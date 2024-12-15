@@ -1,0 +1,34 @@
+{
+	"name": "doubleedesign/comet-components",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Leesa Ward",
+			"email": "leesa@doubleedesign.com.au"
+		}
+	],
+	"autoload": {
+		"classmap": [
+			"src/components/"
+		],
+		"psr-4": {
+			"Doubleedesign\\Comet\\Components\\": [
+				"src/base/",
+				"src/base/types/"
+			],
+			"Doubleedesign\\Comet\\Tests\\": "test/unit/",
+			"Doubleedesign\\Comet\\TestUtils\\": "test/common/",
+			"Doubleedesign\\Comet\\TestUtils\\WordPress\\": "test/common/wordpress"
+		}
+	},
+	"require-dev": {
+		"brain/monkey": "^2.6.2",
+		"phpunit/phpunit": "9.6.22",
+		"roots/wordpress": "^6.7"
+	},
+	"config": {
+		"allow-plugins": {
+			"roots/wordpress-core-installer": true
+		}
+	}
+}
