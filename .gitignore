@@ -3,3 +3,4 @@ vendor/*
 !vendor/autoload.php
 /wordpress
 /test/.phpunit.result.cache
+/test/coverage/

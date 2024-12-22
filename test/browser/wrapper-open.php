@@ -1,4 +1,7 @@
 <?php
+// Autoload dependencies using Composer
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 // Allow Storybook to access this server
 $storybook = 'http://localhost:6006';
 if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {

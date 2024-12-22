@@ -1,6 +1,5 @@
 <?php
 namespace Doubleedesign\Comet\Components;
-use InvalidArgumentException;
 
 class UIComponent implements Renderable {
     protected BaseAttributes $attributes;
@@ -17,13 +16,8 @@ class UIComponent implements Renderable {
      * @param array $attributes
      * @param string $content
      * @param UIComponent[] $innerComponents
-     * @throws InvalidArgumentException
      */
     function __construct(array $attributes, string $content = '', array $innerComponents = []) {
-        if (empty($content) && empty($innerComponents)) {
-            throw new InvalidArgumentException("UIComponent: Either 'content' or 'innerComponents' must be provided.");
-        }
-
         $this->attributes = new BaseAttributes($attributes);
         $this->content = $content;
         $this->innerComponents = $innerComponents;

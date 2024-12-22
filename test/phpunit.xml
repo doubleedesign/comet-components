@@ -4,20 +4,25 @@
          bootstrap="bootstrap.php"
          colors="true"
          verbose="true"
+         convertDeprecationsToExceptions="true"
 >
     <php>
         <ini name="display_errors" value="1"/>
         <ini name="display_startup_errors" value="1"/>
         <ini name="error_reporting" value="E_ALL"/>
+        <ini name="xdebug.mode" value="coverage"/>
     </php>
     <testsuites>
         <testsuite name="Unit">
             <directory>./unit</directory>
         </testsuite>
     </testsuites>
-    <coverage>
+    <coverage includeUncoveredFiles="true">
         <include>
             <directory suffix=".php">../src</directory>
         </include>
+        <exclude>
+            <directory>../vendor</directory>
+        </exclude>
     </coverage>
 </phpunit>

@@ -43,7 +43,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	}
 
 	const classPath = `./src/components/${className}/${className}.php`;
-	const testFilePath = `./test/components/${shortName}.php`;
+	const testFilePath = `./test/browser/components/${shortName}.php`;
 
 	// Bail if the file already exists
 	const classExists = existsSync(classPath);

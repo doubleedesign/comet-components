@@ -15,17 +15,23 @@ const useBlockProps = {
 };
 
 export default function saveHeading({ attributes }) {
-	const { textAlign, content, level, className } = attributes;
+	const { textAlign, content, level, className, id } = attributes;
 	const TagName = 'h' + level;
 
-	const classes = clsx({
+	const classes = textAlign ? clsx({
 		[`has-text-align-${textAlign}`]: textAlign,
 		...className
-	});
+	}): className;
 
-	return ReactDOMServer.renderToString(
-		<TagName {...useBlockProps.save({ className })}>
-			<RichText.Content value={content} />
-		</TagName>
-	);
+	return id ? (
+		ReactDOMServer.renderToString(
+			<TagName id={id} {...useBlockProps.save( { className: classes })}>
+				<RichText.Content value={content} />
+			</TagName>
+		)) : (
+		ReactDOMServer.renderToString(
+			<TagName {...useBlockProps.save({ className: classes })}>
+				<RichText.Content value={content} />
+			</TagName>
+		));
 }

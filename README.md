@@ -1,31 +1,49 @@
 # Comet Components
 
-An early work-in-progress, experimental, to-become-cross-platform web UI component library. Initially being developed as an abstraction layer for WordPress blocks, with the intention of being able to use the same components in other projects.
+An early work-in-progress, experimental, to-become-cross-platform web UI component library. Initially being developed as
+an abstraction layer for WordPress blocks, with the intention of being able to use the same components in other
+projects.
 
 ## Usage
 
 ### In WordPress
 
-TO COME: WordPress plugin with my core block customisations, common custom blocks, etc.
+// TODO WordPress plugin with my core block customisations, common custom blocks, etc.
 
 ### As a standalone PHP library
 
-TO COME.
+// TODO.
 
 ---
+
 ## Development
 
+1. [Prerequisites](#prerequisites)
+2. [Quick start](#quick-start)
+3. [Create a new component](#create-a-new-component)
+4. [Automated tests](#automated-tests)
+
+- [Appendix 1: CLI command quick reference](#appendix-1-cli-command-quick-reference)
+- [Appendix 2: Troubleshooting](./notes/troubleshooting.md)
+- [Appendix 3: From-scratch environment setup on Windows](./notes/windows.md)
+
 > [!NOTE]
-> I use Windows for developing my projects locally and generally like to use [WSL](https://learn.microsoft.com/en-us/windows/wsl/) (Debian on WSL1) as my terminal, with PowerShell as my second choice (and where I do anything Windows-specific that I can't easily do in my WSL setup). All notes/docs/config/scripts throughout this project reflect this.
+> I use Windows for developing my projects locally and generally like to
+> use [WSL](https://learn.microsoft.com/en-us/windows/wsl/) (Debian on WSL1) as my terminal, with PowerShell as my
+> second
+> choice (and where I do anything Windows-specific that I can't easily do in my WSL setup). All
+> notes/docs/config/scripts
+> throughout this project reflect this.
 
 ### Prerequisites
 
-- PHP and [Composer](https://getcomposer.org) installed locally 
+- PHP and [Composer](https://getcomposer.org) installed locally
 - [Node](https://nodejs.org) installed locally
 - Git installed locally
 - IDE of choice (I use [PHPStorm](https://www.jetbrains.com/phpstorm/))
 
-Windows users can find more details on [PHP, Composer, and Node setup below](#appendix-1-from-scratch-environment-setup-on-windows). 
+Windows users can find more details
+on [PHP, Composer, and Node setup in this document](./notes/windows.md).
 
 ### Quick start
 
@@ -34,29 +52,69 @@ Windows users can find more details on [PHP, Composer, and Node setup below](#ap
 3. Run `npm install` to install Node dependencies
 4. TO COME: Run Storybook to see what you're working with
 
-### Testing
+### Create a new component
+
+To generate the boilerplate code for a new component, run the following command with `example` and `simple` replaced
+with the desired component name and type. Valid types are `simple`, `complex`, and `wrapper`.
+
+```bash
+npm run generate component -- --name=example --type=simple
+```
+
+// TODO More to come here, especially re CSS and JS files for each component.
+
+### Automated tests
 
 See [testing notes](./notes/testing.md) for more information.
 
----
-### Appendix 1: From-scratch environment setup on Windows
+### Appendix 1: CLI command quick reference
 
-As a first step, if you prefer the command line I'd recommend installing [Chocolatey](https://community.chocolatey.org/) if you haven't already. If you prefer to do things using a GUI, you might like to use [Laravel Herd](https://herd.laravel.com/windows). If you don't have existing instances of PHP, Composer, or Node installed, the latter basically gets you up and running out-of-the-box.
+Refresh Composer autoloader after adding new classes:
 
-The below-linked notes detail how I set up my local development environment, along with some other options I have tested. It is not essential to follow these steps or to use the same setup as me, but they may be helpful if you are new to any of the tools or technologies listed here or are new to using Windows for web development.
+```bash
+composer dump-autoload -o
+```
 
-These notes cover both doing everything natively (using PowerShell as your terminal) and using WSL (for a Bash terminal), and also include IDE configuration information for PHPStorm.
+Install Composer dependencies (after a fresh clone of the project):
 
-- [PHP development setup on Windows](./notes/php.md)
-- [Node development setup on Windows](./notes/node.md)
-- [My WSL setup](./notes/wsl.md)
+```bash
+composer install
+```
 
-#### Additional background information
-- [Glossary of terms](./notes/glossary.md)
-- [About Windows system PATH](./notes/path.md)
+Update Composer dependencies (after a pull from the repository or other changes to `composer.json`):
 
----
+```bash
+composer update
+```
+
+Install or update Node dependencies:
+
+```bash
+npm install
+```
+
+Run basic local web server to view/work with isolated component demos:
+
+```bash
+npm run test:server
+```
+
+// TODO: Run Storybook for a more robust and detailed browser demo/testing environment:
+
+```bash
+# TO COME
+```
+
+Generate a new component (example):
+
+```bash
+npm run generate component -- --name=gallery --type=simple
+```
+
 ### Appendix 2: Troubleshooting
-- [Miscellaneous troubleshooting notes](./notes/troubleshooting.md)
 
----
+See [troubleshooting notes](./notes/troubleshooting.md).
+
+### Appendix 3: From-scratch environment setup on Windows
+
+See [Windows setup notes](./notes/windows.md).

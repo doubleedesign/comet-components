@@ -2,18 +2,10 @@
 namespace Doubleedesign\Comet\Components;
 
 // Using enums as a way to limit the valid values of some string attributes
-enum Alignment: string {
-    case LEFT = 'left';
-    case RIGHT = 'right';
-    case CENTER = 'center';
-    case JUSTIFY = 'justify';
-    case START = 'start';
-    case END = 'end';
-    case MATCH_PARENT = 'match-parent';
-}
 
 class BaseAttributes {
     protected array $rawAttributes = [];
+    protected ?string $id = null;
     /* @var string[] */
     protected array $classes = [];
     protected string|array|null $style = null;
@@ -23,6 +15,7 @@ class BaseAttributes {
 
     public function __construct(array $attrs) {
         $this->rawAttributes = $attrs;
+        $this->id = isset($attrs['id']) ? $this->transform_string_value($attrs['id']) : null;
         $this->classes = isset($attrs['className']) ? explode(' ', $attrs['className']) : [];
         $this->style = $attrs['style'] ?? null;
         $this->align = isset($attrs['align']) ? Alignment::tryFrom($attrs['align']) : null;
@@ -41,6 +34,7 @@ class BaseAttributes {
 
         $attrs = array_merge(
             array(
+                'id' => $this->id,
                 'class' => implode(' ', $filtered_classes),
                 'style' => $inline_styles,
             ),
@@ -61,11 +55,17 @@ class BaseAttributes {
         // 1. attributes that are handled as separate properties in this class
         // 2. nested arrays such as layout and focalPoint (which should be handled elsewhere)
         // 3. attributes that are not valid/supported HTML attributes for the given tag
+        // Explicitly keep:
+        // 1. attributes that start with 'data-' (custom data attributes)
         return array_filter($this->rawAttributes, function($key) use ($class_properties) {
             return (
-                $key !== 'class' && $key !== 'style' && !in_array($key, $class_properties) &&
+                // Stuff to filter out
+                $key !== 'class' &&
+                $key !== 'style' &&
+                !in_array($key, $class_properties) &&
                 !is_array($this->rawAttributes[$key]) &&
-                in_array($key, $this->get_valid_html_attributes())
+                // Other stuff to keep
+                (in_array($key, $this->get_valid_html_attributes()) || str_starts_with($key, 'data-'))
             );
         }, ARRAY_FILTER_USE_KEY);
     }
@@ -99,6 +99,25 @@ class BaseAttributes {
         }
 
         return $styles;
+    }
+
+    /**
+     * If a string value has spaces, convert it to kebab case
+     * @param string $value
+     * @return string
+     */
+    protected function transform_string_value(string $value): string {
+        // If no whitespace characters, return as is (preserves snake_case and PascalCase)
+        if (!preg_match('/\s/', $value)) {
+            return $value;
+        }
+
+        // Convert whitespace to hyphens and make lowercase
+        return trim(
+            strtolower(
+                preg_replace('/\s+/', '-', $value)
+            )
+        );
     }
 
     /**

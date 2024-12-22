@@ -60,7 +60,7 @@ Restart the WSL terminal before trying to use these aliases.
 
 Unlike [for PHP](./php.md), I haven't had any pressing need to alias Windows' Node installation to WSL - I just install it in WSL using its own version of [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating). (But if I had discovered Herd before that maybe I would have, because Herd is very convenient!)
 
-PHPStorm's various configuration options that involve Node pick up WSL's Node instance automatically, so ensuring I'm using the same instance across the tools I need is generally straightforward once Node is installed.
+PHPStorm's various configuration options that involve Node pick up WSL's Node instance as an option, so ensuring I'm using the same instance across the tools I need is generally straightforward once Node is installed.
 
 The only thing to note about Windows vs WSL Node instances for this particular project is when using the `BlockTransformer` class in tests: if using Windows' PHP instance, then the PHP `shell_exec` function will use Windows' Node instance. Generally this is fine if the versions are compatible, but it's good to be aware that that's how it works. If you want to use the Windows Node instance because of this, see above for how to set up the aliases in your WSL terminal and skip the rest of this section.
 
@@ -111,11 +111,7 @@ nvm use <version>
 ---
 ## [Optional] PHPStorm Configuration
 
-Ensure that PHPStorm's default Node interpreter matches the one you are using in your terminal. You can find this in Settings > Languages & Frameworks > Node.js.
-
-![phpstorm-node.png](images/phpstorm-node.png)
-
-If this is not set correctly, tools like ESLint won't work in the editor.
+See the [PHPStorm configuration notes](./phpstorm.md) for more information.
 
 ---
 [^1]: Chocolatey is great for a lot of things, but I wouldn't recommend it for Node unless you don't expect to ever need to switch between Node versions easily.
