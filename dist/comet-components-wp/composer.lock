@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "21bcbe8efce003181be6cc708aba9aa1",
+    "packages": [
+        {
+            "name": "doubleedesign/comet-components",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:doubleedesign/comet-components.git",
+                "reference": "ac7a670c800f5a77c0f27c37a3dd6168b19b9135"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doubleedesign/comet-components/zipball/ac7a670c800f5a77c0f27c37a3dd6168b19b9135",
+                "reference": "ac7a670c800f5a77c0f27c37a3dd6168b19b9135",
+                "shasum": ""
+            },
+            "require-dev": {
+                "brain/monkey": "^2.6.2",
+                "phpunit/phpunit": "9.6.22",
+                "roots/wordpress": "^6.7"
+            },
+            "default-branch": true,
+            "type": "project",
+            "autoload": {
+                "classmap": [
+                    "src/components/"
+                ],
+                "psr-4": {
+                    "Doubleedesign\\Comet\\Components\\": [
+                        "src/base/",
+                        "src/base/types/"
+                    ],
+                    "Doubleedesign\\Comet\\Tests\\": "test/unit/",
+                    "Doubleedesign\\Comet\\TestUtils\\": "test/common/",
+                    "Doubleedesign\\Comet\\TestUtils\\WordPress\\": "test/common/wordpress/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Leesa Ward",
+                    "email": "leesa@doubleedesign.com.au"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/doubleedesign/comet-components/tree/master",
+                "issues": "https://github.com/doubleedesign/comet-components/issues"
+            },
+            "time": "2024-12-23T08:33:46+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "doubleedesign/comet-components": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}

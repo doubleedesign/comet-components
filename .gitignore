@@ -4,3 +4,4 @@ vendor/*
 /wordpress
 /test/.phpunit.result.cache
 /test/coverage/
+!dist

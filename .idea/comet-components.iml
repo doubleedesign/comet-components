@@ -6,8 +6,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/base/types" isTestSource="false" packagePrefix="Doubleedesign\Comet\Components\" />
       <sourceFolder url="file://$MODULE_DIR$/test/common" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/test/common/wordpress" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\WordPress\" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/dist/comet-components-wp" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brain/monkey" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
@@ -42,6 +43,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/roots/wordpress-core-installer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/resource-operations" />
+      <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />
+      <excludeFolder url="file://$MODULE_DIR$/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/test/coverage" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,8 +1,8 @@
 <?php
-namespace Doubleedesign\Comet;
+namespace Doubleedesign\Comet\Components;
 
 class Paragraph extends UIComponent implements Renderable {
-    function __construct(array $attributes, string $content) {
-        parent::__construct($attributes, $content);
-    }
+	function __construct(array $attributes, string $content) {
+		parent::__construct($attributes, $content);
+	}
 }

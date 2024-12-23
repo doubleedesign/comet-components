@@ -18,7 +18,7 @@
 			],
 			"Doubleedesign\\Comet\\Tests\\": "test/unit/",
 			"Doubleedesign\\Comet\\TestUtils\\": "test/common/",
-			"Doubleedesign\\Comet\\TestUtils\\WordPress\\": "test/common/wordpress"
+			"Doubleedesign\\Comet\\TestUtils\\WordPress\\": "test/common/wordpress/"
 		}
 	},
 	"require-dev": {
