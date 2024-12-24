@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Components;
 
-class Cover extends UIComponent implements Renderable {
+class Cover extends UIComponent implements IRenderable {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, '', $innerComponents);
 	}

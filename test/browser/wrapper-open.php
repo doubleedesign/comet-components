@@ -17,3 +17,7 @@ if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+<pre>
+    <?php print_r($_SERVER); ?>
+</pre>

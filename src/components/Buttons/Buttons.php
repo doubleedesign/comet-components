@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Components;
 
-class Buttons extends UIComponent implements Renderable {
+class Buttons extends UIComponent implements IRenderable {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, '', $innerComponents);
 	}

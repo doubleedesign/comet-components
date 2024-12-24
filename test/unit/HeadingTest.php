@@ -20,8 +20,8 @@ class HeadingTest extends WpBridgeTestCase {
     }
 
     /**
-     * Test that the output of the Comet Heading component matches the output of the corresponding WordPress core block
-     * in ways that are expected to match.
+     * Test that the output of the Comet Heading component matches the default output
+     * of the corresponding WordPress core block in ways that are expected to match.
      * @dataProvider wpIntegrationTestCases_match
      * @noinspection PhpUnhandledExceptionInspection
      */
@@ -46,8 +46,8 @@ class HeadingTest extends WpBridgeTestCase {
 
 
     /**
-     * Test that the output of the Comet component differs from the output of the corresponding WordPress core block
-     * in exactly the expected ways.
+     * Test that the output of the Comet component differs from the default output
+     * of the corresponding WordPress core block in exactly the expected ways.
      * @dataProvider wpIntegrationTestCases_differ
      * @noinspection PhpUnhandledExceptionInspection
      */

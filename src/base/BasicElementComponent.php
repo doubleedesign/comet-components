@@ -1,28 +1,20 @@
 <?php
 namespace Doubleedesign\Comet\Components;
 
-class Heading extends CoreElementComponent {
-	protected HeadingAttributes $attributes;
-	protected ?Alignment $textAlign = null;
-	/** @var string $content - plain text or basic HTML */
-	protected string $content;
+class BasicElementComponent extends CoreElementComponent {
+	protected BaseAttributes $attributes;
 	
-    function __construct(array $attributes, string $content) {
-        if(isset($attributes['level'])) {
-            $attributes['level'] = (int) $attributes['level'];
-            $attributes['tagName'] = 'h' . $attributes['level'];
-        }
-        else {
-            $attributes['level'] = 2;
-            $attributes['tagName'] = 'h2';
-        }
-	    
-	    // Pass the attributes as a basic array for processing of generic, common attributes within the parent
-	    parent::__construct($attributes, $content);
-	    // Cast the attributes to a more specific type for use in this class
-	    $this->attributes = new HeadingAttributes($attributes);
-    }
+	function __construct(array $attributes, string $content) {
+		// Pass the attributes as a basic array for processing of generic, common attributes within the parent
+		parent::__construct($attributes, $content);
+		// Cast the attributes to a more specific type for use in this class
+		$this->attributes = new BaseAttributes($attributes);
+	}
 	
+	/**
+	 * Get the valid/supported HTML attributes as a single string
+	 * @return string
+	 */
 	function get_html_attributes(): string {
 		$baseAttributes = $this->attributes->get_filtered_attributes();
 		$baseClasses = $this->attributes->get_filtered_classes();
@@ -44,6 +36,11 @@ class Heading extends CoreElementComponent {
 		}, '');
 	}
 	
+	/**
+	 * Default render method (child classes may override this)
+	 *
+	 * @return void
+	 */
 	public function render(): void {
 		$output = '';
 		$tag = $this->attributes->get_tag() ?? 'div';
@@ -65,14 +62,5 @@ class Heading extends CoreElementComponent {
 		$output .= "</$tag>";
 		
 		echo $output;
-	}
-}
-
-class HeadingAttributes extends CoreAttributes {
-	protected ?HeadingTag $tag = null;
-	
-	public function __construct(array $attrs) {
-		parent::__construct($attrs);
-		$this->tag = isset($attrs['tagName']) ? HeadingTag::tryFrom($attrs['tagName']) : HeadingTag::H2;
 	}
 }

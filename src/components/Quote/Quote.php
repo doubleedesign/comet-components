@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Components;
 
-class Quote extends UIComponent implements Renderable {
+class Quote extends UIComponent implements IRenderable {
 	function __construct(array $attributes, string $content) {
 		parent::__construct($attributes, $content);
 	}

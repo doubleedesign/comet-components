@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, mkdirSync, writeFileSync } from 'fs';
 import Case from 'case';
 import * as path from 'node:path';
+import { execSync } from 'child_process';
 
 // Get the component name and type from command line arguments
 // Command is in the format: 'npm run generate-component name --type=complex'
@@ -44,11 +45,13 @@ function generateSkeletonFiles({ componentName, componentType }) {
 
 	const classPath = `./src/components/${className}/${className}.php`;
 	const testFilePath = `./test/browser/components/${shortName}.php`;
+	const defFilePath = `./src/components/${className}/${className}.json`;
 
 	// Bail if the file already exists
 	const classExists = existsSync(classPath);
 	const testExists = existsSync(testFilePath);
-	if(classExists && testExists) {
+	const defExists = existsSync(defFilePath);
+	if(classExists && testExists && defExists) {
 		console.log(`Skipping ${componentName} because the files already exist`);
 
 		return;
@@ -79,5 +82,17 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	}
 	else {
 		console.log(`Template file for ${componentName} already exists, skipping`);
+	}
+
+	if(!defExists) {
+		const defOutput = execSync(`php ${classPath} --component ${className}`).toString();
+		writeFileSync(defFilePath, defOutput, 'utf8');
+
+		if(existsSync(defFilePath)) {
+			console.log(`Definition file created successfully at ${defFilePath}`);
+		}
+	}
+	else {
+		console.log(`Definition file for ${className} already exists, skipping`);
 	}
 }

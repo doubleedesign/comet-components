@@ -1,0 +1,39 @@
+{
+    "name": "Heading",
+    "properties": [
+        {
+            "name": "attributes",
+            "type": "Doubleedesign\\Comet\\Components\\HeadingAttributes",
+            "properties": [
+                {
+                    "name": "tag",
+                    "type": "'a'|'abbr'|'address'|'article'|'aside'|'audio'|'bdi'|'bdo'|'blockquote'|'br'|'button'|'canvas'|'caption'|'cite'|'code'|'col'|'colgroup'|'data'|'datalist'|'dd'|'del'|'details'|'dfn'|'dialog'|'div'|'dl'|'dt'|'em'|'embed'|'fieldset'|'figcaption'|'figure'|'footer'|'form'|'h1'|'h2'|'h3'|'h4'|'h5'|'h6'|'head'|'header'|'hgroup'|'hr'|'i'|'iframe'|'img'|'input'|'ins'|'kbd'|'label'|'legend'|'li'|'main'|'map'|'mark'|'meta'|'meter'|'nav'|'noscript'|'object'|'ol'|'optgroup'|'option'|'output'|'p'|'picture'|'pre'|'progress'|'q'|'s'|'samp'|'search'|'section'|'select'|'small'|'source'|'span'|'strong'|'style'|'sub'|'summary'|'sup'|'table'|'tbody'|'td'|'textarea'|'tfoot'|'th'|'thead'|'time'|'title'|'tr'|'track'|'u'|'ul'|'var'|'video'|'wbr'|''"
+                },
+                {
+                    "name": "rawAttributes",
+                    "type": "array"
+                },
+                {
+                    "name": "classes",
+                    "type": "array"
+                },
+                {
+                    "name": "id",
+                    "type": "string"
+                },
+                {
+                    "name": "style",
+                    "type": "array|string|null"
+                }
+            ]
+        },
+        {
+            "name": "textAlign",
+            "type": "'left'|'right'|'center'|'justify'|'start'|'end'|'match-parent'"
+        },
+        {
+            "name": "content",
+            "type": "string"
+        }
+    ]
+}
