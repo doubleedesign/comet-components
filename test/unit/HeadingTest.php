@@ -1,21 +1,24 @@
 <?php
 namespace Doubleedesign\Comet\Tests;
-use Doubleedesign\Comet\TestUtils\WordPress\WpBridgeTestCase;
+
 use Doubleedesign\Comet\Components\Heading;
+use Doubleedesign\Comet\TestUtils\WordPress\WpBridgeTestCase;
 use RuntimeException;
 
 class HeadingTest extends WpBridgeTestCase {
+
+    // TODO: These don't match anymore because the real WordPress block adds the class "wp-block-heading" which I don't want and so needs to be tested/accounted for here.
     private function wpIntegrationTestCases_match(): array {
         return [
-            'Handle heading level' => ["Hello, world!", ["level" => 3]],
-            'Handle style'         => ["Hello, world!", ["level" => 2, "className" => "is-style-accent"]],
-            'Handle anchor'        => ["Hello, world!", ["level" => 2, "id" => "hello-world"]],
+            'Heading level' => ["Hello, world!", ["level" => 3]],
+            'Style class'   => ["Hello, world!", ["level" => 2, "className" => "is-style-accent"]],
+            'Anchor'        => ["Hello, world!", ["level" => 2, "id" => "hello-world"]],
         ];
     }
 
     private function wpIntegrationTestCases_differ(): array {
         return [
-            'Handle alignment'     => ["Hello, world!", ["level" => 2, "textAlign" => "center"]],
+            'Handle alignment' => ["Hello, world!", ["level" => 2, "textAlign" => "center"]],
         ];
     }
 
@@ -27,8 +30,9 @@ class HeadingTest extends WpBridgeTestCase {
      */
     public function test_comet_matches_wp_core($content, $attributes): void {
         try {
-            $wp_output = parent::$transformer->transform_block('core/heading', $attributes, [$content]);
-        } catch (RuntimeException $e) {
+            $wp_output = parent::$transformer->transform_block('core/heading', $attributes, $content);
+        }
+        catch (RuntimeException $e) {
             fwrite(STDERR, $e->getMessage());
             $this->fail($e->getMessage());
         }
@@ -54,7 +58,8 @@ class HeadingTest extends WpBridgeTestCase {
     public function test_comet_differs_from_wp_core($content, $attributes): void {
         try {
             $wp_output = parent::$transformer->transform_block('core/heading', $attributes, [$content]);
-        } catch (RuntimeException $e) {
+        }
+        catch (RuntimeException $e) {
             fwrite(STDERR, $e->getMessage());
             $this->fail($e->getMessage());
         }

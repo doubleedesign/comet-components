@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Components;
 
-class Group extends LayoutComponent {
+class Row extends LayoutComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
 	}

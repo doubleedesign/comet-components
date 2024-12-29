@@ -1,13 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Components;
 
-class Stack extends UIComponent implements IRenderable {
-	function __construct(array $attributes, string $content) {
-		$this->attributes = $attributes;
-		parent::__construct($this->attributes, $content);
-	}
-	
-	function render(): void {
-		parent::render();
+class Stack extends LayoutComponent {
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
 	}
 }

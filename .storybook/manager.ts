@@ -7,9 +7,9 @@ addons.setConfig({
 		showRoots: true,
 		filters: {
 			// Only show Docs pages in the sidebar
-			patterns: (item) => {
-				return item.name === 'Docs';
-			}
+			// patterns: (item) => {
+			// 	return item.name === 'Docs';
+			// }
 		}
 	},
 });

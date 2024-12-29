@@ -6,6 +6,7 @@
 			"core/column",
 			"core/grid",
 			"core/stack",
+			"core/row",
 			"core/details",
 			"core/image",
 			"core/media-text",
@@ -47,6 +48,7 @@
 				"core/column",
 				"core/grid",
 				"core/stack",
+				"core/row",
 				"core/details"
 			]
 		},

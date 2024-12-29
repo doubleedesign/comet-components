@@ -13,12 +13,23 @@
 		}
 	},
 	"require": {
-		"doubleedesign/comet-components": "dev-master"
+		"doubleedesign/comet-components": "*",
+		"composer/installers": "^2.0"
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"repositories": [
 		{
-			"type": "vcs",
-			"url": "https://github.com/doubleedesign/comet-components"
+			"type": "path",
+			"url": "../..",
+			"options": {
+				"symlink": true
+			}
 		}
-	]
+	],
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	}
 }

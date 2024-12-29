@@ -12,10 +12,10 @@ abstract class CoreAttributes {
 	public function __construct(array $attrs) {
 		$this->rawAttributes = $attrs;
 		$this->classes = isset($attrs['className']) ? explode(' ', $attrs['className']) : [];
-		$this->id = isset($attrs['id']) ? Utils::transform_string_value($attrs['id']) : null;
+		$this->id = isset($attrs['id']) ? Utils::kebab_case($attrs['id']) : null;
 		$this->style = $attrs['style'] ?? null;
 	}
-
+	
 	public function get_id(): ?string {
 		return $this->id;
 	}
@@ -33,16 +33,10 @@ abstract class CoreAttributes {
 		// 3. attributes that are not valid/supported HTML attributes for the given tag
 		// Explicitly keep:
 		// 1. attributes that start with 'data-' (custom data attributes)
-		return array_filter($this->rawAttributes, function($key) use ($class_properties) {
-			return (
-				// Stuff to filter out
-				$key !== 'class' &&
-				$key !== 'style' &&
-				!in_array($key, $class_properties) &&
-				!is_array($this->rawAttributes[$key]) &&
-				// Other stuff to keep
-				str_starts_with($key, 'data-')
-			);
+		return array_filter($this->rawAttributes, function ($key) use ($class_properties) {
+			return (// Stuff to filter out
+				$key !== 'class' && $key !== 'style' && !in_array($key, $class_properties) && !is_array($this->rawAttributes[$key]) && // Other stuff to keep
+				str_starts_with($key, 'data-'));
 		}, ARRAY_FILTER_USE_KEY);
 	}
 	
@@ -53,7 +47,7 @@ abstract class CoreAttributes {
 	public function get_filtered_classes(): array {
 		$redundant_classes = ['is-style-default'];
 		
-		return array_filter($this->classes, function($class) use ($redundant_classes) {
+		return array_filter($this->classes, function ($class) use ($redundant_classes) {
 			return !in_array($class, $redundant_classes);
 		});
 	}

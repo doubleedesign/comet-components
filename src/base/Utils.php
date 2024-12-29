@@ -8,18 +8,23 @@ class Utils {
 	 * @param string $value
 	 * @return string
 	 */
-	public static function transform_string_value(string $value): string {
+	public static function kebab_case(string $value): string {
 		// If no whitespace characters, return as is (preserves snake_case and PascalCase)
 		if (!preg_match('/\s/', $value)) {
 			return $value;
 		}
 		
 		// Convert whitespace to hyphens and make lowercase
-		return trim(
-			strtolower(
-				preg_replace('/\s+/', '-', $value)
-			)
-		);
+		return trim(strtolower(preg_replace('/\s+/', '-', $value)));
+	}
+	
+	/**
+	 * Convert string value to PascalCase
+	 * @param string $value
+	 * @return string
+	 */
+	public static function pascal_case(string $value): string {
+		return trim(ucwords(preg_replace('/\s+/', ' ', $value)));
 	}
 	
 	/**
@@ -32,16 +37,15 @@ class Utils {
 		$text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 		
 		// Replace specific characters that need special handling
-		$replacements = array(
-			'%' => '%25',    // Percent sign
-			'\'' => '&#039;', // Single quote
-			'"' => '&quot;',  // Double quote
-			'<' => '&lt;',    // Less than
-			'>' => '&gt;',    // Greater than
-			'&' => '&amp;',   // Ampersand
-			"\r" => '',       // Remove carriage returns
-			"\n" => '',       // Remove newlines
-			"\t" => ' '       // Convert tabs to spaces
+		$replacements = array('%'  => '%25',    // Percent sign
+		                      '\'' => '&#039;', // Single quote
+		                      '"'  => '&quot;',  // Double quote
+		                      '<'  => '&lt;',    // Less than
+		                      '>'  => '&gt;',    // Greater than
+		                      '&'  => '&amp;',   // Ampersand
+		                      "\r" => '',       // Remove carriage returns
+		                      "\n" => '',       // Remove newlines
+		                      "\t" => ' '       // Convert tabs to spaces
 		);
 		
 		// Apply replacements

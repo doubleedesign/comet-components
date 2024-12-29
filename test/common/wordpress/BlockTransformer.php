@@ -1,5 +1,7 @@
 <?php
+
 namespace Doubleedesign\Comet\TestUtils\WordPress;
+
 use RuntimeException;
 
 class BlockTransformer {
@@ -8,8 +10,8 @@ class BlockTransformer {
     private string $script_path;
 
     public function __construct() {
-        $this->script_path =  './common/wordpress/get-block-innerHtml.mjs';
-        $this->loader_path =  './common/wordpress/babel-loader.js';
+        $this->script_path = './common/wordpress/get-block-innerHtml.jsx';
+        $this->loader_path = './common/wordpress/babel-loader.js';
 
         if (shell_exec('node -v') !== null) {
             $this->node_path = 'node';
@@ -28,17 +30,15 @@ class BlockTransformer {
     }
 
     /**
+     * Get the inner HTML of a block as it would be saved by the WordPress editor
+     * (which does some JavaScript stuff)
      * @throws RuntimeException
      */
-    public function transform_block(string $name, array $attributes, array $content): string {
-        if (empty($this->node_path)) {
-            throw new RuntimeException('Node.js is not available');
-        }
-
+    public function transform_block(string $name, array $attributes, array|string $content): string {
         $data = [
-            'blockName'  => $name,
-            'attributes' => $attributes,
-            'content'    => $content
+            'blockName'   => $name,
+            'attributes'  => is_array($content) ? $attributes : array_merge($attributes, ['content' => $content]),
+            'innerBlocks' => is_array($content) ? $content : []
         ];
 
         $json_data = json_encode($data, JSON_UNESCAPED_SLASHES);
@@ -56,16 +56,16 @@ class BlockTransformer {
 
         $result = shell_exec($command);
 
-        if(str_contains($result, 'triggerUncaughtException')) {
+        if (str_contains($result, 'triggerUncaughtException')) {
             throw new RuntimeException("BlockTransformer: A Node error occurred while transforming the block.\n $result\n");
         }
 
         $updated_block = [
             'blockName'    => $name,
-            'attrs'        => $attributes,
+            'attrs'        => is_array($content) ? $attributes : array_merge($attributes, ['content' => $content]),
             'innerHTML'    => $result,
             'innerContent' => [$result],
-            'innerBlocks'  => []
+            'innerBlocks'  => is_array($content) ? $content : []
         ];
 
         $serialized_block = serialize_block($updated_block);

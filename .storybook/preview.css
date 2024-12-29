@@ -1,0 +1,37 @@
+.sbdocs-wrapper {
+	padding: 1rem !important;
+	container-type: inline-size;
+}
+
+.breakout {
+	width: 100cqw;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 1800px;
+
+	figure {
+		margin: 0;
+
+		.sbdocs-preview {
+			margin: 0;
+		}
+	}
+}
+
+.docs-story > div:first-child {
+	padding: 0;
+}
+
+.innerZoomElementWrapper > div:first-child {
+	border: 0 !important;
+}
+
+.docs-story .sb-story > div:first-child {
+	height: max-content !important;
+}
+
+.docblock-code-toggle {
+	display: none !important;
+	pointer-events: none !important;
+}

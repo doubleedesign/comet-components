@@ -11,21 +11,21 @@ namespace Doubleedesign\Comet\WordPress;
  * NOTE: The JavaScript file must be in the same directory as the PHP file, and must be named with a kebab-case version of the PHP class name.
  */
 abstract class JavaScriptImplementation {
-	
+
 	function __construct() {
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_companion_javascript'], 100);
 		add_filter('script_loader_tag', [$this, 'script_type_module'], 10, 3);
 	}
-	
-	protected function enqueue_companion_javascript(): void {
+
+	public function enqueue_companion_javascript(): void {
 		// Get the name of the class and kebab case it
 		$class_name = get_class($this);
 		$handle = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $class_name));
-		
+
 		// Enqueue the matching JS file
 		wp_enqueue_script("comet-$handle", "./$handle.js", array('wp-dom', 'wp-dom-ready', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-plugins', 'wp-edit-post', 'wp-components', 'wp-data', 'wp-compose', 'wp-i18n', 'wp-hooks', 'wp-block-editor', 'wp-block-library',), COMET_VERSION, false);
 	}
-	
+
 	/**
 	 * Add type=module to admin JS script tag
 	 *
@@ -39,7 +39,7 @@ abstract class JavaScriptImplementation {
 		if (str_starts_with($handle, 'comet-')) {
 			$tag = '<script type="module" src="' . esc_url($src) . '" id="' . $handle . '" ></script>';
 		}
-		
+
 		return $tag;
 	}
 }

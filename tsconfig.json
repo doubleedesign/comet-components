@@ -7,7 +7,7 @@
 		"lib": [
 			"ESNext",
 			"DOM", // required to make WebStorm colour console.log as a global, not a module
-			"DOM.Iterable",
+			"DOM.Iterable"
 		],
 		"types": ["node"],
 		"esModuleInterop": true,
@@ -18,7 +18,9 @@
 		"noImplicitAny": false,
 		"allowJs": false,
 		"allowImportingTsExtensions": true, // required to run scripts that import other TS files
-		"noEmit": true, // for allowImportingTsExtensions to work
+		"noEmit": true,
+		"jsx": "react"
+		// for allowImportingTsExtensions to work
 	},
 	"ts-node": {
 		"esm": true,

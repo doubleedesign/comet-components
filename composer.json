@@ -1,6 +1,6 @@
 {
 	"name": "doubleedesign/comet-components",
-	"type": "project",
+	"type": "library",
 	"authors": [
 		{
 			"name": "Leesa Ward",
