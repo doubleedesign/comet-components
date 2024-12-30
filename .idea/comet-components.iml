@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test/common" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/test/common/wordpress" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\WordPress\" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dist/comet-components-wp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dist" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />

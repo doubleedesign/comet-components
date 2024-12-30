@@ -12,13 +12,13 @@
 		}
 	},
 	"args": {
-		"text": "Default Heading",
+		"content": "Default Heading",
 		"level": 2,
 		"style": "default"
 	},
 	"argTypes": {
-		"text": {
-			"description": "The content/text of the heading.",
+		"content": {
+			"description": "The content of the heading.",
 			"control": {
 				"type": "text"
 			},
@@ -48,7 +48,7 @@
 			}
 		},
 		"style": {
-			"description": "The style of the heading.",
+			"description": "The style name of the heading.",
 			"control": {
 				"type": "select"
 			},
@@ -72,7 +72,7 @@
 		{
 			"name": "Default",
 			"args": {
-				"text": "Default Heading",
+				"content": "Default Heading",
 				"level": 2,
 				"style": "default"
 			}
@@ -80,7 +80,7 @@
 		{
 			"name": "Accent style",
 			"args": {
-				"text": "Accent style",
+				"content": "Accent style",
 				"level": 2,
 				"style": "accent"
 			}

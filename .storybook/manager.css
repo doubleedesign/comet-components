@@ -1,0 +1,7 @@
+.sb-bar {
+	display: none;
+}
+
+#root.is-story-page .sb-bar {
+	display: block;
+}

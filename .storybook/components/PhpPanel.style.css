@@ -1,0 +1,20 @@
+.php-preview {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+
+	code {
+		width: 100%;
+		height: 100%;
+		padding: 1rem;
+		box-sizing: border-box;
+		font-family: 'Hack', 'Fira Code', monospace;
+		font-size: 0.8rem;
+		line-height: 1.6;
+
+		.hljs-name {
+			color: #87D9FF;
+		}
+	}
+}
