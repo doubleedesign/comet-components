@@ -18,7 +18,7 @@
 	},
 	"argTypes": {
 		"content": {
-			"description": "The content of the heading.",
+			"description": "The text/basic HTML content",
 			"control": {
 				"type": "text"
 			},
@@ -32,7 +32,7 @@
 			}
 		},
 		"level": {
-			"description": "The heading level (1-6).",
+			"description": "HTML heading level (1-6)",
 			"control": {
 				"type": "number",
 				"min": 1,
@@ -48,7 +48,7 @@
 			}
 		},
 		"style": {
-			"description": "The style name of the heading.",
+			"description": "Style name",
 			"control": {
 				"type": "select"
 			},
@@ -60,6 +60,26 @@
 			"table": {
 				"defaultValue": {
 					"summary": "default"
+				},
+				"type": {
+					"summary": "string"
+				},
+				"readonly": true
+			}
+		},
+		"textAlign": {
+			"description": "Horizontal alignment",
+			"control": {
+				"type": "select"
+			},
+			"options": [
+				"left",
+				"center",
+				"right"
+			],
+			"table": {
+				"defaultValue": {
+					"summary": "left"
 				},
 				"type": {
 					"summary": "string"
@@ -83,6 +103,15 @@
 				"content": "Accent style",
 				"level": 2,
 				"style": "accent"
+			}
+		},
+		{
+			"name": "Centered",
+			"args": {
+				"content": "Centered Heading",
+				"level": 2,
+				"style": "default",
+				"textAlign": "center"
 			}
 		}
 	]

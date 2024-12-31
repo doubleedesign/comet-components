@@ -3,11 +3,15 @@ import { addons } from '@storybook/manager-api';
 import { html as beautifyHtml } from 'js-beautify';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/felipec.css';
-import './HtmlPanel.style.css';
+import './CodePanels.style.css';
 
 export const RENDER_PREVIEW_TAB = 'renderPreviewTab';
 export const GET_PREVIEW_HTML = 'getPreviewHtml';
 
+/**
+ * The HTML output panel used in the @doubleedesign/code-tabs addon,
+ * which adds a tab to story view that displays the raw HTML result of the current story.
+ */
 export const HtmlPanel = () => {
 	const [html, setHtml] = useState<string>('');
 	const channel = addons.getChannel();
@@ -49,7 +53,7 @@ export const HtmlPanel = () => {
 	}, [channel]);
 
 	return (
-		<pre className="html-preview hljs">
+		<pre className="code-preview code-preview--html hljs">
 			<code className="language-html">
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 			</code>

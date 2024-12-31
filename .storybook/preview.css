@@ -30,8 +30,3 @@
 .docs-story .sb-story > div:first-child {
 	height: max-content !important;
 }
-
-.docblock-code-toggle {
-	display: none !important;
-	pointer-events: none !important;
-}

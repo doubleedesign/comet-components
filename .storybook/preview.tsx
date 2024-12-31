@@ -1,7 +1,8 @@
 import React from 'react';
 import type { Preview } from '@storybook/server';
-import { Controls, Description, DocsContainer, Primary, Stories, Subtitle, Title, Unstyled } from '@storybook/blocks';
 import { addons } from '@storybook/preview-api';
+import { Description, Controls, Stories, DocsContainer, Subtitle, Title, Unstyled } from '@storybook/blocks';
+import { Primary } from './blocks/Primary.tsx';
 import { RENDER_PREVIEW_TAB, GET_PREVIEW_HTML } from './components/HtmlPanel.tsx';
 import './preview.css';
 
@@ -50,7 +51,11 @@ const preview: Preview = {
 		},
 		docs: {
 			source: {
-				code: null
+				code: null,
+				disable: true,
+			},
+			canvas: {
+				withToolbar: false,
 			},
 			container: ({ children, context }) => {
 				return (
@@ -59,18 +64,20 @@ const preview: Preview = {
 					</DocsContainer>
 				);
 			},
-			page: () => (
-				<Unstyled>
-					<Title/>
-					<Subtitle/>
-					<Description/>
-					<div className="breakout">
-						<Primary/>
-					</div>
-					<Controls/>
-					<Stories includePrimary={false} title="Variations"/>
-				</Unstyled>
-			)
+			page: () => {
+				return (
+					<Unstyled>
+						<Title/>
+						<Subtitle/>
+						<Description/>
+						<div className="breakout">
+							<Primary/>
+						</div>
+						<Controls/>
+						<Stories includePrimary={false} title="Variations"/>
+					</Unstyled>
+				);
+			}
 		}
 	},
 	tags: ['autodocs'],
