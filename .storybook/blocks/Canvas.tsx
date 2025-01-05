@@ -1,12 +1,11 @@
-// @source https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/blocks/Canvas.tsx
 import React, { useContext } from 'react';
 import type { FC } from 'react';
 
 import type { ModuleExport, ModuleExports } from 'storybook/internal/types';
 import { DocsContext, type SourceProps, useSourceProps, SourceContext, type StoryProps, Story, useOf } from '@storybook/blocks';
-import { Preview as PurePreview, type PreviewProps as PurePreviewProps, type Layout } from './components/Preview.tsx';
+import { Preview, type PreviewProps, type Layout } from './components/Preview.tsx';
 
-type CanvasProps = Pick<PurePreviewProps, 'withToolbar' | 'additionalActions' | 'className'> & {
+type CanvasProps = Pick<PreviewProps, 'withToolbar' | 'additionalActions' | 'className'> & {
 	/**
 	 * Pass the export defining a story to render that story
 	 *
@@ -50,12 +49,13 @@ type CanvasProps = Pick<PurePreviewProps, 'withToolbar' | 'additionalActions' | 
 	source?: Omit<SourceProps, 'dark'>;
 	/** @see {StoryProps} */
 	story?: Pick<StoryProps, 'inline' | 'height' | 'autoplay' | '__forceInitialArgs' | '__primary'>;
+	title?: string; // I added this to pass it down to my custom component
 };
 
 export const Canvas: FC<CanvasProps> = (props) => {
 	const docsContext = useContext(DocsContext);
 	const sourceContext = useContext(SourceContext);
-	const { of, source } = props;
+	const { title, of, source } = props;
 	if ('of' in props && of === undefined) {
 		throw new Error('Unexpected `of={undefined}`, did you mistype a CSF file reference?');
 	}
@@ -72,15 +72,17 @@ export const Canvas: FC<CanvasProps> = (props) => {
 	const className = props.className ?? story.parameters.docs?.canvas?.className;
 
 	return (
-		<PurePreview
+		<Preview
 			withSource={sourceState === 'none' ? undefined : sourceProps}
 			isExpanded={sourceState === 'shown'}
 			withToolbar={withToolbar}
 			additionalActions={additionalActions}
 			className={className}
 			layout={layout}
+			title={title}
+			of={of}
 		>
 			<Story of={of || story.moduleExport} meta={props.meta} {...props.story} />
-		</PurePreview>
+		</Preview>
 	);
 };

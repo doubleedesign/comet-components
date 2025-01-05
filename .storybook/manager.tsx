@@ -2,9 +2,9 @@ import React from 'react';
 import { addons, types } from '@storybook/manager-api';
 import { themes } from '@storybook/theming';
 import { DOCS_PREPARED, DOCS_RENDERED, STORY_PREPARED, SET_CURRENT_STORY, UPDATE_QUERY_PARAMS } from '@storybook/core-events';
-import {  HtmlPanel } from './components/HtmlPanel.tsx';
+import {  HtmlPanel } from './custom-components/HtmlPanel.tsx';
 import './manager.css';
-import { PhpPanel } from './components/PhpPanel.tsx';
+import { PhpPanel } from './custom-components/PhpPanel.tsx';
 
 addons.setConfig({
 	theme: themes.light,

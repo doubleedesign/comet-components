@@ -1,9 +1,10 @@
 import React from 'react';
 import type { Preview } from '@storybook/server';
 import { addons } from '@storybook/preview-api';
-import { Description, Controls, Stories, DocsContainer, Subtitle, Title, Unstyled } from '@storybook/blocks';
+import { Controls, Description, DocsContainer, Subtitle, Title, Unstyled } from '@storybook/blocks';
 import { Primary } from './blocks/Primary.tsx';
-import { RENDER_PREVIEW_TAB, GET_PREVIEW_HTML } from './components/HtmlPanel.tsx';
+import { Stories } from './blocks/Stories.tsx';
+import { RENDER_PREVIEW_TAB, GET_PREVIEW_HTML } from './custom-components/HtmlPanel.tsx';
 import './preview.css';
 
 const channel = addons.getChannel();
@@ -44,6 +45,7 @@ const preview: Preview = {
 	parameters: {
 		viewMode: 'story',
 		controls: {
+			disableSaveFromUI: true,
 			matchers: {
 				color: /(background|color)$/i,
 				date: /Date$/i,

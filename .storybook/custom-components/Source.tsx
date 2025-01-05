@@ -1,10 +1,9 @@
 import React from 'react';
 import type { FunctionComponent } from 'react';
 import type { SupportedLanguage } from 'storybook/internal/components';
-import {
-	ignoreSsrWarning,
-	styled,
-} from 'storybook/internal/theming';
+import type { ModuleExport } from 'storybook/internal/types';
+import { ignoreSsrWarning, styled } from 'storybook/internal/theming';
+import { DocsCodePanel } from './DocsCode.tsx';
 
 
 export enum SourceError {
@@ -16,6 +15,8 @@ export interface SourceProps {
 	language?: SupportedLanguage;
 	isLoading?: boolean;
 	error?: SourceError;
+	title?: string; // I added this to pass it down to my custom component
+	of?: ModuleExport; // and this
 }
 
 const SourceSkeletonWrapper = styled.div(({ theme }) => ({
@@ -49,10 +50,11 @@ const SourceSkeleton = () => (
 	</SourceSkeletonWrapper>
 );
 
-/** Syntax-highlighted source code for a component (or anything!) */
 const Source: FunctionComponent<SourceProps> = ({
 	isLoading,
 	error,
+	title, // I added this so it can be passed down to my custom DocsCodePanel component
+	of, // and this
 	...rest
 }) => {
 	if (isLoading) {
@@ -63,7 +65,7 @@ const Source: FunctionComponent<SourceProps> = ({
 	}
 
 	return (
-		<>MY CODE HERE</>
+		<DocsCodePanel title={title} story={of}/>
 	);
 };
 

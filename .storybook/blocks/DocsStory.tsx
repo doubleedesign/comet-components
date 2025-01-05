@@ -12,7 +12,6 @@ export const DocsStory: FC<DocsStoryProps> = ({
 	__primary = false,
 }) => {
 	const { story } = useOf(of || 'story', ['story']);
-
 	// use withToolbar from parameters or default to true in autodocs
 	const withToolbar = story.parameters.docs?.canvas?.withToolbar ?? withToolbarProp;
 
@@ -26,6 +25,7 @@ export const DocsStory: FC<DocsStoryProps> = ({
 			)}
 			<Canvas
 				of={of}
+				title={story.title}
 				withToolbar={withToolbar}
 				story={{ __forceInitialArgs, __primary }}
 				source={{ __forceInitialArgs }}

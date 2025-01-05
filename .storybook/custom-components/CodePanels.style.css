@@ -5,6 +5,7 @@
 	margin: 0;
 
 	code {
+		display: block;
 		width: 100%;
 		height: 100%;
 		padding: 1rem;
@@ -66,7 +67,28 @@
 		color: #87d9ff; /* default, gets punctuation not wrapped in its own class */
 
 		.hljs-indented-php {
-			padding-inline-start: 2rem;
+			padding-inline-start: 1.5rem;
+		}
+	}
+}
+
+.code-preview-pair {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-rows: 1fr;
+	/** match the show/hide code button so it looks cohesive */
+	border-top: 1px solid hsla(203, 50%, 30%, 0.15);
+
+	> figure {
+		margin: 0;
+
+		figcaption {
+			display: block;
+			padding: 0.5rem 1rem;
+		}
+
+		code {
+			overflow-x: auto;
 		}
 	}
 }

@@ -1,17 +1,27 @@
 //@source https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/components/Preview.tsx
 import type { ClipboardEvent, FC, ReactElement, ReactNode, Context } from 'react';
 import React, { Children, useCallback, useState, createContext } from 'react';
-import { ActionBar, Zoom, type ActionItem } from 'storybook/internal/components';
-import { styled } from 'storybook/internal/theming';
+import { ActionBar, Zoom, type ActionItem, Loader } from 'storybook/internal/components';
+import type { ModuleExport } from 'storybook/internal/types';
+import { styled, Theme } from 'storybook/internal/theming';
 import { darken } from 'polished';
-import { Loader } from 'storybook/internal/components';
 import { Toolbar } from './Toolbar.tsx';
-import { Source, type SourceProps } from '../../components/Source.tsx'; // this is my custom one
+import { Source, type SourceProps } from '../../custom-components/Source.tsx'; // this is my custom one
 
 const StorySkeleton = () => <Loader/>;
 
+// Copied from https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/components/ZoomContext.tsx
 const ZoomContext: Context<{ scale: number }> = createContext({
 	scale: 1,
+});
+
+// Copied from https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/components/BlockBackgroundStyles.tsx
+const getBlockBackgroundStyle: (theme: Theme) => object = (theme: Theme) => ({
+	borderRadius: theme.appBorderRadius,
+	background: theme.background.content,
+	boxShadow:
+		theme.base === 'light' ? 'rgba(0, 0, 0, 0.10) 0 1px 3px 0' : 'rgba(0, 0, 0, 0.20) 0 2px 5px 0',
+	border: `1px solid ${theme.appBorderColor}`,
 });
 
 export interface PreviewProps {
@@ -25,6 +35,8 @@ export interface PreviewProps {
 	className?: string;
 	additionalActions?: ActionItem[];
 	children?: ReactNode;
+	title?: string; // I added this
+	of?: ModuleExport; // and this
 }
 
 export type Layout = 'padded' | 'fullscreen' | 'centered';
@@ -95,7 +107,7 @@ const PreviewContainer = styled.div<PreviewProps>(
 		position: 'relative',
 		overflow: 'hidden',
 		margin: '25px 0 40px',
-		//...getBlockBackgroundStyle(theme),
+		...getBlockBackgroundStyle(theme),
 		borderBottomLeftRadius: withSource && isExpanded && 0,
 		borderBottomRightRadius: withSource && isExpanded && 0,
 		borderBottomWidth: isExpanded && 0,
@@ -113,9 +125,11 @@ interface SourceItem {
 }
 
 const getSource = (
+	title: string, // I added this
+	of: ModuleExport, // and this
 	withSource: SourceProps,
 	expanded: boolean,
-	setExpanded: Function
+	setExpanded: Function,
 ): SourceItem => {
 	switch (true) {
 		case !!(withSource && withSource.error): {
@@ -131,7 +145,7 @@ const getSource = (
 		}
 		case expanded: {
 			return {
-				source: <StyledSource {...withSource} />,
+				source: <StyledSource title={title} of={of} {...withSource} />,
 				actionItem: {
 					title: 'Hide code',
 					className: 'docblock-code-toggle docblock-code-toggle--expanded',
@@ -141,7 +155,7 @@ const getSource = (
 		}
 		default: {
 			return {
-				source: <StyledSource {...withSource} />,
+				source: <StyledSource title={title} of={of} {...withSource} />,
 				actionItem: {
 					title: 'Show code',
 					className: 'docblock-code-toggle',
@@ -178,6 +192,7 @@ const Relative = styled.div({
 /**
  * A preview component for showing one or more component `Story` items. The preview also shows the
  * source for the component as a drop-down.
+ * This has been customised to pass story data down to a custom Source component.
  */
 export const Preview: FC<PreviewProps> = ({
 	isLoading,
@@ -190,10 +205,12 @@ export const Preview: FC<PreviewProps> = ({
 	additionalActions,
 	className,
 	layout = 'padded',
+	title,
+	of,
 	...props
 }) => {
 	const [expanded, setExpanded] = useState(isExpanded);
-	const { source, actionItem } = getSource(withSource, expanded, setExpanded);
+	const { source, actionItem } = getSource(title, of, withSource, expanded, setExpanded);
 	const [scale, setScale] = useState(1);
 	const previewClasses = [className].concat(['sbdocs', 'sbdocs-preview', 'sb-unstyled']);
 

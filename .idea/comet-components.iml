@@ -11,7 +11,6 @@
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/dist/comet-components-wp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/dist/comet-components-wp/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brain/monkey" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
