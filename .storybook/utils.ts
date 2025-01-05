@@ -1,7 +1,7 @@
 type MockPhpSourceCodeArgs = {
 	componentName: string;
 	content: string;
-	style?: string;
+	classes: string[];
 	attributes: Record<string, string>;
 };
 
@@ -11,13 +11,13 @@ type MockPhpSourceCodeArgs = {
  * Some assumptions are made here based on how Comet Components generally work.
  * @param componentName PascalCase component class name
  * @param content       The content of the component
- * @param style         Style name (e.g., accent)
+ * @param classes       CSS classes (e.g. is-style-accent)
  * @param attributes    Other component attributes
  */
 export const mockPhpSourceCode = async ({
 	componentName,
 	content,
-	style,
+	classes,
 	attributes
 }: MockPhpSourceCodeArgs): Promise<string> => {
 
@@ -25,7 +25,7 @@ export const mockPhpSourceCode = async ({
 		use DoubleeDesign\\Comet\\Components\\${componentName};
 	
 		$attributes = [
-			${style ? `'style' => '${style}',` : ''}
+			${classes ? `'className' => '[${classes}'],` : ''}
 			${Object.entries(attributes).map(([key, value], index) => {
 				if (Number.parseFloat(value)) {
 					return index === 0 ? `'${key}' => ${value},` : `\t'${key}' => ${value},`;

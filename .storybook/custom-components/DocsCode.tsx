@@ -4,7 +4,6 @@ import { omit } from 'lodash';
 import { mockPhpSourceCode } from '../utils.ts';
 import { PhpCodeBlock } from './PhpCodeBlock.tsx';
 import { HtmlCodeBlock } from './HtmlCodeBlock.tsx';
-import './CodePanels.style.css';
 
 type DocsCodePanelProps = {
 	title: string;
@@ -15,7 +14,7 @@ export const DocsCodePanel = ({ title, story }: DocsCodePanelProps) => {
 	const [sourceCode, setSourceCode] = useState<string>('');
 	const [outputCode, setOutputCode] = useState<string>('');
 	const classShortName = title.split('/').pop();
-	const style = story?.args?.style ? `is-style-${story.args.style}` : undefined;
+	const className = story?.args?.style ? `is-style-${story.args.style}` : undefined;
 	const content = story?.args?.content;
 	// args is an object, omit style and content from it using lodash because they're handled separately
 	const attributes = omit(story.args, ['style', 'content']);
@@ -23,7 +22,7 @@ export const DocsCodePanel = ({ title, story }: DocsCodePanelProps) => {
 	const mockSourceCode = useCallback(async() => {
 		const mockCode = await mockPhpSourceCode({
 			componentName: classShortName,
-			style: style,
+			classes: [className],
 			content,
 			attributes
 		});
@@ -33,13 +32,33 @@ export const DocsCodePanel = ({ title, story }: DocsCodePanelProps) => {
 
 	const getOutputCode = useCallback(async() => {
 		const likelyFileName = classShortName.toLowerCase();
-		try {
-			const response = await fetch(`http://localhost:6001/${likelyFileName}.php`);
-			const html = await response.text();
-			setOutputCode(html);
-		}
-		catch (error) {
-			console.error('Error:', error);
+		const urlParams = Object.entries(story.args)
+			.filter(([key, value]) => value)
+			.map(([key, value]) => `${key}=${value}`).join('&');
+		const url = `http://localhost:6001/${likelyFileName}.php?${urlParams}`;
+
+		const MAX_RETRIES = 3;
+		let retryCount = 0;
+
+		while (retryCount < MAX_RETRIES) {
+			try {
+				const response = await fetch(url);
+				const html = await response.text();
+				setOutputCode(html);
+
+				return;
+			}
+			catch (error) {
+				retryCount++;
+				console.error(`Attempt ${retryCount} failed:`, error);
+
+				if (retryCount === MAX_RETRIES) {
+					console.error('Max retries reached. Final error:', error);
+					break;
+				}
+
+				await new Promise(resolve => setTimeout(resolve, 500));
+			}
 		}
 	}, [story]);
 

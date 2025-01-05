@@ -1,11 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { addons, useStorybookApi } from '@storybook/manager-api';
-import 'highlight.js/styles/felipec.css';
 import { API_StoryEntry } from '@storybook/types';
 import { omit } from 'lodash';
-import './CodePanels.style.css';
-import { mockPhpSourceCode } from '../utils.ts';
-import { PhpCodeBlock } from './PhpCodeBlock.tsx';
+import { mockPhpSourceCode } from '../../utils.ts';
+import { PhpCodeBlock } from '../../custom-components/PhpCodeBlock.tsx';
 
 /**
  * The PHP code panel used in the @doubleedesign/code-tabs addon,
@@ -19,14 +17,14 @@ export const PhpPanel = () => {
 
 	const mockSourceCode = useCallback(async () => {
 		const classShortName = story.title.split('/').pop();
-		const style = story?.args?.style ? `is-style-${story.args.style}` : undefined;
+		const className = story?.args?.style ? `is-style-${story.args.style}` : undefined;
 		const content = story?.args?.content;
 		// args is an object, omit style and content from it using lodash because they're handled separately
 		const attributes = omit(story.args, ['style', 'content']);
 
 		const mockCode = await mockPhpSourceCode({
 			componentName: classShortName,
-			style: style,
+			classes: [className],
 			content,
 			attributes
 		});

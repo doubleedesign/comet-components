@@ -100,19 +100,56 @@
 		{
 			"name": "Accent style",
 			"args": {
-				"content": "Accent style",
+				"content": "Accent style heading",
 				"level": 2,
 				"style": "accent"
 			}
 		},
+
 		{
-			"name": "Centered",
+			"name": "Heading 1",
 			"args": {
-				"content": "Centered Heading",
-				"level": 2,
-				"style": "default",
-				"textAlign": "center"
-			}
+				"content": "Heading Level 1",
+				"level": 1,
+				"style": "default"
+			},
+			"tags": ["docsOnly"]
+		},
+		{
+			"name": "Heading 3",
+			"args": {
+				"content": "Heading Level 3",
+				"level": 3,
+				"style": "default"
+			},
+			"tags": ["docsOnly"]
+		},
+		{
+			"name": "Heading 4",
+			"args": {
+				"content": "Heading Level 4",
+				"level": 4,
+				"style": "default"
+			},
+			"tags": ["docsOnly"]
+		},
+		{
+			"name": "Heading 5",
+			"args": {
+				"content": "Heading Level 5",
+				"level": 5,
+				"style": "default"
+			},
+			"tags": ["docsOnly"]
+		},
+		{
+			"name": "Heading 6",
+			"args": {
+				"content": "Heading Level 6",
+				"level": 6,
+				"style": "default"
+			},
+			"tags": ["docsOnly"]
 		}
 	]
 }

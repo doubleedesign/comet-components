@@ -3,14 +3,12 @@ import { html as beautifyHtml } from 'js-beautify';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/felipec.css';
 import './CodePanels.style.css';
-import { Loader } from 'storybook/internal/components';
 
 export const HtmlCodeBlock = ({ codeString }) => {
 	const [html, setHtml] = useState<string>('');
-	const [loading, setLoading] = useState<boolean>(true);
 
 	const formatAndHighlightCode = useCallback(async () => {
-		const formattedCode = beautifyHtml(codeString, {
+		const formattedCode = beautifyHtml(codeString.replace('\r', ''), {
 			indent_size: 4,
 			preserve_newlines: false,
 		});
@@ -39,23 +37,11 @@ export const HtmlCodeBlock = ({ codeString }) => {
 		formatAndHighlightCode();
 	}, [codeString]);
 
-	useEffect(() => {
-		if (html) {
-			setLoading(false);
-		}
-	}, [html]);
-
 	return (
-		<>
-			{loading ? (
-				<Loader/>
-			) : (
-				<pre className="code-preview code-preview--html hljs">
-					<code className="language-html">
-						<div dangerouslySetInnerHTML={{ __html: html }}/>
-					</code>
-				</pre>
-			)}
-		</>
+		<pre className="code-preview code-preview--html hljs">
+			<code className="language-html">
+				<div dangerouslySetInnerHTML={{ __html: html }}/>
+			</code>
+		</pre>
 	);
 };

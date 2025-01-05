@@ -9,6 +9,7 @@ const config: StorybookConfig = {
 		'@storybook/addon-webpack5-compiler-swc',
 		'@storybook/addon-essentials',
 		'@chromatic-com/storybook',
+		'./addons/code-tabs/preset.ts'
 	],
 	framework: {
 		name: '@storybook/server-webpack5',
