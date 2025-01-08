@@ -3,14 +3,13 @@ import type { Configuration } from 'webpack';
 
 const config: StorybookConfig = {
 	stories: [
-		'../src/**/*.mdx',
+		'../docs/**/*.mdx',
 		'../test/browser/stories/**/*.stories.@(json|yaml|yml)'
 	],
 	addons: [
 		'@storybook/addon-webpack5-compiler-swc',
 		'@storybook/addon-essentials',
-		'./addons/code-tabs/preset.ts',
-		'./addons/server-page-states/preset.ts',
+		'./addons/code-tabs/preset.ts'
 	],
 	framework: {
 		name: '@storybook/server-webpack5',

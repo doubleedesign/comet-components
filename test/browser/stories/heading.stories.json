@@ -23,8 +23,15 @@
 		"content": {
 			"description": "The text/basic HTML content",
 			"control": {
-				"type": "text"
+				"type": "select"
 			},
+			"options": [
+				"Heading Component",
+				"Heading with <em>emphasis</em>",
+				"Heading with <strong>strong</strong>",
+				"Heading with <a href='#'>link</a>",
+				"Long heading lorem ipsum dolor sit amet, consectetur adipiscing elit sed non risus sspendisse lectus tortor, dignissim sit amet"
+			],
 			"table": {
 				"defaultValue": {
 					"summary": ""
@@ -66,8 +73,7 @@
 				},
 				"type": {
 					"summary": "string"
-				},
-				"readonly": true
+				}
 			}
 		},
 		"textAlign": {
@@ -86,12 +92,22 @@
 				},
 				"type": {
 					"summary": "string"
-				},
-				"readonly": true
+				}
 			}
 		}
 	},
 	"stories": [
+		{
+			"name": "Playground",
+			"args": {
+				"content": "Heading Component",
+				"level": 2,
+				"style": "default"
+			},
+			"tags": [
+				"docsOnly"
+			]
+		},
 		{
 			"name": "Default",
 			"args": {

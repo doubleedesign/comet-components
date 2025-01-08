@@ -7,6 +7,7 @@ import { withServerPageStates } from './decorators/server-page-states/withServer
 import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
+import comet from './theme.ts';
 
 // Log all events
 // import { addons } from '@storybook/preview-api';
@@ -47,6 +48,7 @@ const preview: Preview = {
 			disable: true
 		},
 		docs: {
+			theme: comet,
 			// Code is handled in a custom component
 			source: {
 				code: null,

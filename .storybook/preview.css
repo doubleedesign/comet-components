@@ -1,3 +1,30 @@
+@import url("https://use.typekit.net/daf8wql.css");
+
+:root {
+	--comet-docs-body-font: solitaire-mvb-pro, sans-serif;
+	--comet-docs-heading-font: gelica, sans-serif;
+}
+
+#storybook-docs {
+	font-family: var(--comet-docs-body-font);
+
+	h1, h2, h3 {
+		font-family: var(--comet-docs-heading-font);
+	}
+
+	.sbdocs-preview .docs-story {
+		font-family: initial;
+
+		h1, h2, h3 {
+			font-family: initial;
+		}
+	}
+}
+
+.docblock-argstable * {
+	font-family: var(--comet-docs-body-font);
+}
+
 .sbdocs-wrapper {
 	padding: 2rem 1rem !important;
 	container-type: inline-size;
@@ -44,3 +71,4 @@
 	pointer-events: none;
 	position: relative;
 }
+
