@@ -24,7 +24,7 @@
 		"@prettier/plugin-php": "^0.22.2",
 		"@storybook/addon-essentials": "^8.4.7",
 		"@storybook/addon-links": "^8.4.7",
-		"@storybook/addon-webpack5-compiler-swc": "^1.0.5",
+		"@storybook/addon-webpack5-compiler-swc": "^2.0.0",
 		"@storybook/addons": "^7.6.17",
 		"@storybook/blocks": "^8.4.7",
 		"@storybook/core-events": "^8.4.7",

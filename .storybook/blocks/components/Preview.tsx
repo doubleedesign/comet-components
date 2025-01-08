@@ -1,4 +1,6 @@
 //@source https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/components/Preview.tsx
+// Copied as part of the overrides needed to load a custom Source component
+// And also modified to add the story name to the HTML for customising output wrapper styling for specific stories
 import type { ClipboardEvent, FC, ReactElement, ReactNode, Context } from 'react';
 import React, { Children, useCallback, useState, createContext } from 'react';
 import { ActionBar, Zoom, type ActionItem, Loader } from 'storybook/internal/components';

@@ -1,3 +1,6 @@
+// @source https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/blocks/Canvas.tsx
+// Copied as part of the overrides needed to load a custom Source component
+// And also modified to add the story name to the HTML for customising output wrapper styling for specific stories
 import React, { useContext } from 'react';
 import type { FC } from 'react';
 
@@ -69,7 +72,9 @@ export const Canvas: FC<CanvasProps> = (props) => {
 	const additionalActions =
 		props.additionalActions ?? story.parameters.docs?.canvas?.additionalActions;
 	const sourceState = props.sourceState ?? story.parameters.docs?.canvas?.sourceState ?? 'hidden';
-	const className = props.className ?? story.parameters.docs?.canvas?.className;
+	const defaultClassName = props.className ?? story.parameters.docs?.canvas?.className;
+	const storyClassNames = `story--${story.componentId} story--${story.id}`;
+	const className = `${defaultClassName ?? ''} ${storyClassNames}`.trim();
 
 	return (
 		<Preview

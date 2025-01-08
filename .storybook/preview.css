@@ -19,6 +19,10 @@
 	}
 }
 
+.docs-story {
+	padding: 1rem;
+}
+
 .docs-story > div:first-child {
 	padding: 0;
 }
@@ -29,4 +33,14 @@
 
 .docs-story .sb-story > div:first-child {
 	height: max-content !important;
+}
+
+.sbdocs-preview:has(.sbdocs-preview--story-loading) {
+	padding-top: 0 !important;
+}
+
+.sbdocs-preview:has(.sbdocs-preview--story-loading) > div:not(.sb-loader) {
+	opacity: 0.25;
+	pointer-events: none;
+	position: relative;
 }
