@@ -6,6 +6,9 @@
  *
  * See BlockEditorAdminAssets.php for where the compiled version of this script is loaded;
  * and the dependencies that may need to be added to ensure future modifications work
+ *
+ * TODO: Find a way to use the various JSON files (wp-supported-blocks, individual definitions?)
+ *       that are generated or used by the PHP classes to keep this aligned with the abstracted implementations
  */
 
 import lodash from 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/+esm';

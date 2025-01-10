@@ -3,7 +3,6 @@ namespace Doubleedesign\Comet\Components;
 
 class Heading extends CoreElementComponent {
 	protected HeadingAttributes $attributes;
-	protected ?Alignment $textAlign = null;
 	/** @var string $content - plain text or basic HTML */
 	protected string $content;
 
@@ -69,7 +68,7 @@ class Heading extends CoreElementComponent {
 }
 
 class HeadingAttributes extends CoreAttributes {
-	protected ?HeadingTag $tag = null;
+	protected ?HeadingTag $tag = HeadingTag::H2;
 
 	public function __construct(array $attrs) {
 		parent::__construct($attrs);

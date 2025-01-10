@@ -1,39 +1,51 @@
 {
     "name": "Heading",
-    "properties": [
-        {
-            "name": "attributes",
-            "type": "Doubleedesign\\Comet\\Components\\HeadingAttributes",
-            "properties": [
-                {
-                    "name": "tag",
-                    "type": "'a'|'abbr'|'address'|'article'|'aside'|'audio'|'bdi'|'bdo'|'blockquote'|'br'|'button'|'canvas'|'caption'|'cite'|'code'|'col'|'colgroup'|'data'|'datalist'|'dd'|'del'|'details'|'dfn'|'dialog'|'div'|'dl'|'dt'|'em'|'embed'|'fieldset'|'figcaption'|'figure'|'footer'|'form'|'h1'|'h2'|'h3'|'h4'|'h5'|'h6'|'head'|'header'|'hgroup'|'hr'|'i'|'iframe'|'img'|'input'|'ins'|'kbd'|'label'|'legend'|'li'|'main'|'map'|'mark'|'meta'|'meter'|'nav'|'noscript'|'object'|'ol'|'optgroup'|'option'|'output'|'p'|'picture'|'pre'|'progress'|'q'|'s'|'samp'|'search'|'section'|'select'|'small'|'source'|'span'|'strong'|'style'|'sub'|'summary'|'sup'|'table'|'tbody'|'td'|'textarea'|'tfoot'|'th'|'thead'|'time'|'title'|'tr'|'track'|'u'|'ul'|'var'|'video'|'wbr'|''"
-                },
-                {
-                    "name": "rawAttributes",
-                    "type": "array"
-                },
-                {
-                    "name": "classes",
-                    "type": "array"
-                },
-                {
-                    "name": "id",
-                    "type": "string"
-                },
-                {
-                    "name": "style",
-                    "type": "array|string|null"
-                }
-            ]
+    "content": {
+        "type": "string",
+        "required": true
+    },
+    "attributes": {
+        "tag": {
+            "type": "HeadingTag",
+            "supported": [
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "h5",
+                "h6"
+            ],
+            "default": "h2"
         },
-        {
-            "name": "textAlign",
-            "type": "'left'|'right'|'center'|'justify'|'start'|'end'|'match-parent'"
+        "id": {
+            "type": "string",
+            "description": "Unique identifier for the component instance"
         },
-        {
-            "name": "content",
-            "type": "string"
+        "style": {
+            "type": "string",
+            "description": "Inline styles to be applied to the component HTML"
+        },
+        "textAlign": {
+            "type": "Alignment",
+            "supported": [
+                "left",
+                "right",
+                "center",
+                "justify",
+                "start",
+                "end",
+                "match-parent"
+            ],
+            "default": "start"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes to be applied to the component HTML",
+            "supported": [
+                "is-style-accent",
+                "is-style-lead"
+            ],
+            "default": []
         }
-    ]
+    }
 }
