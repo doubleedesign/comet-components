@@ -3,7 +3,7 @@
 namespace Doubleedesign\Comet\Components;
 
 
-enum Tag: string implements ITag {
+enum Tag: string {
 	case A = 'a';
 	case ABBR = 'abbr';
 	case ADDRESS = 'address';

@@ -6,12 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src/base/types" isTestSource="false" packagePrefix="Doubleedesign\Comet\Components\" />
       <sourceFolder url="file://$MODULE_DIR$/test/common" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/test/common/wordpress" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\WordPress\" />
-      <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/dist/comet-components-wp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dist/comet-components-wp/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\" />
-      <sourceFolder url="file://$MODULE_DIR$/dist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/base/components" isTestSource="false" packagePrefix="Doubleedesign\Comet\Components\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/base/traits" isTestSource="false" packagePrefix="Doubleedesign\Comet\Components\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/services" isTestSource="false" packagePrefix="Doubleedesign\Comet\Services\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brain/monkey" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
@@ -50,6 +49,31 @@
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/test/coverage" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/carbonphp/carbon-doctrine-types" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/bus" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/collections" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/conditionable" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/events" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/macroable" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/pipeline" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/support" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/illuminate/view" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/voku/portable-ascii" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -13,9 +13,12 @@
 		],
 		"psr-4": {
 			"Doubleedesign\\Comet\\Components\\": [
-				"src/base/",
-				"src/base/types/"
+				"src/base/types/",
+				"src/base/traits/",
+				"src/base/components/",
+				"src/base/"
 			],
+			"Doubleedesign\\Comet\\Services\\": "src/services/",
 			"Doubleedesign\\Comet\\Tests\\": "test/unit/",
 			"Doubleedesign\\Comet\\TestUtils\\": "test/common/",
 			"Doubleedesign\\Comet\\TestUtils\\WordPress\\": "test/common/wordpress/"
@@ -30,5 +33,13 @@
 		"allow-plugins": {
 			"roots/wordpress-core-installer": true
 		}
+	},
+	"require": {
+		"illuminate/view": "^10.0",
+		"illuminate/filesystem": "^10.0",
+		"illuminate/events": "^10.0",
+		"illuminate/container": "^10.0",
+		"illuminate/support": "^10.0",
+		"ezyang/htmlpurifier": "^4.18"
 	}
 }

@@ -29,6 +29,9 @@ if (!empty($output)) {
     }
 }
 
+// Clear Blade template cache
+array_map('unlink', glob(dirname(__DIR__, 2) . '/cache/blade/*'));
+
 // Start the server, using the components directory (in the same folder as this file) as the web root
 $cmd = "php -S localhost:$port -c $phpIniPath -t $currentDir/components";
 exec($cmd);

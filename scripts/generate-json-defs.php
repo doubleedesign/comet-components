@@ -1,4 +1,7 @@
 <?php
+use Doubleedesign\Comet\Components\HasAllowedTags;
+use Doubleedesign\Comet\Components\Tag;
+
 /**
  * This script generates JSON files that summarise the details of component classes written in PHP.
  * They are intended to be used for story generation and testing integrations (e.g., comparing WordPress block.json definitions).
@@ -8,28 +11,14 @@
 class ComponentClassesToJsonDefinitions {
 	private string $directory;
 	private array $processedClasses = [];
+    private ReflectionClass $currentClass;
 
 	public function __construct() {
+        require_once(__DIR__ . '/../vendor/autoload.php');
 		$this->directory = dirname(__DIR__, 1) . '\src\components';
 	}
 
-	private function includeBaseClasses(): void {
-		require_once __DIR__ . '/../src/base/IRenderable.php';
-		require_once __DIR__ . '/../src/base/types/ITag.php';
-		require_once __DIR__ . '/../src/base/types/Tag.php';
-		require_once __DIR__ . '/../src/base/types/HeadingTag.php';
-		require_once __DIR__ . '/../src/base/UIComponent.php';
-		require_once __DIR__ . '/../src/base/CoreElementComponent.php';
-		require_once __DIR__ . '/../src/base/BasicElementComponent.php';
-		require_once __DIR__ . '/../src/base/LayoutComponent.php';
-		require_once __DIR__ . '/../src/base/CoreAttributes.php';
-		require_once __DIR__ . '/../src/base/BaseAttributes.php';
-		require_once __DIR__ . '/../src/base/types/Alignment.php';
-	}
-
 	public function runAll(): void {
-		$this->includeBaseClasses();
-
 		// Get all PHP files in the directory
 		/** @noinspection PhpUnhandledExceptionInspection */
 		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->directory));
@@ -41,12 +30,12 @@ class ComponentClassesToJsonDefinitions {
 		}
 	}
 
-	public function runSingle($component): void {
-		$this->includeBaseClasses();
 
-		$filePath = $this->directory . '\\' . $component . '\\' . $component . '.php';
+    /** @noinspection PhpUnhandledExceptionInspection */
+    public function runSingle($component): void {
+        $filePath = $this->directory . '\\' . $component . '\\' . $component . '.php';
 		if (!file_exists($filePath)) {
-			throw new Exception("Component class $component not found");
+			throw new RuntimeException("Component class $component not found");
 		}
 
 		$this->processFile($filePath);
@@ -66,12 +55,12 @@ class ComponentClassesToJsonDefinitions {
 		if (preg_match('/class\s+(\w+)/', $content, $matches)) {
 			$className = $namespace . $matches[1];
 
-			// Include the file to make the class available for reflection
-			require_once $filePath;
-
 			try {
+                // Collect the data about the class
 				$reflectionClass = new ReflectionClass($className);
 				$result = $this->analyseClass($reflectionClass);
+
+                // Export the data to a JSON file
 				$outputPath = str_replace('.php', '.json', $reflectionClass->getFileName());
 				$this->exportToJson($outputPath, $result);
 				print_r("Exported component definition JSON to $outputPath\n");
@@ -142,6 +131,8 @@ class ComponentClassesToJsonDefinitions {
      * @return array
      */
     private function getPropertyType(ReflectionProperty $property): array {
+        $this->currentClass = $property->getDeclaringClass();
+
         $required = !$property->getType()->allowsNull();
         $defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null;
         $type = $property->getType();
@@ -205,6 +196,24 @@ class ComponentClassesToJsonDefinitions {
         $reflectionType = new ReflectionClass($typeName);
         $namespace = $reflectionType->getNamespaceName();
 
+        // If it's a Tag property and the class uses HasAllowedTags, get the allowed tags
+        if ($typeName === Tag::class && $this->classUsesTraitRecursive($this->currentClass, HasAllowedTags::class)) {
+            try {
+                $allowedTags = $this->currentClass->getMethod('get_allowed_html_tags')->invoke(null);
+                $supportedValues = array_map(function($tag) {
+                    return $tag->value;
+                }, $allowedTags);
+
+                return [
+                    'type' => str_replace("$namespace\\", '', $typeName),
+                    'supported' => array_values($supportedValues)
+                ];
+            }
+            catch (ReflectionException $e) {
+                error_log($e->getMessage());
+            }
+        }
+
         if ($reflectionType->isEnum()) {
             $cases = $reflectionType->getConstants();
             $supportedValues = array_map(function($case) {
@@ -220,6 +229,21 @@ class ComponentClassesToJsonDefinitions {
         // If it's not an enum or the class doesn't exist, return the original type name
         return ['type' => $typeName];
     }
+
+
+    /**
+     * Check if a class uses a trait, including traits used by parent classes
+     */
+    private function classUsesTraitRecursive(ReflectionClass $class, string $traitName): bool {
+        do {
+            if (in_array($traitName, array_keys($class->getTraits()))) {
+                return true;
+            }
+        } while ($class = $class->getParentClass());
+
+        return false;
+    }
+
 
     /**
      * Exports the processed data as a JSON file to the specified output path.

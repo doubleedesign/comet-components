@@ -10,6 +10,7 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
+		"generate:json": "php scripts/generate-json-defs.php",
 		"generate-from:wp": "node --import ./scripts/loader.mjs ./scripts/generate-from-wp-blocks.ts"
 	},
 	"devDependencies": {

@@ -2,30 +2,26 @@
 namespace Doubleedesign\Comet\Components;
 use RuntimeException;
 
-abstract class UIComponent {
-	protected BaseAttributes $attributes;
-	
-	/** @var string $content - plain text or innerHTML */
-	protected string $content;
-	
-	/** @var UIComponent[] $innerComponents */
+abstract class UIComponent extends Renderable {
+	/**
+     * @var array<Renderable> $innerComponents
+     * @description Inner components to be rendered within this component
+     */
 	protected array $innerComponents;
-	
+
 	/**
 	 * UIComponent constructor
-	 *
-	 * @param array $attributes
-	 * @param string $content
-	 * @param UIComponent[] $innerComponents
+	 * @param array<string, string|int|array|null> $attributes
+	 * @param array<Renderable> $innerComponents
+     * @param string $bladeFile
 	 */
-	function __construct(array $attributes, string $content = '', array $innerComponents = []) {
-		$this->attributes = new BaseAttributes($attributes);
-		$this->content = $content;
-		$this->innerComponents = $innerComponents;
+	function __construct(array $attributes, array $innerComponents, string $bladeFile) {
+		parent::__construct($attributes, $bladeFile);
+        $this->innerComponents = $innerComponents;
 	}
-	
-	
-	/**
+
+
+    /**
 	 * Generic method to render inner content
 	 * (child classes may override this)
 	 *
@@ -46,10 +42,10 @@ abstract class UIComponent {
 				throw new RuntimeException("UIComponent could not find class $fullClassName to render an inner component");
 			}
 		}, '');
-		
+
 		ob_start();
 		echo $inner_html;
 		return ob_get_clean();
 	}
-	
+
 }

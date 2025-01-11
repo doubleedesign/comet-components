@@ -1,8 +1,10 @@
 <?php
 namespace Doubleedesign\Comet\Components;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 
 class Utils {
-	
+
 	/**
 	 * If a string value has spaces, convert it to kebab case
 	 * @param string $value
@@ -13,11 +15,11 @@ class Utils {
 		if (!preg_match('/\s/', $value)) {
 			return $value;
 		}
-		
+
 		// Convert whitespace to hyphens and make lowercase
 		return trim(strtolower(preg_replace('/\s+/', '-', $value)));
 	}
-	
+
 	/**
 	 * Convert string value to PascalCase
 	 * @param string $value
@@ -26,7 +28,7 @@ class Utils {
 	public static function pascal_case(string $value): string {
 		return trim(ucwords(preg_replace('/\s+/', ' ', $value)));
 	}
-	
+
 	/**
 	 * Implementation of similar to WordPress' esc_attr function
 	 * @param $text
@@ -35,7 +37,7 @@ class Utils {
 	public static function esc_attr($text): array|string|null {
 		// Convert special characters to HTML entities
 		$text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
-		
+
 		// Replace specific characters that need special handling
 		$replacements = array('%'  => '%25',    // Percent sign
 		                      '\'' => '&#039;', // Single quote
@@ -47,14 +49,26 @@ class Utils {
 		                      "\n" => '',       // Remove newlines
 		                      "\t" => ' '       // Convert tabs to spaces
 		);
-		
+
 		// Apply replacements
 		$text = strtr($text, $replacements);
-		
+
 		// Remove any null bytes
 		$text = str_replace("\0", '', $text);
-		
+
 		// Remove control characters and return the result
 		return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', '', $text);
 	}
+
+    /**
+     * Sanitise content string using HTMLPurifier
+     * @param string $content The input content to be sanitised.
+     * @return string The sanitised content.
+     */
+    public static function sanitise_content($content): string {
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+
+        return $purifier->purify($content);
+    }
 }

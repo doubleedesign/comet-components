@@ -82,13 +82,15 @@
 				"type": "select"
 			},
 			"options": [
-				"left",
+				"start",
 				"center",
-				"right"
+				"end",
+				"justify",
+				"match-parent"
 			],
 			"table": {
 				"defaultValue": {
-					"summary": "left"
+					"summary": "match-parent"
 				},
 				"type": {
 					"summary": "string"
