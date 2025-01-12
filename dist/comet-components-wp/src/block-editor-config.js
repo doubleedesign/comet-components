@@ -128,8 +128,7 @@ function updateCoreBlockLabelsAndDescriptions() {
 		}
 
 		if(name === 'core/details') {
-			settings.title = 'Accordion';
-			settings.description = 'Put content into expandable/collapsible sections.';
+			settings.description = 'Put content into an expandable/collapsible section.';
 		}
 
 		if (name === 'core/columns') {

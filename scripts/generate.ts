@@ -32,13 +32,14 @@ generateSkeletonFiles({
 function generateSkeletonFiles({ componentName, componentType }) {
 	// The template for the core PHP class for this component
 	const classTemplateFile = readFileSync(`./scripts/templates/${Case.pascal(componentType)}Component.php`, 'utf8');
-	const templateClassName = `${Case.pascal(componentType)}Component`;
 	// The template for the Blade template file that will be used to render the component
-	const templateFile = readFileSync('./scripts/templates/template.blade.php', 'utf8');
+	const bladeTemplateFile = readFileSync('./scripts/templates/template.blade.php', 'utf8');
+	// The template for the CSS file for non-trivial comopnents
+	const cssTemplateFile = readFileSync('./scripts/templates/template.css', 'utf8');
 	// The template for the sample usage/output file placed in a folder that will be used for testing
 	const testFileTemplate = readFileSync(`./scripts/templates/${Case.snake(componentType)}.php`, 'utf8');
 
-	const shortName = Case.snake(componentName);
+	const shortName = Case.kebab(componentName);
 	let className = Case.pascal(componentName);
 	const reservedWords = ['List'];
 	if(reservedWords.includes(className)) {
@@ -54,12 +55,14 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	const classExists = existsSync(classPath);
 	const templateExists = existsSync(templatePath);
 	const testExists = existsSync(testFilePath);
-	const defExists = existsSync(defFilePath);
 
 	if(!classExists) {
-		// Create directory if it doesn't exist
-		mkdirSync(path.dirname(classPath), { recursive: true });
-		const classOutput = classTemplateFile.replaceAll(templateClassName, className);
+		const templateClassName = `${Case.pascal(componentType)}Component`;
+		mkdirSync(path.dirname(classPath), { recursive: true }); // Create directory if it doesn't exist
+		const classOutput = classTemplateFile
+			.replaceAll(templateClassName, className)
+			.replaceAll('ThisComponent', className)
+			.replaceAll('this-component', shortName);
 		writeFileSync(classPath, classOutput, 'utf8');
 
 		if(existsSync(classPath)) {
@@ -71,7 +74,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	}
 
 	if(!templateExists) {
-		const templateOutput = templateFile;
+		const templateOutput = bladeTemplateFile;
 		mkdirSync(path.dirname(templatePath), { recursive: true });
 		writeFileSync(templatePath, templateOutput, 'utf8');
 
@@ -81,6 +84,22 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	}
 	else {
 		console.log(`Template file for ${componentName} already exists, skipping`);
+	}
+
+	if(componentType !== 'simple') {
+		const cssPath = `./src/components/${className}/${shortName}.css`;
+		const cssExists = existsSync(cssPath);
+		if(!cssExists) {
+			const cssOutput = cssTemplateFile.replace('component', shortName);
+			writeFileSync(cssPath, cssOutput, 'utf8');
+
+			if(existsSync(cssPath)) {
+				console.log(`CSS file created successfully at ${cssPath}`);
+			}
+		}
+		else {
+			console.log(`CSS file for ${componentName} already exists, skipping`);
+		}
 	}
 
 
@@ -95,17 +114,5 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	// }
 	// else {
 	// 	console.log(`Template file for ${componentName} already exists, skipping`);
-	// }
-	//
-	// if(!defExists) {
-	// 	const defOutput = execSync(`php ${classPath} --component ${className}`).toString();
-	// 	writeFileSync(defFilePath, defOutput, 'utf8');
-	//
-	// 	if(existsSync(defFilePath)) {
-	// 		console.log(`Definition file created successfully at ${defFilePath}`);
-	// 	}
-	// }
-	// else {
-	// 	console.log(`Definition file for ${className} already exists, skipping`);
 	// }
 }

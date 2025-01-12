@@ -1,7 +1,5 @@
 <?php
-
 namespace Doubleedesign\Comet\WordPress;
-
 use Closure;
 use RuntimeException;
 use WP_Block;
@@ -13,7 +11,7 @@ class BlockRegistry extends JavaScriptImplementation {
         parent::__construct();
         add_action('init', [$this, 'register_blocks'], 10);
         add_filter('allowed_block_types_all', [$this, 'set_allowed_blocks'], 10, 2);
-       // add_action('init', [$this, 'override_core_block_rendering'], 20);
+        add_action('init', [$this, 'override_core_block_rendering'], 20);
     }
 
     /**
@@ -130,9 +128,6 @@ class BlockRegistry extends JavaScriptImplementation {
         // For group block, detect variation based on layout attributes
         if ($block_name_trimmed === 'group') {
             $layout = $attributes['layout'];
-            echo '<pre>';
-            echo print_r($layout, true);
-            echo '</pre>';
             if ($layout['type'] === 'flex') {
                 if (isset($layout['orientation']) && $layout['orientation'] === 'vertical') {
                     $variation = 'stack';

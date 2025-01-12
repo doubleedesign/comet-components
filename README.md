@@ -99,10 +99,10 @@ Run basic local web server to view/work with isolated component demos:
 npm run test:server
 ```
 
-// TODO: Run Storybook for a more robust and detailed browser demo/testing environment:
+Run Storybook for a more robust and detailed browser demo/testing environment (note: server needs to be running):
 
 ```bash
-# TO COME
+npm run test:storybook
 ```
 
 Generate a new component (example):
@@ -110,6 +110,34 @@ Generate a new component (example):
 ```bash
 npm run generate component -- --name=gallery --type=simple
 ```
+
+Once you have added fields and docblock comments to a component, generate the JSON definition file (example):
+
+```bash
+php scripts/generate-json-defs.php --component Gallery
+```
+
+Use the same command to update it after making changes.
+
+You can also generate/update all JSON definition files at once:
+
+```bash
+php scripts/generate-json-defs.php 
+```
+
+or
+
+```bash
+npm run generate:json
+```
+
+Then generate stories:
+
+```bash
+# TO COME
+````
+
+---
 
 ### Appendix 2: Troubleshooting
 

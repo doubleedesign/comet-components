@@ -80,6 +80,11 @@ sudo ln -s /mnt/c/tools/php84/php.exe /usr/local/bin/php
 ```
 
 ```bash
+# For PHP 8.3 from Laravel Herd (replace leesa with your Windows username)
+sudo ln -s /mnt/c/Users/leesa/.config/herd/bin/php83/php.exe /usr/local/bin/php
+```
+
+```bash
 # For PHP 8.4 from Laravel Herd (replace leesa with your Windows username)
 sudo ln -s /mnt/c/Users/leesa/.config/herd/bin/php84/php.exe /usr/local/bin/php
 ```
@@ -185,7 +190,9 @@ Get-Command composer
 
 ### Changing the PHP or Composer instance
 
-To change these, I find it easiest to modify the [system PATH variables](./path.md) in the Windows GUI, but there's
+To change the global PHP version, if you're using Laravel Herd you can just do it in the GUI - there's a simple
+dropdown.
+Otherwise, I find it easiest to modify the [system PATH variables](./path.md) in the Windows GUI, but there's
 probably some aliasing you could do instead.
 
 Once PowerShell is pointing to the instance you want, you will need to update the WSL symlink (for PHP) or alias (for

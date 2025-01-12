@@ -3,8 +3,7 @@ namespace Doubleedesign\Comet\Components;
 
 class ComplexComponent extends UIComponent {
     function __construct(array $attributes, array $innerComponents) {
-        $bladeFile = 'components.ComplexComponent.complex-component';
-        parent::__construct($attributes, $innerComponents, $bladeFile);
+        parent::__construct($attributes, $innerComponents, 'components.ThisComponent.this-component');
     }
 
     function get_inline_styles(): array {
