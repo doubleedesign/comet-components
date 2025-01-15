@@ -3,7 +3,7 @@ if (!isset($attributes) || !isset($innerComponents)) {
     return;
 }
 
-use Doubleedesign\Comet\Components\ListItem;
+use Doubleedesign\Comet\Core\ListItem;
 
 $component = new ListItem($attributes, $innerComponents);
 $component->render();

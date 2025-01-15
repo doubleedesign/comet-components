@@ -1,7 +1,5 @@
 <?php
-
-use Doubleedesign\Comet\Components\HasAllowedTags;
-use Doubleedesign\Comet\Components\Tag;
+use Doubleedesign\Comet\Core;
 
 /**
  * This script generates JSON files that summarise the details of component classes written in PHP.
@@ -16,7 +14,7 @@ class ComponentClassesToJsonDefinitions {
 
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
-		$this->directory = dirname(__DIR__, 1) . '\src\components';
+		$this->directory = dirname(__DIR__, 1) . 'packages\core\src\components';
 	}
 
 	public function runAll(): void {

@@ -1,0 +1,32 @@
+{
+	"name": "doubleedesign/comet-components-core",
+	"type": "library",
+	"authors": [
+		{
+			"name": "Leesa Ward",
+			"email": "leesa@doubleedesign.com.au"
+		}
+	],
+	"autoload": {
+		"classmap": [
+			"src/components/"
+		],
+		"psr-4": {
+			"Doubleedesign\\Comet\\Core\\": [
+				"src/base/types/",
+				"src/base/traits/",
+				"src/base/components/",
+				"src/base/",
+				"src/services/"
+			]
+		}
+	},
+	"require": {
+		"illuminate/view": "^10.0",
+		"illuminate/filesystem": "^10.0",
+		"illuminate/events": "^10.0",
+		"illuminate/container": "^10.0",
+		"illuminate/support": "^10.0",
+		"ezyang/htmlpurifier": "^4.18"
+	}
+}

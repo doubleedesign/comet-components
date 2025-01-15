@@ -3,7 +3,7 @@ if (!isset($attributes) || !isset($content)) {
     return;
 }
 
-use Doubleedesign\Comet\Components\Details;
+use Doubleedesign\Comet\Core\Details;
 
 $component = new Details($attributes, $content);
 $component->render();

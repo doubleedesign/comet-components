@@ -1,7 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Tests;
-
-use Doubleedesign\Comet\Components\Paragraph;
+use Doubleedesign\Comet\Core\Paragraph;
 use Doubleedesign\Comet\TestUtils\WordPress\WpBridgeTestCase;
 use RuntimeException;
 

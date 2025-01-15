@@ -48,9 +48,9 @@ on [PHP, Composer, and Node setup in this document](./notes/windows.md).
 ### Quick start
 
 1. Clone the repository from GitHub
-2. Run `composer install` to install PHP dependencies
+2. Run `npm run refresh` or `powershell.exe -File scripts\refresh.ps1` to install/update PHP dependencies and regenerate autoload files for the root and all packages
 3. Run `npm install` to install Node dependencies
-4. TO COME: Run Storybook to see what you're working with
+4. Run `npm run test:server` and `npm run test:storybook` at the same time (I use two terminal windows) to start the local web server and Storybook to see what you're working with!
 
 ### Create a new component
 
@@ -85,6 +85,18 @@ Update Composer dependencies (after a pull from the repository or other changes 
 
 ```bash
 composer update
+```
+
+Run all Composer update and autoload commands for the root and packages at once:
+```bash
+npm run refresh
+```
+```bash
+powershell.exe -File scripts\refresh.ps1
+```
+or in PowerShell:
+```PowerShell
+powershell.exe -File scripts\refresh.ps1
 ```
 
 Install or update Node dependencies:

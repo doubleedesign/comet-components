@@ -1,6 +1,7 @@
 <?php
 // Autoload dependencies using Composer
 require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../packages/core/vendor/autoload.php';
 
 // Allow Storybook to access this server
 $storybook = 'http://localhost:6006';

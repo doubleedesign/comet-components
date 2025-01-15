@@ -30,6 +30,7 @@ generateSkeletonFiles({
 });
 
 function generateSkeletonFiles({ componentName, componentType }) {
+	console.log(`Generating ${componentType} component: ${componentName}`);
 	// The template for the core PHP class for this component
 	const classTemplateFile = readFileSync(`./scripts/templates/${Case.pascal(componentType)}Component.php`, 'utf8');
 	// The template for the Blade template file that will be used to render the component
@@ -46,10 +47,10 @@ function generateSkeletonFiles({ componentName, componentType }) {
 		className = `${className}Component`;
 	}
 
-	const classPath = `./src/components/${className}/${className}.php`;
-	const templatePath = `./src/components/${className}/${shortName}.blade.php`;
+	const classPath = `./packages/core/src/components/${className}/${className}.php`;
+	const templatePath = `./packages/core/src/components/${className}/${shortName}.blade.php`;
 	const testFilePath = `./test/browser/components/${shortName}.php`;
-	const defFilePath = `./src/components/${className}/${className}.json`;
+	const defFilePath = `./packages/core/src/components/${className}/${className}.json`;
 
 	// Bail if the file already exists
 	const classExists = existsSync(classPath);
@@ -87,7 +88,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	}
 
 	if(componentType !== 'simple') {
-		const cssPath = `./src/components/${className}/${shortName}.css`;
+		const cssPath = `./packages/core/src/components/${className}/${shortName}.css`;
 		const cssExists = existsSync(cssPath);
 		if(!cssExists) {
 			const cssOutput = cssTemplateFile.replace('component', shortName);

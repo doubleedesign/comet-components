@@ -1,0 +1,29 @@
+{
+	"name": "doubleedesign/comet-components-wp",
+	"type": "wordpress-plugin",
+	"authors": [
+		{
+			"name": "Leesa Ward",
+			"email": "leesa@doubleedesign.com.au"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Doubleedesign\\Comet\\WordPress\\": "src/"
+		}
+	},
+	"require": {
+		"doubleedesign/comet-components-core": "*"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../core",
+			"options": {
+				"symlink": true
+			}
+		}
+	]
+}

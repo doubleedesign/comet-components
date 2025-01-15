@@ -3,7 +3,7 @@ if (!isset($attributes) || !isset($innerComponents)) {
     return;
 }
 
-use Doubleedesign\Comet\Components\Column;
+use Doubleedesign\Comet\Core\Column;
 
 $component = new Column($attributes, $innerComponents);
 $component->render();

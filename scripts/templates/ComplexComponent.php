@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Components;
 
+use Doubleedesign\Comet\Core\src\base\components\UIComponent;
+
 class ComplexComponent extends UIComponent {
     function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.ThisComponent.this-component');

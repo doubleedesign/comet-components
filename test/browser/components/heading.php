@@ -1,6 +1,6 @@
 <div id="browser-test-content">
     <?php
-    use Doubleedesign\Comet\Components\Heading;
+    use Doubleedesign\Comet\Core\Heading;
 
     try {
         $content = $_REQUEST['content'] ?? 'Heading';
