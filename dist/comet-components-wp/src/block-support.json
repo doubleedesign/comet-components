@@ -9,6 +9,7 @@
 			"core/row",
 			"core/details",
 			"core/image",
+			"core/file",
 			"core/media-text",
 			"core/latest-posts",
 			"core/cover",
@@ -23,25 +24,28 @@
 			"core/button",
 			"core/gallery",
 			"core/embed",
-			"core/freeform"
+			"core/freeform",
+			"core/footnotes"
 		]
 	},
 	"categories": [
 		{
 			"name": "Text",
 			"slug": "text",
+			"icon": "",
 			"blocks": [
 				"core/heading",
 				"core/paragraph",
 				"core/pullquote",
 				"core/quote",
 				"core/list",
-				"core/list-item"
+				"core/buttons"
 			]
 		},
 		{
 			"name": "Layout",
-			"slug": "layout",
+			"slug": "design",
+			"icon": "",
 			"blocks": [
 				"core/group",
 				"core/columns",
@@ -55,12 +59,29 @@
 		{
 			"name": "Media",
 			"slug": "media",
+			"icon": "",
 			"blocks": [
 				"core/image",
 				"core/media-text",
 				"core/cover",
-				"core/gallery",
+				"core/gallery"
+			]
+		},
+		{
+			"name": "Media - Embedded",
+			"slug": "embeds",
+			"icon": "",
+			"blocks": [
 				"core/embed"
+			]
+		},
+		{
+			"name": "Content",
+			"slug": "content",
+			"icon": "",
+			"blocks": [
+				"core/latest-posts",
+				"core/footnotes"
 			]
 		}
 	]

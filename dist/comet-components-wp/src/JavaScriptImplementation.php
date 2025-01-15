@@ -2,6 +2,8 @@
 
 namespace Doubleedesign\Comet\WordPress;
 
+use Doubleedesign\Comet\Components\Utils;
+
 /**
  * When customising WordPress blocks and the block editor, some things can be done in PHP but some must be done in JavaScript.
  * This class is a base class for PHP classes that do their work in conjunction with some JavaScript,
@@ -18,12 +20,14 @@ abstract class JavaScriptImplementation {
 	}
 
 	public function enqueue_companion_javascript(): void {
-		// Get the name of the class and kebab case it
-		$class_name = get_class($this);
-		$handle = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $class_name));
+		$dir = '/wp-content/plugins/comet-components-wp/src';
+		// Get the last bit of the class name (to remove the namespace)
+		$class_name = array_reverse(explode('\\', get_class($this)))[0];
+		// Kebab case it
+		$handle = $this->kebab_case($class_name);
 
 		// Enqueue the matching JS file
-		wp_enqueue_script("comet-$handle", "./$handle.js", array('wp-dom', 'wp-dom-ready', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-plugins', 'wp-edit-post', 'wp-components', 'wp-data', 'wp-compose', 'wp-i18n', 'wp-hooks', 'wp-block-editor', 'wp-block-library',), COMET_VERSION, false);
+		wp_enqueue_script("comet-$handle", "$dir/$handle.js", array('wp-dom', 'wp-dom-ready', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-plugins', 'wp-edit-post', 'wp-components', 'wp-data', 'wp-compose', 'wp-i18n', 'wp-hooks', 'wp-block-editor', 'wp-block-library',), COMET_VERSION, false);
 	}
 
 	/**
@@ -41,5 +45,18 @@ abstract class JavaScriptImplementation {
 		}
 
 		return $tag;
+	}
+
+	/**
+	 * Utility function to convert to kebab case
+	 * @param string $value
+	 * @return string
+	 */
+	public static function kebab_case(string $value): string {
+		// Account for PascalCase
+		$value = preg_replace('/([a-z])([A-Z])/', '$1 $2', $value);
+
+		// Convert whitespace to hyphens and make lowercase
+		return trim(strtolower(preg_replace('/\s+/', '-', $value)));
 	}
 }
