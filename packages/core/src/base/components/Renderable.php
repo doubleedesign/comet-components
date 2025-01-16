@@ -22,10 +22,10 @@ abstract class Renderable {
 	 */
 	protected ?array $classes = [];
 	/**
-	 * @var string|null $style
-	 * @description Inline styles
+	 * @var array|null $style
+	 * @description Inline styles, or in WordPress a style object
 	 */
-	protected ?string $style = null;
+	protected ?array $style = null;
 	/**
 	 * The dot-delimited path to the Blade template file
 	 * @var string
@@ -36,20 +36,15 @@ abstract class Renderable {
 
 	public function __construct(array $attrs, string $bladeFile) {
 		$this->rawAttributes = $attrs;
-		$this->tag = isset($attrs['tagName']) ? Tag::tryFrom($attrs['tagName']) : 'div';
 		$this->id = isset($attrs['id']) ? Utils::kebab_case($attrs['id']) : null;
 		$this->classes = isset($attrs['className']) ? explode(' ', $attrs['className']) : [];
-		$this->style = $attrs['style'] ?? null;
+		$this->style = (isset($attrs['style']) && is_array($attrs['style'])) ? $attrs['style'] : null;
 		$this->bladeFile = $bladeFile;
 		$this->shortName = array_reverse(explode($this->bladeFile, '.'))[0];
 	}
 
 	public function get_id(): ?string {
 		return $this->id;
-	}
-
-	protected function get_tag(): string {
-		return $this->tag;
 	}
 
 	/**
@@ -61,11 +56,15 @@ abstract class Renderable {
 	 *
 	 * @return array<string>
 	 */
-	private function get_filtered_classes(): array {
+	protected function get_filtered_classes(): array {
 		$redundant_classes = ['is-style-default'];
 
 		return array_filter($this->classes, function ($class) use ($redundant_classes) {
-			return !in_array($class, $redundant_classes);
+			return (
+				!in_array($class, $redundant_classes)
+				// WordPress sometimes add classes like wp-element-some-really-long-random-string and I don't know why nor do I want it
+				&& !str_starts_with('wp-elements-', $class)
+			);
 		});
 	}
 

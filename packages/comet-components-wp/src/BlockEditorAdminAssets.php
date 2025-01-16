@@ -26,6 +26,6 @@ class BlockEditorAdminAssets {
 	 * @return void
 	 */
 	function admin_scripts(): void {
-		wp_enqueue_script('comet-block-editor-hacks', './block-editor-hacks.js', array('wp-edit-post', 'wp-data', 'wp-dom-ready'), COMET_VERSION, true);
+		//wp_enqueue_script('comet-block-editor-hacks', './block-editor-hacks.js', array('wp-edit-post', 'wp-data', 'wp-dom-ready'), COMET_VERSION, true);
 	}
 }

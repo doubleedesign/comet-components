@@ -1,7 +1,10 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
+
 use RuntimeException;
 use Closure;
+use WP_Block;
+use WP_Block_Type_Registry;
 
 class BlockRegistry extends JavaScriptImplementation {
 
@@ -106,7 +109,7 @@ class BlockRegistry extends JavaScriptImplementation {
 	 */
 	static function get_override_template_file($blockName): ?string {
 		$blockNameTrimmed = array_reverse(explode('/', $blockName))[0];
-		$file = __DIR__ . '/output/' . $blockNameTrimmed . '.php';
+		$file = __DIR__ . '\output\\' . $blockNameTrimmed . '.php';
 
 		return file_exists($file) ? $file : null;
 	}
@@ -125,6 +128,7 @@ class BlockRegistry extends JavaScriptImplementation {
 			$block_type = WP_Block_Type_Registry::get_instance()->get_registered($core_block);
 			$file = $this->get_override_template_file($core_block);
 
+			// If they do, override the render callback
 			if ($block_type && $file) {
 				// Unregister the original block
 				unregister_block_type($core_block);
@@ -141,6 +145,8 @@ class BlockRegistry extends JavaScriptImplementation {
 				// Re-register the block with the original settings and new render callback
 				register_block_type($core_block, $settings);
 			}
+
+			// Otherwise, do nothing - the original WP block render function will be used
 		}
 	}
 
@@ -158,7 +164,6 @@ class BlockRegistry extends JavaScriptImplementation {
 
 	/**
 	 * The function called inside render_block_callback
-	 *
 	 *
 	 * This exists separately for better debugging - this way we see render_block() in Xdebug stack traces,
 	 * whereas if this returned the closure directly, it would show up as an anonymous function
@@ -197,18 +202,19 @@ class BlockRegistry extends JavaScriptImplementation {
 
 		$file = self::get_override_template_file($block_name);
 
-		ob_start();
 		// TODO: Check if the file exists in the child theme, then in the parent theme, before defaulting to the plugin
+		// Note: Inner block files will not be used here, as they are rendered by the parent block.
+		// Maybe I could remove this file entirely and create the component objects right here instead?
 		if (file_exists($file)) {
+			ob_start();
 			// The variables are extracted to make them available to the included file
 			extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $inner_blocks]);
 			// Include the file that renders the block
 			include $file;
+			return ob_get_clean();
 		}
-		else {
-			$fallbackFn($attributes, $content, $block_instance);
-		}
-		return ob_get_clean();
+
+		return '';
 	}
 
 

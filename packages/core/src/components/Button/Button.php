@@ -1,10 +1,8 @@
 <?php
-namespace Doubleedesign\Comet\Components;
-
-use Doubleedesign\Comet\Core\src\base\components\TextElement;
+namespace Doubleedesign\Comet\Core;
 
 class Button extends TextElement {
-    function __construct(array $attributes, string $content) {
-        parent::__construct($attributes, $content, 'components.Button.button');
-    }
+	function __construct(array $attributes, string $content) {
+		parent::__construct($attributes, $content, 'components.Button.button');
+	}
 }

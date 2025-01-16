@@ -26,49 +26,47 @@ class Utils {
 	 * @return string
 	 */
 	public static function pascal_case(string $value): string {
-		return trim(ucwords(preg_replace('/\s+/', ' ', $value)));
+		$value = str_replace(['-', '_'], ' ', $value);
+		return str_replace(' ', '', ucwords($value));
 	}
 
 	/**
-	 * Implementation of similar to WordPress' esc_attr function
-	 * @param $text
-	 * @return array|string|null
+	 * Sanitise content string using HTMLPurifier
+	 * @param string $content The input content to be sanitised
+	 * @param ?array<Tag> $allowedTags
+	 *
+	 * @return string The sanitised content.
 	 */
-	public static function esc_attr($text): array|string|null {
-		// Convert special characters to HTML entities
-		$text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+	public static function sanitise_content(string $content, array $allowedTags = null): string {
+		$config = HTMLPurifier_Config::createDefault();
+		$purifier = new HTMLPurifier($config);
 
-		// Replace specific characters that need special handling
-		$replacements = array('%'  => '%25',    // Percent sign
-		                      '\'' => '&#039;', // Single quote
-		                      '"'  => '&quot;',  // Double quote
-		                      '<'  => '&lt;',    // Less than
-		                      '>'  => '&gt;',    // Greater than
-		                      '&'  => '&amp;',   // Ampersand
-		                      "\r" => '',       // Remove carriage returns
-		                      "\n" => '',       // Remove newlines
-		                      "\t" => ' '       // Convert tabs to spaces
-		);
+		if (!$allowedTags) {
+			return $purifier->purify($content);
+		}
 
-		// Apply replacements
-		$text = strtr($text, $replacements);
-
-		// Remove any null bytes
-		$text = str_replace("\0", '', $text);
-
-		// Remove control characters and return the result
-		return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', '', $text);
+		// HTML Purifier does have an option to pass allowed tags to it,
+		// but in that case we'd also have to pass all their attributes, which may be overkill
+		$allowedTagsAsTags = array_map(fn($tag) => "<$tag->value>", $allowedTags);
+		$updatedContent = strip_tags($content, $allowedTagsAsTags);
+		return $purifier->purify($updatedContent);
 	}
 
-    /**
-     * Sanitise content string using HTMLPurifier
-     * @param string $content The input content to be sanitised.
-     * @return string The sanitised content.
-     */
-    public static function sanitise_content($content): string {
-        $config = HTMLPurifier_Config::createDefault();
-        $purifier = new HTMLPurifier($config);
+	/**
+	 * Convert lowercase, kebab-case, and WP block format component names to PascalCase
+	 * and add the namespace to return the full class name
+	 * @param string $name
+	 * @return string
+	 */
+	public static function get_class_name(string $name): string {
+		$reserved_words = ['List'];
 
-        return $purifier->purify($content);
-    }
+		$shortName = array_reverse(explode('/', $name))[0];
+		$className = Utils::pascal_case($shortName);
+		if (in_array($className, $reserved_words)) {
+			$className = $className . 'Component';
+		}
+
+		return sprintf('%s\\%s', __NAMESPACE__, $className);
+	}
 }

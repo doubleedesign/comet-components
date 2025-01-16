@@ -9,7 +9,7 @@ class Paragraph extends TextElement {
 	 */
 	protected ?Tag $tag = Tag::P;
 
-	protected static function get_allowed_html_tags(): array {
+	protected static function get_allowed_wrapping_tags(): array {
 		return [Tag::P];
 	}
 

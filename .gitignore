@@ -8,5 +8,5 @@ vendor/*
 !dist
 packages/**/vendor
 packages/**/node_modules
-packages/core/cache/*
+packages/core/cache
 *storybook.log

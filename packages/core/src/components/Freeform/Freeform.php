@@ -1,10 +1,8 @@
 <?php
-namespace Doubleedesign\Comet\Components;
+namespace Doubleedesign\Comet\Core;
 
-use Doubleedesign\Comet\Core\src\base\components\TextElement;
-
-class Freeform extends TextElement {
-    function __construct(array $attributes, string $content) {
-        parent::__construct($attributes, $content, 'components.Freeform.freeform');
-    }
+class Freeform extends Renderable {
+	function __construct(array $attributes, string $content) {
+		parent::__construct($attributes, $content, 'components.Freeform.freeform');
+	}
 }

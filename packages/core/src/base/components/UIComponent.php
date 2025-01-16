@@ -1,51 +1,65 @@
 <?php
 namespace Doubleedesign\Comet\Core;
+
 use RuntimeException;
 
 abstract class UIComponent extends Renderable {
 	/**
-     * @var array<Renderable> $innerComponents
-     * @description Inner components to be rendered within this component
-     */
+	 * @var array<Renderable> $innerComponents
+	 * @description Inner components to be rendered within this component
+	 */
 	protected array $innerComponents;
 
 	/**
 	 * UIComponent constructor
 	 * @param array<string, string|int|array|null> $attributes
 	 * @param array<Renderable> $innerComponents
-     * @param string $bladeFile
+	 * @param string $bladeFile
 	 */
 	function __construct(array $attributes, array $innerComponents, string $bladeFile) {
 		parent::__construct($attributes, $bladeFile);
-        $this->innerComponents = $innerComponents;
+		$this->innerComponents = $innerComponents;
 	}
 
-
-    /**
-	 * Generic method to render inner content
-	 * (child classes may override this)
-	 *
-	 * @return string
+	/**
+	 * Process inner blocks to convert them into components
+	 * @return array<Renderable>
 	 * @throws RuntimeException
 	 */
-	protected function get_inner_content_html(): string {
-		$inner_html = array_reduce($this->innerComponents, function ($acc, $component) {
-			ob_start();
-			$className = Utils::pascal_case(array_reverse(explode('/', $component['blockName']))[0]);
-			$fullClassName = __NAMESPACE__ . '\\' . $className;
-			if (class_exists($fullClassName)) {
-				$component = new $fullClassName($component['attrs'], $component['innerHTML']); // TODO: Do I need to handle innerBlocks here or does innerHTML take care of that?
-				$component->render();
-				return $acc . ob_get_clean();
-			}
-			else {
-				throw new RuntimeException("UIComponent could not find class $fullClassName to render an inner component");
-			}
-		}, '');
+	protected function process_inner_components(): array {
+		$processed_components = [];
 
-		ob_start();
-		echo $inner_html;
-		return ob_get_clean();
+		foreach ($this->innerComponents as $component) {
+			$name = $component['blockName'] ?? $component['name'];
+			if (!$name) {
+				throw new RuntimeException('Name of inner component not found, cannot render');
+			}
+
+			$ComponentClass = Utils::get_class_name($name);
+			if (class_exists($ComponentClass)) {
+				$attributes = $component['attributes'] ?? [];
+				$innerComponents = $component['innerComponents'] ?? $component['innerBlocks'] ?? null;
+				$content = $component['content'] ?? $component['innerHTML'] ?? null;
+
+
+				// Handle components that have plain text as well as nested components, e.g. list items with nested lists
+				// TODO: Ascertain this dynamically
+				$canHaveBoth = [__NAMESPACE__ . '\\ListItem'];
+				$doesHaveBoth = $innerComponents && !empty(trim($content));
+				if (in_array($ComponentClass, $canHaveBoth) && $doesHaveBoth) {
+					$componentObject = new $ComponentClass($attributes, $content, $innerComponents);
+				}
+				else if (!empty($innerComponents)) {
+					$componentObject = new $ComponentClass($attributes, $innerComponents);
+				}
+				else {
+					$componentObject = new $ComponentClass($attributes, $content);
+				}
+
+				$processed_components[] = $componentObject;
+			}
+		}
+
+		return $processed_components;
 	}
-
 }

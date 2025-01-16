@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
 
+use WP_Theme_JSON_Data;
+
 class BlockEditorConfig {
 
 	function __construct() {

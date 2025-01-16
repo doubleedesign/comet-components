@@ -32,6 +32,32 @@ abstract class TextElement extends Renderable {
 			$styles['text-align'] = $this->textAlign->value;
 		}
 
+		if($this->style) {
+			$color =
+				$this->style['color']
+				?? $this->style['elements']['link']['color']['text'] // WordPress format
+				?? null;
+
+			if ($color) {
+				// If it's a hex colour, leave as-is
+				if (preg_match('/^#[0-9A-F]{6}$/i', $color)) {
+					$styles['color'] = $color;
+				}
+				else {
+					// Transform expected formats to CSS variable format
+					// WordPress format is like var:preset|color|vivid-cyan-blue
+					$stripped = str_replace('var:', '', $color);
+					$color = str_replace('|', '--', $stripped);
+					// Hack in if we're in WP context
+					if (defined('WPINC')) {
+						$color = "wp--$color";
+					}
+
+					$styles['color'] = "var(--$color)";
+				}
+			}
+		}
+
 		return $styles;
 	}
 
@@ -43,14 +69,14 @@ abstract class TextElement extends Renderable {
 	public function render(): void {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();
-		$classes = $attrs['class'] ?? [];
+		$classes = $attrs['className'] ?? '';
 
 		try {
 			echo $blade->make($this->bladeFile, [
 				'tag'        => $this->tag->value,
 				'classes'    => $classes,
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
-				'content'    => Utils::sanitise_content($this->content)
+				'attributes' => array_filter($attrs, fn($k) => $k !== 'className', ARRAY_FILTER_USE_KEY),
+				'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
 			])->render();
 		}
 		catch (Exception $e) {

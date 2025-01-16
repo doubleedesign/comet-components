@@ -4,7 +4,7 @@
  * because while we could get them out of block.json, that doesn't account for modifications made elsewhere (plugin or theme) for core blocks.
  * // TODO: Support custom blocks in the same way; in that case attributes may be able to be handled from block.json during generation
  */
-import blockSupportConfig from './resources/wp-supported-blocks.json' assert { type: 'json' };
+import blockSupportConfig from '../packages/comet-components-wp/src/block-support.json' assert { type: 'json' };
 const wpIncludes = '../wordpress/wp-includes/blocks'; // Installed via Composer
 const coreBlocks = blockSupportConfig.core.supported;
 import { execSync } from 'child_process';

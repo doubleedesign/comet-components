@@ -1,19 +1,17 @@
 <?php
-namespace Doubleedesign\Comet\Components;
-
-use Doubleedesign\Comet\Core\src\base\components\UIComponent;
+namespace Doubleedesign\Comet\Core;
 
 class Buttons extends UIComponent {
-    function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.Buttons.buttons');
-    }
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents, 'components.Buttons.buttons');
+	}
 
-    function get_inline_styles(): array {
-        // TODO: Implement get_inline_styles() method.
-        return [];
-    }
+	function get_inline_styles(): array {
+		// TODO: Implement get_inline_styles() method.
+		return [];
+	}
 
-    function render(): void {
-        // TODO: Implement render() method.
-    }
+	function render(): void {
+		// TODO: Implement render() method.
+	}
 }

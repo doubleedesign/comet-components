@@ -1,5 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
+
 use Exception;
 
 abstract class LayoutComponent extends UIComponent {
@@ -7,12 +8,13 @@ abstract class LayoutComponent extends UIComponent {
 
 	protected ?Alignment $hAlign = Alignment::START;
 	protected ?Alignment $vAlign = Alignment::START;
+	protected ?Tag $tag = Tag::DIV;
 
 	/**
 	 * Specify allowed Tags using the HasAllowedTags trait
 	 * @return array<Tag>
 	 */
-	protected static function get_allowed_html_tags(): array {
+	protected static function get_allowed_wrapping_tags(): array {
 		return [Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE, Tag::ASIDE];
 	}
 
@@ -20,6 +22,7 @@ abstract class LayoutComponent extends UIComponent {
 		parent::__construct($attributes, $children, $bladeFile);
 		$this->hAlign = isset($attrs['justifyContent']) ? Alignment::fromString($attrs['justifyContent']) : Alignment::START;
 		$this->vAlign = isset($attrs['verticalAlignment']) ? Alignment::fromString($attrs['verticalAlignment']) : Alignment::START;
+		$this->tag = isset($attrs['tagName']) ? Tag::tryFrom($attrs['tagName']) : Tag::DIV;
 	}
 
 
@@ -29,9 +32,7 @@ abstract class LayoutComponent extends UIComponent {
 	 * @return array<string, string>
 	 */
 	function get_inline_styles(): array {
-		$styles = [];
-
-		return $styles;
+		return [];
 	}
 
 	/**
@@ -42,7 +43,7 @@ abstract class LayoutComponent extends UIComponent {
 	public function render(): void {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();
-		$classes = $attrs['class'];
+		$classes = $attrs['className'] ?? '';
 
 		try {
 			echo $blade->make($this->bladeFile, [

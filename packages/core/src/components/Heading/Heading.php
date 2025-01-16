@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+use InvalidArgumentException;
+
 class Heading extends TextElement {
 	use HasAllowedTags;
 
@@ -19,22 +21,27 @@ class Heading extends TextElement {
 	 * Specify allowed Tags using the HasAllowedTags trait
 	 * @return array<Tag>
 	 */
-	protected static function get_allowed_html_tags(): array {
+	protected static function get_allowed_wrapping_tags(): array {
 		return [Tag::H1, Tag::H2, Tag::H3, Tag::H4, Tag::H5, Tag::H6];
 	}
 
 	function __construct(array $attributes, string $content) {
-		if (isset($attributes['level'])) {
-			$attributes['level'] = (int)$attributes['level'];
-			$attributes['tagName'] = 'h' . $attributes['level'];
+		$proposedTag = Tag::H2;
+
+		// Convert level to tag format for validation
+		if (isset($attributes['level']) && is_numeric($attributes['level'])) {
+			$proposedTag = Tag::tryFrom('h' . $attributes['level']) ?? Tag::H2;
 		}
-		else {
-			$attributes['level'] = 2;
-			$attributes['tagName'] = 'h2';
+
+		// Validate the tag against allowed tags and fall back to h2 if invalid
+		if (!$this->validate_html_tag($proposedTag)) {
+			$proposedTag = Tag::H2;
 		}
+
+		// Set the validated tagName
+		$attributes['tagName'] = strtolower($proposedTag->value);
 
 		$bladeFile = 'components.Heading.heading';
-
 		parent::__construct($attributes, $content, $bladeFile);
 	}
 }

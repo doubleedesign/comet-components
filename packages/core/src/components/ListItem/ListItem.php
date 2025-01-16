@@ -1,19 +1,22 @@
 <?php
-namespace Doubleedesign\Comet\Components;
+namespace Doubleedesign\Comet\Core;
 
-use Doubleedesign\Comet\Core\src\base\components\UIComponent;
+class ListItem {
+	protected ?Tag $tag = Tag::LI;
+	private ListItemSimple|ListItemComplex $instance;
 
-class ListItem extends UIComponent {
-    function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.ListItem.list-item');
-    }
+	function __construct(array $attributes, string $content, array $nestedLists = []) {
+		print_r($attributes);
+		$attributes['tagName'] = 'li';
+		if (!empty($nestedLists)) {
+			$this->instance = new ListItemComplex($attributes, $content, $nestedLists);
+		}
+		else {
+			$this->instance = new ListItemSimple($attributes, $content);
+		}
+	}
 
-    function get_inline_styles(): array {
-        // TODO: Implement get_inline_styles() method.
-        return [];
-    }
-
-    function render(): void {
-        // TODO: Implement render() method.
-    }
+	public function render(): void {
+		$this->instance->render();
+	}
 }

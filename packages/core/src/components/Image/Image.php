@@ -1,5 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
+
 use Exception;
 
 class Image extends Renderable {
@@ -60,15 +61,15 @@ class Image extends Renderable {
 
 	function __construct(array $attributes, string $content) {
 		$this->aspectRatio = isset($attributes['aspectRatio']) ? AspectRatio::tryFrom(str_replace('/', ':', $attributes['aspectRatio'])) : null;
-		if($this->aspectRatio) {
+		if ($this->aspectRatio) {
 			$this->classes[] = 'aspect-ratio-' . str_replace($this->aspectRatio->value, ':', '-');
 		}
 
-		if(isset($attributes['scale'])) {
+		if (isset($attributes['scale'])) {
 			$this->classes[] = 'image-scale-' . $attributes['scale'];
 		}
 
-		if(isset($attributes['linkDestination'])) {
+		if (isset($attributes['linkDestination'])) {
 			$this->href = $attributes['linkDestination'];
 			$attributes['href'] = $this->href;
 			unset($attributes['linkDestination']);
@@ -80,11 +81,11 @@ class Image extends Renderable {
 	public function get_inline_styles(): array {
 		$styles = [];
 
-		if($this->height) {
+		if ($this->height) {
 			$styles['height'] = $this->height;
 		}
 
-		if($this->width) {
+		if ($this->width) {
 			$styles['width'] = $this->width;
 		}
 
@@ -94,7 +95,7 @@ class Image extends Renderable {
 	public function render(): void {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();
-		$classes = $attrs['class'];
+		$classes = $attrs['className'] ?? '';
 
 		try {
 			echo $blade->make($this->bladeFile, [
