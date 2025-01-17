@@ -6,12 +6,7 @@ class Buttons extends UIComponent {
 		parent::__construct($attributes, $innerComponents, 'components.Buttons.buttons');
 	}
 
-	function get_inline_styles(): array {
-		// TODO: Implement get_inline_styles() method.
-		return [];
-	}
-
+	#[NotImplemented]
 	function render(): void {
-		// TODO: Implement render() method.
 	}
 }

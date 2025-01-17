@@ -6,12 +6,7 @@ class MediaText extends UIComponent {
 		parent::__construct($attributes, $innerComponents, 'components.MediaText.media-text');
 	}
 
-	function get_inline_styles(): array {
-		// TODO: Implement get_inline_styles() method.
-		return [];
-	}
-
+	#[NotImplemented]
 	function render(): void {
-		// TODO: Implement render() method.
 	}
 }

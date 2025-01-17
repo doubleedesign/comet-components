@@ -1,6 +1,5 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-
 use Exception;
 
 abstract class LayoutComponent extends UIComponent {

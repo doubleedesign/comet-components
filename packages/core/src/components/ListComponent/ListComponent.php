@@ -12,33 +12,7 @@ class ListComponent extends UIComponent {
 	}
 
 	function get_inline_styles(): array {
-		$styles = [];
-
-		$color =
-			$this->style['color']
-			?? $this->style['elements']['link']['color']['text'] // WordPress format
-			?? null;
-
-		if($color) {
-			// If it's a hex colour, leave as-is
-			if (preg_match('/^#[0-9A-F]{6}$/i', $color)) {
-				$styles['color'] = $color;
-			}
-			else {
-				// Transform expected formats to CSS variable format
-				// WordPress format is like var:preset|color|vivid-cyan-blue
-				$stripped = str_replace('var:', '', $color);
-				$color = str_replace('|', '--', $stripped);
-				// Hack in if we're in WP context
-				if(defined('WPINC')) {
-					$color = "wp--$color";
-				}
-
-				$styles['color'] = "var(--$color)";
-			}
-		}
-
-		return $styles;
+		return [];
 	}
 
 	function render(): void {

@@ -57,26 +57,21 @@ abstract class Renderable {
 	 * @return array<string>
 	 */
 	protected function get_filtered_classes(): array {
+		$current_classes = $this->classes;
 		$redundant_classes = ['is-style-default'];
 
-		return array_filter($this->classes, function ($class) use ($redundant_classes) {
-			return (
-				!in_array($class, $redundant_classes)
-				// WordPress sometimes add classes like wp-element-some-really-long-random-string and I don't know why nor do I want it
-				&& !str_starts_with('wp-elements-', $class)
-			);
+		return array_filter($current_classes, function ($class) use ($redundant_classes) {
+			return !in_array($class, $redundant_classes);
 		});
 	}
 
-
 	/**
 	 * Get the valid/supported HTML attributes for the given tag
-	 * @return string[]
+	 * @return array<string>
 	 */
 	private function get_valid_html_attributes(): array {
 		return $this->tag->get_valid_attributes();
 	}
-
 
 	/**
 	 * Filter the attributes for later use
@@ -100,7 +95,6 @@ abstract class Renderable {
 				str_starts_with($key, 'data-'));
 		}, ARRAY_FILTER_USE_KEY);
 	}
-
 
 	/**
 	 * Collect the final HTML attributes excluding "class"
@@ -129,7 +123,14 @@ abstract class Renderable {
 		return array_filter($attrs, fn($value) => !empty($value));
 	}
 
-	abstract function get_inline_styles(): array;
+	/**
+	 * Build the inline styles (style attribute) as a single string
+	 * using the relevant supported attributes
+	 * @return array<string, string>
+	 */
+	protected function get_inline_styles(): array {
+		return [];
+	}
 
 	abstract function render(): void;
 }

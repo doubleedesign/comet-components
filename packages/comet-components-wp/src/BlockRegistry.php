@@ -1,10 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
-
-use RuntimeException;
-use Closure;
-use WP_Block;
-use WP_Block_Type_Registry;
+use Doubleedesign\Comet\Core\{Utils, NotImplemented};
+use ReflectionClass, ReflectionProperty, Closure, ReflectionException;
+use WP_Block, WP_Block_Type_Registry;
 
 class BlockRegistry extends JavaScriptImplementation {
 
@@ -99,21 +97,72 @@ class BlockRegistry extends JavaScriptImplementation {
 		return array_values($allowed_blocks);
 	}
 
-
 	/**
-	 * Get the path to the override template file for a block
-	 * TODO: Allow theme to override block output by looking in the theme directory before loading the file from here
-	 *
+	 * Get the Comet class name from a block name and see if that class exists
 	 * @param $blockName
 	 * @return string|null
 	 */
-	static function get_override_template_file($blockName): ?string {
+	static function get_comet_component_class($blockName): ?string {
 		$blockNameTrimmed = array_reverse(explode('/', $blockName))[0];
-		$file = __DIR__ . '\output\\' . $blockNameTrimmed . '.php';
+		$className = Utils::get_class_name($blockNameTrimmed);
 
-		return file_exists($file) ? $file : null;
+		if(class_exists($className)) {
+			return $className;
+		}
+
+		return null;
 	}
 
+	/**
+	 * Check if the class is expecting string $content, an array of $innerComponents, both, or neither
+	 * This is used in the block render function to determine what to pass from WordPress to the Comet component
+	 * because Comet has constructors like new Thing($attributes, $content) or new Thing($attributes, $innerComponents)
+	 * @param $className
+	 * @return string[]|null
+	 */
+	static function get_comet_component_content_type($className): ?array {
+		if(!$className || !class_exists($className)) return null;
+
+		$fields = [];
+		$reflectionClass = new ReflectionClass($className);
+		$properties = $reflectionClass->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED);
+
+		foreach($properties as $property) {
+			$fields[$property->getName()] = $property->getType()->getName();
+		}
+
+		$stringContent = isset($fields['content']) && $fields['content'] === 'string';
+		$innerComponents = isset($fields['innerComponents']) && $fields['innerComponents'] === 'array';
+
+		if($stringContent && $innerComponents) {
+			return ['string', 'array'];
+		}
+		else if($stringContent) {
+			return ['string'];
+		}
+		else if($innerComponents) {
+			return ['array'];
+		}
+		return null;
+	}
+
+	/**
+	 * Check whether the Comet Component's render method has been implemented
+	 * Helpful for development/progressive adoption of components by falling back to default WP rendering if the custom one isn't ready yet
+	 * @param string $className
+	 * @return bool
+	 */
+	static function can_render_comet_component(string $className): bool {
+		try {
+			$reflectionClass = new ReflectionClass($className);
+			$method = $reflectionClass->getMethod('render');
+			$attribute = $method->getAttributes(NotImplemented::class);
+			return empty($attribute);
+		}
+		catch (ReflectionException $e) {
+			return false;
+		}
+	}
 
 	/**
 	 * Override core block render function and use Comet instead
@@ -123,40 +172,50 @@ class BlockRegistry extends JavaScriptImplementation {
 		$blocks = $this->get_allowed_blocks();
 		$core_blocks = array_filter($blocks, fn($block) => str_starts_with($block, 'core/'));
 
-		foreach ($core_blocks as $core_block) {
-			// Check if the block type and override file exist
-			$block_type = WP_Block_Type_Registry::get_instance()->get_registered($core_block);
-			$file = $this->get_override_template_file($core_block);
+		// Check rendering prerequisites and bail early if one is not met
+		// Otherwise, do nothing - the original WP block render function will be used
+		foreach ($core_blocks as $core_block_name) {
+			// WP block type exists
+			$block_type = WP_Block_Type_Registry::get_instance()->get_registered($core_block_name);
+			if(!$block_type) continue;
 
-			// If they do, override the render callback
-			if ($block_type && $file) {
-				// Unregister the original block
-				unregister_block_type($core_block);
+			// Corresponding Comet Component class exists
+			$ComponentClass = self::get_comet_component_class($core_block_name); // returns the namespaced class name
+			if(!$ComponentClass) continue;
 
-				// Merge the original block settings with overrides
-				$settings = array_merge(
-					get_object_vars($block_type), // Convert object to array
-					[
-						// Custom render callback + pass in the default one for use as a fallback
-						'render_callback' => self::render_block_callback($core_block),
-					]
-				);
+			//...and the render method has been implemented
+			$ready_to_render = self::can_render_comet_component($ComponentClass);
+			if(!$ready_to_render) continue;
 
-				// Re-register the block with the original settings and new render callback
-				register_block_type($core_block, $settings);
-			}
+			//...and one or more of the expected content fields is present
+			$content_types = self::get_comet_component_content_type($ComponentClass); // so we know what to pass to it
+			if(!$content_types) continue;
 
-			// Otherwise, do nothing - the original WP block render function will be used
+			// If all of those conditions were met, override the block's render callback
+			// Unregister the original block
+			unregister_block_type($core_block_name);
+
+			// Merge the original block settings with overrides
+			$settings = array_merge(
+				get_object_vars($block_type), // Convert object to array
+				[
+					// Custom render callback
+					'render_callback' => self::render_block_callback($core_block_name),
+				]
+			);
+
+			// Re-register the block with the original settings and new render callback
+			register_block_type($core_block_name, $settings);
 		}
 	}
 
 	/**
 	 * Inner function for the override, to render a core block using a custom template
-	 * @param $block_name
+	 * @param string $block_name
 	 *
 	 * @return Closure
 	 */
-	static function render_block_callback($block_name): Closure {
+	static function render_block_callback(string $block_name): Closure {
 		return function ($attributes, $content, $block_instance) use ($block_name) {
 			return self::render_block($block_name, $attributes, $content, $block_instance);
 		};
@@ -164,8 +223,10 @@ class BlockRegistry extends JavaScriptImplementation {
 
 	/**
 	 * The function called inside render_block_callback
+	 * to render blocks using Comet Components.
+	 * Note: Inner blocks do not hit this code, as they are rendered by the parent block.
 	 *
-	 * This exists separately for better debugging - this way we see render_block() in Xdebug stack traces,
+	 * This exists separately from render_block_callback for better debugging - this way we see render_block() in Xdebug stack traces,
 	 * whereas if this returned the closure directly, it would show up as an anonymous function
 	 * @param string $block_name
 	 * @param array $attributes
@@ -173,11 +234,12 @@ class BlockRegistry extends JavaScriptImplementation {
 	 * @param WP_Block $block_instance
 	 *
 	 * @return string
-	 * @throws RuntimeException
 	 */
 	static function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
 		$block_name_trimmed = explode('/', $block_name)[1];
 		$inner_blocks = $block_instance->parsed_block['innerBlocks'];
+		$ComponentClass = self::get_comet_component_class($block_name); // returns the namespaced class name
+		$content_type = self::get_comet_component_content_type($ComponentClass); // so we know what to pass to it
 
 		// For group block, detect variation based on layout attributes
 		if ($block_name_trimmed === 'group') {
@@ -200,23 +262,22 @@ class BlockRegistry extends JavaScriptImplementation {
 			$block_name_trimmed = $variation;
 		}
 
-		$file = self::get_override_template_file($block_name);
+		ob_start();
+		extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $inner_blocks]);
 
-		// TODO: Check if the file exists in the child theme, then in the parent theme, before defaulting to the plugin
-		// Note: Inner block files will not be used here, as they are rendered by the parent block.
-		// Maybe I could remove this file entirely and create the component objects right here instead?
-		if (file_exists($file)) {
-			ob_start();
-			// The variables are extracted to make them available to the included file
-			extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $inner_blocks]);
-			// Include the file that renders the block
-			include $file;
-			return ob_get_clean();
+		// Most components will have string content or an array of inner components
+		if(count($content_type) === 1) {
+			$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
+			$component->render();
+		}
+		// Some can have both, e.g. list items can have text content and nested lists
+		else if(count($content_type) === 2) {
+			$component = new $ComponentClass($attributes, $content, $innerComponents);
+			$component->render();
 		}
 
-		return '';
+		return ob_get_clean();
 	}
-
 
 	/**
 	 * Register additional styles for core blocks

@@ -53,7 +53,8 @@ class Utils {
 	}
 
 	/**
-	 * Convert lowercase, kebab-case, and WP block format component names to PascalCase
+	 * Convert lowercase, kebab-case, and WP block format component names to PascalCase,
+	 * account for components with reserved words as names having "Component" appended (e.g., ListComponent),
 	 * and add the namespace to return the full class name
 	 * @param string $name
 	 * @return string

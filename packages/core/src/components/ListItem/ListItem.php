@@ -6,7 +6,6 @@ class ListItem {
 	private ListItemSimple|ListItemComplex $instance;
 
 	function __construct(array $attributes, string $content, array $nestedLists = []) {
-		print_r($attributes);
 		$attributes['tagName'] = 'li';
 		if (!empty($nestedLists)) {
 			$this->instance = new ListItemComplex($attributes, $content, $nestedLists);

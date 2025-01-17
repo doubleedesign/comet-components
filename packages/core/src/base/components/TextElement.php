@@ -4,20 +4,25 @@ use Exception;
 
 abstract class TextElement extends Renderable {
 	/**
-	 * @var Alignment|null $textAlign
-	 */
-	protected ?Alignment $textAlign = Alignment::MATCH_PARENT;
-	/**
 	 * @var string $content
 	 * @description plain text or basic HTML
 	 */
 	protected string $content;
+	/**
+	 * @var Alignment|null $textAlign
+	 */
+	protected ?Alignment $textAlign = Alignment::MATCH_PARENT;
+	/**
+	 * @var string|null $textColor
+	 */
+	protected ?string $textColor = null;
 
 	function __construct(array $attributes, string $content, string $bladeFile) {
 		parent::__construct($attributes, $bladeFile);
 		$this->shortName = array_reverse(explode($this->bladeFile, '.'))[0];
 		$this->content = $content;
 		$this->textAlign = isset($attributes['textAlign']) ? Alignment::tryFrom($attributes['textAlign']) : null;
+		$this->textColor = isset($attributes['textColor']) ?? null;
 	}
 
 	/**
@@ -32,38 +37,25 @@ abstract class TextElement extends Renderable {
 			$styles['text-align'] = $this->textAlign->value;
 		}
 
-		if($this->style) {
-			$color =
-				$this->style['color']
-				?? $this->style['elements']['link']['color']['text'] // WordPress format
-				?? null;
-
-			if ($color) {
-				// If it's a hex colour, leave as-is
-				if (preg_match('/^#[0-9A-F]{6}$/i', $color)) {
-					$styles['color'] = $color;
-				}
-				else {
-					// Transform expected formats to CSS variable format
-					// WordPress format is like var:preset|color|vivid-cyan-blue
-					$stripped = str_replace('var:', '', $color);
-					$color = str_replace('|', '--', $stripped);
-					// Hack in if we're in WP context
-					if (defined('WPINC')) {
-						$color = "wp--$color";
-					}
-
-					$styles['color'] = "var(--$color)";
-				}
-			}
-		}
-
 		return $styles;
 	}
 
 	/**
+	 * Get the valid/supported classes for this component
+	 * @return array<string>
+	 */
+	function get_filtered_classes(): array {
+		$current_classes = parent::get_filtered_classes();
+
+		if ($this->textColor) {
+			$current_classes[] = 'text-' . $this->textColor;
+		}
+
+		return $current_classes;
+	}
+
+	/**
 	 * Default render method (child classes may override this)
-	 *
 	 * @return void
 	 */
 	public function render(): void {

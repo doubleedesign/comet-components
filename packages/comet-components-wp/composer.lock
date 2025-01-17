@@ -172,7 +172,7 @@
             "dist": {
                 "type": "path",
                 "url": "../core",
-                "reference": "626e0be5240c4fa310b3a03ec293841471cd4a37"
+                "reference": "e7130e89aebfddc051a3085434c34d953c164fb1"
             },
             "require": {
                 "ezyang/htmlpurifier": "^4.18",
@@ -191,6 +191,7 @@
                     "Doubleedesign\\Comet\\Core\\": [
                         "src/base/types/",
                         "src/base/traits/",
+                        "src/base/annotations/",
                         "src/base/components/",
                         "src/base/",
                         "src/services/"

@@ -1,6 +1,5 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-
 use RuntimeException;
 
 abstract class UIComponent extends Renderable {
@@ -37,10 +36,9 @@ abstract class UIComponent extends Renderable {
 
 			$ComponentClass = Utils::get_class_name($name);
 			if (class_exists($ComponentClass)) {
-				$attributes = $component['attributes'] ?? [];
+				$attributes = $component['attrs'] ?? [];
 				$innerComponents = $component['innerComponents'] ?? $component['innerBlocks'] ?? null;
 				$content = $component['content'] ?? $component['innerHTML'] ?? null;
-
 
 				// Handle components that have plain text as well as nested components, e.g. list items with nested lists
 				// TODO: Ascertain this dynamically

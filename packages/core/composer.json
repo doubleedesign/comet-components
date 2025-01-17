@@ -15,6 +15,7 @@
 			"Doubleedesign\\Comet\\Core\\": [
 				"src/base/types/",
 				"src/base/traits/",
+				"src/base/annotations/",
 				"src/base/components/",
 				"src/base/",
 				"src/services/"

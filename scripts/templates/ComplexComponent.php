@@ -1,7 +1,5 @@
 <?php
-namespace Doubleedesign\Comet\Components;
-
-use Doubleedesign\Comet\Core\src\base\components\UIComponent;
+namespace Doubleedesign\Comet\Core;
 
 class ComplexComponent extends UIComponent {
     function __construct(array $attributes, array $innerComponents) {
@@ -13,6 +11,7 @@ class ComplexComponent extends UIComponent {
         return [];
     }
 
+	#[NotImplemented]
     function render(): void {
         // TODO: Implement render() method.
     }
