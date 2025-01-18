@@ -13,7 +13,9 @@
 		}
 	},
 	"require": {
-		"doubleedesign/comet-components-core": "*"
+		"doubleedesign/comet-components-core": "*",
+		"composer/installers": "^2.0",
+		"humanmade/block-supports-extended": "^0.2.0"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
@@ -24,6 +26,22 @@
 			"options": {
 				"symlink": true
 			}
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/humanmade/block-supports-extended"
 		}
-	]
+	],
+	"extra": {
+		"installer-paths": {
+			"vendor/humanmade/block-supports-extended": [
+				"type:wordpress-plugin"
+			]
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	}
 }

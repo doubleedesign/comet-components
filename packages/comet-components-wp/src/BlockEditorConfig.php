@@ -3,9 +3,10 @@ namespace Doubleedesign\Comet\WordPress;
 
 use WP_Theme_JSON_Data;
 
-class BlockEditorConfig {
+class BlockEditorConfig extends JavaScriptImplementation {
 
 	function __construct() {
+		parent::__construct();
 		add_filter('should_load_remote_block_patterns', '__return_false');
 		remove_action('enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets');
 		remove_action('enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets_block_directory');

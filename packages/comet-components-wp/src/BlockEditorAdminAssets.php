@@ -11,12 +11,15 @@ class BlockEditorAdminAssets {
 			// Block editor is not available.
 			return;
 		}
-		add_action('enqueue_block_assets', [$this, 'enqueue_shared_block_css']);
+		add_action('enqueue_block_assets', [$this, 'enqueue_global_css']);
 		add_action('admin_enqueue_scripts', [$this, 'admin_scripts']);
 	}
 
-	function enqueue_shared_block_css(): void {
-		wp_enqueue_style('comet-shared-block-styles', './shared-block-styles.css', array(), COMET_VERSION);
+	function enqueue_global_css(): void {
+		$currentDir = plugin_dir_url(__FILE__);
+		$pluginDir = dirname($currentDir, 1);
+		$global_css_path = $pluginDir . '/vendor/doubleedesign/comet-components-core/src/components/global.css';
+		wp_enqueue_style('comet-global-styles', $global_css_path, array(), COMET_VERSION);
 	}
 
 	/**

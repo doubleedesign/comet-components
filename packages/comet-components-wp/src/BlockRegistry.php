@@ -3,15 +3,21 @@ namespace Doubleedesign\Comet\WordPress;
 use Doubleedesign\Comet\Core\{Utils, NotImplemented};
 use ReflectionClass, ReflectionProperty, Closure, ReflectionException;
 use WP_Block, WP_Block_Type_Registry;
+use Block_Supports_Extended;
 
 class BlockRegistry extends JavaScriptImplementation {
+	private array $block_support_json;
 
 	function __construct() {
 		parent::__construct();
+
+		$this->block_support_json = json_decode(file_get_contents(__DIR__ . '/block-support.json'), true);
+
 		add_action('init', [$this, 'register_blocks'], 10, 2);
 		add_filter('allowed_block_types_all', [$this, 'set_allowed_blocks'], 10, 2);
 		add_action('init', [$this, 'override_core_block_rendering'], 20);
 		add_action('init', [$this, 'register_core_block_styles'], 10);
+		//add_action('init', [$this, 'register_custom_attributes'], 5);
 		add_filter('block_type_metadata', [$this, 'customise_core_block_options'], 10, 1);
 	}
 
@@ -65,7 +71,7 @@ class BlockRegistry extends JavaScriptImplementation {
 	function set_allowed_blocks($allowed_blocks): array {
 		$all_block_types = WP_Block_Type_Registry::get_instance()->get_all_registered();
 		// Read core block list from JSON file
-		$core = json_decode(file_get_contents(__DIR__ . '/block-support.json'), true);
+		$core = $this->block_support_json;
 		// Custom blocks in this plugin
 		$custom = $this->get_custom_block_names();
 		// Third-party plugin block types
@@ -106,7 +112,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		$blockNameTrimmed = array_reverse(explode('/', $blockName))[0];
 		$className = Utils::get_class_name($blockNameTrimmed);
 
-		if(class_exists($className)) {
+		if (class_exists($className)) {
 			return $className;
 		}
 
@@ -121,26 +127,26 @@ class BlockRegistry extends JavaScriptImplementation {
 	 * @return string[]|null
 	 */
 	static function get_comet_component_content_type($className): ?array {
-		if(!$className || !class_exists($className)) return null;
+		if (!$className || !class_exists($className)) return null;
 
 		$fields = [];
 		$reflectionClass = new ReflectionClass($className);
 		$properties = $reflectionClass->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED);
 
-		foreach($properties as $property) {
+		foreach ($properties as $property) {
 			$fields[$property->getName()] = $property->getType()->getName();
 		}
 
 		$stringContent = isset($fields['content']) && $fields['content'] === 'string';
 		$innerComponents = isset($fields['innerComponents']) && $fields['innerComponents'] === 'array';
 
-		if($stringContent && $innerComponents) {
+		if ($stringContent && $innerComponents) {
 			return ['string', 'array'];
 		}
-		else if($stringContent) {
+		else if ($stringContent) {
 			return ['string'];
 		}
-		else if($innerComponents) {
+		else if ($innerComponents) {
 			return ['array'];
 		}
 		return null;
@@ -177,19 +183,19 @@ class BlockRegistry extends JavaScriptImplementation {
 		foreach ($core_blocks as $core_block_name) {
 			// WP block type exists
 			$block_type = WP_Block_Type_Registry::get_instance()->get_registered($core_block_name);
-			if(!$block_type) continue;
+			if (!$block_type) continue;
 
 			// Corresponding Comet Component class exists
 			$ComponentClass = self::get_comet_component_class($core_block_name); // returns the namespaced class name
-			if(!$ComponentClass) continue;
+			if (!$ComponentClass) continue;
 
 			//...and the render method has been implemented
 			$ready_to_render = self::can_render_comet_component($ComponentClass);
-			if(!$ready_to_render) continue;
+			if (!$ready_to_render) continue;
 
 			//...and one or more of the expected content fields is present
 			$content_types = self::get_comet_component_content_type($ComponentClass); // so we know what to pass to it
-			if(!$content_types) continue;
+			if (!$content_types) continue;
 
 			// If all of those conditions were met, override the block's render callback
 			// Unregister the original block
@@ -266,12 +272,12 @@ class BlockRegistry extends JavaScriptImplementation {
 		extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $inner_blocks]);
 
 		// Most components will have string content or an array of inner components
-		if(count($content_type) === 1) {
+		if (count($content_type) === 1) {
 			$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
 			$component->render();
 		}
 		// Some can have both, e.g. list items can have text content and nested lists
-		else if(count($content_type) === 2) {
+		else if (count($content_type) === 2) {
 			$component = new $ComponentClass($attributes, $content, $innerComponents);
 			$component->render();
 		}
@@ -299,6 +305,27 @@ class BlockRegistry extends JavaScriptImplementation {
 	}
 
 	/**
+	 * Register some additional attributes for core blocks
+	 * Note: Requires the block-supports-extended plugin, which is installed as a dependency via Composer
+	 * @return void
+	 */
+	function register_custom_attributes(): void {
+		// Theme colour option that matches the field type and structure of the existing background and text fields
+		Block_Supports_Extended\register('color', 'theme', [
+			'label'    => __('Theme'),
+			'property' => 'text',
+			// %s is replaced with a generated class name applied to the block.
+			'selector' => '.%1$s',
+			// Optional list of default blocks to add support for. This can
+			// also be done via a block's block.json "supports" property, or
+			// later using the Block_Supports_Extended\add_support() function.
+			'blocks'   => [
+				'core/details',
+			],
+		]);
+	}
+
+	/**
 	 * Override core block.json configuration
 	 * Note: $metadata['allowed_blocks'] also exists and is an array of block names,
 	 * so presumably allowed blocks can be added and removed here too
@@ -308,6 +335,16 @@ class BlockRegistry extends JavaScriptImplementation {
 	function customise_core_block_options($metadata): array {
 		delete_transient('wp_blocks_data'); // clear cache
 		$name = $metadata['name'];
+
+		$typography_blocks = array_values(array_filter(
+			$this->block_support_json['categories'],
+			fn($category) => $category['slug'] === 'text'
+		))[0]['blocks'] ?? null;
+
+		$layout_blocks = array_values(array_filter(
+			$this->block_support_json['categories'],
+			fn($category) => $category['slug'] === 'design'
+		))[0]['blocks'] ?? null;
 
 		// Remove support for some things from all blocks
 		if (isset($metadata['supports'])) {
@@ -324,7 +361,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		}
 
 		// Typography blocks
-		if (in_array($name, ['core/heading', 'core/paragraph', 'core/list', 'core/list-item'])) {
+		if (in_array($name, $typography_blocks)) {
 			$metadata['supports']['color']['background'] = false;
 			$metadata['supports']['color']['gradients'] = false;
 			$metadata['supports']['color']['__experimentalDefaultControls'] = [
