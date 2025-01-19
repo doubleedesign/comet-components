@@ -8,6 +8,7 @@
  * Version:             0.0.1
  * Requires at least:   6.7.0
  * Requires PHP:        8.3.11
+ * Requires plugins:	advanced-custom-fields-pro
  * Text Domain:         comet
  *
  * @package Comet

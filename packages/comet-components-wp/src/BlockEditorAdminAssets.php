@@ -23,12 +23,16 @@ class BlockEditorAdminAssets {
 	}
 
 	/**
-	 * Script to hackily remove menu items (e.g., the disabled code editor button) for simplicity,
+	 * Scripts to hackily remove/hide menu items (e.g., the disabled code editor button) for simplicity,
 	 * open list view by default, and other editor UX things like that
 	 *
 	 * @return void
 	 */
 	function admin_scripts(): void {
+		$currentDir = plugin_dir_url(__FILE__);
+		$pluginDir = dirname($currentDir, 1);
+
 		//wp_enqueue_script('comet-block-editor-hacks', './block-editor-hacks.js', array('wp-edit-post', 'wp-data', 'wp-dom-ready'), COMET_VERSION, true);
+		wp_enqueue_style('comet-block-editor-hacks', "$pluginDir/src/block-editor-hacks.css", array(), COMET_VERSION);
 	}
 }

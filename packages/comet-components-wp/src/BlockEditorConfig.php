@@ -63,7 +63,7 @@ class BlockEditorConfig extends JavaScriptImplementation {
 			];
 		}
 
-		$preferred_order = array('design', 'text', 'media', 'content', 'embeds');
+		$preferred_order = array('design', 'grouping', 'text', 'media', 'content', 'embeds');
 		usort($new_categories, function ($a, $b) use ($preferred_order) {
 			return array_search($a['slug'], $preferred_order) <=> array_search($b['slug'], $preferred_order);
 		});

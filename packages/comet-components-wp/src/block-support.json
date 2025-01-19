@@ -1,32 +1,32 @@
 {
 	"core": {
-		"supported": [
-			"core/group",
-			"core/columns",
-			"core/column",
-			"core/grid",
-			"core/stack",
-			"core/row",
-			"core/details",
-			"core/image",
-			"core/file",
-			"core/media-text",
-			"core/latest-posts",
-			"core/cover",
-			"core/heading",
-			"core/paragraph",
-			"core/pullquote",
-			"core/quote",
-			"core/list",
-			"core/list-item",
-			"core/table",
-			"core/buttons",
-			"core/button",
-			"core/gallery",
-			"core/embed",
-			"core/freeform",
-			"core/footnotes"
-		]
+		"supported": {
+			"core/group": {},
+			"core/columns": {},
+			"core/column": {},
+			"core/grid": {},
+			"core/stack": {},
+			"core/row": {},
+			"core/details": {},
+			"core/image": {},
+			"core/file": {},
+			"core/media-text": {},
+			"core/latest-posts": {},
+			"core/cover": {},
+			"core/heading": {},
+			"core/paragraph": {},
+			"core/pullquote": {},
+			"core/quote": {},
+			"core/list": {},
+			"core/list-item": {},
+			"core/table": {},
+			"core/buttons": {},
+			"core/button": {},
+			"core/gallery": {},
+			"core/embed": {},
+			"core/freeform": {},
+			"core/footnotes": {}
+		}
 	},
 	"categories": [
 		{
@@ -52,8 +52,17 @@
 				"core/column",
 				"core/grid",
 				"core/stack",
-				"core/row",
-				"core/details"
+				"core/row"
+			]
+		},
+		{
+			"name": "Grouping",
+			"slug": "grouping",
+			"icon": "",
+			"blocks": [
+				"comet/accordion",
+				"comet/tabs",
+				"comet/downloads"
 			]
 		},
 		{
@@ -63,7 +72,6 @@
 			"blocks": [
 				"core/image",
 				"core/media-text",
-				"core/cover",
 				"core/gallery"
 			]
 		},

@@ -17,8 +17,10 @@ class BlockRegistry extends JavaScriptImplementation {
 		add_filter('allowed_block_types_all', [$this, 'set_allowed_blocks'], 10, 2);
 		add_action('init', [$this, 'override_core_block_rendering'], 20);
 		add_action('init', [$this, 'register_core_block_styles'], 10);
-		//add_action('init', [$this, 'register_custom_attributes'], 5);
-		add_filter('block_type_metadata', [$this, 'customise_core_block_options'], 10, 1);
+		add_action('block_type_metadata', [$this, 'register_core_block_variations'], 10);
+		add_action('block_type_metadata', [$this, 'update_some_core_block_descriptions'], 10);
+		add_action('init', [$this, 'register_custom_attributes'], 5);
+		add_filter('block_type_metadata', [$this, 'customise_core_block_options'], 15, 1);
 	}
 
 	/**
@@ -27,34 +29,30 @@ class BlockRegistry extends JavaScriptImplementation {
 	 */
 	function get_custom_block_names(): array {
 		$folder = dirname(__DIR__, 1) . '/src/blocks/';
-		$files = scandir($folder);
-		$blocks = [];
-		foreach ($files as $file) {
-			$full_path = $folder . $file;
-			if (is_file($full_path) && pathinfo($file, PATHINFO_EXTENSION) === 'json') {
-				$content = json_decode(file_get_contents($full_path), true);
-				if (isset($content['name'])) {
-					$blocks[] = $content['name'];
-				}
-			}
-		}
+		$block_folders = scandir($folder);
+		$blocks = array_map(fn($block) => 'comet/' . $block, $block_folders);
 
 		return $blocks;
 	}
 
 	/**
 	 * Register custom blocks
-	 * // TODO: Add more components as blocks here (e.g., PageHeader, Call-to-Action, etc.)
+	 * Requires Advanced Custom Fields Pro
 	 * @return void
 	 */
 	function register_blocks(): void {
-		$names = $this->get_custom_block_names();
-		foreach ($names as $name) {
-			$shortName = array_reverse(explode('/', $name))[0];
-			$file = dirname(__DIR__, 1) . '\src\blocks\\' . $shortName . '.json';
-			if (file_exists($file)) {
-				register_block_type_from_metadata($file);
+		$block_folders = scandir(dirname(__DIR__, 1) . '/src/blocks');
+
+		foreach ($block_folders as $block_name) {
+			if (file_exists(dirname(__DIR__, 1) . '/src/blocks/' . $block_name . '/editor.js')) {
+				wp_register_script($block_name . '-editor-js',
+					get_template_directory_uri() . '/src/blocks/' . $block_name . '/editor.js',
+					array('wp-dom', 'wp-blocks', 'wp-element', 'wp-editor', 'wp-block-editor'),
+					COMET_VERSION
+				);
 			}
+
+			register_block_type(dirname(__DIR__, 1) . '/src/blocks/' . $block_name);
 		}
 	}
 
@@ -71,15 +69,16 @@ class BlockRegistry extends JavaScriptImplementation {
 	function set_allowed_blocks($allowed_blocks): array {
 		$all_block_types = WP_Block_Type_Registry::get_instance()->get_all_registered();
 		// Read core block list from JSON file
-		$core = $this->block_support_json;
+		$core = array_keys($this->block_support_json['core']['supported']);
 		// Custom blocks in this plugin
 		$custom = $this->get_custom_block_names();
 		// Third-party plugin block types
 		$plugin = array_filter($all_block_types, fn($block_type) => str_starts_with($block_type->name, 'ninja-forms/'));
 
 		$result = array_merge(
+			$core,
 			$custom,
-			array_column($plugin, 'name'),
+			array_column($plugin, 'name')
 			// add core or plugin blocks here if:
 			// 1. They are to be allowed at the top level
 			// 2. They Are allowed to be inserted as child blocks of a core block (note: set custom parents for core blocks in addCoreBlockParents() in blocks.js if not allowing them at the top level)
@@ -87,7 +86,7 @@ class BlockRegistry extends JavaScriptImplementation {
 			// 1. As direct $allowed_blocks within custom ACF-driven blocks and/or
 			// 2. In a page/post type template defined programmatically and locked there (so users can't delete something that can't be re-inserted)
 			// TODO: When adding post support, there's some post-specific blocks that may be useful
-			$core['core']['supported']);
+		);
 
 		return $result;
 	}
@@ -285,6 +284,43 @@ class BlockRegistry extends JavaScriptImplementation {
 		return ob_get_clean();
 	}
 
+
+	/**
+	 * Register custom variations of core block
+	 * @param $metadata - the existing block metadata used to register it
+	 * @return array
+	 */
+	function register_core_block_variations($metadata): array {
+		$supported_core_blocks  = $this->block_support_json['core']['supported'];
+		$blocks_with_variations = array_filter($supported_core_blocks, fn($block) => isset($block['variations']));
+
+		foreach($blocks_with_variations as $block_name => $data) {
+			if($metadata['name'] === $block_name) {
+				$metadata['variations'] = array_merge(
+					$metadata['variations'] ?? array(),
+					$data['variations']
+				);
+			}
+		}
+
+		return $metadata;
+	}
+
+
+	function update_some_core_block_descriptions($metadata): array {
+		$blocks = $this->block_support_json['core']['supported'];
+		$blocks_to_update = array_filter($blocks, fn($block) => isset($block['description']));
+
+		foreach($blocks_to_update as $block_name => $data) {
+			if($metadata['name'] === $block_name) {
+				$metadata['description'] = $data['description'];
+			}
+		}
+
+		return $metadata;
+	}
+
+
 	/**
 	 * Register additional styles for core blocks
 	 * @return void
@@ -310,19 +346,12 @@ class BlockRegistry extends JavaScriptImplementation {
 	 * @return void
 	 */
 	function register_custom_attributes(): void {
-		// Theme colour option that matches the field type and structure of the existing background and text fields
-		Block_Supports_Extended\register('color', 'theme', [
-			'label'    => __('Theme'),
-			'property' => 'text',
-			// %s is replaced with a generated class name applied to the block.
-			'selector' => '.%1$s',
-			// Optional list of default blocks to add support for. This can
-			// also be done via a block's block.json "supports" property, or
-			// later using the Block_Supports_Extended\add_support() function.
-			'blocks'   => [
-				'core/details',
-			],
+		Block_Supports_Extended\register('color', 'inner_background', [
+			'label'    => __('Inner background'),
+			'blocks'   => ['core/group', 'core/columns', 'core/details'],
 		]);
+
+		// Note: Remove the thing the custom attribute is replacing, if applicable, using block_type_metadata filter
 	}
 
 	/**
@@ -360,7 +389,18 @@ class BlockRegistry extends JavaScriptImplementation {
 			);
 		}
 
-		// Typography blocks
+		// All layout blocks
+		if (in_array($name, $layout_blocks)) {
+			$metadata['supports']['color']['background'] = true;
+			$metadata['supports']['color']['gradients'] = false;
+			$metadata['supports']['color']['text'] = false;
+			$metadata['supports']['color']['__experimentalDefaultControls'] = [
+				'background' => true,
+				'text'       => false,
+			];
+		}
+
+		// All typography blocks
 		if (in_array($name, $typography_blocks)) {
 			$metadata['supports']['color']['background'] = false;
 			$metadata['supports']['color']['gradients'] = false;
@@ -400,7 +440,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		if ($name === 'core/group') {
 			$metadata['supports'] = array_diff_key(
 				$metadata['supports'],
-				array_flip(['__experimentalSettings', 'align', 'background', 'color', 'position'])
+				array_flip(['__experimentalSettings', 'align', 'position'])
 			);
 
 			$metadata['supports']['layout'] = array_merge(

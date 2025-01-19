@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "comet/accordion",
+	"title": "Accordion",
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "index.php"
+	},
+	"category": "grouping",
+	"icon": "list-view",
+	"description": "Lay out related content in expandable/collapsible sections.",
+	"keywords": ["accordion", "container", "wrapper", "section", "group"],
+	"textdomain": "comet",
+	"attributes": {
+		"tagName": {
+			"type": "string",
+			"default": "div"
+		},
+		"templateLock": {
+			"type": [ "string", "boolean" ],
+			"enum": [ "all", "insert", "contentOnly", false ]
+		},
+		"allowedBlocks": {
+			"type": "array",
+			"default": [ "core/details" ]
+		}
+	},
+	"supports": {
+		"anchor": true,
+		"ariaLabel": true,
+		"html": false,
+		"color": {
+			"gradients": true,
+			"background": true,
+			"text": false,
+			"__experimentalDefaultControls": {
+				"background": true
+			}
+		}
+	},
+	"editorScript": "file:./accordion.js"
+}
