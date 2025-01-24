@@ -5,6 +5,12 @@
  * (not individual blocks)
  */
 document.addEventListener('DOMContentLoaded', async function() {
+	// Disable full-screen mode by default
+	const isFullscreenMode = wp.data.select('core/edit-post').isFeatureActive('fullscreenMode');
+	if (isFullscreenMode) {
+		wp.data.dispatch('core/edit-post').toggleFeature('fullscreenMode');
+	}
+
 	// Open list view by default
 	wp.domReady(() => {
 		const { select, dispatch } = wp.data;
@@ -34,32 +40,4 @@ function hideBlockOptionToggleByLabelText(labelText) {
 			toggle.style.display = 'none';
 		}
 	});
-}
-
-// Adapted from https://codepen.io/boosmoke/pen/abbMZzb
-function waitForElementToExist(selector, limit) {
-	return new Promise((resolve, reject) => {
-		let count = 0;
-		(function waitForFoo() {
-			const element = document.querySelector(selector);
-			if (element) {
-				return resolve(element);
-			}
-			if (limit && count > limit) {
-				//reject(new Error('Element not found'));
-				return false;
-			}
-			count += 1;
-			setTimeout(waitForFoo, 50);
-		}());
-	});
-}
-
-function arrayToHtmlCollection(array) {
-	const fragment = document.createDocumentFragment();
-	array.forEach((child) => {
-		fragment.appendChild(child);
-	});
-
-	return fragment;
 }

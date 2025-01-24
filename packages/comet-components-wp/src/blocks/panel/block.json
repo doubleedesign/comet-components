@@ -1,0 +1,26 @@
+{
+	"name": "comet/panel",
+	"title": "Panel",
+	"icon": "open-folder",
+	"category": "grouping",
+	"parent": ["comet/accordion", "comet/tabs"],
+	"allowedBlocks": ["comet/panel-title", "comet/panel-content"],
+	"acf": {
+		"renderTemplate": "index.php",
+		"mode": "preview"
+	},
+	"description": "Panel within an accordion or tabbed interface",
+	"keywords": ["accordion", "tabs", "container", "wrapper", "section", "group"],
+	"textdomain": "comet",
+	"attributes": {},
+	"supports": {
+		"mode": false,
+		"jsx": true,
+		"innerBlocks": true,
+		"anchor": false,
+		"ariaLabel": false,
+		"align": false,
+		"html": false,
+		"multiple": true
+	}
+}

@@ -23,9 +23,9 @@ abstract class JavaScriptImplementation {
 		$class_name = array_reverse(explode('\\', get_class($this)))[0];
 		// Kebab case it
 		$handle = $this->kebab_case($class_name);
-		
+
 		// Enqueue the matching JS file
-		wp_enqueue_script("comet-$handle", "$pluginDir/src/$handle.js", array('wp-dom', 'wp-dom-ready', 'wp-blocks', 'wp-edit-post', 'wp-element', 'wp-plugins', 'wp-edit-post', 'wp-components', 'wp-data', 'wp-compose', 'wp-i18n', 'wp-hooks', 'wp-block-editor', 'wp-block-library',), COMET_VERSION, false);
+		wp_enqueue_script("comet-$handle", "$pluginDir/src/$handle.js", array('wp-dom', 'wp-dom-ready', 'wp-blocks', 'wp-edit-post', 'wp-editor', 'wp-element', 'wp-plugins', 'wp-edit-post', 'wp-components', 'wp-data', 'wp-compose', 'wp-i18n', 'wp-hooks', 'wp-block-editor', 'wp-block-library',), COMET_VERSION, false);
 	}
 
 	/**

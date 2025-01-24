@@ -60,9 +60,7 @@
 			"slug": "grouping",
 			"icon": "",
 			"blocks": [
-				"comet/accordion",
-				"comet/tabs",
-				"comet/downloads"
+				"comet/details-group"
 			]
 		},
 		{

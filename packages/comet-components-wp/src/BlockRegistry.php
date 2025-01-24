@@ -13,7 +13,8 @@ class BlockRegistry extends JavaScriptImplementation {
 
 		$this->block_support_json = json_decode(file_get_contents(__DIR__ . '/block-support.json'), true);
 
-		add_action('init', [$this, 'register_blocks'], 10, 2);
+		add_action('acf/init', [$this, 'register_blocks'], 10, 2);
+		add_action('acf/include_fields', [$this, 'register_block_fields'], 10, 2);
 		add_filter('allowed_block_types_all', [$this, 'set_allowed_blocks'], 10, 2);
 		add_action('init', [$this, 'override_core_block_rendering'], 20);
 		add_action('init', [$this, 'register_core_block_styles'], 10);
@@ -44,15 +45,46 @@ class BlockRegistry extends JavaScriptImplementation {
 		$block_folders = scandir(dirname(__DIR__, 1) . '/src/blocks');
 
 		foreach ($block_folders as $block_name) {
-			if (file_exists(dirname(__DIR__, 1) . '/src/blocks/' . $block_name . '/editor.js')) {
-				wp_register_script($block_name . '-editor-js',
-					get_template_directory_uri() . '/src/blocks/' . $block_name . '/editor.js',
+			$folder = dirname(__DIR__, 1) . '/src/blocks/' . $block_name;
+			$currentDir = dirname(__DIR__, 1) . '/src/';
+			$register_js = $currentDir . "blocks/$block_name/register.js";
+			$editor_js = $currentDir . "blocks/$block_name/editor.js";
+
+			if (file_exists($editor_js)) {
+				$currentDir = plugin_dir_url(__FILE__);
+				$editor_js_enqueue_path = $currentDir . "blocks/$block_name/editor.js";
+
+				wp_register_script($block_name . '-editor',
+					$editor_js_enqueue_path,
 					array('wp-dom', 'wp-blocks', 'wp-element', 'wp-editor', 'wp-block-editor'),
 					COMET_VERSION
 				);
 			}
 
-			register_block_type(dirname(__DIR__, 1) . '/src/blocks/' . $block_name);
+			if(file_exists($register_js)) {
+				$currentDir = plugin_dir_url(__FILE__);
+				$register_js_enqueue_path = $currentDir . "blocks/$block_name/register.js";
+
+				wp_enqueue_script($block_name . '-register',
+					$register_js_enqueue_path,
+					array('wp-dom', 'wp-blocks', 'wp-element', 'wp-editor', 'wp-block-editor'),
+					COMET_VERSION
+				);
+			}
+
+			register_block_type($folder);
+		}
+	}
+
+	function register_block_fields(): void {
+		$block_folders = scandir(dirname(__DIR__, 1) . '/src/blocks');
+
+		foreach ($block_folders as $block_name) {
+			$file = dirname(__DIR__, 1) . '/src/blocks/' . $block_name . '/fields.php';
+
+			if (file_exists($file) && function_exists('acf_add_local_field_group')) {
+				require_once $file;
+			}
 		}
 	}
 
