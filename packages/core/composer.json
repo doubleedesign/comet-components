@@ -9,7 +9,8 @@
 	],
 	"autoload": {
 		"classmap": [
-			"src/components/"
+			"src/components/",
+			"src/components/**/"
 		],
 		"psr-4": {
 			"Doubleedesign\\Comet\\Core\\": [

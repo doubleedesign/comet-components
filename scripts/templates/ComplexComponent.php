@@ -7,12 +7,12 @@ class ComplexComponent extends UIComponent {
     }
 
     function get_inline_styles(): array {
-        // TODO: Implement get_inline_styles() method.
         return [];
     }
 
 	#[NotImplemented]
-    function render(): void {
-        // TODO: Implement render() method.
-    }
+	function render(): void {
+		// Check the render method of the parent and see if it needs to be overridden,
+		// if not then remove this method and the annotation
+	}
 }

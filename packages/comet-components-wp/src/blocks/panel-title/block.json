@@ -2,11 +2,21 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "comet/panel-title",
-	"title": "Panel title",
-	"parent": ["comet/panel"],
+	"title": "Panel title/label",
+	"editorScript": "file:./index.js",
+	"parent": [
+		"comet/panel"
+	],
+	"usesContext": [
+		"comet/variant"
+	],
 	"category": "text",
+	"icon": "tag",
 	"description": "Title/label for a panel in an accordion or tabbed interface",
-	"keywords": ["accordion", "tabs"],
+	"keywords": [
+		"accordion",
+		"tabs"
+	],
 	"textdomain": "comet",
 	"attributes": {
 		"content": {
@@ -16,7 +26,8 @@
 			"role": "content"
 		},
 		"placeholder": {
-			"type": "string"
+			"type": "string",
+			"default": "Add panel title here..."
 		}
 	}
 }

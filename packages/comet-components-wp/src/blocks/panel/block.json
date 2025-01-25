@@ -1,16 +1,30 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
 	"name": "comet/panel",
 	"title": "Panel",
 	"icon": "open-folder",
+	"editorScript": "file:./index.js",
 	"category": "grouping",
-	"parent": ["comet/accordion", "comet/tabs"],
-	"allowedBlocks": ["comet/panel-title", "comet/panel-content"],
-	"acf": {
-		"renderTemplate": "index.php",
-		"mode": "preview"
-	},
+	"parent": [
+		"comet/panels"
+	],
+	"usesContext": [
+		"comet/variant"
+	],
+	"allowedBlocks": [
+		"comet/panel-title",
+		"comet/panel-content"
+	],
 	"description": "Panel within an accordion or tabbed interface",
-	"keywords": ["accordion", "tabs", "container", "wrapper", "section", "group"],
+	"keywords": [
+		"accordion",
+		"tabs",
+		"container",
+		"wrapper",
+		"section",
+		"group"
+	],
 	"textdomain": "comet",
 	"attributes": {},
 	"supports": {

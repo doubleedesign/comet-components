@@ -8,5 +8,7 @@ class SimpleComponent extends TextElement {
 
 	#[NotImplemented]
 	function render(): void {
+		// Check the render method of the parent and see if it needs to be overridden,
+		// if not then remove this method and the annotation
 	}
 }

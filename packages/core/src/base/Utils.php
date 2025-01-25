@@ -11,10 +11,11 @@ class Utils {
 	 * @return string
 	 */
 	public static function kebab_case(string $value): string {
-		// If no whitespace characters, return as is (preserves snake_case and PascalCase)
-		if (!preg_match('/\s/', $value)) {
-			return $value;
-		}
+		// Account for PascalCase
+		$value = preg_replace('/([a-z])([A-Z])/', '$1 $2', $value);
+
+		// Convert slashes so this works on namespaced block names
+		$value = str_replace('/', '-', $value);
 
 		// Convert whitespace to hyphens and make lowercase
 		return trim(strtolower(preg_replace('/\s+/', '-', $value)));
@@ -69,5 +70,18 @@ class Utils {
 		}
 
 		return sprintf('%s\\%s', __NAMESPACE__, $className);
+	}
+
+	public static function get_array_depth($array) {
+		$max_depth = 1;
+
+		foreach ($array as $value) {
+			if (is_array($value)) {
+				$depth = self::get_array_depth($value) + 1;
+				$max_depth = max($max_depth, $depth);
+			}
+		}
+
+		return $max_depth;
 	}
 }

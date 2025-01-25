@@ -4,7 +4,7 @@ import * as path from 'node:path';
 import { execSync } from 'child_process';
 
 // Get the component name and type from command line arguments
-// Command is in the format: 'npm run generate-component name --type=complex'
+// Command is in the format: 'npm run generate component -- --name=YourThing --type=complex'
 const args = process.argv.slice(2);
 if(args[0] !== 'component' || !args[1] || !args[1].startsWith('--name=')) {
 	console.error('Invalid command. Usage: npm run generate component -- --name=<name> --type=<simple or complex>');

@@ -1,15 +1,24 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
 	"name": "comet/panels",
 	"title": "Panels",
-	"acf": {
-		"mode": "preview",
-		"renderTemplate": "index.php"
-	},
-	"allowedBlocks": ["comet/panel"],
+	"allowedBlocks": [
+		"comet/panel"
+	],
+	"editorScript": "file:./index.js",
 	"category": "grouping",
 	"icon": "list-view",
 	"description": "Group related content into expandable/collapsible sections or a tabbed interface",
-	"keywords": ["accordion", "tabs", "panels", "container", "wrapper", "section", "group"],
+	"keywords": [
+		"accordion",
+		"tabs",
+		"panels",
+		"container",
+		"wrapper",
+		"section",
+		"group"
+	],
 	"textdomain": "comet",
 	"attributes": {
 		"tagName": {
@@ -21,15 +30,32 @@
 			"default": "comet/accordion"
 		}
 	},
+	"editorStyle": [
+		"comet-accordion-style",
+		"comet-tabs-style"
+	],
+	"style": [
+		"comet-accordion-style",
+		"comet-tabs-style"
+	],
+	"providesContext": {
+		"comet/variant": "variant"
+	},
 	"variations": [
 		{
 			"name": "comet/accordion",
 			"title": "Accordion",
 			"icon": "list-view",
 			"description": "Group related content in an expandable/collapsible interface",
-			"scope": ["inserter", "transform"],
+			"scope": [
+				"inserter",
+				"transform"
+			],
 			"isDefault": true,
-			"isActive": ["variant", "accordion"],
+			"isActive": [
+				"variant",
+				"accordion"
+			],
 			"attributes": {
 				"variant": "accordion"
 			}
@@ -39,8 +65,14 @@
 			"title": "Tabs",
 			"icon": "category",
 			"description": "Group related content in a tabbed interface",
-			"scope": ["inserter", "transform"],
-			"isActive": ["variant", "tabs"],
+			"scope": [
+				"inserter",
+				"transform"
+			],
+			"isActive": [
+				"variant",
+				"tabs"
+			],
 			"attributes": {
 				"variant": "tabs"
 			}
@@ -56,10 +88,11 @@
 		"html": false,
 		"color": {
 			"gradients": true,
-			"background": true,
+			"theme": true,
 			"text": false,
+			"background": false,
 			"__experimentalDefaultControls": {
-				"background": true
+				"theme": true
 			}
 		},
 		"layout": {

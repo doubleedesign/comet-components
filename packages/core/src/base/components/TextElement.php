@@ -19,7 +19,6 @@ abstract class TextElement extends Renderable {
 
 	function __construct(array $attributes, string $content, string $bladeFile) {
 		parent::__construct($attributes, $bladeFile);
-		$this->shortName = array_reverse(explode($this->bladeFile, '.'))[0];
 		$this->content = $content;
 		$this->textAlign = isset($attributes['textAlign']) ? Alignment::tryFrom($attributes['textAlign']) : null;
 		$this->textColor = isset($attributes['textColor']) ?? null;
@@ -61,7 +60,7 @@ abstract class TextElement extends Renderable {
 	public function render(): void {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();
-		$classes = $attrs['className'] ?? '';
+		$classes = implode(' ', $this->get_filtered_classes());
 
 		try {
 			echo $blade->make($this->bladeFile, [

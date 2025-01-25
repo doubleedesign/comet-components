@@ -59,23 +59,29 @@ class Image extends Renderable {
 	protected ?string $width = null;
 
 
-	function __construct(array $attributes, string $content) {
+	function __construct(array $attributes) {
+		$this->src = $attributes['src'];
+		$this->alt = $attributes['alt'] ?? '';
+		$this->title = $attributes['title'] ?? null;
+		$this->caption = $attributes['caption'] ?? null;
+		$this->href = $attributes['href'] ?? null;
 		$this->aspectRatio = isset($attributes['aspectRatio']) ? AspectRatio::tryFrom(str_replace('/', ':', $attributes['aspectRatio'])) : null;
+		$this->scale = $attributes['scale'] ?? 'contain';
+
+		parent::__construct($attributes, 'components.Image.image');
+	}
+
+	public function get_filtered_classes(): array {
+		$classes = [$this->shortName];
+		if ($this->scale) {
+			$classes[] = 'image--scale-' . $this->scale;
+		}
+		// TODO: Aspect ratio isn't working
 		if ($this->aspectRatio) {
-			$this->classes[] = 'aspect-ratio-' . str_replace($this->aspectRatio->value, ':', '-');
+			$classes[] = 'aspect-ratio-' . str_replace($this->aspectRatio->value, ':', '-');
 		}
 
-		if (isset($attributes['scale'])) {
-			$this->classes[] = 'image-scale-' . $attributes['scale'];
-		}
-
-		if (isset($attributes['linkDestination'])) {
-			$this->href = $attributes['linkDestination'];
-			$attributes['href'] = $this->href;
-			unset($attributes['linkDestination']);
-		}
-
-		parent::__construct($attributes, $content, 'components.Image.image');
+		return array_merge(parent::get_filtered_classes(), $classes);
 	}
 
 	public function get_inline_styles(): array {
@@ -92,13 +98,26 @@ class Image extends Renderable {
 		return $styles;
 	}
 
+	public function get_html_attributes(): array {
+		return array_merge(
+			parent::get_html_attributes(),
+			[
+				'alt'   => $this->alt,
+				'title' => $this->title,
+			]
+		);
+	}
+
 	public function render(): void {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();
-		$classes = $attrs['className'] ?? '';
+		$classes = implode(' ', $this->get_filtered_classes());
 
 		try {
 			echo $blade->make($this->bladeFile, [
+				'src'        => $this->src,
+				'href'       => $this->href,
+				'caption'    => $this->caption,
 				'classes'    => $classes,
 				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
 			])->render();

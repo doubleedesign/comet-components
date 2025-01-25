@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/comet-components.iml" filepath="$PROJECT_DIR$/.idea/comet-components.iml" />
+      <module fileurl="file://$USER_HOME$/LocalSites/vanilla-playground/.idea/vanilla-playground.iml" filepath="$USER_HOME$/LocalSites/vanilla-playground/.idea/vanilla-playground.iml" />
     </modules>
   </component>
 </project>

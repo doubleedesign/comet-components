@@ -33,14 +33,22 @@ abstract class Renderable {
 	protected string $bladeFile;
 	protected string $shortName;
 
-
 	public function __construct(array $attrs, string $bladeFile) {
 		$this->rawAttributes = $attrs;
 		$this->id = isset($attrs['id']) ? Utils::kebab_case($attrs['id']) : null;
 		$this->classes = isset($attrs['className']) ? explode(' ', $attrs['className']) : [];
 		$this->style = (isset($attrs['style']) && is_array($attrs['style'])) ? $attrs['style'] : null;
 		$this->bladeFile = $bladeFile;
-		$this->shortName = array_reverse(explode($this->bladeFile, '.'))[0];
+		$this->tag = isset($attrs['tagName']) ? Tag::tryFrom($attrs['tagName']) : Tag::DIV;
+
+		// The shortname based on the Blade filename, but make it BEM if it has a parent context set (e.g. 'accordion-panel' -> 'accordion__panel')
+		$initial = array_reverse(explode('.', $this->bladeFile))[0];
+		if (isset($attrs['context'])) {
+			$this->shortName = str_replace('-', '__', $initial);
+		}
+		else {
+			$this->shortName = $initial;
+		}
 	}
 
 	public function get_id(): ?string {

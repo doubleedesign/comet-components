@@ -1,7 +1,8 @@
-{{-- @var string $tag --}}
-{{-- @var string $classes --}}
-{{-- @var array<string,string> $attributes --}}
-{{-- @var string $content --}}
-<{{ $tag }} @class($classes) @attributes($attributes)>
+<{{ $tag }} @if($classes)@class($classes)@endif @attributes($attributes)>
 	{!! $content !!}
+	@foreach($children as $child)
+		@if(method_exists($child, 'render'))
+			{{ $child->render() }}
+		@endif
+	@endforeach
 </{{ $tag }}>

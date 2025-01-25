@@ -1,22 +1,20 @@
-<x-media class="image">
-	@if($caption)
-		<figure>
-			@if($link)
-				<a href="{{ $link }}">
-					<img src="{{ $src }}" @class($classes) @attributes($attributes)>
-				</a>
-			@else
-				<img src="{{ $src }}" @class($classes) @attributes($attributes)>
-			@endif
-			<figcaption>{{ $caption }}</figcaption>
-		</figure>
-	@else
-		@if($link)
-			<a href="{{ $link }}">
-				<img src="{{ $src }}" @class($classes) @attributes($attributes)>
+@if($caption)
+	<figure @if($classes)@class($classes)@endif>
+		@if($href)
+			<a href="{{ $href }}">
+				<img src="{{ $src }}" @attributes($attributes)>
 			</a>
 		@else
 			<img src="{{ $src }}" @class($classes) @attributes($attributes)>
 		@endif
+		<figcaption>{{ $caption }}</figcaption>
+	</figure>
+@else
+	@if($href)
+		<a href="{{ $href }}" @if($classes)@class($classes)@endif>
+			<img src="{{ $src }}" @attributes($attributes)>
+		</a>
+	@else
+		<img src="{{ $src }}" @if($classes)@class($classes)@endif @attributes($attributes)>
 	@endif
-</x-media>
+@endif

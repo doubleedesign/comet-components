@@ -3,6 +3,9 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"settings": {
 		"appearanceTools": false,
+		"lightbox": {
+			"enabled": false
+		},
 		"typography": {
 			"lineHeight": false,
 			"dropCap": false,
@@ -29,6 +32,14 @@
 			"style": false,
 			"width": false,
 			"color": false
+		},
+		"blocks": {
+			"core/image": {
+				"lightbox": {
+					"allowEditing": false,
+					"enabled": false
+				}
+			}
 		}
 	}
 }

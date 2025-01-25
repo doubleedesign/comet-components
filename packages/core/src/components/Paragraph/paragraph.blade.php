@@ -1,6 +1,3 @@
-{{-- @var string $tag --}}
-{{-- @var array<string,string> $attributes --}}
-{{-- @var string $content --}}
-<p @attributes($attributes)>
+<p @if($classes)@class($classes)@endif @attributes($attributes)>
 	{!! $content !!}
 </p>

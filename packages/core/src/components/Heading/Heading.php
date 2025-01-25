@@ -1,7 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-use InvalidArgumentException;
 
 class Heading extends TextElement {
 	use HasAllowedTags;

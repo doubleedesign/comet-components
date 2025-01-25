@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
 use Doubleedesign\Comet\Core\{Utils, NotImplemented};
-use ReflectionClass, ReflectionProperty, Closure, ReflectionException;
+use ReflectionClass, ReflectionProperty, Closure, ReflectionException, Exception;
 use WP_Block, WP_Block_Type_Registry;
 use Block_Supports_Extended;
 
@@ -13,7 +13,7 @@ class BlockRegistry extends JavaScriptImplementation {
 
 		$this->block_support_json = json_decode(file_get_contents(__DIR__ . '/block-support.json'), true);
 
-		add_action('acf/init', [$this, 'register_blocks'], 10, 2);
+		add_action('init', [$this, 'register_blocks'], 10, 2);
 		add_action('acf/include_fields', [$this, 'register_block_fields'], 10, 2);
 		add_filter('allowed_block_types_all', [$this, 'set_allowed_blocks'], 10, 2);
 		add_action('init', [$this, 'override_core_block_rendering'], 20);
@@ -38,7 +38,6 @@ class BlockRegistry extends JavaScriptImplementation {
 
 	/**
 	 * Register custom blocks
-	 * Requires Advanced Custom Fields Pro
 	 * @return void
 	 */
 	function register_blocks(): void {
@@ -46,36 +45,62 @@ class BlockRegistry extends JavaScriptImplementation {
 
 		foreach ($block_folders as $block_name) {
 			$folder = dirname(__DIR__, 1) . '/src/blocks/' . $block_name;
-			$currentDir = dirname(__DIR__, 1) . '/src/';
-			$register_js = $currentDir . "blocks/$block_name/register.js";
-			$editor_js = $currentDir . "blocks/$block_name/editor.js";
+			$className = self::get_comet_component_class($block_name);
+			if (!file_exists("$folder/block.json")) continue;
 
-			if (file_exists($editor_js)) {
-				$currentDir = plugin_dir_url(__FILE__);
-				$editor_js_enqueue_path = $currentDir . "blocks/$block_name/editor.js";
+			$block_json = json_decode(file_get_contents("$folder/block.json"));
 
-				wp_register_script($block_name . '-editor',
-					$editor_js_enqueue_path,
-					array('wp-dom', 'wp-blocks', 'wp-element', 'wp-editor', 'wp-block-editor'),
-					COMET_VERSION
-				);
+			// Block name -> direct translation to component name
+			if (isset($className) && $this->can_render_comet_component($className)) {
+				register_block_type($folder, [
+					'render_callback' => self::render_block_callback("comet/$block_name")
+				]);
 			}
+			// Block has variations that align to a component name, without the overarching block name being used for a rendering class
+			else if (isset($block_json->variations)) {
+				// TODO: Actually check for matching component classes
+				register_block_type($folder, [
+					'render_callback' => self::render_block_callback("comet/$block_name")
+				]);
 
-			if(file_exists($register_js)) {
-				$currentDir = plugin_dir_url(__FILE__);
-				$register_js_enqueue_path = $currentDir . "blocks/$block_name/register.js";
+				foreach ($block_json->variations as $variation) {
+					$shortName = Utils::pascal_case(array_reverse(explode('/', $variation->name))[0]);
+					$shortNameLower = strtolower($shortName);
+					$filePath = dirname(__DIR__, 1) . "/vendor/doubleedesign/comet-components-core/src/components/$shortName/$shortNameLower.css";
 
-				wp_enqueue_script($block_name . '-register',
-					$register_js_enqueue_path,
-					array('wp-dom', 'wp-blocks', 'wp-element', 'wp-editor', 'wp-block-editor'),
-					COMET_VERSION
-				);
+					if (file_exists($filePath)) {
+						$handle = Utils::kebab_case($variation->name) . '-style';
+						$pluginFilePath = dirname(plugin_dir_url(__FILE__)) . "/vendor/doubleedesign/comet-components-core/src/components/$shortName/$shortNameLower.css";
+						wp_register_style(
+							$handle,
+							$pluginFilePath,
+							[],
+							COMET_VERSION
+						);
+
+						wp_enqueue_style($handle);
+					}
+				}
+
 			}
-
-			register_block_type($folder);
+			// Block is an inner component of a variation, and we want to use a Comet Component according to the variation
+			else if (isset($block_json->parent)) {
+				// TODO: Actually check for matching component classes
+				register_block_type($folder, [
+					'render_callback' => self::render_block_callback("comet/$block_name")
+				]);
+			}
+			// Fallback = WP block rendering
+			else {
+				register_block_type($folder);
+			}
 		}
 	}
 
+	/**
+	 * Register ACF fields for custom blocks if there is a fields.php file containing them in the block folder
+	 * @return void
+	 */
 	function register_block_fields(): void {
 		$block_folders = scandir(dirname(__DIR__, 1) . '/src/blocks');
 
@@ -111,13 +136,13 @@ class BlockRegistry extends JavaScriptImplementation {
 			$core,
 			$custom,
 			array_column($plugin, 'name')
-			// add core or plugin blocks here if:
-			// 1. They are to be allowed at the top level
-			// 2. They Are allowed to be inserted as child blocks of a core block (note: set custom parents for core blocks in addCoreBlockParents() in blocks.js if not allowing them at the top level)
-			// No need to include them here if they are only being used in one or more of the below contexts:
-			// 1. As direct $allowed_blocks within custom ACF-driven blocks and/or
-			// 2. In a page/post type template defined programmatically and locked there (so users can't delete something that can't be re-inserted)
-			// TODO: When adding post support, there's some post-specific blocks that may be useful
+		// add core or plugin blocks here if:
+		// 1. They are to be allowed at the top level
+		// 2. They Are allowed to be inserted as child blocks of a core block (note: set custom parents for core blocks in addCoreBlockParents() in blocks.js if not allowing them at the top level)
+		// No need to include them here if they are only being used in one or more of the below contexts:
+		// 1. As direct $allowed_blocks within custom ACF-driven blocks and/or
+		// 2. In a page/post type template defined programmatically and locked there (so users can't delete something that can't be re-inserted)
+		// TODO: When adding post support, there's some post-specific blocks that may be useful
 		);
 
 		return $result;
@@ -180,7 +205,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		else if ($innerComponents) {
 			return ['array'];
 		}
-		return null;
+		return ['is-self-closing']; // Assuming if we get this far, it's something like the Image block
 	}
 
 	/**
@@ -261,7 +286,7 @@ class BlockRegistry extends JavaScriptImplementation {
 	/**
 	 * The function called inside render_block_callback
 	 * to render blocks using Comet Components.
-	 * Note: Inner blocks do not hit this code, as they are rendered by the parent block.
+	 * Note: Inner blocks do not always hit this code, as they can be rendered by the parent Comet component.
 	 *
 	 * This exists separately from render_block_callback for better debugging - this way we see render_block() in Xdebug stack traces,
 	 * whereas if this returned the closure directly, it would show up as an anonymous function
@@ -274,38 +299,70 @@ class BlockRegistry extends JavaScriptImplementation {
 	 */
 	static function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
 		$block_name_trimmed = explode('/', $block_name)[1];
-		$inner_blocks = $block_instance->parsed_block['innerBlocks'];
-		$ComponentClass = self::get_comet_component_class($block_name); // returns the namespaced class name
-		$content_type = self::get_comet_component_content_type($ComponentClass); // so we know what to pass to it
-
-		// For group block, detect variation based on layout attributes
-		if ($block_name_trimmed === 'group') {
-			$layout = $attributes['layout'];
-			if ($layout['type'] === 'flex') {
-				if (isset($layout['orientation']) && $layout['orientation'] === 'vertical') {
-					$variation = 'stack';
-				}
-				else {
-					$variation = 'row';
-				}
-			}
-			else if ($layout['type'] === 'grid') {
-				$variation = 'grid';
-			}
-			else {
-				$variation = 'group';
-			}
-
-			$block_name_trimmed = $variation;
+		$innerComponents = $block_instance->parsed_block['innerBlocks'];
+		// This is a block variant at the top level, such as an Accordion (variant of Panels)
+		if (isset($attributes['variant'])) {
+			// use the namespaced class name matching the variant name
+			$ComponentClass = self::get_comet_component_class($attributes['variant']);
+		}
+		// This is a block within a variant that is providing its namespaced name via the providesContext property
+		else if (isset($block_instance->context['comet/variant'])) {
+			// use the namespaced class name matching the variant name + the block name (e.g. Accordion variant + Panel block = AccordionPanel)
+			$variant = $block_instance->context['comet/variant'];
+			$transformed_name = Utils::pascal_case("$variant-$block_name_trimmed");
+			$ComponentClass = self::get_comet_component_class($transformed_name);
+		}
+		// This is a regular block
+		else {
+			$ComponentClass = self::get_comet_component_class($block_name); // returns the namespaced class name matching the block name
 		}
 
-		ob_start();
-		extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $inner_blocks]);
+		// For the core group block, detect variation based on layout attributes
+		if ($block_name_trimmed === 'group') {
+			$layout = $attributes['layout'];
+			$variation = match($layout['type']) {
+				'flex' => isset($layout['orientation']) && $layout['orientation'] === 'vertical' ? 'stack' : 'row',
+				'grid' => 'grid',
+				default => 'group'
+			};
+			$ComponentClass = self::get_comet_component_class($variation);
+		}
 
-		// Most components will have string content or an array of inner components
-		if (count($content_type) === 1) {
-			$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
+		// so we know what to pass to it - an array, a string, etc
+		$content_type = self::get_comet_component_content_type($ComponentClass);
+
+		// For variant children in context, prepend the variant name to the block name so the correct component will be found
+		// e.g. Panel in an Accordion = AccordionPanel
+		// $attributes['variant'] indicates we are at the top level
+		if (isset($innerComponents) && isset($attributes['variant'])) {
+			self::apply_variant_context($attributes['variant'], $innerComponents);
+		}
+
+		// If this is an image block, add the src attribute
+		if($block_name === 'core/image') {
+			$attributes['src'] = wp_get_attachment_image_url($attributes['id'], 'full');
+		}
+		// Process all inner image blocks and add the relevant attributes as Comet expects
+		self::add_attributes_to_image_blocks($innerComponents);
+
+		// Prepare the output
+		ob_start();
+		extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $innerComponents]);
+
+		// Self-closing tag components, e.g. <img>, only have attributes
+		if($content_type[0] === 'is-self-closing') {
+			$component = new $ComponentClass($attributes);
 			$component->render();
+		}
+		// Most components will have string content or an array of inner components
+		else if (count($content_type) === 1) {
+			try {
+				$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
+				$component->render();
+			}
+			catch(Exception $e) {
+				error_log(print_r($e, true));
+			}
 		}
 		// Some can have both, e.g. list items can have text content and nested lists
 		else if (count($content_type) === 2) {
@@ -318,16 +375,68 @@ class BlockRegistry extends JavaScriptImplementation {
 
 
 	/**
+	 * Loop through an array of inner blocks and prepend the given variant name to the block name,
+	 * and add an attribute to pass down the variant context in the way Comet expects
+	 * e.g. comet/panel => comet/accordion-panel (where accordion is the variant name)
+	 * $blocks are passed by reference and are modified in-place rather than returning a new array
+	 * @param $variant_name
+	 * @param $blocks
+	 * @return void
+	 */
+	static function apply_variant_context($variant_name, &$blocks): void {
+		foreach($blocks as &$block) {
+			if (!str_starts_with($block['blockName'], 'comet/')) return; // Apply only to Comet component blocks
+
+			$short_name = explode('/', $block['blockName'])[1];
+			$block['blockName'] = "comet/$variant_name-$short_name";
+			$block['attrs']['context'] = $variant_name;
+
+			// Recurse into inner blocks
+			if (isset($block['innerBlocks'])) {
+				self::apply_variant_context($variant_name, $block['innerBlocks']);
+			}
+		}
+	}
+
+	/**
+	 * Because the render_block function only renders the top level and the Image component needs the src attribute,
+	 * we need to process innerBlocks and add it
+	 * @param array $blocks
+	 * @return void
+	 */
+	static function add_attributes_to_image_blocks(array &$blocks): void {
+		foreach ($blocks as &$block) {
+			if ($block['blockName'] === 'core/image' && isset($block['attrs']['id'])) {
+				$size = $attrs['sizeSlug'] ?? 'full';
+				$block['attrs']['src'] = wp_get_attachment_image_url($block['attrs']['id'], $size);
+				$block['attrs']['alt'] = get_post_meta($block['attrs']['id'], '_wp_attachment_image_alt', true) ?? '';
+				$block['attrs']['caption'] = wp_get_attachment_caption($block['attrs']['id']) ?? null;
+				$block['attrs']['title'] = get_the_title($block['attrs']['id']) ?? null;
+
+				$block_content = $block['innerHTML'];
+				preg_match('/href="([^"]+)"/', $block_content, $matches);
+				$block['attrs']['href'] = $matches[1] ?? null;
+			}
+
+			// Recurse into inner blocks
+			if (isset($block['innerBlocks'])) {
+				self::add_attributes_to_image_blocks($block['innerBlocks']);
+			}
+		}
+	}
+
+
+	/**
 	 * Register custom variations of core block
 	 * @param $metadata - the existing block metadata used to register it
 	 * @return array
 	 */
 	function register_core_block_variations($metadata): array {
-		$supported_core_blocks  = $this->block_support_json['core']['supported'];
+		$supported_core_blocks = $this->block_support_json['core']['supported'];
 		$blocks_with_variations = array_filter($supported_core_blocks, fn($block) => isset($block['variations']));
 
-		foreach($blocks_with_variations as $block_name => $data) {
-			if($metadata['name'] === $block_name) {
+		foreach ($blocks_with_variations as $block_name => $data) {
+			if ($metadata['name'] === $block_name) {
 				$metadata['variations'] = array_merge(
 					$metadata['variations'] ?? array(),
 					$data['variations']
@@ -343,8 +452,8 @@ class BlockRegistry extends JavaScriptImplementation {
 		$blocks = $this->block_support_json['core']['supported'];
 		$blocks_to_update = array_filter($blocks, fn($block) => isset($block['description']));
 
-		foreach($blocks_to_update as $block_name => $data) {
-			if($metadata['name'] === $block_name) {
+		foreach ($blocks_to_update as $block_name => $data) {
+			if ($metadata['name'] === $block_name) {
 				$metadata['description'] = $data['description'];
 			}
 		}
@@ -373,14 +482,19 @@ class BlockRegistry extends JavaScriptImplementation {
 	}
 
 	/**
-	 * Register some additional attributes for core blocks
+	 * Register some additional attribute options
 	 * Note: Requires the block-supports-extended plugin, which is installed as a dependency via Composer
 	 * @return void
 	 */
 	function register_custom_attributes(): void {
 		Block_Supports_Extended\register('color', 'inner_background', [
-			'label'    => __('Inner background'),
-			'blocks'   => ['core/group', 'core/columns', 'core/details'],
+			'label'  => __('Inner background'),
+			'blocks' => ['core/group', 'core/columns'],
+		]);
+
+		Block_Supports_Extended\register('color', 'theme', [
+			'label'  => __('Colour theme'),
+			'blocks' => ['comet/panels'],
 		]);
 
 		// Note: Remove the thing the custom attribute is replacing, if applicable, using block_type_metadata filter
@@ -411,10 +525,10 @@ class BlockRegistry extends JavaScriptImplementation {
 		if (isset($metadata['supports'])) {
 			$metadata['supports'] = array_diff_key(
 				$metadata['supports'],
-				array_flip(['html', 'spacing', 'typography', 'shadow', 'dimensions'])
+				array_flip(['spacing', 'typography', 'shadow', 'dimensions', 'align'])
 			);
 		}
-		if (isset($metadata['attributes'])) {
+		if (isset($metadata['attributes']['isStackedOnMobile'])) {
 			$metadata['attributes'] = array_diff_key(
 				$metadata['attributes'],
 				array_flip(['isStackedOnMobile'])
@@ -488,14 +602,20 @@ class BlockRegistry extends JavaScriptImplementation {
 		}
 
 		// Columns
+		if ($name === 'core/columns') {
+			$metadata['attributes']['tagName'] = [
+				'type'    => 'string',
+				'default' => 'div'
+			];
+		}
 		if ($name === 'core/columns' && isset($metadata['supports']['layout'])) {
 			$metadata['supports']['layout'] = array_merge(
 				$metadata['supports']['layout'],
 				[
-					'allowEditing'           => true, // allow selection of the enabled layout options
-					'allowSwitching'         => false, // disables selection of flow/flex/constrained/grid because we're deciding that with CSS
-					'allowOrientation'       => false, // disable vertical stacking option
-					'allowJustification'     => true, // allow selection of horizontal alignment
+					'allowEditing'           => true,  // allow selection of any enabled layout options
+					'allowSwitching'         => false, // selection of flow/flex/constrained/grid - false because we're deciding that with CSS
+					'allowOrientation'       => false, // vertical stacking option
+					'allowJustification'     => false, // selection of horizontal alignment
 					'allowVerticalAlignment' => false, // prevent double-up - this one adds a class, but the attribute is an attribute which is preferred for my programmatic handling
 				]
 			);

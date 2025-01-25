@@ -39,7 +39,8 @@
 				"core/pullquote",
 				"core/quote",
 				"core/list",
-				"core/buttons"
+				"core/buttons",
+				"comet/panel-title"
 			]
 		},
 		{
@@ -60,7 +61,7 @@
 			"slug": "grouping",
 			"icon": "",
 			"blocks": [
-				"comet/details-group"
+				"comet/panels"
 			]
 		},
 		{

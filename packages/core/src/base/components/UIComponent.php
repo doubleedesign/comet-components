@@ -3,11 +3,23 @@ namespace Doubleedesign\Comet\Core;
 use RuntimeException;
 
 abstract class UIComponent extends Renderable {
+	use HasAllowedTags;
+
 	/**
 	 * @var array<Renderable> $innerComponents
 	 * @description Inner components to be rendered within this component
 	 */
 	protected array $innerComponents;
+
+	protected ?Tag $tag = Tag::DIV;
+
+	/**
+	 * Specify allowed Tags using the HasAllowedTags trait
+	 * @return array<Tag>
+	 */
+	protected static function get_allowed_wrapping_tags(): array {
+		return [Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE, Tag::ASIDE];
+	}
 
 	/**
 	 * UIComponent constructor
@@ -18,6 +30,27 @@ abstract class UIComponent extends Renderable {
 	function __construct(array $attributes, array $innerComponents, string $bladeFile) {
 		parent::__construct($attributes, $bladeFile);
 		$this->innerComponents = $innerComponents;
+		$this->tag = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::DIV;
+	}
+
+	/**
+	 * Filter the classes to what's valid/supported for this component
+	 * plus its name as the first class
+	 * @return array<string>
+	 */
+	protected function get_filtered_classes(): array {
+		return array_merge(
+			[$this->shortName],
+			parent::get_filtered_classes()
+		);
+	}
+
+	/**
+	 * Get the filtered class list for this component as a string
+	 * @return string
+	 */
+	protected function get_filtered_classes_string(): string {
+		return implode(' ', $this->get_filtered_classes());
 	}
 
 	/**
@@ -26,6 +59,7 @@ abstract class UIComponent extends Renderable {
 	 * @throws RuntimeException
 	 */
 	protected function process_inner_components(): array {
+		if(empty($this->innerComponents)) return [];
 		$processed_components = [];
 
 		foreach ($this->innerComponents as $component) {
@@ -47,11 +81,14 @@ abstract class UIComponent extends Renderable {
 				if (in_array($ComponentClass, $canHaveBoth) && $doesHaveBoth) {
 					$componentObject = new $ComponentClass($attributes, $content, $innerComponents);
 				}
-				else if (!empty($innerComponents)) {
+				else if (!empty($innerComponents) && gettype($innerComponents) === 'array') {
 					$componentObject = new $ComponentClass($attributes, $innerComponents);
 				}
-				else {
+				else if($content) {
 					$componentObject = new $ComponentClass($attributes, $content);
+				}
+				else {
+					$componentObject = new $ComponentClass($attributes); // if we get this far, maybe it's an Image or something else with only attributes at creation time
 				}
 
 				$processed_components[] = $componentObject;

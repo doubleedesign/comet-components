@@ -37,7 +37,7 @@ async function getBlockTypes() {
 	};
 
 
-	await Promise.all(coreBlocks.map(async blockName => {
+	await Promise.all(Object.keys(coreBlocks).map(async blockName => {
 		const blockShortName = blockName.split('/')[1];
 		const blockPath = `${wpIncludes}/${blockShortName}/block.json`;
 
