@@ -7,7 +7,8 @@
 2. [Xdebug](#xdebug)
 3. [PHPUnit](#phpunit)
 4. [Node](#node)
-5. [Linting and formatting](#linting-and-formatting)
+5. [SASS file watcher](#sass-file-watcher)
+6. [Linting and formatting](#linting-and-formatting)
     - [PHP - PHPStorm code style settings](#php---phpstorm-formatting)
     - [JavaScript and TypeScript - ESLint](#javascript-and-typescript---eslint)
 
@@ -56,6 +57,27 @@ switching between doing tasks in the terminal and the IDE.
 You can find the setting for this in Settings > Languages & Frameworks > Node.js.
 
 ![Node settings](images/phpstorm-node.png)
+
+---
+
+## SASS file watcher
+
+If you have installed Sass globally on your machine, you can set up a file watcher in PHPStorm to compile your SCSS to
+matching CSS files. This is particularly useful if using pure Dart Sass installed via Chocolatey in Windows. (Also, it's
+just neat to not have to run a command at all.)
+
+PHPStorm will probably prompt you to set up a file watcher when you open a `.scss` file for the first time, but you can
+also find the configuration in `File > Settings > Tools > File Watchers`. An example config looks like this:
+
+![Sass file watcher](./images/phpstorm-scss-filewatcher.png)
+
+At the time of writing this, I have two watchers set up:
+1. To compile the core package's individual components' SCSS files to CSS files in the same directory
+2. To compile the `blocks.scss` file in the WordPress plugin package, which imports files from the core package; the watcher also watches those.
+
+The difference between the two is that the core one is scoped to a custom scope of just that package folder (you can create this under "Files to watch -> Scope -> click the 3 dots), whereas the WordPress plugin one is scoped to the entire project so that the core package's files are also watched.
+
+These configurations are included in this repository (`.idea/watcherTasks.xml`) so it _should_ all be there already.
 
 ---
 

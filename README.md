@@ -20,8 +20,9 @@ projects.
 
 1. [Prerequisites](#prerequisites)
 2. [Quick start](#quick-start)
-3. [Create a new component](#create-a-new-component)
-4. [Automated tests](#automated-tests)
+3. [General quick tips](#general-quick-tips)
+4. [Create a new component](#create-a-new-component)
+5. [Automated tests](#automated-tests)
 
 - [Appendix 1: CLI command quick reference](#appendix-1-cli-command-quick-reference)
 - [Appendix 2: Troubleshooting](./notes/troubleshooting.md)
@@ -40,17 +41,25 @@ projects.
 - PHP and [Composer](https://getcomposer.org) installed locally
 - [Node](https://nodejs.org) installed locally
 - Git installed locally
+- [Sass](https://sass-lang.com) installed globally on your machine
 - IDE of choice (I use [PHPStorm](https://www.jetbrains.com/phpstorm/))
 
 Windows users can find more details
-on [PHP, Composer, and Node setup in this document](./notes/windows.md).
+on [PHP, Composer, Node, and Sass setup in this document](./notes/windows.md).
 
 ### Quick start
 
 1. Clone the repository from GitHub
-2. Run `npm run refresh` or `powershell.exe -File scripts\refresh.ps1` to install/update PHP dependencies and regenerate autoload files for the root and all packages
+2. Run `npm run refresh` or `powershell.exe -File scripts\refresh.ps1` to install/update PHP dependencies and regenerate
+   autoload files for the root and all packages
 3. Run `npm install` to install Node dependencies
-4. Run `npm run test:server` and `npm run test:storybook` at the same time (I use two terminal windows) to start the local web server and Storybook to see what you're working with!
+4. Run `npm run test:server` and `npm run test:storybook` at the same time (I use two terminal windows) to start the
+   local web server and Storybook to see what you're working with!
+
+### General quick tips
+
+- When developing for the WordPress plugin, running with Xdebug on can slow things down. If loading the editor or saving
+  seems unduly slow, test with Xdebug off to confirm if it's just that or if you have an actual performance issue.
 
 ### Create a new component
 
@@ -62,6 +71,10 @@ npm run generate component -- --name=example --type=simple
 ```
 
 // TODO More to come here, especially re CSS and JS files for each component.
+
+You will need to add the SCSS file to `blocks.scss` in the WordPress plugin and run Sass to compile it. (Historically, I
+always used Gulp with a plugin to import all component SCSS using a glob pattern, but because `@import` is being
+deprecated in Sass that approach's days are numbered.)
 
 ### Automated tests
 
@@ -88,13 +101,17 @@ composer update
 ```
 
 Run all Composer update and autoload commands for the root and packages at once:
+
 ```bash
 npm run refresh
 ```
+
 ```bash
 powershell.exe -File scripts\refresh.ps1
 ```
+
 or in PowerShell:
+
 ```PowerShell
 powershell.exe -File scripts\refresh.ps1
 ```

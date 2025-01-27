@@ -12,6 +12,7 @@ class BlockEditorConfig extends JavaScriptImplementation {
 		remove_action('enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets_block_directory');
 
 		add_action('init', [$this, 'load_plugin_theme_json']);
+		add_action('init', [$this, 'register_page_template'], 15, 2);
 
 		add_filter('block_categories_all', [$this, 'customise_block_categories'], 10, 1);
 		add_filter('register_block_type_args', [$this, 'assign_blocks_to_categories'], 11, 2);
@@ -34,7 +35,9 @@ class BlockEditorConfig extends JavaScriptImplementation {
 		$plugin_theme_json_path = plugin_dir_path(__FILE__) . 'theme.json';
 		$plugin_theme_json_data = json_decode(file_get_contents($plugin_theme_json_path), true);
 
-		add_filter('wp_theme_json_data_default', function ($theme_json) use ($plugin_theme_json_data) {
+		// TODO: Use theme's theme.json properties if present
+
+		add_filter('wp_theme_json_data_theme', function ($theme_json) use ($plugin_theme_json_data) {
 			if (is_array($plugin_theme_json_data)) {
 				$new_data = $theme_json->get_data();
 				$new_data = array_replace_recursive($new_data, $plugin_theme_json_data);
@@ -42,6 +45,23 @@ class BlockEditorConfig extends JavaScriptImplementation {
 			}
 			return $theme_json;
 		});
+	}
+
+
+	/**
+	 * Default blocks for a new page
+	 * @return void
+	 */
+	function register_page_template(): void {
+		$template = [
+			[
+				'comet/container',
+				[]
+			],
+		];
+		$post_type_object = get_post_type_object('page');
+		$post_type_object->template = $template;
+		$post_type_object->template_lock = false;
 	}
 
 

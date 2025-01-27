@@ -1,0 +1,45 @@
+$colors: (
+	'primary': #845ec2,
+	'secondary': #00c9a7,
+	'accent': #ba3caf,
+	'light': #F0F0F2,
+	'dark': #4b4453,
+	'white': #ffffff
+);
+
+$widths: (
+	'wide': 1440px,
+	'contained': 1100px,
+	'narrow': 960px
+);
+
+:root {
+	@each $name, $color in $colors {
+		--bg-#{$name}: #{$color};
+	}
+	--width-wide: #{map-get($widths, 'wide')};
+	--width-contained: #{map-get($widths, 'contained')};
+	--width-narrow: #{map-get($widths, 'narrow')};
+
+	--spacing-xs: 0.25rem;
+	--spacing-sm: 0.5rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 2rem;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+@each $name, $color in $colors {
+	.bg-#{$name} {
+		background-color: $color;
+	}
+}

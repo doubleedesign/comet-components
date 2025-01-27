@@ -14,6 +14,7 @@ terminal), and also include IDE configuration information for PHPStorm.
 
 - [PHP development setup on Windows](./php.md)
 - [Node development setup on Windows](./node.md)
+- [Sass on Windows](./sass.md)
 - [My WSL setup](./wsl.md)
 - [My PHPStorm setup](./phpstorm.md)
 

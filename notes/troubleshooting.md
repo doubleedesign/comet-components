@@ -77,6 +77,10 @@ Get-Command node
 Get-Command composer
 ```
 
+```PowerShell
+Get-Command sass
+```
+
 Or in WSL:
 
 ```bash
@@ -89,6 +93,10 @@ readlink -f $(which node)
 
 ```bash
 readlink -f $(which composer)
+``` 
+
+```bash
+where sass
 ``` 
 
 ## Where is my PHP configuration (php.ini) file?

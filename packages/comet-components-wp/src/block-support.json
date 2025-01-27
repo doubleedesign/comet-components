@@ -40,7 +40,8 @@
 				"core/quote",
 				"core/list",
 				"core/buttons",
-				"comet/panel-title"
+				"core/details",
+				"core/table"
 			]
 		},
 		{
@@ -61,6 +62,7 @@
 			"slug": "grouping",
 			"icon": "",
 			"blocks": [
+				"comet/container",
 				"comet/panels"
 			]
 		},
@@ -71,7 +73,9 @@
 			"blocks": [
 				"core/image",
 				"core/media-text",
-				"core/gallery"
+				"core/gallery",
+				"core/cover",
+				"core/file"
 			]
 		},
 		{

@@ -1,0 +1,7 @@
+@use 'global' as *;
+
+@mixin container-width-up($widthName) {
+	@container (min-width: #{map-get($widths, $widthName)}) {
+		@content;
+	}
+}

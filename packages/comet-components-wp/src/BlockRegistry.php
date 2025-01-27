@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
 use Doubleedesign\Comet\Core\{Utils, NotImplemented};
-use ReflectionClass, ReflectionProperty, Closure, ReflectionException, Exception;
+use ReflectionClass, ReflectionProperty, Closure, ReflectionException, Exception, TypeError;
 use WP_Block, WP_Block_Type_Registry;
 use Block_Supports_Extended;
 
@@ -22,6 +22,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		add_action('block_type_metadata', [$this, 'update_some_core_block_descriptions'], 10);
 		add_action('init', [$this, 'register_custom_attributes'], 5);
 		add_filter('block_type_metadata', [$this, 'customise_core_block_options'], 15, 1);
+		add_filter('block_type_metadata', [$this, 'control_block_parents'], 15, 1);
 	}
 
 	/**
@@ -55,6 +56,23 @@ class BlockRegistry extends JavaScriptImplementation {
 				register_block_type($folder, [
 					'render_callback' => self::render_block_callback("comet/$block_name")
 				]);
+
+				$shortName = $block_name; // folder name in this case
+				$pascalCaseName = Utils::pascal_case($shortName); // should match the class name without the namespace
+				$cssPath = dirname(__DIR__, 1) . "/vendor/doubleedesign/comet-components-core/src/components/$pascalCaseName/$shortName.css";
+				if (file_exists($cssPath)) {
+					$handle = Utils::kebab_case($block_name) . '-style';
+					$pluginFilePath = dirname(plugin_dir_url(__FILE__)) . "/vendor/doubleedesign/comet-components-core/src/components/$pascalCaseName/$shortName.css";
+					wp_register_style(
+						$handle,
+						$pluginFilePath,
+						[],
+						COMET_VERSION
+					);
+
+					wp_enqueue_style($handle);
+				}
+
 			}
 			// Block has variations that align to a component name, without the overarching block name being used for a rendering class
 			else if (isset($block_json->variations)) {
@@ -271,6 +289,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		}
 	}
 
+
 	/**
 	 * Inner function for the override, to render a core block using a custom template
 	 * @param string $block_name
@@ -320,7 +339,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		// For the core group block, detect variation based on layout attributes
 		if ($block_name_trimmed === 'group') {
 			$layout = $attributes['layout'];
-			$variation = match($layout['type']) {
+			$variation = match ($layout['type']) {
 				'flex' => isset($layout['orientation']) && $layout['orientation'] === 'vertical' ? 'stack' : 'row',
 				'grid' => 'grid',
 				default => 'group'
@@ -339,7 +358,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		}
 
 		// If this is an image block, add the src attribute
-		if($block_name === 'core/image') {
+		if ($block_name === 'core/image') {
 			$attributes['src'] = wp_get_attachment_image_url($attributes['id'], 'full');
 		}
 		// Process all inner image blocks and add the relevant attributes as Comet expects
@@ -350,9 +369,14 @@ class BlockRegistry extends JavaScriptImplementation {
 		extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $innerComponents]);
 
 		// Self-closing tag components, e.g. <img>, only have attributes
-		if($content_type[0] === 'is-self-closing') {
-			$component = new $ComponentClass($attributes);
-			$component->render();
+		if ($content_type[0] === 'is-self-closing') {
+			try {
+				$component = new $ComponentClass($attributes);
+				$component->render();
+			}
+			catch (TypeError|Exception $e) {
+				error_log(print_r($e, true));
+			}
 		}
 		// Most components will have string content or an array of inner components
 		else if (count($content_type) === 1) {
@@ -360,14 +384,19 @@ class BlockRegistry extends JavaScriptImplementation {
 				$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
 				$component->render();
 			}
-			catch(Exception $e) {
+			catch (TypeError|Exception $e) {
 				error_log(print_r($e, true));
 			}
 		}
 		// Some can have both, e.g. list items can have text content and nested lists
 		else if (count($content_type) === 2) {
-			$component = new $ComponentClass($attributes, $content, $innerComponents);
-			$component->render();
+			try {
+				$component = new $ComponentClass($attributes, $content, $innerComponents);
+				$component->render();
+			}
+			catch (TypeError|Exception $e) {
+				error_log(print_r($e, true));
+			}
 		}
 
 		return ob_get_clean();
@@ -384,7 +413,7 @@ class BlockRegistry extends JavaScriptImplementation {
 	 * @return void
 	 */
 	static function apply_variant_context($variant_name, &$blocks): void {
-		foreach($blocks as &$block) {
+		foreach ($blocks as &$block) {
 			if (!str_starts_with($block['blockName'], 'comet/')) return; // Apply only to Comet component blocks
 
 			$short_name = explode('/', $block['blockName'])[1];
@@ -481,16 +510,17 @@ class BlockRegistry extends JavaScriptImplementation {
 		]);
 	}
 
+
 	/**
 	 * Register some additional attribute options
 	 * Note: Requires the block-supports-extended plugin, which is installed as a dependency via Composer
 	 * @return void
 	 */
 	function register_custom_attributes(): void {
-		Block_Supports_Extended\register('color', 'inner_background', [
-			'label'  => __('Inner background'),
-			'blocks' => ['core/group', 'core/columns'],
-		]);
+//		Block_Supports_Extended\register('color', 'inner_background', [
+//			'label'  => __('Inner background'),
+//			'blocks' => ['core/group', 'core/columns'],
+//		]);
 
 		Block_Supports_Extended\register('color', 'theme', [
 			'label'  => __('Colour theme'),
@@ -499,6 +529,7 @@ class BlockRegistry extends JavaScriptImplementation {
 
 		// Note: Remove the thing the custom attribute is replacing, if applicable, using block_type_metadata filter
 	}
+
 
 	/**
 	 * Override core block.json configuration
@@ -525,7 +556,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		if (isset($metadata['supports'])) {
 			$metadata['supports'] = array_diff_key(
 				$metadata['supports'],
-				array_flip(['spacing', 'typography', 'shadow', 'dimensions', 'align'])
+				array_flip(['spacing', 'typography', 'shadow', 'dimensions'])
 			);
 		}
 		if (isset($metadata['attributes']['isStackedOnMobile'])) {
@@ -634,6 +665,74 @@ class BlockRegistry extends JavaScriptImplementation {
 					'allowVerticalAlignment' => false // also use the attribute here, don't add a class name
 				]
 			);
+		}
+
+		return $metadata;
+	}
+
+	/**
+	 * Control where blocks can be placed by requiring them to be inside certain other blocks
+	 * This is mainly for core blocks because custom blocks should have the parent set in block.json,
+	 * but because this uses block-support.json's categories then these settings can also apply to custom blocks that are listed there
+	 * @param $metadata
+	 * @return array
+	 */
+	function control_block_parents($metadata): array {
+		delete_transient('wp_blocks_data'); // clear cache
+		$name = $metadata['name'];
+
+		$typography_blocks = array_values(array_filter(
+			$this->block_support_json['categories'],
+			fn($category) => $category['slug'] === 'text'
+		))[0]['blocks'] ?? [];
+
+		$layout_blocks = array_values(array_filter(
+			$this->block_support_json['categories'],
+			fn($category) => $category['slug'] === 'design'
+		))[0]['blocks'] ?? [];
+		$layout_blocks = array_filter($layout_blocks, fn($block) => $block !== 'core/column');
+
+		$media_blocks = array_values(array_filter(
+			$this->block_support_json['categories'],
+			fn($category) => $category['slug'] === 'media'
+		))[0]['blocks'] ?? [];
+
+		$content_blocks = array_values(array_filter(
+			$this->block_support_json['categories'],
+			fn($category) => $category['slug'] === 'content'
+		))[0]['blocks'] ?? [];
+
+		if (in_array($name, $layout_blocks)) {
+			$supported = ['comet/container', 'comet/panel-content'];
+			if (isset($metadata['parent'])) {
+				$metadata['parent'] = array_merge($metadata['parent'], $supported);
+			}
+			else {
+				$metadata['parent'] = $supported;
+			}
+		}
+		if (in_array($name, array_merge($typography_blocks, $media_blocks))) {
+			$supported = ['comet/container', 'core/column', 'core/group'];
+
+			if (isset($metadata['parent'])) {
+				$metadata['parent'] = array_merge($metadata['parent'], $supported);
+			}
+			else {
+				$metadata['parent'] = $supported;
+			}
+		}
+		if (in_array($name, array_merge($content_blocks, ['core/embed']))) {
+			$supported = ['comet/container', 'core/column', 'core/group', 'core/details', 'comet/panel-content'];
+
+			if (isset($metadata['parent'])) {
+				$metadata['parent'] = array_merge($metadata['parent'], $supported);
+			}
+			else {
+				$metadata['parent'] = $supported;
+			}
+		}
+		if ($name === 'core/freeform') {
+			$metadata['parent'] = ['comet/container', 'comet/group', 'comet/column', 'comet/panel-content'];
 		}
 
 		return $metadata;
