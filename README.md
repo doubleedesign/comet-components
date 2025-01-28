@@ -50,11 +50,30 @@ on [PHP, Composer, Node, and Sass setup in this document](./notes/windows.md).
 ### Quick start
 
 1. Clone the repository from GitHub
-2. Run `npm run refresh` or `powershell.exe -File scripts\refresh.ps1` to install/update PHP dependencies and regenerate
-   autoload files for the root and all packages
-3. Run `npm install` to install Node dependencies
-4. Run `npm run test:server` and `npm run test:storybook` at the same time (I use two terminal windows) to start the
-   local web server and Storybook to see what you're working with!
+2. Refresh dependencies, autoloading, and symlinks: (**Note:** These run PowerShell scripts under the hood)
+    ```bash
+    # Composer dependencies and autoloading
+    npm run refresh:composer
+    ```
+    ```bash
+    # Symlink component assets (e.g., CSS) to the browser testing assets directory
+    npm run refresh:symlinks
+    ```
+    ```bash
+    # Both
+    npm run refresh
+    ```
+3. Install Node dependencies
+    ```bash
+    npm install
+    ```
+4. Run the local web server and Storybook (at the same time i.e. two terminal windows) to see what you're working with!
+    ```bash
+    npm run test:server
+    ```
+    ```bash
+    npm run test:storybook
+    ```
 
 ### General quick tips
 
@@ -63,24 +82,33 @@ on [PHP, Composer, Node, and Sass setup in this document](./notes/windows.md).
 
 ### Create a new component
 
-To generate the boilerplate code for a new component, run the following command with `example` and `simple` replaced
+1. To generate the boilerplate code for a new component, run the following command with `example` and `simple` replaced
 with the desired component name and type. Valid types are `simple`, `complex`, and `wrapper`.
 
-```bash
-npm run generate component -- --name=example --type=simple
-```
+    ```bash
+    npm run generate component -- --name=example --type=simple
+    ```
 
-// TODO More to come here, especially re CSS and JS files for each component.
-
-You will need to add the SCSS file to `blocks.scss` in the WordPress plugin and run Sass to compile it. (Historically, I
+2. Add the SCSS file to `blocks.scss` in the WordPress plugin and [run Sass](./notes/sass.md) to compile it.[^1]
+3. Update the symlinks so the local web server/Storybook can access the CSS file.
+    ```bash
+    npm run refresh:symlinks
+    ```
+4. Add a file to `./test/browser/components` with a sample usage of the component. Add handling for `$_GET` parameters
+   to allow for different attributes to be tested.
+5. Create a Storybook file in `./test/browser/stories`. // TODO - I plan on adding boilerplate generation of this too.
+   
+[^1]: Historically, I
 always used Gulp with a plugin to import all component SCSS using a glob pattern, but because `@import` is being
-deprecated in Sass that approach's days are numbered.)
+deprecated in Sass that approach's days are numbered.
 
 ### Automated tests
 
 See [testing notes](./notes/testing.md) for more information.
 
 ### Appendix 1: CLI command quick reference
+
+Note: Composer commands need to be run in each relevant package folder that has a `composer.json` file. 
 
 Refresh Composer autoloader after adding new classes:
 
@@ -103,7 +131,7 @@ composer update
 Run all Composer update and autoload commands for the root and packages at once:
 
 ```bash
-npm run refresh
+npm run refresh:composer
 ```
 
 ```bash
@@ -164,7 +192,8 @@ Then generate stories:
 
 ```bash
 # TO COME
-````
+```
+**Note:*** The story generator requires PHP 8.4+.
 
 ---
 

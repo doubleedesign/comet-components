@@ -10,3 +10,6 @@ packages/**/vendor
 packages/**/node_modules
 packages/core/cache
 *storybook.log
+
+# Symlinks
+/test/browser/assets/*.css

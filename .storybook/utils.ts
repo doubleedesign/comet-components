@@ -1,7 +1,6 @@
 type MockPhpSourceCodeArgs = {
 	componentName: string;
 	content: string;
-	classes: string[];
 	attributes: Record<string, string>;
 };
 
@@ -11,29 +10,51 @@ type MockPhpSourceCodeArgs = {
  * Some assumptions are made here based on how Comet Components generally work.
  * @param componentName PascalCase component class name
  * @param content       The content of the component
- * @param classes       CSS classes (e.g. is-style-accent)
  * @param attributes    Other component attributes
  */
 export const mockPhpSourceCode = async ({
 	componentName,
 	content,
-	classes,
 	attributes
 }: MockPhpSourceCodeArgs): Promise<string> => {
+
+	function getAttributesText() {
+		return `$attributes = [
+				${Object.entries(attributes)
+					// Ignore attribute when the value is empty
+					.filter(([key, value]) => value !== '')
+					// Put into PHP format
+					.map(([key, value], index) => {
+						// We are expecting Storybook to send a string for the classes but want to show the preferred array format
+						if(key === 'classes') {
+							return `\t'${key}' => ["${value}"],`;
+						}
+
+						if (Number.parseFloat(value)) {
+							return index === 0 ? `'${key}' => ${value},` : `\t'${key}' => ${value},`;
+						}
+
+						return `\t'${key}' => '${value}',`;
+					})
+					.join('\n')}
+		];`;
+	}
+
+	if(!content) {
+		return `
+		use DoubleeDesign\\Comet\\Components\\${componentName};
+		
+		${getAttributesText()}
+		
+		$component = new ${componentName}($attributes, $innerComponents);
+		$component->render();
+		`;
+	}
 
 	return `
 		use DoubleeDesign\\Comet\\Components\\${componentName};
 	
-		$attributes = [
-			${classes ? `'className' => '[${classes}'],` : ''}
-			${Object.entries(attributes).map(([key, value], index) => {
-				if (Number.parseFloat(value)) {
-					return index === 0 ? `'${key}' => ${value},` : `\t'${key}' => ${value},`;
-				}
-
-				return `\t'${key}' => '${value}',`;
-			}).join('\n')}
-		];
+		${getAttributesText()}
 		$content = '${content}';
 		
 		$component = new ${componentName}($attributes, $content);

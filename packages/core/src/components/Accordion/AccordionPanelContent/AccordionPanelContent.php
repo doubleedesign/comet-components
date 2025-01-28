@@ -3,8 +3,22 @@ namespace Doubleedesign\Comet\Core;
 use Exception;
 
 class AccordionPanelContent extends UIComponent {
+	use HasAllowedTags;
+
+	/**
+	 * Specify allowed Tags using the HasAllowedTags trait
+	 * @return array<Tag>
+	 */
+	protected static function get_allowed_wrapping_tags(): array {
+		return [Tag::DIV];
+	}
+
 	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents, 'components.Accordion.AccordionPanelContent.accordion-panel-content');
+		parent::__construct(
+			array_merge($attributes, ['context' => 'accordion__panel']),
+			$innerComponents,
+			'components.Accordion.AccordionPanelContent.accordion-panel-content'
+		);
 	}
 
 	function get_inline_styles(): array {

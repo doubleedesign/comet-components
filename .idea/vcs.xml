@@ -3,5 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$USER_HOME$/LocalSites/vanilla-playground" vcs="Git" />
+    <mapping directory="$USER_HOME$/LocalSites/vanilla-playground/app/public/wp-content/plugins/doublee-base-plugin" vcs="Git" />
+    <mapping directory="$USER_HOME$/LocalSites/vanilla-playground/app/public/wp-content/plugins/doublee-breadcrumbs" vcs="Git" />
   </component>
 </project>

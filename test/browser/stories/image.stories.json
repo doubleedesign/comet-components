@@ -1,190 +1,190 @@
 {
-    "title": "Components/Image",
-    "parameters": {
-        "docs": {
-            "description": {
-                "component": ""
-            }
-        },
-        "server": {
-            "id": "Image",
-            "url": "http://localhost:6001/image.php",
-            "params": {
-                "__debug": true
-            }
-        }
-    },
-    "args": {
-        "src": "",
-        "classes": [
-            "is-style-default"
-        ],
-        "alt": "",
-        "title": "",
-        "caption": "",
-        "aspectRatio": "",
-        "scale": "contain",
-        "href": "",
-        "height": "",
-        "width": ""
-    },
-    "argTypes": {
-        "src": {
-            "description": "Image source URL",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
-        },
-        "classes": {
-            "description": "CSS classes",
-            "control": {
-                "type": "checkbox"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": []
-                },
-                "type": {
-                    "summary": "array<string>"
-                }
-            },
-            "options": [
-                "is-style-rounded"
-            ]
-        },
-        "alt": {
-            "description": "Alternative text",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
-        },
-        "title": {
-            "description": "Optional image title (appears on hover)",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
-        },
-        "caption": {
-            "description": "Optional image caption (to appear below the image)",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
-        },
-        "aspectRatio": {
-            "description": "Crop image to the given aspect ratio",
-            "control": {
-                "type": "checkbox"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "AspectRatio"
-                }
-            },
-            "options": [
-                "4:3",
-                "3:4",
-                "1:1",
-                "16:9",
-                "9:16",
-                "3:2",
-                "2:3"
-            ]
-        },
-        "scale": {
-            "description": "How to handle image scaling",
-            "control": {
-                "type": "checkbox"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": "contain"
-                },
-                "type": {
-                    "summary": "string"
-                }
-            },
-            "options": [
-                "contain",
-                "cover"
-            ]
-        },
-        "href": {
-            "description": "URL to link to",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
-        },
-        "height": {
-            "description": "Set a fixed height for the image",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
-        },
-        "width": {
-            "description": "Set a fixed width for the image",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
-        }
-    },
-    "stories": []
+	"title": "Components/Media/Image",
+	"parameters": {
+		"docs": {
+			"description": {
+				"component": ""
+			}
+		},
+		"server": {
+			"id": "Image",
+			"url": "http://localhost:6001/components/image.php",
+			"params": {
+				"__debug": true
+			}
+		}
+	},
+	"args": {
+		"src": "",
+		"classes": [
+			"is-style-default"
+		],
+		"alt": "",
+		"title": "",
+		"caption": "",
+		"aspectRatio": "",
+		"scale": "contain",
+		"href": "",
+		"height": "",
+		"width": ""
+	},
+	"argTypes": {
+		"src": {
+			"description": "Image source URL",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"classes": {
+			"description": "CSS classes",
+			"control": {
+				"type": "checkbox"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": []
+				},
+				"type": {
+					"summary": "array<string>"
+				}
+			},
+			"options": [
+				"is-style-rounded"
+			]
+		},
+		"alt": {
+			"description": "Alternative text",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"title": {
+			"description": "Optional image title (appears on hover)",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"caption": {
+			"description": "Optional image caption (to appear below the image)",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"aspectRatio": {
+			"description": "Crop image to the given aspect ratio",
+			"control": {
+				"type": "checkbox"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "AspectRatio"
+				}
+			},
+			"options": [
+				"4:3",
+				"3:4",
+				"1:1",
+				"16:9",
+				"9:16",
+				"3:2",
+				"2:3"
+			]
+		},
+		"scale": {
+			"description": "How to handle image scaling",
+			"control": {
+				"type": "checkbox"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "contain"
+				},
+				"type": {
+					"summary": "string"
+				}
+			},
+			"options": [
+				"contain",
+				"cover"
+			]
+		},
+		"href": {
+			"description": "URL to link to",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"height": {
+			"description": "Set a fixed height for the image",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"width": {
+			"description": "Set a fixed width for the image",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		}
+	},
+	"stories": []
 }

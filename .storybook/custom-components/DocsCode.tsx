@@ -14,15 +14,13 @@ export const DocsCodePanel = ({ title, story }: DocsCodePanelProps) => {
 	const [sourceCode, setSourceCode] = useState<string>('');
 	const [outputCode, setOutputCode] = useState<string>('');
 	const classShortName = title.split('/').pop();
-	const className = story?.args?.style ? `is-style-${story.args.style}` : undefined;
 	const content = story?.args?.content;
 	// args is an object, omit style and content from it using lodash because they're handled separately
-	const attributes = omit(story.args, ['style', 'content']);
+	const attributes = omit(story.args, ['content']);
 
 	const mockSourceCode = useCallback(async() => {
 		const mockCode = await mockPhpSourceCode({
 			componentName: classShortName,
-			classes: [className],
 			content,
 			attributes
 		});
@@ -35,7 +33,7 @@ export const DocsCodePanel = ({ title, story }: DocsCodePanelProps) => {
 		const urlParams = Object.entries(story.args)
 			.filter(([key, value]) => value)
 			.map(([key, value]) => `${key}=${value}`).join('&');
-		const url = `http://localhost:6001/${likelyFileName}.php?${urlParams}`;
+		const url = `http://localhost:6001/components/${likelyFileName}.php?${urlParams}`;
 
 		const MAX_RETRIES = 3;
 		let retryCount = 0;

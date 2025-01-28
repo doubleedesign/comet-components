@@ -1,16 +1,19 @@
 <?php
 namespace Doubleedesign\Comet\Core;
+use InvalidArgumentException;
 
 abstract class Renderable {
+
 	/**
 	 * @var array<string, string|int|array|null> $rawAttributes
 	 * @description Raw attributes passed to the component constructor as key-value pairs
 	 */
-	protected array $rawAttributes = [];
+	protected array $rawAttributes; // TODO: Make this private and have the to_array methods return the set fields
 	/**
-	 * @var Tag|null
+	 * @var ?Tag
+	 * @description The HTML tag to use for the component
 	 */
-	protected ?Tag $tag = null;
+	protected ?Tag $tagName = Tag::DIV;
 	/**
 	 * @var string|null $id
 	 * @description Unique identifier
@@ -23,7 +26,7 @@ abstract class Renderable {
 	protected ?array $classes = [];
 	/**
 	 * @var array|null $style
-	 * @description Inline styles, or in WordPress a style object
+	 * @description Inline styles
 	 */
 	protected ?array $style = null;
 	/**
@@ -31,23 +34,33 @@ abstract class Renderable {
 	 * @var string
 	 */
 	protected string $bladeFile;
+	/**
+	 * @var string $shortName
+	 * @description The name of the component without any namespacing, prefixes, etc. Derived from the Blade filename by default.
+	 */
 	protected string $shortName;
 
-	public function __construct(array $attrs, string $bladeFile) {
-		$this->rawAttributes = $attrs;
-		$this->id = isset($attrs['id']) ? Utils::kebab_case($attrs['id']) : null;
-		$this->classes = isset($attrs['className']) ? explode(' ', $attrs['className']) : [];
-		$this->style = (isset($attrs['style']) && is_array($attrs['style'])) ? $attrs['style'] : null;
+	public function __construct(array $attributes, string $bladeFile) {
+		$this->rawAttributes = $attributes;
+		$this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
+		$this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
 		$this->bladeFile = $bladeFile;
-		$this->tag = isset($attrs['tagName']) ? Tag::tryFrom($attrs['tagName']) : Tag::DIV;
+		$this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
 
-		// The shortname based on the Blade filename, but make it BEM if it has a parent context set (e.g. 'accordion-panel' -> 'accordion__panel')
-		$initial = array_reverse(explode('.', $this->bladeFile))[0];
-		if (isset($attrs['context'])) {
-			$this->shortName = str_replace('-', '__', $initial);
+		$classes = [];
+		// Handle WordPress block implementation of classes (className string)
+		if (isset($attributes['className']) && is_string($attributes['className'])) {
+			$classes = explode(' ', $attributes['className']);
 		}
-		else {
-			$this->shortName = $initial;
+		// Handle preferred implementation of classes (array)
+		if (isset($attributes['classes']) && is_array($attributes['classes'])) {
+			$classes = array_merge($classes, $attributes['classes']);
+		}
+		$this->classes = $classes;
+
+		// If no tagName is set, default to div
+		if (!isset($attributes['tagName'])) {
+			$this->tagName = Tag::DIV;
 		}
 	}
 
@@ -78,7 +91,7 @@ abstract class Renderable {
 	 * @return array<string>
 	 */
 	private function get_valid_html_attributes(): array {
-		return $this->tag->get_valid_attributes();
+		return $this->tagName->get_valid_attributes();
 	}
 
 	/**
@@ -138,6 +151,14 @@ abstract class Renderable {
 	 */
 	protected function get_inline_styles(): array {
 		return [];
+	}
+
+	// TODO: Make this abstract
+	function to_array(): array {
+		return [
+			'name'       => $this->shortName,
+			'attributes' => $this->rawAttributes,
+		];
 	}
 
 	abstract function render(): void;

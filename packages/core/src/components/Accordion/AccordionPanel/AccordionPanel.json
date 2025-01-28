@@ -1,0 +1,33 @@
+{
+    "name": "AccordionPanel",
+    "attributes": {
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "details"
+            ],
+            "default": "details"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "accordion__accordion-panel"
+            ]
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles, or in WordPress a style object"
+        }
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true
+    }
+}

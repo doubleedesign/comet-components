@@ -4,7 +4,7 @@ namespace Doubleedesign\Comet\Core;
 class ListItemSimple extends TextElement {
 	use HasAllowedTags;
 
-	protected ?Tag $tag = Tag::LI;
+	protected ?Tag $tagName = Tag::LI;
 
 	protected static function get_allowed_wrapping_tags(): array {
 		return [Tag::LI];

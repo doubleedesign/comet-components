@@ -5,7 +5,7 @@ use RuntimeException;
 class ListItemComplex extends UIComponent {
 	use HasAllowedTags;
 
-	protected ?Tag $tag = Tag::LI;
+	protected ?Tag $tagName = Tag::LI;
 	protected ?string $content = null;
 
 	protected static function get_allowed_wrapping_tags(): array {
@@ -29,7 +29,7 @@ class ListItemComplex extends UIComponent {
 
 		try {
 			echo $blade->make($this->bladeFile, [
-				'tag'        => $this->tag->value,
+				'tag'        => $this->tagName->value,
 				'classes'    => sprintf('%s', $classes),
 				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
 				'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),

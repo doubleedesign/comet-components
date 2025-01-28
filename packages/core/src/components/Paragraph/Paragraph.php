@@ -7,7 +7,7 @@ class Paragraph extends TextElement {
 	/**
 	 * @var Tag|null
 	 */
-	protected ?Tag $tag = Tag::P;
+	protected ?Tag $tagName = Tag::P;
 
 	protected static function get_allowed_wrapping_tags(): array {
 		return [Tag::P];

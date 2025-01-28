@@ -1,5 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core;
+use Doubleedesign\Comet\Core\HasAllowedTags;
+use Doubleedesign\Comet\Core\Tag;
 
 /**
  * This script generates JSON files that summarise the details of component classes written in PHP.
@@ -11,10 +12,11 @@ class ComponentClassesToJsonDefinitions {
 	private string $directory;
 	private array $processedClasses = [];
 	private ReflectionClass $currentClass;
+	private ReflectionClass $declaringClass;
 
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
-		$this->directory = dirname(__DIR__, 1) . 'packages\core\src\components';
+		$this->directory = dirname(__DIR__, 1) . '\packages\core\src\components';
 	}
 
 	public function runAll(): void {
@@ -32,12 +34,33 @@ class ComponentClassesToJsonDefinitions {
 
 	/** @noinspection PhpUnhandledExceptionInspection */
 	public function runSingle($component): void {
+		// First try direct path
 		$filePath = $this->directory . '\\' . $component . '\\' . $component . '.php';
-		if (!file_exists($filePath)) {
-			throw new RuntimeException("Component class $component not found");
+		if (file_exists($filePath)) {
+			$this->processFile($filePath);
+			return;
 		}
 
-		$this->processFile($filePath);
+		// If not found, try to find base folder:
+		// try by splitting PascalCase into words - e.g., "AccordionPanel" is inside "Accordion"
+		preg_match_all('/[A-Z][a-z]*/', $component, $matches);
+		$baseFolder = $matches[0][0];
+		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+
+		if (file_exists($filePath)) {
+			$this->processFile($filePath);
+			return;
+		}
+
+		// try singular to plural, e.g. Column is inside Columns
+		$baseFolder = $component . 's';
+		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+		if (file_exists($filePath)) {
+			$this->processFile($filePath);
+		}
+		else {
+			throw new RuntimeException("Component $component not found");
+		}
 	}
 
 	private function processFile(string $filePath): void {
@@ -76,10 +99,12 @@ class ComponentClassesToJsonDefinitions {
 			return $this->processedClasses[$className];
 		}
 
+		$this->currentClass = $reflectionClass;
 		$properties = [];
 
 		foreach ($reflectionClass->getProperties() as $property) {
 			if ($this->getVisibility($property) !== 'private') {
+				$this->declaringClass = $property->getDeclaringClass(); // get the parent class where the property is declared
 				$propertyType = $this->getPropertyType($property);
 				$propertyName = $property->getName();
 
@@ -107,16 +132,18 @@ class ComponentClassesToJsonDefinitions {
 		$result = [
 			'name'       => array_reverse(explode('\\', $className))[0],
 			'attributes' => array_filter($properties, function ($key) {
-				return !in_array($key, ['rawAttributes', 'content', 'bladeFile', 'shortName']);
+				return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
 			}, ARRAY_FILTER_USE_KEY)
 		];
-
-		if(isset($properties['content'])) {
+		if (isset($properties['content'])) {
 			$result['content'] = $properties['content'];
 		}
+		if (isset($properties['innerComponents'])) {
+			$result['innerComponents'] = $properties['innerComponents'];
+		}
 
-		if(array_reverse(explode('\\', $className))[0] === 'Image') {
-			unset($result['attributes']['tag']);
+		if (array_reverse(explode('\\', $className))[0] === 'Image') {
+			unset($result['properties']['tag']);
 		}
 
 		$this->processedClasses[$className] = $result; // Mark as processed to prevent infinite recursion
@@ -137,14 +164,34 @@ class ComponentClassesToJsonDefinitions {
 	 * @return array
 	 */
 	private function getPropertyType(ReflectionProperty $property): array {
-		$this->currentClass = $property->getDeclaringClass();
-
 		$required = !$property->getType()->allowsNull();
 		$defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null;
 		$type = $property->getType();
 		$description = null;
 		$supportedValues = null;
 		$result = $this->processPropertyType($type);
+
+		// If this is the $classes property, compute the actual default classes (e.g. the shortName or BEM name with context)
+		if ($property->getName() === 'classes') {
+			if ($this->currentClass->hasMethod('get_filtered_classes')) {
+				try {
+					$instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
+					$defaultValue = $this->currentClass->getMethod('get_filtered_classes')->invoke($instance);
+				}
+				catch (\ReflectionException $e) {
+					// If we can't create an instance of current class, fall back to parent
+					if ($this->declaringClass->hasMethod('get_filtered_classes')) {
+						$parentInstance = $this->declaringClass->newInstance([], [], 'dummy.blade.php');
+						$defaultValue = $this->declaringClass->getMethod('get_filtered_classes')->invoke($parentInstance);
+					}
+				}
+			}
+			else if ($this->declaringClass->hasMethod('get_filtered_classes')) {
+				// Use parent's method if current class doesn't have it
+				$instance = $this->declaringClass->newInstance([], [], 'dummy.blade.php');
+				$defaultValue = $this->declaringClass->getMethod('get_filtered_classes')->invoke($instance);
+			}
+		}
 
 		// Get type details from docblock if available
 		$docComment = $property->getDocComment();
@@ -156,7 +203,7 @@ class ComponentClassesToJsonDefinitions {
 		}
 
 		// Use type from docblock if specified, to use declared types like array<string>
-		if ($docComment && preg_match('/@var\s+([^\s]+)/', $docComment, $matches)) {
+		if ($docComment && preg_match('/@var\s+(\S+)/', $docComment, $matches)) {
 			$type = trim($matches[1]);
 		}
 		else {
@@ -167,6 +214,15 @@ class ComponentClassesToJsonDefinitions {
 		// If those are returned from processPropertyType, use them
 		if (isset($result['supported'])) {
 			$supportedValues = $result['supported'];
+		}
+
+		// Sort supported values so 'default' is always at the top
+		if ($supportedValues) {
+			usort($supportedValues, function ($a, $b) {
+				if ($a === 'default') return -1;
+				if ($b === 'default') return 1;
+				return 0;
+			});
 		}
 
 		// $required takes care of these rather than having them in the field names
@@ -205,7 +261,7 @@ class ComponentClassesToJsonDefinitions {
 		// If it's a Tag property and the class uses HasAllowedTags, get the allowed tags
 		if ($typeName === Tag::class && $this->classUsesTraitRecursive($this->currentClass, HasAllowedTags::class)) {
 			try {
-				$allowedTags = $this->currentClass->getMethod('get_allowed_html_tags')->invoke(null);
+				$allowedTags = $this->currentClass->getMethod('get_allowed_wrapping_tags')->invoke(null);
 				$supportedValues = array_map(function ($tag) {
 					return $tag->value;
 				}, $allowedTags);

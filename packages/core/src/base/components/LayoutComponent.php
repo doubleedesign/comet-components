@@ -5,12 +5,12 @@ use Exception;
 abstract class LayoutComponent extends UIComponent {
 	protected ?Alignment $hAlign = Alignment::START;
 	protected ?Alignment $vAlign = Alignment::START;
-	private ?ThemeColor $background_color;
+	protected ?ThemeColor $backgroundColor;
 
 
 	function __construct(array $attributes, array $children, string $bladeFile) {
 		parent::__construct($attributes, $children, $bladeFile);
-		$this->background_color = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : null;
+		$this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : null;
 
 		// In WordPress, some blocks have $attributes['theSetting'] and some have $attributes['layout']['theSetting'] so we need to account for both
 		$hAlign = $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null;
@@ -26,8 +26,8 @@ abstract class LayoutComponent extends UIComponent {
 	protected function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
 
-		if (isset($this->background_color)) {
-			$classes[] = 'bg-' . $this->background_color->value;
+		if (isset($this->backgroundColor)) {
+			$classes[] = 'bg-' . $this->backgroundColor->value;
 		}
 
 		if (isset($this->hAlign)) {
@@ -63,7 +63,7 @@ abstract class LayoutComponent extends UIComponent {
 
 		try {
 			echo $blade->make($this->bladeFile, [
-				'tag'        => $this->tag->value,
+				'tag'        => $this->tagName->value,
 				'classes'    => $classes,
 				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
 				'children'   => $this->process_inner_components()

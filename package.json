@@ -13,7 +13,9 @@
 		"generate:json": "php scripts/generate-json-defs.php",
 		"generate:stories": "php scripts/generate-stories.php",
 		"generate-from:wp": "node --import ./scripts/loader.mjs ./scripts/generate-from-wp-blocks.ts",
-		"refresh": "powershell.exe -File scripts/refresh.ps1"
+		"refresh:composer": "powershell.exe -File scripts/refresh.ps1",
+		"refresh:symlinks": "powershell.exe -File scripts/symlinks.ps1",
+		"refresh": "npm run refresh:composer && npm run refresh:symlinks"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",

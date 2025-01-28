@@ -1,0 +1,26 @@
+{
+	"title": "Components/Layout/Columns",
+	"parameters": {
+		"docs": {
+			"description": {
+				"component": "Lay out components in a row of columns."
+			}
+		},
+		"server": {
+			"id": "columns",
+			"url": "http://localhost:6001/components/columns.php",
+			"params": {
+				"__debug": true
+			}
+		}
+	},
+	"args": {
+	},
+	"argTypes": {
+	},
+	"stories": [
+		{
+			"name": "Two columns"
+		}
+	]
+}

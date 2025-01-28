@@ -6,6 +6,12 @@ class AccordionPanel extends UIComponent {
 	use HasAllowedTags;
 
 	/**
+	 * @var ?Tag $tagName
+	 * @description The HTML tag to use for this component
+	 */
+	protected ?Tag $tagName = Tag::DETAILS;
+
+	/**
 	 * Specify allowed Tags using the HasAllowedTags trait
 	 * @return array<Tag>
 	 */
@@ -14,8 +20,12 @@ class AccordionPanel extends UIComponent {
 	}
 
 	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents, 'components.Accordion.AccordionPanel.accordion-panel');
-		$this->tag = Tag::DETAILS;
+		parent::__construct(
+			array_merge($attributes, ['context' => 'accordion']),
+			$innerComponents,
+			'components.Accordion.AccordionPanel.accordion-panel'
+		);
+		$this->tagName = Tag::DETAILS;
 	}
 
 	function render(): void {

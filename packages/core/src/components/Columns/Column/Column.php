@@ -2,11 +2,28 @@
 namespace Doubleedesign\Comet\Core;
 
 class Column extends LayoutComponent {
+	use HasAllowedTags;
+
+	/**
+	 * @var ?string $width
+	 * Optional set width of the column. Note: This may be overridden to stack columns on small viewports.
+	 */
 	private ?string $width;
 
+	/**
+	 * Specify allowed Tags using the HasAllowedTags trait
+	 * @return array<Tag>
+	 */
+	protected static function get_allowed_wrapping_tags(): array {
+		return [Tag::DIV, Tag::SECTION, Tag::MAIN, Tag::ARTICLE, Tag::ASIDE];
+	}
+
+
 	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents, 'components.Columns.Column.column');
-		$this->shortName = 'columns__column';
+		parent::__construct(
+			array_merge($attributes, ['context' => 'columns']),
+			$innerComponents,
+			'components.Columns.Column.column');
 		$this->width = $attributes['width'] ?? null;
 	}
 

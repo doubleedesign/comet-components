@@ -108,6 +108,13 @@ class Image extends Renderable {
 		);
 	}
 
+	public function to_array(): array {
+		return [
+			'name'       => $this->shortName,
+			'attributes' => [], // TODO
+		];
+	}
+
 	public function render(): void {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();

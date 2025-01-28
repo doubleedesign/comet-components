@@ -3,6 +3,16 @@ namespace Doubleedesign\Comet\Core;
 use Exception;
 
 class Accordion extends UIComponent {
+	use HasAllowedTags;
+
+	/**
+	 * Specify allowed Tags using the HasAllowedTags trait
+	 * @return array<Tag>
+	 */
+	protected static function get_allowed_wrapping_tags(): array {
+		return [Tag::DIV, Tag::SECTION];
+	}
+
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Accordion.accordion');
 	}
@@ -13,7 +23,7 @@ class Accordion extends UIComponent {
 
 		try {
 			echo $blade->make($this->bladeFile, [
-				'tag'        => $this->tag->value,
+				'tag'        => $this->tagName->value,
 				'classes'    => $this->get_filtered_classes_string(),
 				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
 				'children'   => $this->process_inner_components()

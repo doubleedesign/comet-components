@@ -38,7 +38,7 @@ class Utils {
 	 *
 	 * @return string The sanitised content.
 	 */
-	public static function sanitise_content(string $content, array $allowedTags = null): string {
+	public static function sanitise_content(string $content, ?array $allowedTags = null): string {
 		$config = HTMLPurifier_Config::createDefault();
 		$purifier = new HTMLPurifier($config);
 

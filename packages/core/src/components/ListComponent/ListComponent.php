@@ -7,7 +7,7 @@ class ListComponent extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		$this->ordered = $attributes['ordered'] ?? false;
-		$this->tag = $this->ordered ? Tag::OL : Tag::UL;
+		$this->tagName = $this->ordered ? Tag::OL : Tag::UL;
 		parent::__construct($attributes, $innerComponents, 'components.ListComponent.list');
 	}
 

@@ -1,23 +1,24 @@
 {
-	"title": "Components/Heading",
+	"title": "Components/Text/Heading",
 	"parameters": {
 		"docs": {
 			"description": {
-				"component": "A reusable Heading component."
+				"component": "Introduce new sections and organize content to help visitors (and search engines) understand the structure of your content."
 			}
 		},
 		"server": {
 			"id": "heading",
-			"url": "http://localhost:6001/heading.php",
+			"url": "http://localhost:6001/components/heading.php",
 			"params": {
 				"__debug": true
 			}
 		}
 	},
 	"args": {
-		"content": "Default Heading",
-		"level": 2,
-		"style": "default"
+		"content": "Default heading",
+		"tag": "h2",
+		"classes": [],
+		"textAlign": "match-parent"
 	},
 	"argTypes": {
 		"content": {
@@ -41,61 +42,67 @@
 				}
 			}
 		},
-		"level": {
+		"tag": {
 			"description": "HTML heading level (1-6)",
 			"control": {
-				"type": "number",
-				"min": 1,
-				"max": 6
+				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "2"
+					"summary": "h2"
 				},
 				"type": {
-					"summary": "number"
+					"summary": "Tag"
 				}
-			}
+			},
+			"options": [
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6"
+			]
 		},
-		"style": {
-			"description": "Style name",
+		"classes": {
+			"description": "CSS classes",
 			"control": {
 				"type": "select"
 			},
-			"options": [
-				"default",
-				"accent",
-				"small"
-			],
 			"table": {
 				"defaultValue": {
-					"summary": "default"
+					"summary": []
 				},
 				"type": {
-					"summary": "string"
+					"summary": "array<string>"
 				}
-			}
+			},
+			"options": [
+				"",
+				"is-style-accent",
+				"is-style-small"
+			]
 		},
 		"textAlign": {
-			"description": "Horizontal alignment",
+			"description": "",
 			"control": {
 				"type": "select"
 			},
-			"options": [
-				"start",
-				"center",
-				"end",
-				"justify",
-				"match-parent"
-			],
 			"table": {
 				"defaultValue": {
 					"summary": "match-parent"
 				},
 				"type": {
-					"summary": "string"
+					"summary": "Alignment"
 				}
-			}
+			},
+			"options": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			]
 		}
 	},
 	"stories": [
@@ -103,8 +110,7 @@
 			"name": "Playground",
 			"args": {
 				"content": "Heading Component",
-				"level": 2,
-				"style": "default"
+				"classes": ""
 			},
 			"tags": [
 				"docsOnly"
@@ -114,16 +120,14 @@
 			"name": "Default",
 			"args": {
 				"content": "Default Heading",
-				"level": 2,
-				"style": "default"
+				"classes": ""
 			}
 		},
 		{
 			"name": "Accent style",
 			"args": {
 				"content": "Accent style heading",
-				"level": 2,
-				"style": "accent"
+				"classes": "is-style-accent"
 			}
 		},
 		{
@@ -131,7 +135,7 @@
 			"args": {
 				"content": "Small style heading",
 				"level": 2,
-				"style": "small"
+				"classes": "is-style-small"
 			}
 		}
 	]

@@ -1,0 +1,58 @@
+{
+    "name": "Columns",
+    "attributes": {
+        "hAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start"
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start"
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div",
+                "section",
+                "main"
+            ],
+            "default": "div"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "columns",
+                "columns--0"
+            ]
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles, or in WordPress a style object"
+        }
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true
+    }
+}

@@ -2,7 +2,7 @@
 namespace Doubleedesign\Comet\Core;
 
 class ListItem {
-	protected ?Tag $tag = Tag::LI;
+	protected ?Tag $tagName = Tag::LI;
 	private ListItemSimple|ListItemComplex $instance;
 
 	function __construct(array $attributes, string $content, array $nestedLists = []) {

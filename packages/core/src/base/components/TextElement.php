@@ -1,8 +1,10 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use Exception;
+use Exception, InvalidArgumentException;
 
 abstract class TextElement extends Renderable {
+	use HasAllowedTags;
+
 	/**
 	 * @var string $content
 	 * @description plain text or basic HTML
@@ -17,11 +19,41 @@ abstract class TextElement extends Renderable {
 	 */
 	protected ?string $textColor = null;
 
+	/**
+	 * Specify default allowed Tags using the HasAllowedTags trait
+	 * (Many child classes will override this with specific tags)
+	 * @return array<Tag>
+	 */
+	protected static function get_allowed_wrapping_tags(): array {
+		return Settings::INLINE_PHRASING_ELEMENTS;
+	}
+
 	function __construct(array $attributes, string $content, string $bladeFile) {
 		parent::__construct($attributes, $bladeFile);
 		$this->content = $content;
 		$this->textAlign = isset($attributes['textAlign']) ? Alignment::tryFrom($attributes['textAlign']) : null;
 		$this->textColor = isset($attributes['textColor']) ?? null;
+		// If tagName is set, validate it before setting the property
+		try {
+			if (isset($attributes['tagName'])) {
+				$tag = Tag::tryFrom($attributes['tagName']);
+				if ($tag && $this->validate_html_tag($tag)) {
+					$this->tagName = $tag;
+				}
+				else {
+					throw new InvalidArgumentException(
+						"Tag $tag->value is not allowed for " . get_class($this) .
+						". Allowed tags are: " . implode(', ', array_map(fn($tag) => $tag->value, static::get_allowed_wrapping_tags()))
+					);
+				}
+			}
+		}
+		catch (InvalidArgumentException $e) {
+			error_log($e->getMessage());
+			// Default to div if the tag was invalid
+			$this->tagName = Tag::DIV;
+		}
+
 	}
 
 	/**
@@ -53,6 +85,20 @@ abstract class TextElement extends Renderable {
 		return $current_classes;
 	}
 
+
+	/**
+	 * Get the associative array representation of this component
+	 * @return array
+	 */
+	public function to_array(): array {
+		return [
+			'name'       => $this->shortName,
+			'attributes' => $this->rawAttributes,
+			'content'    => $this->content,
+		];
+	}
+
+
 	/**
 	 * Default render method (child classes may override this)
 	 * @return void
@@ -64,9 +110,9 @@ abstract class TextElement extends Renderable {
 
 		try {
 			echo $blade->make($this->bladeFile, [
-				'tag'        => $this->tag->value,
+				'tag'        => $this->tagName->value,
 				'classes'    => $classes,
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'className', ARRAY_FILTER_USE_KEY),
+				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
 				'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
 			])->render();
 		}

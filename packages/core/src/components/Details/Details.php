@@ -2,11 +2,13 @@
 namespace Doubleedesign\Comet\Core;
 
 class Details extends TextElement {
-	function __construct(array $attributes, string $content) {
-		parent::__construct($attributes, $content, 'components.Details.details');
+	use HasAllowedTags;
+
+	protected static function get_allowed_wrapping_tags(): array {
+		return [Tag::DETAILS];
 	}
 
-	#[NotImplemented]
-	function render(): void {
+	function __construct(array $attributes, string $content) {
+		parent::__construct($attributes, $content, 'components.Details.details');
 	}
 }

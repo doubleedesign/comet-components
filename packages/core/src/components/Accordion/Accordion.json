@@ -1,0 +1,34 @@
+{
+    "name": "Accordion",
+    "attributes": {
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div",
+                "section"
+            ],
+            "default": "div"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "accordion"
+            ]
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles, or in WordPress a style object"
+        }
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true
+    }
+}
