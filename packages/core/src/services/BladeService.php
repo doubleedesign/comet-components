@@ -9,8 +9,8 @@ use RuntimeException, InvalidArgumentException;
 class BladeService {
     private static ?ViewFactory $blade = null;
     private static ?BladeCompiler $compiler = null;
-    private const string CACHE_DIR = '/cache/blade';
-    private const string TEMPLATE_DIR = '/';
+    private const CACHE_DIR = '/cache/blade';
+    private const TEMPLATE_DIR = '/';
 
     public static function getInstance(): ViewFactory {
         if (self::$blade === null) {

@@ -7,7 +7,7 @@
  * Author URI:          https://www.doubleedesign.com.au
  * Version:             0.0.1
  * Requires at least:   6.7.0
- * Requires PHP:        8.3.11
+ * Requires PHP:        8.2.23
  * Requires plugins:    advanced-custom-fields-pro
  * Text Domain:         comet
  *

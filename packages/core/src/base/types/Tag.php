@@ -104,7 +104,10 @@ enum Tag: string {
 	case VIDEO = 'video';
 	case WBR = 'wbr';
 
-	public const array GLOBAL_ATTRIBUTES = [
+	/**
+	 * @var array<string>
+	 */
+	public const GLOBAL_ATTRIBUTES = [
 		'accesskey',
         'aria-label',
         'aria-labelledby',
