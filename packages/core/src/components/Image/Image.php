@@ -130,7 +130,7 @@ class Image extends Renderable {
 			])->render();
 		}
 		catch (Exception $e) {
-			error_log(print_r($e, true));
+			error_log(print_r($e->getMessage(), true));
 		}
 	}
 }

@@ -59,7 +59,7 @@ abstract class UIComponent extends Renderable {
 			}
 		}
 		catch (InvalidArgumentException $e) {
-			error_log($e->getMessage());
+			error_log(print_r($e->getMessage(), true));
 			// Default to div if the tag was invalid
 			$this->tagName = Tag::DIV;
 		}
@@ -93,7 +93,7 @@ abstract class UIComponent extends Renderable {
 	 * @throws RuntimeException
 	 */
 	protected function process_inner_components(): array {
-		if(empty($this->innerComponents)) return [];
+		if (empty($this->innerComponents)) return [];
 		$processed_components = [];
 
 		foreach ($this->innerComponents as $component) {
@@ -118,7 +118,7 @@ abstract class UIComponent extends Renderable {
 				else if (!empty($innerComponents) && gettype($innerComponents) === 'array') {
 					$componentObject = new $ComponentClass($attributes, $innerComponents);
 				}
-				else if($content) {
+				else if ($content) {
 					$componentObject = new $ComponentClass($attributes, $content);
 				}
 				else {

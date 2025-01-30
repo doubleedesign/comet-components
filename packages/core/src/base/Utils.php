@@ -56,6 +56,7 @@ class Utils {
 	/**
 	 * Convert lowercase, kebab-case, and WP block format component names to PascalCase,
 	 * account for components with reserved words as names having "Component" appended (e.g., ListComponent),
+	 * account for some other edge cases where I really really want to rename a component,
 	 * and add the namespace to return the full class name
 	 * @param string $name
 	 * @return string
@@ -67,6 +68,10 @@ class Utils {
 		$className = Utils::pascal_case($shortName);
 		if (in_array($className, $reserved_words)) {
 			$className = $className . 'Component';
+		}
+
+		if ($shortName === 'buttons') {
+			$className = 'ButtonGroup';
 		}
 
 		return sprintf('%s\\%s', __NAMESPACE__, $className);

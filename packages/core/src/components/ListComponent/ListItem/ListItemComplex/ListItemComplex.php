@@ -37,7 +37,7 @@ class ListItemComplex extends UIComponent {
 			])->render();
 		}
 		catch (RuntimeException $e) {
-			error_log(print_r($e, true));
+			error_log(print_r($e->getMessage(), true));
 		}
 	}
 }

@@ -1,9 +1,9 @@
 <?php
 if (!isset($attributes) || !isset($innerComponents)) {
-    return;
+	return;
 }
 
-use Doubleedesign\Comet\Core\Buttons;
+use Doubleedesign\Comet\Core\ButtonGroup;
 
-$component = new Buttons($attributes, $innerComponents);
+$component = new ButtonGroup($attributes, $innerComponents);
 $component->render();

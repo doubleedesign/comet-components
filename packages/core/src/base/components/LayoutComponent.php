@@ -70,7 +70,7 @@ abstract class LayoutComponent extends UIComponent {
 			])->render();
 		}
 		catch (Exception $e) {
-			error_log(print_r($e, true));
+			error_log(print_r($e->getMessage(), true));
 		}
 	}
 }
