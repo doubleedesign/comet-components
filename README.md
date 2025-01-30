@@ -83,7 +83,7 @@ on [PHP, Composer, Node, and Sass setup in this document](./notes/windows.md).
 ### Create a new component
 
 1. To generate the boilerplate code for a new component, run the following command with `example` and `simple` replaced
-with the desired component name and type. Valid types are `simple`, `complex`, and `wrapper`.
+   with the desired component name and type. Valid types are `simple`, `complex`, and `wrapper`.
 
     ```bash
     npm run generate component -- --name=example --type=simple
@@ -97,7 +97,13 @@ with the desired component name and type. Valid types are `simple`, `complex`, a
 4. Add a file to `./test/browser/components` with a sample usage of the component. Add handling for `$_GET` parameters
    to allow for different attributes to be tested.
 5. Create a Storybook file in `./test/browser/stories`. // TODO - I plan on adding boilerplate generation of this too.
-   
+
+### Check for expected files
+
+```bash
+php ./scripts/healthcheck.php
+```
+
 [^1]: Historically, I
 always used Gulp with a plugin to import all component SCSS using a glob pattern, but because `@import` is being
 deprecated in Sass that approach's days are numbered.
@@ -108,7 +114,7 @@ See [testing notes](./notes/testing.md) for more information.
 
 ### Appendix 1: CLI command quick reference
 
-Note: Composer commands need to be run in each relevant package folder that has a `composer.json` file. 
+Note: Composer commands need to be run in each relevant package folder that has a `composer.json` file.
 
 Refresh Composer autoloader after adding new classes:
 
@@ -193,6 +199,7 @@ Then generate stories:
 ```bash
 # TO COME
 ```
+
 **Note:*** The story generator requires PHP 8.4+.
 
 ---
