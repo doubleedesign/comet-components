@@ -5,6 +5,9 @@ class ListItem {
 	protected ?Tag $tagName = Tag::LI;
 	private ListItemSimple|ListItemComplex $instance;
 
+	protected ?string $content;
+	protected ?array $innerComponents;
+
 	function __construct(array $attributes, string $content, array $nestedLists = []) {
 		$attributes['tagName'] = 'li';
 		if (!empty($nestedLists)) {

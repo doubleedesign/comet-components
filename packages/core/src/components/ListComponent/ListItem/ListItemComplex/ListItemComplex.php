@@ -13,7 +13,7 @@ class ListItemComplex extends UIComponent {
 	}
 
 	function __construct(array $attributes, string $content, array $nestedLists) {
-		$bladeFile = 'components.ListItem.list-item';
+		$bladeFile = 'components.ListComponent.ListItem.list-item';
 		$this->content = Utils::sanitise_content($content);
 		parent::__construct($attributes, $nestedLists, $bladeFile);
 	}

@@ -11,7 +11,7 @@ class ListItemSimple extends TextElement {
 	}
 
 	function __construct(array $attributes, string $content) {
-		$bladeFile = 'components.ListItem.list-item';
+		$bladeFile = 'components.ListComponent.ListItem.list-item';
 		parent::__construct($attributes, $content, $bladeFile);
 	}
 }
