@@ -12,7 +12,7 @@ $attributes = array_filter([
 ]);
 
 $innerComponents = [
-	(new Paragraph([], ucfirst($size) . ' Container'))->to_array(),
+	(new Paragraph([], ucfirst($size) . ' Container')),
 ];
 
 $component = new Container($attributes, $innerComponents);

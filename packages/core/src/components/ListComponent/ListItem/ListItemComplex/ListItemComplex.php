@@ -1,6 +1,5 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use RuntimeException;
 
 class ListItemComplex extends UIComponent {
 	use HasAllowedTags;
@@ -27,17 +26,12 @@ class ListItemComplex extends UIComponent {
 		$attrs = $this->get_html_attributes();
 		$classes = $attrs['className'] ?? '';
 
-		try {
-			echo $blade->make($this->bladeFile, [
-				'tag'        => $this->tagName->value,
-				'classes'    => sprintf('%s', $classes),
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
-				'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
-				'children'   => $this->process_inner_components()
-			])->render();
-		}
-		catch (RuntimeException $e) {
-			error_log(print_r($e->getMessage(), true));
-		}
+		echo $blade->make($this->bladeFile, [
+			'tag'        => $this->tagName->value,
+			'classes'    => sprintf('%s', $classes),
+			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
+			'children'   => $this->innerComponents
+		])->render();
 	}
 }

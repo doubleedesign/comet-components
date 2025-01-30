@@ -1,8 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-use Exception;
-
 class Image extends Renderable {
 	/**
 	 * @var string $src
@@ -108,29 +106,17 @@ class Image extends Renderable {
 		);
 	}
 
-	public function to_array(): array {
-		return [
-			'name'       => $this->shortName,
-			'attributes' => [], // TODO
-		];
-	}
-
 	public function render(): void {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();
 		$classes = implode(' ', $this->get_filtered_classes());
 
-		try {
-			echo $blade->make($this->bladeFile, [
-				'src'        => $this->src,
-				'href'       => $this->href,
-				'caption'    => $this->caption,
-				'classes'    => $classes,
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
-			])->render();
-		}
-		catch (Exception $e) {
-			error_log(print_r($e->getMessage(), true));
-		}
+		echo $blade->make($this->bladeFile, [
+			'src'        => $this->src,
+			'href'       => $this->href,
+			'caption'    => $this->caption,
+			'classes'    => $classes,
+			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+		])->render();
 	}
 }

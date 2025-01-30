@@ -1,6 +1,5 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use Exception;
 
 abstract class LayoutComponent extends UIComponent {
 	protected ?Alignment $hAlign = Alignment::START;
@@ -61,16 +60,11 @@ abstract class LayoutComponent extends UIComponent {
 		$attrs = $this->get_html_attributes();
 		$classes = $this->get_filtered_classes_string();
 
-		try {
-			echo $blade->make($this->bladeFile, [
-				'tag'        => $this->tagName->value,
-				'classes'    => $classes,
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
-				'children'   => $this->process_inner_components()
-			])->render();
-		}
-		catch (Exception $e) {
-			error_log(print_r($e->getMessage(), true));
-		}
+		echo $blade->make($this->bladeFile, [
+			'tag'        => $this->tagName->value,
+			'classes'    => $classes,
+			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'children'   => $this->innerComponents
+		])->render();
 	}
 }

@@ -1,6 +1,5 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use Exception;
 
 class AccordionPanelContent extends UIComponent {
 	use HasAllowedTags;
@@ -29,15 +28,10 @@ class AccordionPanelContent extends UIComponent {
 		$blade = BladeService::getInstance();
 		$attrs = $this->get_html_attributes();
 
-		try {
-			echo $blade->make($this->bladeFile, [
-				'classes'    => $this->get_filtered_classes_string(),
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
-				'children'   => $this->process_inner_components()
-			])->render();
-		}
-		catch (Exception $e) {
-			error_log(print_r($e->getMessage(), true));
-		}
+		echo $blade->make($this->bladeFile, [
+			'classes'    => $this->get_filtered_classes_string(),
+			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'children'   => $this->innerComponents
+		])->render();
 	}
 }

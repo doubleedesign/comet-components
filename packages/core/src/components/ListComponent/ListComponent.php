@@ -25,16 +25,11 @@ class ListComponent extends UIComponent {
 		$attrs = $this->get_html_attributes();
 		$classes = implode(',', $this->get_filtered_classes());
 
-		try {
-			echo $blade->make($this->bladeFile, [
-				'ordered'    => $this->ordered,
-				'classes'    => $classes,
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
-				'children'   => $this->process_inner_components()
-			])->render();
-		}
-		catch (RuntimeException $e) {
-			error_log(print_r($e->getMessage(), true));
-		}
+		echo $blade->make($this->bladeFile, [
+			'ordered'    => $this->ordered,
+			'classes'    => $classes,
+			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'children'   => $this->innerComponents
+		])->render();
 	}
 }

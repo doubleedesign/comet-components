@@ -8,7 +8,7 @@ abstract class Renderable {
 	 * @var array<string, string|int|array|null> $rawAttributes
 	 * @description Raw attributes passed to the component constructor as key-value pairs
 	 */
-	protected array $rawAttributes; // TODO: Make this private and have the to_array methods return the set fields
+	private array $rawAttributes;
 	/**
 	 * @var ?Tag
 	 * @description The HTML tag to use for the component
@@ -151,14 +151,6 @@ abstract class Renderable {
 	 */
 	protected function get_inline_styles(): array {
 		return [];
-	}
-
-	// TODO: Make this abstract
-	function to_array(): array {
-		return [
-			'name'       => $this->shortName,
-			'attributes' => $this->rawAttributes,
-		];
 	}
 
 	abstract function render(): void;

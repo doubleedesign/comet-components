@@ -34,5 +34,9 @@
 		"allow-plugins": {
 			"roots/wordpress-core-installer": true
 		}
+	},
+	"require": {
+		"ext-dom": "*",
+		"ext-libxml": "*"
 	}
 }

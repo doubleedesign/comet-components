@@ -4,7 +4,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/test/common" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/test/common/wordpress" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\WordPress\" />
-      <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/components" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />

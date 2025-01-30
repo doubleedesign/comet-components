@@ -1,17 +1,23 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
+use DOMDocument;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 use Doubleedesign\Comet\Core\{Utils, NotImplemented};
-use ReflectionClass, ReflectionProperty, Closure, ReflectionException, Exception, TypeError;
+use ReflectionClass, ReflectionProperty, Closure, ReflectionException;
 use WP_Block, WP_Block_Type_Registry;
 use Block_Supports_Extended;
 
 class BlockRegistry extends JavaScriptImplementation {
 	private array $block_support_json;
+	private array $theme_json;
 
 	function __construct() {
 		parent::__construct();
 
 		$this->block_support_json = json_decode(file_get_contents(__DIR__ . '/block-support.json'), true);
+		// TODO: If the theme has its own, get it from there first
+		$this->theme_json = json_decode(file_get_contents(__DIR__ . '/theme.json'), true);
 
 		add_action('init', [$this, 'register_blocks'], 10, 2);
 		add_action('acf/include_fields', [$this, 'register_block_fields'], 10, 2);
@@ -72,7 +78,6 @@ class BlockRegistry extends JavaScriptImplementation {
 
 					wp_enqueue_style($handle);
 				}
-
 			}
 			// Block has variations that align to a component name, without the overarching block name being used for a rendering class
 			else if (isset($block_json->variations)) {
@@ -296,16 +301,15 @@ class BlockRegistry extends JavaScriptImplementation {
 	 *
 	 * @return Closure
 	 */
-	static function render_block_callback(string $block_name): Closure {
+	function render_block_callback(string $block_name): Closure {
 		return function ($attributes, $content, $block_instance) use ($block_name) {
-			return self::render_block($block_name, $attributes, $content, $block_instance);
+			return $this->render_block($block_name, $attributes, $content, $block_instance);
 		};
 	}
 
 	/**
 	 * The function called inside render_block_callback
 	 * to render blocks using Comet Components.
-	 * Note: Inner blocks do not always hit this code, as they can be rendered by the parent Comet component.
 	 *
 	 * This exists separately from render_block_callback for better debugging - this way we see render_block() in Xdebug stack traces,
 	 * whereas if this returned the closure directly, it would show up as an anonymous function
@@ -316,9 +320,48 @@ class BlockRegistry extends JavaScriptImplementation {
 	 *
 	 * @return string
 	 */
-	static function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
-		$block_name_trimmed = explode('/', $block_name)[1];
-		$innerComponents = $block_instance->parsed_block['innerBlocks'];
+	function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
+		// Process all inner image blocks and add the relevant attributes as Comet expects
+		// self::add_attributes_to_image_blocks($innerComponents); // TODO is this still needed and does it still work?
+
+		// For variant children in context, prepend the variant name to the block name so the correct component will be found
+		// e.g. Panel in an Accordion = AccordionPanel
+		// $attributes['variant'] indicates we are at the top level
+		// TODO Update this
+//		if (isset($innerComponents) && isset($attributes['variant'])) {
+//			self::apply_variant_context($attributes['variant'], $innerComponents);
+//		}
+
+		ob_start();
+		$component = $this->block_to_comet_component_object($block_instance);
+		$component->render();
+		return ob_get_clean();
+	}
+
+	private function process_innerblocks($block_instance): ?array {
+		$innerBlocks = $block_instance->inner_blocks ?? null;
+		if ($innerBlocks) {
+			return array_map(function ($block) {
+				return self::block_to_comet_component_object($block);
+			}, iterator_to_array($innerBlocks));
+		}
+
+		return null;
+	}
+
+	private function block_to_comet_component_object($block_instance): ?object {
+		$block_name = $block_instance->name;
+		$block_name_trimmed = array_reverse(explode('/', $block_name))[0];
+		$attributes = $block_instance->attributes ?? [];
+		$content = $block_instance->parsed_block['innerHTML'] ?? '';
+		$innerComponents = $block_instance->inner_blocks ? self::process_innerblocks($block_instance) : [];
+
+		// If this is a button block, process its HTML and turn it into compatible attributes format
+		if ($block_name === 'core/button') {
+			$attributes = $this->process_button_block($block_instance)['attributes'];
+			$content = $this->process_button_block($block_instance)['content'];
+		}
+
 		// This is a block variant at the top level, such as an Accordion (variant of Panels)
 		if (isset($attributes['variant'])) {
 			// use the namespaced class name matching the variant name
@@ -336,7 +379,7 @@ class BlockRegistry extends JavaScriptImplementation {
 			$ComponentClass = self::get_comet_component_class($block_name); // returns the namespaced class name matching the block name
 		}
 
-		// For the core group block, detect variation based on layout attributes
+		// For the core group block, detect variation based on layout attributes and use that class instead
 		if ($block_name_trimmed === 'group') {
 			$layout = $attributes['layout'];
 			$variation = match ($layout['type']) {
@@ -347,59 +390,29 @@ class BlockRegistry extends JavaScriptImplementation {
 			$ComponentClass = self::get_comet_component_class($variation);
 		}
 
-		// so we know what to pass to it - an array, a string, etc
+		// Check what type of content to pass to it - an array, a string, etc
 		$content_type = self::get_comet_component_content_type($ComponentClass);
-
-		// For variant children in context, prepend the variant name to the block name so the correct component will be found
-		// e.g. Panel in an Accordion = AccordionPanel
-		// $attributes['variant'] indicates we are at the top level
-		if (isset($innerComponents) && isset($attributes['variant'])) {
-			self::apply_variant_context($attributes['variant'], $innerComponents);
-		}
 
 		// If this is an image block, add the src attribute
 		if ($block_name === 'core/image') {
 			$attributes['src'] = wp_get_attachment_image_url($attributes['id'], 'full');
 		}
-		// Process all inner image blocks and add the relevant attributes as Comet expects
-		self::add_attributes_to_image_blocks($innerComponents);
 
-		// Prepare the output
-		ob_start();
-		extract(['attributes' => $attributes, 'content' => $content, 'innerComponents' => $innerComponents]);
-
+		// Create the component object
 		// Self-closing tag components, e.g. <img>, only have attributes
 		if ($content_type[0] === 'is-self-closing') {
-			try {
-				$component = new $ComponentClass($attributes);
-				$component->render();
-			}
-			catch (TypeError|Exception $e) {
-				error_log(print_r($e, true));
-			}
+			$component = new $ComponentClass($attributes);
 		}
 		// Most components will have string content or an array of inner components
 		else if (count($content_type) === 1) {
-			try {
-				$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
-				$component->render();
-			}
-			catch (TypeError|Exception $e) {
-				error_log(print_r($e, true));
-			}
+			$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
 		}
 		// Some can have both, e.g. list items can have text content and nested lists
 		else if (count($content_type) === 2) {
-			try {
-				$component = new $ComponentClass($attributes, $content, $innerComponents);
-				$component->render();
-			}
-			catch (TypeError|Exception $e) {
-				error_log(print_r($e, true));
-			}
+			$component = new $ComponentClass($attributes, $content, $innerComponents);
 		}
 
-		return ob_get_clean();
+		return $component ?? null;
 	}
 
 
@@ -452,6 +465,53 @@ class BlockRegistry extends JavaScriptImplementation {
 				self::add_attributes_to_image_blocks($block['innerBlocks']);
 			}
 		}
+	}
+
+	function process_button_block($block_instance): array {
+		$attributes = $block_instance->attributes;
+		$raw_content = $block_instance->parsed_block['innerHTML'];
+		$content = '';
+
+		// Process custom attributes
+		$attributes['colorTheme'] = $this->hex_to_theme_color_name($attributes['style']['elements']['theme']['color']['text']) ?? null;
+		unset($attributes['style']);
+
+		// Turn style classes into attributes
+		$classes = explode(' ', $attributes['className']);
+		if (in_array('is-style-outline', $classes)) {
+			$attributes['isOutline'] = true;
+		}
+
+		// Use HTMLPurifier to do the initial stripping of unwanted tags and attributes for the inner content
+		$config = HTMLPurifier_Config::createDefault();
+		$config->set('HTML.Allowed', 'a[href|target|title|rel],span,i,b,strong,em');
+		$config->set('Attr.AllowedFrameTargets', ['_blank', '_self', '_parent', '_top']);
+		$config->set('HTML.TargetBlank', true);
+		$purifier = new HTMLPurifier($config);
+		$clean_html = $purifier->purify($raw_content);
+
+		// Create a simple DOM parser and find the anchor tag and attributes
+		// Note: In PHP 8.4+ you will be able to use Dom\HTMLDocument::createFromString and presumably remove the ext-dom and ext-libxml Composer dependencies
+		$dom = new DOMDocument();
+		$dom->loadHTML($clean_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		$links = $dom->getElementsByTagName('a');
+		$link = $links->item(0);
+		foreach ($link->attributes as $attr) {
+			$attributes[$attr->name] = $attr->value;
+		}
+
+		// Remove unwanted attributes
+		unset($attributes['type']);
+
+		// Get inner HTML with any nested tags
+		foreach ($link->childNodes as $child) {
+			$content .= $dom->saveHTML($child);
+		}
+
+		return [
+			'attributes' => $attributes,
+			'content'    => $content
+		];
 	}
 
 
@@ -524,10 +584,24 @@ class BlockRegistry extends JavaScriptImplementation {
 
 		Block_Supports_Extended\register('color', 'theme', [
 			'label'  => __('Colour theme'),
-			'blocks' => ['comet/panels'],
+			'blocks' => ['comet/panels', 'core/button'],
 		]);
 
 		// Note: Remove the thing the custom attribute is replacing, if applicable, using block_type_metadata filter
+	}
+
+
+	/**
+	 * The custom colour attributes are stored as hex values, but we want them as the theme colour names
+	 * @param $hex
+	 * @return string | null
+	 */
+	private function hex_to_theme_color_name($hex): ?string {
+		$theme = $this->theme_json['settings']['color']['palette'];
+
+		return array_reduce($theme, function ($carry, $item) use ($hex) {
+			return $item['color'] === $hex ? $item['slug'] : $carry;
+		}, null);
 	}
 
 
@@ -592,7 +666,7 @@ class BlockRegistry extends JavaScriptImplementation {
 				[
 					'allowEditing'           => true, // allow selection of the enabled layout options
 					'allowSwitching'         => false,
-					'allowOrientation'       => false, // disable vertical stacking option
+					'allowOrientation'       => true,
 					'allowJustification'     => true,
 					'allowVerticalAlignment' => false
 				]
@@ -606,9 +680,11 @@ class BlockRegistry extends JavaScriptImplementation {
 
 			$metadata['supports']['color']['text'] = false;
 			$metadata['supports']['color']['gradients'] = false;
+			$metadata['supports']['color']['background'] = false;
 			$metadata['supports']['__experimentalBorder'] = false;
 			$metadata['supports']['color']['__experimentalDefaultControls'] = [
-				'background' => true
+				'background' => false,
+				'theme'      => true
 			];
 		}
 

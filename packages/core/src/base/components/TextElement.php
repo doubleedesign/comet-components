@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use Exception, InvalidArgumentException;
+use InvalidArgumentException;
 
 abstract class TextElement extends Renderable {
 	use HasAllowedTags;
@@ -87,19 +87,6 @@ abstract class TextElement extends Renderable {
 
 
 	/**
-	 * Get the associative array representation of this component
-	 * @return array
-	 */
-	public function to_array(): array {
-		return [
-			'name'       => $this->shortName,
-			'attributes' => $this->rawAttributes,
-			'content'    => $this->content,
-		];
-	}
-
-
-	/**
 	 * Default render method (child classes may override this)
 	 * @return void
 	 */
@@ -108,16 +95,12 @@ abstract class TextElement extends Renderable {
 		$attrs = $this->get_html_attributes();
 		$classes = implode(' ', $this->get_filtered_classes());
 
-		try {
-			echo $blade->make($this->bladeFile, [
-				'tag'        => $this->tagName->value,
-				'classes'    => $classes,
-				'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
-				'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
-			])->render();
-		}
-		catch (Exception $e) {
-			error_log(print_r($e->getMessage(), true));
-		}
+		echo $blade->make($this->bladeFile, [
+			'tag'        => $this->tagName->value,
+			'classes'    => $classes,
+			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
+		])->render();
+
 	}
 }
