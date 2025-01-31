@@ -180,6 +180,8 @@ Once you have added fields and docblock comments to a component, generate the JS
 php scripts/generate-json-defs.php --component Gallery
 ```
 
+**Note:** The JSON definition generator requires PHP 8.4+.
+
 Use the same command to update it after making changes.
 
 You can also generate/update all JSON definition files at once:

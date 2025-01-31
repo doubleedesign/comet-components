@@ -7,13 +7,16 @@ function Run-Composer {
     )
     Write-Host "Running composer commands in $directory"
     Push-Location $directory
-    composer update
+    composer update --prefer-source
     composer dump-autoload
     Pop-Location
 }
 
 # Store the root directory
 $ROOT_DIR = Get-Location
+
+# Clear cache
+composer clear-cache
 
 # Run composer commands in root
 Run-Composer $ROOT_DIR

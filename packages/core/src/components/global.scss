@@ -1,22 +1,16 @@
-$colors: (
-	'primary': #845ec2,
-	'secondary': #00c9a7,
-	'accent': #ba3caf,
-	'light': #F0F0F2,
-	'dark': #4b4453,
-	'white': #ffffff
-);
-
-$widths: (
-	'wide': 1440px,
-	'contained': 1100px,
-	'narrow': 960px
-);
+@use 'variables' as *;
 
 :root {
-	@each $name, $color in $colors {
-		--bg-#{$name}: #{$color};
+	@each $name, $values in $colors {
+		--color-#{$name}: #{map-get($colors, '#{$name}')};
 	}
+	@each $name, $value in $hslColors {
+		--color-#{$name}: #{$value};
+	}
+	@each $name in map-keys($colors) {
+		--readable-color-#{$name}: #{if(map-get($hslColors, #{$name}-l) > 60, black, white)};
+	}
+
 	--width-wide: #{map-get($widths, 'wide')};
 	--width-contained: #{map-get($widths, 'contained')};
 	--width-narrow: #{map-get($widths, 'narrow')};

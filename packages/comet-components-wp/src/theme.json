@@ -43,6 +43,16 @@
 					"color": "#ba3caf"
 				},
 				{
+					"name": "Warning",
+					"slug": "warning",
+					"color": "#f9c971"
+				},
+				{
+					"name": "Error",
+					"slug": "error",
+					"color": "#d23e3e"
+				},
+				{
 					"name": "light",
 					"slug": "light",
 					"color": "#F0F0F2"

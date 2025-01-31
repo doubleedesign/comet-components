@@ -12,15 +12,15 @@ class Button extends TextElement {
 
 	/**
 	 * @var ?ThemeColor $colorTheme
-	 * @description Background colour keyword
+	 * @description Colour keyword for the fill or outline colour
 	 */
 	protected ?ThemeColor $colorTheme = ThemeColor::PRIMARY;
 
 	/**
-	 * Whether to use outline style instead of solid/filled
-	 * @var bool
+	 * @var ?bool $isOutline
+	 * @description Whether to use outline style instead of solid/filled
 	 */
-	protected bool $isOutline = false;
+	protected ?bool $isOutline = false;
 
 	/**
 	 * Specify default allowed Tags using the HasAllowedTags trait

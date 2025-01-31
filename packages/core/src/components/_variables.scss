@@ -1,0 +1,33 @@
+@use 'functions' as *;
+
+$colors: ();
+$hslColors: ();
+@each $name, $color in (
+	'primary': #845ec2,
+	'secondary': #00c9a7,
+	'accent': #ba3caf,
+	'warning': #f9c971,
+	'error': #d23e3e,
+	'light': #F0F0F2,
+	'dark': #4b4453,
+	'white': #ffffff
+) {
+	$hsl: hex-to-hsl($color);
+	$hslColors: map-merge($hslColors, (
+		// Store HSL values individually for use in colour calculations
+		'#{$name}-h': nth($hsl, 1),
+		'#{$name}-s': nth($hsl, 2),
+		'#{$name}-l': nth($hsl, 3)
+	));
+
+	$colors: map_merge($colors, (
+		$name: $color,
+	));
+}
+
+
+$widths: (
+	'wide': 1440px,
+	'contained': 1100px,
+	'narrow': 960px
+);

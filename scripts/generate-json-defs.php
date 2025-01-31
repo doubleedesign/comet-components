@@ -7,6 +7,7 @@ use Doubleedesign\Comet\Core\Tag;
  * They are intended to be used for story generation and testing integrations (e.g., comparing WordPress block.json definitions).
  * Usage: php generate-json-defs.php to generate or regenerate all
  *      php generate-json-defs.php --component MyComponent to generate or regenerate a specific component
+ *  NOTE: This script requires PHP 8.4+.
  */
 class ComponentClassesToJsonDefinitions {
 	private string $directory;
@@ -42,11 +43,21 @@ class ComponentClassesToJsonDefinitions {
 		}
 
 		// If not found, try to find base folder:
-		// try by splitting PascalCase into words - e.g., "AccordionPanel" is inside "Accordion"
+		// try by splitting PascalCase into words - e.g., AccordionPanel is inside Accordion
 		preg_match_all('/[A-Z][a-z]*/', $component, $matches);
 		$baseFolder = $matches[0][0];
 		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+		if (file_exists($filePath)) {
+			$this->processFile($filePath);
+			return;
+		}
 
+		// try the other way around, e.g., Button is inside ButtonGroup
+		$folders = scandir($this->directory);
+		$baseFolder = array_find($folders, function ($folder) use ($component) {
+			return str_starts_with($folder, $component);
+		});
+		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
@@ -93,6 +104,9 @@ class ComponentClassesToJsonDefinitions {
 		}
 	}
 
+	/**
+	 * @throws ReflectionException
+	 */
 	private function analyseClass(ReflectionClass $reflectionClass): array {
 		$className = $reflectionClass->getName();
 		if (isset($this->processedClasses[$className])) {
@@ -108,9 +122,8 @@ class ComponentClassesToJsonDefinitions {
 				$propertyType = $this->getPropertyType($property);
 				$propertyName = $property->getName();
 
-				// If this is the attributes property, and its type is an *Attributes one,
-				// add all the nested attributes to the $properties array
-				if ($propertyName === 'attributes' && str_ends_with($propertyType['type'], 'Attributes')) {
+				// If this is the attributes property, add all the nested attributes to the $properties array
+				if ($propertyName === 'attributes') {
 					try {
 						$attributesClass = new ReflectionClass($propertyType['type']);
 						foreach ($attributesClass->getProperties() as $attrProperty) {
@@ -162,6 +175,7 @@ class ComponentClassesToJsonDefinitions {
 	 * Extracts the type of a property, including whether it's required, the default value, and the description.
 	 * @param ReflectionProperty $property
 	 * @return array
+	 * @throws ReflectionException
 	 */
 	private function getPropertyType(ReflectionProperty $property): array {
 		$required = !$property->getType()->allowsNull();
@@ -170,15 +184,16 @@ class ComponentClassesToJsonDefinitions {
 		$description = null;
 		$supportedValues = null;
 		$result = $this->processPropertyType($type);
+		$content_type = $this->currentClass->hasProperty('innerComponents') ? 'array' : 'string';
 
 		// If this is the $classes property, compute the actual default classes (e.g. the shortName or BEM name with context)
 		if ($property->getName() === 'classes') {
 			if ($this->currentClass->hasMethod('get_filtered_classes')) {
 				try {
-					$instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
+					$instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
 					$defaultValue = $this->currentClass->getMethod('get_filtered_classes')->invoke($instance);
 				}
-				catch (\ReflectionException $e) {
+				catch (ReflectionException $e) {
 					// If we can't create an instance of current class, fall back to parent
 					if ($this->declaringClass->hasMethod('get_filtered_classes')) {
 						$parentInstance = $this->declaringClass->newInstance([], [], 'dummy.blade.php');

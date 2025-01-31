@@ -1,3 +1,23 @@
-.button-group {
+@use '../mixins' as *;
 
+.button-group {
+	display: flex;
+	gap: var(--spacing-sm);
+	padding-block: var(--spacing-sm);
+
+	&--halign-start {
+		justify-content: flex-start;
+	}
+
+	&--halign-center {
+		justify-content: center;
+	}
+
+	&--halign-end {
+		justify-content: flex-end;
+	}
+
+	&--stacked {
+		flex-direction: column;
+	}
 }

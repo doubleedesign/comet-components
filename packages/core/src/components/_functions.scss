@@ -1,0 +1,49 @@
+@use "sass:color";
+
+@function hex-to-rgb($hex-color) {
+	@return rgb(red($hex-color), green($hex-color), blue($hex-color));
+}
+
+@function hex-to-hsl($color) {
+	$r: red($color) / 255;
+	$g: green($color) / 255;
+	$b: blue($color) / 255;
+
+	$max: max($r, $g, $b);
+	$min: min($r, $g, $b);
+
+	$h: 0;
+	$s: 0;
+	$l: ($max + $min) / 2;
+
+	@if $max != $min {
+		$d: $max - $min;
+		$s: if($l > 0.5, $d / (2 - $max - $min), $d / ($max + $min));
+
+		@if $max == $r {
+			$h: ($g - $b) / $d + if($g < $b, 6, 0);
+		} @else if $max == $g {
+			$h: ($b - $r) / $d + 2;
+		} @else {
+			$h: ($r - $g) / $d + 4;
+		}
+		$h: $h * 60;
+	}
+
+	@return ($h, $s * 100, $l * 100);
+}
+
+@function readable_color($colorName) {
+
+}
+
+// Replacements for SASS colour functions that will automatically adopt replacement vanilla CSS variables.
+// Calculations are added so that the syntax for their use is the same as SCSS,
+// e.g. darken by 10% would usually mean 90% for color-mix, but this function means we can still write it as 10%.
+// To use, ensure @use 'functions' as *; is at the top of your SCSS file.
+@function lighten($colorName, $amount) {
+	@return color-mix(in srgb, var(--color-#{$colorName}) (100% - $amount), white);
+}
+@function darken($colorName, $amount) {
+	@return color-mix(in srgb, var(--color-#{$colorName}) (100% - $amount), black);
+}
