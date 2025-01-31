@@ -22,13 +22,11 @@ class ListComponent extends UIComponent {
 
 	function render(): void {
 		$blade = BladeService::getInstance();
-		$attrs = $this->get_html_attributes();
-		$classes = implode(',', $this->get_filtered_classes());
 
 		echo $blade->make($this->bladeFile, [
 			'ordered'    => $this->ordered,
-			'classes'    => $classes,
-			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'classes'    => implode(',', $this->get_filtered_classes()),
+			'attributes' => $this->get_html_attributes(),
 			'children'   => $this->innerComponents
 		])->render();
 	}

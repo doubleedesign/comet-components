@@ -123,14 +123,12 @@ abstract class Renderable {
 	 */
 	protected function get_html_attributes(): array {
 		$baseAttributes = $this->get_filtered_attributes();
-		$baseClasses = $this->get_filtered_classes();
 		$styles = $this->get_inline_styles();
 
 		$attrs = array_merge(
 			$baseAttributes,
 			array(
 				'id'    => $this->get_id(),
-				'class' => implode(' ', $baseClasses),
 				'style' => implode(';',
 					array_map(fn($key, $value) => $key . ':' . $value,
 						array_keys($styles),

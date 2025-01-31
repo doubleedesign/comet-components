@@ -23,13 +23,11 @@ class ListItemComplex extends UIComponent {
 
 	function render(): void {
 		$blade = BladeService::getInstance();
-		$attrs = $this->get_html_attributes();
-		$classes = $attrs['className'] ?? '';
 
 		echo $blade->make($this->bladeFile, [
 			'tag'        => $this->tagName->value,
-			'classes'    => sprintf('%s', $classes),
-			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'classes'    => $this->get_filtered_classes_string(),
+			'attributes' => $this->get_html_attributes(),
 			'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
 			'children'   => $this->innerComponents
 		])->render();

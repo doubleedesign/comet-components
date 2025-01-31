@@ -55,13 +55,11 @@ class Button extends TextElement {
 
 	function render(): void {
 		$blade = BladeService::getInstance();
-		$attrs = $this->get_html_attributes();
-		$classes = implode(' ', $this->get_filtered_classes());
 
 		echo $blade->make($this->bladeFile, [
 			'tag'        => $this->tagName->value,
-			'classes'    => $classes,
-			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'classes'    => implode(' ', $this->get_filtered_classes()),
+			'attributes' => $this->get_html_attributes(),
 			'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
 		])->render();
 	}

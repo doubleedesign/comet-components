@@ -18,12 +18,11 @@ class Accordion extends UIComponent {
 
 	function render(): void {
 		$blade = BladeService::getInstance();
-		$attrs = $this->get_html_attributes();
 
 		echo $blade->make($this->bladeFile, [
 			'tag'        => $this->tagName->value,
 			'classes'    => $this->get_filtered_classes_string(),
-			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'attributes' => $this->get_html_attributes(),
 			'children'   => $this->innerComponents
 		])->render();
 	}

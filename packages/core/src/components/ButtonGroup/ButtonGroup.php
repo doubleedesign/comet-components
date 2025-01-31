@@ -9,12 +9,10 @@ class ButtonGroup extends UIComponent {
 
 	public function render(): void {
 		$blade = BladeService::getInstance();
-		$attrs = $this->get_html_attributes();
-		$classes = $this->get_filtered_classes_string();
-
+		
 		echo $blade->make($this->bladeFile, [
-			'classes'    => $classes,
-			'attributes' => array_filter($attrs, fn($k) => $k !== 'class', ARRAY_FILTER_USE_KEY),
+			'classes'    => $this->get_filtered_classes_string(),
+			'attributes' => $this->get_html_attributes(),
 			'children'   => $this->innerComponents
 		])->render();
 
