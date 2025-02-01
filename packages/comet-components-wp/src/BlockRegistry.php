@@ -361,7 +361,12 @@ class BlockRegistry extends JavaScriptImplementation {
 			$attributes = $this->process_button_block($block_instance)['attributes'];
 			$content = $this->process_button_block($block_instance)['content'];
 		}
+		// If this is an image block, add the src attribute
+		if ($block_name === 'core/image') {
+			$attributes['src'] = wp_get_attachment_image_url($attributes['id'], 'full');
+		}
 
+		// Figure out the component class to use:
 		// This is a block variant at the top level, such as an Accordion (variant of Panels)
 		if (isset($attributes['variant'])) {
 			// use the namespaced class name matching the variant name
@@ -374,13 +379,8 @@ class BlockRegistry extends JavaScriptImplementation {
 			$transformed_name = Utils::pascal_case("$variant-$block_name_trimmed");
 			$ComponentClass = self::get_comet_component_class($transformed_name);
 		}
-		// This is a regular block
-		else {
-			$ComponentClass = self::get_comet_component_class($block_name); // returns the namespaced class name matching the block name
-		}
-
 		// For the core group block, detect variation based on layout attributes and use that class instead
-		if ($block_name_trimmed === 'group') {
+		else if ($block_name_trimmed === 'group') {
 			$layout = $attributes['layout'];
 			$variation = match ($layout['type']) {
 				'flex' => isset($layout['orientation']) && $layout['orientation'] === 'vertical' ? 'stack' : 'row',
@@ -389,14 +389,13 @@ class BlockRegistry extends JavaScriptImplementation {
 			};
 			$ComponentClass = self::get_comet_component_class($variation);
 		}
+		// This is a regular block that is not a Group or variation of a Group
+		else {
+			$ComponentClass = self::get_comet_component_class($block_name); // returns the namespaced class name matching the block name
+		}
 
 		// Check what type of content to pass to it - an array, a string, etc
 		$content_type = self::get_comet_component_content_type($ComponentClass);
-
-		// If this is an image block, add the src attribute
-		if ($block_name === 'core/image') {
-			$attributes['src'] = wp_get_attachment_image_url($attributes['id'], 'full');
-		}
 
 		// Create the component object
 		// Self-closing tag components, e.g. <img>, only have attributes

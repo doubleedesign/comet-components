@@ -1,0 +1,65 @@
+{
+    "name": "Stack",
+    "attributes": {
+        "hAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start"
+        },
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div",
+                "section",
+                "header",
+                "footer",
+                "main",
+                "article",
+                "aside"
+            ],
+            "default": "div"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "stack"
+            ]
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        }
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true
+    }
+}

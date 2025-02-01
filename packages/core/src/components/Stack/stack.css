@@ -1,3 +1,15 @@
 .stack {
-
+  display: flex;
+  flex-direction: column;
 }
+.stack--halign-start {
+  align-items: start;
+}
+.stack--halign-center {
+  align-items: center;
+}
+.stack--halign-end {
+  align-items: flex-end;
+}
+
+/*# sourceMappingURL=stack.css.map */

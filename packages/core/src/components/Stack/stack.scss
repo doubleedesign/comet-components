@@ -1,0 +1,16 @@
+.stack {
+	display: flex;
+	flex-direction: column;
+
+	&--halign-start {
+		align-items: start;
+	}
+
+	&--halign-center {
+		align-items: center;
+	}
+
+	&--halign-end {
+		align-items: flex-end;
+	}
+}

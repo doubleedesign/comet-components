@@ -19,6 +19,20 @@
   max-width: var(--width-narrow);
 }
 
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+.stack--halign-start {
+  align-items: start;
+}
+.stack--halign-center {
+  align-items: center;
+}
+.stack--halign-end {
+  align-items: flex-end;
+}
+
 .columns {
   display: grid;
   grid-gap: var(--spacing-sm);
