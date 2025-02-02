@@ -17,9 +17,10 @@
 const COMET_VERSION = '0.0.1';
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Doubleedesign\Comet\WordPress\{EmbeddedPlugins, BlockRegistry, BlockEditorConfig, BlockEditorAdminAssets};
+use Doubleedesign\Comet\WordPress\{EmbeddedPlugins, BlockRegistry, BlockRenderer, BlockEditorConfig, BlockEditorAdminAssets};
 
 new EmbeddedPlugins();
 new BlockRegistry();
+new BlockRenderer();
 new BlockEditorConfig();
 new BlockEditorAdminAssets();
