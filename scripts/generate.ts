@@ -36,7 +36,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	// The template for the Blade template file that will be used to render the component
 	const bladeTemplateFile = readFileSync('./scripts/templates/template.blade.php', 'utf8');
 	// The template for the CSS file for non-trivial comopnents
-	const cssTemplateFile = readFileSync('./scripts/templates/template.css', 'utf8');
+	const cssTemplateFile = readFileSync('./scripts/templates/template.scss', 'utf8');
 	// The template for the sample usage/output file placed in a folder that will be used for testing
 	const testFileTemplate = readFileSync(`./scripts/templates/${Case.snake(componentType)}.php`, 'utf8');
 
@@ -88,7 +88,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	}
 
 	if(componentType !== 'simple') {
-		const cssPath = `./packages/core/src/components/${className}/${shortName}.css`;
+		const cssPath = `./packages/core/src/components/${className}/${shortName}.scss`;
 		const cssExists = existsSync(cssPath);
 		if(!cssExists) {
 			const cssOutput = cssTemplateFile.replace('component', shortName);
