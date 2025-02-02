@@ -7,8 +7,12 @@ wp.domReady(() => {
 
 	registerBlockType('comet/panels', {
 		edit: ({ attributes }) => {
+			const themeColors = wp.data.select('core/block-editor').getSettings().colors;
+			const colorThemeHex = attributes.style.elements.theme.color.background;
+			const colorThemeName = themeColors.find((color) => color.color === colorThemeHex).slug;
+
 			const blockProps = useBlockProps({
-				className: attributes.variant
+				className: [attributes.variant, `${attributes.variant}--theme-${colorThemeName}`].join(' '),
 			});
 			const template = [
 				['comet/panel'],

@@ -1,0 +1,13 @@
+// This file compiles component CSS adjusted for the WordPress block editor, to be loaded only in the back-end.
+// When I say "adjusted", that should just be for core components because we don't control their default HTML.
+@use "blocks";
+
+.wp-block-buttons {
+	@extend .button-group;
+}
+
+.wp-block-button__link {
+	padding: 0 !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+}

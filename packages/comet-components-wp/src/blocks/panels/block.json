@@ -39,10 +39,6 @@
 		"comet-accordion-style",
 		"comet-tabs-style"
 	],
-	"style": [
-		"comet-accordion-style",
-		"comet-tabs-style"
-	],
 	"providesContext": {
 		"comet/variant": "variant"
 	},

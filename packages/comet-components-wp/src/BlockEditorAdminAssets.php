@@ -11,16 +11,26 @@ class BlockEditorAdminAssets {
 			// Block editor is not available.
 			return;
 		}
-		add_action('enqueue_block_assets', [$this, 'enqueue_global_css'], 1);
-		add_action('enqueue_block_assets', [$this, 'enqueue_block_css'], 1);
+		// Global CSS - both front-end and editor
+		add_action('enqueue_block_assets', [$this, 'enqueue_comet_global_css'], 1);
+		// Front-end only CSS
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_comet_combined_component_css'], 1);
+		// Editor only CSS
+		if(is_admin()) {
+			add_action('enqueue_block_assets', [$this, 'enqueue_wp_block_css'], 100);
+			add_filter('block_editor_settings_all', [$this, 'remove_gutenberg_inline_styles']);
+		}
+
+		// Admin JS
 		add_action('admin_enqueue_scripts', [$this, 'admin_scripts']);
 	}
 
 	/**
 	 * Global stylesheet for basics like typography, colors, etc.
+	 * To be used both for the front-end and the back-end editor.
 	 * @return void
 	 */
-	function enqueue_global_css(): void {
+	function enqueue_comet_global_css(): void {
 		$currentDir = plugin_dir_url(__FILE__);
 		$pluginDir = dirname($currentDir, 1);
 		$global_css_path = $pluginDir . '/vendor/doubleedesign/comet-components-core/src/components/global.css';
@@ -28,14 +38,38 @@ class BlockEditorAdminAssets {
 	}
 
 	/**
-	 * Combined stylesheet for all blocks
+	 * Combined stylesheet for all blocks for the front-end
 	 * @return void
 	 */
-	function enqueue_block_css(): void {
+	function enqueue_comet_combined_component_css(): void {
 		$currentDir = plugin_dir_url(__FILE__);
 		$pluginDir = dirname($currentDir, 1);
 		$block_css_path = $pluginDir . '/src/blocks.css';
-		wp_enqueue_style('comet-block-styles', $block_css_path, array(), COMET_VERSION);
+		wp_enqueue_style('comet-component-styles', $block_css_path, array(), COMET_VERSION);
+	}
+
+	/**
+	 * Combined stylesheet for all blocks for the editor
+	 * @return void
+	 */
+	function enqueue_wp_block_css(): void {
+		$currentDir = plugin_dir_url(__FILE__);
+		$pluginDir = dirname($currentDir, 1);
+		$block_css_path = $pluginDir . '/src/editor.css';
+		wp_enqueue_style('comet-block-styles', $block_css_path, array('wp-edit-blocks'), COMET_VERSION);
+	}
+
+	/**
+	 * Remove default inline styles from the block editor
+	 * @param $editor_settings
+	 * @return mixed
+	 */
+	function remove_gutenberg_inline_styles($editor_settings): array {
+		if (!empty($editor_settings['styles'])) {
+			$editor_settings['styles'] = [];
+		}
+
+		return $editor_settings;
 	}
 
 	/**

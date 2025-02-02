@@ -6,8 +6,8 @@
  */
 wp.domReady(() => {
 	removeSomeCoreStylesAndVariations();
+	addCustomAttributesToCoreBlockHtml();
 });
-
 
 /**
  * Unregister unwanted core block styles and variations
@@ -22,4 +22,56 @@ function removeSomeCoreStylesAndVariations() {
 			wp.blocks.unregisterBlockVariation('core/embed', embed);
 		});
 	}, 200);
+}
+
+/**
+ * Add custom attributes (registered in PHP using Block Supports Extended plugin) as classes to core block HTML in the editor
+ * Note: This is for the editor only, the PHP render function customisations take care of the front-end
+ */
+function addCustomAttributesToCoreBlockHtml() {
+	const { addFilter } = wp.hooks;
+	const { select } = wp.data;
+	const { createElement } = wp.element;
+
+	addFilter(
+		'blocks.registerBlockType',
+		'comet/modify-button-block',
+		(settings, name) => {
+			if (name !== 'core/button') {
+				return settings;
+			}
+
+			const originalEdit = settings.edit;
+
+			settings.edit = (props) => {
+				const themeColors = React.useMemo(() => {
+					return select('core/block-editor').getSettings().colors;
+				}, []);
+
+				const colorThemeHex = React.useMemo(() => {
+					return props?.attributes?.style?.elements?.theme?.color?.background;
+				}, [props?.attributes?.style?.elements?.theme?.color?.background]);
+
+				const colorThemeName = React.useMemo(() => {
+					return themeColors?.find((color) => color.color === colorThemeHex)?.slug ?? 'primary';
+				}, [themeColors, colorThemeHex]);
+
+				const buttonClass = React.useMemo(() => {
+					if (props.attributes?.className?.includes('is-style-outline')) {
+						return `button button--${colorThemeName}--outline`;
+					}
+
+					return `button button--${colorThemeName}`;
+				}, [colorThemeName, props.attributes?.className]);
+
+				// Wrap the original edit component with our custom classes
+				return createElement('div',
+					{ className: buttonClass },
+					originalEdit(props)
+				);
+			};
+
+			return settings;
+		}
+	);
 }

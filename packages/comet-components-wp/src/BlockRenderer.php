@@ -127,17 +127,16 @@ class BlockRenderer {
 	 * @param WP_Block $block_instance
 	 * @return object|null
 	 */
-	private static function block_to_comet_component_object(WP_Block $block_instance): ?object {
+	private static function block_to_comet_component_object(WP_Block &$block_instance): ?object {
 		$block_name = $block_instance->name;
 		$block_name_trimmed = array_reverse(explode('/', $block_name))[0];
-		$attributes = $block_instance->attributes ?? [];
 		$content = $block_instance->parsed_block['innerHTML'] ?? '';
 		$innerComponents = $block_instance->inner_blocks ? self::process_innerblocks($block_instance) : [];
 
 		// Block-specific handling of attributes and content
 		if ($block_name === 'core/button') {
-			$attributes = self::process_button_block($block_instance)['attributes'];
-			$content = self::process_button_block($block_instance)['content'];
+			self::process_button_block($block_instance);
+			$content = $block_instance->attributes['content'];
 		}
 		if ($block_name === 'core/image') {
 			self::process_image_block($block_instance);
@@ -145,9 +144,9 @@ class BlockRenderer {
 
 		// Figure out the component class to use:
 		// This is a block variant at the top level, such as an Accordion (variant of Panels)
-		if (isset($attributes['variant'])) {
+		if (isset($block_instance->attributes['variant'])) {
 			// use the namespaced class name matching the variant name
-			$ComponentClass = self::get_comet_component_class($attributes['variant']);
+			$ComponentClass = self::get_comet_component_class($block_instance->attributes['variant']);
 		}
 		// This is a block within a variant that is providing its namespaced name via the providesContext property
 		else if (isset($block_instance->context['comet/variant'])) {
@@ -158,7 +157,7 @@ class BlockRenderer {
 		}
 		// For the core group block, detect variation based on layout attributes and use that class instead
 		else if ($block_name_trimmed === 'group') {
-			$layout = $attributes['layout'];
+			$layout = $block_instance->attributes['layout'];
 			$variation = match ($layout['type']) {
 				'flex' => isset($layout['orientation']) && $layout['orientation'] === 'vertical' ? 'stack' : 'row',
 				'grid' => 'grid',
@@ -177,15 +176,17 @@ class BlockRenderer {
 		// Create the component object
 		// Self-closing tag components, e.g. <img>, only have attributes
 		if ($content_type[0] === 'is-self-closing') {
-			$component = new $ComponentClass($attributes);
+			$component = new $ComponentClass($block_instance->attributes);
 		}
 		// Most components will have string content or an array of inner components
 		else if (count($content_type) === 1) {
-			$component = $content_type[0] === 'array' ? new $ComponentClass($attributes, $innerComponents) : new $ComponentClass($attributes, $content);
+			$component = $content_type[0] === 'array'
+				? new $ComponentClass($block_instance->attributes, $innerComponents)
+				: new $ComponentClass($block_instance->attributes, $content);
 		}
 		// Some can have both, e.g. list items can have text content and nested lists
 		else if (count($content_type) === 2) {
-			$component = new $ComponentClass($attributes, $content, $innerComponents);
+			$component = new $ComponentClass($block_instance->attributes, $content, $innerComponents);
 		}
 
 		return $component ?? null;
@@ -264,17 +265,19 @@ class BlockRenderer {
 	 * @return void
 	 */
 	static function process_image_block(WP_Block &$block_instance): void {
-		if(!isset($block['attrs']['id'])) return;
+		if(!isset($block_instance->attributes['id'])) return;
 
-		$size = $attrs['sizeSlug'] ?? 'full';
-		$block_instance['attrs']['src'] = wp_get_attachment_image_url($block_instance['attrs']['id'], $size);
-		$block_instance['attrs']['alt'] = get_post_meta($block_instance['attrs']['id'], '_wp_attachment_image_alt', true) ?? '';
-		$block_instance['attrs']['caption'] = wp_get_attachment_caption($block_instance['attrs']['id']) ?? null;
-		$block_instance['attrs']['title'] = get_the_title($block_instance['attrs']['id']) ?? null;
+		$size = $block_instance->attributes['sizeSlug'] ?? 'full';
+		$id = $block_instance->attributes['id'];
 
-		$block_content = $block['innerHTML'];
+		$block_instance->attributes['src'] = wp_get_attachment_image_url($id, $size);
+		$block_instance->attributes['alt'] = get_post_meta($id, '_wp_attachment_image_alt', true) ?? '';
+		$block_instance->attributes['caption'] = wp_get_attachment_caption($id) ?? null;
+		$block_instance->attributes['title'] = get_the_title($id) ?? null;
+
+		$block_content = $block_instance->parsed_block['innerHTML'];
 		preg_match('/href="([^"]+)"/', $block_content, $matches);
-		$block_instance['attrs']['href'] = $matches[1] ?? null;
+		$block_instance->attributes['href'] = $matches[1] ?? null;
 	}
 
 	/**
@@ -282,14 +285,14 @@ class BlockRenderer {
 	 * @param WP_Block $block_instance
 	 * @return array
 	 */
-	static function process_button_block(WP_Block $block_instance): array {
+	static function process_button_block(WP_Block $block_instance): void {
 		$attributes = $block_instance->attributes;
 		$raw_content = $block_instance->parsed_block['innerHTML'];
 		$content = '';
 
 		// Process custom attributes
 		if(isset($attributes['style'])) {
-			$attributes['colorTheme'] = self::hex_to_theme_color_name($attributes['style']['elements']['theme']['color']['text']) ?? null;
+			$attributes['colorTheme'] = self::hex_to_theme_color_name($attributes['style']['elements']['theme']['color']['background']) ?? null;
 			unset($attributes['style']);
 		}
 
@@ -327,10 +330,8 @@ class BlockRenderer {
 			$content .= $dom->saveHTML($child);
 		}
 
-		return [
-			'attributes' => $attributes,
-			'content'    => $content
-		];
+		$block_instance->attributes = $attributes;
+		$block_instance->attributes['content'] = $content;
 	}
 
 	/**

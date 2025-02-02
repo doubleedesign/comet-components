@@ -10,6 +10,7 @@
 	cursor: pointer;
 	transition: all 0.3s;
 	text-decoration: none;
+	border-radius: var(--button-border-radius);
 
 	> span {
 		text-decoration: underline;

@@ -232,6 +232,8 @@ class BlockRegistry extends JavaScriptImplementation {
 
 		Block_Supports_Extended\register('color', 'theme', [
 			'label'  => __('Colour theme'),
+			'property' => 'background',
+			'selector' => '.%1$s wp-block-button__link',
 			'blocks' => ['comet/panels', 'core/button'],
 		]);
 
