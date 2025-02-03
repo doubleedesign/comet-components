@@ -37,5 +37,6 @@ body {
 @each $name, $color in $colors {
 	.bg-#{$name} {
 		background-color: $color;
+		color: var(--readable-color-#{$name});
 	}
 }

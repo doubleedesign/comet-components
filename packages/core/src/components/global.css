@@ -62,34 +62,42 @@ body {
 
 .bg-primary {
   background-color: #845ec2;
+  color: var(--readable-color-primary);
 }
 
 .bg-secondary {
   background-color: #00c9a7;
+  color: var(--readable-color-secondary);
 }
 
 .bg-accent {
   background-color: #ba3caf;
+  color: var(--readable-color-accent);
 }
 
 .bg-warning {
   background-color: #f9c971;
+  color: var(--readable-color-warning);
 }
 
 .bg-error {
   background-color: #d23e3e;
+  color: var(--readable-color-error);
 }
 
 .bg-light {
   background-color: #F0F0F2;
+  color: var(--readable-color-light);
 }
 
 .bg-dark {
   background-color: #4b4453;
+  color: var(--readable-color-dark);
 }
 
 .bg-white {
   background-color: #ffffff;
+  color: var(--readable-color-white);
 }
 
 /*# sourceMappingURL=global.css.map */
