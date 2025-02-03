@@ -132,6 +132,15 @@
 .button-group--stacked {
   flex-direction: column;
 }
+.button-group--stacked.button-group--halign-start {
+  align-items: flex-start;
+}
+.button-group--stacked.button-group--halign-center {
+  align-items: center;
+}
+.button-group--stacked.button-group--halign-end {
+  align-items: flex-end;
+}
 
 .button {
   display: inline-block;
@@ -141,10 +150,12 @@
   cursor: pointer;
   transition: all 0.3s;
   text-decoration: none;
+  border-radius: var(--button-border-radius);
 }
 .button > span {
   text-decoration: underline;
   text-decoration-color: transparent;
+  transition: text-decoration-color 0.3s, color 0.3s;
 }
 .button:hover > span, .button:focus > span, .button:active > span {
   text-decoration-color: currentColor;

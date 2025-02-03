@@ -30,18 +30,26 @@
 	},
 	"categories": [
 		{
-			"name": "Text",
+			"name": "Basic text",
 			"slug": "text",
 			"icon": "",
 			"blocks": [
 				"core/heading",
 				"core/paragraph",
-				"core/pullquote",
 				"core/quote",
 				"core/list",
 				"core/buttons",
 				"core/details",
 				"core/table"
+			]
+		},
+		{
+			"name": "Featured text",
+			"slug": "featured-text",
+			"icon": "",
+			"blocks": [
+				"comet/call-to-action",
+				"core/pullquote"
 			]
 		},
 		{
@@ -58,7 +66,7 @@
 			]
 		},
 		{
-			"name": "Grouping",
+			"name": "Content grouping",
 			"slug": "grouping",
 			"icon": "",
 			"blocks": [
@@ -87,7 +95,7 @@
 			]
 		},
 		{
-			"name": "Content",
+			"name": "Dynamic content",
 			"slug": "content",
 			"icon": "",
 			"blocks": [

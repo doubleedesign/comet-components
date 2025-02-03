@@ -15,5 +15,14 @@
 .button-group--stacked {
   flex-direction: column;
 }
+.button-group--stacked.button-group--halign-start {
+  align-items: flex-start;
+}
+.button-group--stacked.button-group--halign-center {
+  align-items: center;
+}
+.button-group--stacked.button-group--halign-end {
+  align-items: flex-end;
+}
 
 /*# sourceMappingURL=button-group.css.map */

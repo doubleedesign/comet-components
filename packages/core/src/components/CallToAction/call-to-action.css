@@ -1,0 +1,13 @@
+.call-to-action {
+  padding: var(--spacing-sm);
+}
+@container (min-width: 960px) {
+  .call-to-action {
+    padding: var(--spacing-md);
+  }
+}
+.call-to-action .button-group:last-child {
+  padding-block-end: 0;
+}
+
+/*# sourceMappingURL=call-to-action.css.map */
