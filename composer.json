@@ -25,18 +25,19 @@
 			]
 		}
 	},
+	"require": {
+		"ext-dom": "*",
+		"ext-libxml": "*"
+	},
 	"require-dev": {
 		"brain/monkey": "^2.6.2",
 		"phpunit/phpunit": "9.6.22",
 		"roots/wordpress": "^6.7"
 	},
 	"config": {
+		"preferred-install": "source",
 		"allow-plugins": {
 			"roots/wordpress-core-installer": true
 		}
-	},
-	"require": {
-		"ext-dom": "*",
-		"ext-libxml": "*"
 	}
 }
