@@ -30,6 +30,11 @@ abstract class Renderable {
 	 */
 	protected ?array $style = null;
 	/**
+	 * @var ?string $context
+	 * @description The parent component or variant if contextually relevant
+	 */
+	protected ?string $context = null;
+	/**
 	 * The dot-delimited path to the Blade template file
 	 * @var string
 	 */
@@ -46,6 +51,7 @@ abstract class Renderable {
 		$this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
 		$this->bladeFile = $bladeFile;
 		$this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
+		$this->context = $attributes['context'] ?? null;
 
 		$classes = [];
 		// Handle WordPress block implementation of classes (className string)
@@ -68,6 +74,20 @@ abstract class Renderable {
 		return $this->id;
 	}
 
+	protected function get_bem_name(): ?string {
+		if($this->context) {
+			$kebabContext = Utils::kebab_case($this->context);
+			$shortNameToUse = $this->shortName;
+			if(str_starts_with($this->shortName, $kebabContext)) {
+				$shortNameToUse = str_replace("$kebabContext-", '', $this->shortName);
+			}
+
+			return $this->context . '__' . $shortNameToUse;
+		}
+
+		return $this->shortName;
+	}
+
 	/**
 	 * Get the valid/supported classes for this component
 	 * Note: Supported classes noted in docblocks refer to those that have been accounted for in CSS.
@@ -81,9 +101,12 @@ abstract class Renderable {
 		$current_classes = $this->classes;
 		$redundant_classes = ['is-style-default'];
 
-		return array_filter($current_classes, function ($class) use ($redundant_classes) {
-			return !in_array($class, $redundant_classes);
-		});
+		return array_merge(
+			[$this->get_bem_name()],
+			array_filter($current_classes, function ($class) use ($redundant_classes) {
+				return !in_array($class, $redundant_classes);
+			})
+		);
 	}
 
 	/**

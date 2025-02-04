@@ -17,8 +17,14 @@ class Utils {
 		// Convert slashes so this works on namespaced block names
 		$value = str_replace('/', '-', $value);
 
+		// Also replace double underscores (used for BEM naming manipulations)
+		$value = str_replace('__', '-', $value);
+
 		// Convert whitespace to hyphens and make lowercase
-		return trim(strtolower(preg_replace('/\s+/', '-', $value)));
+		$value = trim(strtolower(preg_replace('/\s+/', '-', $value)));
+
+		// Trim any leading or trailing hyphens
+		return trim($value, '-');
 	}
 
 	/**

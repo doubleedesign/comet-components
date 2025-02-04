@@ -11,3 +11,18 @@
 	border: 0 !important;
 	border-radius: 0 !important;
 }
+
+// flex layout support is used solely to enable the orientation setting in the editor,
+// but it then breaks the visual layout so we need to hack it here
+.wp-block-comet-panels-is-layout-flex {
+	display: block !important;
+}
+
+.accordion {
+	details {
+		> .block-editor-inner-blocks,
+		> .block-editor-inner-blocks > .block-editor-block-list__layout {
+			display: contents;
+		}
+	}
+}

@@ -33,6 +33,14 @@
 		"variant": {
 			"type": "string",
 			"default": "comet/accordion"
+		},
+		"orientation": {
+			"type": "string",
+			"enum": [
+				"horizontal",
+				"vertical"
+			],
+			"default": "horizontal"
 		}
 	},
 	"editorStyle": [
@@ -40,7 +48,8 @@
 		"comet-tabs-style"
 	],
 	"providesContext": {
-		"comet/variant": "variant"
+		"comet/variant": "variant",
+		"comet/orientation": "orientation"
 	},
 	"variations": [
 		{
@@ -72,10 +81,10 @@
 			],
 			"isActive": [
 				"variant",
-				"tabs"
+				"tab"
 			],
 			"attributes": {
-				"variant": "tabs"
+				"variant": "tab"
 			}
 		}
 	],
@@ -98,7 +107,15 @@
 		},
 		"layout": {
 			"allowEditing": true,
-			"allowOrientation": true
+			"allowSwitching": false,
+			"allowJustification": false,
+			"allowVerticalAlignment": false,
+			"allowOrientation": true,
+			"allowInheriting": false,
+			"default": {
+				"type": "flex",
+				"flexWrap": "wrap"
+			}
 		}
 	}
 }

@@ -21,7 +21,9 @@ wp.domReady(() => {
 				}]
 			];
 
-			return createElement('div',
+			const tag = variant === 'accordion' ? 'details' : 'div';
+
+			return createElement(tag,
 				blockProps,
 				createElement(InnerBlocks, {
 					allowedBlocks: ['comet/panel-title', 'comet/panel-content'],

@@ -77,9 +77,18 @@ abstract class TextElement extends Renderable {
 	 */
 	function get_filtered_classes(): array {
 		$current_classes = parent::get_filtered_classes();
+		$bem_name = $this->get_bem_name();
 
+		// Add classes specific to this component
 		if ($this->textColor) {
 			$current_classes[] = 'text-' . $this->textColor;
+		}
+
+		// I want the BEM name in Renderable so it gets applied to all other component types,
+		// and text elements with explicit context,
+		// but don't want it for most basic text elements like headings and paragraphs
+		if(!$this->context) {
+			unset($current_classes[array_search($bem_name, $current_classes)]);
 		}
 
 		return $current_classes;

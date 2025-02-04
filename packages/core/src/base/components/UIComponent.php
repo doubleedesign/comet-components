@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use RuntimeException, InvalidArgumentException;
+use InvalidArgumentException;
 
 abstract class UIComponent extends Renderable {
 	use HasAllowedTags;
@@ -16,13 +16,6 @@ abstract class UIComponent extends Renderable {
 	 * @description The HTML tag to use for this component
 	 */
 	protected ?Tag $tagName = Tag::DIV;
-
-	/**
-	 * @var ?string $context
-	 * @description The parent component or variant if contextually relevant
-	 */
-	private ?string $context;
-
 
 	/**
 	 * Specify allowed Tags using the HasAllowedTags trait
@@ -41,7 +34,6 @@ abstract class UIComponent extends Renderable {
 	function __construct(array $attributes, array $innerComponents, string $bladeFile) {
 		parent::__construct($attributes, $bladeFile);
 		$this->innerComponents = $innerComponents;
-		$this->context = $attributes['context'] ?? null;
 
 		// If tagName is set, validate it before setting the property
 		try {
@@ -63,20 +55,6 @@ abstract class UIComponent extends Renderable {
 			// Default to div if the tag was invalid
 			$this->tagName = Tag::DIV;
 		}
-	}
-
-	/**
-	 * Filter the classes to what's valid/supported for this component
-	 * plus its name as the first class
-	 * @return array<string>
-	 */
-	protected function get_filtered_classes(): array {
-		$bem_name = isset($this->context) ? $this->context . '__' . $this->shortName : $this->shortName;
-
-		return array_merge(
-			[$bem_name],
-			parent::get_filtered_classes()
-		);
 	}
 
 	/**

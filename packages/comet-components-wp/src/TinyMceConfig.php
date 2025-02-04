@@ -20,12 +20,19 @@ class TinyMceConfig {
 	 * @return array
 	 */
 	static function get_theme(): array {
-		$json = file_get_contents(get_stylesheet_directory() . '/theme.json');
-		if (!$json) {
-			$json = file_get_contents(get_template_directory() . '/theme.json');
+		$theme = get_stylesheet_directory() . '/theme.json';
+		$parent = get_template_directory() . '/theme.json';
+		$plugin = __DIR__ . '/theme.json';
+		$json = null;
+
+		if (file_exists($theme)) {
+			$json = file_get_contents($theme);
 		}
-		if ($json) {
-			$json = file_get_contents(__DIR__ . '/theme.json');
+		else if (file_exists($parent)) {
+			$json = file_get_contents($parent);
+		}
+		else if (file_exists($plugin)) {
+			$json = file_get_contents($plugin);
 		}
 
 		$colours = $json ? json_decode($json, true)['settings']['color']['palette'] : [];

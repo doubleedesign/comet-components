@@ -6,6 +6,7 @@ use DOMDocument;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 use ReflectionClass, ReflectionProperty, Closure, ReflectionException;
+use Symfony\Component\Translation\Exception\RuntimeException;
 use WP_Block_Type_Registry, WP_Block;
 
 class BlockRenderer {
@@ -89,13 +90,11 @@ class BlockRenderer {
 	 * @return string
 	 */
 	static function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
-		// Process all inner image blocks and add the relevant attributes as Comet expects
-		// self::add_attributes_to_image_blocks($innerComponents); // TODO is this still needed and does it still work?
 
+		// TODO: Update this if it's still needed
 		// For variant children in context, prepend the variant name to the block name so the correct component will be found
 		// e.g. Panel in an Accordion = AccordionPanel
 		// $attributes['variant'] indicates we are at the top level
-		// TODO Update this
 //		if (isset($innerComponents) && isset($attributes['variant'])) {
 //			self::apply_variant_context($attributes['variant'], $innerComponents);
 //		}
@@ -146,7 +145,11 @@ class BlockRenderer {
 		// This is a block variant at the top level, such as an Accordion (variant of Panels)
 		if (isset($block_instance->attributes['variant'])) {
 			// use the namespaced class name matching the variant name
-			$ComponentClass = self::get_comet_component_class($block_instance->attributes['variant']);
+			if($block_instance->attributes['variant'] === 'tab') {
+				$ComponentClass = self::get_comet_component_class('comet/tabs');
+			} else {
+				$ComponentClass = self::get_comet_component_class($block_instance->attributes['variant']);
+			}
 		}
 		// This is a block within a variant that is providing its namespaced name via the providesContext property
 		else if (isset($block_instance->context['comet/variant'])) {

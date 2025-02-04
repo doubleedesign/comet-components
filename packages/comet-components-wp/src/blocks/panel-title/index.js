@@ -9,16 +9,22 @@ wp.domReady(() => {
 		edit: function({ context, attributes, setAttributes }) {
 			const variant = context['comet/variant'];
 			const blockProps = useBlockProps({
-				className: `${variant}__panel__title`
+				className: variant === 'tab' ? 'tabs__tab-list__item' : `${variant}__panel__title`
 			});
 
-			return createElement(RichText, {
+			const element = createElement(RichText, {
 				...blockProps,
-				tagName: 'span',
+				tagName: variant === 'tab' ? 'li' : 'summary',
 				value: attributes.content,
 				onChange: (content) => setAttributes({ content }),
 				placeholder: attributes.placeholder
 			});
+
+			if(variant === 'tab') {
+				return createElement('ul', { className: 'tabs__tab-list' }, element);
+			}
+
+			return element;
 		},
 		save: function({ attributes }) {
 			return createElement(RichText.Content, {

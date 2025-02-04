@@ -303,4 +303,13 @@
   border-radius: 0 !important;
 }
 
+.wp-block-comet-panels-is-layout-flex {
+  display: block !important;
+}
+
+.accordion details > .block-editor-inner-blocks,
+.accordion details > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: contents;
+}
+
 /*# sourceMappingURL=editor.css.map */
