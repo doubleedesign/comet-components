@@ -43,7 +43,7 @@ class Healthcheck {
 			$this->log_with_colour('Unimplemented render methods: 0', 'green');
 		}
 
-		if(count($missingScss) > 0) {
+		if (count($missingScss) > 0) {
 			$this->log_with_colour('Missing SCSS imports in WordPress plugin: ' . count($missingScss), 'yellow');
 		}
 		else {
@@ -69,7 +69,7 @@ class Healthcheck {
 
 		foreach ($all as $dir) {
 			$componentName = basename($dir);
-			if (!file_exists($this->componentDir . $componentName . '.json')) {
+			if (!file_exists($this->componentDir . '\\' . $componentName . '\\' . $componentName . '.json')) {
 				$fileCollections['JSON'][] = $componentName;
 			}
 			if (!glob($dir . '\\*.blade.php')) {
@@ -163,7 +163,7 @@ class Healthcheck {
 		foreach ($all as $dir) {
 			$componentName = basename($dir);
 			$scssFileName = self::kebab_case($componentName) . '.scss';
-			if(file_exists($dir . '\\' . $scssFileName)) {
+			if (file_exists($dir . '\\' . $scssFileName)) {
 				$scssFiles[] = trim($scssFileName);
 			}
 		}
