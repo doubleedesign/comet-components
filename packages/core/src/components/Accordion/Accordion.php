@@ -3,6 +3,8 @@ namespace Doubleedesign\Comet\Core;
 
 class Accordion extends UIComponent {
 	use HasAllowedTags;
+	/** @var array<AccordionPanel> */
+	protected array $innerComponents;
 
 	/**
 	 * Specify allowed Tags using the HasAllowedTags trait

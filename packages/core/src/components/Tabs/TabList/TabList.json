@@ -1,14 +1,15 @@
 {
-    "name": "AccordionPanel",
+    "name": "TabList",
     "extends": "UIComponent",
     "attributes": {
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "details"
+                "ul",
+                "ol"
             ],
-            "default": "details"
+            "default": "ul"
         },
         "id": {
             "type": "string",
@@ -18,7 +19,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion__panel"
+                "tabs__tab-list"
             ]
         },
         "style": {
@@ -31,8 +32,8 @@
         }
     },
     "innerComponents": {
-        "type": "array<AccordionPanelTitle|AccordionPanelContent>",
-        "description": "Inner components to be rendered within this component",
+        "type": "array<TabPanelTitle>",
+        "description": "Items to make up the tab list / links.",
         "required": true
     }
 }

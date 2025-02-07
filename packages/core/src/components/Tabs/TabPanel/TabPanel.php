@@ -2,6 +2,8 @@
 namespace Doubleedesign\Comet\Core;
 
 class TabPanel extends UIComponent {
+	/** @var array<TabPanelTitle|TabPanelContent> */
+	protected array $innerComponents;
 	/**
 	 * Specify allowed Tags using the HasAllowedTags trait
 	 * @return array<Tag>

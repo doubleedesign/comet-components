@@ -1,5 +1,5 @@
 {
-    "name": "AccordionPanel",
+    "name": "Details",
     "extends": "UIComponent",
     "attributes": {
         "tagName": {
@@ -18,7 +18,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion__panel"
+                "details"
             ]
         },
         "style": {
@@ -31,7 +31,7 @@
         }
     },
     "innerComponents": {
-        "type": "array<AccordionPanelTitle|AccordionPanelContent>",
+        "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
         "required": true
     }

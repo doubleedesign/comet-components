@@ -1,14 +1,14 @@
 {
-    "name": "AccordionPanel",
+    "name": "TabPanelContent",
     "extends": "UIComponent",
     "attributes": {
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "details"
+                "div"
             ],
-            "default": "details"
+            "default": "div"
         },
         "id": {
             "type": "string",
@@ -18,7 +18,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion__panel"
+                "tab-panel-content"
             ]
         },
         "style": {
@@ -31,7 +31,7 @@
         }
     },
     "innerComponents": {
-        "type": "array<AccordionPanelTitle|AccordionPanelContent>",
+        "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
         "required": true
     }

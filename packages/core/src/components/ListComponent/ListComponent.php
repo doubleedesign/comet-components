@@ -1,9 +1,24 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use RuntimeException;
 
 class ListComponent extends UIComponent {
+	use hasAllowedTags;
+
 	private bool $ordered;
+	protected ?Tag $tagName = Tag::UL;
+	/**
+	 * @var array<ListItem>
+	 * @description List item objects to render inside this list
+	 */
+	protected array $innerComponents;
+
+	/**
+	 * Specify allowed Tags using the HasAllowedTags trait
+	 * @return array<Tag>
+	 */
+	protected static function get_allowed_wrapping_tags(): array {
+		return [Tag::UL, Tag::OL]; // TODO: Implement definition lists
+	}
 
 	function __construct(array $attributes, array $innerComponents) {
 		$this->ordered = $attributes['ordered'] ?? false;

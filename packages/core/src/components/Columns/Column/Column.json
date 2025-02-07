@@ -1,5 +1,6 @@
 {
     "name": "Column",
+    "extends": "LayoutComponent",
     "attributes": {
         "hAlign": {
             "type": "Alignment",
@@ -23,15 +24,26 @@
             ],
             "default": "start"
         },
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
+        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div",
-                "section",
-                "main",
-                "article",
-                "aside"
+                "div"
             ],
             "default": "div"
         },
@@ -48,7 +60,11 @@
         },
         "style": {
             "type": "array",
-            "description": "Inline styles, or in WordPress a style object"
+            "description": "Inline styles"
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
         }
     },
     "innerComponents": {

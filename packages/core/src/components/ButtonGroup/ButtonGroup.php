@@ -7,6 +7,12 @@ class ButtonGroup extends UIComponent {
 	protected ?Alignment $hAlign = Alignment::START;
 	protected ?Orientation $orientation = Orientation::HORIZONTAL;
 
+	/**
+	 * @var array<Button>
+	 * @description Button objects to render inside the ButtonGroup
+	 */
+	protected array $innerComponents;
+
 	protected static function get_allowed_wrapping_tags(): array {
 		return [Tag::DIV];
 	}

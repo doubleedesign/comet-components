@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class Paragraph extends TextElement {
+class Paragraph extends TextElementExtended {
 	use HasAllowedTags;
 
 	/**

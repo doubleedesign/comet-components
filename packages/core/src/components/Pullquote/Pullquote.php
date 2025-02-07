@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class Pullquote extends TextElement {
+class Pullquote extends TextElementExtended {
 	function __construct(array $attributes, string $content) {
 		parent::__construct($attributes, $content, 'components.Pullquote.pullquote');
 	}

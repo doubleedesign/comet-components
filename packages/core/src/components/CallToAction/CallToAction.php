@@ -2,7 +2,19 @@
 namespace Doubleedesign\Comet\Core;
 
 class CallToAction extends UIComponent {
+	use HasAllowedTags;
+
 	protected ?ThemeColor $backgroundColor;
+	/** @var array<Heading|Paragraph|ButtonGroup> */
+	protected array $innerComponents;
+
+	/**
+	 * Specify allowed Tags using the HasAllowedTags trait
+	 * @return array<Tag>
+	 */
+	protected static function get_allowed_wrapping_tags(): array {
+		return [Tag::DIV, Tag::SECTION, Tag::ASIDE];
+	}
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.CallToAction.call-to-action');

@@ -69,7 +69,7 @@ class Healthcheck {
 
 		foreach ($all as $dir) {
 			$componentName = basename($dir);
-			if (!file_exists($this->componentDir . '\\' . $componentName . '\\' . $componentName . '.json')) {
+			if (!file_exists($dir . '\\' . $componentName . '.json')) {
 				$fileCollections['JSON'][] = $componentName;
 			}
 			if (!glob($dir . '\\*.blade.php')) {
@@ -219,11 +219,11 @@ class Healthcheck {
 			$contents = scandir($dir);
 
 			$subDirs = array_filter($contents, function ($subDir) use ($dir) {
-				return is_dir($dir . '\\' . $subDir) && !in_array($subDir, ['.', '..']);
+				return is_dir($dir . $subDir) && !in_array($subDir, ['.', '..']);
 			});
 
 			foreach ($subDirs as $subDir) {
-				$allDirs[] = $dir . '\\' . $subDir;
+				$allDirs[] = $dir . $subDir;
 			}
 		}
 

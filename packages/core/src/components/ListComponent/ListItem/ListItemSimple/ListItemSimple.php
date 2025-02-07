@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class ListItemSimple extends TextElement {
+class ListItemSimple extends TextElementExtended {
 	use HasAllowedTags;
 
 	protected ?Tag $tagName = Tag::LI;

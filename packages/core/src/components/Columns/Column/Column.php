@@ -15,7 +15,7 @@ class Column extends LayoutComponent {
 	 * @return array<Tag>
 	 */
 	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::DIV, Tag::SECTION, Tag::MAIN, Tag::ARTICLE, Tag::ASIDE];
+		return [Tag::DIV];
 	}
 
 

@@ -1,8 +1,19 @@
 {
-    "name": "Stack",
-    "extends": "UIComponent",
+    "name": "Group",
+    "extends": "LayoutComponent",
     "attributes": {
         "hAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start"
+        },
+        "vAlign": {
             "type": "Alignment",
             "supported": [
                 "start",
@@ -50,7 +61,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "stack"
+                "group"
             ]
         },
         "style": {

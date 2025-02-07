@@ -3,6 +3,11 @@ namespace Doubleedesign\Comet\Core;
 
 class Tabs extends UIComponent {
 	use HasAllowedTags;
+	/**
+	 * @var array<TabPanel>
+	 * @description Wrapping components each containing a TabPanelTitle and TabPanelContent.
+	 */
+	protected array $innerComponents;
 
 	protected ?Orientation $orientation = Orientation::HORIZONTAL;
 

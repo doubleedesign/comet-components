@@ -1,6 +1,26 @@
 {
     "name": "ButtonGroup",
+    "extends": "UIComponent",
     "attributes": {
+        "hAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start"
+        },
+        "orientation": {
+            "type": "Orientation",
+            "supported": [
+                "horizontal",
+                "vertical"
+            ],
+            "default": "horizontal"
+        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
@@ -23,11 +43,15 @@
         "style": {
             "type": "array",
             "description": "Inline styles"
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
         }
     },
     "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
+        "type": "array<Button>",
+        "description": "Button objects to render inside the ButtonGroup",
         "required": true
     }
 }

@@ -3,12 +3,7 @@ namespace Doubleedesign\Comet\Core;
 
 class Container extends UIComponent {
 	use HasAllowedTags;
-
-	/**
-	 * @var array<Renderable> $innerComponents
-	 * @description Inner components to be rendered within this component
-	 */
-	protected array $innerComponents;
+	
 	/**
 	 * @var ?Tag $tagName
 	 * @description The HTML tag to use for this component

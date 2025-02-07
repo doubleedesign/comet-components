@@ -1,5 +1,6 @@
 {
     "name": "AccordionPanelContent",
+    "extends": "UIComponent",
     "attributes": {
         "tagName": {
             "type": "Tag",
@@ -17,12 +18,16 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion__panel__accordion-panel-content"
+                "accordion__panel__content"
             ]
         },
         "style": {
             "type": "array",
-            "description": "Inline styles, or in WordPress a style object"
+            "description": "Inline styles"
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
         }
     },
     "innerComponents": {

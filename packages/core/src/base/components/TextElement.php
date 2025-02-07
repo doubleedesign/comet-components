@@ -7,17 +7,13 @@ abstract class TextElement extends Renderable {
 
 	/**
 	 * @var string $content
-	 * @description plain text or basic HTML
+	 * @description Plain text or basic HTML
 	 */
 	protected string $content;
 	/**
 	 * @var Alignment|null $textAlign
 	 */
 	protected ?Alignment $textAlign = Alignment::MATCH_PARENT;
-	/**
-	 * @var string|null $textColor
-	 */
-	protected ?string $textColor = null;
 
 	/**
 	 * Specify default allowed Tags using the HasAllowedTags trait
@@ -32,7 +28,7 @@ abstract class TextElement extends Renderable {
 		parent::__construct($attributes, $bladeFile);
 		$this->content = $content;
 		$this->textAlign = isset($attributes['textAlign']) ? Alignment::tryFrom($attributes['textAlign']) : null;
-		$this->textColor = isset($attributes['textColor']) ?? null;
+
 		// If tagName is set, validate it before setting the property
 		try {
 			if (isset($attributes['tagName'])) {
@@ -79,15 +75,10 @@ abstract class TextElement extends Renderable {
 		$current_classes = parent::get_filtered_classes();
 		$bem_name = $this->get_bem_name();
 
-		// Add classes specific to this component
-		if ($this->textColor) {
-			$current_classes[] = 'text-' . $this->textColor;
-		}
-
 		// I want the BEM name in Renderable so it gets applied to all other component types,
 		// and text elements with explicit context,
 		// but don't want it for most basic text elements like headings and paragraphs
-		if(!$this->context) {
+		if (!$this->context) {
 			unset($current_classes[array_search($bem_name, $current_classes)]);
 		}
 

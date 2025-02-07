@@ -35,6 +35,7 @@ class ComponentClassesToJsonDefinitions {
 
 	/** @noinspection PhpUnhandledExceptionInspection */
 	public function runSingle($component): void {
+
 		// First try direct path
 		$filePath = $this->directory . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
@@ -68,6 +69,29 @@ class ComponentClassesToJsonDefinitions {
 		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
 			$this->processFile($filePath);
+			return;
+		}
+
+		// shortened singular to plural based on PascalCase, e.g. TabPanel is inside Tabs
+		$baseFolder = $matches[0][0] . 's';
+		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+		if (file_exists($filePath)) {
+			$this->processFile($filePath);
+			return;
+		}
+
+		// Specific edge cases
+		if (in_array($component, ['ListItem', 'ListItemSimple', 'ListItemComplex'])) {
+			if ($component === 'ListItem') {
+				$filePath = $this->directory . '\ListComponent\ListItem\ListItem.php';
+			}
+			else {
+				$filePath = $this->directory . '\ListComponent\ListItem\\' . $component . "\\$component.php";
+			}
+			if (file_exists($filePath)) {
+				$this->processFile($filePath);
+				return;
+			}
 		}
 		else {
 			throw new RuntimeException("Component $component not found");
@@ -109,6 +133,7 @@ class ComponentClassesToJsonDefinitions {
 	 */
 	private function analyseClass(ReflectionClass $reflectionClass): array {
 		$className = $reflectionClass->getName();
+		$parentClass = $reflectionClass->getParentClass();
 		if (isset($this->processedClasses[$className])) {
 			return $this->processedClasses[$className];
 		}
@@ -144,6 +169,7 @@ class ComponentClassesToJsonDefinitions {
 
 		$result = [
 			'name'       => array_reverse(explode('\\', $className))[0],
+			'extends'    => $parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null,
 			'attributes' => array_filter($properties, function ($key) {
 				return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
 			}, ARRAY_FILTER_USE_KEY)
@@ -212,6 +238,22 @@ class ComponentClassesToJsonDefinitions {
 		$docComment = $property->getDocComment();
 		if ($docComment && preg_match('/@description\s+(.+)/', $docComment, $matches)) {
 			$description = trim($matches[1]);
+		}
+		// Try to get description from parent class if it exists
+		else {
+			$parentClass = $this->declaringClass->getParentClass();
+			if ($parentClass) {
+				try {
+					$parentProperty = $parentClass->getProperty($property->getName());
+					$parentDocComment = $parentProperty->getDocComment();
+					if ($parentDocComment && preg_match('/@description\s+(.+)/', $parentDocComment, $matches)) {
+						$description = trim($matches[1]);
+					}
+				}
+				catch (ReflectionException $e) {
+					// Property doesn't exist in parent class
+				}
+			}
 		}
 		if ($docComment && preg_match('/@supported-values\s+(.+)/', $docComment, $matches)) {
 			$supportedValues = array_map('trim', explode(',', $matches[1]));
