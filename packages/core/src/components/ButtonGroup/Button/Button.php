@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class Button extends TextElement {
+class Button extends Renderable {
 	use HasAllowedTags;
 
 	/**
@@ -9,18 +9,21 @@ class Button extends TextElement {
 	 * @description The HTML tag to use for the component
 	 */
 	protected ?Tag $tagName = Tag::A;
-
 	/**
 	 * @var ?ThemeColor $colorTheme
 	 * @description Colour keyword for the fill or outline colour
 	 */
 	protected ?ThemeColor $colorTheme = ThemeColor::PRIMARY;
-
 	/**
 	 * @var ?bool $isOutline
 	 * @description Whether to use outline style instead of solid/filled
 	 */
 	protected ?bool $isOutline = false;
+	/**
+	 * @var string $content
+	 * @description Plain text or basic HTML
+	 */
+	protected string $content;
 
 	/**
 	 * Specify default allowed Tags using the HasAllowedTags trait
@@ -32,10 +35,11 @@ class Button extends TextElement {
 	}
 
 	function __construct(array $attributes, string $content) {
-		parent::__construct($attributes, $content, 'components.ButtonGroup.Button.button');
+		parent::__construct($attributes, 'components.ButtonGroup.Button.button');
 		$this->tagName = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::A;
 		$this->colorTheme = isset($attributes['colorTheme']) ? ThemeColor::tryFrom($attributes['colorTheme']) : ThemeColor::PRIMARY;
-		$this->isOutline = isset($attributes['isOutline']) && (bool)$attributes['isOutline'];
+		$this->isOutline = $attributes['isOutline'] ?? false;
+		$this->content = $content;
 	}
 
 	function get_filtered_classes(): array {
@@ -43,7 +47,7 @@ class Button extends TextElement {
 			return !str_starts_with($class, 'is-style-outline') && $class !== 'is-style-outline';
 		});
 
-		return array_merge(
+		$result = array_merge(
 			[
 				'button',
 				"button--{$this->colorTheme->value}",
@@ -51,6 +55,8 @@ class Button extends TextElement {
 			],
 			$classes
 		);
+
+		return array_unique($result);
 	}
 
 	function render(): void {

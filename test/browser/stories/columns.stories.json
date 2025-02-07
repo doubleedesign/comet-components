@@ -124,73 +124,13 @@
             }
         }
     },
-    "stories": [
-        {
-            "name": "Playground",
-            "args": [],
-            "tags": [
-                "docsOnly"
-            ]
-        },
-        {
-            "name": "Start",
-            "args": {
-                "hAlign": "start"
-            }
-        },
-        {
-            "name": "End",
-            "args": {
-                "hAlign": "end"
-            }
-        },
-        {
-            "name": "Center",
-            "args": {
-                "hAlign": "center"
-            }
-        },
-        {
-            "name": "Justify",
-            "args": {
-                "hAlign": "justify"
-            }
-        },
-        {
-            "name": "Match-parent",
-            "args": {
-                "hAlign": "match-parent"
-            }
-        },
-        {
-            "name": "Start",
-            "args": {
-                "vAlign": "start"
-            }
-        },
-        {
-            "name": "End",
-            "args": {
-                "vAlign": "end"
-            }
-        },
-        {
-            "name": "Center",
-            "args": {
-                "vAlign": "center"
-            }
-        },
-        {
-            "name": "Justify",
-            "args": {
-                "vAlign": "justify"
-            }
-        },
-        {
-            "name": "Match-parent",
-            "args": {
-                "vAlign": "match-parent"
-            }
-        }
-    ]
+	"stories": [
+		{
+			"name": "Playground",
+			"args": [],
+			"tags": [
+				"docsOnly"
+			]
+		}
+	]
 }

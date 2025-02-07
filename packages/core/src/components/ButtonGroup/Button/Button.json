@@ -1,6 +1,6 @@
 {
     "name": "Button",
-    "extends": "TextElement",
+    "extends": "Renderable",
     "attributes": {
         "tagName": {
             "type": "Tag",
@@ -32,17 +32,6 @@
             "type": "bool",
             "description": "Whether to use outline style instead of solid/filled"
         },
-        "textAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent"
-        },
         "id": {
             "type": "string",
             "description": "Unique identifier"
@@ -52,7 +41,8 @@
             "description": "CSS classes",
             "default": [
                 "button",
-                "button--primary"
+                "button--primary",
+                "button"
             ]
         },
         "style": {

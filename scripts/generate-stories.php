@@ -31,6 +31,9 @@ class ComponentStoryGenerator {
 	/** @noinspection PhpUnhandledExceptionInspection */
 	public function runSingle($component): void {
 		$filePath = $this->directory . '\\' . $component . '\\' . $component . '.json';
+		if($component === 'Button') {
+			$filePath = $this->directory . '\\ButtonGroup\\Button\\Button.json';
+		}
 		if (!file_exists($filePath)) {
 			throw new RuntimeException("Component class $component not found");
 		}
@@ -44,7 +47,7 @@ class ComponentStoryGenerator {
 		$json = json_decode($content, true);
 		$shortName = self::kebab_case($json['name']);
 		// Exclude some attributes handled internally or not suitable for Storybook, such as inline styles, from stories
-		$attributes = array_diff_key($json['attributes'], array_flip(['style', 'classes']));
+		$attributes = array_diff_key($json['attributes'], array_flip(['style', 'classes', 'context']));
 		// Get the category from the WordPress plugin's block support JSON file
 		$category = self::get_category_from_wordpress_plugin_json($json['name']);
 

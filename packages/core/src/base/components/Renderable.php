@@ -75,10 +75,10 @@ abstract class Renderable {
 	}
 
 	protected function get_bem_name(): ?string {
-		if($this->context) {
+		if ($this->context) {
 			$kebabContext = Utils::kebab_case($this->context);
 			$shortNameToUse = $this->shortName;
-			if(str_starts_with($this->shortName, $kebabContext)) {
+			if (str_starts_with($this->shortName, $kebabContext)) {
 				$shortNameToUse = str_replace("$kebabContext-", '', $this->shortName);
 			}
 
@@ -101,12 +101,14 @@ abstract class Renderable {
 		$current_classes = $this->classes;
 		$redundant_classes = ['is-style-default'];
 
-		return array_merge(
+		$result = array_merge(
 			[$this->get_bem_name()],
 			array_filter($current_classes, function ($class) use ($redundant_classes) {
 				return !in_array($class, $redundant_classes);
 			})
 		);
+
+		return array_unique($result);
 	}
 
 	/**

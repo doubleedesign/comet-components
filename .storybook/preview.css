@@ -72,3 +72,26 @@
 	position: relative;
 }
 
+.docs-wrapper {
+	&.docs-wrapper--button {
+		h2 {
+			grid-column: span 2;
+		}
+
+		.stories-wrapper {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 1rem;
+
+			> div {
+				max-width: 100%;
+				min-width: 0;
+				overflow: hidden;
+			}
+
+			.code-preview-pair {
+				display: block;
+			}
+		}
+	}
+}

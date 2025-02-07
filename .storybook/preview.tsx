@@ -66,10 +66,15 @@ const preview: Preview = {
 				},
 			},
 			container: ({ children, context }) => {
+				console.log(context);
+				const component = context.primaryStory.title.split('/').reverse()[0].toLowerCase();
+
 				return (
-					<DocsContainer context={context}>
-						{children}
-					</DocsContainer>
+					<div className={`docs-wrapper docs-wrapper--${component}`}>
+						<DocsContainer context={context}>
+							{children}
+						</DocsContainer>
+					</div>
 				);
 			},
 			page: () => {
@@ -81,8 +86,12 @@ const preview: Preview = {
 						<div className="breakout">
 							<Primary />
 						</div>
-						<Controls/>
-						<Stories includePrimary={false} title="Variations"/>
+						<div className="controls-wrapper">
+							<Controls/>
+						</div>
+						<div className="stories-wrapper">
+							<Stories includePrimary={false} title="Variations"/>
+						</div>
 					</Unstyled>
 				);
 			}
