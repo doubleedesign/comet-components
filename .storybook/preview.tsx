@@ -66,8 +66,7 @@ const preview: Preview = {
 				},
 			},
 			container: ({ children, context }) => {
-				console.log(context);
-				const component = context.primaryStory.title.split('/').reverse()[0].toLowerCase();
+				const component = context?.primaryStory?.title.split('/')?.reverse()[0]?.toLowerCase() || 'default';
 
 				return (
 					<div className={`docs-wrapper docs-wrapper--${component}`}>

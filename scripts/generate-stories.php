@@ -31,7 +31,7 @@ class ComponentStoryGenerator {
 	/** @noinspection PhpUnhandledExceptionInspection */
 	public function runSingle($component): void {
 		$filePath = $this->directory . '\\' . $component . '\\' . $component . '.json';
-		if($component === 'Button') {
+		if ($component === 'Button') {
 			$filePath = $this->directory . '\\ButtonGroup\\Button\\Button.json';
 		}
 		if (!file_exists($filePath)) {
@@ -46,10 +46,10 @@ class ComponentStoryGenerator {
 		$content = file_get_contents($filePath);
 		$json = json_decode($content, true);
 		$shortName = self::kebab_case($json['name']);
-		// Exclude some attributes handled internally or not suitable for Storybook, such as inline styles, from stories
-		$attributes = array_diff_key($json['attributes'], array_flip(['style', 'classes', 'context']));
+		// Exclude some attributes handled internally , not suitable for Storybook, or not suitable to autogenerate
+		$attributes = array_diff_key($json['attributes'], array_flip(['id', 'style', 'context']));
 		// Get the category from the WordPress plugin's block support JSON file
-		$category = self::get_category_from_wordpress_plugin_json($json['name']);
+		$category = ucfirst(self::get_category_from_wordpress_plugin_json($json['name'])) ?? 'Uncategorised';
 
 		$storyFile = [
 			'title'      => sprintf('Components/%s/%s', $category, $json['name']),
@@ -70,15 +70,32 @@ class ComponentStoryGenerator {
 		];
 
 		$storyFile['args'] = array_reduce(array_keys($attributes), function ($acc, $attr) use ($attributes) {
-			if ($attr === 'id') return $acc; // Skip some attributes
+			// Do not show a specified class name by default (the auto-generated ones within the component will still be where they need to be)
+			if ($attr === 'classes') {
+				$acc['class'] = '';
+				return $acc;
+			}
 
 			$acc[$attr] = $attributes[$attr]['default'] ?? '';
-
 			return $acc;
 		}, []);
 
 		$storyFile['argTypes'] = array_reduce(array_keys($attributes), function ($acc, $attr) use ($attributes) {
-			if (in_array($attr, ['id'])) return $acc; // Skip some attributes
+			// Special handling for classes - include "supported" values but not the default or generated classes
+			// This allows auto-generation of options like "accent heading" and "lead paragraph" without also including BEM classnames and the like
+			if ($attr === 'classes' && isset($attributes[$attr]['supported'])) {
+				$acc['class'] = [
+					'description' => $attributes[$attr]['description'] ?? '',
+					'control'     => ['type' => 'select'],
+					'options'     => ['', ...$attributes[$attr]['supported']],
+					'table'       => [
+						'defaultValue' => ['summary' => ''],
+						'type'         => ['summary' => 'string']
+					]
+				];
+
+				return $acc;
+			}
 
 			$data = $attributes[$attr];
 			$propType = isset($data['supported']) ? 'array' : $data['type'];
@@ -112,8 +129,17 @@ class ComponentStoryGenerator {
 				'tags' => ['docsOnly']
 			]
 		];
+
+		// Collect boolean attributes to generate variations for each of the options
+		$booleanAttributes = array_filter($attributes, function ($attr) {
+			return $attr['type'] === 'bool';
+		});
+
 		foreach ($storyFile['argTypes'] as $propName => $settings) {
-			if (in_array($propName, ['tagName', 'classes', 'backgroundColor'])) continue;
+			// Properties that we don't want individual stories for
+			if (in_array($propName, ['tagName', 'classes', 'backgroundColor', 'textAlign'])) continue;
+
+			// Generate stories for properties with options specified
 			if (!isset($settings['options'])) continue;
 
 			foreach ($settings['options'] as $option) {
@@ -123,6 +149,23 @@ class ComponentStoryGenerator {
 						$propName => $option
 					]
 				];
+
+				if (!empty($booleanAttributes)) {
+					foreach ($booleanAttributes as $boolAttrName => $boolAttrSettings) {
+						// Adjust label for things like "isOutline" be "Outline" etc
+						if (str_starts_with($boolAttrName, 'is')) {
+							$boolAttrName = substr($boolAttrName, 2);
+						}
+
+						$stories[] = [
+							'name' => ucfirst($option) . ' - ' . $boolAttrName,
+							'args' => [
+								$propName     => $option,
+								$boolAttrName => true
+							]
+						];
+					}
+				}
 			}
 		}
 		$storyFile['stories'] = $stories;
@@ -145,19 +188,12 @@ class ComponentStoryGenerator {
 	}
 
 	private static function propertyTypeToControl($propType): string {
-		switch ($propType) {
-			case 'number':
-				return 'number';
-			case 'boolean':
-				return 'boolean';
-			case 'array':
-			case 'Tag':
-			case 'Alignment':
-			case 'AspectRatio':
-				return 'select';
-			default:
-				return 'text';
-		}
+		return match ($propType) {
+			'number' => 'number',
+			'bool' => 'boolean',
+			'array', 'Tag', 'Alignment', 'AspectRatio' => 'select',
+			default => 'text',
+		};
 	}
 
 	private static function kebab_case(string $value): string {
@@ -195,7 +231,7 @@ class ComponentStoryGenerator {
 		return array_find($categories, function ($category) use ($block_name) {
 			$block_name_kebab = self::kebab_case($block_name);
 			return in_array("comet/$block_name_kebab", $category['blocks']) || in_array("core/$block_name_kebab", $category['blocks']);
-		})['name'] ?? 'Uncategorised';
+		})['slug'] ?? 'Uncategorised';
 	}
 
 	private static function move_default_to_top(array $items): array {

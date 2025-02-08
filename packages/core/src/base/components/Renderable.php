@@ -21,7 +21,7 @@ abstract class Renderable {
 	protected ?string $id;
 	/**
 	 * @var array<string> $classes
-	 * @description CSS classes
+	 * @description Additional CSS classes
 	 */
 	protected ?array $classes = [];
 	/**
