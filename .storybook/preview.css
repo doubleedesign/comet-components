@@ -95,3 +95,8 @@
 		}
 	}
 }
+
+
+:where(pre:not(.sb-anchor, .sb-unstyled, .sb-unstyled pre)):not(.prismjs) {
+	background-color: #1d1c21 !important;
+}

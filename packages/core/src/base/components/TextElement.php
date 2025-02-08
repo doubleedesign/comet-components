@@ -21,7 +21,7 @@ abstract class TextElement extends Renderable {
 	 * @return array<Tag>
 	 */
 	protected static function get_allowed_wrapping_tags(): array {
-		return Settings::INLINE_PHRASING_ELEMENTS;
+		return array_merge(Settings::BLOCK_PHRASING_ELEMENTS, Settings::INLINE_PHRASING_ELEMENTS);
 	}
 
 	function __construct(array $attributes, string $content, string $bladeFile) {

@@ -6,7 +6,7 @@ type ElementData = {
 	deprecated: boolean;
 	experimental: boolean;
 	attributes: any[];
-}
+};
 
 run();
 
@@ -22,8 +22,9 @@ function run() {
 		})
 		.reduce((acc, [tag, data]: [string, ElementData]) => {
 			acc[tag] = filterDeprecatedAndExperimental(data.attributes);
+
 			return acc;
-	}, {});
+		}, {});
 
 	const output = buildOutput(elements, globalAttributes);
 
@@ -35,7 +36,8 @@ function run() {
 function buildOutput(elements: Record<string, string[]>, globalAttributes: string[]): string {
 	const elementNames = Object.keys(elements);
 	const cases = `${elementNames.map(tag => { 
-		return `case ${tag.toUpperCase()} = '${tag.toLowerCase()}';`}).join('\n')
+		return `case ${tag.toUpperCase()} = '${tag.toLowerCase()}';`;
+	}).join('\n')
 	}`;
 	const attributeMap = Object.entries(elements)
 		.map(([tag, attributes]: [string, string[]]) => {

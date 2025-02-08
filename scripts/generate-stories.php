@@ -71,10 +71,7 @@ class ComponentStoryGenerator {
 
 		$storyFile['args'] = array_reduce(array_keys($attributes), function ($acc, $attr) use ($attributes) {
 			// Do not show a specified class name by default (the auto-generated ones within the component will still be where they need to be)
-			if ($attr === 'classes') {
-				$acc['class'] = '';
-				return $acc;
-			}
+			if ($attr === 'classes') return $acc;
 
 			$acc[$attr] = $attributes[$attr]['default'] ?? '';
 			return $acc;
@@ -102,9 +99,7 @@ class ComponentStoryGenerator {
 
 			$acc[$attr] = [
 				'description' => $data['description'] ?? '',
-				'control'     => [
-					'type' => self::propertyTypeToControl($propType)
-				],
+				'control'     => $attr === 'classes' ? false : ['type' => self::propertyTypeToControl($propType)],
 				'table'       => [
 					'defaultValue' => [
 						'summary' => $data['default'] ?? ''
@@ -143,8 +138,13 @@ class ComponentStoryGenerator {
 			if (!isset($settings['options'])) continue;
 
 			foreach ($settings['options'] as $option) {
+				// Adjust label for "is-style-*" class names
+				$displayName = $option;
+				if (str_starts_with($option, 'is-style-')) {
+					$displayName = substr($option, 9) . ' style';
+				}
 				$stories[] = [
-					'name' => ucfirst($option),
+					'name' => ucfirst($displayName),
 					'args' => [
 						$propName => $option
 					]
@@ -152,13 +152,14 @@ class ComponentStoryGenerator {
 
 				if (!empty($booleanAttributes)) {
 					foreach ($booleanAttributes as $boolAttrName => $boolAttrSettings) {
+						$boolAttrDisplayName = $boolAttrName;
 						// Adjust label for things like "isOutline" be "Outline" etc
 						if (str_starts_with($boolAttrName, 'is')) {
-							$boolAttrName = substr($boolAttrName, 2);
+							$boolAttrDisplayName = substr($boolAttrName, 2);
 						}
 
 						$stories[] = [
-							'name' => ucfirst($option) . ' - ' . $boolAttrName,
+							'name' => ucfirst($option) . ' - ' . $boolAttrDisplayName,
 							'args' => [
 								$propName     => $option,
 								$boolAttrName => true
@@ -168,7 +169,9 @@ class ComponentStoryGenerator {
 				}
 			}
 		}
-		$storyFile['stories'] = $stories;
+		$storyFile['stories'] = array_values(array_filter($stories, function ($story) {
+			return !empty($story['name']);
+		}));
 
 		// Export the processed data as a JSON file
 		$outputPath = $this->outputDirectory . '\\' . strtolower($shortName) . '.stories.json';

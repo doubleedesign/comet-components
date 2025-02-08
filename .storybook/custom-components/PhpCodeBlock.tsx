@@ -29,11 +29,13 @@ export const PhpCodeBlock = ({ codeString }) => {
 			language: 'php'
 		}).value;
 
-		// Add spans around brackets and parentheses
 		const updatedHighlightedCode = highlightedCode
+			// Add spans around brackets and parentheses
 			.replaceAll(/(\[|\])/g, '<span class="hljs-bracket">$1</span>')
 			.replaceAll(/(\(|\))/g, '<span class="hljs-paren">$1</span>')
-			.replaceAll(/(\\)/g, '<span class="hljs-backslash">$1</span>');
+			.replaceAll(/(\\)/g, '<span class="hljs-backslash">$1</span>')
+			// Add spans around some other specific stuff it misses
+			.replaceAll('-&gt;value;', '-&gt;<span class="hljs-variable">value</span>;');
 
 		// Prettier's tab settings have no effect on manually added \t characters, so this is a hack to customise the width
 		const updatedHighlightedCodeWithCustomIndents = updatedHighlightedCode.split('\n').map((line) => {

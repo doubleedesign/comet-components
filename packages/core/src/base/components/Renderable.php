@@ -21,7 +21,7 @@ abstract class Renderable {
 	protected ?string $id;
 	/**
 	 * @var array<string> $classes
-	 * @description Additional CSS classes
+	 * @description CSS classes
 	 */
 	protected ?array $classes = [];
 	/**
@@ -48,6 +48,7 @@ abstract class Renderable {
 	public function __construct(array $attributes, string $bladeFile) {
 		$this->rawAttributes = $attributes;
 		$this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
+		$this->tagName = $attributes['tagName'] ?? Tag::DIV;
 		$this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
 		$this->bladeFile = $bladeFile;
 		$this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
@@ -63,11 +64,6 @@ abstract class Renderable {
 			$classes = array_merge($classes, $attributes['classes']);
 		}
 		$this->classes = $classes;
-
-		// If no tagName is set, default to div
-		if (!isset($attributes['tagName'])) {
-			$this->tagName = Tag::DIV;
-		}
 	}
 
 	public function get_id(): ?string {

@@ -10,9 +10,13 @@
 		height: 100%;
 		padding: 1rem;
 		box-sizing: border-box;
-		font-family: 'Hack', 'Fira Code', monospace;
 		font-size: 0.8rem;
 		line-height: 1.6;
+
+		* {
+			font-family: 'Hack', 'Fira Code', monospace !important;
+			font-size: 0.8rem;
+		}
 
 		.hljs-name,
 		.hljs-number,
@@ -41,6 +45,11 @@
 
 		.hljs-variable {
 			color: #b48fff;
+
+			&.constant_ {
+				color: #FD618A;
+				font-style: italic;
+			}
 		}
 
 		.hljs-bracket {
@@ -64,7 +73,9 @@
 
 .code-preview--php {
 	code {
-		color: #87d9ff; /* default, gets punctuation not wrapped in its own class */
+		/* default, gets punctuation not wrapped in its own class */
+		/* needs to be !important so Storybook MDX styles don't override because they're more specific */
+		color: #87d9ff !important;
 
 		.hljs-indented-php {
 			padding-inline-start: 1.5rem;

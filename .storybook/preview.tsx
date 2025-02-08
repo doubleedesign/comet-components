@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Preview } from '@storybook/server';
-import { Controls, Description, DocsContainer, Subtitle, Title, Unstyled } from '@storybook/blocks';
+import { Controls, Description, DocsContainer, Subtitle, Title, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
 import { Primary } from './blocks/Primary.tsx';
 import { Stories } from './blocks/Stories.tsx';
 import { withServerPageStates } from './decorators/server-page-states/withServerPageStates.tsx';
@@ -8,6 +8,7 @@ import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
 import comet from './theme.ts';
+import { PhpCodeBlock } from './custom-components/PhpCodeBlock.tsx';
 
 // Log all events
 // import { addons } from '@storybook/preview-api';
@@ -56,6 +57,17 @@ const preview: Preview = {
 			},
 			canvas: {
 				withToolbar: true,
+			},
+			components: {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				code: (props: { className?: string, children: any }) => {
+					// For PHP, use the same custom component as is used for source code in the component docs
+					if(props?.className === 'language-php') {
+						return <PhpCodeBlock codeString={props.children} />;
+					}
+
+					return <CodeOrSourceMdx {...props} />;
+				}
 			},
 			story: {
 				inline: true, // This makes the primary story respond to controls

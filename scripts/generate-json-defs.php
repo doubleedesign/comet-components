@@ -10,20 +10,22 @@ use Doubleedesign\Comet\Core\Tag;
  *  NOTE: This script requires PHP 8.4+.
  */
 class ComponentClassesToJsonDefinitions {
-	private string $directory;
+	private string $mainComponentDirectory;
+	private string $baseComponentDirectory;
 	private array $processedClasses = [];
 	private ReflectionClass $currentClass;
 	private ReflectionClass $declaringClass;
 
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
-		$this->directory = dirname(__DIR__, 1) . '\packages\core\src\components';
+		$this->mainComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
+		$this->baseComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components';
 	}
 
 	public function runAll(): void {
 		// Get all PHP files in the directory
 		/** @noinspection PhpUnhandledExceptionInspection */
-		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->directory));
+		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mainComponentDirectory));
 
 		foreach ($files as $file) {
 			if ($file->isFile() && $file->getExtension() === 'php') {
@@ -35,9 +37,8 @@ class ComponentClassesToJsonDefinitions {
 
 	/** @noinspection PhpUnhandledExceptionInspection */
 	public function runSingle($component): void {
-
 		// First try direct path
-		$filePath = $this->directory . '\\' . $component . '\\' . $component . '.php';
+		$filePath = $this->mainComponentDirectory . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
@@ -47,18 +48,18 @@ class ComponentClassesToJsonDefinitions {
 		// try by splitting PascalCase into words - e.g., AccordionPanel is inside Accordion
 		preg_match_all('/[A-Z][a-z]*/', $component, $matches);
 		$baseFolder = $matches[0][0];
-		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
 		}
 
 		// try the other way around, e.g., Button is inside ButtonGroup
-		$folders = scandir($this->directory);
+		$folders = scandir($this->mainComponentDirectory);
 		$baseFolder = array_find($folders, function ($folder) use ($component) {
 			return str_starts_with($folder, $component);
 		});
-		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
@@ -66,7 +67,7 @@ class ComponentClassesToJsonDefinitions {
 
 		// try singular to plural, e.g. Column is inside Columns
 		$baseFolder = $component . 's';
-		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
@@ -74,7 +75,7 @@ class ComponentClassesToJsonDefinitions {
 
 		// shortened singular to plural based on PascalCase, e.g. TabPanel is inside Tabs
 		$baseFolder = $matches[0][0] . 's';
-		$filePath = $this->directory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
+		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
 		if (file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
@@ -83,10 +84,10 @@ class ComponentClassesToJsonDefinitions {
 		// Specific edge cases
 		if (in_array($component, ['ListItem', 'ListItemSimple', 'ListItemComplex'])) {
 			if ($component === 'ListItem') {
-				$filePath = $this->directory . '\ListComponent\ListItem\ListItem.php';
+				$filePath = $this->mainComponentDirectory . '\ListComponent\ListItem\ListItem.php';
 			}
 			else {
-				$filePath = $this->directory . '\ListComponent\ListItem\\' . $component . "\\$component.php";
+				$filePath = $this->mainComponentDirectory . '\ListComponent\ListItem\\' . $component . "\\$component.php";
 			}
 			if (file_exists($filePath)) {
 				$this->processFile($filePath);
@@ -95,6 +96,16 @@ class ComponentClassesToJsonDefinitions {
 		}
 		else {
 			throw new RuntimeException("Component $component not found");
+		}
+	}
+
+	public function runSingleBase($baseComponent): void {
+		$filePath = $this->baseComponentDirectory . '\\' . $baseComponent . '.php';
+		if (file_exists($filePath)) {
+			$this->processFile($filePath);
+		}
+		else {
+			throw new RuntimeException("Base component $baseComponent not found");
 		}
 	}
 
@@ -133,7 +144,8 @@ class ComponentClassesToJsonDefinitions {
 	 */
 	private function analyseClass(ReflectionClass $reflectionClass): array {
 		$className = $reflectionClass->getName();
-		$parentClass = $reflectionClass->getParentClass();
+		$parentClass = $reflectionClass->getParentClass() ?? null;
+
 		if (isset($this->processedClasses[$className])) {
 			return $this->processedClasses[$className];
 		}
@@ -147,33 +159,21 @@ class ComponentClassesToJsonDefinitions {
 				$propertyType = $this->getPropertyType($property);
 				$propertyName = $property->getName();
 
-				// If this is the attributes property, add all the nested attributes to the $properties array
-				if ($propertyName === 'attributes') {
-					try {
-						$attributesClass = new ReflectionClass($propertyType['type']);
-						foreach ($attributesClass->getProperties() as $attrProperty) {
-							if ($this->getVisibility($attrProperty) !== 'private') {
-								$properties[$attrProperty->getName()] = $this->getPropertyType($attrProperty);
-							}
-						}
-					}
-					catch (ReflectionException $e) {
-						error_log("Error analyzing attributes: " . $e->getMessage());
-					}
-				}
-				else {
-					$properties[$propertyName] = $propertyType;
-				}
+				$properties[$propertyName] = $propertyType;
 			}
 		}
 
 		$result = [
 			'name'       => array_reverse(explode('\\', $className))[0],
-			'extends'    => $parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null,
+			'extends'    => $parentClass
+				? ($parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null)
+				: null,
+			'abstract'   => $reflectionClass->isAbstract(),
 			'attributes' => array_filter($properties, function ($key) {
 				return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
 			}, ARRAY_FILTER_USE_KEY)
 		];
+
 		if (isset($properties['content'])) {
 			$result['content'] = $properties['content'];
 		}
@@ -212,8 +212,16 @@ class ComponentClassesToJsonDefinitions {
 		$result = $this->processPropertyType($type);
 		$content_type = $this->currentClass->hasProperty('innerComponents') ? 'array' : 'string';
 
+		// Handle default boolean values
+		if ($type->getName() === 'bool' && $defaultValue === false) {
+			$defaultValue = 'false';
+		}
+		else if ($type->getName() === 'bool' && $defaultValue === true) {
+			$defaultValue = 'true';
+		}
+
 		// If this is the $classes property, compute the actual default classes (e.g. the shortName or BEM name with context)
-		if ($property->getName() === 'classes') {
+		if ($property->getName() === 'classes' && !$this->currentClass->isAbstract()) {
 			if ($this->currentClass->hasMethod('get_filtered_classes')) {
 				try {
 					$instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
@@ -384,6 +392,9 @@ try {
 	$instance = new ComponentClassesToJsonDefinitions();
 	if (isset($argv[1]) && $argv[1] === '--component') {
 		$instance->runSingle($argv[2]);
+	}
+	else if (isset($argv[1]) && $argv[1] === '--base') {
+		$instance->runSingleBase($argv[2]);
 	}
 	else {
 		$instance->runAll();

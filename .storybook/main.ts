@@ -9,7 +9,8 @@ const config: StorybookConfig = {
 	addons: [
 		'@storybook/addon-webpack5-compiler-swc',
 		'@storybook/addon-essentials',
-		'./addons/code-tabs/preset.ts'
+		'./addons/code-tabs/preset.ts',
+		'@storybook/addon-mdx-gfm'
 	],
 	framework: {
 		name: '@storybook/server-webpack5',
@@ -56,15 +57,6 @@ const config: StorybookConfig = {
 					}
 				}
 			},
-			// module: {
-			// 	rules: [
-			// 		...config.module.rules,
-			// 		{
-			// 			test: /\.json$/,
-			// 			type: 'json'
-			// 		}
-			// 	]
-			// }
 		};
 	},
 	docs: {

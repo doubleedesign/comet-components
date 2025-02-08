@@ -24,7 +24,7 @@ export const PhpPanel = () => {
 
 		const mockCode = await mockPhpSourceCode({
 			componentName: classShortName,
-			classes: [className],
+			//classes: [className],
 			content,
 			attributes
 		});

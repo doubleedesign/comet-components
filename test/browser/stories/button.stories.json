@@ -1,9 +1,9 @@
 {
-    "title": "Components/Text/Button",
+    "title": "Components/Uncategorised/Button",
     "parameters": {
         "docs": {
             "description": {
-                "component": "Prompt visitors to take action with a button or a button-style link."
+                "component": "Prompt visitors to take action with a button-style link."
             }
         },
         "server": {
@@ -17,7 +17,7 @@
     "args": {
         "tagName": "a",
         "colorTheme": "primary",
-        "isOutline": false
+        "isOutline": "false"
     },
     "argTypes": {
         "tagName": {
@@ -77,6 +77,21 @@
                     "summary": "bool"
                 }
             }
+        },
+        "classes": {
+            "description": "CSS classes",
+            "control": false,
+            "table": {
+                "defaultValue": {
+                    "summary": [
+                        "button",
+                        "button--primary"
+                    ]
+                },
+                "type": {
+                    "summary": "array<string>"
+                }
+            }
         }
     },
     "stories": [
@@ -88,120 +103,134 @@
             ]
         },
         {
-            "name": "Primary solid",
+            "name": "Primary",
             "args": {
                 "colorTheme": "primary"
             }
         },
-		{
-			"name": "Primary outline",
-			"args": {
-				"colorTheme": "primary",
-				"isOutline": true
-			}
-		},
         {
-            "name": "Secondary solid",
+            "name": "Primary - Outline",
+            "args": {
+                "colorTheme": "primary",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Secondary",
             "args": {
                 "colorTheme": "secondary"
             }
         },
-		{
-			"name": "Secondary outline",
-			"args": {
-				"colorTheme": "secondary",
-				"isOutline": true
-			}
-		},
         {
-            "name": "Accent solid",
+            "name": "Secondary - Outline",
+            "args": {
+                "colorTheme": "secondary",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Accent",
             "args": {
                 "colorTheme": "accent"
             }
         },
-		{
-			"name": "Accent outline",
-			"args": {
-				"colorTheme": "accent",
-				"isOutline": true
-			}
-		},
         {
-            "name": "Error solid",
+            "name": "Accent - Outline",
+            "args": {
+                "colorTheme": "accent",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Error",
             "args": {
                 "colorTheme": "error"
             }
         },
-		{
-			"name": "Error outline",
-			"args": {
-				"colorTheme": "error",
-				"isOutline": true
-			}
-		},
         {
-            "name": "Success solid",
+            "name": "Error - Outline",
+            "args": {
+                "colorTheme": "error",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Success",
             "args": {
                 "colorTheme": "success"
             }
         },
-		{
-			"name": "Success outline",
-			"args": {
-				"colorTheme": "success",
-				"isOutline": true
-			}
-		},
         {
-            "name": "Warning solid",
+            "name": "Success - Outline",
+            "args": {
+                "colorTheme": "success",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Warning",
             "args": {
                 "colorTheme": "warning"
             }
         },
-		{
-			"name": "Warning outline",
-			"args": {
-				"colorTheme": "warning",
-				"isOutline": true
-			}
-		},
         {
-            "name": "Info solid",
+            "name": "Warning - Outline",
+            "args": {
+                "colorTheme": "warning",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Info",
             "args": {
                 "colorTheme": "info"
             }
         },
-		{
-			"name": "Info outline",
-			"args": {
-				"colorTheme": "info",
-				"isOutline": true
-			}
-		},
-		{
-			"name": "Dark",
-			"args": {
-				"colorTheme": "dark"
-			}
-		},
-		{
-			"name": "Dark outline",
-			"args": {
-				"colorTheme": "dark",
-				"isOutline": true
-			}
-		},
-		{
-			"name": "Light",
-			"args": {
-				"colorTheme": "light"
-			}
-		},
-		{
-			"name": "White",
-			"args": {
-				"colorTheme": "white"
-			}
-		}
+        {
+            "name": "Info - Outline",
+            "args": {
+                "colorTheme": "info",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Light",
+            "args": {
+                "colorTheme": "light"
+            }
+        },
+        {
+            "name": "Light - Outline",
+            "args": {
+                "colorTheme": "light",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "Dark",
+            "args": {
+                "colorTheme": "dark"
+            }
+        },
+        {
+            "name": "Dark - Outline",
+            "args": {
+                "colorTheme": "dark",
+                "isOutline": true
+            }
+        },
+        {
+            "name": "White",
+            "args": {
+                "colorTheme": "white"
+            }
+        },
+        {
+            "name": "White - Outline",
+            "args": {
+                "colorTheme": "white",
+                "isOutline": true
+            }
+        }
     ]
 }

@@ -16,8 +16,7 @@
     },
     "args": {
         "tagName": "h2",
-        "textAlign": "match-parent",
-        "context": ""
+        "textAlign": "match-parent"
     },
     "argTypes": {
         "tagName": {
@@ -42,6 +41,25 @@
                 "h6"
             ]
         },
+        "class": {
+            "description": "CSS classes",
+            "control": {
+                "type": "select"
+            },
+            "options": [
+                "",
+                "is-style-accent",
+                "is-style-small"
+            ],
+            "table": {
+                "defaultValue": {
+                    "summary": ""
+                },
+                "type": {
+                    "summary": "string"
+                }
+            }
+        },
         "textAlign": {
             "description": "",
             "control": {
@@ -62,20 +80,6 @@
                 "justify",
                 "match-parent"
             ]
-        },
-        "context": {
-            "description": "The parent component or variant if contextually relevant",
-            "control": {
-                "type": "text"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": ""
-                },
-                "type": {
-                    "summary": "string"
-                }
-            }
         }
     },
     "stories": [
@@ -87,33 +91,15 @@
             ]
         },
         {
-            "name": "Start",
+            "name": "Accent style",
             "args": {
-                "textAlign": "start"
+                "class": "is-style-accent"
             }
         },
         {
-            "name": "End",
+            "name": "Small style",
             "args": {
-                "textAlign": "end"
-            }
-        },
-        {
-            "name": "Center",
-            "args": {
-                "textAlign": "center"
-            }
-        },
-        {
-            "name": "Justify",
-            "args": {
-                "textAlign": "justify"
-            }
-        },
-        {
-            "name": "Match-parent",
-            "args": {
-                "textAlign": "match-parent"
+                "class": "is-style-small"
             }
         }
     ]

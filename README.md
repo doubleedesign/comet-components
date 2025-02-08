@@ -180,9 +180,13 @@ Once you have added fields and docblock comments to a component, generate the JS
 php scripts/generate-json-defs.php --component Gallery
 ```
 
-**Note:** The JSON definition generator requires PHP 8.4+.
+Or for a new base/abstract/parent component:
 
-Use the same command to update it after making changes.
+```bash
+php scripts/generate-json-defs.php --base Renderable
+```
+
+Use the same command to update these after making changes.
 
 You can also generate/update all JSON definition files at once:
 
@@ -190,19 +194,19 @@ You can also generate/update all JSON definition files at once:
 php scripts/generate-json-defs.php 
 ```
 
-or
+Then generate stories (example):
 
 ```bash
-npm run generate:json
+php scripts/generate-stories.php --component Container
 ```
 
-Then generate stories:
+If adding a "type" enum, generate an MDX documentation page for Storybook with:
 
 ```bash
-# TO COME
+php scripts/generate-enum-docs.php --enum Alignment
 ```
 
-**Note:*** The story generator requires PHP 8.4+.
+**Note:** The JSON definition and story generators require PHP 8.4+.
 
 ---
 
