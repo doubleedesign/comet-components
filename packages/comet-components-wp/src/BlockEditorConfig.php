@@ -7,7 +7,6 @@ class BlockEditorConfig extends JavaScriptImplementation {
 
 	function __construct() {
 		parent::__construct();
-		add_filter('should_load_remote_block_patterns', '__return_false');
 		remove_action('enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets');
 		remove_action('enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets_block_directory');
 
@@ -17,7 +16,6 @@ class BlockEditorConfig extends JavaScriptImplementation {
 		add_filter('block_categories_all', [$this, 'customise_block_categories'], 10, 1);
 		add_filter('register_block_type_args', [$this, 'assign_blocks_to_categories'], 11, 2);
 
-		add_action('init', [$this, 'allowed_block_patterns'], 10, 2);
 		add_filter('block_editor_settings_all', [$this, 'block_inspector_single_panel'], 10, 2);
 		add_filter('use_block_editor_for_post_type', [$this, 'selective_gutenberg'], 10, 2);
 		add_action('after_setup_theme', [$this, 'disable_block_template_editor']);
@@ -116,25 +114,6 @@ class BlockEditorConfig extends JavaScriptImplementation {
 		}
 
 		return $settings;
-	}
-
-
-	/**
-	 * Disable some core Block Patterns for simplicity
-	 * and register custom patterns
-	 * Note: Also ensure loading of remote patterns is disabled using add_filter('should_load_remote_block_patterns', '__return_false');
-	 *
-	 * @return void
-	 */
-	function allowed_block_patterns(): void {
-		unregister_block_pattern('core/query-offset-posts');
-		unregister_block_pattern('core/query-large-title-posts');
-		unregister_block_pattern('core/query-grid-posts');
-		unregister_block_pattern('core/query-standard-posts');
-		unregister_block_pattern('core/query-medium-posts');
-		unregister_block_pattern('core/query-small-posts');
-
-		// TODO: Register custom block patterns
 	}
 
 

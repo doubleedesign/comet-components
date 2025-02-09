@@ -83,6 +83,15 @@ class Utils {
 		return sprintf('%s\\%s', __NAMESPACE__, $className);
 	}
 
+	public static function array_flat(array $array): array {
+		// This is an array of arrays and needs to be flattened
+		if(is_array($array[0])) {
+			return array_merge(...$array);
+		}
+
+		return $array;
+	}
+
 	public static function get_array_depth($array) {
 		$max_depth = 1;
 

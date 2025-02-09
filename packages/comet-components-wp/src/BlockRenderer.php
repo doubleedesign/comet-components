@@ -1,12 +1,12 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
 use Doubleedesign\Comet\Core\NotImplemented;
+use Doubleedesign\Comet\Core\Renderable;
 use Doubleedesign\Comet\Core\Utils;
 use DOMDocument;
 use HTMLPurifier;
 use HTMLPurifier_Config;
-use ReflectionClass, ReflectionProperty, Closure, ReflectionException;
-use Symfony\Component\Translation\Exception\RuntimeException;
+use ReflectionClass, ReflectionProperty, Closure, ReflectionException, RuntimeException;
 use WP_Block_Type_Registry, WP_Block;
 
 class BlockRenderer {
@@ -16,7 +16,7 @@ class BlockRenderer {
 		// TODO: If the theme has its own, get it from there first
 		self::$theme_json = json_decode(file_get_contents(__DIR__ . '/theme.json'), true);
 
-		add_action('init', [$this, 'override_core_block_rendering'], 20);
+		add_action('init', [$this, 'override_core_block_rendering'], 25);
 	}
 
 	/**
@@ -30,6 +30,10 @@ class BlockRenderer {
 		// Check rendering prerequisites and bail early if one is not met
 		// Otherwise, do nothing - the original WP block render function will be used
 		foreach ($core_blocks as $core_block_name) {
+			// core/block is for reusable blocks (synced patterns), and does not have a Comet component
+			// so we don't want to override it like we do with other core blocks
+			if ($core_block_name === 'core/block') continue;
+
 			// WP block type exists
 			$block_type = WP_Block_Type_Registry::get_instance()->get_registered($core_block_name);
 			if (!$block_type) continue;
@@ -50,17 +54,16 @@ class BlockRenderer {
 			// Unregister the original block
 			unregister_block_type($core_block_name);
 
-			// Merge the original block settings with overrides
-			$settings = array_merge(
-				get_object_vars($block_type), // Convert object to array
-				[
-					// Custom front-end rendering using Comet
-					'render_callback' => self::render_block_callback($core_block_name),
-				]
+			// Re-register the block with the original settings merged with new settings and new render callback
+			register_block_type($core_block_name,
+				array_merge(
+					get_object_vars($block_type), // Convert object to array
+					[
+						// Custom front-end rendering using Comet
+						'render_callback' => self::render_block_callback($core_block_name),
+					]
+				)
 			);
-
-			// Re-register the block with the original settings and new render callback
-			register_block_type($core_block_name, $settings);
 		}
 	}
 
@@ -90,19 +93,15 @@ class BlockRenderer {
 	 * @return string
 	 */
 	static function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
-
-		// TODO: Update this if it's still needed
-		// For variant children in context, prepend the variant name to the block name so the correct component will be found
-		// e.g. Panel in an Accordion = AccordionPanel
-		// $attributes['variant'] indicates we are at the top level
-//		if (isset($innerComponents) && isset($attributes['variant'])) {
-//			self::apply_variant_context($attributes['variant'], $innerComponents);
-//		}
-
-		ob_start();
-		$component = self::block_to_comet_component_object($block_instance);
-		$component->render();
-		return ob_get_clean();
+		try {
+			ob_start();
+			$component = self::block_to_comet_component_object($block_instance);
+			$component->render();
+			return ob_get_clean();
+		}
+		catch (RuntimeException $e) {
+			return self::handle_error($e);
+		}
 	}
 
 	/**
@@ -125,6 +124,7 @@ class BlockRenderer {
 	 * Convert a WP_Block instance to a Comet component object
 	 * @param WP_Block $block_instance
 	 * @return object|null
+	 * @throws RuntimeException
 	 */
 	private static function block_to_comet_component_object(WP_Block &$block_instance): ?object {
 		$block_name = $block_instance->name;
@@ -173,6 +173,10 @@ class BlockRenderer {
 			$ComponentClass = self::get_comet_component_class($block_name); // returns the namespaced class name matching the block name
 		}
 
+		if(!isset($ComponentClass)) {
+			throw new RuntimeException("No component class found to render $block_name");
+		}
+
 		// Check what type of content to pass to it - an array, a string, etc
 		$content_type = self::get_comet_component_content_type($ComponentClass);
 
@@ -198,17 +202,58 @@ class BlockRenderer {
 	/**
 	 * Convert an innerBlocks array to an array of Comet component objects
 	 * @param WP_Block $block_instance
-	 * @return array|null
+	 * @return array<Renderable>
 	 */
-	private static function process_innerblocks(WP_Block $block_instance): ?array {
-		$innerBlocks = $block_instance->inner_blocks ?? null;
-		if ($innerBlocks) {
-			return array_map(function ($block) {
-				return self::block_to_comet_component_object($block);
-			}, iterator_to_array($innerBlocks));
+	private static function process_innerblocks(WP_Block $block_instance): array {
+		// Handle nested reusable blocks (synced patterns)
+		if($block_instance->name === 'core/block') {
+			return self::reusable_block_content_to_comet_component_objects($block_instance);
 		}
 
-		return null;
+		$innerBlocks = $block_instance->inner_blocks ?? null;
+		if ($innerBlocks) {
+			$transformed = array_map(function ($block) {
+				if($block->name === 'core/block') {
+					return self::reusable_block_content_to_comet_component_objects($block);
+				}
+
+				return self::block_to_comet_component_object($block);
+			}, iterator_to_array($innerBlocks));
+
+			// Ensure arrays of arrays (common with reusable blocks) get flattened to a single array
+			return Utils::array_flat($transformed);
+		}
+
+		return [];
+	}
+
+	private static function reusable_block_content_to_comet_component_objects(WP_Block $block): array {
+		try {
+			$postId = $block->parsed_block['attrs']['ref'];
+			$serializedBlock = get_the_content(null, false, $postId);
+			$blockObjects = parse_blocks($serializedBlock);
+			// No idea why we sometimes get some empty ones here sometimes, but let's just filter them out
+			// and reset the indexes using array_values
+			$blockObjects = array_values(array_filter($blockObjects, fn($block) => !empty($block['blockName'])));
+
+			// Convert to Comet component objects and return those
+			$components = array_map(function ($block) {
+				try {
+					$block_instance = new WP_Block($block);
+					return self::block_to_comet_component_object($block_instance);
+				}
+				catch (RuntimeException $e) {
+					self::handle_error($e);
+					return null;
+				}
+			}, $blockObjects);
+
+			return $components;
+		}
+		catch (RuntimeException $e) {
+			self::handle_error($e);
+			return [];
+		}
 	}
 
 	/**
@@ -383,6 +428,22 @@ class BlockRenderer {
 		$allowed_blocks = apply_filters('allowed_block_types_all', $all_blocks);
 
 		return array_values($allowed_blocks);
+	}
+
+	private static function handle_error($error): string {
+		if(current_user_can('edit_posts')) {
+			$adminMessage = '';
+			$adminMessage .= '<div class="callout callout--error">';
+			$adminMessage .= '<p><strong>' . $error->getMessage() . '</strong></p>';
+			$adminMessage .= '<p>This message is shown only to logged-in site editors. For support, please <a href="https://www.doubleedesign.com.au">contact Double-E Design.</a></p>';
+			$adminMessage .= '</div>';
+
+			return $adminMessage;
+		}
+		else {
+			error_log($error);
+			return '';
+		}
 	}
 
 }

@@ -6,11 +6,6 @@
 	"icon": "megaphone",
 	"editorScript": "file:./index.js",
 	"category": "text",
-	"parent": [
-		"comet/container",
-		"core/column",
-		"core/group"
-	],
 	"allowedBlocks": [
 		"core/heading",
 		"core/paragraph",

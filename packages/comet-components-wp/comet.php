@@ -23,6 +23,7 @@ use Doubleedesign\Comet\WordPress\{
 	BlockRenderer,
 	BlockEditorConfig,
 	BlockEditorAdminAssets,
+	BlockPatternHandler,
 	TinyMceConfig
 };
 
@@ -31,4 +32,5 @@ new BlockRegistry();
 new BlockRenderer();
 new BlockEditorConfig();
 new BlockEditorAdminAssets();
+new BlockPatternHandler();
 new TinyMceConfig();
