@@ -7,7 +7,6 @@ wp.domReady(() => {
 
 	registerBlockType('comet/call-to-action', {
 		edit: ({ attributes }) => {
-			console.log(attributes);
 			const blockProps = useBlockProps({
 				className: 'call-to-action'
 			});
@@ -19,7 +18,9 @@ wp.domReady(() => {
 					'lock': { 'remove': true }
 				}],
 				['core/buttons', {
-					'lock': { 'remove': true }
+					'lock': { 'remove': true },
+					'placeholder': 'Add buttons',
+					'allowedBlocks': ['core/button']
 				}]
 			];
 
@@ -27,8 +28,7 @@ wp.domReady(() => {
 				blockProps,
 				createElement(InnerBlocks, {
 					allowedBlocks: ['core/heading', 'comet/paragraph', 'core/buttons'],
-					template: template,
-					templateLock: 'insert'
+					template: template
 				})
 			);
 		},
