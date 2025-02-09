@@ -48,7 +48,7 @@ abstract class Renderable {
 	public function __construct(array $attributes, string $bladeFile) {
 		$this->rawAttributes = $attributes;
 		$this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
-		$this->tagName = $attributes['tagName'] ?? Tag::DIV;
+		$this->tagName = Tag::tryFrom($attributes['tagName']) ?? Tag::DIV;
 		$this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
 		$this->bladeFile = $bladeFile;
 		$this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
