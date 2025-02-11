@@ -1,16 +1,18 @@
 <?php
 namespace Doubleedesign\Comet\WordPress;
 
+use Doubleedesign\Comet\Core\Utils;
 use WP_Theme_JSON_Data;
 
 class BlockEditorConfig extends JavaScriptImplementation {
+	private array $final_theme_json = [];
 
 	function __construct() {
 		parent::__construct();
 		remove_action('enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets');
 		remove_action('enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets_block_directory');
 
-		add_action('init', [$this, 'load_plugin_theme_json']);
+		add_action('init', [$this, 'load_merged_theme_json'], 5, 1);
 		add_action('init', [$this, 'register_page_template'], 15, 2);
 
 		add_filter('block_categories_all', [$this, 'customise_block_categories'], 10, 1);
@@ -25,22 +27,19 @@ class BlockEditorConfig extends JavaScriptImplementation {
 
 	/**
 	 * Load theme.json file from this plugin to set defaults of what's supported in the editor
+	 * and combine it with the theme's theme.json for actual theme stuff like colours
 	 * @return void
 	 */
-	function load_plugin_theme_json(): void {
+	function load_merged_theme_json(): void {
 		delete_option('wp_theme_json_data'); // clear cache
 
-		$plugin_theme_json_path = plugin_dir_path(__FILE__) . 'theme.json';
-		$plugin_theme_json_data = json_decode(file_get_contents($plugin_theme_json_path), true);
-
-		// TODO: Use theme's theme.json properties if present
-
-		add_filter('wp_theme_json_data_theme', function ($theme_json) use ($plugin_theme_json_data) {
+		add_filter('wp_theme_json_data_theme', function ($theme_json)  {
+			$plugin_theme_json_path = plugin_dir_path(__FILE__) . 'theme.json';
+			$plugin_theme_json_data = json_decode(file_get_contents($plugin_theme_json_path), true);
 			if (is_array($plugin_theme_json_data)) {
-				$new_data = $theme_json->get_data();
-				$new_data = array_replace_recursive($new_data, $plugin_theme_json_data);
-				return new WP_Theme_JSON_Data($new_data);
+				return new WP_Theme_JSON_Data(Utils::array_merge_deep($plugin_theme_json_data, $theme_json->get_data()));
 			}
+
 			return $theme_json;
 		});
 	}

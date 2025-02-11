@@ -83,6 +83,11 @@ class Utils {
 		return sprintf('%s\\%s', __NAMESPACE__, $className);
 	}
 
+	/**
+	 * Ensure an indexed array of objects is flat
+	 * @param array $array
+	 * @return array
+	 */
 	public static function array_flat(array $array): array {
 		// This is an array of arrays and needs to be flattened
 		if(is_array($array[0])) {
@@ -90,6 +95,30 @@ class Utils {
 		}
 
 		return $array;
+	}
+
+	/**
+	 * Deep merging of a multidimensional array where one is a partial variation of the other
+	 * @param array $original
+	 * @param array $partial
+	 * @return array
+	 */
+	public static function array_merge_deep(array $original, array $partial): array	{
+		$result = $original;
+
+		foreach ($partial as $key => $value) {
+			// If both are arrays but the original is indexed (numeric keys),
+			// or if the value isn't an array, replace entirely
+			if (!isset($original[$key]) || !is_array($value) || (is_array($original[$key]) && array_is_list($original[$key]))) {
+				$result[$key] = $value;
+			}
+			// If both are associative arrays, merge recursively
+			else if (is_array($original[$key])) {
+				$result[$key] = self::array_merge_deep($original[$key], $value);
+			}
+		}
+
+		return $result;
 	}
 
 	public static function get_array_depth($array) {

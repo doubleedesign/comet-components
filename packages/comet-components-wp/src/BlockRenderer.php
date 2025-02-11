@@ -10,13 +10,25 @@ use ReflectionClass, ReflectionProperty, Closure, ReflectionException, RuntimeEx
 use WP_Block_Type_Registry, WP_Block;
 
 class BlockRenderer {
-	private static array $theme_json;
+	private array $theme_json;
 
 	public function __construct() {
-		// TODO: If the theme has its own, get it from there first
-		self::$theme_json = json_decode(file_get_contents(__DIR__ . '/theme.json'), true);
-
+		$this->load_merged_theme_json();
 		add_action('init', [$this, 'override_core_block_rendering'], 25);
+	}
+
+	protected function load_merged_theme_json(): void {
+		$plugin_theme_json_path = plugin_dir_path(__FILE__) . 'theme.json';
+		$plugin_theme_json_data = json_decode(file_get_contents($plugin_theme_json_path), true);
+		$final_theme_json = $plugin_theme_json_data;
+
+		$theme_json_file = get_stylesheet_directory() . '/theme.json';
+		if(file_exists($theme_json_file)) {
+			$theme_json_data = json_decode(file_get_contents($theme_json_file), true);
+			$final_theme_json = Utils::array_merge_deep($plugin_theme_json_data, $theme_json_data);
+		}
+
+		$this->theme_json = $final_theme_json;
 	}
 
 	/**
@@ -43,11 +55,11 @@ class BlockRenderer {
 			if (!$ComponentClass) continue;
 
 			//...and the render method has been implemented
-			$ready_to_render = self::can_render_comet_component($ComponentClass);
+			$ready_to_render = $this->can_render_comet_component($ComponentClass);
 			if (!$ready_to_render) continue;
 
 			//...and one or more of the expected content fields is present
-			$content_types = self::get_comet_component_content_type($ComponentClass); // so we know what to pass to it
+			$content_types = $this->get_comet_component_content_type($ComponentClass); // so we know what to pass to it
 			if (!$content_types) continue;
 
 			// If all of those conditions were met, override the block's render callback
@@ -73,9 +85,9 @@ class BlockRenderer {
 	 *
 	 * @return Closure
 	 */
-	static function render_block_callback(string $block_name): Closure {
+	public static function render_block_callback(string $block_name): Closure {
 		return function ($attributes, $content, $block_instance) use ($block_name) {
-			return self::render_block($block_name, $attributes, $content, $block_instance);
+			return (new BlockRenderer())->render_block($block_name, $attributes, $content, $block_instance);
 		};
 	}
 
@@ -92,10 +104,10 @@ class BlockRenderer {
 	 *
 	 * @return string
 	 */
-	static function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
+	public function render_block(string $block_name, array $attributes, string $content, WP_Block $block_instance): string {
 		try {
 			ob_start();
-			$component = self::block_to_comet_component_object($block_instance);
+			$component = $this->block_to_comet_component_object($block_instance);
 			$component->render();
 			return ob_get_clean();
 		}
@@ -109,7 +121,7 @@ class BlockRenderer {
 	 * @param string $blockName
 	 * @return string|null
 	 */
-	static function get_comet_component_class(string $blockName): ?string {
+	public static function get_comet_component_class(string $blockName): ?string {
 		$blockNameTrimmed = array_reverse(explode('/', $blockName))[0];
 		$className = Utils::get_class_name($blockNameTrimmed);
 
@@ -126,19 +138,19 @@ class BlockRenderer {
 	 * @return object|null
 	 * @throws RuntimeException
 	 */
-	private static function block_to_comet_component_object(WP_Block &$block_instance): ?object {
+	private function block_to_comet_component_object(WP_Block &$block_instance): ?object {
 		$block_name = $block_instance->name;
 		$block_name_trimmed = array_reverse(explode('/', $block_name))[0];
 		$content = $block_instance->parsed_block['innerHTML'] ?? '';
-		$innerComponents = $block_instance->inner_blocks ? self::process_innerblocks($block_instance) : [];
+		$innerComponents = $block_instance->inner_blocks ? $this->process_innerblocks($block_instance) : [];
 
 		// Block-specific handling of attributes and content
 		if ($block_name === 'core/button') {
-			self::process_button_block($block_instance);
+			$this->process_button_block($block_instance);
 			$content = $block_instance->attributes['content'];
 		}
 		if ($block_name === 'core/image') {
-			self::process_image_block($block_instance);
+			$this->process_image_block($block_instance);
 		}
 
 		// Figure out the component class to use:
@@ -178,7 +190,7 @@ class BlockRenderer {
 		}
 
 		// Check what type of content to pass to it - an array, a string, etc
-		$content_type = self::get_comet_component_content_type($ComponentClass);
+		$content_type = $this->get_comet_component_content_type($ComponentClass);
 
 		// Create the component object
 		// Self-closing tag components, e.g. <img>, only have attributes
@@ -204,20 +216,20 @@ class BlockRenderer {
 	 * @param WP_Block $block_instance
 	 * @return array<Renderable>
 	 */
-	private static function process_innerblocks(WP_Block $block_instance): array {
+	private function process_innerblocks(WP_Block $block_instance): array {
 		// Handle nested reusable blocks (synced patterns)
 		if($block_instance->name === 'core/block') {
-			return self::reusable_block_content_to_comet_component_objects($block_instance);
+			return $this->reusable_block_content_to_comet_component_objects($block_instance);
 		}
 
 		$innerBlocks = $block_instance->inner_blocks ?? null;
 		if ($innerBlocks) {
 			$transformed = array_map(function ($block) {
 				if($block->name === 'core/block') {
-					return self::reusable_block_content_to_comet_component_objects($block);
+					return $this->reusable_block_content_to_comet_component_objects($block);
 				}
 
-				return self::block_to_comet_component_object($block);
+				return $this->block_to_comet_component_object($block);
 			}, iterator_to_array($innerBlocks));
 
 			// Ensure arrays of arrays (common with reusable blocks) get flattened to a single array
@@ -227,7 +239,7 @@ class BlockRenderer {
 		return [];
 	}
 
-	private static function reusable_block_content_to_comet_component_objects(WP_Block $block): array {
+	private function reusable_block_content_to_comet_component_objects(WP_Block $block): array {
 		try {
 			$postId = $block->parsed_block['attrs']['ref'];
 			$serializedBlock = get_the_content(null, false, $postId);
@@ -240,7 +252,7 @@ class BlockRenderer {
 			$components = array_map(function ($block) {
 				try {
 					$block_instance = new WP_Block($block);
-					return self::block_to_comet_component_object($block_instance);
+					return $this->block_to_comet_component_object($block_instance);
 				}
 				catch (RuntimeException $e) {
 					self::handle_error($e);
@@ -281,7 +293,7 @@ class BlockRenderer {
 	 * @param string $className
 	 * @return array<string>|null
 	 */
-	private static function get_comet_component_content_type(string $className): ?array {
+	private function get_comet_component_content_type(string $className): ?array {
 		if (!$className || !class_exists($className)) return null;
 
 		$fields = [];
@@ -312,7 +324,7 @@ class BlockRenderer {
 	 * @param WP_Block $block_instance
 	 * @return void
 	 */
-	static function process_image_block(WP_Block &$block_instance): void {
+	protected function process_image_block(WP_Block &$block_instance): void {
 		if(!isset($block_instance->attributes['id'])) return;
 
 		$size = $block_instance->attributes['sizeSlug'] ?? 'full';
@@ -331,17 +343,17 @@ class BlockRenderer {
 	/**
 	 * Process the button block's HTML and turn it into Comet-compatible attributes format
 	 * @param WP_Block $block_instance
-	 * @return array
+	 * @return void
 	 */
-	static function process_button_block(WP_Block $block_instance): void {
+	protected function process_button_block(WP_Block $block_instance): void {
 		$attributes = $block_instance->attributes;
 		$raw_content = $block_instance->parsed_block['innerHTML'];
 		$content = '';
 
 		// Process custom attributes
 		if(isset($attributes['style'])) {
-			$attributes['colorTheme'] = self::hex_to_theme_color_name($attributes['style']['elements']['theme']['color']['background']) ?? null;
-			unset($attributes['style']);
+			$attributes['colorTheme'] = $this->hex_to_theme_color_name($attributes['style']['elements']['theme']['color']['background']) ?? null;
+						unset($attributes['style']);
 		}
 
 		// Turn style classes into attributes
@@ -391,7 +403,7 @@ class BlockRenderer {
 	 * @param $blocks
 	 * @return void
 	 */
-	private static function apply_variant_context($variant_name, &$blocks): void {
+	protected function apply_variant_context($variant_name, &$blocks): void {
 		foreach ($blocks as &$block) {
 			if (!str_starts_with($block['blockName'], 'comet/')) return; // Apply only to Comet component blocks
 
@@ -401,7 +413,7 @@ class BlockRenderer {
 
 			// Recurse into inner blocks
 			if (isset($block['innerBlocks'])) {
-				self::apply_variant_context($variant_name, $block['innerBlocks']);
+				$this->apply_variant_context($variant_name, $block['innerBlocks']);
 			}
 		}
 	}
@@ -411,8 +423,8 @@ class BlockRenderer {
 	 * @param $hex
 	 * @return string | null
 	 */
-	private static function hex_to_theme_color_name($hex): ?string {
-		$theme = self::$theme_json['settings']['color']['palette'];
+	private function hex_to_theme_color_name($hex): ?string {
+		$theme = $this->theme_json['settings']['color']['palette'];
 
 		return array_reduce($theme, function ($carry, $item) use ($hex) {
 			return $item['color'] === $hex ? $item['slug'] : $carry;
@@ -423,7 +435,7 @@ class BlockRenderer {
 	 * Utility function to get all allowed blocks after filtering functions have run
 	 * @return array
 	 */
-	function get_allowed_blocks(): array {
+	public function get_allowed_blocks(): array {
 		$all_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
 		$allowed_blocks = apply_filters('allowed_block_types_all', $all_blocks);
 
