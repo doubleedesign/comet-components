@@ -8,12 +8,14 @@ use HTMLPurifier;
 use HTMLPurifier_Config;
 use ReflectionClass, ReflectionProperty, Closure, ReflectionException, RuntimeException;
 use WP_Block_Type_Registry, WP_Block;
+use WP_Theme_JSON_Data;
 
 class BlockRenderer {
 	private array $theme_json;
 
 	public function __construct() {
 		$this->load_merged_theme_json();
+		add_filter('wp_theme_json_data_default', [$this, 'filter_default_theme_json'], 10, 1);
 		add_action('init', [$this, 'override_core_block_rendering'], 25);
 	}
 
@@ -30,6 +32,32 @@ class BlockRenderer {
 
 		$this->theme_json = $final_theme_json;
 	}
+
+	/**
+	 * Filter the default theme.json data to remove some of the WP defaults
+	 * that add unwanted CSS variables
+	 * @param $theme_json
+	 * @return WP_Theme_JSON_Data
+	 */
+	function filter_default_theme_json($theme_json): WP_Theme_JSON_Data {
+		$data = $theme_json->get_data();
+		// Remove unused WP defaults that become the --wp--preset-* CSS variables and clog up the CSS
+		$data['settings']['color']['palette']['default'] = [];
+		$data['settings']['color']['duotone']['default'] = [];
+		$data['settings']['color']['gradients']['default'] = [];
+		$data['settings']['shadow']['presets']['default'] = [];
+		$data['settings']['typography']['fontSizes']['default'] = [];
+		$data['settings']['spacing']['spacingSizes']['default'] = [];
+
+		// Remove some only on the front-end, because they're needed in the editor
+		if(!is_admin()) {
+			$data['settings']['dimensions']['aspectRatios'] = [];
+		}
+
+		$theme_json->update_with($data);
+		return $theme_json;
+	}
+
 
 	/**
 	 * Override core block render function and use Comet instead
