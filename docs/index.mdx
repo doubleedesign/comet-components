@@ -8,16 +8,37 @@ An early work-in-progress, experimental, to-become-cross-platform web UI compone
 an abstraction layer for WordPress blocks, with the intention of being able to use the same components in other
 projects.
 
+---
+## Tech Stack
+
+| Technology | Description                    | Rationale                                                                                                                                                                                          |
+|------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PHP        | Primary programming language   | I like it. And because I'm using this in WordPress.                                                                                                                                                |
+| Blade	     | Templating engine for PHP      | I wanted to try using a templating language, and a) preferred the syntax over Twig and b) have vague notions of working with Laravel at some point in the future.                                  |
+| SCSS 	     | CSS preprocessor               | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                  |
+| JavaScript | Secondary programming language | Used in the WordPress plugin where necessary for custom blocks or customisations of core blocks (anything that can't be done in PHP), and in the standalone library for client-side interactivity. |
+
+---
 ## Usage
 
 ### In WordPress
 
-// TODO WordPress plugin with my core block customisations, common custom blocks, etc.
+#### Installation
+// TODO
+
+#### Theme setup
+For best results, use the plugin along with the Comet Canvas theme as a parent theme, and your project's theme as a child theme.
+
+#### Setting colours, fonts, etc
+- Set colours and gradients in your theme's `theme.json` file. WordPress will automatically pick up on these for use in the editor, and the Comet Canvas theme will inject them as CSS variables in the relevant places (overriding the Comet default ones).
+- Set fonts with the `--font-family-body` and `--font-family-accent` CSS variables in your theme's `style.css`.
+- Override any of the other default Comet CSS variables (e.g., spacing, container sizes) in your theme's `style.css`.
+
+#### Overriding Blade templates
+You can override the rendering template for a component by creating a Blade file with the same name in your theme's `components` directory.
 
 ### As a standalone PHP library
-
-// TODO.
+// TODO
 
 ### In a standalone HTML project
-
-// TODO.
+You could use Comet Components without PHP by including the compiled CSS files in your project and replicating the HTML that the PHP component classes generate.
