@@ -95,10 +95,16 @@ class BladeService {
      */
     private static function createViewFinder(Filesystem $filesystem): FileViewFinder {
         $templatePath = dirname(__DIR__, 1) . self::TEMPLATE_DIR;
+	    if (!is_dir($templatePath)) {
+		    throw new RuntimeException("Template directory not found: $templatePath");
+	    }
 
-        if (!is_dir($templatePath)) {
-            throw new RuntimeException("Template directory not found: $templatePath");
-        }
+		// If we are in WordPress, allow overriding from the theme
+		if(class_exists('WP_Block')) {
+			$wpThemeOverridePath = get_stylesheet_directory() . '/';
+			$wpParentThemeOverridePath = get_template_directory() . '/';
+			return new FileViewFinder($filesystem, [$wpThemeOverridePath, $wpParentThemeOverridePath, $templatePath]);
+		}
 
         return new FileViewFinder($filesystem, [$templatePath]);
     }

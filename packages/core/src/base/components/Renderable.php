@@ -50,9 +50,23 @@ abstract class Renderable {
 		$this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
 		$this->tagName = (isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) ?? Tag::DIV : Tag::DIV);
 		$this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
+		$this->context = $attributes['context'] ?? null;
 		$this->bladeFile = $bladeFile;
 		$this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
-		$this->context = $attributes['context'] ?? null;
+
+		// If we are in WordPress, allow overriding Blade template from the theme
+		if(class_exists('WP_Block') && function_exists('get_template_directory') && function_exists('get_stylesheet_directory')) {
+			$themeBladeFile = get_stylesheet_directory() . "/components/{$this->shortName}.blade.php";
+			if(file_exists($themeBladeFile)) {
+				$this->bladeFile = "components.{$this->shortName}";
+			}
+			else {
+				$parentThemeBladeFile = get_template_directory() . "/components/{$this->shortName}.blade.php";
+				if (file_exists($parentThemeBladeFile)) {
+					$this->bladeFile = str_replace('/', '\\', $parentThemeBladeFile);
+				}
+			}
+		}
 
 		$classes = [];
 		// Handle WordPress block implementation of classes (className string)
