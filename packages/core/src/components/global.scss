@@ -94,6 +94,10 @@ p, ul, ol {
 	}
 }
 
+a {
+	transition: all 0.2s ease-in-out;
+}
+
 .is-style-accent {
 	font-family: var(--font-family-accent), sans-serif;
 	font-weight: normal;

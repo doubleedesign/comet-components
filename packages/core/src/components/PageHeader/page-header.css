@@ -1,0 +1,10 @@
+.page-header {
+  padding-block: var(--spacing-lg);
+}
+@container (min-width: 960px) {
+  .page-header {
+    padding-block: var(--spacing-xl);
+  }
+}
+
+/*# sourceMappingURL=page-header.css.map */

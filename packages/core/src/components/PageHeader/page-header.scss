@@ -1,0 +1,9 @@
+@use '../mixins' as *;
+
+.page-header {
+	padding-block: var(--spacing-lg);
+
+	@include container-width-up('narrow') {
+		padding-block: var(--spacing-xl);
+	}
+}
