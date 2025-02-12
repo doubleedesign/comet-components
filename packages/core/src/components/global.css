@@ -1,4 +1,6 @@
 :root {
+  --font-family-body: sans-serif;
+  --font-family-accent: sans-serif;
   --color-primary: #845ec2;
   --color-secondary: #00c9a7;
   --color-accent: #ba3caf;
@@ -42,10 +44,13 @@
   --width-wide: 1440px;
   --width-contained: 1100px;
   --width-narrow: 960px;
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
+  /* Augmented fourth scale - 1.414 */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.707rem;
   --spacing-md: 1rem;
-  --spacing-lg: 2rem;
+  --spacing-lg: 1.414rem;
+  --spacing-xl: 1.999rem;
+  --spacing-2xl: 2.827rem;
   --button-border-radius: 0;
 }
 
@@ -59,6 +64,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-family-body), sans-serif;
+  line-height: 1.4;
 }
 
 .bg-primary {
@@ -66,9 +72,17 @@ body {
   color: var(--readable-color-primary);
 }
 
+.color-primary {
+  color: var(--color-primary);
+}
+
 .bg-secondary {
   background-color: var(--color-secondary);
   color: var(--readable-color-secondary);
+}
+
+.color-secondary {
+  color: var(--color-secondary);
 }
 
 .bg-accent {
@@ -76,9 +90,17 @@ body {
   color: var(--readable-color-accent);
 }
 
+.color-accent {
+  color: var(--color-accent);
+}
+
 .bg-warning {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
+}
+
+.color-warning {
+  color: var(--color-warning);
 }
 
 .bg-error {
@@ -86,9 +108,17 @@ body {
   color: var(--readable-color-error);
 }
 
+.color-error {
+  color: var(--color-error);
+}
+
 .bg-light {
   background-color: var(--color-light);
   color: var(--readable-color-light);
+}
+
+.color-light {
+  color: var(--color-light);
 }
 
 .bg-dark {
@@ -96,13 +126,76 @@ body {
   color: var(--readable-color-dark);
 }
 
+.color-dark {
+  color: var(--color-dark);
+}
+
 .bg-white {
   background-color: var(--color-white);
   color: var(--readable-color-white);
 }
 
+.color-white {
+  color: var(--color-white);
+}
+
+h3 {
+  font-size: 1.414rem;
+  line-height: 1.2;
+}
+h3.is-style-accent {
+  font-size: 1.7675rem;
+}
+
+h2 {
+  font-size: 1.999396rem;
+  line-height: 1.2;
+}
+h2.is-style-accent {
+  font-size: 2.499245rem;
+}
+
+h1 {
+  font-size: 2.827145944rem;
+  line-height: 1.2;
+}
+h1.is-style-accent {
+  font-size: 3.53393243rem;
+}
+
+h1 {
+  margin-block: var(--spacing-lg);
+}
+h1:first-child {
+  margin-block-start: 0;
+}
+
+h2, h3 {
+  margin-block: var(--spacing-md);
+}
+h2:first-child, h3:first-child {
+  margin-block-start: 0;
+}
+
+p, ul, ol {
+  margin-block: var(--spacing-sm);
+}
+p:first-child, ul:first-child, ol:first-child {
+  margin-block-start: 0;
+}
+p:last-child, ul:last-child, ol:last-child {
+  margin-block-end: 0;
+}
+
 .is-style-accent {
   font-family: var(--font-family-accent), sans-serif;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.is-style-lead {
+  font-weight: 600;
+  font-size: 1.25rem;
 }
 
 /*# sourceMappingURL=global.css.map */

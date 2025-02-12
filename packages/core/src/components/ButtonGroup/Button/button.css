@@ -16,6 +16,12 @@
 .button:hover > span, .button:focus > span, .button:active > span {
   text-decoration-color: currentColor;
 }
+.button:has(i, svg) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
 .button--primary:not([class*="--outline"]) {
   background-color: var(--color-primary);
   border: 1px solid var(--color-primary);

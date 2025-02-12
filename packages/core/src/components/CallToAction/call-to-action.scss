@@ -1,10 +1,10 @@
 @use '../mixins' as *;
 
 .call-to-action {
-	padding: var(--spacing-sm);
+	padding: var(--spacing-lg);
 
 	@include container-width-up('narrow') {
-		padding: var(--spacing-md);
+		padding: var(--spacing-xl);
 	}
 
 	.button-group:last-child {

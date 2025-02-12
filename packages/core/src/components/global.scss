@@ -1,6 +1,9 @@
 @use 'variables' as *;
 
 :root {
+	--font-family-body: sans-serif;
+	--font-family-accent: sans-serif;
+
 	@each $name, $values in $colors {
 		--color-#{$name}: #{map-get($colors, '#{$name}')};
 	}
@@ -15,10 +18,13 @@
 	--width-contained: #{map-get($widths, 'contained')};
 	--width-narrow: #{map-get($widths, 'narrow')};
 
-	--spacing-xs: 0.25rem;
-	--spacing-sm: 0.5rem;
+	/* Augmented fourth scale - 1.414 */
+	--spacing-xs: 0.5rem;
+	--spacing-sm: 0.707rem;
 	--spacing-md: 1rem;
-	--spacing-lg: 2rem;
+	--spacing-lg: 1.414rem;
+	--spacing-xl: 1.999rem;
+	--spacing-2xl: 2.827rem;
 
 	--button-border-radius: 0;
 }
@@ -33,6 +39,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: var(--font-family-body), sans-serif;
+	line-height: 1.4;
 }
 
 @each $name, $color in $colors {
@@ -46,6 +53,54 @@ body {
 	}
 }
 
+@each $heading, $i in ('h3': 1,	'h2': 2,'h1': 3) {
+	#{$heading} {
+		font-size: $baseFontSize * pow($typeScale, $i);
+		line-height: 1.2;
+
+		// Accent font is often a handwriting or other stylised font that looks visually smaller,
+		// so this sets a default to account for that
+		&.is-style-accent {
+			font-size: ($baseFontSize * 1.25) * pow($typeScale, $i);
+		}
+	}
+}
+
+h1 {
+	margin-block: var(--spacing-lg);
+
+	&:first-child {
+		margin-block-start: 0;
+	}
+}
+
+h2, h3 {
+	margin-block: var(--spacing-md);
+
+	&:first-child {
+		margin-block-start: 0;
+	}
+}
+
+p, ul, ol {
+	margin-block: var(--spacing-sm);
+
+	&:first-child {
+		margin-block-start: 0;
+	}
+
+	&:last-child {
+		margin-block-end: 0;
+	}
+}
+
 .is-style-accent {
 	font-family: var(--font-family-accent), sans-serif;
+	font-weight: normal;
+	line-height: 1;
+}
+
+.is-style-lead {
+	font-weight: 600;
+	font-size: $baseFontSize * 1.25;
 }

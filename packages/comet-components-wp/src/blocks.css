@@ -160,6 +160,12 @@
 .button:hover > span, .button:focus > span, .button:active > span {
   text-decoration-color: currentColor;
 }
+.button:has(i, svg) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
 .button--primary:not([class*="--outline"]) {
   background-color: var(--color-primary);
   border: 1px solid var(--color-primary);
@@ -295,6 +301,18 @@
 }
 .button--white--outline:hover, .button--white--outline:focus, .button--white--outline:active {
   box-shadow: inset 0 0 0 1px var(--color-white);
+}
+
+.call-to-action {
+  padding: var(--spacing-lg);
+}
+@container (min-width: 960px) {
+  .call-to-action {
+    padding: var(--spacing-xl);
+  }
+}
+.call-to-action .button-group:last-child {
+  padding-block-end: 0;
 }
 
 /*# sourceMappingURL=blocks.css.map */

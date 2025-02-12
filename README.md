@@ -220,8 +220,9 @@ See [Windows setup notes](./notes/windows.md).
 
 ---
 
-## Acknowledgements
+## With thanks to
 
-- Thank you to [Jozo](https://github.com/jozo) for
+- [TypeScale](https://type-scale.com) 
+- [Jozo](https://github.com/jozo) for
   the [JSON of HTML elements and their attributes](https://github.com/jozo/all-html-elements-and-attributes/blob/master/html-elements.json)
   used for generating the `Tag` enum.
