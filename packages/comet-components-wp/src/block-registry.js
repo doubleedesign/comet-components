@@ -74,4 +74,42 @@ function addCustomAttributesToCoreBlockHtml() {
 			return settings;
 		}
 	);
+
+	addFilter(
+		'blocks.registerBlockType',
+		'comet/modify-text-blocks',
+		(settings, name) => {
+			if (name !== 'core/heading' && name !== 'core/paragraph') {
+				return settings;
+			}
+
+			const originalEdit = settings.edit;
+
+			settings.edit = (props) => {
+				const themeColors = React.useMemo(() => {
+					return select('core/block-editor').getSettings().colors;
+				}, []);
+
+				const colorHex = React.useMemo(() => {
+					return props?.attributes?.style?.elements?.inline?.color?.text;
+				}, [props?.attributes?.style?.elements?.inline?.color?.text]);
+
+				const colorThemeName = React.useMemo(() => {
+					return themeColors?.find((color) => color.color === colorHex)?.slug ?? '';
+				}, [themeColors, colorHex]);
+
+				const styleClass = React.useMemo(() => {
+					return `color-${colorThemeName}`;
+				}, [colorThemeName, props.attributes?.className]);
+
+				// Wrap the original edit component with our custom classes
+				return createElement('div',
+					{ className: styleClass },
+					originalEdit(props)
+				);
+			};
+
+			return settings;
+		}
+	);
 }

@@ -2,7 +2,7 @@
 namespace Doubleedesign\Comet\Core;
 
 
-class Heading extends TextElement {
+class Heading extends TextElementExtended {
 	use HasAllowedTags;
 
 	/**

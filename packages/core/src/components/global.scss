@@ -40,6 +40,10 @@ body {
 		background-color: var(--color-#{$name});
 		color: var(--readable-color-#{$name});
 	}
+
+	.color-#{$name} {
+		color: var(--color-#{$name});
+	}
 }
 
 .is-style-accent {

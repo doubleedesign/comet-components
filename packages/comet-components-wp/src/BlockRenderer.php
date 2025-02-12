@@ -181,6 +181,19 @@ class BlockRenderer {
 			$this->process_image_block($block_instance);
 		}
 
+		// Process custom attributes added in BlockRegistry.php
+		// Note: We do not expect blocks to have both a "colour theme" and a text colour attribute
+		if(isset($block_instance->attributes['style']['elements']['theme'])) {
+			$color = $block_instance->attributes['style']['elements']['theme']['color']['background'];
+			$block_instance->attributes['colorTheme'] = $this->hex_to_theme_color_name($color) ?? null;
+			unset($block_instance->attributes['style']);
+		}
+		if(isset($block_instance->attributes['style']['elements']['inline'])) {
+			$color = $block_instance->attributes['style']['elements']['inline']['color']['text'];
+			$block_instance->attributes['textColor'] = $this->hex_to_theme_color_name($color) ?? null;
+			unset($block_instance->attributes['style']);
+		}
+
 		// Figure out the component class to use:
 		// This is a block variant at the top level, such as an Accordion (variant of Panels)
 		if (isset($block_instance->attributes['variant'])) {
@@ -381,7 +394,7 @@ class BlockRenderer {
 		// Process custom attributes
 		if(isset($attributes['style'])) {
 			$attributes['colorTheme'] = $this->hex_to_theme_color_name($attributes['style']['elements']['theme']['color']['background']) ?? null;
-						unset($attributes['style']);
+			unset($attributes['style']);
 		}
 
 		// Turn style classes into attributes
@@ -455,7 +468,7 @@ class BlockRenderer {
 		$theme = $this->theme_json['settings']['color']['palette'];
 
 		return array_reduce($theme, function ($carry, $item) use ($hex) {
-			return $item['color'] === $hex ? $item['slug'] : $carry;
+			return strtoupper($item['color']) === strtoupper($hex) ? $item['slug'] : $carry;
 		}, null);
 	}
 

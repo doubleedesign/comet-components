@@ -221,7 +221,8 @@ class BlockRegistry extends JavaScriptImplementation {
 
 	/**
 	 * Register some additional attribute options
-	 * Note: Requires the block-supports-extended plugin, which is installed as a dependency via Composer
+	 * Notes: Requires the block-supports-extended plugin, which is installed as a dependency via Composer
+	 *        To see the styles in the editor, you must override the JavaScript edit function for the block (see block-registry.js)
 	 * @return void
 	 */
 	function register_custom_attributes(): void {
@@ -233,8 +234,16 @@ class BlockRegistry extends JavaScriptImplementation {
 		Block_Supports_Extended\register('color', 'theme', [
 			'label'  => __('Colour theme'),
 			'property' => 'background',
+			// TODO: Support for comet/panels
 			'selector' => '.%1$s wp-block-button__link',
-			'blocks' => ['comet/panels', 'core/button'],
+			'blocks' => ['core/button'],
+		]);
+
+		Block_Supports_Extended\register('color', 'inline', [
+			'label'  => __('Text (override default)'),
+			'property' => 'text',
+			'selector' => '.%1$s wp-block-heading wp-block-paragraph',
+			'blocks' => ['core/heading', 'core/paragraph'],
 		]);
 
 		// Note: Remove the thing the custom attribute is replacing, if applicable, using block_type_metadata filter
@@ -291,7 +300,8 @@ class BlockRegistry extends JavaScriptImplementation {
 			$metadata['supports']['color']['background'] = false;
 			$metadata['supports']['color']['gradients'] = false;
 			$metadata['supports']['color']['__experimentalDefaultControls'] = [
-				'text' => true
+				'text' => false, // replaced with custom attribute because it wasn't working
+				'background' => false
 			];
 		}
 
