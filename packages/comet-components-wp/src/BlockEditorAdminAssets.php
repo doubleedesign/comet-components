@@ -11,17 +11,19 @@ class BlockEditorAdminAssets {
 			// Block editor is not available.
 			return;
 		}
-		// Global CSS - both front-end and editor
-		add_action('enqueue_block_assets', [$this, 'enqueue_comet_global_css'], 1);
-		// Front-end only CSS
-		add_action('wp_enqueue_scripts', [$this, 'enqueue_comet_combined_component_css'], 1);
-		// Editor only CSS
+
+		// Front-end CSS
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_comet_global_css'], 10);
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_comet_combined_component_css'], 10);
+
+		// Editor CSS
 		if(is_admin()) {
-			add_action('enqueue_block_assets', [$this, 'enqueue_wp_block_css'], 100);
+			add_action('enqueue_block_assets', [$this, 'enqueue_comet_global_css'], 10);
+			add_action('enqueue_block_assets', [$this, 'enqueue_wp_block_css'], 10);
 			add_filter('block_editor_settings_all', [$this, 'remove_gutenberg_inline_styles']);
 		}
 
-		// Admin JS
+		// General admin JS
 		add_action('admin_enqueue_scripts', [$this, 'admin_scripts']);
 	}
 
@@ -62,7 +64,7 @@ class BlockEditorAdminAssets {
 	/**
 	 * Remove default inline styles from the block editor
 	 * @param $editor_settings
-	 * @return mixed
+	 * @return array
 	 */
 	function remove_gutenberg_inline_styles($editor_settings): array {
 		if (!empty($editor_settings['styles'])) {
@@ -75,7 +77,6 @@ class BlockEditorAdminAssets {
 	/**
 	 * Scripts to hackily remove/hide menu items (e.g., the disabled code editor button) for simplicity,
 	 * open list view by default, and other editor UX things like that
-	 *
 	 * @return void
 	 */
 	function admin_scripts(): void {
