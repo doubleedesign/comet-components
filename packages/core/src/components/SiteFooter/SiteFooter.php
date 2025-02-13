@@ -1,9 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class ComplexComponent extends UIComponent {
+class SiteFooter extends UIComponent {
     function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.ThisComponent.this-component');
+        parent::__construct($attributes, $innerComponents, 'components.SiteFooter.site-footer');
+    }
+
+    function get_inline_styles(): array {
+        return [];
     }
 
 	#[NotImplemented]

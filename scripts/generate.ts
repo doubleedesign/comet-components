@@ -103,6 +103,8 @@ function generateSkeletonFiles({ componentName, componentType }) {
 		}
 	}
 
+	//execSync('cd packages/core && composer dump-autoload -o');
+
 
 	// if(!testExists) {
 	// 	const templateOutput = testFileTemplate.replaceAll(templateClassName, className);

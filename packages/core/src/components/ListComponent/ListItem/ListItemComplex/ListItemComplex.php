@@ -11,14 +11,16 @@ class ListItemComplex extends UIComponent {
 		return [Tag::LI];
 	}
 
+	/**
+	 * ListItemComplex constructor.
+	 * @param array $attributes
+	 * @param string $content
+	 * @param array<ListComponent> $nestedLists
+	 */
 	function __construct(array $attributes, string $content, array $nestedLists) {
 		$bladeFile = 'components.ListComponent.ListItem.list-item';
 		$this->content = Utils::sanitise_content($content);
 		parent::__construct($attributes, $nestedLists, $bladeFile);
-	}
-
-	function get_inline_styles(): array {
-		return [];
 	}
 
 	function render(): void {

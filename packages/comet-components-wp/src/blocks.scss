@@ -10,3 +10,6 @@
 @use "../vendor/doubleedesign/comet-components-core/src/components/CallToAction/call-to-action.scss";
 @use "../vendor/doubleedesign/comet-components-core/src/components/Accordion/accordion.scss";
 @use "../vendor/doubleedesign/comet-components-core/src/components/Tabs/tabs.scss";
+
+// Technically not blocks, but we'll include these components here for simplicity
+@use "../vendor/doubleedesign/comet-components-core/src/components/SiteFooter/site-footer.scss";
