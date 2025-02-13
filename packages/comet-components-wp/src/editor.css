@@ -374,6 +374,24 @@
   padding-block-end: 0;
 }
 
+.site-footer {
+  padding-block: var(--spacing-lg);
+}
+@container (min-width: 960px) {
+  .site-footer {
+    padding-block: var(--spacing-xl);
+  }
+}
+.site-footer a {
+  color: inherit;
+}
+.site-footer__menu-list {
+  display: block;
+}
+.site-footer__menu-list__item {
+  display: block;
+}
+
 .has-primary-background-color {
   background-color: var(--color-primary);
   color: var(--readable-color-primary);

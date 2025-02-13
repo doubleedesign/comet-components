@@ -16,11 +16,11 @@ class PageHeader extends UIComponent {
 	protected array $breadcrumbs;
 	/**
 	 * @var ?ContainerSize $size
-	 * @description Keyword specifying the relative width of the container
+	 * @description Keyword specifying the relative width of the container for the inner content
 	 */
 	protected ?ContainerSize $size = ContainerSize::DEFAULT;
 	/**
-	 * @var ?ThemeColor $background_color
+	 * @var ?ThemeColor $backgroundColor
 	 * @description Background colour keyword
 	 */
 	protected ?ThemeColor $backgroundColor;

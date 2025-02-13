@@ -1,3 +1,24 @@
-.site-footer {
+@use '../mixins' as *;
 
+.site-footer {
+	padding-block: var(--spacing-lg);
+
+	@include container-width-up('narrow') {
+		padding-block: var(--spacing-xl);
+	}
+
+	a {
+		color: inherit;
+	}
+
+	&__menu {
+
+		&-list {
+			display: block;
+
+			&__item {
+				display: block;
+			}
+		}
+	}
 }
