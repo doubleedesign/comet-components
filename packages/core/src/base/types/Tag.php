@@ -147,7 +147,7 @@ enum Tag: string {
 
 	public function get_valid_attributes(): array {
 		$local = match ($this) {
-			self::A => ['download', 'href', 'hreflang', 'ping', 'referrerpolicy', 'rel', 'target', 'type'],
+			self::A => ['download', 'href', 'hreflang', 'ping', 'referrerpolicy', 'rel', 'target', 'type', 'aria-current'],
 			self::AUDIO => [
 				'autoplay',
 				'controls',

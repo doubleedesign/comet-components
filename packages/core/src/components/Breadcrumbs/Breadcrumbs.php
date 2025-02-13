@@ -4,10 +4,24 @@ namespace Doubleedesign\Comet\Core;
 class Breadcrumbs extends UIComponent {
 	function __construct(array $attributes, array $breadcrumbs) {
 		$listItems = array_map(function($breadcrumb) {
-			return new ListItemSimple(['className' => 'breadcrumbs__item'], "<a href=\"{$breadcrumb['url']}\">{$breadcrumb['title']}</a>");
+			$linkAttributes = ['href' => trim($breadcrumb['url'] !== '') ? $breadcrumb['url'] : '#'];
+			if($breadcrumb['current']) {
+				$linkAttributes['aria-current'] = 'page';
+			}
+
+			ob_start();
+			$link = new Link($linkAttributes, $breadcrumb['title']);
+			$link->render();
+			$linkHtml = ob_get_clean();
+			return new ListItem(
+				['context' => 'breadcrumbs__list'],
+				$linkHtml
+			);
 		}, $breadcrumbs);
 
-        parent::__construct($attributes, $listItems, 'components.Breadcrumbs.breadcrumbs');
+		$innerComponents = [new ListComponent(['ordered' => true, 'context' => 'breadcrumbs'], $listItems)];
+
+        parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
     }
 
 	function render(): void {

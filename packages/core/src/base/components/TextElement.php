@@ -99,6 +99,5 @@ abstract class TextElement extends Renderable {
 			'attributes' => $this->get_html_attributes(),
 			'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
 		])->render();
-
 	}
 }
