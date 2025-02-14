@@ -7,8 +7,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion",
-                "accordion--color-theme-primary"
+                "accordion"
             ]
         },
         "colorTheme": {

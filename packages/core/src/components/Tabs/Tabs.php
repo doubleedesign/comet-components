@@ -20,10 +20,16 @@ class Tabs extends UIComponent {
 	}
 
 	function get_html_attributes(): array {
-		return array_merge(
+		$attrs = array_merge(
 			parent::get_html_attributes(),
-			['data-orientation' => $this->orientation->value]
+			['data-orientation' => $this->orientation->value],
 		);
+
+		if($this->colorTheme) {
+			$attrs['data-color-theme'] = $this->colorTheme->value;
+		}
+
+		return $attrs;
 	}
 
 	/**
@@ -49,18 +55,6 @@ class Tabs extends UIComponent {
 			...$panels
 		];
 	}
-
-	function get_filtered_classes(): array {
-		$classes = parent::get_filtered_classes();
-
-		$result = array_merge(
-			$classes,
-			["{$this->get_bem_name()}--color-theme-{$this->colorTheme->value}"],
-		);
-
-		return array_unique($result);
-	}
-
 
 	function render(): void {
 		$blade = BladeService::getInstance();

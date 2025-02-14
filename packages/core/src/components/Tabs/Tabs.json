@@ -7,8 +7,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "tabs",
-                "tabs--color-theme-primary"
+                "tabs"
             ]
         },
         "colorTheme": {

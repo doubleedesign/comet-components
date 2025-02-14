@@ -30,7 +30,7 @@ class MenuTest extends TestCase {
 		];
 	}
 
-	public function test_default_classnames(): void {
+	public function test_default_bem_class_structure(): void {
 		ob_start();
 		$menu = new Menu([], $this->menuItems);
 		$menu->render();
@@ -49,7 +49,7 @@ class MenuTest extends TestCase {
 		$this->assertEquals('menu-list__item__link', $link->className);
 	}
 
-	public function test_context_classnames(): void {
+	public function test_context_bem_class_structure(): void {
 		ob_start();
 		$menu = new Menu(['context' => 'footer'], $this->menuItems);
 		$menu->render();

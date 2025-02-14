@@ -14,15 +14,14 @@ class Accordion extends UIComponent {
 		$this->set_color_theme_from_attrs($attributes);
 	}
 
-	function get_filtered_classes(): array {
-		$classes = parent::get_filtered_classes();
+	function get_html_attributes(): array {
+		$attrs = parent::get_html_attributes();
 
-		$result = array_merge(
-			$classes,
-			["{$this->get_bem_name()}--color-theme-{$this->colorTheme->value}"],
-		);
+		if($this->colorTheme) {
+			$attrs['data-color-theme'] = $this->colorTheme->value;
+		}
 
-		return array_unique($result);
+		return $attrs;
 	}
 
 	function render(): void {
