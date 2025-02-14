@@ -1,7 +1,41 @@
 {
     "name": "Tabs",
     "extends": "UIComponent",
+    "abstract": false,
     "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "tabs",
+                "tabs--color-theme-primary"
+            ]
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for the fill or outline colour",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "primary"
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
         "orientation": {
             "type": "Orientation",
             "supported": [
@@ -10,6 +44,10 @@
             ],
             "default": "horizontal"
         },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
@@ -17,25 +55,6 @@
                 "div"
             ],
             "default": "div"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "tabs"
-            ]
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
         }
     },
     "innerComponents": {

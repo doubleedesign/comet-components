@@ -7,8 +7,26 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion"
+                "accordion",
+                "accordion--color-theme-primary"
             ]
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for the fill or outline colour",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "primary"
         },
         "context": {
             "type": "string",

@@ -4,11 +4,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::A, Tag::BUTTON])]
 #[DefaultTag(Tag::A)]
 class Button extends Renderable {
-	/**
-	 * @var ?ThemeColor $colorTheme
-	 * @description Colour keyword for the fill or outline colour
-	 */
-	protected ?ThemeColor $colorTheme = ThemeColor::PRIMARY;
+	use ColorTheme;
+
 	/**
 	 * @var ?bool $isOutline
 	 * @description Whether to use outline style instead of solid/filled
@@ -22,7 +19,7 @@ class Button extends Renderable {
 
 	function __construct(array $attributes, string $content) {
 		parent::__construct($attributes, 'components.ButtonGroup.Button.button');
-		$this->colorTheme = isset($attributes['colorTheme']) ? ThemeColor::tryFrom($attributes['colorTheme']) : ThemeColor::PRIMARY;
+		$this->set_color_theme_from_attrs($attributes);
 		$this->isOutline = $attributes['isOutline'] ?? false;
 		$this->content = $content;
 	}

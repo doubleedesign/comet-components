@@ -4,6 +4,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class Tabs extends UIComponent {
+	use ColorTheme;
 	use LayoutOrientation;
 	/**
 	 * @var array<TabPanel>
@@ -13,6 +14,7 @@ class Tabs extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Tabs.tabs');
+		$this->set_color_theme_from_attrs($attributes);
 		$this->set_orientation_from_attrs($attributes);
 		$this->build_tablist();
 	}
@@ -47,6 +49,18 @@ class Tabs extends UIComponent {
 			...$panels
 		];
 	}
+
+	function get_filtered_classes(): array {
+		$classes = parent::get_filtered_classes();
+
+		$result = array_merge(
+			$classes,
+			["{$this->get_bem_name()}--color-theme-{$this->colorTheme->value}"],
+		);
+
+		return array_unique($result);
+	}
+
 
 	function render(): void {
 		$blade = BladeService::getInstance();
