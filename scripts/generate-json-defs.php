@@ -1,7 +1,6 @@
 <?php
 use Doubleedesign\Comet\Core\AllowedTags;
 use Doubleedesign\Comet\Core\DefaultTag;
-use Doubleedesign\Comet\Core\HasAllowedTags;
 use Doubleedesign\Comet\Core\Tag;
 
 /**
@@ -155,6 +154,7 @@ class ComponentClassesToJsonDefinitions {
 		$this->currentClass = $reflectionClass;
 		$properties = [];
 
+		// Collect properties from the class itself
 		foreach ($reflectionClass->getProperties() as $property) {
 			if ($this->getVisibility($property) !== 'private') {
 				$this->declaringClass = $property->getDeclaringClass(); // get the parent class where the property is declared
@@ -162,6 +162,23 @@ class ComponentClassesToJsonDefinitions {
 				$propertyName = $property->getName();
 
 				$properties[$propertyName] = $propertyType;
+			}
+		}
+
+		// Collect properties from traits
+		$traits = $reflectionClass->getTraits();
+		foreach ($traits as $trait) {
+			foreach ($trait->getProperties() as $property) {
+				if ($this->getVisibility($property) !== 'private') {
+					$this->declaringClass = $trait;
+					$propertyType = $this->getPropertyType($property);
+					$propertyName = $property->getName();
+
+					// Only add if not already defined in the class
+					if (!isset($properties[$propertyName])) {
+						$properties[$propertyName] = $propertyType;
+					}
+				}
 			}
 		}
 

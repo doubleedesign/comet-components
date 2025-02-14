@@ -13,10 +13,6 @@ class AccordionPanelContent extends UIComponent {
 		);
 	}
 
-	function get_inline_styles(): array {
-		return [];
-	}
-
 	function render(): void {
 		$blade = BladeService::getInstance();
 

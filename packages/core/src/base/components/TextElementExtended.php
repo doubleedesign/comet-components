@@ -2,14 +2,11 @@
 namespace Doubleedesign\Comet\Core;
 
 abstract class TextElementExtended extends TextElement {
-	/**
-	 * @var ThemeColor|null $textColor
-	 */
-	protected ?ThemeColor $textColor = null;
+	use TextColor;
 
 	function __construct(array $attributes, string $content, string $bladeFile) {
 		parent::__construct($attributes, $content, $bladeFile);
-		$this->textColor = isset($attributes['textColor']) ? ThemeColor::tryFrom($attributes['textColor']) : null;
+		$this->set_text_color_from_attrs($attributes);
 	}
 
 	function get_filtered_classes(): array {

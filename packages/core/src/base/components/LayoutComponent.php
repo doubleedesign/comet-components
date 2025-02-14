@@ -2,20 +2,15 @@
 namespace Doubleedesign\Comet\Core;
 
 abstract class LayoutComponent extends UIComponent {
-	protected ?Alignment $hAlign = Alignment::START;
-	protected ?Alignment $vAlign = Alignment::START;
-	protected ?ThemeColor $backgroundColor;
-
+	use BackgroundColor;
+	use LayoutAlignmentHorizontal;
+	use LayoutAlignmentVertical;
 
 	function __construct(array $attributes, array $children, string $bladeFile) {
 		parent::__construct($attributes, $children, $bladeFile);
-		$this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : null;
-
-		// In WordPress, some blocks have $attributes['theSetting'] and some have $attributes['layout']['theSetting'] so we need to account for both
-		$hAlign = $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null;
-		$this->hAlign = isset($hAlign) ? Alignment::fromString($hAlign) : null;
-		$vAlign = $attributes['verticalAlignment'] ?? $attributes['layout']['verticalAlignment'] ?? null;
-		$this->vAlign = isset($vAlign) ? Alignment::fromString($vAlign) : null;
+		$this->set_background_color_from_attrs($attributes);
+		$this->set_halign_from_attrs($attributes);
+		$this->set_valign_from_attrs($attributes);
 	}
 
 	/**

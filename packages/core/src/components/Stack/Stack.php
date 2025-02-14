@@ -4,16 +4,12 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
 class Stack extends UIComponent {
-	protected ?Alignment $hAlign = Alignment::START;
-	protected ?ThemeColor $backgroundColor;
+	use BackgroundColor;
+	use LayoutAlignmentHorizontal;
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Stack.stack');
-		$this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : null;
-
-		// In WordPress, some blocks have $attributes['theSetting'] and some have $attributes['layout']['theSetting'] so we need to account for both
-		$hAlign = $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null;
-		$this->hAlign = isset($hAlign) ? Alignment::fromString($hAlign) : null;
+		$this->set_background_color_from_attrs($attributes);
 	}
 
 	/**

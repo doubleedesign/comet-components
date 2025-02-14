@@ -4,29 +4,12 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV])]
 #[DefaultTag(Tag::SECTION)]
 class Container extends UIComponent {
+	use LayoutContainerSize;
+	use BackgroundColor;
 
-	/**
-	 * @var ?ContainerSize $size
-	 * @description Keyword specifying the relative width of the container
-	 */
-	protected ?ContainerSize $size = ContainerSize::DEFAULT;
-	/**
-	 * @var ?ThemeColor $background_color
-	 * @description Background colour keyword
-	 */
-	protected ?ThemeColor $backgroundColor;
-	
 	function __construct(array $attributes, array $innerComponents) {
-		if (isset($attributes['size'])) {
-			$this->size = ContainerSize::tryFrom($attributes['size']);
-		}
-		else if (isset($attributes['className'])) {
-			$this->size = ContainerSize::fromWordPressClassName($attributes['className']);
-		}
-
-		$this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : null;
-
 		parent::__construct($attributes, $innerComponents, 'components.Container.container');
+		$this->set_size_from_attrs($attributes);
 	}
 
 	protected function get_filtered_classes(): array {

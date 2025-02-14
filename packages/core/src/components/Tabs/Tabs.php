@@ -4,26 +4,23 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class Tabs extends UIComponent {
+	use LayoutOrientation;
 	/**
 	 * @var array<TabPanel>
 	 * @description Wrapping components each containing a TabPanelTitle and TabPanelContent.
 	 */
 	protected array $innerComponents;
 
-	protected ?Orientation $orientation = Orientation::HORIZONTAL;
-
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Tabs.tabs');
-		$this->orientation = isset($attributes['orientation']) ? Orientation::tryFrom($attributes['orientation']) : Orientation::HORIZONTAL;
+		$this->set_orientation_from_attrs($attributes);
 		$this->build_tablist();
 	}
 
 	function get_html_attributes(): array {
 		return array_merge(
 			parent::get_html_attributes(),
-			[
-				'data-orientation' => $this->orientation->value
-			]
+			['data-orientation' => $this->orientation->value]
 		);
 	}
 

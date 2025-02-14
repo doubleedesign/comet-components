@@ -3,21 +3,6 @@
     "extends": "UIComponent",
     "abstract": false,
     "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ]
-        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
@@ -46,10 +31,26 @@
         "context": {
             "type": "string",
             "description": "The parent component or variant if contextually relevant"
+        },
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
         }
     },
     "innerComponents": {
-        "type": "array<Heading|Paragraph|ButtonGroup>",
+        "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
         "required": true
     }

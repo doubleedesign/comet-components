@@ -9,7 +9,7 @@ class MenuListItem extends UIComponent {
 	 * @param array<Link|MenuList> $innerComponents
 	 */
     function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.Menu.MenuList.MenuListItem.menu-list-item');
+        parent::__construct($attributes, $innerComponents, 'components.Menu.MenuListItem.menu-list-item');
     }
 
 	protected function get_bem_name(): ?string {

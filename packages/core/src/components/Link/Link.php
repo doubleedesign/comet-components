@@ -7,11 +7,7 @@ class Link extends Renderable {
 	protected string $content;
 
     function __construct(array $attributes, string $content) {
-        parent::__construct(
-			array_merge($attributes, ['tagName' => 'a']),
-	        'components.Link.link'
-        );
-
+        parent::__construct($attributes, 'components.Link.link');
 		$this->content = $content;
     }
 

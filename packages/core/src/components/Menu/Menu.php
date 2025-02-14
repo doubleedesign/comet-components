@@ -4,6 +4,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::NAV])]
 #[DefaultTag(Tag::NAV)]
 class Menu extends UIComponent {
+
 	function __construct(array $attributes, array $menuItems) {
 		$innerComponents = [
 			new MenuList($attributes, $this->array_to_items($menuItems, $attributes['context'] ?? ''))

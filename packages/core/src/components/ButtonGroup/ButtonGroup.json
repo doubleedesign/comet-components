@@ -3,25 +3,6 @@
     "extends": "UIComponent",
     "abstract": false,
     "attributes": {
-        "hAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start"
-        },
-        "orientation": {
-            "type": "Orientation",
-            "supported": [
-                "horizontal",
-                "vertical"
-            ],
-            "default": "horizontal"
-        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
@@ -48,6 +29,25 @@
         "context": {
             "type": "string",
             "description": "The parent component or variant if contextually relevant"
+        },
+        "orientation": {
+            "type": "Orientation",
+            "supported": [
+                "horizontal",
+                "vertical"
+            ],
+            "default": "horizontal"
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start"
         }
     },
     "innerComponents": {

@@ -4,21 +4,18 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::FOOTER])]
 #[DefaultTag(Tag::FOOTER)]
 class SiteFooter extends UIComponent {
+	use BackgroundColor;
+	use LayoutContainerSize;
 
 	/**
 	 * @var ?ContainerSize $size
 	 * @description Keyword specifying the relative width of the container for the inner content
 	 */
 	protected ?ContainerSize $size = ContainerSize::DEFAULT;
-	/**
-	 * @var ?ThemeColor $backgroundColor
-	 * @description Background colour keyword
-	 */
-	protected ?ThemeColor $backgroundColor;
 
 	function __construct(array $attributes, array $innerComponents) {
-		$this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : ThemeColor::WHITE;
-		$this->size = isset($attributes['size']) ? ContainerSize::tryFrom($attributes['size']) : ContainerSize::DEFAULT;
+		$this->set_background_color_from_attrs($attributes);
+		$this->set_size_from_attrs($attributes);
 
 		$this->innerComponents = array(
 			new Container(

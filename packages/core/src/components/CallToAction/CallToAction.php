@@ -4,15 +4,15 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
 class CallToAction extends UIComponent {
-	protected ?ThemeColor $backgroundColor;
+	use BackgroundColor;
 
-	/** @var array<Heading|Paragraph|ButtonGroup> */
-	protected array $innerComponents;
-
+	/**
+	 * @param array $attributes
+	 * @param array<Heading|Paragraph|ButtonGroup> $innerComponents
+	 */
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.CallToAction.call-to-action');
-		$this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : null;
-
+		$this->set_background_color_from_attrs($attributes);
 	}
 
 	protected function get_filtered_classes(): array {
@@ -23,10 +23,6 @@ class CallToAction extends UIComponent {
 		}
 
 		return $classes;
-	}
-
-	function get_inline_styles(): array {
-		return [];
 	}
 
 	function render(): void {

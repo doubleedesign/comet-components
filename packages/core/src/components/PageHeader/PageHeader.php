@@ -4,6 +4,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::HEADER, Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::HEADER)]
 class PageHeader extends UIComponent {
+	use BackgroundColor;
+	use LayoutContainerSize;
 
 	/**
 	 * @var string $title
@@ -15,20 +17,10 @@ class PageHeader extends UIComponent {
 	 * @description Array of title and URL pairs
 	 */
 	protected array $breadcrumbs;
-	/**
-	 * @var ?ContainerSize $size
-	 * @description Keyword specifying the relative width of the container for the inner content
-	 */
-	protected ?ContainerSize $size = ContainerSize::DEFAULT;
-	/**
-	 * @var ?ThemeColor $backgroundColor
-	 * @description Background colour keyword
-	 */
-	protected ?ThemeColor $backgroundColor;
 
     function __construct(array $attributes, string $title, array $breadcrumbs = []) {
-	    $this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : ThemeColor::WHITE;
-	    $this->size = isset($attributes['size']) ? ContainerSize::tryFrom($attributes['size']) : ContainerSize::DEFAULT;
+		$this->set_background_color_from_attrs($attributes);
+		$this->set_size_from_attrs($attributes);
 		$this->breadcrumbs = $breadcrumbs;
 		$this->innerComponents = !empty($breadcrumbs) ?  [new Breadcrumbs([], $this->breadcrumbs)] : [];
 

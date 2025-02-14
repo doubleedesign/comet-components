@@ -4,8 +4,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class ButtonGroup extends UIComponent {
-	protected ?Alignment $hAlign = Alignment::START;
-	protected ?Orientation $orientation = Orientation::HORIZONTAL;
+	use LayoutOrientation;
+	use LayoutAlignmentHorizontal;
 
 	/**
 	 * @var array<Button>
@@ -15,12 +15,8 @@ class ButtonGroup extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.ButtonGroup.button-group');
-
-		// In WordPress, some blocks have $attributes['theSetting'] and some have $attributes['layout']['theSetting'] so we need to account for both
-		$hAlign = $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null;
-		$this->hAlign = isset($hAlign) ? Alignment::fromString($hAlign) : null;
-		$orientation = $attributes['orientation'] ?? $attributes['layout']['orientation'] ?? null;
-		$this->orientation = isset($orientation) ? Orientation::tryFrom($orientation) : null;
+		$this->set_orientation_from_attrs($attributes);
+		$this->set_halign_from_attrs($attributes);
 	}
 
 	function get_filtered_classes(): array {
@@ -28,7 +24,6 @@ class ButtonGroup extends UIComponent {
 
 		if (isset($this->hAlign)) {
 			$classes[] = $this->shortName . '--halign-' . $this->hAlign->value;
-
 		}
 
 		if (isset($this->orientation) && $this->orientation == Orientation::VERTICAL) {
