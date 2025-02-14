@@ -1,6 +1,7 @@
 {
     "name": "AccordionPanel",
     "extends": "UIComponent",
+    "abstract": false,
     "attributes": {
         "tagName": {
             "type": "Tag",

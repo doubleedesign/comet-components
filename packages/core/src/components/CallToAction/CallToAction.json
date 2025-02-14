@@ -1,6 +1,7 @@
 {
     "name": "CallToAction",
     "extends": "UIComponent",
+    "abstract": false,
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",

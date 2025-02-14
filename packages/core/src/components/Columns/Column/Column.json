@@ -1,6 +1,7 @@
 {
     "name": "Column",
     "extends": "LayoutComponent",
+    "abstract": false,
     "attributes": {
         "hAlign": {
             "type": "Alignment",

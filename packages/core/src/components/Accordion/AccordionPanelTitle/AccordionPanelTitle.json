@@ -1,6 +1,7 @@
 {
     "name": "AccordionPanelTitle",
     "extends": "TextElement",
+    "abstract": false,
     "attributes": {
         "textAlign": {
             "type": "Alignment",

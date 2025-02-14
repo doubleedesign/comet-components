@@ -1,6 +1,7 @@
 {
     "name": "ButtonGroup",
     "extends": "UIComponent",
+    "abstract": false,
     "attributes": {
         "hAlign": {
             "type": "Alignment",

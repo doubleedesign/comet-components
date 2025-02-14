@@ -1,6 +1,7 @@
 {
     "name": "Heading",
-    "extends": "TextElement",
+    "extends": "TextElementExtended",
+    "abstract": false,
     "attributes": {
         "tagName": {
             "type": "Tag",
@@ -23,6 +24,21 @@
                 "is-style-small"
             ],
             "default": []
+        },
+        "textColor": {
+            "type": "ThemeColor",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
         },
         "textAlign": {
             "type": "Alignment",
