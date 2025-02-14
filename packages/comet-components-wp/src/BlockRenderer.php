@@ -180,6 +180,15 @@ class BlockRenderer {
 		if ($block_name === 'core/image') {
 			$this->process_image_block($block_instance);
 		}
+		if ($block_name === 'core/pullquote') {
+			$quoteContent = $block_instance->parsed_block['innerHTML'];
+			$dom = new DOMDocument();
+			@$dom->loadHTML($quoteContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+			$quote = $dom->getElementsByTagName('p')->item(0);
+			$citation = $dom->getElementsByTagName('cite')->item(0)->textContent;
+			$content = $quote->textContent;
+			$block_instance->attributes['citation'] = $citation;
+		}
 
 		// Process custom attributes added in BlockRegistry.php
 		// Note: We do not expect blocks to have both a "colour theme" and a text colour attribute

@@ -232,6 +232,8 @@ class ComponentClassesToJsonDefinitions {
 		$defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null;
 		$supportedValues = null;
 		$content_type = $this->currentClass->hasProperty('innerComponents') ? 'array' : 'string';
+
+		// Initial property type processing
 		$result = $this->processPropertyType($type);
 
 		// Handle default boolean values
@@ -246,7 +248,14 @@ class ComponentClassesToJsonDefinitions {
 		if ($property->getName() === 'classes' && !$this->currentClass->isAbstract()) {
 			if ($this->currentClass->hasMethod('get_filtered_classes')) {
 				try {
-					$instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
+					// Special handling for some classes that don't follow the usual pattern of parameters
+					if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
+						$instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
+					}
+					else {
+						$instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
+					}
+
 					$defaultValue = $this->currentClass->getMethod('get_filtered_classes')->invoke($instance);
 				}
 				catch (ReflectionException $e) {

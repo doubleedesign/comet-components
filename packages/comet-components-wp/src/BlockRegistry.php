@@ -242,8 +242,8 @@ class BlockRegistry extends JavaScriptImplementation {
 		Block_Supports_Extended\register('color', 'inline', [
 			'label'  => __('Text (override default)'),
 			'property' => 'text',
-			'selector' => '.%1$s wp-block-heading wp-block-paragraph',
-			'blocks' => ['core/heading', 'core/paragraph'],
+			'selector' => '.%1$s wp-block-heading wp-block-paragraph wp-block-pullquote',
+			'blocks' => ['core/heading', 'core/paragraph', 'core/pullquote'],
 		]);
 
 		// Note: Remove the thing the custom attribute is replacing, if applicable, using block_type_metadata filter

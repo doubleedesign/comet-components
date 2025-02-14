@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::FIGURE])]
+#[DefaultTag(Tag::FIGURE)]
 class Image extends Renderable {
 	/**
 	 * @var string $src
@@ -36,7 +38,7 @@ class Image extends Renderable {
 	protected ?AspectRatio $aspectRatio = null;
 	/**
 	 * @var string|null $scale
-	 * @description How to handle image scaling
+	 * @description How to handle how the image fits the available space
 	 * @supported-values contain, cover
 	 */
 	protected ?string $scale = 'contain';
@@ -58,7 +60,7 @@ class Image extends Renderable {
 
 
 	function __construct(array $attributes) {
-		$this->src = $attributes['src'];
+		$this->src = $attributes['src'] ?? '';
 		$this->alt = $attributes['alt'] ?? '';
 		$this->title = $attributes['title'] ?? null;
 		$this->caption = $attributes['caption'] ?? null;
@@ -79,7 +81,7 @@ class Image extends Renderable {
 			$classes[] = 'aspect-ratio-' . str_replace($this->aspectRatio->value, ':', '-');
 		}
 
-		return array_merge(parent::get_filtered_classes(), $classes);
+		return array_values(array_unique(array_merge(parent::get_filtered_classes(), $classes)));
 	}
 
 	public function get_inline_styles(): array {

@@ -1,7 +1,4 @@
-{{-- @var string $tag --}}
-{{-- @var string $classes --}}
-{{-- @var array<string,string> $attributes --}}
-{{-- @var string $content --}}
-<{{ $tag }} @class($classes) @attributes($attributes)>
-	{!! $content !!}
-</{{ $tag }}>
+<div @if($classes)@class($classes)@endif @attributes($attributes)>
+	<!-- TODO Check if this is the right way to pass the raw HTML for security (letting Blade sanitise rather than preprocessing) -->
+	{{ $content }}
+</div>

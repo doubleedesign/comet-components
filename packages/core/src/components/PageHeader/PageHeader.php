@@ -13,8 +13,8 @@ class PageHeader extends UIComponent {
 	 */
 	protected string $title;
 	/**
-	 * @var array<int, array{title: string, url: string|null}> $breadcrumbs
-	 * @description Array of title and URL pairs
+	 * @var array $breadcrumbs
+	 * @description Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page
 	 */
 	protected array $breadcrumbs;
 

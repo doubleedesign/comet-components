@@ -1,7 +1,25 @@
 {
     "name": "ListComponent",
     "extends": "UIComponent",
+    "abstract": false,
     "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": []
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
@@ -10,23 +28,6 @@
                 "ol"
             ],
             "default": "ul"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": []
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
         }
     },
     "innerComponents": {

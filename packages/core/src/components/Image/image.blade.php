@@ -18,3 +18,4 @@
 		<img src="{{ $src }}" @if($classes)@class($classes)@endif @attributes($attributes)>
 	@endif
 @endif
+<!-- TODO: Handle caption AND link present at the same time -->

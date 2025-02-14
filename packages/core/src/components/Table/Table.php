@@ -1,9 +1,11 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class Table extends TextElement {
-	function __construct(array $attributes, string $content) {
-		parent::__construct($attributes, $content, 'components.Table.table');
+#[AllowedTags([Tag::FIGURE])]
+#[DefaultTag(Tag::FIGURE)]
+class Table extends Renderable {
+	function __construct(array $attributes, array $data) {
+		parent::__construct($attributes, 'components.Table.table');
 	}
 
 	#[NotImplemented]
