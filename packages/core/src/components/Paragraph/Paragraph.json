@@ -1,0 +1,63 @@
+{
+    "name": "Paragraph",
+    "extends": "TextElementExtended",
+    "abstract": false,
+    "attributes": {
+        "textColor": {
+            "type": "ThemeColor",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
+        },
+        "textAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "p"
+            ],
+            "default": "p"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": []
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        }
+    },
+    "content": {
+        "type": "string",
+        "description": "Plain text or basic HTML",
+        "required": true
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "name": "Link",
+    "extends": "Renderable",
+    "abstract": false,
+    "attributes": {
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "a"
+            ],
+            "default": "a"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "link"
+            ]
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        }
+    },
+    "content": {
+        "type": "string",
+        "required": true
+    }
+}

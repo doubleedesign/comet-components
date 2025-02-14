@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::UL])]
+#[DefaultTag(Tag::UL)]
 class MenuList extends UIComponent {
 	/**
 	 * @param array $attributes

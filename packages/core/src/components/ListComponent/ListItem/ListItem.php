@@ -1,15 +1,15 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::LI])]
+#[DefaultTag(Tag::LI)]
 class ListItem {
-	protected ?Tag $tagName = Tag::LI;
 	private ListItemSimple|ListItemComplex $instance;
 
 	protected ?string $content;
 	protected ?array $innerComponents;
 
 	function __construct(array $attributes, string $content, array $nestedLists = []) {
-		$attributes['tagName'] = 'li';
 		$this->innerComponents = $nestedLists;
 		if (!empty($nestedLists)) {
 			$this->instance = new ListItemComplex($attributes, $content, $nestedLists);

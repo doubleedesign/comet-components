@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-#[AllowedTags([Tag::HEADER, Tag::DIV])]
+#[AllowedTags([Tag::HEADER, Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::HEADER)]
 class PageHeader extends UIComponent {
 

@@ -18,11 +18,6 @@ class Heading extends TextElementExtended {
 			$proposedTag = Tag::tryFrom('h' . $attributes['level']) ?? Tag::H2;
 		}
 
-		// Validate the tag against allowed tags and fall back to h2 if invalid
-		if (!$this->validate_html_tag($proposedTag)) {
-			$proposedTag = Tag::H2;
-		}
-
 		// Set the validated tagName
 		$attributes['tagName'] = strtolower($proposedTag->value);
 

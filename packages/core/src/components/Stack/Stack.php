@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE, Tag::ASIDE])]
+#[DefaultTag(Tag::DIV)]
 class Stack extends UIComponent {
 	protected ?Alignment $hAlign = Alignment::START;
 	protected ?ThemeColor $backgroundColor;

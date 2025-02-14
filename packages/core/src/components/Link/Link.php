@@ -1,14 +1,18 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class Link extends TextElement {
+#[AllowedTags([Tag::A])]
+#[DefaultTag(Tag::A)]
+class Link extends Renderable {
+	protected string $content;
 
     function __construct(array $attributes, string $content) {
         parent::__construct(
 			array_merge($attributes, ['tagName' => 'a']),
-	        $content,
 	        'components.Link.link'
         );
+
+		$this->content = $content;
     }
 
 	function render(): void {

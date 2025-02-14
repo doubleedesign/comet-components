@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::NAV])]
+#[DefaultTag(Tag::NAV)]
 class Menu extends UIComponent {
 	function __construct(array $attributes, array $menuItems) {
 		$innerComponents = [

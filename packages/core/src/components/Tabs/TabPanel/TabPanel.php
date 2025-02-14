@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
 class TabPanel extends UIComponent {
 	/** @var array<TabPanelTitle|TabPanelContent> */
 	protected array $innerComponents;
