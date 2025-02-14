@@ -81,9 +81,12 @@ class Healthcheck {
 		}
 
 		foreach ($topLevel as $dir) {
+			$shouldnotHaveOwnCSS = ['Heading', 'ListComponent', 'Paragraph', 'Link', 'Group'];
 			$componentName = basename($dir);
 			if (!file_exists($this->componentDir . $componentName . '\\' . self::kebab_case($componentName) . '.css')) {
-				$fileCollections['CSS'][] = $componentName;
+				if(!in_array($componentName, $shouldnotHaveOwnCSS)) {
+					$fileCollections['CSS'][] = $componentName;
+				}
 			}
 			if (!file_exists($this->testPageDir . self::kebab_case($componentName) . '.php')) {
 				$fileCollections['test page'][] = $componentName;
