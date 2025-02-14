@@ -1,8 +1,9 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
 class Tabs extends UIComponent {
-	use HasAllowedTags;
 	/**
 	 * @var array<TabPanel>
 	 * @description Wrapping components each containing a TabPanelTitle and TabPanelContent.
@@ -10,14 +11,6 @@ class Tabs extends UIComponent {
 	protected array $innerComponents;
 
 	protected ?Orientation $orientation = Orientation::HORIZONTAL;
-
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::DIV];
-	}
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Tabs.tabs');

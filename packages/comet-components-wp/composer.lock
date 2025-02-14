@@ -318,7 +318,7 @@
             "dist": {
                 "type": "path",
                 "url": "../core",
-                "reference": "bc0ea72b163abf66422863fc80e4044fdf039f8e"
+                "reference": "c6c3e6570dbce45d02020c2f460258923c3f9bea"
             },
             "require": {
                 "ezyang/htmlpurifier": "^4.18",
@@ -337,6 +337,7 @@
                 "psr-4": {
                     "Doubleedesign\\Comet\\Core\\": [
                         "src/base/types/",
+                        "src/base/attributes/",
                         "src/base/traits/",
                         "src/base/annotations/",
                         "src/base/components/",

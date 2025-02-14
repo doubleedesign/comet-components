@@ -1,8 +1,9 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::FOOTER])]
+#[DefaultTag(Tag::FOOTER)]
 class SiteFooter extends UIComponent {
-	use HasAllowedTags;
 
 	/**
 	 * @var ?ContainerSize $size
@@ -14,22 +15,8 @@ class SiteFooter extends UIComponent {
 	 * @description Background colour keyword
 	 */
 	protected ?ThemeColor $backgroundColor;
-	/**
-	 * @var ?Tag $tagName
-	 * @description The HTML tag to use for this component
-	 */
-	protected ?Tag $tagName = Tag::FOOTER;
-
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::FOOTER];
-	}
 
 	function __construct(array $attributes, array $innerComponents) {
-		$this->tagName = Tag::FOOTER;
 		$this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : ThemeColor::WHITE;
 		$this->size = isset($attributes['size']) ? ContainerSize::tryFrom($attributes['size']) : ContainerSize::DEFAULT;
 

@@ -1,14 +1,9 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::A, Tag::BUTTON])]
+#[DefaultTag(Tag::A)]
 class Button extends Renderable {
-	use HasAllowedTags;
-
-	/**
-	 * @var ?Tag
-	 * @description The HTML tag to use for the component
-	 */
-	protected ?Tag $tagName = Tag::A;
 	/**
 	 * @var ?ThemeColor $colorTheme
 	 * @description Colour keyword for the fill or outline colour
@@ -25,18 +20,8 @@ class Button extends Renderable {
 	 */
 	protected string $content;
 
-	/**
-	 * Specify default allowed Tags using the HasAllowedTags trait
-	 * (Many child classes will override this with specific tags)
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::A, Tag::BUTTON];
-	}
-
 	function __construct(array $attributes, string $content) {
 		parent::__construct($attributes, 'components.ButtonGroup.Button.button');
-		$this->tagName = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::A;
 		$this->colorTheme = isset($attributes['colorTheme']) ? ThemeColor::tryFrom($attributes['colorTheme']) : ThemeColor::PRIMARY;
 		$this->isOutline = $attributes['isOutline'] ?? false;
 		$this->content = $content;

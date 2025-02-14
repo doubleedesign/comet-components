@@ -1,23 +1,14 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::UL, Tag::OL])]
+#[DefaultTag(Tag::UL)]
 class TabList extends UIComponent {
-	use HasAllowedTags;
-
-	protected ?Tag $tagName = Tag::UL;
 	/**
 	 * @var array<TabPanelTitle>
 	 * @description Items to make up the tab list / links.
 	 */
 	protected array $innerComponents;
-
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::UL, Tag::OL];
-	}
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct(

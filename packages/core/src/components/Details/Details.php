@@ -1,14 +1,9 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DETAILS])]
+#[DefaultTag(Tag::DETAILS)]
 class Details extends UIComponent {
-	use HasAllowedTags;
-
-	protected ?Tag $tagName = Tag::DETAILS;
-
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::DETAILS];
-	}
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Details.details');

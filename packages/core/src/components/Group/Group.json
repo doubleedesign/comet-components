@@ -46,9 +46,6 @@
             "supported": [
                 "div",
                 "section",
-                "header",
-                "footer",
-                "main",
                 "article",
                 "aside"
             ],

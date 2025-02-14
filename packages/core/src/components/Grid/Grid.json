@@ -1,5 +1,5 @@
 {
-    "name": "Columns",
+    "name": "Grid",
     "extends": "LayoutComponent",
     "abstract": false,
     "attributes": {
@@ -45,7 +45,9 @@
             "description": "The HTML tag to use for this component",
             "supported": [
                 "div",
-                "section"
+                "section",
+                "article",
+                "aside"
             ],
             "default": "div"
         },
@@ -57,8 +59,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "columns",
-                "columns--0"
+                "grid"
             ]
         },
         "style": {

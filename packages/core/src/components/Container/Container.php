@@ -1,14 +1,10 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV])]
+#[DefaultTag(Tag::SECTION)]
 class Container extends UIComponent {
-	use HasAllowedTags;
 
-	/**
-	 * @var ?Tag $tagName
-	 * @description The HTML tag to use for this component
-	 */
-	protected ?Tag $tagName = Tag::SECTION;
 	/**
 	 * @var ?ContainerSize $size
 	 * @description Keyword specifying the relative width of the container
@@ -19,15 +15,7 @@ class Container extends UIComponent {
 	 * @description Background colour keyword
 	 */
 	protected ?ThemeColor $backgroundColor;
-
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::SECTION, Tag::MAIN, Tag::DIV];
-	}
-
+	
 	function __construct(array $attributes, array $innerComponents) {
 		if (isset($attributes['size'])) {
 			$this->size = ContainerSize::tryFrom($attributes['size']);

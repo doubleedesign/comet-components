@@ -1,14 +1,15 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::LI])]
+#[DefaultTag(Tag::LI)]
 class ListItemSimple extends TextElementExtended {
-	use HasAllowedTags;
 
-	protected ?Tag $tagName = Tag::LI;
-
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::LI];
+	function __construct(array $attributes, string $content) {
+		$bladeFile = 'components.ListComponent.ListItem.list-item';
+		parent::__construct($attributes, $content, $bladeFile);
 	}
+
 
 	protected function get_bem_name(): string {
 		if($this->context && str_ends_with($this->context, '__list')) {
@@ -16,11 +17,6 @@ class ListItemSimple extends TextElementExtended {
 		}
 
 		return parent::get_bem_name();
-	}
-
-	function __construct(array $attributes, string $content) {
-		$bladeFile = 'components.ListComponent.ListItem.list-item';
-		parent::__construct($attributes, $content, $bladeFile);
 	}
 
 	public function render(): void {

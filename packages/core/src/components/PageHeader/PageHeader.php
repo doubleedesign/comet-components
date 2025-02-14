@@ -1,8 +1,9 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::HEADER, Tag::DIV])]
+#[DefaultTag(Tag::HEADER)]
 class PageHeader extends UIComponent {
-	use HasAllowedTags;
 
 	/**
 	 * @var string $title
@@ -25,22 +26,7 @@ class PageHeader extends UIComponent {
 	 */
 	protected ?ThemeColor $backgroundColor;
 
-	/**
-	 * @var ?Tag $tagName
-	 * @description The HTML tag to use for this component
-	 */
-	protected ?Tag $tagName = Tag::HEADER;
-
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::HEADER];
-	}
-
     function __construct(array $attributes, string $title, array $breadcrumbs = []) {
-	    $this->tagName = Tag::HEADER;
 	    $this->backgroundColor = isset($attributes['backgroundColor']) ? ThemeColor::tryFrom($attributes['backgroundColor']) : ThemeColor::WHITE;
 	    $this->size = isset($attributes['size']) ? ContainerSize::tryFrom($attributes['size']) : ContainerSize::DEFAULT;
 		$this->breadcrumbs = $breadcrumbs;

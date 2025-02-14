@@ -1,7 +1,10 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::NAV])]
+#[DefaultTag(Tag::NAV)]
 class Breadcrumbs extends UIComponent {
+
 	function __construct(array $attributes, array $breadcrumbs) {
 		$listItems = array_map(function($breadcrumb) {
 			$linkAttributes = ['href' => trim($breadcrumb['url'] !== '') ? $breadcrumb['url'] : '#'];

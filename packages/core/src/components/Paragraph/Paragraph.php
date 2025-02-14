@@ -1,17 +1,9 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::P])]
+#[DefaultTag(Tag::P)]
 class Paragraph extends TextElementExtended {
-	use HasAllowedTags;
-
-	/**
-	 * @var Tag|null
-	 */
-	protected ?Tag $tagName = Tag::P;
-
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::P];
-	}
 
 	function __construct(array $attributes, string $content) {
 		$bladeFile = 'components.Paragraph.paragraph';

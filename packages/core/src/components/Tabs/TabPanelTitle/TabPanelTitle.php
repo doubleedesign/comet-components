@@ -1,17 +1,10 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::LI])]
+#[DefaultTag(Tag::LI)]
 class TabPanelTitle extends TextElement {
-	use HasAllowedTags;
 	protected string $anchor;
-
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::LI];
-	}
 
 	function __construct(array $attributes, string $content) {
 		parent::__construct(
@@ -19,7 +12,6 @@ class TabPanelTitle extends TextElement {
 			$content, '
 			components.Tabs.TabPanelTitle.tab-panel-title'
 		);
-		$this->tagName = Tag::LI;
 		$this->anchor = substr(Utils::kebab_case(strip_tags($content)), 0, 15);
 	}
 

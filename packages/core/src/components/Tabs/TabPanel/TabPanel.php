@@ -4,13 +4,6 @@ namespace Doubleedesign\Comet\Core;
 class TabPanel extends UIComponent {
 	/** @var array<TabPanelTitle|TabPanelContent> */
 	protected array $innerComponents;
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::DIV];
-	}
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct(
@@ -18,7 +11,7 @@ class TabPanel extends UIComponent {
 			$innerComponents,
 			'components.Tabs.TabPanel.tab-panel'
 		);
-		$this->tagName = Tag::DIV;
+
 		// Ensure the ID matches the anchor of the associated button
 		// This will override any existing ID attribute
 		$this->id = $this->get_title_component()->get_anchor();

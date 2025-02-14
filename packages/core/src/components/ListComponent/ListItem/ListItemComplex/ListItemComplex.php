@@ -1,15 +1,10 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::LI])]
+#[DefaultTag(Tag::LI)]
 class ListItemComplex extends UIComponent {
-	use HasAllowedTags;
-
-	protected ?Tag $tagName = Tag::LI;
 	protected ?string $content = null;
-
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::LI];
-	}
 
 	/**
 	 * ListItemComplex constructor.

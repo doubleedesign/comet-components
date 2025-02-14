@@ -18,7 +18,9 @@
 			"Doubleedesign\\Comet\\TestUtils\\WordPress\\": "test/common/wordpress/",
 			"Doubleedesign\\Comet\\Core\\": [
 				"packages/core/src/base/types/",
+				"packages/core/src/base/attributes/",
 				"packages/core/src/base/traits/",
+				"packages/core/src/base/annotations/",
 				"packages/core/src/base/components/",
 				"packages/core/src/base/",
 				"packages/core/src/services/"

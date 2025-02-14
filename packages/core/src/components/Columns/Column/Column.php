@@ -1,23 +1,14 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
 class Column extends LayoutComponent {
-	use HasAllowedTags;
-
 	/**
 	 * @var ?string $width
 	 * Optional set width of the column. Note: This may be overridden to stack columns on small viewports.
 	 */
 	private ?string $width;
-
-	/**
-	 * Specify allowed Tags using the HasAllowedTags trait
-	 * @return array<Tag>
-	 */
-	protected static function get_allowed_wrapping_tags(): array {
-		return [Tag::DIV];
-	}
-
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct(

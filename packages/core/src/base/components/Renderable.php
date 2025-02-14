@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use InvalidArgumentException;
+use ReflectionClass;
 
 abstract class Renderable {
 
@@ -11,7 +11,7 @@ abstract class Renderable {
 	private array $rawAttributes;
 	/**
 	 * @var ?Tag
-	 * @description The HTML tag to use for the component
+	 * @description The HTML tag to use for this component
 	 */
 	protected ?Tag $tagName = Tag::DIV;
 	/**
@@ -47,8 +47,8 @@ abstract class Renderable {
 
 	public function __construct(array $attributes, string $bladeFile) {
 		$this->rawAttributes = $attributes;
+		$this->set_tag($attributes['tagName'] ?? null);
 		$this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
-		$this->tagName = (isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) ?? Tag::DIV : Tag::DIV);
 		$this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
 		$this->context = $attributes['context'] ?? null;
 		$this->bladeFile = $bladeFile;
@@ -78,6 +78,35 @@ abstract class Renderable {
 			$classes = array_merge($classes, $attributes['classes']);
 		}
 		$this->classes = $classes;
+	}
+
+	protected function set_tag(?string $tagName): void {
+		$reflection = new ReflectionClass($this);
+
+		// Get allowed tags and default tag from attributes
+		$allowedTagsAttr = $reflection->getAttributes(AllowedTags::class)[0] ?? null;
+		$defaultTagAttr = $reflection->getAttributes(DefaultTag::class)[0] ?? null;
+
+		$allowedTags = $allowedTagsAttr ? $allowedTagsAttr->newInstance()->tags : null;
+		$defaultTag = $defaultTagAttr ? $defaultTagAttr->newInstance()->tag : Tag::DIV;
+
+		// Try to use provided tag, fall back to default
+		$requestedTag = $tagName ? Tag::tryFrom($tagName) : $defaultTag;
+
+		// Validate against allowed tags if specified
+		if ($allowedTags && !in_array($requestedTag, $allowedTags)) {
+			error_log(sprintf(
+				'Tag %s is not allowed for %s. Allowed tags: %s. Defaulting to %s.',
+				$requestedTag->value,
+				static::class,
+				implode(', ', array_map(fn($tag) => $tag->value, $allowedTags)),
+				$defaultTag->value
+			));
+
+			$requestedTag = $defaultTag;
+		}
+
+		$this->tagName = $requestedTag;
 	}
 
 	public function get_id(): ?string {

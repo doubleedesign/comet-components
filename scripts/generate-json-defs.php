@@ -1,4 +1,6 @@
 <?php
+use Doubleedesign\Comet\Core\AllowedTags;
+use Doubleedesign\Comet\Core\DefaultTag;
 use Doubleedesign\Comet\Core\HasAllowedTags;
 use Doubleedesign\Comet\Core\Tag;
 
@@ -205,12 +207,12 @@ class ComponentClassesToJsonDefinitions {
 	 */
 	private function getPropertyType(ReflectionProperty $property): array {
 		$required = !$property->getType()->allowsNull();
-		$defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null;
 		$type = $property->getType();
 		$description = null;
+		$defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null;
 		$supportedValues = null;
-		$result = $this->processPropertyType($type);
 		$content_type = $this->currentClass->hasProperty('innerComponents') ? 'array' : 'string';
+		$result = $this->processPropertyType($type);
 
 		// Handle default boolean values
 		if ($type->getName() === 'bool' && $defaultValue === false) {
@@ -275,10 +277,13 @@ class ComponentClassesToJsonDefinitions {
 			$type = $result['type'];
 		}
 
-		// Supported values may be set in ways other than docblock - e.g., enum values
+		// Supported and default values may be set in ways other than docblock - e.g., enum values, class attributes
 		// If those are returned from processPropertyType, use them
 		if (isset($result['supported'])) {
 			$supportedValues = $result['supported'];
+		}
+		if (isset($result['default'])) {
+			$defaultValue = $result['default'];
 		}
 
 		// Sort supported values so 'default' is always at the top
@@ -323,20 +328,23 @@ class ComponentClassesToJsonDefinitions {
 		$reflectionType = new ReflectionClass($typeName);
 		$namespace = $reflectionType->getNamespaceName();
 
-		// If it's a Tag property and the class uses HasAllowedTags, get the allowed tags
-		if ($typeName === Tag::class && $this->classUsesTraitRecursive($this->currentClass, HasAllowedTags::class)) {
+		// If it's a Tag property, get default and supported tags from the class attributes
+		if ($typeName === Tag::class) {
 			try {
-				$allowedTags = $this->currentClass->getMethod('get_allowed_wrapping_tags')->invoke(null);
-				$supportedValues = array_map(function ($tag) {
-					return $tag->value;
-				}, $allowedTags);
+				$allowedTagsAttr = $this->currentClass->getAttributes(AllowedTags::class)[0] ?? null;
+				$defaultTagAttr = $this->currentClass->getAttributes(DefaultTag::class)[0] ?? null;
+				$allowedTags = $allowedTagsAttr->newInstance()->tags;
+				$defaultTag = $defaultTagAttr->newInstance()->tag;
 
 				return [
-					'type'      => str_replace("$namespace\\", '', $typeName),
-					'supported' => array_values($supportedValues)
+					'type' => str_replace("$namespace\\", '', $typeName),
+					'supported' => array_values(array_map(function ($tag) {
+						return $tag->value;
+					}, $allowedTags)),
+					'default' => $defaultTag->value
 				];
 			}
-			catch (ReflectionException $e) {
+			catch (\Throwable $e) {
 				error_log($e->getMessage());
 			}
 		}

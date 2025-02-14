@@ -10,6 +10,8 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/components" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/traits" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/types" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/annotations" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/attributes" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/services" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brain/monkey" />
