@@ -3,6 +3,14 @@
     "extends": "Renderable",
     "abstract": false,
     "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "button",
+                "button--primary"
+            ]
+        },
         "colorTheme": {
             "type": "ThemeColor",
             "description": "Colour keyword for the fill or outline colour",
@@ -20,10 +28,22 @@
             ],
             "default": "primary"
         },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
         "isOutline": {
             "type": "bool",
             "description": "Whether to use outline style instead of solid/filled",
             "default": "false"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -33,26 +53,6 @@
                 "button"
             ],
             "default": "a"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "button",
-                "button--primary"
-            ]
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
         }
     },
     "content": {

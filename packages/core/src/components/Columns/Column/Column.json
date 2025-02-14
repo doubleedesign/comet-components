@@ -3,33 +3,6 @@
     "extends": "LayoutComponent",
     "abstract": false,
     "attributes": {
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div"
-            ],
-            "default": "div"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "columns__column"
-            ]
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
-        },
         "backgroundColor": {
             "type": "ThemeColor",
             "description": "Background colour keyword",
@@ -46,6 +19,17 @@
                 "white"
             ]
         },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "columns__column"
+            ]
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
         "hAlign": {
             "type": "Alignment",
             "supported": [
@@ -56,6 +40,22 @@
                 "match-parent"
             ],
             "default": "start"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div"
+            ],
+            "default": "div"
         },
         "vAlign": {
             "type": "Alignment",

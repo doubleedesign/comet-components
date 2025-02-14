@@ -3,6 +3,33 @@
     "extends": "TextElement",
     "abstract": false,
     "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "accordion__panel__title"
+            ]
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "summary"
+            ],
+            "default": "summary"
+        },
         "textAlign": {
             "type": "Alignment",
             "supported": [
@@ -13,33 +40,6 @@
                 "match-parent"
             ],
             "default": "match-parent"
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "summary"
-            ],
-            "default": "summary"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "accordion__panel__title"
-            ]
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
         }
     },
     "content": {

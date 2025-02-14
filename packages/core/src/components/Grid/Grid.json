@@ -3,36 +3,6 @@
     "extends": "LayoutComponent",
     "abstract": false,
     "attributes": {
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div",
-                "section",
-                "article",
-                "aside"
-            ],
-            "default": "div"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "grid"
-            ]
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
-        },
         "backgroundColor": {
             "type": "ThemeColor",
             "description": "Background colour keyword",
@@ -49,6 +19,17 @@
                 "white"
             ]
         },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "grid"
+            ]
+        },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
         "hAlign": {
             "type": "Alignment",
             "supported": [
@@ -59,6 +40,25 @@
                 "match-parent"
             ],
             "default": "start"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div",
+                "section",
+                "article",
+                "aside"
+            ],
+            "default": "div"
         },
         "vAlign": {
             "type": "Alignment",

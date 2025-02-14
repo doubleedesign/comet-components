@@ -182,15 +182,18 @@ class ComponentClassesToJsonDefinitions {
 			}
 		}
 
+		$finalAttrs = array_filter($properties, function ($key) {
+			return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
+		}, ARRAY_FILTER_USE_KEY);
+		ksort($finalAttrs);
+
 		$result = [
 			'name'       => array_reverse(explode('\\', $className))[0],
 			'extends'    => $parentClass
 				? ($parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null)
 				: null,
 			'abstract'   => $reflectionClass->isAbstract(),
-			'attributes' => array_filter($properties, function ($key) {
-				return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
-			}, ARRAY_FILTER_USE_KEY)
+			'attributes' => $finalAttrs
 		];
 
 		if (isset($properties['content'])) {

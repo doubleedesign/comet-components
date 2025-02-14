@@ -3,18 +3,6 @@
     "extends": "UIComponent",
     "abstract": false,
     "attributes": {
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "details"
-            ],
-            "default": "details"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
@@ -22,13 +10,25 @@
                 "details"
             ]
         },
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
         "style": {
             "type": "array",
             "description": "Inline styles"
         },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "details"
+            ],
+            "default": "details"
         }
     },
     "innerComponents": {

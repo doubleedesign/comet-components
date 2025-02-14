@@ -12,16 +12,17 @@
             ],
             "default": []
         },
-        "textAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent"
+        "context": {
+            "type": "string",
+            "description": "The parent component or variant if contextually relevant"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -36,17 +37,16 @@
             ],
             "default": "h2"
         },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+        "textAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
         },
         "textColor": {
             "type": "ThemeColor",
