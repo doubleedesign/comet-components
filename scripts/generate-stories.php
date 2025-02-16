@@ -209,7 +209,7 @@ class ComponentStoryGenerator {
 
 	private static function get_description_from_wordpress_block_json($block_name): string {
 		// Look for my blocks first
-		$cometBlocksDir = dirname(__DIR__, 1) . '/packages/comet-components-wp/src/blocks';
+		$cometBlocksDir = dirname(__DIR__, 1) . '/packages/comet-plugin/src/blocks';
 		$blockJsonPath = $cometBlocksDir . '/' . $block_name . '/block.json';
 		if (file_exists($blockJsonPath)) {
 			$blockJson = json_decode(file_get_contents($blockJsonPath), true);
@@ -228,7 +228,7 @@ class ComponentStoryGenerator {
 	}
 
 	private static function get_category_from_wordpress_plugin_json($block_name): string {
-		$json = file_get_contents(dirname(__DIR__, 1) . '/packages/comet-components-wp/src/block-support.json');
+		$json = file_get_contents(dirname(__DIR__, 1) . '/packages/comet-plugin/src/block-support.json');
 		$categories = json_decode($json, true)['categories'];
 
 		return array_find($categories, function ($category) use ($block_name) {

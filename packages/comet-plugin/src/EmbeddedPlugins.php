@@ -33,7 +33,7 @@ class EmbeddedPlugins {
 	}
 
 	private function get_relative_path($plugin_path): string {
-		return 'comet-components-wp' . str_replace('\\', '/', $plugin_path);
+		return 'comet-plugin' . str_replace('\\', '/', $plugin_path);
 	}
 
 	private function get_plugin_definition($plugin_path): array {

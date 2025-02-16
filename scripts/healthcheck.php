@@ -84,7 +84,7 @@ class Healthcheck {
 			$shouldnotHaveOwnCSS = ['Heading', 'ListComponent', 'Paragraph', 'Link', 'Group'];
 			$componentName = basename($dir);
 			if (!file_exists($this->componentDir . $componentName . '\\' . self::kebab_case($componentName) . '.css')) {
-				if(!in_array($componentName, $shouldnotHaveOwnCSS)) {
+				if (!in_array($componentName, $shouldnotHaveOwnCSS)) {
 					$fileCollections['CSS'][] = $componentName;
 				}
 			}
@@ -176,7 +176,7 @@ class Healthcheck {
 
 	private function get_wp_blocks_missing_scss_imports(): array {
 		$scssFiles = $this->get_scss_files();
-		$pluginFile = dirname(__DIR__, 1) . '\packages\comet-components-wp\src\blocks.scss';
+		$pluginFile = dirname(__DIR__, 1) . '\packages\comet-plugin\src\blocks.scss';
 		$pluginFileContents = file_get_contents($pluginFile);
 		$imported = explode("\n", $pluginFileContents);
 		array_walk($imported, function (&$value) {
