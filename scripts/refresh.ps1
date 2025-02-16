@@ -1,9 +1,14 @@
+param (
+	[switch]$autoload
+)
+
 Write-Host "Starting refresh script..."
 
 # Function to run composer commands in a directory
 function Run-Composer {
 	param (
-		[string]$directory
+		[string]$directory,
+		[switch]$autoloadOnly
 	)
 	Write-Host "Running composer commands in $directory"
 	Push-Location $directory
@@ -14,7 +19,9 @@ function Run-Composer {
 		Remove-Item -Recurse -Force $corePackagePath
 	}
 
-	composer update --prefer-source
+	if (-not $autoloadOnly) {
+		composer update --prefer-source
+	}
 	composer dump-autoload -o
 
 	Pop-Location
@@ -27,11 +34,11 @@ $ROOT_DIR = Get-Location
 composer clear-cache
 
 # Run composer commands in root
-Run-Composer $ROOT_DIR
+Run-Composer $ROOT_DIR -autoloadOnly:$autoload
 
 # Run composer commands in each package
 Get-ChildItem -Directory "packages" | ForEach-Object {
-	Run-Composer $_.FullName
+	Run-Composer $_.FullName -autoloadOnly:$autoload
 }
 
 Write-Host "All done!"

@@ -133,11 +133,16 @@ npm run refresh:composer
 powershell.exe -File scripts\refresh.ps1
 ```
 
-or in PowerShell:
+For autoload only (don't update packages):
 
-```PowerShell
-powershell.exe -File scripts\refresh.ps1
+```bash
+npm run refresh:autoload
 ```
+
+```bash
+powershell.exe -File scripts\refresh.ps1 -autoload
+```
+
 
 Install or update Node dependencies:
 
@@ -189,10 +194,16 @@ Then generate stories (example):
 php scripts/generate-stories.php --component Container
 ```
 
-If adding a "type" enum, generate an MDX documentation page for Storybook with:
+If adding a "type" enum, regenerate the MDX documentation page for Storybook with:
 
 ```bash
-php scripts/generate-enum-docs.php --enum Alignment
+php scripts/generate-enum-docs.php
+```
+
+Similarly, for a trait:
+
+```bash
+php scripts/generate-trait-docs.php
 ```
 
 **Note:** The JSON definition and story generators require PHP 8.4+.
