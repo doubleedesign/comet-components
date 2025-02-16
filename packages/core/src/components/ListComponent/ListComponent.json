@@ -6,19 +6,23 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": []
+            "default": [],
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+            "description": "The parent component or variant if contextually relevant",
+            "inherited": true
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier"
+            "description": "Unique identifier",
+            "inherited": true
         },
         "style": {
             "type": "array",
-            "description": "Inline styles"
+            "description": "Inline styles",
+            "inherited": true
         },
         "tagName": {
             "type": "Tag",
@@ -27,7 +31,8 @@
                 "ul",
                 "ol"
             ],
-            "default": "ul"
+            "default": "ul",
+            "inherited": true
         }
     },
     "innerComponents": {

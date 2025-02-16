@@ -24,19 +24,23 @@
             "description": "CSS classes",
             "default": [
                 "call-to-action"
-            ]
+            ],
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+            "description": "The parent component or variant if contextually relevant",
+            "inherited": true
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier"
+            "description": "Unique identifier",
+            "inherited": true
         },
         "style": {
             "type": "array",
-            "description": "Inline styles"
+            "description": "Inline styles",
+            "inherited": true
         },
         "tagName": {
             "type": "Tag",
@@ -46,12 +50,14 @@
                 "section",
                 "aside"
             ],
-            "default": "div"
+            "default": "div",
+            "inherited": true
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true
+        "required": true,
+        "inherited": true
     }
 }

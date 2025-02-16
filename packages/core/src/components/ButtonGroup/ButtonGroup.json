@@ -8,11 +8,13 @@
             "description": "CSS classes",
             "default": [
                 "button-group"
-            ]
+            ],
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+            "description": "The parent component or variant if contextually relevant",
+            "inherited": true
         },
         "hAlign": {
             "type": "Alignment",
@@ -27,7 +29,8 @@
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier"
+            "description": "Unique identifier",
+            "inherited": true
         },
         "orientation": {
             "type": "Orientation",
@@ -39,7 +42,8 @@
         },
         "style": {
             "type": "array",
-            "description": "Inline styles"
+            "description": "Inline styles",
+            "inherited": true
         },
         "tagName": {
             "type": "Tag",
@@ -47,7 +51,8 @@
             "supported": [
                 "div"
             ],
-            "default": "div"
+            "default": "div",
+            "inherited": true
         }
     },
     "innerComponents": {

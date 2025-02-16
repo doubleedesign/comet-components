@@ -39,7 +39,8 @@
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+            "description": "The parent component or variant if contextually relevant",
+            "inherited": true
         },
         "height": {
             "type": "string",
@@ -51,7 +52,8 @@
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier"
+            "description": "Unique identifier",
+            "inherited": true
         },
         "scale": {
             "type": "string",
@@ -69,7 +71,8 @@
         },
         "style": {
             "type": "array",
-            "description": "Inline styles"
+            "description": "Inline styles",
+            "inherited": true
         },
         "tagName": {
             "type": "Tag",
@@ -77,7 +80,8 @@
             "supported": [
                 "figure"
             ],
-            "default": "figure"
+            "default": "figure",
+            "inherited": true
         },
         "title": {
             "type": "string",

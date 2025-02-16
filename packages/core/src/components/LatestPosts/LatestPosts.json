@@ -6,19 +6,23 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": []
+            "default": [],
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+            "description": "The parent component or variant if contextually relevant",
+            "inherited": true
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier"
+            "description": "Unique identifier",
+            "inherited": true
         },
         "style": {
             "type": "array",
-            "description": "Inline styles"
+            "description": "Inline styles",
+            "inherited": true
         },
         "tagName": {
             "type": "Tag",
@@ -125,7 +129,8 @@
                 "wbr",
                 null
             ],
-            "default": "div"
+            "default": "div",
+            "inherited": true
         },
         "textAlign": {
             "type": "Alignment",
@@ -136,12 +141,14 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": true
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true
+        "required": true,
+        "inherited": true
     }
 }

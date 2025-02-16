@@ -17,7 +17,8 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": true
         },
         "classes": {
             "type": "array<string>",
@@ -25,11 +26,13 @@
             "default": [
                 "columns",
                 "columns--0"
-            ]
+            ],
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+            "description": "The parent component or variant if contextually relevant",
+            "inherited": true
         },
         "hAlign": {
             "type": "Alignment",
@@ -40,15 +43,18 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start"
+            "default": "start",
+            "inherited": true
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier"
+            "description": "Unique identifier",
+            "inherited": true
         },
         "style": {
             "type": "array",
-            "description": "Inline styles"
+            "description": "Inline styles",
+            "inherited": true
         },
         "tagName": {
             "type": "Tag",
@@ -57,7 +63,8 @@
                 "div",
                 "section"
             ],
-            "default": "div"
+            "default": "div",
+            "inherited": true
         },
         "vAlign": {
             "type": "Alignment",
@@ -68,12 +75,14 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start"
+            "default": "start",
+            "inherited": true
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true
+        "required": true,
+        "inherited": true
     }
 }

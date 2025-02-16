@@ -9,7 +9,8 @@
             "default": [
                 "button",
                 "button--primary"
-            ]
+            ],
+            "inherited": true
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -30,11 +31,13 @@
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant"
+            "description": "The parent component or variant if contextually relevant",
+            "inherited": true
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier"
+            "description": "Unique identifier",
+            "inherited": true
         },
         "isOutline": {
             "type": "bool",
@@ -43,7 +46,8 @@
         },
         "style": {
             "type": "array",
-            "description": "Inline styles"
+            "description": "Inline styles",
+            "inherited": true
         },
         "tagName": {
             "type": "Tag",
@@ -52,7 +56,8 @@
                 "a",
                 "button"
             ],
-            "default": "a"
+            "default": "a",
+            "inherited": true
         }
     },
     "content": {
