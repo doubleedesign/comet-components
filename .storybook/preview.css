@@ -96,7 +96,54 @@
 	}
 }
 
-
 :where(pre:not(.sb-anchor, .sb-unstyled, .sb-unstyled pre)):not(.prismjs) {
 	background-color: #1d1c21 !important;
+}
+
+
+.two-column-doc-section {
+	padding-bottom: 2rem;
+
+	> div {
+		p {
+			&:has(code) {
+				display: flex;
+				align-items: center;
+			}
+
+			strong:not(:first-child) {
+				display: inline-block;
+				margin-inline-start: 1rem;
+			}
+		}
+	}
+
+	> figure {
+		margin: 0;
+		overflow-x: hidden;
+
+		figcaption {
+			font-weight: bold;
+			display: block;
+			margin-bottom: 0.25rem;
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.two-column-doc-section {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1rem;
+		width: 100%;
+
+		> div, > figure {
+			min-width: 0;
+			overflow-x: hidden;
+
+			.code-preview {
+				overflow-x: scroll;
+			}
+		}
+	}
 }
