@@ -334,6 +334,7 @@ class ComponentClassesToJsonDefinitions {
 			'required'    => $required,
 			'supported'   => $supportedValues,
 			'default'     => $defaultValue,
+			// TODO: Make it clearer what this means - the field name and type is inherited, but the allowed and default values are not
 			'inherited'   => $this->declaringClass->getName() !== $this->currentClass->getName()
 		];
 
