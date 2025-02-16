@@ -15,6 +15,10 @@ if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
 $host = "http://$_SERVER[HTTP_HOST]";
 $fileName = array_reverse(explode('/', $_SERVER['SCRIPT_NAME']))[0];
 $cssFileName = str_replace('.php', '.css', $fileName);
+$supportingCss = [];
+if($_SERVER['SCRIPT_NAME'] === '/components/button-group.php') {
+	array_push($supportingCss, str_replace('button-group', 'button', $cssFileName));
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,5 +28,9 @@ $cssFileName = str_replace('.php', '.css', $fileName);
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?php echo "$host/assets/global.css" ?>">
 	<link rel="stylesheet" href="<?php echo "$host/assets/$cssFileName"; ?>">
+	<?php
+	foreach ($supportingCss as $supportingCssFile) { ?>
+		<link rel="stylesheet" href="<?php echo "$host/assets/$supportingCssFile"; ?>">
+	<?php } ?>
 </head>
 <body>

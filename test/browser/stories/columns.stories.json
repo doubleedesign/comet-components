@@ -22,6 +22,11 @@
         "context": ""
     },
     "argTypes": {
+		"qty": {
+			"control": {
+				"type": "number"
+			}
+		},
         "hAlign": {
             "description": "",
             "control": {
@@ -127,10 +132,59 @@
 	"stories": [
 		{
 			"name": "Playground",
-			"args": [],
+			"args": {
+				"qty": 2
+			},
 			"tags": [
 				"docsOnly"
 			]
+		},
+		{
+			"name": "Two columns even",
+			"args": {
+				"qty": 2
+			}
+		},
+		{
+			"name": "Two columns, 30% 70%",
+			"args": {
+				"qty": 2,
+				"widths": "30%,70%"
+			}
+		},
+		{
+			"name": "Two columns, 30% 30% centered",
+			"args": {
+				"qty": 2,
+				"widths": "30%,30%",
+				"hAlign": "center"
+			}
+		},
+		{
+			"name": "Three columns even",
+			"args": {
+				"qty": 3
+			}
+		},
+		{
+			"name": "Three columns, 30% 20% unspecified",
+			"args": {
+				"qty": 2,
+				"widths": "30%,20%,"
+			}
+		},
+		{
+			"name": "Three columns, 20% unspecified 30%",
+			"args": {
+				"qty": 2,
+				"widths": "30%,,20%"
+			}
+		},
+		{
+			"name": "Four columns even",
+			"args": {
+				"qty": 4
+			}
 		}
 	]
 }

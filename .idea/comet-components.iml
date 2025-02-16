@@ -55,6 +55,5 @@
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="vanilla-playground" />
   </component>
 </module>
