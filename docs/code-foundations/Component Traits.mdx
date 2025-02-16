@@ -1,0 +1,184 @@
+<h1>Component Traits</h1><p>PHP traits are used to provide common implementations of an attribute's conversion from $attributes array element to object field.</p><p>This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.</p>
+
+<div className="two-column-doc-section">
+<div>
+<h2>BackgroundColor</h2>
+<dl>
+<dt>Property</dt><dd><p>`backgroundColor` <strong>Type: </strong> `ThemeColor`</p><p>Background colour keyword</p></dd><dt>Method</dt><dd><p>`set_background_color_from_attrs` <strong>Returns: </strong> `void`</p><p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p></dd>
+</dl></div>
+
+<figure>
+
+<figcaption>Example usage</figcaption>
+
+```php
+namespace Doubleedesign\Comet\Core;
+
+class MyComponent {
+    use BackgroundColor;
+
+    function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents);
+        $this->set_background_color_from_attrs($attributes);
+    }
+}
+```
+
+</figure>
+</div>
+<div className="two-column-doc-section">
+<div>
+<h2>ColorTheme</h2>
+<dl>
+<dt>Property</dt><dd><p>`colorTheme` <strong>Type: </strong> `ThemeColor`</p><p>Colour keyword for the fill or outline colour</p></dd><dt>Method</dt><dd><p>`set_color_theme_from_attrs` <strong>Returns: </strong> `void`</p><p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p></dd>
+</dl></div>
+
+<figure>
+
+<figcaption>Example usage</figcaption>
+
+```php
+namespace Doubleedesign\Comet\Core;
+
+class MyComponent {
+    use ColorTheme;
+
+    function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents);
+        $this->set_color_theme_from_attrs($attributes);
+    }
+}
+```
+
+</figure>
+</div>
+<div className="two-column-doc-section">
+<div>
+<h2>LayoutAlignmentHorizontal</h2>
+<dl>
+<dt>Property</dt><dd><p>`hAlign` <strong>Type: </strong> `Alignment`</p><p></p></dd><dt>Method</dt><dd><p>`set_halign_from_attrs` <strong>Returns: </strong> `void`</p><p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p></dd>
+</dl></div>
+
+<figure>
+
+<figcaption>Example usage</figcaption>
+
+```php
+namespace Doubleedesign\Comet\Core;
+
+class MyComponent {
+    use LayoutAlignmentHorizontal;
+
+    function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents);
+        $this->set_halign_from_attrs($attributes);
+    }
+}
+```
+
+</figure>
+</div>
+<div className="two-column-doc-section">
+<div>
+<h2>LayoutAlignmentVertical</h2>
+<dl>
+<dt>Property</dt><dd><p>`vAlign` <strong>Type: </strong> `Alignment`</p><p></p></dd><dt>Method</dt><dd><p>`set_valign_from_attrs` <strong>Returns: </strong> `void`</p><p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p></dd>
+</dl></div>
+
+<figure>
+
+<figcaption>Example usage</figcaption>
+
+```php
+namespace Doubleedesign\Comet\Core;
+
+class MyComponent {
+    use LayoutAlignmentVertical;
+
+    function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents);
+        $this->set_valign_from_attrs($attributes);
+    }
+}
+```
+
+</figure>
+</div>
+<div className="two-column-doc-section">
+<div>
+<h2>LayoutContainerSize</h2>
+<dl>
+<dt>Property</dt><dd><p>`size` <strong>Type: </strong> `ContainerSize`</p><p>Keyword specifying the relative width of the container for the inner content</p></dd><dt>Method</dt><dd><p>`set_size_from_attrs` <strong>Returns: </strong> `void`</p><p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p></dd>
+</dl></div>
+
+<figure>
+
+<figcaption>Example usage</figcaption>
+
+```php
+namespace Doubleedesign\Comet\Core;
+
+class MyComponent {
+    use LayoutContainerSize;
+
+    function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents);
+        $this->set_size_from_attrs($attributes);
+    }
+}
+```
+
+</figure>
+</div>
+<div className="two-column-doc-section">
+<div>
+<h2>LayoutOrientation</h2>
+<dl>
+<dt>Property</dt><dd><p>`orientation` <strong>Type: </strong> `Orientation`</p><p></p></dd><dt>Method</dt><dd><p>`set_orientation_from_attrs` <strong>Returns: </strong> `void`</p><p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p></dd>
+</dl></div>
+
+<figure>
+
+<figcaption>Example usage</figcaption>
+
+```php
+namespace Doubleedesign\Comet\Core;
+
+class MyComponent {
+    use LayoutOrientation;
+
+    function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents);
+        $this->set_orientation_from_attrs($attributes);
+    }
+}
+```
+
+</figure>
+</div>
+<div className="two-column-doc-section">
+<div>
+<h2>TextColor</h2>
+<dl>
+<dt>Property</dt><dd><p>`textColor` <strong>Type: </strong> `ThemeColor`</p><p></p></dd><dt>Method</dt><dd><p>`set_text_color_from_attrs` <strong>Returns: </strong> `void`</p><p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p></dd>
+</dl></div>
+
+<figure>
+
+<figcaption>Example usage</figcaption>
+
+```php
+namespace Doubleedesign\Comet\Core;
+
+class MyComponent {
+    use TextColor;
+
+    function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents);
+        $this->set_text_color_from_attrs($attributes);
+    }
+}
+```
+
+</figure>
+</div>

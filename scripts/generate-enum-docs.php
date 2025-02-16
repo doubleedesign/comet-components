@@ -3,21 +3,23 @@
 class EnumDocGenerator {
 	private string $sourceDirectory;
 	private string $outputDirectory;
+	private string $mdx = '';
 
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
 		$this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\types';
-		$this->outputDirectory = dirname(__DIR__, 1) . '\docs\types';
+		$this->outputDirectory = dirname(__DIR__, 1) . '\docs\code-foundations';
 		// Ensure output directory exists
 		if (!is_dir($this->outputDirectory)) {
 			mkdir($this->outputDirectory, 0777, true);
 		}
+
+		$this->mdx = "<h1>Data Types</h1>\n\n";
+		$this->mdx .= $this->addParagraph('PHP enums are used to specify valid values for properties.');
+		$this->mdx .= $this->addParagraph('This provides a central location for validation logic and documentation, as well as reducing duplication, ensuring consistency, and enabling type safety.');
 	}
 
-	/**
-	 * @throws ReflectionException
-	 * @throws Error
-	 */
+
 	public function runAll(): void {
 		$enumFiles = $this->getFiles();
 
@@ -26,72 +28,37 @@ class EnumDocGenerator {
 
 			if ($className) {
 				$mdx = $this->generateMDX($className);
-				$shortName = (new ReflectionClass($className))->getShortName();
-				$outputFile = "$this->outputDirectory/$shortName.mdx";
-
-				file_put_contents($outputFile, $mdx);
-				echo "Generated MDX for $shortName\n";
-			}
-		}
-	}
-
-	/**
-	 * @throws ReflectionException
-	 * @throws Error
-	 */
-	public function runSingle(string $enum): void {
-		$enumFiles = $this->getFiles();
-		$enum = ucfirst($enum);
-		$enumFile = null;
-
-		foreach ($enumFiles as $file) {
-			$className = $this->getFullyQualifiedClassName($file);
-
-			if ($className === "Doubleedesign\\Comet\\Core\\$enum") {
-				$enumFile = $file;
-				break;
+				$this->mdx .= $mdx;
 			}
 		}
 
-		if ($enumFile) {
-			$mdx = $this->generateMDX("Doubleedesign\\Comet\\Core\\$enum");
-			$shortName = (new ReflectionClass("Doubleedesign\\Comet\\Core\\$enum"))->getShortName();
-			$outputFile = "$this->outputDirectory/$shortName.mdx";
-
-			file_put_contents($outputFile, $mdx);
-			echo "Generated MDX for $shortName\n";
-		}
+		$outputFile = "$this->outputDirectory/Data Types.mdx";
+		file_put_contents($outputFile, $this->mdx);
 	}
 
-	/**
-	 * @throws ReflectionException
-	 * @throws Error
-	 */
+	/** @noinspection PhpUnhandledExceptionInspection */
 	private function generateMDX(string $enumClass): string {
 		$reflectionClass = new ReflectionEnum($enumClass);
 		$shortName = $reflectionClass->getShortName();
-		$mdx = '';
+		// A place to store stuff from the first column's loop that we want to display in the second column
+		$holdForSecondColumn = '';
 
+		$mdx = $this->openDiv('two-column-doc-section');
+
+		// FIRST COLUMN ------------------------------------------------------------------------------------------------
+		$mdx .= $this->openDiv();
 		// Title and description ---------------------------
-		$mdx .= "# {$shortName}\n";
-		$mdx .= "Enum used to specify valid values for {$this->lower_sentence_case($shortName)} properties\n\n";
-		// -------------------------------------------------
-
-		// Generic basic usage example ---------------------
-		$mdx .= "## Basic usage\n";
-		$mdx .= "```php\n";
-		$mdx .= "use {$reflectionClass->getName()};\n\n";
-		$mdx .= "\$result = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};\n";
-		$mdx .= '$value = $result->value;' . " // returns '{$reflectionClass->getCases()[0]->getValue()->value}'\n";
-		$mdx .= "```\n\n";
+		$mdx .= "<h2>$shortName</h2>\n";
+		$mdx .= $this->addParagraph("Enum used to specify valid values for {$this->lower_sentence_case($shortName)} properties.");
 		// -------------------------------------------------
 
 		// Enum cases --------------------------------------
-		$mdx .= '---' . "\n";
-		$mdx .= "## Available Values\n";
-
 		// Handle the attributes stuff in the Tag enum, and anything that works the same
 		if ($reflectionClass->hasMethod('get_valid_attributes')) {
+			$mdx .= "<details>\n";
+			$mdx .= '<summary>Supported values</summary>';
+			$mdx .= "\n\n";
+
 			$mdx .= "| Case | Value | Valid attributes |\n";
 			$mdx .= "|------|-------|------------------|\n";
 			foreach ($reflectionClass->getCases() as $case) {
@@ -105,62 +72,62 @@ class EnumDocGenerator {
 				// Now we can call get_valid_attributes() on it
 				$uniqueAttributes = $enumCase->get_valid_attributes();
 				if ($enumClass::GLOBAL_ATTRIBUTES) {
-					$link = "[Global attributes](#global-attributes)";
 					$uniqueAttributes = array_diff($uniqueAttributes, $enumClass::GLOBAL_ATTRIBUTES);
 					$uniqueAttributes = array_map(fn($attribute) => "`$attribute`", $uniqueAttributes);
-					$uniqueAttributes = implode(' ', $uniqueAttributes);
+					$uniqueAttributes = implode(', ', $uniqueAttributes);
 					if (empty($uniqueAttributes)) {
-						$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | $link |\n";
+						$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | Global attributes |\n";
 						continue;
 					}
-					$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | $link $uniqueAttributes |\n";
+					$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | Global attributes, $uniqueAttributes, |\n";
 					continue;
 				}
 
 				$uniqueAttributes = implode(', ', $uniqueAttributes);
 				$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | `{$uniqueAttributes}` |\n";
 			}
+			$mdx .= "\n\n";
+			$mdx .= '</details>';
+
+			// Global attributes for the Tag enum
+			// or anything else that also has it ---------------
+			if ($reflectionClass->hasMethod('get_valid_attributes') && $enumClass::GLOBAL_ATTRIBUTES) {
+				$mdx .= "<details>\n";
+				$mdx .= '<summary>Global attributes</summary>';
+				$mdx .= "\n\n";
+				$formattedAttributes = array_map(fn($attribute) => "`$attribute`", $enumClass::GLOBAL_ATTRIBUTES);
+				$mdx .= implode(' ', $formattedAttributes);
+				$mdx .= "\n\n";
+				$mdx .= '</details>';
+			}
+			// -------------------------------------------------
 		}
 		// Otherwise, just case and value
 		else {
+			$mdx .= $this->openFigure('Supported values');
 			$mdx .= "| Case | Value |\n";
 			$mdx .= "|------|-------|\n";
 			foreach ($reflectionClass->getCases() as $case) {
 				$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}`|\n";
 			}
+			$mdx .= $this->closeFigure();
 		}
 		// -------------------------------------------------
 
-		// Global attributes for the Tag enum
-		// or anything else that also has it ---------------
-		if ($reflectionClass->hasMethod('get_valid_attributes') && $enumClass::GLOBAL_ATTRIBUTES) {
-			$mdx .= "\n\n---\n\n";
-			$mdx .= "## Global Attributes\n";
-			$formattedAttributes = array_map(fn($attribute) => "`$attribute`", $enumClass::GLOBAL_ATTRIBUTES);
-			$mdx .= implode(' ', $formattedAttributes);
-			$mdx .= "\n\n";
-		}
-		// -------------------------------------------------
-
-
+		$mdx .= $this->openFigure('Methods');
 		// Expected/known methods --------------------------
-		if ($reflectionClass->hasMethod('fromString') || $reflectionClass->hasMethod('get_valid_attributes')) {
-			$mdx .= '---' . "\n";
-			$mdx .= "## Methods\n";
-		}
-
 		if ($reflectionClass->hasMethod('fromString')) {
-			$mdx .= '### `fromString(string $value)`' . "\n\n";
-			$mdx .= "Converts a string to the corresponding enum case.\n\n";
+			$mdx .= '<dl>';
+			$mdx .= '<dt><code>fromString(string $value)</code></dt>';
+			$mdx .= '<dd>';
+			$mdx .= 'Converts a string to the corresponding enum case.';
+			$mdx .= '</dd>';
+			$mdx .= '</dl>';
 
-			$mdx .= "#### Example usage\n";
-			$mdx .= "```php\n";
-			$mdx .= "use {$reflectionClass->getName()};\n\n";
-			$mdx .= "\$result = {$shortName}::fromString('left');\n";
-			$mdx .= "```\n\n";
-
-			$mdx .= "#### Supported Input Mappings\n";
-
+			$mdx .= "\n\n";
+			$mdx .= "<details>\n";
+			$mdx .= '<summary>Supported input mappings</summary>';
+			$mdx .= "\n\n";
 			// Try to extract input mappings from the method
 			$methodSource = file_get_contents($reflectionClass->getFileName());
 			preg_match('/match\(\$value\)\s*{(.*?)}/s', $methodSource, $matchBlock);
@@ -185,23 +152,100 @@ class EnumDocGenerator {
 					}
 				}
 			}
+			$mdx .= "\n\n";
+			$mdx .= '</details>';
+
+			$holdForSecondColumn .= $this->openFigure('Method usage');
+			$holdForSecondColumn .= "```php\n";
+			$holdForSecondColumn .= "use {$reflectionClass->getName()};\n\n";
+			$holdForSecondColumn .= "\$result = {$shortName}::fromString('left');\n";
+			$holdForSecondColumn .= "```\n\n";
+			$holdForSecondColumn .= $this->closeFigure();
+		}
+		// If there is no fromString, we probably use PHP's tryFrom
+		else {
+			$mdx .= '<dl>';
+			$mdx .= '<dt><code>tryFrom(string $value): ?self</code></dt>';
+			$mdx .= '<dd>';
+			$mdx .= 'Built-in PHP enum method that converts a string to the corresponding enum case, or returns null if the string is not a valid value.';
+			$mdx .= '</dd>';
+			$mdx .= '</dl>';
+			$mdx .= "\n\n";
+
+			$firstCase = $reflectionClass->getCases()[0]->getValue()->value;
+			$holdForSecondColumn .= $this->openFigure('Method usage');
+			$holdForSecondColumn .= "```php\n";
+			$holdForSecondColumn .= "use {$reflectionClass->getName()};\n\n";
+			$holdForSecondColumn .= "\$result = {$shortName}::tryFrom('$firstCase');\n";
+			$holdForSecondColumn .= "```\n\n";
+			$holdForSecondColumn .= $this->closeFigure();
+
 		}
 
 		if ($reflectionClass->hasMethod('get_valid_attributes')) {
-			$mdx .= "### `get_valid_attributes(): array`\n\n";
-			$mdx .= "Returns an array of valid attributes\n\n";
-			$mdx .= "#### Example usage\n";
-			$mdx .= "```php\n";
-			$mdx .= "use {$reflectionClass->getName()};\n\n";
-			$mdx .= "\$someTag = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};\n";
-			$mdx .= '$result = $someTag->get_valid_attributes();' . "\n";
-			$mdx .= "```\n\n";
+			$mdx .= '<dl>';
+			$mdx .= '<dt><code>get_valid_attributes(): array</code></dt>';
+			$mdx .= '<dd>';
+			$mdx .= 'Returns an array of valid attributes';
+			$mdx .= '</dd>';
+			$mdx .= '</dl>';
+
+			$holdForSecondColumn .= "```php\n";
+			$holdForSecondColumn .= "use {$reflectionClass->getName()};\n\n";
+			$holdForSecondColumn .= "\$someTag = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};\n";
+			$holdForSecondColumn .= '$result = $someTag->get_valid_attributes();' . "\n";
+			$holdForSecondColumn .= "```\n\n";
 		}
 		// -------------------------------------------------
 
-		$mdx .= '---' . "\n\n";
+		$mdx .= $this->closeFigure();
+		$mdx .= $this->closeDiv();
+		// END FIRST COLUMN --------------------------------------------------------------------------------------------
+
+		// SECOND COLUMN -----------------------------------------------------------------------------------------------
+		$mdx .= $this->openDiv();
+		// Generic basic usage example ---------------------
+		$mdx .= $this->openFigure('Basic usage');
+		$mdx .= "```php\n";
+		$mdx .= "use {$reflectionClass->getName()};\n\n";
+		$mdx .= "\$result = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};\n";
+		$mdx .= '$value = $result->value;' . " // returns '{$reflectionClass->getCases()[0]->getValue()->value}'\n\n";
+		$mdx .= "```\n";
+		$mdx .= $this->closeFigure();
+		// -------------------------------------------------
+		$mdx .= $holdForSecondColumn;
+		$mdx .= $this->closeDiv();
+		// END SECOND COLUMN -------------------------------------------------------------------------------------------
+
+		$mdx .= $this->closeDiv();
+		// END TWO COLUMN DOC SECTION ----------------------------------------------------------------------------------
 
 		return $mdx;
+	}
+
+	private function addParagraph(string $text): string {
+		return "<p>$text</p>\n";
+	}
+
+	private function openDiv(string $className = ''): string {
+		if ($className) {
+			return "<div className=\"$className\">\n";
+		}
+		return "<div>\n";
+	}
+
+	private function closeDiv(): string {
+		return "</div>\n";
+	}
+
+	private function openFigure(string $caption): string {
+		$output = "\n<figure>\n\n";
+		$output .= "<figcaption>$caption</figcaption>\n\n";
+		return $output;
+	}
+
+	private function closeFigure(): string {
+		return "\n</figure>\n";
 	}
 
 	private function getFiles(): array {
@@ -253,16 +297,10 @@ class EnumDocGenerator {
 	}
 }
 
-// Usage: php generate-enum-docs.php
-//        or php generate-enum-docs.php --enum Tag
+// Usage: php scripts/generate-enum-docs.php
 try {
 	$instance = new EnumDocGenerator();
-	if (isset($argv[1]) && $argv[1] === '--enum') {
-		$instance->runSingle($argv[2]);
-	}
-	else {
-		$instance->runAll();
-	}
+	$instance->runAll();
 	echo "Done!\n";
 }
 catch (Error|ReflectionException $e) {

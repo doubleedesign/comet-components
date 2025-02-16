@@ -9,9 +9,14 @@ class TraitDocGenerator {
 		require_once(__DIR__ . '/../vendor/autoload.php');
 		$this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\traits';
 		$this->outputDirectory = dirname(__DIR__, 1) . '\docs\code-foundations';
-		$this->output .= "# Component Traits\n\n";
-		$this->output .= 'PHP traits are used to provide common implementations of an attribute\'s conversion from `$attributes` array element to object field.';
-		$this->output .= 'This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.' . "\n\n";
+		$this->output .= "<h1>Component Traits</h1>";
+		$this->output .= '<p>';
+		$this->output .= 'PHP traits are used to provide common implementations of an attribute\'s conversion from $attributes array element to object field.';
+		$this->output .= '</p>';
+		$this->output .= '<p>';
+		$this->output .= 'This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.';
+		$this->output .= '</p>';
+		$this->output .= "\n\n";
 
 		// Ensure output directory exists
 		if (!is_dir($this->outputDirectory)) {
@@ -41,27 +46,24 @@ class TraitDocGenerator {
 		$properties = array_filter($reflectionTrait->getProperties(), fn(ReflectionProperty $property) => !$property->isPrivate());
 		$methods = array_filter($reflectionTrait->getMethods(), fn(ReflectionMethod $method) => !$method->isPrivate());
 
-		$mdx .= '<div class="two-column-doc-section">';
+		$mdx .= $this->openDiv('two-column-doc-section');
 
-		$mdx .= '<div>';
-		$mdx .= "\n## $traitName\n";
-		$mdx .= '<dl>';
+		$mdx .= $this->openDiv();
+		$mdx .= "<h2>$traitName</h2>\n";
+		$mdx .= "<dl>\n";
 		foreach ($properties as $property) {
 			$mdx .= $this->generate_definition_item($property);
 		}
 		foreach ($methods as $method) {
 			$mdx .= $this->generate_definition_item($method);
 		}
-		$mdx .= '</dl>';
-		$mdx .= "\n";
-		$mdx .= '</div>';
+		$mdx .= "\n</dl>";
+		$mdx .= $this->closeDiv();
 
 		$firstMethod = $methods[0]->getName();
-		$mdx .= '<figure>';
-		$mdx .= "\n";
-		$mdx .= '<figcaption>Example usage</figcaption>';
-		$mdx .= "\n```php\n";
-		$mdx .= "namespace Doubleedesign\Comet\Core\n\n";
+		$mdx .= $this->openFigure("Example usage");
+		$mdx .= "```php\n";
+		$mdx .= "namespace Doubleedesign\Comet\Core;\n\n";
 		$mdx .= "class MyComponent {\n";
 		$mdx .= "    use $traitName;\n\n";
 		$mdx .= "    function __construct(array \$attributes, array \$innerComponents) {\n";
@@ -70,9 +72,9 @@ class TraitDocGenerator {
 		$mdx .= "    }\n";
 		$mdx .= "}\n";
 		$mdx .= "```\n";
-		$mdx .= '</figure>';
+		$mdx .= $this->closeFigure();
 
-		$mdx .= '</div>';
+		$mdx .= $this->closeDiv();
 		return $mdx;
 	}
 
@@ -91,12 +93,32 @@ class TraitDocGenerator {
 
 		$mdx = "<dt>$rowType</dt>";
 		$mdx .= "<dd>";
-		$mdx .= "<p>`{$item->getName()}`";
-		$mdx .= "<strong>$shortTypeLabel: </strong> `$shortTypeName`</p>";
+		$mdx .= "<p>`{$item->getName()}` <strong>$shortTypeLabel: </strong> `$shortTypeName`</p>";
 		$mdx .= "<p>$description</p>";
 		$mdx .= "</dd>";
 
 		return $mdx;
+	}
+
+	private function openDiv(string $className = ''): string {
+		if ($className) {
+			return "<div className=\"$className\">\n";
+		}
+		return "<div>\n";
+	}
+
+	private function closeDiv(): string {
+		return "</div>\n";
+	}
+
+	private function openFigure(string $caption): string {
+		$output = "\n<figure>\n\n";
+		$output .= "<figcaption>$caption</figcaption>\n\n";
+		return $output;
+	}
+
+	private function closeFigure(): string {
+		return "\n</figure>\n";
 	}
 
 	private function strip_namespace(string $className): string {

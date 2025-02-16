@@ -11,8 +11,9 @@ class AbstractClassDocGenerator {
 		$this->baseSourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components';
 		$this->mainComponentSourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
 		$this->outputDirectory = dirname(__DIR__, 1) . '\docs\code-foundations';
-		$this->output = "# Abstract Component Classes\n\n";
-		$this->output .= 'Foundational PHP classes for defining common fields and methods for components.';
+		$this->output = "<h1>Abstract Component Classes</h1>\n";
+		$this->output .= "<p>Foundational PHP classes for defining common fields and methods for components.</p>\n";
+		$this->output .= "\n\n";
 
 		// Ensure output directory exists
 		if (!is_dir($this->outputDirectory)) {
@@ -24,11 +25,37 @@ class AbstractClassDocGenerator {
 	 * @throws Error
 	 */
 	public function runAll(): void {
-		$files = $this->get_files();
+		$files = $this->get_abstract_def_files();
+		// Custom sort order
+		usort($files, function ($a, $b) {
+			$sortOrder = [
+				'Renderable',
+				'UIComponent',
+				'TextElement',
+				'LayoutComponent',
+				'TextElementExtended',
+			];
+
+			$a = str_replace('.json', '', basename($a));
+			$b = str_replace('.json', '', basename($b));
+
+			$aIndex = array_search($a, $sortOrder);
+			$bIndex = array_search($b, $sortOrder);
+
+			if ($aIndex === false) $aIndex = 999;
+			if ($bIndex === false) $bIndex = 999;
+
+			return $aIndex - $bIndex;
+		});
+
+		$this->output .= "<div id=\"abstract-classes\">\n\n";
+
 		foreach ($files as $file) {
 			$componentName = basename($file);
 			$this->runSingle($componentName);
 		}
+
+		$this->output .= "\n</div>\n";
 
 		$outputFile = "$this->outputDirectory/Abstract Classes.mdx";
 		file_put_contents($outputFile, $this->output);
@@ -49,23 +76,68 @@ class AbstractClassDocGenerator {
 	private function generateMDX(array $json): string {
 		$mdx = '';
 		$name = $json['name'];
-		$extends = $json['extends'];
+		$extends = '`' . $json['extends'] . '`';
 		$children = $this->get_child_classes($name);
+		$properties = $json['attributes'];
 
-		$mdx .= "\n## $name\n";
-		$extendsLink = "[$extends](#$extends)";
+		$mdx .= "<div id=\"$name\" className=\"abstract-class-doc\">\n";
 
+		$mdx .= "<div>\n";
+		$mdx .= "<h2>$name</h2>\n";
+		// TODO: Somehow get an auto-generated description in here
 		$mdx .= '<table>';
 		$mdx .= '<tbody>';
-		$mdx .= '<tr><th scope="row">Extends</th><td>' . $extendsLink . '</td></tr>';
-		$mdx .= '<tr><th scope="row">Extended by</th><td>' . implode(' ', $children) . '</td></tr>';
+		if ($extends !== '``') {
+			$mdx .= '<tr><th scope="row">Extends</th><td>' . $extends . '</td></tr>';
+		}
+		if (count($children['abstract']) > 0) {
+			$mdx .= '<tr><th scope="row" rowspan="2">Extended by</th>';
+			$mdx .= '<td>' . implode(' ', $children['abstract']) . '</td></tr>';
+			$mdx .= '<tr><td>' . implode(' ', $children['component']) . '</td></tr>';
+		}
+		else {
+			$mdx .= '<tr><th scope="row">Extended by</th>';
+			$mdx .= '<td>' . implode(' ', $children['component']) . '</td></tr>';
+		}
+
+		if ($properties) {
+			$properties = array_filter($properties, function ($property) {
+				return !isset($property['inherited']) && $property['inherited'] !== false;
+			});
+			$count = count($properties) + 1;
+			if ($extends !== '``') {
+				$mdx .= '<tr>';
+				$mdx .= "<th scope='row' rowspan='$count'>Properties</th>";
+				$mdx .= "<td>All properties from $extends</td>";
+				$mdx .= '</tr>';
+			}
+			else {
+				$mdx .= '<tr>';
+				$mdx .= "<th scope='row' rowspan='$count'>Properties</th>";
+				$mdx .= "<td></td>";
+				$mdx .= '</tr>';
+			}
+			if ($count > 1) {
+				foreach ($properties as $key => $property) {
+					$mdx .= '<tr>';
+					$mdx .= '<td>';
+					$mdx .= "`$key`";
+					$mdx .= $property['description'];
+					$mdx .= '</td>';
+					$mdx .= '</tr>';
+				}
+			}
+		}
+
 		$mdx .= '</tbody>';
 		$mdx .= '</table>';
+		$mdx .= "\n</div>\n\n";
 
+		$mdx .= "</div>\n\n";
 		return $mdx;
 	}
 
-	private function get_files(): array {
+	private function get_abstract_def_files(): array {
 		/** @noinspection PhpUnhandledExceptionInspection */
 		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->baseSourceDirectory));
 		$phpFiles = [];
@@ -79,18 +151,29 @@ class AbstractClassDocGenerator {
 	}
 
 	private function get_child_classes($componentName): array {
-		$children = [];
+		$children = [
+			'abstract'  => [],
+			'component' => [],
+		];
 		$directories = $this->get_all_component_directories();
-		$jsonDefs = array_map(function ($dir) {
+		$componentDefs = array_map(function ($dir) {
 			return $dir . '\\' . basename($dir) . '.json';
 		}, $directories);
+		$abstractDefs = $this->get_abstract_def_files();
 
-		foreach ($jsonDefs as $jsonDef) {
+		foreach ($abstractDefs as $jsonDef) {
 			if (!file_exists($jsonDef)) continue;
-
 			$json = json_decode(file_get_contents($jsonDef), true);
 			if (isset($json['extends']) && $json['extends'] === $componentName) {
-				$children[] = $json['name'];
+				$children['abstract'][] = '`' . $json['name'] . '`';
+			}
+		}
+
+		foreach ($componentDefs as $jsonDef) {
+			if (!file_exists($jsonDef)) continue;
+			$json = json_decode(file_get_contents($jsonDef), true);
+			if (isset($json['extends']) && $json['extends'] === $componentName) {
+				$children['component'][] = '`' . $json['name'] . '`';
 			}
 		}
 

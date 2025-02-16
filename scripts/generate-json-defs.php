@@ -249,7 +249,7 @@ class ComponentClassesToJsonDefinitions {
 			if ($this->currentClass->hasMethod('get_filtered_classes')) {
 				try {
 					// Special handling for some classes that don't follow the usual pattern of parameters
-					if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
+					if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
 						$instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
 					}
 					else {
@@ -333,7 +333,8 @@ class ComponentClassesToJsonDefinitions {
 			'description' => $description,
 			'required'    => $required,
 			'supported'   => $supportedValues,
-			'default'     => $defaultValue
+			'default'     => $defaultValue,
+			'inherited'   => $this->declaringClass->getName() !== $this->currentClass->getName()
 		];
 
 		return array_filter($result, fn($value) => $value !== null && $value !== false, ARRAY_FILTER_USE_BOTH);
@@ -366,11 +367,11 @@ class ComponentClassesToJsonDefinitions {
 				$defaultTag = $defaultTagAttr->newInstance()->tag;
 
 				return [
-					'type' => str_replace("$namespace\\", '', $typeName),
+					'type'      => str_replace("$namespace\\", '', $typeName),
 					'supported' => array_values(array_map(function ($tag) {
 						return $tag->value;
 					}, $allowedTags)),
-					'default' => $defaultTag->value
+					'default'   => $defaultTag->value
 				];
 			}
 			catch (\Throwable $e) {
@@ -393,21 +394,6 @@ class ComponentClassesToJsonDefinitions {
 		// If it's not an enum or the class doesn't exist, return the original type name
 		return ['type' => $typeName];
 	}
-
-
-	/**
-	 * Check if a class uses a trait, including traits used by parent classes
-	 */
-	private function classUsesTraitRecursive(ReflectionClass $class, string $traitName): bool {
-		do {
-			if (in_array($traitName, array_keys($class->getTraits()))) {
-				return true;
-			}
-		} while ($class = $class->getParentClass());
-
-		return false;
-	}
-
 
 	/**
 	 * Exports the processed data as a JSON file to the specified output path.

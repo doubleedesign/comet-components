@@ -100,11 +100,62 @@
 	background-color: #1d1c21 !important;
 }
 
+details {
+	summary {
+		cursor: pointer;
+	}
+}
 
-.two-column-doc-section {
-	padding-bottom: 2rem;
+.two-column-doc-section,
+.abstract-class-doc {
+	padding: 0;
+	margin-bottom: 2rem !important;
+	/* same as component story boxes */
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10);
+	border-radius: 0.25rem;
+	border: 1px solid hsla(203, 50%, 30%, 0.15);
 
 	> div {
+		&:first-of-type {
+			padding: 1rem 0 1rem 1rem;
+		}
+
+		/** Code column */
+
+		&:last-of-type:has(.code-preview) {
+			background: #1d1c21;
+			overflow-x: visible;
+
+			figure {
+				overflow-x: visible;
+
+				figcaption {
+					background: rgb(132, 94, 194);
+					color: white;
+					padding: 0.25rem 0.5rem 0.25rem 1rem;
+					display: inline-block;
+					position: relative;
+					left: -0.75rem;
+					top: 0.5rem;
+					border-radius: 0.25rem;
+					border-bottom-left-radius: 0;
+
+					&:before {
+						content: '';
+						width: 0;
+						height: 0;
+						border-style: solid;
+						border-width: 0 0.75rem 0.75rem 0;
+						border-color: transparent color-mix(in srgb, rgb(132, 94, 194) 70%, black) transparent transparent;
+						transform: rotate(0deg);
+						position: absolute;
+						top: 100%;
+						left: 0;
+					}
+				}
+			}
+		}
+
 		p {
 			&:has(code) {
 				display: flex;
@@ -118,14 +169,79 @@
 		}
 	}
 
-	> figure {
+	dl {
+		margin-top: 0.25rem;
+
+		dt {
+			margin-top: 0;
+
+			code {
+				background-color: #F7FAFC;
+				border: 1px solid #ECF4F9;
+				padding: 0.25rem;
+				border-radius: 0.25rem;
+			}
+		}
+
+		dd {
+			font-size: 14px; /** same as default paragraph text */
+			padding: 0 1rem;
+		}
+	}
+
+	details {
+		margin-bottom: 0.5rem;
+
+		&:not(:has(+ details)) {
+			margin-bottom: 1rem;
+		}
+	}
+
+	table {
+		margin: 0 0 1rem 0;
+		width: 100%;
+		max-width: 400px;
+
+		th {
+			width: 50%;
+			text-align: start;
+			background-color: #F7FAFC;
+
+			.abstract-class-doc & {
+				width: 30%;
+			}
+		}
+
+		td {
+			background-color: white;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	figure {
 		margin: 0;
 		overflow-x: hidden;
+
+		& + figure {
+			margin-top: 1rem;
+		}
 
 		figcaption {
 			font-weight: bold;
 			display: block;
 			margin-bottom: 0.25rem;
+		}
+
+		dl + figure, dl + details {
+			padding-left: 1rem;
+
+			figcaption, summary {
+				font-size: 14px;
+				font-weight: bold;
+			}
 		}
 	}
 }
@@ -142,8 +258,32 @@
 			overflow-x: hidden;
 
 			.code-preview {
-				overflow-x: scroll;
+				overflow-x: auto;
 			}
 		}
+	}
+}
+
+#abstract-classes {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 1rem;
+
+	.abstract-class-doc {
+		margin-bottom: 0 !important;
+		padding-right: 1rem;
+
+		table {
+			max-width: 100%;
+
+			th {
+				width: 120px;
+				vertical-align: top;
+			}
+		}
+	}
+
+	#Renderable {
+		grid-column: span 2;
 	}
 }
