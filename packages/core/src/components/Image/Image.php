@@ -67,12 +67,13 @@ class Image extends Renderable {
 		$this->href = $attributes['href'] ?? null;
 		$this->aspectRatio = isset($attributes['aspectRatio']) ? AspectRatio::tryFrom(str_replace('/', ':', $attributes['aspectRatio'])) : null;
 		$this->scale = $attributes['scale'] ?? 'contain';
+		$this->classes = $attributes['classes'] ?? [];
 
 		parent::__construct($attributes, 'components.Image.image');
 	}
 
 	public function get_filtered_classes(): array {
-		$classes = [$this->shortName];
+		$classes = array_merge([$this->shortName], parent::get_filtered_classes());
 		if ($this->scale) {
 			$classes[] = 'image--scale-' . $this->scale;
 		}

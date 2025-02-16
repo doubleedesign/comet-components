@@ -16,10 +16,12 @@
 				color: inherit;
 				display: block;
 				opacity: 0.75;
-				text-decoration: none; // TODO: Animated hover underline
+				text-decoration: underline;
+				text-decoration-color: transparent;
 
 				&:hover, &:focus, &:active {
 					opacity: 1;
+					text-decoration-color: currentColor;
 				}
 			}
 

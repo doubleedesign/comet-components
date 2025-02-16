@@ -1,0 +1,13 @@
+.site-header .container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.site-header__logo {
+  display: block;
+  max-width: 11rem;
+}
+.site-header__logo img {
+  width: 100%;
+}
+
+/*# sourceMappingURL=site-header.css.map */

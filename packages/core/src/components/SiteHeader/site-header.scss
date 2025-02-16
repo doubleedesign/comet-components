@@ -1,0 +1,19 @@
+.site-header {
+	.container {
+		display: flex;
+		flex-wrap: nowrap;
+	}
+
+	&__logo {
+		display: block;
+		max-width: 11rem;
+
+		img {
+			width: 100%;
+		}
+	}
+
+	&__menu {
+
+	}
+}

@@ -18,13 +18,21 @@
 	--width-contained: #{map-get($widths, 'contained')};
 	--width-narrow: #{map-get($widths, 'narrow')};
 
+	--spacing-xxs: 0.25rem;
 	/* Augmented fourth scale - 1.414 */
 	--spacing-xs: 0.5rem;
 	--spacing-sm: 0.707rem;
 	--spacing-md: 1rem;
 	--spacing-lg: 1.414rem;
 	--spacing-xl: 1.999rem;
-	--spacing-2xl: 2.827rem;
+	--spacing-xxl: 2.827rem;
+
+	--font-size-sm: 0.875rem;
+
+	--font-weight-light: 300;
+	--font-weight-regular: 400;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
 
 	--button-border-radius: 0;
 }

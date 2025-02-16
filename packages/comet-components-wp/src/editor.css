@@ -1,6 +1,5 @@
 .container {
   margin: 0 auto;
-  container-name: container;
   container-type: inline-size;
   width: 100%;
   max-width: var(--width-contained);
@@ -339,10 +338,12 @@
   color: inherit;
   display: block;
   opacity: 0.75;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: transparent;
 }
 .breadcrumbs__list__item a:hover, .breadcrumbs__list__item a:focus, .breadcrumbs__list__item a:active {
   opacity: 1;
+  text-decoration-color: currentColor;
 }
 .breadcrumbs__list__item:after {
   content: "/";
@@ -374,6 +375,17 @@
   color: var(--readable-color-white);
 }
 
+.site-header .container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.site-header__logo {
+  display: block;
+  max-width: 11rem;
+}
+.site-header__logo img {
+  width: 100%;
+}
 .site-footer {
   padding-block: var(--spacing-lg);
 }
