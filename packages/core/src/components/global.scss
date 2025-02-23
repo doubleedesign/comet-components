@@ -108,12 +108,19 @@ a {
 }
 
 .is-style-accent {
-	font-family: var(--font-family-accent), sans-serif;
+	font-family: var(--font-family-accent);
 	font-weight: normal;
 	line-height: 1;
 }
 
+h1, h2, h3 {
+	&.is-style-small {
+		font-size: 1rem;
+		text-transform: uppercase;
+	}
+}
+
 .is-style-lead {
 	font-weight: 600;
-	font-size: $baseFontSize * 1.25;
+	font-size: $baseFontSize * 1.125;
 }
