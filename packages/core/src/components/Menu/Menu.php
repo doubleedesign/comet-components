@@ -37,7 +37,7 @@ class Menu extends UIComponent {
 			);
 
 			// Handle nested lists
-			if(isset($item['children'])) {
+			if(!empty($item['children'])) {
 				$itemObject->innerComponents[] = new MenuList(
 					[],
 					$this->array_to_items($item['children'])

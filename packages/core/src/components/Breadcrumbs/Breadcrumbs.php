@@ -8,7 +8,7 @@ class Breadcrumbs extends UIComponent {
 	function __construct(array $attributes, array $breadcrumbs) {
 		$listItems = array_map(function($breadcrumb) {
 			$linkAttributes = ['href' => trim($breadcrumb['url'] !== '') ? $breadcrumb['url'] : '#'];
-			if($breadcrumb['current']) {
+			if(isset($breadcrumb['current']) && $breadcrumb['current']) {
 				$linkAttributes['aria-current'] = 'page';
 			}
 

@@ -63,12 +63,14 @@
 .columns--halign-end {
   justify-content: flex-end;
 }
+.columns__column {
+  min-width: 0;
+}
 .columns__column:not(.columns__column--has-own-width) {
   flex-grow: 1;
 }
 .columns__column--has-own-width {
   grid-column: span 1;
-  min-width: 0;
 }
 .columns__column--valign-start {
   align-self: flex-start;

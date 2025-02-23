@@ -9,7 +9,7 @@ class TabPanel extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct(
-			array_merge($attributes, ['context' => 'tabs']),
+			array_merge($attributes, ['context' => 'tabs__content']),
 			$innerComponents,
 			'components.Tabs.TabPanel.tab-panel'
 		);

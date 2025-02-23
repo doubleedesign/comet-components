@@ -38,13 +38,14 @@
 	}
 
 	&__column {
+		min-width: 0; // prevents overflowing content from widening the column
+
 		&:not(&--has-own-width) {
 			flex-grow: 1;
 		}
 
 		&--has-own-width {
 			grid-column: span 1;
-			min-width: 0;
 		}
 
 		&--valign-start {

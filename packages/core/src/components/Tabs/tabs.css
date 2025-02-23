@@ -1,3 +1,87 @@
-
+.tabs {
+  margin-bottom: var(--spacing-lg);
+}
+.tabs__tab-list__item {
+  display: block;
+}
+.tabs__tab-list__item strong {
+  display: block;
+}
+.tabs__tab-list__item [role=tab] {
+  appearance: none;
+  border: 0;
+  background: unset;
+  text-align: match-parent;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  text-decoration-color: transparent;
+  color: inherit;
+}
+.tabs__tab-list__item [role=tab]:focus {
+  text-decoration-color: currentColor;
+}
+.tabs__tab-list__item [role=tab][aria-selected=true], .tabs__tab-list__item [role=tab]:hover, .tabs__tab-list__item [role=tab]:focus, .tabs__tab-list__item [role=tab]:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+.tabs__content {
+  background: white;
+}
+.tabs__content__tab-panel {
+  display: none;
+}
+.tabs__content__tab-panel.active {
+  display: block;
+}
+.tabs__content[data-color-theme=primary] h2, .tabs__content[data-color-theme=primary] h3 {
+  color: var(--color-primary);
+}
+.tabs__content[data-color-theme=secondary] h2, .tabs__content[data-color-theme=secondary] h3 {
+  color: var(--color-secondary);
+}
+.tabs__content[data-color-theme=accent] h2, .tabs__content[data-color-theme=accent] h3 {
+  color: var(--color-accent);
+}
+.tabs__content[data-color-theme=warning] h2, .tabs__content[data-color-theme=warning] h3 {
+  color: var(--color-warning);
+}
+.tabs__content[data-color-theme=error] h2, .tabs__content[data-color-theme=error] h3 {
+  color: var(--color-error);
+}
+.tabs__content[data-color-theme=light] h2, .tabs__content[data-color-theme=light] h3 {
+  color: var(--color-light);
+}
+.tabs__content[data-color-theme=dark] h2, .tabs__content[data-color-theme=dark] h3 {
+  color: var(--color-dark);
+}
+.tabs__content[data-color-theme=white] h2, .tabs__content[data-color-theme=white] h3 {
+  color: var(--color-white);
+}
+.tabs[data-orientation=vertical] {
+  container-type: inline-size;
+  display: flex;
+}
+.tabs[data-orientation=vertical] .tabs__tab-list {
+  width: 100%;
+  margin: 0;
+}
+@container (min-width: 600px) {
+  .tabs[data-orientation=vertical] .tabs__tab-list {
+    width: 14rem;
+    flex-basis: 14rem;
+    min-width: 14rem;
+  }
+}
+.tabs[data-orientation=vertical] .tabs__content {
+  width: 100%;
+}
+@container (min-width: 600px) {
+  .tabs[data-orientation=vertical] .tabs__content {
+    width: auto;
+    flex-basis: auto;
+    flex-grow: 1;
+  }
+}
 
 /*# sourceMappingURL=tabs.css.map */

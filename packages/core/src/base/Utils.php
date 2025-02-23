@@ -133,4 +133,23 @@ class Utils {
 
 		return $max_depth;
 	}
+
+	public static function get_first_phrase_from_html_string(string $content): string {
+		// Remove any leading/trailing whitespace
+		$trimmed = trim($content);
+
+		// Try splitting by common HTML elements
+		$blockParts = preg_split('/<\/?(?:span|strong|em|div|p|br|h[1-6])[^>]*>/i', $trimmed);
+
+		// Get first non-empty block
+		foreach ($blockParts as $block) {
+			$stripped = trim(strip_tags($block));
+			if ($stripped !== '') {
+				return $stripped;
+			}
+		}
+
+		// If no content found, return the original string
+		return $trimmed;
+	}
 }

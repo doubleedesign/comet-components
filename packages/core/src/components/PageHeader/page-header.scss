@@ -6,4 +6,9 @@
 	@include container-width-up('narrow') {
 		padding-block: var(--spacing-xl);
 	}
+
+	h1 {
+		margin-top: var(--spacing-xs);
+		margin-bottom: 0;
+	}
 }

@@ -27,12 +27,14 @@ class TabsTest extends TestCase {
 		$wrapper = $dom->getElementsByTagName('div')->item(0);
 		$tabList = $wrapper->getElementsByTagName('ul')->item(0);
 		$tabListItem = $tabList->getElementsByTagName('li')->item(0);
-		$tabContent = $wrapper->getElementsByTagName('div')->item(0);
+		$tabContentWrapper = $wrapper->getElementsByTagName('div')->item(0);
+		$tabContentItem = $tabContentWrapper->getElementsByTagName('div')->item(0);
 
 		$this->assertEquals('tabs', $wrapper->getAttribute('class'));
 		$this->assertEquals('tabs__tab-list', $tabList->getAttribute('class'));
 		$this->assertEquals('tabs__tab-list__item', $tabListItem->getAttribute('class'));
-		$this->assertEquals('tabs__tab-panel', $tabContent->getAttribute('class'));
+		$this->assertContains('tabs__content', explode(' ', $tabContentWrapper->getAttribute('class')));
+		$this->assertEquals('tabs__content__tab-panel', $tabContentItem->getAttribute('class'));
 	}
 
 	function test_role_attributes() {
@@ -46,11 +48,12 @@ class TabsTest extends TestCase {
 		$wrapper = $dom->getElementsByTagName('div')->item(0);
 		$tabList = $wrapper->getElementsByTagName('ul')->item(0);
 		$tabListItemLink = $tabList->getElementsByTagName('a')->item(0);
-		$tabContent = $wrapper->getElementsByTagName('div')->item(0);
+		$tabContentWrapper = $wrapper->getElementsByTagName('div')->item(0);
+		$tabContentItem = $tabContentWrapper->getElementsByTagName('div')->item(0);
 
 		$this->assertEquals('tablist', $tabList->getAttribute('role'));
 		$this->assertEquals('tab', $tabListItemLink->getAttribute('role'));
-		$this->assertEquals('tabpanel', $tabContent->getAttribute('role'));
+		$this->assertEquals('tabpanel', $tabContentItem->getAttribute('role'));
 	}
 
 	function test_orientation_attribute() {

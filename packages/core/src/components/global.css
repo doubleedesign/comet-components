@@ -42,8 +42,8 @@
   --readable-color-dark: white;
   --readable-color-white: black;
   --width-wide: 1440px;
-  --width-contained: 1100px;
-  --width-narrow: 960px;
+  --width-contained: 1140px;
+  --width-narrow: 940px;
   --spacing-xxs: 0.25rem;
   /* Augmented fourth scale - 1.414 */
   --spacing-xs: 0.5rem;
@@ -195,6 +195,7 @@ p:last-child, ul:last-child, ol:last-child {
 
 a {
   transition: all 0.2s ease-in-out;
+  color: inherit;
 }
 
 .is-style-accent {

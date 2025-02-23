@@ -11,12 +11,13 @@ projects.
 ---
 ## Tech Stack
 
-| Technology | Description                    | Rationale                                                                                                                                                                                          |
-|------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PHP        | Primary programming language   | I like it. And because I'm using this in WordPress.                                                                                                                                                |
-| Blade	     | Templating engine for PHP      | I wanted to try using a templating language, and a) preferred the syntax over Twig and b) have vague notions of working with Laravel at some point in the future.                                  |
-| SCSS 	     | CSS preprocessor               | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                  |
-| JavaScript | Secondary programming language | Used in the WordPress plugin where necessary for custom blocks or customisations of core blocks (anything that can't be done in PHP), and in the standalone library for client-side interactivity. |
+| Technology | Description                       | Rationale                                                                                                                                                                                          |
+|------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PHP        | Primary programming language      | I like it. And because I'm using this in WordPress.                                                                                                                                                |
+| Blade	     | Templating engine for PHP         | I wanted to try using a templating language, and a) preferred the syntax over Twig and b) have vague notions of working with Laravel at some point in the future.                                  |
+| SCSS 	     | CSS preprocessor                  | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                  |
+| JavaScript | Secondary programming language    | Used in the WordPress plugin where necessary for custom blocks or customisations of core blocks (anything that can't be done in PHP), and in the standalone library for client-side interactivity. |
+| Bootstrap  | Front-end framework (partial use) | Some of Bootstrap's JavaScript plugins are used to provide basic client-side interactivity, because it's easier than reinventing the wheel.                                                        |
 
 ---
 ## Usage
@@ -41,7 +42,7 @@ You can override the rendering template for a component by creating a Blade file
 // TODO
 
 ### In a standalone HTML project
-You could use Comet Components without PHP by including the compiled CSS files in your project and replicating the HTML that the PHP component classes generate.
+You could use Comet Components without PHP by including the compiled CSS files and relevant JS in your project, and replicating the HTML that the PHP component classes generate.
 
 ---
 
