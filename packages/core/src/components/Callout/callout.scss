@@ -1,0 +1,26 @@
+@use '../variables' as *;
+
+.callout {
+	padding: var(--spacing-md);
+	display: flex;
+	flex-wrap: nowrap;
+	gap: var(--spacing-md);
+	margin-block: var(--spacing-md);
+
+	@each $colorName, $value in $colors {
+		&--#{$colorName} {
+			border: 1px solid var(--color-#{$colorName});
+			border-left-width: var(--spacing-xxs);
+			color: var(--color-#{$colorName});
+			background-color: hsl(from var(--color-#{$colorName}) h s l / 0.05);
+		}
+	}
+
+	i, svg {
+		font-size: var(--spacing-lg);
+	}
+
+	&__content {
+		flex-grow: 1;
+	}
+}
