@@ -20,16 +20,10 @@ class Tabs extends UIComponent {
 	}
 
 	function get_html_attributes(): array {
-		$attrs = array_merge(
+		return array_merge(
 			parent::get_html_attributes(),
 			['data-orientation' => $this->orientation->value],
 		);
-
-		if($this->colorTheme) {
-			$attrs['data-color-theme'] = $this->colorTheme->value;
-		}
-
-		return $attrs;
 	}
 
 	/**
@@ -48,11 +42,12 @@ class Tabs extends UIComponent {
 
 		$attributes = [
 			'tagName' => Tag::UL->value, // TODO: Implement <ol> option
+			'backgroundColor' => $this->colorTheme->value,
 		];
 
 		$this->innerComponents = [
 			new TabList($attributes, $titles),
-			...$panels
+			new Group(['classes' => ['tabs__content'], 'data-color-theme' => $this->colorTheme->value], $panels)
 		];
 	}
 

@@ -10,10 +10,92 @@
 
 		img {
 			width: 100%;
+			max-width: 11rem;
 		}
 	}
 
 	&__menu {
+		container-type: inline-size;
+		flex-grow: 1;
+		padding-block: var(--spacing-lg);
 
+		&-list {
+			@container (min-width: 600px) {
+				display: flex;
+				justify-content: flex-end;
+				gap: var(--spacing-xs);
+			}
+
+			@container (min-width: 720px) {
+				gap: var(--spacing-md);
+			}
+
+			&__item {
+				display: block;
+				position: relative;
+				padding-bottom: var(--spacing-xs);
+
+				&__link {
+					display: block;
+					color: var(--color-primary);
+					text-decoration: underline;
+					text-decoration-color: transparent;
+					transition: all 0.2s ease-in-out;
+
+					&:hover, &:focus, &:active,
+					[aria-current="page"] {
+						text-decoration-color: currentColor;
+					}
+				}
+
+				// Parent item when submenu containing current page is present
+				&:has(.menu-list__item__link[aria-current="page"]) {
+					a {
+						text-decoration-color: currentColor;
+					}
+				}
+
+				// Submenu
+				.menu-list {
+					margin-top: 0;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					opacity: 0;
+					height: 0;
+					transition: all 0.2s linear;
+					min-width: 10rem;
+					padding-block: var(--spacing-xxs);
+					background: var(--color-primary);
+
+					&__item {
+						display: block;
+
+						&__link {
+							display: block;
+							padding: var(--spacing-xs) var(--spacing-sm);
+							white-space: nowrap;
+							color: var(--readable-color-primary);
+							font-size: var(--font-size-sm);
+							text-decoration: underline;
+							text-decoration-color: transparent;
+							transition: all 0.2s ease-in-out;
+
+							&:hover, &:focus, &:active {
+								text-decoration-color: currentColor;
+								background: rgba(0,0,0,0.25);
+							}
+						}
+					}
+				}
+
+				&:hover, &:focus-within {
+					.menu-list {
+						opacity: 1;
+						height: auto;
+					}
+				}
+			}
+		}
 	}
 }

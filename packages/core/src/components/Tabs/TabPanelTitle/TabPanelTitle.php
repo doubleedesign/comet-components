@@ -12,7 +12,8 @@ class TabPanelTitle extends TextElement {
 			$content, '
 			components.Tabs.TabPanelTitle.tab-panel-title'
 		);
-		$this->anchor = substr(Utils::kebab_case(strip_tags($content)), 0, 15);
+
+		$this->anchor = Utils::kebab_case(Utils::get_first_phrase_from_html_string($content));
 	}
 
 	public function get_anchor(): string {
