@@ -1249,6 +1249,13 @@ EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
 defineJQueryPlugin(Tab);
 
 const triggerTabList = document.querySelectorAll('[role="tab"]');
+
+// On page load, show the first tab
+if (triggerTabList.length) {
+	const firstTab = new Tab(triggerTabList[0]);
+	firstTab.show();
+}
+
 triggerTabList.forEach(triggerEl => {
 	const tabTrigger = new Tab(triggerEl);
 

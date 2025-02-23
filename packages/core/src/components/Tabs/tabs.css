@@ -1,6 +1,10 @@
 .tabs {
   margin-bottom: var(--spacing-lg);
 }
+.tabs__tab-list {
+  margin: 0;
+  padding: 0;
+}
 .tabs__tab-list__item {
   display: block;
 }

@@ -6,7 +6,7 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/packages/core/build/dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/core/dist/dist.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
