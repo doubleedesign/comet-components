@@ -53,6 +53,7 @@
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/composer" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
+    <content url="file://$MODULE_DIR$/packages/core/build" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

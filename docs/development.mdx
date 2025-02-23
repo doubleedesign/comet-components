@@ -38,25 +38,14 @@ on [PHP, Composer, Node, and Sass setup in this document](./notes/windows.md).
 ## Quick start
 
 1. Clone the repository from GitHub
-2. Refresh dependencies, autoloading, and symlinks: (**Note:** These run PowerShell scripts under the hood)
+2. Install dependencies, refresh autoloading, and redo symlinks:
 
 ```bash
-# Composer dependencies and autoloading
-npm run refresh:composer
+npm run refresh:all
 ```
-```bash
-# Symlink component assets (e.g., CSS) to the browser testing assets directory
-npm run refresh:symlinks
-```
-```bash
-# Both
-npm run refresh
-```
-3. Install Node dependencies
-```bash
-npm install
-```
-4. Run the local web server and Storybook (at the same time i.e. two terminal windows) to see what you're working with!
+See Appendix 1 for more options if you don't need to do a full refresh.
+
+3. Run the local web server and Storybook (at the same time i.e. two terminal windows) to see what you're working with!
 ```bash
 npm run test:server
 ```
@@ -78,14 +67,12 @@ with the desired component name and type. Valid types are `simple`, `complex`, a
 npm run generate component -- --name=example --type=simple
 ```
 
-2. Add the SCSS file to `blocks.scss` in the WordPress plugin and [run Sass](./notes/sass.md) to compile it.[^1]
-3. Update the symlinks so the local web server/Storybook can access the CSS file.
-```bash
-npm run refresh:symlinks
-```
-4. Add a file to `./test/browser/components` with a sample usage of the component. Add handling for `$_GET` parameters
+2. Add the SCSS file to `blocks.scss` or `template-parts.scss` (depending on what it is) in the WordPress plugin and [run Sass](./notes/sass.md) to compile it.[^1]
+3. If you add a custom front-end JavaScript file, add it to `rollup.index.js` in the Core package and run Rollup (`npm run build`) to update the bundle.
+4. Update the symlinks so the local web server/Storybook can access the CSS file: `npm run refresh:symlinks`
+5. Add a file to `./test/browser/components` with a sample usage of the component. Add handling for `$_GET` parameters
 to allow for different attributes to be tested.
-5. Create a Storybook file in `./test/browser/stories`. // TODO - I plan on adding boilerplate generation of this too.
+6. Create a Storybook file in `./test/browser/stories`. // TODO - I plan on adding boilerplate generation of this too.
 
 ### Check for expected files
 
@@ -93,74 +80,69 @@ to allow for different attributes to be tested.
 php ./scripts/healthcheck.php
 ```
 
+### Compile assets in the Core package
+
+#### CLI
+
+Bundle component JS and its dependencies into a single file using Rollup:
+
+```bash
+npm run build
+```
+
+Compile a CSS file (or the global file) using Sass (replace `input.scss` and `output.css` with the actual filenames):
+
+```bash
+sass input.scss:output.css
+```
+
+#### PHPStorm file watchers
+
+See the [PHPStorm file watcher](./notes/phpstorm.md#sass-file-watcher) notes for information on how to set up watchers to automatically compile SCSS and bundle JS on file save.
+
+
 [^1]: Historically, I
 always used Gulp with a plugin to import all component SCSS using a glob pattern, but because `@import` is being
 deprecated in Sass that approach's days are numbered.
 
-### Automated tests
+---
+## Automated tests
 
 See [testing notes](./notes/testing.md) for more information.
 
-### Appendix 1: CLI command quick reference
+---
+## Appendix 1: CLI command quick reference
 
-Note: Composer commands need to be run in each relevant package folder that has a `composer.json` file.
+### Dependencies
 
-Refresh Composer autoloader after adding new classes:
+#### Convenience scripts
 
-```bash
-composer dump-autoload -o
-```
+Run these from the root of the project.
 
-Install Composer dependencies (after a fresh clone of the project):
+| Command                       | Description                                                                                                  |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `npm run refresh:composer`    | Refresh Composer dependencies and autoloading for the root and all packages                                  |
+| `npm run refresh:npm`         | Run `npm install` in the root and all packages, and `rollup` in packages that use it                         |
+| `npm run refresh:symlinks`    | Refresh symlinks for the local web server and Storybook                                                      |
+| `npm run refresh:all`         | Install/update Composer and NPM dependencies in the root and all packages + relink all symlinks              |
+| `npm run refresh:autoload`    | Run `composer dump-autoload -o` for the root and all packages (skip updating dependencies)                   |
+| `npm run refresh:npmpackages` | Run `npm install` and `rollup` in the packages only (skips installing/updating root dev deps like Storybook) |
+| `npm run test:server`         | Run the local web server for component demos                                                                 |
+| `npm run test:storybook`      | Run Storybook for component demos                                                                            |
 
-```bash
-composer install
-```
+#### Raw commands
 
-Update Composer dependencies (after a pull from the repository or other changes to `composer.json`):
+These commands need to be run in the relevant folder. Running in the root will only run the command for the root, not the packages. `cd` into the package folder first if you want to run these for a package.
 
-```bash
-composer update
-```
+| Command                     | Description                                                                                                                                                                    |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `composer install`          | Install Composer dependencies as per `composer.json`                                                                                                                           |
+| `composer update`           | Update Composer dependencies as per `composer.json`                                                                                                                            |
+| `composer dump-autoload -o` | Refresh Composer autoloader after adding new dependencies or classes                                                                                                           |
+| `npm install`               | Install all NPM dependencies as per `package.json`                                                                                                                             |
+| `npm run build`             | Run Rollup to compile JS using the package's `rollup.config.js`. For example, for the `core` package this bundles all component JS files and their imports into a single file. |
 
-Run all Composer update and autoload commands for the root and packages at once:
-
-```bash
-npm run refresh:composer
-```
-
-```bash
-powershell.exe -File scripts\refresh.ps1
-```
-
-For autoload only (don't update packages):
-
-```bash
-npm run refresh:autoload
-```
-
-```bash
-powershell.exe -File scripts\refresh.ps1 -autoload
-```
-
-
-Install or update Node dependencies:
-
-```bash
-npm install
-```
-
-Run basic local web server to view/work with isolated component demos:
-
-```bash
-npm run test:server
-```
-
-Run Storybook for a more robust and detailed browser demo/testing environment (note: server needs to be running):
-
-```bash
-npm run test:storybook
-```
+### Component generation
 
 Generate a new component (example):
 

@@ -7,7 +7,9 @@
 2. [Xdebug](#xdebug)
 3. [PHPUnit](#phpunit)
 4. [Node](#node)
-5. [SASS file watcher](#sass-file-watcher)
+5. [File watchers](#file-watchers)
+    - [SASS](#sass)
+    -
 6. [Linting and formatting](#linting-and-formatting)
     - [PHP - PHPStorm code style settings](#php---phpstorm-formatting)
     - [JavaScript and TypeScript - ESLint](#javascript-and-typescript---eslint)
@@ -60,7 +62,12 @@ You can find the setting for this in Settings > Languages & Frameworks > Node.js
 
 ---
 
-## SASS file watcher
+## File watchers
+
+**Note:** These configurations are included in this repository (`.idea/watcherTasks.xml`) so it _should_ all be there
+already.
+
+### SASS
 
 If you have installed Sass globally on your machine, you can set up a file watcher in PHPStorm to compile your SCSS to
 matching CSS files. This is particularly useful if using pure Dart Sass installed via Chocolatey in Windows. (Also, it's
@@ -72,12 +79,26 @@ also find the configuration in `File > Settings > Tools > File Watchers`. An exa
 ![Sass file watcher](./images/phpstorm-scss-filewatcher.png)
 
 At the time of writing this, I have two watchers set up:
+
 1. To compile the core package's individual components' SCSS files to CSS files in the same directory
-2. To compile the `blocks.scss` file in the WordPress plugin package, which imports files from the core package; the watcher also watches those.
+2. To compile the `blocks.scss` file in the WordPress plugin package, which imports files from the core package; the
+   watcher also watches those.
 
-The difference between the two is that the core one is scoped to a custom scope of just that package folder (you can create this under "Files to watch -> Scope -> click the 3 dots), whereas the WordPress plugin one is scoped to the entire project so that the core package's files are also watched.
+The difference between the two is that the core one is scoped to a custom scope of just that package folder (you can
+create this under "Files to watch -> Scope -> click the 3 dots), whereas the WordPress plugin one is scoped to the
+entire project so that the core package's files are also watched.
 
-These configurations are included in this repository (`.idea/watcherTasks.xml`) so it _should_ all be there already.
+### Rollup
+
+If you are working on the core package, you can set up a file watcher to bundle the component JS files into a single
+file automatically on save.
+
+In `File > Settings > Tools > File Watchers`:
+
+![Rollup file watcher](./images/phpstorm-rollup-filewatcher.png)
+
+Note: If you add a new JS file, you need to add it to `rollup.index.js` so that Rollup knows to include it in the
+bundle.
 
 ---
 

@@ -41,5 +41,25 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="-c" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="js" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Rollup - Core" />
+      <option name="output" value="$ProjectFileDir$/packages/core/dist/dist.js" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$ProjectFileDir$/packages/core/node_modules/.bin/rollup" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Core package" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$/packages/core" />
+      <envs />
+    </TaskOptions>
   </component>
 </project>

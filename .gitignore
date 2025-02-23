@@ -6,6 +6,7 @@ vendor/*
 /test/coverage/
 /cache
 !dist
+!packages/core/dist
 packages/**/vendor
 packages/**/node_modules
 packages/core/cache

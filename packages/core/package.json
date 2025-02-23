@@ -1,0 +1,14 @@
+{
+	"name": "comet-components-core",
+	"version": "0.0.1",
+	"type": "module",
+	"description": "",
+	"author": "Leesa Ward",
+	"devDependencies": {
+		"@rollup/plugin-node-resolve": "^16.0.0",
+		"rollup": "^4.34.8"
+	},
+	"scripts": {
+		"build": "rollup -c"
+	}
+}

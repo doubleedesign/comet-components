@@ -13,10 +13,12 @@
 		"generate:json": "php scripts/generate-json-defs.php",
 		"generate:stories": "php scripts/generate-stories.php",
 		"generate-from:wp": "node --import ./scripts/loader.mjs ./scripts/generate-from-wp-blocks.ts",
-		"refresh:composer": "powershell.exe -File scripts/refresh.ps1",
+		"refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
+		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
 		"refresh:symlinks": "powershell.exe -File scripts/symlinks.ps1",
-		"refresh": "npm run refresh:composer && npm run refresh:symlinks",
-		"refresh:autoload": "npm run refresh:composer -- -autoload"
+		"refresh:autoload": "npm run refresh:composer -- -autoload",
+		"refresh:npmpackages": "npm run refresh:npm -- -packagesOnly",
+		"refresh:all": "npm run refresh:composer && npm run refresh:npm && npm run refresh:symlinks"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",

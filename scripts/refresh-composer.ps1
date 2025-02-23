@@ -2,7 +2,7 @@ param (
 	[switch]$autoload
 )
 
-Write-Host "Starting refresh script..."
+Write-Host "Starting Composer refresh script"
 
 # Function to run composer commands in a directory
 function Run-Composer {
