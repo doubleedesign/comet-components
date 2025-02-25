@@ -10,6 +10,10 @@
 		padding: var(--spacing-md);
 	}
 
+	.container > & {
+		padding-inline: 0;
+	}
+
 	&:has(.columns__column--has-own-width) {
 		display: flex;
 		gap: var(--spacing-sm);
@@ -37,7 +41,7 @@
 		justify-content: flex-end;
 	}
 
-	&__column {
+	.column {
 		min-width: 0; // prevents overflowing content from widening the column
 
 		&:not(&--has-own-width) {
