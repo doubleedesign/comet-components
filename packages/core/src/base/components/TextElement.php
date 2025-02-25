@@ -4,21 +4,18 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([...Settings::BLOCK_PHRASING_ELEMENTS, ...Settings::INLINE_PHRASING_ELEMENTS])]
 #[DefaultTag(Tag::SPAN)]
 abstract class TextElement extends Renderable {
+	use TextAlign;
 
 	/**
 	 * @var string $content
 	 * @description Plain text or basic HTML
 	 */
 	protected string $content;
-	/**
-	 * @var Alignment|null $textAlign
-	 */
-	protected ?Alignment $textAlign = Alignment::MATCH_PARENT;
 
 	function __construct(array $attributes, string $content, string $bladeFile) {
 		parent::__construct($attributes, $bladeFile);
 		$this->content = $content;
-		$this->textAlign = isset($attributes['textAlign']) ? Alignment::tryFrom($attributes['textAlign']) : null;
+		$this->set_text_align_from_attrs($attributes);
 	}
 
 	/**
@@ -27,13 +24,10 @@ abstract class TextElement extends Renderable {
 	 * @return array<string, string>
 	 */
 	function get_inline_styles(): array {
-		$styles = [];
-
-		if ($this->textAlign) {
-			$styles['text-align'] = $this->textAlign->value;
-		}
-
-		return $styles;
+		return array_merge(
+			parent::get_inline_styles(),
+			$this->textAlign ? ['text-align' => $this->textAlign->value] : [],
+		);
 	}
 
 	/**
