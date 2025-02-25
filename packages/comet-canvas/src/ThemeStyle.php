@@ -1,6 +1,5 @@
 <?php
 namespace Doubleedesign\CometCanvas;
-
 use WP_Theme_JSON_Data;
 
 class ThemeStyle {
@@ -15,8 +14,8 @@ class ThemeStyle {
 		add_action('admin_head', [$this, 'add_css_variables_to_head'], 25);
 
 		if(is_admin()) {
-			add_action('enqueue_block_assets', [$this, 'enqueue_theme_stylesheets'], 20);
 			add_action('enqueue_block_assets', [$this, 'add_css_variables_to_block_editor'], 25);
+			add_action('enqueue_block_assets', [$this, 'enqueue_theme_stylesheets'], 30);
 		}
 	}
 
