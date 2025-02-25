@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
 class File extends Renderable {
 	use ColorTheme;
 
