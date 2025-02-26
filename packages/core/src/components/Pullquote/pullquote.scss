@@ -1,3 +1,53 @@
-.pullquote {
+@use '../variables' as *;
+@use '../functions' as *;
 
+.pullquote {
+	text-align: center;
+	padding: var(--spacing-md);
+	margin-block: var(--spacing-lg);
+	position: relative;
+
+	&:before, &:after {
+		font-family: var(--font-family-accent);
+		font-size: 12rem;
+		position: absolute;
+		height: 4rem;
+	}
+
+	&:before {
+		content: open-quote;
+		top: 0;
+		left: 0;
+		transform: rotate(15deg) translateY(-2.5rem) translateX(-1rem);
+		transform-origin: center center;
+	}
+
+	&:after {
+		content: close-quote;
+		bottom: var(--spacing-lg);
+		transform: rotate(15deg) translateX(1rem);
+		right: 0;
+	}
+
+	@each $name, $color in $colors {
+		&[data-color-theme=#{$name}] {
+			color: var(--color-#{$name});
+			background: lighten($name, 95%);
+
+			&:before, &:after {
+				color: lighten($name, 75%);
+			}
+		}
+	}
+
+	p {
+		font-weight:  var(--font-weight-bold);
+		font-size: 1.125rem;
+		position: relative;
+		z-index: 10;
+	}
+
+	cite {
+		font-size: var(--font-size-sm);
+	}
 }

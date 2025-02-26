@@ -1,3 +1,92 @@
-
+.pullquote {
+  text-align: center;
+  padding: var(--spacing-md);
+  margin-block: var(--spacing-lg);
+  position: relative;
+}
+.pullquote:before, .pullquote:after {
+  font-family: var(--font-family-accent);
+  font-size: 12rem;
+  position: absolute;
+  height: 4rem;
+}
+.pullquote:before {
+  content: open-quote;
+  top: 0;
+  left: 0;
+  transform: rotate(15deg) translateY(-2.5rem) translateX(-1rem);
+  transform-origin: center center;
+}
+.pullquote:after {
+  content: close-quote;
+  bottom: var(--spacing-lg);
+  transform: rotate(15deg) translateX(1rem);
+  right: 0;
+}
+.pullquote[data-color-theme=primary] {
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 5%, white);
+}
+.pullquote[data-color-theme=primary]:before, .pullquote[data-color-theme=primary]:after {
+  color: color-mix(in srgb, var(--color-primary) 25%, white);
+}
+.pullquote[data-color-theme=secondary] {
+  color: var(--color-secondary);
+  background: color-mix(in srgb, var(--color-secondary) 5%, white);
+}
+.pullquote[data-color-theme=secondary]:before, .pullquote[data-color-theme=secondary]:after {
+  color: color-mix(in srgb, var(--color-secondary) 25%, white);
+}
+.pullquote[data-color-theme=accent] {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 5%, white);
+}
+.pullquote[data-color-theme=accent]:before, .pullquote[data-color-theme=accent]:after {
+  color: color-mix(in srgb, var(--color-accent) 25%, white);
+}
+.pullquote[data-color-theme=warning] {
+  color: var(--color-warning);
+  background: color-mix(in srgb, var(--color-warning) 5%, white);
+}
+.pullquote[data-color-theme=warning]:before, .pullquote[data-color-theme=warning]:after {
+  color: color-mix(in srgb, var(--color-warning) 25%, white);
+}
+.pullquote[data-color-theme=error] {
+  color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 5%, white);
+}
+.pullquote[data-color-theme=error]:before, .pullquote[data-color-theme=error]:after {
+  color: color-mix(in srgb, var(--color-error) 25%, white);
+}
+.pullquote[data-color-theme=light] {
+  color: var(--color-light);
+  background: color-mix(in srgb, var(--color-light) 5%, white);
+}
+.pullquote[data-color-theme=light]:before, .pullquote[data-color-theme=light]:after {
+  color: color-mix(in srgb, var(--color-light) 25%, white);
+}
+.pullquote[data-color-theme=dark] {
+  color: var(--color-dark);
+  background: color-mix(in srgb, var(--color-dark) 5%, white);
+}
+.pullquote[data-color-theme=dark]:before, .pullquote[data-color-theme=dark]:after {
+  color: color-mix(in srgb, var(--color-dark) 25%, white);
+}
+.pullquote[data-color-theme=white] {
+  color: var(--color-white);
+  background: color-mix(in srgb, var(--color-white) 5%, white);
+}
+.pullquote[data-color-theme=white]:before, .pullquote[data-color-theme=white]:after {
+  color: color-mix(in srgb, var(--color-white) 25%, white);
+}
+.pullquote p {
+  font-weight: var(--font-weight-bold);
+  font-size: 1.125rem;
+  position: relative;
+  z-index: 10;
+}
+.pullquote cite {
+  font-size: var(--font-size-sm);
+}
 
 /*# sourceMappingURL=pullquote.css.map */
