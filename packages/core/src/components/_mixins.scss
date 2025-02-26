@@ -11,3 +11,9 @@ $widths: (
 		@content;
 	}
 }
+
+@mixin media-breakpoint-up($widthName) {
+	@media (min-width: #{map-get($widths, $widthName)}) {
+		@content;
+	}
+}

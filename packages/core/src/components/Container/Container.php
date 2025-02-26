@@ -7,9 +7,15 @@ class Container extends UIComponent {
 	use LayoutContainerSize;
 	use BackgroundColor;
 
+	protected ?bool $withWrapper = true;
+	protected ?string $gradient; // TODO: Not limited by a trait because implementations could have all kinds of gradients they handle themselves
+
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Container.container');
 		$this->set_size_from_attrs($attributes);
+		$this->set_background_color_from_attrs($attributes);
+		$this->gradient = $attributes['gradient'] ?? null;
+		$this->withWrapper = $attributes['withWrapper'] ?? true;
 	}
 
 	protected function get_filtered_classes(): array {
@@ -21,22 +27,33 @@ class Container extends UIComponent {
 			array_push($classes, "container--{$this->size->value}");
 		}
 
+		return array_unique($classes);
+	}
+
+	protected function get_outer_classes(): array {
+		$classes = ['page-section'];
+
 		if (isset($this->backgroundColor)) {
-			$classes[] = 'bg-' . $this->backgroundColor->value;
+			array_push($classes, 'bg-' . $this->backgroundColor->value);
+		}
+
+		if (isset($this->gradient)) {
+			array_push($classes, 'bg-gradient-' . $this->gradient);
 		}
 
 		return $classes;
 	}
 
-
 	function render(): void {
 		$blade = BladeService::getInstance();
 
 		echo $blade->make($this->bladeFile, [
-			'tag'        => $this->tagName->value,
-			'classes'    => $this->get_filtered_classes_string(),
-			'attributes' => $this->get_html_attributes(),
-			'children'   => $this->innerComponents
+			'tag'          => $this->tagName->value,
+			'withWrapper'  => $this->withWrapper,
+			'outerClasses' => $this->get_outer_classes(),
+			'classes'      => $this->get_filtered_classes_string(),
+			'attributes'   => $this->get_html_attributes(),
+			'children'     => $this->innerComponents
 		])->render();
 	}
 }

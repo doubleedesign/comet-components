@@ -29,6 +29,8 @@ class PageHeader extends UIComponent {
 				// Attributes
 				[
 					'size' => $this->size->value,
+					'withWrapper' => false,
+					'tagName' => Tag::DIV->value,
 				],
 				// Inner components
 				array_merge(

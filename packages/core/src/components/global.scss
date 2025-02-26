@@ -17,6 +17,7 @@
 	--width-wide: #{map-get($widths, 'wide')};
 	--width-contained: #{map-get($widths, 'contained')};
 	--width-narrow: #{map-get($widths, 'narrow')};
+	--width-small: #{map-get($widths, 'small')};
 
 	--spacing-xxs: 0.25rem;
 	/* Augmented fourth scale - 1.414 */
@@ -54,6 +55,20 @@ body {
 	.bg-#{$name} {
 		background-color: var(--color-#{$name});
 		color: var(--readable-color-#{$name});
+	}
+
+	.bg-#{$name} + [class*="bg-gradient-#{$name}"] {
+		padding-block-start: 0;
+	}
+
+	[class*="bg-gradient-"][class*="-#{$name}"] + .bg-#{$name} {
+		padding-block-start: 0;
+	}
+
+	@each $name2, $color2 in $colors {
+		.bg-gradient-#{$name}-#{$name2} {
+			background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
+		}
 	}
 
 	.color-#{$name} {

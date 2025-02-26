@@ -44,6 +44,7 @@
   --width-wide: 1440px;
   --width-contained: 1140px;
   --width-narrow: 940px;
+  --width-small: 600px;
   --spacing-xxs: 0.25rem;
   /* Augmented fourth scale - 1.414 */
   --spacing-xs: 0.5rem;
@@ -78,6 +79,46 @@ body {
   color: var(--readable-color-primary);
 }
 
+.bg-primary + [class*=bg-gradient-primary] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-primary] + .bg-primary {
+  padding-block-start: 0;
+}
+
+.bg-gradient-primary-primary {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-primary-secondary {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-primary-accent {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-primary-warning {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-primary-error {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-primary-light {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-primary-dark {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-primary-white {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-white) 50%, var(--color-white) 100%);
+}
+
 .color-primary {
   color: var(--color-primary);
 }
@@ -85,6 +126,46 @@ body {
 .bg-secondary {
   background-color: var(--color-secondary);
   color: var(--readable-color-secondary);
+}
+
+.bg-secondary + [class*=bg-gradient-secondary] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-secondary] + .bg-secondary {
+  padding-block-start: 0;
+}
+
+.bg-gradient-secondary-primary {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-secondary-secondary {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-secondary-accent {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-secondary-warning {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-secondary-error {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-secondary-light {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-secondary-dark {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-secondary-white {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
 .color-secondary {
@@ -96,6 +177,46 @@ body {
   color: var(--readable-color-accent);
 }
 
+.bg-accent + [class*=bg-gradient-accent] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-accent] + .bg-accent {
+  padding-block-start: 0;
+}
+
+.bg-gradient-accent-primary {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-accent-secondary {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-accent-accent {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-accent-warning {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-accent-error {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-accent-light {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-accent-dark {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-accent-white {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-white) 50%, var(--color-white) 100%);
+}
+
 .color-accent {
   color: var(--color-accent);
 }
@@ -103,6 +224,46 @@ body {
 .bg-warning {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
+}
+
+.bg-warning + [class*=bg-gradient-warning] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-warning] + .bg-warning {
+  padding-block-start: 0;
+}
+
+.bg-gradient-warning-primary {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-warning-secondary {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-warning-accent {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-warning-warning {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-warning-error {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-warning-light {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-warning-dark {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-warning-white {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
 .color-warning {
@@ -114,6 +275,46 @@ body {
   color: var(--readable-color-error);
 }
 
+.bg-error + [class*=bg-gradient-error] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-error] + .bg-error {
+  padding-block-start: 0;
+}
+
+.bg-gradient-error-primary {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-error-secondary {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-error-accent {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-error-warning {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-error-error {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-error-light {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-error-dark {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-error-white {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-white) 50%, var(--color-white) 100%);
+}
+
 .color-error {
   color: var(--color-error);
 }
@@ -121,6 +322,46 @@ body {
 .bg-light {
   background-color: var(--color-light);
   color: var(--readable-color-light);
+}
+
+.bg-light + [class*=bg-gradient-light] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-light] + .bg-light {
+  padding-block-start: 0;
+}
+
+.bg-gradient-light-primary {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-light-secondary {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-light-accent {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-light-warning {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-light-error {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-light-light {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-light-dark {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-light-white {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
 .color-light {
@@ -132,6 +373,46 @@ body {
   color: var(--readable-color-dark);
 }
 
+.bg-dark + [class*=bg-gradient-dark] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-dark] + .bg-dark {
+  padding-block-start: 0;
+}
+
+.bg-gradient-dark-primary {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-dark-secondary {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-dark-accent {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-dark-warning {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-dark-error {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-dark-light {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-dark-dark {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-dark-white {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-white) 50%, var(--color-white) 100%);
+}
+
 .color-dark {
   color: var(--color-dark);
 }
@@ -139,6 +420,46 @@ body {
 .bg-white {
   background-color: var(--color-white);
   color: var(--readable-color-white);
+}
+
+.bg-white + [class*=bg-gradient-white] {
+  padding-block-start: 0;
+}
+
+[class*=bg-gradient-][class*=-white] + .bg-white {
+  padding-block-start: 0;
+}
+
+.bg-gradient-white-primary {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+.bg-gradient-white-secondary {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+.bg-gradient-white-accent {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+.bg-gradient-white-warning {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+.bg-gradient-white-error {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+.bg-gradient-white-light {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+.bg-gradient-white-dark {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+.bg-gradient-white-white {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
 .color-white {

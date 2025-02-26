@@ -22,6 +22,7 @@ class SiteFooter extends UIComponent {
 				// Attributes
 				[
 					'size' => $this->size->value,
+					'withWrapper' => false
 				],
 				// Inner components
 				array_merge(

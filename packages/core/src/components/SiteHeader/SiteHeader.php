@@ -32,6 +32,7 @@ class SiteHeader extends LayoutComponent {
 				[
 					'size' => $this->size->value,
 					'tagName' => 'div',
+					'withWrapper' => false,
 				],
 				// Inner components
 				array_merge(

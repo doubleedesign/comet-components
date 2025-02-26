@@ -1,13 +1,43 @@
+@use '../mixins' as *;
+@use '../variables' as *;
+
+.page-section {
+	padding-inline: var(--spacing-sm);
+	padding-block: var(--spacing-md);
+
+	@include media-breakpoint-up('narrow') {
+		padding-block: var(--spacing-xl);
+	}
+
+	@include media-breakpoint-up('wide') {
+		padding-block: var(--spacing-xxl);
+	}
+
+	// Handle same colour adjacent sections
+	@each $name, $color in $colors {
+		&.bg-#{$name} + &.bg-#{$name} {
+			padding-top: 0;
+		}
+	}
+
+	// When neither section has a bg class, do the same as if they had the same background colour class
+	&:not([class*="bg-"]) + &:not([class*="bg-"]) {
+		padding-top: 0;
+	}
+
+	// When directly following PageHeader with white background, also remove top padding
+	+ &:not([class*="bg-"]) {
+		.page-header.bg-white & {
+			padding-top: 0;
+		}
+	}
+}
+
 .container {
 	margin: 0 auto;
 	container-type: inline-size;
 	width: 100%;
 	max-width: var(--width-contained);
-	padding-inline: var(--spacing-sm);
-
-	&[class*="bg-"] {
-		padding-block: var(--spacing-sm);
-	}
 
 	&--fullwidth {
 		max-width: 100vw;
