@@ -1,13 +1,7 @@
 .columns {
   display: grid;
-  grid-gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
-}
-@container (min-width: 960px) {
-  .columns {
-    grid-gap: var(--spacing-md);
-    padding: var(--spacing-md);
-  }
+  grid-gap: var(--spacing-lg);
+  padding-inline: var(--spacing-md);
 }
 .container > .columns {
   padding-inline: 0;

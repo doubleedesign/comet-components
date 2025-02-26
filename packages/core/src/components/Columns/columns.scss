@@ -2,13 +2,8 @@
 
 .columns {
 	display: grid;
-	grid-gap: var(--spacing-sm);
-	padding: var(--spacing-sm);
-
-	@include container-width-up('narrow') {
-		grid-gap: var(--spacing-md);
-		padding: var(--spacing-md);
-	}
+	grid-gap: var(--spacing-lg);
+	padding-inline: var(--spacing-md);
 
 	.container > & {
 		padding-inline: 0;

@@ -1,0 +1,65 @@
+@use '../variables' as *;
+
+.link-group {
+
+	&__link {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: var(--spacing-sm);
+		margin-block-end: var(--spacing-sm);
+		text-decoration: none;
+		padding: var(--spacing-sm);
+		transition: background 0.2s linear;
+
+		@each $name, $color in $colors {
+			[data-color-theme=#{$name}] &,
+			&[data-color-theme=#{$name}] {
+				background: color-mix(in srgb, var(--color-#{$name}) 10%, white);
+
+				&:hover, &:focus, &:active {
+					background: color-mix(in srgb, var(--color-#{$name}) 20%, white);
+				}
+			}
+		}
+
+		&__icon {
+			font-size: 2rem;
+
+			@each $name, $color in $colors {
+				[data-color-theme=#{$name}] & {
+					color: var(--color-#{$name});
+				}
+			}
+		}
+
+		&__content {
+
+			&__title {
+				font-weight: var(--font-weight-bold);
+				font-size: 1.125rem;
+				display: block;
+
+				@each $name, $color in $colors {
+					[data-color-theme=#{$name}] & {
+						color: var(--color-#{$name});
+					}
+				}
+			}
+
+			&__description {
+			}
+
+			&__meta {
+				margin-block-start: var(--spacing-xxs);
+				display: flex;
+				gap: var(--spacing-sm);
+				justify-content: flex-end;
+
+				&__size,
+				&__date {
+					font-size: var(--font-size-sm);
+				}
+			}
+		}
+	}
+}
