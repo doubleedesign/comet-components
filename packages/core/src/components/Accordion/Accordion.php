@@ -11,7 +11,7 @@ class Accordion extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Accordion.accordion');
-		$this->set_color_theme_from_attrs($attributes);
+		$this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
 	}
 
 	function get_html_attributes(): array {

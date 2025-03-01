@@ -1,16 +1,17 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
 class LinkGroup extends UIComponent {
 	use ColorTheme;
 
 	/**
 	 * @param array $attributes
-	 * @param array<File|array<string,string> $links - Either an array of Link objects or an array of associative arrays corresponding to Link fields
+	 * @param array<Link|array<string,string> $links - Either an array of Link objects or an array of associative arrays corresponding to Link fields
 	 */
-
     function __construct(array $attributes, array $links) {
-	    $this->set_color_theme_from_attrs($attributes);
+	    $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
 	    $innerComponents = array_map(function($link) {
 		    if ($link instanceof Link) {
 			    return $link;

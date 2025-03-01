@@ -15,7 +15,7 @@ class ButtonGroup extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.ButtonGroup.button-group');
-		$this->set_orientation_from_attrs($attributes);
+		$this->set_orientation_from_attrs($attributes, Orientation::HORIZONTAL);
 		$this->set_halign_from_attrs($attributes);
 	}
 

@@ -1,14 +1,13 @@
 {
-    "name": "Callout",
-    "extends": "UIComponent",
+    "name": "File",
+    "extends": "Renderable",
     "abstract": false,
     "attributes": {
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "callout",
-                "callout--info"
+                "file"
             ],
             "inherited": true
         },
@@ -27,16 +26,19 @@
                 "dark",
                 "white"
             ],
-            "default": "info"
+            "default": "null"
         },
         "context": {
             "type": "string",
             "description": "The parent component or variant if contextually relevant",
             "inherited": true
         },
+        "description": {
+            "type": "string"
+        },
         "icon": {
             "type": "string",
-            "description": "Icon class name; if not set, defaults to one matching the colour theme"
+            "description": "Icon class name; if not set, defaults to one matching the file type"
         },
         "iconPrefix": {
             "type": "string",
@@ -48,6 +50,13 @@
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
+        },
+        "mimeType": {
+            "type": "string|mixed",
+            "description": "MIME type of the file"
+        },
+        "size": {
+            "type": "string"
         },
         "style": {
             "type": "array",
@@ -62,12 +71,16 @@
             ],
             "default": "div",
             "inherited": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "uploadDate": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string",
+            "required": true
         }
-    },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
     }
 }

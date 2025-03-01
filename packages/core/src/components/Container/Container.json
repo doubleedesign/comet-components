@@ -32,6 +32,10 @@
             "description": "The parent component or variant if contextually relevant",
             "inherited": true
         },
+        "gradient": {
+            "type": "string",
+            "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)"
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
@@ -63,6 +67,11 @@
             ],
             "default": "section",
             "inherited": true
+        },
+        "withWrapper": {
+            "type": "bool",
+            "description": "Whether to wrap the container element so that the background is full-width",
+            "default": "true"
         }
     },
     "innerComponents": {

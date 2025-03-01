@@ -1,5 +1,5 @@
 {
-    "name": "Callout",
+    "name": "LinkGroup",
     "extends": "UIComponent",
     "abstract": false,
     "attributes": {
@@ -7,8 +7,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "callout",
-                "callout--info"
+                "link-group"
             ],
             "inherited": true
         },
@@ -34,16 +33,6 @@
             "description": "The parent component or variant if contextually relevant",
             "inherited": true
         },
-        "icon": {
-            "type": "string",
-            "description": "Icon class name; if not set, defaults to one matching the colour theme"
-        },
-        "iconPrefix": {
-            "type": "string",
-            "description": "Icon prefix class name",
-            "required": true,
-            "default": "fa-solid"
-        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
@@ -64,9 +53,9 @@
             "inherited": true
         }
     },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
+    "links": {
+        "type": "array<Link|array<string,string>",
+        "description": "Either an array of Link objects or an array of associative arrays corresponding to Link fields",
         "required": true,
         "inherited": true
     }

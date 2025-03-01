@@ -16,6 +16,14 @@
             "description": "The parent component or variant if contextually relevant",
             "inherited": true
         },
+        "icon": {
+            "type": "string",
+            "description": "Icon class name; if not set, defaults to one according to whether the link target is set to open in a new tab or not"
+        },
+        "iconPrefix": {
+            "type": "string",
+            "description": "Icon prefix class name"
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",

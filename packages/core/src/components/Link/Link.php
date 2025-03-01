@@ -7,12 +7,12 @@ class Link extends Renderable {
 	protected string $content;
 	/**
 	 * @var ?string $iconPrefix
-	 * @description Icon prefix class name.
+	 * @description Icon prefix class name
 	 */
 	protected ?string $iconPrefix = null;
 	/**
 	 * @var ?string $icon
-	 * @description Icon class name. If not set, defaults to one matching the file type.
+	 * @description Icon class name; if not set, defaults to one according to whether the link target is set to open in a new tab or not
 	 */
 	protected ?string $icon = null;
 

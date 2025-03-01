@@ -18,18 +18,18 @@ class File extends Renderable {
 	protected ?string $uploadDate;
 	/**
 	 * @var string $iconPrefix
-	 * @description Icon prefix class name.
+	 * @description Icon prefix class name
 	 */
 	protected string $iconPrefix = 'fa-solid';
 	/**
 	 * @var ?string $icon
-	 * @description Icon class name. If not set, defaults to one matching the file type.
+	 * @description Icon class name; if not set, defaults to one matching the file type
 	 */
 	protected ?string $icon;
 
 
 	function __construct(array $attributes) {
-		$this->set_color_theme_from_attrs($attributes);
+		$this->set_color_theme_from_attrs($attributes, null);
 		$this->url = $attributes['url'] ?? '';
 		$this->title = $attributes['title'] ?? 'Untitled file';
 		$this->description = $attributes['description'] ?? null;

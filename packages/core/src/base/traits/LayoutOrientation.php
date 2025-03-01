@@ -6,11 +6,12 @@ trait LayoutOrientation {
 
 	/**
 	 * @param array $attributes
+	 * @param Orientation|null $default
 	 * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
 	 */
-	protected function set_orientation_from_attrs($attributes): void {
+	protected function set_orientation_from_attrs(array $attributes, Orientation|null $default = Orientation::VERTICAL): void {
 		// In WordPress, some blocks have $attributes['theSetting'] and some have $attributes['layout']['theSetting'] so we need to account for both
 		$orientation = $attributes['orientation'] ?? $attributes['layout']['orientation'] ?? null;
-		$this->orientation = isset($orientation) ? Orientation::tryFrom($orientation) : Orientation::VERTICAL;
+		$this->orientation = isset($orientation) ? Orientation::tryFrom($orientation) : $default;
 	}
 }

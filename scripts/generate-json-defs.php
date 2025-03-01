@@ -218,6 +218,63 @@ class ComponentClassesToJsonDefinitions {
 		return 'public';
 	}
 
+	/**
+	 * Extracts the default value from constructor calls to set_*_from_attrs methods
+	 *
+	 * @param ReflectionClass $class The class to analyze
+	 * @param string $propertyName The name of the property to find defaults for
+	 * @return string|null The default value or null if not found
+	 */
+	private function extractDefaultFromConstructor(ReflectionClass $class, string $propertyName): ?string {
+		if (!$class->hasMethod('__construct')) {
+			return null;
+		}
+
+		$constructor = $class->getMethod('__construct');
+		$filename = $constructor->getFileName();
+		$startLine = $constructor->getStartLine();
+		$endLine = $constructor->getEndLine();
+
+		if (!$filename) {
+			return null;
+		}
+
+		$fileContent = file_get_contents($filename);
+		$lines = explode("\n", $fileContent);
+		$constructorCode = implode("\n", array_slice($lines, $startLine - 1, $endLine - $startLine + 1));
+
+		// Map property names to their setter method patterns
+		$propertyToMethodMap = [
+			'colorTheme' => 'set_color_theme_from_attrs',
+			'size' => 'set_size_from_attrs',
+			'width' => 'set_width_from_attrs',
+			'alignment' => 'set_alignment_from_attrs',
+			'variant' => 'set_variant_from_attrs',
+			'background' => 'set_background_from_attrs',
+			'style' => 'set_style_from_attrs',
+			// Add more mappings as needed
+		];
+
+		// Get the method name for this property (or use a pattern for unknown properties)
+		$methodName = $propertyToMethodMap[$propertyName] ?? "set_{$propertyName}_from_attrs";
+
+		// Look for calls to the setter method with a default parameter
+		$pattern = '/\$this->' . preg_quote($methodName, '/') . '\s*\(\s*\$[^,]+\s*,\s*([^)]+)\)/i';
+
+		if (preg_match($pattern, $constructorCode, $matches)) {
+			$defaultValue = trim($matches[1]);
+
+			// Extract just the enum value if it's in the form EnumClass::VALUE
+			if (strpos($defaultValue, '::') !== false) {
+				$parts = explode('::', $defaultValue);
+				return trim($parts[1]);
+			}
+
+			return $defaultValue;
+		}
+
+		return null;
+	}
 
 	/**
 	 * Extracts the type of a property, including whether it's required, the default value, and the description.
@@ -242,6 +299,19 @@ class ComponentClassesToJsonDefinitions {
 		}
 		else if ($type->getName() === 'bool' && $defaultValue === true) {
 			$defaultValue = 'true';
+		}
+
+		// Special handling for properties that might have defaults set in from_attrs trait methods
+		$propertyName = $property->getName();
+		$knownTraitProperties = [
+			'colorTheme', 'backgroundColor', 'hAlign', 'vAlign', 'size', 'orientation', 'textAlign', 'textColor'
+		];
+
+		if (in_array($propertyName, $knownTraitProperties) || str_contains($propertyName, 'Theme')) {
+			$customDefault = $this->extractDefaultFromConstructor($this->currentClass, $propertyName);
+			if ($customDefault !== null) {
+				$defaultValue = strtolower($customDefault); // this assumes enum cases translate directly from uppercase cases to lowercase values
+			}
 		}
 
 		// If this is the $classes property, compute the actual default classes (e.g. the shortName or BEM name with context)

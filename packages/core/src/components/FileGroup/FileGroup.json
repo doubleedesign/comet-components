@@ -1,5 +1,5 @@
 {
-    "name": "Callout",
+    "name": "FileGroup",
     "extends": "UIComponent",
     "abstract": false,
     "attributes": {
@@ -7,8 +7,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "callout",
-                "callout--info"
+                "file-group"
             ],
             "inherited": true
         },
@@ -27,22 +26,12 @@
                 "dark",
                 "white"
             ],
-            "default": "info"
+            "default": "primary"
         },
         "context": {
             "type": "string",
             "description": "The parent component or variant if contextually relevant",
             "inherited": true
-        },
-        "icon": {
-            "type": "string",
-            "description": "Icon class name; if not set, defaults to one matching the colour theme"
-        },
-        "iconPrefix": {
-            "type": "string",
-            "description": "Icon prefix class name",
-            "required": true,
-            "default": "fa-solid"
         },
         "id": {
             "type": "string",
@@ -64,9 +53,9 @@
             "inherited": true
         }
     },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
+    "files": {
+        "type": "array<File|array<string,string>",
+        "description": "Either an array of File objects or an array of associative arrays corresponding to File fields",
         "required": true,
         "inherited": true
     }

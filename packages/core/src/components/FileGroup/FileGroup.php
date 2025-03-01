@@ -11,7 +11,7 @@ class FileGroup extends UIComponent {
 	 * @param array<File|array<string,string> $files - Either an array of File objects or an array of associative arrays corresponding to File fields
 	 */
     function __construct(array $attributes, array $files) {
-	    $this->set_color_theme_from_attrs($attributes);
+	    $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
 	    $innerComponents = array_map(function($file) {
 			if ($file instanceof File) {
 				return $file;

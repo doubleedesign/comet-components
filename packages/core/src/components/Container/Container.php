@@ -7,7 +7,16 @@ class Container extends UIComponent {
 	use LayoutContainerSize;
 	use BackgroundColor;
 
+	/**
+	 * @var bool|null $withWrapper
+	 * @description Whether to wrap the container element so that the background is full-width
+	 */
 	protected ?bool $withWrapper = true;
+
+	/**
+	 * @var string|null $gradient
+	 * @description Name of a gradient to use for the background (requires accompanying CSS to be defined)
+	 */
 	protected ?string $gradient; // TODO: Not limited by a trait because implementations could have all kinds of gradients they handle themselves
 
 	function __construct(array $attributes, array $innerComponents) {

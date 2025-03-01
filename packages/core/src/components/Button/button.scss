@@ -1,6 +1,6 @@
-@use '../../variables' as *;
-@use '../../mixins' as *;
-@use '../../functions' as *;
+@use '../variables' as *;
+@use '../mixins' as *;
+@use '../functions' as *;
 
 .button {
 	display: inline-block;

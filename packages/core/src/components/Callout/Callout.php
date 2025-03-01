@@ -8,19 +8,19 @@ class Callout extends UIComponent {
 
 	/**
 	 * @var string $iconPrefix
-	 * @description Icon prefix class name.
+	 * @description Icon prefix class name
 	 */
 	protected string $iconPrefix = 'fa-solid';
 
 	/**
 	 * @var ?string $icon
-	 * @description Icon class name. If not set, defaults to one matching the colour theme.
+	 * @description Icon class name; if not set, defaults to one matching the colour theme
 	 */
 	protected ?string $icon;
 
     function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Callout.callout');
-	    $this->set_color_theme_from_attrs($attributes);
+	    $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
 
 		if(isset($attributes['icon'])) {
 			$this->icon = $attributes['icon']; // TODO: Sanitise/validate input

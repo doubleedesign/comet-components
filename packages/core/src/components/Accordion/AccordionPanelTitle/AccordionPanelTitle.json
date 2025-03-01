@@ -44,7 +44,6 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
             "inherited": true
         }
     },
