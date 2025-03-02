@@ -4,12 +4,19 @@ param (
 
 Write-Host "Starting NPM refresh script"
 
-# Function to run composer commands in a directory
+# Function to run NPM commands in a directory
 function Run-NPM {
 	param (
 		[string]$directory,
 		[switch]$packagesOnly
 	)
+
+	# If there is no package.json file, skip this directory
+	if (-not (Test-Path "$directory\package.json")) {
+		Write-Host "No package.json file found in $directory. Skipping."
+		return
+	}
+
 	Write-Host "Running NPM commands in $directory"
 	Push-Location $directory
 
