@@ -1,0 +1,46 @@
+@use '../variables' as *;
+@use '../functions' as *;
+
+.icon-with-text {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: var(--spacing-sm);
+	padding-block: var(--spacing-xs);
+
+	&__icon {
+		width: 2rem;
+		min-width: 2rem;
+		flex-basis: 2rem;
+		overflow-x: hidden;
+
+		i, svg {
+			font-size: 2rem;
+		}
+
+		@each $name, $color in $colors {
+			[data-color-theme=#{$name}] & {
+				color: var(--color-#{$name});
+			}
+		}
+	}
+
+	&__content {
+		flex-grow: 1;
+		flex-basis: auto;
+		
+		p {
+			color: var(--color-primary);
+			line-height: 1.2;
+
+			span {
+				display: block;
+
+				&:first-child {
+					font-size: var(--font-size-sm);
+					color: lighten('dark', 20%);
+				}
+			}
+		}
+	}
+}
