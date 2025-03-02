@@ -138,7 +138,12 @@ abstract class Renderable {
 	 */
 	protected function get_filtered_classes(): array {
 		$current_classes = $this->classes;
-		$redundant_classes = ['is-style-default'];
+		$redundant_classes = [
+			'is-style-default',
+			// unwanted WordPress classes that are handled in other ways
+			'is-stacked-on-mobile',
+			'is-not-stacked-on-mobile'
+		];
 
 		$result = array_merge(
 			[$this->get_bem_name()],

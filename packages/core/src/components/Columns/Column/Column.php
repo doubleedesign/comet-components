@@ -18,8 +18,16 @@ class Column extends LayoutComponent {
 		$this->width = $attributes['width'] ?? null;
 	}
 
+	public function get_width() {
+		return $this->width;
+	}
+
+	public function set_width(string|null $width) {
+		$this->width = $width;
+	}
+
 	function get_filtered_classes(): array {
-		$classes = parent::get_filtered_classes();
+		$classes = array_merge([$this->shortName], parent::get_filtered_classes());
 
 		if(isset($this->width)) {
 			$classes[] = 'columns__column--has-own-width';

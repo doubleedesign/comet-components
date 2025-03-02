@@ -1,0 +1,21 @@
+.column {
+  min-width: 0;
+}
+.column--valign-start, .column--valign-center, .column--valign-end {
+  display: flex;
+  flex-direction: column;
+}
+.column--valign-start {
+  justify-content: flex-start;
+}
+.column--valign-center {
+  justify-content: center;
+}
+.column--valign-end {
+  justify-content: flex-end;
+}
+.column__inner {
+  display: flow-root;
+}
+
+/*# sourceMappingURL=column.css.map */
