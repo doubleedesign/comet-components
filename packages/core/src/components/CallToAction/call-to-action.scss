@@ -2,6 +2,11 @@
 
 .call-to-action {
 	padding: var(--spacing-lg);
+	text-align: center;
+
+	@include container-width-up('small') {
+		text-align: revert;
+	}
 
 	@include container-width-up('narrow') {
 		padding: var(--spacing-xl);

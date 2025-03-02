@@ -118,9 +118,17 @@ p, ul, ol {
 	}
 }
 
+ul, ol {
+	margin-inline-start: var(--spacing-md);
+}
+
 a {
 	transition: all 0.2s ease-in-out;
 	color: inherit;
+
+	&:hover, &:focus, &:active {
+		color: var(--color-secondary);
+	}
 }
 
 .is-style-accent {

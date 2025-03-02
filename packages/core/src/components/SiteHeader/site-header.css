@@ -19,6 +19,9 @@
   flex-grow: 1;
   padding-block: var(--spacing-lg);
 }
+.site-header__menu-list {
+  margin-inline: 0;
+}
 @container (min-width: 600px) {
   .site-header__menu-list {
     display: flex;
@@ -71,6 +74,7 @@
   min-width: 10rem;
   padding-block: var(--spacing-xxs);
   background: var(--color-primary);
+  margin-inline: 0;
 }
 .site-header__menu-list__item .menu-list__item {
   display: block;

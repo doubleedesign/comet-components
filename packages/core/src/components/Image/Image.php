@@ -65,7 +65,11 @@ class Image extends Renderable {
 		$this->title = $attributes['title'] ?? null;
 		$this->caption = $attributes['caption'] ?? null;
 		$this->href = $attributes['href'] ?? null;
-		$this->aspectRatio = isset($attributes['aspectRatio']) ? AspectRatio::tryFrom(str_replace('/', ':', $attributes['aspectRatio'])) : null;
+		$this->aspectRatio = isset($attributes['aspectRatio'])
+			? ($attributes['aspectRatio'] == '1'
+				? AspectRatio::tryFrom('1:1')
+				: AspectRatio::tryFrom(str_replace('/', ':', $attributes['aspectRatio'])))
+			: null;
 		$this->scale = $attributes['scale'] ?? 'contain';
 		$this->classes = $attributes['classes'] ?? [];
 
@@ -77,9 +81,8 @@ class Image extends Renderable {
 		if($this->scale) {
 			$classes[] = 'image--scale-' . $this->scale;
 		}
-		// TODO: Aspect ratio isn't working
 		if($this->aspectRatio) {
-			$classes[] = 'aspect-ratio-' . str_replace($this->aspectRatio->value, ':', '-');
+			$classes[] = 'image--aspect-ratio-' . strtolower($this->aspectRatio->name);
 		}
 
 		return array_values(array_unique(array_merge(parent::get_filtered_classes(), $classes)));
@@ -113,11 +116,11 @@ class Image extends Renderable {
 		$blade = BladeService::getInstance();
 
 		echo $blade->make($this->bladeFile, [
-			'src'        => $this->src,
-			'href'       => $this->href,
-			'caption'    => $this->caption,
-			'classes'    => implode(' ', $this->get_filtered_classes()),
-			'attributes' => $this->get_html_attributes(),
+			'src'            => $this->src,
+			'href'           => $this->href,
+			'caption'        => $this->caption,
+			'classes'        => implode(' ', $this->get_filtered_classes()),
+			'attributes'     => $this->get_html_attributes(),
 		])->render();
 	}
 }

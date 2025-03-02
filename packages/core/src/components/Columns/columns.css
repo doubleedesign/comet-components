@@ -1,14 +1,14 @@
 .columns {
   padding-inline: var(--spacing-md);
   display: grid;
-  grid-gap: var(--spacing-sm);
+  grid-gap: var(--spacing-md);
 }
 .container > .columns {
   padding-inline: 0;
 }
 @container (min-width: 960px) {
   .columns {
-    grid-gap: var(--spacing-md);
+    grid-gap: var(--spacing-lg);
   }
 }
 .columns--2[data-allow-layout-stacking=true], .columns--4[data-allow-layout-stacking=true], .columns--6[data-allow-layout-stacking=true] {
@@ -41,11 +41,11 @@
 }
 .columns:has(.columns__column--has-own-width) {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
 @container (min-width: 960px) {
   .columns:has(.columns__column--has-own-width) {
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
   }
 }
 .columns--halign-start {

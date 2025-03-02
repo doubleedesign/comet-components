@@ -1,3 +1,34 @@
-.image {
-	max-width: 100%;
+.image img {
+  max-width: 100%;
 }
+.image--aspect-ratio-square {
+  aspect-ratio: 1/1;
+}
+.image--aspect-radio-standard {
+  aspect-ratio: 4/3;
+}
+.image--aspect-radio-portrait {
+  aspect-ratio: 3/4;
+}
+.image--aspect-ratio-16-9 {
+  aspect-ratio: 16/9;
+}
+.image--aspect-ratio-classic {
+  aspect-ratio: 3/2;
+}
+.image--aspect-ratio-classic-portrait {
+  aspect-ratio: 2/3;
+}
+.image--scale-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.image--scale-contain img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/*# sourceMappingURL=image.css.map */

@@ -23,6 +23,8 @@
 		padding-block: var(--spacing-lg);
 
 		&-list {
+			margin-inline: 0;
+
 			@container (min-width: 600px) {
 				display: flex;
 				justify-content: flex-end;
@@ -83,6 +85,7 @@
 					min-width: 10rem;
 					padding-block: var(--spacing-xxs);
 					background: var(--color-primary);
+					margin-inline: 0;
 
 					&__item {
 						display: block;

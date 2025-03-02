@@ -1,5 +1,5 @@
 @if ($caption)
-    <figure @if ($classes) @class($classes) @endif>
+    <figure @if($classes) @class($classes) @endif>
         @if ($href)
             <a href="{{ $href }}">
                 <img src="{{ $src }}" @attributes($attributes)>
@@ -15,8 +15,8 @@
             <img src="{{ $src }}" @attributes($attributes)>
         </a>
     @else
-        <img src="{{ $src }}" @if ($classes) @class($classes) @endif
-            @attributes($attributes)>
+        <div @if ($classes) @class($classes) @endif>
+			<img src="{{ $src }}" @attributes($attributes)>
+        </div>
     @endif
 @endif
-<!-- TODO: Handle caption AND link present at the same time -->

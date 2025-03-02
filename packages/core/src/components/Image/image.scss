@@ -1,3 +1,48 @@
 .image {
-	max-width: 100%;
+
+	img {
+		max-width: 100%;
+	}
+
+	// See packages/core/src/base/types/AspectRatio for what these should be
+	&--aspect-ratio-square {
+		aspect-ratio: 1/1;
+	}
+
+	&--aspect-radio-standard {
+		aspect-ratio: 4/3;
+	}
+
+	&--aspect-radio-portrait {
+		aspect-ratio: 3/4;
+	}
+
+	&--aspect-ratio-16-9 {
+		aspect-ratio: 16/9;
+	}
+
+	&--aspect-ratio-classic {
+		aspect-ratio: 3/2;
+	}
+
+	&--aspect-ratio-classic-portrait {
+		aspect-ratio: 2/3;
+	}
+
+	&--scale-cover {
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center center;
+		}
+	}
+
+	&--scale-contain {
+		img {
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+		}
+	}
 }

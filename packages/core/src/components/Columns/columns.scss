@@ -9,10 +9,10 @@
 
 	// Default/auto layout
 	display: grid;
-	grid-gap: var(--spacing-sm);
+	grid-gap: var(--spacing-md);
 
 	@include container-width-up('narrow') {
-		grid-gap: var(--spacing-md);
+		grid-gap: var(--spacing-lg);
 	}
 
 	&--2, &--4, &--6 {
@@ -60,10 +60,10 @@
 	// Adjust layout if any of the columns has a preset width
 	&:has(.columns__column--has-own-width) {
 		display: flex;
-		gap: var(--spacing-sm);
+		gap: var(--spacing-md);
 
 		@include container-width-up('narrow') {
-			gap: var(--spacing-md);
+			gap: var(--spacing-lg);
 		}
 	}
 

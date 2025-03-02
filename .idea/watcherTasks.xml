@@ -61,7 +61,7 @@
       <option name="workingDir" value="$ProjectFileDir$/packages/core" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="&quot;$ProjectFileDir$\packages\core\node_modules\.bin\blade-formatter&quot; --write &quot;$FilePath$&quot;" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />

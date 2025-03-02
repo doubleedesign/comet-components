@@ -1,7 +1,15 @@
 @use '../mixins' as *;
 
 .page-header {
-	padding-block: var(--spacing-lg);
+	padding-block: var(--spacing-md);
+
+	@include media-breakpoint-up('narrow') {
+		padding-block: var(--spacing-xl);
+	}
+
+	@include media-breakpoint-up('wide') {
+		padding-block: var(--spacing-xxl);
+	}
 
 	@include container-width-up('narrow') {
 		padding-block: var(--spacing-xl);
