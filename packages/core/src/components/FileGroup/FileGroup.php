@@ -10,26 +10,26 @@ class FileGroup extends UIComponent {
 	 * @param array $attributes
 	 * @param array<File|array<string,string> $files - Either an array of File objects or an array of associative arrays corresponding to File fields
 	 */
-    function __construct(array $attributes, array $files) {
-	    $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
-	    $innerComponents = array_map(function($file) {
-			if ($file instanceof File) {
+	function __construct(array $attributes, array $files) {
+		$this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
+		$innerComponents = array_map(function ($file) {
+			if($file instanceof File) {
 				return $file;
 			}
-		    return new File([
-				'context' => 'file-group',
-			    'url' => $file['url'],
-			    'title' => $file['title'],
-			    'description' => $file['description'],
-			    'size' => $file['size'],
-			    'mimeType' => $file['mimeType'],
-			    'uploadDate' => $file['date'],
-			    'colorTheme' => $file['colorTheme'] ?? null // selectively enables per-file color theme styling
-		    ]);
-	    }, $files);
+			return new File([
+				'context'     => 'file-group',
+				'url'         => $file['url'],
+				'title'       => $file['title'],
+				'description' => $file['description'],
+				'size'        => $file['size'] ?? '',
+				'mimeType'    => $file['mimeType'],
+				'uploadDate'  => $file['date'] ?? '',
+				'colorTheme'  => $file['colorTheme'] ?? null // selectively enables per-file color theme styling
+			]);
+		}, $files);
 
-        parent::__construct($attributes, $innerComponents, 'components.FileGroup.file-group');
-    }
+		parent::__construct($attributes, $innerComponents, 'components.FileGroup.file-group');
+	}
 
 	function get_html_attributes(): array {
 		return array_merge(
