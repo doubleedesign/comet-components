@@ -35,8 +35,7 @@
 		&__content {
 
 			&__title {
-				font-weight: var(--font-weight-bold);
-				font-size: 1.125rem;
+				font-weight: var(--font-weight-semibold);
 				display: block;
 
 				@each $name, $color in $colors {
@@ -47,6 +46,10 @@
 			}
 
 			&__description {
+				display: block;
+				font-size: var(--font-size-sm);
+				line-height: 1.3;
+				font-weight: var(--font-weight-light);
 			}
 
 			&__meta {
