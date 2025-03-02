@@ -1,81 +1,110 @@
+.site-header {
+  position: relative;
+  z-index: 500;
+}
 .site-header .container {
-	display: flex;
-	flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
 }
 .site-header__logo {
-	display: block;
-	max-width: 11rem;
+  display: block;
+  max-width: 11rem;
 }
 .site-header__logo img {
-	width: 100%;
-	max-width: 11rem;
+  width: 100%;
+  max-width: 11rem;
 }
 .site-header__menu {
-	container-type: inline-size;
-	flex-grow: 1;
-	padding-block: var(--spacing-lg);
+  container-type: inline-size;
+  flex-grow: 1;
+  padding-block: var(--spacing-lg);
 }
 @container (min-width: 600px) {
-	.site-header__menu-list {
-		display: flex;
-		justify-content: flex-end;
-		gap: var(--spacing-xs);
-	}
+  .site-header__menu-list {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-xs);
+  }
 }
 @container (min-width: 720px) {
-	.site-header__menu-list {
-		gap: var(--spacing-md);
-	}
+  .site-header__menu-list {
+    gap: var(--spacing-md);
+  }
 }
 .site-header__menu-list__item {
-	display: block;
-	position: relative;
-	padding-bottom: var(--spacing-xs);
+  display: block;
+  position: relative;
+  padding-bottom: var(--spacing-xs);
 }
 .site-header__menu-list__item__link {
-	display: block;
-	color: var(--color-primary);
-	text-decoration: underline;
-	text-decoration-color: transparent;
-	transition: all 0.2s ease-in-out;
+  display: block;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.2s ease-in-out;
 }
-.site-header__menu-list__item__link:hover, .site-header__menu-list__item__link:focus, .site-header__menu-list__item__link:active,
-.site-header__menu-list__item__link [aria-current="page"] {
-	text-decoration-color: currentColor;
+.site-header__menu-list__item__link:hover, .site-header__menu-list__item__link:focus, .site-header__menu-list__item__link:active, .site-header__menu-list__item__link[aria-current=page] {
+  text-decoration-color: currentColor;
 }
-.site-header__menu-list__item:has(.menu-list__item__link[aria-current="page"]) a {
-	text-decoration-color: currentColor;
+.site-header__menu-list__item__link[target=_blank] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.site-header__menu-list__item__link[target=_blank]:after {
+  content: "\f061";
+  font-family: "Font Awesome 6 Pro Solid";
+  padding-inline-start: var(--spacing-xs);
+}
+.site-header__menu-list__item:has(.menu-list__item__link[aria-current=page]) > a {
+  text-decoration-color: currentColor;
 }
 .site-header__menu-list__item .menu-list {
-	margin-top: 0;
-	position: absolute;
-	top: 100%;
-	left: 0;
-	opacity: 0;
-	height: 0;
-	transition: all 0.2s linear;
-	min-width: 10rem;
-	padding-block: var(--spacing-xxs);
-	background: var(--color-primary);
+  margin-top: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  transition: all 0.2s linear;
+  min-width: 10rem;
+  padding-block: var(--spacing-xxs);
+  background: var(--color-primary);
 }
 .site-header__menu-list__item .menu-list__item {
-	display: block;
+  display: block;
 }
 .site-header__menu-list__item .menu-list__item__link {
-	display: block;
-	padding: var(--spacing-xs) var(--spacing-sm);
-	white-space: nowrap;
-	color: var(--readable-color-primary);
-	font-size: var(--font-size-sm);
-	text-decoration: underline;
-	text-decoration-color: transparent;
-	transition: all 0.2s ease-in-out;
+  display: block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  white-space: nowrap;
+  color: var(--readable-color-primary);
+  font-size: var(--font-size-sm);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.2s ease-in-out;
 }
 .site-header__menu-list__item .menu-list__item__link:hover, .site-header__menu-list__item .menu-list__item__link:focus, .site-header__menu-list__item .menu-list__item__link:active {
-	text-decoration-color: currentColor;
-	background: rgb(0 0 0 / 0.25);
+  text-decoration-color: currentColor;
+  background: rgba(0, 0, 0, 0.25);
+}
+.site-header__menu-list__item .menu-list__item__link[target=_blank] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.site-header__menu-list__item .menu-list__item__link[target=_blank]:after {
+  content: "\f08e";
+  font-family: "Font Awesome 6 Pro Solid";
+  display: inline-block;
+  padding-inline-start: var(--spacing-xs);
+  font-size: 0.85em;
 }
 .site-header__menu-list__item:hover .menu-list, .site-header__menu-list__item:focus-within .menu-list {
-	opacity: 1;
-	height: auto;
+  opacity: 1;
+  height: auto;
 }
+
+/*# sourceMappingURL=site-header.css.map */

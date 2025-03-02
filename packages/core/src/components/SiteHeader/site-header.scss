@@ -1,4 +1,7 @@
 .site-header {
+	position: relative;
+	z-index: 500;
+
 	.container {
 		display: flex;
 		flex-wrap: nowrap;
@@ -43,14 +46,27 @@
 					transition: all 0.2s ease-in-out;
 
 					&:hover, &:focus, &:active,
-					[aria-current="page"] {
+					&[aria-current="page"] {
 						text-decoration-color: currentColor;
+					}
+
+					&[target="_blank"] {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						flex-wrap: nowrap;
+
+						&:after {
+							content: '\f061';
+							font-family: "Font Awesome 6 Pro Solid";
+							padding-inline-start: var(--spacing-xs);
+						}
 					}
 				}
 
 				// Parent item when submenu containing current page is present
 				&:has(.menu-list__item__link[aria-current="page"]) {
-					a {
+					> a {
 						text-decoration-color: currentColor;
 					}
 				}
@@ -84,6 +100,21 @@
 							&:hover, &:focus, &:active {
 								text-decoration-color: currentColor;
 								background: rgb(0 0 0 / 0.25);
+							}
+
+							&[target="_blank"] {
+								display: flex;
+								align-items: center;
+								justify-content: space-between;
+								flex-wrap: nowrap;
+
+								&:after {
+									content: '\f08e';
+									font-family: "Font Awesome 6 Pro Solid";
+									display: inline-block;
+									padding-inline-start: var(--spacing-xs);
+									font-size: 0.85em;
+								}
 							}
 						}
 					}

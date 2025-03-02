@@ -120,3 +120,14 @@ PHPStorm:
 > [!NOTE]
 > The browser dev/testing envrionment run with `npm run test:server` uses its own, separate config file.
 
+## PHPStorm File Watchers
+
+**"Is not a valid Win32 application" error**"
+
+If you ran `npm install` from WSL, it may not have installed the Windows binaries in the `node_modules/.bin` directory
+for the tool you're trying to use. There are two workarounds:
+
+1. Switch to PowerShell or Command Prompt and run `npm install` again. Being the native Windows shell, it will install
+   the Windows binaries.
+2. In the file watcher configuration, set the `Program` to `node` and put the full CLI command for the tool in the
+   `arguments` field.
