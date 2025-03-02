@@ -1,12 +1,12 @@
 {
-    "name": "ListItem",
-    "extends": null,
-    "abstract": false,
-    "attributes": [],
-    "content": {
-        "type": "string"
-    },
-    "innerComponents": {
-        "type": "array"
-    }
+	"name": "ListItem",
+	"extends": null,
+	"abstract": false,
+	"attributes": [],
+	"content": {
+		"type": "string"
+	},
+	"innerComponents": {
+		"type": "array"
+	}
 }

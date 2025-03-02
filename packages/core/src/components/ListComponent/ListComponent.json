@@ -1,43 +1,43 @@
 {
-    "name": "ListComponent",
-    "extends": "UIComponent",
-    "abstract": false,
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "ul",
-                "ol"
-            ],
-            "default": "ul",
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<ListItem>",
-        "description": "List item objects to render inside this list",
-        "required": true
-    }
+	"name": "ListComponent",
+	"extends": "UIComponent",
+	"abstract": false,
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"ul",
+				"ol"
+			],
+			"default": "ul",
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<ListItem>",
+		"description": "List item objects to render inside this list",
+		"required": true
+	}
 }

@@ -7,14 +7,14 @@
 	margin-block: var(--spacing-lg);
 	position: relative;
 
-	&:before, &:after {
+	&::before, &::after {
 		font-family: var(--font-family-accent);
 		font-size: 12rem;
 		position: absolute;
 		height: 4rem;
 	}
 
-	&:before {
+	&::before {
 		content: open-quote;
 		top: 0;
 		left: 0;
@@ -22,7 +22,7 @@
 		transform-origin: center center;
 	}
 
-	&:after {
+	&::after {
 		content: close-quote;
 		bottom: var(--spacing-lg);
 		transform: rotate(15deg) translateX(1rem);
@@ -34,14 +34,14 @@
 			color: var(--color-#{$name});
 			background: lighten($name, 95%);
 
-			&:before, &:after {
+			&::before, &::after {
 				color: lighten($name, 75%);
 			}
 		}
 	}
 
 	p {
-		font-weight:  var(--font-weight-bold);
+		font-weight: var(--font-weight-bold);
 		font-size: 1.125rem;
 		position: relative;
 		z-index: 10;

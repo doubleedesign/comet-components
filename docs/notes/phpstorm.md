@@ -9,7 +9,8 @@
 4. [Node](#node)
 5. [File watchers](#file-watchers)
     - [SASS](#sass)
-    -
+    - [Rollup](#rollup)
+    - [Blade Formatter](#blade-formatter)
 6. [Linting and formatting](#linting-and-formatting)
     - [PHP - PHPStorm code style settings](#php---phpstorm-formatting)
     - [JavaScript and TypeScript - ESLint](#javascript-and-typescript---eslint)
@@ -78,7 +79,7 @@ also find the configuration in `File > Settings > Tools > File Watchers`. An exa
 
 ![Sass file watcher](./images/phpstorm-scss-filewatcher.png)
 
-At the time of writing this, I have two watchers set up:
+At the time of writing this, I have two SCSS watchers set up:
 
 1. To compile the core package's individual components' SCSS files to CSS files in the same directory
 2. To compile the `blocks.scss` file in the WordPress plugin package, which imports files from the core package; the
@@ -99,6 +100,21 @@ In `File > Settings > Tools > File Watchers`:
 
 Note: If you add a new JS file, you need to add it to `rollup.index.js` so that Rollup knows to include it in the
 bundle.
+
+### Blade Formatter
+
+If you are working on the core package (or an implementation where you are overriding Blade templates) you can set up a
+file watcher to format Blade templates on save using [blade-formatter](https://github.com/shufo/blade-formatter).
+Configuration for this is included in the `core` package directory.
+
+In `File > Settings > Tools > File Watchers`:
+
+![Blade file watcher](./images/phpstorm-blade-filewatcher.png)
+
+**Important:** Ensure you exclude Blade files from PHPStorm's built-in reformatting, as it will cause conflicts. By
+default, Blade templates will adopt the HTML code style settings, which might not match what you want for Blade due to
+how it treats @directives as HTML attributes. You can find the setting to exclude Blade files in
+`File -> Settings -> Editor -> Code Style`. Click Code Style itself at the top level, and then the `Formatter` tab.
 
 ---
 

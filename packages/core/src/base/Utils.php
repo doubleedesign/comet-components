@@ -48,7 +48,7 @@ class Utils {
 		$config = HTMLPurifier_Config::createDefault();
 		$purifier = new HTMLPurifier($config);
 
-		if (!$allowedTags) {
+		if(!$allowedTags) {
 			return $purifier->purify($content);
 		}
 
@@ -72,11 +72,11 @@ class Utils {
 
 		$shortName = array_reverse(explode('/', $name))[0];
 		$className = Utils::pascal_case($shortName);
-		if (in_array($className, $reserved_words)) {
+		if(in_array($className, $reserved_words)) {
 			$className = $className . 'Component';
 		}
 
-		if ($shortName === 'buttons') {
+		if($shortName === 'buttons') {
 			$className = 'ButtonGroup';
 		}
 
@@ -103,17 +103,17 @@ class Utils {
 	 * @param array $partial
 	 * @return array
 	 */
-	public static function array_merge_deep(array $original, array $partial): array	{
+	public static function array_merge_deep(array $original, array $partial): array {
 		$result = $original;
 
-		foreach ($partial as $key => $value) {
+		foreach($partial as $key => $value) {
 			// If both are arrays but the original is indexed (numeric keys),
 			// or if the value isn't an array, replace entirely
-			if (!isset($original[$key]) || !is_array($value) || (is_array($original[$key]) && array_is_list($original[$key]))) {
+			if(!isset($original[$key]) || !is_array($value) || (is_array($original[$key]) && array_is_list($original[$key]))) {
 				$result[$key] = $value;
 			}
 			// If both are associative arrays, merge recursively
-			else if (is_array($original[$key])) {
+			else if(is_array($original[$key])) {
 				$result[$key] = self::array_merge_deep($original[$key], $value);
 			}
 		}
@@ -124,8 +124,8 @@ class Utils {
 	public static function get_array_depth($array) {
 		$max_depth = 1;
 
-		foreach ($array as $value) {
-			if (is_array($value)) {
+		foreach($array as $value) {
+			if(is_array($value)) {
 				$depth = self::get_array_depth($value) + 1;
 				$max_depth = max($max_depth, $depth);
 			}
@@ -142,9 +142,9 @@ class Utils {
 		$blockParts = preg_split('/<\/?(?:span|strong|em|div|p|br|h[1-6])[^>]*>/i', $trimmed);
 
 		// Get first non-empty block
-		foreach ($blockParts as $block) {
+		foreach($blockParts as $block) {
 			$stripped = trim(strip_tags($block));
-			if ($stripped !== '') {
+			if($stripped !== '') {
 				return $stripped;
 			}
 		}

@@ -29,21 +29,18 @@
 		}
 		$h: $h * 60;
 	}
-
 	@return ($h, $s * 100, $l * 100);
 }
 
-@function readable_color($colorName) {
-
-}
 
 // Replacements for SASS colour functions that will automatically adopt replacement vanilla CSS variables.
 // Calculations are added so that the syntax for their use is the same as SCSS,
 // e.g. darken by 10% would usually mean 90% for color-mix, but this function means we can still write it as 10%.
-// To use, ensure @use 'functions' as *; is at the top of your SCSS file.
+// To use, ensure @use 'path/to/functions' as *; is at the top of your SCSS file.
 @function lighten($colorName, $amount) {
 	@return color-mix(in srgb, var(--color-#{$colorName}) (100% - $amount), white);
 }
+
 @function darken($colorName, $amount) {
 	@return color-mix(in srgb, var(--color-#{$colorName}) (100% - $amount), black);
 }

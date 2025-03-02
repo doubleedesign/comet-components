@@ -1,78 +1,78 @@
 {
-    "name": "PageHeader",
-    "extends": "UIComponent",
-    "abstract": false,
-    "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ]
-        },
-        "breadcrumbs": {
-            "type": "array",
-            "description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
-            "required": true
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "page-header"
-            ]
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "size": {
-            "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow"
-            ],
-            "default": "default"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "header",
-                "div",
-                "section"
-            ],
-            "default": "header"
-        },
-        "title": {
-            "type": "string",
-            "description": "The title of the page",
-            "required": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
-        "required": true
-    }
+	"name": "PageHeader",
+	"extends": "UIComponent",
+	"abstract": false,
+	"attributes": {
+		"backgroundColor": {
+			"type": "ThemeColor",
+			"description": "Background colour keyword",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		},
+		"breadcrumbs": {
+			"type": "array",
+			"description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
+			"required": true
+		},
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"page-header"
+			]
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant"
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier"
+		},
+		"size": {
+			"type": "ContainerSize",
+			"description": "Keyword specifying the relative width of the container for the inner content",
+			"supported": [
+				"default",
+				"wide",
+				"fullwidth",
+				"narrow"
+			],
+			"default": "default"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles"
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"header",
+				"div",
+				"section"
+			],
+			"default": "header"
+		},
+		"title": {
+			"type": "string",
+			"description": "The title of the page",
+			"required": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<Renderable>",
+		"description": "Inner components to be rendered within this component",
+		"required": true
+	}
 }

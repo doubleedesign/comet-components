@@ -4,8 +4,8 @@
     <directives>
       <data directive="@append" />
       <data directive="@attributes" injection="true" />
-      <data directive="@auth" injection="true" prefix="&lt;?php&#10;if(auth()-&gt;guard(" suffix=")-&gt;check()): ?&gt;" />
-      <data directive="@aware" injection="true" prefix="&lt;?php&#10;$__aware_exp = " suffix="?&gt;" />
+      <data directive="@auth" injection="true" prefix="&lt;?php if(auth()-&gt;guard(" suffix=")-&gt;check()): ?&gt;" />
+      <data directive="@aware" injection="true" prefix="&lt;?php $__aware_exp =" suffix="?&gt;" />
       <data directive="@break" injection="true" prefix="&lt;?php&#10;if(" suffix=") break; ?&gt;" />
       <data directive="@can" injection="true" prefix="&lt;?php&#10;if (app(\Illuminate\Contracts\Auth\Access\Gate::class)-&gt;check(" suffix=")): ?&gt;" />
       <data directive="@canany" injection="true" prefix="&lt;?php&#10;if (app(\Illuminate\Contracts\Auth\Access\Gate::class)-&gt;any(" suffix=")): ?&gt;" />

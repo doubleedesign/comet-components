@@ -1,62 +1,62 @@
 {
-    "name": "FileGroup",
-    "extends": "UIComponent",
-    "abstract": false,
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "file-group"
-            ],
-            "inherited": true
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ],
-            "default": "primary"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div"
-            ],
-            "default": "div",
-            "inherited": true
-        }
-    },
-    "files": {
-        "type": "array<File|array<string,string>",
-        "description": "Either an array of File objects or an array of associative arrays corresponding to File fields",
-        "required": true,
-        "inherited": true
-    }
+	"name": "FileGroup",
+	"extends": "UIComponent",
+	"abstract": false,
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"file-group"
+			],
+			"inherited": true
+		},
+		"colorTheme": {
+			"type": "ThemeColor",
+			"description": "Colour keyword for the fill or outline colour",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			],
+			"default": "primary"
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"div"
+			],
+			"default": "div",
+			"inherited": true
+		}
+	},
+	"files": {
+		"type": "array<File|array<string,string>",
+		"description": "Either an array of File objects or an array of associative arrays corresponding to File fields",
+		"required": true,
+		"inherited": true
+	}
 }

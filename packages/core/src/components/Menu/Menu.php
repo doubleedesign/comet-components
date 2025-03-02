@@ -10,8 +10,8 @@ class Menu extends UIComponent {
 			new MenuList($attributes, $this->array_to_items($menuItems, $attributes['context'] ?? ''))
 		];
 
-        parent::__construct($attributes, $innerComponents, 'components.Menu.menu');
-    }
+		parent::__construct($attributes, $innerComponents, 'components.Menu.menu');
+	}
 
 	/**
 	 * @param array $items

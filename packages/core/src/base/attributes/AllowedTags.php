@@ -9,5 +9,6 @@ class AllowedTags {
 	/**
 	 * @param array<Tag> $tags
 	 */
-	public function __construct(public array $tags) {}
+	public function __construct(public array $tags) {
+	}
 }

@@ -78,7 +78,7 @@
 		&__inner {
 			background: var(--color-white);
 			padding: var(--spacing-md);
-			box-shadow: 0 0 0.5rem 0 rgba(0,0,0,0.15);
+			box-shadow: 0 0 0.5rem 0 rgb(0 0 0 / 0.15);
 			height: 100%;
 			position: relative;
 			z-index: 10;
@@ -86,7 +86,7 @@
 			@each $name, $color in $colors {
 				[data-color-theme=#{$name}] & {
 
-					&:before {
+					&::before {
 						background-color: var(--color-#{$name});
 						color: var(--readable-color-#{$name});
 					}
@@ -96,7 +96,7 @@
 			.steps--numbered & {
 				counter-increment: step-counter;
 
-				&:before {
+				&::before {
 					content: counter(step-counter);
 					height: 2rem;
 					width: 2rem;
@@ -114,7 +114,7 @@
 				}
 			}
 
-			&:after {
+			&::after {
 				content: '';
 				position: absolute;
 				width: var(--spacing-lg);
@@ -125,7 +125,7 @@
 			}
 
 			[data-orientation="vertical"] & {
-				&:after {
+				&::after {
 					left: 50%;
 					bottom: 100%;
 					transform: translateY(-50%) translateX(-50%) rotate(45deg);
@@ -133,7 +133,7 @@
 			}
 
 			[data-orientation="horizontal"] & {
-				&:after {
+				&::after {
 					top: 50%;
 					left: 100%;
 					transform: translateY(-50%) translateX(-50%) rotate(45deg);
@@ -143,7 +143,7 @@
 
 		&:last-child {
 			.steps__step__inner {
-				&:after {
+				&::after {
 					display: none;
 				}
 			}

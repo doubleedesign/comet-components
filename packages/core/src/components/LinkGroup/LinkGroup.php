@@ -10,20 +10,20 @@ class LinkGroup extends UIComponent {
 	 * @param array $attributes
 	 * @param array<Link|array<string,string> $links - Either an array of Link objects or an array of associative arrays corresponding to Link fields
 	 */
-    function __construct(array $attributes, array $links) {
-	    $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
-	    $innerComponents = array_map(function($link) {
-		    if ($link instanceof Link) {
-			    return $link;
-		    }
-		    return new Link(
+	function __construct(array $attributes, array $links) {
+		$this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
+		$innerComponents = array_map(function($link) {
+			if($link instanceof Link) {
+				return $link;
+			}
+			return new Link(
 				array_merge($link['attributes'], ['context' => 'link-group']),
-		        $link['content']
-		    );
-	    }, $links);
+				$link['content']
+			);
+		}, $links);
 
-        parent::__construct($attributes, $innerComponents, 'components.LinkGroup.link-group');
-    }
+		parent::__construct($attributes, $innerComponents, 'components.LinkGroup.link-group');
+	}
 
 	function get_html_attributes(): array {
 		return array_merge(

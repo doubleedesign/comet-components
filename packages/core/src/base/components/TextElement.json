@@ -1,80 +1,80 @@
 {
-    "name": "TextElement",
-    "extends": "Renderable",
-    "abstract": true,
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "h1",
-                "h2",
-                "h3",
-                "h4",
-                "h5",
-                "h6",
-                "p",
-                "li",
-                "button",
-                "summary",
-                "span",
-                "em",
-                "strong",
-                "a",
-                "i",
-                "mark",
-                "cite",
-                "s",
-                "sup",
-                "sub",
-                "button",
-                "img",
-                "wbr",
-                "time",
-                "code",
-                "kbd",
-                "bdi",
-                "bdo"
-            ],
-            "default": "span",
-            "inherited": true
-        },
-        "textAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent"
-        }
-    },
-    "content": {
-        "type": "string",
-        "description": "Plain text or basic HTML",
-        "required": true
-    }
+	"name": "TextElement",
+	"extends": "Renderable",
+	"abstract": true,
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"h1",
+				"h2",
+				"h3",
+				"h4",
+				"h5",
+				"h6",
+				"p",
+				"li",
+				"button",
+				"summary",
+				"span",
+				"em",
+				"strong",
+				"a",
+				"i",
+				"mark",
+				"cite",
+				"s",
+				"sup",
+				"sub",
+				"button",
+				"img",
+				"wbr",
+				"time",
+				"code",
+				"kbd",
+				"bdi",
+				"bdo"
+			],
+			"default": "span",
+			"inherited": true
+		},
+		"textAlign": {
+			"type": "Alignment",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "match-parent"
+		}
+	},
+	"content": {
+		"type": "string",
+		"description": "Plain text or basic HTML",
+		"required": true
+	}
 }

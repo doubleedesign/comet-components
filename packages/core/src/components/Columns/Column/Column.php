@@ -21,7 +21,7 @@ class Column extends LayoutComponent {
 	function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
 
-		if (isset($this->width)) {
+		if(isset($this->width)) {
 			$classes[] = 'columns__column--has-own-width';
 		}
 
@@ -31,7 +31,7 @@ class Column extends LayoutComponent {
 	function get_inline_styles(): array {
 		$styles = parent::get_inline_styles();
 
-		if (isset($this->width)) {
+		if(isset($this->width)) {
 			$styles['width'] = $this->width;
 			$styles['flex-basis'] = $this->width;
 		}

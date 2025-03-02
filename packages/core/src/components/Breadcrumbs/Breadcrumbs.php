@@ -24,8 +24,8 @@ class Breadcrumbs extends UIComponent {
 
 		$innerComponents = [new ListComponent(['ordered' => true, 'context' => 'breadcrumbs'], $listItems)];
 
-        parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
-    }
+		parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
+	}
 
 	function render(): void {
 		$blade = BladeService::getInstance();

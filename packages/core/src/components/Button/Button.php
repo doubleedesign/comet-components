@@ -25,7 +25,7 @@ class Button extends Renderable {
 	}
 
 	function get_filtered_classes(): array {
-		$classes = array_filter(parent::get_filtered_classes(), function ($class) {
+		$classes = array_filter(parent::get_filtered_classes(), function($class) {
 			return !str_starts_with($class, 'is-style-outline') && $class !== 'is-style-outline';
 		});
 

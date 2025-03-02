@@ -2,6 +2,7 @@
 
 $colors: ();
 $hslColors: ();
+
 @each $name, $color in (
 	'primary': #845ec2,
 	'secondary': #00c9a7,

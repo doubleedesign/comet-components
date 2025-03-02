@@ -1,64 +1,64 @@
 {
-    "name": "Tabs",
-    "extends": "UIComponent",
-    "abstract": false,
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "tabs"
-            ]
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ],
-            "default": "primary"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "orientation": {
-            "type": "Orientation",
-            "supported": [
-                "horizontal",
-                "vertical"
-            ],
-            "default": "horizontal"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div"
-            ],
-            "default": "div"
-        }
-    },
-    "innerComponents": {
-        "type": "array<TabPanel>",
-        "description": "Wrapping components each containing a TabPanelTitle and TabPanelContent.",
-        "required": true
-    }
+	"name": "Tabs",
+	"extends": "UIComponent",
+	"abstract": false,
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"tabs"
+			]
+		},
+		"colorTheme": {
+			"type": "ThemeColor",
+			"description": "Colour keyword for the fill or outline colour",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			],
+			"default": "primary"
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant"
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier"
+		},
+		"orientation": {
+			"type": "Orientation",
+			"supported": [
+				"horizontal",
+				"vertical"
+			],
+			"default": "horizontal"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles"
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"div"
+			],
+			"default": "div"
+		}
+	},
+	"innerComponents": {
+		"type": "array<TabPanel>",
+		"description": "Wrapping components each containing a TabPanelTitle and TabPanelContent.",
+		"required": true
+	}
 }

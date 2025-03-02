@@ -13,10 +13,10 @@ trait LayoutContainerSize {
 	 * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
 	 */
 	function set_size_from_attrs(array $attributes): void {
-		if (isset($attributes['size'])) {
+		if(isset($attributes['size'])) {
 			$this->size = ContainerSize::tryFrom($attributes['size']);
 		}
-		else if (isset($attributes['className'])) {
+		else if(isset($attributes['className'])) {
 			$this->size = ContainerSize::from_wordpress_class_name($attributes['className']);
 		}
 	}

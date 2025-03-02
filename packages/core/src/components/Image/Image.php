@@ -74,11 +74,11 @@ class Image extends Renderable {
 
 	public function get_filtered_classes(): array {
 		$classes = array_merge([$this->shortName], parent::get_filtered_classes());
-		if ($this->scale) {
+		if($this->scale) {
 			$classes[] = 'image--scale-' . $this->scale;
 		}
 		// TODO: Aspect ratio isn't working
-		if ($this->aspectRatio) {
+		if($this->aspectRatio) {
 			$classes[] = 'aspect-ratio-' . str_replace($this->aspectRatio->value, ':', '-');
 		}
 
@@ -88,11 +88,11 @@ class Image extends Renderable {
 	public function get_inline_styles(): array {
 		$styles = [];
 
-		if ($this->height) {
+		if($this->height) {
 			$styles['height'] = $this->height;
 		}
 
-		if ($this->width) {
+		if($this->width) {
 			$styles['width'] = $this->width;
 		}
 

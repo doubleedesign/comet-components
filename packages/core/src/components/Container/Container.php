@@ -28,11 +28,11 @@ class Container extends UIComponent {
 	}
 
 	protected function get_filtered_classes(): array {
-		$classes = array_filter(parent::get_filtered_classes(), function ($class) {
+		$classes = array_filter(parent::get_filtered_classes(), function($class) {
 			return !in_array($class, ['is-style-wide', 'is-style-fullwidth', 'is-style-narrow']);
 		});
 
-		if ($this->size !== ContainerSize::DEFAULT) {
+		if($this->size !== ContainerSize::DEFAULT) {
 			array_push($classes, "container--{$this->size->value}");
 		}
 
@@ -42,11 +42,11 @@ class Container extends UIComponent {
 	protected function get_outer_classes(): array {
 		$classes = ['page-section'];
 
-		if (isset($this->backgroundColor)) {
+		if(isset($this->backgroundColor)) {
 			array_push($classes, 'bg-' . $this->backgroundColor->value);
 		}
 
-		if (isset($this->gradient)) {
+		if(isset($this->gradient)) {
 			array_push($classes, 'bg-gradient-' . $this->gradient);
 		}
 

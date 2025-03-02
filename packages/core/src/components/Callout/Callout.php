@@ -18,9 +18,9 @@ class Callout extends UIComponent {
 	 */
 	protected ?string $icon;
 
-    function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.Callout.callout');
-	    $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents, 'components.Callout.callout');
+		$this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
 
 		if(isset($attributes['icon'])) {
 			$this->icon = $attributes['icon']; // TODO: Sanitise/validate input
@@ -34,7 +34,7 @@ class Callout extends UIComponent {
 				default => null,
 			};
 		}
-    }
+	}
 
 	function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();

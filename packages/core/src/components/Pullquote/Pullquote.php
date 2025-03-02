@@ -22,7 +22,7 @@ class Pullquote extends TextElementExtended {
 		$classes = parent::get_filtered_classes();
 		$classes[] = $this->get_bem_name();
 
-		if (isset($this->backgroundColor)) {
+		if(isset($this->backgroundColor)) {
 			$classes[] = 'bg-' . $this->backgroundColor->value;
 		}
 

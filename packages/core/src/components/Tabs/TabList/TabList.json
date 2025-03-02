@@ -1,39 +1,39 @@
 {
-    "name": "TabList",
-    "extends": "UIComponent",
-    "attributes": {
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "ul",
-                "ol"
-            ],
-            "default": "ul"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "tabs__tab-list"
-            ]
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
-        }
-    },
-    "innerComponents": {
-        "type": "array<TabPanelTitle>",
-        "description": "Items to make up the tab list / links.",
-        "required": true
-    }
+	"name": "TabList",
+	"extends": "UIComponent",
+	"attributes": {
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"ul",
+				"ol"
+			],
+			"default": "ul"
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier"
+		},
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"tabs__tab-list"
+			]
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles"
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant"
+		}
+	},
+	"innerComponents": {
+		"type": "array<TabPanelTitle>",
+		"description": "Items to make up the tab list / links.",
+		"required": true
+	}
 }

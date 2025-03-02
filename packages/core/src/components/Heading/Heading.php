@@ -14,7 +14,7 @@ class Heading extends TextElementExtended {
 	function __construct(array $attributes, string $content) {
 		$proposedTag = Tag::H2;
 		// Convert level to tag format for validation
-		if (isset($attributes['level']) && is_numeric($attributes['level'])) {
+		if(isset($attributes['level']) && is_numeric($attributes['level'])) {
 			$proposedTag = Tag::tryFrom('h' . $attributes['level']) ?? Tag::H2;
 		}
 

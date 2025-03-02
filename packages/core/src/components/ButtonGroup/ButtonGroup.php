@@ -22,11 +22,11 @@ class ButtonGroup extends UIComponent {
 	function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
 
-		if (isset($this->hAlign)) {
+		if(isset($this->hAlign)) {
 			$classes[] = $this->shortName . '--halign-' . $this->hAlign->value;
 		}
 
-		if (isset($this->orientation) && $this->orientation == Orientation::VERTICAL) {
+		if(isset($this->orientation) && $this->orientation == Orientation::VERTICAL) {
 			$classes[] = $this->shortName . '--stacked';
 		}
 

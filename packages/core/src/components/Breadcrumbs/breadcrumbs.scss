@@ -25,7 +25,7 @@
 				}
 			}
 
-			&:after {
+			&::after {
 				content: '/';
 				padding-inline-start: var(--spacing-xs);
 				opacity: 0.4;

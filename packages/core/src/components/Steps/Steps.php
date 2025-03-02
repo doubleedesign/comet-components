@@ -23,8 +23,8 @@ class Steps extends LayoutComponent {
 	 */
 	protected array|null $classes;
 
-    function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.Steps.steps');
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents, 'components.Steps.steps');
 		$this->set_orientation_from_attrs($attributes);
 		$this->set_color_theme_from_attrs($attributes);
 		if($this->orientation === Orientation::HORIZONTAL) {
@@ -33,7 +33,7 @@ class Steps extends LayoutComponent {
 		else {
 			$this->maxPerRow = null;
 		}
-    }
+	}
 
 	function get_html_attributes(): array {
 		$attributes = array_merge(

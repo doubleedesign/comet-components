@@ -11,7 +11,7 @@ class ListItem {
 
 	function __construct(array $attributes, string $content, array $nestedLists = []) {
 		$this->innerComponents = $nestedLists;
-		if (!empty($nestedLists)) {
+		if(!empty($nestedLists)) {
 			$this->instance = new ListItemComplex($attributes, $content, $nestedLists);
 		}
 		else {

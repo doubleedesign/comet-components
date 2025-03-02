@@ -62,7 +62,7 @@ abstract class Renderable {
 			}
 			else {
 				$parentThemeBladeFile = get_template_directory() . "/components/{$this->shortName}.blade.php";
-				if (file_exists($parentThemeBladeFile)) {
+				if(file_exists($parentThemeBladeFile)) {
 					$this->bladeFile = str_replace('/', '\\', $parentThemeBladeFile);
 				}
 			}
@@ -70,11 +70,11 @@ abstract class Renderable {
 
 		$classes = [];
 		// Handle WordPress block implementation of classes (className string)
-		if (isset($attributes['className']) && is_string($attributes['className'])) {
+		if(isset($attributes['className']) && is_string($attributes['className'])) {
 			$classes = explode(' ', $attributes['className']);
 		}
 		// Handle preferred implementation of classes (array)
-		if (isset($attributes['classes']) && is_array($attributes['classes'])) {
+		if(isset($attributes['classes']) && is_array($attributes['classes'])) {
 			$classes = array_merge($classes, $attributes['classes']);
 		}
 		$this->classes = $classes;
@@ -94,7 +94,7 @@ abstract class Renderable {
 		$requestedTag = $tagName ? Tag::tryFrom($tagName) : $defaultTag;
 
 		// Validate against allowed tags if specified
-		if ($allowedTags && !in_array($requestedTag, $allowedTags)) {
+		if($allowedTags && !in_array($requestedTag, $allowedTags)) {
 			error_log(sprintf(
 				'Tag %s is not allowed for %s. Allowed tags: %s. Defaulting to %s.',
 				$requestedTag->value,
@@ -114,10 +114,10 @@ abstract class Renderable {
 	}
 
 	protected function get_bem_name(): ?string {
-		if ($this->context) {
+		if($this->context) {
 			$kebabContext = Utils::kebab_case($this->context);
 			$shortNameToUse = $this->shortName;
-			if (str_starts_with($this->shortName, $kebabContext)) {
+			if(str_starts_with($this->shortName, $kebabContext)) {
 				$shortNameToUse = str_replace("$kebabContext-", '', $this->shortName);
 			}
 
@@ -142,7 +142,7 @@ abstract class Renderable {
 
 		$result = array_merge(
 			[$this->get_bem_name()],
-			array_filter($current_classes, function ($class) use ($redundant_classes) {
+			array_filter($current_classes, function($class) use ($redundant_classes) {
 				return !in_array($class, $redundant_classes);
 			})
 		);
@@ -171,7 +171,7 @@ abstract class Renderable {
 		// 3. attributes that are not valid/supported HTML attributes for the given tag
 		// Explicitly keep:
 		// 1. attributes that start with 'data-' (custom data attributes)
-		return array_filter($this->rawAttributes, function ($key) use ($class_properties) {
+		return array_filter($this->rawAttributes, function($key) use ($class_properties) {
 			return (
 				// Stuff to filter out
 				$key !== 'class' && $key !== 'style' && !in_array($key, $class_properties) && !is_array($this->rawAttributes[$key]) &&

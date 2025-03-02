@@ -6,6 +6,7 @@ namespace Doubleedesign\Comet\Core;
 class Tabs extends UIComponent {
 	use ColorTheme;
 	use LayoutOrientation;
+
 	/**
 	 * @var array<TabPanel>
 	 * @description Wrapping components each containing a TabPanelTitle and TabPanelContent.
@@ -33,15 +34,15 @@ class Tabs extends UIComponent {
 	 */
 	function build_tablist(): void {
 		$panels = $this->innerComponents;
-		$titles = array_reduce($panels, function ($acc, $panel) {
-			if ($panel instanceof TabPanel) {
+		$titles = array_reduce($panels, function($acc, $panel) {
+			if($panel instanceof TabPanel) {
 				$acc[] = $panel->get_title_component();
 			}
 			return $acc;
 		}, []);
 
 		$attributes = [
-			'tagName' => Tag::UL->value, // TODO: Implement <ol> option
+			'tagName'         => Tag::UL->value, // TODO: Implement <ol> option
 			'backgroundColor' => $this->colorTheme->value,
 		];
 

@@ -18,19 +18,19 @@ class PageHeader extends UIComponent {
 	 */
 	protected array $breadcrumbs;
 
-    function __construct(array $attributes, string $title, array $breadcrumbs = []) {
+	function __construct(array $attributes, string $title, array $breadcrumbs = []) {
 		$this->set_background_color_from_attrs($attributes);
 		$this->set_size_from_attrs($attributes);
 		$this->breadcrumbs = $breadcrumbs;
-		$this->innerComponents = !empty($breadcrumbs) ?  [new Breadcrumbs([], $this->breadcrumbs)] : [];
+		$this->innerComponents = !empty($breadcrumbs) ? [new Breadcrumbs([], $this->breadcrumbs)] : [];
 
 		$this->innerComponents = array(
 			new Container(
-				// Attributes
+			// Attributes
 				[
-					'size' => $this->size->value,
+					'size'        => $this->size->value,
 					'withWrapper' => false,
-					'tagName' => Tag::DIV->value,
+					'tagName'     => Tag::DIV->value,
 				],
 				// Inner components
 				array_merge(
@@ -40,13 +40,13 @@ class PageHeader extends UIComponent {
 			)
 		);
 
-        parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
-    }
+		parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
+	}
 
 	protected function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
 
-		if (isset($this->backgroundColor)) {
+		if(isset($this->backgroundColor)) {
 			$classes[] = 'bg-' . $this->backgroundColor->value;
 		}
 

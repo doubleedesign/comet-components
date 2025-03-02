@@ -41,7 +41,7 @@ abstract class TextElement extends Renderable {
 		// I want the BEM name in Renderable so it gets applied to all other component types,
 		// and text elements with explicit context,
 		// but don't want it for most basic text elements like headings and paragraphs
-		if (!$this->context) {
+		if(!$this->context) {
 			unset($current_classes[array_search($bem_name, $current_classes)]);
 		}
 

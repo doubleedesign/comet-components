@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
+      <option name="arguments" value="--color --source-map $FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
@@ -22,7 +22,7 @@
       <envs />
     </TaskOptions>
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
+      <option name="arguments" value="--color --source-map $FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
@@ -59,6 +59,26 @@
       <option name="scopeName" value="Core package" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$ProjectFileDir$/packages/core" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="&quot;$ProjectFileDir$\packages\core\node_modules\.bin\blade-formatter&quot; --write &quot;$FilePath$&quot;" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="blade.php" />
+      <option name="immediateSync" value="false" />
+      <option name="name" value="Blade Formatter - Core" />
+      <option name="output" value="$FileName$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="node" />
+      <option name="runOnExternalChanges" value="false" />
+      <option name="scopeName" value="Core package" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
   </component>

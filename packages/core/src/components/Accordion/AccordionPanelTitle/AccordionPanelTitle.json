@@ -1,56 +1,56 @@
 {
-    "name": "AccordionPanelTitle",
-    "extends": "TextElement",
-    "abstract": false,
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "accordion__panel__title"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "summary"
-            ],
-            "default": "summary",
-            "inherited": true
-        },
-        "textAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "inherited": true
-        }
-    },
-    "content": {
-        "type": "string",
-        "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": true
-    }
+	"name": "AccordionPanelTitle",
+	"extends": "TextElement",
+	"abstract": false,
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"accordion__panel__title"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"summary"
+			],
+			"default": "summary",
+			"inherited": true
+		},
+		"textAlign": {
+			"type": "Alignment",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"inherited": true
+		}
+	},
+	"content": {
+		"type": "string",
+		"description": "Plain text or basic HTML",
+		"required": true,
+		"inherited": true
+	}
 }

@@ -1,3 +1,3 @@
 <component name="DependencyValidationManager">
-  <scope name="Core package" pattern="file[comet-components]:test//*||file[comet-components]:src//*||file[comet-components]:scripts//*||file[comet-components]:docs/notes//*||file[comet-components]:packages/core//*" />
+  <scope name="Core package" pattern="file[comet-components]:src//*||file[comet-components]:docs/notes//*||file[comet-components]:packages/core//*" />
 </component>

@@ -19,11 +19,11 @@ class Stack extends UIComponent {
 	protected function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
 
-		if (isset($this->backgroundColor)) {
+		if(isset($this->backgroundColor)) {
 			$classes[] = 'bg-' . $this->backgroundColor->value;
 		}
 
-		if (isset($this->hAlign)) {
+		if(isset($this->hAlign)) {
 			$classes[] = $this->shortName . '--halign-' . $this->hAlign->value;
 		}
 

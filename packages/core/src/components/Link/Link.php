@@ -24,11 +24,11 @@ class Link extends Renderable {
 		if(isset($attributes['iconPrefix']) || isset($attributes['icon']) || $this->context === 'link-group') {
 			$this->iconPrefix = $attributes['iconPrefix'] ?? 'fa-solid';
 		}
-		if (isset($attributes['icon'])) {
+		if(isset($attributes['icon'])) {
 			$this->icon = $attributes['icon']; // TODO: Sanitisation/validation of icon class name
 		}
 		else if($this->context === 'link-group') {
-			if (isset($attributes['target']) && $attributes['target'] === '_blank') {
+			if(isset($attributes['target']) && $attributes['target'] === '_blank') {
 				$this->icon = 'fa-arrow-up-right-from-square';
 			}
 			else {

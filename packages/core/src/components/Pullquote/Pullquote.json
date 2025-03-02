@@ -1,85 +1,85 @@
 {
-    "name": "Pullquote",
-    "extends": "TextElementExtended",
-    "abstract": false,
-    "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ]
-        },
-        "citation": {
-            "type": "string",
-            "description": "Optional citation for the quote"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "pullquote"
-            ]
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "blockquote"
-            ],
-            "default": "blockquote"
-        },
-        "textAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent"
-        },
-        "textColor": {
-            "type": "ThemeColor",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ]
-        }
-    },
-    "content": {
-        "type": "string",
-        "description": "Plain text or basic HTML",
-        "required": true
-    }
+	"name": "Pullquote",
+	"extends": "TextElementExtended",
+	"abstract": false,
+	"attributes": {
+		"backgroundColor": {
+			"type": "ThemeColor",
+			"description": "Background colour keyword",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		},
+		"citation": {
+			"type": "string",
+			"description": "Optional citation for the quote"
+		},
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"pullquote"
+			]
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant"
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles"
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"blockquote"
+			],
+			"default": "blockquote"
+		},
+		"textAlign": {
+			"type": "Alignment",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "match-parent"
+		},
+		"textColor": {
+			"type": "ThemeColor",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		}
+	},
+	"content": {
+		"type": "string",
+		"description": "Plain text or basic HTML",
+		"required": true
+	}
 }

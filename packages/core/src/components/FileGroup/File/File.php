@@ -38,7 +38,7 @@ class File extends Renderable {
 		$this->uploadDate = $attributes['uploadDate'] ?? null;
 		$this->iconPrefix = $attributes['iconPrefix'] ?? $this->iconPrefix;
 
-		if (isset($attributes['icon'])) {
+		if(isset($attributes['icon'])) {
 			$this->icon = $attributes['icon']; // TODO: Sanitisation/validation of icon class name
 		}
 		else {
@@ -62,7 +62,7 @@ class File extends Renderable {
 			['href' => $this->url]
 		);
 
-		if ($this->colorTheme) {
+		if($this->colorTheme) {
 			$attributes['data-color-theme'] = $this->colorTheme->value;
 		}
 

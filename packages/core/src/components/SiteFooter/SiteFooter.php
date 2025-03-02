@@ -19,9 +19,9 @@ class SiteFooter extends UIComponent {
 
 		$this->innerComponents = array(
 			new Container(
-				// Attributes
+			// Attributes
 				[
-					'size' => $this->size->value,
+					'size'        => $this->size->value,
 					'withWrapper' => false
 				],
 				// Inner components
@@ -38,7 +38,7 @@ class SiteFooter extends UIComponent {
 	protected function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
 
-		if (isset($this->backgroundColor)) {
+		if(isset($this->backgroundColor)) {
 			$classes[] = 'bg-' . $this->backgroundColor->value;
 		}
 

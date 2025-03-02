@@ -6,6 +6,7 @@
 	"author": "Leesa Ward",
 	"devDependencies": {
 		"@rollup/plugin-node-resolve": "^16.0.0",
+		"blade-formatter": "^1.42.2",
 		"rollup": "^4.34.8"
 	},
 	"scripts": {

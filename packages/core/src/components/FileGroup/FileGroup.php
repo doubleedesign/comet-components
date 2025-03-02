@@ -12,7 +12,7 @@ class FileGroup extends UIComponent {
 	 */
 	function __construct(array $attributes, array $files) {
 		$this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
-		$innerComponents = array_map(function ($file) {
+		$innerComponents = array_map(function($file) {
 			if($file instanceof File) {
 				return $file;
 			}

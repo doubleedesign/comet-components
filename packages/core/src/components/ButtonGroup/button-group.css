@@ -1,28 +1,27 @@
 .button-group {
-  display: flex;
-  gap: var(--spacing-sm);
-  padding-block: var(--spacing-sm);
+	display: flex;
+	gap: var(--spacing-sm);
+	padding-block: var(--spacing-sm);
 }
 .button-group--halign-start {
-  justify-content: flex-start;
+	justify-content: flex-start;
 }
 .button-group--halign-center {
-  justify-content: center;
+	justify-content: center;
 }
 .button-group--halign-end {
-  justify-content: flex-end;
+	justify-content: flex-end;
 }
 .button-group--stacked {
-  flex-direction: column;
+	flex-direction: column;
 }
 .button-group--stacked.button-group--halign-start {
-  align-items: flex-start;
+	align-items: flex-start;
 }
 .button-group--stacked.button-group--halign-center {
-  align-items: center;
+	align-items: center;
 }
 .button-group--stacked.button-group--halign-end {
-  align-items: flex-end;
+	align-items: flex-end;
 }
-
 /*# sourceMappingURL=button-group.css.map */

@@ -19,19 +19,19 @@ class SiteHeader extends LayoutComponent {
 		$this->logoUrl = $attributes['logoUrl'] ?? null;
 		$logo = isset($attributes['logoUrl'])
 			? new Image([
-				'src' => $this->logoUrl,
-				'alt' => 'Site logo',
-				'href' => '/',
+				'src'     => $this->logoUrl,
+				'alt'     => 'Site logo',
+				'href'    => '/',
 				'classes' => ['site-header__logo']
 			])
 			: null;
 
 		$this->innerComponents = array(
 			new Container(
-				// Attributes
+			// Attributes
 				[
-					'size' => $this->size->value,
-					'tagName' => 'div',
+					'size'        => $this->size->value,
+					'tagName'     => 'div',
 					'withWrapper' => false,
 				],
 				// Inner components
@@ -50,7 +50,7 @@ class SiteHeader extends LayoutComponent {
 	protected function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
 
-		if (isset($this->backgroundColor)) {
+		if(isset($this->backgroundColor)) {
 			$classes[] = 'bg-' . $this->backgroundColor->value;
 		}
 

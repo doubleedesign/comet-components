@@ -1,67 +1,67 @@
 {
-    "name": "Button",
-    "extends": "Renderable",
-    "abstract": false,
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "button",
-                "button--primary"
-            ],
-            "inherited": true
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ]
-        },
-        "context": {
-            "type": "string",
-            "description": "The parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "isOutline": {
-            "type": "bool",
-            "description": "Whether to use outline style instead of solid/filled",
-            "default": "false"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "a",
-                "button"
-            ],
-            "default": "a",
-            "inherited": true
-        }
-    },
-    "content": {
-        "type": "string",
-        "description": "Plain text or basic HTML",
-        "required": true
-    }
+	"name": "Button",
+	"extends": "Renderable",
+	"abstract": false,
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"button",
+				"button--primary"
+			],
+			"inherited": true
+		},
+		"colorTheme": {
+			"type": "ThemeColor",
+			"description": "Colour keyword for the fill or outline colour",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		},
+		"context": {
+			"type": "string",
+			"description": "The parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"isOutline": {
+			"type": "bool",
+			"description": "Whether to use outline style instead of solid/filled",
+			"default": "false"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"a",
+				"button"
+			],
+			"default": "a",
+			"inherited": true
+		}
+	},
+	"content": {
+		"type": "string",
+		"description": "Plain text or basic HTML",
+		"required": true
+	}
 }
