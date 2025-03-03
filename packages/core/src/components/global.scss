@@ -51,6 +51,66 @@ body {
 	line-height: 1.4;
 }
 
+// Default alignments. Note that components can override with their own stuff that they do with these values,
+// for example orientation for Tabs is about where the tablist is.
+[data-valign="start"] {
+	align-items: flex-start;
+}
+
+[data-valign="center"] {
+	align-items: center;
+}
+
+[data-valign="end"] {
+	align-items: flex-end;
+}
+
+[data-halign="start"] {
+	justify-content: flex-start;
+}
+
+[data-halign="center"] {
+	justify-content: center;
+}
+
+[data-halign="end"] {
+	justify-content: flex-end;
+}
+
+[data-orientation="vertical"] {
+	flex-direction: column;
+
+	[data-valign="start"],
+	&[data-valign="start"] {
+		align-items: flex-start;
+	}
+
+	[data-valign="center"],
+	&[data-valign="center"] {
+		align-items: center;
+	}
+
+	[data-valign="end"],
+	&[data-valign="end"] {
+		align-items: flex-end;
+	}
+
+	[data-halign="start"],
+	&[data-halign="start"] {
+		justify-content: flex-start;
+	}
+
+	[data-halign="center"],
+	&[data-halign="center"] {
+		justify-content: center;
+	}
+
+	[data-halign="end"],
+	&[data-halign="end"] {
+		justify-content: flex-end;
+	}
+}
+
 @each $name, $color in $colors {
 	.bg-#{$name} {
 		background-color: var(--color-#{$name});

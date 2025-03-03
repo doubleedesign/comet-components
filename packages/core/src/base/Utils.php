@@ -80,6 +80,13 @@ class Utils {
 			$className = 'ButtonGroup';
 		}
 
+		if($shortName === 'image-and-text-image-wrapper') {
+			$className = 'ImageWrapper';
+		}
+		if($shortName === 'image-and-text-content') {
+			$className = 'ContentWrapper';
+		}
+
 		return sprintf('%s\\%s', __NAMESPACE__, $className);
 	}
 

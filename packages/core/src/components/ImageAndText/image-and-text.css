@@ -1,0 +1,27 @@
+.image-and-text {
+  display: flex;
+  position: relative;
+}
+.image-and-text__image, .image-and-text__content {
+  display: flex;
+}
+[data-orientation=horizontal] .image-and-text__image, [data-orientation=horizontal] .image-and-text__content {
+  display: contents;
+}
+.image-and-text__image img {
+  max-width: 100%;
+}
+[data-orientation=vertical] .image-and-text__content:first-child {
+  margin-block-end: var(--overlay-amount);
+}
+[data-orientation=horizontal] .image-and-text__content:first-child {
+  margin-inline-end: var(--overlay-amount);
+}
+[data-orientation=vertical] .image-and-text__content:last-child {
+  margin-block-start: var(--overlay-amount);
+}
+[data-orientation=horizontal] .image-and-text__content:last-child {
+  margin-inline-start: var(--overlay-amount);
+}
+
+/*# sourceMappingURL=image-and-text.css.map */

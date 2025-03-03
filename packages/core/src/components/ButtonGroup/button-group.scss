@@ -1,36 +1,7 @@
 @use '../mixins' as *;
 
 .button-group {
-	$parent: &;
 	display: flex;
 	gap: var(--spacing-sm);
 	padding-block: var(--spacing-sm);
-
-	&--halign-start {
-		justify-content: flex-start;
-	}
-
-	&--halign-center {
-		justify-content: center;
-	}
-
-	&--halign-end {
-		justify-content: flex-end;
-	}
-
-	&--stacked {
-		flex-direction: column;
-
-		&#{$parent}--halign-start {
-			align-items: flex-start;
-		}
-
-		&#{$parent}--halign-center {
-			align-items: center;
-		}
-
-		&#{$parent}--halign-end {
-			align-items: flex-end;
-		}
-	}
 }

@@ -66,16 +66,4 @@
 			gap: var(--spacing-lg);
 		}
 	}
-
-	&--halign-start {
-		justify-content: flex-start;
-	}
-
-	&--halign-center {
-		justify-content: center;
-	}
-
-	&--halign-end {
-		justify-content: flex-end;
-	}
 }

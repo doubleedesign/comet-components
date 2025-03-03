@@ -50,7 +50,7 @@ abstract class Renderable {
 		$this->set_tag($attributes['tagName'] ?? null);
 		$this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
 		$this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
-		$this->context = $attributes['context'] ?? null;
+		$this->context = $attributes['context'] ?? $this->context;
 		$this->bladeFile = $bladeFile;
 		$this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
 

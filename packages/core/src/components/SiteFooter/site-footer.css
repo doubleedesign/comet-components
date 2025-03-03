@@ -16,5 +16,8 @@
   display: block;
   margin-block-end: var(--spacing-sm);
 }
+.site-footer__menu-list .menu-list {
+  margin-inline-start: 0;
+}
 
 /*# sourceMappingURL=site-footer.css.map */

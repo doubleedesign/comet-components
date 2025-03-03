@@ -48,14 +48,5 @@
     gap: var(--spacing-lg);
   }
 }
-.columns--halign-start {
-  justify-content: flex-start;
-}
-.columns--halign-center {
-  justify-content: center;
-}
-.columns--halign-end {
-  justify-content: flex-end;
-}
 
 /*# sourceMappingURL=columns.css.map */

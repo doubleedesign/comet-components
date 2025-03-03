@@ -1,52 +1,53 @@
 .breadcrumbs__list {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	gap: var(--spacing-xs);
-	margin-block: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-xs);
+  margin-block: var(--spacing-md);
 }
 .breadcrumbs__list__item {
-	display: flex;
-	font-size: 0.9rem;
+  display: flex;
+  font-size: 0.9rem;
 }
 .breadcrumbs__list__item a {
-	color: inherit;
-	display: block;
-	opacity: 0.75;
-	text-decoration: underline;
-	text-decoration-color: transparent;
+  color: inherit;
+  display: block;
+  opacity: 0.75;
+  text-decoration: underline;
+  text-decoration-color: transparent;
 }
 .breadcrumbs__list__item a:hover, .breadcrumbs__list__item a:focus, .breadcrumbs__list__item a:active {
-	opacity: 1;
-	text-decoration-color: currentColor;
+  opacity: 1;
+  text-decoration-color: currentColor;
 }
 .breadcrumbs__list__item::after {
-	content: "/";
-	padding-inline-start: var(--spacing-xs);
-	opacity: 0.4;
+  content: "/";
+  padding-inline-start: var(--spacing-xs);
+  opacity: 0.4;
 }
 .bg-primary .breadcrumbs__list {
-	color: var(--readable-color-primary);
+  color: var(--readable-color-primary);
 }
 .bg-secondary .breadcrumbs__list {
-	color: var(--readable-color-secondary);
+  color: var(--readable-color-secondary);
 }
 .bg-accent .breadcrumbs__list {
-	color: var(--readable-color-accent);
+  color: var(--readable-color-accent);
 }
 .bg-warning .breadcrumbs__list {
-	color: var(--readable-color-warning);
+  color: var(--readable-color-warning);
 }
 .bg-error .breadcrumbs__list {
-	color: var(--readable-color-error);
+  color: var(--readable-color-error);
 }
 .bg-light .breadcrumbs__list {
-	color: var(--readable-color-light);
+  color: var(--readable-color-light);
 }
 .bg-dark .breadcrumbs__list {
-	color: var(--readable-color-dark);
+  color: var(--readable-color-dark);
 }
 .bg-white .breadcrumbs__list {
-	color: var(--readable-color-white);
+  color: var(--readable-color-white);
 }
+
 /*# sourceMappingURL=breadcrumbs.css.map */

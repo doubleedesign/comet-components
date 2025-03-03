@@ -61,6 +61,7 @@
 	&[data-orientation="vertical"] {
 		container-type: inline-size;
 		display: flex;
+		flex-direction: row;
 
 		.tabs__tab-list {
 			width: 100%;

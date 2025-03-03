@@ -1,24 +1,6 @@
 .column {
 	min-width: 0; // prevents overflowing content from widening the column in grid layouts
-
-	&--valign-start,
-	&--valign-center,
-	&--valign-end {
-		display: flex;
-		flex-direction: column;
-	}
-
-	&--valign-start {
-		justify-content: flex-start;
-	}
-
-	&--valign-center {
-		justify-content: center;
-	}
-
-	&--valign-end {
-		justify-content: flex-end;
-	}
+	display: flex;
 
 	&__inner {
 		display: flow-root;

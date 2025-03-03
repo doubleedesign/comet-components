@@ -20,6 +20,10 @@
 				display: block;
 				margin-block-end: var(--spacing-sm);
 			}
+
+			.menu-list {
+				margin-inline-start: 0;
+			}
 		}
 	}
 }

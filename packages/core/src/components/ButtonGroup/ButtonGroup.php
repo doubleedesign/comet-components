@@ -19,19 +19,24 @@ class ButtonGroup extends UIComponent {
 		$this->set_halign_from_attrs($attributes);
 	}
 
-	function get_filtered_classes(): array {
-		$classes = parent::get_filtered_classes();
+	protected function get_html_attributes(): array {
+		$attributes = parent::get_html_attributes();
+
+		if(isset($this->orientation)) {
+			$attributes['data-orientation'] = $this->orientation->value;
+		}
 
 		if(isset($this->hAlign)) {
-			$classes[] = $this->shortName . '--halign-' . $this->hAlign->value;
+			$attributes['data-halign'] = $this->hAlign->value;
 		}
 
-		if(isset($this->orientation) && $this->orientation == Orientation::VERTICAL) {
-			$classes[] = $this->shortName . '--stacked';
+		if(isset($this->vAlign)) {
+			$attributes['data-valign'] = $this->vAlign->value;
 		}
 
-		return $classes;
+		return $attributes;
 	}
+
 
 	public function render(): void {
 		$blade = BladeService::getInstance();

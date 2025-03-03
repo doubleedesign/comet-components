@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["site-footer.scss","../_mixins.scss"],"names":[],"mappings":"AAEA;EACC;;ACMA;EDPD;IAIE;;;AAGD;EACC;;AAKA;EACC;;AAEA;EACC;EACA","file":"site-footer.css"}
+{"version":3,"sourceRoot":"","sources":["site-footer.scss","../_mixins.scss"],"names":[],"mappings":"AAEA;EACC;;ACMA;EDPD;IAIE;;;AAGD;EACC;;AAKA;EACC;;AAEA;EACC;EACA;;AAGD;EACC","file":"site-footer.css"}
