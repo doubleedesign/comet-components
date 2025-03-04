@@ -30,6 +30,7 @@
 .button--primary:not([class*="--outline"]):hover, .button--primary:not([class*="--outline"]):focus, .button--primary:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-primary) 80%, black);
   border-color: color-mix(in srgb, var(--color-primary) 80%, black);
+  color: var(--readable-color-primary);
 }
 .button--primary--outline {
   border: 1px solid var(--color-primary);
@@ -37,7 +38,8 @@
   color: var(--color-primary);
 }
 .button--primary--outline:hover, .button--primary--outline:focus, .button--primary--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-primary);
+  background: var(--color-primary);
+  color: var(--readable-color-primary);
 }
 .button--secondary:not([class*="--outline"]) {
   background-color: var(--color-secondary);
@@ -47,6 +49,7 @@
 .button--secondary:not([class*="--outline"]):hover, .button--secondary:not([class*="--outline"]):focus, .button--secondary:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-secondary) 80%, black);
   border-color: color-mix(in srgb, var(--color-secondary) 80%, black);
+  color: var(--readable-color-secondary);
 }
 .button--secondary--outline {
   border: 1px solid var(--color-secondary);
@@ -54,7 +57,8 @@
   color: var(--color-secondary);
 }
 .button--secondary--outline:hover, .button--secondary--outline:focus, .button--secondary--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-secondary);
+  background: var(--color-secondary);
+  color: var(--readable-color-secondary);
 }
 .button--accent:not([class*="--outline"]) {
   background-color: var(--color-accent);
@@ -64,6 +68,7 @@
 .button--accent:not([class*="--outline"]):hover, .button--accent:not([class*="--outline"]):focus, .button--accent:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-accent) 80%, black);
   border-color: color-mix(in srgb, var(--color-accent) 80%, black);
+  color: var(--readable-color-accent);
 }
 .button--accent--outline {
   border: 1px solid var(--color-accent);
@@ -71,7 +76,8 @@
   color: var(--color-accent);
 }
 .button--accent--outline:hover, .button--accent--outline:focus, .button--accent--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-accent);
+  background: var(--color-accent);
+  color: var(--readable-color-accent);
 }
 .button--warning:not([class*="--outline"]) {
   background-color: var(--color-warning);
@@ -81,6 +87,7 @@
 .button--warning:not([class*="--outline"]):hover, .button--warning:not([class*="--outline"]):focus, .button--warning:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-warning) 80%, black);
   border-color: color-mix(in srgb, var(--color-warning) 80%, black);
+  color: var(--readable-color-warning);
 }
 .button--warning--outline {
   border: 1px solid var(--color-warning);
@@ -88,7 +95,8 @@
   color: var(--color-warning);
 }
 .button--warning--outline:hover, .button--warning--outline:focus, .button--warning--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-warning);
+  background: var(--color-warning);
+  color: var(--readable-color-warning);
 }
 .button--error:not([class*="--outline"]) {
   background-color: var(--color-error);
@@ -98,6 +106,7 @@
 .button--error:not([class*="--outline"]):hover, .button--error:not([class*="--outline"]):focus, .button--error:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-error) 80%, black);
   border-color: color-mix(in srgb, var(--color-error) 80%, black);
+  color: var(--readable-color-error);
 }
 .button--error--outline {
   border: 1px solid var(--color-error);
@@ -105,7 +114,8 @@
   color: var(--color-error);
 }
 .button--error--outline:hover, .button--error--outline:focus, .button--error--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-error);
+  background: var(--color-error);
+  color: var(--readable-color-error);
 }
 .button--light:not([class*="--outline"]) {
   background-color: var(--color-light);
@@ -115,6 +125,7 @@
 .button--light:not([class*="--outline"]):hover, .button--light:not([class*="--outline"]):focus, .button--light:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-light) 80%, black);
   border-color: color-mix(in srgb, var(--color-light) 80%, black);
+  color: var(--readable-color-light);
 }
 .button--light--outline {
   border: 1px solid var(--color-light);
@@ -122,7 +133,8 @@
   color: var(--color-light);
 }
 .button--light--outline:hover, .button--light--outline:focus, .button--light--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-light);
+  background: var(--color-light);
+  color: var(--readable-color-light);
 }
 .button--dark:not([class*="--outline"]) {
   background-color: var(--color-dark);
@@ -132,6 +144,7 @@
 .button--dark:not([class*="--outline"]):hover, .button--dark:not([class*="--outline"]):focus, .button--dark:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-dark) 80%, black);
   border-color: color-mix(in srgb, var(--color-dark) 80%, black);
+  color: var(--readable-color-dark);
 }
 .button--dark--outline {
   border: 1px solid var(--color-dark);
@@ -139,7 +152,8 @@
   color: var(--color-dark);
 }
 .button--dark--outline:hover, .button--dark--outline:focus, .button--dark--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-dark);
+  background: var(--color-dark);
+  color: var(--readable-color-dark);
 }
 .button--white:not([class*="--outline"]) {
   background-color: var(--color-white);
@@ -149,6 +163,7 @@
 .button--white:not([class*="--outline"]):hover, .button--white:not([class*="--outline"]):focus, .button--white:not([class*="--outline"]):active {
   background-color: color-mix(in srgb, var(--color-white) 80%, black);
   border-color: color-mix(in srgb, var(--color-white) 80%, black);
+  color: var(--readable-color-white);
 }
 .button--white--outline {
   border: 1px solid var(--color-white);
@@ -156,7 +171,8 @@
   color: var(--color-white);
 }
 .button--white--outline:hover, .button--white--outline:focus, .button--white--outline:active {
-  box-shadow: inset 0 0 0 1px var(--color-white);
+  background: var(--color-white);
+  color: var(--readable-color-white);
 }
 
 /*# sourceMappingURL=button.css.map */
