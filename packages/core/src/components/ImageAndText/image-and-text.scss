@@ -1,14 +1,10 @@
 .image-and-text {
 	display: flex;
-	position: relative;
+	flex-direction: column;
 
 	&__image,
 	&__content {
 		display: flex;
-
-		[data-orientation="horizontal"] & {
-			display: contents;
-		}
 	}
 
 	&__image {
@@ -19,25 +15,15 @@
 	}
 
 	&__content {
+		position: relative;
+		z-index: 200;
 
-		&:first-child {
-			[data-orientation="vertical"] & {
-				margin-block-end: var(--overlay-amount);
-			}
-
-			[data-orientation="horizontal"] & {
-				margin-inline-end: var(--overlay-amount);
-			}
+		&:nth-of-type(1) {
+			margin-block-end: var(--overlay-amount);
 		}
 
-		&:last-child {
-			[data-orientation="vertical"] & {
-				margin-block-start: var(--overlay-amount);
-			}
-
-			[data-orientation="horizontal"] & {
-				margin-inline-start: var(--overlay-amount);
-			}
+		&:nth-of-type(2) {
+			margin-block-start: var(--overlay-amount);
 		}
 	}
 }
