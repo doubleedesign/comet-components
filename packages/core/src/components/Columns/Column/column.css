@@ -4,6 +4,7 @@
 }
 .column__inner {
   display: flow-root;
+  width: 100%;
 }
 
 /*# sourceMappingURL=column.css.map */
