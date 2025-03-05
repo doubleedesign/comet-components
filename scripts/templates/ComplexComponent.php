@@ -1,10 +1,12 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
 class ComplexComponent extends UIComponent {
-    function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.ThisComponent.this-component');
-    }
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents, 'components.ThisComponent.this-component');
+	}
 
 	#[NotImplemented]
 	function render(): void {
