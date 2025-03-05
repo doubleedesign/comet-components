@@ -1,0 +1,33 @@
+@use '../variables' as *;
+
+.separator {
+	border: 0;
+	margin: var(--spacing-lg) 0;
+	height: 2px;
+
+	@each $name, $color in $colors {
+		&[data-color-theme="#{$name}"] {
+			background-color: var(--color-#{$name});
+		}
+	}
+
+	&--dots {
+		background-color: transparent !important;
+		text-align: center;
+		height: 2rem;
+
+		@each $name, $color in $colors {
+			&[data-color-theme="#{$name}"] {
+				&:before {
+					color: var(--color-#{$name});
+				}
+			}
+		}
+
+		&:before {
+			content: "······";
+			font-size: 2rem;
+			letter-spacing: 2rem;
+		}
+	}
+}
