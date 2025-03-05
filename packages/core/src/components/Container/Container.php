@@ -29,28 +29,32 @@ class Container extends UIComponent {
 
 	protected function get_filtered_classes(): array {
 		$classes = array_filter(parent::get_filtered_classes(), function($class) {
-			return !in_array($class, ['is-style-wide', 'is-style-fullwidth', 'is-style-narrow']);
+			// Filter out WordPress + other classes used for the size (size is applied elsewhere)
+			return !in_array($class, ['is-style-wide', 'is-style-fullwidth', 'is-style-narrow', 'container--wide', 'container--fullwidth', 'container--narrow']);
 		});
-
-		if($this->size !== ContainerSize::DEFAULT) {
-			array_push($classes, "container--{$this->size->value}");
-		}
 
 		return array_unique($classes);
 	}
 
 	protected function get_outer_classes(): array {
-		$classes = ['page-section'];
+		return ['page-section'];
+	}
+
+	protected function get_html_attributes(): array {
+		$attributes = parent::get_html_attributes();
+
+		if(isset($this->size) && $this->size !== ContainerSize::DEFAULT) {
+			$attributes['data-size'] = $this->size->value;
+		}
 
 		if(isset($this->backgroundColor)) {
-			array_push($classes, 'bg-' . $this->backgroundColor->value);
+			$attributes['data-background'] = $this->backgroundColor->value;
+		}
+		else if(isset($this->gradient)) {
+			$attributes['data-background'] = 'gradient-' . $this->gradient;
 		}
 
-		if(isset($this->gradient)) {
-			array_push($classes, 'bg-gradient-' . $this->gradient);
-		}
-
-		return $classes;
+		return $attributes;
 	}
 
 	function render(): void {

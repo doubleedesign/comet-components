@@ -12,21 +12,7 @@ abstract class LayoutComponent extends UIComponent {
 		$this->set_halign_from_attrs($attributes);
 		$this->set_valign_from_attrs($attributes);
 	}
-
-	/**
-	 * Add classes for the relevant attributes
-	 * @return array|string[]
-	 */
-	protected function get_filtered_classes(): array {
-		$classes = parent::get_filtered_classes();
-
-		if(isset($this->backgroundColor)) {
-			$classes[] = 'bg-' . $this->backgroundColor->value;
-		}
-
-		return $classes;
-	}
-
+	
 	protected function get_html_attributes(): array {
 		$attributes = parent::get_html_attributes();
 
@@ -38,16 +24,11 @@ abstract class LayoutComponent extends UIComponent {
 			$attributes['data-valign'] = $this->vAlign->value;
 		}
 
-		return $attributes;
-	}
+		if(isset($this->backgroundColor)) {
+			$attributes['data-background'] = $this->backgroundColor->value;
+		}
 
-	/**
-	 * Build the inline styles (style attribute) as a single string
-	 * using the relevant supported attributes
-	 * @return array<string, string>
-	 */
-	protected function get_inline_styles(): array {
-		return [];
+		return $attributes;
 	}
 
 	/**

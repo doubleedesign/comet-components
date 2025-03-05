@@ -14,21 +14,14 @@
 
 	// Handle same colour adjacent sections
 	@each $name, $color in $colors {
-		&.bg-#{$name} + &.bg-#{$name} {
+		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
 			padding-block-start: 0;
 		}
 	}
 
-	// When neither section has a bg class, do the same as if they had the same background colour class
-	&:not([class*="bg-"]) + &:not([class*="bg-"]) {
+	// If no bg colour, handle them as adjacent
+	&:not([data-background]) + &:not([data-background]) {
 		padding-block-start: 0;
-	}
-
-	// When directly following PageHeader with white background, also remove top padding
-	+ &:not([class*="bg-"]) {
-		.page-header.bg-white & {
-			padding-block-start: 0;
-		}
 	}
 }
 
@@ -39,15 +32,18 @@
 	max-width: var(--width-contained);
 	padding-inline: var(--spacing-sm);
 
-	&--fullwidth {
+	[data-size="fullwidth"],
+	[data-size="fullwidth"] & {
 		max-width: 100vw;
 	}
 
-	&--wide {
+	[data-size="wide"],
+	[data-size="wide"] & {
 		max-width: var(--width-wide);
 	}
 
-	&--narrow {
+	[data-size="narrow"],
+	[data-size="narrow"] & {
 		max-width: var(--width-narrow);
 	}
 }

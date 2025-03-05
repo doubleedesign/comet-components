@@ -47,14 +47,14 @@ class SiteHeader extends LayoutComponent {
 		$this->set_size_from_attrs($attributes);
 	}
 
-	protected function get_filtered_classes(): array {
-		$classes = parent::get_filtered_classes();
+	protected function get_html_attributes(): array {
+		$attributes = parent::get_html_attributes();
 
 		if(isset($this->backgroundColor)) {
-			$classes[] = 'bg-' . $this->backgroundColor->value;
+			$attributes['data-background'] = $this->backgroundColor->value;
 		}
 
-		return $classes;
+		return $attributes;
 	}
 
 	function render(): void {

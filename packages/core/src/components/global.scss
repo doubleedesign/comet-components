@@ -112,27 +112,26 @@ body {
 }
 
 @each $name, $color in $colors {
-	.bg-#{$name} {
+	[data-background="#{$name}"] {
 		background-color: var(--color-#{$name});
 		color: var(--readable-color-#{$name});
 	}
 
-	.bg-#{$name} + [class*="bg-gradient-#{$name}"] {
+	[data-background="#{$name}"] + [data-background*="gradient-#{$name}"] {
 		padding-block-start: 0;
 	}
 
-	[class*="bg-gradient-"][class*="-#{$name}"] + .bg-#{$name} {
+	[data-background*="gradient-"][data-background*="-#{$name}"] + [data-background="#{$name}"] {
 		padding-block-start: 0;
 	}
 
 	@each $name2, $color2 in $colors {
-		.bg-gradient-#{$name}-#{$name2} {
-			background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%,
-				var(--color-#{$name2}) 100%);
+		[data-background="gradient-#{$name}-#{$name2}"] {
+			background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
 		}
 	}
 
-	.color-#{$name} {
+	[data-text-color="#{$name}"] {
 		color: var(--color-#{$name});
 	}
 }

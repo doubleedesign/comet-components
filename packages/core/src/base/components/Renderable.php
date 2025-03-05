@@ -148,7 +148,7 @@ abstract class Renderable {
 		$result = array_merge(
 			[$this->get_bem_name()],
 			array_filter($current_classes, function($class) use ($redundant_classes) {
-				return !in_array($class, $redundant_classes);
+				return !in_array($class, $redundant_classes) && !str_starts_with($class, 'wp-elements-');
 			})
 		);
 
@@ -217,7 +217,7 @@ abstract class Renderable {
 	 * @return array<string, string>
 	 */
 	protected function get_inline_styles(): array {
-		return [];
+		return $this->style ?? [];
 	}
 
 	abstract function render(): void;
