@@ -1,0 +1,60 @@
+.banner {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	height: 100vh; // allow plenty of space for the min-height and max-height that may be added inline to work
+
+	&__image {
+		height: 100%;
+		width: 100%;
+		position: relative;
+
+		.image {
+			display: contents;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		// Parallax version
+		&[data-parallax="true"] {
+			clip-path: inset(0 0 0 0);
+
+			.image {
+				position: static;
+				height: 100%;
+			}
+
+			img {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				object-fit: cover;
+				object-position: center bottom;
+				z-index: 1;
+			}
+		}
+	}
+
+	&__content,
+	&__overlay {
+		position: absolute;
+		inset: 0 0 0 0;
+	}
+
+	&__content {
+		z-index: 100;
+		display: flex;
+
+		&__inner {
+			@container (max-width:768px) {
+				max-width: 100% !important;
+			}
+		}
+	}
+}
