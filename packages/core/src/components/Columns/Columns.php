@@ -36,20 +36,15 @@ class Columns extends LayoutComponent {
 
 		parent::__construct($attributes, $updatedInnerComponents ?? $innerComponents, 'components.Columns.columns');
 	}
-
-	function get_filtered_classes(): array {
-		return array_merge(
-			parent::get_filtered_classes(),
-			["columns--$this->qty"]
-		);
-	}
-
+	
 	function get_html_attributes(): array {
 		$attributes = parent::get_html_attributes();
 
 		if($this->allowStacking) {
 			$attributes['data-allow-layout-stacking'] = 'true';
 		}
+
+		$attributes['data-count'] = $this->qty;
 
 		return $attributes;
 	}

@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-#[AllowedTags([Tag::DIV])]
+#[AllowedTags([Tag::DIV, Tag::MAIN, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
 class Column extends LayoutComponent {
 	/**
@@ -12,10 +12,11 @@ class Column extends LayoutComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct(
-			array_merge($attributes, ['context' => 'columns']),
+			array_merge(['context' => 'columns'], $attributes),
 			$innerComponents,
 			'components.Columns.Column.column');
 		$this->width = $attributes['width'] ?? null;
+		$this->tagName = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::DIV;
 	}
 
 	public function get_width() {

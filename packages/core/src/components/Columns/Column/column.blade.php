@@ -1,4 +1,4 @@
-<div @if ($classes) @class($classes) @endif @attributes($attributes)>
+<{{$tag}} @if ($classes) @class($classes) @endif @attributes($attributes)>
 	<div class="column__inner">
 	    @foreach ($children as $child)
 	        @if (method_exists($child, 'render'))
@@ -6,4 +6,4 @@
 	        @endif
 	    @endforeach
 	</div>
-</div>
+</{{$tag}}>
