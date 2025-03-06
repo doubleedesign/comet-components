@@ -1,6 +1,7 @@
 <?php
-use Doubleedesign\Comet\Core\{SiteHeader,Menu};
+use Doubleedesign\Comet\Core\{SiteHeader, Menu};
 use Doubleedesign\CometCanvas\NavMenus;
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> lang="en">
@@ -12,7 +13,7 @@ use Doubleedesign\CometCanvas\NavMenus;
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class('frontend'); ?>>
 <?php wp_body_open(); ?>
 
 <?php
@@ -24,5 +25,6 @@ $headerComponent = new SiteHeader(['logoUrl' => $logoUrl, 'backgroundColor' => '
 $headerComponent->render();
 ?>
 
-<!--<a class="skip-link screen-reader-text" href="#primary">--><?php //esc_html_e('Skip to content', 'comet'); ?><!--</a>-->
+<!--<a class="skip-link screen-reader-text" href="#primary">-->
+<?php //esc_html_e('Skip to content', 'comet'); ?><!--</a>-->
 
