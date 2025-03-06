@@ -1,61 +1,61 @@
 {
-	"name": "Accordion",
-	"extends": "UIComponent",
-	"abstract": false,
-	"attributes": {
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"default": [
-				"accordion"
-			],
-			"inherited": true
-		},
-		"colorTheme": {
-			"type": "ThemeColor",
-			"description": "Colour keyword for the fill or outline colour",
-			"supported": [
-				"primary",
-				"secondary",
-				"accent",
-				"error",
-				"success",
-				"warning",
-				"info",
-				"light",
-				"dark",
-				"white"
-			],
-			"default": "primary"
-		},
-		"context": {
-			"type": "string",
-			"description": "The parent component or variant if contextually relevant",
-			"inherited": true
-		},
-		"id": {
-			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"style": {
-			"type": "array",
-			"description": "Inline styles",
-			"inherited": true
-		},
-		"tagName": {
-			"type": "Tag",
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"div"
-			],
-			"default": "div",
-			"inherited": true
-		}
-	},
-	"innerComponents": {
-		"type": "array<AccordionPanel>",
-		"description": "Inner components to be rendered within this component",
-		"required": true
-	}
+    "name": "Accordion",
+    "extends": "UIComponent",
+    "abstract": false,
+    "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "accordion"
+            ],
+            "inherited": true
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for the fill or outline colour",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "primary"
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+            "inherited": true
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div"
+            ],
+            "default": "div",
+            "inherited": true
+        }
+    },
+    "innerComponents": {
+        "type": "array<AccordionPanel>",
+        "description": "Inner components to be rendered within this component",
+        "required": true
+    }
 }

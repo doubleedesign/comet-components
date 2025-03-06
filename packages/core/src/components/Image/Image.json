@@ -1,95 +1,95 @@
 {
-	"name": "Image",
-	"extends": "Renderable",
-	"abstract": false,
-	"attributes": {
-		"alt": {
-			"type": "string",
-			"description": "Alternative text",
-			"required": true,
-			"default": ""
-		},
-		"aspectRatio": {
-			"type": "AspectRatio",
-			"description": "Crop image to the given aspect ratio",
-			"supported": [
-				"4:3",
-				"3:4",
-				"1:1",
-				"16:9",
-				"9:16",
-				"3:2",
-				"2:3"
-			]
-		},
-		"caption": {
-			"type": "string",
-			"description": "Optional image caption (to appear below the image)"
-		},
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"supported": [
-				"is-style-rounded"
-			],
-			"default": [
-				"image",
-				"image--scale-contain"
-			]
-		},
-		"context": {
-			"type": "string",
-			"description": "The parent component or variant if contextually relevant",
-			"inherited": true
-		},
-		"height": {
-			"type": "string",
-			"description": "Set a fixed height for the image"
-		},
-		"href": {
-			"type": "string",
-			"description": "URL to link to"
-		},
-		"id": {
-			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"scale": {
-			"type": "string",
-			"description": "How to handle how the image fits the available space",
-			"supported": [
-				"contain",
-				"cover"
-			],
-			"default": "contain"
-		},
-		"src": {
-			"type": "string",
-			"description": "Image source URL",
-			"required": true
-		},
-		"style": {
-			"type": "array",
-			"description": "Inline styles",
-			"inherited": true
-		},
-		"tagName": {
-			"type": "Tag",
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"figure"
-			],
-			"default": "figure",
-			"inherited": true
-		},
-		"title": {
-			"type": "string",
-			"description": "Optional image title (appears on hover)"
-		},
-		"width": {
-			"type": "string",
-			"description": "Set a fixed width for the image"
-		}
-	}
+    "name": "Image",
+    "extends": "Renderable",
+    "abstract": false,
+    "attributes": {
+        "alt": {
+            "type": "string",
+            "description": "Alternative text",
+            "required": true,
+            "default": ""
+        },
+        "aspectRatio": {
+            "type": "AspectRatio",
+            "description": "Crop image to the given aspect ratio",
+            "supported": [
+                "4:3",
+                "3:4",
+                "1:1",
+                "16:9",
+                "9:16",
+                "3:2",
+                "2:3"
+            ]
+        },
+        "caption": {
+            "type": "string",
+            "description": "Optional image caption (to appear below the image)"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "supported": [
+                "is-style-rounded"
+            ],
+            "default": [
+                "image",
+                "image--scale-contain"
+            ]
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+            "inherited": true
+        },
+        "height": {
+            "type": "string",
+            "description": "Set a fixed height for the image"
+        },
+        "href": {
+            "type": "string",
+            "description": "URL to link to"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "scale": {
+            "type": "string",
+            "description": "How to handle how the image fits the available space",
+            "supported": [
+                "contain",
+                "cover"
+            ],
+            "default": "contain"
+        },
+        "src": {
+            "type": "string",
+            "description": "Image source URL",
+            "required": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "figure"
+            ],
+            "default": "figure",
+            "inherited": true
+        },
+        "title": {
+            "type": "string",
+            "description": "Optional image title (appears on hover)"
+        },
+        "width": {
+            "type": "string",
+            "description": "Set a fixed width for the image"
+        }
+    }
 }

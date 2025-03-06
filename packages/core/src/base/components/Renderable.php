@@ -31,7 +31,7 @@ abstract class Renderable {
 	protected ?array $style = null;
 	/**
 	 * @var ?string $context
-	 * @description The parent component or variant if contextually relevant
+	 * @description The kebab-case or BEM name of the parent component or variant if contextually relevant
 	 */
 	protected ?string $context = null;
 	/**

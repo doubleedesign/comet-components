@@ -30,7 +30,7 @@
         },
         "context": {
             "type": "string",
-            "description": "The parent component or variant if contextually relevant",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
             "inherited": true
         },
         "icon": {

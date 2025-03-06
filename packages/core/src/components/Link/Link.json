@@ -1,51 +1,51 @@
 {
-	"name": "Link",
-	"extends": "Renderable",
-	"abstract": false,
-	"attributes": {
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"default": [
-				"link"
-			],
-			"inherited": true
-		},
-		"context": {
-			"type": "string",
-			"description": "The parent component or variant if contextually relevant",
-			"inherited": true
-		},
-		"icon": {
-			"type": "string",
-			"description": "Icon class name; if not set, defaults to one according to whether the link target is set to open in a new tab or not"
-		},
-		"iconPrefix": {
-			"type": "string",
-			"description": "Icon prefix class name"
-		},
-		"id": {
-			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"style": {
-			"type": "array",
-			"description": "Inline styles",
-			"inherited": true
-		},
-		"tagName": {
-			"type": "Tag",
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"a"
-			],
-			"default": "a",
-			"inherited": true
-		}
-	},
-	"content": {
-		"type": "string",
-		"required": true
-	}
+    "name": "Link",
+    "extends": "Renderable",
+    "abstract": false,
+    "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "link"
+            ],
+            "inherited": true
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+            "inherited": true
+        },
+        "icon": {
+            "type": "string",
+            "description": "Icon class name; if not set, defaults to one according to whether the link target is set to open in a new tab or not"
+        },
+        "iconPrefix": {
+            "type": "string",
+            "description": "Icon prefix class name"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "a"
+            ],
+            "default": "a",
+            "inherited": true
+        }
+    },
+    "content": {
+        "type": "string",
+        "required": true
+    }
 }
