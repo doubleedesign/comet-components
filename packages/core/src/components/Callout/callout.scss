@@ -22,5 +22,9 @@
 
 	&__content {
 		flex-grow: 1;
+
+		h2 {
+			margin-block-end: 0;
+		}
 	}
 }

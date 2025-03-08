@@ -39,12 +39,12 @@
     grid-template-columns: repeat(5, 1fr);
   }
 }
-.columns:has(.columns__column--has-own-width) {
+.columns:has(> .columns__column--has-own-width) {
   display: flex;
   gap: var(--spacing-md);
 }
 @container (min-width: 960px) {
-  .columns:has(.columns__column--has-own-width) {
+  .columns:has(> .columns__column--has-own-width) {
     gap: var(--spacing-lg);
   }
 }

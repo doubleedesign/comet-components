@@ -58,7 +58,7 @@
 	}
 
 	// Adjust layout if any of the columns has a preset width
-	&:has(.columns__column--has-own-width) {
+	&:has(> .columns__column--has-own-width) {
 		display: flex;
 		gap: var(--spacing-md);
 
