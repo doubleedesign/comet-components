@@ -179,6 +179,10 @@ p, ul, ol {
 
 ul, ol {
 	margin-inline-start: var(--spacing-md);
+
+	li {
+		margin-block-end: var(--spacing-xxs);
+	}
 }
 
 a {

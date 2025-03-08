@@ -21,12 +21,15 @@
             "inherited": true
         },
         "classes": {
-            "type": "array<string>",
+            "type": "array",
             "description": "CSS classes",
+            "supported": [
+                "group",
+                "group--breakout"
+            ],
             "default": [
                 "group"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
