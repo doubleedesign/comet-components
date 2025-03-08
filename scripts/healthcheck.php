@@ -27,8 +27,8 @@ class Healthcheck {
 		$this->log_with_colour("Summary: ", 'cyan');
 		$this->log_with_colour("Top-level components should have: Blade template, CSS, JSON definition, browser test page, story, unit test.", 'cyan');
 		$this->log_with_colour('Sub-components should have: Blade template, JSON definition.', 'cyan');
-		foreach ($missingFiles as $key => $value) {
-			if (count($value) > 0) {
+		foreach($missingFiles as $key => $value) {
+			if(count($value) > 0) {
 				$this->log_with_colour('Missing ' . $key . ': ' . count($value), 'yellow');
 			}
 			else {
@@ -36,14 +36,14 @@ class Healthcheck {
 			}
 		}
 
-		if (count($unimplementedRender) > 0) {
+		if(count($unimplementedRender) > 0) {
 			$this->log_with_colour('Unimplemented render methods: ' . count($unimplementedRender), 'yellow');
 		}
 		else {
 			$this->log_with_colour('Unimplemented render methods: 0', 'green');
 		}
 
-		if (count($missingScss) > 0) {
+		if(count($missingScss) > 0) {
 			$this->log_with_colour('Missing SCSS imports in WordPress plugin: ' . count($missingScss), 'yellow');
 		}
 		else {
@@ -67,31 +67,31 @@ class Healthcheck {
 			'unit test'      => []
 		];
 
-		foreach ($all as $dir) {
+		foreach($all as $dir) {
 			$componentName = basename($dir);
-			if (!file_exists($dir . '\\' . $componentName . '.json')) {
+			if(!file_exists($dir . '\\' . $componentName . '.json')) {
 				$fileCollections['JSON'][] = $componentName;
 			}
-			if (!glob($dir . '\\*.blade.php')) {
+			if(!glob($dir . '\\*.blade.php')) {
 				$fileCollections['Blade template'][] = $componentName;
 			}
-			if (!file_exists($this->unitTestDir . $componentName . 'Test.php')) {
+			if(!file_exists($this->unitTestDir . $componentName . 'Test.php')) {
 				$fileCollections['unit test'][] = $componentName;
 			}
 		}
 
-		foreach ($topLevel as $dir) {
+		foreach($topLevel as $dir) {
 			$shouldnotHaveOwnCSS = ['Heading', 'ListComponent', 'Paragraph', 'Link', 'Group'];
 			$componentName = basename($dir);
-			if (!file_exists($this->componentDir . $componentName . '\\' . self::kebab_case($componentName) . '.css')) {
-				if (!in_array($componentName, $shouldnotHaveOwnCSS)) {
+			if(!file_exists($this->componentDir . $componentName . '\\' . self::kebab_case($componentName) . '.css')) {
+				if(!in_array($componentName, $shouldnotHaveOwnCSS)) {
 					$fileCollections['CSS'][] = $componentName;
 				}
 			}
-			if (!file_exists($this->testPageDir . self::kebab_case($componentName) . '.php')) {
+			if(!file_exists($this->testPageDir . self::kebab_case($componentName) . '.php')) {
 				$fileCollections['test page'][] = $componentName;
 			}
-			if (!file_exists($this->storyDir . self::kebab_case($componentName) . '.stories.json')) {
+			if(!file_exists($this->storyDir . self::kebab_case($componentName) . '.stories.json')) {
 				$fileCollections['stories'][] = $componentName;
 			}
 		}
@@ -104,8 +104,8 @@ class Healthcheck {
 		$all = $this->get_all_component_directories();
 		$this->log_with_colour("You have " . count($topLevel) . " top level components and " . count($all) - count($topLevel) . " sub-components", 'green');
 
-		foreach ($fileCollections as $key => $value) {
-			if (count($value) > 0) {
+		foreach($fileCollections as $key => $value) {
+			if(count($value) > 0) {
 				$this->log_with_colour(count($value) . ' missing ' . $key . ':', 'yellow');
 				print_r($value);
 			}
@@ -116,33 +116,33 @@ class Healthcheck {
 		$all = $this->get_all_component_directories();
 		$unimplemented = [];
 
-		foreach ($all as $filePath) {
+		foreach($all as $filePath) {
 			// Get file contents
 			$componentName = basename($filePath);
 			$content = file_get_contents($filePath . '\\' . $componentName . '.php');
 
 			// Extract namespace if exists
 			$namespace = '';
-			if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
+			if(preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
 				$namespace = $matches[1] . '\\';
 			}
 			// Extract class name
 			$className = null;
-			if (preg_match('/class\s+(\w+)/', $content, $matches)) {
+			if(preg_match('/class\s+(\w+)/', $content, $matches)) {
 				$className = $namespace . $matches[1];
 			}
 
-			if (!isset($className) || !class_exists($className)) {
+			if(!isset($className) || !class_exists($className)) {
 				$this->log_with_colour('Could not find class ' . $className, 'red');
 				continue;
 			}
 
 			$reflectionClass = new ReflectionClass($className);
-			if ($reflectionClass->hasMethod('render')) {
+			if($reflectionClass->hasMethod('render')) {
 				$renderMethod = $reflectionClass->getMethod('render');
 				$attributes = $renderMethod->getAttributes();
-				if (count($attributes) > 0) {
-					if ($attributes[0]->getName() === "Doubleedesign\Comet\Core\NotImplemented") {
+				if(count($attributes) > 0) {
+					if($attributes[0]->getName() === "Doubleedesign\Comet\Core\NotImplemented") {
 						$unimplemented[] = $className;
 					}
 				}
@@ -153,7 +153,7 @@ class Healthcheck {
 	}
 
 	private function log_unimplemented_render_functions(array $unimplemented): void {
-		if (count($unimplemented) > 0) {
+		if(count($unimplemented) > 0) {
 			$this->log_with_colour('The following components have unimplemented render methods', 'cyan');
 			print_r($unimplemented);
 		}
@@ -163,10 +163,10 @@ class Healthcheck {
 		$all = $this->get_all_component_directories();
 		$scssFiles = [];
 
-		foreach ($all as $dir) {
+		foreach($all as $dir) {
 			$componentName = basename($dir);
 			$scssFileName = self::kebab_case($componentName) . '.scss';
-			if (file_exists($dir . '\\' . $scssFileName)) {
+			if(file_exists($dir . '\\' . $scssFileName)) {
 				$scssFiles[] = trim($scssFileName);
 			}
 		}
@@ -176,10 +176,11 @@ class Healthcheck {
 
 	private function get_wp_blocks_missing_scss_imports(): array {
 		$scssFiles = $this->get_scss_files();
-		$pluginFile = dirname(__DIR__, 1) . '\packages\comet-plugin\src\blocks.scss';
-		$pluginFileContents = file_get_contents($pluginFile);
+		$pluginBlocksFile = dirname(__DIR__, 1) . '\packages\comet-plugin\src\blocks.scss';
+		$pluginTemplatePartsFile = dirname(__DIR__, 1) . '\packages\comet-plugin\src\template-parts.scss';
+		$pluginFileContents = file_get_contents($pluginBlocksFile) . file_get_contents($pluginTemplatePartsFile);
 		$imported = explode("\n", $pluginFileContents);
-		array_walk($imported, function (&$value) {
+		array_walk($imported, function(&$value) {
 			$value = array_reverse(explode('/', $value))[0];
 			$value = trim(str_replace('";', '', $value));
 		});
@@ -188,8 +189,8 @@ class Healthcheck {
 	}
 
 	private function log_wp_blocks_missing_scss_imports(array $missingImports): void {
-		if (count($missingImports) > 0) {
-			$this->log_with_colour('The following SCSS files exist but are not imported in the WordPress plugin blocks.scss file:', 'yellow');
+		if(count($missingImports) > 0) {
+			$this->log_with_colour('The following SCSS files exist but are not imported in the WordPress plugin blocks.scss or template-parts.scss file:', 'yellow');
 			print_r($missingImports);
 		}
 	}
@@ -201,11 +202,11 @@ class Healthcheck {
 	private function get_top_level_component_directories(): array {
 		$contents = scandir($this->componentDir);
 
-		$folders = array_filter($contents, function ($dir) {
+		$folders = array_filter($contents, function($dir) {
 			return is_dir($this->componentDir . '\\' . $dir) && !in_array($dir, ['.', '..']);
 		});
 
-		return array_map(function ($dir) {
+		return array_map(function($dir) {
 			return $this->componentDir . '\\' . $dir;
 		}, array_values($folders));
 	}
@@ -218,14 +219,14 @@ class Healthcheck {
 		$topLevelDirs = $this->get_top_level_component_directories();
 		$allDirs = $topLevelDirs;
 
-		foreach ($topLevelDirs as $dir) {
+		foreach($topLevelDirs as $dir) {
 			$contents = scandir($dir);
 
-			$subDirs = array_filter($contents, function ($subDir) use ($dir) {
+			$subDirs = array_filter($contents, function($subDir) use ($dir) {
 				return is_dir($dir . $subDir) && !in_array($subDir, ['.', '..']);
 			});
 
-			foreach ($subDirs as $subDir) {
+			foreach($subDirs as $subDir) {
 				$allDirs[] = $dir . $subDir;
 			}
 		}
@@ -259,6 +260,6 @@ try {
 	$instance = new Healthcheck();
 	$instance->run();
 }
-catch (Exception $e) {
+catch(Exception $e) {
 	echo "Error: " . $e->getMessage() . "\n";
 }
