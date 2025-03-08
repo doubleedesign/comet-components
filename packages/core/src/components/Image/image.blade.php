@@ -1,22 +1,23 @@
 @if ($caption)
-    <figure @if($classes) @class($classes) @endif @attributes($outerAttrs)>
+    <figure @if ($classes) @class($classes) @endif @attributes($outerAttrs)>
         @if ($href)
             <a href="{{ $href }}">
                 <img src="{{ $src }}" @attributes($attributes)>
             </a>
         @else
-            <img src="{{ $src }}" @class($classes) @attributes($attributes)>
+            <img src="{{ $src }}" @attributes($attributes)>
         @endif
-        <figcaption>{{ $caption }}</figcaption>
+        <figcaption @class($captionClasses)>{{ $caption }}</figcaption>
     </figure>
 @else
     @if ($href)
-        <a href="{{ $href }}" @if ($classes) @class($classes) @endif @attributes($outerAttrs)>
+        <a href="{{ $href }}" @if ($classes) @class($classes) @endif
+            @attributes($outerAttrs)>
             <img src="{{ $src }}" @attributes($attributes)>
         </a>
     @else
         <div @if ($classes) @class($classes) @endif @attributes($outerAttrs)>
-			<img src="{{ $src }}" @attributes($attributes)>
+            <img src="{{ $src }}" @attributes($attributes)>
         </div>
     @endif
 @endif

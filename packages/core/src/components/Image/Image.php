@@ -84,14 +84,16 @@ class Image extends Renderable {
 		parent::__construct($attributes, 'components.Image.image');
 	}
 
+	/**
+	 * @param string<'cover'|'contain'> $behaviour
+	 * @return void
+	 */
+	public function set_behaviour(string $behaviour): void {
+		$this->scale = $behaviour;
+	}
+
 	public function get_filtered_classes(): array {
 		$classes = array_merge([$this->shortName], parent::get_filtered_classes());
-		if($this->scale) {
-			$classes[] = 'image--scale-' . $this->scale;
-		}
-		if($this->aspectRatio) {
-			$classes[] = 'image--aspect-ratio-' . strtolower($this->aspectRatio->name);
-		}
 
 		return array_values(array_unique(array_merge(parent::get_filtered_classes(), $classes)));
 	}
@@ -111,13 +113,11 @@ class Image extends Renderable {
 	}
 
 	public function get_outer_html_attributes(): array {
-		$attributes = [];
-
-		if($this->align) {
-			$attributes['data-align'] = $this->align;
-		}
-
-		return $attributes;
+		return [
+			'data-align'        => $this->align ?? null,
+			'data-aspect-ratio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
+			'data-behaviour'    => $this->scale ?? null,
+		];
 	}
 
 	public function get_html_attributes(): array {
@@ -134,12 +134,13 @@ class Image extends Renderable {
 		$blade = BladeService::getInstance();
 
 		echo $blade->make($this->bladeFile, [
-			'src'        => $this->src,
-			'href'       => $this->href,
-			'caption'    => $this->caption,
-			'classes'    => implode(' ', $this->get_filtered_classes()),
-			'outerAttrs' => $this->get_outer_html_attributes(),
-			'attributes' => $this->get_html_attributes(),
+			'src'            => $this->src,
+			'href'           => $this->href,
+			'caption'        => $this->caption,
+			'captionClasses' => $this->context ? [$this->context . '__image__caption'] : ['image__caption'],
+			'classes'        => implode(' ', $this->get_filtered_classes()),
+			'outerAttrs'     => $this->get_outer_html_attributes(),
+			'attributes'     => $this->get_html_attributes(),
 		])->render();
 	}
 }
