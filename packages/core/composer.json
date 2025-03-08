@@ -24,6 +24,12 @@
 			]
 		}
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/doubleedesign/baguetteBox.js"
+		}
+	],
 	"require": {
 		"illuminate/view": "^10.0",
 		"illuminate/filesystem": "^10.0",
@@ -31,6 +37,7 @@
 		"illuminate/container": "^10.0",
 		"illuminate/support": "^10.0",
 		"ezyang/htmlpurifier": "^4.18",
-		"twbs/bootstrap": "^5.3"
+		"twbs/bootstrap": "^5.3",
+		"feimosi/baguettebox.js": "dev-main"
 	}
 }

@@ -1,7 +1,7 @@
 @if ($caption)
     <figure @if ($classes) @class($classes) @endif @attributes($outerAttrs)>
         @if ($href)
-            <a href="{{ $href }}">
+            <a href="{{ $href }}" @if ($caption) data-caption="{{ $caption }}" @endif>
                 <img src="{{ $src }}" @attributes($attributes)>
             </a>
         @else
@@ -12,7 +12,7 @@
 @else
     @if ($href)
         <a href="{{ $href }}" @if ($classes) @class($classes) @endif
-            @attributes($outerAttrs)>
+            @attributes($outerAttrs) @if ($caption) data-caption="{{ $caption }}" @endif>
             <img src="{{ $src }}" @attributes($attributes)>
         </a>
     @else

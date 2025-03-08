@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b87b6b52028039622491e59bfc2fb09a",
+    "content-hash": "d749943fd729a01b147e74f494efcf81",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -226,6 +226,49 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.18.0"
             },
             "time": "2024-11-01T03:51:45+00:00"
+        },
+        {
+            "name": "feimosi/baguettebox.js",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doubleedesign/baguetteBox.js.git",
+                "reference": "787351667d61a04119dca0a4c381ce76277fdf52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doubleedesign/baguetteBox.js/zipball/787351667d61a04119dca0a4c381ce76277fdf52",
+                "reference": "787351667d61a04119dca0a4c381ce76277fdf52",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "dist/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "feimosi",
+                    "homepage": "https://github.com/feimosi"
+                }
+            ],
+            "description": "Simple and easy to use lightbox script",
+            "homepage": "https://github.com/feimosi/baguetteBox.js",
+            "keywords": [
+                "gallery",
+                "image",
+                "javascript",
+                "lightbox"
+            ],
+            "support": {
+                "source": "https://github.com/doubleedesign/baguetteBox.js/tree/main"
+            },
+            "time": "2025-03-08T05:24:04+00:00"
         },
         {
             "name": "illuminate/bus",
@@ -1672,7 +1715,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "feimosi/baguettebox.js": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},

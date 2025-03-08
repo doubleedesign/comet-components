@@ -109,6 +109,10 @@ abstract class Renderable {
 		$this->tagName = $requestedTag;
 	}
 
+	protected function set_context(string $context): void {
+		$this->context = $context;
+	}
+
 	public function get_id(): ?string {
 		return $this->id;
 	}

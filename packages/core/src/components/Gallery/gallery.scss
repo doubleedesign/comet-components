@@ -1,3 +1,40 @@
-.gallery {
+@use '../mixins' as *;
+@use '../../../vendor/feimosi/baguettebox.js/src/baguetteBox.scss';
 
+.gallery {
+	display: grid;
+	grid-gap: var(--spacing-md);
+	margin-block: var(--spacing-md);
+
+	&[data-interim-columns="2"] {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	&[data-interim-columns="3"] {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	@include container-width-up('narrower') {
+		@for $i from 1 through 8 {
+			&[data-max-columns="#{$i}"] {
+				grid-template-columns: repeat(#{$i}, 1fr);
+			}
+		}
+	}
+
+	&__image {
+		margin: 0;
+
+		&__caption {
+			display: block;
+			text-align: center;
+			font-size: var(--font-size-sm);
+		}
+	}
+
+	&__caption {
+		display: block;
+		text-align: center;
+		grid-column: 1 / -1;
+	}
 }
