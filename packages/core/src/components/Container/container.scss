@@ -2,27 +2,7 @@
 @use '../variables' as *;
 
 .page-section {
-	padding-block: var(--spacing-md);
-
-	@include media-breakpoint-up('narrow') {
-		padding-block: var(--spacing-xl);
-	}
-
-	@include media-breakpoint-up('wide') {
-		padding-block: var(--spacing-xxl);
-	}
-
-	// Handle same colour adjacent sections
-	@each $name, $color in $colors {
-		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
-			padding-block-start: 0;
-		}
-	}
-
-	// If no bg colour, handle them as adjacent
-	&:not([data-background]) + &:not([data-background]) {
-		padding-block-start: 0;
-	}
+	@include section-padding();
 }
 
 .container {
