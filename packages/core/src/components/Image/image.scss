@@ -1,6 +1,12 @@
 .image {
 
+	&:not(:first-child):not(:last-child) {
+		margin-top: var(--spacing-md);
+		margin-bottom: var(--spacing-md);
+	}
+
 	img {
+		display: block;
 		max-width: 100%;
 	}
 
@@ -43,6 +49,24 @@
 			width: 100%;
 			height: auto;
 			object-fit: contain;
+		}
+	}
+
+	&[data-align="left"] {
+		float: left;
+		margin-right: var(--spacing-md);
+	}
+
+	&[data-align="right"] {
+		float: right;
+		margin-left: var(--spacing-md);
+	}
+
+	&[data-align="center"] {
+		img {
+			width: auto;
+			margin: 0 auto;
+			display: block;
 		}
 	}
 }

@@ -57,6 +57,13 @@ class Image extends Renderable {
 	 * @description Set a fixed width for the image
 	 */
 	protected ?string $width = null;
+	/**
+	 * @var string|null $align
+	 * @description Image alignment
+	 * @supported-values left, center, right, full
+	 * Dev notes: There are fewer options than the layout alignment values, that's why they're not using the Alignment enum
+	 */
+	protected ?string $align = null;
 
 
 	function __construct(array $attributes) {
@@ -72,6 +79,7 @@ class Image extends Renderable {
 			: null;
 		$this->scale = $attributes['scale'] ?? 'contain';
 		$this->classes = $attributes['classes'] ?? [];
+		$this->align = $attributes['align'] ?? null;
 
 		parent::__construct($attributes, 'components.Image.image');
 	}
@@ -102,12 +110,22 @@ class Image extends Renderable {
 		return $styles;
 	}
 
+	public function get_outer_html_attributes(): array {
+		$attributes = [];
+
+		if($this->align) {
+			$attributes['data-align'] = $this->align;
+		}
+
+		return $attributes;
+	}
+
 	public function get_html_attributes(): array {
 		return array_merge(
 			parent::get_html_attributes(),
 			[
 				'alt'   => $this->alt,
-				'title' => $this->title,
+				'title' => $this->title
 			]
 		);
 	}
@@ -116,11 +134,12 @@ class Image extends Renderable {
 		$blade = BladeService::getInstance();
 
 		echo $blade->make($this->bladeFile, [
-			'src'            => $this->src,
-			'href'           => $this->href,
-			'caption'        => $this->caption,
-			'classes'        => implode(' ', $this->get_filtered_classes()),
-			'attributes'     => $this->get_html_attributes(),
+			'src'        => $this->src,
+			'href'       => $this->href,
+			'caption'    => $this->caption,
+			'classes'    => implode(' ', $this->get_filtered_classes()),
+			'outerAttrs' => $this->get_outer_html_attributes(),
+			'attributes' => $this->get_html_attributes(),
 		])->render();
 	}
 }
