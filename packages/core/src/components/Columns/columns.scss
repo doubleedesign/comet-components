@@ -7,6 +7,10 @@
 		padding-inline: 0;
 	}
 
+	& + .columns {
+		@include section-padding();
+	}
+
 	// Default/auto layout
 	display: grid;
 	grid-gap: var(--spacing-md);
