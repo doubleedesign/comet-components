@@ -1,0 +1,99 @@
+@use '../variables' as *;
+@use '../functions' as *;
+
+@mixin active-link {
+	@each $name, $color in $colors {
+		[data-color-theme="#{$name}"] & {
+			background: lighten($name, 80%);
+			border-color: var(--color-#{$name});
+		}
+	}
+}
+
+.section-navigation {
+
+	@each $name, $color in $colors {
+		&[data-color-theme="#{$name}"] {
+			background: lighten($name, 95%);
+			border-left: 0.125rem solid var(--color-#{$name});
+
+			a {
+				color: var(--color-#{$name});
+			}
+		}
+	}
+
+	&__menu-list {
+		display: block;
+		padding: 0;
+		margin: 0;
+
+		&__item {
+			display: block;
+
+			&__link {
+				display: block;
+				padding: var(--spacing-xs) var(--spacing-sm);
+				font-family: var(--font-family-accent);
+				font-weight: var(--font-weight-bold);
+				font-size: 1.25rem;
+				text-decoration: underline;
+				text-decoration-color: transparent;
+
+				&:hover, &:focus, &:active {
+					text-decoration-color: currentColor;
+					@include active-link;
+				}
+			}
+
+			// Second level
+			.menu-list {
+				display: block;
+				padding: 0;
+				margin: 0;
+
+				:has([aria-current="page"]) {
+					@include active-link;
+				}
+
+				&__item {
+					display: block;
+
+					&__link {
+						display: flex;
+						padding: var(--spacing-xxs) var(--spacing-sm);
+						align-items: center;
+						justify-content: space-between;
+						text-decoration: underline;
+						text-decoration-color: transparent;
+						border-left: 0.25rem solid transparent;
+
+						&:hover, &:focus, &:active {
+							text-decoration-color: currentColor;
+							@include active-link;
+						}
+
+						&[aria-current="page"] {
+							@include active-link;
+						}
+
+						&[target="_blank"] {
+							&::after {
+								font-family: "Font Awesome 6 Pro Light";
+								content: '\f08e';
+								font-size: 0.8rem;
+							}
+						}
+					}
+
+					// Third level
+					.menu-list {
+						&__item {
+							font-size: 0.9rem;
+						}
+					}
+				}
+			}
+		}
+	}
+}

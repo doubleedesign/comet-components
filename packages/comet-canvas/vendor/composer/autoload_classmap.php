@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Doubleedesign\\CometCanvas\\NavMenus' => $baseDir . '/src/NavMenus.php',
+    'Doubleedesign\\CometCanvas\\SectionMenuBuilder' => $baseDir . '/src/SectionMenuBuilder.php',
     'Doubleedesign\\CometCanvas\\SiteHealth' => $baseDir . '/src/SiteHealth.php',
     'Doubleedesign\\CometCanvas\\ThemeStyle' => $baseDir . '/src/ThemeStyle.php',
     'Doubleedesign\\CometCanvas\\WpAdmin' => $baseDir . '/src/WpAdmin.php',

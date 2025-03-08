@@ -5,6 +5,20 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::NAV)]
 class Menu extends UIComponent {
 
+	/**
+	 * @param array $attributes
+	 * @param array<MenuItem> $menuItems
+	 *
+	 * @phpstan-type MenuItem array{
+	 *   title: string,
+	 *   link_attributes: array{
+	 *     href: string,
+	 *     target?: string,
+	 *     'aria-current'?: string
+	 *   },
+	 *   children: array<MenuItem>
+	 * }
+	 */
 	function __construct(array $attributes, array $menuItems) {
 		$innerComponents = [
 			new MenuList($attributes, $this->array_to_items($menuItems, $attributes['context'] ?? ''))

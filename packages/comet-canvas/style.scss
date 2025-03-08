@@ -10,19 +10,23 @@
 .page-with-sidebar {
 	container-type: inline-size;
 
-	&__columns {s
+	&__columns {
 		@container (min-width: 768px) {
 			display: grid;
+			grid-template-columns: repeat(4, 1fr) !important;
 		}
 
 		&__column {
-			&main {
-				grid-column: 2 / 3;
+			&:is(main) {
+				grid-column: span 3;
 			}
 
-			&aside {
-				grid-column: 1 / 2;
+			&:is(aside) {
 			}
 		}
 	}
+}
+
+.page-header[data-background="white"] + .page-section[data-background="white"]:has(.page-with-sidebar) {
+	padding-block-start: var(--spacing-md);
 }
