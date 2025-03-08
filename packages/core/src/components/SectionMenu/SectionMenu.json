@@ -1,15 +1,32 @@
 {
-	"name": "Menu",
-	"extends": "UIComponent",
+	"name": "SectionMenu",
+	"extends": "Menu",
 	"abstract": false,
 	"attributes": {
 		"classes": {
 			"type": "array<string>",
 			"description": "CSS classes",
 			"default": [
-				"menu"
+				"section-navigation"
 			],
 			"inherited": true
+		},
+		"colorTheme": {
+			"type": "ThemeColor",
+			"description": "Colour keyword for the fill or outline colour",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			],
+			"default": "primary"
 		},
 		"context": {
 			"type": "string",
@@ -40,6 +57,6 @@
 		"type": "array",
 		"description": "Array of menu item details",
 		"required": true,
-		"inherited": false
+		"inherited": true
 	}
 }

@@ -6,6 +6,20 @@ namespace Doubleedesign\Comet\Core;
 class SectionMenu extends Menu {
 	use ColorTheme;
 
+	/**
+	 * @param array $attributes
+	 * @param array<MenuItem> $menuItems
+	 *
+	 * @phpstan-type MenuItem array{
+	 *   title: string,
+	 *   link_attributes: array{
+	 *     href: string,
+	 *     target?: string,
+	 *     'aria-current'?: string
+	 *   },
+	 *   children: array<MenuItem>
+	 * }
+	 */
 	function __construct(array $attributes, array $menuItems) {
 		parent::__construct(
 			array_merge($attributes, ['context' => 'section-navigation']),

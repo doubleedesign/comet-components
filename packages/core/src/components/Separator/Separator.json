@@ -1,0 +1,57 @@
+{
+    "name": "Separator",
+    "extends": "Renderable",
+    "abstract": false,
+    "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "separator",
+                ""
+            ],
+            "inherited": true
+        },
+        "color": {
+            "type": "ThemeColor",
+            "required": true,
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "primary"
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+            "inherited": true
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "hr"
+            ],
+            "default": "hr",
+            "inherited": true
+        }
+    }
+}
