@@ -54,6 +54,17 @@
 .columns[data-count="2"][data-allow-layout-stacking=true], .columns[data-count="4"][data-allow-layout-stacking=true], .columns[data-count="6"][data-allow-layout-stacking=true] {
   grid-template-columns: repeat(1, 1fr);
 }
+@container (max-width: 600px) {
+  .columns[data-count="2"][data-allow-layout-stacking=true], .columns[data-count="4"][data-allow-layout-stacking=true], .columns[data-count="6"][data-allow-layout-stacking=true] {
+    flex-wrap: wrap;
+  }
+  .columns[data-count="2"][data-allow-layout-stacking=true] .column, .columns[data-count="4"][data-allow-layout-stacking=true] .column, .columns[data-count="6"][data-allow-layout-stacking=true] .column {
+    grid-column: 1/-1;
+    width: 100% !important;
+    flex-basis: 100% !important;
+    min-width: 100%;
+  }
+}
 @container (min-width: 600px) {
   .columns[data-count="2"][data-allow-layout-stacking=true], .columns[data-count="4"][data-allow-layout-stacking=true], .columns[data-count="6"][data-allow-layout-stacking=true] {
     grid-template-columns: repeat(2, 1fr);

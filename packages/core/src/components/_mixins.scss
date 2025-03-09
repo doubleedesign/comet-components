@@ -14,6 +14,12 @@ $widths: (
 	}
 }
 
+@mixin container-width-down($widthName) {
+	@container (max-width: #{map-get($widths, $widthName)}) {
+		@content;
+	}
+}
+
 @mixin media-breakpoint-up($widthName) {
 	@media (min-width: #{map-get($widths, $widthName)}) {
 		@content;

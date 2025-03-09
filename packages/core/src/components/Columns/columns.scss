@@ -1,5 +1,18 @@
 @use '../mixins' as *;
 
+@mixin stack-columns-until($breakpointName) {
+	@include container-width-down($breakpointName) {
+		flex-wrap: wrap;
+
+		.column {
+			grid-column: 1 / -1;
+			width: 100% !important;
+			flex-basis: 100% !important;
+			min-width: 100%;
+		}
+	}
+}
+
 .columns {
 	padding-inline: var(--spacing-md);
 
@@ -22,6 +35,7 @@
 	&[data-count="2"], &[data-count="4"], &[data-count="6"] {
 		&[data-allow-layout-stacking="true"] {
 			grid-template-columns: repeat(1, 1fr);
+			@include stack-columns-until('small');
 
 			@include container-width-up('small') {
 				grid-template-columns: repeat(2, 1fr);
