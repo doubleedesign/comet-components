@@ -51,6 +51,7 @@
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/test/coverage" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/wordpress/gutenberg" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

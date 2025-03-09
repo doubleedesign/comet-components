@@ -40,12 +40,14 @@
 		"illuminate/container": "^10.0",
 		"illuminate/support": "^10.0",
 		"ezyang/htmlpurifier": "^4.18",
+		"humanmade/block-supports-extended": "^0.2.0",
 		"roots/wordpress": "^6.7",
-		"humanmade/block-supports-extended": "^0.2.0"
+		"wpackagist-plugin/gutenberg": "20.4.0"
 	},
 	"config": {
 		"preferred-install": "source",
 		"allow-plugins": {
+			"composer/installers": true,
 			"roots/wordpress-core-installer": true
 		}
 	},
@@ -53,6 +55,26 @@
 		{
 			"type": "vcs",
 			"url": "https://github.com/humanmade/block-supports-extended"
+		},
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org",
+			"only": [
+				"wpackagist-plugin/*"
+			]
 		}
-	]
+	],
+	"extra": {
+		"installer-paths": {
+			"vendor/wordpress/gutenberg": [
+				"wpackagist-plugin/gutenberg"
+			],
+			"vendor/humanmade/block-supports-extended": [
+				"humanmade/block-supports-extended"
+			],
+			"vendor/roots/wordpress": [
+				"roots/wordpress"
+			]
+		}
+	}
 }
