@@ -11,24 +11,25 @@ projects.
 ---
 ## Tech Stack
 
-| Technology | Description                       | Details/Rationale                                                                                                                                                                                  |
-|------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PHP        | Primary programming language      | I like it. And because I'm using this in WordPress.                                                                                                                                                |
-| Blade      | Templating engine for PHP         | I wanted to try using a templating language, and a) preferred the syntax over Twig and b) have vague notions of working with Laravel at some point in the future.                                  |
-| JavaScript | Secondary programming language    | Used in the WordPress plugin where necessary for custom blocks or customisations of core blocks (anything that can't be done in PHP), and in the standalone library for client-side interactivity. |
-| Bootstrap  | Front-end framework (partial use) | Some of Bootstrap's JavaScript plugins are used to provide basic client-side interactivity, because it's easier than reinventing the wheel.                                                        |
+| Technology  | Description                       | Details/Rationale                                                                                                                                                                                  |
+|-------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PHP         | Primary programming language      | I like it. And because I'm using this in WordPress.                                                                                                                                                |
+| Blade       | Templating engine for PHP         | I wanted to try using a templating language, and a) preferred the syntax over Twig and b) have vague notions of working with Laravel at some point in the future.                                  |
+| JavaScript  | Secondary programming language    | Used in the WordPress plugin where necessary for custom blocks or customisations of core blocks (anything that can't be done in PHP), and in the standalone library for client-side interactivity. |
+| Bootstrap   | Front-end framework (partial use) | Some of Bootstrap's JavaScript plugins are used to provide basic client-side interactivity, because it's easier than reinventing the wheel.                                                        |
+| BaguetteBox | Vanilla JS lightbox plugin        | Used to make the gallery block a lightbox if set to link to media files.                                                                                                                           |
 
 ### Tooling
-| Technology | Description                | Details/Rationale                                                                                                                                                                        |
-|------------|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| SCSS       | CSS preprocessor           | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                        |
-| Rollup     | JavaScript bundler         | Used to bundle the core package's JavaScript into one file, to make it easier for other packages to use. (I previously had import path issues, this solves those.)                       |
-| Composer   | PHP package manager        | Used to manage PHP dependencies, and (where possible) other dependencies that should be uploaded to the server (e.g., Bootstrap plugins).                                                |
-| NPM        | JavaScript package manager | Used to manage JavaScript dependencies and build scripts. Primarily for local development (e.g. Storybook, Rollup). `node_modules` for any package should not be uploaded to the server. |
+| Technology | Description                | Details/Rationale                                                                                                                                                                                                                                                                |
+|------------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SCSS       | CSS preprocessor           | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                                                                                                |
+| Rollup     | JavaScript bundler         | Used to bundle the core package's JavaScript into one file, to make it easier for other packages to use. (I previously had import path issues, this solves those.)                                                                                                               |
+| Composer   | PHP package manager        | Used to manage PHP dependencies, and within packages other dependencies that should be uploaded to the server (e.g., Bootstrap plugins). Dev-only dependencies should be installed at the project root, so that packages' `vendor` folders contain only production dependencies. |
+| NPM        | JavaScript package manager | Used to manage JavaScript dependencies and build scripts. Primarily for local development and tooling (e.g. Storybook, Rollup). `node_modules` for any package should not be uploaded to the server.                                                                             |
 
 ---
-## Usage
 
+## Usage
 ### In WordPress
 
 #### Installation
