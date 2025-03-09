@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7027176e5648f5fea0ff09452409eaad",
+    "content-hash": "f1cadf4a16c62149d957a3ad06742b4b",
     "packages": [],
     "packages-dev": [
         {
@@ -466,6 +466,31 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "humanmade/block-supports-extended",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/humanmade/block-supports-extended.git",
+                "reference": "818ba1d1e915df0b54c4685e2291875eea60f61e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/humanmade/block-supports-extended/zipball/818ba1d1e915df0b54c4685e2291875eea60f61e",
+                "reference": "818ba1d1e915df0b54c4685e2291875eea60f61e",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Block supports extension helpers",
+            "support": {
+                "source": "https://github.com/humanmade/block-supports-extended/tree/0.2.0",
+                "issues": "https://github.com/humanmade/block-supports-extended/issues"
+            },
+            "time": "2024-01-16T11:38:39+00:00"
         },
         {
             "name": "illuminate/bus",
