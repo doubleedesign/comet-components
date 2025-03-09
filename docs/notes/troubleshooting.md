@@ -6,6 +6,8 @@
     - [BlockTransformer test utility](#blocktransformer-test-utility)
 - [Where is PHP, Node, Composer, etc running from?](#where-is-php-node-composer-etc-running-from)
 - [Where is my PHP configuration (php.ini) file?](#where-is-my-php-configuration-phpini-file)
+- [PHPStorm File Watchers](#phpstorm-file-watchers)
+- [Front-end development](#front-end-development)
 
 ## PHP unit tests
 
@@ -131,3 +133,26 @@ for the tool you're trying to use. There are two workarounds:
    the Windows binaries.
 2. In the file watcher configuration, set the `Program` to `node` and put the full CLI command for the tool in the
    `arguments` field.
+
+---
+
+## Front-end development
+
+**Component JavaScript not loading in the browser**
+
+Is the script loaded either independently, or as part of the `dist.js` bundle? If not, either:
+
+- Add a script tag (or in WordPress, `wp_enqueue_script`) to load it, remembering that you may need to put the
+  `type="module"` attribute on the script tag
+- Add the script to `rollup.index.js` and run `npm run build`
+- If the script is to be included in the bundle, ensure the import path remapping in `rollup.config.js` will resolve any
+  imports in the file correctly.
+
+If the script is listed in `rollup.index.js` and the import path transformation seems correct, try running
+`npm run build` - maybe the file watcher didn't auto-compile
+it when expected.
+
+**SCSS not recompiling when an imported file changes**
+
+In PHPStorm, try running "reload all from disk" to make it realise the file has changed. If that doesn't help, make a
+whitespace change in the file you want to recompile (not the one that's imported, that you already actually changed).

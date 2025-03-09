@@ -1,4 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve';
+import path from 'node:path';
 
 export default {
 	input: 'rollup.index.js',
@@ -8,6 +9,21 @@ export default {
 		entryFileNames: 'dist.js'
 	},
 	plugins: [
-		resolve()
+		resolve(),
+		{
+			name: 'remap-import-paths',
+			resolveId(source) {
+				if (source.includes('vendor')) {
+					const shortPath = source.split('vendor')[1];
+
+					return {
+						id: path.resolve(`../vendor/${shortPath}`),
+						external: true
+					};
+				}
+
+				return null;
+			}
+		}
 	]
 };

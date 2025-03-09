@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d24cb757f4002647f60a7f387702e01",
+    "content-hash": "e53b84d15fb35bbc7665acc9e59b924e",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -165,6 +165,26 @@
                 }
             ],
             "time": "2024-02-18T20:23:39+00:00"
+        },
+        {
+            "name": "doubleedesign/comet-vue-wrapper",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../plugins/vue-wrapper",
+                "reference": "5263dfd47c987781f72a7d73290b1afb002ef026"
+            },
+            "type": "library",
+            "authors": [
+                {
+                    "name": "Leesa Ward",
+                    "email": "leesa@doubleedesign.com.au"
+                }
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1714,7 +1734,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "doubleedesign/comet-vue-wrapper": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},
