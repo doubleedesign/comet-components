@@ -23,6 +23,9 @@
 .page-section[data-background=warning] + .page-section[data-background=warning] {
   padding-block-start: 0;
 }
+.page-section[data-background=success] + .page-section[data-background=success] {
+  padding-block-start: 0;
+}
 .page-section[data-background=error] + .page-section[data-background=error] {
   padding-block-start: 0;
 }

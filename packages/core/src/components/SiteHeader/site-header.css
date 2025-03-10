@@ -115,12 +115,6 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
   .site-header__menu-list {
     display: flex;
     justify-content: flex-end;
-    gap: var(--spacing-xs);
-  }
-}
-@container (min-width: 720px) {
-  .site-header__menu-list {
-    gap: var(--spacing-md);
   }
 }
 .site-header__menu--responsive .site-header__menu-list {

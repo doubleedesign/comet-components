@@ -210,4 +210,34 @@ h1, h2, h3 {
 .is-style-lead {
 	font-weight: 600;
 	font-size: $baseFontSize * 1.125;
+
+	a {
+		color: inherit;
+
+		&:hover, &:focus, &:active {
+			color: color-mix(in hsl, currentColor, black 20%);
+		}
+	}
+}
+
+form {
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="number"],
+	select,
+	textarea {
+		font-size: 1rem;
+		padding: var(--spacing-xs) var(--spacing-sm);
+		font-family: var(--font-family-body);
+	}
+
+	input[type="submit"],
+	input[type="button"] {
+		font-family: var(--font-family-body);
+		font-size: 1rem;
+	}
 }

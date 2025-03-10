@@ -5,6 +5,7 @@
   --color-secondary: #00c9a7;
   --color-accent: #ba3caf;
   --color-warning: #f9c971;
+  --color-success: #00c9a7;
   --color-error: #d23e3e;
   --color-light: #F0F0F2;
   --color-dark: #4b4453;
@@ -21,6 +22,9 @@
   --color-warning-h: 38.8235294118;
   --color-warning-s: 91.8918918919;
   --color-warning-l: 70.9803921569;
+  --color-success-h: 169.8507462687;
+  --color-success-s: 100;
+  --color-success-l: 39.4117647059;
   --color-error-h: 0;
   --color-error-s: 62.1848739496;
   --color-error-l: 53.3333333333;
@@ -37,6 +41,7 @@
   --readable-color-secondary: white;
   --readable-color-accent: white;
   --readable-color-warning: black;
+  --readable-color-success: white;
   --readable-color-error: white;
   --readable-color-light: black;
   --readable-color-dark: white;
@@ -149,6 +154,10 @@ body {
   background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
 
+[data-background=gradient-primary-success] {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-success) 50%, var(--color-success) 100%);
+}
+
 [data-background=gradient-primary-error] {
   background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-error) 50%, var(--color-error) 100%);
 }
@@ -196,6 +205,10 @@ body {
 
 [data-background=gradient-secondary-warning] {
   background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+[data-background=gradient-secondary-success] {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-success) 50%, var(--color-success) 100%);
 }
 
 [data-background=gradient-secondary-error] {
@@ -247,6 +260,10 @@ body {
   background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
 
+[data-background=gradient-accent-success] {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-success) 50%, var(--color-success) 100%);
+}
+
 [data-background=gradient-accent-error] {
   background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-error) 50%, var(--color-error) 100%);
 }
@@ -296,6 +313,10 @@ body {
   background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
 
+[data-background=gradient-warning-success] {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-success) 50%, var(--color-success) 100%);
+}
+
 [data-background=gradient-warning-error] {
   background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-error) 50%, var(--color-error) 100%);
 }
@@ -314,6 +335,59 @@ body {
 
 [data-text-color=warning] {
   color: var(--color-warning);
+}
+
+[data-background=success] {
+  background-color: var(--color-success);
+  color: var(--readable-color-success);
+}
+
+[data-background=success] + [data-background*=gradient-success] {
+  padding-block-start: 0;
+}
+
+[data-background*=gradient-][data-background*=-success] + [data-background=success] {
+  padding-block-start: 0;
+}
+
+[data-background=gradient-success-primary] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+[data-background=gradient-success-secondary] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+[data-background=gradient-success-accent] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+[data-background=gradient-success-warning] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+[data-background=gradient-success-success] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-success) 50%, var(--color-success) 100%);
+}
+
+[data-background=gradient-success-error] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+[data-background=gradient-success-light] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+[data-background=gradient-success-dark] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+[data-background=gradient-success-white] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-white) 50%, var(--color-white) 100%);
+}
+
+[data-text-color=success] {
+  color: var(--color-success);
 }
 
 [data-background=error] {
@@ -343,6 +417,10 @@ body {
 
 [data-background=gradient-error-warning] {
   background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+[data-background=gradient-error-success] {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-success) 50%, var(--color-success) 100%);
 }
 
 [data-background=gradient-error-error] {
@@ -394,6 +472,10 @@ body {
   background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
 
+[data-background=gradient-light-success] {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-success) 50%, var(--color-success) 100%);
+}
+
 [data-background=gradient-light-error] {
   background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-error) 50%, var(--color-error) 100%);
 }
@@ -443,6 +525,10 @@ body {
   background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
 
+[data-background=gradient-dark-success] {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-success) 50%, var(--color-success) 100%);
+}
+
 [data-background=gradient-dark-error] {
   background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-error) 50%, var(--color-error) 100%);
 }
@@ -490,6 +576,10 @@ body {
 
 [data-background=gradient-white-warning] {
   background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+[data-background=gradient-white-success] {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-success) 50%, var(--color-success) 100%);
 }
 
 [data-background=gradient-white-error] {
@@ -589,6 +679,31 @@ h1.is-style-small, h2.is-style-small, h3.is-style-small {
 .is-style-lead {
   font-weight: 600;
   font-size: 1.125rem;
+}
+.is-style-lead a {
+  color: inherit;
+}
+.is-style-lead a:hover, .is-style-lead a:focus, .is-style-lead a:active {
+  color: color-mix(in hsl, currentColor, black 20%);
+}
+
+form input[type=text],
+form input[type=email],
+form input[type=password],
+form input[type=search],
+form input[type=tel],
+form input[type=url],
+form input[type=number],
+form select,
+form textarea {
+  font-size: 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-family-body);
+}
+form input[type=submit],
+form input[type=button] {
+  font-family: var(--font-family-body);
+  font-size: 1rem;
 }
 
 /*# sourceMappingURL=global.css.map */

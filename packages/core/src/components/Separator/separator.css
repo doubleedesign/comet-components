@@ -16,6 +16,9 @@
 .separator[data-color-theme=warning] {
   background-color: var(--color-warning);
 }
+.separator[data-color-theme=success] {
+  background-color: var(--color-success);
+}
 .separator[data-color-theme=error] {
   background-color: var(--color-error);
 }
@@ -44,6 +47,9 @@
 }
 .separator--dots[data-color-theme=warning]:before {
   color: var(--color-warning);
+}
+.separator--dots[data-color-theme=success]:before {
+  color: var(--color-success);
 }
 .separator--dots[data-color-theme=error]:before {
   color: var(--color-error);

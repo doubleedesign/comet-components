@@ -38,6 +38,9 @@
 .bg-warning .breadcrumbs__list {
   color: var(--readable-color-warning);
 }
+.bg-success .breadcrumbs__list {
+  color: var(--readable-color-success);
+}
 .bg-error .breadcrumbs__list {
   color: var(--readable-color-error);
 }

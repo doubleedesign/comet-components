@@ -26,6 +26,9 @@
 [data-color-theme=warning] .icon-with-text__icon {
   color: var(--color-warning);
 }
+[data-color-theme=success] .icon-with-text__icon {
+  color: var(--color-success);
+}
 [data-color-theme=error] .icon-with-text__icon {
   color: var(--color-error);
 }

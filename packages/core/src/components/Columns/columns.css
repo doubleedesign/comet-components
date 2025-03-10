@@ -31,6 +31,9 @@
 .columns + .columns[data-background=warning] + .columns + .columns[data-background=warning] {
   padding-block-start: 0;
 }
+.columns + .columns[data-background=success] + .columns + .columns[data-background=success] {
+  padding-block-start: 0;
+}
 .columns + .columns[data-background=error] + .columns + .columns[data-background=error] {
   padding-block-start: 0;
 }

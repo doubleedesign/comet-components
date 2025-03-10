@@ -98,6 +98,25 @@
   background: var(--color-warning);
   color: var(--readable-color-warning);
 }
+.button--success:not([class*="--outline"]) {
+  background-color: var(--color-success);
+  border: 1px solid var(--color-success);
+  color: var(--readable-color-success);
+}
+.button--success:not([class*="--outline"]):hover, .button--success:not([class*="--outline"]):focus, .button--success:not([class*="--outline"]):active {
+  background-color: color-mix(in srgb, var(--color-success) 80%, black);
+  border-color: color-mix(in srgb, var(--color-success) 80%, black);
+  color: var(--readable-color-success);
+}
+.button--success--outline {
+  border: 1px solid var(--color-success);
+  background-color: transparent;
+  color: var(--color-success);
+}
+.button--success--outline:hover, .button--success--outline:focus, .button--success--outline:active {
+  background: var(--color-success);
+  color: var(--readable-color-success);
+}
 .button--error:not([class*="--outline"]) {
   background-color: var(--color-error);
   border: 1px solid var(--color-error);

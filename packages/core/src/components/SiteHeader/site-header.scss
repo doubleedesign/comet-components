@@ -141,11 +141,6 @@
 			@container (min-width: 600px) {
 				display: flex;
 				justify-content: flex-end;
-				gap: var(--spacing-xs);
-			}
-
-			@container (min-width: 720px) {
-				gap: var(--spacing-md);
 			}
 
 			.site-header__menu--responsive & {

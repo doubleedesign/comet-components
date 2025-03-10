@@ -51,6 +51,13 @@
 .pullquote[data-color-theme=warning]::before, .pullquote[data-color-theme=warning]::after {
   color: color-mix(in srgb, var(--color-warning) 25%, white);
 }
+.pullquote[data-color-theme=success] {
+  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 5%, white);
+}
+.pullquote[data-color-theme=success]::before, .pullquote[data-color-theme=success]::after {
+  color: color-mix(in srgb, var(--color-success) 25%, white);
+}
 .pullquote[data-color-theme=error] {
   color: var(--color-error);
   background: color-mix(in srgb, var(--color-error) 5%, white);

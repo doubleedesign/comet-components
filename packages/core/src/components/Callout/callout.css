@@ -29,6 +29,12 @@
   color: var(--color-warning);
   background-color: hsl(from var(--color-warning) h s l/0.05);
 }
+.callout--success {
+  border: 1px solid var(--color-success);
+  border-left-width: var(--spacing-xxs);
+  color: var(--color-success);
+  background-color: hsl(from var(--color-success) h s l/0.05);
+}
 .callout--error {
   border: 1px solid var(--color-error);
   border-left-width: var(--spacing-xxs);

@@ -23,6 +23,9 @@
 .group[data-background=warning] + .group[data-background=warning] {
   padding-block-start: 0;
 }
+.group[data-background=success] + .group[data-background=success] {
+  padding-block-start: 0;
+}
 .group[data-background=error] + .group[data-background=error] {
   padding-block-start: 0;
 }

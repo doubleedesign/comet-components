@@ -53,6 +53,9 @@
 .tabs__content[data-color-theme=warning] h2, .tabs__content[data-color-theme=warning] h3 {
   color: var(--color-warning);
 }
+.tabs__content[data-color-theme=success] h2, .tabs__content[data-color-theme=success] h3 {
+  color: var(--color-success);
+}
 .tabs__content[data-color-theme=error] h2, .tabs__content[data-color-theme=error] h3 {
   color: var(--color-error);
 }
