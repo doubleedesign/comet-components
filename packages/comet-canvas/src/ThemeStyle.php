@@ -21,7 +21,7 @@ class ThemeStyle {
 
 	function set_css_variables_from_theme_json(): void {
 		// Note: This needs to run after the same filter in the Comet Components plugin, or the theme object won't be correct
-		add_filter('wp_theme_json_data_theme', function (WP_Theme_JSON_Data $theme_json) {
+		add_filter('wp_theme_json_data_theme', function(WP_Theme_JSON_Data $theme_json) {
 			$colours = $theme_json->get_data()['settings']['color']['palette']['theme'];
 			$gradients = $theme_json->get_data()['settings']['color']['gradients']; // TODO: Implement gradients here
 			$css = '';
@@ -48,7 +48,7 @@ class ThemeStyle {
 	}
 
 	function enqueue_theme_stylesheets(): void {
-		$parent = get_template_directory(). '/style.css';
+		$parent = get_template_directory() . '/style.css';
 		$child = get_stylesheet_directory() . '/style.css';
 
 		if(file_exists($parent)) {

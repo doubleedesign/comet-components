@@ -37,6 +37,10 @@ class Link extends Renderable {
 		}
 	}
 
+	public function get_content() {
+		return $this->content;
+	}
+
 	function render(): void {
 		$blade = BladeService::getInstance();
 

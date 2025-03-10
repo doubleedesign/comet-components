@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{SiteHeader, Menu};
+use Doubleedesign\Comet\Core\{SiteHeader, Group, Menu, Paragraph};
 use Doubleedesign\CometCanvas\NavMenus;
 
 ?>
@@ -21,7 +21,16 @@ $menuItems = NavMenus::get_simplified_nav_menu_items_by_location('primary');
 $menuComponent = new Menu(['context' => 'site-header'], $menuItems);
 $logoId = get_option('options_logo');
 $logoUrl = wp_get_attachment_image_url($logoId, 'full');
-$headerComponent = new SiteHeader(['logoUrl' => $logoUrl, 'backgroundColor' => 'white'], [$menuComponent]);
+$headerComponent = new SiteHeader(
+	[
+		'logoUrl'         => $logoUrl,
+		'backgroundColor' => 'white',
+		'breakpoint'      => '860px',
+		'responsiveStyle' => 'default',
+		'submenuIcon'     => 'fa-caret-down'
+	],
+	[new Group(['context' => 'responsive'], [$menuComponent])]
+);
 $headerComponent->render();
 ?>
 

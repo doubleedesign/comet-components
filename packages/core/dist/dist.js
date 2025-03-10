@@ -1,7 +1,7 @@
 import Tab from '../vendor/twbs/bootstrap/js/src/tab.js';
 import '../vendor/feimosi/baguettebox.js/src/baguetteBox.js';
 import * as Vue from '../vendor/doubleedesign/comet-vue-wrapper/src/vue.esm-browser.js';
-import '../vendor/doubleedesign/comet-vue-wrapper/src/vue3-sfc-loader.esm.js';
+import { loadModule } from '../vendor/doubleedesign/comet-vue-wrapper/src/vue3-sfc-loader.esm.js';
 
 const triggerTabList = document.querySelectorAll('[role="tab"]');
 
@@ -23,8 +23,6 @@ triggerTabList.forEach(triggerEl => {
 window.addEventListener('load', function() {
 	window.baguetteBox.run('.gallery');
 });
-
-const { loadModule } = window['vue3-sfc-loader'];
 
 const vueSfcLoaderOptions = {
 	moduleCache: { vue: Vue },
@@ -67,9 +65,26 @@ const vueSfcLoaderOptions = {
 	},
 };
 
+const BASE_PATH = (function() {
+	// NOTE: If we are loading from an implementation, the <script> tag for dist.js needs to have the data-base-path attribute set to
+	// the path to the Core package, e.g./wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core
+	// The below finds it there.
+	const scripts = document.getElementsByTagName('script');
+	for (let i = 0; i < scripts.length; i++) {
+		if (scripts[i].hasAttribute('data-base-path')) {
+			return scripts[i].getAttribute('data-base-path');
+		}
+	}
+
+	// TODO Fix for other use cases like Storybook
+	return '';
+})();
+
 Vue.createApp({
 	components: {
-		SiteNavigation: Vue.defineAsyncComponent(() => loadModule('./site-header.vue', vueSfcLoaderOptions)),
+		SiteHeaderResponsive: Vue.defineAsyncComponent(() => {
+			return loadModule(`${BASE_PATH}/src/components/SiteHeader/site-header-responsive.vue`, vueSfcLoaderOptions);
+		}),
 	},
 	template: '',
 	compilerOptions: {},
