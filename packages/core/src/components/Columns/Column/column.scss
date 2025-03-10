@@ -7,5 +7,9 @@
 	&__inner {
 		display: flow-root;
 		width: 100%;
+
+		> .container {
+			padding-inline: 0;
+		}
 	}
 }

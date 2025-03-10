@@ -6,5 +6,8 @@
   display: flow-root;
   width: 100%;
 }
+.column__inner > .container {
+  padding-inline: 0;
+}
 
 /*# sourceMappingURL=column.css.map */
