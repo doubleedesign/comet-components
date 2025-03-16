@@ -2,6 +2,7 @@
 namespace Doubleedesign\Comet\Core;
 use HTMLPurifier;
 use HTMLPurifier_Config;
+use Traversable;
 
 class Utils {
 
@@ -158,5 +159,58 @@ class Utils {
 
 		// If no content found, return the original string
 		return $trimmed;
+	}
+
+
+	/**
+	 * Extract specified properties from an object or array of objects
+	 *
+	 * @param mixed $target Single object, array of objects, or Traversable
+	 * @param array $props Array of property names to extract
+	 * @param bool $preserveKeys Whether to preserve array keys in the result
+	 *
+	 * @return array Associative array with extracted properties
+	 */
+	public static function pick_object_properties(mixed $target, array $props, bool $preserveKeys = true): array {
+		$result = [];
+
+		// Handle single object case
+		if(is_object($target) && !($target instanceof Traversable)) {
+			$singleResult = [];
+			foreach($props as $prop) {
+				if(property_exists($target, $prop)) {
+					$singleResult[$prop] = $target->$prop;
+				}
+			}
+			return $singleResult;
+		}
+
+		// Handle array or Traversable
+		foreach($target as $key => $item) {
+			$itemResult = [];
+			if(is_object($item)) {
+				foreach($props as $prop) {
+					if(property_exists($item, $prop)) {
+						$itemResult[$prop] = $item->$prop;
+					}
+				}
+			}
+			elseif(is_array($item)) {
+				foreach($props as $prop) {
+					if(array_key_exists($prop, $item)) {
+						$itemResult[$prop] = $item[$prop];
+					}
+				}
+			}
+
+			if($preserveKeys) {
+				$result[$key] = $itemResult;
+			}
+			else {
+				$result[] = $itemResult;
+			}
+		}
+
+		return $result;
 	}
 }

@@ -1,0 +1,29 @@
+.table {
+	width: 100%;
+
+	&__caption {
+		caption-side: bottom;
+
+		&[data-position="top"] {
+			caption-side: top;
+		}
+	}
+
+	&__header {
+		[data-sticky="header"] & {
+			// TODO
+		}
+	}
+
+	&__body {
+
+	}
+
+	&__footer {
+
+	}
+
+	&[data-allow-layout-stacking="true"] {
+		// TODO
+	}
+}
