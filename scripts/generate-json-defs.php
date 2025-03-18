@@ -28,8 +28,8 @@ class ComponentClassesToJsonDefinitions {
 		/** @noinspection PhpUnhandledExceptionInspection */
 		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mainComponentDirectory));
 
-		foreach ($files as $file) {
-			if ($file->isFile() && $file->getExtension() === 'php') {
+		foreach($files as $file) {
+			if($file->isFile() && $file->getExtension() === 'php') {
 				$this->processFile($file->getPathname());
 			}
 		}
@@ -40,7 +40,7 @@ class ComponentClassesToJsonDefinitions {
 	public function runSingle($component): void {
 		// First try direct path
 		$filePath = $this->mainComponentDirectory . '\\' . $component . '\\' . $component . '.php';
-		if (file_exists($filePath)) {
+		if(file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
 		}
@@ -50,18 +50,18 @@ class ComponentClassesToJsonDefinitions {
 		preg_match_all('/[A-Z][a-z]*/', $component, $matches);
 		$baseFolder = $matches[0][0];
 		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
-		if (file_exists($filePath)) {
+		if(file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
 		}
 
 		// try the other way around, e.g., Button is inside ButtonGroup
 		$folders = scandir($this->mainComponentDirectory);
-		$baseFolder = array_find($folders, function ($folder) use ($component) {
+		$baseFolder = array_find($folders, function($folder) use ($component) {
 			return str_starts_with($folder, $component);
 		});
 		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
-		if (file_exists($filePath)) {
+		if(file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
 		}
@@ -69,7 +69,7 @@ class ComponentClassesToJsonDefinitions {
 		// try singular to plural, e.g. Column is inside Columns
 		$baseFolder = $component . 's';
 		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
-		if (file_exists($filePath)) {
+		if(file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
 		}
@@ -77,20 +77,20 @@ class ComponentClassesToJsonDefinitions {
 		// shortened singular to plural based on PascalCase, e.g. TabPanel is inside Tabs
 		$baseFolder = $matches[0][0] . 's';
 		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
-		if (file_exists($filePath)) {
+		if(file_exists($filePath)) {
 			$this->processFile($filePath);
 			return;
 		}
 
 		// Specific edge cases
-		if (in_array($component, ['ListItem', 'ListItemSimple', 'ListItemComplex'])) {
-			if ($component === 'ListItem') {
+		if(in_array($component, ['ListItem', 'ListItemSimple', 'ListItemComplex'])) {
+			if($component === 'ListItem') {
 				$filePath = $this->mainComponentDirectory . '\ListComponent\ListItem\ListItem.php';
 			}
 			else {
 				$filePath = $this->mainComponentDirectory . '\ListComponent\ListItem\\' . $component . "\\$component.php";
 			}
-			if (file_exists($filePath)) {
+			if(file_exists($filePath)) {
 				$this->processFile($filePath);
 				return;
 			}
@@ -102,7 +102,7 @@ class ComponentClassesToJsonDefinitions {
 
 	public function runSingleBase($baseComponent): void {
 		$filePath = $this->baseComponentDirectory . '\\' . $baseComponent . '.php';
-		if (file_exists($filePath)) {
+		if(file_exists($filePath)) {
 			$this->processFile($filePath);
 		}
 		else {
@@ -116,12 +116,12 @@ class ComponentClassesToJsonDefinitions {
 
 		// Extract namespace if exists
 		$namespace = '';
-		if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
+		if(preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
 			$namespace = $matches[1] . '\\';
 		}
 
 		// Extract class name
-		if (preg_match('/class\s+(\w+)/', $content, $matches)) {
+		if(preg_match('/class\s+(\w+)/', $content, $matches)) {
 			$className = $namespace . $matches[1];
 
 			try {
@@ -134,7 +134,7 @@ class ComponentClassesToJsonDefinitions {
 				$this->exportToJson($outputPath, $result);
 				print_r("Exported component definition JSON to $outputPath\n");
 			}
-			catch (ReflectionException $e) {
+			catch(ReflectionException $e) {
 				error_log("Error analyzing class $className: " . $e->getMessage());
 			}
 		}
@@ -147,7 +147,7 @@ class ComponentClassesToJsonDefinitions {
 		$className = $reflectionClass->getName();
 		$parentClass = $reflectionClass->getParentClass() ?? null;
 
-		if (isset($this->processedClasses[$className])) {
+		if(isset($this->processedClasses[$className])) {
 			return $this->processedClasses[$className];
 		}
 
@@ -155,8 +155,8 @@ class ComponentClassesToJsonDefinitions {
 		$properties = [];
 
 		// Collect properties from the class itself
-		foreach ($reflectionClass->getProperties() as $property) {
-			if ($this->getVisibility($property) !== 'private') {
+		foreach($reflectionClass->getProperties() as $property) {
+			if($this->getVisibility($property) !== 'private') {
 				$this->declaringClass = $property->getDeclaringClass(); // get the parent class where the property is declared
 				$propertyType = $this->getPropertyType($property);
 				$propertyName = $property->getName();
@@ -167,22 +167,22 @@ class ComponentClassesToJsonDefinitions {
 
 		// Collect properties from traits
 		$traits = $reflectionClass->getTraits();
-		foreach ($traits as $trait) {
-			foreach ($trait->getProperties() as $property) {
-				if ($this->getVisibility($property) !== 'private') {
+		foreach($traits as $trait) {
+			foreach($trait->getProperties() as $property) {
+				if($this->getVisibility($property) !== 'private') {
 					$this->declaringClass = $trait;
 					$propertyType = $this->getPropertyType($property);
 					$propertyName = $property->getName();
 
 					// Only add if not already defined in the class
-					if (!isset($properties[$propertyName])) {
+					if(!isset($properties[$propertyName])) {
 						$properties[$propertyName] = $propertyType;
 					}
 				}
 			}
 		}
 
-		$finalAttrs = array_filter($properties, function ($key) {
+		$finalAttrs = array_filter($properties, function($key) {
 			return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
 		}, ARRAY_FILTER_USE_KEY);
 		ksort($finalAttrs);
@@ -196,14 +196,14 @@ class ComponentClassesToJsonDefinitions {
 			'attributes' => $finalAttrs
 		];
 
-		if (isset($properties['content'])) {
+		if(isset($properties['content'])) {
 			$result['content'] = $properties['content'];
 		}
-		if (isset($properties['innerComponents'])) {
+		if(isset($properties['innerComponents'])) {
 			$result['innerComponents'] = $properties['innerComponents'];
 		}
 
-		if (array_reverse(explode('\\', $className))[0] === 'Image') {
+		if(array_reverse(explode('\\', $className))[0] === 'Image') {
 			unset($result['properties']['tag']);
 		}
 
@@ -213,8 +213,8 @@ class ComponentClassesToJsonDefinitions {
 	}
 
 	private function getVisibility(ReflectionProperty $property): string {
-		if ($property->isPrivate()) return 'private';
-		if ($property->isProtected()) return 'protected';
+		if($property->isPrivate()) return 'private';
+		if($property->isProtected()) return 'protected';
 		return 'public';
 	}
 
@@ -226,7 +226,7 @@ class ComponentClassesToJsonDefinitions {
 	 * @return string|null The default value or null if not found
 	 */
 	private function extractDefaultFromConstructor(ReflectionClass $class, string $propertyName): ?string {
-		if (!$class->hasMethod('__construct')) {
+		if(!$class->hasMethod('__construct')) {
 			return null;
 		}
 
@@ -235,7 +235,7 @@ class ComponentClassesToJsonDefinitions {
 		$startLine = $constructor->getStartLine();
 		$endLine = $constructor->getEndLine();
 
-		if (!$filename) {
+		if(!$filename) {
 			return null;
 		}
 
@@ -246,12 +246,12 @@ class ComponentClassesToJsonDefinitions {
 		// Map property names to their setter method patterns
 		$propertyToMethodMap = [
 			'colorTheme' => 'set_color_theme_from_attrs',
-			'size' => 'set_size_from_attrs',
-			'width' => 'set_width_from_attrs',
-			'alignment' => 'set_alignment_from_attrs',
-			'variant' => 'set_variant_from_attrs',
+			'size'       => 'set_size_from_attrs',
+			'width'      => 'set_width_from_attrs',
+			'alignment'  => 'set_alignment_from_attrs',
+			'variant'    => 'set_variant_from_attrs',
 			'background' => 'set_background_from_attrs',
-			'style' => 'set_style_from_attrs',
+			'style'      => 'set_style_from_attrs',
 			// Add more mappings as needed
 		];
 
@@ -261,11 +261,11 @@ class ComponentClassesToJsonDefinitions {
 		// Look for calls to the setter method with a default parameter
 		$pattern = '/\$this->' . preg_quote($methodName, '/') . '\s*\(\s*\$[^,]+\s*,\s*([^)]+)\)/i';
 
-		if (preg_match($pattern, $constructorCode, $matches)) {
+		if(preg_match($pattern, $constructorCode, $matches)) {
 			$defaultValue = trim($matches[1]);
 
 			// Extract just the enum value if it's in the form EnumClass::VALUE
-			if (strpos($defaultValue, '::') !== false) {
+			if(strpos($defaultValue, '::') !== false) {
 				$parts = explode('::', $defaultValue);
 				return trim($parts[1]);
 			}
@@ -289,15 +289,17 @@ class ComponentClassesToJsonDefinitions {
 		$defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null;
 		$supportedValues = null;
 		$content_type = $this->currentClass->hasProperty('innerComponents') ? 'array' : 'string';
+		if($this->currentClass == 'Doubleedesign\Comet\Core\Table') {
+			$content_type = 'array';
+		}
 
-		// Initial property type processing
 		$result = $this->processPropertyType($type);
 
 		// Handle default boolean values
-		if ($type->getName() === 'bool' && $defaultValue === false) {
+		if($type instanceof ReflectionNamedType && $type->getName() === 'bool' && $defaultValue === false) {
 			$defaultValue = 'false';
 		}
-		else if ($type->getName() === 'bool' && $defaultValue === true) {
+		else if($type instanceof ReflectionNamedType && $type->getName() === 'bool' && $defaultValue === true) {
 			$defaultValue = 'true';
 		}
 
@@ -307,20 +309,23 @@ class ComponentClassesToJsonDefinitions {
 			'colorTheme', 'backgroundColor', 'hAlign', 'vAlign', 'size', 'orientation', 'textAlign', 'textColor'
 		];
 
-		if (in_array($propertyName, $knownTraitProperties) || str_contains($propertyName, 'Theme')) {
+		if(in_array($propertyName, $knownTraitProperties) || str_contains($propertyName, 'Theme')) {
 			$customDefault = $this->extractDefaultFromConstructor($this->currentClass, $propertyName);
-			if ($customDefault !== null) {
+			if($customDefault !== null) {
 				$defaultValue = strtolower($customDefault); // this assumes enum cases translate directly from uppercase cases to lowercase values
 			}
 		}
 
 		// If this is the $classes property, compute the actual default classes (e.g. the shortName or BEM name with context)
-		if ($property->getName() === 'classes' && !$this->currentClass->isAbstract()) {
-			if ($this->currentClass->hasMethod('get_filtered_classes')) {
+		if($property->getName() === 'classes' && !$this->currentClass->isAbstract()) {
+			if($this->currentClass->hasMethod('get_filtered_classes')) {
 				try {
 					// Special handling for some classes that don't follow the usual pattern of parameters
-					if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
+					if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
 						$instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
+					}
+					else if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Table') {
+						$instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
 					}
 					else {
 						$instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
@@ -328,15 +333,15 @@ class ComponentClassesToJsonDefinitions {
 
 					$defaultValue = $this->currentClass->getMethod('get_filtered_classes')->invoke($instance);
 				}
-				catch (ReflectionException $e) {
+				catch(ReflectionException $e) {
 					// If we can't create an instance of current class, fall back to parent
-					if ($this->declaringClass->hasMethod('get_filtered_classes')) {
+					if($this->declaringClass->hasMethod('get_filtered_classes')) {
 						$parentInstance = $this->declaringClass->newInstance([], [], 'dummy.blade.php');
 						$defaultValue = $this->declaringClass->getMethod('get_filtered_classes')->invoke($parentInstance);
 					}
 				}
 			}
-			else if ($this->declaringClass->hasMethod('get_filtered_classes')) {
+			else if($this->declaringClass->hasMethod('get_filtered_classes')) {
 				// Use parent's method if current class doesn't have it
 				$instance = $this->declaringClass->newInstance([], [], 'dummy.blade.php');
 				$defaultValue = $this->declaringClass->getMethod('get_filtered_classes')->invoke($instance);
@@ -345,31 +350,31 @@ class ComponentClassesToJsonDefinitions {
 
 		// Get type details from docblock if available
 		$docComment = $property->getDocComment();
-		if ($docComment && preg_match('/@description\s+(.+)/', $docComment, $matches)) {
+		if($docComment && preg_match('/@description\s+(.+)/', $docComment, $matches)) {
 			$description = trim($matches[1]);
 		}
 		// Try to get description from parent class if it exists
 		else {
 			$parentClass = $this->declaringClass->getParentClass();
-			if ($parentClass) {
+			if($parentClass) {
 				try {
 					$parentProperty = $parentClass->getProperty($property->getName());
 					$parentDocComment = $parentProperty->getDocComment();
-					if ($parentDocComment && preg_match('/@description\s+(.+)/', $parentDocComment, $matches)) {
+					if($parentDocComment && preg_match('/@description\s+(.+)/', $parentDocComment, $matches)) {
 						$description = trim($matches[1]);
 					}
 				}
-				catch (ReflectionException $e) {
+				catch(ReflectionException $e) {
 					// Property doesn't exist in parent class
 				}
 			}
 		}
-		if ($docComment && preg_match('/@supported-values\s+(.+)/', $docComment, $matches)) {
+		if($docComment && preg_match('/@supported-values\s+(.+)/', $docComment, $matches)) {
 			$supportedValues = array_map('trim', explode(',', $matches[1]));
 		}
 
 		// Use type from docblock if specified, to use declared types like array<string>
-		if ($docComment && preg_match('/@var\s+(\S+)/', $docComment, $matches)) {
+		if($docComment && preg_match('/@var\s+(\S+)/', $docComment, $matches)) {
 			$type = trim($matches[1]);
 		}
 		else {
@@ -378,18 +383,18 @@ class ComponentClassesToJsonDefinitions {
 
 		// Supported and default values may be set in ways other than docblock - e.g., enum values, class attributes
 		// If those are returned from processPropertyType, use them
-		if (isset($result['supported'])) {
+		if(isset($result['supported'])) {
 			$supportedValues = $result['supported'];
 		}
-		if (isset($result['default'])) {
+		if(isset($result['default'])) {
 			$defaultValue = $result['default'];
 		}
 
 		// Sort supported values so 'default' is always at the top
-		if ($supportedValues) {
-			usort($supportedValues, function ($a, $b) {
-				if ($a === 'default') return -1;
-				if ($b === 'default') return 1;
+		if($supportedValues) {
+			usort($supportedValues, function($a, $b) {
+				if($a === 'default') return -1;
+				if($b === 'default') return 1;
 				return 0;
 			});
 		}
@@ -415,55 +420,73 @@ class ComponentClassesToJsonDefinitions {
 	/**
 	 * Processes the type of a property, returning an array with the short type name (no namespace)
 	 * and supported values if it's an enum.
-	 * @param ReflectionNamedType $type
+	 * @param ReflectionNamedType|ReflectionUnionType $type
 	 *
 	 * @return array|string[]
 	 */
-	private function processPropertyType(ReflectionNamedType $type): array {
-		$typeName = $type->getName();
+	private function processPropertyType(ReflectionNamedType|ReflectionUnionType $type): array {
+		if($type instanceof ReflectionNamedType) {
+			$typeName = $type->getName();
 
-		if (!class_exists($typeName)) {
-			return ['type' => $typeName];
-		}
+			if(!class_exists($typeName)) {
+				return ['type' => $typeName];
+			}
 
-		$reflectionType = new ReflectionClass($typeName);
-		$namespace = $reflectionType->getNamespaceName();
+			$reflectionType = new ReflectionClass($typeName);
+			$namespace = $reflectionType->getNamespaceName();
 
-		// If it's a Tag property, get default and supported tags from the class attributes
-		if ($typeName === Tag::class) {
-			try {
-				$allowedTagsAttr = $this->currentClass->getAttributes(AllowedTags::class)[0] ?? null;
-				$defaultTagAttr = $this->currentClass->getAttributes(DefaultTag::class)[0] ?? null;
-				$allowedTags = $allowedTagsAttr->newInstance()->tags;
-				$defaultTag = $defaultTagAttr->newInstance()->tag;
+			// If it's a Tag property, get default and supported tags from the class attributes
+			if($typeName === Tag::class) {
+				try {
+					$allowedTagsAttr = $this->currentClass->getAttributes(AllowedTags::class)[0] ?? null;
+					$defaultTagAttr = $this->currentClass->getAttributes(DefaultTag::class)[0] ?? null;
+					$allowedTags = $allowedTagsAttr->newInstance()->tags;
+					$defaultTag = $defaultTagAttr->newInstance()->tag;
+
+					return [
+						'type'      => str_replace("$namespace\\", '', $typeName),
+						'supported' => array_values(array_map(function($tag) {
+							return $tag->value;
+						}, $allowedTags)),
+						'default'   => $defaultTag->value
+					];
+				}
+				catch(\Throwable $e) {
+					error_log($e->getMessage());
+				}
+			}
+
+			if($reflectionType->isEnum()) {
+				$cases = $reflectionType->getConstants();
+				$supportedValues = array_map(function($case) {
+					return $case->value;
+				}, $cases);
 
 				return [
 					'type'      => str_replace("$namespace\\", '', $typeName),
-					'supported' => array_values(array_map(function ($tag) {
-						return $tag->value;
-					}, $allowedTags)),
-					'default'   => $defaultTag->value
+					'supported' => array_values($supportedValues)
 				];
 			}
-			catch (\Throwable $e) {
-				error_log($e->getMessage());
-			}
+
+			// If it's not an enum or the class doesn't exist, return the original type name
+			return ['type' => $typeName];
+		}
+		else if($type instanceof ReflectionUnionType) {
+			$types = $type->getTypes();
+
+			$processedTypes = array_map(function($type) {
+				return $this->processPropertyType($type);
+			}, $types);
+
+			// If Comet classes are an option, assume that's what we want and just return that
+			// e.g., in Table, the caption can be a TableCaption or an array corresponding to a TableCaption, so we just list TableCaption here
+			// TODO: Should this allow for more than one type?
+			return array_filter($processedTypes, function($type) {
+				return str_starts_with($type['type'], 'Doubleedesign\Comet\Core');
+			})[0];
 		}
 
-		if ($reflectionType->isEnum()) {
-			$cases = $reflectionType->getConstants();
-			$supportedValues = array_map(function ($case) {
-				return $case->value;
-			}, $cases);
-
-			return [
-				'type'      => str_replace("$namespace\\", '', $typeName),
-				'supported' => array_values($supportedValues)
-			];
-		}
-
-		// If it's not an enum or the class doesn't exist, return the original type name
-		return ['type' => $typeName];
+		return [];
 	}
 
 	/**
@@ -484,10 +507,10 @@ class ComponentClassesToJsonDefinitions {
 //        or php generate-json-defs.php --component MyComponent
 try {
 	$instance = new ComponentClassesToJsonDefinitions();
-	if (isset($argv[1]) && $argv[1] === '--component') {
+	if(isset($argv[1]) && $argv[1] === '--component') {
 		$instance->runSingle($argv[2]);
 	}
-	else if (isset($argv[1]) && $argv[1] === '--base') {
+	else if(isset($argv[1]) && $argv[1] === '--base') {
 		$instance->runSingleBase($argv[2]);
 	}
 	else {
@@ -495,6 +518,6 @@ try {
 	}
 	echo "Done!\n";
 }
-catch (Exception $e) {
+catch(Exception $e) {
 	echo "Error: " . $e->getMessage() . "\n";
 }

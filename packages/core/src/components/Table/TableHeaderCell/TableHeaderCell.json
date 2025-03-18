@@ -1,6 +1,6 @@
 {
-    "name": "TableCell",
-    "extends": "TextElement",
+    "name": "TableHeaderCell",
+    "extends": "TableCell",
     "abstract": false,
     "attributes": {
         "backgroundColor": {
@@ -17,7 +17,8 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": true
         },
         "classes": {
             "type": "array<string>",
@@ -44,9 +45,9 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "td"
+                "th"
             ],
-            "default": "td",
+            "default": "th",
             "inherited": true
         },
         "textAlign": {
@@ -67,7 +68,12 @@
                 "top",
                 "middle",
                 "bottom"
-            ]
+            ],
+            "inherited": true
+        },
+        "width": {
+            "type": "string",
+            "description": "Fixed width of the cell, including units"
         }
     },
     "content": {

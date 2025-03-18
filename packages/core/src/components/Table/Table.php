@@ -12,7 +12,7 @@ class Table extends Renderable {
 	/**
 	 * @var ?string sticky
 	 * @supported-values header, first-column
-	 * @description Make the header "sticky" when the table is large enough to scroll vertically, or make the first column "sticky" when the table is large enough to scroll horizontally
+	 * @description Make the header "sticky" when the table is large enough to scroll vertically, or make the first column "sticky" when the table is large enough to scroll horizontally; designed for use with <thead> or the first cells all being <th scope="row"> elements
 	 */
 	protected ?string $sticky;
 	/**
@@ -22,13 +22,13 @@ class Table extends Renderable {
 	protected TableCaption|array|null $caption = null;
 
 	/**
-	 * @var array<array<TableCell>> $thead
-	 * @description Array of rows of TableCells for the table header
+	 * @var array<array<TableHeaderCell>> $thead
+	 * @description Array of rows of TableHeaderCells for the table header
 	 */
 	private array $thead;
 	/**
 	 * @var array<array<TableCell>> $tbody
-	 * @description Array of rows of TableCells for the table body
+	 * @description Array of rows of TableCells or TableHeaderCells for the table body
 	 */
 	private array $tbody;
 	/**
@@ -45,7 +45,15 @@ class Table extends Renderable {
 		parent::__construct($attributes, 'components.Table.table');
 		$this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? true;
 		$this->sticky = $attributes['sticky'] ?? false;
-		if(isset($attributes['tableCaption'])) {
+
+		// For some unknown reason, WordPress doesn't like me setting the attribute to "caption" in BlockRenderer.php in the plugin, but tableCaption works,
+		// but since I really prefer just 'caption' we need to handle both options here
+		if(isset($attributes['caption'])) {
+			$this->caption = $attributes['caption'] instanceof TableCaption
+				? $attributes['caption']
+				: new TableCaption($attributes['caption']['attributes'], $attributes['caption']['content']);
+		}
+		else if(isset($attributes['tableCaption'])) {
 			$this->caption = $attributes['tableCaption'] instanceof TableCaption
 				? $attributes['tableCaption']
 				: new TableCaption($attributes['tableCaption']['attributes'], $attributes['tableCaption']['content']);
@@ -59,9 +67,15 @@ class Table extends Renderable {
 	private function process_rows(array $rows): array {
 		return array_map(function($row) {
 			return array_map(function($cell) {
-				return $cell instanceof TableCell
-					? $cell
-					: new TableCell($cell['attributes'], $cell['content']);
+				if($cell instanceof TableHeaderCell or $cell instanceof TableCell) {
+					return $cell;
+				}
+
+				if($cell['attributes']['tagName'] === 'th') {
+					return new TableHeaderCell($cell['attributes'], $cell['content']);
+				}
+
+				return new TableCell($cell['attributes'], $cell['content']);
 			}, $row);
 		}, $rows);
 	}
@@ -86,13 +100,12 @@ class Table extends Renderable {
 		// TODO: How to render a colgroup if the first column should be sticky, so that the css can be applied to that?
 
 		echo $blade->make($this->bladeFile, [
-			'tag'        => $this->tagName->value,
 			'classes'    => implode(' ', $this->get_filtered_classes()),
 			'attributes' => $this->get_html_attributes(),
 			'thead'      => $this->thead,
 			'tbody'      => $this->tbody,
 			'tfoot'      => $this->tfoot,
-			'caption'    => $this->caption,
+			'caption'    => $this->caption
 		])->render();
 	}
 }

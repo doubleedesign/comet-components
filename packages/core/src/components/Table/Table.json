@@ -1,0 +1,62 @@
+{
+	"name": "Table",
+	"extends": "Renderable",
+	"abstract": false,
+	"attributes": {
+		"allowStacking": {
+			"type": "bool",
+			"description": "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
+			"required": true,
+			"default": "true"
+		},
+		"caption": {
+			"type": "TableCaption|array",
+			"description": "Caption object, or content and attributes corresponding to a Caption object"
+		},
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"table"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"sticky": {
+			"type": "string",
+			"description": "Make the header \"sticky\" when the table is large enough to scroll vertically, or make the first column \"sticky\" when the table is large enough to scroll horizontally; designed for use with <thead> or the first cells all being <th scope=\"row\"> elements",
+			"supported": [
+				"header",
+				"first-column"
+			]
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"table"
+			],
+			"default": "table",
+			"inherited": true
+		}
+	},
+	"data": {
+		"type": "array<string, array<TableCell|array>",
+		"description": "Either an array of TableCell and/or TableHeaderCell objects or an array of associative arrays corresponding to TableCell or TableHeaderCell fields",
+		"required": true
+	}
+}
