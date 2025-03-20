@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectTasksOptions">
-    <TaskOptions isEnabled="false">
+    <TaskOptions isEnabled="true">
       <option name="arguments" value="--color --source-map $FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -17,7 +17,7 @@
       <option name="program" value="$PROJECT_DIR$/../../../../ProgramData/chocolatey/bin/sass" />
       <option name="runOnExternalChanges" value="true" />
       <option name="scopeName" value="Core package" />
-      <option name="trackOnlyRoot" value="true" />
+      <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
@@ -61,7 +61,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="--update $FileDir$:$FileDir$ --load-path=$ProjectFileDir$\packages --quiet-deps" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -76,7 +76,7 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="sass" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Comet packages" />
+      <option name="scopeName" value="All Places" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$ProjectFileDir$/packages" />
       <envs />

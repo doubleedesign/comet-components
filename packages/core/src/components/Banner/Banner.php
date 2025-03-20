@@ -60,6 +60,10 @@ class Banner extends UIComponent {
 	 * @description The X and Y coordinates of the focal point of the image
 	 */
 	protected array $focalPoint = [50, 50];
+	/**
+	 * @var array<Heading|Paragraph|ButtonGroup> $innerComponents
+	 */
+	protected array $innerComponents;
 
 	function __construct(array $attributes, array $innerComponents) {
 		$this->imageUrl = $attributes['imageUrl'] ?? '';

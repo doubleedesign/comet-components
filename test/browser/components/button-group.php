@@ -1,22 +1,13 @@
 <?php
 use Doubleedesign\Comet\Core\ButtonGroup;
-use Doubleedesign\Comet\Core\Button;
+use const Doubleedesign\Comet\TestUtils\MOCK_INNER_COMPONENTS_BUTTONS;
 
-$attributes = [];
-$innerComponents = [
-	new Button(['href' => '#', 'colorTheme' => 'primary'], 'Button 1'),
-	new Button(['href' => '#', 'colorTheme' => 'primary'], 'Button 2'),
-];
+// Attribute keys fetched from component JSON definition
+$attributeKeys = ['classes', 'hAlign', 'orientation', 'tagName'];
+// Filter the request query vars to only those matching the above
+$attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
 
-if(isset($_REQUEST['hAlign'])) {
-	$attributes['justifyContent'] = $_REQUEST['hAlign'];
-}
-if(isset($_REQUEST['orientation'])) {
-	$attributes['orientation'] = $_REQUEST['orientation'];
-}
-if(isset($_REQUEST['tagName'])) {
-	$attributes['tagName'] = $_REQUEST['tagName'];
-}
+$innerComponents = MOCK_INNER_COMPONENTS_BUTTONS;
 
 $component = new ButtonGroup($attributes, $innerComponents);
 $component->render();

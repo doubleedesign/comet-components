@@ -18,7 +18,7 @@ class Button extends Renderable {
 	protected string $content;
 
 	function __construct(array $attributes, string $content) {
-		parent::__construct($attributes, 'components.ButtonGroup.Button.button');
+		parent::__construct($attributes, 'components.Button.button');
 		$this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
 		$this->isOutline = $attributes['isOutline'] ?? false;
 		$this->content = $content;

@@ -94,14 +94,16 @@ const preview: Preview = {
 						<Title/>
 						<Subtitle/>
 						<Description/>
-						<div className="breakout">
-							<Primary />
-						</div>
+						{/*<div className="breakout">*/}
+						<Primary />
+						{/*</div>*/}
 						<div className="controls-wrapper">
+							<h2 className="section-heading">Attributes</h2>
+							<p>The public properties you can assign to your component at creation time using the <code>$attributes</code> argument.</p>
 							<Controls/>
 						</div>
 						<div className="stories-wrapper">
-							<Stories includePrimary={false} title="Variations"/>
+							<Stories includePrimary={false} title="Variations and examples"/>
 						</div>
 					</Unstyled>
 				);

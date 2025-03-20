@@ -28,9 +28,11 @@ if($_SERVER['SCRIPT_NAME'] === '/components/button-group.php') {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?php echo "$host/assets/global.css" ?>">
 	<link rel="stylesheet" href="<?php echo "$host/assets/$cssFileName"; ?>">
+	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
 	<?php
 	foreach ($supportingCss as $supportingCssFile) { ?>
 		<link rel="stylesheet" href="<?php echo "$host/assets/$supportingCssFile"; ?>">
 	<?php } ?>
 </head>
 <body>
+<div id="browser-test-content">

@@ -36,7 +36,7 @@
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name; if not set, defaults to one matching the colour theme"
+            "description": "Icon class name; if not set, defaults to one matching the colour theme if appropriate (e.g, success, warning)"
         },
         "iconPrefix": {
             "type": "string",

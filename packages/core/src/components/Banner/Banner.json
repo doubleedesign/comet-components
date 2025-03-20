@@ -35,7 +35,9 @@
                 "default",
                 "wide",
                 "fullwidth",
-                "narrow"
+                "narrow",
+                "narrower",
+                "small"
             ],
             "default": "default"
         },
@@ -132,9 +134,8 @@
         }
     },
     "innerComponents": {
-        "type": "array<Renderable>",
+        "type": "array<Heading|Paragraph|ButtonGroup>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

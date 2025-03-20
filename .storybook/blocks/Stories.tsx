@@ -9,22 +9,6 @@ interface StoriesProps {
 	includePrimary?: boolean;
 }
 
-const StyledHeading: typeof Heading = styled(Heading)(({ theme }) => ({
-	fontSize: `${theme.typography.size.s2 - 1}px`,
-	fontWeight: theme.typography.weight.bold,
-	lineHeight: '16px',
-	letterSpacing: '0.35em',
-	textTransform: 'uppercase',
-	color: theme.textMutedColor,
-	border: 0,
-	marginBottom: '12px',
-
-	'&:first-of-type': {
-		// specificity issue
-		marginTop: '56px',
-	},
-}));
-
 export const Stories: FC<StoriesProps> = ({ title = 'Stories', includePrimary = true }) => {
 	const { componentStories, projectAnnotations, getStoryContext } = useContext(DocsContext);
 
@@ -57,7 +41,7 @@ export const Stories: FC<StoriesProps> = ({ title = 'Stories', includePrimary = 
 
 	return (
 		<>
-			<StyledHeading>{title}</StyledHeading>
+			<h2 className="section-heading">{title}</h2>
 			{stories.map(
 				(story) =>
 					story && <DocsStory key={story.id} of={story.moduleExport} expanded __forceInitialArgs />

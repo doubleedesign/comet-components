@@ -4,6 +4,7 @@
   --color-primary: #845ec2;
   --color-secondary: #00c9a7;
   --color-accent: #ba3caf;
+  --color-info: #00d2fc;
   --color-warning: #f9c971;
   --color-success: #00c9a7;
   --color-error: #d23e3e;
@@ -19,6 +20,9 @@
   --color-accent-h: 305.2380952381;
   --color-accent-s: 51.2195121951;
   --color-accent-l: 48.2352941176;
+  --color-info-h: 190;
+  --color-info-s: 100;
+  --color-info-l: 49.4117647059;
   --color-warning-h: 38.8235294118;
   --color-warning-s: 91.8918918919;
   --color-warning-l: 70.9803921569;
@@ -40,6 +44,7 @@
   --readable-color-primary: white;
   --readable-color-secondary: white;
   --readable-color-accent: white;
+  --readable-color-info: white;
   --readable-color-warning: black;
   --readable-color-success: white;
   --readable-color-error: white;
@@ -150,6 +155,10 @@ body {
   background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
 }
 
+[data-background=gradient-primary-info] {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-info) 50%, var(--color-info) 100%);
+}
+
 [data-background=gradient-primary-warning] {
   background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
@@ -201,6 +210,10 @@ body {
 
 [data-background=gradient-secondary-accent] {
   background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+[data-background=gradient-secondary-info] {
+  background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-info) 50%, var(--color-info) 100%);
 }
 
 [data-background=gradient-secondary-warning] {
@@ -256,6 +269,10 @@ body {
   background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
 }
 
+[data-background=gradient-accent-info] {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-info) 50%, var(--color-info) 100%);
+}
+
 [data-background=gradient-accent-warning] {
   background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
@@ -284,6 +301,63 @@ body {
   color: var(--color-accent);
 }
 
+[data-background=info] {
+  background-color: var(--color-info);
+  color: var(--readable-color-info);
+}
+
+[data-background=info] + [data-background*=gradient-info] {
+  padding-block-start: 0;
+}
+
+[data-background*=gradient-][data-background*=-info] + [data-background=info] {
+  padding-block-start: 0;
+}
+
+[data-background=gradient-info-primary] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+}
+
+[data-background=gradient-info-secondary] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+}
+
+[data-background=gradient-info-accent] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+[data-background=gradient-info-info] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-info) 50%, var(--color-info) 100%);
+}
+
+[data-background=gradient-info-warning] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+}
+
+[data-background=gradient-info-success] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-success) 50%, var(--color-success) 100%);
+}
+
+[data-background=gradient-info-error] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-error) 50%, var(--color-error) 100%);
+}
+
+[data-background=gradient-info-light] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-light) 50%, var(--color-light) 100%);
+}
+
+[data-background=gradient-info-dark] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+}
+
+[data-background=gradient-info-white] {
+  background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-white) 50%, var(--color-white) 100%);
+}
+
+[data-text-color=info] {
+  color: var(--color-info);
+}
+
 [data-background=warning] {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
@@ -307,6 +381,10 @@ body {
 
 [data-background=gradient-warning-accent] {
   background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+[data-background=gradient-warning-info] {
+  background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-info) 50%, var(--color-info) 100%);
 }
 
 [data-background=gradient-warning-warning] {
@@ -362,6 +440,10 @@ body {
   background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
 }
 
+[data-background=gradient-success-info] {
+  background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-info) 50%, var(--color-info) 100%);
+}
+
 [data-background=gradient-success-warning] {
   background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
@@ -413,6 +495,10 @@ body {
 
 [data-background=gradient-error-accent] {
   background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+[data-background=gradient-error-info] {
+  background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-info) 50%, var(--color-info) 100%);
 }
 
 [data-background=gradient-error-warning] {
@@ -468,6 +554,10 @@ body {
   background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
 }
 
+[data-background=gradient-light-info] {
+  background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-info) 50%, var(--color-info) 100%);
+}
+
 [data-background=gradient-light-warning] {
   background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
@@ -521,6 +611,10 @@ body {
   background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
 }
 
+[data-background=gradient-dark-info] {
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-info) 50%, var(--color-info) 100%);
+}
+
 [data-background=gradient-dark-warning] {
   background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
 }
@@ -572,6 +666,10 @@ body {
 
 [data-background=gradient-white-accent] {
   background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+}
+
+[data-background=gradient-white-info] {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-info) 50%, var(--color-info) 100%);
 }
 
 [data-background=gradient-white-warning] {

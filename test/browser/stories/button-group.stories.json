@@ -1,9 +1,9 @@
 {
-    "title": "Components/Uncategorised/ButtonGroup",
+    "title": "Components/Basic text/ButtonGroup",
     "parameters": {
         "docs": {
             "description": {
-                "component": ""
+                "component": "Prompt users to take action from multiple options with a group of buttons or button-style links."
             }
         },
         "server": {
@@ -100,25 +100,43 @@
             ]
         },
         {
-            "name": "Align start",
+            "name": "HAlign: Start",
             "args": {
                 "hAlign": "start"
             }
         },
         {
-            "name": "Align end",
+            "name": "HAlign: End",
             "args": {
                 "hAlign": "end"
             }
         },
         {
-            "name": "Align center",
+            "name": "HAlign: Center",
             "args": {
                 "hAlign": "center"
             }
         },
         {
-            "name": "Vertical orientation",
+            "name": "HAlign: Justify",
+            "args": {
+                "hAlign": "justify"
+            }
+        },
+        {
+            "name": "HAlign: Match-parent",
+            "args": {
+                "hAlign": "match-parent"
+            }
+        },
+        {
+            "name": "Orientation: Horizontal",
+            "args": {
+                "orientation": "horizontal"
+            }
+        },
+        {
+            "name": "Orientation: Vertical",
             "args": {
                 "orientation": "vertical"
             }

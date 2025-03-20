@@ -1,14 +1,14 @@
 {
-    "title": "Components/Layout/Container",
+    "title": "Components/Layout/Group",
     "parameters": {
         "docs": {
             "description": {
-                "component": "Create a section that controls the maximum width of its contents, can have a background colour, etc."
+                "component": "Group blocks together for layout, structure, or navigation purposes."
             }
         },
         "server": {
-            "id": "container",
-            "url": "http://localhost:6001/components/container.php",
+            "id": "group",
+            "url": "http://localhost:6001/components/group.php",
             "params": {
                 "__debug": true
             }
@@ -16,10 +16,9 @@
     },
     "args": {
         "backgroundColor": "",
-        "gradient": "",
-        "size": "default",
-        "tagName": "section",
-        "withWrapper": "true"
+        "hAlign": "start",
+        "tagName": "div",
+        "vAlign": "start"
     },
     "argTypes": {
         "backgroundColor": {
@@ -48,23 +47,16 @@
                 "white"
             ]
         },
-        "classes": {
+        "class": {
             "description": "CSS classes",
-            "control": false,
-            "table": {
-                "defaultValue": {
-                    "summary": [
-                        "container"
-                    ]
-                },
-                "type": {
-                    "summary": "array<string>"
-                }
-            }
-        },
-        "gradient": {
-            "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)",
-            "control": "none",
+            "control": {
+                "type": "select"
+            },
+            "options": [
+                "",
+                "group",
+                "group--breakout"
+            ],
             "table": {
                 "defaultValue": {
                     "summary": ""
@@ -74,24 +66,25 @@
                 }
             }
         },
-        "size": {
-            "description": "Keyword specifying the relative width of the container for the inner content",
+        "hAlign": {
+            "description": "",
             "control": {
                 "type": "select"
             },
             "table": {
                 "defaultValue": {
-                    "summary": "default"
+                    "summary": "start"
                 },
                 "type": {
-                    "summary": "ContainerSize"
+                    "summary": "Alignment"
                 }
             },
             "options": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow"
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
             ]
         },
         "tagName": {
@@ -101,31 +94,39 @@
             },
             "table": {
                 "defaultValue": {
-                    "summary": "section"
+                    "summary": "div"
                 },
                 "type": {
                     "summary": "Tag"
                 }
             },
             "options": [
+                "div",
                 "section",
-                "main",
-                "div"
+                "article",
+                "aside"
             ]
         },
-        "withWrapper": {
-            "description": "Whether to wrap the container element so that the background is full-width",
+        "vAlign": {
+            "description": "",
             "control": {
-                "type": "boolean"
+                "type": "select"
             },
             "table": {
                 "defaultValue": {
-                    "summary": "true"
+                    "summary": "start"
                 },
                 "type": {
-                    "summary": "bool"
+                    "summary": "Alignment"
                 }
-            }
+            },
+            "options": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ]
         }
     },
     "stories": [

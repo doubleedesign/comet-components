@@ -8,10 +8,35 @@
 #storybook-docs {
 	font-family: var(--comet-docs-body-font);
 
-	h1, h2, h3 {
+	h1, h2 {
 		font-family: var(--comet-docs-heading-font);
 	}
 
+	.section-heading {
+		font-family: var(--comet-docs-heading-font);
+		font-weight: 700;
+		font-size: 1.4rem;
+	}
+
+	.section-heading:not(:has(+ h3)) {
+		margin-bottom: 0;
+	}
+
+	h3 {
+		font-size: 1.1rem;
+		font-family: var(--comet-docs-body-font);
+		margin-block-end: 0;
+
+		+ .sbdocs-preview {
+			margin-block-start: 0.25rem;
+		}
+	}
+
+	p {
+		font-weight: 300;
+	}
+
+	/** Within the stories themselves **/
 	.sbdocs-preview .docs-story {
 		font-family: initial;
 
@@ -21,8 +46,12 @@
 	}
 }
 
-.docblock-argstable * {
-	font-family: var(--comet-docs-body-font);
+.docblock-argstable {
+	margin-top: 0;
+
+	* {
+		font-family: var(--comet-docs-body-font);
+	}
 }
 
 .sbdocs-wrapper {
@@ -60,6 +89,15 @@
 
 .docs-story .sb-story > div:first-child {
 	height: max-content !important;
+}
+
+.story--components-grouping-container {
+	margin-bottom: 0 !important;
+}
+
+/* This wraps .story--components-grouping-container and includes the heading */
+.sb-anchor:has(.story--components-grouping-container) {
+	margin-block: var(--spacing-lg);
 }
 
 .sbdocs-preview:has(.sbdocs-preview--story-loading) {
