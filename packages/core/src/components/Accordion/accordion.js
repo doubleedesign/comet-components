@@ -2,8 +2,6 @@ import Collapse from '../../../vendor/twbs/bootstrap/js/src/collapse.js';
 
 const panels = document.querySelectorAll('.accordion__panel');
 
-console.log(panels);
-
 panels.forEach((details, index) => {
 	// Get the summary and content elements
 	const summary = details.querySelector('.accordion__panel__title');
@@ -20,7 +18,7 @@ panels.forEach((details, index) => {
 		// Initialize Bootstrap collapse on the content
 		const collapseInstance = new Collapse(content, {
 			toggle: details.hasAttribute('open'), // Initialize open state based on 'open' attribute
-			parent: details.closest('.accordion') // For accordion behavior
+			parent: details.closest('.accordion') // For accordion behavior. Turning this off allows multiple open at a time. // TODO: Make this configurable
 		});
 
 		// Prevent native details toggling behavior
