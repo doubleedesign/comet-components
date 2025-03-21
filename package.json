@@ -9,6 +9,7 @@
 		"test:storybook": "storybook dev -p 6006",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
+		"docs": "cd docs-site && npm run docs:dev",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
 		"generate:json": "php scripts/generate-json-defs.php",
 		"generate:stories": "php scripts/generate-stories.php",

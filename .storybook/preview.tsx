@@ -35,6 +35,19 @@ const preview: Preview = {
 				cache: 'no-store'
 			},
 		},
+		options: {
+			storySort: {
+				order: [
+					'Introduction',
+					'Releases',
+					'Components',
+					'Implementations',
+					'Extending',
+					'Development',
+					'Code Foundations',
+				],
+			},
+		},
 		controls: {
 			disableSaveFromUI: true,
 			matchers: {

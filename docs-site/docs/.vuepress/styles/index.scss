@@ -1,0 +1,169 @@
+@import 'https://use.typekit.net/daf8wql.css';
+
+:root {
+	--font-family: solitaire-mvb-pro, sans-serif;
+	--vp-c-accent: #845ec2;
+	--vp-c-accent-bg: #845ec2;
+	--vp-c-accent-hover: #{darken(#845ec2, 15%)};
+}
+
+body {
+	font-weight: 300;
+}
+
+h1 {
+	font-family: gelica, sans-serif;
+	font-weight: 600;
+}
+
+a {
+	transition: all 0.2s ease-in-out !important;
+
+	&.vp-hero-action-button {
+		text-decoration: underline;
+		text-decoration-color: transparent;
+
+		&:hover, &:focus, &:active {
+			text-decoration-color: currentColor;
+		}
+
+		&.secondary {
+			&:hover, &:focus, &:active {
+				color: var(--vp-c-accent-hover);
+				border-color: var(--vp-c-accent-hover);
+				background: #{rgba(#845ec2, 0.3)};
+			}
+		}
+	}
+}
+
+.vp-home {
+}
+
+.vp-site-name {
+	font-family: gelica, sans-serif;
+	color: var(--vp-c-accent);
+}
+
+.vp-navbar {
+	box-shadow: 0 0 0.5rem 2px rgba(60, 60, 67, 0.15);
+	border: 0;
+
+	[data-theme="dark"] & {
+		box-shadow: 0 0 0.5rem 2px rgba(255, 255, 255, 0.15);
+	}
+}
+
+.vp-sidebar {
+
+	.vp-sidebar-item.collapsible {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.arrow {
+			font-size: 1.5rem;
+		}
+
+		&.active {
+			.arrow {
+				color: var(--vp-c-accent);
+			}
+		}
+	}
+}
+
+.vp-page {
+
+	h1:first-child + p {
+		margin-top: 0;
+	}
+
+	table {
+		border: 1px solid var(--vp-c-border-hard, #d1d4d7);
+
+		thead {
+			background: var(--vp-c-purple-soft);
+			border-bottom: 2px solid var(--vp-c-accent);
+
+			th {
+				text-align: start;
+				border: 0;
+			}
+		}
+
+		tbody {
+			td {
+				vertical-align: top;
+				border: 0;
+			}
+		}
+	}
+}
+
+.vp-page-nav {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
+	border-top: 0;
+
+	.auto-link {
+		margin: 0;
+
+		&.next {
+			grid-column: 2 / 3;
+		}
+	}
+}
+
+.vp-hero {
+
+	&-image {
+		width: 100vh;
+		height: auto;
+		max-height: none;
+		margin: 0 auto;
+		mask-image: linear-gradient(to bottom, black 50%, transparent 85%);
+
+		@media (min-width: 768px) {
+			width: 75vw;
+		}
+
+		@media (min-width: 940px) {
+			width: 60vw;
+			display: block;
+			margin: 0 auto;
+		}
+
+		@media (min-width: 1140px) {
+			width: 50vw;
+			max-width: 940px;
+		}
+	}
+
+	#main-title {
+		margin: 0;
+		line-height: 1;
+
+		@media (min-width: 600px) {
+			margin-top: -5rem;
+		}
+	}
+
+	.vp-hero-description {
+		max-width: none;
+		margin-top: 1rem;
+	}
+
+	.vp-hero-actions {
+	}
+}
+
+.vp-features {
+	border-top: 1px solid var(--vp-c-gutter);
+}
+
+.vp-footer {
+	border-top: 1px solid var(--vp-c-gutter);
+	padding-block: 2rem;
+}

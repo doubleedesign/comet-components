@@ -39,4 +39,7 @@ Get-ChildItem -Directory "packages" | ForEach-Object {
 	Run-NPM $_.FullName
 }
 
+# Run commands for documentation site
+Run-NPM "$ROOT_DIR\docs-site"
+
 Write-Host "All done!"
