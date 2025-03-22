@@ -16,7 +16,7 @@
 		"generate-from:wp": "node --import ./scripts/loader.mjs ./scripts/generate-from-wp-blocks.ts",
 		"refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
 		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
-		"refresh:symlinks": "powershell.exe -File scripts/symlinks.ps1",
+		"refresh:symlinks": "powershell.exe -ExecutionPolicy Bypass -File scripts/symlinks.ps1",
 		"refresh:autoload": "npm run refresh:composer -- -autoload",
 		"refresh:npmpackages": "npm run refresh:npm -- -packagesOnly",
 		"refresh:all": "npm run refresh:composer && npm run refresh:npm && npm run refresh:symlinks"
@@ -49,6 +49,7 @@
 		"@types/node": "^22.10.2",
 		"@typescript-eslint/eslint-plugin": "^8.18.1",
 		"@typescript-eslint/parser": "^8.18.1",
+		"@vuepress/plugin-markdown-container": "^2.0.0-rc.79",
 		"@wordpress/block-editor": "^14.9.0",
 		"@wordpress/block-library": "^9.14.0",
 		"@wordpress/blocks": "^14.3.0",

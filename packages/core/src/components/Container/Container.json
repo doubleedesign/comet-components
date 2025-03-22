@@ -48,7 +48,9 @@
                 "default",
                 "wide",
                 "fullwidth",
-                "narrow"
+                "narrow",
+                "narrower",
+                "small"
             ],
             "default": "default"
         },

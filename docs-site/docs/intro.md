@@ -1,23 +1,14 @@
 # Introduction
 
-Comet Components is a web UI component library initially being developed for PHP as an abstraction layer for WordPress blocks, with the intention of being able to use the same components in other projects.
+Comet Components is a web UI component library initially being developed for PHP as an abstraction layer for WordPress
+blocks, with the intention of being able to use the same components in other projects.
 
----
-## Tech Stack
+It is built with an object-oriented architecture, where each component is passed an array of `$attributes` and in most
+cases, either a string of `$content` or an array of component objects called `$innerComponents`. In a small number of
+cases, a different structure is passed to construct the instance within itself, such as the `Table` block receiving an
+array of `$data`.
 
-| Technology  | Description                    | Details/Rationale                                                                                                                                                                                                                                                                                                 |
-|-------------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PHP         | Primary programming language   | I like it. And because I'm using this in WordPress.                                                                                                                                                                                                                                                               |
-| Blade       | Templating engine for PHP      | I wanted to try using a templating language, and a) preferred the syntax over Twig and b) have vague notions of working with Laravel at some point in the future.                                                                                                                                                 |
-| JavaScript  | Secondary programming language | Used in the WordPress plugin where necessary in the back-end for custom blocks or customisations of core blocks (anything that can't be done in PHP), and in the standalone library for client-side interactivity.                                                                                                |
-| Bootstrap   | Vanilla JS plugins             | Some of Bootstrap's JavaScript plugins are used to provide basic client-side interactivity, because they're straightforward to implement and it's easier than reinventing the wheel. (Note that Bootstrap is _not_ used for general layout and CSS.)                                                              |
-| Vue.js      | JavaScript framework           | Used in select places to provide more advanced interactivity and responsiveness, such as the responsive menu in the `SiteHeader`. [Vue SFC Loader](https://github.com/FranckFreiburger/vue3-sfc-loader) is used to Vue-ify certain components (or parts of them) without the whole thing needing to be a Vue app. |
-| BaguetteBox | Vanilla JS plugin              | Used to make the gallery block a lightbox if set to link to media files.                                                                                                                                                                                                                                          |
+:::warning
+// TODO: Add some basic examples here
+:::
 
-## Dev Tooling
-| Technology | Description                | Details/Rationale                                                                                                                                                                                                                                                                                                    |
-|------------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| SCSS       | CSS preprocessor           | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                                                                                                                                    |
-| Rollup     | JavaScript bundler         | Used to bundle the core package's JavaScript into one file, to make it easier for implementations to use. (I previously had import path issues when trying to use the individual scripts in the WP plugin for example - this solves those.)                                                                          |
-| Composer   | PHP package manager        | Used to manage PHP dependencies, and within packages other dependencies that should be uploaded to the server (e.g., Bootstrap plugins). Dev-only dependencies should be installed at the project root, so that packages' `vendor` folders contain only production dependencies.                                     |
-| NPM        | JavaScript package manager | Used to manage JavaScript dependencies and build scripts. Primarily for local development and tooling (e.g. Storybook, Rollup). `node_modules` for any package should not be uploaded to the server - any JavaScript dependencies that reside here need to be compiled into production bundles that do get uploaded. |

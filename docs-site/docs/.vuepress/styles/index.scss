@@ -5,6 +5,7 @@
 	--vp-c-accent: #845ec2;
 	--vp-c-accent-bg: #845ec2;
 	--vp-c-accent-hover: #{darken(#845ec2, 15%)};
+	--content-width: 840px;
 }
 
 body {
@@ -80,6 +81,10 @@ a {
 	}
 
 	table {
+		display: table;
+		width: 100%;
+		min-width: 100%;
+		max-width: none;
 		border: 1px solid var(--vp-c-border-hard, #d1d4d7);
 
 		thead {
@@ -96,6 +101,31 @@ a {
 			td {
 				vertical-align: top;
 				border: 0;
+
+				code {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+
+	.vp-tabs {
+		margin: 0;
+
+		.vp-tabs-nav {
+
+			.vp-tab-nav {
+				font-family: var(--font-family);
+			}
+		}
+
+		.vp-tab {
+			div[class*="language-"] {
+				margin-top: 0;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
 			}
 		}
 	}
@@ -166,4 +196,223 @@ a {
 .vp-footer {
 	border-top: 1px solid var(--vp-c-gutter);
 	padding-block: 2rem;
+}
+
+#abstract-classes {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 1rem;
+
+	#Renderable {
+		grid-column: span 2;
+	}
+}
+
+.trait-class-doc,
+.abstract-class-doc,
+.data-type-doc {
+	padding: 0;
+	margin-bottom: 2rem !important;
+	/* same as component story boxes */
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10);
+	border-radius: 0.25rem;
+	border: 1px solid hsla(203, 50%, 30%, 0.15);
+
+	> div {
+		&:first-of-type {
+			padding: 1rem 0 1rem 1rem;
+		}
+
+		/** Code column */
+		&:last-of-type:has(div[class*="language-"]) {
+			overflow-x: visible;
+			background: #1d1c21;
+			border-top-right-radius: 0.25rem;
+			border-bottom-right-radius: 0.25rem;
+
+			.hint-container {
+				background: transparent;
+			}
+
+			.hint-container-title {
+				background: rgb(132, 94, 194);
+				color: white;
+				padding: 0.25rem 0.5rem 0.25rem 1rem;
+				display: inline-block;
+				position: relative;
+				left: -1.25rem;
+				top: 0.5rem;
+				border-radius: 0.25rem;
+				border-bottom-left-radius: 0;
+
+				&:before {
+					content: '';
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 0 0.75rem 0.75rem 0;
+					border-color: transparent color-mix(in srgb, rgb(132, 94, 194) 70%, black) transparent transparent;
+					transform: rotate(0deg);
+					position: absolute;
+					top: 100%;
+					left: 0;
+					mask-image: unset;
+				}
+			}
+		}
+	}
+
+	.hint-container {
+		margin: 0 !important;
+	}
+
+	.hint-container-title {
+		color: white;
+	}
+
+	h2 {
+		margin: 0 !important;
+		padding-top: 0;
+		border: 0;
+		font-size: 1.4rem;
+	}
+
+	h3 {
+		font-size: 1.1rem;
+		margin-bottom: 0.5rem;
+		padding-top: 0;
+		margin-top: 1.5rem;
+	}
+
+	p {
+		margin-top: 0 !important;
+		font-size: 0.95rem;
+		line-height: 1.4;
+	}
+
+	.hint-container {
+		padding: 0.5rem;
+		margin-bottom: 0.5rem !important;
+	}
+
+	dl {
+		margin-top: 0.25rem;
+
+		dt {
+			margin-top: 0;
+			margin-bottom: 0.5rem;
+			font-weight: 600;
+		}
+
+		dd {
+			padding: 0 1rem;
+			margin: 0;
+			margin-bottom: 0.5rem;
+			display: flex;
+			flex-wrap: wrap;
+			font-size: 1rem;
+
+			strong {
+				margin-left: 1rem;
+			}
+
+			p {
+				width: 100%;
+				flex-basis: 100%;
+				margin-top: 0.25rem !important;
+			}
+
+			.hint-container {
+				width: 100%;
+				margin-top: 0.5rem !important;
+			}
+		}
+	}
+
+	table {
+		margin: 0 0 1rem 0;
+		width: 100%;
+		max-width: 400px;
+		font-size: 0.9rem;
+
+		th {
+			width: 50%;
+			text-align: start;
+
+			.abstract-class-doc & {
+				width: 30%;
+			}
+		}
+
+		td {
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&:has(th[scope="row"]) {
+			th {
+				background: var(--vp-c-purple-soft);
+			}
+
+			td {
+				background: white !important;
+			}
+		}
+	}
+}
+
+.abstract-class-doc {
+	margin-bottom: 0 !important;
+	padding: 1rem;
+
+	h2 {
+		margin-bottom: 0.5rem !important;
+	}
+
+	table {
+		border-bottom: 0;
+
+		th {
+			vertical-align: top;
+			width: 90px;
+			border-top: 0;
+			border-left: 0;
+		}
+
+		td {
+			border-bottom: 1px solid var(--vp-c-border-hard, #d1d4d7) !important;
+
+			ul {
+				margin: 0;
+				padding: 0;
+
+				li {
+					list-style-type: none;
+					display: inline-block;
+					margin-right: 0.25rem;
+				}
+			}
+		}
+	}
+}
+
+.trait-class-doc,
+.data-type-doc {
+	@media (min-width: 768px) {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1rem;
+		width: 100%;
+
+		> div {
+			min-width: 0;
+			overflow-x: hidden;
+
+			.code-preview {
+				overflow-x: auto;
+			}
+		}
+	}
 }

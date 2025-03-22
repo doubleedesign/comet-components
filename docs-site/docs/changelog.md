@@ -1,12 +1,9 @@
-import { Meta } from '@storybook/blocks';
-
-<Meta title="Releases"/>
+# Releases
 
 ## Current version
 
 To come.
 
----
 ## Roadmap
 
 ### 1.0.0
@@ -20,7 +17,6 @@ To come.
 - Some unit tests.
 - Addition of some client-side interactive features using Vue.js.
 
----
 ## Release History
 
 None.

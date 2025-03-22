@@ -158,42 +158,6 @@ details {
 			padding: 1rem 0 1rem 1rem;
 		}
 
-		/** Code column */
-
-		&:last-of-type:has(.code-preview) {
-			background: #1d1c21;
-			overflow-x: visible;
-
-			figure {
-				overflow-x: visible;
-
-				figcaption {
-					background: rgb(132, 94, 194);
-					color: white;
-					padding: 0.25rem 0.5rem 0.25rem 1rem;
-					display: inline-block;
-					position: relative;
-					left: -0.75rem;
-					top: 0.5rem;
-					border-radius: 0.25rem;
-					border-bottom-left-radius: 0;
-
-					&:before {
-						content: '';
-						width: 0;
-						height: 0;
-						border-style: solid;
-						border-width: 0 0.75rem 0.75rem 0;
-						border-color: transparent color-mix(in srgb, rgb(132, 94, 194) 70%, black) transparent transparent;
-						transform: rotate(0deg);
-						position: absolute;
-						top: 100%;
-						left: 0;
-					}
-				}
-			}
-		}
-
 		p {
 			&:has(code) {
 				display: flex;

@@ -31,7 +31,7 @@ choco install sass
 However, this can cause some permission and file path headaches when going via WSL and trying to use glob patterns or
 the watcher
 though (even with an alias in your Bash config). I haven't figured out a good way to get around that yet, because I have
-historically always used the NPM version for the command line, and alternatively when using [PHPStorm](./phpstorm.md),
+historically always used the NPM version for the command line, and alternatively when using [PhpStorm](./phpstorm.md),
 its file watcher can
 be configured to use the Chocolatey-installed version.
 
@@ -49,7 +49,7 @@ To watch all files in a directory with a glob pattern:
 ## To come
 ```
 
-Or if using PHPStorm, you can use its [file watcher](./phpstorm.md#sass-file-watcher).
+Or if using PhpStorm, you can use its [file watcher](./phpstorm.md#sass-file-watcher).
 
 ---
 

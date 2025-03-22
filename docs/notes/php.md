@@ -14,7 +14,7 @@
     - [Which instance is being used?](#which-instance-is-being-used)
     - [Changing the PHP or Composer instance](#changing-the-php-or-composer-instance)
 - [Optional] [Xdebug](#optional-xdebug)
-- [Optional] [PHPStorm Configuration](#optional-phpstorm-configuration)
+- [Optional] [PhpStorm Configuration](#optional-phpstorm-configuration)
 
 ---
 
@@ -217,21 +217,21 @@ xdebug.start_with_request = yes
 xdebug.start_upon_error = yes
 ```
 
-If using PHPStorm you can check if Xdebug is available (and find your `php.ini` file if it isn't) in
+If using PhpStorm you can check if Xdebug is available (and find your `php.ini` file if it isn't) in
 `File > Settings > Languages & Frameworks > PHP > CLI Interpreter`. Examples of a successful setup are shown below.
 
 If you are trying to use XDebug for a WordPress site using Local, make sure to:
 
 - Turn on XDebug in the Local GUI for the site
-- Set the PHPStorm CLI interpreter to use Local's PHP instance
+- Set the PhpStorm CLI interpreter to use Local's PHP instance
 - Exit Laravel Herd if it is running, because it is probably using the same port unless you've changed one of them
 - Restart your site in Local after making any changes to `php.ini`.
 
 ---
 
-## [Optional] PHPStorm Configuration
+## [Optional] PhpStorm Configuration
 
-See the [PHPStorm setup notes](./phpstorm.md) for more information.
+See the [PhpStorm setup notes](./phpstorm.md) for more information.
 
 ---
 [^1]: Why do I do that, you ask? It's easier for using the same PHP instance across many tools. I can also update this

@@ -6,7 +6,7 @@
     - [BlockTransformer test utility](#blocktransformer-test-utility)
 - [Where is PHP, Node, Composer, etc running from?](#where-is-php-node-composer-etc-running-from)
 - [Where is my PHP configuration (php.ini) file?](#where-is-my-php-configuration-phpini-file)
-- [PHPStorm File Watchers](#phpstorm-file-watchers)
+- [PhpStorm File Watchers](#phpstorm-file-watchers)
 - [Front-end development](#front-end-development)
 
 ## PHP unit tests
@@ -109,7 +109,7 @@ From the command line:
 php --ini
 ```
 
-PHPStorm:
+PhpStorm:
 
 - Go to `File > Settings > Languages & Frameworks > PHP > CLI Interpreter`
 - Click the `...` button next to the interpreter path
@@ -122,7 +122,7 @@ PHPStorm:
 > [!NOTE]
 > The browser dev/testing envrionment run with `npm run test:server` uses its own, separate config file.
 
-## PHPStorm File Watchers
+## PhpStorm File Watchers
 
 **"Is not a valid Win32 application" error**"
 
@@ -154,5 +154,5 @@ it when expected.
 
 **SCSS not recompiling when an imported file changes**
 
-In PHPStorm, try running "reload all from disk" to make it realise the file has changed. If that doesn't help, make a
+In PhpStorm, try running "reload all from disk" to make it realise the file has changed. If that doesn't help, make a
 whitespace change in the file you want to recompile (not the one that's imported, that you already actually changed).

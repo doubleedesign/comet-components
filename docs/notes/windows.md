@@ -10,13 +10,13 @@ tested. It is not essential to follow these steps or to use the same setup as me
 to any of the tools or technologies listed here or are new to using Windows for web development.
 
 These notes cover both doing everything natively (using PowerShell as your terminal) and using WSL (for a Bash
-terminal), and also include IDE configuration information for PHPStorm.
+terminal), and also include IDE configuration information for PhpStorm.
 
 - [PHP development setup on Windows](./php.md)
 - [Node development setup on Windows](./node.md)
 - [Sass on Windows](./sass.md)
 - [My WSL setup](./wsl.md)
-- [My PHPStorm setup](./phpstorm.md)
+- [My PhpStorm setup](./phpstorm.md)
 
 #### Additional background information
 

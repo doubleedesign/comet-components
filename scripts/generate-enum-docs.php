@@ -3,257 +3,226 @@
 class EnumDocGenerator {
 	private string $sourceDirectory;
 	private string $outputDirectory;
-	private string $mdx = '';
+	private string $output;
 
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
 		$this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\types';
-		$this->outputDirectory = dirname(__DIR__, 1) . '\docs\code-foundations';
+		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\development\architecture';
 		// Ensure output directory exists
-		if (!is_dir($this->outputDirectory)) {
+		if(!is_dir($this->outputDirectory)) {
 			mkdir($this->outputDirectory, 0777, true);
 		}
 
-		$this->mdx = "<h1>Data Types</h1>\n\n";
-		$this->mdx .= $this->addParagraph('PHP enums are used to specify valid values for properties.');
-		$this->mdx .= $this->addParagraph('This provides a central location for validation logic and documentation, as well as reducing duplication, ensuring consistency, and enabling type safety.');
+		$this->output = <<<EOT
+		# Data Types
+		PHP enums are used to specify valid values for properties. This provides a central location for validation logic and documentation, as well as reducing duplication, ensuring consistency, and enabling type safety.
+		
+		EOT;
 	}
 
 
 	public function runAll(): void {
 		$enumFiles = $this->getFiles();
 
-		foreach ($enumFiles as $file) {
+		foreach($enumFiles as $file) {
 			$className = $this->getFullyQualifiedClassName($file);
 
-			if ($className) {
-				$mdx = $this->generateMDX($className);
-				$this->mdx .= $mdx;
+			if($className) {
+				$mdx = $this->generateOutput($className);
+				$this->output .= $mdx;
 			}
 		}
 
-		$outputFile = "$this->outputDirectory/Data Types.mdx";
-		file_put_contents($outputFile, $this->mdx);
+		$outputFile = "$this->outputDirectory/data-types.md";
+		file_put_contents($outputFile, $this->output);
 	}
 
 	/** @noinspection PhpUnhandledExceptionInspection */
-	private function generateMDX(string $enumClass): string {
+	private function generateOutput(string $enumClass): string {
 		$reflectionClass = new ReflectionEnum($enumClass);
 		$shortName = $reflectionClass->getShortName();
-		// A place to store stuff from the first column's loop that we want to display in the second column
-		$holdForSecondColumn = '';
-
-		$mdx = $this->openDiv('two-column-doc-section');
-
-		// FIRST COLUMN ------------------------------------------------------------------------------------------------
-		$mdx .= $this->openDiv();
-		// Title and description ---------------------------
-		$mdx .= "<h2>$shortName</h2>\n";
-		$mdx .= $this->addParagraph("Enum used to specify valid values for {$this->lower_sentence_case($shortName)} properties.");
-		// -------------------------------------------------
+		$methods = '';
+		$basicUsage = '';
+		$methodUsage = '';
+		$globalAttributes = '';
 
 		// Enum cases --------------------------------------
 		// Handle the attributes stuff in the Tag enum, and anything that works the same
-		if ($reflectionClass->hasMethod('get_valid_attributes')) {
-			$mdx .= "<details>\n";
-			$mdx .= '<summary>Supported values</summary>';
-			$mdx .= "\n\n";
-
-			$mdx .= "| Case | Value | Valid attributes |\n";
-			$mdx .= "|------|-------|------------------|\n";
-			foreach ($reflectionClass->getCases() as $case) {
+		if($reflectionClass->hasMethod('get_valid_attributes')) {
+			$cases = join('', array_map(function($case) use ($enumClass, $reflectionClass) {
+				$returnOutput = '';
 				// Get the enum name and case name
 				$enumName = $reflectionClass->getName();
 				$caseName = $case->getName();
-
 				// Create the actual enum case instance like $tag = Tag::DIV
 				$enumCase = constant("$enumName::$caseName");
-
 				// Now we can call get_valid_attributes() on it
 				$uniqueAttributes = $enumCase->get_valid_attributes();
-				if ($enumClass::GLOBAL_ATTRIBUTES) {
-					$uniqueAttributes = array_diff($uniqueAttributes, $enumClass::GLOBAL_ATTRIBUTES);
-					$uniqueAttributes = array_map(fn($attribute) => "`$attribute`", $uniqueAttributes);
-					$uniqueAttributes = implode(', ', $uniqueAttributes);
-					if (empty($uniqueAttributes)) {
-						$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | Global attributes |\n";
-						continue;
-					}
-					$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | Global attributes, $uniqueAttributes, |\n";
-					continue;
-				}
-
+				$uniqueAttributes = array_diff($uniqueAttributes, $enumClass::GLOBAL_ATTRIBUTES);
+				$uniqueAttributes = array_map(fn($attribute) => "`$attribute`", $uniqueAttributes);
 				$uniqueAttributes = implode(', ', $uniqueAttributes);
-				$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}` | `{$uniqueAttributes}` |\n";
-			}
-			$mdx .= "\n\n";
-			$mdx .= '</details>';
+				if($enumClass::GLOBAL_ATTRIBUTES) {
+					if(empty($uniqueAttributes)) {
+						$returnOutput .= "| {$case->getValue()->name} | {$case->getValue()->value} | Global attributes |\n";
+					}
+				}
+				$returnOutput .= "| {$case->getValue()->name} | {$case->getValue()->value} | $uniqueAttributes |\n";
+
+				return $returnOutput;
+			}, $reflectionClass->getCases()));
 
 			// Global attributes for the Tag enum
 			// or anything else that also has it ---------------
-			if ($reflectionClass->hasMethod('get_valid_attributes') && $enumClass::GLOBAL_ATTRIBUTES) {
-				$mdx .= "<details>\n";
-				$mdx .= '<summary>Global attributes</summary>';
-				$mdx .= "\n\n";
-				$formattedAttributes = array_map(fn($attribute) => "`$attribute`", $enumClass::GLOBAL_ATTRIBUTES);
-				$mdx .= implode(' ', $formattedAttributes);
-				$mdx .= "\n\n";
-				$mdx .= '</details>';
+			if($enumClass::GLOBAL_ATTRIBUTES) {
+				$globalAttributes = join('', array_map(fn($attribute) => "<li><code>$attribute</code></li>", $enumClass::GLOBAL_ATTRIBUTES));
 			}
-			// -------------------------------------------------
+
+			$enumStuff = <<<EOT
+			::: details Supported values
+			
+			| Case | Value | Valid attributes |
+			|------|-------|------------------|
+			$cases
+			:::
+			
+			::: details Global attributes
+			<ul>
+			$globalAttributes
+			</ul>
+			:::
+			EOT;
 		}
 		// Otherwise, just case and value
 		else {
-			$mdx .= $this->openFigure('Supported values');
-			$mdx .= "| Case | Value |\n";
-			$mdx .= "|------|-------|\n";
-			foreach ($reflectionClass->getCases() as $case) {
-				$mdx .= "| `{$case->getValue()->name}` | `{$case->getValue()->value}`|\n";
-			}
-			$mdx .= $this->closeFigure();
+			$cases = join('', array_map(function($case) {
+				return "| <code>{$case->getValue()->name}</code> | <code>{$case->getValue()->value}</code> |\n";
+			}, $reflectionClass->getCases()));
+
+			$enumStuff = <<<EOT
+			::: details Supported values
+			
+			| Case | Value |
+			|------|-------|
+			$cases
+			:::
+			EOT;
 		}
-		// -------------------------------------------------
 
-		$mdx .= $this->openFigure('Methods');
+		$basicUsage .= <<<EOT
+		
+		::: note Basic usage
+		```php
+		use {$reflectionClass->getName()};
+		\$result = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};
+		\$value = \$result->value; // returns '{$reflectionClass->getCases()[0]->getValue()->value}'
+		```
+		:::
+		EOT;
+
 		// Expected/known methods --------------------------
-		if ($reflectionClass->hasMethod('fromString')) {
-			$mdx .= '<dl>';
-			$mdx .= '<dt><code>fromString(string $value)</code></dt>';
-			$mdx .= '<dd>';
-			$mdx .= 'Converts a string to the corresponding enum case.';
-			$mdx .= '</dd>';
-			$mdx .= '</dl>';
-
-			$mdx .= "\n\n";
-			$mdx .= "<details>\n";
-			$mdx .= '<summary>Supported input mappings</summary>';
-			$mdx .= "\n\n";
+		if($reflectionClass->hasMethod('fromString')) {
+			$inputMappings = '';
 			// Try to extract input mappings from the method
 			$methodSource = file_get_contents($reflectionClass->getFileName());
-			preg_match('/match\(\$value\)\s*{(.*?)}/s', $methodSource, $matchBlock);
-
-			if (!empty($matchBlock[1])) {
-				$mdx .= "| Input | Result |\n";
-				$mdx .= "|-------|--------|\n";
+			preg_match('/return\s+match\s*\(\$value\)\s*{([\s\S]*?)}/s', $methodSource, $matchBlock);
+			if(!empty($matchBlock[1])) {
 				$lines = explode("\n", $matchBlock[1]);
-				foreach ($lines as $line) {
+				$linesOutput = join('', array_map(function($line) {
 					$line = trim($line);
-					if (empty($line)) {
-						continue;
-					}
+					if(empty($line)) return '';
 
 					[$input, $result] = explode('=>', $line);
 					$inputs = array_filter(explode(',', $input), fn($input) => $input !== 'default');
 					$trimmedResult = trim(trim($result, ','));
+					return join('', array_map(function($input) use ($trimmedResult) {
+						return "| `$input` | `$trimmedResult` |\n";
+					}, $inputs));
+				}, $lines));
 
-					foreach ($inputs as $input) {
-						$input = trim($input);
-						$mdx .= "| `$input` | `$trimmedResult` |\n";
-					}
-				}
+				$inputMappings = <<<EOT
+						
+				| Input | Result |
+				|-------|--------|
+				$linesOutput
+				EOT;
 			}
-			$mdx .= "\n\n";
-			$mdx .= '</details>';
 
-			$holdForSecondColumn .= $this->openFigure('Method usage');
-			$holdForSecondColumn .= "```php\n";
-			$holdForSecondColumn .= "use {$reflectionClass->getName()};\n\n";
-			$holdForSecondColumn .= "\$result = {$shortName}::fromString('left');\n";
-			$holdForSecondColumn .= "```\n\n";
-			$holdForSecondColumn .= $this->closeFigure();
+			$methods .= <<<EOT
+			<dt><code>fromString(string \$value)</code></dt>
+			<dd>
+			Converts a string to the corresponding enum case.
+			
+			::: details Supported input mappings
+			$inputMappings
+			:::
+			</dd>
+			EOT;
 		}
 		// If there is no fromString, we probably use PHP's tryFrom
 		else {
-			$mdx .= '<dl>';
-			$mdx .= '<dt><code>tryFrom(string $value): ?self</code></dt>';
-			$mdx .= '<dd>';
-			$mdx .= 'Built-in PHP enum method that converts a string to the corresponding enum case, or returns null if the string is not a valid value.';
-			$mdx .= '</dd>';
-			$mdx .= '</dl>';
-			$mdx .= "\n\n";
+			$methods .= <<<EOT
+			<dt><code>tryFrom(string \$value): ?self</code></dt>
+			<dd>Built-in PHP enum method that converts a string to the corresponding enum case, or returns null if the string is not a valid value.</dd>
+			EOT;
 
 			$firstCase = $reflectionClass->getCases()[0]->getValue()->value;
-			$holdForSecondColumn .= $this->openFigure('Method usage');
-			$holdForSecondColumn .= "```php\n";
-			$holdForSecondColumn .= "use {$reflectionClass->getName()};\n\n";
-			$holdForSecondColumn .= "\$result = {$shortName}::tryFrom('$firstCase');\n";
-			$holdForSecondColumn .= "```\n\n";
-			$holdForSecondColumn .= $this->closeFigure();
 
+			$methodUsage .= <<<EOT
+			
+			```php
+			use {$reflectionClass->getName()};
+			\$result = {$shortName}::tryFrom('$firstCase');
+			```
+			EOT;
 		}
 
-		if ($reflectionClass->hasMethod('get_valid_attributes')) {
-			$mdx .= '<dl>';
-			$mdx .= '<dt><code>get_valid_attributes(): array</code></dt>';
-			$mdx .= '<dd>';
-			$mdx .= 'Returns an array of valid attributes';
-			$mdx .= '</dd>';
-			$mdx .= '</dl>';
+		if($reflectionClass->hasMethod('get_valid_attributes')) {
+			$methods .= <<<EOT
+			<dt><code>get_valid_attributes(): array</code></dt>
+			<dd>Returns an array of valid attributes</dd>
+			EOT;
 
-			$holdForSecondColumn .= "```php\n";
-			$holdForSecondColumn .= "use {$reflectionClass->getName()};\n\n";
-			$holdForSecondColumn .= "\$someTag = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};\n";
-			$holdForSecondColumn .= '$result = $someTag->get_valid_attributes();' . "\n";
-			$holdForSecondColumn .= "```\n\n";
+			$methodUsage .= <<<EOT
+			
+			```php
+			use {$reflectionClass->getName()}; 
+			\$someTag = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};
+			\$result = \$someTag->get_valid_attributes();
+			```
+			EOT;
 		}
-		// -------------------------------------------------
 
-		$mdx .= $this->closeFigure();
-		$mdx .= $this->closeDiv();
-		// END FIRST COLUMN --------------------------------------------------------------------------------------------
-
-		// SECOND COLUMN -----------------------------------------------------------------------------------------------
-		$mdx .= $this->openDiv();
-		// Generic basic usage example ---------------------
-		$mdx .= $this->openFigure('Basic usage');
-		$mdx .= "```php\n";
-		$mdx .= "use {$reflectionClass->getName()};\n\n";
-		$mdx .= "\$result = {$shortName}::{$reflectionClass->getCases()[0]->getValue()->name};\n";
-		$mdx .= '$value = $result->value;' . " // returns '{$reflectionClass->getCases()[0]->getValue()->value}'\n\n";
-		$mdx .= "```\n";
-		$mdx .= $this->closeFigure();
-		// -------------------------------------------------
-		$mdx .= $holdForSecondColumn;
-		$mdx .= $this->closeDiv();
-		// END SECOND COLUMN -------------------------------------------------------------------------------------------
-
-		$mdx .= $this->closeDiv();
-		// END TWO COLUMN DOC SECTION ----------------------------------------------------------------------------------
-
-		return $mdx;
-	}
-
-	private function addParagraph(string $text): string {
-		return "<p>$text</p>\n";
-	}
-
-	private function openDiv(string $className = ''): string {
-		if ($className) {
-			return "<div className=\"$className\">\n";
-		}
-		return "<div>\n";
-	}
-
-	private function closeDiv(): string {
-		return "</div>\n";
-	}
-
-	private function openFigure(string $caption): string {
-		$output = "\n<figure>\n\n";
-		$output .= "<figcaption>$caption</figcaption>\n\n";
-		return $output;
-	}
-
-	private function closeFigure(): string {
-		return "\n</figure>\n";
+		return <<<EOT
+		\n<div class="data-type-doc">
+		<div>
+		\n## $shortName
+		
+		Enum used to specify valid values for {$this->lower_sentence_case($shortName)} properties.
+		
+		$enumStuff
+		### Methods
+		<dl>
+		$methods
+		</dl>
+		</div>
+		
+		<div>
+		$basicUsage
+		::: note Method usage
+		$methodUsage
+		:::
+		</div>
+		</div>
+		EOT;
 	}
 
 	private function getFiles(): array {
 		/** @noinspection PhpUnhandledExceptionInspection */
 		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->sourceDirectory));
 		$phpFiles = [];
-		foreach ($files as $file) {
-			if ($file->isFile() && $file->getExtension() === 'php') {
+		foreach($files as $file) {
+			if($file->isFile() && $file->getExtension() === 'php') {
 				$phpFiles[] = $file->getPathname();
 			}
 		}
@@ -272,13 +241,12 @@ class EnumDocGenerator {
 		preg_match('/enum\s+(\w+)/', $contents, $classMatches);
 		$className = $classMatches[1] ?? null;
 
-		if ($className) {
+		if($className) {
 			return $namespace ? "$namespace\\$className" : $className;
 		}
 
 		return null;
 	}
-
 
 	private function sentence_case(string $string): string {
 		// PascalCase to kebab-case
@@ -303,6 +271,6 @@ try {
 	$instance->runAll();
 	echo "Done!\n";
 }
-catch (Error|ReflectionException $e) {
+catch(Exception $e) {
 	echo "Error: " . $e->getMessage() . "\n";
 }

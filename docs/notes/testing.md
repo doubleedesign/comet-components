@@ -39,22 +39,22 @@ To run a test file from the terminal:
 ./vendor/bin/phpunit  test/unit/HeadingTest.php --configuration ./test/phpunit.xml
 ```
 
-PHPStorm users can:
+PhpStorm users can:
 
 - Use the included Run configuration to run all tests
 - Run selected tests or files from the gutter icon; A PHPUnit run config template has also been included which will be
   used for that unless you configure otherwise.
 
-See [PHPStorm configuration notes](./phpstorm.md) for more information.
+See [PhpStorm configuration notes](./phpstorm.md) for more information.
 
 ### Coverage reporting
 
 You will need [Xdebug](https://xdebug.org/) installed and enabled to generate coverage data and reports. See
 the [PHP setup notes](./php.md) for more information.
 
-A PHPStorm Run Configuration has been included in this repository for running all tests and generating HTML coverage
+A PhpStorm Run Configuration has been included in this repository for running all tests and generating HTML coverage
 report. To see coverage data using the IDE coverage tools, use the "Run with coverage" option. By default, this is
-located in the top right corner of the PHPStorm window (shown below); you can also find it in the Run menu.
+located in the top right corner of the PhpStorm window (shown below); you can also find it in the Run menu.
 
 ![Run with coverage screenshot](./images/phpstorm-run-with-coverage.png)]
 

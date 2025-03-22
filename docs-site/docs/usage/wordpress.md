@@ -1,23 +1,31 @@
 # WordPress usage
 
+[[toc]]
+
 ## Quick Links
 
 ### Prerequisites
 
 - [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
 - [Block Supports Extended](https://github.com/humanmade/block-supports-extended)
-- [Breadcrumbs](https://github.com/doubleedesign/doublee-breadcrumbs) (optional, but required to enable breadcrumbs in the
-    `PageHeader` component)
+- [Breadcrumbs](https://github.com/doubleedesign/doublee-breadcrumbs) (optional, but required to enable breadcrumbs in
+  the
+  `PageHeader` component)
 
 ### Comet Essentials
+
 - [Comet Components plugin](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-plugin)
 - [Comet Canvas theme](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-canvas)
 
 ### Comet Add-Ons
+
 - [Comet Table Block](https://github.com/doubleedesign/comet-table-block)
 - Comet Calendar (coming soon)
 
 ## Plugins and parent theme
+
+For best results, use the plugin along with the Comet Canvas theme as a parent theme, and your project's theme as a child theme.
+
 
 ### Comet Components plugin
 
@@ -75,7 +83,7 @@ again if there are situations I have not accounted for yet.
 [^1]: If the block is generic enough that it can be created with simple core/Comet block combinations, there's a good
 chance it can go in the Comet plugin for use by all clients.
 
-## With custom WordPress blocks
+## With custom native blocks
 
 ### Saving with minimal markup
 

@@ -12,7 +12,7 @@ projects.
 - [Node](https://nodejs.org) installed locally
 - Git installed locally
 - [Sass](https://sass-lang.com) installed globally on your machine
-- IDE of choice (I use [PHPStorm](https://www.jetbrains.com/phpstorm/))
+- IDE of choice (I use [PhpStorm](https://www.jetbrains.com/phpstorm/))
 
 ### Setup
 
@@ -48,4 +48,11 @@ npm run test:server
 ```bash
 npm run test:storybook
 ```
+---
+## With thanks to
 
+- [TypeScale](https://type-scale.com)
+- [Jozo](https://github.com/jozo) for the [JSON of HTML elements and their attributes](https://github.com/jozo/all-html-elements-and-attributes/blob/master/html-elements.json) used for generating the `Tag` enum
+- Franck Freiburger and contributors for the brilliant [Vue SFC Loader](https://github.com/FranckFreiburger/vue3-sfc-loader) that allows me to sprinkle Vue into my PHP (particularly WordPress) projects
+- The presenters and attendees at WordCamp Sydney 2024 for the conversations around the earlier work I presented there that led to this project, and the ideas they presented that informed the approach I've taken here
+- ...and the core developers contributors behind every other library and tool used in this project!
