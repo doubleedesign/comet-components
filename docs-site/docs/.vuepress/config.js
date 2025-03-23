@@ -31,7 +31,7 @@ export default defineUserConfig({
 			},
 			{
 				text: 'Using and extending',
-				link: '/usage/theming.html'
+				link: '/usage/overview.html'
 			},
 			{
 				text: 'Development',
