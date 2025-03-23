@@ -4,11 +4,11 @@ title: Home
 heroImage: /hero.png
 actions:
   - text: Dev docs
-    link: /getting-started.html
+    link: /intro.html
     type: primary
 
   - text: Storybook
-    link: http://localhost:6006
+    link: https://storybook.cometcomponents.io
     type: secondary
 
 features:
@@ -25,7 +25,7 @@ features:
   - title: Clean
     details: Combines BEM class naming and data attributes to balance scoped and global styling while avoiding class name soup.
 
-footer: A Double-E Design creation.
+footer: A Double-E Design creation | Docs powered by VuePress
 ---
 
 

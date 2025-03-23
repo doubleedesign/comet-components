@@ -26,8 +26,12 @@ export default defineUserConfig({
 				link: '/intro.html',
 			},
 			{
-				text: 'Usage',
-				link: '/usage/composer.html',
+				text: 'Getting started',
+				link: '/getting-started/wordpress.html',
+			},
+			{
+				text: 'Using and extending',
+				link: '/usage/theming.html'
 			},
 			{
 				text: 'Development',
@@ -39,11 +43,7 @@ export default defineUserConfig({
 				text: 'Introduction',
 				link: '/intro.html',
 			},
-			...generateSidebar(),
-			{
-				text: 'Changelog',
-				link: '/changelog.html'
-			}
+			...generateSidebar()
 		],
 		sidebarDepth: 1,
 		markdown: {
@@ -69,7 +69,7 @@ export default defineUserConfig({
 
 // Generate structured sidebar items
 function generateSidebar() {
-	const preferredOrder = ['Usage', 'Development'];
+	const preferredOrder = ['Getting Started', 'Usage', 'Development', 'Technical Deep Dives', 'About'];
 	const items = [];
 	const files = fs.readdirSync(docsDir, { withFileTypes: true });
 
@@ -125,7 +125,7 @@ function getSectionChildren(folderName) {
 	}
 
 	// Some hacky preferred ordering
-	const preferredOrder = ['overview', 'setup', 'cli-commands', 'new-component'];
+	const preferredOrder = ['overview', 'setup', 'cli-commands', 'new-component', 'theming', 'extending'];
 
 	const children = [];
 
@@ -231,8 +231,9 @@ function extractTitleFromMarkdown(filePath) {
 		const content = fs.readFileSync(filePath, 'utf8');
 
 		// Look for the first heading in the file
-		const titleMatch = content.match(/^#\s+(.+)$/m) || // Match # Title
-			content.match(/^title:\s*(.+)$/m); // Match YAML frontmatter title: Title
+		const titleMatch =
+			content.match(/^title:\s*(.+)$/m) // Match YAML frontmatter title: Title
+			|| content.match(/^#\s+(.+)$/m); // Match # Title
 
 		if (titleMatch && titleMatch[1]) {
 			return titleMatch[1].trim();

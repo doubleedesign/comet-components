@@ -8,7 +8,7 @@ class EnumDocGenerator {
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
 		$this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\types';
-		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\development\architecture';
+		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\technical-deep-dives\php-architecture';
 		// Ensure output directory exists
 		if(!is_dir($this->outputDirectory)) {
 			mkdir($this->outputDirectory, 0777, true);

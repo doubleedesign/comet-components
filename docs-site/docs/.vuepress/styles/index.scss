@@ -17,11 +17,22 @@ h1 {
 	font-weight: 600;
 }
 
+p {
+	line-height: 1.5;
+}
+
 a {
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-color: transparent;
 	transition: all 0.2s ease-in-out !important;
 
+	&:hover, &:focus, &:active {
+		text-decoration-color: currentColor;
+	}
+
 	&.vp-hero-action-button {
-		text-decoration: underline;
+		text-decoration-style: solid;
 		text-decoration-color: transparent;
 
 		&:hover, &:focus, &:active {
@@ -36,6 +47,19 @@ a {
 			}
 		}
 	}
+
+	div[vp-content] & {
+		text-decoration-color: color-mix(in srgb, currentColor 60%, white) !important;
+
+		&:hover, &:focus, &:active {
+			color: var(--vp-c-accent-dark);
+			text-decoration-color: currentColor !important;
+		}
+	}
+}
+
+small {
+	display: block;
 }
 
 .vp-home {
@@ -73,6 +97,69 @@ a {
 		}
 	}
 }
+
+div[vp-content]:has(.comet-photo) {
+
+	h2:first-of-type {
+		@media (min-width: 768px) {
+			clear: both;
+		}
+		@media (min-width: 1140px) {
+			padding-top: 0;
+		}
+	}
+
+	.comet-photo {
+		max-width: 300px;
+		display: block;
+		margin: 0 auto;
+		padding-bottom: 1rem;
+
+		p:has(img) {
+			margin: 0;
+		}
+
+		&-caption {
+			margin-left: 1rem;
+			font-size: 0.8rem;
+			line-height: 1.2;
+			text-align: center;
+			position: relative;
+			padding-top: 0.5rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			max-width: 80%;
+			margin-inline: auto;
+
+			strong {
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				color: var(--vp-c-accent);
+				font-family: gelica, sans-serif;
+				font-size: 1.25rem;
+				line-height: 1;
+				position: relative;
+				z-index: 200;
+				margin-bottom: 0.5rem;
+			}
+		}
+	}
+
+	@media (min-width: 768px) {
+		.comet-photo {
+			margin-top: -4rem;
+			float: right;
+			margin-left: 2rem;
+			margin-bottom: 0 !important;
+		}
+	}
+}
+
 
 .vp-page {
 

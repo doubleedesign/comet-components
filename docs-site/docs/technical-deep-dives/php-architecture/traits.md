@@ -1,7 +1,6 @@
 # Component Traits
 
-PHP traits are used to provide common implementations of an attribute's conversion from $attributes array element to object field. 
-
+PHP traits are used to provide common implementations of an attribute's conversion from <code>$attributes</code> array element to object field.
 This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.
 
 <div class="trait-class-doc">

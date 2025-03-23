@@ -1,0 +1,41 @@
+# Background
+
+I have a long history of valuing reusability and consistency in my front-end development work, sometimes to a fault. And despite recognising and even espousing
+the benefits of dynamic styling libraries in the JavaScript world (which I joined after many years working with pure HTML and CSS with only sprinklings of JS),
+there's just something about
+coming "back" to the world of PHP-driven CMS theming when I work on freelance web development projects - where I can
+carefully craft clean HTML with human-readable class names and not a single one that doesn't need to be there - that just feels like home.
+
+For many years I worked with WordPress developing site-specific components
+with [ACF Flexible Modules](https://www.advancedcustomfields.com/resources/flexible-content/), and while my agency
+colleagues and I didn't always agree on the best way to build our themes with them, regardless of the specifics we had complete control over the output of
+components we developed. Then the [block editor](https://wordpress.org/gutenberg/) came along and thanks to that and the many other evolving WYSIWYG options,
+clients' expectations of what they could do with their sites grew accordingly. I had to find a way to balance the way I like to work with what my clients want
+and need.
+
+Despite having moved into the world of enterprise web applications in my "day job", working with React, TypeScript, Styled Components and similar, the idea of
+having to add a JavaScript build step and React layer for every component I wanted to create for a WordPress site elicited a visceral reaction in me. While I
+could see some benefits, the now "old-school" developer in me saw it as overkill and shuddered at the thought of how complex troubleshooting or minor
+modifications could become, compared to the simplicity of doing something like logging into a client's cPanel and making a small change to a file in 5 minutes.
+
+For my first few "Gutenberg" sites, I leant heavily on [ACF Blocks](https://www.advancedcustomfields.com/resources/blocks/) which do a great job bridging the
+gap, but in some cases they felt like hacky workarounds that looked and felt duct-taped into the back-end user experience. (That said, there are also cases
+where ACF provides a better user experience than the core blocks and editor do, so it's a balance.) I spent a lot of effort restricting use of core blocks and,
+in some ways, reinventing the wheel only to be dissatisfied with both the back-end user experience and the developer experience in terms of reusability and
+extendability.
+
+At WordCamp Sydney 2024, [Matt Knighton](https://www.mrkwp.com/) spoke about moving from shortcodes to blocks, and when answering a question made a passing
+remark saying he utilised the core blocks within his own blocks as much as possible. I was in the thick of refining my approach at the time and that comment
+really stuck with me and I knew I should try to the same a bit more. But at the same time, coupling my precious idea of true reusability so much to WordPress
+and the block editor didn't feel right. I was already working hard on overhauling my new project boilerplate to include a true foundational UI library, the
+itch and potential need to work with other CMSs was always in the back of my mind, and I just plain don't like a lot of the markup that the core blocks
+generate.
+
+What followed was:
+- a lot of experimentation and trial-and-error
+- embracing atomic design somewhat accidentally, and striving to couple the benefits with my existing approach
+- balancing of embracing what's already available (the power of the WordPress block editor and many of the core blocks) with what I wanted to achieve (a truly
+  reusable, extendable, and consistent set of components with
+  clean HTML)
+
+The result is Comet Components. It's either brilliant or an over-abstracted nightmare. Time will tell. :laughing:

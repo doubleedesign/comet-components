@@ -8,7 +8,7 @@ class TraitDocGenerator {
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
 		$this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\traits';
-		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\development\architecture';
+		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\technical-deep-dives\php-architecture';
 		// Ensure output directory exists
 		if(!is_dir($this->outputDirectory)) {
 			mkdir($this->outputDirectory, 0777, true);
@@ -17,7 +17,7 @@ class TraitDocGenerator {
 		$this->output = <<<EOT
 		# Component Traits
 		
-		PHP traits are used to provide common implementations of an attribute's conversion from \$attributes array element to object field. \n
+		PHP traits are used to provide common implementations of an attribute's conversion from <code>\$attributes</code> array element to object field.
 		This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.\n
 		EOT;
 	}

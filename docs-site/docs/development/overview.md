@@ -33,3 +33,13 @@
 
 - When developing for the WordPress plugin, running with Xdebug on can slow things down. If loading the editor or saving
   seems unduly slow, test with Xdebug off to confirm if it's just that or if you have an actual performance issue.
+
+## Glossary of terms
+
+| Term                      | Definition                                                                                                                                                                                                                                               |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| WSL                       | Windows Subsystem for Linux. This allows you to run a Linux terminal within Windows, which provides a Bash shell as opposed to the Command Prompt or PowerShell.                                                                                         |
+| NVM                       | Node Version Manager. This is a tool that allows you to manage multiple versions of Node.js on your machine.                                                                                                                                             |
+| NPM                       | Node Package Manager. This is a tool that comes with Node and allows you to install and manage JavaScript packages. For context, it's like Composer for PHP. The main place to find packages you can use with it on [npmjs.com](https://www.npmjs.com/). |
+| Composer                  | A package/dependency manager for PHP. It's like NPM for PHP, with additional features for things like class loading. The main place to find packages you can use with it is [Packagist](https://packagist.org/).                                         |
+| Chocolatey, Homebrew, APT | OS-level package managers that enable you to install and manage things like PHP and Node from the command line. [Chocolatey](https://community.chocolatey.org/) is for Windows, [Homebrew](https://brew.sh/) is for MacOS, and APT is built into Linux.  |

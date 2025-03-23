@@ -1,37 +1,18 @@
-# Testing
+# Unit testing
 
-- [General information](#general-information)
-- [Storybook](#storybook)
-- [Unit testing](#unit-testing)
-    - [Running tests](#running-tests)
-    - [About the setup](#about-the-setup)
-    - [Useful links](#useful-links)
-- [Component testing](#component-testing)
-- [Visual regression testing](#visual-regression-testing)
+::: warning
+// This probably needs updating.
+:::
 
----
+[[toc]]
 
-## General information
+## Writing tests
 
-> [!NOTE]
-> When testing compatibility of Comet Components with WordPress core block output, it is important to know that the
-> tests are designed to cover only the attributes I generally support in my themes and will be supporting in the Comet
-> Components WordPress plugin (the plugin will disable attributes in the editor if they are not supported).
->
-> A related note-to-self about this: If looking to refer to WP core `block.json` files for automating test boilerplate
-> and for checking coverage, this will need to be accounted for somehow.
+::: warning
+Details to come
+:::
 
----
-
-### Storybook
-
-// TODO.
-
----
-
-## Unit testing
-
-### Running tests
+## Running tests
 
 To run a test file from the terminal:
 
@@ -47,18 +28,18 @@ PhpStorm users can:
 
 See [PhpStorm configuration notes](./phpstorm.md) for more information.
 
-### Coverage reporting
+## Coverage reporting
 
 You will need [Xdebug](https://xdebug.org/) installed and enabled to generate coverage data and reports. See
-the [PHP setup notes](./php.md) for more information.
+the [PHP setup notes](../tooling/php.md) for more information.
 
 A PhpStorm Run Configuration has been included in this repository for running all tests and generating HTML coverage
 report. To see coverage data using the IDE coverage tools, use the "Run with coverage" option. By default, this is
 located in the top right corner of the PhpStorm window (shown below); you can also find it in the Run menu.
 
-![Run with coverage screenshot](./images/phpstorm-run-with-coverage.png)]
+![Run with coverage screenshot](/phpstorm-run-with-coverage.png)]
 
-### About the setup
+## About the setup
 
 > [!WARNING]
 > The unit tests are set up to use PHPUnit with BrainMonkey, which provides Patchwork and Mockery under the hood with
@@ -84,20 +65,57 @@ PHP systems. The exception is things that do not require any function mocks.
 
 ### Useful links
 
-- [Troubleshooting notes](./troubleshooting.md)
 - [PHPUnit 9.6 docs](https://docs.phpunit.de/en/9.6/)
 - [BrainMonkey docs](https://giuseppe-mazzapica.gitbook.io/brain-monkey)
 
----
+## Troubleshooting
 
-## Component testing
+### Logging to the console
 
-// TODO.
+`print_r` and `var_dump` may not work here. Instead, you can use:
 
----
+```php
+fwrite(STDERR, 'something to output as an error');
+```
 
-## Visual regression testing
+```php
+fwrite(STDOUT, 'something to output as a basic message');
+```
 
-// TODO.
+### General debugging
 
----
+To debug unexpected test failures (or silent failures - where the test passes but you know it shouldn't, the number of
+assertions is wrong, etc), you can run PHPUnit with the `--debug` flag. For example:
+
+```bash
+$ vendor/bin/phpunit --debug test/unit/HeadingTest.php
+```
+
+However, the standard PHP error handling catches problems that come from the JavaScript in the`BlockTransformer` class
+used for testing WordPress compatibility. See [BlockTransformer Test Utility](#blocktransformer-test-utility) below for
+more information.
+
+If you're still not getting useful enough feedback, you might want to try wrapping your test content in a try-catch
+block and outputting the stack trace and error message.
+
+### BlockTransformer test utility
+
+The `BlockTransformer` class exists as a bridge between PHP and JavaScript to enable generating the output of a
+component how the WordPress block editor would save it. It does this using a Node script, because the JavaScript-powered
+WordPress block editor transforms input to HTML before saving it to the database.
+
+Consequently, running PHPUnit with `--debug` doesn't catch problems that come from this Node script. Fortunately,
+there's a simple workaround: Wrap the tests that use this in a try-catch block. For example:
+
+```php
+use Throwable;
+// ... rest of test class and opening of test method
+try {
+    $block = parent::$transformer->transform_block('core/heading', $attributes, [$content]);
+}
+catch (Throwable $e) {
+    echo $e->getTraceAsString() . "\n";
+    $this->fail($e->getMessage()); 
+}
+// ... rest of test method and closing of test class
+```

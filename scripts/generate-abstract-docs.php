@@ -10,7 +10,7 @@ class AbstractClassDocGenerator {
 	public function __construct() {
 		$this->baseSourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components';
 		$this->mainComponentSourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
-		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\development\architecture';
+		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\technical-deep-dives\php-architecture';
 
 		// Ensure output directory exists
 		if(!is_dir($this->outputDirectory)) {
@@ -117,7 +117,7 @@ class AbstractClassDocGenerator {
 					<ul>$component</ul>
 				</td>
 			</tr>
-		EOT : <<< EOT
+		EOT: <<< EOT
 			<tr>
 				<th scope="row">Extended by</th>
 				<td>
