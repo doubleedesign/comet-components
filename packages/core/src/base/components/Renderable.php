@@ -44,6 +44,11 @@ abstract class Renderable {
 	 * @description The name of the component without any namespacing, prefixes, etc. Derived from the Blade filename by default.
 	 */
 	protected string $shortName;
+	/**
+	 * @var string|null $testId
+	 * @description Optionally add a data-testid attribute for automated tests
+	 */
+	protected ?string $testId;
 
 	public function __construct(array $attributes, string $bladeFile) {
 		$this->rawAttributes = $attributes;
@@ -53,6 +58,7 @@ abstract class Renderable {
 		$this->context = $attributes['context'] ?? $this->context;
 		$this->bladeFile = $bladeFile;
 		$this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
+		$this->testId = $attributes['testId'] ?? null;
 
 		// If we are in WordPress, allow overriding Blade template from the theme
 		if(class_exists('WP_Block') && function_exists('get_template_directory') && function_exists('get_stylesheet_directory')) {
@@ -210,6 +216,10 @@ abstract class Renderable {
 				)
 			)
 		);
+
+		if($this->testId) {
+			$attrs['data-testid'] = $this->testId;
+		}
 
 		// Remove any empty attributes before returning
 		return array_filter($attrs, fn($value) => !empty($value));

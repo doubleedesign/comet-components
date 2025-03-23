@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\TestUtils;
-use Doubleedesign\Comet\Core\{Heading, Paragraph, Button};
+use Doubleedesign\Comet\Core\{Heading, Paragraph, Columns, Column, Button};
 
 $heading = (new Heading([], 'Hello World'));
 $paragraph = (new Paragraph([], 'This is a simple paragraph'));

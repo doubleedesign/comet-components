@@ -36,7 +36,7 @@ class Columns extends LayoutComponent {
 
 		parent::__construct($attributes, $updatedInnerComponents ?? $innerComponents, 'components.Columns.columns');
 	}
-	
+
 	function get_html_attributes(): array {
 		$attributes = parent::get_html_attributes();
 

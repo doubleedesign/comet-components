@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use DOMDocument, DOMElement, DOMNode, ReflectionClass, Exception, RuntimeException;
+use DOMDocument, DOMElement, DOMNode, ReflectionClass, Exception;
 
 class TychoService {
 	/**
@@ -14,7 +14,7 @@ class TychoService {
 	 * @param array $variables Variables to make available in the template scope // TODO: This is not implemented yet
 	 * @throws Exception If the template is invalid
 	 *
-	 * @return mixed The root component object
+	 * @return Renderable The root component object
 	 */
 	public static function parse(string $template, array $variables = []): mixed {
 		if (self::$dom === null) {
@@ -54,11 +54,12 @@ class TychoService {
 	 * @param array $variables Variables from the parent scope
 	 * @throws Exception If the component class is not found
 	 *
-	 * @return mixed The component object
+	 * @return Renderable The component object
 	 */
 	private static function node_to_component(DOMNode $node, array $variables = []): mixed {
-		if($node->nodeType !== XML_ELEMENT_NODE) {
-			return $node->textContent;
+		// Wrap plain text content in a paragraph and return it
+		if($node->nodeType === XML_TEXT_NODE) {
+			return new Paragraph([], $node->nodeValue);
 		}
 
 		$tagName = $node->nodeName;
@@ -79,16 +80,21 @@ class TychoService {
 			return new $ComponentClass($attributes, $content);
 		}
 
-		// Otherwise, process inner components
+		// Otherwise, process inner components while maintaining nested hierarchy
 		$children = [];
 		if ($node->hasChildNodes()) {
-			/** @var DOMNode $innerComponent */
-			foreach ($node->childNodes as $innerComponent) {
-				$children[] = self::node_to_component($innerComponent, $variables);
+			foreach ($node->childNodes as $childNode) {
+				// Skip pure whitespace text nodes
+				if ($childNode->nodeType === XML_TEXT_NODE && trim($childNode->nodeValue) === '') {
+					continue;
+				}
+
+				// Process each inner component recursively
+				$children[] = self::node_to_component($childNode, $variables);
 			}
 		}
 
-		// Create and return the component
+		// Create and return the component with its properly nested children
 		return new $ComponentClass($attributes, $children);
 	}
 
@@ -110,10 +116,6 @@ class TychoService {
 		foreach ($node->attributes as $attr) {
 			$name = $attr->nodeName;
 			$value = htmlspecialchars($attr->nodeValue);
-
-			echo '<pre>';
-			echo print_r($value, true);
-			echo '</pre>';
 
 			// Type cast booleans
 			if ($value === 'true' || $value === 'false') {

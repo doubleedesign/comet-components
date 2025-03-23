@@ -16,3 +16,9 @@ packages/core/cache
 /test/browser/assets/*.css
 /docs-site/docs/.vuepress/.cache/
 /docs-site/docs/.vuepress/.temp/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -24,7 +24,7 @@ class Container extends UIComponent {
 		$this->set_size_from_attrs($attributes);
 		$this->set_background_color_from_attrs($attributes);
 		$this->gradient = $attributes['gradient'] ?? null;
-		$this->withWrapper = $attributes['withWrapper'] ?? true;
+		$this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
 	}
 
 	protected function get_filtered_classes(): array {
