@@ -21,7 +21,6 @@ function Run-NPM {
 	Push-Location $directory
 
 	npm install
-	npm run build
 
 	Pop-Location
 }

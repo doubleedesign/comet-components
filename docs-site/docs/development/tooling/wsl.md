@@ -57,6 +57,8 @@ The TL;DR is to add aliases to your `.bashrc` or `.zshrc` file to point to the W
 alias composer='powershell.exe /c C:\\Users\\LeesaWard\\.config\\herd\\bin\\composer.bat' # Use Windows Composer as set by Herd
 alias php='powershell.exe /c C:\\Users\\LeesaWard\\.config\\herd\\bin\\php.bat' # Use Windows PHP as set by Herd
 alias sass="powershell.exe sass -c \$(wslpath -w \$1)'" # Use Dart Sass installed via Chocolatey
+alias node='/mnt/c/Program\ Files/nodejs/node.exe' # Use Windows Node; this can be controlled via Herd
+alias npm='powershell.exe /c npm' # Use Windows NPM
 ```
 
 You can also set PHP to use specific versions installed anywhere in Windows. For details and examples see the [PHP on Windows](./php.md) guide.
