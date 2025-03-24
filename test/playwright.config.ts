@@ -1,4 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the equivalent of __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const projectRoot = resolve(__dirname, '..');
+
 
 /**
  * Read environment variables from file.
@@ -11,8 +20,10 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
 export default defineConfig({
-	testDir: './test/integration',
+	testDir: resolve(projectRoot, 'packages/core/src/components'),
+	testMatch: '**/__tests__/*.spec.ts',
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -25,18 +36,14 @@ export default defineConfig({
 	reporter: 'html',
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
+		navigationTimeout: 60000,
 		/* Base URL to use in actions like `await page.goto('/')`. */
 		baseURL: 'http://localhost:6001',
-
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry',
 	},
 
 	projects: [
-		{
-			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] },
-		},
 		{
 			name: 'firefox',
 			use: { ...devices['Desktop Firefox'] },

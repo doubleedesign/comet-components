@@ -20,10 +20,16 @@ $SOURCE_DIR = "$ROOT_DIR\packages\core\src\components"
 Write-Host "Root directory: $ROOT_DIR"
 Write-Host "Source directory: $SOURCE_DIR"
 
-# Ensure the destination directory exists
-$DEST_DIR = "$ROOT_DIR\test\browser\assets"
-if (-not (Test-Path $DEST_DIR)) {
-	New-Item -ItemType Directory -Path $DEST_DIR -Force
+# Ensure the assets destination directory exists and create it if not
+$ASSETS_DEST_DIR = "$ROOT_DIR\test\browser\assets"
+if (-not (Test-Path $ASSETS_DEST_DIR)) {
+	New-Item -ItemType Directory -Path $ASSETS_DEST_DIR -Force
+}
+
+# Ensure the stories destination directory exists and create it if not
+$STORIES_DEST_DIR = "$ROOT_DIR\test\browser\stories"
+if (-not (Test-Path $STORIES_DEST_DIR)) {
+	New-Item -ItemType Directory -Path $STORIES_DEST_DIR -Force
 }
 
 # Verify source directory exists
@@ -35,7 +41,7 @@ if (-not (Test-Path $SOURCE_DIR)) {
 # Get all CSS files, ignoring the parent directory structure
 Get-ChildItem -Path $SOURCE_DIR -Filter "*.css" -Recurse | ForEach-Object {
 	# Just use the filename for the destination
-	$DestPath = Join-Path $DEST_DIR $_.Name
+	$DestPath = Join-Path $ASSETS_DEST_DIR $_.Name
 
 	Write-Host "Symlinking $( $_.FullName ) to $DestPath"
 
@@ -45,4 +51,38 @@ Get-ChildItem -Path $SOURCE_DIR -Filter "*.css" -Recurse | ForEach-Object {
 	}
 
 	New-Item -ItemType SymbolicLink -Path $DestPath -Value $_.FullName -Force
+}
+
+# Get all stories files, ignoring the parent directory structure
+Get-ChildItem -Path $SOURCE_DIR | ForEach-Object {
+	# Is it a directory?
+	if (-not $_.PSIsContainer) {
+		return
+	}
+
+	$TEST_DIR = "$SOURCE_DIR\$_\__tests__\"
+	# Skip if the test directory doesn't exist
+	if (-not (Test-Path $TEST_DIR)) {
+		return
+	}
+
+	Get-ChildItem -Path $TEST_DIR | ForEach-Object {
+		# Is it a story file?
+		if ($_ -notlike "*.stories.json") {
+			return
+		}
+
+		$DestFileName = $_.Name
+		$DestPath = Join-Path $STORIES_DEST_DIR $DestFileName
+
+		Write-Host "Symlinking $_.FullName to $DestPath"
+
+		# Remove existing symlink if it exists
+		if (Test-Path $DestPath) {
+			Remove-Item $DestPath -Force
+		}
+
+		# Create the symlink
+		New-Item -ItemType SymbolicLink -Path $DestPath -Value $_.FullName -Force
+	}
 }

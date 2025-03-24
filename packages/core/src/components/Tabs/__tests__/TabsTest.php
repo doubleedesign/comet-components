@@ -1,6 +1,6 @@
 <?php
 /** @noinspection PhpUnhandledExceptionInspection */
-use Doubleedesign\Comet\Core\{Tabs,TabPanel,TabPanelTitle,TabPanelContent, Paragraph};
+use Doubleedesign\Comet\Core\{Paragraph, TabPanel, TabPanelContent, TabPanelTitle, Tabs};
 use PHPUnit\Framework\TestCase;
 
 class TabsTest extends TestCase {

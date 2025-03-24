@@ -1,6 +1,6 @@
 <?php
-namespace Doubleedesign\Comet\Tests;
-use Doubleedesign\Comet\Core\{AllowedTags,DefaultTag,Tag};
+namespace Doubleedesign\Comet\__tests__;
+use Doubleedesign\Comet\Core\{AllowedTags, DefaultTag, Tag};
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -15,24 +15,24 @@ class AllComponentsAttributesTest extends TestCase {
 	}
 
 	/** @noinspection PhpUnhandledExceptionInspection */
-	public function test_have_required_attributes(): void  {
+	public function test_have_required_attributes(): void {
 		$components = $this->get_all_component_classes();
 		$errors = [];
 
-		foreach ($components as ['class' => $componentClass, 'path' => $filepath]) {
+		foreach($components as ['class' => $componentClass, 'path' => $filepath]) {
 			$reflection = new ReflectionClass($componentClass);
 			$className = $reflection->getShortName();
 
 			// Check for AllowedTags attribute
 			$allowedTagsAttr = $reflection->getAttributes(AllowedTags::class);
-			if (empty($allowedTagsAttr)) {
+			if(empty($allowedTagsAttr)) {
 				$errors[] = "Component {$className} is missing AllowedTags attribute\nfile://{$filepath}";
 				continue;
 			}
 
 			// Check for DefaultTag attribute
 			$defaultTagAttr = $reflection->getAttributes(DefaultTag::class);
-			if (empty($defaultTagAttr)) {
+			if(empty($defaultTagAttr)) {
 				$errors[] = "Component {$className} is missing DefaultTag attribute\nfile://{$filepath}";
 				continue;
 			}
@@ -42,23 +42,23 @@ class AllComponentsAttributesTest extends TestCase {
 				$allowedTags = $allowedTagsAttr[0]->newInstance()->tags;
 				$defaultTag = $defaultTagAttr[0]->newInstance()->tag;
 
-				if (!in_array($defaultTag, $allowedTags)) {
+				if(!in_array($defaultTag, $allowedTags)) {
 					$errors[] = "Component {$className} has a default tag that is not in its allowed tags list\nfile://{$filepath}";
 				}
 
 				// Check JSON file
 				$jsonPath = str_replace('.php', '.json', $filepath);
-				if (file_exists($jsonPath)) {
+				if(file_exists($jsonPath)) {
 					$jsonContent = json_decode(file_get_contents($jsonPath), true);
 
-					if (isset($jsonContent['attributes']['tagName'])) {
+					if(isset($jsonContent['attributes']['tagName'])) {
 						$jsonTagInfo = $jsonContent['attributes']['tagName'];
 
 						// Check allowed tags match
 						$allowedTagValues = array_map(fn(Tag $tag) => $tag->value, $allowedTags);
 						$jsonAllowedTags = $jsonTagInfo['supported'] ?? [];
 
-						if (array_diff($allowedTagValues, $jsonAllowedTags) || array_diff($jsonAllowedTags, $allowedTagValues)) {
+						if(array_diff($allowedTagValues, $jsonAllowedTags) || array_diff($jsonAllowedTags, $allowedTagValues)) {
 							$errors[] = "Component {$className} has mismatched allowed tags between attributes and JSON\n" .
 								"Attributes: " . implode(', ', $allowedTagValues) . "\n" .
 								"JSON: " . implode(', ', $jsonAllowedTags) . "\n" .
@@ -69,20 +69,22 @@ class AllComponentsAttributesTest extends TestCase {
 						$defaultTagValue = $defaultTag->value;
 						$jsonDefaultTag = $jsonTagInfo['default'] ?? null;
 
-						if ($defaultTagValue !== $jsonDefaultTag) {
+						if($defaultTagValue !== $jsonDefaultTag) {
 							$errors[] = "Component {$className} has mismatched default tag between attributes and JSON\n" .
 								"Attributes: {$defaultTagValue}\n" .
 								"JSON: {$jsonDefaultTag}\n" .
 								"file://{$filepath}";
 						}
-					} else {
+					}
+					else {
 						$errors[] = "Component {$className} is missing tagName information in JSON file\nfile://{$jsonPath}";
 					}
-				} else {
+				}
+				else {
 					$errors[] = "Component {$className} is missing corresponding JSON file\nfile://{$jsonPath}";
 				}
 			}
-			catch (\Throwable $e) {
+			catch(\Throwable $e) {
 				$errors[] = "Component {$className} has invalid tag attributes: {$e->getMessage()}\nfile://{$filepath}";
 			}
 		}
@@ -98,13 +100,13 @@ class AllComponentsAttributesTest extends TestCase {
 			new RecursiveDirectoryIterator($this->componentDirectory)
 		);
 
-		foreach ($files as $file) {
-			if ($file->isFile() && $file->getExtension() === 'php') {
+		foreach($files as $file) {
+			if($file->isFile() && $file->getExtension() === 'php') {
 				$className = $this->get_class_name_for_file($file->getPathname());
-				if ($className) {
+				if($className) {
 					$components[] = [
 						'class' => $className,
-						'path' => $file->getPathname()
+						'path'  => $file->getPathname()
 					];
 				}
 			}
@@ -113,17 +115,17 @@ class AllComponentsAttributesTest extends TestCase {
 		return $components;
 	}
 
-	private function get_class_name_for_file(string $filepath): ?string    {
+	private function get_class_name_for_file(string $filepath): ?string {
 		$content = file_get_contents($filepath);
 
 		// Extract namespace
 		$namespace = '';
-		if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
+		if(preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
 			$namespace = $matches[1];
 		}
 
 		// Extract class name
-		if (preg_match('/class\s+(\w+)/', $content, $matches)) {
+		if(preg_match('/class\s+(\w+)/', $content, $matches)) {
 			$className = $matches[1];
 			return $namespace ? "$namespace\\$className" : $className;
 		}

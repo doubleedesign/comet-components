@@ -1,6 +1,6 @@
 <?php
 /** @noinspection PhpUnhandledExceptionInspection */
-use Doubleedesign\Comet\Core\{Accordion,AccordionPanel,AccordionPanelTitle,AccordionPanelContent, Paragraph};
+namespace Doubleedesign\Comet\Core;
 use PHPUnit\Framework\TestCase;
 
 class AccordionTest extends TestCase {

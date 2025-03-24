@@ -29,6 +29,12 @@
 | Composer   | PHP package manager        | Used to manage PHP dependencies, and within packages other dependencies that should be uploaded to the server (e.g., Bootstrap plugins). Dev-only dependencies should be installed at the project root, so that packages' `vendor` folders contain only production dependencies.                                     |
 | NPM        | JavaScript package manager | Used to manage JavaScript dependencies and build scripts. Primarily for local development and tooling (e.g. Storybook, Rollup). `node_modules` for any package should not be uploaded to the server - any JavaScript dependencies that reside here need to be compiled into production bundles that do get uploaded. |
 
+## Directory structure
+
+:::warning
+// TODO more detail here
+:::
+
 ## General quick tips
 
 - When developing for the WordPress plugin, running with Xdebug on can slow things down. If loading the editor or saving

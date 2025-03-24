@@ -105,8 +105,8 @@ sudo ln -s /mnt/c/tools/php84/php.exe /usr/local/bin/php
 ```
 
 ```bash
-# For PHP 8.3 from Laravel Herd (replace leesa with your Windows username)
-sudo ln -s /mnt/c/Users/leesa/.config/herd/bin/php83/php.exe /usr/local/bin/php
+# For PHP 8.4 from Laravel Herd (replace leesa with your Windows username)
+sudo ln -s /mnt/c/Users/leesa/.config/herd/bin/php84/php.exe /usr/local/bin/php
 ```
 
 ```bash

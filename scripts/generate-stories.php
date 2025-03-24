@@ -15,13 +15,11 @@
 class ComponentStoryGenerator {
 	private string $sourceDirectory;
 	private string $testComponentDirectory;
-	private string $storyDirectory;
 	private bool $overwrite;
 
 	public function __construct($overwrite = false) {
 		$this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
 		$this->testComponentDirectory = dirname(__DIR__, 1) . '\test\browser\components';
-		$this->storyDirectory = dirname(__DIR__, 1) . '\test\browser\stories';
 		$this->overwrite = $overwrite ?? false;
 	}
 
@@ -39,9 +37,15 @@ class ComponentStoryGenerator {
 
 	/** @noinspection PhpUnhandledExceptionInspection */
 	public function runSingle($component): void {
+		// Ensure JSON definition file exists
 		$filePath = $this->sourceDirectory . '\\' . $component . '\\' . $component . '.json';
 		if(!file_exists($filePath)) {
 			throw new RuntimeException("Component class $component not found");
+		}
+
+		// Ensure tests directory exists in the component directory and create it if it doesn't
+		if(!file_exists($this->sourceDirectory . '\\' . $component . '\\' . '__tests__')) {
+			mkdir($this->sourceDirectory . '\\' . $component . '\\' . '/__tests__', 0777, true);
 		}
 
 		$this->processFile($filePath);
@@ -97,7 +101,7 @@ class ComponentStoryGenerator {
 
 	private function generateStoryFile($name, $shortName, $attributes, $category): void {
 		// If the file already exists, bail unless the overwrite flag is set
-		if(file_exists("$this->storyDirectory/$shortName.stories.json") && !$this->overwrite) {
+		if(file_exists("$this->sourceDirectory/__tests__/$shortName.stories.json") && !$this->overwrite) {
 			print_r("Storybook file already exists for $name, skipping\n");
 			return;
 		}
@@ -251,7 +255,7 @@ class ComponentStoryGenerator {
 		}
 
 		// Export the processed data as a JSON file
-		$outputPath = $this->storyDirectory . '\\' . strtolower($shortName) . '.stories.json';
+		$outputPath = $this->sourceDirectory . '\\' . $name . '\\__tests__\\' . strtolower($shortName) . '.stories.json';
 		$this->exportToJson($outputPath, $storyFile);
 	}
 

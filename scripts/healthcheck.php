@@ -3,15 +3,11 @@
 class Healthcheck {
 	private string $componentDir;
 	private string $testPageDir;
-	private string $storyDir;
-	private string $unitTestDir;
 
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
 		$this->componentDir = dirname(__DIR__, 1) . '\packages\core\src\components\\';
 		$this->testPageDir = dirname(__DIR__, 1) . '\test\browser\components\\';
-		$this->storyDir = dirname(__DIR__, 1) . '\test\browser\stories\\';
-		$this->unitTestDir = dirname(__DIR__, 1) . '\test\browser\unit\\';
 	}
 
 	public function run(): void {
@@ -59,12 +55,14 @@ class Healthcheck {
 		$all = $this->get_all_component_directories();
 
 		$fileCollections = [
-			'JSON'           => [],
-			'CSS'            => [],
-			'Blade template' => [],
-			'test page'      => [],
-			'stories'        => [],
-			'unit test'      => []
+			'JSON'             => [],
+			'CSS'              => [],
+			'Blade template'   => [],
+			'test page'        => [],
+			'stories'          => [],
+			// TODO: Not all components require both unit and integration tests, so this should be refined
+			'unit test'        => [],
+			'integration test' => [],
 		];
 
 		foreach($all as $dir) {
@@ -75,7 +73,7 @@ class Healthcheck {
 			if(!glob($dir . '\\*.blade.php')) {
 				$fileCollections['Blade template'][] = $componentName;
 			}
-			if(!file_exists($this->unitTestDir . $componentName . 'Test.php')) {
+			if(!file_exists($this->componentDir . '__tests__' . $componentName . 'Test.php')) {
 				$fileCollections['unit test'][] = $componentName;
 			}
 		}
@@ -91,8 +89,11 @@ class Healthcheck {
 			if(!file_exists($this->testPageDir . self::kebab_case($componentName) . '.php')) {
 				$fileCollections['test page'][] = $componentName;
 			}
-			if(!file_exists($this->storyDir . self::kebab_case($componentName) . '.stories.json')) {
+			if(!file_exists($this->componentDir . self::kebab_case($componentName) . '__tests__' . '.stories.json')) {
 				$fileCollections['stories'][] = $componentName;
+			}
+			if(!file_exists($this->componentDir . '__tests__' . $componentName . '.spec.ts')) {
+				$fileCollections['integration test'][] = $componentName;
 			}
 		}
 

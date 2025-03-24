@@ -24,6 +24,20 @@
 			]
 		}
 	},
+	"archive": {
+		"exclude": [
+			"cache/",
+			"node_modules",
+			"package.json",
+			"package-lock.json",
+			"rollup.config.js",
+			"rollup.index.js",
+			".bladeformatterrc.json",
+			"**/*.spec.ts",
+			"src/components/**/*.json",
+			"src/components/**/__tests__"
+		]
+	},
 	"repositories": [
 		{
 			"type": "vcs",
