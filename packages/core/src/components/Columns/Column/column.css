@@ -2,9 +2,6 @@
   min-width: 0;
   display: flex;
 }
-.column[data-background] {
-  padding: var(--spacing-md);
-}
 .column__inner {
   display: flow-root;
   width: 100%;

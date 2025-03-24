@@ -1,25 +1,9 @@
 .columns {
-  padding-inline: var(--spacing-md);
-  padding-block: var(--spacing-md);
-  padding-inline: 0;
   display: grid;
   grid-gap: var(--spacing-md);
 }
-@media (min-width: 960px) {
-  .columns {
-    padding-block: var(--spacing-xl);
-  }
-}
-@media (min-width: 1440px) {
-  .columns {
-    padding-block: var(--spacing-xxl);
-  }
-}
-.group > .columns {
+.columns[data-background] {
   padding: var(--spacing-md);
-}
-.container > .columns {
-  padding-inline: 0;
 }
 @container (min-width: 960px) {
   .columns {

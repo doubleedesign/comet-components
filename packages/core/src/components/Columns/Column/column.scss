@@ -4,10 +4,6 @@
 	min-width: 0; // prevents overflowing content from widening the column in grid layouts
 	display: flex;
 
-	&[data-background] {
-		padding: var(--spacing-md);
-	}
-
 	&__inner {
 		display: flow-root;
 		width: 100%;

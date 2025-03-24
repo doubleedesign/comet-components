@@ -24,6 +24,7 @@ if(str_starts_with($_SERVER['SCRIPT_NAME'], '/pages/')) {
 		array_push($supportingCss, 'group.css');
 	}
 	if($_SERVER['SCRIPT_NAME'] === '/pages/columns-colours.php') {
+		array_push($supportingCss, 'container.css');
 		array_push($supportingCss, 'columns.css');
 		array_push($supportingCss, 'column.css');
 	}

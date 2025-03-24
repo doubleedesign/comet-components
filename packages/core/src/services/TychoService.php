@@ -1,6 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 use DOMDocument, DOMElement, DOMNode, ReflectionClass, Exception;
+use Doubleedesign\Comet\WordPress\PreprocessedHTML;
 
 class TychoService {
 	/**
@@ -66,7 +67,15 @@ class TychoService {
 		$ComponentClass = "Doubleedesign\\Comet\\Core\\$tagName";
 
 		if(!class_exists($ComponentClass)) {
-			throw new Exception("Component class $ComponentClass not found");
+			// If the tagName is all lowercase, this is probably a basic HTML element
+			// This does some rudimentary matching, but ideally we should just output these as-is.
+			// This needs a way to identify if there are Comet components nested in it and process them accordingly though.
+			if (strtolower($tagName) === $tagName) {
+				$ComponentClass = match ($tagName) {
+					'div' => 'Doubleedesign\\Comet\\Core\\Group',
+					default => throw new Exception("Component class $ComponentClass not found"),
+				};
+			}
 		}
 
 		// Extract attributes

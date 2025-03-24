@@ -14,20 +14,13 @@
 }
 
 .columns {
-	padding-inline: var(--spacing-md);
-	@include section-padding();
-
-	.group > & {
-		@include nested-padding();
-	}
-
-	.container > & {
-		padding-inline: 0;
-	}
-
 	// Default/auto layout
 	display: grid;
 	grid-gap: var(--spacing-md);
+
+	&[data-background] {
+		@include nested-padding();
+	}
 
 	@include container-width-up('narrow') {
 		grid-gap: var(--spacing-lg);
