@@ -6,10 +6,10 @@
 		"moduleResolution": "node",
 		"lib": [
 			"ESNext",
-			"DOM", // required to make WebStorm colour console.log as a global, not a module
+			"DOM", // required to make Jetbrains colour console.log as a global, not a module
 			"DOM.Iterable"
 		],
-		"types": ["node"],
+		"types": ["node", "playwright"],
 		"esModuleInterop": true,
 		"isolatedModules": true,
 		"resolveJsonModule": true,

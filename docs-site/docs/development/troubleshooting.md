@@ -81,6 +81,32 @@ for the tool you're trying to use. There are two workarounds:
 If this is occurring for Sass, consider [installing Sass natively using Chocolatey](./tooling/sass.md) and setting the file watcher to use that.
 :::
 
+::: details Missing syntax highlighting in TypeScript files
+Make sure the package containing definitions is listed in the root `tsconfig.json` file. For example, JS testing tools such as Playwright need to be added here for syntax highlighting to work in PhpStorm, like so:
+
+```json
+{
+  "compilerOptions": {
+	"types": ["node", "playwright"]
+  }
+}
+```
+
+In PhpStorm, you may also need to:
+- add Playwright to the JS libraries under `Settings > Languages & Frameworks > JavaScript > Libraries`. Include all of `@playwright/test`, `playwright`, and `playwright-core`
+- Uncheck "use types from server" in the TypeScript settings under `Settings > Languages & Frameworks > TypeScript`
+- You may also need to restart the TypeScript service and wait a minute or so to ensure the changes take effect, and/or close and reopen any Playwright files currently open. The restart option is usually located in the bottom right of the IDE. If it's still not refreshing, try invalidating caches and restarting the IDE (`File > Invalidate Caches / Restart...`).
+- 
+:::
+
+::: details Missing Playwright browsers in Windows
+In a separate PowerShell window with admin privileges:
+
+```powershell:no-line-numbers
+npx playwright install firefox
+```
+:::
+
 ## Front-end development
 
 ::: details Component JavaScript not loading in the browser

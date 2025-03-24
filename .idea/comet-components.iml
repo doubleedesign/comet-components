@@ -64,5 +64,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="dcb22fbf87" level="application" />
+    <orderEntry type="library" name="playwright" level="project" />
   </component>
 </module>
