@@ -28,13 +28,6 @@
 		{
 			"type": "vcs",
 			"url": "https://github.com/doubleedesign/baguetteBox.js"
-		},
-		{
-			"type": "path",
-			"url": "../../plugins/vue-wrapper",
-			"options": {
-				"symlink": true
-			}
 		}
 	],
 	"require": {
@@ -45,7 +38,6 @@
 		"illuminate/support": "^10.0",
 		"ezyang/htmlpurifier": "^4.18",
 		"twbs/bootstrap": "^5.3",
-		"feimosi/baguettebox.js": "^1.12.1",
-		"doubleedesign/comet-vue-wrapper": "dev-master"
+		"feimosi/baguettebox.js": "^1.12.1"
 	}
 }

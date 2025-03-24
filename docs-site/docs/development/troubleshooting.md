@@ -14,7 +14,7 @@ readlink -f $(which php)
 readlink -f $(which composer)
 ```
 ```bash:no-line-numbers
-readlink -f $(which node)
+which node
 ```
 ```bash:no-line-numbers
 which sass

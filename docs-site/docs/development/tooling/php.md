@@ -77,6 +77,10 @@ replacing leesa with your username):
 # /home/leesa/.zshrc
 alias php='powershell.exe /c C:\\Users\\leesa\\.config\\herd\\bin\\php.bat'
 ```
+:::warning
+If you use an alias like the above, you will also need to alias NPM to the Windows version to be able to use the scripts in `package.json` that call PHP.
+Otherwise, you will need to run the `php` command directly. For example, instead of `npm run test:server` you would need to run `php test/browser/start.php`.
+:::
 
 Alternatively you can set it to use a specific executable anywhere in Windows using a symlink.
 

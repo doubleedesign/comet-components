@@ -1,5 +1,5 @@
-import * as Vue from '../../../vendor/doubleedesign/comet-vue-wrapper/src/vue.esm-browser.js';
-import { loadModule } from  '../../../vendor/doubleedesign/comet-vue-wrapper/src/vue3-sfc-loader.esm.js';
+import * as Vue from '../../plugins/vue-wrapper/src/vue.esm-browser.js';
+import { loadModule } from  '../../plugins/vue-wrapper/src/vue3-sfc-loader.esm.js';
 
 const vueSfcLoaderOptions = {
 	moduleCache: { vue: Vue },
