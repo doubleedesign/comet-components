@@ -7,7 +7,7 @@ require_once __DIR__ . '/../common/mocks.php';
 
 // Allow Storybook to access this server
 $storybook = 'http://localhost:6006';
-if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
+if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
 	header("Access-Control-Allow-Origin: " . $storybook);
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
 }
@@ -15,13 +15,17 @@ if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
 $host = "http://$_SERVER[HTTP_HOST]";
 $fileName = array_reverse(explode('/', $_SERVER['SCRIPT_NAME']))[0];
 $supportingCss = [];
-// For demo pages of component combinations, split at -- to determine which stylesheets to load
+// For demo pages of component combinations:
 if(str_starts_with($_SERVER['SCRIPT_NAME'], '/pages/')) {
-	$components = explode('--', $fileName);
-	foreach($components as $component) {
-		$component = str_replace('.php', '', $component);
-		$cssFileName = "$component.css";
-		array_push($supportingCss, $cssFileName);
+	if($_SERVER['SCRIPT_NAME'] === '/pages/container-colours.php') {
+		array_push($supportingCss, 'container.css');
+	}
+	if($_SERVER['SCRIPT_NAME'] === '/pages/group-colours.php') {
+		array_push($supportingCss, 'group.css');
+	}
+	if($_SERVER['SCRIPT_NAME'] === '/pages/columns-colours.php') {
+		array_push($supportingCss, 'columns.css');
+		array_push($supportingCss, 'column.css');
 	}
 }
 // For standalone components, load the stylesheet with the same name as the component
@@ -53,4 +57,4 @@ $cssFileLinkTags = join("\n\t", array_map(fn($cssFile) => "<link rel=\"styleshee
 	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="browser-test-content">
+<div id="browser-test-content">

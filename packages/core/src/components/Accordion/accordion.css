@@ -31,6 +31,13 @@
   background: var(--color-accent);
   color: var(--readable-color-accent);
 }
+[data-color-theme=info] .accordion__panel__title {
+  background: color-mix(in srgb, var(--color-info) 10%, white);
+}
+[data-color-theme=info] .accordion__panel__title:hover, [data-color-theme=info] .accordion__panel__title:focus, [data-color-theme=info] .accordion__panel__title:active {
+  background: var(--color-info);
+  color: var(--readable-color-info);
+}
 [data-color-theme=warning] .accordion__panel__title {
   background: color-mix(in srgb, var(--color-warning) 10%, white);
 }

@@ -1,17 +1,6 @@
 @use '../mixins' as *;
 
 .group {
-	@include section-padding();
-
-	.column & {
-		&:first-child {
-			padding-block-start: 0;
-		}
-
-		&:last-child {
-			padding-block-end: 0;
-		}
-	}
 
 	&--breakout {
 		width: max-content;

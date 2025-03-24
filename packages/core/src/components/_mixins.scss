@@ -26,8 +26,10 @@ $widths: (
 	}
 }
 
+// See global.css for overrides to ensure no double padding when backgrounds are the same
 @mixin section-padding() {
 	padding-block: var(--spacing-md);
+	padding-inline: 0;
 
 	@include media-breakpoint-up('narrow') {
 		padding-block: var(--spacing-xl);
@@ -36,16 +38,9 @@ $widths: (
 	@include media-breakpoint-up('wide') {
 		padding-block: var(--spacing-xxl);
 	}
+}
 
-	// Handle same colour adjacent sections
-	@each $name, $color in $colors {
-		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
-			padding-block-start: 0;
-		}
-	}
-
-	// If no bg colour, handle them as adjacent
-	&:not([data-background]) + &:not([data-background]) {
-		padding-block-start: 0;
-	}
+// See global.css for overrides to ensure no double padding when backgrounds are the same
+@mixin nested-padding() {
+	padding: var(--spacing-md);
 }

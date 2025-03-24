@@ -15,13 +15,14 @@
 
 .columns {
 	padding-inline: var(--spacing-md);
+	@include section-padding();
+
+	.group > & {
+		@include nested-padding();
+	}
 
 	.container > & {
 		padding-inline: 0;
-	}
-
-	& + .columns {
-		@include section-padding();
 	}
 
 	// Default/auto layout

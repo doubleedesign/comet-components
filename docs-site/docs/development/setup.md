@@ -165,6 +165,21 @@ You can see the currently selected PHP version in the Dashboard:
 confirm using the terminal commands.
 :::
 
+::: details Installing Playwright browsers for integration tests
+::: tabs#shell
+@tab Bash
+```bash:no-line-numbers
+# Bash command to come
+```
+@tab PowerShell
+```powershell:no-line-numbers
+# Use a seprate PowerShell terminal with admin rights
+# This will install the browsers in C:/Users/username/AppData/Local/ms-playwright
+npx playwright install firefox
+```
+:::
+:::
+
 See also:
 -  <Badge type="info" text="Optional" vertical="middle" /> [WSL setup](./tooling/wsl.md)
 - [Troubleshooting](troubleshooting.md)

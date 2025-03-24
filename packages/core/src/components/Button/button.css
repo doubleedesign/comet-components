@@ -79,6 +79,25 @@
   background: var(--color-accent);
   color: var(--readable-color-accent);
 }
+.button--info:not([class*="--outline"]) {
+  background-color: var(--color-info);
+  border: 1px solid var(--color-info);
+  color: var(--readable-color-info);
+}
+.button--info:not([class*="--outline"]):hover, .button--info:not([class*="--outline"]):focus, .button--info:not([class*="--outline"]):active {
+  background-color: color-mix(in srgb, var(--color-info) 80%, black);
+  border-color: color-mix(in srgb, var(--color-info) 80%, black);
+  color: var(--readable-color-info);
+}
+.button--info--outline {
+  border: 1px solid var(--color-info);
+  background-color: transparent;
+  color: var(--color-info);
+}
+.button--info--outline:hover, .button--info--outline:focus, .button--info--outline:active {
+  background: var(--color-info);
+  color: var(--readable-color-info);
+}
 .button--warning:not([class*="--outline"]) {
   background-color: var(--color-warning);
   border: 1px solid var(--color-warning);

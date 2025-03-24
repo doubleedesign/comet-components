@@ -2,12 +2,12 @@
   min-width: 0;
   display: flex;
 }
+.column[data-background] {
+  padding: var(--spacing-md);
+}
 .column__inner {
   display: flow-root;
   width: 100%;
-}
-.column__inner > .container {
-  padding-inline: 0;
 }
 
 /*# sourceMappingURL=column.css.map */

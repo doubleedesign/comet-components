@@ -1,5 +1,6 @@
 .page-section {
   padding-block: var(--spacing-md);
+  padding-inline: 0;
 }
 @media (min-width: 960px) {
   .page-section {
@@ -10,36 +11,6 @@
   .page-section {
     padding-block: var(--spacing-xxl);
   }
-}
-.page-section[data-background=primary] + .page-section[data-background=primary] {
-  padding-block-start: 0;
-}
-.page-section[data-background=secondary] + .page-section[data-background=secondary] {
-  padding-block-start: 0;
-}
-.page-section[data-background=accent] + .page-section[data-background=accent] {
-  padding-block-start: 0;
-}
-.page-section[data-background=warning] + .page-section[data-background=warning] {
-  padding-block-start: 0;
-}
-.page-section[data-background=success] + .page-section[data-background=success] {
-  padding-block-start: 0;
-}
-.page-section[data-background=error] + .page-section[data-background=error] {
-  padding-block-start: 0;
-}
-.page-section[data-background=light] + .page-section[data-background=light] {
-  padding-block-start: 0;
-}
-.page-section[data-background=dark] + .page-section[data-background=dark] {
-  padding-block-start: 0;
-}
-.page-section[data-background=white] + .page-section[data-background=white] {
-  padding-block-start: 0;
-}
-.page-section:not([data-background]) + .page-section:not([data-background]) {
-  padding-block-start: 0;
 }
 
 .container {

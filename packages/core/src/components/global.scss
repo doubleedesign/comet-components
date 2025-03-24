@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 :root {
 	--font-family-body: sans-serif;
@@ -112,27 +113,71 @@ body {
 }
 
 @each $name, $color in $colors {
+	// Basic styling for elements with a background colour
 	[data-background="#{$name}"] {
 		background-color: var(--color-#{$name});
 		color: var(--readable-color-#{$name});
+
+		// Most elements with backgrounds are expected to be nested, so this is a sensible default
+		// Putting this in specific components causes specificity issues with the below overrides
+		@include nested-padding();
 	}
 
-	[data-background="#{$name}"] + [data-background*="gradient-#{$name}"] {
+	// Basic styling for text colours
+	[data-text-color="#{$name}"] {
+		color: var(--color-#{$name});
+	}
+
+	// If this element's next immediate sibling has the same solid background, remove the sibling's top padding so we don't get double padding
+	[data-background="#{$name}"] + [data-background="#{$name}"] {
 		padding-block-start: 0;
 	}
 
-	[data-background*="gradient-"][data-background*="-#{$name}"] + [data-background="#{$name}"] {
-		padding-block-start: 0;
+	// If this element's immediate child has the same solid background as it, the child should not have any padding
+	[data-background="#{$name}"] > [data-background="#{$name}"] {
+		padding: 0;
 	}
 
+	// If this element's immediate child has no background set but the next level child does, and it's the same as this element's background, remove the padding of that third level element
+	[data-background="#{$name}"] > :not([data-background]) > [data-background="#{$name}"] {
+		padding: 0;
+	}
+
+	// If this element has a directly nested child with the same background, that child should not have padding
+	[data-background="#{$name}"] > [data-background="#{$name}"] {
+		padding: 0;
+	}
+
+	// Treat vertically adjacent page-section containers, column sets, and groups with no background colour the same as if they had the same solid background
+	// (We do not generally expect these to be directly horizontally adjacent - they would need to be within an element that handles that, such as Columns)
+	.page-section, .columns, .group {
+		&:not([data-background]) {
+			& + &:not([data-background]) {
+				padding-block-start: 0;
+			}
+		}
+	}
+
+	// 50/50 gradient backgrounds
 	@each $name2, $color2 in $colors {
 		[data-background="gradient-#{$name}-#{$name2}"] {
 			background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
 		}
 	}
 
-	[data-text-color="#{$name}"] {
-		color: var(--color-#{$name});
+	// If this element's next immediate sibling has a gradient background with the same top colour, remove its top padding so we don't get double padding
+	[data-background="#{$name}"] + [data-background*="gradient-#{$name}"] {
+		padding-block-start: 0;
+	}
+
+	// If this element has a gradient background and its next immediate sibling has a solid background with the same top colour, remove its top padding so we don't get double padding
+	[data-background*="gradient-"][data-background*="-#{$name}"] + [data-background="#{$name}"] {
+		padding-block-start: 0;
+	}
+
+	// If this element and its immediate sibling both have gradient backgrounds and this element's bottom colour is the same as the sibling's top colour, remove its bottom padding so we don't get double padding
+	[data-background*="gradient-#{$name}"] + [data-background*="gradient-#{$name}"] {
+		padding-block-start: 0;
 	}
 }
 
