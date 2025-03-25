@@ -5,16 +5,11 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class Callout extends UIComponent {
 	use ColorTheme;
-
-	/**
-	 * @var string $iconPrefix
-	 * @description Icon prefix class name
-	 */
-	protected string $iconPrefix = 'fa-solid';
+	use Icon;
 
 	/**
 	 * @var ?string $icon
-	 * @description Icon class name; if not set, defaults to one matching the colour theme if appropriate (e.g, success, warning)
+	 * @description Icon class name; default value set for success, warning, error, and info color themes
 	 */
 	protected ?string $icon;
 
@@ -22,11 +17,8 @@ class Callout extends UIComponent {
 		parent::__construct($attributes, $innerComponents, 'components.Callout.callout');
 		$this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
 
-		if(isset($attributes['icon']) && !empty($attributes['icon'])) {
-			$this->icon = $attributes['icon']; // TODO: Sanitise/validate input
-		}
-		else {
-			$this->icon = match ($this->colorTheme->value) {
+		if(!isset($attributes['icon'])) {
+			$attributes['icon'] = match ($this->colorTheme->value) {
 				'success' => 'fa-circle-check',
 				'warning' => 'fa-triangle-exclamation',
 				'error' => 'fa-circle-exclamation',
@@ -34,6 +26,7 @@ class Callout extends UIComponent {
 				default => null,
 			};
 		}
+		$this->set_icon_from_attrs($attributes);
 	}
 
 	function get_filtered_classes(): array {

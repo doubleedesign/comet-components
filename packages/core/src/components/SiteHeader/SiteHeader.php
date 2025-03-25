@@ -6,6 +6,7 @@ namespace Doubleedesign\Comet\Core;
 class SiteHeader extends LayoutComponent {
 	use BackgroundColor;
 	use LayoutContainerSize;
+	use Icon;
 
 	/**
 	 * @var ?ContainerSize $size
@@ -28,11 +29,6 @@ class SiteHeader extends LayoutComponent {
 	 * @description The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context "responsive" (note: only one responsive group is supported)
 	 */
 	protected array $innerComponents;
-	/**
-	 * @var string $iconPrefix
-	 * @description Icon prefix class name for the responsive menu toggle button
-	 */
-	protected string $iconPrefix = 'fa-solid';
 	/**
 	 * @var ?string $icon
 	 * @description Icon class name; for the responsive menu toggle button
@@ -65,10 +61,9 @@ class SiteHeader extends LayoutComponent {
 		parent::__construct($attributes, $innerComponents, 'components.SiteHeader.site-header');
 		$this->set_background_color_from_attrs($attributes);
 		$this->set_size_from_attrs($attributes);
+		$this->set_icon_from_attrs($attributes);
 		$this->breakpoint = $attributes['breakpoint'] ?? $this->breakpoint;
 		$this->responsiveStyle = $attributes['responsiveStyle'] ?? $this->responsiveStyle;
-		$this->iconPrefix = $attributes['iconPrefix'] ?? $this->iconPrefix;
-		$this->icon = $attributes['icon'] ?? $this->icon;
 		$this->submenuIcon = $attributes['submenuIcon'] ?? $this->submenuIcon;
 		$this->logoUrl = $attributes['logoUrl'] ?? null;
 		$logo = isset($attributes['logoUrl'])

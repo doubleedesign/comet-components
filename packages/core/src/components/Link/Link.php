@@ -4,40 +4,33 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::A])]
 #[DefaultTag(Tag::A)]
 class Link extends Renderable {
-	protected string $content;
-	/**
-	 * @var ?string $iconPrefix
-	 * @description Icon prefix class name
-	 */
-	protected ?string $iconPrefix = null;
+	use Icon;
+
 	/**
 	 * @var ?string $icon
-	 * @description Icon class name; if not set, defaults to one according to whether the link target is set to open in a new tab or not
+	 * @description Icon class name; for link-group context default value is 'fa-link', or 'fa-arrow-up-right-from-square' if target is '_blank'
 	 */
-	protected ?string $icon = null;
+	protected ?string $icon;
+
+	protected string $content;
 
 	function __construct(array $attributes, string $content) {
 		parent::__construct($attributes, 'components.Link.link');
 		$this->content = $content;
 		$this->context = $attributes['context'] ?? null;
 
-		if(isset($attributes['iconPrefix']) || isset($attributes['icon']) || $this->context === 'link-group') {
-			$this->iconPrefix = $attributes['iconPrefix'] ?? 'fa-solid';
-		}
-		if(isset($attributes['icon'])) {
-			$this->icon = $attributes['icon']; // TODO: Sanitisation/validation of icon class name
-		}
-		else if($this->context === 'link-group') {
+		if(!isset($attributes['icon']) && $this->context === 'link-group') {
 			if(isset($attributes['target']) && $attributes['target'] === '_blank') {
-				$this->icon = 'fa-arrow-up-right-from-square';
+				$attributes['icon'] = 'fa-arrow-up-right-from-square';
 			}
 			else {
-				$this->icon = 'fa-link';
+				$attributes['icon'] = 'fa-link';
 			}
 		}
+		$this->set_icon_from_attrs($attributes);
 	}
 
-	public function get_content() {
+	public function get_content(): string {
 		return $this->content;
 	}
 

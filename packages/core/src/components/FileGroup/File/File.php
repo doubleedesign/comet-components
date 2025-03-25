@@ -5,6 +5,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class File extends Renderable {
 	use ColorTheme;
+	use Icon;
 
 	protected string $url;
 	protected ?string $title;
@@ -16,19 +17,16 @@ class File extends Renderable {
 	 */
 	protected ?string $mimeType;
 	protected ?string $uploadDate;
-	/**
-	 * @var string $iconPrefix
-	 * @description Icon prefix class name
-	 */
-	protected string $iconPrefix = 'fa-solid';
+
 	/**
 	 * @var ?string $icon
-	 * @description Icon class name; if not set, defaults to one matching the file type
+	 * @description Icon class name; default values set for file types including PDF, plain text, calendar, Word, Excel, ZIP, GZIP, TAR, and 7z
+	 * @default-value fa-file
 	 */
 	protected ?string $icon;
 
-
 	function __construct(array $attributes) {
+		parent::__construct($attributes, 'components.FileGroup.File.file');
 		$this->set_color_theme_from_attrs($attributes, null);
 		$this->url = $attributes['url'] ?? '';
 		$this->title = $attributes['title'] ?? 'Untitled file';
@@ -38,11 +36,8 @@ class File extends Renderable {
 		$this->uploadDate = $attributes['uploadDate'] ?? null;
 		$this->iconPrefix = $attributes['iconPrefix'] ?? $this->iconPrefix;
 
-		if(isset($attributes['icon'])) {
-			$this->icon = $attributes['icon']; // TODO: Sanitisation/validation of icon class name
-		}
-		else {
-			$this->icon = match ($this->mimeType) {
+		if(!isset($attributes['icon'])) {
+			$attributes['icon'] = match ($this->mimeType) {
 				'application/pdf' => 'fa-file-pdf',
 				'text/plain' => 'fa-file-alt',
 				'text/calendar' => 'fa-calendar-alt',
@@ -52,8 +47,7 @@ class File extends Renderable {
 				default => 'fa-file',
 			};
 		}
-
-		parent::__construct($attributes, 'components.FileGroup.File.file');
+		$this->set_icon_from_attrs($attributes);
 	}
 
 	function get_html_attributes(): array {

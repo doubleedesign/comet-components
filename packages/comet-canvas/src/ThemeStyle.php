@@ -13,7 +13,10 @@ class ThemeStyle {
 
 		add_action('admin_init', [$this, 'set_css_variables_from_theme_json'], 20, 1);
 		add_action('admin_head', [$this, 'add_css_variables_to_head'], 25);
+
+		// Set defaults for components as per CometConfig class in the core package
 		add_action('init', [$this, 'set_global_background'], 10);
+		add_action('init', [$this, 'set_icon_prefix'], 10);
 
 		if(is_admin()) {
 			add_action('enqueue_block_assets', [$this, 'add_css_variables_to_block_editor'], 25);
@@ -69,5 +72,10 @@ class ThemeStyle {
 	public function set_global_background(): void {
 		$color = apply_filters('comet_canvas_global_background', 'white');
 		CometConfig::set_global_background($color);
+	}
+
+	public function set_icon_prefix(): void {
+		$prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
+		CometConfig::set_icon_prefix($prefix);
 	}
 }

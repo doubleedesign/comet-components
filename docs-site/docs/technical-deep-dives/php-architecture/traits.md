@@ -92,6 +92,55 @@ class MyComponent {
 <div>
 
 
+## Icon
+
+<dl>
+
+<dt>Property</dt>
+<dd>
+	<code>iconPrefix</code> 
+	<strong>Type:</strong> <code>string</code>
+	
+<p>Icon prefix class name</p>
+</dd>
+<dt>Property</dt>
+<dd>
+	<code>icon</code> 
+	<strong>Type:</strong> <code>?string</code>
+	
+<p>Icon class name</p>
+</dd>
+
+<dt>Method</dt>
+<dd>
+	<code>set_icon_from_attrs</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use Icon;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->set_icon_from_attrs($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+
 ## LayoutAlignmentHorizontal
 
 <dl>
