@@ -10,7 +10,7 @@ See the [Getting Started > WordPress](../getting-started/wordpress.md) page for 
 
 This page details using Comet Components within WordPress for creating your own blocks.
 
-## With custom ACF Blocks
+## With custom ACF blocks
 
 When creating a new block for a client site, I usually:
 

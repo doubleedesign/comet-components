@@ -40,7 +40,6 @@ $globalBackground = CometConfig::get_global_background();
 :::
 
 :::details In WordPress
-
 Comet Canvas provides a filter to override the default (white) in your child theme's `functions.php` like so:
 
 ```php
@@ -50,12 +49,13 @@ add_filter('comet_canvas_global_background', fn() => 'dark', 20);
 
 ### Default icon prefix
 
-Components that render icons do so using the `Icon` trait, which uses two attributes passed from the component `$attributes`: `icon` and an optional `iconPrefix`. These values are usually passed to a HTML <i> element as class names in the component's Blade template.
+Components that render icons do so using the `Icon` trait, which uses two attributes passed from the component `$attributes`: `icon` and an optional `iconPrefix`. These values are usually passed to a HTML `<i>` element as class names in the component's Blade template.
 
 The default `iconPrefix` is Font Awesome's `fa-solid`, but this can be overridden both at the global configuration level and at component level. For example if you want to use `fa-light` by default, but then `fa-solid` for a specific component, you can do so by setting `fa-light` in the global configuration and then passing `fa-solid` in the special component's `$attributes`.
 
 :::details General usage
 You can set a default icon prefix for your site using this line of code in an appropriate location:
+
 ```php
 CometConfig::set_icon_prefix('fa-duotone fa-solid');
 ```

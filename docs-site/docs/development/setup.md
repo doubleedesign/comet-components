@@ -28,7 +28,7 @@ Windows-specific setup options and instructions are listed in the [Windows setup
 2. Install dependencies, refresh autoloading, and redo symlinks:
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 npm run refresh:all
 ```
@@ -44,7 +44,7 @@ an already set up copy of the project and don't need to do a full refresh.
 3. Run the local web server and Storybook (at the same time i.e. two terminal windows) to see what you're working with!
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 npm run test:server
 ```
@@ -63,7 +63,7 @@ npm run test:storybook
 4. Optionally, run these docs locally:
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 npm run docs
 ```
@@ -84,11 +84,7 @@ Composer, or Node
 installed, the latter basically gets you up and running out-of-the-box.
 :::
 
-It is not essential to follow the steps in the below-linked guides or to use this exact setup, but this information may be helpful if:
-- you are new to any of the tools or technologies listed here, or
-- are new to using a Windows machine for web development.
-
-I have endeavoured to cover both doing everything natively (using PowerShell as your terminal) and using WSL (for a Bash terminal) wherever possible.
+It is not essential to follow the steps in the below-linked guides or to use this exact setup, but this information may be helpful if you are new to any of the tools or technologies listed here, or are new to using a Windows machine for web development.
 
 ### Detailed tooling setup guides
 
@@ -167,7 +163,7 @@ confirm using the terminal commands.
 
 ::: details Installing Playwright browsers for integration tests
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 # Bash command to come
 ```
@@ -178,8 +174,6 @@ confirm using the terminal commands.
 npx playwright install firefox
 ```
 :::
-:::
 
 See also:
--  <Badge type="info" text="Optional" vertical="middle" /> [WSL setup](./tooling/wsl.md)
 - [Troubleshooting](troubleshooting.md)

@@ -1,3 +1,7 @@
+---
+title: Integration testing (Playwright)
+---
+
 # Integration testing
 
 ::: warning

@@ -1,5 +1,11 @@
 # Overview
 
+:::info
+This section of the docs covers developing the Comet Components core library itself.
+
+Developers looking to use the library in their projects should refer to the [Usage](../usage/overview.md) section.
+:::
+
 [[toc]]
 
 ## Tech Stack

@@ -4,12 +4,7 @@ title: Sass
 
 # Sass (SCSS) development setup
 
-[SCSS](https://sass-lang.com/) or SASS (Syntactically Awesome Style Sheets, written as Sass in the official docs despite being an acronym) is a CSS
-preprocessor that
-allows the
-definition and use of variables,
-functions, and
-mixins to make CSS more modular and maintainable.
+[SCSS](https://sass-lang.com/) or SASS (Syntactically Awesome Style Sheets, written as Sass in the official docs despite being an acronym) is a CSS preprocessor that allows the definition and use of variables, functions, and mixins to make CSS more modular and maintainable.
 
 - [Installing and running SASS](#installing-and-running-sass)
 - [Development approach](#development-approach)
@@ -21,7 +16,7 @@ mixins to make CSS more modular and maintainable.
 Assuming you have already set up [Node](./node.md), you can install SASS globally using NPM:
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 npm install -g sass
 ```
@@ -33,8 +28,7 @@ npm install -g sass
 
 :::tip
 
-The JavaScript implementation the NPM package uses is supposedly slower than Dart Sass on is own. Windows users can use Chocolatey to
-install Dart Sass globally:
+The JavaScript implementation the NPM package uses is supposedly slower than Dart Sass on is own. Windows users can use Chocolatey to install Dart Sass globally:
 
 ::: tabs#shell
 @tab PowerShell
@@ -54,7 +48,7 @@ If using PhpStorm, using a [file watcher](./phpstorm.md) gets around this.
 To compile a single file and watch for changes (example):
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 sass global.scss:global.css --watch
 ```

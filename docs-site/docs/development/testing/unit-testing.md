@@ -1,3 +1,7 @@
+---
+title: Unit testing (PHPUnit)
+---
+
 # Unit testing
 
 [[toc]]
@@ -55,7 +59,7 @@ class YourComponentTest extends CometTestCase {
 To run a test file from the terminal:
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 ./vendor/bin/phpunit packages/core/src/components/Container/__tests__/ContainerTest.php --configuration ./test/phpunit.xml
 ```
@@ -65,21 +69,13 @@ To run a test file from the terminal:
 ```
 :::
 
-PhpStorm users can also run selected tests or files from the gutter icon. A PHPUnit run config template has also been included which will be
-used for that unless you configure otherwise.
-
-See [PhpStorm configuration notes](../tooling/phpstorm.md) for more information.
-
-PhpStorm users can also use the included Run configuration to run all tests.
+PhpStorm users can also run selected tests or files from the gutter icon. A PHPUnit run config template has been included which will be used for that unless you configure otherwise. Similarly, a Run configuration has been included for running all tests.
 
 ## Coverage reporting
 
-You will need [Xdebug](https://xdebug.org/) installed and enabled to generate coverage data and reports. See
-the [PHP setup notes](../tooling/php.md) for more information.
+You will need [Xdebug](https://xdebug.org/) installed and enabled to generate coverage data and reports. See the [PHP setup notes](../tooling/php.md) for more information.
 
-A PhpStorm Run Configuration has been included in this repository for running all tests in the core package and generating a HTML coverage
-report. To see coverage data using the IDE coverage tools, use the "Run with coverage" option. By default, this is
-located in the top right corner of the PhpStorm window (shown below); you can also find it in the Run menu.
+A PhpStorm Run Configuration has been included in this repository for running all tests in the core package and generating a HTML coverage report. To see coverage data using the IDE coverage tools, use the "Run with coverage" option. By default, this is located in the top right corner of the PhpStorm window (shown below); you can also find it in the Run menu.
 
 ![Run with coverage screenshot](/phpstorm-run-with-coverage.png)]
 
@@ -91,7 +87,7 @@ To debug unexpected test failures (or silent failures - where the test passes bu
 assertions is wrong, etc), you can run PHPUnit with the `--debug` flag. For example:
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 ./vendor/bin/phpunit --debug packages/core/src/components/Container/__tests__/ContainerTest.php
 ```

@@ -5,7 +5,7 @@ import path from 'path';
 import fs from 'fs';
 import Case from 'case';
 import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab';
-import { markdownContainerPlugin } from '@vuepress/plugin-markdown-container';
+import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext';
 
 const docsDir = path.resolve(__dirname, '../');
 
@@ -52,13 +52,17 @@ export default defineUserConfig({
 				theme: 'prism-themes/themes/prism-atom-dark.css'
 			},
 		},
-		plugins: [
-			markdownTabPlugin({
-				tabs: true,
-			}),
-			markdownContainerPlugin({}),
-		],
 	}),
+
+	plugins: [
+		markdownTabPlugin({
+			tabs: true,
+		}),
+		markdownExtPlugin({
+			gfm: true,
+			footnote: true
+		}),
+	],
 
 	bundler: viteBundler(),
 
@@ -81,7 +85,7 @@ function generateSidebar() {
 			const hasReadme = fs.existsSync(readmePath);
 
 			// Try to extract title from README if it exists
-			let sectionTitle = Case.title(folderName);
+			let sectionTitle = Case.title(folderName).replace('Js', 'JS').replace('Php', 'PHP');
 			if (hasReadme) {
 				const extractedTitle = extractTitleFromMarkdown(readmePath);
 				if (extractedTitle) {
@@ -139,7 +143,7 @@ function getSectionChildren(folderName) {
 			const name = file.name.replace('.md', '');
 			if (name !== 'README') {
 				const filePath = path.join(folderPath, file.name);
-				const title = extractTitleFromMarkdown(filePath) || Case.title(name);
+				const title = extractTitleFromMarkdown(filePath) ?? Case.title(name);
 
 				children.push({
 					text: title,
@@ -163,7 +167,7 @@ function getSectionChildren(folderName) {
 					const name = subFile.name.replace('.md', '');
 					if (name !== 'README') {
 						const filePath = path.join(subfolderPath, subFile.name);
-						const title = extractTitleFromMarkdown(filePath) || Case.title(name);
+						const title = extractTitleFromMarkdown(filePath) ?? Case.title(name);
 
 						subfolderItems.push({
 							text: title,
@@ -174,7 +178,9 @@ function getSectionChildren(folderName) {
 
 			// Check if subfolder has README for its title
 			const subfolderReadmePath = path.join(subfolderPath, 'README.md');
-			let subfolderTitle = Case.title(subfolderName);
+			let subfolderTitle = Case.title(subfolderName)
+				.replace('Js', 'JS')
+				.replace('Php', 'PHP');
 
 			if (fs.existsSync(subfolderReadmePath)) {
 				const extractedTitle = extractTitleFromMarkdown(subfolderReadmePath);

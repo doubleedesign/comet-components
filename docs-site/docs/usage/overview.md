@@ -4,7 +4,7 @@ title: Overview
 
 # Usage overview
 
-:::note
+:::important
 This section, including the Theming and Extending pages, details how to use Comet Components in your own code. If you're looking for information on using the WordPress plugin in the block editor, see the [WordPress usage page](./wordpress.md).
 :::
 
@@ -35,7 +35,7 @@ $component->render();
 
 This is essentially XML/JSX-style convenience syntax whereby [heredoc strings](https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc) are processed by a custom parser and sent through to the object syntax and hence Blade under the hood. 
 
-:::note
+:::info
 Tycho template syntax / the `TychoService` class is a custom creation, not an existing third-party template engine or library. Rather than calling it something generic like `TemplateService`, for fun I went with continuing the pet-based alliteration and named it after my other dog, Tycho.
 :::
 

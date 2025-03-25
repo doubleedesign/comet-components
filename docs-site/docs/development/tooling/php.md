@@ -4,85 +4,91 @@ title: PHP on Windows
 
 # PHP development setup on Windows
 
-- [Local PHP installation](#local-php-installation)
-	- [Install via PowerShell with Chocolatey](#install-via-powershell-with-chocolatey)
-	- [Install with Laravel Herd](#install-with-laravel-herd)
-	- [Confirm PHP alias is available](#confirm-php-alias-is-available)
-	- [Optional] [Use Windows' PHP in WSL](#optional-use-windows-php-in-wsl)
-- [Composer](#composer)
-	- [Install via PowerShell with Chocolatey](#install-via-powershell-with-chocolatey-1)
-	- [Install with Laravel Herd](#install-with-laravel-herd-1)
-	- [Confirm Composer alias is available](#confirm-composer-alias-is-available)
-	- [Optional] [Use Windows' Composer in WSL](#optional-use-windows-composer-in-wsl)
-- [Checking and changing instances](#checking-and-changing-instances)
-	- [Which instance is being used?](#which-instance-is-being-used)
-	- [Changing the PHP or Composer instance](#changing-the-php-or-composer-instance)
-- [Optional] [Xdebug](#optional-xdebug)
-- [Optional] [PhpStorm Configuration](#optional-phpstorm-configuration)
+[[toc]]
 
----
-
-## Local PHP installation
+## Installing PHP natively in Windows
 
 You can install PHP in Windows a number of ways, including:
 
-1. Downloading a zip from [php.net](https://www.php.net/downloads) and extracting it where you want it to live (quickest
-   and easiest in the short term, but not great for updates)
+1. Installing [Laravel Herd](https://herd.laravel.com/windows), a GUI which includes PHP and Composer and puts them in your [system PATH](../setup.md#general-notes-and-troubleshooting-tips) automatically
 2. Using the [Chocolatey](https://community.chocolatey.org/) package manager through PowerShell
-3. Installing [Laravel Herd](https://herd.laravel.com/windows), a GUI which includes PHP and Composer and puts them in
-   your [system PATH](./path.md) automatically
-4. For WordPress development, using [Local by Flywheel](https://localwp.com/) and making its PHP instance available to
-   your terminal of choice[^2]
-5. Using local web server software like [XAMPP](https://www.apachefriends.org/index.html)
-   or [WampServer](https://www.wampserver.com/en/) and making its PHP instance available to your terminal of choice[^2].
+3. For WordPress development, using [Local by Flywheel](https://localwp.com/)
+4. Using local web server software such as [WampServer](https://www.wampserver.com/en/)
+5. Downloading a zip from [php.net](https://www.php.net/downloads) and extracting it where you want it to live (quickest and easiest in the short term, but not great for updates).
 
-### Install via PowerShell with Chocolatey
-
-```PowerShell
-# Standard - installs in C:/tools by default
-choco install php 
-```
+:::details Install with Laravel Herd
+Download and install [Laravel Herd](https://herd.laravel.com/windows). It comes with PHP and Composer built in, and makes it very easy to have multiple PHP versions installed and switch between them - no need to change environment variables or even type a terminal command.
+:::
+:::details Install via PowerShell with Chocolatey
+Standard installation - installs in C:/tools by default:
+   ```powershell:no-line-numbers
+   choco install php 
+   ```
 
 To update:
+   ```powershell:no-line-numbers
+   choco upgrade php
+   ```
+:::
 
-```PowerShell
-choco upgrade php
-```
+After installing, you can confirm PHP is available in your terminal (and the version) like so:
 
-### Install with Laravel Herd
-
-Download and install [Laravel Herd](https://herd.laravel.com/windows). It comes with PHP and Composer built in, and
-makes it very easy to have multiple PHP versions installed and switch between them - no need to change environment
-variables or even type a terminal command.
-
-### Confirm PHP alias is available
-
-In PowerShell:
-
-```PowerShell
+::: tabs#shell
+@tab PowerShell
+```powershell:no-line-numbers
 php -v
 ```
+:::
 
-If this doesn't show a PHP version, you may just need to manually [add PHP to your PATH](./path.md).
+If this doesn't show a PHP version, you may just need to manually [add PHP to your PATH](../setup.md#general-notes-and-troubleshooting-tips).
 
-### [Optional] Use Windows' PHP in WSL
+If you have multiple instances of PHP, see which is in use with:
 
-I use WSL for most of my day-to-day CLI needs. You can install PHP within the Linux environment, but I opt to use the
-Windows PHP installation[^1] - which you can access from WSL by creating an alias or symbolic link.
+::: tabs#shell
+@tab PowerShell
+```powershell:no-line-numbers
+Get-Command php
+```
+:::
 
-You can have WSL use the "Global PHP version" set in Laravel Herd using an alias in `.zshrc` or `.bashrc` that routes the command via PowerShell like so (
-replacing leesa with your username):
+---
+:::info <Badge type="info" text="Optional" vertical="middle" /> Use Windows' PHP in WSL
+
+If using [WSL](./wsl.md) for your day-to-day CLI needs, you can install PHP within the Linux environment, but for consistency with other tools it can be easier to use the Windows installation. There are two ways you can do this:
+:::
+
+:::details Option 1: Use an alias
+
+You can have WSL use the "Global PHP version" set in Laravel Herd using an alias in `.zshrc` or `.bashrc` that routes the command via PowerShell like the below example:
 
 ```bash
 # /home/leesa/.zshrc
 alias php='powershell.exe /c C:\\Users\\leesa\\.config\\herd\\bin\\php.bat'
 ```
-:::warning
-If you use an alias like the above, you will also need to alias NPM to the Windows version to be able to use the scripts in `package.json` that call PHP.
-Otherwise, you will need to run the `php` command directly. For example, instead of `npm run test:server` you would need to run `php test/browser/start.php`.
+
+You can also alias it to a specific version or instance of PHP, for example:
+
+```bash
+# /home/leesa/.zshrc
+# Specific Herd instance
+alias php='powershell.exe /c C:\\Users\\leesa\\.config\\herd\\bin\\php84\\php.exe'
+```
+```bash
+# /home/leesa/.zshrc
+# Chocolatey default location
+alias php='powershell.exe /c C:\\tools\\php84\\php.exe'
+```
+
+Restart the WSL terminal and then confirm it works and see the version with:
+
+```bash
+php -v
+```
 :::
 
-Alternatively you can set it to use a specific executable anywhere in Windows using a symlink.
+:::details Option 2: Use a symlink
+
+You can create a symbolic link to have WSL use a specific PHP executable that is installed anywhere in Windows.
 
 If you already have one set up and are here to change your PHP version, remove the existing symlink first:
 
@@ -90,38 +96,42 @@ If you already have one set up and are here to change your PHP version, remove t
 sudo rm /usr/local/bin/php
 ```
 
-For a symlink to specific PHP version, use one of the following from a WSL terminal as relevant to your setup and PHP version:
+For a symlink to specific PHP version, use one of the following from a WSL terminal as relevant to your setup and PHP version, the command format is `sudo ln -s /mnt/c/path/to/php.exe /usr/local/bin/php`. For example:
 
 ```bash
 # For PHP 8.4 from Laravel Herd (replace leesa with your Windows username)
 sudo ln -s /mnt/c/Users/leesa/.config/herd/bin/php84/php.exe /usr/local/bin/php
 ```
 
-::: details More examples
-
-```bash
-# For PHP 8.4 in the Chocolatey default location
-sudo ln -s /mnt/c/tools/php84/php.exe /usr/local/bin/php
-```
-
-```bash
-# For PHP 8.4 from Laravel Herd (replace leesa with your Windows username)
-sudo ln -s /mnt/c/Users/leesa/.config/herd/bin/php84/php.exe /usr/local/bin/php
-```
-
-```bash
-# For PHP 8.3 from Local by Flywheel  (replace leesa with your Windows username)
-sudo ln -s /mnt/c/Users/leesa/AppData/Local/Programs/Local/resources/extraResources/lightning-services/php-8.3.0+0/bin/win64/php.exe /usr/local/bin/php
-```
-:::
-
-For any of these, the command to confirm it works and see the version is:
+Restart the WSL terminal and then confirm it works and see the version with:
 
 ```bash
 php -v
 ```
+:::
 
----
+:::details Troubleshooting
+
+To confirm which PHP instance is being used, you can run the following in WSL:
+
+```bash:no-line-numbers
+which php
+```
+
+If it is using alias, you will see something like:
+
+```bash
+php: aliased to powershell.exe /c C:\Users\leesa\.config\herd\bin\php.bat
+```
+
+For a symlink, you will see something like:
+
+```bash
+/usr/local/bin/php
+```
+
+If you have both, the alias will take precedence.
+:::
 
 ## Composer
 
@@ -131,7 +141,10 @@ Composer is a dependency manager for PHP. You can install it in a number of ways
 - Via Chocolatey in PowerShell
 - By installing [Laravel Herd](https://herd.laravel.com/windows), which comes with Composer built-in.
 
-### Install via PowerShell with Chocolatey
+:::details Install with Laravel Herd
+Download and install [Laravel Herd](https://herd.laravel.com/windows). It comes with PHP and Composer built in.
+:::
+:::details Install via PowerShell with Chocolatey
 
 ```PowerShell
 choco install composer
@@ -142,23 +155,20 @@ To update:
 ```PowerShell
 choco upgrade composer
 ```
+:::
 
-### Install with Laravel Herd
-
-Download and install [Laravel Herd](https://herd.laravel.com/windows). It comes with PHP and Composer built in.
-
-### Confirm Composer alias is available
+:::details Confirm Composer alias is available
 
 Once installed, confirm that it works in PowerShell:
 
-```PowerShell
+```powershell:no-line-numbers
 composer -v
 ```
 
-If it isn't, you probably just need to manually add the path to composer in
-your [PATH system environment variable](./path.md).
+If it doesn't work, you probably just need to manually add the path to composer in your [PATH system environment variable](../setup.md#general-notes-and-troubleshooting-tips).
+:::
 
-### [Optional] Use Windows' Composer in WSL
+:::info <Badge type="info" text="Optional" vertical="middle" /> Use Windows' Composer in WSL
 
 If using Windows' PHP as explained above, Composer can then be used from WSL by adding an alias to your Bash config (
 `.bashrc` or `.zshrc`) like so:
@@ -173,57 +183,56 @@ executed by PowerShell. This makes no real difference in practice, but it's nice
 
 Restart the WSL terminal and then confirm it works:
 
-```bash
+::: tabs#shell
+@tab WSL (Bash)
+```bash:no-line-numbers
 composer -v
 ```
+:::
 
 ---
 
 ## Checking and changing instances
 
-### Which instance is being used?
+:::details Which instance is being used?
 
-At any time, you can confirm where the PHP and Composer aliases resolve to with the following commands in WSL:
+At any time, you can confirm where the PHP and Composer aliases resolve to with the following commands:
 
-```bash
+::: tabs#shell
+@tab WSL (Bash)
+```bash:no-line-numbers
 readlink -f $(which php)
 ```
-
-```bash
+```bash:no-line-numbers
 which composer
 ```
-
-Or in PowerShell:
-
-```PowerShell
+@tab PowerShell
+```powershell:no-line-numbers
 Get-Command php
 ```
-
-```PowerShell
+```powershell:no-line-numbers
 Get-Command composer
 ```
+:::
 
-### Changing the PHP or Composer instance
+:::details Changing the PHP or Composer instance
+To change the global PHP version, if you're using Laravel Herd you can just do it in the GUI - there's a simple dropdown. Otherwise, you can modify the [system PATH variables](../setup.md#general-notes-and-troubleshooting-tips) in the Windows GUI.
 
-To change the global PHP version, if you're using Laravel Herd you can just do it in the GUI - there's a simple
-dropdown.
-Otherwise, I find it easiest to modify the [system PATH variables](./path.md) in the Windows GUI, but there's
-probably some aliasing you could do instead.
+For WSL, follow the "Use Windows' PHP in WSL" and "Use Windows' Composer in WSL" instructions above to set up or update your alias or symlink to the PHP executable you want to use.
+:::
 
-Once PowerShell is pointing to the instance you want, you will need to update the WSL symlink (for PHP) or alias (for
-Composer) accordingly.
+## <Badge type="info" text="Optional" vertical="middle" />  Xdebug
 
----
+Xdebug is a PHP extension which provides debugging and profiling capabilities. It is required for generating code coverage reports with PHPUnit, and is useful for other debugging tasks.
 
-## [Optional] Xdebug
+:::tip
+If you are using Laravel Herd or Local by Flywheel to manage PHP, Xdebug is already installed on your system.
 
-Xdebug is a PHP extension which provides debugging and profiling capabilities. It is required for generating code
-coverage reports with PHPUnit, and is useful for other debugging tasks.
+If using PhpStorm you can check if Xdebug is available (and find your `php.ini` file if it isn't) in `File > Settings > PHP > CLI Interpreter`.
 
-If you are using [Laravel Herd or Local by Flywheel to manage PHP](./php.md), Xdebug is already installed.
+:::
 
-For Local by Flywheel, it is probably already enabled. For other setups, enable it by adding the following to the
-`php.ini` file (updating the path to the Xdebug DLL as necessary):
+For Local by Flywheel, there is a toggle on your site's main screen to enable it. For other setups, enable it by adding the following to the `php.ini` file (updating the path to the Xdebug DLL as necessary):
 
 ```ini
 zend_extension = C:\Program Files\Herd\resources\app.asar.unpacked\resources\bin\xdebug\xdebug-8.4.dll
@@ -232,9 +241,7 @@ xdebug.start_with_request = yes
 xdebug.start_upon_error = yes
 ```
 
-If using PhpStorm you can check if Xdebug is available (and find your `php.ini` file if it isn't) in
-`File > Settings > Languages & Frameworks > PHP > CLI Interpreter`. Examples of a successful setup are shown below.
-
+:::details Tips for using XDebug with Local by Flywheel
 If you are trying to use XDebug for a WordPress site using Local, make sure to:
 
 - Turn on XDebug in the Local GUI for the site
@@ -242,12 +249,10 @@ If you are trying to use XDebug for a WordPress site using Local, make sure to:
 - Exit Laravel Herd if it is running, because it is probably using the same port unless you've changed one of them
 - Restart your site in Local after making any changes to `php.ini`.
 
+:::
+
 ---
 
-## [Optional] PhpStorm Configuration
+## <Badge type="info" text="Optional" vertical="middle" /> PhpStorm Configuration
 
 See the [PhpStorm setup notes](./phpstorm.md) for more information.
-
----
-[^1]: Why do I do that, you ask? It's easier for using the same PHP instance across many tools. I can also update this
-alias to use the instance provided by tools such as Laravel Herd or Local by Flywheel when appropriate.

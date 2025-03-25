@@ -167,6 +167,13 @@ div[vp-content]:has(.comet-photo) {
 		margin-top: 0;
 	}
 
+	h2 {
+		.vp-badge {
+			position: relative;
+			top: -0.25rem;
+		}
+	}
+
 	table {
 		display: table;
 		width: 100%;
@@ -499,6 +506,25 @@ div[vp-content]:has(.comet-photo) {
 
 			.code-preview {
 				overflow-x: auto;
+			}
+		}
+	}
+}
+
+.footnotes-sep {
+	margin-top: 3rem;
+	border-color: #CCC;
+}
+
+.footnotes {
+
+	.footnotes-list {
+
+		.footnote-item {
+			font-size: 0.9rem;
+
+			p:first-child {
+				margin-top: 0;
 			}
 		}
 	}

@@ -2,7 +2,9 @@
 
 [[toc]]
 
-## 1. Generate boilerplate code
+## Quick start
+
+### 1. Generate boilerplate code
 
 To generate the boilerplate code for a new component, run the following command with `example` and `simple` replaced
 with the desired component name and type. Valid types are `simple`, `complex`, and `wrapper`.
@@ -11,7 +13,7 @@ with the desired component name and type. Valid types are `simple`, `complex`, a
 npm run generate component -- --name=example --type=simple
 ```
 
-## 2. Compile assets
+### 2. Compile assets
 
 Add the SCSS file to `blocks.scss` or `template-parts.scss` (depending on what it is) in the WordPress plugin and run
 SASS to compile those. Alternatively you can set up [file watchers in PhpStorm](./tooling/phpstorm.md) to automatically compile
@@ -20,7 +22,7 @@ all the SASS on save.
 ::: details SASS terminal commands
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 cd packages/comet-plugin/src
 ```
@@ -55,12 +57,12 @@ the bundle. (You can set up a [file watcher](./tooling/phpstorm.md) for this too
 npm run build
 ```
 
-## 3. Generate documentation
+### 3. Generate documentation
 
 Once you have added fields and docblock comments to a component, generate the JSON definition file:
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 php scripts/generate-json-defs.php --component Example
 ```
@@ -70,12 +72,12 @@ php scripts/generate-json-defs.php --component Example
 ```
 :::
 
-## 4. Prepare for browser testing
+### 4. Prepare for browser testing
 
 1. Generate the boilerplate code for a browser example page and Storybook story:
 
    ::: tabs#shell
-   @tab Bash
+   @tab WSL (Bash)
    ```bash:no-line-numbers
    php scripts/generate-stories.php --component Example
    ```
@@ -100,12 +102,12 @@ php scripts/generate-json-defs.php --component Example
 
 4. Update the Storybook file in `./test/browser/stories` to ensure suitable examples are shown.
 
-## 5. View in Storybook
+### 5. View in Storybook
 
 Run the local web server and Storybook (in two separate terminal tabs) to view the new component in the browser:
 
 ::: tabs#shell
-@tab Bash
+@tab WSL (Bash)
 ```bash:no-line-numbers
 npm run test:server
 ```
@@ -120,3 +122,9 @@ npm run test:server
 npm run test:storybook
 ```
 :::
+
+## Further reading
+
+- See the [PHP Architecture](../technical-deep-dives/php-architecture/traits.md) section for details on the abstract classes you can use as a base for your component, the traits you can use to handle attributes that are used by multiple components in a consistent way, and some data types you can use for attributes.
+- See the [JavaScript Overview](../technical-deep-dives/javascript.md) page for details on how to use vanilla JavaScript to add simple client-side interactivity to your components.
+- See the [JavaScript Advanced: Vue.js](../technical-deep-dives/vue.md) page for details on how to selectively use Vue.js for a component for more advanced client-side interactivity and reactivity.
