@@ -44,6 +44,13 @@
 .pullquote[data-color-theme=accent]::before, .pullquote[data-color-theme=accent]::after {
   color: color-mix(in srgb, var(--color-accent) 25%, white);
 }
+.pullquote[data-color-theme=info] {
+  color: var(--color-info);
+  background: color-mix(in srgb, var(--color-info) 5%, white);
+}
+.pullquote[data-color-theme=info]::before, .pullquote[data-color-theme=info]::after {
+  color: color-mix(in srgb, var(--color-info) 25%, white);
+}
 .pullquote[data-color-theme=warning] {
   color: var(--color-warning);
   background: color-mix(in srgb, var(--color-warning) 5%, white);

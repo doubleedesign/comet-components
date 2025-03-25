@@ -50,6 +50,9 @@
 .tabs__content[data-color-theme=accent] h2, .tabs__content[data-color-theme=accent] h3 {
   color: var(--color-accent);
 }
+.tabs__content[data-color-theme=info] h2, .tabs__content[data-color-theme=info] h3 {
+  color: var(--color-info);
+}
 .tabs__content[data-color-theme=warning] h2, .tabs__content[data-color-theme=warning] h3 {
   color: var(--color-warning);
 }

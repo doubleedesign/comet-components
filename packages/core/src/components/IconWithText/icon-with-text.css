@@ -23,6 +23,9 @@
 [data-color-theme=accent] .icon-with-text__icon {
   color: var(--color-accent);
 }
+[data-color-theme=info] .icon-with-text__icon {
+  color: var(--color-info);
+}
 [data-color-theme=warning] .icon-with-text__icon {
   color: var(--color-warning);
 }

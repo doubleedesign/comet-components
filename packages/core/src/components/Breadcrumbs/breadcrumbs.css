@@ -35,6 +35,9 @@
 .bg-accent .breadcrumbs__list {
   color: var(--readable-color-accent);
 }
+.bg-info .breadcrumbs__list {
+  color: var(--readable-color-info);
+}
 .bg-warning .breadcrumbs__list {
   color: var(--readable-color-warning);
 }
