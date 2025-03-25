@@ -32,6 +32,17 @@ TYCHO,
 	</Container>
 </Group>
 TYCHO,
+	<<<TYCHO
+<Group testId="example-4">
+	<Container>
+		<Paragraph>Container dark background</Paragraph>
+	</Container>
+	<Container backgroundColor="white">
+		<Paragraph>Container primary background</Paragraph>
+	</Container>
+</Group>
+TYCHO,
+
 ];
 
 try {

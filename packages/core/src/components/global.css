@@ -130,6 +130,11 @@ body {
   justify-content: flex-end;
 }
 
+body[data-global-background=primary] {
+  background-color: var(--color-primary);
+  color: var(--readable-color-primary);
+}
+
 [data-background=primary] {
   background-color: var(--color-primary);
   color: var(--readable-color-primary);
@@ -210,6 +215,11 @@ body {
 
 [data-background*=gradient-primary] + [data-background*=gradient-primary] {
   padding-block-start: 0;
+}
+
+body[data-global-background=secondary] {
+  background-color: var(--color-secondary);
+  color: var(--readable-color-secondary);
 }
 
 [data-background=secondary] {
@@ -294,6 +304,11 @@ body {
   padding-block-start: 0;
 }
 
+body[data-global-background=accent] {
+  background-color: var(--color-accent);
+  color: var(--readable-color-accent);
+}
+
 [data-background=accent] {
   background-color: var(--color-accent);
   color: var(--readable-color-accent);
@@ -374,6 +389,11 @@ body {
 
 [data-background*=gradient-accent] + [data-background*=gradient-accent] {
   padding-block-start: 0;
+}
+
+body[data-global-background=info] {
+  background-color: var(--color-info);
+  color: var(--readable-color-info);
 }
 
 [data-background=info] {
@@ -458,6 +478,11 @@ body {
   padding-block-start: 0;
 }
 
+body[data-global-background=warning] {
+  background-color: var(--color-warning);
+  color: var(--readable-color-warning);
+}
+
 [data-background=warning] {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
@@ -538,6 +563,11 @@ body {
 
 [data-background*=gradient-warning] + [data-background*=gradient-warning] {
   padding-block-start: 0;
+}
+
+body[data-global-background=success] {
+  background-color: var(--color-success);
+  color: var(--readable-color-success);
 }
 
 [data-background=success] {
@@ -622,6 +652,11 @@ body {
   padding-block-start: 0;
 }
 
+body[data-global-background=error] {
+  background-color: var(--color-error);
+  color: var(--readable-color-error);
+}
+
 [data-background=error] {
   background-color: var(--color-error);
   color: var(--readable-color-error);
@@ -702,6 +737,11 @@ body {
 
 [data-background*=gradient-error] + [data-background*=gradient-error] {
   padding-block-start: 0;
+}
+
+body[data-global-background=light] {
+  background-color: var(--color-light);
+  color: var(--readable-color-light);
 }
 
 [data-background=light] {
@@ -786,6 +826,11 @@ body {
   padding-block-start: 0;
 }
 
+body[data-global-background=dark] {
+  background-color: var(--color-dark);
+  color: var(--readable-color-dark);
+}
+
 [data-background=dark] {
   background-color: var(--color-dark);
   color: var(--readable-color-dark);
@@ -866,6 +911,11 @@ body {
 
 [data-background*=gradient-dark] + [data-background*=gradient-dark] {
   padding-block-start: 0;
+}
+
+body[data-global-background=white] {
+  background-color: var(--color-white);
+  color: var(--readable-color-white);
 }
 
 [data-background=white] {

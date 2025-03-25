@@ -113,6 +113,12 @@ body {
 }
 
 @each $name, $color in $colors {
+	// Set body background colour and associated default text colour
+	body[data-global-background="#{$name}"] {
+		background-color: var(--color-#{$name});
+		color: var(--readable-color-#{$name});
+	}
+
 	// Basic styling for elements with a background colour
 	[data-background="#{$name}"] {
 		background-color: var(--color-#{$name});

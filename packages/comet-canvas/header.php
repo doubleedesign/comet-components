@@ -1,7 +1,8 @@
 <?php
-use Doubleedesign\Comet\Core\{SiteHeader, Group, Menu, Paragraph};
+use Doubleedesign\Comet\Core\{CometConfig, SiteHeader, Group, Menu};
 use Doubleedesign\CometCanvas\NavMenus;
 
+$globalBackground = CometConfig::get_global_background();
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> lang="en">
@@ -13,7 +14,7 @@ use Doubleedesign\CometCanvas\NavMenus;
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class('frontend'); ?>>
+<body <?php body_class('frontend'); ?> data-global-background="<?php echo $globalBackground; ?>">
 <?php wp_body_open(); ?>
 
 <?php

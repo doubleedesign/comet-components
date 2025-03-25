@@ -1,4 +1,6 @@
 <?php
+use Doubleedesign\Comet\Core\CometConfig;
+
 // Autoload dependencies using Composer
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../packages/core/vendor/autoload.php';
@@ -46,6 +48,8 @@ if(str_contains($_SERVER['SCRIPT_NAME'], 'columns')) {
 <?php
 $cssFiles = array_unique(array_merge([$cssFileName ?? ''], $supportingCss));
 $cssFileLinkTags = join("\n\t", array_map(fn($cssFile) => "<link rel=\"stylesheet\" href=\"$host/assets/$cssFile\">", $cssFiles));
+CometConfig::set_global_background('dark');
+$globalBackground = CometConfig::get_global_background();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,5 +61,5 @@ $cssFileLinkTags = join("\n\t", array_map(fn($cssFile) => "<link rel=\"styleshee
 
 	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body data-global-background="<?php echo $globalBackground; ?>">
 <div id="browser-test-content">

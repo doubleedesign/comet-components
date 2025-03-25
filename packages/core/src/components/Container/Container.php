@@ -22,9 +22,13 @@ class Container extends UIComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Container.container');
 		$this->set_size_from_attrs($attributes);
-		$this->set_background_color_from_attrs($attributes);
 		$this->gradient = $attributes['gradient'] ?? null;
 		$this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
+
+		$globalBackground = CometConfig::get_global_background();
+		if(isset($attributes['backgroundColor']) && $attributes['backgroundColor'] !== $globalBackground) {
+			$this->set_background_color_from_attrs($attributes);
+		}
 	}
 
 	protected function get_filtered_classes(): array {

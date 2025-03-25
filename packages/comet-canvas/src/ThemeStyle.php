@@ -1,5 +1,6 @@
 <?php
 namespace Doubleedesign\CometCanvas;
+use Doubleedesign\Comet\Core\CometConfig;
 use WP_Theme_JSON_Data;
 
 class ThemeStyle {
@@ -12,6 +13,7 @@ class ThemeStyle {
 
 		add_action('admin_init', [$this, 'set_css_variables_from_theme_json'], 20, 1);
 		add_action('admin_head', [$this, 'add_css_variables_to_head'], 25);
+		add_action('init', [$this, 'set_global_background'], 10);
 
 		if(is_admin()) {
 			add_action('enqueue_block_assets', [$this, 'add_css_variables_to_block_editor'], 25);
@@ -62,5 +64,10 @@ class ThemeStyle {
 			$slug = sanitize_title($theme->get('Name'));
 			wp_enqueue_style($slug, $child, [], $theme->get('Version'));
 		}
+	}
+
+	public function set_global_background(): void {
+		$color = apply_filters('comet_canvas_global_background', 'white');
+		CometConfig::set_global_background($color);
 	}
 }
