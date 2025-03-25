@@ -2,8 +2,6 @@ node_modules
 vendor/*
 !vendor/autoload.php
 /wordpress
-/test/.phpunit.result.cache
-/test/coverage/
 /cache
 !dist
 !packages/core/dist
@@ -23,3 +21,9 @@ packages/core/cache
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# PHPUnit
+/test-results
+/test/.phpunit.cache
+/test/phpunit-report
+.phpunit.cache

@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-    <TestRunner options="--coverage-html coverage/" />
+    <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/src" />
+    <TestRunner options="--testdox --coverage-html ../../../test/phpunit-report" />
     <method v="2" />
   </configuration>
 </component>

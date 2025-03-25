@@ -6,23 +6,22 @@ use PHPUnit\Framework\TestCase;
 class MenuTest extends TestCase {
 	private array $menuItems;
 
-	public function __construct() {
-		parent::__construct();
+	public function setUp(): void {
 		$this->menuItems = [
 			[
-				'title' => 'Home',
+				'title'           => 'Home',
 				'link_attributes' => [
 					'href' => '/'
 				]
 			],
 			[
-				'title' => 'About',
+				'title'           => 'About',
 				'link_attributes' => [
 					'href' => '/about'
 				],
 			],
 			[
-				'title' => 'Contact',
+				'title'           => 'Contact',
 				'link_attributes' => [
 					'href' => '/contact'
 				]

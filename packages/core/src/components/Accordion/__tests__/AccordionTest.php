@@ -2,12 +2,12 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 namespace Doubleedesign\Comet\Core;
 use PHPUnit\Framework\TestCase;
+use DOMDocument;
 
 class AccordionTest extends TestCase {
 	private array $panels;
 
-	public function __construct() {
-		parent::__construct();
+	protected function setUp(): void {
 		$this->panels = [
 			new AccordionPanel([], [
 				new AccordionPanelTitle([], 'Panel 1 title'),

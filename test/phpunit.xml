@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.0/phpunit.xsd"
          bootstrap="bootstrap.php"
          colors="true"
-         verbose="true"
-         convertDeprecationsToExceptions="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         cacheDirectory=".phpunit.cache"
+         beStrictAboutCoverageMetadata="true"
 >
     <php>
         <ini name="display_errors" value="1"/>
@@ -12,17 +16,14 @@
         <ini name="error_reporting" value="E_ALL"/>
         <ini name="xdebug.mode" value="coverage"/>
     </php>
-    <testsuites>
-        <testsuite name="Unit">
-            <directory>./unit</directory>
-        </testsuite>
-    </testsuites>
-    <coverage includeUncoveredFiles="true">
+    <source>
         <include>
-            <directory suffix=".php">../src</directory>
+            <directory suffix=".php">../packages/core/src</directory>
         </include>
         <exclude>
-            <directory>../vendor</directory>
+            <directory>vendor</directory>
+            <directory suffix="Test.php">../packages/core/src</directory>
+            <directory suffix="blade.php">../packages/core/src</directory>
         </exclude>
-    </coverage>
+    </source>
 </phpunit>

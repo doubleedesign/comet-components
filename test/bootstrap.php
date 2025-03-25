@@ -1,3 +1,3 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/common/mocks.php';
+require_once __DIR__ . '/../vendor/antecedent/patchwork/Patchwork.php';

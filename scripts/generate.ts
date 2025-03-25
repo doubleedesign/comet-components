@@ -37,8 +37,6 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	const bladeTemplateFile = readFileSync('./scripts/templates/template.blade.php', 'utf8');
 	// The template for the CSS file for non-trivial comopnents
 	const cssTemplateFile = readFileSync('./scripts/templates/template.scss', 'utf8');
-	// The template for the sample usage/output file placed in a folder that will be used for testing
-	const testFileTemplate = readFileSync(`./scripts/templates/${Case.snake(componentType)}.php`, 'utf8');
 
 	const shortName = Case.kebab(componentName);
 	let className = Case.pascal(componentName);
@@ -49,13 +47,10 @@ function generateSkeletonFiles({ componentName, componentType }) {
 
 	const classPath = `./packages/core/src/components/${className}/${className}.php`;
 	const templatePath = `./packages/core/src/components/${className}/${shortName}.blade.php`;
-	const testFilePath = `./test/browser/components/${shortName}.php`;
-	const defFilePath = `./packages/core/src/components/${className}/${className}.json`;
 
 	// Bail if the file already exists
 	const classExists = existsSync(classPath);
 	const templateExists = existsSync(templatePath);
-	const testExists = existsSync(testFilePath);
 
 	if(!classExists) {
 		const templateClassName = `${Case.pascal(componentType)}Component`;
@@ -104,18 +99,4 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	}
 
 	//execSync('cd packages/core && composer dump-autoload -o');
-
-
-	// if(!testExists) {
-	// 	const templateOutput = testFileTemplate.replaceAll(templateClassName, className);
-	// 	mkdirSync(path.dirname(testFilePath), { recursive: true });
-	// 	writeFileSync(testFilePath, templateOutput, 'utf8');
-	//
-	// 	if(existsSync(testFilePath)) {
-	// 		console.log(`Test/example usage file created successfully at ${testFilePath}`);
-	// 	}
-	// }
-	// else {
-	// 	console.log(`Template file for ${componentName} already exists, skipping`);
-	// }
 }

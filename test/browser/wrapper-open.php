@@ -48,7 +48,6 @@ if(str_contains($_SERVER['SCRIPT_NAME'], 'columns')) {
 <?php
 $cssFiles = array_unique(array_merge([$cssFileName ?? ''], $supportingCss));
 $cssFileLinkTags = join("\n\t", array_map(fn($cssFile) => "<link rel=\"stylesheet\" href=\"$host/assets/$cssFile\">", $cssFiles));
-CometConfig::set_global_background('dark');
 $globalBackground = CometConfig::get_global_background();
 ?>
 <!DOCTYPE html>

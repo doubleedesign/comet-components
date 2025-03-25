@@ -6,8 +6,7 @@ use PHPUnit\Framework\TestCase;
 class TabsTest extends TestCase {
 	private array $panels;
 
-	public function __construct() {
-		parent::__construct();
+	public function setUp(): void {
 		$this->panels = [
 			new TabPanel([], [
 				new TabPanelTitle([], 'Panel 1 title'),

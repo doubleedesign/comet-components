@@ -5,8 +5,7 @@
       <tool tool_name="PHPUnit">
         <cache>
           <versions>
-            <info id="LocalC:\Users\leesa\PHPStormProjects\comet-components\vendor\autoload.php" version="9.6.22" />
-            <info id="Local\vendor/autoload.php" version="9.6.22" />
+            <info id="Local\vendor/autoload.php" version="12.0.10" />
           </versions>
         </cache>
       </tool>

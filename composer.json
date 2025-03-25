@@ -13,9 +13,10 @@
 			"packages/core/src/components/"
 		],
 		"psr-4": {
-			"Doubleedesign\\Comet\\Tests\\": "test/unit/",
-			"Doubleedesign\\Comet\\TestUtils\\": "test/common/",
-			"Doubleedesign\\Comet\\TestUtils\\WordPress\\": "test/common/wordpress/",
+			"Doubleedesign\\Comet\\TestUtils\\": [
+				"test/common/",
+				"test/unit"
+			],
 			"Doubleedesign\\Comet\\Core\\": [
 				"packages/core/src/base/types/",
 				"packages/core/src/base/attributes/",
@@ -32,8 +33,8 @@
 		"ext-libxml": "*"
 	},
 	"require-dev": {
-		"brain/monkey": "^2.6.2",
-		"phpunit/phpunit": "9.6.22",
+		"phpunit/phpunit": "^12.0.10",
+		"antecedent/patchwork": "^2.2.1",
 		"illuminate/view": "^10.0",
 		"illuminate/filesystem": "^10.0",
 		"illuminate/events": "^10.0",
