@@ -38,12 +38,12 @@
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name; if not set, defaults to one matching the file type"
+            "description": "Icon class name; default values set for file types including PDF, plain text, calendar, Word, Excel, ZIP, GZIP, TAR, and 7z",
+            "default": "fa-file"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "required": true,
             "default": "fa-solid"
         },
         "id": {
@@ -70,6 +70,11 @@
                 "div"
             ],
             "default": "div",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
         "title": {

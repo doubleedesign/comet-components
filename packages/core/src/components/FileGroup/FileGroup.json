@@ -50,9 +50,14 @@
                 "div"
             ],
             "default": "div",
-			"inherited": true
-		}
-	},
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        }
+    },
 	"files": {
 		"type": "array<File|array<string,string>",
 		"description": "Either an array of File objects or an array of associative arrays corresponding to File fields",

@@ -28,13 +28,13 @@ class File extends Renderable {
 	function __construct(array $attributes) {
 		parent::__construct($attributes, 'components.FileGroup.File.file');
 		$this->set_color_theme_from_attrs($attributes, null);
+		$this->set_icon_from_attrs($attributes);
 		$this->url = $attributes['url'] ?? '';
 		$this->title = $attributes['title'] ?? 'Untitled file';
 		$this->description = $attributes['description'] ?? null;
 		$this->size = $attributes['size'] ?? null;
 		$this->mimeType = $attributes['mimeType'] ?? null;
 		$this->uploadDate = $attributes['uploadDate'] ?? null;
-		$this->iconPrefix = $attributes['iconPrefix'] ?? $this->iconPrefix;
 
 		if(!isset($attributes['icon'])) {
 			$attributes['icon'] = match ($this->mimeType) {

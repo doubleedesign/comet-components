@@ -35,13 +35,12 @@
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name; if not set, defaults to one matching the colour theme"
+            "description": "Icon class name"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "required": true,
-            "default": "fa-duotone fa-solid"
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
@@ -63,6 +62,11 @@
                 "div"
             ],
             "default": "div",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         }
     },

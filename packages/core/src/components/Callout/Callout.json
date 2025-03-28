@@ -36,12 +36,11 @@
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name; if not set, defaults to one matching the colour theme if appropriate (e.g, success, warning)"
+            "description": "Icon class name; default value set for success, warning, error, and info color themes"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "required": true,
             "default": "fa-solid"
         },
         "id": {
@@ -61,6 +60,11 @@
                 "div"
             ],
             "default": "div",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         }
     },

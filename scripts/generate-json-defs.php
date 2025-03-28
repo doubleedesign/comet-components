@@ -29,7 +29,7 @@ class ComponentClassesToJsonDefinitions {
 		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mainComponentDirectory));
 
 		foreach($files as $file) {
-			if($file->isFile() && $file->getExtension() === 'php') {
+			if($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php')) {
 				$this->processFile($file->getPathname());
 			}
 		}
@@ -40,7 +40,7 @@ class ComponentClassesToJsonDefinitions {
 	public function runSingle($component): void {
 		// First try direct path
 		$filePath = $this->mainComponentDirectory . '\\' . $component . '\\' . $component . '.php';
-		if(file_exists($filePath)) {
+		if(file_exists($filePath) && !str_ends_with($filePath, 'Test.php')) {
 			$this->processFile($filePath);
 			return;
 		}
@@ -50,7 +50,7 @@ class ComponentClassesToJsonDefinitions {
 		preg_match_all('/[A-Z][a-z]*/', $component, $matches);
 		$baseFolder = $matches[0][0];
 		$filePath = $this->mainComponentDirectory . '\\' . $baseFolder . '\\' . $component . '\\' . $component . '.php';
-		if(file_exists($filePath)) {
+		if(file_exists($filePath) && !str_ends_with($filePath, 'Test.php')) {
 			$this->processFile($filePath);
 			return;
 		}
@@ -372,7 +372,10 @@ class ComponentClassesToJsonDefinitions {
 		if($docComment && preg_match('/@supported-values\s+(.+)/', $docComment, $matches)) {
 			$supportedValues = array_map('trim', explode(',', $matches[1]));
 		}
-
+		// Get default values from docblock if not already set
+		if(!isset($result['default']) && $docComment && preg_match('/@default-value\s+(.+)/', $docComment, $matches)) {
+			$defaultValue = trim($matches[1]);
+		}
 		// Use type from docblock if specified, to use declared types like array<string>
 		if($docComment && preg_match('/@var\s+(\S+)/', $docComment, $matches)) {
 			$type = trim($matches[1]);
@@ -509,12 +512,14 @@ try {
 	$instance = new ComponentClassesToJsonDefinitions();
 	if(isset($argv[1]) && $argv[1] === '--component') {
 		$instance->runSingle($argv[2]);
+		shell_exec('php scripts/generate-xml.php');
 	}
 	else if(isset($argv[1]) && $argv[1] === '--base') {
 		$instance->runSingleBase($argv[2]);
 	}
 	else {
 		$instance->runAll();
+		shell_exec('php scripts/generate-xml.php');
 	}
 	echo "Done!\n";
 }

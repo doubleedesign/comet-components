@@ -3,6 +3,16 @@
     "extends": "Renderable",
     "abstract": false,
     "attributes": {
+        "align": {
+            "type": "string",
+            "description": "Image alignment",
+            "supported": [
+                "left",
+                "center",
+                "right",
+                "full"
+            ]
+        },
         "alt": {
             "type": "string",
             "description": "Alternative text",
@@ -33,8 +43,7 @@
                 "is-style-rounded"
             ],
             "default": [
-                "image",
-                "image--scale-contain"
+                "image"
             ]
         },
         "context": {
@@ -81,6 +90,11 @@
                 "figure"
             ],
             "default": "figure",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
         "title": {

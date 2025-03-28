@@ -1,81 +1,67 @@
 <?php
 use Doubleedesign\Comet\Core\{TychoService};
 
-$page = [
-	<<<TYCHO
-<Container testId="example-1">
-	<Group>Group no background</Group>
-	<Group>Group no background</Group>
-</Container>
-TYCHO,
-	<<<TYCHO
-<Container testId="example-2">
-	<Group backgroundColor="light">Group light background</Group>
-	<Group backgroundColor="light">Group light background</Group>
-</Container>
-TYCHO,
-	<<<TYCHO
-<Container testId="example-3">
-	<Group backgroundColor="dark">Group dark background</Group>
-	<Group backgroundColor="primary">Group primary background</Group>
-</Container>
-TYCHO,
-	<<<TYCHO
-<Container testId="example-4">
-	<Group>
+$page =	<<<TYCHO
+<TychoTemplate xmlns="schema/components.xsd">
+	<Container testId="example-1">
+		<Group>Group no background</Group>
+		<Group>Group no background</Group>
+	</Container>
+	<Container testId="example-2">
+		<Group backgroundColor="light">Group light background</Group>
+		<Group backgroundColor="light">Group light background</Group>
+	</Container>
+	<Container testId="example-3">
+		<Group backgroundColor="dark">Group dark background</Group>
+		<Group backgroundColor="primary">Group primary background</Group>
+	</Container>
+	<Container testId="example-4">
 		<Group>
-			<Paragraph>Nested group no background</Paragraph>
+			<Group>
+				<Paragraph>Nested group no background</Paragraph>
+			</Group>
 		</Group>
-	</Group>
-</Container>
-TYCHO,
-	<<<TYCHO
-<Container testId="example-5">
-	<Group backgroundColor="light">
+	</Container>
+	<Container testId="example-5">
 		<Group backgroundColor="light">
-			<Paragraph>Nested group same background on both</Paragraph>
+			<Group backgroundColor="light">
+				<Paragraph>Nested group same background on both</Paragraph>
+			</Group>
 		</Group>
-	</Group>
-</Container>
-TYCHO,
-	<<<TYCHO
-<Container testId="example-6">
-	<Group backgroundColor="dark">
-		<Group backgroundColor="primary">
-			<Paragraph>Nested group different backgrounds</Paragraph>
+	</Container>
+	<Container testId="example-6">
+		<Group backgroundColor="dark">
+			<Group backgroundColor="primary">
+				<Paragraph>Nested group different backgrounds</Paragraph>
+			</Group>
 		</Group>
-	</Group>
-</Container>
-TYCHO,
-	<<<TYCHO
-<Container testId="example-7">
-	<Group backgroundColor="light">
-		<Group backgroundColor="primary">
-			<Paragraph>Two nested groups</Paragraph>
-		</Group>
-		<Group backgroundColor="primary">
-			<Paragraph>...same background as each other</Paragraph>
-		</Group>
-	</Group>
-</Container>
-TYCHO,
-	<<<TYCHO
-<Container testId="example-8">
-	<Group backgroundColor="light">
+	</Container>
+	<Container testId="example-7">
 		<Group backgroundColor="light">
-			<Paragraph>Two nested groups</Paragraph>
+			<Group backgroundColor="primary">
+				<Paragraph>Two nested groups</Paragraph>
+			</Group>
+			<Group backgroundColor="primary">
+				<Paragraph>...same background as each other</Paragraph>
+			</Group>
 		</Group>
+	</Container>
+	<Container testId="example-8">
 		<Group backgroundColor="light">
-			<Paragraph>...same background as the parent</Paragraph>
+			<Group backgroundColor="light">
+				<Paragraph>Two nested groups</Paragraph>
+			</Group>
+			<Group backgroundColor="light">
+				<Paragraph>...same background as the parent</Paragraph>
+			</Group>
 		</Group>
-	</Group>
-</Container>
-TYCHO,
-];
+	</Container>
+</TychoTemplate>
+TYCHO;
 
 try {
-	foreach($page as $template) {
-		$component = TychoService::parse($template);
+	$components = TychoService::parse($page);
+	foreach($components as $component) {
 		$component->render();
 	}
 }

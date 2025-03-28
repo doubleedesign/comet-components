@@ -18,11 +18,12 @@
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name; if not set, defaults to one according to whether the link target is set to open in a new tab or not"
+            "description": "Icon class name; for link-group context default value is 'fa-link', or 'fa-arrow-up-right-from-square' if target is '_blank'"
         },
         "iconPrefix": {
             "type": "string",
-            "description": "Icon prefix class name"
+            "description": "Icon prefix class name",
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
@@ -41,6 +42,11 @@
                 "a"
             ],
             "default": "a",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         }
     },

@@ -1,7 +1,6 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 use DOMDocument, DOMElement, DOMNode, ReflectionClass, Exception;
-use Doubleedesign\Comet\WordPress\PreprocessedHTML;
 
 class TychoService {
 	/**
@@ -15,7 +14,7 @@ class TychoService {
 	 * @param array $variables Variables to make available in the template scope // TODO: This is not implemented yet
 	 * @throws Exception If the template is invalid
 	 *
-	 * @return Renderable The root component object
+	 * @return array<Renderable> Component objects
 	 */
 	public static function parse(string $template, array $variables = []): mixed {
 		if (self::$dom === null) {
@@ -45,8 +44,20 @@ class TychoService {
 			throw new Exception("No valid component found in template");
 		}
 
-		// Convert the DOM node to a component
-		return self::node_to_component($rootNode, $variables);
+		// If this is a TychoTemplate wrapper, process all the children
+		// TychoTemplate is an XML wrapper that exists for templating purposes only and should not be output in the HTML
+		if ($rootNode->nodeName === 'TychoTemplate') {
+			$nodes = $rootNode->childNodes;
+			return array_filter(
+				array_map(fn($node) => self::node_to_component($node, $variables), iterator_to_array($nodes)),
+				fn($component) => $component !== null
+			);
+		}
+
+		// Otherwise, support a single node // TODO: Make this also support multiple nodes
+		return array(
+			self::node_to_component($rootNode, $variables)
+		);
 	}
 
 	/**
@@ -55,11 +66,13 @@ class TychoService {
 	 * @param array $variables Variables from the parent scope
 	 * @throws Exception If the component class is not found
 	 *
-	 * @return Renderable The component object
+	 * @return ?Renderable The component object
 	 */
-	private static function node_to_component(DOMNode $node, array $variables = []): mixed {
-		// Wrap plain text content in a paragraph and return it
+	private static function node_to_component(DOMNode $node, array $variables = []): ?Renderable {
+		// Wrap plain text content in a paragraph and return it, unless it's empty
 		if($node->nodeType === XML_TEXT_NODE) {
+			if(trim($node->nodeValue) === '') return null;
+
 			return new Paragraph([], $node->nodeValue);
 		}
 

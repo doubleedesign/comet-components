@@ -9,9 +9,18 @@
 To generate the boilerplate code for a new component, run the following command with `example` and `simple` replaced
 with the desired component name and type. Valid types are `simple`, `complex`, and `wrapper`.
 
+Note: If using PowerShell **or** WSL with Node aliased to PowerShell, do not use equals signs.
+
+::: tabs#shell
+@tab WSL (Bash)
 ```bash:no-line-numbers
-npm run generate component -- --name=example --type=simple
+npm run generate component -- --name=YourThing --type=simple
 ```
+@tab PowerShell
+```powershell:no-line-numbers
+npm run generate component -- --name YourThing --type simple
+```
+:::
 
 ### 2. Compile assets
 
@@ -59,7 +68,7 @@ npm run build
 
 ### 3. Generate documentation
 
-Once you have added fields and docblock comments to a component, generate the JSON definition file:
+Once you have added fields and docblock comments to a component, generate the JSON definition file and [Tycho Template syntax](../usage/overview.md#tycho-template-syntax) XML definition file:
 
 ::: tabs#shell
 @tab WSL (Bash)

@@ -70,6 +70,11 @@
             "default": "section",
             "inherited": true
         },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
         "withWrapper": {
             "type": "bool",
             "description": "Whether to wrap the container element so that the background is full-width",

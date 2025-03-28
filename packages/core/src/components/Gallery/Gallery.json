@@ -55,6 +55,11 @@
             ],
             "default": "figure",
             "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
         }
     },
     "innerComponents": {

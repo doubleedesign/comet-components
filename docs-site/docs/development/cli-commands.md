@@ -6,15 +6,16 @@
 
 Run these from the root of the project.
 
-| Command                         | Description                                                                                                                                                      |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `npm run refresh:composer`      | Refresh Composer dependencies and autoloading for the root and all packages  <Badge type="warning" text="Requires PowerShell"/>                                  |
-| `npm run refresh:npm`           | Run `npm install` in the root and all packages, and `rollup` in packages that use it  <Badge type="warning" text="Requires PowerShell"/>                         |
-| `npm run refresh:symlinks`      | Refresh symlinks for the local web server and Storybook <Badge type="warning" text="Requires PowerShell"/>                                                       |
-| `npm run refresh:all`           | Install/update Composer and NPM dependencies in the root and all packages + relink all symlinks   <Badge type="warning" text="Requires PowerShell"/>             |
-| `npm run refresh:autoload`      | Run `composer dump-autoload -o` for the root and all packages (skip updating dependencies)  <Badge type="warning" text="Requires PowerShell"/>                   |
-| `npm run refresh:npmpackages`   | Run `npm install` and `rollup` in the packages only (skips installing/updating root dev deps like Storybook)  <Badge type="warning" text="Requires PowerShell"/> |
-| `php ./scripts/healthcheck.php` | Check for expected files                                                                                                                                         |
+| Command                          | Description                                                                                                                                                      |
+|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `npm run refresh:composer`       | Refresh Composer dependencies and autoloading for the root and all packages  <Badge type="warning" text="Requires PowerShell"/>                                  |
+| `npm run refresh:npm`            | Run `npm install` in the root and all packages, and `rollup` in packages that use it  <Badge type="warning" text="Requires PowerShell"/>                         |
+| `npm run refresh:symlinks`       | Refresh symlinks for the local web server and Storybook <Badge type="warning" text="Requires PowerShell"/>                                                       |
+| `npm run refresh:all`            | Install/update Composer and NPM dependencies in the root and all packages + relink all symlinks   <Badge type="warning" text="Requires PowerShell"/>             |
+| `npm run refresh:autoload`       | Run `composer dump-autoload -o` for the root and all packages (skip updating dependencies)  <Badge type="warning" text="Requires PowerShell"/>                   |
+| `npm run refresh:npmpackages`    | Run `npm install` and `rollup` in the packages only (skips installing/updating root dev deps like Storybook)  <Badge type="warning" text="Requires PowerShell"/> |
+| `php ./scripts/healthcheck.php`  | Check for expected files                                                                                                                                         |
+| `php ./scripts/generate-xml.php` | Regenerate the XML schema for Tycho Template syntax.                                                                                                             |
 
 ### Equivalent standalone commands
 
@@ -48,7 +49,7 @@ Generate a new component (example):
 npm run generate component -- --name=gallery --type=simple
 ```
 
-Once you have added fields and docblock comments to a component, generate the JSON definition file (example):
+Once you have added fields and docblock comments to a component, generate the JSON definition file and [Tycho Template syntax](../usage/overview.md#tycho-template-syntax) XML definition file (example):
 
 ```bash
 php scripts/generate-json-defs.php --component Gallery

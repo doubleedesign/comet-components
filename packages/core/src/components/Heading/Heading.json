@@ -41,6 +41,11 @@
             "default": "h2",
             "inherited": true
         },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
         "textAlign": {
             "type": "Alignment",
             "supported": [

@@ -5,7 +5,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class Group extends LayoutComponent {
 	/**
-	 * @var ?array $classes
+	 * @var ?array<string> $classes
 	 * @supported-values group, group--breakout
 	 */
 	protected ?array $classes;

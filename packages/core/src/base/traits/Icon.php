@@ -3,11 +3,11 @@ namespace Doubleedesign\Comet\Core;
 
 trait Icon {
 	/**
-	 * @var string $iconPrefix
+	 * @var ?string $iconPrefix
 	 * @description Icon prefix class name
 	 * @default-value fa-solid
 	 */
-	protected string $iconPrefix;
+	protected ?string $iconPrefix;
 
 	/**
 	 * @var ?string $icon

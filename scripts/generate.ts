@@ -4,7 +4,8 @@ import * as path from 'node:path';
 import { execSync } from 'child_process';
 
 // Get the component name and type from command line arguments
-// Command is in the format: 'npm run generate component -- --name=YourThing --type=complex'
+// WSL command: 'npm run generate component -- --name=YourThing --type=complex'
+// PowerShell command: 'npm run generate component -- --name YourThing --type complex' (no equals signs)
 const args = process.argv.slice(2);
 if(args[0] !== 'component' || !args[1] || !args[1].startsWith('--name=')) {
 	console.error('Invalid command. Usage: npm run generate component -- --name=<name> --type=<simple or complex>');
@@ -17,17 +18,6 @@ if(args[2] && !['simple', 'complex', 'wrapper'].includes(componentType)) {
 	console.log('Usage: npm run generate component -- --name=<name> --type=<simple or complex>');
 	process.exit(1);
 }
-
-
-/**
- * Generate:
- * 1. A class that will be used to build the output (PascalCase block name without prefix)
- * 2. A template file in the test directory that will be used to render the block using the associated class (lowercase block name without prefix)
- */
-generateSkeletonFiles({
-	componentName,
-	componentType,
-});
 
 function generateSkeletonFiles({ componentName, componentType }) {
 	console.log(`Generating ${componentType} component: ${componentName}`);
@@ -97,6 +87,23 @@ function generateSkeletonFiles({ componentName, componentType }) {
 			console.log(`CSS file for ${componentName} already exists, skipping`);
 		}
 	}
-
-	//execSync('cd packages/core && composer dump-autoload -o');
 }
+
+
+/**
+ * Generate:
+ * 1. A class that will be used to build the output (PascalCase block name without prefix)
+ * 2. A template file in the test directory that will be used to render the block using the associated class (lowercase block name without prefix)
+ */
+generateSkeletonFiles({
+	componentName,
+	componentType,
+});
+
+// Then run updates to supplementary files and configuration
+console.log('Updating XML definition for Tycho Template syntax');
+execSync('php scripts/generate-xml.php');
+console.log('IMPORTANT: Remember to update the Composer autoloader manually, as this script cannot do it yet.');
+//console.log('Updating autoloader');
+//execSync('cd packages/core && composer dump-autoload -o');
+//execSync('cd ../..');
