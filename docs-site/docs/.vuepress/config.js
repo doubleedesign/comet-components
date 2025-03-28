@@ -128,29 +128,53 @@ function getSectionChildren(folderName) {
 		return [];
 	}
 
-	// Some hacky preferred ordering
-	const preferredOrder = ['overview', 'setup', 'cli-commands', 'new-component', 'theming', 'extending'];
-
 	const children = [];
 
 	// Get all items in the directory
 	const items = fs.readdirSync(folderPath, { withFileTypes: true });
 
 	// Process files first
-	items
+	const filesWithMetadata = items
 		.filter((item) => item.isFile() && item.name.endsWith('.md'))
-		.forEach((file) => {
+		.map((file) => {
 			const name = file.name.replace('.md', '');
 			if (name !== 'README') {
 				const filePath = path.join(folderPath, file.name);
 				const title = extractTitleFromMarkdown(filePath) ?? Case.title(name);
+				const position = extractPagePositionFromMarkdown(filePath);
 
-				children.push({
+				return {
 					text: title,
-					link: `/${folderName}/${name}`
-				});
+					link: `/${folderName}/${name}`,
+					position: position !== null ? parseInt(position, 10) : null
+				};
 			}
-		});
+
+			return null;
+		})
+		.filter(Boolean);
+
+	// Sort files by position first, then by title
+	filesWithMetadata.sort((a, b) => {
+		// If both have positions, sort numerically
+		if (a.position !== null && b.position !== null) {
+			return a.position - b.position;
+		}
+		// If only a has position, it comes first
+		if (a.position !== null) {
+			return -1;
+		}
+		// If only b has position, it comes first
+		if (b.position !== null) {
+			return 1;
+		}
+
+		// If neither has position, sort alphabetically
+		return a.text.localeCompare(b.text);
+	});
+
+	// Add the sorted files to children
+	children.push(...filesWithMetadata);
 
 	// Process subfolders
 	items
@@ -161,20 +185,47 @@ function getSectionChildren(folderName) {
 			const subfolderItems = [];
 
 			// Get markdown files in the subfolder
-			fs.readdirSync(subfolderPath, { withFileTypes: true })
+			const subfolderFilesWithMetadata = fs.readdirSync(subfolderPath, { withFileTypes: true })
 				.filter((subItem) => subItem.isFile() && subItem.name.endsWith('.md'))
-				.forEach((subFile) => {
+				.map((subFile) => {
 					const name = subFile.name.replace('.md', '');
 					if (name !== 'README') {
 						const filePath = path.join(subfolderPath, subFile.name);
 						const title = extractTitleFromMarkdown(filePath) ?? Case.title(name);
+						const position = extractPagePositionFromMarkdown(filePath);
 
-						subfolderItems.push({
+						return {
 							text: title,
-							link: `/${folderName}/${subfolderName}/${name}`
-						});
+							link: `/${folderName}/${subfolderName}/${name}`,
+							position: position !== null ? parseInt(position, 10) : null
+						};
 					}
-				});
+
+					return null;
+				})
+				.filter(Boolean);
+
+			// Sort subfolder files by position first, then by title
+			subfolderFilesWithMetadata.sort((a, b) => {
+				// If both have positions, sort numerically
+				if (a.position !== null && b.position !== null) {
+					return a.position - b.position;
+				}
+				// If only a has position, it comes first
+				if (a.position !== null) {
+					return -1;
+				}
+				// If only b has position, it comes first
+				if (b.position !== null) {
+					return 1;
+				}
+
+				// If neither has position, sort alphabetically
+				return a.text.localeCompare(b.text);
+			});
+
+			// Add the sorted subfolder files
+			subfolderItems.push(...subfolderFilesWithMetadata);
 
 			// Check if subfolder has README for its title
 			const subfolderReadmePath = path.join(subfolderPath, 'README.md');
@@ -199,34 +250,18 @@ function getSectionChildren(folderName) {
 			}
 		});
 
-	// Sort the top-level
+	// Sort the top-level items - folders still come after files
 	return children.sort((a, b) => {
 		// If it's a file vs subfolder, files come first
 		if (!a.children && b.children) return -1;
 		if (a.children && !b.children) return 1;
 
-		// If both are files, use preferred order
+		// If both are files, they've already been sorted by position and title
 		if (!a.children && !b.children) {
-			const aName = a.link.split('/').pop();
-			const bName = b.link.split('/').pop();
-
-			const aIndex = preferredOrder.indexOf(aName);
-			const bIndex = preferredOrder.indexOf(bName);
-
-			if (aIndex === -1 && bIndex === -1) {
-				return a.text.localeCompare(b.text);
-			}
-			if (aIndex === -1) {
-				return 1;
-			}
-			if (bIndex === -1) {
-				return -1;
-			}
-
-			return aIndex - bIndex;
+			return 0; // Keep the existing order from our previous sort
 		}
 
-		// If both are folders, alphabetical
+		// If both are folders, sort alphabetically
 		return a.text.localeCompare(b.text);
 	});
 }
@@ -243,6 +278,26 @@ function extractTitleFromMarkdown(filePath) {
 
 		if (titleMatch && titleMatch[1]) {
 			return titleMatch[1].trim();
+		}
+
+		return null;
+	}
+	catch (error) {
+		console.error(`Error reading file ${filePath}:`, error);
+
+		return null;
+	}
+}
+
+function extractPagePositionFromMarkdown(filePath) {
+	try {
+		const content = fs.readFileSync(filePath, 'utf8');
+
+		const positionMatch =
+			content.match(/^position:\s*(.+)$/m); // Match YAML frontmatter position: number
+
+		if (positionMatch && positionMatch[1]) {
+			return positionMatch[1].trim();
 		}
 
 		return null;

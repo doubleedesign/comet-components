@@ -1,3 +1,8 @@
+---
+title: Component traits
+position: 2
+---
+
 # Component Traits
 
 PHP traits are used to provide common implementations of an attribute's conversion from <code>$attributes</code> array element to object field.
@@ -7,7 +12,6 @@ This provides a central location for validation logic and documentation, reducin
 
 <div>
 
-
 ## BackgroundColor
 
 <dl>
@@ -16,7 +20,7 @@ This provides a central location for validation logic and documentation, reducin
 <dd>
 	<code>backgroundColor</code> 
 	<strong>Type:</strong> <code>ThemeColor</code>
-	
+
 <p>Background colour keyword</p>
 </dd>
 
@@ -24,7 +28,7 @@ This provides a central location for validation logic and documentation, reducin
 <dd>
 	<code>set_background_color_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>
@@ -49,7 +53,6 @@ class MyComponent {
 
 <div>
 
-
 ## ColorTheme
 
 <dl>
@@ -58,7 +61,7 @@ class MyComponent {
 <dd>
 	<code>colorTheme</code> 
 	<strong>Type:</strong> <code>ThemeColor</code>
-	
+
 <p>Colour keyword for the fill or outline colour</p>
 </dd>
 
@@ -66,7 +69,7 @@ class MyComponent {
 <dd>
 	<code>set_color_theme_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>
@@ -91,7 +94,6 @@ class MyComponent {
 
 <div>
 
-
 ## Icon
 
 <dl>
@@ -100,14 +102,14 @@ class MyComponent {
 <dd>
 	<code>iconPrefix</code> 
 	<strong>Type:</strong> <code>string</code>
-	
+
 <p>Icon prefix class name</p>
 </dd>
 <dt>Property</dt>
 <dd>
 	<code>icon</code> 
 	<strong>Type:</strong> <code>?string</code>
-	
+
 <p>Icon class name</p>
 </dd>
 
@@ -115,7 +117,7 @@ class MyComponent {
 <dd>
 	<code>set_icon_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p></p>
 </dd>
 </dl>
@@ -140,7 +142,6 @@ class MyComponent {
 
 <div>
 
-
 ## LayoutAlignmentHorizontal
 
 <dl>
@@ -149,7 +150,7 @@ class MyComponent {
 <dd>
 	<code>hAlign</code> 
 	<strong>Type:</strong> <code>Alignment</code>
-	
+
 <p></p>
 </dd>
 
@@ -157,7 +158,7 @@ class MyComponent {
 <dd>
 	<code>set_halign_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>
@@ -182,7 +183,6 @@ class MyComponent {
 
 <div>
 
-
 ## LayoutAlignmentVertical
 
 <dl>
@@ -191,7 +191,7 @@ class MyComponent {
 <dd>
 	<code>vAlign</code> 
 	<strong>Type:</strong> <code>Alignment</code>
-	
+
 <p></p>
 </dd>
 
@@ -199,7 +199,7 @@ class MyComponent {
 <dd>
 	<code>set_valign_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>
@@ -224,7 +224,6 @@ class MyComponent {
 
 <div>
 
-
 ## LayoutContainerSize
 
 <dl>
@@ -233,7 +232,7 @@ class MyComponent {
 <dd>
 	<code>size</code> 
 	<strong>Type:</strong> <code>ContainerSize</code>
-	
+
 <p>Keyword specifying the relative width of the container for the inner content</p>
 </dd>
 
@@ -241,7 +240,7 @@ class MyComponent {
 <dd>
 	<code>set_size_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>
@@ -266,7 +265,6 @@ class MyComponent {
 
 <div>
 
-
 ## LayoutOrientation
 
 <dl>
@@ -275,7 +273,7 @@ class MyComponent {
 <dd>
 	<code>orientation</code> 
 	<strong>Type:</strong> <code>Orientation</code>
-	
+
 <p></p>
 </dd>
 
@@ -283,7 +281,7 @@ class MyComponent {
 <dd>
 	<code>set_orientation_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>
@@ -308,7 +306,6 @@ class MyComponent {
 
 <div>
 
-
 ## TextAlign
 
 <dl>
@@ -317,7 +314,7 @@ class MyComponent {
 <dd>
 	<code>textAlign</code> 
 	<strong>Type:</strong> <code>Alignment</code>
-	
+
 <p></p>
 </dd>
 
@@ -325,7 +322,7 @@ class MyComponent {
 <dd>
 	<code>set_text_align_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>
@@ -350,7 +347,6 @@ class MyComponent {
 
 <div>
 
-
 ## TextColor
 
 <dl>
@@ -359,7 +355,7 @@ class MyComponent {
 <dd>
 	<code>textColor</code> 
 	<strong>Type:</strong> <code>ThemeColor</code>
-	
+
 <p></p>
 </dd>
 
@@ -367,7 +363,7 @@ class MyComponent {
 <dd>
 	<code>set_text_color_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 </dl>

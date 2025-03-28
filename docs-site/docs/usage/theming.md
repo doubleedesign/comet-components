@@ -1,3 +1,7 @@
+---
+position: 1
+---
+
 # Theming
 
 [[toc]]
@@ -5,7 +9,7 @@
 ## Global PHP configuration
 
 The `CometConfig` class provides static methods to set and get several options to be made available to components at runtime, such as global background colour and default icon prefix. In general usage, these can be set directly. In WordPress, themes (other than Comet Canvas) don't generally have direct access to the `CometConfig` class, unless you have installed the Comet Components
-core library yourself. Comet Canvas provides filters so that child themes can easily override the defaults from `functions.php`. 
+core library yourself. Comet Canvas provides filters so that child themes can easily override the defaults from `functions.php`.
 
 ### Global background colour
 
@@ -81,12 +85,12 @@ For WordPress usage, some tokens should be set in your theme's `theme.json` so t
 Set colours, fonts, spacing, font weights, and container widths by overriding Comet's CSS variables in your own `style.css` file. For example:
 - Set fonts with the `--font-family-body` and `--font-family-accent` variables
 - Set colours with the `--color-primary`, `--color-secondary`, etc. variables (unless you are using WordPress - see below).
-:::
+  :::
 
 :::details In WordPress
 - Set colours and gradients in your theme's `theme.json` file. WordPress will automatically pick up on these for use in the editor, and the Comet Canvas theme will inject them as CSS variables in the relevant places (overriding the Comet default ones).
 - Set fonts and other CSS variables as per the general usage instructions above.
-:::
+  :::
 
 ## Adding animation
 

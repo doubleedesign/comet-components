@@ -1,3 +1,7 @@
+---
+position: 3
+---
+
 # Creating a new component
 
 [[toc]]

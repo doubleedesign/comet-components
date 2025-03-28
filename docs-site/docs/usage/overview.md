@@ -1,5 +1,6 @@
 ---
 title: Overview
+position: 0
 ---
 
 # Usage overview
@@ -33,7 +34,7 @@ $component->render();
 
 ## Tycho template syntax
 
-This is essentially XML/JSX-style convenience syntax whereby [heredoc strings](https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc) are processed by a custom parser and sent through to the object syntax and hence Blade under the hood. 
+This is essentially XML/JSX-style convenience syntax whereby [heredoc strings](https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc) are processed by a custom parser and sent through to the object syntax and hence Blade under the hood.
 
 :::info
 Tycho template syntax / the `TychoService` class is ~~a custom creation~~, glorified XML with a parsing function, not an existing third-party template engine or library. Rather than calling it something generic like `TemplateService`, for fun I went with continuing the pet-based alliteration and named it after my other dog, Tycho.
@@ -63,7 +64,7 @@ foreach($components as $component) {
 ```
 
 :::info
-Wrapping the components in `<TychoTemplate xmlns="schema/components.xsd">` provides basic IDE autocompletion and validation, and a somewhat useful "go to definition" response (it goes to the schema file, not the PHP class as would be ideal). 
+Wrapping the components in `<TychoTemplate xmlns="schema/components.xsd">` provides basic IDE autocompletion and validation, and a somewhat useful "go to definition" response (it goes to the schema file, not the PHP class as would be ideal).
 
 The schema file is located in the core package, in the `tycho-fetch.xsd` file. Because Tycho, the Labrador Retriever, is fetching the definition for the component you threw onto the page...or something like that. :laugh:
 

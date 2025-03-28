@@ -1,3 +1,7 @@
+---
+position: 2
+---
+
 # CLI command quick reference
 
 [[toc]]

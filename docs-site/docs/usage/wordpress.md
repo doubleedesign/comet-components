@@ -1,5 +1,6 @@
 ---
 title: Using in WordPress
+position: 3
 ---
 
 # Usage in WordPress themes and plugins

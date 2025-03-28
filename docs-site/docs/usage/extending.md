@@ -1,3 +1,7 @@
+---
+position: 2
+---
+
 # Extending
 
 [[toc]]
@@ -14,6 +18,10 @@ For other usages including custom WordPress blocks, you can override the renderi
 // TODO examples to come
 :::
 
+:::warning
+// TODO generic passing of custom Blade template
+// Method in Renderable?
+:::
 
 ## Customising component classes
 The core component classes are built in an object-oriented fashion, so you can create your own versions of them while keeping the functionality of the original using inheritance.
