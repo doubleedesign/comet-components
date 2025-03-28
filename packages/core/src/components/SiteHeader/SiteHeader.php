@@ -32,8 +32,9 @@ class SiteHeader extends LayoutComponent {
 	/**
 	 * @var ?string $icon
 	 * @description Icon class name; for the responsive menu toggle button
+	 * @default-value fa-bars
 	 */
-	protected ?string $icon = 'fa-bars';
+	protected ?string $icon;
 	/**
 	 * @var string|null $submenuIcon
 	 * @description Icon class name for the submenu toggle button in responsive mode
@@ -58,6 +59,10 @@ class SiteHeader extends LayoutComponent {
 
 
 	function __construct(array $attributes, array $innerComponents) {
+		if(!isset($attributes['icon'])) {
+			$attributes['icon'] = 'fa-bars';
+		}
+
 		parent::__construct($attributes, $innerComponents, 'components.SiteHeader.site-header');
 		$this->set_background_color_from_attrs($attributes);
 		$this->set_size_from_attrs($attributes);

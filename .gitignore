@@ -13,6 +13,8 @@ packages/core/cache
 # Symlinks
 /test/browser/assets/*.css
 /test/browser/stories/*
+/test/browser/components/*
+/test/browser/pages/*
 /docs-site/docs/.vuepress/.cache/
 /docs-site/docs/.vuepress/.temp/
 

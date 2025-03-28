@@ -32,6 +32,18 @@ if (-not (Test-Path $STORIES_DEST_DIR)) {
 	New-Item -ItemType Directory -Path $STORIES_DEST_DIR -Force
 }
 
+# Ensure the browser components directory exists and create it if not
+$BROWSER_COMPONENTS_DIR = "$ROOT_DIR\test\browser\components"
+if (-not (Test-Path $BROWSER_COMPONENTS_DIR)) {
+	New-Item -ItemType Directory -Path $BROWSER_COMPONENTS_DIR -Force
+}
+
+# Ensure the browser pages directory exists and create it if not
+$BROWSER_PAGES_DIR = "$ROOT_DIR\test\browser\pages"
+if (-not (Test-Path $BROWSER_PAGES_DIR)) {
+	New-Item -ItemType Directory -Path $BROWSER_PAGES_DIR -Force
+}
+
 # Verify source directory exists
 if (-not (Test-Path $SOURCE_DIR)) {
 	Write-Error "Source directory not found: $SOURCE_DIR"
@@ -53,8 +65,8 @@ Get-ChildItem -Path $SOURCE_DIR -Filter "*.css" -Recurse | ForEach-Object {
 	New-Item -ItemType SymbolicLink -Path $DestPath -Value $_.FullName -Force
 }
 
-# Get all stories files, ignoring the parent directory structure
-Get-ChildItem -Path $SOURCE_DIR | ForEach-Object {
+# Get files from __tests__ in each component directory
+Get-ChildItem -Path $SOURCE_DIR -Recurse | ForEach-Object {
 	# Is it a directory?
 	if (-not $_.PSIsContainer) {
 		return
@@ -67,19 +79,36 @@ Get-ChildItem -Path $SOURCE_DIR | ForEach-Object {
 	}
 
 	Get-ChildItem -Path $TEST_DIR | ForEach-Object {
-		# Is it a story file?
-		if ($_ -notlike "*.stories.json") {
+		# Ignore unit test files (format PascalCaseTest.php)
+		if ($_.Name -match "([A-Z][a-z]+)Test\.php") {
 			return
 		}
 
-		$DestFileName = $_.Name
-		$DestPath = Join-Path $STORIES_DEST_DIR $DestFileName
+		# Is it a story file? (Format short-name.stories.json)
+		if ($_.Name -match "([a-zA-Z]+)\.stories\.json") {
+			$DestFileName = $matches[1] + ".stories.json"
+			$DestPath = Join-Path $STORIES_DEST_DIR $DestFileName
+
+		}
+
+		# Is it a component file? (Format short-name.php)
+		if ($_.Name -match "([a-zA-Z]+)\.php") {
+			$DestFileName = $matches[1] + ".php"
+			$DestPath = Join-Path $BROWSER_COMPONENTS_DIR $DestFileName
+		}
+
+		# Is it the pages directory? If so, go into it and get any .php files (they can have various names)
+		if ($_.Name -eq "pages") {
+			Get-ChildItem -Path $TEST_DIR\pages | ForEach-Object {
+				$DestPath = Join-Path $BROWSER_PAGES_DIR $_.Name
+			}
+		}
 
 		Write-Host "Symlinking $_.FullName to $DestPath"
 
 		# Remove existing symlink if it exists
 		if (Test-Path $DestPath) {
-			Remove-Item $DestPath -Force
+			Remove-Item $DestPath -Recurse -Force
 		}
 
 		# Create the symlink

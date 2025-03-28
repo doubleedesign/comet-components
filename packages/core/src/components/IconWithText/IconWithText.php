@@ -9,13 +9,12 @@ class IconWithText extends UIComponent {
 
 	protected ?string $label;
 	protected string $content;
-	protected string $iconPrefix = 'fa-duotone fa-solid';
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.IconWithText.icon-with-text');
 		$this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
 		$this->set_icon_from_attrs([
-			'iconPrefix' => $attributes['iconPrefix'] ?? $this->iconPrefix,
+			'iconPrefix' => $attributes['iconPrefix'] ?? 'fa-duotone fa-solid',
 			...$attributes
 		]);
 	}
