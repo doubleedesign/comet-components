@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecf1c15c9ff3d49fd4258211bb682128",
+    "content-hash": "6597fd47eb33b8b7b485886dcf9488d6",
     "packages": [],
     "packages-dev": [
         {
@@ -1383,6 +1383,41 @@
                 "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
             "time": "2022-02-21T01:04:05+00:00"
+        },
+        {
+            "name": "phluent/phluent",
+            "version": "0.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Haberkamp/phluent.git",
+                "reference": "57c23d83bb9415a52d3c515f66762d5cbdfe5faf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Haberkamp/phluent/zipball/57c23d83bb9415a52d3c515f66762d5cbdfe5faf",
+                "reference": "57c23d83bb9415a52d3c515f66762d5cbdfe5faf",
+                "shasum": ""
+            },
+            "require-dev": {
+                "laravel/pint": "dev-main",
+                "phpunit/phpunit": "^11.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phluent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A fluent assertion library for PHPUnit. Make your tests read the same way you speak.",
+            "support": {
+                "issues": "https://github.com/Haberkamp/phluent/issues",
+                "source": "https://github.com/Haberkamp/phluent/tree/v0.5.3"
+            },
+            "time": "2024-08-19T14:20:57+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
