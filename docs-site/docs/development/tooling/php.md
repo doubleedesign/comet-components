@@ -229,10 +229,13 @@ Xdebug is a PHP extension which provides debugging and profiling capabilities. I
 If you are using Laravel Herd or Local by Flywheel to manage PHP, Xdebug is already installed on your system.
 
 If using PhpStorm you can check if Xdebug is available (and find your `php.ini` file if it isn't) in `File > Settings > PHP > CLI Interpreter`.
-
 :::
 
-For Local by Flywheel, there is a toggle on your site's main screen to enable it. For other setups, enable it by adding the following to the `php.ini` file (updating the path to the Xdebug DLL as necessary):
+For Local by Flywheel, there is a toggle on your site's main screen to enable Xdebug.
+
+For Laravel Herd Pro with PhpStorm, the [Xdebug detection](https://herd.laravel.com/docs/macos/debugging/xdebug-detection) feature should enable it automatically when you try to use it with breakpoints. If it doesn't, or you need to trigger it another way (such as for unit test coverage), you can enable it manually. See the troubleshooting section of the [unit testing](../testing/unit-testing.md#troubleshooting) page for more information.
+
+For other setups including the free version of Herd, enable it by adding the following to the `php.ini` file (updating the path to the Xdebug DLL as necessary):
 
 ```ini
 zend_extension = C:\Program Files\Herd\resources\app.asar.unpacked\resources\bin\xdebug\xdebug-8.4.dll

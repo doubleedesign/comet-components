@@ -39,7 +39,7 @@ class Menu extends UIComponent {
 		return array_map(function($item) use ($context) {
 			$itemObject = new MenuListItem(
 				[
-					'id'              => $item['id'],
+					'id'              => $item['id'] ?? null,
 					'classes'         => $item['classes'] ?? '',
 					'context'         => $context ? "{$context}__menu-list" : 'menu-list',
 					'isCurrentParent' => $item['isCurrentParent'] ?? 'false'

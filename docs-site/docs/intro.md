@@ -19,12 +19,9 @@ Semantic HTML is a priority in Comet Components, with a focus on accessibility a
 - ARIA attributes where possible and practical for "what its current state is"
 - custom data attributes for common "how it looks" properties.
 
-If someone hits "view source" on a Comet Components site, I want them to revel in how easy it is to read and understand - while seeing enough selectors to
-enable custom styling.
+If someone hits "view source" on a Comet Components site, I want them to revel in how easy it is to read and understand - while seeing enough selectors to enable custom styling.
 
-<small>And by that I really mean: if certain former teachers, mentors, or colleagues of mine were to hit "view source" or take it for a spin with assistive
-technologies, I want them to feel a rush of clean-code, design-system-mindset, structural perfectionist, and/or accessibility
-advocate satisfaction. If any of my former students were to do so, they should see me practising what I preach. :laughing: </small>
+<small>And by that I really mean: if certain former teachers, mentors, or colleagues of mine were to hit "view source" or take it for a spin with assistive technologies, I want them to feel a rush of clean-code, design-system-mindset, structural perfectionist, and/or accessibility advocate satisfaction. If any of my former students were to do so, they should see me practising what I preach. :laughing: </small>
 :::
 
 ::: details Atomic design and reusability

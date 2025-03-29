@@ -66,9 +66,7 @@ php --ini
 @tab PhpStorm
 1. Go to File > Settings > Languages & Frameworks > PHP > CLI Interpreter
 2. Click the `...` button next to the interpreter path
-3. In the dialog that appears, there will be a field to set the configuration file path. **You do not need to do this if
-   it has automatically been detected.** Keep reading - look for the blue info icon with the configuration path below
-   that. An example is pictured below.
+3. In the dialog that appears, there will be a field to set the configuration file path. **You do not need to do this if it has automatically been  detected.** Keep reading - look for the blue info icon with the configuration path below that. An example is pictured below.
    ![phpstorm-php.png](../.vuepress/public/phpstorm-phpini.png)
 
 :::
@@ -109,6 +107,30 @@ In a separate PowerShell window with admin privileges:
 ```powershell:no-line-numbers
 npx playwright install firefox
 ```
+:::
+
+::: details PhpStorm not detecting Xdebug when using Laravel Herd
+If you are trying to use Xdebug for unit test code coverage and nothing has triggered Herd's automatic Xdebug detection, you can enable it manually:
+
+1. Ensure the PHP version the default interpreter in PhpStorm (found in `Settings > PHP`)is set to is the same as the one currently set as the global version in Herd. In the Herd dashboard, under `Active Services` it should also say that version is active with debugging - e.g., `PHP 8.4 (debug)`
+2. Back in PhpStorm > `Settings > PHP > CLI Interpreter`, click the 3 dot button to go into the interpreter details and click the `Reload PHPInfo` button
+3. If it's still not picking up Xdebug, try putting the path to the extension in the `Additional` section. This will be something like `C:\Users\YOUR_USERNAME\.config\herd\bin\xdebug\xdebug-8.4.dll`. Click the reload button again, and it should pick it up if you have the file path correct.
+4. In `Settings > PHP > PHP Runtime tab` and click "sync extensions with interpreter".
+
+Below is an example of the CLI interpreter settings using this method:
+
+![PhpStorm CLI interpreter settings with Xdebug manually enabled](/phpstorm-xdebug-fix.png)
+
+Try running the unit tests with coverage again. If using the PhpStorm run configuration for PHPUnit, select "Run [test config] with coverage" as shown below:
+
+![PHPUnit run with coverage](/phpstorm-run-with-coverage.png)
+
+If it works, the `Coverage` tool window should populate when the tests have finished (and coverage data should be shown in the Project tool window and in the files themselves until you close the active suite in the Coverage tool window).
+
+Below is an example of the test run output and the coverage tool window.
+
+[![PhpStorm test run output and coverage](/phpstorm-coverage-window.png)
+
 :::
 
 ## Front-end development
