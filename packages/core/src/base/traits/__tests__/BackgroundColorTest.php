@@ -28,14 +28,14 @@ class BackgroundColorTest extends TestCase {
 	}
 
 	#[TestDox('It sets the background colour when a valid name is passed')]
-	#[Test] public function sets_valid_background_color() {
+	#[Test] public function sets_valid_value() {
 		$component = $this->create_component(['backgroundColor' => 'secondary']);
 
 		Expect($component->get_background_color())->toBe(ThemeColor::SECONDARY);
 	}
 
 	#[TestDox('It sets null when an invalid value is passed')]
-	#[Test] public function sets_null_background_color() {
+	#[Test] public function sets_null_when_invalid() {
 		$component = $this->create_component(['backgroundColor' => '#FFF']);
 
 		Expect($component->get_background_color())->toBeNull();

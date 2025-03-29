@@ -77,7 +77,8 @@ class TabsTest extends TestCase {
 		$dom = new DOMDocument();
 		@$dom->loadHTML($output);
 		$wrapper = $dom->getElementsByTagName('div')->item(0);
+		$content = $wrapper->getElementsByTagName('div')->item(0);
 
-		$this->assertEquals('secondary', $wrapper->getAttribute('data-color-theme'));
+		$this->assertEquals('secondary', $content->getAttribute('data-color-theme'));
 	}
 }

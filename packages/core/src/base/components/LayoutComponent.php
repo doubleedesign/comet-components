@@ -3,16 +3,14 @@ namespace Doubleedesign\Comet\Core;
 
 abstract class LayoutComponent extends UIComponent {
 	use BackgroundColor;
-	use LayoutAlignmentHorizontal;
-	use LayoutAlignmentVertical;
+	use LayoutAlignment;
 
 	function __construct(array $attributes, array $children, string $bladeFile) {
 		parent::__construct($attributes, $children, $bladeFile);
 		$this->set_background_color_from_attrs($attributes);
-		$this->set_halign_from_attrs($attributes);
-		$this->set_valign_from_attrs($attributes);
+		$this->set_layout_alignment_from_attrs($attributes);
 	}
-	
+
 	protected function get_html_attributes(): array {
 		$attributes = parent::get_html_attributes();
 

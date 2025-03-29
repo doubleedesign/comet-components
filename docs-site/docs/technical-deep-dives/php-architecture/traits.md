@@ -6,7 +6,7 @@ position: 2
 # Component Traits
 
 PHP traits are used to provide common implementations of an attribute's conversion from <code>$attributes</code> array element to object field.
-This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.
+Thinpms provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.
 
 <div class="trait-class-doc">
 
@@ -101,7 +101,7 @@ class MyComponent {
 <dt>Property</dt>
 <dd>
 	<code>iconPrefix</code> 
-	<strong>Type:</strong> <code>string</code>
+	<strong>Type:</strong> <code>?string</code>
 
 <p>Icon prefix class name</p>
 </dd>
@@ -142,7 +142,7 @@ class MyComponent {
 
 <div>
 
-## LayoutAlignmentHorizontal
+## LayoutAlignment
 
 <dl>
 
@@ -153,40 +153,6 @@ class MyComponent {
 
 <p></p>
 </dd>
-
-<dt>Method</dt>
-<dd>
-	<code>set_halign_from_attrs</code> 
-	<strong>Returns:</strong> <code>void</code>
-
-<p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
-</dd>
-</dl>
-
-</div>
-
-::: note Example usage
-```php:no-line-numbers
-namespace Doubleedesign\Comet\Core;
-class MyComponent {
-	use LayoutAlignmentHorizontal;
-	
-	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents);
-		$this->set_halign_from_attrs($attributes);
-	}
-}
-```
-:::
-</div>
-<div class="trait-class-doc">
-
-<div>
-
-## LayoutAlignmentVertical
-
-<dl>
-
 <dt>Property</dt>
 <dd>
 	<code>vAlign</code> 
@@ -197,7 +163,7 @@ class MyComponent {
 
 <dt>Method</dt>
 <dd>
-	<code>set_valign_from_attrs</code> 
+	<code>set_layout_alignment_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
 
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
@@ -210,11 +176,11 @@ class MyComponent {
 ```php:no-line-numbers
 namespace Doubleedesign\Comet\Core;
 class MyComponent {
-	use LayoutAlignmentVertical;
+	use LayoutAlignment;
 	
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
-		$this->set_valign_from_attrs($attributes);
+		$this->set_layout_alignment_from_attrs($attributes);
 	}
 }
 ```

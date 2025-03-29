@@ -6,8 +6,7 @@ namespace Doubleedesign\Comet\Core;
 class TabPanelContent extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents, 'components.Tabs.TabPanelContent.tab-panel-content'
-		);
+		parent::__construct($attributes, $innerComponents, 'components.Tabs.TabPanelContent.tab-panel-content');
 	}
 
 	function render(): void {

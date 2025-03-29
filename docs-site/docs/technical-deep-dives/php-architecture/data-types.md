@@ -75,7 +75,7 @@ Enum used to specify valid values for aspect ratio properties.
 | Case                          | Value             |
 |-------------------------------|-------------------|
 | <code>STANDARD</code>         | <code>4:3</code>  |
-| <code>PORTAIT</code>          | <code>3:4</code>  |
+| <code>PORTRAIT</code>         | <code>3:4</code>  |
 | <code>SQUARE</code>           | <code>1:1</code>  |
 | <code>WIDE</code>             | <code>16:9</code> |
 | <code>TALL</code>             | <code>9:16</code> |

@@ -5,7 +5,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class ButtonGroup extends UIComponent {
 	use LayoutOrientation;
-	use LayoutAlignmentHorizontal;
+	use LayoutAlignment;
 
 	/**
 	 * @var array<Button>
@@ -16,7 +16,7 @@ class ButtonGroup extends UIComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.ButtonGroup.button-group');
 		$this->set_orientation_from_attrs($attributes, Orientation::HORIZONTAL);
-		$this->set_halign_from_attrs($attributes);
+		$this->set_layout_alignment_from_attrs($attributes);
 	}
 
 	protected function get_html_attributes(): array {

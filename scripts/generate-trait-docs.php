@@ -109,7 +109,7 @@ class TraitDocGenerator {
 		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->sourceDirectory));
 		$phpFiles = [];
 		foreach($files as $file) {
-			if($file->isFile() && $file->getExtension() === 'php') {
+			if($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php')) {
 				$phpFiles[] = $file->getPathname();
 			}
 		}

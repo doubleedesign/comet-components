@@ -40,8 +40,8 @@ class Link extends Renderable {
 		echo $blade->make($this->bladeFile, [
 			'classes'    => implode(' ', $this->get_filtered_classes()),
 			'attributes' => $this->get_html_attributes(),
-			'iconPrefix' => $this->iconPrefix,
-			'icon'       => $this->icon,
+			'iconPrefix' => $this->iconPrefix ?? null,
+			'icon'       => $this->icon ?? null,
 			'content'    => $this->content
 		])->render();
 	}
