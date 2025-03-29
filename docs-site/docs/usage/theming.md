@@ -8,17 +8,16 @@ position: 1
 
 ## Global PHP configuration
 
-The `CometConfig` class provides static methods to set and get several options to be made available to components at runtime, such as global background colour and default icon prefix. In general usage, these can be set directly. In WordPress, themes (other than Comet Canvas) don't generally have direct access to the `CometConfig` class, unless you have installed the Comet Components
-core library yourself. Comet Canvas provides filters so that child themes can easily override the defaults from `functions.php`.
+The `CometConfig` class provides static methods to set and get several options to be made available to components at runtime, such as global background colour and default icon prefix. In general usage, these can be set directly. 
+
+In WordPress, themes (other than Comet Canvas) don't generally have direct access to the `CometConfig` class, unless you have installed the Comet Components core library yourself. Comet Canvas provides filters so that child themes can easily override the defaults from `functions.php`.
 
 ### Global background colour
 
 :::important
-By setting the global background colour in the Comet config, you are making it available to all components at runtime, allowing them to use this context to refine
-styling.
+By setting the global background colour in the Comet config, you are making it available to all components at runtime, allowing them to use this context to refine styling.
 
-Simply adding the colour to the body tag manually will not have the full effect, because the PHP component classes will not be aware of it when constructing
-component instances.
+Simply adding the colour to the body tag manually will not have the full effect, because the PHP component classes will not be aware of it when constructing component instances.
 :::
 :::warning
 The string must be a colour name (not a hex code) matching the value of a [ThemeColor](../technical-deep-dives/php-architecture/data-types.html#themecolor).

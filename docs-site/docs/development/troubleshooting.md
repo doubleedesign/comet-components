@@ -98,7 +98,7 @@ In PhpStorm, you may also need to:
 - add Playwright to the JS libraries under `Settings > Languages & Frameworks > JavaScript > Libraries`. Include all of `@playwright/test`, `playwright`, and `playwright-core`
 - Uncheck "use types from server" in the TypeScript settings under `Settings > Languages & Frameworks > TypeScript`
 - You may also need to restart the TypeScript service and wait a minute or so to ensure the changes take effect, and/or close and reopen any Playwright files currently open. The restart option is usually located in the bottom right of the IDE. If it's still not refreshing, try invalidating caches and restarting the IDE (`File > Invalidate Caches / Restart...`).
--
+
 :::
 
 ::: details Missing Playwright browsers in Windows
