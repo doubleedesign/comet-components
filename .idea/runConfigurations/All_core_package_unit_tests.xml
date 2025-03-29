@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All core package unit tests" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+    <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/src">
+      <envs>
+        <env name="PHPUNIT_TESTDOX" value="1" />
+      </envs>
+    </CommandLine>
+    <TestRunner configuration_file="$PROJECT_DIR$/test/phpunit.xml" directory="$PROJECT_DIR$/packages/core/src" options="--coverage-html ../../../test/phpunit-report" />
+    <method v="2" />
+  </configuration>
+</component>
