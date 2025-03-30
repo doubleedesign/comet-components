@@ -98,68 +98,93 @@ small {
 	}
 }
 
+.comet-photo, .tycho-photo {
+	max-width: 300px;
+	display: block;
+	margin: 0 auto;
+	padding-bottom: 1rem;
+
+	p:has(img) {
+		margin: 0;
+	}
+
+	&-caption {
+		margin-left: 1rem;
+		font-size: 0.8rem;
+		line-height: 1.2;
+		text-align: center;
+		position: relative;
+		padding-top: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		max-width: 80%;
+		margin-inline: auto;
+
+		strong {
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			color: var(--vp-c-accent);
+			font-family: gelica, sans-serif;
+			font-size: 1.25rem;
+			line-height: 1;
+			position: relative;
+			z-index: 200;
+			margin-bottom: 0.5rem;
+		}
+	}
+}
+
+@container (min-width: 768px) {
+	.comet-photo, .tycho-photo {
+		margin-top: -4rem;
+		float: right;
+		margin-left: 2rem;
+		margin-bottom: 0 !important;
+	}
+}
+
+.tycho-photo {
+	img {
+		display: block;
+		margin: 0 auto;
+		border-radius: 100%;
+		border: 1rem solid var(--vp-c-accent);
+		box-sizing: border-box;
+	}
+}
+
 div[vp-content]:has(.comet-photo) {
+	container-type: inline-size;
 
 	h2:first-of-type {
-		@media (min-width: 768px) {
+		@container (min-width: 768px) {
 			clear: both;
 		}
 		@media (min-width: 1140px) {
 			padding-top: 0;
 		}
 	}
+}
 
-	.comet-photo {
-		max-width: 300px;
-		display: block;
-		margin: 0 auto;
-		padding-bottom: 1rem;
+div[vp-content]:has(.tycho-photo) {
+	container-type: inline-size;
 
-		p:has(img) {
-			margin: 0;
-		}
-
-		&-caption {
-			margin-left: 1rem;
-			font-size: 0.8rem;
-			line-height: 1.2;
-			text-align: center;
-			position: relative;
-			padding-top: 0.5rem;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-wrap: wrap;
-			max-width: 80%;
-			margin-inline: auto;
-
-			strong {
-				box-sizing: border-box;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				text-align: center;
-				color: var(--vp-c-accent);
-				font-family: gelica, sans-serif;
-				font-size: 1.25rem;
-				line-height: 1;
-				position: relative;
-				z-index: 200;
-				margin-bottom: 0.5rem;
-			}
-		}
+	.hint-container.warning {
+		clear: both;
 	}
 
-	@media (min-width: 768px) {
-		.comet-photo {
-			margin-top: -4rem;
-			float: right;
-			margin-left: 2rem;
-			margin-bottom: 0 !important;
+	@container (min-width: 768px) {
+		.tycho-photo + p + .hint-container.info {
+			// Container width minus image width + some spacing
+			width: calc(100% - 300px - 3rem);
 		}
 	}
 }
-
 
 .vp-page {
 

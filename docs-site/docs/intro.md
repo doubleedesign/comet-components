@@ -2,7 +2,7 @@
 
 <figure class="comet-photo">
 
-![comet.png](/comet.png)
+![Comet](/comet.png)
 
 <figcaption class="comet-photo-caption">
 <strong>This is Comet.</strong>I wanted a short and snappy name for this project, alliteration sounds good for that, and he is a good boy.</figcaption>

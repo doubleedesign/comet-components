@@ -1,6 +1,6 @@
 # Background
 
-I, the author of this library, have a long history of valuing reusability and consistency in my front-end development work, sometimes to a fault. And despite recognising and even espousing the benefits of dynamic styling libraries in the JavaScript world (which I joined after many years working with pure HTML and CSS with only sprinklings of JS), there's just something about coming "back" to the world of PHP-driven CMS theming when I work on freelance web development projects - where I can carefully craft clean HTML with human-readable class names and not a single one that doesn't need to be there - that just feels like home.
+I, Leesa Ward, the author of this library, have a long history of valuing reusability and consistency in my front-end development work, sometimes to a fault. And despite recognising and even espousing the benefits of dynamic styling libraries in the JavaScript world (which I joined after many years working with pure HTML and CSS with only sprinklings of JS), there's just something about coming "back" to the world of PHP-driven CMS theming when I work on freelance web development projects - where I can carefully craft clean HTML with human-readable class names and not a single one that doesn't need to be there - that just feels like home.
 
 For many years I worked with WordPress developing site-specific components with [ACF Flexible Modules](https://www.advancedcustomfields.com/resources/flexible-content/), and while my agency colleagues and I didn't always agree on the best way to build our themes with them, regardless of the specifics we had complete control over the output of components we developed. Then the [block editor](https://wordpress.org/gutenberg/) came along and thanks to that and the many other evolving WYSIWYG options, clients' expectations of what they could do with their sites grew accordingly. I had to find a way to balance the way I like to work with what my clients want and need.
 
@@ -13,6 +13,7 @@ At WordCamp Sydney 2024, [Matt Knighton](https://www.mrkwp.com/) spoke about mov
 What followed was:
 - a lot of experimentation and trial-and-error
 - embracing atomic design somewhat accidentally, and striving to couple the benefits with my existing approach
+- figuring out how to create basic native blocks using JavaScript/React without a build step (for now, at least)
 - balancing of embracing what's already available (the power of the WordPress block editor and many of the core blocks) with what I wanted to achieve (a truly reusable, extendable, and consistent set of components with clean HTML)
 
 The result is Comet Components. It's either brilliant or an over-abstracted nightmare. Time will tell. :laughing:

@@ -34,6 +34,14 @@ $component->render();
 
 ## Tycho template syntax
 
+<figure class="tycho-photo">
+
+![Tycho](/tycho.png)
+
+<figcaption class="tycho-photo-caption">
+<strong>This is Tycho.</strong> He is standing by to retrieve schema and chew up XML syntax for us.</figcaption>
+</figure>
+
 This is essentially XML/JSX-style convenience syntax whereby [heredoc strings](https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc) are processed by a custom parser and sent through to the object syntax and hence Blade under the hood.
 
 :::info
