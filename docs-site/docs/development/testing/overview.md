@@ -21,7 +21,7 @@ Unit testing is the practice of testing the result of a function or method in is
 
 Unit tests can be thought of as the building blocks of overall test coverage, as they test the smallest pieces of code and ensure they work before they are integrated into more complex use cases, and can be instrumental in narrowing down the source of bugs and catching unexpected regressions.
 
-In Comet Components, unit testing is done with [PHPUnit](./unit-testing.md).
+In Comet Components, unit testing is done with [Pest](./unit-testing.md).
 :::
 
 :::details Integration testing

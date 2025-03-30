@@ -1,50 +1,49 @@
 <?php
-/** @noinspection PhpUnhandledExceptionInspection */
-namespace Doubleedesign\Comet\Core;
-use PHPUnit\Framework\TestCase;
-use DOMDocument;
+use Doubleedesign\Comet\Core\{
+	Accordion,
+	AccordionPanel,
+	AccordionPanelContent,
+	AccordionPanelTitle,
+	Paragraph
+};
 
-class AccordionTest extends TestCase {
-	private array $panels;
+beforeEach(function () {
+    $this->panels = [
+  			new AccordionPanel([], [
+  				new AccordionPanelTitle([], 'Panel 1 title'),
+  				new AccordionPanelContent([], [new Paragraph([], 'Panel 1 content')])
+  			]),
+  		];
+});
 
-	protected function setUp(): void {
-		$this->panels = [
-			new AccordionPanel([], [
-				new AccordionPanelTitle([], 'Panel 1 title'),
-				new AccordionPanelContent([], [new Paragraph([], 'Panel 1 content')])
-			]),
-		];
-	}
+test('bem class structure', function () {
+    ob_start();
+    $component = new Accordion([], $this->panels);
+    $component->render();
+    $output = ob_get_clean();
 
-	function test_bem_class_structure(): void {
-		ob_start();
-		$component = new Accordion([], $this->panels);
-		$component->render();
-		$output = ob_get_clean();
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $wrapper = $dom->getElementsByTagName('div')->item(0);
+    $panel = $wrapper->getElementsByTagName('details')->item(0);
+    $title = $panel->getElementsByTagName('summary')->item(0);
+    $content = $panel->getElementsByTagName('div')->item(0);
 
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$wrapper = $dom->getElementsByTagName('div')->item(0);
-		$panel = $wrapper->getElementsByTagName('details')->item(0);
-		$title = $panel->getElementsByTagName('summary')->item(0);
-		$content = $panel->getElementsByTagName('div')->item(0);
+    expect($wrapper->getAttribute('class'))->toEqual('accordion');
+    expect($panel->getAttribute('class'))->toEqual('accordion__panel');
+    expect($title->getAttribute('class'))->toEqual('accordion__panel__title');
+    expect($content->getAttribute('class'))->toEqual('accordion__panel__content');
+});
 
-		$this->assertEquals('accordion', $wrapper->getAttribute('class'));
-		$this->assertEquals('accordion__panel', $panel->getAttribute('class'));
-		$this->assertEquals('accordion__panel__title', $title->getAttribute('class'));
-		$this->assertEquals('accordion__panel__content', $content->getAttribute('class'));
-	}
+test('colour theme attribute', function () {
+    ob_start();
+    $component = new Accordion(['colorTheme' => 'accent'], $this->panels);
+    $component->render();
+    $output = ob_get_clean();
 
-	function test_colour_theme_attribute() {
-		ob_start();
-		$component = new Accordion(['colorTheme' => 'accent'], $this->panels);
-		$component->render();
-		$output = ob_get_clean();
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $wrapper = $dom->getElementsByTagName('div')->item(0);
 
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$wrapper = $dom->getElementsByTagName('div')->item(0);
-
-		$this->assertEquals('accent', $wrapper->getAttribute('data-color-theme'));
-	}
-}
+    expect($wrapper->getAttribute('data-color-theme'))->toEqual('accent');
+});

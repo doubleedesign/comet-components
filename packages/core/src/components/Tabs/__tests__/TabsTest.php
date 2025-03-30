@@ -1,84 +1,74 @@
 <?php
 /** @noinspection PhpUnhandledExceptionInspection */
 use Doubleedesign\Comet\Core\{Paragraph, TabPanel, TabPanelContent, TabPanelTitle, Tabs};
-use PHPUnit\Framework\TestCase;
+beforeEach(function () {
+    $this->panels = [
+  			new TabPanel([], [
+  				new TabPanelTitle([], 'Panel 1 title'),
+  				new TabPanelContent([], [new Paragraph([], 'Panel 1 content')])
+  			]),
+  		];
+});
+test('bem class structure', function () {
+    ob_start();
+    $component = new Tabs([], $this->panels);
+    $component->render();
+    $output = ob_get_clean();
 
-class TabsTest extends TestCase {
-	private array $panels;
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $wrapper = $dom->getElementsByTagName('div')->item(0);
+    $tabList = $wrapper->getElementsByTagName('ul')->item(0);
+    $tabListItem = $tabList->getElementsByTagName('li')->item(0);
+    $tabContentWrapper = $wrapper->getElementsByTagName('div')->item(0);
+    $tabContentItem = $tabContentWrapper->getElementsByTagName('div')->item(0);
 
-	public function setUp(): void {
-		$this->panels = [
-			new TabPanel([], [
-				new TabPanelTitle([], 'Panel 1 title'),
-				new TabPanelContent([], [new Paragraph([], 'Panel 1 content')])
-			]),
-		];
-	}
+    expect($wrapper->getAttribute('class'))->toEqual('tabs');
+    expect($tabList->getAttribute('class'))->toEqual('tabs__tab-list');
+    expect($tabListItem->getAttribute('class'))->toEqual('tabs__tab-list__item');
+    expect(explode(' ', $tabContentWrapper->getAttribute('class')))->toContain('tabs__content');
+    expect($tabContentItem->getAttribute('class'))->toEqual('tabs__content__tab-panel');
+});
+test('role attributes', function () {
+    ob_start();
+    $component = new Tabs([], $this->panels);
+    $component->render();
+    $output = ob_get_clean();
 
-	function test_bem_class_structure(): void {
-		ob_start();
-		$component = new Tabs([], $this->panels);
-		$component->render();
-		$output = ob_get_clean();
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $wrapper = $dom->getElementsByTagName('div')->item(0);
+    $tabList = $wrapper->getElementsByTagName('ul')->item(0);
+    $tabListItemLink = $tabList->getElementsByTagName('a')->item(0);
+    $tabContentWrapper = $wrapper->getElementsByTagName('div')->item(0);
+    $tabContentItem = $tabContentWrapper->getElementsByTagName('div')->item(0);
 
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$wrapper = $dom->getElementsByTagName('div')->item(0);
-		$tabList = $wrapper->getElementsByTagName('ul')->item(0);
-		$tabListItem = $tabList->getElementsByTagName('li')->item(0);
-		$tabContentWrapper = $wrapper->getElementsByTagName('div')->item(0);
-		$tabContentItem = $tabContentWrapper->getElementsByTagName('div')->item(0);
+    expect($tabList->getAttribute('role'))->toEqual('tablist');
+    expect($tabListItemLink->getAttribute('role'))->toEqual('tab');
+    expect($tabContentItem->getAttribute('role'))->toEqual('tabpanel');
+});
+test('orientation attribute', function () {
+    ob_start();
+    $component = new Tabs(['orientation' => 'vertical'], $this->panels);
+    $component->render();
+    $output = ob_get_clean();
 
-		$this->assertEquals('tabs', $wrapper->getAttribute('class'));
-		$this->assertEquals('tabs__tab-list', $tabList->getAttribute('class'));
-		$this->assertEquals('tabs__tab-list__item', $tabListItem->getAttribute('class'));
-		$this->assertContains('tabs__content', explode(' ', $tabContentWrapper->getAttribute('class')));
-		$this->assertEquals('tabs__content__tab-panel', $tabContentItem->getAttribute('class'));
-	}
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $wrapper = $dom->getElementsByTagName('div')->item(0);
 
-	function test_role_attributes() {
-		ob_start();
-		$component = new Tabs([], $this->panels);
-		$component->render();
-		$output = ob_get_clean();
+    expect($wrapper->getAttribute('data-orientation'))->toEqual('vertical');
+});
+test('colour theme attribute', function () {
+    ob_start();
+    $component = new Tabs(['colorTheme' => 'secondary'], $this->panels);
+    $component->render();
+    $output = ob_get_clean();
 
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$wrapper = $dom->getElementsByTagName('div')->item(0);
-		$tabList = $wrapper->getElementsByTagName('ul')->item(0);
-		$tabListItemLink = $tabList->getElementsByTagName('a')->item(0);
-		$tabContentWrapper = $wrapper->getElementsByTagName('div')->item(0);
-		$tabContentItem = $tabContentWrapper->getElementsByTagName('div')->item(0);
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $wrapper = $dom->getElementsByTagName('div')->item(0);
+    $content = $wrapper->getElementsByTagName('div')->item(0);
 
-		$this->assertEquals('tablist', $tabList->getAttribute('role'));
-		$this->assertEquals('tab', $tabListItemLink->getAttribute('role'));
-		$this->assertEquals('tabpanel', $tabContentItem->getAttribute('role'));
-	}
-
-	function test_orientation_attribute() {
-		ob_start();
-		$component = new Tabs(['orientation' => 'vertical'], $this->panels);
-		$component->render();
-		$output = ob_get_clean();
-
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$wrapper = $dom->getElementsByTagName('div')->item(0);
-
-		$this->assertEquals('vertical', $wrapper->getAttribute('data-orientation'));
-	}
-
-	function test_colour_theme_attribute() {
-		ob_start();
-		$component = new Tabs(['colorTheme' => 'secondary'], $this->panels);
-		$component->render();
-		$output = ob_get_clean();
-
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$wrapper = $dom->getElementsByTagName('div')->item(0);
-		$content = $wrapper->getElementsByTagName('div')->item(0);
-
-		$this->assertEquals('secondary', $content->getAttribute('data-color-theme'));
-	}
-}
+    expect($content->getAttribute('data-color-theme'))->toEqual('secondary');
+});

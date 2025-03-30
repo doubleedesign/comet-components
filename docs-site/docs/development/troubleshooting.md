@@ -123,7 +123,7 @@ Below is an example of the CLI interpreter settings using this method:
 
 Try running the unit tests with coverage again. If using the PhpStorm run configuration for PHPUnit, select "Run [test config] with coverage" as shown below:
 
-![PHPUnit run with coverage](/phpstorm-run-with-coverage.png)
+![Unit test run with coverage](/phpstorm-run-with-coverage.png)
 
 If it works, the `Coverage` tool window should populate when the tests have finished (and coverage data should be shown in the Project tool window and in the files themselves until you close the active suite in the Coverage tool window).
 

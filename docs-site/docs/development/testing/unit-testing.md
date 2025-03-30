@@ -1,5 +1,5 @@
 ---
-title: Unit testing (PHPUnit)
+title: Unit testing (Pest)
 position: 1
 ---
 
@@ -9,9 +9,11 @@ position: 1
 
 ## About the setup
 
-The unit tests are set up to use [PHPUnit](https://phpunit.de/index.html) with the following utility add-on libraries:
+The unit tests are set up to use [Pest](https://pestphp.com/), with the following utility add-on libraries:
 - [Patchwork](https://patchwork2.org/) for convenient mocking functions that support class methods 
 - [Phluent](https://github.com/Haberkamp/phluent) for convenient plain-English assertion syntax.
+
+Pest uses [PHPUnit](https://phpunit.de/index.html) under the hood, but provides a syntax similar to JavaScript test runners such as Jest and Playwright.
 
 :::important
 If adding additional utility libraries for unit testing, they should go in the dev dependencies in the project root's `composer.json` file. All testing configuration should go in the root in the first instance, so it can be shared amongst packages while also helping to keep them lean for distribution.
@@ -21,59 +23,45 @@ If adding any testing utilities of your own that are relevant only to a specific
 
 ## Writing tests
 
-### General things to note about PHPUnit
-
-:::details Naming conventions
+### Naming conventions
 - Test classes and files should be in PascalCase with the word `Test` appended to the class name. e.g., tests for `Container` are in `ContainerTest.php`.
-- Tests are functions within the class, and need to either start with `test_` or be marked with the `#[Test]` attribute.
-
-:::
 
 ### Boilerplate for a new test file
 
 ```php
 <?php
-/** @noinspection PhpUnhandledExceptionInspection */
-namespace Doubleedesign\Comet\Core;
-use PHPUnit\Framework\{TestCase, Attributes\TestDox, Attributes\Test};
-use DOMDocument;
+use Doubleedesign\Comet\Core;
 
-#[TestDox("YourComponent")]
-class YourComponentTest extends TestCase {
+test('some test case description', function () {
+    ob_start();
+    $component = new YourComponent([], []);
+    $component->render();
+    $output = ob_get_clean();
 
-	#[TestDox('It does something')]
-	#[Test] public function something_happens() {
-		ob_start();
-		$component = new YourComponent([], []);
-		$component->render();
-		$output = ob_get_clean();
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $component = $dom->getElementsByTagName('div')->item(0);
 
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$element = $dom->getElementsByTagName('div')->item(0); // update this to find your component
-
-		// Assertions
-	}
-}
+    // assertions
+});
 
 ```
 
 ## Running tests
 
 To run a test file from the terminal:
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-./vendor/bin/phpunit packages/core/src/components/Container/__tests__/ContainerTest.php --configuration ./test/phpunit.xml
-```
-@tab PowerShell
-```powershell:no-line-numbers
-./vendor/bin/phpunit packages/core/src/components/Container/__tests__/ContainerTest.php --configuration ./test/phpunit.xml
-```
+:::warning
+// TODO: Updated instructions to come 
 :::
 
-PhpStorm users can also run selected tests or files from the gutter icon. A PHPUnit run config template has been included which will be used for that unless you configure otherwise. Similarly, a Run configuration has been included for running all tests.
+To run all tests in a file in PhpStorm:
+- Right-click the test file's tab in the editor or its name in the Project tool window and select `Run FileName.test (Pest)`. This will use the included Run configuration template unless you configure a custom one.
+
+To run a single test from the gutter icon in PhpStorm:
+- :warning: // TODO: This is not currently supported because the automatic filtering of the test name is not working. Run the whole file instead as a workaround.
+
+To run all unit tests in PhpStorm:
+- A Run configuration has been included for running all tests.
 
 ## Coverage reporting
 
@@ -85,20 +73,6 @@ A PhpStorm Run Configuration has been included in this repository for running al
 
 ## Troubleshooting
 
-:::details General debugging
-
-To debug unexpected test failures (or silent failures - where the test passes but you know it shouldn't, the number of assertions is wrong, etc), you can run PHPUnit with the `--debug` flag. For example:
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-./vendor/bin/phpunit --debug packages/core/src/components/Container/__tests__/ContainerTest.php
-```
-@tab PowerShell
-```powershell:no-line-numbers
-./vendor/bin/phpunit --debug packages/core/src/components/Container/__tests__/ContainerTest.php
-```
-:::
 
 :::details Logging to the console
 
@@ -124,9 +98,9 @@ Below is an example of the CLI interpreter settings using this method:
 
 ![PhpStorm CLI interpreter settings with Xdebug manually enabled](/phpstorm-xdebug-fix.png)
 
-Try running the unit tests with coverage again. If using the PhpStorm run configuration for PHPUnit, select "Run [test config] with coverage" as shown below:
+Try running the unit tests with coverage again. If using the PhpStorm run configuration for Pest, select "Run [test config] with coverage" as shown below:
 
-![PHPUnit run with coverage](/phpstorm-run-with-coverage.png)
+![Pest run with coverage](/phpstorm-run-with-coverage.png)
 
 If it works, the `Coverage` tool window should populate when the tests have finished (and coverage data should be shown in the Project tool window and in the files themselves until you close the active suite in the Coverage tool window).
 

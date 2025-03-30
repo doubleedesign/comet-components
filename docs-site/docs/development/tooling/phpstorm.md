@@ -12,7 +12,7 @@ Ensure you have [PHP](./php.md) and [Node](./node.md) set up locally before cont
 
 ## PHP interpreter
 
-For IDE tools such as the PHPUnit test runner and Xdebug integration to work, you will need to set the PHP interpreter and language version. For consistency, usually this should be the same as the PHP instance you are using in your terminal.
+For IDE tools such as the Pest test runner and Xdebug integration to work, you will need to set the PHP interpreter and language version. For consistency, usually this should be the same as the PHP instance you are using in your terminal.
 
 You can find these settings in PhpStorm under `File > Settings > Languages & Frameworks > PHP`. If your PHP instance is not listed, click the 3 dots next to the dropdown and add it.
 
@@ -107,10 +107,10 @@ It _should_ pick up the configuration file located in the root of the project (`
 ![Eslint on save](/phpstorm-eslint.png)
 :::
 
-## PHPUnit
+## Pest (for unit testing)
 
-Configuration of PHPUnit is mostly handled in its configuration file (`./test/phpunit.xml`) and the Run configuration.
+Configuration of Pest/PHPUnit is mostly handled in its configuration file (`./test/phpunit.xml`) and the Run configuration.
 
 You can check and tweak the default settings for PhpStorm under `File > Settings > Languages & Frameworks > PHP > Test Frameworks` (shown below) and for the run configuration under `Run > Edit Configurations`.
 
-![PHPUnit settings](/phpstorm-phpunit.png)
+![Pest settings](/phpstorm-pest.png)

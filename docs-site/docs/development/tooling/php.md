@@ -223,7 +223,7 @@ For WSL, follow the "Use Windows' PHP in WSL" and "Use Windows' Composer in WSL"
 
 ## <Badge type="info" text="Optional" vertical="middle" />  Xdebug
 
-Xdebug is a PHP extension which provides debugging and profiling capabilities. It is required for generating code coverage reports with PHPUnit, and is useful for other debugging tasks.
+Xdebug is a PHP extension which provides debugging and profiling capabilities. It is required for generating code coverage reports with Pest/PHPUnit, and is useful for other debugging tasks.
 
 :::tip
 If you are using Laravel Herd or Local by Flywheel to manage PHP, Xdebug is already installed on your system.
