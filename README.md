@@ -40,14 +40,22 @@ npm run docs
 
 Detailed component documentation and demos are in Storybook.
 
-In separate terminal windows, run:
+You can run the web server to view the components in isolation by starting a standalone server by running the following command in the project root:
 
 ```bash
 npm run test:server
 ```
+
+Then in a separate terminal, run:
+
 ```bash
 npm run test:storybook
 ```
+
+You can also run the project as a [Laravel Herd](https://herd.laravel.com) site instead of running the basic local server, which enables you to use features like Herd's Dumps for debugging. See the documentation site for more details.
+
+```bash
+
 ---
 ## With thanks to
 

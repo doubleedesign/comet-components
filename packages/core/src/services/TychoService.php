@@ -12,12 +12,12 @@ class TychoService {
 	 * Parse a JSX-like template string into component objects
 	 * @param string $template The template string to parse
 	 * @param array $variables Variables to make available in the template scope // TODO: This is not implemented yet
+	 * @return array<Renderable> Component objects
 	 * @throws Exception If the template is invalid
 	 *
-	 * @return array<Renderable> Component objects
 	 */
 	public static function parse(string $template, array $variables = []): mixed {
-		if (self::$dom === null) {
+		if(self::$dom === null) {
 			self::$dom = new DOMDocument();
 		}
 
@@ -40,13 +40,13 @@ class TychoService {
 		// Get the first child (should be our component)
 		$rootNode = self::$dom->documentElement->firstChild;
 
-		if (!$rootNode) {
+		if(!$rootNode) {
 			throw new Exception("No valid component found in template");
 		}
 
 		// If this is a TychoTemplate wrapper, process all the children
 		// TychoTemplate is an XML wrapper that exists for templating purposes only and should not be output in the HTML
-		if ($rootNode->nodeName === 'TychoTemplate') {
+		if($rootNode->nodeName === 'TychoTemplate') {
 			$nodes = $rootNode->childNodes;
 			return array_filter(
 				array_map(fn($node) => self::node_to_component($node, $variables), iterator_to_array($nodes)),
@@ -64,11 +64,16 @@ class TychoService {
 	 * Convert a DOM node to a component object
 	 * @param DOMNode $node The DOM node to convert
 	 * @param array $variables Variables from the parent scope
+	 * @return ?Renderable The component object
 	 * @throws Exception If the component class is not found
 	 *
-	 * @return ?Renderable The component object
 	 */
 	private static function node_to_component(DOMNode $node, array $variables = []): ?Renderable {
+		// Skip comment nodes
+		if($node->nodeType === XML_COMMENT_NODE) {
+			return null;
+		}
+
 		// Wrap plain text content in a paragraph and return it, unless it's empty
 		if($node->nodeType === XML_TEXT_NODE) {
 			if(trim($node->nodeValue) === '') return null;
@@ -83,7 +88,7 @@ class TychoService {
 			// If the tagName is all lowercase, this is probably a basic HTML element
 			// This does some rudimentary matching, but ideally we should just output these as-is.
 			// This needs a way to identify if there are Comet components nested in it and process them accordingly though.
-			if (strtolower($tagName) === $tagName) {
+			if(strtolower($tagName) === $tagName) {
 				$ComponentClass = match ($tagName) {
 					'div' => 'Doubleedesign\\Comet\\Core\\Group',
 					default => throw new Exception("Component class $ComponentClass not found"),
@@ -104,10 +109,10 @@ class TychoService {
 
 		// Otherwise, process inner components while maintaining nested hierarchy
 		$children = [];
-		if ($node->hasChildNodes()) {
-			foreach ($node->childNodes as $childNode) {
+		if($node->hasChildNodes()) {
+			foreach($node->childNodes as $childNode) {
 				// Skip pure whitespace text nodes
-				if ($childNode->nodeType === XML_TEXT_NODE && trim($childNode->nodeValue) === '') {
+				if($childNode->nodeType === XML_TEXT_NODE && trim($childNode->nodeValue) === '') {
 					continue;
 				}
 
@@ -128,19 +133,19 @@ class TychoService {
 	 * @return array The extracted attributes
 	 */
 	private static function extract_attributes(DOMNode $node, array $variables = []): array {
-		if (!$node->hasAttributes()) {
+		if(!$node->hasAttributes()) {
 			return [];
 		}
 
 		$attributes = [];
 
 		/** @var DOMElement $node */
-		foreach ($node->attributes as $attr) {
+		foreach($node->attributes as $attr) {
 			$name = $attr->nodeName;
 			$value = htmlspecialchars($attr->nodeValue);
 
 			// Type cast booleans
-			if ($value === 'true' || $value === 'false') {
+			if($value === 'true' || $value === 'false') {
 				$value = $value === 'true';
 			}
 

@@ -66,7 +66,7 @@ php --ini
 @tab PhpStorm
 1. Go to File > Settings > Languages & Frameworks > PHP > CLI Interpreter
 2. Click the `...` button next to the interpreter path
-3. In the dialog that appears, there will be a field to set the configuration file path. **You do not need to do this if it has automatically been  detected.** Keep reading - look for the blue info icon with the configuration path below that. An example is pictured below.
+3. In the dialog that appears, there will be a field to set the configuration file path. **You do not need to do this if it has automatically been detected.** Keep reading - look for the blue info icon with the configuration path below that. An example is pictured below.
    ![phpstorm-php.png](../.vuepress/public/phpstorm-phpini.png)
 
 :::
@@ -130,7 +130,22 @@ If it works, the `Coverage` tool window should populate when the tests have fini
 Below is an example of the test run output and the coverage tool window.
 
 [![PhpStorm test run output and coverage](/phpstorm-coverage-window.png)
+:::
 
+:::details print_r, var_dump, etc output not shown in the browser
+If you are using the `TychoService` class to render your components, the output of `print_r`, `var_dump`, etc. will not be shown in the browser due to how the parser handles or ignores certain node types. The core package is configured to support the Symfony VarDumper, which doesn't have this problem and also has the benefit of sending the debugging output to Laravel Herd's Dumps feature if you run your project in that environment. To use:
+
+```php
+\Symfony\Component\VarDumper\VarDumper::dump($thing_you_want_to_dump);
+```
+:::warning
+If you are running the project through Herd, the debug output will _only_ be shown in the Dumps window, and not in your browser.
+:::
+
+:::details "Class not found" errors in the browser when running through Laravel Herd
+Make sure the `php.ini` file for the currently selected version of PHP in Herd contains the append and prepend values for the `wrapper_open` and `wrapper_close` files. See the [browser testing](./testing/browser.md) page for full details.
+
+If that configuration is correct and the class is one you recently added, try running `composer dump-autoload -o` in the root or the package where you added the file. This will regenerate the autoload files and ensure that any new classes are included.
 :::
 
 ## Front-end development

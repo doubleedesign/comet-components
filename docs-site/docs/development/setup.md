@@ -64,6 +64,10 @@ npm run test:storybook
 ```
 :::
 
+:::tip
+You can also run the project as a [Laravel Herd](https://herd.laravel.com) site instead of running the basic local server, which enables you to use features like Herd's Dumps for debugging. See the [Browser Testing](./testing/browser-testing.md) documentation for more details.
+:::
+
 4. Optionally, run these docs locally:
 
 ::: tabs#shell

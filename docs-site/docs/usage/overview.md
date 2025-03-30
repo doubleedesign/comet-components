@@ -40,8 +40,19 @@ This is essentially XML/JSX-style convenience syntax whereby [heredoc strings](h
 Tycho template syntax / the `TychoService` class is ~~a custom creation~~, glorified XML with a parsing function, not an existing third-party template engine or library. Rather than calling it something generic like `TemplateService`, for fun I went with continuing the pet-based alliteration and named it after my other dog, Tycho.
 :::
 
-::: warning
+:::warning
 This option is still in active development and is not yet thoroughly tested.
+:::
+
+:::warning
+When using this syntax, vanilla `var_dump` and `print_r` may not work as expected because of how the parser handles or ignores certain node types.
+
+The core package is configured to support the Symfony VarDumper, which also has the benefit of sending the debugging output to Laravel Herd's Dumps feature if you run your project in that environment.
+
+To use:
+```php
+\Symfony\Component\VarDumper\VarDumper::dump($thing_you_want_to_dump);
+```
 :::
 
 The below example renders the same output as the above object syntax:

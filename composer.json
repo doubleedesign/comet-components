@@ -44,7 +44,8 @@
 		"humanmade/block-supports-extended": "^0.2.0",
 		"roots/wordpress": "^6.7",
 		"wpackagist-plugin/gutenberg": "20.4.0",
-		"phluent/phluent": "^0.5.3"
+		"phluent/phluent": "^0.5.3",
+		"symfony/var-dumper": "^7.2"
 	},
 	"config": {
 		"preferred-install": "source",

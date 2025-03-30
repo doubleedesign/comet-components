@@ -1,6 +1,9 @@
 <?php
 use Doubleedesign\Comet\Core\CometConfig;
 
+// If the request has not come from a browser (e.g., it has come from a unit test or CLI command), bail early
+if(!isset($_SERVER['HTTP_USER_AGENT'])) return;
+
 // Autoload dependencies using Composer
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../packages/core/vendor/autoload.php';
@@ -15,6 +18,16 @@ if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
 }
 
 $host = "http://$_SERVER[HTTP_HOST]";
+$assetPath = "$host/assets";
+// If the project is running as a Herd site, adjust the asset path
+if(isset($_SERVER['HERD_HOME']) && $_SERVER['HTTP_HOST'] === 'comet-components.test') {
+	$assetPath = "$host/test/browser/assets";
+}
+// Likewise if running from PhpStorm's built-in web server (what opens when you click an "open in browser" button)
+if(str_contains($_SERVER['SERVER_NAME'], 'PhpStorm')) {
+	$assetPath = "$host/test/browser/assets";
+}
+
 $fileName = array_reverse(explode('/', $_SERVER['SCRIPT_NAME']))[0];
 $supportingCss = [];
 // For demo pages of component combinations:
@@ -47,7 +60,7 @@ if(str_contains($_SERVER['SCRIPT_NAME'], 'columns')) {
 
 <?php
 $cssFiles = array_unique(array_merge([$cssFileName ?? ''], $supportingCss));
-$cssFileLinkTags = join("\n\t", array_map(fn($cssFile) => "<link rel=\"stylesheet\" href=\"$host/assets/$cssFile\">", $cssFiles));
+$cssFileLinkTags = join("\n\t", array_map(fn($cssFile) => "<link rel=\"stylesheet\" href=\"$assetPath/$cssFile\">", $cssFiles));
 $globalBackground = CometConfig::get_global_background();
 ?>
 <!DOCTYPE html>
@@ -55,7 +68,7 @@ $globalBackground = CometConfig::get_global_background();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<?php echo $host; ?>/assets/global.css">
+	<link rel="stylesheet" href="<?php echo $assetPath; ?>/global.css">
 	<?php echo $cssFileLinkTags; ?>
 
 	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
