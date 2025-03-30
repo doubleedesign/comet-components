@@ -8,19 +8,13 @@ const __dirname = dirname(__filename);
 
 const projectRoot = resolve(__dirname, '..');
 
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-
 export default defineConfig({
 	testDir: resolve(projectRoot, 'packages/core/src/components'),
 	testMatch: '**/__tests__/*.spec.ts',
@@ -38,7 +32,7 @@ export default defineConfig({
 	use: {
 		navigationTimeout: 120000,
 		/* Base URL to use in actions like `await page.goto('/')`. */
-		baseURL: 'http://localhost:6001',
+		baseURL: process.env.BROWSER_TEST_URL,
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry',
 	},
