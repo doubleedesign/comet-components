@@ -28,38 +28,41 @@ if(str_contains($_SERVER['SERVER_NAME'], 'PhpStorm')) {
 	$assetPath = "$host/test/browser/assets";
 }
 
-$fileName = array_reverse(explode('/', $_SERVER['SCRIPT_NAME']))[0];
+$path = $_SERVER['REQUEST_URI'];
+$fileName = array_reverse(explode('/', $path))[0];
 $supportingCss = [];
 // For demo pages of component combinations:
-if(str_starts_with($_SERVER['SCRIPT_NAME'], '/pages/')) {
-	if($_SERVER['SCRIPT_NAME'] === '/pages/container-colours.php') {
+if(str_starts_with($path, '/pages/') || str_starts_with($path, '/test/browser/pages/')) {
+	if(str_contains($path, '/pages/container-colours.php')) {
 		array_push($supportingCss, 'container.css');
 	}
-	if($_SERVER['SCRIPT_NAME'] === '/pages/group-colours.php') {
+	if(str_contains($path, '/pages/group-colours.php')) {
 		array_push($supportingCss, 'group.css');
 	}
-	if($_SERVER['SCRIPT_NAME'] === '/pages/columns-colours.php') {
+	if(str_contains($path, '/pages/columns-colours.php')) {
 		array_push($supportingCss, 'container.css');
 		array_push($supportingCss, 'columns.css');
 		array_push($supportingCss, 'column.css');
+		array_push($supportingCss, 'group.css');
 	}
 }
 // For standalone components, load the stylesheet with the same name as the component
-else if(str_starts_with($_SERVER['SCRIPT_NAME'], '/components/')) {
+else if(str_starts_with($path, '/components/')) {
 	$cssFileName = str_replace('.php', '.css', $fileName);
 	array_push($supportingCss, $cssFileName);
 }
 // Specific cases where we need others
-if($_SERVER['SCRIPT_NAME'] === '/components/button-group.php') {
+if($path === '/components/button-group.php') {
 	array_push($supportingCss, 'button.css');
 }
-if(str_contains($_SERVER['SCRIPT_NAME'], 'columns')) {
+if(str_contains($path, '/components/columns.php')) {
+	array_push($supportingCss, 'columns.css');
 	array_push($supportingCss, 'column.css');
 }
 ?>
 
 <?php
-$cssFiles = array_unique(array_merge([$cssFileName ?? ''], $supportingCss));
+$cssFiles = isset($cssFileName) ? array_unique($cssFileName, $supportingCss) : $supportingCss;
 $cssFileLinkTags = join("\n\t", array_map(fn($cssFile) => "<link rel=\"stylesheet\" href=\"$assetPath/$cssFile\">", $cssFiles));
 $globalBackground = CometConfig::get_global_background();
 ?>
