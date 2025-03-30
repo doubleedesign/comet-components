@@ -80,6 +80,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="dcb22fbf87" level="application" />
-    <orderEntry type="library" name="playwright" level="project" />
+    <orderEntry type="library" name="Playwright" level="project" />
   </component>
 </module>

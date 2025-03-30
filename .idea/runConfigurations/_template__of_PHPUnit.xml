@@ -1,6 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-    <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/src" />
+    <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/src">
+      <envs>
+        <env name="APP_ENV" value="development" />
+      </envs>
+    </CommandLine>
     <TestRunner options="--testdox --coverage-html ../../../test/phpunit-report" />
     <method v="2" />
   </configuration>
