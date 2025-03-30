@@ -27,14 +27,6 @@ $page = <<<TYCHO
 			<Paragraph>Container primary background</Paragraph>
 		</Container>
 	</Group>
-	<Group testId="example-4">
-		<Container>
-			<Paragraph>Container dark background</Paragraph>
-		</Container>
-		<Container backgroundColor="white">
-			<Paragraph>Container primary background</Paragraph>
-		</Container>
-	</Group>
 </TychoTemplate>
 TYCHO;
 

@@ -130,6 +130,10 @@ body {
   justify-content: flex-end;
 }
 
+[data-text-color=primary] {
+  color: var(--color-primary);
+}
+
 body[data-global-background=primary] {
   background-color: var(--color-primary);
   color: var(--readable-color-primary);
@@ -141,27 +145,20 @@ body[data-global-background=primary] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=primary] {
-  color: var(--color-primary);
+[data-background=primary] > [data-background=primary] {
+  padding: 0;
 }
 
-[data-background=primary] + [data-background=primary] {
+.layout-block[data-background=primary] + .layout-block[data-background=primary] {
   padding-block-start: 0;
 }
-
-[data-background=primary] > [data-background=primary] {
+.layout-block[data-background=primary] > .layout-block[data-background=primary] {
   padding: 0;
 }
-
-[data-background=primary] > :not([data-background]) > [data-background=primary] {
+.layout-block[data-background=primary] > .layout-block:not([data-background]) > .layout-block[data-background=primary] {
   padding: 0;
 }
-
-[data-background=primary] > [data-background=primary] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -217,6 +214,10 @@ body[data-global-background=primary] {
   padding-block-start: 0;
 }
 
+[data-text-color=secondary] {
+  color: var(--color-secondary);
+}
+
 body[data-global-background=secondary] {
   background-color: var(--color-secondary);
   color: var(--readable-color-secondary);
@@ -228,27 +229,20 @@ body[data-global-background=secondary] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=secondary] {
-  color: var(--color-secondary);
+[data-background=secondary] > [data-background=secondary] {
+  padding: 0;
 }
 
-[data-background=secondary] + [data-background=secondary] {
+.layout-block[data-background=secondary] + .layout-block[data-background=secondary] {
   padding-block-start: 0;
 }
-
-[data-background=secondary] > [data-background=secondary] {
+.layout-block[data-background=secondary] > .layout-block[data-background=secondary] {
   padding: 0;
 }
-
-[data-background=secondary] > :not([data-background]) > [data-background=secondary] {
+.layout-block[data-background=secondary] > .layout-block:not([data-background]) > .layout-block[data-background=secondary] {
   padding: 0;
 }
-
-[data-background=secondary] > [data-background=secondary] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -304,6 +298,10 @@ body[data-global-background=secondary] {
   padding-block-start: 0;
 }
 
+[data-text-color=accent] {
+  color: var(--color-accent);
+}
+
 body[data-global-background=accent] {
   background-color: var(--color-accent);
   color: var(--readable-color-accent);
@@ -315,27 +313,20 @@ body[data-global-background=accent] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=accent] {
-  color: var(--color-accent);
+[data-background=accent] > [data-background=accent] {
+  padding: 0;
 }
 
-[data-background=accent] + [data-background=accent] {
+.layout-block[data-background=accent] + .layout-block[data-background=accent] {
   padding-block-start: 0;
 }
-
-[data-background=accent] > [data-background=accent] {
+.layout-block[data-background=accent] > .layout-block[data-background=accent] {
   padding: 0;
 }
-
-[data-background=accent] > :not([data-background]) > [data-background=accent] {
+.layout-block[data-background=accent] > .layout-block:not([data-background]) > .layout-block[data-background=accent] {
   padding: 0;
 }
-
-[data-background=accent] > [data-background=accent] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -391,6 +382,10 @@ body[data-global-background=accent] {
   padding-block-start: 0;
 }
 
+[data-text-color=info] {
+  color: var(--color-info);
+}
+
 body[data-global-background=info] {
   background-color: var(--color-info);
   color: var(--readable-color-info);
@@ -402,27 +397,20 @@ body[data-global-background=info] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=info] {
-  color: var(--color-info);
+[data-background=info] > [data-background=info] {
+  padding: 0;
 }
 
-[data-background=info] + [data-background=info] {
+.layout-block[data-background=info] + .layout-block[data-background=info] {
   padding-block-start: 0;
 }
-
-[data-background=info] > [data-background=info] {
+.layout-block[data-background=info] > .layout-block[data-background=info] {
   padding: 0;
 }
-
-[data-background=info] > :not([data-background]) > [data-background=info] {
+.layout-block[data-background=info] > .layout-block:not([data-background]) > .layout-block[data-background=info] {
   padding: 0;
 }
-
-[data-background=info] > [data-background=info] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -478,6 +466,10 @@ body[data-global-background=info] {
   padding-block-start: 0;
 }
 
+[data-text-color=warning] {
+  color: var(--color-warning);
+}
+
 body[data-global-background=warning] {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
@@ -489,27 +481,20 @@ body[data-global-background=warning] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=warning] {
-  color: var(--color-warning);
+[data-background=warning] > [data-background=warning] {
+  padding: 0;
 }
 
-[data-background=warning] + [data-background=warning] {
+.layout-block[data-background=warning] + .layout-block[data-background=warning] {
   padding-block-start: 0;
 }
-
-[data-background=warning] > [data-background=warning] {
+.layout-block[data-background=warning] > .layout-block[data-background=warning] {
   padding: 0;
 }
-
-[data-background=warning] > :not([data-background]) > [data-background=warning] {
+.layout-block[data-background=warning] > .layout-block:not([data-background]) > .layout-block[data-background=warning] {
   padding: 0;
 }
-
-[data-background=warning] > [data-background=warning] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -565,6 +550,10 @@ body[data-global-background=warning] {
   padding-block-start: 0;
 }
 
+[data-text-color=success] {
+  color: var(--color-success);
+}
+
 body[data-global-background=success] {
   background-color: var(--color-success);
   color: var(--readable-color-success);
@@ -576,27 +565,20 @@ body[data-global-background=success] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=success] {
-  color: var(--color-success);
+[data-background=success] > [data-background=success] {
+  padding: 0;
 }
 
-[data-background=success] + [data-background=success] {
+.layout-block[data-background=success] + .layout-block[data-background=success] {
   padding-block-start: 0;
 }
-
-[data-background=success] > [data-background=success] {
+.layout-block[data-background=success] > .layout-block[data-background=success] {
   padding: 0;
 }
-
-[data-background=success] > :not([data-background]) > [data-background=success] {
+.layout-block[data-background=success] > .layout-block:not([data-background]) > .layout-block[data-background=success] {
   padding: 0;
 }
-
-[data-background=success] > [data-background=success] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -652,6 +634,10 @@ body[data-global-background=success] {
   padding-block-start: 0;
 }
 
+[data-text-color=error] {
+  color: var(--color-error);
+}
+
 body[data-global-background=error] {
   background-color: var(--color-error);
   color: var(--readable-color-error);
@@ -663,27 +649,20 @@ body[data-global-background=error] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=error] {
-  color: var(--color-error);
+[data-background=error] > [data-background=error] {
+  padding: 0;
 }
 
-[data-background=error] + [data-background=error] {
+.layout-block[data-background=error] + .layout-block[data-background=error] {
   padding-block-start: 0;
 }
-
-[data-background=error] > [data-background=error] {
+.layout-block[data-background=error] > .layout-block[data-background=error] {
   padding: 0;
 }
-
-[data-background=error] > :not([data-background]) > [data-background=error] {
+.layout-block[data-background=error] > .layout-block:not([data-background]) > .layout-block[data-background=error] {
   padding: 0;
 }
-
-[data-background=error] > [data-background=error] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -739,6 +718,10 @@ body[data-global-background=error] {
   padding-block-start: 0;
 }
 
+[data-text-color=light] {
+  color: var(--color-light);
+}
+
 body[data-global-background=light] {
   background-color: var(--color-light);
   color: var(--readable-color-light);
@@ -750,27 +733,20 @@ body[data-global-background=light] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=light] {
-  color: var(--color-light);
+[data-background=light] > [data-background=light] {
+  padding: 0;
 }
 
-[data-background=light] + [data-background=light] {
+.layout-block[data-background=light] + .layout-block[data-background=light] {
   padding-block-start: 0;
 }
-
-[data-background=light] > [data-background=light] {
+.layout-block[data-background=light] > .layout-block[data-background=light] {
   padding: 0;
 }
-
-[data-background=light] > :not([data-background]) > [data-background=light] {
+.layout-block[data-background=light] > .layout-block:not([data-background]) > .layout-block[data-background=light] {
   padding: 0;
 }
-
-[data-background=light] > [data-background=light] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -826,6 +802,10 @@ body[data-global-background=light] {
   padding-block-start: 0;
 }
 
+[data-text-color=dark] {
+  color: var(--color-dark);
+}
+
 body[data-global-background=dark] {
   background-color: var(--color-dark);
   color: var(--readable-color-dark);
@@ -837,27 +817,20 @@ body[data-global-background=dark] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=dark] {
-  color: var(--color-dark);
+[data-background=dark] > [data-background=dark] {
+  padding: 0;
 }
 
-[data-background=dark] + [data-background=dark] {
+.layout-block[data-background=dark] + .layout-block[data-background=dark] {
   padding-block-start: 0;
 }
-
-[data-background=dark] > [data-background=dark] {
+.layout-block[data-background=dark] > .layout-block[data-background=dark] {
   padding: 0;
 }
-
-[data-background=dark] > :not([data-background]) > [data-background=dark] {
+.layout-block[data-background=dark] > .layout-block:not([data-background]) > .layout-block[data-background=dark] {
   padding: 0;
 }
-
-[data-background=dark] > [data-background=dark] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 
@@ -913,6 +886,10 @@ body[data-global-background=dark] {
   padding-block-start: 0;
 }
 
+[data-text-color=white] {
+  color: var(--color-white);
+}
+
 body[data-global-background=white] {
   background-color: var(--color-white);
   color: var(--readable-color-white);
@@ -924,27 +901,20 @@ body[data-global-background=white] {
   padding: var(--spacing-md);
 }
 
-[data-text-color=white] {
-  color: var(--color-white);
+[data-background=white] > [data-background=white] {
+  padding: 0;
 }
 
-[data-background=white] + [data-background=white] {
+.layout-block[data-background=white] + .layout-block[data-background=white] {
   padding-block-start: 0;
 }
-
-[data-background=white] > [data-background=white] {
+.layout-block[data-background=white] > .layout-block[data-background=white] {
   padding: 0;
 }
-
-[data-background=white] > :not([data-background]) > [data-background=white] {
+.layout-block[data-background=white] > .layout-block:not([data-background]) > .layout-block[data-background=white] {
   padding: 0;
 }
-
-[data-background=white] > [data-background=white] {
-  padding: 0;
-}
-
-.page-section:not([data-background]) + .page-section:not([data-background]):not([data-background]), .page-section:not([data-background]) + .columns:not([data-background]):not([data-background]), .page-section:not([data-background]) + .group:not([data-background]):not([data-background]), .columns:not([data-background]) + .page-section:not([data-background]):not([data-background]), .columns:not([data-background]) + .columns:not([data-background]):not([data-background]), .columns:not([data-background]) + .group:not([data-background]):not([data-background]), .group:not([data-background]) + .page-section:not([data-background]):not([data-background]), .group:not([data-background]) + .columns:not([data-background]):not([data-background]), .group:not([data-background]) + .group:not([data-background]):not([data-background]) {
+.layout-block:not([data-background]) + .layout-block:not([data-background]) {
   padding-block-start: 0;
 }
 

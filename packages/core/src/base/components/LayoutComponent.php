@@ -11,6 +11,17 @@ abstract class LayoutComponent extends UIComponent {
 		$this->set_layout_alignment_from_attrs($attributes);
 	}
 
+	protected function get_filtered_classes(): array {
+		if($this instanceof Columns || $this instanceof Group) {
+			return array_merge(
+				['layout-block'],
+				parent::get_filtered_classes()
+			);
+		}
+
+		return parent::get_filtered_classes();
+	}
+
 	protected function get_html_attributes(): array {
 		$attributes = parent::get_html_attributes();
 
@@ -24,6 +35,9 @@ abstract class LayoutComponent extends UIComponent {
 
 		if(isset($this->backgroundColor)) {
 			$attributes['data-background'] = $this->backgroundColor->value;
+		}
+		else if(isset($this->gradient)) {
+			$attributes['data-background'] = 'gradient-' . $this->gradient;
 		}
 
 		return $attributes;

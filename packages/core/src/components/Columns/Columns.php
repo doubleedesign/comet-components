@@ -22,15 +22,30 @@ class Columns extends LayoutComponent {
 		$this->qty = count($innerComponents);
 		$this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? true;
 
+		// If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
 		$columnWidths = array_map(function($column) {
 			return $column->get_width();
 		}, $innerComponents);
-		// If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
 		if(count(array_unique($columnWidths)) === 1) {
 			$updatedInnerComponents = [];
 			foreach($innerComponents as $column) {
 				$column->set_width(null);
 				$updatedInnerComponents[] = $column;
+			}
+		}
+
+		// If all column backgrounds are the same as this component's background, remove them for HTML and styling simplicity
+		\Symfony\Component\VarDumper\VarDumper::dump($this->backgroundColor);
+		if(isset($this->backgroundColor)) {
+			$columnBackgrounds = array_map(function($column) {
+				return $column->get_background_color();
+			}, $innerComponents);
+			if(count(array_unique($columnBackgrounds)) === 1 && $this->backgroundColor->value === $columnBackgrounds[0]) {
+				$updatedInnerComponents = [];
+				foreach($innerComponents as $column) {
+					$column->set_background_color(null);
+					$updatedInnerComponents[] = $column;
+				}
 			}
 		}
 

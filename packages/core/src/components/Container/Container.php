@@ -37,11 +37,15 @@ class Container extends UIComponent {
 			return !in_array($class, ['is-style-wide', 'is-style-fullwidth', 'is-style-narrow', 'container--wide', 'container--fullwidth', 'container--narrow']);
 		});
 
+		if(!$this->withWrapper) {
+			$classes[] = 'layout-block';
+		}
+
 		return array_unique($classes);
 	}
 
 	protected function get_outer_classes(): array {
-		return ['page-section'];
+		return ['layout-block', 'page-section'];
 	}
 
 	protected function get_html_attributes(): array {

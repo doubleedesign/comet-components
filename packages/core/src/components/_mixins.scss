@@ -26,7 +26,6 @@ $widths: (
 	}
 }
 
-// See global.css for overrides to ensure no double padding when backgrounds are the same
 @mixin section-padding() {
 	padding-block: var(--spacing-md);
 	padding-inline: 0;
@@ -38,6 +37,12 @@ $widths: (
 	@include media-breakpoint-up('wide') {
 		padding-block: var(--spacing-xxl);
 	}
+}
+
+@mixin adjacent-background-padding() {
+	// For section-style elements (not necessarily <section> tags) that we only ever expect to be vertically adjacent
+	// such as containers, column sets, and groups
+
 }
 
 // See global.css for overrides to ensure no double padding when backgrounds are the same
