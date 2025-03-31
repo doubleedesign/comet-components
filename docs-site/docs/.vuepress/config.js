@@ -6,6 +6,7 @@ import fs from 'fs';
 import Case from 'case';
 import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab';
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext';
+import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 
 const docsDir = path.resolve(__dirname, '../');
 
@@ -48,9 +49,6 @@ export default defineUserConfig({
 		sidebarDepth: 1,
 		markdown: {
 			lineNumbers: true,
-			prism: {
-				theme: 'prism-themes/themes/prism-atom-dark.css'
-			},
 		},
 	}),
 
@@ -61,6 +59,10 @@ export default defineUserConfig({
 		markdownExtPlugin({
 			gfm: true,
 			footnote: true
+		}),
+		prismjsPlugin({
+			theme: 'coldark-dark',
+			preloadLanguages: ['php', 'html', 'css', 'scss', 'js', 'json', 'bash', 'powershell'],
 		}),
 	],
 

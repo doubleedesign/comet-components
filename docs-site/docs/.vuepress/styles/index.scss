@@ -1,10 +1,11 @@
+@use 'sass:color';
 @import 'https://use.typekit.net/daf8wql.css';
 
 :root {
 	--font-family: solitaire-mvb-pro, sans-serif;
 	--vp-c-accent: #845ec2;
 	--vp-c-accent-bg: #845ec2;
-	--vp-c-accent-hover: #{darken(#845ec2, 15%)};
+	--vp-c-accent-hover: #{color.scale(#845ec2, $lightness: -15%)};
 	--content-width: 840px;
 }
 
@@ -550,6 +551,92 @@ div[vp-content]:has(.tycho-photo) {
 
 			p:first-child {
 				margin-top: 0;
+			}
+		}
+	}
+}
+
+// Syntax highlighting customisations
+[data-highlighter="prismjs"] {
+
+	.line:has(.token.php) {
+		.token.delimiter.important {
+			color: #F64EAD;
+		}
+	}
+
+	.token {
+		&.comment {
+			color: #7A7B7D;
+		}
+
+		&.php {
+			color: #F64EAD;
+		}
+
+		&.string,
+		&.double-quoted-string,
+		&.single-quoted-string {
+			color: #FFF;
+		}
+
+		&.heredoc-string,
+		&.nowdoc-string,
+		&.delimiter.symbol { // .delimiter.symbol catches the closing heredoc comment
+			color: #FFBB00;
+			font-style: italic;
+
+			.punctuation {
+				color: #FFBB00;
+				font-style: italic;
+			}
+		}
+
+		&.punctuation {
+			color: #87D9FF;
+		}
+
+		&.operator {
+			color: #FFE081;
+		}
+
+		&.package { // namespace
+			color: #FFF;
+
+			.punctuation {
+				color: #FFF;
+			}
+		}
+
+		&.keyword {
+			color: #8291ef;
+		}
+
+		&.variable,
+		&.literal-property {
+			color: #B48FFF;
+		}
+
+		&.class-name { // php class/object
+			color: #87D9FF;
+		}
+
+		&.function {
+			color: #93FFB4;
+			font-style: italic;
+		}
+
+		&.class-name + .operator + .function,
+		&.variable + .operator + .function {
+			font-style: normal;
+		}
+	}
+
+	&.language-json {
+
+		.token {
+			&.property {
+				color: #B48FFF;
 			}
 		}
 	}

@@ -81,10 +81,7 @@ npm run docs
 ::: tip
 As a first step, I'd recommend installing [Chocolatey](https://community.chocolatey.org/) if you haven't already.
 
-If you prefer
-to do things using a GUI where possible, you might like to use [Laravel Herd](https://herd.laravel.com/windows). If you don't have existing instances of PHP,
-Composer, or Node
-installed, the latter basically gets you up and running out-of-the-box.
+If you prefer to do things using a GUI where possible, you might like to use [Laravel Herd](https://herd.laravel.com/windows). If you don't have existing instances of PHP, Composer, or Node installed, the latter basically gets you up and running out-of-the-box.
 :::
 
 It is not essential to follow the steps in the below-linked guides or to use this exact setup, but this information may be helpful if you are new to any of the tools or technologies listed here, or are new to using a Windows machine for web development.

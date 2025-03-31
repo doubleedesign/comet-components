@@ -25,7 +25,7 @@ $attributes = [
 	'backgroundColor' => 'light'
 ];
 
-$component = new Container([$attributes], [)
+$component = new Container($attributes, [
 	new Heading([], 'Hello world!'),
 ]);
 

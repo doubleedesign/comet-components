@@ -38,7 +38,7 @@ If adding any testing utilities of your own that are relevant only to a specific
 <?php
 use Doubleedesign\Comet\Core;
 
-test('some test case description', function () {
+test('some test case description', function() {
     ob_start();
     $component = new YourComponent([], []);
     $component->render();
