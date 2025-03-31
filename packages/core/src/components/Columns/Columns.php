@@ -19,6 +19,7 @@ class Columns extends LayoutComponent {
 	protected array $innerComponents;
 
 	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $updatedInnerComponents ?? $innerComponents, 'components.Columns.columns');
 		$this->qty = count($innerComponents);
 		$this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? true;
 
@@ -35,12 +36,12 @@ class Columns extends LayoutComponent {
 		}
 
 		// If all column backgrounds are the same as this component's background, remove them for HTML and styling simplicity
-		\Symfony\Component\VarDumper\VarDumper::dump($this->backgroundColor);
 		if(isset($this->backgroundColor)) {
-			$columnBackgrounds = array_map(function($column) {
-				return $column->get_background_color();
-			}, $innerComponents);
-			if(count(array_unique($columnBackgrounds)) === 1 && $this->backgroundColor->value === $columnBackgrounds[0]) {
+			// Note: array_unique can't be run directly on the ThemeColors because enums aren't directly comparable,
+			// so we need to use the string value after filtering out null values
+			$columnsWithBackgrounds = array_filter($innerComponents, fn($column) => $column->get_background_color() !== null);
+			$columnBackgrounds = array_unique(array_map(fn($column) => $column->get_background_color()->value, $columnsWithBackgrounds));
+			if((count($columnBackgrounds) === 1) && ($this->backgroundColor->value === $columnBackgrounds[0])) {
 				$updatedInnerComponents = [];
 				foreach($innerComponents as $column) {
 					$column->set_background_color(null);
@@ -49,7 +50,7 @@ class Columns extends LayoutComponent {
 			}
 		}
 
-		parent::__construct($attributes, $updatedInnerComponents ?? $innerComponents, 'components.Columns.columns');
+		$this->innerComponents = $updatedInnerComponents ?? $innerComponents;
 	}
 
 	function get_html_attributes(): array {
