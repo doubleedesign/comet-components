@@ -15,6 +15,12 @@ The unit tests are set up to use [Pest](https://pestphp.com/), with the followin
 
 Pest uses [PHPUnit](https://phpunit.de/index.html) under the hood, but provides a syntax similar to JavaScript test runners such as Jest and Playwright.
 
+Some custom utility functions are included in the `PestUtils` class, which can be found in `./test/unit/PestUtils.php` and used in tests by importing the class at the top of your test file:
+
+```php
+use Doubleedesign\Comet\TestUtils\PestUtils;
+```
+
 :::important
 If adding additional utility libraries for unit testing, they should go in the dev dependencies in the project root's `composer.json` file. All testing configuration should go in the root in the first instance, so it can be shared amongst packages while also helping to keep them lean for distribution.
 
@@ -44,8 +50,35 @@ test('some test case description', function () {
 
     // assertions
 });
-
 ```
+
+### Identifying DOM elements using DOMDocument
+
+You can render a component within a test, capturing its HTML using [output buffering](https://www.php.net/manual/en/outcontrol.output-buffering.php):
+
+```php
+ob_start();
+$component = new YourComponent([], []);
+$component->render();
+$output = ob_get_clean();
+```
+
+Then, you can use the [DOMDocument](https://www.php.net/manual/en/class.domdocument.php) class to parse the HTML and find elements. For example:
+
+```php
+$dom = new DOMDocument();
+@$dom->loadHTML($output);
+$wrapper = $dom->getElementsByTagName('div')->item(0);
+```
+
+In this example, `$wrapper` will be a [DOMElement](https://www.php.net/manual/en/class.domelement.php) object representing the first `<div>` in the rendered HTML.
+
+:::warning
+`$dom->getElementsByTagName()` ignores hierarchy. This means that, for example, if you want to get the first two inner divs of a component but they have their own inner divs, `dom->getElementsByTagName('div')->item(1)` will give you the first child's own first child, not the second child of your component.
+
+A utility function, `PestUtils::getElementsByClassName()`, is available to get elements by their class name instead of just their tag name.
+:::
+
 
 ## Running tests
 
@@ -83,6 +116,12 @@ fwrite(STDERR, 'something to output as an error');
 ```
 ```php
 fwrite(STDOUT, 'something to output as a basic message');
+```
+
+Even better, if you are using Laravel Herd you can send output to the Herd Dumps window which is much more powerful, allowing you to directly log entire objects and arrays:
+
+```php
+\Symfony\Component\VarDumper\VarDumper::dump($variable);
 ```
 :::
 

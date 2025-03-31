@@ -17,9 +17,9 @@ Automated testing helps ensure that the code we write works as expected in given
 
 ### Definitions and tooling
 :::details Unit testing
-Unit testing is the practice of testing the result of a function or method in isolation, without even rendering or viewing them in a browser environment. Dynamic data is "mocked" or "stubbed" to simulate scenarios we want to test, and the output is compared to the expected result. 
+Unit testing is the practice of testing the result of a function or method in isolation, without even rendering or viewing them in a browser environment (making them convenient and easy to run - it's as simple as a terminal command or using an IDE that supports your testing framework). Dynamic data is "mocked" or "stubbed" to simulate scenarios we want to test, and the output is compared to the expected result. 
 
-Unit tests can be thought of as the building blocks of overall test coverage, as they test the smallest pieces of code and ensure they work before they are integrated into more complex use cases, and can be instrumental in narrowing down the source of bugs and catching unexpected regressions.
+Unit tests can be thought of as the building blocks of overall test coverage, as they test the smallest pieces of code and ensure they work before they are integrated into more complex use cases. Consequently, they can be instrumental in narrowing down the source of bugs and catching unexpected regressions.
 
 In Comet Components, unit testing is done with [Pest](./unit-testing.md).
 :::
