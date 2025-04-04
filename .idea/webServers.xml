@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a429af3b-84af-4fff-8db2-c7e5d6bbc2e4" name="Synergy - Comet">
+        <fileTransfer rootFolder="/home/cometcom" accessType="SFTP" host="SYN03GE.SYD5.hostyourservices.net" port="2683" sshConfigId="749e8e0b-ebdf-45a3-a712-bbc3f70a2443" sshConfig="cometcom@SYN03GE.SYD5.hostyourservices.net:2683 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
