@@ -1,7 +1,7 @@
 :::important
 Comet Components is an active work in progress at [Double-E Design](https://www.doubleedesign.com.au).
 
-The code currently available via GitHub should be considered an incomplete alpha release.
+These docs and the code currently available via GitHub should be considered an incomplete alpha release.
 :::
 
 # Welcome!

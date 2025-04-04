@@ -1,0 +1,9 @@
+{
+  "component": {
+    "default": {
+      "path": "docs/.vuepress/components",
+      "withTest": false,
+      "withStory": false
+    }
+  }
+}

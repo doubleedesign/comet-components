@@ -13,6 +13,25 @@ body {
 	font-weight: 300;
 }
 
+#app:has(.announcement-banner) {
+
+	.vp-theme-container {
+		padding-top: 40px; // TODO: This is for the height of the announcement banner nad needs to be made responsive
+
+		.vp-navbar {
+			top: 40px;
+		}
+
+		.vp-sidebar {
+			padding-top: 40px;
+		}
+
+		.vp-page {
+			padding-top: 2rem;
+		}
+	}
+}
+
 h1 {
 	font-family: gelica, sans-serif;
 	font-weight: 600;
@@ -64,6 +83,7 @@ small {
 }
 
 .vp-home {
+	padding-top: 2rem;
 }
 
 .vp-site-name {
@@ -74,6 +94,7 @@ small {
 .vp-navbar {
 	box-shadow: 0 0 0.5rem 2px rgba(60, 60, 67, 0.15);
 	border: 0;
+	z-index: 2000;
 
 	[data-theme="dark"] & {
 		box-shadow: 0 0 0.5rem 2px rgba(255, 255, 255, 0.15);
@@ -268,7 +289,19 @@ div[vp-content]:has(.tycho-photo) {
 
 .vp-hero {
 
-	&-image {
+	&-description {
+		max-width: none;
+		margin-top: 1rem;
+	}
+
+	&-actions {
+	}
+
+}
+
+.vp-hero:has(.vp-hero-image) {
+
+	.vp-hero-image {
 		width: 100vh;
 		height: auto;
 		max-height: none;
@@ -298,14 +331,6 @@ div[vp-content]:has(.tycho-photo) {
 		@media (min-width: 600px) {
 			margin-top: -5rem;
 		}
-	}
-
-	.vp-hero-description {
-		max-width: none;
-		margin-top: 1rem;
-	}
-
-	.vp-hero-actions {
 	}
 }
 
