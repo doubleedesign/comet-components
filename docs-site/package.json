@@ -13,6 +13,7 @@
     "@vuepress/plugin-markdown-ext": "2.0.0-rc.91",
     "@vuepress/plugin-markdown-tab": "2.0.0-rc.91",
     "@vuepress/plugin-prismjs": "2.0.0-rc.91",
+    "@vuepress/plugin-search": "^2.0.0-rc.91",
     "@vuepress/theme-default": "2.0.0-rc.91",
     "generate-vue-cli": "^0.0.2",
     "prism-themes": "^1.9.0",

@@ -7,6 +7,7 @@ import Case from 'case';
 import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab';
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
+import { searchPlugin } from '@vuepress/plugin-search';
 
 const docsDir = path.resolve(__dirname, '../');
 
@@ -61,6 +62,7 @@ export default defineUserConfig({
 			theme: 'coldark-dark',
 			preloadLanguages: ['php', 'html', 'css', 'scss', 'js', 'json', 'bash', 'powershell'],
 		}),
+		searchPlugin()
 	],
 
 	bundler: viteBundler(),

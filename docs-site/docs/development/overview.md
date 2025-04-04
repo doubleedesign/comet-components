@@ -41,9 +41,16 @@ Developers looking to use the library in their projects should refer to the [Usa
 
 ## Directory structure
 
-:::warning
-// TODO more detail here
-:::
+| Directory     | Subdirectory      | Purpose                                                                                                                                                                                   |
+|---------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `./docs`      |                   | The built documentation site, which is generated from the `docs-site` directory. **Do not edit the contents of this folder - it will get overwritten the next time the site is built**.   |
+| `./docs-site` |                   | The source files for this documentation site, which is built with [VuePress](https://vuepress.vuejs.org/).                                                                                |
+| `./packages`  | `/core`           | The core package, which contains the library's components and styles.                                                                                                                     |
+| `./packages`  | `/comet-plugin`   | The core WordPress plugin, which implements Comet versions of select WordPress core blocks and most other core Comet Components.                                                          |
+| `./packages`  | `/comet-calendar` | The WordPress plugin for managing and displaying event information using Comet Components.                                                                                                |
+| `./packages`  | `/comet-canvas`   | WordPress parent theme. Implements Comet Components for global layout elements such as the header and footer, and provides theming foundations and hooks for child theme implementations. |
+| `./scripts`   |                   | Utilities for local development.                                                                                                                                                          |
+| `./test`      |                   | Configuration and utilities for the browser testing environment, unit testing, and integration testing.                                                                                   |
 
 ## Glossary of terms
 

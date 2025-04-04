@@ -21,7 +21,7 @@ export default {
         <div v-if="isLocal" class="announcement-banner__info">
             <p><strong>Local dev:</strong> This is the built version of the docs. If you are working on the docs, you will need to run the dev server for that separately.</p>
         </div>
-        <div v-if="!isLocal" class="announcement-banner__warning">
+        <div v-if="!isLocal" class="announcement-banner__info">
             <p><strong>Comet Components is an active work in progress.</strong> These docs and the code currently available via GitHub should be considered an incomplete alpha release.</p>
         </div>
     </div>

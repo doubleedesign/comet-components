@@ -7,6 +7,7 @@
 	--vp-c-accent-bg: #845ec2;
 	--vp-c-accent-hover: #{color.scale(#845ec2, $lightness: -15%)};
 	--content-width: 840px;
+	--search-input-width: 12rem;
 }
 
 body {
@@ -107,6 +108,18 @@ small {
 			}
 		}
 	}
+
+	.vp-toggle-color-mode-button {
+		order: 10;
+		margin-inline-start: 0.5rem;
+	}
+
+	.search-box {
+		input {
+			font-family: var(--font-family);
+		}
+	}
+
 }
 
 .vp-sidebar {
@@ -197,6 +210,7 @@ small {
 		margin-bottom: 0 !important;
 	}
 }
+
 
 .tycho-photo {
 	img {
@@ -298,6 +312,20 @@ div[vp-content]:has(.tycho-photo) {
 					margin-bottom: 0;
 				}
 			}
+		}
+	}
+
+	.hint-container {
+
+		&.details {
+			summary {
+				font-size: 1rem;
+				font-weight: 600;
+			}
+		}
+
+		&-title {
+			font-size: 1rem;
 		}
 	}
 }
