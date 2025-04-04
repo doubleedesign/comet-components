@@ -1,9 +1,3 @@
-:::important
-Comet Components is an active work in progress at [Double-E Design](https://www.doubleedesign.com.au).
-
-The code currently available via GitHub should be considered an incomplete alpha release.
-:::
-
 # Welcome!
 
 <figure class="comet-photo">

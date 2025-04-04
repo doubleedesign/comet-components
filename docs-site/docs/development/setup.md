@@ -1,169 +1,224 @@
 ---
+title: Local dev quick start
 position: 1
 ---
 
 # Local development setup
 
+:::important
+This is the "decisions, not options" quick start guide which reflects the author's preferred setup, summarised here in the hope that it simplifies getting started on this multi-language project in the sea of options available.
+
+Details on other options can be found in the [Local Dev Deep Dives](../local-dev-deep-dives/setup.md) section.
+:::
+
+:::warning
+This guide is written for Windows users. MacOS and Linux users will need to adapt some steps.
+:::
+
 [[toc]]
 
-## Prerequisites
-
-- PHP and [Composer](https://getcomposer.org) installed locally
-- [Node](https://nodejs.org) installed locally
+## 0. Prerequisites
 - Git installed locally
-- [Sass](https://sass-lang.com) installed globally on your machine
-- IDE of choice (using [PhpStorm](https://www.jetbrains.com/phpstorm/) is documented throughout this site)
+- Windows machine with sufficient privileges to create symbolic links using PowerShell
+  - _or_ the ability to translate/adapt PowerShell commands and scripts for your OS
+- Sufficient privileges to install software on your machine.
 
-:::note
-The author of Comet Components is a Windows user and [PhpStorm](https://www.jetbrains.com/phpstorm/) is her IDE of choice. While many of the instructions in this documentation and the convenience scripts provided are platform-agnostic (as she uses [WSL](https://learn.microsoft.com/en-us/windows/wsl/) which provides a Bash terminal, and many of the scripts are written in PHP or TypeScript), there are some things that developers using MacOS, Linux, and/or non-JetBrains IDEs will need to adapt for their own environments.
+## 1. Clone the repo
+
+1. Create a directory in `C:\Users\<your-username>` called `PhpStormProjects`
+2. Clone the repo using your GUI of choice (such as [GitKraken](https://www.gitkraken.com/)) or via your terminal (from the `PhpStormProjects` directory):
+
+```powershell
+git clone https://github.com/doubleedesign/comet-components.git
+```
+
+3. Create and check out a branch for the work you're going to do:
+
+```powershell
+git checkout -b <your-branch-name>
+```
+
+## 2. Set up Laravel Herd
+
+Laravel Herd is an all-in-one local development environment tool for PHP and Node. It takes the place of the likes of WAMP, MAMP, or XAMPP for PHP, and Node Version Manager (NVM) for Node, while also providing [Composer](https://getcomposer.org/) and [Xdebug](https://xdebug.org/) out of the box.
+
+1. If you already have Node installed on your machine, remove it so Herd can install the version of NVM it requires and thus manage Node for you. (Other instances of PHP can stay if you want.)
+2. Download and install [Laravel Herd Pro](https://herd.laravel.com/)
+
+:::details Do I really need to pay for Pro?
+No, but without Pro you won't have built-in Xdebug, the Dumps feature, or database services.
+- Xdebug is required for generating unit test coverage reports
+- Dumps is a great debugging tool which is referenced in this documentation
+- Database services are required if you want to use Herd to develop websites with WordPress or any other database-driven CMS.
 :::
 
-:::tip
-Windows-specific setup options and instructions are listed in the [Windows setup deep-dive](#windows-setup-deep-dive) section below.
-:::
+3. Make sure Herd is controlling PHP:
 
-## Quick start
-
-1. Clone the repository from GitHub
-2. Install dependencies, refresh autoloading, and redo symlinks:
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-npm run refresh:all
-```
-@tab PowerShell
-```powershell:no-line-numbers
-npm run refresh:all
-```
-:::
-
-See the [CLI command quick reference](./appendices/cli-commands.md) for more options if you are returning to an already set up copy of the project and don't need to do a full refresh.
-
-3. Run the local web server and Storybook (at the same time i.e. two terminal windows) to see what you're working with!
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-npm run test:server
-```
-```bash:no-line-numbers
-npm run test:storybook
-```
-@tab PowerShell
-```powershell:no-line-numbers
-npm run test:server
-```
-```powershell:no-line-numbers
-npm run test:storybook
-```
-:::
-
-:::tip
-You can also run the project as a [Laravel Herd](https://herd.laravel.com) site instead of running the basic local server, which enables you to use features like Herd's Dumps for debugging. See the [Browser Testing](./testing/browser-testing.md) documentation for more details.
-:::
-
-4. Optionally, run these docs locally:
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-npm run docs
-```
-@tab PowerShell
-```powershell:no-line-numbers
-npm run docs
-```
-:::
-
-## Windows setup deep-dive
-
-::: tip
-As a first step, I'd recommend installing [Chocolatey](https://community.chocolatey.org/) if you haven't already.
-
-If you prefer to do things using a GUI where possible, you might like to use [Laravel Herd](https://herd.laravel.com/windows). If you don't have existing instances of PHP, Composer, or Node installed, the latter basically gets you up and running out-of-the-box.
-:::
-
-It is not essential to follow the steps in the below-linked guides or to use this exact setup, but this information may be helpful if you are new to any of the tools or technologies listed here, or are new to using a Windows machine for web development.
-
-### Detailed tooling setup guides
-
-- [PHP development setup on Windows](./tooling/php.md)
-- [Node development setup on Windows](./tooling/node.md)
-- <Badge type="info" text="Optional" vertical="middle" /> [PhpStorm setup](./tooling/phpstorm.md)
-- <Badge type="info" text="Optional" vertical="middle" /> [WSL setup](./tooling/wsl.md)
-
-### General notes and troubleshooting tips
-
-::: details About the PATH system environment variable
-
-Making things like PHP and Composer available to Windows terminals generally involves adding their directory locations to your system `path` environment variable (often referred to as `PATH` in uppercase, even though Windows 11 calls it `Path` in the GUI).
-
-Most installation methods handle this automatically, but there may be times that you need to add, delete, or change these paths manually, such as when:
-- you have multiple instances of PHP or Composer installed and your terminal aliases aren't using the one you want
-- you want to use an instance that doesn't automatically get added to the PATH, or it was optional during installation and you chose not to add it
-
-You can find the GUI for these settings in Control Panel > System > Advanced System Settings > Environment Variables. (Or just search for "environment variables" in the Start menu.)
-
-The below example shows the path to Laravel Herd in my user PATH variable. This is the default location for PHP and Composer when installed with Herd. (You can also see that [NVM for Windows](https://github.com/coreybutler/nvm-windows) and [Local by Flywheel](https://localwp.com/)'s PHP instance are also there.)
-
-![path.png](/windows-path.png)
-
-**Note:** In some cases, these variables will be in the system PATH rather than the user PATH.
-
-With multiple PHP instances available here, I can confirm which is being used with the terminal alias (i.e., when I type a `php` command) as per the below.
-
-These are the same for finding Node, Composer, and other tools with a terminal alias, which is particularly useful when it's not listed specifically in the `PATH` - which is expected when Herd is controlling it (all that's in the PATH for that is `C:\Users\username\.config\herd\bin`).
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-readlink -f $(which php)
-```
-:warning: **Warning:** WSL is not aware of the `PATH` settings unless you set up aliases to Windows executables that are. By default, it will look for instances you have installed in WSL itself.
-
-To use the same versions as native Windows applications (such as Herd and PhpStorm) you can set up aliases to those. You can also set up aliases that go directly to specific executables, in which case it will also ignore `PATH` variables. See the [WSL setup guide](./tooling/wsl.md) for more information.
-
-For these reasons, if you switch between WSL and PowerShell you may get different results.
-
-@tab PowerShell
-```powershell:no-line-numbers
+```powershell
 Get-Command php
 ```
-:warning: **Warning:** PowerShell in the PhpStorm terminal may pick up the version set as PhpStorm's CLI interpreter, rather than what you have set in your
-`PATH`. There are two key PhpStorm settings that control this, which you can find in Settings > Tools > Terminal:
-- Add default project PHP interpreter to PATH
-- Shell integration.
+The output should list the source as `C:\Users\<your-username>\.config\herd\bin\php84\php.exe` or similar according to the global PHP version you have set in Herd.
 
-If both of these are on, PowerShell will use the version set in PhpStorm and ignore anything else in your `PATH` _when used in the PhpStorm terminal_. Running a standalone PowerShell window will always use the version in your `PATH`.
-
-| Add project interpreter to PATH | Shell integration | PowerShell behaviour within PhpStorm terminal		 |
-|---------------------------------|-------------------|-------------------------------------------------|
-| On                              | On                | PHP version set in PhpStorm settings            |
-| On                              | Off               | System default PHP version as per `PATH`        |
-| Off                             | On                | System default PHP version as per `PATH`        |
-| Off                             | Off               | System default PHP version as per `PATH`        |
-
-@tab Laravel Herd
-You can see the currently selected PHP version in the Dashboard:
-![herd-dashboard.png](../.vuepress/public/herd-dashboard.png)
-
-:warning: **Warning:** If you have other instances of PHP in your `PATH`, this might not be the one your terminal is using. Move it to the top of the list and confirm using the terminal commands.
+:::details What if my PHP source is not Herd?
+Go into your system environment variables and move the `PATH` entry for Herd to the top. Restart PowerShell and try again.
 :::
 
-::: details Installing Playwright browsers for integration tests
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-# Bash command to come
+4. Make sure Composer is installed and available:
+
+```powershell
+Get-Command composer
 ```
-@tab PowerShell
-```powershell:no-line-numbers
-# Use a seprate PowerShell terminal with admin rights
-# This will install the browsers in C:/Users/username/AppData/Local/ms-playwright
+
+The output should list the source as `C:\Users\<your-username>\.config\herd\bin\composer.bat`.
+
+5. Make sure Node is installed and available:
+
+```powershell
+Get-Command node
+```
+The output should list the source as `C:\Program Files\nodejs\node.exe` and the version should match the installed version listed in Herd.
+
+If you install alternative versions in Herd, change the active version with:
+
+```powershell
+nvm use <version>
+```
+
+6. Tell Herd where the project is using one of the following methods:
+ - In the Herd GUI, go to `General` in the left menu, and add `PHPStormProjects` the `Herd Paths`. This will make Herd pick up all directories in `PHPStormProjects` as projects.
+ - From the Herd GUI Dashboard, click `Open Sites` and in the screen that appears, click `Add` and select the directory you cloned the repo into.
+ - From the `comet-components` directory your terminal, type `herd link`.
+
+7. Open http://comet-components.test in your web browser. It should load a local copy of these docs.
+
+## 3. Install Sass globally
+
+1. Install the [Chocolatey](https://chocolatey.org) package manager for Windows if you don't already have it.
+2. Install Dart Sass globally:
+
+```powershell
+choco install sass
+```
+
+## 4. Install project dependencies and create symlinks
+
+The project contains multiple sub-packages, and uses both [Composer](https://getcomposer.org/) and [NPM](https://www.npmjs.com/) to manage different types of dependencies. In addition, symbolic links (symlinks) are used to make certain files available in certain locations for easy browser testing. 
+
+A convenience script is provided to install all dependencies in the project root and all `packages`, and create symlinks for the `test` directory. You can run it from the project root (`comet-components` directory) with:
+
+```powershell
+npm run refresh:all
+```
+:::warning
+Some of the underling scripts are PowerShell scripts, which have not been tested in non-Windows environments. PowerShell for MacOS exists, but you may need to adapt the script for it to work; or alternatively replace it with a shell script. The source code of all the scripts can be found in the `scripts` directory in the project root.
+:::
+
+## 5. Set up the IDE
+
+[PhpStorm](https://www.jetbrains.com/phpstorm) is a powerful, fully-featured IDE for PHP and JavaScript development and testing. Download and install it.
+
+:::details Do I really have to use PhpStorm? What about VSCode?
+No, you don't have to use PhpStorm, but all IDE-specific information in these docs is written for it.
+:::
+
+### Plugins
+Open PhpStorm and go to `File > Settings > Plugins`.
+
+:::details Plugins to install and enable
+Install and activate the following plugins and any dependencies they have:
+   - [Test Automation](https://plugins.jetbrains.com/plugin/20175-test-automation)
+   - [PHP Annotations](https://plugins.jetbrains.com/plugin/7320-php-annotations)
+   - [PowerShell](https://plugins.jetbrains.com/plugin/10249-powershell)
+
+In `File > Settings > Plugins`, ensure the following bundled plugins are enabled:
+   - PHP
+   - PHP Architecture 
+   - JavaScript and TypeScript
+   - Node.js
+   - Vue.js
+   - Ini
+   - JSON
+   - CSS
+   - Sass
+   - Blade
+   - Pest
+   - Terminal
+:::
+
+### PHP Interpreter and Xdebug
+1. In `File > Settings > PHP`, click the 3 dot button next to the `CLI Interpreter` dropdown. 
+2. Add the Path to Herd's PHP `.bat` file so that it will use the global PHP version set in Herd. 
+3. Click the refresh button and make sure it has picked up the version, configuration file, and Xdebug correctly. If it does not detect Xdebug, you can manually add the path to it as shown in the below screenshot.
+
+![PHP interpreter settings](/phpstorm-php-bat.png)
+
+### Terminal
+
+Go to `File > Settings > Tools > Terminal` and:
+ - in the `Shell path` field, select or enter the path to PowerShell
+ - tick `Shell integration`
+ - tick `Add default PHP interpreter to PATH` (it should already be there but it can't hurt to tick it)
+ - tick `Add node_modules/.bin` from the project root to PATH.
+
+:::details Do I have to use PowerShell?
+No. CMD? Amateur, just use PowerShell. WSL? Hardcore, I like it. Instructions for almost all steps using WSL are available in the [Local setup deep dives](../local-dev-deep-dives/setup.md) section. (But be warned: A lot of them just route commands through PowerShell anyway, as integration of all tooling such as the IDE, PHP, Xdebug, Node, and Playwright is easier if you use the native Windows instances of Node, PHP, etc. installed by Herd.)
+:::
+
+### Node
+Enable Node.js support in `File > Settings > Languages & Frameworks > Node.js`:
+- In the `Node interpreter` dropdown, ensure `C:\Program Files\nodejs\node.exe` is selected.
+- Tick `Coding assistance for Node.js`.
+
+### File watchers
+
+Follow the instructions in the [PhpStorm page](../local-dev-deep-dives/tooling-guides/phpstorm.md#file-watchers) to set up file watchers for Sass, Rollup, and the Blade template formatter.
+
+### Linting and formatting
+
+Configure automatic linting and formatting with a combination of PhpStorm's built-in tools and ESLint as per the instructions in the [PhpStorm page](../local-dev-deep-dives/tooling-guides/phpstorm.md#linting-and-formatting).
+
+### Pest (for unit testing)
+
+Configuration of Pest/PHPUnit is mostly handled in its configuration file (`./test/phpunit.xml`) and the Run configuration.
+
+You can check and tweak the default settings for PhpStorm under `File > Settings > Languages & Frameworks > PHP > Test Frameworks` (shown below) and for the run configuration under `Run > Edit Configurations`.
+
+![Pest settings](/phpstorm-pest.png)
+
+## 6. Update the `php.ini` file
+
+Locate the PHP configuration file (as per the PHP interpreter settings above) and add the following lines to it (updated with your username):
+
+```ini
+herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-open.php
+herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-close.php
+```
+This is to wrap test pages with the required opening and closing HTML.
+
+## 7. Ensure test pages load
+
+Navigate to a test page such as http://comet-components.test/test/browser/pages/container-colours.php in your browser. You should see the page content with styling applied.
+
+## 8. Set up Playwright (for integration testing)
+
+Playwright itself should be installed in the project by the refresh script listed above, but you may need to install the browsers it uses.
+
+1. To install a browser for Playwright, in the location it expects to find it, with the following command:
+
+```powershell
 npx playwright install firefox
 ```
-:::
 
-See also:
-- [Troubleshooting](troubleshooting.md)
+2. Ensure the `BROWSER_TEST_URL` in the `.env` file in the project root is set to `http://comet-components.test`.
+
+3. In PhpStorm, ensure it understands Playwright for syntax highlighting and code completion by following these steps:
+  - add Playwright to the JS libraries under `Settings > Languages & Frameworks > JavaScript > Libraries`. Include all of `@playwright/test`, `playwright`, and `playwright-core`.
+  - In `Settings > Languages & Frameworks > TypeScript`, uncheck `use types from server`.
+
+## 9. Run Storybook
+
+The refresh script should have installed the dependencies for Storybook. Run it locally with:
+
+```powershell
+npm run storybook
+```

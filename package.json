@@ -13,7 +13,6 @@
     "generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
     "generate:json": "php scripts/generate-json-defs.php",
     "generate:stories": "php scripts/generate-stories.php",
-    "generate-from:wp": "node --import ./scripts/loader.mjs ./scripts/generate-from-wp-blocks.ts",
     "refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
     "refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
     "refresh:symlinks": "powershell.exe -ExecutionPolicy Bypass -File scripts/symlinks.ps1",

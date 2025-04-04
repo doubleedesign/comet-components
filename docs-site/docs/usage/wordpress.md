@@ -5,11 +5,13 @@ position: 3
 
 # Usage in WordPress themes and plugins
 
-[[toc]]
-
-See the [Getting Started > WordPress](../getting-started/wordpress.md) page for setup instructions.
-
+:::info
 This page details using Comet Components within WordPress for creating your own blocks.
+
+See the [Getting Started > WordPress](../getting-started/wordpress.md) page for initial setup instructions.
+:::
+
+[[toc]]
 
 ## With custom ACF blocks
 

@@ -1,7 +1,7 @@
 ---
 home: true
 title: Home
-heroImage: /hero.png
+#heroImage: /hero.png
 actions:
   - text: Dev docs
     link: /intro.html
@@ -23,7 +23,7 @@ features:
   - title: Semantic
     details: Carefully crafted HTML output prioritising semantic meaning and accessibility.
   - title: Clean
-    details: Combines BEM class naming and data attributes to balance scoped and global styling while avoiding class name soup.
+    details: BEM class naming and data attributes combine to balance scoped and global styling while avoiding class name soup.
 
 footer: A Double-E Design creation | Docs powered by VuePress
 ---

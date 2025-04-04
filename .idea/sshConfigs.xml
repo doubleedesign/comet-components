@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="SYN03GE.SYD5.hostyourservices.net" id="749e8e0b-ebdf-45a3-a712-bbc3f70a2443" port="2683" nameFormat="DESCRIPTIVE" username="cometcom" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>
