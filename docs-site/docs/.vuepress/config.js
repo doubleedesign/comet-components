@@ -16,6 +16,7 @@ export default defineUserConfig({
 	title: 'Comet Components',
 	description: 'A front-end user interface library for PHP-driven websites',
 
+	extend: '@vuepress/theme-default',
 	theme: defaultTheme({
 		logo: '/comet.png',
 		repo: 'doubleedesign/comet-components',
@@ -67,6 +68,8 @@ export default defineUserConfig({
 	],
 
 	bundler: viteBundler(),
+	dest: '../docs',
+	base: '/docs/',
 
 	head: [
 		['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/comet.png' }],

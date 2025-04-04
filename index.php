@@ -1,1 +1,2 @@
-<h1>Test site running via Laravel Herd</h1>
+<?php
+header('location: /docs/index.html');
