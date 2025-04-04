@@ -99,6 +99,13 @@ small {
 	[data-theme="dark"] & {
 		box-shadow: 0 0 0.5rem 2px rgba(255, 255, 255, 0.15);
 	}
+
+	&-item {
+
+		&:hover, &:focus, &:active {
+			border: 0;
+		}
+	}
 }
 
 .vp-sidebar {
@@ -371,7 +378,7 @@ div[vp-content]:has(.tycho-photo) {
 		/** Code column */
 		&:last-of-type:has(div[class*="language-"]) {
 			overflow-x: visible;
-			background: #1d1c21;
+			background: var(--code-c-bg);
 			border-top-right-radius: 0.25rem;
 			border-bottom-right-radius: 0.25rem;
 
