@@ -44,7 +44,7 @@ http://localhost:6001/pages/container-colours.php
 ```
 
 ## Option 2: Laravel Herd
-[Laravel Herd])(https://herd.laravel.com) is a local development environment for PHP applications. It provides a simple way to run a local web server with advanced debugging features.
+[Laravel Herd](https://herd.laravel.com) is a local development environment for PHP applications. It provides a simple way to run a local web server with advanced debugging features.
 
 More details on installing and configuring Herd can be found on the [PHP](../tooling/php.md) page. The below instructions assume you have Herd installed and running.
 

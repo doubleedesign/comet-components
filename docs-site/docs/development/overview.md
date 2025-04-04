@@ -45,11 +45,6 @@ Developers looking to use the library in their projects should refer to the [Usa
 // TODO more detail here
 :::
 
-## General quick tips
-
-- When developing for the WordPress plugin, running with Xdebug on can slow things down. If loading the editor or saving
-  seems unduly slow, test with Xdebug off to confirm if it's just that or if you have an actual performance issue.
-
 ## Glossary of terms
 
 | Term                      | Definition                                                                                                                                                                                                                                               |

@@ -28,11 +28,7 @@ export default defineUserConfig({
 				link: '/intro.html',
 			},
 			{
-				text: 'Getting started',
-				link: '/getting-started/wordpress.html',
-			},
-			{
-				text: 'Using and extending',
+				text: 'Usage',
 				link: '/usage/overview.html'
 			},
 			{
@@ -47,7 +43,7 @@ export default defineUserConfig({
 			},
 			...generateSidebar()
 		],
-		sidebarDepth: 1,
+		sidebarDepth: 0, // don't put page headings in the sidebar
 		markdown: {
 			lineNumbers: true,
 		},
@@ -78,7 +74,7 @@ export default defineUserConfig({
 
 // Generate structured sidebar items
 function generateSidebar() {
-	const preferredOrder = ['Getting Started', 'Usage', 'Development', 'Technical Deep Dives', 'About'];
+	const preferredOrder = ['Getting Started', 'Usage', 'Development', 'Technical Deep Dives', 'Local Dev Deep Dives', 'About'];
 	const items = [];
 	const files = fs.readdirSync(docsDir, { withFileTypes: true });
 

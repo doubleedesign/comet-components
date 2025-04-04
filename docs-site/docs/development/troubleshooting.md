@@ -148,6 +148,10 @@ Make sure the `php.ini` file for the currently selected version of PHP in Herd c
 If that configuration is correct and the class is one you recently added, try running `composer dump-autoload -o` in the root or the package where you added the file. This will regenerate the autoload files and ensure that any new classes are included.
 :::
 
+:::details WordPress running slowly when Xdebug is enabled
+When developing for the WordPress plugin, running with Xdebug on can slow things down. If loading the editor or saving seems unduly slow, test with Xdebug off to confirm if it's just that or if you have an actual performance issue.
+:::
+
 ## Front-end development
 
 ::: details Component JavaScript not loading in the browser

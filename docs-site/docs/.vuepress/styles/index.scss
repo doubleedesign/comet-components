@@ -101,9 +101,10 @@ small {
 	}
 
 	&-item {
-
-		&:hover, &:focus, &:active {
-			border: 0;
+		a {
+			&:hover, &:focus, &:active {
+				border: 0 !important;
+			}
 		}
 	}
 }
@@ -122,6 +123,26 @@ small {
 		&.active {
 			.arrow {
 				color: var(--vp-c-accent);
+			}
+		}
+	}
+
+	// Very hacky way of creating some subtle visual separation between general usage/info and dev/advanced docs
+	// the items don't have any identifiers to grab onto so we just have to go with the order at least for now
+	&-items {
+		> li:nth-of-type(4),
+		> li:last-child {
+			position: relative;
+			margin-top: 1rem;
+			padding-top: 1rem;
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 1.25rem;
+				right: 1.5rem;
+				border-top: 1px solid #CCC;
 			}
 		}
 	}
@@ -234,6 +255,8 @@ div[vp-content]:has(.tycho-photo) {
 		min-width: 100%;
 		max-width: none;
 		border: 1px solid var(--vp-c-border-hard, #d1d4d7);
+		border-collapse: separate;
+		border-radius: 0.5rem;
 
 		thead {
 			background: var(--vp-c-purple-soft);
@@ -298,7 +321,7 @@ div[vp-content]:has(.tycho-photo) {
 
 	&-description {
 		max-width: none;
-		margin-top: 1rem;
+		margin-top: -1rem;
 	}
 
 	&-actions {
