@@ -29,6 +29,10 @@ export default defineUserConfig({
 				link: '/intro.html',
 			},
 			{
+				text: 'Installation',
+				link: '/installation/wordpress.html'
+			},
+			{
 				text: 'Usage',
 				link: '/usage/overview.html'
 			},
@@ -42,7 +46,17 @@ export default defineUserConfig({
 				text: 'Introduction',
 				link: '/intro.html',
 			},
-			...generateSidebar()
+			...generateSidebar({ excludeFolders: ['about'] }),
+			{
+				text: 'Troubleshooting',
+				link: '/troubleshooting.html',
+			},
+			{
+				text: 'About',
+				link: '/about.html',
+				collapsible: true,
+				children: getSectionChildren('about')
+			}
 		],
 		sidebarDepth: 0, // don't put page headings in the sidebar
 		markdown: {
@@ -70,13 +84,20 @@ export default defineUserConfig({
 	base: '/docs/',
 
 	head: [
-		['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/comet.png' }],
+		['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/docs/comet.png' }],
 	],
 });
 
 // Generate structured sidebar items
-function generateSidebar() {
-	const preferredOrder = ['Getting Started', 'Usage', 'Development', 'Technical Deep Dives', 'Local Dev Deep Dives', 'About'];
+function generateSidebar({ excludeFolders }) {
+	const preferredOrder = [
+		'Installation',
+		'Usage',
+		'Development (Core)',
+		'Technical Deep Dives',
+		'New Implementations',
+		'Local Dev Deep Dives',
+	];
 	const items = [];
 	const files = fs.readdirSync(docsDir, { withFileTypes: true });
 
@@ -86,13 +107,23 @@ function generateSidebar() {
 			// Check if there's a README.md file for the main section
 			const readmePath = path.join(docsDir, folderName, 'README.md');
 			const hasReadme = fs.existsSync(readmePath);
+			let sectionTitle;
 
-			// Try to extract title from README if it exists
-			let sectionTitle = Case.title(folderName).replace('Js', 'JS').replace('Php', 'PHP');
-			if (hasReadme) {
-				const extractedTitle = extractTitleFromMarkdown(readmePath);
-				if (extractedTitle) {
-					sectionTitle = extractedTitle;
+			// Hackily manually name the items for certain folders
+			if(folderName === 'development-core') {
+				sectionTitle = 'Development (Core)';
+			}
+			else if(folderName === 'development-new') {
+				sectionTitle = 'New Implementations';
+			}
+			else {
+				// Try to extract title from README if it exists
+				sectionTitle = Case.title(folderName).replace('Js', 'JS').replace('Php', 'PHP');
+				if (hasReadme) {
+					const extractedTitle = extractTitleFromMarkdown(readmePath);
+					if (extractedTitle) {
+						sectionTitle = extractedTitle;
+					}
 				}
 			}
 
@@ -120,7 +151,14 @@ function generateSidebar() {
 		}
 
 		return aIndex - bIndex;
-	});
+	}).filter((item => {
+		// Filter out excluded folders
+		if (excludeFolders) {
+			return !excludeFolders.includes(Case.title(item.text));
+		}
+
+		return true;
+	}));
 }
 
 // Get the child pages for a specific section folder, including nested subfolders

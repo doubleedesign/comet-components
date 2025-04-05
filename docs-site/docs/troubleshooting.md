@@ -1,5 +1,6 @@
 ---
-position: 10
+title: Troubleshooting
+position: 9
 ---
 
 # Troubleshooting
@@ -67,7 +68,7 @@ php --ini
 1. Go to File > Settings > Languages & Frameworks > PHP > CLI Interpreter
 2. Click the `...` button next to the interpreter path
 3. In the dialog that appears, there will be a field to set the configuration file path. **You do not need to do this if it has automatically been detected.** Keep reading - look for the blue info icon with the configuration path below that. An example is pictured below.
-   ![phpstorm-php.png](../.vuepress/public/phpstorm-phpini.png)
+   ![phpstorm-php.png](/phpstorm-phpini.png)
 
 :::
 

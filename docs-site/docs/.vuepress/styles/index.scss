@@ -8,6 +8,18 @@
 	--vp-c-accent-hover: #{color.scale(#845ec2, $lightness: -15%)};
 	--content-width: 840px;
 	--search-input-width: 12rem;
+
+	--announcement-banner-height: 90px;
+	@media (min-width: 768px) {
+		--announcement-banner-height: 64px;
+	}
+	@media (min-width: 1140px) {
+		--announcement-banner-height: 40px;
+	}
+}
+
+html {
+	scroll-behavior: smooth;
 }
 
 body {
@@ -17,14 +29,14 @@ body {
 #app:has(.announcement-banner) {
 
 	.vp-theme-container {
-		padding-top: 40px; // TODO: This is for the height of the announcement banner nad needs to be made responsive
+		padding-top: var(--announcement-banner-height);
 
 		.vp-navbar {
-			top: 40px;
+			top: var(--announcement-banner-height);
 		}
 
 		.vp-sidebar {
-			padding-top: 40px;
+			padding-top: var(--announcement-banner-height);
 		}
 
 		.vp-page {
@@ -36,6 +48,12 @@ body {
 h1 {
 	font-family: gelica, sans-serif;
 	font-weight: 600;
+}
+
+h2 {
+	.header-anchor {
+		scroll-padding-top: calc(var(--navbar-height) + var(--announcement-banner-height) + 2rem);
+	}
 }
 
 p {
@@ -253,6 +271,15 @@ div[vp-content]:has(.tycho-photo) {
 		.tycho-photo + p + .hint-container.info {
 			// Container width minus image width + some spacing
 			width: calc(100% - 300px - 3rem);
+		}
+	}
+}
+
+[vp-content], .vp-page-meta {
+	@media (min-width: 1140px) {
+
+		#app:has(.in-page-nav__content) & {
+			padding-inline-end: 20rem;
 		}
 	}
 }
@@ -728,6 +755,30 @@ div[vp-content]:has(.tycho-photo) {
 			&.property {
 				color: #B48FFF;
 			}
+		}
+	}
+}
+
+// Page-specific overrides
+div[vp-content]:has(h1#local-development-setup) {
+	counter-set: sections;
+
+	.table-of-contents ul {
+		margin-inline-start: 0.75rem;
+		list-style: decimal-leading-zero;
+
+		ul {
+			list-style: circle;
+			margin-inline-start: -0.25rem;
+		}
+	}
+
+	h2 {
+		counter-increment: sections;
+
+		&:before {
+			content: counter(sections) ". ";
+			font-weight: 400;
 		}
 	}
 }

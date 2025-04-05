@@ -1,3 +1,8 @@
+---
+title: Introduction
+position: 0
+---
+
 # Welcome!
 
 <figure class="comet-photo">

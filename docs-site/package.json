@@ -1,29 +1,29 @@
 {
-  "name": "comet-components-docs",
-  "version": "0.0.1",
-  "type": "module",
-  "scripts": {
-    "docs:build": "vuepress build docs",
-    "docs:clean-dev": "vuepress dev docs --clean-cache",
-    "docs:dev": "vuepress dev docs",
-    "docs:update-package": "npx vp-update"
-  },
-  "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.20",
-    "@vuepress/plugin-markdown-ext": "2.0.0-rc.91",
-    "@vuepress/plugin-markdown-tab": "2.0.0-rc.91",
-    "@vuepress/plugin-prismjs": "2.0.0-rc.91",
-    "@vuepress/plugin-search": "^2.0.0-rc.91",
-    "@vuepress/theme-default": "2.0.0-rc.91",
-    "generate-vue-cli": "^0.0.2",
-    "prism-themes": "^1.9.0",
-    "sass": "^1.86.0",
-    "sass-embedded": "^1.86.0",
-    "sass-loader": "^16.0.5",
-    "vue": "^3.5.13",
-    "vuepress": "2.0.0-rc.20"
-  },
-  "dependencies": {
-    "case": "^1.6.3"
-  }
+	"name": "comet-components-docs",
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"docs:build": "vuepress build docs",
+		"docs:clean-dev": "vuepress dev docs --clean-cache",
+		"docs:dev": "vuepress dev docs",
+		"docs:update-package": "npx vp-update"
+	},
+	"devDependencies": {
+		"@vuepress/bundler-vite": "2.0.0-rc.20",
+		"@vuepress/plugin-markdown-ext": "2.0.0-rc.91",
+		"@vuepress/plugin-markdown-tab": "2.0.0-rc.91",
+		"@vuepress/plugin-prismjs": "2.0.0-rc.91",
+		"@vuepress/plugin-search": "^2.0.0-rc.91",
+		"@vuepress/theme-default": "2.0.0-rc.91",
+		"generate-vue-cli": "^0.0.2",
+		"prism-themes": "^1.9.0",
+		"sass": "^1.86.0",
+		"sass-embedded": "^1.86.0",
+		"sass-loader": "^16.0.5",
+		"vue": "^3.5.13",
+		"vuepress": "2.0.0-rc.20"
+	},
+	"dependencies": {
+		"case": "^1.6.3"
+	}
 }

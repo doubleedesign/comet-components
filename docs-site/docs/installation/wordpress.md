@@ -1,8 +1,8 @@
 ---
-title: WordPress
+title: WordPress - Block Editor
 ---
 
-# Setup for WordPress
+# Setup for WordPress - Block Editor (Gutenberg)
 
 [[toc]]
 
@@ -34,7 +34,7 @@ The Comet Components plugin provides:
 
 - implementations of WordPress core blocks listed in its `block-support.json` file
 - additional blocks and variations that correspond to Comet components such as `Container`, `Call-to-Action`, `Callout`,  `FileGroup`, `Accordion`, and `Tabs`
-- support for using Comet Components for reusable blocks (synced patterns), such as a call-to-action used in multiple  places on a site.
+- support for using Comet Components for reusable blocks (synced patterns), such as a call-to-action used in multiple places on a site.
 
 Comet Components blocks utilise core blocks and options where practical, but some blocks do use ACF Pro where it provides a better user experience. You can use Comet without ACF, you'll just be missing some blocks.
 
@@ -43,7 +43,7 @@ Comet Components blocks utilise core blocks and options where practical, but som
 The Comet Canvas theme is designed to be used as a parent theme and provides:
 
 - Common navigation menu configuration
-- Implementations of Comet's `SiteHeader`, `PageHeader`, and `SiteFooter` components (with relevant inner components  like `Menu` and `Breadcrumbs`) in the relevant files as per the WordPress template hierarchy
+- Implementations of Comet's `SiteHeader`, `PageHeader`, and `SiteFooter` components (with relevant inner components like `Menu` and `Breadcrumbs`) in the relevant files as per the WordPress template hierarchy
 - Injection of theme colours from `theme.json` as embedded CSS variables in the `<head>`
 - Enqueueing of theme `style.css` files in the block editor and front-end
 - Site Health checks for required and recommended plugins.

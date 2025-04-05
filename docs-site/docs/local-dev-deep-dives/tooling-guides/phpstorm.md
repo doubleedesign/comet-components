@@ -46,12 +46,9 @@ If you add a new JS file, you need to add it to `rollup.index.js` so that Rollup
 
 :::details Sass
 
-If you have installed Sass globally on your machine, you can set up a file watcher in PhpStorm to compile your SCSS to
-matching CSS files. This is particularly useful if using pure Dart Sass installed via Chocolatey in Windows. (Also, it's
-just neat to not have to run a command at all.)
+If you have installed Sass globally on your machine, you can set up a file watcher in PhpStorm to compile your SCSS to matching CSS files. This is particularly useful if using pure Dart Sass installed via Chocolatey in Windows. (Also, it's just neat to not have to run a command at all.)
 
-PhpStorm will probably prompt you to set up a file watcher when you open a `.scss` file for the first time, but you can
-also find the configuration in `File > Settings > Tools > File Watchers`. An example config looks like this:
+PhpStorm will probably prompt you to set up a file watcher when you open a `.scss` file for the first time, but you can also find the configuration in `File > Settings > Tools > File Watchers`. An example config looks like this:
 
 ![Sass file watcher](/phpstorm-scss-filewatcher.png)
 
@@ -61,9 +58,7 @@ At the time of writing this, two Sass watchers are included the provided configu
 2. To compile the `blocks.scss` file in the WordPress plugin package, which imports files from the core package; the
    watcher also watches those.
 
-The difference between the two is that the core one is scoped to a custom scope of just that package folder (you can
-create this under `Files to watch -> Scope ->` click the 3 dots), whereas the WordPress plugin one is scoped to the
-entire project so that the core package's files are also watched.
+The difference between the two is that the core one is scoped to a custom scope of just that package folder (you can create this under `Files to watch -> Scope ->` click the 3 dots), whereas the WordPress plugin one is scoped to the entire project so that the core package's files are also watched.
 :::
 
 :::details Rollup (JavaScript bundling)
@@ -93,14 +88,18 @@ If you are working on the core package (or an implementation where you are overr
 
 In `File > Settings > Tools > File Watchers`:
 
+**Using Node (suitable for Bash/WSL users):**
 ![Blade file watcher](/phpstorm-blade-filewatcher.png)
+
+**Using PowerShell:**
+![Blade file watcher PowerShell](/phpstorm-blade-filewatcher-powershell.png)
 
 **Important:** Ensure you exclude Blade files from PhpStorm's built-in reformatting, as it will cause conflicts. By default, Blade templates will adopt the HTML code style settings, which might not match what you want for Blade due to how it treats @directives as HTML attributes. You can find the setting to exclude Blade files in `File -> Settings -> Editor -> Code Style`. Click Code Style itself at the top level, and then the `Formatter` tab.
 :::
 
 :::details JavaScript and TypeScript
 
-[ESLint](https://eslint.org/) is configured for linting and formatting JavaScript and TypeScript code in this project You can enable ESLint to pick up problems within the IDE as well as fix them automatically on save in `File > Settings > Languages & Frameworks > JavaScript > Code Quality Tools > ESLint`.
+[ESLint](https://eslint.org/) is configured for linting and formatting JavaScript and TypeScript code in this project. You can enable ESLint to pick up problems within the IDE as well as fix them automatically on save in `File > Settings > Languages & Frameworks > JavaScript > Code Quality Tools > ESLint`.
 
 It _should_ pick up the configuration file located in the root of the project (`./.eslint.config.js`), but you can set the path to your configuration manually if necessary or preferred.
 
