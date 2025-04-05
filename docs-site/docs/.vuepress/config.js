@@ -46,16 +46,16 @@ export default defineUserConfig({
 				text: 'Introduction',
 				link: '/intro.html',
 			},
-			...generateSidebar({ excludeFolders: ['about'] }),
+			...generateSidebar({ excludeFolders: ['About'] }),
 			{
 				text: 'Troubleshooting',
 				link: '/troubleshooting.html',
 			},
 			{
 				text: 'About',
-				link: '/about.html',
+				link: '/about/changelog.html',
 				collapsible: true,
-				children: getSectionChildren('about')
+				children: getSectionChildren('about'),
 			}
 		],
 		sidebarDepth: 0, // don't put page headings in the sidebar
