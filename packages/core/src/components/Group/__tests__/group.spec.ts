@@ -1,4 +1,5 @@
-import { test, expect, Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import type { Page } from 'playwright';
 import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/playwright-utils';
 
 test.describe('Group', () => {
@@ -6,7 +7,7 @@ test.describe('Group', () => {
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/pages/group-colours.php', {
+		await page.goto('/test/browser/pages/group-colours.php', {
 			waitUntil: 'domcontentloaded',
 		});
 	});

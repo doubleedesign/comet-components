@@ -1,4 +1,5 @@
-import { test, expect, Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import type { Page } from 'playwright';
 import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/playwright-utils';
 
 test.describe('Columns', () => {
@@ -6,7 +7,7 @@ test.describe('Columns', () => {
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/pages/columns-colours.php', {
+		await page.goto('/test/browser/pages/columns-colours.php', {
 			waitUntil: 'domcontentloaded',
 		});
 	});

@@ -58,5 +58,6 @@
     <content url="file://$MODULE_DIR$/packages/core/dist" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Playwright" level="project" />
   </component>
 </module>

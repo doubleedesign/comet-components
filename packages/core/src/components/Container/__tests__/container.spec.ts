@@ -1,12 +1,14 @@
-import { test, expect, Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import type { Page } from 'playwright';
 import { getPadding, SECTION_PADDING } from '../../../../../../test/playwright-utils';
 
+// Define a test fixture for the page
 test.describe('Container', () => {
 	let page: Page;
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/pages/container-colours.php', {
+		await page.goto('/test/browser/pages/container-colours.php', {
 			waitUntil: 'domcontentloaded',
 		});
 	});

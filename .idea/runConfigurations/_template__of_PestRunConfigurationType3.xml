@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="PestRunConfigurationType">
+    <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/">
+      <envs>
+        <env name="APP_ENV" value="development" />
+      </envs>
+    </CommandLine>
+    <option name="pestRunnerSettings">
+      <PestRunner configuration_file="$PROJECT_DIR$/test/phpunit.xml" method="" scope="Method" options="--debug" use_alternative_configuration_file="true" />
+    </option>
+    <method v="2" />
+  </configuration>
+</component>

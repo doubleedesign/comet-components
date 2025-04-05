@@ -1,15 +1,14 @@
 // Utility function to get the computed padding of an element as a number
-export async function getPadding(element): Promise<number> {
-	const values = await element.evaluate((element) => {
+export async function getPadding(element): Promise<number[]> {
+	return element.evaluate((el) => {
+		const style = window.getComputedStyle(el);
 		return [
-			window.getComputedStyle(element).getPropertyValue('padding-top'),
-			window.getComputedStyle(element).getPropertyValue('padding-right'),
-			window.getComputedStyle(element).getPropertyValue('padding-bottom'),
-			window.getComputedStyle(element).getPropertyValue('padding-left'),
+			parseFloat(style.paddingTop),
+			parseFloat(style.paddingRight),
+			parseFloat(style.paddingBottom),
+			parseFloat(style.paddingLeft)
 		];
 	});
-
-	return values.map((value: string) => Math.ceil(Number(value.replace('px', ''))));
 }
 
 export const SECTION_PADDING = [32, 0, 32, 0];
