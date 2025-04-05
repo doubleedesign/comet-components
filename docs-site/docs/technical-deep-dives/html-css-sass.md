@@ -62,6 +62,81 @@ And remember:
 - if you're using a class name for styling, that doesn't mean you shouldn't also have ARIA attributes or roles on the element. Accessibility and machine-readability is always of paramount importance.
   :::
 
+### Practical examples
+
+The below examples compare the default WordPress block output to that of the same block using Comet Components.
+
+:::details Group with background colour
+```html
+<!-- WordPress core -->
+<div class="wp-block-group has-accent-2-background-color has-background has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+	<p>Group content</p>
+</div>
+```
+
+```html
+<!-- Comet Components -->
+<div class="layout-block group" data-background="primary">
+	<p>Group content</p>
+</div>
+```
+:::
+
+:::details Button group, horizontally centered, vertical orientation, different colours, one solid and one outline style
+```html
+<!-- WordPress core -->
+<div class="wp-block-buttons is-vertical is-content-justification-center is-layout-flex wp-container-core-buttons-is-layout-1 wp-block-buttons-is-layout-flex">
+	<div class="wp-block-button">
+		<a class="wp-block-button__link has-accent-3-background-color has-background wp-element-button">Button 1</a>
+	</div>
+	<div class="wp-block-button is-style-outline is-style-outline--2">
+		<a class="wp-block-button__link wp-element-button">Button 2</a>
+	</div>
+</div>
+```
+
+```html
+<!-- Comet Components -->
+<div role="group" class="button-group" data-orientation="vertical" data-halign="center">
+	<a class="button button--primary">
+		<span>Button 1</span>
+	</a>
+	<a class="button button--secondary button--secondary--outline">
+		<span>Button 2</span>
+	</a>
+</div>
+```
+:::
+
+:::details Columns block with two even columns, one with middle vertical alignment
+```html
+<!-- WordPress core -->
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
+	<div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow">
+		<p>Column 1</p>
+	</div>
+	<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+		<p>Column 2</p>
+	</div>
+</div>
+```
+```html
+<!-- Comet Components -->
+<div class="layout-block columns" data-allow-layout-stacking="true" data-count="2">
+	<div class="column columns__column" data-valign="center">
+		<div class="column__inner">
+			<p>Column 1</p>
+		</div>
+	</div>
+	<div class="column columns__column">
+		<div class="column__inner">
+			<p>Column 2</p>
+		</div>
+	</div>
+</div>
+```
+:::
+
 ## Sass/CSS development approach
 
 Vanilla CSS now has a lot of the features that SCSS was created to provide, such as variables and nesting, and even some colour functions like `lighten` and `darken` can be replicated without SCSS now. Nonetheless, it is used within the `core` package for conveniences such as mixins, loops, and neat [BEM](https://getbem.com/) class syntax.

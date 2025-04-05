@@ -47,3 +47,6 @@ More advanced customisation is enabled through the object-oriented architecture 
 
 More information can be found in the [Theming](./usage/theming.md) and [Extending](./usage/extending.md) documentation.
 :::
+
+For some examples of these principles in action in WordPress, you can find some comparisons of the default output (on a site with the default theme and no plugins) to that of Comet Components for some simple, common block configurations on the [HTML, CSS, and SCSS technical deep dive](./technical-deep-dives/html-css-sass.md) page.
+
