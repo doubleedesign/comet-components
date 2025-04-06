@@ -24,6 +24,12 @@ Create your implementation as a Composer package with the Comet Components core 
 }
 ```
 
+Or if you have already set up your Composer configuration, you can install Comet with:
+
+```bash
+composer require doubleedesign/comet-components-core
+```
+
 ## Setting configuration
 
 Implementations need a way to set the global configuration for the components, which are found in the `CometConfig` class.
