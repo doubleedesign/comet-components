@@ -5,7 +5,7 @@ import stylisticPlugin from '@stylistic/eslint-plugin-ts';
 
 export default [
 	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.spec.ts'],
 		ignores: ['node_modules/**'],
 		languageOptions: {
 			parser: tsParser,
@@ -81,8 +81,7 @@ export default [
 			],
 			'block-spacing': 'error',
 			'@typescript-eslint/no-explicit-any': 'warn',
-			'@typescript-eslint/no-unused-vars': 'warn',
-			'@typescript-eslint/no-floating-promises': 'warn',
+			'@typescript-eslint/no-unused-vars': 'warn'
 		}
 	},
 ];

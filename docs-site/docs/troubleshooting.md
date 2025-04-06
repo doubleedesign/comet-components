@@ -81,35 +81,6 @@ If this error is occurring for an NPM package and you ran `npm install` from WSL
 If this is occurring for Sass, consider [installing Sass natively using Chocolatey](./tooling/sass.md) and setting the file watcher to use that.
 :::
 
-::: details Missing syntax highlighting in TypeScript files
-Make sure the package containing definitions is listed in the root `tsconfig.json` file. For example, JS testing tools such as Playwright need to be added here for syntax highlighting to work in PhpStorm, like so:
-
-```json
-{
-	"compilerOptions": {
-		"types": [
-			"node",
-			"playwright"
-		]
-	}
-}
-```
-
-In PhpStorm, you may also need to:
-- add Playwright to the JS libraries under `Settings > Languages & Frameworks > JavaScript > Libraries`. Include all of `@playwright/test`, `playwright`, and `playwright-core`
-- Uncheck "use types from server" in the TypeScript settings under `Settings > Languages & Frameworks > TypeScript`
-- You may also need to restart the TypeScript service and wait a minute or so to ensure the changes take effect, and/or close and reopen any Playwright files currently open. The restart option is usually located in the bottom right of the IDE. If it's still not refreshing, try invalidating caches and restarting the IDE (`File > Invalidate Caches / Restart...`).
-
-:::
-
-::: details Missing Playwright browsers in Windows
-In a separate PowerShell window with admin privileges:
-
-```powershell:no-line-numbers
-npx playwright install firefox
-```
-:::
-
 ::: details PhpStorm not detecting Xdebug when using Laravel Herd
 If you are trying to use Xdebug for unit test code coverage and nothing has triggered Herd's automatic Xdebug detection, you can enable it manually:
 
@@ -169,3 +140,39 @@ If the script is listed in `rollup.index.js` and the import path transformation 
 In PhpStorm, try running "reload all from disk" to make it realise the file has changed. If that doesn't help, make a whitespace change in the file you want to recompile (not the one that's imported, that you already actually changed).
 
 :::
+
+## Testing
+
+::: details Missing Playwright browsers in Windows
+In a separate PowerShell window with admin privileges:
+
+```powershell:no-line-numbers
+npx playwright install firefox
+```
+:::
+
+::: details Missing syntax highlighting in Playwright spec files
+Make sure the package containing definitions is listed in the root `tsconfig.json` file. For example, JS testing tools such as Playwright need to be added here for syntax highlighting to work in PhpStorm, like so:
+
+```json
+{
+	"compilerOptions": {
+		"types": [
+			"node",
+			"playwright"
+		]
+	}
+}
+```
+
+In PhpStorm, you may also need to:
+- add Playwright to the JS libraries under `Settings > Languages & Frameworks > JavaScript > Libraries`. Include all of `@playwright/test`, `playwright`, and `playwright-core`
+- Uncheck "use types from server" in the TypeScript settings under `Settings > Languages & Frameworks > TypeScript`
+- You may also need to restart the TypeScript service and wait a minute or so to ensure the changes take effect, and/or close and reopen any Playwright files currently open. The restart option is usually located in the bottom right of the IDE. If it's still not refreshing, try invalidating caches and restarting the IDE (`File > Invalidate Caches / Restart...`).
+
+:::
+
+:::details Playwright Error: locator.evaluate: Target page, context or browser has been closed
+When trying to use the same page for multiple tests, you may get this error because the page closes prematurely when tests are running in parallel. You can instead run them in sequence using `test.describe.serial` instead of just `test.describe`.
+:::
+
