@@ -8,3 +8,4 @@ composer.json linguist-detectable=false
 composer.lock linguist-detectable=false
 package.json linguist-detectable=false
 package.lock linguist-detectable=false
+src/plugins/vue-wrapper/src/** linguist-vendored=true
