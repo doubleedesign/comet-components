@@ -11,13 +11,13 @@ class Separator extends Renderable {
 	protected ThemeColor $color = ThemeColor::PRIMARY;
 
 	function __construct(array $attributes) {
+		$classes = $attributes['classes'] ?? [];
+		if(isset($attributes['className'])) {
+			$classes[] = str_replace('is-style-', 'separator--', $attributes['className']);
+		}
+
 		parent::__construct(
-			array_merge(
-				$attributes,
-				['classes' => [
-					...$attributes['classes'] ?? [],
-					str_replace('is-style-', 'separator--', $attributes['className'])
-				]]),
+			array_merge($attributes, ['classes' => $classes]),
 			'components.Separator.separator'
 		);
 

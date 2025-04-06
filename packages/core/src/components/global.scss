@@ -112,6 +112,12 @@ body {
 	}
 }
 
+[data-background] {
+	// Most elements with backgrounds are expected to be nested, so this is a sensible default
+	// Putting this in specific components causes specificity issues with the below overrides
+	@include nested-padding();
+}
+
 @each $name, $color in $colors {
 	// Basic styling for elements with a text colour attribute specified
 	[data-text-color="#{$name}"] {
@@ -128,14 +134,10 @@ body {
 	[data-background="#{$name}"] {
 		background-color: var(--color-#{$name});
 		color: var(--readable-color-#{$name});
-
-		// Most elements with backgrounds are expected to be nested, so this is a sensible default
-		// Putting this in specific components causes specificity issues with the below overrides
-		@include nested-padding();
 	}
 
-	// If an element has a directly nested child with the same background, that child should not have padding
-	[data-background="#{$name}"] > [data-background="#{$name}"] {
+	// If an element has a directly nested only child with the same background, that child should not have padding
+	[data-background="#{$name}"] > [data-background="#{$name}"]:only-child {
 		padding: 0;
 	}
 
@@ -148,9 +150,29 @@ body {
 			padding-block-start: 0;
 		}
 
-		// If its immediate child has the same solid background, the child should not have any padding
-		&[data-background="#{$name}"] > &[data-background="#{$name}"] {
-			padding: 0;
+		// If its immediate child has the same solid background:
+		&[data-background="#{$name}"] {
+			// Only child should not have any padding
+			> [data-background="#{$name}"]:only-child {
+				padding: 0;
+			}
+
+			// First child of multiple should only have bottom padding (if any)
+			> [data-background="#{$name}"]:first-child:not(:only-child) {
+				padding-inline: 0;
+				padding-block-start: 0;
+			}
+
+			// Last child of multiple should only have top padding (if any)
+			> [data-background="#{$name}"]:last-child:not(:only-child) {
+				padding-inline: 0;
+				padding-block-end: 0;
+			}
+		}
+
+		// If its immediate child is also a layout block but that has no background set, it should have padding
+		&[data-background] > .layout-block:not([data-background]) {
+			@include nested-padding();
 		}
 
 		// If its immediate child has no background set but the next level child does,

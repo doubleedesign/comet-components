@@ -44,6 +44,7 @@ if(str_starts_with($path, '/pages/') || str_starts_with($path, '/test/browser/pa
 		array_push($supportingCss, 'columns.css');
 		array_push($supportingCss, 'column.css');
 		array_push($supportingCss, 'group.css');
+		array_push($supportingCss, 'separator.css');
 	}
 }
 // For standalone components, load the stylesheet with the same name as the component

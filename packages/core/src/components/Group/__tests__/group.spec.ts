@@ -119,12 +119,17 @@ test.describe.serial('Group', () => {
 			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
 		});
 
-		test('Neither of the inner groups have padding', async () => {
+		test('First group has bottom padding only', async () => {
 			const wrapper = page.getByTestId('example-8');
 			const element1 = await getPadding(wrapper.locator('.group > .group').nth(0));
+
+			expect(element1).toStrictEqual([0, 0, 16, 0]);
+		});
+
+		test('Second group has no padding', async () => {
+			const wrapper = page.getByTestId('example-8');
 			const element2 = await getPadding(wrapper.locator('.group > .group').nth(1));
 
-			expect(element1).toStrictEqual(NO_PADDING);
 			expect(element2).toStrictEqual(NO_PADDING);
 		});
 	});

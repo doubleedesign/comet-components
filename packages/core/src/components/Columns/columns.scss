@@ -1,4 +1,5 @@
 @use '../mixins' as *;
+@use '../variables' as *;
 
 @mixin stack-columns-until($breakpointName) {
 	@include container-width-down($breakpointName) {
@@ -17,10 +18,6 @@
 	// Default/auto layout
 	display: grid;
 	grid-gap: var(--spacing-md);
-
-	&[data-background] {
-		@include nested-padding();
-	}
 
 	@include container-width-up('narrow') {
 		grid-gap: var(--spacing-lg);
@@ -76,6 +73,32 @@
 
 		@include container-width-up('narrow') {
 			gap: var(--spacing-lg);
+		}
+	}
+
+	// If this element has at least one child with a different background colour set, all children should have padding so they align
+	@each $color, $value in $colors {
+		&[data-background="#{$value}"] {
+			// Has any direct child with a different background
+			@each $color2, $value in $colors {
+				@if $color != $color2 {
+					&:has(> [data-background="#{$value}"]) {
+						.columns__column {
+							@include nested-padding();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// If this element doesn't have a background set, and there are any direct children with one,
+	// then all children should have padding so they align
+	&:not([data-background]) {
+		&:has(> [data-background]) {
+			.columns__column {
+				@include nested-padding();
+			}
 		}
 	}
 }

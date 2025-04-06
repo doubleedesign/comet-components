@@ -2,9 +2,6 @@
   display: grid;
   grid-gap: var(--spacing-md);
 }
-.columns[data-background] {
-  padding: var(--spacing-md);
-}
 @container (min-width: 960px) {
   .columns {
     grid-gap: var(--spacing-lg);
@@ -57,6 +54,279 @@
   .columns:has(> .columns__column--has-own-width) {
     gap: var(--spacing-lg);
   }
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#845ec2"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ba3caf"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00d2fc"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#f9c971"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#00c9a7"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#d23e3e"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#F0F0F2"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#4b4453"]:has(> [data-background="#ffffff"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#845ec2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#ba3caf"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#00d2fc"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#f9c971"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#00c9a7"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#d23e3e"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#F0F0F2"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns[data-background="#ffffff"]:has(> [data-background="#4b4453"]) .columns__column {
+  padding: var(--spacing-md);
+}
+.columns:not([data-background]):has(> [data-background]) .columns__column {
+  padding: var(--spacing-md);
 }
 
 /*# sourceMappingURL=columns.css.map */
