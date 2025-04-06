@@ -35,7 +35,8 @@
 			".bladeformatterrc.json",
 			"**/*.spec.ts",
 			"src/components/**/*.json",
-			"src/components/**/__tests__"
+			"src/components/**/__tests__",
+			"README.md"
 		]
 	},
 	"repositories": [
