@@ -33,13 +33,13 @@ This is of course a balancing act with the benefits of BEM for styling and ensur
 
 :::
 
-:::details What it looks like: Data attributes
+:::details What it looks like or how it behaves: Data attributes
 In Comet Components, data attributes are used for centralised styling of common, well-scoped, and reasonably generic variation properties (such as background colours) and layout states (such as orientation). The benefits include:
 - a single source of sensible defaults and shared styles, which keeps their usage consistent and the CSS maintainable
 - those properties are easy to access for JavaScript-based extension and customisation.
 
-This is a minor departure from a full commitment to BEM. For example, instead of
-`class="tabs tabs--vertical"` we use
+This is a minor departure from a full commitment to BEM. For example, for layout behaviour like orientation, instead of
+`class="tabs tabs--vertical"`, we use
 `class="tabs" data-orientation="vertical"`.
 
 In this example, the data attribute approach means:
@@ -64,9 +64,9 @@ And remember:
 
 ### Practical examples
 
-The below examples compare the default WordPress block output to that of the same block using Comet Components.
+The below examples compare the default WordPress output to that of the same block or feature using Comet Components.
 
-:::details Group with background colour
+:::details Group block with background colour
 ```html
 <!-- WordPress core -->
 <div class="wp-block-group has-accent-2-background-color has-background has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
@@ -82,7 +82,7 @@ The below examples compare the default WordPress block output to that of the sam
 ```
 :::
 
-:::details Button group, horizontally centered, vertical orientation, different colours, one solid and one outline style
+:::details Buttons block, horizontally centered, vertical orientation, different colours, one solid and one outline style
 ```html
 <!-- WordPress core -->
 <div class="wp-block-buttons is-vertical is-content-justification-center is-layout-flex wp-container-core-buttons-is-layout-1 wp-block-buttons-is-layout-flex">
@@ -134,6 +134,43 @@ The below examples compare the default WordPress block output to that of the sam
 		</div>
 	</div>
 </div>
+```
+:::
+
+:::details Default output of `wp_nav_menu` vs Comet Canvas's handling + Comet Menu component
+
+```html
+<!-- WordPress core -->
+<div class="menu-all-pages-container">
+	<ul id="menu-all-pages" class="menu">
+		<li id="menu-item-2247" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-2247">
+			<a href="http://vanilla-playground.local/" aria-current="page">Home</a>
+		</li>
+		<li id="menu-item-2248" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2248">
+			<a href="http://vanilla-playground.local/buttons/">Buttons</a>
+		</li>
+		<li id="menu-item-2249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2249">
+			<a href="http://vanilla-playground.local/columns/">Columns</a>
+		</li>
+	</ul>
+</div>
+```
+
+```html
+<!-- Comet Components -->
+<nav class="site-footer__menu">
+	<ul class="site-footer__menu-list">
+		<li class="site-footer__menu-list__item" id="2247">
+			<a class="site-footer__menu-list__item__link" aria-current="page" href="http://vanilla-playground.local/">Home</a>
+		</li>
+		<li class="site-footer__menu-list__item" id="2248">
+			<a class="site-footer__menu-list__item__link" href="http://vanilla-playground.local/buttons/">Buttons</a>
+		</li>
+		<li class="site-footer__menu-list__item" id="2249">
+			<a class="site-footer__menu-list__item__link" href="http://vanilla-playground.local/columns/">Columns</a>
+		</li>
+	</ul>
+</nav>
 ```
 :::
 
