@@ -118,6 +118,21 @@ body {
 	@include nested-padding();
 }
 
+.layout-block {
+	// If a layout block's immediate child is also a layout block but that has no background set, it should have padding
+	&[data-background] > .layout-block:not([data-background]) {
+		@include nested-padding();
+	}
+
+	// Treat vertically adjacent layout blocks that have no background colour the same as if they had the same solid background
+	// (We do not generally expect these to be directly horizontally adjacent - they would need to be within an element that handles that, such as Columns)
+	&:not([data-background]) {
+		& + & {
+			padding-block-start: 0;
+		}
+	}
+}
+
 @each $name, $color in $colors {
 	// Basic styling for elements with a text colour attribute specified
 	[data-text-color="#{$name}"] {
@@ -170,23 +185,10 @@ body {
 			}
 		}
 
-		// If its immediate child is also a layout block but that has no background set, it should have padding
-		&[data-background] > .layout-block:not([data-background]) {
-			@include nested-padding();
-		}
-
 		// If its immediate child has no background set but the next level child does,
 		// and it's the same as this element's background, remove the padding of that third level element
 		&[data-background="#{$name}"] > &:not([data-background]) > &[data-background="#{$name}"] {
 			padding: 0;
-		}
-
-		// Treat vertically adjacent layout blocks that have no background colour the same as if they had the same solid background
-		// (We do not generally expect these to be directly horizontally adjacent - they would need to be within an element that handles that, such as Columns)
-		&:not([data-background]) {
-			& + & {
-				padding-block-start: 0;
-			}
 		}
 	}
 
