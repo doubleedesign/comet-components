@@ -38,7 +38,7 @@ export default defineUserConfig({
 			},
 			{
 				text: 'Development',
-				link: '/development/overview.html',
+				link: '/development-core/overview.html',
 			}
 		],
 		sidebar: [
