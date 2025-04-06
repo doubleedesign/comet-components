@@ -1,0 +1,40 @@
+name: Split Package
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/core/**'
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Split Repository
+        run: |
+          git subtree split --prefix=packages/core -b split-branch
+
+      - name: Clone target repository
+        run: |
+          mkdir -p /tmp/split-repo
+          cd /tmp/split-repo
+          git init
+          git remote add origin https://github.com/doubleedesign/comet-components-core.git
+          
+          # Pull from the split branch
+          git pull $GITHUB_WORKSPACE split-branch
+
+      - name: Push to Package Repository
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.COMET_TOKEN }}
+          branch: master
+          repository: doubleedesign/comet-components-core
+          directory: /tmp/split-repo
