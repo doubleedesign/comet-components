@@ -1,2 +1,10 @@
-./dist/dist.js linguist-generated=true
+dist/** linguist-detectable=false
 **/*.php linguist-language=PHP
+**/__tests__/** linguist-detectable=false
+rollup.index.js linguist-detectable=false
+rollup.config.js linguist-detectable=false
+.bladeformatterrc.json linguist-detectable=false
+composer.json linguist-detectable=false
+composer.lock linguist-detectable=false
+package.json linguist-detectable=false
+package.lock linguist-detectable=false

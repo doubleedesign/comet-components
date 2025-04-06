@@ -1,0 +1,19 @@
+**/*.php linguist-language=PHP
+docs/* linguist-documentation
+docs-site/* linguist-documentation
+eslint.config.js linguist-detectable=false
+loader.mjs linguist-detectable=false
+scripts/* linguist-detectable=false
+test/* linguist-detectable=false
+**/rollup.index.js linguist-detectable=false
+**/rollup.config.js linguist-detectable=false
+.bladeformatterrc.json linguist-detectable=false
+composer.json linguist-detectable=false
+**/composer.json linguist-detectable=false
+composer.lock linguist-detectable=false
+**/composer.lock linguist-detectable=false
+package.json linguist-detectable=false
+**/package.json linguist-detectable=false
+package.lock linguist-detectable=false
+**/package.lock linguist-detectable=false
+
