@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All Tests in playwright.config.ts with GUI" type="JavaScriptTestRunnerPlaywright">
+    <config value="$PROJECT_DIR$/test/playwright.config.ts" />
+    <node-interpreter value="node" />
+    <playwright-package value="$PROJECT_DIR$/node_modules/@playwright/test" />
+    <working-dir value="$PROJECT_DIR$/packages/core" />
+    <cli-options value="--ui" />
+    <envs />
+    <scope-kind value="ALL" />
+    <method v="2" />
+  </configuration>
+</component>

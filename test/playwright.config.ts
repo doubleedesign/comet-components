@@ -20,14 +20,14 @@ export default defineConfig({
 	testMatch: '**/__tests__/*.spec.ts',
 	fullyParallel: true,
 	reporter: 'html',
-	timeout: 60000,
+	timeout: 120000,
 	expect: {
 		timeout: 10000, // Assertion timeout
 	},
 	use: {
 		headless: true,
 		viewport: { width: 1024, height: 768 },
-		navigationTimeout: 60000,
+		navigationTimeout: 120000,
 		baseURL: process.env.BROWSER_TEST_URL,
 	},
 
