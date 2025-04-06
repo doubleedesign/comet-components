@@ -24,7 +24,7 @@ export default {
         </div>
         <div v-if="!isLocal" class="announcement-banner__info">
             <p><strong>Comet Components is an active work in progress.</strong> These docs and the code currently
-                available via GitHub should be considered an incomplete alpha release.</p>
+                available via GitHub and Packagist should be considered an incomplete alpha release.</p>
         </div>
     </div>
 </template>
