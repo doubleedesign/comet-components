@@ -2,14 +2,12 @@ import { test, expect } from '@playwright/test';
 import type { Page } from 'playwright';
 import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/playwright-utils';
 
-test.describe('Group', () => {
+test.describe.serial('Group', () => {
 	let page: Page;
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/test/browser/pages/group-colours.php', {
-			waitUntil: 'domcontentloaded',
-		});
+		await page.goto('/test/browser/pages/group-colours.php');
 	});
 
 	test.afterAll(async () => {
@@ -30,14 +28,14 @@ test.describe('Group', () => {
 	test.describe('Vertically adjacent groups with the same background', () => {
 		test('First element has padding', async () => {
 			const wrapper = page.getByTestId('example-2');
-			const element1 = await getPadding(wrapper.locator('.group[data-section-background="light"]').nth(0));
+			const element1 = await getPadding(wrapper.locator('.group[data-background="light"]').nth(0));
 
 			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
 		});
 
 		test('Second element has bottom padding but no top padding', async () => {
 			const wrapper = page.getByTestId('example-2');
-			const element2 = await getPadding(wrapper.locator('.group[data-section-background="light"]').nth(1));
+			const element2 = await getPadding(wrapper.locator('.group[data-background="light"]').nth(1));
 
 			expect(element2).toStrictEqual([0, 16, 16, 16]);
 		});
@@ -46,8 +44,8 @@ test.describe('Group', () => {
 	test.describe('Vertically adjacent groups with different backgrounds', () => {
 		test('Both elements have padding', async () => {
 			const wrapper = page.getByTestId('example-3');
-			const element1 = await getPadding(wrapper.locator('.group[data-section-background="dark"]').nth(0));
-			const element2 = await getPadding(wrapper.locator('.group[data-section-background="primary"]').nth(0));
+			const element1 = await getPadding(wrapper.locator('.group[data-background="dark"]').nth(0));
+			const element2 = await getPadding(wrapper.locator('.group[data-background="primary"]').nth(0));
 
 			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
 			expect(element2).toStrictEqual(NESTED_ELEMENT_PADDING);

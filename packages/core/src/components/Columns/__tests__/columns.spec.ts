@@ -2,14 +2,12 @@ import { test, expect } from '@playwright/test';
 import type { Page } from 'playwright';
 import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/playwright-utils';
 
-test.describe('Columns', () => {
+test.describe.serial('Columns', () => {
 	let page: Page;
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/test/browser/pages/columns-colours.php', {
-			waitUntil: 'domcontentloaded',
-		});
+		await page.goto('/test/browser/pages/columns-colours.php');
 	});
 
 	test.afterAll(async () => {
