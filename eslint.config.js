@@ -5,7 +5,7 @@ import stylisticPlugin from '@stylistic/eslint-plugin-ts';
 
 export default [
 	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.spec.ts'],
+		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.spec.ts', '**/*.vue'],
 		ignores: ['node_modules/**'],
 		languageOptions: {
 			parser: tsParser,

@@ -61,7 +61,7 @@
 		"clsx": "^2.1.1",
 		"crypto-browserify": "^3.12.1",
 		"dotenv": "^16.4.7",
-		"eslint": "^9.17.0",
+		"eslint": "^9.24.0",
 		"eslint-plugin-storybook": "^0.11.2",
 		"esm": "^3.2.25",
 		"highlight.js": "^11.11.1",
