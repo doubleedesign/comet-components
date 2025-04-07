@@ -22,6 +22,12 @@ This is a response (pun not intended) and solution to the practice of rendering 
 Vue is awesome and a great way to achieve client-side interactive and responsive features, but it is important to understand that Vue SFC loader essentially turns every component using it into a miniature Vue application. If you're using it so much that you start noticing performance degradation, you might want to just build a full Vue application instead.
 :::
 
+:::danger
+A limitation of the current implementation is that each Vue-enhanced component can only be used once per page. Not much of a problem for `SiteHeader`, but something that is on the roadmap to be fixed for other components such as `ResponsivePanels`, at which point these docs will be updated to detail how to remove this restriction for new components.
+
+When creating a Vue-enhanced component that can be used as a WordPress block, add `multiple:false` to the `supports` object in `block.json` to impose the restriction within the editor.
+:::
+
 ## Create a Vue-enhanced Comet Component
 
 :::warning
@@ -63,8 +69,10 @@ export default {
 ```
 :::details Notes about this setup
 - Version 3 of Vue is used.
-- `inheritAttrs: true` allows us to pass down attributes directly from PHP class -> Blade like normal and have them work without the Vue component needing specific handling for them
-- TypeScript is supported if you include `lang="ts"` in the `<script>` tag
+- `inheritAttrs: true` allows us to pass down attributes directly from PHP class -> Blade like normal and have them work without the Vue component needing specific handling for them. They will be passed to the first HTML element in the Vue component.
+	- If the Vue component contains other Vue components and the first rendered HTML element comes from there (such as with the `ResponsivePanels` component which loads `Accordion` and `Tabs` Vue components), that's where the attributes will go, so long as that child component also has `inheritAttrs: true`.
+    - This concept is called [fallthrough attributes](https://vuejs.org/guide/components/attrs).
+- TypeScript is supported if you include `lang="ts"` in the `<script>` tag.
 - This syntax is the Vue [options API](https://vuejs.org/guide/introduction.html#options-api).
 :::
 

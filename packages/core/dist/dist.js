@@ -80,6 +80,8 @@ panels.forEach((details, index) => {
 });
 
 window.addEventListener('load', function() {
+	if(!document.querySelector('.gallery')) return;
+
 	window.baguetteBox.run('.gallery');
 });
 
@@ -20372,7 +20374,13 @@ createApp({
 		SiteHeaderResponsive: defineAsyncComponent(() => {
 			return i(`${BASE_PATH}/src/components/SiteHeader/site-header-responsive.vue`, vueSfcLoaderOptions);
 		}),
-	},
-	template: '',
-	compilerOptions: {},
+	}
 }).mount('[data-vue-component="site-header__responsive"]');
+
+createApp({
+	components: {
+		ResponsivePanels: defineAsyncComponent(() => {
+			return i(`${BASE_PATH}/src/components/ResponsivePanels/responsive-panels.vue`, vueSfcLoaderOptions);
+		}),
+	}
+}).mount('[data-vue-component="responsive-panels"]');

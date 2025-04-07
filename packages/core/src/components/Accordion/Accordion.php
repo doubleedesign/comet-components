@@ -6,7 +6,10 @@ namespace Doubleedesign\Comet\Core;
 class Accordion extends UIComponent {
 	use ColorTheme;
 
-	/** @var array<AccordionPanel> */
+	/**
+	 * @var array<AccordionPanel>
+	 * @description Wrapping components each containing an AccordionPanelTitle and AccordionPanelContent.
+	 */
 	protected array $innerComponents;
 
 	function __construct(array $attributes, array $innerComponents) {

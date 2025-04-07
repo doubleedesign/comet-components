@@ -31,6 +31,7 @@ if(str_contains($_SERVER['SERVER_NAME'], 'PhpStorm')) {
 $path = $_SERVER['REQUEST_URI'];
 $fileName = array_reverse(explode('/', $path))[0];
 $supportingCss = [];
+$scripts = [];
 // For demo pages of component combinations:
 if(str_starts_with($path, '/pages/') || str_starts_with($path, '/test/browser/pages/')) {
 	if(str_contains($path, '/pages/container-colours.php')) {
@@ -60,6 +61,12 @@ if(str_contains($path, '/components/columns.php')) {
 	array_push($supportingCss, 'columns.css');
 	array_push($supportingCss, 'column.css');
 }
+// This is Responsive Panels, not sure why the symlink is only panels, not urgent to fix so haven't
+if(str_contains($path, '/components/panels.php')) {
+	array_push($supportingCss, 'responsive-panels.css');
+	array_push($supportingCss, 'accordion.css');
+	array_push($supportingCss, 'tabs.css');
+}
 ?>
 
 <?php
@@ -74,7 +81,10 @@ $globalBackground = CometConfig::get_global_background();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?php echo $assetPath; ?>/global.css">
 	<?php echo $cssFileLinkTags; ?>
-
+	<script type="module"
+			src="http://comet-components.test/packages/core/dist/dist.js"
+			data-base-path="/packages/core/"
+	></script>
 	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
 </head>
 <body data-global-background="<?php echo $globalBackground; ?>">

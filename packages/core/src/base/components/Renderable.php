@@ -123,6 +123,10 @@ abstract class Renderable {
 		return $this->id;
 	}
 
+	public function set_id(string $id): void {
+		$this->id = $id;
+	}
+
 	protected function get_bem_name(): ?string {
 		if($this->context) {
 			$kebabContext = Utils::kebab_case($this->context);

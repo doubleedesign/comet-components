@@ -2,6 +2,7 @@
 export async function getPadding(element): Promise<number[]> {
 	return element.evaluate((el) => {
 		const style = window.getComputedStyle(el);
+
 		return [
 			parseFloat(style.paddingTop),
 			parseFloat(style.paddingRight),

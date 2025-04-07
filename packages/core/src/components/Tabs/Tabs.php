@@ -15,7 +15,7 @@ class Tabs extends UIComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Tabs.tabs');
-		$this->set_color_theme_from_attrs($attributes);
+		$this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
 		$this->set_orientation_from_attrs($attributes);
 		$this->build_tablist();
 	}

@@ -15,6 +15,7 @@ if (-not (Test-Admin)) {
 $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ROOT_DIR = (Get-Item $SCRIPT_DIR).Parent.FullName
 $SOURCE_DIR = "$ROOT_DIR\packages\core\src\components"
+$DIST_DIR = "$ROOT_DIR\packages\core\dist"
 
 # Debug output to verify paths
 Write-Host "Root directory: $ROOT_DIR"
@@ -67,6 +68,17 @@ function Create-Symlink {
 	New-Item -ItemType SymbolicLink -Path $Destination -Value $Source -Force
 }
 
+# Link the dist files to the assets directory
+Get-ChildItem -Path $DIST_DIR -Recurse | ForEach-Object {
+	# Ignore directories
+	if ($_.PSIsContainer) {
+		return
+	}
+
+	# Create the destination path in the assets directory
+	$DestPath = Join-Path $ASSETS_DEST_DIR $_.Name
+	Create-Symlink -Source $_.FullName -Destination $DestPath
+}
 
 # Get all CSS files and symlink to the assets folder, ignoring the parent directory structure
 Get-ChildItem -Path $SOURCE_DIR -Filter "*.css" -Recurse | ForEach-Object {
