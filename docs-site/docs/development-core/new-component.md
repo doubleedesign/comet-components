@@ -6,9 +6,7 @@ position: 2
 
 [[toc]]
 
-## Quick start
-
-### 1. Generate boilerplate code
+## Generate boilerplate code
 
 To generate the boilerplate code for a new component, run the following command with `example` and `simple` replaced with the desired component name and type. Valid types are `simple`, `complex`, and `wrapper`.
 
@@ -25,7 +23,7 @@ npm run generate component -- --name YourThing --type simple
 ```
 :::
 
-### 2. Compile assets
+## Compile assets
 
 Add the SCSS file to `blocks.scss` or `template-parts.scss` (depending on what it is) in the WordPress plugin and run SASS to compile those. Alternatively you can set up [file watchers in PhpStorm](./tooling/phpstorm.md) to automatically compile all the SASS on save.
 
@@ -66,7 +64,7 @@ If you add a custom front-end JavaScript file, add it to `rollup.index.js` in th
 npm run build
 ```
 
-### 3. Generate documentation
+## Generate documentation
 
 Once you have added fields and docblock comments to a component, generate the JSON definition file and [Tycho Template syntax](../usage/overview.md#tycho-template-syntax) XML definition file:
 
@@ -81,7 +79,7 @@ php scripts/generate-json-defs.php --component Example
 ```
 :::
 
-### 4. Prepare for browser testing
+## Prepare for browser testing
 
 1. Generate the boilerplate code for a browser example page and Storybook story:
 
@@ -109,7 +107,7 @@ php scripts/generate-json-defs.php --component Example
 
 4. Update the Storybook file in `./test/browser/stories` to ensure suitable examples are shown.
 
-### 5. View in Storybook
+## View in Storybook
 
 Run the local web server and Storybook (in two separate terminal tabs) to view the new component in the browser:
 
@@ -133,5 +131,5 @@ npm run test:storybook
 ## Further reading
 
 - See the [PHP Architecture](../technical-deep-dives/php-architecture/traits.md) section for details on the abstract classes you can use as a base for your component, the traits you can use to handle attributes that are used by multiple components in a consistent way, and some data types you can use for attributes.
-- See the [JavaScript Overview](../technical-deep-dives/javascript.md) page for details on how to use vanilla JavaScript to add simple client-side interactivity to your components.
-- See the [JavaScript Advanced: Vue.js](../technical-deep-dives/vue.md) page for details on how to selectively use Vue.js for a component for more advanced client-side interactivity and reactivity.
+- See the [Basic JavaScript](../technical-deep-dives/js-architecture/javascript.md) page for details on how to use vanilla JavaScript to add simple client-side interactivity to your components.
+- See the [JavaScript Advanced - Vue.js](../technical-deep-dives/js-architecture/vue.md) page for details on how to selectively use Vue.js for a component for more advanced client-side interactivity and reactivity.

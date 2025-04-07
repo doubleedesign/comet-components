@@ -13,11 +13,13 @@ class Healthcheck {
 	public function run(): void {
 		$missingFiles = $this->get_missing_files();
 		$unimplementedRender = $this->get_unimplemented_render_functions();
-		$missingScss = $this->get_wp_blocks_missing_scss_imports();
+		$missingBundleScss = $this->get_bundle_missing_scss_imports();
+		$missingWpScss = $this->get_wp_blocks_missing_scss_imports();
 
 		$this->log_missing_files($missingFiles);
 		$this->log_unimplemented_render_functions($unimplementedRender);
-		$this->log_wp_blocks_missing_scss_imports($missingScss);
+		$this->log_wp_blocks_missing_scss_imports($missingWpScss);
+		$this->log_bundle_missing_scss_imports($missingBundleScss);
 
 		$this->log_with_colour("=================================================", 'cyan');
 		$this->log_with_colour("Summary: ", 'cyan');
@@ -39,8 +41,15 @@ class Healthcheck {
 			$this->log_with_colour('Unimplemented render methods: 0', 'green');
 		}
 
-		if(count($missingScss) > 0) {
-			$this->log_with_colour('Missing SCSS imports in WordPress plugin: ' . count($missingScss), 'yellow');
+		if(count($missingBundleScss) > 0) {
+			$this->log_with_colour('Missing SCSS imports in bundle: ' . count($missingBundleScss), 'yellow');
+		}
+		else {
+			$this->log_with_colour('Missing SCSS imports in bundle: 0', 'green');
+		}
+
+		if(count($missingWpScss) > 0) {
+			$this->log_with_colour('Missing SCSS imports in WordPress plugin: ' . count($missingWpScss), 'yellow');
 		}
 		else {
 			$this->log_with_colour('Missing SCSS imports in WordPress plugin: 0', 'green');
@@ -173,6 +182,26 @@ class Healthcheck {
 		}
 
 		return $scssFiles;
+	}
+
+	private function get_bundle_missing_scss_imports(): array {
+		$scssFiles = $this->get_scss_files();
+		$bundleFile = dirname(__DIR__, 1) . '\packages\core\bundle.scss';
+		$fileContents = file_get_contents($bundleFile);
+		$imported = explode("\n", $fileContents);
+		array_walk($imported, function(&$value) {
+			$value = array_reverse(explode('/', $value))[0];
+			$value = trim(str_replace('";', '', $value));
+		});
+
+		return array_diff($scssFiles, $imported);
+	}
+
+	private function log_bundle_missing_scss_imports(array $missingImports): void {
+		if(count($missingImports) > 0) {
+			$this->log_with_colour('The following SCSS files exist but are not imported in the bundle.scss file:', 'yellow');
+			print_r($missingImports);
+		}
 	}
 
 	private function get_wp_blocks_missing_scss_imports(): array {

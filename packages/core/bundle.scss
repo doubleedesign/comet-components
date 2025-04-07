@@ -1,0 +1,33 @@
+// This file is to bundle all the SCSS files into one file in dist/dist.css
+// To see if any are missing, run php scripts/healthcheck.php from the project root
+@use "./src/components/global.scss";
+@use "./src/components/Container/container.scss";
+@use "./src/components/Group/group.scss";
+@use "./src/components/Menu/menu.scss";
+@use "./src/components/PageHeader/page-header.scss";
+@use "./src/components/Breadcrumbs/breadcrumbs.scss";
+@use "./src/components/SectionMenu/section-menu.scss";
+@use "./src/components/SiteHeader/site-header.scss";
+@use "./src/components/SiteFooter/site-footer.scss";
+@use "./src/components/Columns/columns.scss";
+@use "./src/components/Columns/Column/column.scss";
+@use "./src/components/ButtonGroup/button-group.scss";
+@use "./src/components/Button/button.scss";
+@use "./src/components/CallToAction/call-to-action.scss";
+@use "./src/components/Details/details.scss";
+@use "./src/components/Accordion/accordion.scss";
+@use "./src/components/Tabs/tabs.scss";
+@use "./src/components/ResponsivePanels/responsive-panels.scss";
+@use "./src/components/Pullquote/pullquote.scss";
+@use "./src/components/Image/image.scss";
+@use "./src/components/Gallery/gallery.scss";
+@use "./src/components/Embed/embed.scss";
+@use "./src/components/Callout/callout.scss";
+@use "./src/components/FileGroup/file-group.scss";
+@use "./src/components/LinkGroup/link-group.scss";
+@use "./src/components/Steps/steps.scss";
+@use "./src/components/IconWithText/icon-with-text.scss";
+@use "./src/components/ImageAndText/image-and-text.scss";
+@use "./src/components/Banner/banner.scss";
+@use "./src/components/Separator/separator.scss";
+@use "./src/components/Table/table.scss";

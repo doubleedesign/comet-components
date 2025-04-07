@@ -11,6 +11,10 @@ This section, including the Theming and Extending pages, details how to use Come
 
 [[toc]]
 
+## Installation and configuration
+
+If you are using Comet Components in a custom project, follow the [new implementation guide](../development-new/overview.md) for overall guidance on installing, configuring, and integrating Comet Components into your project to ensure the component classes are available, assets are loaded, etc., before proceeding.
+
 ## PHP object syntax
 
 This is the original syntax that components are developed with, and the syntax that the WordPress plugin uses to render components on the front-end.
