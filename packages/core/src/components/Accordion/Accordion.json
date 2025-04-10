@@ -2,6 +2,7 @@
     "name": "Accordion",
     "extends": "UIComponent",
     "abstract": false,
+    "vue": true,
     "attributes": {
         "classes": {
             "type": "array<string>",

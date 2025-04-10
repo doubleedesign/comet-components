@@ -535,14 +535,20 @@
 	<xs:element name="SiteHeader">
 		<xs:complexType>
 			<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="logoUrl" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="submenuIcon" type="xs:string"/>
+<xs:attribute name="responsiveStyle" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="logoUrl" type="xs:string"/>
+<xs:attribute name="icon" type="xs:string"/>
+<xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="breakpoint" type="xs:string"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>

@@ -2,6 +2,7 @@
 use Doubleedesign\Comet\Core\AllowedTags;
 use Doubleedesign\Comet\Core\DefaultTag;
 use Doubleedesign\Comet\Core\Tag;
+use Doubleedesign\Comet\Core\Utils;
 
 /**
  * This script generates JSON files that summarise the details of component classes written in PHP.
@@ -129,6 +130,12 @@ class ComponentClassesToJsonDefinitions {
 				$reflectionClass = new ReflectionClass($className);
 				$result = $this->analyseClass($reflectionClass);
 
+				// Check if there is a Vue component in this component's directory
+				$vueFile = Utils::kebab_case(basename($filePath) . '.vue');
+				if($vueFile) {
+					$result['vue'] = true;
+				}
+
 				// Export the data to a JSON file
 				$outputPath = str_replace('.php', '.json', $reflectionClass->getFileName());
 				$this->exportToJson($outputPath, $result);
@@ -193,6 +200,7 @@ class ComponentClassesToJsonDefinitions {
 				? ($parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null)
 				: null,
 			'abstract'   => $reflectionClass->isAbstract(),
+			'vue'        => false, // default value - overridden elsewhere if a Vue file is found
 			'attributes' => $finalAttrs
 		];
 

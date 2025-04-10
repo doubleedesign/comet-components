@@ -2,6 +2,7 @@
     "name": "ResponsivePanels",
     "extends": "UIComponent",
     "abstract": false,
+    "vue": true,
     "attributes": {
         "breakpoint": {
             "type": "string",
