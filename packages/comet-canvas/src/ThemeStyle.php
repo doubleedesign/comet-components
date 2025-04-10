@@ -58,7 +58,7 @@ class ThemeStyle {
 
 		if(file_exists($parent)) {
 			$parent = get_template_directory_uri() . '/style.css';
-			wp_enqueue_style('comet-canvas', $parent, [], '0.0.1'); // TODO: Get this dynamically
+			wp_enqueue_style('comet-canvas', $parent, [], '0.0.2'); // TODO: Get this dynamically
 		}
 
 		if(file_exists($child)) {

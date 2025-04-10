@@ -2,6 +2,7 @@
 	"name": "doubleedesign/comet-components",
 	"description": "Development environment for Comet Components",
 	"type": "project",
+	"version": "0.0.2",
 	"authors": [
 		{
 			"name": "Leesa Ward",

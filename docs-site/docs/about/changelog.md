@@ -6,6 +6,18 @@ For fun and gratitude, Comet's releases are named after albums that can somehow 
 
 ## Current version
 
+### 0.0.2 London Calling (10 April 2025)
+This second alpha release is focused on completion and refinement of the initial set of Vue-enhanced components, notably completion of `ResponsivePanels` and refactoring of `Accordion` and `Tabs` to use the same Vue components, ensuring consistency and removing Bootstrap from the project dependencies.
+
+:::details London Calling - the story
+This release is named for where I met [Derek Mwanza](https://www.creativeconnections.co.uk/) and he told me about using Vue selectively in his WordPress sites. (Amusingly, this was at a React conference!). While we didn't get a chance to dig into the specifics of
+_how_ he does this, I was fascinated by the idea and quickly investigated it further when I next had a project that could benefit from it. This mere seed of an idea has been instrumental in solving some pain points in responsive markup and client-side interactivity for me, and hence in the direction of Comet Components.
+:::
+
+---
+
+## Release History
+
 ### 0.0.1 Fearless (6 April 2025)
 
 A "soft release" of the "incomplete alpha" version of Comet Components, marked for the day I turned the [GitHub repo](https://github.com/doubleedesign/comet-components) public and published the [Core library on Packagist](https://packagist.org/packages/doubleedesign/comet-components-core), a few days after first publishing the [documentation site](https://cometcomponents.io).
@@ -31,30 +43,17 @@ So while I solemnly swear I am not a Swiftie, when I was trying to come up with 
 
 ## Roadmap
 
-### 0.0.2 London Calling
-This second alpha release will be focused on completion and refinement of the current Vue-enhanced components, and possibly addition of more.
-
-:::details London Calling - the story
-This release is named for where I met [Derek Mwanza](https://www.creativeconnections.co.uk/) and he told me about using Vue selectively in his WordPress sites. (Amusingly, this was at a React conference!). While we didn't get a chance to dig into the specifics of
-_how_ he does this, I was fascinated by the idea and quickly investigated it further when I next had a project that could benefit from it. This mere seed of an idea has been instrumental in solving some pain points in responsive markup and client-side interactivity for me, and hence in the direction of Comet Components.
-:::
-
-### 1.0.0 TBC
+### 1.0.0 Dreamers Are Waiting
 The first stable release of Comet Components, which is expected to include:
 - completion of all essential features/improvements/enhancements and documentation marked as TODO
 - publishing of the Storybook
 - extensive automated test coverage.
 
-:::details - the story
+:::details Dreamers Are Waiting - the story
 Early in my career and studies, I was a [Western Chances](https://westernchances.org.au/) scholarship recipient, and at a workshop they ran I met a young woman by the name of [Sarah Bell](https://mantacreative.agency/) (now Duck) who was working for them at the time. We did a little "introduce yourself and what you got your scholarship for" exercise and when I said I got mine for multimedia, Sarah's eyes lit up and so began an unofficial mentorship that very much shaped my early career.
 
 Sarah was one of the people who encouraged me to start [my business](https://www.doubleedesign.com.au), referred me for my first teaching job (delivering 1-2 day short courses on Adobe software and WordPress), and encouraged me to get my Cert IV so I could side-hustle teach at TAFE (and I totally name-dropped her in an interview 5 years later). Importantly, she was proof that these things were achievable because she was doing them herself. Possibly my first exposure to a "portfolio career" person, her influence and guidance were instrumental in shaping my early career.
 
-This release will be named when I work out something suitable from one of Sarah's favourite artists, or I think of something that honours Licorice Frog, the name of her design business at the time.
+This release gets its name from Crowded House, a band Sarah and I both love, and...something about being a dreamer fits in there somewhere!
 :::
 
----
-
-## Release History
-
-None.
