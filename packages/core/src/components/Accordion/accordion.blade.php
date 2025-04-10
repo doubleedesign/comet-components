@@ -1,7 +1,4 @@
-<div @class($classes) @attributes($attributes) role="group">
-    @foreach ($children as $child)
-        @if (method_exists($child, 'render'))
-            {{ $child->render() }}
-        @endif
-    @endforeach
+<div data-vue-component="accordion">
+    <accordion @class($classes) @attributes($attributes) :panels="{{ json_encode($panels) }}">
+    </accordion>
 </div>

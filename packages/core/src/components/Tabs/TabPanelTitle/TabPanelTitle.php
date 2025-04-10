@@ -8,29 +8,21 @@ class TabPanelTitle extends TextElement {
 
 	function __construct(array $attributes, string $content) {
 		parent::__construct(
-			array_merge($attributes, ['context' => 'tabs__tab-list']),
-			$content, '
-			components.Tabs.TabPanelTitle.tab-panel-title'
+			array_merge($attributes, ['context' => 'tabs']),
+			$content,
+			'components.Tabs.TabPanelTitle.tab-panel-title'
 		);
-
-		$this->anchor = Utils::kebab_case(Utils::get_first_phrase_from_html_string($content));
 	}
 
-	public function get_anchor(): string {
-		return $this->anchor;
-	}
-
-	function get_bem_name(): ?string {
-		return $this->context . '__item';
+	protected function get_bem_name(): ?string {
+		return 'tabs__tab-list__item';
 	}
 
 	function render(): void {
 		$blade = BladeService::getInstance();
 
+		// The template just renders the inner content because the rest is taken care of by Vue
 		echo $blade->make($this->bladeFile, [
-			'anchor'     => $this->anchor,
-			'classes'    => implode(' ', $this->get_filtered_classes()),
-			'attributes' => $this->get_html_attributes(),
 			'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
 		])->render();
 	}

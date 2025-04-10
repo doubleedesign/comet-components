@@ -1,89 +1,4 @@
-import Tab from '../vendor/twbs/bootstrap/js/src/tab.js';
-import Collapse from '../vendor/twbs/bootstrap/js/src/collapse.js';
 import '../vendor/feimosi/baguettebox.js/src/baguetteBox.js';
-
-const triggerTabList = document.querySelectorAll('[role="tab"]');
-
-// On page load, show the first tab
-if (triggerTabList.length) {
-	const firstTab = new Tab(triggerTabList[0]);
-	firstTab.show();
-}
-
-triggerTabList.forEach(triggerEl => {
-	const tabTrigger = new Tab(triggerEl);
-
-	triggerEl.addEventListener('click', event => {
-		event.preventDefault();
-		tabTrigger.show();
-	});
-});
-
-const panels = document.querySelectorAll('.accordion__panel');
-
-panels.forEach((details, index) => {
-	// Get the summary and content elements
-	const summary = details.querySelector('.accordion__panel__title');
-	const content = details.querySelector('.accordion__panel__content');
-
-	if (summary && content) {
-		// Generate a unique ID for the collapse
-		const collapseId = `accordion-collapse-${index}`;
-		content.id = collapseId;
-
-		// Add collapse class to content
-		content.classList.add('collapse');
-
-		// Initialize Bootstrap collapse on the content
-		const collapseInstance = new Collapse(content, {
-			toggle: details.hasAttribute('open'), // Initialize open state based on 'open' attribute
-			parent: details.closest('.accordion') // For accordion behavior. Turning this off allows multiple open at a time. // TODO: Make this configurable
-		});
-
-		// Prevent native details toggling behavior
-		details.addEventListener('click', (event) => {
-			event.preventDefault();
-		});
-
-		// Set up summary as trigger
-		summary.setAttribute('role', 'button');
-		summary.setAttribute('aria-expanded', details.hasAttribute('open') ? 'true' : 'false');
-		summary.setAttribute('aria-controls', collapseId);
-
-		// Add click handler to summary
-		summary.addEventListener('click', (event) => {
-			event.preventDefault(); // Prevent default details toggling
-			collapseInstance.toggle(); // Use Bootstrap's toggle instead
-
-			// Update the open attribute to match collapse state
-			if (content.classList.contains('show')) {
-				details.removeAttribute('open');
-				summary.setAttribute('aria-expanded', 'false');
-			}
-			else {
-				details.setAttribute('open', '');
-				summary.setAttribute('aria-expanded', 'true');
-			}
-		});
-
-		// Listen for Bootstrap events to update details state
-		content.addEventListener('shown.bs.collapse', () => {
-			details.setAttribute('open', '');
-			summary.setAttribute('aria-expanded', 'true');
-		});
-
-		content.addEventListener('hidden.bs.collapse', () => {
-			details.removeAttribute('open');
-			summary.setAttribute('aria-expanded', 'false');
-		});
-	}
-});
-
-window.addEventListener('load', function() {
-	if(!document.querySelector('.gallery')) return;
-
-	window.baguetteBox.run('.gallery');
-});
 
 /**
 * vue v3.5.13
@@ -18300,176 +18215,176 @@ ${codeFrame}` : message);
 registerRuntimeCompiler(compileToFunction);
 
 var Vue = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	BaseTransition: BaseTransition,
-	BaseTransitionPropsValidators: BaseTransitionPropsValidators,
-	Comment: Comment,
-	DeprecationTypes: DeprecationTypes,
-	EffectScope: EffectScope,
-	ErrorCodes: ErrorCodes,
-	ErrorTypeStrings: ErrorTypeStrings,
-	Fragment: Fragment,
-	KeepAlive: KeepAlive,
-	ReactiveEffect: ReactiveEffect,
-	Static: Static,
-	Suspense: Suspense,
-	Teleport: Teleport,
-	Text: Text,
-	TrackOpTypes: TrackOpTypes,
-	Transition: Transition,
-	TransitionGroup: TransitionGroup,
-	TriggerOpTypes: TriggerOpTypes,
-	VueElement: VueElement,
-	assertNumber: assertNumber,
-	callWithAsyncErrorHandling: callWithAsyncErrorHandling,
-	callWithErrorHandling: callWithErrorHandling,
-	camelize: camelize,
-	capitalize: capitalize,
-	cloneVNode: cloneVNode,
-	compatUtils: compatUtils,
-	compile: compileToFunction,
-	computed: computed,
-	createApp: createApp,
-	createBlock: createBlock,
-	createCommentVNode: createCommentVNode,
-	createElementBlock: createElementBlock,
-	createElementVNode: createBaseVNode,
-	createHydrationRenderer: createHydrationRenderer,
-	createPropsRestProxy: createPropsRestProxy,
-	createRenderer: createRenderer,
-	createSSRApp: createSSRApp,
-	createSlots: createSlots,
-	createStaticVNode: createStaticVNode,
-	createTextVNode: createTextVNode,
-	createVNode: createVNode,
-	customRef: customRef,
-	defineAsyncComponent: defineAsyncComponent,
-	defineComponent: defineComponent,
-	defineCustomElement: defineCustomElement,
-	defineEmits: defineEmits,
-	defineExpose: defineExpose,
-	defineModel: defineModel,
-	defineOptions: defineOptions,
-	defineProps: defineProps,
-	defineSSRCustomElement: defineSSRCustomElement,
-	defineSlots: defineSlots,
-	devtools: devtools,
-	effect: effect,
-	effectScope: effectScope,
-	getCurrentInstance: getCurrentInstance,
-	getCurrentScope: getCurrentScope,
-	getCurrentWatcher: getCurrentWatcher,
-	getTransitionRawChildren: getTransitionRawChildren,
-	guardReactiveProps: guardReactiveProps,
-	h: h,
-	handleError: handleError,
-	hasInjectionContext: hasInjectionContext,
-	hydrate: hydrate,
-	hydrateOnIdle: hydrateOnIdle,
-	hydrateOnInteraction: hydrateOnInteraction,
-	hydrateOnMediaQuery: hydrateOnMediaQuery,
-	hydrateOnVisible: hydrateOnVisible,
-	initCustomFormatter: initCustomFormatter,
-	initDirectivesForSSR: initDirectivesForSSR,
-	inject: inject,
-	isMemoSame: isMemoSame,
-	isProxy: isProxy,
-	isReactive: isReactive,
-	isReadonly: isReadonly,
-	isRef: isRef,
-	isRuntimeOnly: isRuntimeOnly,
-	isShallow: isShallow,
-	isVNode: isVNode,
-	markRaw: markRaw,
-	mergeDefaults: mergeDefaults,
-	mergeModels: mergeModels,
-	mergeProps: mergeProps,
-	nextTick: nextTick,
-	normalizeClass: normalizeClass,
-	normalizeProps: normalizeProps,
-	normalizeStyle: normalizeStyle,
-	onActivated: onActivated,
-	onBeforeMount: onBeforeMount,
-	onBeforeUnmount: onBeforeUnmount,
-	onBeforeUpdate: onBeforeUpdate,
-	onDeactivated: onDeactivated,
-	onErrorCaptured: onErrorCaptured,
-	onMounted: onMounted,
-	onRenderTracked: onRenderTracked,
-	onRenderTriggered: onRenderTriggered,
-	onScopeDispose: onScopeDispose,
-	onServerPrefetch: onServerPrefetch,
-	onUnmounted: onUnmounted,
-	onUpdated: onUpdated,
-	onWatcherCleanup: onWatcherCleanup,
-	openBlock: openBlock,
-	popScopeId: popScopeId,
-	provide: provide,
-	proxyRefs: proxyRefs,
-	pushScopeId: pushScopeId,
-	queuePostFlushCb: queuePostFlushCb,
-	reactive: reactive,
-	readonly: readonly,
-	ref: ref,
-	registerRuntimeCompiler: registerRuntimeCompiler,
-	render: render,
-	renderList: renderList,
-	renderSlot: renderSlot,
-	resolveComponent: resolveComponent,
-	resolveDirective: resolveDirective,
-	resolveDynamicComponent: resolveDynamicComponent,
-	resolveFilter: resolveFilter,
-	resolveTransitionHooks: resolveTransitionHooks,
-	setBlockTracking: setBlockTracking,
-	setDevtoolsHook: setDevtoolsHook,
-	setTransitionHooks: setTransitionHooks,
-	shallowReactive: shallowReactive,
-	shallowReadonly: shallowReadonly,
-	shallowRef: shallowRef,
-	ssrContextKey: ssrContextKey,
-	ssrUtils: ssrUtils,
-	stop: stop,
-	toDisplayString: toDisplayString,
-	toHandlerKey: toHandlerKey,
-	toHandlers: toHandlers,
-	toRaw: toRaw,
-	toRef: toRef,
-	toRefs: toRefs,
-	toValue: toValue,
-	transformVNodeArgs: transformVNodeArgs,
-	triggerRef: triggerRef,
-	unref: unref,
-	useAttrs: useAttrs,
-	useCssModule: useCssModule,
-	useCssVars: useCssVars,
-	useHost: useHost,
-	useId: useId,
-	useModel: useModel,
-	useSSRContext: useSSRContext,
-	useShadowRoot: useShadowRoot,
-	useSlots: useSlots,
-	useTemplateRef: useTemplateRef,
-	useTransitionState: useTransitionState,
-	vModelCheckbox: vModelCheckbox,
-	vModelDynamic: vModelDynamic,
-	vModelRadio: vModelRadio,
-	vModelSelect: vModelSelect,
-	vModelText: vModelText,
-	vShow: vShow,
-	version: version,
-	warn: warn,
-	watch: watch,
-	watchEffect: watchEffect,
-	watchPostEffect: watchPostEffect,
-	watchSyncEffect: watchSyncEffect,
-	withAsyncContext: withAsyncContext,
-	withCtx: withCtx,
-	withDefaults: withDefaults,
-	withDirectives: withDirectives,
-	withKeys: withKeys,
-	withMemo: withMemo,
-	withModifiers: withModifiers,
-	withScopeId: withScopeId
+  __proto__: null,
+  BaseTransition: BaseTransition,
+  BaseTransitionPropsValidators: BaseTransitionPropsValidators,
+  Comment: Comment,
+  DeprecationTypes: DeprecationTypes,
+  EffectScope: EffectScope,
+  ErrorCodes: ErrorCodes,
+  ErrorTypeStrings: ErrorTypeStrings,
+  Fragment: Fragment,
+  KeepAlive: KeepAlive,
+  ReactiveEffect: ReactiveEffect,
+  Static: Static,
+  Suspense: Suspense,
+  Teleport: Teleport,
+  Text: Text,
+  TrackOpTypes: TrackOpTypes,
+  Transition: Transition,
+  TransitionGroup: TransitionGroup,
+  TriggerOpTypes: TriggerOpTypes,
+  VueElement: VueElement,
+  assertNumber: assertNumber,
+  callWithAsyncErrorHandling: callWithAsyncErrorHandling,
+  callWithErrorHandling: callWithErrorHandling,
+  camelize: camelize,
+  capitalize: capitalize,
+  cloneVNode: cloneVNode,
+  compatUtils: compatUtils,
+  compile: compileToFunction,
+  computed: computed,
+  createApp: createApp,
+  createBlock: createBlock,
+  createCommentVNode: createCommentVNode,
+  createElementBlock: createElementBlock,
+  createElementVNode: createBaseVNode,
+  createHydrationRenderer: createHydrationRenderer,
+  createPropsRestProxy: createPropsRestProxy,
+  createRenderer: createRenderer,
+  createSSRApp: createSSRApp,
+  createSlots: createSlots,
+  createStaticVNode: createStaticVNode,
+  createTextVNode: createTextVNode,
+  createVNode: createVNode,
+  customRef: customRef,
+  defineAsyncComponent: defineAsyncComponent,
+  defineComponent: defineComponent,
+  defineCustomElement: defineCustomElement,
+  defineEmits: defineEmits,
+  defineExpose: defineExpose,
+  defineModel: defineModel,
+  defineOptions: defineOptions,
+  defineProps: defineProps,
+  defineSSRCustomElement: defineSSRCustomElement,
+  defineSlots: defineSlots,
+  devtools: devtools,
+  effect: effect,
+  effectScope: effectScope,
+  getCurrentInstance: getCurrentInstance,
+  getCurrentScope: getCurrentScope,
+  getCurrentWatcher: getCurrentWatcher,
+  getTransitionRawChildren: getTransitionRawChildren,
+  guardReactiveProps: guardReactiveProps,
+  h: h,
+  handleError: handleError,
+  hasInjectionContext: hasInjectionContext,
+  hydrate: hydrate,
+  hydrateOnIdle: hydrateOnIdle,
+  hydrateOnInteraction: hydrateOnInteraction,
+  hydrateOnMediaQuery: hydrateOnMediaQuery,
+  hydrateOnVisible: hydrateOnVisible,
+  initCustomFormatter: initCustomFormatter,
+  initDirectivesForSSR: initDirectivesForSSR,
+  inject: inject,
+  isMemoSame: isMemoSame,
+  isProxy: isProxy,
+  isReactive: isReactive,
+  isReadonly: isReadonly,
+  isRef: isRef,
+  isRuntimeOnly: isRuntimeOnly,
+  isShallow: isShallow,
+  isVNode: isVNode,
+  markRaw: markRaw,
+  mergeDefaults: mergeDefaults,
+  mergeModels: mergeModels,
+  mergeProps: mergeProps,
+  nextTick: nextTick,
+  normalizeClass: normalizeClass,
+  normalizeProps: normalizeProps,
+  normalizeStyle: normalizeStyle,
+  onActivated: onActivated,
+  onBeforeMount: onBeforeMount,
+  onBeforeUnmount: onBeforeUnmount,
+  onBeforeUpdate: onBeforeUpdate,
+  onDeactivated: onDeactivated,
+  onErrorCaptured: onErrorCaptured,
+  onMounted: onMounted,
+  onRenderTracked: onRenderTracked,
+  onRenderTriggered: onRenderTriggered,
+  onScopeDispose: onScopeDispose,
+  onServerPrefetch: onServerPrefetch,
+  onUnmounted: onUnmounted,
+  onUpdated: onUpdated,
+  onWatcherCleanup: onWatcherCleanup,
+  openBlock: openBlock,
+  popScopeId: popScopeId,
+  provide: provide,
+  proxyRefs: proxyRefs,
+  pushScopeId: pushScopeId,
+  queuePostFlushCb: queuePostFlushCb,
+  reactive: reactive,
+  readonly: readonly,
+  ref: ref,
+  registerRuntimeCompiler: registerRuntimeCompiler,
+  render: render,
+  renderList: renderList,
+  renderSlot: renderSlot,
+  resolveComponent: resolveComponent,
+  resolveDirective: resolveDirective,
+  resolveDynamicComponent: resolveDynamicComponent,
+  resolveFilter: resolveFilter,
+  resolveTransitionHooks: resolveTransitionHooks,
+  setBlockTracking: setBlockTracking,
+  setDevtoolsHook: setDevtoolsHook,
+  setTransitionHooks: setTransitionHooks,
+  shallowReactive: shallowReactive,
+  shallowReadonly: shallowReadonly,
+  shallowRef: shallowRef,
+  ssrContextKey: ssrContextKey,
+  ssrUtils: ssrUtils,
+  stop: stop,
+  toDisplayString: toDisplayString,
+  toHandlerKey: toHandlerKey,
+  toHandlers: toHandlers,
+  toRaw: toRaw,
+  toRef: toRef,
+  toRefs: toRefs,
+  toValue: toValue,
+  transformVNodeArgs: transformVNodeArgs,
+  triggerRef: triggerRef,
+  unref: unref,
+  useAttrs: useAttrs,
+  useCssModule: useCssModule,
+  useCssVars: useCssVars,
+  useHost: useHost,
+  useId: useId,
+  useModel: useModel,
+  useSSRContext: useSSRContext,
+  useShadowRoot: useShadowRoot,
+  useSlots: useSlots,
+  useTemplateRef: useTemplateRef,
+  useTransitionState: useTransitionState,
+  vModelCheckbox: vModelCheckbox,
+  vModelDynamic: vModelDynamic,
+  vModelRadio: vModelRadio,
+  vModelSelect: vModelSelect,
+  vModelText: vModelText,
+  vShow: vShow,
+  version: version,
+  warn: warn,
+  watch: watch,
+  watchEffect: watchEffect,
+  watchPostEffect: watchPostEffect,
+  watchSyncEffect: watchSyncEffect,
+  withAsyncContext: withAsyncContext,
+  withCtx: withCtx,
+  withDefaults: withDefaults,
+  withDirectives: withDirectives,
+  withKeys: withKeys,
+  withMemo: withMemo,
+  withModifiers: withModifiers,
+  withScopeId: withScopeId
 });
 
 /*!
@@ -20368,6 +20283,28 @@ const BASE_PATH = (function() {
 	// TODO Fix for other use cases like Storybook
 	return '';
 })();
+
+createApp({
+	components: {
+		Tabs: defineAsyncComponent(() => {
+			return i(`${BASE_PATH}/src/plugins/shared-vue-components/tabs.vue`, vueSfcLoaderOptions);
+		}),
+	}
+}).mount('[data-vue-component="tabs"]');
+
+createApp({
+	components: {
+		Accordion: defineAsyncComponent(() => {
+			return i(`${BASE_PATH}/src/plugins/shared-vue-components/accordion.vue`, vueSfcLoaderOptions);
+		}),
+	}
+}).mount('[data-vue-component="accordion"]');
+
+window.addEventListener('load', function() {
+	if(!document.querySelector('.gallery')) return;
+
+	window.baguetteBox.run('.gallery');
+});
 
 createApp({
 	components: {

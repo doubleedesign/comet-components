@@ -16,13 +16,55 @@ class AccordionPanel extends UIComponent {
 		);
 	}
 
+	public function get_title(): ?array {
+		// TODO: Can potentially use array_find when we can use PHP 8.4
+		foreach($this->innerComponents as $component) {
+			if($component instanceof AccordionPanelTitle) {
+				ob_start();
+				$component->render();
+				$content = ob_get_clean();
+
+				// Strip the wrapping <span> that WordPress sends while keeping any other inline HTML intact
+				$content = preg_replace('/<span>\s*(.*?)\s*<\/span>/s', '$1', $content);
+
+				return array(
+					'attributes' => $component->get_html_attributes(),
+					'classes'    => $component->get_filtered_classes(),
+					'content'    => trim($content)
+				);
+			}
+		}
+
+		return null;
+	}
+
+	public function get_content(): ?array {
+		// TODO: Can potentially use array_find when we can use PHP 8.4
+		foreach($this->innerComponents as $component) {
+			if($component instanceof AccordionPanelContent) {
+				ob_start();
+				$component->render();
+				$content = ob_get_clean();
+
+				return array(
+					'attributes' => $component->get_html_attributes(),
+					'classes'    => $component->get_filtered_classes(),
+					'content'    => trim($content),
+				);
+			}
+		}
+
+		return null;
+	}
+
 	function render(): void {
 		$blade = BladeService::getInstance();
 
+		// Render the children directly without wrapping this component with its own tag,
+		// if this even gets used - generally it is expected that get_title() and get_content() will be used by the parent component
+		// to pass the children directly to its Vue component
 		echo $blade->make($this->bladeFile, [
-			'classes'    => $this->get_filtered_classes_string(),
-			'attributes' => $this->get_html_attributes(),
-			'children'   => $this->innerComponents
+			'children' => $this->innerComponents
 		])->render();
 	}
 }

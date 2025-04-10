@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PanelItem } from './types.ts';
+import type { PanelItem } from '../../components/ResponsivePanels/types.ts';
 
 export default {
 	name: 'Accordion',
@@ -24,7 +24,9 @@ export default {
 						classes: panel.content.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
 					}
 				};
-			})
+			}),
+			// Track animation state to help prevent race conditions
+			animating: false
 		};
 	},
 	mounted() {
@@ -37,9 +39,14 @@ export default {
 	methods: {
 		togglePanel(event: Event) {
 			event.preventDefault();
+
+			// Prevent subsequent click events while still animating from the first one
+			if (this.animating) return;
+
 			const summary = event.currentTarget as HTMLElement;
 			const details = summary.parentElement as HTMLDetailsElement;
 			const isOpen = details.open;
+
 			if(isOpen) {
 				this.animateClose(details);
 			}
@@ -51,60 +58,77 @@ export default {
 			const content = details.querySelector('.accordion__panel__content') as HTMLElement;
 			if(!content) return;
 
-			// Initial closed state
+			this.animating = true;
+
+			// Set details.open before measuring height
+			details.open = true;
+
+			// Force a reflow to ensure the browser recognises the open state
+			void content.offsetHeight;
+
+			// Set initial height to 0
 			content.style.height = '0px';
 			content.style.overflow = 'hidden';
+			content.style.display = 'block';
 
-			// Get the scroll height and animate to it
+			// Ensure the browser has processed the height changes before animating
 			requestAnimationFrame(() => {
 				const height = content.scrollHeight;
-				content.style.height = `${height}px`;
 
-				content.addEventListener('transitionend', function removeHeight() {
-					// Remove inline CSS after transition completes
-					content.style.height = '';
-					content.style.overflow = '';
-					content.removeEventListener('transitionend', removeHeight);
+				// Start the animation in the next frame
+				requestAnimationFrame(() => {
+					content.style.height = `${height}px`;
+
+					const onTransitionEnd = () => {
+						// Clean up styles after animation completes
+						content.style.height = '';
+						content.style.overflow = '';
+						content.style.display = '';
+						content.removeEventListener('transitionend', onTransitionEnd);
+						this.animating = false;
+					};
+
+					content.addEventListener('transitionend', onTransitionEnd, { once: true });
 				});
-
-				// Add the open attribute to the details element for proper semantics
-				// we do this last to ensure it animates - CSS transitions don't work on the open attribute itself
-				details.open = true;
 			});
 		},
 		animateClose(details: HTMLDetailsElement) {
 			const content = details.querySelector('.accordion__panel__content') as HTMLElement;
 			if(!content) return;
 
-			// Set fixed height so CSS transitions work
+			this.animating = true;
+
+			// Get current height and set it explicitly so CSS transitions will work
 			const height = content.scrollHeight;
 			content.style.height = `${height}px`;
 			content.style.overflow = 'hidden';
 
-			// Force a reflow by accessing the current offsetHeight (but don't assign it to a variable because it won't be used)
-			content.offsetHeight;
+			// Force a reflow to ensure the browser recognises the height change
+			void content.offsetHeight;
 
-			// Animate to 0 height
+			// Start the animation in the next frame to ensure the browser has processed the height changes
 			requestAnimationFrame(() => {
 				content.style.height = '0px';
 
-				content.addEventListener('transitionend', function closeDetails() {
-					// Remove inline CSS after the transition completes
+				const onTransitionEnd = () => {
 					content.style.height = '';
 					content.style.overflow = '';
-					content.removeEventListener('transitionend', closeDetails);
-
-					// remove the open attribute from the details element for proper semantics
-					// we do this inside the event listener to ensure it animates - outside it will just close the panel instantly
 					details.open = false;
-				});
+					content.removeEventListener('transitionend', onTransitionEnd);
+					this.animating = false;
+				};
+
+				content.addEventListener('transitionend', onTransitionEnd, { once: true });
 			});
 		},
 		// If text in a panel is selected such as via browser 'find in page', switch to that panel
 		watchForSelectedTextAndOpenPanel(event: Event) {
+			// Don't trigger if another animation is still in progress
+			if (this.animating) return;
+
 			const selection = document.getSelection();
 			// Get the details element that the selection is in, if any
-			const details = selection?.anchorNode?.parentElement.closest('details');
+			const details = selection?.anchorNode?.parentElement?.closest('details');
 			// Open it if it's closed
 			if (details && !details.open) {
 				this.animateOpen(details);
@@ -125,7 +149,7 @@ export default {
                 :class="panel.title.classes"
                 v-bind="panel.title.attributes"
                 :aria-controls="panel.content.attributes.id"
-                @click="(event: MouseEvent) => this.togglePanel(event, index)"
+                @click="(event: MouseEvent) => this.togglePanel(event)"
                 v-html="panel.title.content"
             >
             </summary>
@@ -139,7 +163,4 @@ export default {
 </template>
 
 <style>
-.accordion__panel__content {
-    transition: height 0.3s ease-in-out;
-}
 </style>

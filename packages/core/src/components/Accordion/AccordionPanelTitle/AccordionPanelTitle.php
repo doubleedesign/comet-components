@@ -16,9 +16,8 @@ class AccordionPanelTitle extends TextElement {
 	function render(): void {
 		$blade = BladeService::getInstance();
 
+		// The template just renders the inner content because the rest is taken care of by Vue
 		echo $blade->make($this->bladeFile, [
-			'classes'    => implode(' ', $this->get_filtered_classes()),
-			'attributes' => $this->get_html_attributes(),
 			'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
 		])->render();
 	}

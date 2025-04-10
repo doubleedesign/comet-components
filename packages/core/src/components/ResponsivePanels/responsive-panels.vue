@@ -1,6 +1,6 @@
 <script lang="ts">
-import Accordion from './accordion.vue';
-import Tabs from './tabs.vue';
+import Accordion from '../../plugins/shared-vue-components/accordion.vue';
+import Tabs from '../../plugins/shared-vue-components/tabs.vue';
 import type { PanelItem } from './types.ts';
 
 export default {

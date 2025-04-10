@@ -1,18 +1,11 @@
-import Tab from '../../../vendor/twbs/bootstrap/js/src/tab.js';
+import * as Vue from '../../plugins/vue-wrapper/src/vue.esm-browser.js';
+import { loadModule } from  '../../plugins/vue-wrapper/src/vue3-sfc-loader.esm.js';
+import { vueSfcLoaderOptions, BASE_PATH } from '../../plugins/vue-wrapper/src/index.js';
 
-const triggerTabList = document.querySelectorAll('[role="tab"]');
-
-// On page load, show the first tab
-if (triggerTabList.length) {
-	const firstTab = new Tab(triggerTabList[0]);
-	firstTab.show();
-}
-
-triggerTabList.forEach(triggerEl => {
-	const tabTrigger = new Tab(triggerEl);
-
-	triggerEl.addEventListener('click', event => {
-		event.preventDefault();
-		tabTrigger.show();
-	});
-});
+Vue.createApp({
+	components: {
+		Tabs: Vue.defineAsyncComponent(() => {
+			return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/tabs.vue`, vueSfcLoaderOptions);
+		}),
+	}
+}).mount('[data-vue-component="tabs"]');

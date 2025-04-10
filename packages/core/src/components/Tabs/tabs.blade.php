@@ -1,7 +1,4 @@
-<div @class($classes) @attributes($attributes)>
-    @foreach ($children as $child)
-        @if (method_exists($child, 'render'))
-            {{ $child->render() }}
-        @endif
-    @endforeach
+<div data-vue-component="tabs">
+    <tabs @class($classes) @attributes($attributes) :panels="{{ json_encode($panels) }}">
+    </tabs>
 </div>

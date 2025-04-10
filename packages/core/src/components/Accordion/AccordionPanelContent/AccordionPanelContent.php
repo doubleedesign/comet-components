@@ -16,9 +16,8 @@ class AccordionPanelContent extends UIComponent {
 	function render(): void {
 		$blade = BladeService::getInstance();
 
+		// The template just renders the inner content because the rest is taken care of by Vue
 		echo $blade->make($this->bladeFile, [
-			'classes'    => $this->get_filtered_classes_string(),
-			'attributes' => $this->get_html_attributes(),
 			'children'   => $this->innerComponents
 		])->render();
 	}

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PanelItem } from './types.ts';
+import type { PanelItem } from '../../components/ResponsivePanels/types.ts';
 
 export default {
 	name: 'Tabs',
@@ -49,8 +49,8 @@ export default {
 		recalculateHeight() {
 			// Get the height of the panels before any CSS to set the height of the overall element accordingly
 			const panels = this.$el.querySelectorAll('[role="tabpanel"]');
-			const maxHeight = Array.from(panels).reduce((max: number, panel: HTMLElement) => {
-				const height = panel.scrollHeight;
+			const maxHeight = Array.from(panels).reduce((max: number, panel) => {
+				const height = (panel as HTMLElement).scrollHeight;
 
 				return height > max ? height : max;
 			}, 0);

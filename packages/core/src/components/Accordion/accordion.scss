@@ -42,24 +42,14 @@
 		}
 
 		&__content {
+			transition: height 0.3s ease-in-out;
+
 			> :first-child {
 				padding-block-start: var(--spacing-md);
 			}
 
 			> :last-child {
 				padding-block-end: var(--spacing-md);
-			}
-
-			&.collapse {
-				&:not(.show) {
-					display: none;
-				}
-			}
-
-			&.collapsing {
-				height: 0;
-				overflow: hidden;
-				transition: all 0.3s ease-in-out;
 			}
 		}
 	}
