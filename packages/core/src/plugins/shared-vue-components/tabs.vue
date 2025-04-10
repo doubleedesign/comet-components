@@ -32,12 +32,11 @@ export default {
 	},
 	mounted() {
 		document.addEventListener('selectionchange', this.watchForSelectedTextAndOpenPanel);
-
-		// Calculate initial height without a wait
-		this.height = this.recalculateHeight();
 		// Store a reference to the debounced function rather than applying it directly, so it can be cleaned up later
 		this.debouncedResize = this.debounce(() => this.height = this.recalculateHeight(), 200);
-		// Recalculate on resize, after a short wait
+		// Calculate initial height
+		this.height = this.debouncedResize();
+		// Recalculate on resize
 		window.addEventListener('resize', this.debouncedResize);
 	},
 	beforeUnmount() {
