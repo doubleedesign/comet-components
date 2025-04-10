@@ -60,7 +60,7 @@
     },
     "innerComponents": {
         "type": "array<AccordionPanel>",
-        "description": "Inner components to be rendered within this component",
+        "description": "Wrapping components each containing an AccordionPanelTitle and AccordionPanelContent.",
         "required": true
     }
 }

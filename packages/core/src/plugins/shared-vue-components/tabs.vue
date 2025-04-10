@@ -84,7 +84,7 @@ export default {
 </script>
 
 <template>
-   <div class="tabs" :style="this.height ? { height: this.height + 'px' } : {}" role="tablist">
+   <div class="tabs" :style="this.height ? { height: this.height + 'px' } : {}">
        <ul class="tabs__tab-list" role="tablist" :data-background="this.colorTheme">
             <li v-for="(title, index) in this.titles" :key="index" :class="title.classes" role="presentation">
                 <!--TODO: Make direct page anchors work, and find a way to make it a relevant ID -->

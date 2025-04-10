@@ -1,32 +1,15 @@
 {
-    "name": "Tabs",
-    "extends": "UIComponent",
+    "name": "ResponsivePanel",
+    "extends": "PanelComponent",
     "abstract": false,
     "attributes": {
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "tabs"
+                "responsive__panel__content"
             ],
             "inherited": true
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ],
-            "default": "primary"
         },
         "context": {
             "type": "string",
@@ -38,24 +21,21 @@
             "description": "Unique identifier",
             "inherited": true
         },
-        "orientation": {
-            "type": "Orientation",
-            "supported": [
-                "horizontal",
-                "vertical"
-            ],
-            "default": "vertical"
-        },
         "style": {
             "type": "array",
             "description": "Inline styles",
+            "inherited": true
+        },
+        "subtitle": {
+            "type": "string",
             "inherited": true
         },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "details"
             ],
             "default": "div",
             "inherited": true
@@ -64,11 +44,17 @@
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
+        },
+        "title": {
+            "type": "string",
+            "required": true,
+            "inherited": true
         }
     },
     "innerComponents": {
-        "type": "array<TabPanel>",
-        "description": "Wrapping components each containing a TabPanelTitle and TabPanelContent.",
-        "required": true
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true,
+        "inherited": true
     }
 }

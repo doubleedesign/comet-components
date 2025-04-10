@@ -1,13 +1,13 @@
 {
     "name": "AccordionPanel",
-    "extends": "UIComponent",
+    "extends": "PanelComponent",
     "abstract": false,
     "attributes": {
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion__panel"
+                "accordion__panel__content"
             ],
             "inherited": true
         },
@@ -26,6 +26,10 @@
             "description": "Inline styles",
             "inherited": true
         },
+        "subtitle": {
+            "type": "string",
+            "inherited": true
+        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
@@ -39,11 +43,17 @@
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
+        },
+        "title": {
+            "type": "string",
+            "required": true,
+            "inherited": true
         }
     },
     "innerComponents": {
-        "type": "array<AccordionPanelTitle|AccordionPanelContent>",
+        "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true
+        "required": true,
+        "inherited": true
     }
 }

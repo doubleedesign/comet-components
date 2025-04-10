@@ -21,7 +21,7 @@ export default {
 					},
 					content: {
 						...panel.content,
-						classes: panel.content.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
+						classes: panel.content.classes.map((className: string) => className.replace('responsive__panel', 'accordion__panel'))
 					}
 				};
 			}),

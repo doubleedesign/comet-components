@@ -1,13 +1,18 @@
 {
-    "name": "Tabs",
+    "name": "ResponsivePanels",
     "extends": "UIComponent",
     "abstract": false,
     "attributes": {
+        "breakpoint": {
+            "type": "string",
+            "description": "The container breakpoint at which to switch between accordion and tabs",
+            "required": true
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "tabs"
+                "responsive-panels"
             ],
             "inherited": true
         },
@@ -25,8 +30,7 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "default": "primary"
+            ]
         },
         "context": {
             "type": "string",
@@ -67,8 +71,8 @@
         }
     },
     "innerComponents": {
-        "type": "array<TabPanel>",
-        "description": "Wrapping components each containing a TabPanelTitle and TabPanelContent.",
+        "type": "array<ResponsivePanel>",
+        "description": "Inner components to be rendered within this component",
         "required": true
     }
 }

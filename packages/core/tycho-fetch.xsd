@@ -18,15 +18,6 @@
 	<xs:attribute name="key" type="xs:string" use="required"/>
 	<xs:attribute name="value" type="xs:string" use="required"/>
 </xs:complexType>
-<xs:simpleType name="Alignment">
-	<xs:restriction base="xs:string">
-		<xs:enumeration value="start"/>
-<xs:enumeration value="end"/>
-<xs:enumeration value="center"/>
-<xs:enumeration value="justify"/>
-<xs:enumeration value="match-parent"/>
-	</xs:restriction>
-</xs:simpleType>
 <xs:simpleType name="ContainerSize">
 	<xs:restriction base="xs:string">
 		<xs:enumeration value="default"/>
@@ -35,6 +26,15 @@
 <xs:enumeration value="narrow"/>
 <xs:enumeration value="narrower"/>
 <xs:enumeration value="small"/>
+	</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Alignment">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="start"/>
+<xs:enumeration value="end"/>
+<xs:enumeration value="center"/>
+<xs:enumeration value="justify"/>
+<xs:enumeration value="match-parent"/>
 	</xs:restriction>
 </xs:simpleType>
 <xs:simpleType name="Orientation">
@@ -84,29 +84,10 @@
 	</xs:element>
 	<xs:element name="AccordionPanel">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="title" type="xs:string"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="AccordionPanelContent">
-		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="AccordionPanelTitle">
-		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="textAlign" type="Alignment"/>
-<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="subtitle" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
@@ -428,7 +409,7 @@
 	</xs:element>
 	<xs:element name="ListItem">
 		<xs:complexType>
-			
+			<xs:attribute name="tagName" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Menu">
@@ -493,6 +474,31 @@
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="citation" type="xs:string"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResponsivePanel">
+		<xs:complexType>
+			<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="subtitle" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResponsivePanels">
+		<xs:complexType>
+			<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="orientation" type="Orientation"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="colorTheme" type="ThemeColor"/>
+<xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="breakpoint" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="SectionMenu">
@@ -603,39 +609,22 @@
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="TabList">
+	<xs:element name="TabPanel">
 		<xs:complexType>
-			<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="tagName" type="xs:string"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="TabPanelContent">
-		<xs:complexType>
-			<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="tagName" type="xs:string"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="TabPanelTitle">
-		<xs:complexType>
-			<xs:attribute name="textAlign" type="Alignment"/>
+			<xs:attribute name="title" type="xs:string"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="subtitle" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="anchor" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Tabs">
 		<xs:complexType>
-			<xs:attribute name="style" type="InlineStyle"/>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="orientation" type="Orientation"/>
 <xs:attribute name="id" type="xs:string"/>

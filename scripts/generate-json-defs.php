@@ -508,6 +508,7 @@ class ComponentClassesToJsonDefinitions {
 
 // Usage: php generate-json-defs.php
 //        or php generate-json-defs.php --component MyComponent
+//        or php generate-json-defs.php --base MyBaseComponent for base abstract component classes
 try {
 	$instance = new ComponentClassesToJsonDefinitions();
 	if(isset($argv[1]) && $argv[1] === '--component') {
