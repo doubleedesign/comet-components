@@ -13,19 +13,14 @@ Details on other options can be found in the [Local Dev Deep Dives](../local-dev
 :::
 
 :::warning
-This guide is written for Windows users. MacOS and Linux users will need to adapt some steps.
+This guide is written for Windows users. MacOS and Linux users will need to slightly adapt some steps and file paths.
 :::
 
 [[toc]]
 
 ## Prerequisites
 - Git installed locally
-- Windows machine with sufficient privileges to create symbolic links using PowerShell
-	- _or_ MacOS machine with PowerShell installed and sufficient privileges to create symbolic links :warning:
-	- _or_ the ability to translate/adapt PowerShell commands and scripts for your OS
 - Sufficient privileges to install software on your machine.
-
-<small>:warning: This option has not been tested.</small>
 
 ## Clone the repo
 
