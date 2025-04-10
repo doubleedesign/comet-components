@@ -8,9 +8,6 @@
 	@each $name, $values in $colors {
 		--color-#{$name}: #{map-get($colors, '#{$name}')};
 	}
-	@each $name, $value in $hslColors {
-		--color-#{$name}: #{$value};
-	}
 	@each $name in map-keys($colors) {
 		--readable-color-#{$name}: #{if(map-get($hslColors, #{$name}-l) > 60, black, white)};
 	}

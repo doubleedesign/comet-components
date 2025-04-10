@@ -782,3 +782,30 @@ div[vp-content]:has(h1#local-development-setup) {
 		}
 	}
 }
+
+
+// Theming page
+.vp-page:has(h1#theming) {
+	td:has(code) {
+		width: 7rem;
+	}
+
+	// Design tokens tables
+	.docs-token-color, .docs-token-spacing {
+		display: inline-block;
+		margin-inline-end: 0.25rem;
+		height: 1.5rem;
+	}
+
+	.docs-token-color {
+		width: 1.5rem;
+	}
+
+	.docs-token-spacing {
+		border: 1px solid black;
+	}
+
+	td:has(.docs-token-color), td:has(.docs-token-spacing) {
+		vertical-align: middle !important;
+	}
+}
