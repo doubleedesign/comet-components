@@ -46,9 +46,9 @@ class ComponentStoryGenerator {
 		// Ensure tests directory exists in the component directory and create it if it doesn't
 		if(!file_exists($this->sourceDirectory . '\\' . $component . '\\' . '__tests__')) {
 			mkdir($this->sourceDirectory . '\\' . $component . '\\' . '/__tests__', 0777, true);
-			$this->testComponentDirectory = $this->sourceDirectory . '\\' . $component . '\\' . '/__tests__';
 		}
 
+		$this->testComponentDirectory = $this->sourceDirectory . '\\' . $component . '\\' . '/__tests__';
 		$this->processFile($filePath);
 	}
 
@@ -67,7 +67,7 @@ class ComponentStoryGenerator {
 	}
 
 	private function generateComponentOutputPage($name, $shortName, $attributes): void {
-		// If the file already exists, bail unless the overwrite flag is set
+			// If the file already exists, bail unless the overwrite flag is set
 		if(file_exists("$this->testComponentDirectory/$shortName.php") && !$this->overwrite) {
 			print_r("Browser output example file already exists for $name, skipping\n");
 			return;
@@ -81,16 +81,15 @@ class ComponentStoryGenerator {
 		// TODO: If the component extends TextElement, use a basic string instead of mock inner components
 		$fileContent = <<<EOT
 		<?php
-		// File to be symlinked to ./test/components/$shortName.php for browser testing and Storybook
 		use $namespacedName;
-		use const Doubleedesign\Comet\TestUtils\MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT;
+		use Doubleedesign\Comet\Core\{Paragraph};
 		
-		// Attribute keys fetched from component JSON definition
+		// Attribute keys from component JSON definition
 		\$attributeKeys = [$attributeKeys];
 		// Filter the request query vars to only those matching the above
 		\$attributes = array_filter(\$_REQUEST, fn(\$key) => in_array(\$key, \$attributeKeys), ARRAY_FILTER_USE_KEY);
 		
-		\$innerComponents = MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT;
+		\$innerComponents = [new Paragraph([], '$shortName component')];
 		
 		\$component = new $name(\$attributes, \$innerComponents);
 		\$component->render();
@@ -117,8 +116,8 @@ class ComponentStoryGenerator {
 					]
 				],
 				'server' => [
-					"id"     => $shortName,
-					'url'    => sprintf('http://localhost:6001/components/%s.php', strtolower($shortName)),
+					"id"     => self::kebab_case($shortName) . '.php',
+					'url'    => sprintf('/packages/core/src/components/%s/__tests__', $shortName),
 					'params' => [
 						"__debug" => true
 					]
@@ -358,7 +357,6 @@ try {
 		$instance->runAll();
 	}
 	echo "Done!\n";
-	echo "Don't forget to run powershell.exe ./scripts/symlinks.ps1 to use the generated files in Storybook and Playwright tests\n";
 }
 catch(Exception $e) {
 	echo "Error: " . $e->getMessage() . "\n";

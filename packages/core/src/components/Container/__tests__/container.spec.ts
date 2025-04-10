@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from 'playwright';
-import { getPadding, SECTION_PADDING } from '../../../../../../test/playwright-utils';
+import { getPadding, SECTION_PADDING } from '../../../../../../test/integration/playwright-utils';
 
 test.describe.serial('Container', () => {
 	let page: Page;
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/test/browser/pages/container-colours.php');
+		await page.goto('/packages/core/src/components/Container/__tests__/pages/container-colours.php');
 	});
 
 	test.afterAll(async () => {

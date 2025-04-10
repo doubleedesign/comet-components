@@ -9,41 +9,7 @@ In order to view the component test out put and pages found in each component's 
 
 [[toc]]
 
-:::warning
-The below instructions are Windows-specific. If you're using MacOS or Linux you will need to adapt some parts, such as symlinking procedures and file paths.
-:::
-
-## Prerequisites
-- PHP installed locally
-- Symlinks created for the `./test/browser/` directory. This is done automatically when you run `npm run refresh:all`, but if you skipped that step, you can create them manually by running the following command in the project root directory:
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-powershell.exe ./scripts/symlinks.ps1
-```
-@tab PowerShell
-```powershell:no-line-numbers
-./scripts/symlinks.ps1
-```
-:::
-
-## Option 1: Basic PHP web server
-
-Run the following command in the project root directory to start a basic PHP web server:
-
-```bash
-npm run test:server
-```
-
-This will start a PHP web server on port 6001 that runs from the `./test/browser/` directory. You can access the server at `http://localhost:6001`.
-
-An example of a testing page URL for this setup is:
-```
-http://localhost:6001/pages/container-colours.php
-```
-
-## Option 2: Laravel Herd
+## Option 1: Laravel Herd <Badge text="Recommended" vertical="middle" type="tip" />
 [Laravel Herd](https://herd.laravel.com) is a local development environment for PHP applications. It provides a simple way to run a local web server with advanced debugging features.
 
 More details on installing and configuring Herd can be found on the [PHP](../tooling/php.md) page. The below instructions assume you have Herd installed and running.
@@ -62,8 +28,25 @@ php.ini directory`. Add the below lines, filling in your own username and updati
 3. Restart the PHP service in Herd so that the updated configuration is loaded.
 
 An example of a testing page URL for this setup is:
+
 ```
-http://comet-components.test/test/browser/pages/container-colours.php`.
+https://comet-components.test/packages/core/src/components/Columns/__tests__/pages/columns-colours.php`.
+```
+
+## Option 2: Basic PHP web server
+
+Run the following command in the project root directory to start a basic PHP web server:
+	
+```bash
+php ./test/browser/start.php
+```
+
+This will start a PHP web server on port 6001 that runs from the `./test/browser/` directory. You can access the server at `http://localhost:6001`.
+
+An example of a testing page URL for this setup is:
+
+```
+http://localhost:6001/packages/core/src/components/Columns/__tests__/pages/columns-colours.php
 ```
 
 ## Option 3: PhpStorm's built-in web server

@@ -38,5 +38,7 @@ putenv("APP_ENV=development");
 putenv("PHP_EXECUTABLE=" . PHP_BINARY);
 // Specify to use the custom php.ini file as an additional configuration, so the current PHP instance's is used as well
 putenv("PHP_INI_SCAN_DIR=$currentDir");
+// Go up to the project root directory so the URL paths will match where expected to in stories, Playwright tests, etc
+$rootDir = dirname($currentDir, 2);
 // Start the server
-exec("php -S localhost:$port -t $currentDir");
+exec("php -S localhost:$port -t $rootDir");

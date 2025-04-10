@@ -105,11 +105,11 @@ nvm use <version>
 choco install sass
 ```
 
-## Install project dependencies and create symlinks
+## Install project dependencies 
 
-The project contains multiple sub-packages, and uses both [Composer](https://getcomposer.org/) and [NPM](https://www.npmjs.com/) to manage different types of dependencies. In addition, symbolic links (symlinks) are used to make certain files available in certain locations for easy browser testing.
+The project contains multiple sub-packages, and uses both [Composer](https://getcomposer.org/) and [NPM](https://www.npmjs.com/) to manage different types of dependencies. 
 
-A convenience script is provided to install all dependencies in the project root and all `packages`, and create symlinks for the `test` directory. You can run it from the project root (`comet-components` directory) with:
+A convenience script is provided to install all dependencies in the project root and all `packages`. You can run it from the project root (`comet-components` directory) with:
 
 ```powershell::no-line-numbers
 npm run refresh:all

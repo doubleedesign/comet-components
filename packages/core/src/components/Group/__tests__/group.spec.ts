@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from 'playwright';
-import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/playwright-utils';
+import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/integration/playwright-utils';
 
 test.describe.serial('Group', () => {
 	let page: Page;
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/test/browser/pages/group-colours.php');
+		await page.goto('/packages/core/src/components/Group/__tests__/pages/group-colours.php');
 	});
 
 	test.afterAll(async () => {

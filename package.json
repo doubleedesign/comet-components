@@ -5,20 +5,17 @@
 	"author": "Leesa Ward",
 	"type": "module",
 	"scripts": {
-		"test:server": "php test/browser/start.php",
-		"test:storybook": "storybook dev -p 6006",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build",
+		"build-storybook": "BROWSER_TEST_URL=https://storybook.cometcomponents.io storybook build",
 		"docs": "cd docs-site && npm run docs:dev",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
 		"generate:json": "php scripts/generate-json-defs.php",
 		"generate:stories": "php scripts/generate-stories.php",
 		"refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
 		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
-		"refresh:symlinks": "powershell.exe -ExecutionPolicy Bypass -File scripts/symlinks.ps1",
 		"refresh:autoload": "npm run refresh:composer -- -autoload",
 		"refresh:npmpackages": "npm run refresh:npm -- -packagesOnly",
-		"refresh:all": "npm run refresh:composer && npm run refresh:npm && npm run refresh:symlinks"
+		"refresh:all": "npm run refresh:composer && npm run refresh:npm"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",

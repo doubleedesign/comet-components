@@ -7,7 +7,7 @@ position: 0
 :::info
 This section of the docs covers developing the Comet Components core library itself.
 
-Developers looking to use the library in their projects should refer to the [Usage](../usage/overview.md) section.
+Developers looking to use the library in their projects should refer to the [Usage](../usage/overview.md) and [New Implementations](../development-new/overview.md) sections.
 :::
 
 [[toc]]

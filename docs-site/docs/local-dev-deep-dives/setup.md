@@ -33,7 +33,7 @@ Windows-specific setup options and instructions are listed in the [Windows setup
 ## Setup
 
 1. Clone the repository from GitHub
-2. Install dependencies, refresh autoloading, and redo symlinks:
+2. Install dependencies and refresh Composer autoloading:
 
 ::: tabs#shell
 @tab WSL (Bash)
@@ -46,32 +46,11 @@ npm run refresh:all
 ```
 :::
 
-See the [CLI command quick reference](./appendices/cli-commands.md) for more options if you are returning to an already set up copy of the project and don't need to do a full refresh.
+See the [CLI command quick reference](../development-core/cli-commands.md) for more options if you are returning to an already set up copy of the project and don't need to do a full refresh.
 
-3. Run the local web server and Storybook (at the same time i.e. two terminal windows) to see what you're working with!
+3. Run the [local web server](../development-core/testing/browser.md) and Storybook (`npm run storybook` from the project root) to see what you're working with!
 
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-npm run test:server
-```
-```bash:no-line-numbers
-npm run test:storybook
-```
-@tab PowerShell
-```powershell:no-line-numbers
-npm run test:server
-```
-```powershell:no-line-numbers
-npm run test:storybook
-```
-:::
-
-:::tip
-You can also run the project as a [Laravel Herd](https://herd.laravel.com) site instead of running the basic local server, which enables you to use features like Herd's Dumps for debugging. See the [Browser Testing](./testing/browser-testing.md) documentation for more details.
-:::
-
-4. Optionally, run these docs locally:
+4. Optionally, run these docs locally in dev mode:
 
 ::: tabs#shell
 @tab WSL (Bash)

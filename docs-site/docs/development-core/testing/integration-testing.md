@@ -5,8 +5,6 @@ position: 4
 
 # Integration testing
 
-
-
 [[toc]]
 
 ::: warning

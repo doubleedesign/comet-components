@@ -7,8 +7,8 @@
             }
         },
         "server": {
-            "id": "container",
-            "url": "http://localhost:6001/components/container.php",
+            "id": "container.php",
+            "url": "/packages/core/src/components/Container/__tests__",
             "params": {
                 "__debug": true
             }

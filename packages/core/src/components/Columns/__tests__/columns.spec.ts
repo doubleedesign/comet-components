@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from 'playwright';
-import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/playwright-utils';
+import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/integration/playwright-utils';
 
 test.describe.serial('Columns', () => {
 	let page: Page;
 
 	test.beforeAll(async ({ browser }) => {
 		page = await browser.newPage();
-		await page.goto('/test/browser/pages/columns-colours.php');
+		await page.goto('/packages/core/src/components/Columns/__tests__/pages/columns-colours.php');
 	});
 
 	test.afterAll(async () => {

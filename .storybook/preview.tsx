@@ -20,11 +20,11 @@ import { PhpCodeBlock } from './custom-components/PhpCodeBlock.tsx';
 // 	});
 // });
 
+
 const preview: Preview = {
 	parameters: {
 		viewMode: 'story',
 		server: {
-			url: 'http://localhost:6001',
 			fetchStoryTimeout: 5000,
 			maxSimultaneousRequests: 2,
 			reconnectionAttempts: 5,
@@ -127,6 +127,20 @@ const preview: Preview = {
 };
 
 export const decorators = [
+	// Decorator to add the server URL to the story context, so relative URLs can be used in the stories
+	(Story, context) => {
+		if (context.parameters.server && context.parameters.server.url) {
+			const baseUrl = process.env.BROWSER_TEST_URL || 'https://storybook.cometcomponents.io';
+
+			// Only prepend baseUrl if it's a relative URL
+			if (!context.parameters.server.url.startsWith('http')) {
+				context.parameters.server.url = `${baseUrl}${context.parameters.server.url}`;
+				console.log('Transformed URL:', context.parameters.server.url);
+			}
+		}
+
+		return Story();
+	},
 	withCodeTabs,
 	withServerPageStates
 ];

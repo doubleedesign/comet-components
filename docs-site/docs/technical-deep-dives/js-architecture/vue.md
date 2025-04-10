@@ -145,11 +145,11 @@ export default {
 	inheritAttrs: true,
 	props: {
 		titles: {
-			type: Array as Vue.PropType<PanelItem[]>,
+			type: Array as () => PanelItem[],
 			required: true,
 		},
 		contents: {
-			type: Array as Vue.PropType<PanelItem[]>,
+			type: Array as () => PanelItem[],
 			required: true,
 		},
 		breakpoint: String
@@ -160,3 +160,7 @@ export default {
 ```
 
 9. Go forth and build the rest of your Vue component!
+
+:::details Where to put CSS?
+Yeah, I need to decide on some guidance about that.
+:::
