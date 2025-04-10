@@ -8,9 +8,9 @@ position: 1
 
 ## Global PHP configuration
 
-The `CometConfig` class provides static methods to set and get several options to be made available to components at runtime, such as global background colour and default icon prefix. In general usage, these can be set directly. 
+The `Config` class provides static methods to set and get several options to be made available to components at runtime, such as global background colour and default icon prefix. In general usage, these can be set directly. 
 
-In WordPress, themes (other than Comet Canvas) don't generally have direct access to the `CometConfig` class, unless you have installed the Comet Components core library yourself. Comet Canvas provides filters so that child themes can easily override the defaults from `functions.php`.
+In WordPress, themes (other than Comet Canvas) don't generally have direct access to the `Config` class, unless you have installed the Comet Components core library yourself. Comet Canvas provides filters so that child themes can easily override the defaults from `functions.php`.
 
 ### Global background colour
 
@@ -29,14 +29,14 @@ You can set a global background colour for your site using this line of code in 
 For a "vanilla" project this could be as simple as calling it at the top of the page:
 
 ```php
-CometConfig::set_global_background('dark');
+Config::set_global_background('dark');
 ```
 
 You then simply need to add the `data-global-background` attribute to the `body` tag:
 
 ```php
 <?php
-$globalBackground = CometConfig::get_global_background();
+$globalBackground = Config::get_global_background();
 ?>
 <body data-global-background="<?php echo $globalBackground; ?>">
 ```
@@ -60,7 +60,7 @@ The default `iconPrefix` is Font Awesome's `fa-solid`, but this can be overridde
 You can set a default icon prefix for your site using this line of code in an appropriate location:
 
 ```php
-CometConfig::set_icon_prefix('fa-duotone fa-solid');
+Config::set_icon_prefix('fa-duotone fa-solid');
 ```
 :::
 

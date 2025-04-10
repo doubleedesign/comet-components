@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-class CometConfig {
+class Config {
 	private static ThemeColor $globalBackground = ThemeColor::WHITE;
 	private static string $iconPrefix = 'fa-solid';
 

@@ -25,7 +25,7 @@ class Container extends UIComponent {
 		$this->gradient = $attributes['gradient'] ?? null;
 		$this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
 
-		$globalBackground = CometConfig::get_global_background();
+		$globalBackground = Config::get_global_background();
 		if(isset($attributes['backgroundColor']) && $attributes['backgroundColor'] !== $globalBackground) {
 			$this->set_background_color_from_attrs($attributes);
 		}

@@ -18,7 +18,7 @@ trait Icon {
 	public function set_icon_from_attrs(array $attributes): void {
 		if(!isset($attributes['icon'])) return;
 
-		$this->iconPrefix = $attributes['iconPrefix'] ?? CometConfig::get_icon_prefix();
+		$this->iconPrefix = $attributes['iconPrefix'] ?? Config::get_icon_prefix();
 		$this->icon = $attributes['icon'];
 	}
 }

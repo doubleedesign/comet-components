@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{TychoService};
+use Doubleedesign\Comet\Core\{TychoService,Assets};
 
 $page = <<<TYCHO
 <TychoTemplate xmlns="schema/components.xsd">
@@ -142,3 +142,6 @@ try {
 catch(Exception $e) {
 	echo $e->getMessage();
 }
+
+// Workaround for wrapper-close not loading in Laravel Herd
+Assets::get_instance()->render_component_stylesheet_html();

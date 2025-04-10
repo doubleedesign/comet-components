@@ -47,11 +47,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 ## Setting configuration
 
-Implementations need a way to set the global configuration for the components, which are found in the `CometConfig` class.
+Implementations need a way to set the global configuration for the components, which are found in the `Config` class.
 
 The most basic way, using the global background setting as an example, is like so:
 ```php
-CometConfig::set_global_background($color);
+Config::set_global_background($color);
 ```
 
 Depending on the way your CMS works, you may need to do this in a particular place. For example, the Comet Canvas WordPress theme does it in an action hook (and provides a filter for child themes to change it).
@@ -89,6 +89,29 @@ An example of the result in WordPress is:
 </script>
 
 ```
+:::
+
+:::details Use the Comet `Assets` class
+Component CSS and JS files that follow the kebab-case naming convention are automatically added to the `Assets` class, which has utility methods that can be used to load the global assets plus just the assets for components that have been rendered on the page.
+
+The below methods will render the HTML for the global assets (such as `global.css`):
+
+```php
+Assets::get_instance()->render_global_stylesheet_html();
+Assets::get_instance()->render_global_script_html(); 
+```
+
+And these methods will render the HTML to load the assets for the components that have been rendered on the page, automatically ensuring they are not loaded multiple times if there is more than one instance of the component on the page:
+
+```php
+Assets::get_instance()->render_component_stylesheet_html();
+Assets::get_instance()->render_component_script_html();
+```
+
+Examples of this in action for testing pages can be found in `./test/browser/wrapper-open.php` and `./test/browser/wrapper-close.php`.
+
+:::warning
+Remember, PHP reads your page top-to-bottom. This means that you can't load component assets in the `<head>` unless you have somehow instantiated the components before calling the asset loader there ([output buffering](https://www.php.net/manual/en/ref.outcontrol.php) is one way you could do this). Loading assets at the bottom of the page is the easiest way to ensure that the assets are loaded after the components have been rendered, but can cause a flash of unstyled content (FOUC) when the page first loads.
 :::
 
 :::details Load the global CSS + individual CSS and JS files 

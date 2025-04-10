@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\CometConfig;
+use Doubleedesign\Comet\Core\{Assets,Config};
 
 // If the request has not come from a browser (e.g., it has come from a unit test or CLI command), bail early
 if(!isset($_SERVER['HTTP_USER_AGENT'])) return;
@@ -15,13 +15,15 @@ if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
 }
 
 // Set global config
-$globalBackground = CometConfig::get_global_background();
+$globalBackground = Config::get_global_background();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php Assets::get_instance()->render_global_stylesheet_html(); ?>
+	<?php Assets::get_instance()->render_global_script_html(); ?>
 	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
 </head>
 <body data-global-background="<?php echo $globalBackground; ?>">

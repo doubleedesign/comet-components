@@ -84,6 +84,17 @@ abstract class Renderable {
 			$classes = array_merge($classes, $attributes['classes']);
 		}
 		$this->classes = $classes;
+
+		// If a CSS file is in the directory, add it to the asset loader
+		// TODO: Make this opt-in somehow, so it's not being run when not used (e.g., in WordPress where the bundles are used)
+		// TODO: Also make this work with custom Blade file paths
+		$componentRootDir = dirname(__DIR__, 2);
+		$thisComponentPathFromBladeFile = str_replace('.', '/', $this->bladeFile);
+		$cssFile = $componentRootDir . '/' . $thisComponentPathFromBladeFile . '.css';
+		$cssFile = str_replace('\\', '/', $cssFile);
+		if(file_exists($cssFile)) {
+			Assets::get_instance()->add_stylesheet($cssFile);
+		}
 	}
 
 	protected function set_tag(?string $tagName): void {
