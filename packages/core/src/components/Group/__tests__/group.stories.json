@@ -3,7 +3,7 @@
     "parameters": {
         "docs": {
             "description": {
-                "component": "Group blocks together for layout, structure, or navigation purposes."
+                "component": "Group components together for layout or structure purposes."
             }
         },
         "server": {
@@ -16,10 +16,8 @@
     },
     "args": {
         "backgroundColor": "",
-        "hAlign": "start",
         "tagName": "div",
-        "testId": "",
-        "vAlign": "start"
+        "testId": ""
     },
     "argTypes": {
         "backgroundColor": {
@@ -67,27 +65,6 @@
                 }
             }
         },
-        "hAlign": {
-            "description": "",
-            "control": {
-                "type": "select"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": "start"
-                },
-                "type": {
-                    "summary": "Alignment"
-                }
-            },
-            "options": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ]
-        },
         "tagName": {
             "description": "The HTML tag to use for this component",
             "control": {
@@ -121,27 +98,6 @@
                     "summary": "string"
                 }
             }
-        },
-        "vAlign": {
-            "description": "",
-            "control": {
-                "type": "select"
-            },
-            "table": {
-                "defaultValue": {
-                    "summary": "start"
-                },
-                "type": {
-                    "summary": "Alignment"
-                }
-            },
-            "options": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ]
         }
     },
     "stories": [

@@ -1,7 +1,8 @@
 {
     "name": "Group",
-    "extends": "LayoutComponent",
+    "extends": "UIComponent",
     "abstract": false,
+    "vue": true,
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
@@ -17,8 +18,7 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "classes": {
             "type": "array<string>",
@@ -34,18 +34,6 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "hAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start",
             "inherited": true
         },
         "id": {
@@ -73,18 +61,6 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        },
-        "vAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start",
             "inherited": true
         }
     },
