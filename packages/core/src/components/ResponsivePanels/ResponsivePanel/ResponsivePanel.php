@@ -9,14 +9,10 @@ class ResponsivePanel extends PanelComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.ResponsivePanels.ResponsivePanel.responsive-panel');
-		$this->context = 'responsive';
+		$this->context = 'responsive-panel';
 	}
 
-	public function get_title(): ?array {
-		return array(
-			'attributes' => [],
-			'classes'    => ['responsive-panel__title'],
-			'content'    => $this->title . ($this->subtitle ? "<small class='responsive-panel__title__subtitle'>$this->subtitle</small>" : ''),
-		);
+	protected function get_bem_name(): ?string {
+		return 'responsive-panel__content';
 	}
 }

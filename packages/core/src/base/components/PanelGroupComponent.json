@@ -1,15 +1,13 @@
 {
-    "name": "Accordion",
-    "extends": "PanelGroupComponent",
-    "abstract": false,
+    "name": "PanelGroupComponent",
+    "extends": "UIComponent",
+    "abstract": true,
     "vue": true,
     "attributes": {
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [
-                "accordion"
-            ],
+            "default": [],
             "inherited": true
         },
         "colorTheme": {
@@ -27,21 +25,12 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "default": "primary"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
             "inherited": true
-        },
-        "icon": {
-            "type": "string",
-            "description": "Icon class name for the icon to use for the expand/collapse indicator."
-        },
-        "iconPrefix": {
-            "type": "string",
-            "description": "Icon prefix class name",
-            "default": "fa-solid"
         },
         "id": {
             "type": "string",
@@ -54,8 +43,7 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical",
-            "inherited": true
+            "default": "vertical"
         },
         "style": {
             "type": "array",
@@ -78,8 +66,9 @@
         }
     },
     "innerComponents": {
-        "type": "array<AccordionPanel>",
+        "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true
+        "required": true,
+        "inherited": true
     }
 }

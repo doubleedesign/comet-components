@@ -14,5 +14,6 @@ export type PanelContent = {
 // and that they are in the correct order to match up
 export type PanelItem = {
 	title: PanelTitle;
+	subtitle: PanelTitle;
 	content: PanelContent;
 };

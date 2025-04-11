@@ -30,11 +30,6 @@ When creating a Vue-enhanced component that can be used as a WordPress block, ad
 
 ## Create a Vue-enhanced Comet Component
 
-:::warning
-// TODO: This has not yet been tested with standalone JS loading, only with bundled `dist.js` usage.
-:::
-
-
 1. [Create a new component](../../development-core/new-component.md) as you would for a standard PHP component.
 2. In your component's Blade template, add the `data-vue-component` attribute to the root element of your component. This will be the element that Vue mounts to. For example:
 
@@ -46,41 +41,44 @@ When creating a Vue-enhanced component that can be used as a WordPress block, ad
 3. In your component's directory, create a file with the kebab case name of your component, followed by `.vue`. For example, if your component is called `ResponsivePanels`, create a file called `responsive-panels.vue` and put the below boilerplate code into it, updating `ResponsivePanels` to the PascalCase name of your component:
 
 ```vue
+
 <script lang="ts">
-export default {
-	name: 'ResponsivePanels',
-	inheritAttrs: true, 
-	props: {
-	},
-	data() {
-		return {
-		};
-	},
-	mounted() {
-	},
-	methods: {
-	}
-};
+    export default {
+        name: 'ResponsivePanels',
+        inheritAttrs: true,
+        props: {},
+        data() {
+            return {};
+        },
+        mounted() {
+        },
+        methods: {}
+    };
 </script>
 
 <template>
-	
+
 </template>
+
+<style lang="css">
+	
+</style>
 ```
 :::details Notes about this setup
 - Version 3 of Vue is used.
-- `inheritAttrs: true` allows us to pass down attributes directly from PHP class -> Blade like normal and have them work without the Vue component needing specific handling for them. They will be passed to the first HTML element in the Vue component.
+- `inheritAttrs: true` allows us to pass down HTML attributes directly from PHP class -> Blade like normal and have them work without the Vue component needing specific handling for them. They will be passed to the first HTML element in the Vue component.
 	- If the Vue component contains other Vue components and the first rendered HTML element comes from there (such as with the `ResponsivePanels` component which loads `Accordion` and `Tabs` Vue components), that's where the attributes will go, so long as that child component also has `inheritAttrs: true`.
-    - This concept is called [fallthrough attributes](https://vuejs.org/guide/components/attrs).
+	- This concept is called [fallthrough attributes](https://vuejs.org/guide/components/attrs).
 - TypeScript is supported if you include `lang="ts"` in the `<script>` tag.
 - This syntax is the Vue [options API](https://vuejs.org/guide/introduction.html#options-api).
-:::
+- Only vanilla CSS is currently supported in Comet's implementation of Vue SFC Loader.
+  :::
 
 4. Add a `your-component.js` file to the component directory. Copy and paste the code below into it:
 
 ```javascript
 import * as Vue from '../../plugins/vue-wrapper/src/vue.esm-browser.js';
-import { loadModule } from  '../../plugins/vue-wrapper/src/vue3-sfc-loader.esm.js';
+import { loadModule } from '../../plugins/vue-wrapper/src/vue3-sfc-loader.esm.js';
 import { vueSfcLoaderOptions, BASE_PATH } from '../../plugins/vue-wrapper/src/index.js';
 
 Vue.createApp({
@@ -92,17 +90,17 @@ Vue.createApp({
 }).mount('[data-vue-component="responsive-panels"]');
 ```
 
-Update to suit your component by:
-- Updating `ResponsivePanels` on line 7 to the PascalCase name of your component
-- Update the path to the `.vue` file on line 8 to the path to the file you just created in step 3
-- Update the selector on line 11 to match what you put in your Blade template in step 2.
+  Update to suit your component by:
+  - Updating `ResponsivePanels` on line 7 to the PascalCase name of your component
+  - Update the path to the `.vue` file on line 8 to the path to the file you just created in step 3
+  - Update the selector on line 11 to match what you put in your Blade template in step 2.
 
 5. Add the `your-component.js` file to the `dist.js` build process in `rollup.index.js` in the core package root directory.
+
 
 :::note
 If you don't have a [file watcher](../../local-dev-deep-dives/tooling-guides/phpstorm.md#file-watchers) or other automatic way for Rollup to run configured, you will need to run `npm run build` from the core package directory manually to update the `dist.js` file with your new script - and do so again whenever you change it.
 :::
-
 
 6. In your component's PHP `render()` method, add the props you want to pass to the Vue component. For example:
 
@@ -120,7 +118,7 @@ function render(): void {
 }
 ```
 
-7. In your component's Blade template, render the Vue component using its kebab-case tag and the props you passed through to the render method. For example: 
+7. In your component's Blade template, render the Vue component using its kebab-case tag and the props you passed through to the render method. For example:
 
 ```blade
 <div data-vue-component="responsive-panels" @if ($classes) @class($classes) @endif>
@@ -136,31 +134,42 @@ function render(): void {
 8. Go into your `.vue` file and add the props you just added to the Blade template to the `props` of the component. For example:
 
 ```vue
+
 <script lang="ts">
-import * as Vue from '../../plugins/vue-wrapper/src/vue.esm-browser.js';
-import type { PanelItem } from './types.ts';
-	
-export default {
-	name: 'ResponsivePanels',
-	inheritAttrs: true,
-	props: {
-		titles: {
-			type: Array as () => PanelItem[],
-			required: true,
-		},
-		contents: {
-			type: Array as () => PanelItem[],
-			required: true,
-		},
-		breakpoint: String
-	},
-	// ... rest of your component script
-}
+    import * as Vue from '../../plugins/vue-wrapper/src/vue.esm-browser.js';
+    import type { PanelItem } from './types.ts';
+
+    export default {
+        name: 'ResponsivePanels',
+        inheritAttrs: true,
+        props: {
+            titles: {
+                type: Array as () => PanelItem[],
+                required: true,
+            },
+            contents: {
+                type: Array as () => PanelItem[],
+                required: true,
+            },
+            breakpoint: String
+        },
+        // ... rest of your component script
+    }
 </script>
 ```
 
-9. Go forth and build the rest of your Vue component!
+:::tip
+If you want to separate out inner components and they are ones that will be used in multiple places, those should go in 
+`./packages/core/plugins/shared-vue-components` and ideally have their CSS co-located in the Vue file.
+:::
+
+9. Add the component to the `web-types.json` file in the Core package root so that PhpStorm recognises the tag as a Vue component, rather than flagging it as an unknown HTML element, and intellisense picks up the props.
+
+10. Go forth and build the rest of your Vue component!
 
 :::details Where to put CSS?
-Yeah, I need to decide on some guidance about that.
+For Vue components that are shared amongst multiple PHP components (for example, the Accordion and Tabs are used in both their standalone counterparts and in `ResponsivePanels`), it is preferred to put the CSS within the Vue single-file component. This simplifies style loading when using non-bundled [asset-loading methods](../../development-new/overview.md#loading-assets), and also means the CSS is only loaded when the component is actually being used.
+
+:warning: That said, also in the spirit of simplifying things (particularly for front-end performance), the current implementation of Vue SFC Loader is not set up to support Sass within Vue components, which can mean a little more code is necessary to get the desired results. In some cases, it may be worthwhile to have a separate SCSS file and manually add it to the asset loader or a custom bundle.
 :::
+

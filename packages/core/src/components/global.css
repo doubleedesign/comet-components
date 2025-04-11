@@ -104,6 +104,56 @@ body {
   padding: var(--spacing-md);
 }
 
+[data-color-theme=primary] {
+  --theme-color: var(--color-primary);
+  --theme-text-color: var(--readable-color-primary);
+}
+
+[data-color-theme=secondary] {
+  --theme-color: var(--color-secondary);
+  --theme-text-color: var(--readable-color-secondary);
+}
+
+[data-color-theme=accent] {
+  --theme-color: var(--color-accent);
+  --theme-text-color: var(--readable-color-accent);
+}
+
+[data-color-theme=info] {
+  --theme-color: var(--color-info);
+  --theme-text-color: var(--readable-color-info);
+}
+
+[data-color-theme=warning] {
+  --theme-color: var(--color-warning);
+  --theme-text-color: var(--readable-color-warning);
+}
+
+[data-color-theme=success] {
+  --theme-color: var(--color-success);
+  --theme-text-color: var(--readable-color-success);
+}
+
+[data-color-theme=error] {
+  --theme-color: var(--color-error);
+  --theme-text-color: var(--readable-color-error);
+}
+
+[data-color-theme=light] {
+  --theme-color: var(--color-light);
+  --theme-text-color: var(--readable-color-light);
+}
+
+[data-color-theme=dark] {
+  --theme-color: var(--color-dark);
+  --theme-text-color: var(--readable-color-dark);
+}
+
+[data-color-theme=white] {
+  --theme-color: var(--color-white);
+  --theme-text-color: var(--readable-color-white);
+}
+
 .layout-block[data-background] > .layout-block:not([data-background]) {
   padding: var(--spacing-md);
 }

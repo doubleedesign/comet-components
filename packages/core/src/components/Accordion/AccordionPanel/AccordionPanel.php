@@ -13,12 +13,4 @@ class AccordionPanel extends PanelComponent {
 	protected function get_bem_name(): ?string {
 		return 'accordion__panel__content';
 	}
-
-	public function get_title(): ?array {
-		return array(
-			'attributes' => [],
-			'classes' => ['accordion__panel__title'],
-			'content' => "$this->title" . ($this->subtitle ? "<small class='accordion__panel__title__subtitle'>$this->subtitle</small>" : ''),
-		);
-	}
 }

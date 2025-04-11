@@ -1,44 +1,52 @@
 <?php
-use Doubleedesign\Comet\Core\{ResponsivePanels,
-	ResponsivePanel,
-	ResponsivePanelTitle,
-	ResponsivePanelContent,
-	Paragraph
-};
+use Doubleedesign\Comet\Core\{Assets, ResponsivePanels, ResponsivePanel, Heading, Paragraph};
 
 $component = new ResponsivePanels(
 	[
-		'colorTheme' => 'primary',
+		'colorTheme' => 'secondary',
 	],
 	[
 		new ResponsivePanel(
-			[],
 			[
-				new ResponsivePanelTitle([], 'Panel 1'),
-				new ResponsivePanelContent([], [
-					new Paragraph([], 'This is the content of panel 1')
-				])
+				'title' => 'Panel 1',
+				'subtitle' => 'Subtitle 1',
+			],
+			[
+				new Heading([], 'The cushions are the essence of the chair!'),
+				new Paragraph([], "Come on, Ross, you're a paleontologist. Dig a little deeper. Just to be clear, comedy with the plates will not be well-received. Okay, well, who identified this restaurant's tone as \"pretentious-comma-garlicky\"?"),
+				new Paragraph([], "Wow. I haven't seen you this worked-up since you did that dog-food commercial and you thought you were gonna be with a real talking dog. Yeah, that was a disappointment If you want to receive emails about my upcoming shows, please give me money so I can buy a computer. We said aloof, not a doof! You don't have a TV? What's all your furniture pointed at?")
 			]
 		),
 		new ResponsivePanel(
-			[],
 			[
-				new ResponsivePanelTitle([], 'Panel 2'),
-				new ResponsivePanelContent([], [
-					new Paragraph([], 'This is the content of panel 2')
-				])
+				'title' => 'Panel 2',
+				'subtitle' => 'Subtitle 2',
+			],
+			[
+				new Paragraph([], 'This is the content of panel 2')
 			]
 		),
 		new ResponsivePanel(
-			[],
 			[
-				new ResponsivePanelTitle([], 'Panel 3'),
-				new ResponsivePanelContent([], [
-					new Paragraph([], 'This is the content of panel 3')
-				])
+				'title' => 'Panel 3'
+			],
+			[
+				new Paragraph([], 'This is the content of panel 3')
 			]
-		)
+		),
+		new ResponsivePanel(
+			[
+				'title' => 'Panel 4',
+				'subtitle' => 'Subtitle 4',
+			],
+			[
+				new Paragraph([], 'This is the content of panel 4')
+			]
+		),
 	]);
 
 $component->render();
 
+// Workaround for wrapper-close not loading in Laravel Herd
+Assets::get_instance()->render_component_stylesheet_html();
+Assets::get_instance()->render_component_script_html();

@@ -7,8 +7,8 @@
             }
         },
         "server": {
-            "id": "button-group",
-            "url": "http://localhost:6001/components/button-group.php",
+	        "id": "button-group.php",
+	        "url": "/packages/core/src/components/ButtonGroup/__tests__",
             "params": {
                 "__debug": true
             }
@@ -91,55 +91,13 @@
             ]
         }
     },
-    "stories": [
-        {
-            "name": "Playground",
-            "args": [],
-            "tags": [
-                "docsOnly"
-            ]
-        },
-        {
-            "name": "HAlign: Start",
-            "args": {
-                "hAlign": "start"
-            }
-        },
-        {
-            "name": "HAlign: End",
-            "args": {
-                "hAlign": "end"
-            }
-        },
-        {
-            "name": "HAlign: Center",
-            "args": {
-                "hAlign": "center"
-            }
-        },
-        {
-            "name": "HAlign: Justify",
-            "args": {
-                "hAlign": "justify"
-            }
-        },
-        {
-            "name": "HAlign: Match-parent",
-            "args": {
-                "hAlign": "match-parent"
-            }
-        },
-        {
-            "name": "Orientation: Horizontal",
-            "args": {
-                "orientation": "horizontal"
-            }
-        },
-        {
-            "name": "Orientation: Vertical",
-            "args": {
-                "orientation": "vertical"
-            }
-        }
-    ]
+	"stories": [
+		{
+			"name": "Playground",
+			"args": [],
+			"tags": [
+				"docsOnly"
+			]
+		}
+	]
 }

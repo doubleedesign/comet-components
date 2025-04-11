@@ -84,8 +84,8 @@ export default {
 </script>
 
 <template>
-   <div class="tabs" :style="this.height ? { height: this.height + 'px' } : {}">
-       <ul class="tabs__tab-list" role="tablist" :data-background="this.colorTheme">
+    <div class="tabs" :style="this.height ? { height: this.height + 'px' } : {}">
+        <ul class="tabs__tab-list" role="tablist" :data-background="this.colorTheme">
             <li v-for="(title, index) in this.titles" :key="index" :class="title.classes" role="presentation">
                 <!--TODO: Make direct page anchors work, and find a way to make it a relevant ID -->
                 <a
@@ -97,8 +97,8 @@ export default {
                     v-html="title.content"
                 ></a>
             </li>
-       </ul>
-       <div class="tabs__content" :data-color-theme="this.colorTheme">
+        </ul>
+        <div class="tabs__content" :data-color-theme="this.colorTheme">
             <div v-for="(content, index) in this.contents"
                  :key="index"
                  role="tabpanel"
@@ -108,9 +108,97 @@ export default {
                  :data-open="index === this.activePanelIndex"
                  v-html="content.content"
             ></div>
-       </div>
-   </div>
+        </div>
+    </div>
 </template>
 
-<style scoped>
+<style lang="css">
+/** Sadly, Sass-style BEM nesting e.g., &__ prefix does not work in vanilla CSS */
+.tabs {
+    margin-bottom: var(--spacing-lg);
+
+    .tabs__tab-list {
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        .tabs__tab-list__item {
+            display: block;
+            margin-block: 0;
+
+            strong {
+                display: block;
+            }
+
+            [role="tab"] {
+                text-align: match-parent;
+                cursor: pointer;
+                display: block;
+                width: 100%;
+                padding: var(--spacing-xs) var(--spacing-sm);
+                text-decoration-color: transparent;
+                color: inherit;
+
+                &:focus {
+                    text-decoration-color: currentColor;
+                }
+
+                &[aria-selected="true"],
+                &:hover, &:focus, &:active {
+                    background: rgb(255 255 255 / 0.25);
+                }
+            }
+        }
+    }
+
+    .tabs__content {
+        background: white;
+        padding-block: 0;
+
+        [role="tabpanel"] {
+            height: 0;
+            overflow: hidden;
+            opacity: 0;
+
+            &[data-open="true"] {
+                height: auto;
+                opacity: 1;
+                padding: var(--spacing-md);
+            }
+
+            @media (prefers-reduced-motion) {
+                transition: none;
+            }
+        }
+
+        h2, h3 {
+            color: var(--theme-color);
+        }
+    }
+
+    &[data-orientation="vertical"] {
+        container-type: inline-size;
+        display: flex;
+        flex-direction: row;
+
+        .tabs__tab-list {
+            margin: 0;
+            width: 14rem;
+            flex-basis: 14rem;
+            min-width: 14rem;
+            flex-direction: column;
+            justify-content: flex-start;
+
+            .tabs__tab-list__item {
+                width: 100%;
+            }
+        }
+
+        .tabs__content {
+            width: auto;
+            flex-basis: auto;
+            flex-grow: 1;
+        }
+    }
+}
 </style>

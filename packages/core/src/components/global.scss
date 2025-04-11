@@ -115,6 +115,14 @@ body {
 	@include nested-padding();
 }
 
+@each $name, $color in $colors {
+	[data-color-theme="#{$name}"] {
+		// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
+		--theme-color: var(--color-#{$name});
+		--theme-text-color: var(--readable-color-#{$name});
+	}
+}
+
 .layout-block {
 	// If a layout block's immediate child is also a layout block but that has no background set, it should have padding
 	&[data-background] > .layout-block:not([data-background]) {

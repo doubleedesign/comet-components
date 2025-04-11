@@ -20280,8 +20280,13 @@ const BASE_PATH = (function() {
 		}
 	}
 
-	// TODO Fix for other use cases like Storybook
-	return '';
+	// For individual asset loading:
+	// In a local dev environment, default to the core package source directory
+	if(window.location.hostname === 'comet-components.test' || window.location.hostname === 'localhost') {
+		return '/packages/core/';
+	}
+	// Otherwise, assume vendor directory path
+	return '/vendor/doubleedesign/comet-components-core/packages/core/';
 })();
 
 createApp({

@@ -1,0 +1,74 @@
+{
+	"name": "comet-components",
+	"version": "0.0.2",
+	"contributions": {
+		"html": {
+			"elements": [
+				{
+					"name": "accordion",
+					"description": "Accordion Vue component",
+					"attributes": [
+						{
+							"name": ":panels",
+							"value": {
+								"kind": "expression",
+								"required": true
+							}
+						},
+						{
+							"name": "icon",
+							"value": {
+								"kind": "string"
+							}
+						}
+					]
+				},
+				{
+					"name": "tabs",
+					"description": "Tabs Vue component",
+					"attributes": [
+						{
+							"name": ":panels",
+							"value": {
+								"kind": "expression",
+								"required": true
+							}
+						}
+					]
+				},
+				{
+					"name": "responsive-panels",
+					"description": "Responsive panels Vue component",
+					"attributes": [
+						{
+							"name": "breakpoint",
+							"value": {
+								"kind": "string"
+							}
+						},
+						{
+							"name": "icon",
+							"value": {
+								"kind": "string"
+							}
+						},
+						{
+							"name": ":titles",
+							"value": {
+								"kind": "expression",
+								"required": true
+							}
+						},
+						{
+							"name": ":contents",
+							"value": {
+								"kind": "expression",
+								"required": true
+							}
+						}
+					]
+				}
+			]
+		}
+	}
+}

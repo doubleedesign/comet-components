@@ -115,66 +115,6 @@
 			"tags": [
 				"docsOnly"
 			]
-		},
-		{
-			"name": "Primary",
-			"args": {
-				"colorTheme": "primary"
-			}
-		},
-		{
-			"name": "Secondary",
-			"args": {
-				"colorTheme": "secondary"
-			}
-		},
-		{
-			"name": "Accent",
-			"args": {
-				"colorTheme": "accent"
-			}
-		},
-		{
-			"name": "Error",
-			"args": {
-				"colorTheme": "error"
-			}
-		},
-		{
-			"name": "Success",
-			"args": {
-				"colorTheme": "success"
-			}
-		},
-		{
-			"name": "Warning",
-			"args": {
-				"colorTheme": "warning"
-			}
-		},
-		{
-			"name": "Info",
-			"args": {
-				"colorTheme": "info"
-			}
-		},
-		{
-			"name": "Light",
-			"args": {
-				"colorTheme": "light"
-			}
-		},
-		{
-			"name": "Dark",
-			"args": {
-				"colorTheme": "dark"
-			}
-		},
-		{
-			"name": "White",
-			"args": {
-				"colorTheme": "white"
-			}
 		}
 	]
 }

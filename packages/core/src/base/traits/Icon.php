@@ -15,10 +15,10 @@ trait Icon {
 	 */
 	protected ?string $icon;
 
-	public function set_icon_from_attrs(array $attributes): void {
-		if(!isset($attributes['icon'])) return;
+	protected function set_icon_from_attrs(array $attributes, ?string $default = null): void {
+		if(!isset($attributes['icon']) && $default === null) return;
 
 		$this->iconPrefix = $attributes['iconPrefix'] ?? Config::get_icon_prefix();
-		$this->icon = $attributes['icon'];
+		$this->icon = $attributes['icon'] ?? $default ?? null;
 	}
 }

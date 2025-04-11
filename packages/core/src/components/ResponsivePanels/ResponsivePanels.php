@@ -3,9 +3,8 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
-class ResponsivePanels extends UIComponent {
-	use ColorTheme;
-	use LayoutOrientation;
+class ResponsivePanels extends PanelGroupComponent {
+	use Icon;
 
 	/**
 	 * @var string $breakpoint
@@ -14,44 +13,24 @@ class ResponsivePanels extends UIComponent {
 	protected string $breakpoint;
 
 	/**
-	 * @var array<ResponsivePanel> $innerComponents
+	 * @var ?string $icon
+	 * @description Icon class name for the icon to use for the expand/collapse indicator in accordion mode
 	 */
+	protected ?string $icon;
+
+	/** @var array<ResponsivePanel> */
 	protected array $innerComponents;
 
-	private array $titles = [];
+	/**
+	 * @var array
+	 * @description Panels transformed for use by the Vue component.
+	 */
 	private array $panels = [];
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.ResponsivePanels.responsive-panels');
-		$this->set_orientation_from_attrs($attributes);
-		$this->set_color_theme_from_attrs($attributes);
 		$this->breakpoint = $attributes['breakpoint'] ?? '768px';
-		$this->prepare_inner_components_for_vue();
-	}
-
-	private function prepare_inner_components_for_vue(): void {
-		foreach($this->innerComponents as $panel) {
-			if(!$panel instanceof ResponsivePanel) {
-				error_log('ResponsivePanels: Invalid inner component type found and ignored.');
-			}
-
-			array_push($this->titles, $panel->get_title());
-			array_push($this->panels, $panel->get_content());
-		}
-	}
-
-	protected function get_html_attributes(): array {
-		$attributes = parent::get_html_attributes();
-
-		if(isset($this->orientation)) {
-			$attributes['data-orientation'] = $this->orientation->value;
-		}
-
-		if(isset($this->colorTheme)) {
-			$attributes['data-color-theme'] = $this->colorTheme->value;
-		}
-
-		return $attributes;
+		$this->set_icon_from_attrs($attributes, 'fa-plus');
 	}
 
 	function render(): void {
@@ -61,8 +40,8 @@ class ResponsivePanels extends UIComponent {
 			'classes'    => $this->get_filtered_classes(),
 			'attributes' => $this->get_html_attributes(),
 			'breakpoint' => $this->breakpoint,
-			'titles'     => $this->titles,
-			'panels'     => $this->panels
+			'panels'     => $this->get_panel_data_for_vue(),
+			'icon'       => "$this->iconPrefix $this->icon"
 		])->render();
 	}
 }

@@ -8,24 +8,15 @@ export default {
 	components: { Accordion, Tabs },
 	inheritAttrs: true,
 	props: {
-		titles: {
+		panels: {
 			type: Array as () => PanelItem[],
 			required: true,
 		},
-		contents: {
-			type: Array as () => PanelItem[],
-			required: true,
-		},
-		breakpoint: String
+		breakpoint: String,
+		icon: String
 	},
 	data() {
 		return {
-			panels: this.titles.map((title: string, index: number) => {
-				return {
-					title: title,
-					content: this.contents[index],
-				};
-			}),
 			showAsTabs: false, // to be swapped when breakpoint is reached
 			debouncedResize: null
 		};
@@ -61,17 +52,13 @@ export default {
 			};
 		},
 	}
-
-	// TODO: The inner Accordion and Tabs components should be refactored out into their own Vue components
-	// and used for the standalone accordion and tabs too, so they share all styling in a cleaner way
-	// - this currently relies on those components' styling which is...not consistent with the rest of the project's architecture
 };
 </script>
 
 <template>
     <Transition name="panel-switch" mode="out-in">
         <Tabs v-if="this.showAsTabs" :panels="this.panels"></Tabs>
-        <Accordion v-else :panels="this.panels"></Accordion>
+        <Accordion v-else :panels="this.panels" :icon="this.icon"></Accordion>
     </Transition>
 </template>
 

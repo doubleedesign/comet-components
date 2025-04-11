@@ -14,6 +14,12 @@
 <xs:enumeration value="white"/>
 	</xs:restriction>
 </xs:simpleType>
+<xs:simpleType name="Orientation">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="horizontal"/>
+<xs:enumeration value="vertical"/>
+	</xs:restriction>
+</xs:simpleType>
 <xs:complexType name="InlineStyle">
 	<xs:attribute name="key" type="xs:string" use="required"/>
 	<xs:attribute name="value" type="xs:string" use="required"/>
@@ -35,12 +41,6 @@
 <xs:enumeration value="center"/>
 <xs:enumeration value="justify"/>
 <xs:enumeration value="match-parent"/>
-	</xs:restriction>
-</xs:simpleType>
-<xs:simpleType name="Orientation">
-	<xs:restriction base="xs:string">
-		<xs:enumeration value="horizontal"/>
-<xs:enumeration value="vertical"/>
 	</xs:restriction>
 </xs:simpleType>
 <xs:simpleType name="AspectRatio">
@@ -73,10 +73,13 @@
 	</xs:simpleType>
 		<xs:element name="Accordion">
 		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="orientation" type="Orientation"/>
+<xs:attribute name="iconPrefix" type="xs:string"/>
+<xs:attribute name="icon" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
@@ -492,7 +495,9 @@
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="orientation" type="Orientation"/>
 <xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="icon" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>

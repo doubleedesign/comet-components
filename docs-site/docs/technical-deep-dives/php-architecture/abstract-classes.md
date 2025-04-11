@@ -1,8 +1,3 @@
----
-title: Abstract classes
-position: 1
----
-
 # Abstract Component Classes
 Foundational PHP classes for defining common fields and methods for components.
 
@@ -42,12 +37,12 @@ Foundational PHP classes for defining common fields and methods for components.
 		<tr>
 		<th scope="row" rowspan="2">Extended by</th>
 		<td>
-			<ul><li><code>LayoutComponent</code></li><li><code>PanelComponent</code></li></ul>
+			<ul><li><code>LayoutComponent</code></li><li><code>PanelComponent</code></li><li><code>PanelGroupComponent</code></li></ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<ul><li><code>Accordion</code></li><li><code>Banner</code></li><li><code>Breadcrumbs</code></li><li><code>ButtonGroup</code></li><li><code>CallToAction</code></li><li><code>Callout</code></li><li><code>Container</code></li><li><code>Details</code></li><li><code>FileGroup</code></li><li><code>Gallery</code></li><li><code>Group</code></li><li><code>IconWithText</code></li><li><code>ImageAndText</code></li><li><code>LinkGroup</code></li><li><code>ListComponent</code></li><li><code>Menu</code></li><li><code>PageHeader</code></li><li><code>ResponsivePanels</code></li><li><code>SiteFooter</code></li><li><code>Tabs</code></li></ul>
+			<ul><li><code>Banner</code></li><li><code>Breadcrumbs</code></li><li><code>ButtonGroup</code></li><li><code>CallToAction</code></li><li><code>Callout</code></li><li><code>Container</code></li><li><code>Details</code></li><li><code>FileGroup</code></li><li><code>Gallery</code></li><li><code>Group</code></li><li><code>IconWithText</code></li><li><code>ImageAndText</code></li><li><code>LinkGroup</code></li><li><code>ListComponent</code></li><li><code>Menu</code></li><li><code>PageHeader</code></li><li><code>SiteFooter</code></li></ul>
 		</td>
 	</tr>
 	<tr>
@@ -145,7 +140,7 @@ Foundational PHP classes for defining common fields and methods for components.
 		<tr>
 		<th scope="row">Extended by</th>
 		<td>
-			<ul><li><code>AccordionPanel</code></li><li><code>TabPanel</code></li><li><code>ResponsivePanel</code></li></ul>
+			<ul><li><code>AccordionPanel</code></li><li><code>ResponsivePanel</code></li><li><code>TabPanel</code></li></ul>
 		</td>
 	</tr>
 	<tr>
@@ -154,6 +149,33 @@ Foundational PHP classes for defining common fields and methods for components.
 	</tr>
 	<tr>
 		<td>	<ul><li><code>subtitle</code></li><li><code>title</code></li></ul></td>
+	</tr>
+</table>
+	
+</div>
+<div class="abstract-class-doc" id="PanelGroupComponent">
+
+## PanelGroupComponent
+
+<table>
+	<tr><th scope='row'>Extends</th><td><code>UIComponent</code></td></tr>
+		<tr>
+		<th scope="row" rowspan="2">Extended by</th>
+		<td>
+			<ul></ul>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<ul><li><code>Accordion</code></li><li><code>ResponsivePanels</code></li><li><code>Tabs</code></li></ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" rowspan="2">Properties</th>
+		<td><ul><li>All properties from <code>UIComponent</code></li></ul></td>
+	</tr>
+	<tr>
+		<td>	<ul><li><code>colorTheme</code></li><li><code>orientation</code></li></ul></td>
 	</tr>
 </table>
 	

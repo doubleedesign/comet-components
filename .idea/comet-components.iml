@@ -11,8 +11,6 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/annotations" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/attributes" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/services" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/roots/wordpress-core-installer" />
@@ -59,5 +57,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Playwright" level="project" />
+    <orderEntry type="library" name="Comet Vue components" level="project" />
   </component>
 </module>

@@ -1,6 +1,6 @@
 {
     "name": "Tabs",
-    "extends": "UIComponent",
+    "extends": "PanelGroupComponent",
     "abstract": false,
     "vue": true,
     "attributes": {
@@ -27,7 +27,7 @@
                 "dark",
                 "white"
             ],
-            "default": "primary"
+            "inherited": true
         },
         "context": {
             "type": "string",
@@ -45,7 +45,8 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical"
+            "default": "vertical",
+            "inherited": true
         },
         "style": {
             "type": "array",
@@ -69,7 +70,7 @@
     },
     "innerComponents": {
         "type": "array<TabPanel>",
-        "description": "Wrapping components each containing a TabPanelTitle and TabPanelContent.",
+        "description": "Inner components to be rendered within this component",
         "required": true
     }
 }

@@ -9,9 +9,11 @@ export default {
 			type: Array as () => PanelItem[],
 			required: true,
 		},
+		icon: String
 	},
 	data() {
 		return {
+			iconHtml: this.icon ? `<i class="${this.icon}"></i>` : '',
 			// Replace generic responsive-panel classes with accordion-specific classes
 			transformedPanels: this.panels.map((panel: PanelItem) => {
 				return {
@@ -21,7 +23,7 @@ export default {
 					},
 					content: {
 						...panel.content,
-						classes: panel.content.classes.map((className: string) => className.replace('responsive__panel', 'accordion__panel'))
+						classes: panel.content.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
 					}
 				};
 			}),
@@ -47,7 +49,7 @@ export default {
 			const details = summary.parentElement as HTMLDetailsElement;
 			const isOpen = details.open;
 
-			if(isOpen) {
+			if (isOpen) {
 				this.animateClose(details);
 			}
 			else {
@@ -56,7 +58,7 @@ export default {
 		},
 		animateOpen(details: HTMLDetailsElement) {
 			const content = details.querySelector('.accordion__panel__content') as HTMLElement;
-			if(!content) return;
+			if (!content) return;
 
 			this.animating = true;
 
@@ -94,7 +96,7 @@ export default {
 		},
 		animateClose(details: HTMLDetailsElement) {
 			const content = details.querySelector('.accordion__panel__content') as HTMLElement;
-			if(!content) return;
+			if (!content) return;
 
 			this.animating = true;
 
@@ -150,7 +152,7 @@ export default {
                 v-bind="panel.title.attributes"
                 :aria-controls="panel.content.attributes.id"
                 @click="(event: MouseEvent) => this.togglePanel(event)"
-                v-html="panel.title.content"
+                v-html="`${panel.title.content} ${this.iconHtml}`"
             >
             </summary>
             <div
@@ -162,5 +164,68 @@ export default {
     </div>
 </template>
 
-<style>
+<style lang="css">
+/** Sadly, Sass-style BEM nesting e.g., &__ prefix does not work in vanilla CSS */
+.accordion {
+
+    .accordion__panel {
+        display: contents; /* allows open attribute to be ignored and contents to animate with CSS transitions */
+
+        .accordion__panel__title {
+            cursor: pointer;
+            transition: all 0.2s linear;
+            padding: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-block-start: var(--spacing-xxs);
+            background: color-mix(in srgb, var(--theme-color) 10%, white);
+
+            &:hover, &:focus, &:active {
+                background: var(--theme-color);
+                color: var(--theme-text-color);
+            }
+
+            &__text {
+                display: block;
+
+                &__main {
+                    display: block;
+                }
+
+                &__subtitle {
+                    display: block;
+                }
+            }
+
+            &::marker {
+                display: none;
+                visibility: hidden;
+                font-size: 0
+            }
+
+            i, svg {
+                transition: all 0.2s linear;
+                transform-origin: center center;
+
+                [open] & {
+                    transform: rotate(45deg);
+                }
+            }
+        }
+
+        .accordion__panel__content {
+            transition: height 0.3s ease-in-out;
+
+            > :first-child {
+                padding-block-start: var(--spacing-md);
+            }
+
+            > :last-child {
+                padding-block-end: var(--spacing-md);
+            }
+        }
+    }
+}
+
 </style>

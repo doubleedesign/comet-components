@@ -2,6 +2,7 @@
     "name": "TabPanel",
     "extends": "PanelComponent",
     "abstract": false,
+    "vue": true,
     "attributes": {
         "classes": {
             "type": "array<string>",

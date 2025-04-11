@@ -20,6 +20,26 @@ abstract class PanelComponent extends UIComponent {
 		return "{$this->context}__panel__content";
 	}
 
+	public function get_title(): array {
+		return array(
+			'attributes' => [],
+			'classes'    => ["{$this->context}__title"],
+			'content'    => $this->title
+		);
+	}
+
+	public function get_subtitle(): ?array {
+		if(empty($this->subtitle)) {
+			return null;
+		}
+
+		return array(
+			'attributes' => [],
+			'classes'    => ["{$this->context}__subtitle"],
+			'content'    => $this->subtitle
+		);
+	}
+
 	public function get_content(): ?array {
 		ob_start();
 		$this->render();

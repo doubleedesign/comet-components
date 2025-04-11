@@ -88,7 +88,7 @@ class Healthcheck {
 		}
 
 		foreach($topLevel as $dir) {
-			$shouldnotHaveOwnCSS = ['Heading', 'ListComponent', 'Paragraph', 'Link', 'Group'];
+			$shouldnotHaveOwnCSS = ['Heading', 'ListComponent', 'Paragraph', 'Link', 'Accordion', 'Tabs', 'ResponsivePanels'];
 			$componentName = basename($dir);
 			if(!file_exists($this->componentDir . $componentName . '\\' . self::kebab_case($componentName) . '.css')) {
 				if(!in_array($componentName, $shouldnotHaveOwnCSS)) {

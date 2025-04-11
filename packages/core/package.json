@@ -2,6 +2,7 @@
 	"name": "comet-components-core",
 	"version": "0.0.2",
 	"type": "module",
+	"web-types": "web-types.json",
 	"description": "",
 	"author": "Leesa Ward",
 	"devDependencies": {

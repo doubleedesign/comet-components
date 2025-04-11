@@ -1,6 +1,6 @@
 {
     "name": "ResponsivePanels",
-    "extends": "UIComponent",
+    "extends": "PanelGroupComponent",
     "abstract": false,
     "vue": true,
     "attributes": {
@@ -31,12 +31,22 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": true
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
             "inherited": true
+        },
+        "icon": {
+            "type": "string",
+            "description": "Icon class name for the icon to use for the expand/collapse indicator in accordion mode"
+        },
+        "iconPrefix": {
+            "type": "string",
+            "description": "Icon prefix class name",
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
@@ -49,7 +59,8 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical"
+            "default": "vertical",
+            "inherited": true
         },
         "style": {
             "type": "array",
