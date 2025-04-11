@@ -1,10 +1,13 @@
 <?php
 use Doubleedesign\Comet\Core\{Assets, ResponsivePanels, ResponsivePanel, Heading, Paragraph};
 
+// Attribute keys from component JSON definition
+$attributeKeys = ['colorTheme', 'breakpoint', 'iconPrefix', 'icon', 'orientation'];
+// Filter the request query vars to only those matching the above
+$attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
+
 $component = new ResponsivePanels(
-	[
-		'colorTheme' => 'secondary',
-	],
+	$attributes,
 	[
 		new ResponsivePanel(
 			[

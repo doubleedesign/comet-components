@@ -117,7 +117,7 @@ class ComponentStoryGenerator {
 				],
 				'server' => [
 					"id"     => self::kebab_case($shortName) . '.php',
-					'url'    => sprintf('/packages/core/src/components/%s/__tests__', $shortName),
+					'url'    => sprintf('/packages/core/src/components/%s/__tests__', $name),
 					'params' => [
 						"__debug" => true
 					]
