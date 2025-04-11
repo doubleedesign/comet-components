@@ -173,3 +173,7 @@ For Vue components that are shared amongst multiple PHP components (for example,
 :warning: That said, also in the spirit of simplifying things (particularly for front-end performance), the current implementation of Vue SFC Loader is not set up to support Sass within Vue components, which can mean a little more code is necessary to get the desired results. In some cases, it may be worthwhile to have a separate SCSS file and manually add it to the asset loader or a custom bundle.
 :::
 
+:::tip
+Pass the `data-color-theme` attribute to your component to make the localised CSS variables `--theme-color` and `--theme-text-color` available to your Vue component's vanilla CSS, removing the need to manually specify the styles for every theme colour.
+:::
+
