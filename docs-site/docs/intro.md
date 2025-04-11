@@ -17,6 +17,8 @@ Comet Components is a PHP-driven web UI component library initially developed as
 
 It is built with PHP using an object-oriented architecture where each component is passed an array of `$attributes` and in most cases, either a string of `$content` or an array of component objects called `$innerComponents`.
 
+A selection of components are enhanced by [Vue.js](https://vuejs.org/) for interactivity and improved execution of responsive design.
+
 - [View components in Storybook](https://storybook.cometcomponents.io)
 - [View the code on GitHub](https://github.com/doubleedesign/comet-components)
 
