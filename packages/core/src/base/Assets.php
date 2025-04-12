@@ -8,9 +8,23 @@ class Assets {
 	protected array $globalScripts = [];
 	protected array $styles = [];
 	protected array $scripts = [];
+	private ?string $domain = null;
 
 	// Private constructor to prevent direct instantiation
 	private function __construct() {
+		$env = getEnv();
+		$origin = $env['HTTP_ORIGIN'] ?? null;
+		$isStorybookLocal = $origin && str_contains($origin, 'storybook.comet-components.test:6006');
+		if($isStorybookLocal) {
+			$this->domain = 'https://comet-components.test'; // TODO: Get this from .env
+		}
+		else {
+			$isStorybookProd = $origin && str_contains($origin, 'storybook.cometcomponents.io');
+			if($isStorybookProd) {
+				$this->domain = 'https://cometcomponents.io';
+			}
+		}
+
 		// Add the global CSS
 		$srcDir = dirname(__FILE__, 2);
 		$absolute_path = $srcDir . '/components/global.css';
@@ -19,7 +33,7 @@ class Assets {
 
 	// Singleton pattern to get the instance of the class in things that want to use it
 	public static function get_instance(): self {
-		if (self::$instance === null) {
+		if(self::$instance === null) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -29,7 +43,13 @@ class Assets {
 		return str_replace('\\', '/', $path);
 	}
 
-	private function get_relative_path($absolute_path): string {
+	/**
+	 * Transform a filesystem path to just the package bit
+	 * OR if we are coming from Storybook, the package bit preceded by the main project domain
+	 * @param $absolute_path
+	 * @return string
+	 */
+	private function get_relative_or_domain_path($absolute_path): string {
 		// If the path contains 'vendor', split before that and return the second part
 		if(str_contains($absolute_path, 'vendor')) {
 			$parts = explode('vendor', $absolute_path);
@@ -47,16 +67,21 @@ class Assets {
 			$path = '/packages' . $parts[1];
 		}
 
-		return $this->normalize_path($path);
+		$normalizedPath = $this->normalize_path($path);
+		if($this->domain) {
+			$normalizedPath = $this->domain . $normalizedPath;
+		}
+
+		return $normalizedPath;
 	}
 
 	/**
 	 * Add a global stylesheet to the asset loader
-	 * @param string $absolute_path
+	 * @param string $absolute_path - filesystem path to the stylesheet (e.g. C:/Users/path/to/project/packages/core/src/components/global.css)
 	 * @return void
 	 */
 	public function add_global_stylesheet(string $absolute_path): void {
-		$path = $this->get_relative_path($absolute_path);
+		$path = $this->get_relative_or_domain_path($absolute_path);
 		if(!in_array($path, $this->globalStyles)) {
 			$this->globalStyles[] = $path;
 		}
@@ -64,11 +89,11 @@ class Assets {
 
 	/**
 	 * Add a global script to the asset loader
-	 * @param string $absolute_path
+	 * @param string $absolute_path - filesystem path to the script (e.g. C:/Users/path/to/file)
 	 * @return void
 	 */
 	public function add_global_script(string $absolute_path): void {
-		$path = $this->get_relative_path($absolute_path);
+		$path = $this->get_relative_or_domain_path($absolute_path);
 		if(!in_array($path, $this->globalScripts)) {
 			$this->globalScripts[] = $path;
 		}
@@ -76,11 +101,11 @@ class Assets {
 
 	/**
 	 * Add a component stylesheet to the asset loader
-	 * @param string $absolute_path
+	 * @param string $absolute_path - filesystem path to the stylesheet (e.g. C:/Users/path/to/file)
 	 * @return void
 	 */
 	public function add_stylesheet(string $absolute_path): void {
-		$path = $this->get_relative_path($absolute_path);
+		$path = $this->get_relative_or_domain_path($absolute_path);
 		if(!in_array($path, $this->styles)) {
 			$this->styles[] = $path;
 		}
@@ -88,20 +113,21 @@ class Assets {
 
 	/**
 	 * Add a component script to the asset loader
-	 * @param string $absolute_path
-	 * @param array $attributes
+	 * @param string $absolute_path - filesystem path to the script (e.g. C:/Users/path/to/file)
+	 * @param array $attributes - HTML attributes to add to the script tag, such as type="module"
 	 * @return void
 	 */
 	public function add_script(string $absolute_path, array $attributes): void {
-		$path = $this->get_relative_path($absolute_path);
+		$path = $this->get_relative_or_domain_path($absolute_path);
 		// Prevent duplication
-		foreach ($this->scripts as $script) {
-			if ($script['path'] === $path) {
+		// TODO: This can be replaced with array_any() when we can use PHP 8.4
+		foreach($this->scripts as $script) {
+			if($script['path'] === $path) {
 				return;
 			}
 		}
 		$this->scripts[] = [
-			'path' => $path,
+			'path'       => $path,
 			'attributes' => $attributes,
 		];
 	}
@@ -121,7 +147,7 @@ class Assets {
 
 	/**
 	 * Render the component stylesheets as HTML <link> tags
-	 * This needs to be run after components have been instantiated, otherwise their stylesheets won't be added in time
+	 * IMPORTANT: This needs to be run after components have been instantiated, otherwise their stylesheets won't be added in time
 	 * @return void
 	 */
 	public function render_component_stylesheet_html(): void {
@@ -148,7 +174,7 @@ class Assets {
 
 	/**
 	 * Render the component scripts as HTML script tags
-	 * This needs to be run after components have been instantiated, otherwise their scripts won't be added in time
+	 * IMPORTANT: This needs to be run after components have been instantiated, otherwise their scripts won't be added in time
 	 * Suitable for use at the end of the document, just before the closing <body> tag
 	 * and should be run after the global scripts if they rely on any of those
 	 * @return void

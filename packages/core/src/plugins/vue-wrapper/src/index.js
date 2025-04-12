@@ -2,6 +2,17 @@ import * as Vue from './vue.esm-browser.js';
 
 export const vueSfcLoaderOptions = {
 	moduleCache: { vue: Vue },
+	pathResolve({ refPath, relPath }, options) {
+		// Fix import relative path resolution
+		// e.g., when coming from Storybook imports of Accordion and Tabs within ResponsivePanels would break without this
+		// Source: https://github.com/FranckFreiburger/vue3-sfc-loader/blob/main/docs/examples.md#use-remote-components
+
+		if (relPath === '.') return refPath; // self
+
+		if (relPath[0] !== '.' && relPath[0] !== '/') return relPath; // relPath is a module name
+
+		return String(new URL(relPath, refPath === undefined ? window.location : refPath));
+	},
 	getFile: async(url) => {
 		const res = await fetch(url);
 		if (!res.ok) {
@@ -24,6 +35,7 @@ export const vueSfcLoaderOptions = {
 	},
 	addStyle: async(fileUrl) => {
 		const res = await fetch(fileUrl);
+
 		const dom = new DOMParser().parseFromString(await res.text(), 'text/html');
 		const css = Array.from(dom.head.children).find((element) => element.tagName === 'STYLE');
 		if (css?.textContent) {
@@ -57,6 +69,14 @@ export const BASE_PATH = (function() {
 	if(window.location.hostname === 'comet-components.test' || window.location.hostname === 'localhost') {
 		return '/packages/core/';
 	}
+	// For Storybook, we also need to include the project site domain
+	if(window.location.hostname === 'storybook.comet-components.test') {
+		return 'https://comet-components.test/packages/core/';
+	}
+	if(window.location.hostname === 'storybook.cometcomponents.io') {
+		return 'https://cometcomponents.io/packages/core/';
+	}
+
 	// Otherwise, assume vendor directory path
 	return '/vendor/doubleedesign/comet-components-core/packages/core/';
 })();

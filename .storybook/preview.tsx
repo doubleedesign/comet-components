@@ -3,12 +3,13 @@ import type { Preview } from '@storybook/server';
 import { Controls, Description, DocsContainer, Subtitle, Title, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
 import { Primary } from './blocks/Primary.tsx';
 import { Stories } from './blocks/Stories.tsx';
-import { withServerPageStates } from './decorators/server-page-states/withServerPageStates.tsx';
 import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
 import comet from './theme.ts';
 import { PhpCodeBlock } from './custom-components/PhpCodeBlock.tsx';
+import { withRelativeUrls, withServerPageStates } from './decorators';
+import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
 
 // Log all events
 // import { addons } from '@storybook/preview-api';
@@ -72,26 +73,27 @@ const preview: Preview = {
 				withToolbar: true,
 			},
 			components: {
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				code: (props: { className?: string, children: any }) => {
-					// For PHP, use the same custom component as is used for source code in the component docs
-					if(props?.className === 'language-php') {
-						return <PhpCodeBlock codeString={props.children} />;
-					}
 
-					return <CodeOrSourceMdx {...props} />;
-				}
+				// code: (props: { className?: string, children: any }) => {
+				// 	// For PHP, use the same custom component as is used for source code in the component docs
+				// 	if(props?.className === 'language-php') {
+				// 		return <PhpCodeBlock codeString={props.children} />;
+				// 	}
+				//
+				// 	return <CodeOrSourceMdx {...props} />;
+				// }
 			},
 			story: {
 				inline: true, // This makes the primary story respond to controls
 				parameters: {
-					server: {
-						autoRefresh: true
-					}
+					server: { autoRefresh: true },
 				},
 			},
 			container: ({ children, context }) => {
 				const component = context?.primaryStory?.title.split('/')?.reverse()[0]?.toLowerCase() || 'default';
+
+				// Extremely hacky way to get the context to where I need it in the ResponsiveContainer
+				localStorage.setItem('storyContext', JSON.stringify(context));
 
 				return (
 					<div className={`docs-wrapper docs-wrapper--${component}`}>
@@ -107,9 +109,11 @@ const preview: Preview = {
 						<Title/>
 						<Subtitle/>
 						<Description/>
-						{/*<div className="breakout">*/}
-						<Primary />
-						{/*</div>*/}
+						<div className="breakout">
+							<ResponsiveContainer>
+								<Primary />
+							</ResponsiveContainer>
+						</div>
 						<div className="controls-wrapper">
 							<h2 className="section-heading">Attributes</h2>
 							<p>The public properties you can assign to your component at creation time using the <code>$attributes</code> argument.</p>
@@ -127,21 +131,8 @@ const preview: Preview = {
 };
 
 export const decorators = [
-	// Decorator to add the server URL to the story context, so relative URLs can be used in the stories
-	(Story, context) => {
-		if (context.parameters.server && context.parameters.server.url) {
-			const baseUrl = process.env.BROWSER_TEST_URL || 'https://storybook.cometcomponents.io';
-
-			// Only prepend baseUrl if it's a relative URL
-			if (!context.parameters.server.url.startsWith('http')) {
-				context.parameters.server.url = `${baseUrl}${context.parameters.server.url}`;
-				console.log('Transformed URL:', context.parameters.server.url);
-			}
-		}
-
-		return Story();
-	},
-	withCodeTabs,
+	withRelativeUrls,
+	//withCodeTabs,
 	withServerPageStates
 ];
 

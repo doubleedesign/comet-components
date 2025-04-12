@@ -70,9 +70,29 @@ php --ini
 3. In the dialog that appears, there will be a field to set the configuration file path. **You do not need to do this if it has automatically been detected.** Keep reading - look for the blue info icon with the configuration path below that. An example is pictured below.
    ![phpstorm-php.png](/phpstorm-phpini.png)
 
+@tab Laravel Herd
+1. In the Herd GUI, go to the PHP page
+2. Right-click on the currently active version of PHP and click "Open php.ini directory"
+3. Locate and open the file from the Explorer/Finder window that opens
+
 :::
 
-::: details "Is not a valid Win32 application" error when using a PhpStorm file watcher
+:::details [Windows] My terminal is not using the instance of something I want
+If you have multiple instances of PHP, Node, Composer, OpenSSL, Sass, or other CLI tools installed and the above commands for finding them is not showing the one you expect, you can change this in your system `PATH`:
+1. Open the Start menu and search for "Environment Variables" and click "Edit the system environment variables" OR go to the Control Panel > System > Advanced system settings > Environment Variables
+2. In the User Variables section, find `Path` and click "Edit"
+3. Find the instance of the thing you want and move it up the list, to above the one your terminal is returning
+	- If you can't find it, add a new entry for the path to the instance you want.
+
+:::important
+If you are using Laravel Herd, the path to PHP and Composer is the Herd binary path, which is usually:
+```text:no-line-numbers
+C:\Users\YOUR_USERNAME\.config\herd\bin
+```
+
+:::
+
+:::details [Windows] "Is not a valid Win32 application" error when using a PhpStorm file watcher
 If this error is occurring for an NPM package and you ran `npm install` from WSL, it may not have installed the Windows binaries in the `node_modules/.bin` directory for the tool you're trying to use. There are two workarounds:
 
 1. Switch to PowerShell and run `npm install` again. Being a native Windows shell, it will install the Windows binaries.

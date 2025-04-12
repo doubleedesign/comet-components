@@ -29,3 +29,5 @@ packages/core/cache
 /test/.phpunit.cache
 /test/phpunit-report
 .phpunit.cache
+/.cert/cert.pem
+/.cert/key.pem

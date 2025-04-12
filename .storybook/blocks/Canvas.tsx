@@ -78,7 +78,7 @@ export const Canvas: FC<CanvasProps> = (props) => {
 
 	return (
 		<Preview
-			withSource={sourceState === 'none' ? undefined : sourceProps}
+			//withSource={sourceState === 'none' ? undefined : sourceProps} // Uncomment this to put the Code block back into the preview
 			isExpanded={sourceState === 'shown'}
 			withToolbar={withToolbar}
 			additionalActions={additionalActions}

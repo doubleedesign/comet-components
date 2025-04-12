@@ -33,6 +33,8 @@ export const DocsCodePanel = ({ title, story }: DocsCodePanelProps) => {
 		const urlParams = Object.entries(story.args)
 			.filter(([key, value]) => value)
 			.map(([key, value]) => `${key}=${value}`).join('&');
+
+		// TODO: Fix this, figure out a way to handle Vue output, and uncomment the withSource prop in Canvas.tsx that enables it
 		const url = `http://localhost:6001/components/${likelyFileName}.php?${urlParams}`;
 
 		const MAX_RETRIES = 3;

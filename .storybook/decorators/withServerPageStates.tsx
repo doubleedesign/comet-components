@@ -47,7 +47,7 @@ export const withServerPageStates = (StoryFn, context) => {
 
 		const loader = storyPreview.closest('.sbdocs-preview').querySelector('.sb-loader');
 
-		if(storyId && storyPreview) {
+		if(storyId && storyPreview && loader) {
 			if (newPhase === 'loading' || newPhase === 'rendering') {
 				storyPreview.classList.add('sbdocs-preview--story-loading');
 				// @ts-expect-error TS2339: Property style does not exist on type Element

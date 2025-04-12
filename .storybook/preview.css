@@ -64,7 +64,7 @@
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
-	max-width: 1800px;
+	max-width: 2000px;
 
 	figure {
 		margin: 0;
@@ -136,4 +136,65 @@
 
 :where(pre:not(.sb-anchor, .sb-unstyled, .sb-unstyled pre)):not(.prismjs) {
 	background-color: #1d1c21 !important;
+}
+
+.docs-story-responsive-container {
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+	margin-block-end: 2rem;
+
+	.docs-story-responsive-container__inner {
+		margin: 0 auto;
+		position: relative;
+
+		.sbdocs-preview {
+			margin-block-end: 0.5rem;
+
+			.docs-story {
+			}
+		}
+
+		.docs-story-viewport-width-control {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 9999;
+			height: 40px; /* same as the toolbar */
+			display: flex;
+			align-items: center;
+			padding-inline: 0.5rem;
+
+			label {
+				font-weight: 300;
+				font-size: 0.9rem;
+				display: inline-block;
+				margin-inline-end: 0.25rem;
+			}
+
+			select {
+				font-family: var(--comet-docs-body-font);
+				cursor: pointer;
+				font-weight: 300;
+				padding: 0.25rem 0.5rem;
+				border-radius: 0.25rem;
+				border: 1px solid #ccc;
+			}
+		}
+	}
+}
+
+.docs-story-open-in-new-tab {
+	text-align: right;
+
+	a {
+		font-size: 0.9rem;
+		display: inline-flex;
+		align-items: center;
+
+		svg {
+			display: inline-block;
+			margin-inline-end: 0.25rem;
+		}
+	}
 }

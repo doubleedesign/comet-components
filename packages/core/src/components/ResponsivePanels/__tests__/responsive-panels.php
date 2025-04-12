@@ -11,7 +11,7 @@ $component = new ResponsivePanels(
 	[
 		new ResponsivePanel(
 			[
-				'title' => 'Panel 1',
+				'title'    => 'Panel 1',
 				'subtitle' => 'Subtitle 1',
 			],
 			[
@@ -22,7 +22,7 @@ $component = new ResponsivePanels(
 		),
 		new ResponsivePanel(
 			[
-				'title' => 'Panel 2',
+				'title'    => 'Panel 2',
 				'subtitle' => 'Subtitle 2',
 			],
 			[
@@ -39,7 +39,7 @@ $component = new ResponsivePanels(
 		),
 		new ResponsivePanel(
 			[
-				'title' => 'Panel 4',
+				'title'    => 'Panel 4',
 				'subtitle' => 'Subtitle 4',
 			],
 			[

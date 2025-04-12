@@ -37,7 +37,7 @@ git clone https://github.com/doubleedesign/comet-components.git
 git checkout -b <your-branch-name>
 ```
 
-## Set up Laravel Herd
+## Set up Laravel Herd and add the project
 
 Laravel Herd is an all-in-one local development environment tool for PHP and Node. It takes the place of the likes of WAMP, MAMP, or XAMPP for PHP, and Node Version Manager (NVM) for Node, while also providing [Composer](https://getcomposer.org/) and [Xdebug](https://xdebug.org/) out of the box.
 
@@ -89,7 +89,18 @@ nvm use <version>
 - From the Herd GUI Dashboard, click `Open Sites` and in the screen that appears, click `Add` and select the directory you cloned the repo into.
 - From the `comet-components` directory your terminal, type `herd link`.
 
-7. Open http://comet-components.test in your web browser. It should load a local copy of these docs.
+7. Enable HTTPS for the site by:
+
+- going to the Herd GUI, clicking on the `Sites` tab, and enabling HTTPS for the site you just added, OR
+- in your terminal from the project root, run `herd secure`.
+
+This will create a self-signed certificate for you, which is suitable for local development.
+
+:::details Why do I need HTTPS locally?
+HTTPS is the standard in production environments and some tools and applications will not work correctly without it, even locally. Even if everything runs fine on HTTP locally, the difference can cause some headaches when you deploy to production, so enabling HTTPS locally can save time and effort later.
+:::
+
+8. Open https://comet-components.test in your web browser. It should load a local copy of these docs.
 
 ## Install Sass globally
 
@@ -100,9 +111,9 @@ nvm use <version>
 choco install sass
 ```
 
-## Install project dependencies 
+## Install project dependencies
 
-The project contains multiple sub-packages, and uses both [Composer](https://getcomposer.org/) and [NPM](https://www.npmjs.com/) to manage different types of dependencies. 
+The project contains multiple sub-packages, and uses both [Composer](https://getcomposer.org/) and [NPM](https://www.npmjs.com/) to manage different types of dependencies.
 
 A convenience script is provided to install all dependencies in the project root and all `packages`. You can run it from the project root (`comet-components` directory) with:
 
@@ -270,7 +281,7 @@ $ProjectFileDir$\packages\core\node_modules\.bin\rollup
 A combination of tools and configurations are provided to ensure consistent code formatting across the project.
 
 :::details PHP (General) - PhpStorm formatter
-1. Go to `File > Settings > Editor > Code Style > PHP`
+1. Go to `File > Settings > Editor > Code Style > PHP`;
 2. Ensure the `Project` scheme is selected in the dropdown at the top.
 3. Go to `File > Settings > Actions on save`.
 4. Tick `Reformat code`.
@@ -352,10 +363,54 @@ npx playwright install firefox
 - add Playwright to the JS libraries under `Settings > Languages & Frameworks > JavaScript > Libraries`. Include all of `@playwright/test`, `playwright`, and `playwright-core`.
 - In `Settings > Languages & Frameworks > TypeScript`, uncheck `use types from server`.
 
-## Run Storybook
+## Set up and run Storybook
 
-The refresh script should have installed the dependencies for Storybook. Run it locally with:
+The refresh script should have installed the NPM dependencies for Storybook, but you will also need a local self-signed certificate so that it can run over HTTPS. You can generate this easily with the [OpenSSL](https://www.openssl.org/) command line utility.
 
+:::details Why do I need HTTPS locally?
+HTTPS is the standard in production environments and some tools and applications will not work correctly without it, even locally. For example, Storybook loading the test pages into iframes can have problems over HTTP. And as for why we enable HTTP in Herd for the local development site, because HTTPS is standard for production environments it can save us some headaches later if we develop locally with the same standard.
+:::
+
+To check if OpenSSL is available on your machine already, run:
+
+```powershell:no-line-numbers
+Get-Command openssl
+```
+
+If it isn't, you can install it with [Chocolatey](https://community.chocolatey.org/packages/OpenSSL) (from a PowerShell instance with admin privileges):
+```powershell:no-line-numbers
+choco install openssl
+```
+
+Then back in your main terminal from the project root, run the convenience script that will:
+- add an entry to the hosts file to enable Storybook to use the domain `storybook.comet-components.test`
+- generate a self-signed cert for Storybook and add it to the trusted root store in Windows
+- ensure the Herd project certificate is also in the trusted root store in Windows
+
+```powershell:no-line-numbers
+./scripts/local-hosts-and-certs.ps1
+```
+
+The script will provide feedback about its success or failure, but you can also check manually in the Certificate Manager.
+1. Access the Certificate Manager via the Start menu (search for "Certificate" and choose "Manage user certificates") or via the Run dialog (Windows + R) -> `certmgr.msc`
+2. In the left pane, expand `Trusted Root Certification Authorities` and select `Certificates`
+3. Look for the following two certificates:
+
+```text
+| Issued to                       | Issued by                       | Intended purpose      |
+|---------------------------------|---------------------------------|-----------------------|
+| storybook.comet-components.test | storybook.comet-components.test | Server authentication |
+| comet-components.test           | Laravel Valet CA Self-Signed CN | <All>                 |
+```
+
+Ensure that the Herd project site loads as secure by navigating to a test component URL, such as https://comet-components.test/packages/core/src/components/Container/__tests__/container.php.
+
+Next, you can run Storybook locally with:
 ```powershell::no-line-numbers
 npm run storybook
 ```
+Use the "network" URL to access it: https://storybook.comet-components.test:6006/ and ensure that your browser sees the connection as secure.
+
+:::details Cross-origin (CORS) errors
+The project is configured to allow Storybook to request the test pages from the local development site in `./browser/test/wrapper-open.php`, which you should have configured `php.ini` to use as the `herd_auto_prepend_file` in step 7 above. If you still have CORS problems, there are a number of browser extensions you can use to work around it.
+:::

@@ -7,3 +7,51 @@
 #root.is-story-page .sb-bar {
 	display: block;
 }
+
+.sidebar-header {
+	flex-wrap: wrap;
+	height: 36px;
+
+	div:has(img[alt="Comet Components"]) {
+		width: 100%;
+		flex-basis: 100%;
+
+		a:has(img[alt="Comet Components"]) {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+
+			img {
+				/* match the docs site */
+				width: 36px;
+				margin-inline-end: 12px;
+			}
+
+			&:after {
+				content: attr(title);
+				font-family: gelica, sans-serif;
+				font-size: 1.3rem;
+				color: rgb(132, 94, 194);
+			}
+		}
+	}
+
+	div:has(button[aria-label="Shortcuts"]) {
+		transform: translateY(70%);
+		margin-left: auto;
+
+		button[aria-label="Shortcuts"] {
+			height: 2rem;
+
+			> svg {
+				width: 1.125rem;
+				height: 1.125rem;
+			}
+		}
+	}
+}
+
+.search-field {
+	width: calc(100% - 2.5rem);
+	max-width: calc(100% - 2.5rem);
+}
