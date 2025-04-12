@@ -3,7 +3,7 @@
 	"parameters": {
 		"docs": {
 			"description": {
-				"component": "Display grouped panels of content as an Accordion or Tabs depending on available space. Uses Vue to determine which to show and only renders the HTML for the current view."
+				"component": "Display grouped panels of content as an Accordion or Tabs depending on available space. Uses Vue to determine which to show and only renders the HTML for the current view. <br>It does not use display:none to hide panels, which means browser search functionality picks up content in visually hidden panels. The component includes handling of this to automatically open (for accordion mode) or switch to (for tabs mode) the panel containing the highlighted phrase."
 			}
 		},
 		"server": {

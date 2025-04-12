@@ -100,7 +100,7 @@ php scripts/generate-json-defs.php --component Example
 
 ## View in Storybook
 
-Run the [local web server](testing/browser.md) and Storybook (`npm run storybook` from the project root) to view the new component in the browser.
+Ensure your [local web server](testing/browser.md) is running, and optionally launch Storybook (`npm run storybook` from the project root) to view the new component in the browser.
 
 ## Further reading
 

@@ -20,12 +20,16 @@ More details on installing and configuring Herd can be found on the [PHP](../too
 2. Open the `php.ini` file for the currently active PHP version in Herd. You can find this in `Herd > PHP > right-click on the current version > Open 
 php.ini directory`. Add the below lines, filling in your own username and updating the project path as needed:
 
-   ```ini
-   herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-open.php
-   herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-close.php
-   ```
+```ini
+herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-open.php
+herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-close.php
+```
 
-3. Restart the PHP service in Herd so that the updated configuration is loaded.
+3. Enable HTTPS for the local site by doing one of the following:
+  - open the Herd GUI > Dashboard > Open Sites > Comet Compoenents, and tick the "Enable HTTPS" checkbox
+  - in PowerShell, run `herd secure` from the project root directory.
+
+4. Restart the PHP service in Herd so that the updated configuration is loaded.
 
 An example of a testing page URL for this setup is:
 
@@ -41,10 +45,16 @@ Run the following command in the project root directory to start a basic PHP web
 php ./test/browser/start.php
 ```
 
-This will start a PHP web server on port 6001 that runs from the `./test/browser/` directory. You can access the server at `http://localhost:6001`.
+This will start a PHP web server on port 6001. For maximum compatibility with default local dev configurations and path resolution workarounds, it is recommended to:
+- add a hosts file entry so you can access this at https://comet-components.test 
+- generate a local self-signed SSL certificate and add it to your system's trusted root certificate store.
 
-An example of a testing page URL for this setup is:
+An example of a testing page URL with the hosts file entry and certificate is:
+```
+https://comet-components.test/packages/core/src/components/Columns/__tests__/pages/columns-colours.php
+```
 
+An example of a testing page URL without the hosts file entry is:
 ```
 http://localhost:6001/packages/core/src/components/Columns/__tests__/pages/columns-colours.php
 ```

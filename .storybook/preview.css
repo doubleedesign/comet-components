@@ -59,6 +59,13 @@
 	container-type: inline-size;
 }
 
+.sbdocs-title + p {
+	br {
+		display: block;
+		margin-bottom: 0.75rem;
+	}
+}
+
 .breakout {
 	width: 100cqw;
 	position: relative;

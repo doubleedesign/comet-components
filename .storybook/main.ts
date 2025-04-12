@@ -11,7 +11,7 @@ const config: StorybookConfig = {
 	addons: [
 		'@storybook/addon-webpack5-compiler-swc',
 		'@storybook/addon-essentials',
-		'./addons/code-tabs/preset.ts'
+		//'./addons/code-tabs/preset.ts'
 	],
 	framework: {
 		name: '@storybook/server-webpack5',

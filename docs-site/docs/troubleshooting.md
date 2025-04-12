@@ -196,3 +196,7 @@ In PhpStorm, you may also need to:
 When trying to use the same page for multiple tests, you may get this error because the page closes prematurely when tests are running in parallel. You can instead run them in sequence using `test.describe.serial` instead of just `test.describe`.
 :::
 
+:::details "Require is not defined" error when starting Storybook
+This error occurs when using Node version 23 - in which case switching to a 20.x version should solve it.
+:::
+
