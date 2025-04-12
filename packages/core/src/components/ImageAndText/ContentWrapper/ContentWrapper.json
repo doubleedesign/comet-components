@@ -2,6 +2,8 @@
     "name": "ContentWrapper",
     "extends": "LayoutComponent",
     "abstract": false,
+    "isInner": true,
+    "belongsInside": "ImageAndText",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",

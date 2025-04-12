@@ -2,7 +2,8 @@
     "name": "AccordionPanel",
     "extends": "PanelComponent",
     "abstract": false,
-    "vue": true,
+    "isInner": true,
+    "belongsInside": "Accordion",
     "attributes": {
         "classes": {
             "type": "array<string>",

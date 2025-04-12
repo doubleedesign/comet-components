@@ -2,6 +2,8 @@
     "name": "File",
     "extends": "Renderable",
     "abstract": false,
+    "isInner": true,
+    "belongsInside": "FileGroup",
     "attributes": {
         "classes": {
             "type": "array<string>",

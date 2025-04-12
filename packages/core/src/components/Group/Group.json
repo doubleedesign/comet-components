@@ -2,7 +2,7 @@
     "name": "Group",
     "extends": "UIComponent",
     "abstract": false,
-    "vue": true,
+    "isInner": false,
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",

@@ -3,6 +3,7 @@
     "extends": "PanelGroupComponent",
     "abstract": false,
     "vue": true,
+    "isInner": false,
     "attributes": {
         "classes": {
             "type": "array<string>",

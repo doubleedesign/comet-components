@@ -2,6 +2,8 @@
     "name": "Column",
     "extends": "LayoutComponent",
     "abstract": false,
+    "isInner": true,
+    "belongsInside": "Columns",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",

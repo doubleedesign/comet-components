@@ -2,6 +2,7 @@
     "name": "Columns",
     "extends": "LayoutComponent",
     "abstract": false,
+    "isInner": false,
     "attributes": {
         "allowStacking": {
             "type": "bool",
@@ -30,6 +31,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
+                "layout-block",
                 "columns"
             ],
             "inherited": true

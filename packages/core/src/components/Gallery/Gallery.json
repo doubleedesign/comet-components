@@ -2,6 +2,7 @@
     "name": "Gallery",
     "extends": "UIComponent",
     "abstract": false,
+    "isInner": false,
     "attributes": {
         "caption": {
             "type": "string",

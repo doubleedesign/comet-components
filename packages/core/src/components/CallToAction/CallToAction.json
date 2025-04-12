@@ -2,6 +2,7 @@
     "name": "CallToAction",
     "extends": "UIComponent",
     "abstract": false,
+    "isInner": false,
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",

@@ -121,8 +121,8 @@ class ComponentClassesToJsonDefinitions {
 			$namespace = $matches[1] . '\\';
 		}
 
-		// Extract class name
 		if(preg_match('/class\s+(\w+)/', $content, $matches)) {
+			// Extract class name
 			$className = $namespace . $matches[1];
 
 			try {
@@ -130,11 +130,39 @@ class ComponentClassesToJsonDefinitions {
 				$reflectionClass = new ReflectionClass($className);
 				$result = $this->analyseClass($reflectionClass);
 
-				// Check if there is a Vue component in this component's directory
-				$vueFile = Utils::kebab_case(basename($filePath) . '.vue');
-				if($vueFile) {
-					$result['vue'] = true;
+				// Check the file path - if it has an extra level between it and the main component directory, it's an inner component
+				// we have to go from a folder other than "components" because splitting on "components" will capture the project name in the path too
+				$pathParts = explode('packages', $filePath);
+				$pathParts = explode("\\", $pathParts[1]);
+				$isInner = count($pathParts) > 6;
+				if($isInner) {
+					$result['isInner'] = true;
+					$result['belongsInside'] = $pathParts[4];
 				}
+				else {
+					$result['isInner'] = false;
+
+					// Check if there is a Vue component in this component's directory
+					$vueFile = Utils::kebab_case(basename($filePath) . '.vue');
+					$vueFilePath = dirname($filePath) . '\\' . $vueFile;
+					if(file_exists($vueFilePath)) {
+						$result['vue'] = true;
+					}
+					// Workaround for ones known to have a common Vue component
+					// TODO: Should check the actual folder of these to get this dynamically
+					if(in_array($className, [
+						'Doubleedesign\Comet\Core\Accordion',
+						'Doubleedesign\Comet\Core\Tabs',
+					])) {
+						$result['vue'] = true;
+					}
+				}
+
+				// Sort the result into the desired order
+				$result = Utils::sort_associative_array_with_given_key_order(
+					$result,
+					['name', 'extends', 'abstract', 'vue', 'isInner', 'belongsInside', 'attributes', 'content', 'innerComponents']
+				);
 
 				// Export the data to a JSON file
 				$outputPath = str_replace('.php', '.json', $reflectionClass->getFileName());
@@ -200,7 +228,6 @@ class ComponentClassesToJsonDefinitions {
 				? ($parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null)
 				: null,
 			'abstract'   => $reflectionClass->isAbstract(),
-			'vue'        => false, // default value - overridden elsewhere if a Vue file is found
 			'attributes' => $finalAttrs
 		];
 

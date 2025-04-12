@@ -142,6 +142,27 @@ class Utils {
 		return $max_depth;
 	}
 
+	public static function sort_associative_array_with_given_key_order(array $array, array $keyOrder): array {
+		$result = [];
+
+		// First, add elements in the specified order
+		foreach($keyOrder as $key) {
+			if(array_key_exists($key, $array)) {
+				$result[$key] = $array[$key];
+				// Remove this key from the original array
+				unset($array[$key]);
+			}
+		}
+
+		// Then add any remaining keys
+		foreach($array as $key => $value) {
+			$result[$key] = $value;
+		}
+
+		return $result;
+	}
+
+
 	public static function get_first_phrase_from_html_string(string $content): string {
 		// Remove any leading/trailing whitespace
 		$trimmed = trim($content);

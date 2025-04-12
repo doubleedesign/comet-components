@@ -2,6 +2,7 @@
     "name": "LinkGroup",
     "extends": "UIComponent",
     "abstract": false,
+    "isInner": false,
     "attributes": {
         "classes": {
             "type": "array<string>",
