@@ -8,19 +8,47 @@ export default {
 		panels: {
 			type: Array as () => PanelItem[],
 			required: true,
+		},
+		isResponsive: {
+			type: Boolean,
+			default: false
 		}
 	},
 	data() {
+		console.log(this.isResponsive);
+
 		return {
 			debouncedResize: null,
 			// Initially open the first panel
 			activePanelIndex: 0,
 			// Overall height of the element, to be based on the highest panel
 			height: 0,
-			// Replace generic responsive-panel classes with tab-specific classes
-			titles: this.panels.map((panel: PanelItem) => ({
-				...panel.title,
-				classes: panel.title.classes.map((className: string) => className.replace('responsive-panel__title', 'tabs__tab-list__item')),
+			// Replace generic responsive-panel classes with tab-specific classes if isResponsive is true
+			// (allows us to skip some processing if we didn't come from ResponsivePanels context)
+			tabs: this.isResponsive ? this.panels.map((panel: PanelItem) => {
+				console.log(panel.summary);
+
+				return ({
+					wrapper: {
+						...panel.summary,
+						classes: panel.summary.classes.map((className: string) => className.replace('responsive-panel', 'tabs__tab-list__item')),
+					},
+					title: {
+						...panel.summary.title,
+						classes: panel.summary.title.classes.map((className: string) => className.replace('responsive-panel', 'tabs__tab-list__item')),
+					},
+					subtitle: {
+						...panel?.summary?.subtitle,
+						classes: panel?.summary?.subtitle?.classes.map((className: string) => className.replace('responsive-panel', 'tabs__tab-list__item')),
+					}
+				});
+			}) : this.panels.map((panel: PanelItem) => ({
+				wrapper: {
+					classes: panel.summary.classes,
+					attributes: panel.summary.attributes
+				},
+				title: panel.summary.title,
+				subtitle: panel.summary.subtitle
 			})),
 			contents: this.panels.map((panel: PanelItem) => ({
 				...panel.content,
@@ -86,16 +114,31 @@ export default {
 <template>
     <div class="tabs" :style="this.height ? { height: this.height + 'px' } : {}">
         <ul class="tabs__tab-list" role="tablist" :data-background="this.colorTheme">
-            <li v-for="(title, index) in this.titles" :key="index" :class="title.classes" role="presentation">
+            <li v-for="(tabItem, index) in this.tabs"
+                :key="index"
+                class="tabs__tab-list__item"
+                v-bind="tabItem.wrapper.attributes"
+                role="presentation"
+            >
                 <!--TODO: Make direct page anchors work, and find a way to make it a relevant ID -->
                 <a
                     role="tab"
+                    :class="tabItem.wrapper.classes"
                     :aria-selected="index === this.activePanelIndex"
                     :aria-controls="'tabpanel-' + index"
                     :href="'#tabpanel-' + index"
                     @click="this.togglePanel($event, index)"
-                    v-html="title.content"
-                ></a>
+                >
+                    <span :class="tabItem.title.classes"
+                          v-bind="tabItem.title.attributes"
+                          v-html="tabItem.title.content"
+                    ></span>
+                    <small v-if="tabItem.subtitle"
+                           :class="tabItem.subtitle.classes"
+                           v-bind="tabItem.subtitle.attributes"
+                           v-html="tabItem.subtitle.content"
+                    ></small>
+                </a>
             </li>
         </ul>
         <div class="tabs__content" :data-color-theme="this.colorTheme">
@@ -126,8 +169,11 @@ export default {
             display: block;
             margin-block: 0;
 
-            strong {
-                display: block;
+            .tabs__tab-list__item__title {
+                .tabs__tab-list__item__title__main,
+                .tabs__tab-list__item__title__subtitle {
+                    display: block;
+                }
             }
 
             [role="tab"] {

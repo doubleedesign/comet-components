@@ -28,9 +28,8 @@ abstract class PanelGroupComponent extends UIComponent {
 			}
 
 			$this->panels[] = [
-				'title'    => $panel->get_title(),
-				'subtitle' => $panel->get_subtitle(),
-				'content'  => $panel->get_content(),
+				'summary' => $panel->get_summary(),
+				'content' => $panel->get_content(),
 			];
 		}
 	}

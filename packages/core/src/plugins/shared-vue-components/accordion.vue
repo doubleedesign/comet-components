@@ -9,24 +9,37 @@ export default {
 			type: Array as () => PanelItem[],
 			required: true,
 		},
-		icon: String
+		icon: String,
+		isResponsive: {
+			type: Boolean,
+			default: false
+		}
 	},
 	data() {
 		return {
 			iconHtml: this.icon ? `<i class="${this.icon}"></i>` : '',
-			// Replace generic responsive-panel classes with accordion-specific classes
-			transformedPanels: this.panels.map((panel: PanelItem) => {
+			// Replace generic responsive-panel classes with accordion-specific classes if isResponsive is true
+			// (allows us to skip all this processing if we didn't come from ResponsivePanels context)
+			transformedPanels: this.isResponsive ? this.panels.map((panel: PanelItem) => {
 				return {
-					title: {
-						...panel.title,
-						classes: panel.title.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
+					summary: {
+						...panel.summary,
+						classes: panel.summary.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel')),
+						title: {
+							...panel.summary.title,
+							classes: panel.summary.title.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
+						},
+						subtitle: {
+							...panel?.summary?.subtitle,
+							classes: panel?.summary?.subtitle?.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
+						},
 					},
 					content: {
 						...panel.content,
 						classes: panel.content.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
 					}
 				};
-			}),
+			}) : this.panels,
 			// Track animation state to help prevent race conditions
 			animating: false
 		};
@@ -148,12 +161,22 @@ export default {
             :key="index"
         >
             <summary
-                :class="panel.title.classes"
-                v-bind="panel.title.attributes"
+                :class="panel.summary.classes"
+                v-bind="panel.summary.attributes"
                 :aria-controls="panel.content.attributes.id"
                 @click="(event: MouseEvent) => this.togglePanel(event)"
-                v-html="`${panel.title.content} ${this.iconHtml}`"
             >
+                <span :class="panel.summary.title.classes"
+                      v-bind="panel.summary.title.attributes"
+                      v-html="panel.summary.title.content"
+                >
+                </span>
+                <small v-if="panel.summary.subtitle"
+                       :class="panel.summary.subtitle.classes"
+                       v-bind="panel.summary.subtitle.attributes"
+                       v-html="panel.summary.subtitle.content"
+                ></small>
+                <span v-html="this.iconHtml"></span>
             </summary>
             <div
                 :class="panel.content.classes"
@@ -175,26 +198,46 @@ export default {
             cursor: pointer;
             transition: all 0.2s linear;
             padding: var(--spacing-sm);
+            margin-block-start: var(--spacing-xxs);
+            background: color-mix(in srgb, var(--theme-color) 10%, white);
+            /* Default: Main title and icon only */
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-block-start: var(--spacing-xxs);
-            background: color-mix(in srgb, var(--theme-color) 10%, white);
 
+            /* Subtitle is optional, so handle differently if it's there */
+
+            &:has(.accordion__panel__title__subtitle) {
+                display: grid;
+                width: 100%;
+                grid-template-columns: 1fr auto;
+                grid-template-rows: auto auto;
+            }
+
+            .accordion__panel[open] &,
             &:hover, &:focus, &:active {
                 background: var(--theme-color);
                 color: var(--theme-text-color);
             }
 
-            &__text {
-                display: block;
+            .accordion__panel__title__main {
+                grid-column: 1;
+                grid-row: 1;
+            }
 
-                &__main {
-                    display: block;
-                }
+            .accordion__panel__title__subtitle {
+                grid-column: 1;
+                grid-row: 2;
+            }
 
-                &__subtitle {
-                    display: block;
+            > span > i, svg {
+                grid-column: 2;
+                grid-row: 1 / 3;
+                transition: all 0.2s linear;
+                transform-origin: center center;
+
+                .accordion__panel[open] & {
+                    transform: rotate(45deg);
                 }
             }
 
@@ -202,15 +245,6 @@ export default {
                 display: none;
                 visibility: hidden;
                 font-size: 0
-            }
-
-            i, svg {
-                transition: all 0.2s linear;
-                transform-origin: center center;
-
-                [open] & {
-                    transform: rotate(45deg);
-                }
             }
         }
 

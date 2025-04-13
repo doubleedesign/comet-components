@@ -20,22 +20,31 @@ abstract class PanelComponent extends UIComponent {
 		return "{$this->context}__panel__content";
 	}
 
-	public function get_title(): array {
+	public function get_summary(): ?array {
 		return array(
 			'attributes' => [],
 			'classes'    => ["{$this->context}__title"],
+			'title'      => $this->get_title(),
+			'subtitle'   => $this->get_subtitle()
+		);
+	}
+
+	private function get_title(): array {
+		return array(
+			'attributes' => [],
+			'classes'    => ["{$this->context}__title__main"],
 			'content'    => $this->title
 		);
 	}
 
-	public function get_subtitle(): ?array {
+	private function get_subtitle(): ?array {
 		if(empty($this->subtitle)) {
 			return null;
 		}
 
 		return array(
 			'attributes' => [],
-			'classes'    => ["{$this->context}__subtitle"],
+			'classes'    => ["{$this->context}__title__subtitle"],
 			'content'    => $this->subtitle
 		);
 	}

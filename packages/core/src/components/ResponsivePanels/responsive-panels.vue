@@ -57,8 +57,8 @@ export default {
 
 <template>
     <Transition name="panel-switch" mode="out-in">
-        <Tabs v-if="this.showAsTabs" :panels="this.panels"></Tabs>
-        <Accordion v-else :panels="this.panels" :icon="this.icon"></Accordion>
+        <Tabs v-if="this.showAsTabs" :panels="this.panels" :is-responsive="true"></Tabs>
+        <Accordion v-else :panels="this.panels" :icon="this.icon" :is-responsive="true"></Accordion>
     </Transition>
 </template>
 
