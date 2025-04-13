@@ -2,7 +2,12 @@
 	width: 100%;
 	position: relative;
 	overflow: hidden;
-	height: 100vh; // allow plenty of space for the min-height and max-height that may be added inline to work
+	padding: 0;
+	height: 600px; // min-height will override this, but setting this as height ensures 100% height on the image actually works
+
+	@media (min-height: 600px) {
+		height: 100dvh; // allow plenty of space for the min-height and max-height that may be added inline to work
+	}
 
 	&__image {
 		height: 100%;
@@ -41,17 +46,20 @@
 		}
 	}
 
-	&__content,
+	&__container,
 	&__overlay {
 		position: absolute;
 		inset: 0 0 0 0;
 	}
 
-	&__content {
+	&__container {
 		z-index: 100;
 		display: flex;
 
 		&__inner {
+			position: relative;
+			z-index: 200;
+
 			@container (max-width:768px) {
 				max-width: 100% !important;
 			}

@@ -23,7 +23,7 @@ abstract class UIComponent extends Renderable {
 
 	protected function get_filtered_classes(): array {
 		$classes = parent::get_filtered_classes();
-
+		
 		// Transform WordPress class names
 		return array_map(function($class) {
 			return str_replace('is-style-', "{$this->get_bem_name()}--", $class);

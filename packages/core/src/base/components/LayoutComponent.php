@@ -12,10 +12,10 @@ abstract class LayoutComponent extends UIComponent {
 	}
 
 	protected function get_filtered_classes(): array {
-		if($this instanceof Columns || $this instanceof Group) {
+		if(!$this instanceof Column) {
 			return array_merge(
-				['layout-block'],
-				parent::get_filtered_classes()
+				parent::get_filtered_classes(),
+				['layout-block']
 			);
 		}
 

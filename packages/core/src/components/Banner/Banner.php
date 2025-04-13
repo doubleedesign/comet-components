@@ -3,13 +3,7 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class Banner extends UIComponent {
-
-	/**
-	 * @var ThemeColor|null $backgroundColor
-	 * @description The background colour of the content area
-	 */
-	protected ?ThemeColor $backgroundColor;
+class Banner extends LayoutComponent {
 	/**
 	 * @var ContainerSize $containerSize
 	 * @description The size of the container for the content
@@ -81,49 +75,45 @@ class Banner extends UIComponent {
 			$this->focalPoint = [intval($focalPointX), intval($focalPointY)];
 		}
 
-		$transformedInnerComponents = [
-			new Group(
+		parent::__construct($attributes, $innerComponents, 'components.Banner.banner');
+		$this->transform_inner_components();
+	}
+
+	private function transform_inner_components(): void {
+		$rawInnerComponents = $this->innerComponents;
+
+		$this->innerComponents = [
+			new Image(
 				[
-					'context'       => 'banner',
-					'shortName'     => 'image',
-					'data-parallax' => $this->isParallax ? 'true' : 'false'
-				],
-				[
-					new Image(
-						[
-							'src'   => $this->imageUrl,
-							'alt'   => $this->imageAlt ?? '',
-							'scale' => 'cover',
-							'style' => $this->get_image_block_inline_styles()
-						]
-					)
+					'src'        => $this->imageUrl,
+					'alt'        => $this->imageAlt ?? '',
+					'scale'      => 'cover',
+					'context'    => 'banner',
+					'isParallax' => $this->isParallax,
+					'style'      => $this->get_image_block_inline_styles()
 				]
 			),
-			new Group(
-				[
-					'context'           => 'banner',
-					'shortName'         => 'content',
-					'justifyContent'    => $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null,
-					'verticalAlignment' => $attributes['verticalAlignment'] ?? null
-				],
-				[new Container(
+			new Container(
+				array_merge(
+					$this->get_container_attributes(),
 					[
 						'size'        => $this->containerSize->value,
 						'withWrapper' => false,
-						'tagName'     => 'div'
-					],
-					[new Group(
-						[
-							'backgroundColor' => $attributes['backgroundColor'] ?? null,
-							'context'         => 'banner__content',
-							'shortName'       => 'inner',
-							'style'           => [
-								'max-width' => $this->contentMaxWidth . '%'
-							]
-						],
-						$innerComponents)
+						'tagName'     => 'div',
+						'context'     => 'banner',
 					]
-				)]
+				),
+				[new Group(
+					[
+						'backgroundColor' => $this->backgroundColor ?? null,
+						'context'         => 'banner__container',
+						'shortName'       => 'inner',
+						'style'           => [
+							'max-width' => $this->contentMaxWidth . '%'
+						]
+					],
+					$rawInnerComponents)
+				]
 			),
 			new Group(
 				[
@@ -137,28 +127,17 @@ class Banner extends UIComponent {
 				[]
 			)
 		];
-
-		parent::__construct($attributes, $transformedInnerComponents, 'components.Banner.banner');
 	}
 
-	function get_filtered_classes(): array {
-		$classes = parent::get_filtered_classes();
+	private function get_container_attributes(): array {
+		$attrs = $this->get_html_attributes();
 
-		// Filter out the bg-colour class because it's the only thing in LayoutComponent we don't want,
-		// so rather than repeat all the alignment code I'll just hack this
-		return array_filter($classes, function($class) {
-			return !str_starts_with($class, 'bg-');
-		});
+		return array_filter($attrs, function($key) {
+			return $key !== 'data-background';
+		}, ARRAY_FILTER_USE_KEY);
 	}
 
-	function get_inline_styles(): array {
-		$styles['min-height'] = $this->minHeight . 'px';
-		$styles['max-height'] = $this->maxHeight . 'vh';
-
-		return $styles;
-	}
-
-	function get_image_block_inline_styles(): array {
+	private function get_image_block_inline_styles(): array {
 		$styles = [];
 
 		if(!$this->isParallax && $this->focalPoint) {
@@ -167,14 +146,21 @@ class Banner extends UIComponent {
 
 		return $styles;
 	}
+	
+	function get_inline_styles(): array {
+		$styles['min-height'] = $this->minHeight . 'px';
+		$styles['max-height'] = $this->maxHeight . 'vh';
+
+		return $styles;
+	}
 
 	function render(): void {
 		$blade = BladeService::getInstance();
 
 		echo $blade->make($this->bladeFile, [
-			'classes'    => $this->get_filtered_classes_string(),
-			'attributes' => $this->get_html_attributes(),
-			'children'   => $this->innerComponents
+			// No attributes here because they get passed down to the inner Container
+			'classes'  => $this->get_filtered_classes_string(),
+			'children' => $this->innerComponents
 		])->render();
 	}
 }

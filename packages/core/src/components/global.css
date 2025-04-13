@@ -154,6 +154,9 @@ body {
   --theme-text-color: var(--readable-color-white);
 }
 
+.layout-block[data-valign], .layout-block[data-halign] {
+  display: flex;
+}
 .layout-block[data-background] > .layout-block:not([data-background]) {
   padding: var(--spacing-md);
 }

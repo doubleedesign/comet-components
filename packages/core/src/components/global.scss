@@ -124,6 +124,11 @@ body {
 }
 
 .layout-block {
+	&[data-valign],
+	&[data-halign] {
+		display: flex;
+	}
+
 	// If a layout block's immediate child is also a layout block but that has no background set, it should have padding
 	&[data-background] > .layout-block:not([data-background]) {
 		@include nested-padding();

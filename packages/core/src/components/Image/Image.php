@@ -64,6 +64,11 @@ class Image extends Renderable {
 	 * Dev notes: There are fewer options than the layout alignment values, that's why they're not using the Alignment enum
 	 */
 	protected ?string $align = null;
+	/**
+	 * @var bool $isParallax
+	 * @description In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)
+	 */
+	protected bool $isParallax = false;
 
 
 	function __construct(array $attributes) {
@@ -80,6 +85,7 @@ class Image extends Renderable {
 		$this->scale = $attributes['scale'] ?? 'contain';
 		$this->classes = $attributes['classes'] ?? [];
 		$this->align = $attributes['align'] ?? null;
+		$this->isParallax = $attributes['isParallax'] ?? $this->isParallax;
 
 		parent::__construct($attributes, 'components.Image.image');
 	}
@@ -93,9 +99,9 @@ class Image extends Renderable {
 	}
 
 	public function get_filtered_classes(): array {
-		$classes = array_merge([$this->shortName], parent::get_filtered_classes());
+		$classes = array_merge(parent::get_filtered_classes(), [$this->shortName]);
 
-		return array_values(array_unique(array_merge(parent::get_filtered_classes(), $classes)));
+		return array_unique($classes);
 	}
 
 	public function get_inline_styles(): array {
@@ -113,11 +119,16 @@ class Image extends Renderable {
 	}
 
 	public function get_outer_html_attributes(): array {
-		return [
+		$attrs = [
 			'data-align'        => $this->align ?? null,
 			'data-aspect-ratio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
 			'data-behaviour'    => $this->scale ?? null,
+			'data-parallax'     => $this->isParallax ? 'true' : 'false',
 		];
+
+		return array_filter($attrs, function($value) {
+			return $value !== null && $value !== 'false';
+		});
 	}
 
 	public function get_html_attributes(): array {

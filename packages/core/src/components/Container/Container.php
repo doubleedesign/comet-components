@@ -3,9 +3,8 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV])]
 #[DefaultTag(Tag::SECTION)]
-class Container extends UIComponent {
+class Container extends LayoutComponent {
 	use LayoutContainerSize;
-	use BackgroundColor;
 
 	/**
 	 * @var bool|null $withWrapper
@@ -41,7 +40,7 @@ class Container extends UIComponent {
 			$classes[] = 'layout-block';
 		}
 
-		return array_unique($classes);
+		return array_unique(array_merge($classes, [$this->shortName]));
 	}
 
 	protected function get_outer_classes(): array {
