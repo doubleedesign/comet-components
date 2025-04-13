@@ -3,6 +3,7 @@
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
@@ -28,7 +29,8 @@
                 "group--breakout"
             ],
             "default": [
-                "group"
+                "group",
+                "layout-block"
             ]
         },
         "context": {

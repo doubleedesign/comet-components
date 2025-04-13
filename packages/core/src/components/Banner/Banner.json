@@ -1,8 +1,9 @@
 {
     "name": "Banner",
-    "extends": "UIComponent",
+    "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
@@ -18,13 +19,15 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": true
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "banner"
+                "banner",
+                "layout-block"
             ],
             "inherited": true
         },
@@ -61,6 +64,18 @@
                 50,
                 50
             ]
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start",
+            "inherited": true
         },
         "id": {
             "type": "string",
@@ -136,6 +151,18 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start",
             "inherited": true
         }
     },

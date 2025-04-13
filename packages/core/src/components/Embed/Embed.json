@@ -3,6 +3,7 @@
     "extends": "Renderable",
     "abstract": false,
     "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "classes": {
             "type": "array<string>",

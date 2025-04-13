@@ -3,6 +3,7 @@
     "extends": "TextElementExtended",
     "abstract": false,
     "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "classes": {
             "type": "array<string>",

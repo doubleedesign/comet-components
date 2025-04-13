@@ -4,6 +4,7 @@
     "abstract": false,
     "vue": true,
     "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "classes": {
             "type": "array<string>",

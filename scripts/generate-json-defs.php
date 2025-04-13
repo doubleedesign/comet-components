@@ -141,6 +141,12 @@ class ComponentClassesToJsonDefinitions {
 				}
 				else {
 					$result['isInner'] = false;
+					if($className === 'Doubleedesign\Comet\Core\Container') {
+						$result['belongsInside'] = null;
+					}
+					else {
+						$result['belongsInside'] = 'LayoutComponent';
+					}
 
 					// Check if there is a Vue component in this component's directory
 					$vueFile = Utils::kebab_case(basename($filePath) . '.vue');

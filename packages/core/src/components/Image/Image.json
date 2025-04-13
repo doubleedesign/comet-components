@@ -3,6 +3,7 @@
     "extends": "Renderable",
     "abstract": false,
     "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "align": {
             "type": "string",
@@ -64,6 +65,12 @@
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
+        },
+        "isParallax": {
+            "type": "bool",
+            "description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
+            "required": true,
+            "default": "false"
         },
         "scale": {
             "type": "string",
