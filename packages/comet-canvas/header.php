@@ -25,7 +25,7 @@ $logoUrl = wp_get_attachment_image_url($logoId, 'full');
 $headerComponent = new SiteHeader(
 	[
 		'logoUrl'         => $logoUrl,
-		'backgroundColor' => 'white',
+		'size'            => 'wide',
 		'breakpoint'      => '860px',
 		'responsiveStyle' => 'default',
 		'submenuIcon'     => 'fa-caret-down'

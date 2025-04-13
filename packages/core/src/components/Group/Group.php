@@ -21,6 +21,10 @@ class Group extends UIComponent {
 	}
 
 	protected function get_filtered_classes(): array {
+		if($this->context) {
+			return parent::get_filtered_classes();
+		}
+
 		return array_merge(parent::get_filtered_classes(), ['layout-block']);
 	}
 

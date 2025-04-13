@@ -793,6 +793,10 @@ h2:first-child, h3:first-child {
   margin-block-start: 0;
 }
 
+.separator + h2 {
+  margin-block-start: 0;
+}
+
 p, ul, ol {
   margin-block: var(--spacing-sm);
 }
