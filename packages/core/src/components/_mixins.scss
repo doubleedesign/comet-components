@@ -39,12 +39,6 @@ $widths: (
 	}
 }
 
-@mixin adjacent-background-padding() {
-	// For section-style elements (not necessarily <section> tags) that we only ever expect to be vertically adjacent
-	// such as containers, column sets, and groups
-
-}
-
 // See global.css for overrides to ensure no double padding when backgrounds are the same
 @mixin nested-padding() {
 	padding: var(--spacing-md);

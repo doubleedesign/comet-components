@@ -6,10 +6,7 @@
       </envs>
     </CommandLine>
     <option name="pestRunnerSettings">
-      <PestRunner configuration_file="$PROJECT_DIR$/test/phpunit.xml" directory="$PROJECT_DIR$/packages/core/src" method="" options="--coverage-html ../../../test/phpunit-report" use_alternative_configuration_file="true" />
-    </option>
-    <option name="runnerSettings">
-      <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/test/phpunit.xml" directory="$PROJECT_DIR$/packages/core/src" method="" options="--coverage-html ../../../test/phpunit-report" use_alternative_configuration_file="true" />
+      <PestRunner configuration_file="$PROJECT_DIR$/test/unit/phpunit.xml" directory="$PROJECT_DIR$/packages/core/src" method="" options="--coverage-html ../../../test/unit/phpunit-report" use_alternative_configuration_file="true" />
     </option>
     <method v="2" />
   </configuration>

@@ -41,8 +41,9 @@ class PageHeader extends UIComponent {
 		);
 
 		parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
+		$this->simplify_all_background_colors();
 	}
-	
+
 	protected function get_html_attributes(): array {
 		$attributes = parent::get_html_attributes();
 

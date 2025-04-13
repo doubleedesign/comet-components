@@ -78,16 +78,21 @@
 
 	// If this element has at least one child with a different background colour set, all children should have padding so they align
 	@each $color, $value in $colors {
-		&[data-background="#{$value}"] {
+		&[data-background="#{$color}"] {
 			// Has any direct child with a different background
 			@each $color2, $value in $colors {
 				@if $color != $color2 {
-					&:has(> [data-background="#{$value}"]) {
+					&:has(> [data-background="#{$color2}"]) {
 						.columns__column {
 							@include nested-padding();
 						}
 					}
 				}
+			}
+
+			// Has adjacent sibling with same background - negate the container gap
+			& + & {
+				margin-block-start: calc(var(--spacing-md) * -2);
 			}
 		}
 	}

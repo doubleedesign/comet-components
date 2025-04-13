@@ -1,32 +1,36 @@
 <?php
-use Doubleedesign\Comet\Core\{TychoService};
+use Doubleedesign\Comet\Core\{Assets, TychoService};
 
 $page = <<<TYCHO
 <TychoTemplate xmlns="schema/components.xsd">
-	<Group testId="example-1">
-		<Container>
-			<Paragraph>Container no background</Paragraph>
-		</Container>
-		<Container>
-			<Paragraph>Container no background</Paragraph>
-		</Container>
-	</Group>
-	<Group testId="example-2">
-		<Container backgroundColor="light">
-			<Paragraph>Container light background</Paragraph>
-		</Container>
-		<Container backgroundColor="light">
-			<Paragraph>Container light background</Paragraph>
-		</Container>
-	</Group>
-	<Group testId="example-3">
-		<Container backgroundColor="dark">
-			<Paragraph>Container dark background</Paragraph>
-		</Container>
-		<Container backgroundColor="primary">
-			<Paragraph>Container primary background</Paragraph>
-		</Container>
-	</Group>
+	<Container testId="example-1">
+		<Paragraph>Container no background</Paragraph>
+	</Container>
+	<Container testId="example-1b">
+		<Paragraph>Container no background</Paragraph>
+	</Container>
+	
+	<Container backgroundColor="light" testId="example-2">
+		<Paragraph>Container light background</Paragraph>
+	</Container>
+	<Container backgroundColor="light" testId="example-2b">
+		<Paragraph>Container light background</Paragraph>
+	</Container>
+	
+	<Container backgroundColor="white" testId="example-4">
+		<Paragraph>Page section, first thing with a background, but it's the same as the global background</Paragraph>
+	</Container>
+	
+	<Container backgroundColor="dark" testId="example-3">
+		<Paragraph>Container dark background</Paragraph>
+	</Container>
+	<Container backgroundColor="primary" testId="example-3b">
+		<Paragraph>Container primary background</Paragraph>
+	</Container>
+	
+	<Container backgroundColor="white" withWrapper="false" testId="example-5">
+		<Paragraph>No page section wrapper, first thing with a background, but it's the same as the global background</Paragraph>
+	</Container>
 </TychoTemplate>
 TYCHO;
 
@@ -39,3 +43,6 @@ try {
 catch(Exception $e) {
 	echo $e->getMessage();
 }
+
+// Workaround for wrapper-close not loading in Laravel Herd
+Assets::get_instance()->render_component_stylesheet_html();

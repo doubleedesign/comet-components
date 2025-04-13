@@ -22,4 +22,115 @@ trait BackgroundColor {
 			}
 		}
 	}
+
+	/**
+	 * @description Get the background colour of the component.
+	 * @return ?ThemeColor
+	 */
+	public function get_background_color(): ?ThemeColor {
+		return $this->backgroundColor;
+	}
+
+	/**
+	 * @description Allows the background colour of a component to be set based on contextual factors not available at instantiation.
+	 * @param string|null|ThemeColor $backgroundColor
+	 * @return void
+	 */
+	public function set_background_color(ThemeColor|string|null $backgroundColor): void {
+		if($backgroundColor instanceof ThemeColor) {
+			$this->backgroundColor = $backgroundColor;
+		}
+		else if(is_string($backgroundColor)) {
+			$this->backgroundColor = ThemeColor::tryFrom($backgroundColor);
+		}
+		else {
+			$this->backgroundColor = null;
+		}
+	}
+
+
+	/**
+	 * @description Clean up duplication of background colours between this and its inner components simplify HTML and CSS. Runs either remove_redundant_background_colors() or set_background_color_based_on_children() as appropriate.
+	 * NOTE: This must be run after the constructor and after set_background_color_from_attrs() to ensure the backgrounds and innerComponents are available
+	 * @return void
+	 */
+	public function simplify_all_background_colors(): void {
+		// If all backgrounds set on direct children of this component are the same as this component's background,
+		// remove the background from those children
+		if(isset($this->backgroundColor) && isset($this->innerComponents)) {
+			$this->remove_redundant_background_colors();
+		}
+
+		// If this component does not have a background set but its children all have the same background and/or no background,
+		// remove the backgrounds from the children and apply that singular set background to this component
+		if(!$this->backgroundColor && isset($this->innerComponents)) {
+			$this->set_background_color_based_on_children();
+		}
+	}
+
+	/**
+	 * @description If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS. This method is public as there are some components where we want to do this, but not assign a background colour to the component.
+	 * @return void
+	 */
+	public function remove_redundant_background_colors(): void {
+		$childrenWithSameBackground = array_filter($this->innerComponents, function($child) {
+			if(method_exists($child, 'get_background_color')) {
+				return $child->get_background_color() === $this->backgroundColor;
+			}
+			return false;
+		});
+
+		if(count($childrenWithSameBackground) > 0) {
+			$updatedInnerComponents = array_map(function($child) {
+				if(method_exists($child, 'set_background_color') && method_exists($child, 'get_background_color')) {
+					if($child->get_background_color() === $this->backgroundColor) {
+						$child->set_background_color(null);
+					}
+				}
+				return $child;
+			}, $this->innerComponents);
+		}
+
+		$this->innerComponents = $updatedInnerComponents ?? $this->innerComponents;
+	}
+
+	/**
+	 * If this component does not have a background set but its children all have the same background and/or no background,
+	 * "hoist" that singular set background to this component and remove the backgrounds from the children
+	 * @return void
+	 */
+	private function set_background_color_based_on_children(): void {
+		if($this->backgroundColor) {
+			return; // No need to set the background if it's already set
+		}
+
+		// Collect the child backgrounds, with in-place filtering to remove duplicates
+		$childBackgrounds = array_reduce($this->innerComponents, function($carry, $child) {
+			if(method_exists($child, 'get_background_color')) {
+				if(!in_array($child->get_background_color(), $carry)) {
+					$carry[] = $child->get_background_color();
+				}
+			}
+			return $carry;
+		}, []);
+
+		// Filter out null values
+		$childBackgrounds = array_values(array_filter($childBackgrounds, function($background) {
+			return $background !== null;
+		}));
+
+		// If there is one colour left standing, set it as this component's background and remove it from the children
+		if(count($childBackgrounds) === 1) {
+			$this->backgroundColor = $childBackgrounds[0];
+			$updatedInnerComponents = array_map(function($child) {
+				if(method_exists($child, 'set_background_color')) {
+					$child->set_background_color(null);
+				}
+				return $child;
+			}, $this->innerComponents);
+		}
+
+		$this->innerComponents = $updatedInnerComponents ?? $this->innerComponents;
+	}
+
 }

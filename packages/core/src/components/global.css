@@ -54,6 +54,11 @@ body {
   line-height: 1.4;
 }
 
+[data-valign],
+[data-halign] {
+  display: flex;
+}
+
 [data-valign=start] {
   align-items: flex-start;
 }
@@ -98,10 +103,6 @@ body {
 }
 [data-orientation=vertical] [data-halign=end], [data-orientation=vertical][data-halign=end] {
   justify-content: flex-end;
-}
-
-[data-background] {
-  padding: var(--spacing-md);
 }
 
 [data-color-theme=primary] {
@@ -154,50 +155,60 @@ body {
   --theme-text-color: var(--readable-color-white);
 }
 
-.layout-block[data-valign], .layout-block[data-halign] {
-  display: flex;
-}
-.layout-block[data-background] > .layout-block:not([data-background]) {
-  padding: var(--spacing-md);
-}
-.layout-block:not([data-background]) + .layout-block:not([data-background]) {
-  padding-block-start: 0;
-}
-
 [data-text-color=primary] {
   color: var(--color-primary);
 }
 
-body[data-global-background=primary] {
+[data-text-color=secondary] {
+  color: var(--color-secondary);
+}
+
+[data-text-color=accent] {
+  color: var(--color-accent);
+}
+
+[data-text-color=info] {
+  color: var(--color-info);
+}
+
+[data-text-color=warning] {
+  color: var(--color-warning);
+}
+
+[data-text-color=success] {
+  color: var(--color-success);
+}
+
+[data-text-color=error] {
+  color: var(--color-error);
+}
+
+[data-text-color=light] {
+  color: var(--color-light);
+}
+
+[data-text-color=dark] {
+  color: var(--color-dark);
+}
+
+[data-text-color=white] {
+  color: var(--color-white);
+}
+
+[data-background=primary]:not(body[data-global-background=primary] [data-background=primary]) {
   background-color: var(--color-primary);
   color: var(--readable-color-primary);
 }
-
-[data-background=primary] {
+[data-background=primary]:not(body[data-global-background=primary] [data-background=primary]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=primary]) [data-background=primary] {
   background-color: var(--color-primary);
   color: var(--readable-color-primary);
 }
-
-[data-background=primary] > [data-background=primary]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=primary] + .layout-block[data-background=primary] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=primary] > [data-background=primary]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=primary] > [data-background=primary]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=primary] > [data-background=primary]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=primary] > .layout-block:not([data-background]) > .layout-block[data-background=primary] {
-  padding: 0;
+body[data-global-background=primary] [data-background]:not([data-background=primary]) [data-background=primary] [data-background=primary] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-primary-primary] {
@@ -240,52 +251,20 @@ body[data-global-background=primary] {
   background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=primary] + [data-background*=gradient-primary] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-primary] + [data-background=primary] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-primary] + [data-background*=gradient-primary] {
-  padding-block-start: 0;
-}
-
-[data-text-color=secondary] {
-  color: var(--color-secondary);
-}
-
-body[data-global-background=secondary] {
+[data-background=secondary]:not(body[data-global-background=secondary] [data-background=secondary]) {
   background-color: var(--color-secondary);
   color: var(--readable-color-secondary);
 }
-
-[data-background=secondary] {
+[data-background=secondary]:not(body[data-global-background=secondary] [data-background=secondary]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=secondary]) [data-background=secondary] {
   background-color: var(--color-secondary);
   color: var(--readable-color-secondary);
 }
-
-[data-background=secondary] > [data-background=secondary]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=secondary] + .layout-block[data-background=secondary] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=secondary] > [data-background=secondary]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=secondary] > [data-background=secondary]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=secondary] > [data-background=secondary]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=secondary] > .layout-block:not([data-background]) > .layout-block[data-background=secondary] {
-  padding: 0;
+body[data-global-background=secondary] [data-background]:not([data-background=secondary]) [data-background=secondary] [data-background=secondary] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-secondary-primary] {
@@ -328,52 +307,20 @@ body[data-global-background=secondary] {
   background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=secondary] + [data-background*=gradient-secondary] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-secondary] + [data-background=secondary] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-secondary] + [data-background*=gradient-secondary] {
-  padding-block-start: 0;
-}
-
-[data-text-color=accent] {
-  color: var(--color-accent);
-}
-
-body[data-global-background=accent] {
+[data-background=accent]:not(body[data-global-background=accent] [data-background=accent]) {
   background-color: var(--color-accent);
   color: var(--readable-color-accent);
 }
-
-[data-background=accent] {
+[data-background=accent]:not(body[data-global-background=accent] [data-background=accent]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=accent]) [data-background=accent] {
   background-color: var(--color-accent);
   color: var(--readable-color-accent);
 }
-
-[data-background=accent] > [data-background=accent]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=accent] + .layout-block[data-background=accent] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=accent] > [data-background=accent]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=accent] > [data-background=accent]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=accent] > [data-background=accent]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=accent] > .layout-block:not([data-background]) > .layout-block[data-background=accent] {
-  padding: 0;
+body[data-global-background=accent] [data-background]:not([data-background=accent]) [data-background=accent] [data-background=accent] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-accent-primary] {
@@ -416,52 +363,20 @@ body[data-global-background=accent] {
   background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=accent] + [data-background*=gradient-accent] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-accent] + [data-background=accent] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-accent] + [data-background*=gradient-accent] {
-  padding-block-start: 0;
-}
-
-[data-text-color=info] {
-  color: var(--color-info);
-}
-
-body[data-global-background=info] {
+[data-background=info]:not(body[data-global-background=info] [data-background=info]) {
   background-color: var(--color-info);
   color: var(--readable-color-info);
 }
-
-[data-background=info] {
+[data-background=info]:not(body[data-global-background=info] [data-background=info]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=info]) [data-background=info] {
   background-color: var(--color-info);
   color: var(--readable-color-info);
 }
-
-[data-background=info] > [data-background=info]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=info] + .layout-block[data-background=info] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=info] > [data-background=info]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=info] > [data-background=info]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=info] > [data-background=info]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=info] > .layout-block:not([data-background]) > .layout-block[data-background=info] {
-  padding: 0;
+body[data-global-background=info] [data-background]:not([data-background=info]) [data-background=info] [data-background=info] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-info-primary] {
@@ -504,52 +419,20 @@ body[data-global-background=info] {
   background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=info] + [data-background*=gradient-info] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-info] + [data-background=info] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-info] + [data-background*=gradient-info] {
-  padding-block-start: 0;
-}
-
-[data-text-color=warning] {
-  color: var(--color-warning);
-}
-
-body[data-global-background=warning] {
+[data-background=warning]:not(body[data-global-background=warning] [data-background=warning]) {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
 }
-
-[data-background=warning] {
+[data-background=warning]:not(body[data-global-background=warning] [data-background=warning]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=warning]) [data-background=warning] {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
 }
-
-[data-background=warning] > [data-background=warning]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=warning] + .layout-block[data-background=warning] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=warning] > [data-background=warning]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=warning] > [data-background=warning]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=warning] > [data-background=warning]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=warning] > .layout-block:not([data-background]) > .layout-block[data-background=warning] {
-  padding: 0;
+body[data-global-background=warning] [data-background]:not([data-background=warning]) [data-background=warning] [data-background=warning] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-warning-primary] {
@@ -592,52 +475,20 @@ body[data-global-background=warning] {
   background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=warning] + [data-background*=gradient-warning] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-warning] + [data-background=warning] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-warning] + [data-background*=gradient-warning] {
-  padding-block-start: 0;
-}
-
-[data-text-color=success] {
-  color: var(--color-success);
-}
-
-body[data-global-background=success] {
+[data-background=success]:not(body[data-global-background=success] [data-background=success]) {
   background-color: var(--color-success);
   color: var(--readable-color-success);
 }
-
-[data-background=success] {
+[data-background=success]:not(body[data-global-background=success] [data-background=success]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=success]) [data-background=success] {
   background-color: var(--color-success);
   color: var(--readable-color-success);
 }
-
-[data-background=success] > [data-background=success]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=success] + .layout-block[data-background=success] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=success] > [data-background=success]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=success] > [data-background=success]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=success] > [data-background=success]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=success] > .layout-block:not([data-background]) > .layout-block[data-background=success] {
-  padding: 0;
+body[data-global-background=success] [data-background]:not([data-background=success]) [data-background=success] [data-background=success] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-success-primary] {
@@ -680,52 +531,20 @@ body[data-global-background=success] {
   background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=success] + [data-background*=gradient-success] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-success] + [data-background=success] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-success] + [data-background*=gradient-success] {
-  padding-block-start: 0;
-}
-
-[data-text-color=error] {
-  color: var(--color-error);
-}
-
-body[data-global-background=error] {
+[data-background=error]:not(body[data-global-background=error] [data-background=error]) {
   background-color: var(--color-error);
   color: var(--readable-color-error);
 }
-
-[data-background=error] {
+[data-background=error]:not(body[data-global-background=error] [data-background=error]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=error]) [data-background=error] {
   background-color: var(--color-error);
   color: var(--readable-color-error);
 }
-
-[data-background=error] > [data-background=error]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=error] + .layout-block[data-background=error] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=error] > [data-background=error]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=error] > [data-background=error]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=error] > [data-background=error]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=error] > .layout-block:not([data-background]) > .layout-block[data-background=error] {
-  padding: 0;
+body[data-global-background=error] [data-background]:not([data-background=error]) [data-background=error] [data-background=error] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-error-primary] {
@@ -768,52 +587,20 @@ body[data-global-background=error] {
   background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=error] + [data-background*=gradient-error] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-error] + [data-background=error] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-error] + [data-background*=gradient-error] {
-  padding-block-start: 0;
-}
-
-[data-text-color=light] {
-  color: var(--color-light);
-}
-
-body[data-global-background=light] {
+[data-background=light]:not(body[data-global-background=light] [data-background=light]) {
   background-color: var(--color-light);
   color: var(--readable-color-light);
 }
-
-[data-background=light] {
+[data-background=light]:not(body[data-global-background=light] [data-background=light]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=light]) [data-background=light] {
   background-color: var(--color-light);
   color: var(--readable-color-light);
 }
-
-[data-background=light] > [data-background=light]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=light] + .layout-block[data-background=light] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=light] > [data-background=light]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=light] > [data-background=light]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=light] > [data-background=light]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=light] > .layout-block:not([data-background]) > .layout-block[data-background=light] {
-  padding: 0;
+body[data-global-background=light] [data-background]:not([data-background=light]) [data-background=light] [data-background=light] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-light-primary] {
@@ -856,52 +643,20 @@ body[data-global-background=light] {
   background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=light] + [data-background*=gradient-light] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-light] + [data-background=light] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-light] + [data-background*=gradient-light] {
-  padding-block-start: 0;
-}
-
-[data-text-color=dark] {
-  color: var(--color-dark);
-}
-
-body[data-global-background=dark] {
+[data-background=dark]:not(body[data-global-background=dark] [data-background=dark]) {
   background-color: var(--color-dark);
   color: var(--readable-color-dark);
 }
-
-[data-background=dark] {
+[data-background=dark]:not(body[data-global-background=dark] [data-background=dark]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=dark]) [data-background=dark] {
   background-color: var(--color-dark);
   color: var(--readable-color-dark);
 }
-
-[data-background=dark] > [data-background=dark]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=dark] + .layout-block[data-background=dark] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=dark] > [data-background=dark]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=dark] > [data-background=dark]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=dark] > [data-background=dark]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=dark] > .layout-block:not([data-background]) > .layout-block[data-background=dark] {
-  padding: 0;
+body[data-global-background=dark] [data-background]:not([data-background=dark]) [data-background=dark] [data-background=dark] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-dark-primary] {
@@ -944,52 +699,20 @@ body[data-global-background=dark] {
   background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-white) 50%, var(--color-white) 100%);
 }
 
-[data-background=dark] + [data-background*=gradient-dark] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-dark] + [data-background=dark] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-dark] + [data-background*=gradient-dark] {
-  padding-block-start: 0;
-}
-
-[data-text-color=white] {
-  color: var(--color-white);
-}
-
-body[data-global-background=white] {
+[data-background=white]:not(body[data-global-background=white] [data-background=white]) {
   background-color: var(--color-white);
   color: var(--readable-color-white);
 }
-
-[data-background=white] {
+[data-background=white]:not(body[data-global-background=white] [data-background=white]):not(.page-section) {
+  padding: var(--spacing-md);
+}
+[data-background]:not([data-background=white]) [data-background=white] {
   background-color: var(--color-white);
   color: var(--readable-color-white);
 }
-
-[data-background=white] > [data-background=white]:only-child {
-  padding: 0;
-}
-
-.layout-block[data-background=white] + .layout-block[data-background=white] {
-  padding-block-start: 0;
-}
-.layout-block[data-background=white] > [data-background=white]:only-child {
-  padding: 0;
-}
-.layout-block[data-background=white] > [data-background=white]:first-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-start: 0;
-}
-.layout-block[data-background=white] > [data-background=white]:last-child:not(:only-child) {
-  padding-inline: 0;
-  padding-block-end: 0;
-}
-.layout-block[data-background=white] > .layout-block:not([data-background]) > .layout-block[data-background=white] {
-  padding: 0;
+body[data-global-background=white] [data-background]:not([data-background=white]) [data-background=white] [data-background=white] {
+  background-color: transparent;
+  color: inherit;
 }
 
 [data-background=gradient-white-primary] {
@@ -1030,18 +753,6 @@ body[data-global-background=white] {
 
 [data-background=gradient-white-white] {
   background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-white) 50%, var(--color-white) 100%);
-}
-
-[data-background=white] + [data-background*=gradient-white] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-][data-background*=-white] + [data-background=white] {
-  padding-block-start: 0;
-}
-
-[data-background*=gradient-white] + [data-background*=gradient-white] {
-  padding-block-start: 0;
 }
 
 h3 {

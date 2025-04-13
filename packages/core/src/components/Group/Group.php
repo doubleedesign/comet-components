@@ -15,8 +15,13 @@ class Group extends UIComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Group.group');
 		$this->set_background_color_from_attrs($attributes);
+		$this->simplify_all_background_colors();
 		// Allow something other than "group" to be used as the shortName, primarily for automatic BEM class naming
 		$this->shortName = $attributes['shortName'] ?? $this->shortName;
+	}
+
+	protected function get_filtered_classes(): array {
+		return array_merge(parent::get_filtered_classes(), ['layout-block']);
 	}
 
 	protected function get_html_attributes(): array {

@@ -27,14 +27,6 @@ class Column extends LayoutComponent {
 		$this->width = $width;
 	}
 
-	public function get_background_color() {
-		return $this->backgroundColor;
-	}
-
-	public function set_background_color(string|null $backgroundColor) {
-		$this->backgroundColor = $backgroundColor;
-	}
-
 	function get_filtered_classes(): array {
 		$classes = array_merge([$this->shortName], parent::get_filtered_classes());
 

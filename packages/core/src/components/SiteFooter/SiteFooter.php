@@ -28,6 +28,7 @@ class SiteFooter extends UIComponent {
 		);
 
 		parent::__construct($attributes, $this->innerComponents, 'components.SiteFooter.site-footer');
+		$this->simplify_all_background_colors();
 	}
 
 	protected function get_html_attributes(): array {

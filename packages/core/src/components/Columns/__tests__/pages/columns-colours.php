@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{TychoService,Assets};
+use Doubleedesign\Comet\Core\{TychoService, Assets};
 
 $page = <<<TYCHO
 <TychoTemplate xmlns="schema/components.xsd">
@@ -53,7 +53,7 @@ $page = <<<TYCHO
 	<Container testId="example-4" withWrapper="false" backgroundColor="light">
 		<Columns backgroundColor="dark">
 			<Column>Column 1</Column>
-			<Column>Column 2</Column>
+			<Column backgroundColor="accent">Column 2</Column>
 		</Columns>
 	</Container>
 	
@@ -120,13 +120,28 @@ $page = <<<TYCHO
 			<Column>Column 2</Column>
 		</Columns>
 	</Container>
-
+	
 	<Separator color="dark"/>
-	<!-- Used to manually test ignoring of attributes -->
-	<Container>
-		<Columns backgroundColor="light">
-			<Column backgroundColor="light">Column 1</Column>
-			<Column backgroundColor="light">Column 2</Column>
+	<Container testId="example-9" withWrapper="false">
+		<Columns>
+			<Column backgroundColor="white">Column 1</Column>
+			<Column>Column 2</Column>
+		</Columns>
+	</Container>
+	
+	<Separator color="dark"/>
+	<Container testId="example-10" withWrapper="false">
+		<Columns backgroundColor="white">
+			<Column>Column 1</Column>
+			<Column>Column 2</Column>
+		</Columns>
+	</Container>
+	
+	<Separator color="dark"/>
+	<Container testId="example-11" backgroundColor="light">
+		<Columns>
+			<Column>Column 1</Column>
+			<Column>Column 2</Column>
 		</Columns>
 	</Container>
 

@@ -5,10 +5,17 @@ abstract class LayoutComponent extends UIComponent {
 	use BackgroundColor;
 	use LayoutAlignment;
 
-	function __construct(array $attributes, array $children, string $bladeFile) {
-		parent::__construct($attributes, $children, $bladeFile);
+	function __construct(array $attributes, array $innerComponents, string $bladeFile) {
+		parent::__construct($attributes, $innerComponents, $bladeFile);
 		$this->set_background_color_from_attrs($attributes);
 		$this->set_layout_alignment_from_attrs($attributes);
+
+		if($this instanceof Container && !$this->withWrapper) {
+			$this->remove_redundant_background_colors();
+		}
+		else {
+			$this->simplify_all_background_colors();
+		}
 	}
 
 	protected function get_filtered_classes(): array {

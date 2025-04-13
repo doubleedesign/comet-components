@@ -1,11 +1,7 @@
----
-title: Component traits
-position: 2
----
-
 # Component Traits
 
-PHP traits are used to provide common implementations of an attribute's conversion from <code>$attributes</code> array element to object field. This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.
+PHP traits are used to provide common implementations of an attribute's conversion from <code>$attributes</code> array element to object field.
+This provides a central location for validation logic and documentation, reducing duplication and ensuring consistency.
 
 <div class="trait-class-doc">
 
@@ -29,6 +25,34 @@ PHP traits are used to provide common implementations of an attribute's conversi
 	<strong>Returns:</strong> <code>void</code>
 
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_background_color</code> 
+	<strong>Returns:</strong> <code>ThemeColor</code>
+
+<p>Get the background colour of the component.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_background_color</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p>Allows the background colour of a component to be set based on contextual factors not available at instantiation.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>simplify_all_background_colors</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p>Clean up duplication of background colours between this and its inner components simplify HTML and CSS. Runs either remove_redundant_background_colors() or set_background_color_based_on_children() as appropriate.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>remove_redundant_background_colors</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p>If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS. This method is public as there are some components where we want to do this, but not assign a background colour to the component.</p>
 </dd>
 </dl>
 

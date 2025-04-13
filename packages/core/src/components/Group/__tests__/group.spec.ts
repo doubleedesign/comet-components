@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from 'playwright';
-import { getPadding, NESTED_ELEMENT_PADDING, NO_PADDING } from '../../../../../../test/integration/playwright-utils';
+import {
+	get_vertical_space_between,
+	getPadding,
+	NESTED_ELEMENT_PADDING,
+	NO_PADDING
+} from '../../../../../../test/integration/playwright-utils';
 
 test.describe.serial('Group', () => {
 	let page: Page;
@@ -14,123 +19,49 @@ test.describe.serial('Group', () => {
 		await page.close();
 	});
 
-	test.describe('Vertically adjacent groups with no background set', () => {
-		test('neither element has padding', async () => {
-			const wrapper = page.getByTestId('example-1');
-			const element1 = await getPadding(wrapper.locator('.group').nth(0));
-			const element2 = await getPadding(wrapper.locator('.group').nth(1));
+	test('Vertically adjacent, no backgrounds = no padding', async () => {
+		const wrapper = page.getByTestId('example-1');
+		const element1 = await getPadding(wrapper.locator('.group').nth(0));
+		const element2 = await getPadding(wrapper.locator('.group').nth(1));
 
-			expect(element1).toStrictEqual(NO_PADDING);
-			expect(element2).toStrictEqual(NO_PADDING);
-		});
+		expect(element1).toStrictEqual(NO_PADDING);
+		expect(element2).toStrictEqual(NO_PADDING);
 	});
 
-	test.describe('Vertically adjacent groups with the same background', () => {
-		test('First element has padding', async () => {
-			const wrapper = page.getByTestId('example-2');
-			const element1 = await getPadding(wrapper.locator('.group[data-background="light"]').nth(0));
+	test('Vertically adjacent, same background = do not double up on space between', async () => {
+		const wrapper = page.getByTestId('example-2');
+		const element1 = wrapper.locator('.group').nth(0);
+		const element2 = wrapper.locator('.group').nth(1);
 
-			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
-		});
+		const space = await get_vertical_space_between(element1, element2);
 
-		test('Second element has bottom padding but no top padding', async () => {
-			const wrapper = page.getByTestId('example-2');
-			const element2 = await getPadding(wrapper.locator('.group[data-background="light"]').nth(1));
-
-			expect(element2).toStrictEqual([0, 16, 16, 16]);
-		});
+		expect(space).toEqual(16);
 	});
 
-	test.describe('Vertically adjacent groups with different backgrounds', () => {
-		test('Both elements have padding', async () => {
-			const wrapper = page.getByTestId('example-3');
-			const element1 = await getPadding(wrapper.locator('.group[data-background="dark"]').nth(0));
-			const element2 = await getPadding(wrapper.locator('.group[data-background="primary"]').nth(0));
+	test('Nested group, no backgrounds = no padding', async () => {
+		const wrapper = page.getByTestId('example-4');
+		const outer = await getPadding(wrapper);
+		const inner = await getPadding(wrapper.locator('.group').nth(0));
 
-			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
-			expect(element2).toStrictEqual(NESTED_ELEMENT_PADDING);
-		});
+		expect(outer).toStrictEqual(NO_PADDING);
+		expect(inner).toStrictEqual(NO_PADDING);
 	});
 
-	test.describe('Nested group, no backgrounds', async () => {
-		test('Neither element has padding', async () => {
-			const wrapper = page.getByTestId('example-4');
-			const element1 = await getPadding(wrapper.locator('.group').nth(0));
-			const element2 = await getPadding(wrapper.locator('.group').nth(1));
+	test('Nested group, same background = padding on outer and not inner', async () => {
+		const wrapper = page.getByTestId('example-5');
+		const outer = await getPadding(wrapper);
+		const inner = await getPadding(wrapper.locator('.group').nth(0));
 
-			expect(element1).toStrictEqual(NO_PADDING);
-			expect(element2).toStrictEqual(NO_PADDING);
-		});
+		expect(outer).toStrictEqual(NESTED_ELEMENT_PADDING);
+		expect(inner).toStrictEqual(NO_PADDING);
 	});
 
-	test.describe('Nested group, same background', async () => {
-		test('The outer group has padding', async () => {
-			const wrapper = page.getByTestId('example-5');
-			const element1 = await getPadding(wrapper.locator('.group').nth(0));
+	test('Nested group, different backgrounds = both have padding', async () => {
+		const wrapper = page.getByTestId('example-6');
+		const inner = await getPadding(wrapper);
+		const outer = await getPadding(wrapper.locator('.group').nth(0));
 
-			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
-		});
-
-		test('The inner group has no padding', async () => {
-			const wrapper = page.getByTestId('example-5');
-			const element2 = await getPadding(wrapper.locator('.group > .group'));
-
-			expect(element2).toStrictEqual(NO_PADDING);
-		});
-	});
-
-	test.describe('Nested group, different backgrounds', async () => {
-		test('The outer group has padding', async () => {
-			const wrapper = page.getByTestId('example-6');
-			const element1 = await getPadding(wrapper.locator('.group').nth(0));
-
-			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
-		});
-
-		test('The inner group has padding', async () => {
-			const wrapper = page.getByTestId('example-6');
-			const element2 = await getPadding(wrapper.locator('.group > .group'));
-
-			expect(element2).toStrictEqual(NESTED_ELEMENT_PADDING);
-		});
-	});
-
-	test.describe('Two nested groups with the same background as each other', async () => {
-		test('The first inner group has padding', async () => {
-			const wrapper = page.getByTestId('example-7');
-			const element1 = await getPadding(wrapper.locator('.group > .group').nth(0));
-
-			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
-		});
-
-		test('The second inner group no top padding', async () => {
-			const wrapper = page.getByTestId('example-7');
-			const element2 = await getPadding(wrapper.locator('.group > .group').nth(1));
-
-			expect(element2).toStrictEqual([0, 16, 16, 16]);
-		});
-	});
-
-	test.describe('Two nested groups with the same background as the outer group', async () => {
-		test('The outer group has padding', async () => {
-			const wrapper = page.getByTestId('example-8');
-			const element1 = await getPadding(wrapper.locator('.group').nth(0));
-
-			expect(element1).toStrictEqual(NESTED_ELEMENT_PADDING);
-		});
-
-		test('First group has bottom padding only', async () => {
-			const wrapper = page.getByTestId('example-8');
-			const element1 = await getPadding(wrapper.locator('.group > .group').nth(0));
-
-			expect(element1).toStrictEqual([0, 0, 16, 0]);
-		});
-
-		test('Second group has no padding', async () => {
-			const wrapper = page.getByTestId('example-8');
-			const element2 = await getPadding(wrapper.locator('.group > .group').nth(1));
-
-			expect(element2).toStrictEqual(NO_PADDING);
-		});
+		expect(outer).toStrictEqual(NESTED_ELEMENT_PADDING);
+		expect(inner).toStrictEqual(NESTED_ELEMENT_PADDING);
 	});
 });

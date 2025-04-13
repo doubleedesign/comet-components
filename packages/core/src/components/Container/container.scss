@@ -3,27 +3,64 @@
 
 .page-section {
 	@include section-padding();
+	@each $name, $color in $colors {
+		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
+			padding-block-start: 0;
+		}
+	}
+
+	// Treat no-background containers the same as those with the same solid background
+	&:not([data-background]) + &:not([data-background]) {
+		padding-block-start: 0;
+	}
 }
 
 .container {
 	margin: 0 auto;
 	container-type: inline-size;
 	width: 100%;
-	max-width: var(--width-contained);
-	padding-inline: var(--spacing-sm);
+	padding-inline: var(--spacing-md);
+	display: grid;
+	gap: var(--spacing-md);
+	--current-maxwidth: var(--width-contained);
+	max-width: var(--current-maxwidth);
 
 	[data-size="fullwidth"],
 	[data-size="fullwidth"] & {
-		max-width: 100vw;
+		--current-maxwidth: 100vw;
 	}
 
 	[data-size="wide"],
 	[data-size="wide"] & {
-		max-width: var(--width-wide);
+		--current-maxwidth: var(--width-wide);
 	}
 
 	[data-size="narrow"],
 	[data-size="narrow"] & {
-		max-width: var(--width-narrow);
+		--current-maxwidth: var(--width-narrow);
+	}
+
+	&[data-background],
+	[data-background] &,
+	.page-section & {
+		max-width: calc(var(--current-maxwidth) - var(--spacing-md) * 2);
+	}
+
+	// 50/50 gradient backgrounds
+	@each $name, $color in $colors {
+		// If this element's next immediate sibling has a gradient background with the same top colour, remove its top padding so we don't get double padding
+		[data-background="#{$name}"] + [data-background*="gradient-#{$name}"] {
+			padding-block-start: 0;
+		}
+
+		// If this element has a gradient background and its next immediate sibling has a solid background with the same top colour, remove its top padding so we don't get double padding
+		[data-background*="gradient-"][data-background*="-#{$name}"] + [data-background="#{$name}"] {
+			padding-block-start: 0;
+		}
+
+		// If this element and its immediate sibling both have gradient backgrounds and this element's bottom colour is the same as the sibling's top colour, remove its bottom padding so we don't get double padding
+		[data-background*="gradient-#{$name}"] + [data-background*="gradient-#{$name}"] {
+			padding-block-start: 0;
+		}
 	}
 }

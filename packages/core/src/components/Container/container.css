@@ -12,22 +12,151 @@
     padding-block: var(--spacing-xxl);
   }
 }
+.page-section[data-background=primary] + .page-section[data-background=primary] {
+  padding-block-start: 0;
+}
+.page-section[data-background=secondary] + .page-section[data-background=secondary] {
+  padding-block-start: 0;
+}
+.page-section[data-background=accent] + .page-section[data-background=accent] {
+  padding-block-start: 0;
+}
+.page-section[data-background=info] + .page-section[data-background=info] {
+  padding-block-start: 0;
+}
+.page-section[data-background=warning] + .page-section[data-background=warning] {
+  padding-block-start: 0;
+}
+.page-section[data-background=success] + .page-section[data-background=success] {
+  padding-block-start: 0;
+}
+.page-section[data-background=error] + .page-section[data-background=error] {
+  padding-block-start: 0;
+}
+.page-section[data-background=light] + .page-section[data-background=light] {
+  padding-block-start: 0;
+}
+.page-section[data-background=dark] + .page-section[data-background=dark] {
+  padding-block-start: 0;
+}
+.page-section[data-background=white] + .page-section[data-background=white] {
+  padding-block-start: 0;
+}
+.page-section:not([data-background]) + .page-section:not([data-background]) {
+  padding-block-start: 0;
+}
 
 .container {
   margin: 0 auto;
   container-type: inline-size;
   width: 100%;
-  max-width: var(--width-contained);
-  padding-inline: var(--spacing-sm);
+  padding-inline: var(--spacing-md);
+  display: grid;
+  gap: var(--spacing-md);
+  --current-maxwidth: var(--width-contained);
+  max-width: var(--current-maxwidth);
 }
 .container [data-size=fullwidth], [data-size=fullwidth] .container {
-  max-width: 100vw;
+  --current-maxwidth: 100vw;
 }
 .container [data-size=wide], [data-size=wide] .container {
-  max-width: var(--width-wide);
+  --current-maxwidth: var(--width-wide);
 }
 .container [data-size=narrow], [data-size=narrow] .container {
-  max-width: var(--width-narrow);
+  --current-maxwidth: var(--width-narrow);
+}
+.container[data-background], [data-background] .container, .page-section .container {
+  max-width: calc(var(--current-maxwidth) - var(--spacing-md) * 2);
+}
+.container [data-background=primary] + [data-background*=gradient-primary] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-primary] + [data-background=primary] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-primary] + [data-background*=gradient-primary] {
+  padding-block-start: 0;
+}
+.container [data-background=secondary] + [data-background*=gradient-secondary] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-secondary] + [data-background=secondary] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-secondary] + [data-background*=gradient-secondary] {
+  padding-block-start: 0;
+}
+.container [data-background=accent] + [data-background*=gradient-accent] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-accent] + [data-background=accent] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-accent] + [data-background*=gradient-accent] {
+  padding-block-start: 0;
+}
+.container [data-background=info] + [data-background*=gradient-info] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-info] + [data-background=info] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-info] + [data-background*=gradient-info] {
+  padding-block-start: 0;
+}
+.container [data-background=warning] + [data-background*=gradient-warning] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-warning] + [data-background=warning] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-warning] + [data-background*=gradient-warning] {
+  padding-block-start: 0;
+}
+.container [data-background=success] + [data-background*=gradient-success] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-success] + [data-background=success] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-success] + [data-background*=gradient-success] {
+  padding-block-start: 0;
+}
+.container [data-background=error] + [data-background*=gradient-error] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-error] + [data-background=error] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-error] + [data-background*=gradient-error] {
+  padding-block-start: 0;
+}
+.container [data-background=light] + [data-background*=gradient-light] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-light] + [data-background=light] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-light] + [data-background*=gradient-light] {
+  padding-block-start: 0;
+}
+.container [data-background=dark] + [data-background*=gradient-dark] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-dark] + [data-background=dark] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-dark] + [data-background*=gradient-dark] {
+  padding-block-start: 0;
+}
+.container [data-background=white] + [data-background*=gradient-white] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-][data-background*=-white] + [data-background=white] {
+  padding-block-start: 0;
+}
+.container [data-background*=gradient-white] + [data-background*=gradient-white] {
+  padding-block-start: 0;
 }
 
 /*# sourceMappingURL=container.css.map */

@@ -49,6 +49,11 @@ body {
 	line-height: 1.4;
 }
 
+[data-valign],
+[data-halign] {
+	display: flex;
+}
+
 // Default alignments. Note that components can override with their own stuff that they do with these values,
 // for example orientation for Tabs is about where the tablist is.
 [data-valign="start"] {
@@ -109,12 +114,6 @@ body {
 	}
 }
 
-[data-background] {
-	// Most elements with backgrounds are expected to be nested, so this is a sensible default
-	// Putting this in specific components causes specificity issues with the below overrides
-	@include nested-padding();
-}
-
 @each $name, $color in $colors {
 	[data-color-theme="#{$name}"] {
 		// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
@@ -123,82 +122,38 @@ body {
 	}
 }
 
-.layout-block {
-	&[data-valign],
-	&[data-halign] {
-		display: flex;
-	}
-
-	// If a layout block's immediate child is also a layout block but that has no background set, it should have padding
-	&[data-background] > .layout-block:not([data-background]) {
-		@include nested-padding();
-	}
-
-	// Treat vertically adjacent layout blocks that have no background colour the same as if they had the same solid background
-	// (We do not generally expect these to be directly horizontally adjacent - they would need to be within an element that handles that, such as Columns)
-	&:not([data-background]) {
-		& + & {
-			padding-block-start: 0;
-		}
-	}
-}
-
+// Basic theme styling for elements with a text colour attribute specified
 @each $name, $color in $colors {
-	// Basic styling for elements with a text colour attribute specified
 	[data-text-color="#{$name}"] {
 		color: var(--color-#{$name});
 	}
+}
 
-	// Set body background colour and associated default text colour
-	body[data-global-background="#{$name}"] {
-		background-color: var(--color-#{$name});
-		color: var(--readable-color-#{$name});
-	}
-
-	// Basic styling for elements with a background colour
+// Basic theme styling for elements with a background colour attribute specified
+@each $name, $color in $colors {
 	[data-background="#{$name}"] {
-		background-color: var(--color-#{$name});
-		color: var(--readable-color-#{$name});
-	}
+		// Apply background colour and default padding if it is different to the global background
+		&:not(body[data-global-background="#{$name}"] &) {
+			background-color: var(--color-#{$name});
+			color: var(--readable-color-#{$name});
 
-	// If an element has a directly nested only child with the same background, that child should not have padding
-	[data-background="#{$name}"] > [data-background="#{$name}"]:only-child {
-		padding: 0;
-	}
-
-	// If this element is a "layout block" type element such as a container, column set, or group,
-	// i.e., something expected to take up the full width of its container or the page)
-	.layout-block {
-		// if its next immediate "layout block" sibling has the same solid background, remove the sibling's top padding so we don't get double padding
-		// (they won't always be <section>s so we can't use that to target; nor is there a suitable ARIA attribute or role for this)
-		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
-			padding-block-start: 0;
-		}
-
-		// If its immediate child has the same solid background:
-		&[data-background="#{$name}"] {
-			// Only child should not have any padding
-			> [data-background="#{$name}"]:only-child {
-				padding: 0;
-			}
-
-			// First child of multiple should only have bottom padding (if any)
-			> [data-background="#{$name}"]:first-child:not(:only-child) {
-				padding-inline: 0;
-				padding-block-start: 0;
-			}
-
-			// Last child of multiple should only have top padding (if any)
-			> [data-background="#{$name}"]:last-child:not(:only-child) {
-				padding-inline: 0;
-				padding-block-end: 0;
+			&:not(.page-section) {
+				@include nested-padding();
 			}
 		}
 
-		// If its immediate child has no background set but the next level child does,
-		// and it's the same as this element's background, remove the padding of that third level element
-		&[data-background="#{$name}"] > &:not([data-background]) > &[data-background="#{$name}"] {
-			padding: 0;
+		// Or if it has an ancestor with a different background to itself and to the global background
+		@at-root {
+			[data-background]:not([data-background="#{$name}"]) & {
+				background-color: var(--color-#{$name});
+				color: var(--readable-color-#{$name});
+
+				// Reset child elements that match global background
+				body[data-global-background="#{$name}"] & [data-background="#{$name}"] {
+					background-color: transparent;
+					color: inherit;
+				}
+			}
 		}
 	}
 
@@ -207,21 +162,6 @@ body {
 		[data-background="gradient-#{$name}-#{$name2}"] {
 			background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
 		}
-	}
-
-	// If this element's next immediate sibling has a gradient background with the same top colour, remove its top padding so we don't get double padding
-	[data-background="#{$name}"] + [data-background*="gradient-#{$name}"] {
-		padding-block-start: 0;
-	}
-
-	// If this element has a gradient background and its next immediate sibling has a solid background with the same top colour, remove its top padding so we don't get double padding
-	[data-background*="gradient-"][data-background*="-#{$name}"] + [data-background="#{$name}"] {
-		padding-block-start: 0;
-	}
-
-	// If this element and its immediate sibling both have gradient backgrounds and this element's bottom colour is the same as the sibling's top colour, remove its bottom padding so we don't get double padding
-	[data-background*="gradient-#{$name}"] + [data-background*="gradient-#{$name}"] {
-		padding-block-start: 0;
 	}
 }
 

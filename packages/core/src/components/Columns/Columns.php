@@ -35,21 +35,6 @@ class Columns extends LayoutComponent {
 			}
 		}
 
-		// If all column backgrounds are the same as this component's background, remove them for HTML and styling simplicity
-		if(isset($this->backgroundColor)) {
-			// Note: array_unique can't be run directly on the ThemeColors because enums aren't directly comparable,
-			// so we need to use the string value after filtering out null values
-			$columnsWithBackgrounds = array_filter($innerComponents, fn($column) => $column->get_background_color() !== null);
-			$columnBackgrounds = array_unique(array_map(fn($column) => $column->get_background_color()->value, $columnsWithBackgrounds));
-			if((count($columnBackgrounds) === 1) && ($this->backgroundColor->value === $columnBackgrounds[0])) {
-				$updatedInnerComponents = [];
-				foreach($innerComponents as $column) {
-					$column->set_background_color(null);
-					$updatedInnerComponents[] = $column;
-				}
-			}
-		}
-
 		$this->innerComponents = $updatedInnerComponents ?? $innerComponents;
 	}
 
