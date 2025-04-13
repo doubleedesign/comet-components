@@ -21,7 +21,6 @@ class AbstractClassDocGenerator {
 		# Abstract Component Classes
 		Foundational PHP classes for defining common fields and methods for components.
 		
-		<div id="abstract-classes">
 		EOT;
 	}
 
@@ -35,9 +34,11 @@ class AbstractClassDocGenerator {
 			$sortOrder = [
 				'Renderable',
 				'UIComponent',
-				'TextElement',
 				'LayoutComponent',
+				'TextElement',
 				'TextElementExtended',
+				'PanelGroupComponent',
+				'PanelComponent',
 			];
 
 			$a = str_replace('.json', '', basename($a));
@@ -56,8 +57,6 @@ class AbstractClassDocGenerator {
 			$componentName = basename($file);
 			$this->runSingle($componentName);
 		}
-
-		$this->output .= '</div>';
 
 		$outputFile = "$this->outputDirectory/abstract-classes.md";
 		file_put_contents($outputFile, $this->output);
@@ -78,11 +77,17 @@ class AbstractClassDocGenerator {
 	private function generateOutput(array $json): string {
 		$name = $json['name'];
 		$extends = $json['extends'] ?? null;
-		$extendsOutput = '';
 		$inheritedProperties = '';
+
+		$extendsOutput = null;
 		if(!empty($extends)) {
 			$extendsOutput = "<tr><th scope='row'>Extends</th><td><code>$extends</code></td></tr>";
 			$inheritedProperties = "<ul><li>All properties from <code>$extends</code></li></ul>";
+
+			$grandParent = $this->get_parent_class($extends);
+			if($grandParent) {
+				$inheritedProperties = "<ul><li>All properties from <code>$extends</code> <code>$grandParent</code></li></ul>";
+			}
 		}
 		$children = $this->get_child_classes($name);
 		$abstract = join('', array_map(function($component) {
@@ -92,6 +97,46 @@ class AbstractClassDocGenerator {
 		$component = join('', array_map(function($component) {
 			return "<li><code>$component</code></li>";
 		}, $children['component']));
+
+		if($hasChildren && $abstract) {
+			$extendedBy = <<< EOT
+				<tr>
+					<th scope="row" rowspan="2">Extended by</th>
+					<td>
+						<ul>$abstract</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ul>$component</ul>
+					</td>
+				</tr>
+			EOT;
+		}
+		else if($abstract) {
+			$extendedBy = <<< EOT
+				<tr>
+					<th scope="row">Extended by</th>
+					<td>
+						<ul>$abstract</ul>
+					</td>
+				</tr>
+			EOT;
+		}
+		else if($hasChildren) {
+			$extendedBy = <<< EOT
+				<tr>
+					<th scope="row">Extended by</th>
+					<td>
+						<ul>$component</ul>
+					</td>
+				</tr>
+			EOT;
+		}
+		else {
+			$extendedBy = null;
+		}
+
 		$filteredProperties = array_filter($json['attributes'], function($property) {
 			return !isset($property['inherited']) || $property['inherited'] == false;
 		});
@@ -101,37 +146,14 @@ class AbstractClassDocGenerator {
 		$hasOwnProperties = count($filteredProperties) > 0;
 
 		$ownPropertiesOutput = $hasOwnProperties ? <<< EOT
-			<ul>$properties</ul>
-		EOT: '';
-
-
-		$extendedBy = $hasChildren ? <<<EOT
-			<tr>
-				<th scope="row" rowspan="2">Extended by</th>
-				<td>
-					<ul>$abstract</ul>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<ul>$component</ul>
-				</td>
-			</tr>
-		EOT: <<< EOT
-			<tr>
-				<th scope="row">Extended by</th>
-				<td>
-					<ul>$abstract</ul>
-				</td>
-			</tr>
-		EOT;
+			<td><ul>$properties</ul></td>
+		EOT: null;
 
 
 		// TODO: Somehow get an auto-generated description in here
-		return <<<EOT
-		
+		return $extends ? <<<EOT
 		<div class="abstract-class-doc" id="$name">
-		
+			
 		## $name
 		
 		<table>
@@ -141,11 +163,21 @@ class AbstractClassDocGenerator {
 				<th scope="row" rowspan="2">Properties</th>
 				<td>$inheritedProperties</td>
 			</tr>
+			<tr>$ownPropertiesOutput</tr>
+		</table>	
+		</div>
+		EOT: <<<EOT
+		<div class="abstract-class-doc" id="$name">
+			
+		## $name
+		
+		<table>
+			$extendedBy
 			<tr>
-				<td>$ownPropertiesOutput</td>
+				<th scope="row">Properties</th>
+				$ownPropertiesOutput
 			</tr>
 		</table>
-			
 		</div>
 		EOT;
 	}
@@ -193,6 +225,22 @@ class AbstractClassDocGenerator {
 		return $children;
 	}
 
+	private function get_parent_class(string $class): ?string {
+		$folders = array_merge([$this->baseSourceDirectory], $this->get_all_component_directories());
+		$classDir = array_find($folders, function($dir) use ($class) {
+			return str_ends_with($dir, $class);
+		});
+		$classDef = "$this->baseSourceDirectory\\$class.json" ?? "$classDir\\$class.json";
+		if(file_exists($classDef)) {
+			$json = json_decode(file_get_contents($classDef), true);
+			if(isset($json['extends'])) {
+				return $json['extends'];
+			}
+		}
+
+		return null;
+	}
+
 	/**
 	 * Get top-level component directories
 	 * @return array
@@ -220,12 +268,12 @@ class AbstractClassDocGenerator {
 		foreach($topLevelDirs as $dir) {
 			$contents = scandir($dir);
 
-			$subDirs = array_filter($contents, function($subDir) use ($dir) {
-				return is_dir($dir . $subDir) && !in_array($subDir, ['.', '..']);
+			$subDirs = array_filter($contents, function($subItem) use ($dir) {
+				return !in_array($subItem, ['.', '..']) && !str_contains($subItem, '.') && $subItem !== '__tests__';
 			});
 
 			foreach($subDirs as $subDir) {
-				$allDirs[] = $dir . $subDir;
+				$allDirs[] = $dir . '\\' . $subDir;
 			}
 		}
 

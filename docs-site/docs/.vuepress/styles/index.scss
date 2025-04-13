@@ -303,8 +303,6 @@ div[vp-content]:has(.tycho-photo) {
 		min-width: 100%;
 		max-width: none;
 		border: 1px solid var(--vp-c-border-hard, #d1d4d7);
-		border-collapse: separate;
-		border-radius: 0.5rem;
 
 		thead {
 			background: var(--vp-c-purple-soft);
@@ -433,16 +431,6 @@ div[vp-content]:has(.tycho-photo) {
 .vp-footer {
 	border-top: 1px solid var(--vp-c-gutter);
 	padding-block: 2rem;
-}
-
-#abstract-classes {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-gap: 1rem;
-
-	#Renderable {
-		grid-column: span 2;
-	}
 }
 
 .trait-class-doc,
@@ -601,7 +589,6 @@ div[vp-content]:has(.tycho-photo) {
 }
 
 .abstract-class-doc {
-	margin-bottom: 0 !important;
 	padding: 1rem;
 
 	h2 {
