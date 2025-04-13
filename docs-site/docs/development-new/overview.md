@@ -8,7 +8,7 @@ position: 0
 An **implementation** of Comet Components is an integration for a Content Management System (CMS) or other platform that allows the components to be used in that system. An implementation includes the core library (installed as a Composer dependency), any necessary plugins, and the platform-specific code required to make the components work in that system.
 :::
 
-This page provides an overview of the elements required to integrate Comet Components into a CMS or other system. This also encompasses the requirements for a one-off integration in a custom projet.
+This page provides an overview of the elements required to integrate Comet Components into a CMS or other system. This also encompasses the requirements for a one-off integration in a custom project.
 
 [[toc]]
 
