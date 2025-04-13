@@ -19,8 +19,13 @@ This guide is written for Windows users. MacOS and Linux users will need to slig
 [[toc]]
 
 ## Prerequisites
-- Git installed locally
-- Sufficient privileges to install software on your machine.
+- Git installed on your machine
+- [Chocolatey](https://chocolatey.org/) package manager installed on your machine
+- Sufficient privileges to do the following on your machine:
+  - install software on your machine
+  - add entries to the hosts file
+  - install certificates
+  - add certificates to the trusted root store.
 
 ## Clone the repo
 
