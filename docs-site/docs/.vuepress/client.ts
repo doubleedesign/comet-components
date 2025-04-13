@@ -1,6 +1,8 @@
 import { defineClientConfig } from '@vuepress/client';
 import Layout from './layouts/Layout.vue';
 
+let handleScroll = null;
+
 export default defineClientConfig({
 	layouts: {
 		Layout,
@@ -17,7 +19,7 @@ export default defineClientConfig({
 			}
 
 			// Remove existing scroll listeners before setting up new ones
-			if (scrollSpyActive) {
+			if (scrollSpyActive && handleScroll) {
 				window.removeEventListener('scroll', handleScroll);
 				scrollSpyActive = false;
 			}
@@ -25,6 +27,7 @@ export default defineClientConfig({
 			// Wait for DOM to update and animations to complete
 			setupTimeout = setTimeout(() => {
 				setupScrollSpy();
+				scrollSpyActive = true; // Mark as active after setup
 				setupTimeout = null;
 			}, 600);
 		});
@@ -32,6 +35,8 @@ export default defineClientConfig({
 });
 
 function setupScrollSpy() {
+	if(!document) return;
+
 	// Find all heading level 2 and 3 elements
 	const hElements = Array.from(document.querySelectorAll('h2[id], h3[id]'));
 
@@ -52,8 +57,8 @@ function setupScrollSpy() {
 	let isThrottled = false;
 	let scrollTimeout = null;
 
-	// Define the scroll handler outside to be able to remove it properly
-	function handleScroll() {
+	// Redefine handleScroll at the top level so it can be removed properly
+	handleScroll = function() {
 		// Clear any pending timeout
 		if (scrollTimeout) {
 			clearTimeout(scrollTimeout);
@@ -70,7 +75,7 @@ function setupScrollSpy() {
 				});
 			}
 		}, 100);
-	}
+	};
 
 	function updateUrlOnScroll() {
 		// Recompute offsets as they might have changed

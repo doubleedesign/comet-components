@@ -200,3 +200,8 @@ When trying to use the same page for multiple tests, you may get this error beca
 This error occurs when using Node version 23 - in which case switching to a 20.x version should solve it.
 :::
 
+## Documentation site changes
+
+:::details Error "SEARCH_INDEX" is not exported by "docs/.vuepress/.temp/internal/searchIndex.js" when running the build step
+This error occurs when you try to build the docs site while the dev version is running. Stop the dev version and run `npm run docs:build` from the `docs-site` directory again.
+:::
