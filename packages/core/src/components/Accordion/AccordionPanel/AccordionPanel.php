@@ -7,7 +7,7 @@ class AccordionPanel extends PanelComponent {
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Accordion.AccordionPanel.accordion-panel');
-		$this->context = 'accordion';
+		$this->context = 'accordion__panel';
 	}
 
 	protected function get_bem_name(): ?string {

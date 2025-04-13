@@ -20,30 +20,47 @@
 	container-type: inline-size;
 	width: 100%;
 	padding-inline: var(--spacing-md);
-	display: grid;
-	gap: var(--spacing-md);
-	--current-maxwidth: var(--width-contained);
-	max-width: var(--current-maxwidth);
+	max-width: var(--width-contained);
 
-	[data-size="fullwidth"],
+	&:has(> .layout-block + .layout-block) {
+		display: grid;
+		gap: var(--spacing-md);
+	}
+
+	&[data-size="fullwidth"],
 	[data-size="fullwidth"] & {
-		--current-maxwidth: 100vw;
+		max-width: 100vw;
+
+		&[data-background],
+		[data-background] &,
+		.page-section &,
+		.site-header & {
+			max-width: calc(100vw - var(--spacing-md) * 2);
+		}
 	}
 
-	[data-size="wide"],
+	&[data-size="wide"],
 	[data-size="wide"] & {
-		--current-maxwidth: var(--width-wide);
+		max-width: var(--width-wide);
+
+		&[data-background],
+		[data-background] &,
+		.page-section &,
+		.site-header & {
+			max-width: calc(var(--width-wide) - var(--spacing-md) * 2);
+		}
 	}
 
-	[data-size="narrow"],
+	&[data-size="narrow"],
 	[data-size="narrow"] & {
-		--current-maxwidth: var(--width-narrow);
-	}
+		max-width: var(--width-narrow);
 
-	&[data-background],
-	[data-background] &,
-	.page-section & {
-		max-width: calc(var(--current-maxwidth) - var(--spacing-md) * 2);
+		&[data-background],
+		[data-background] &,
+		.page-section &,
+		.site-header & {
+			max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
+		}
 	}
 
 	// 50/50 gradient backgrounds

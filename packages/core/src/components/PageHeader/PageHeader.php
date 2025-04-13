@@ -26,13 +26,11 @@ class PageHeader extends UIComponent {
 
 		$this->innerComponents = array(
 			new Container(
-			// Attributes
 				[
 					'size'        => $this->size->value,
 					'withWrapper' => false,
 					'tagName'     => Tag::DIV->value,
 				],
-				// Inner components
 				array_merge(
 					$this->innerComponents,
 					[new Heading(['level' => 1], $title)]
@@ -42,6 +40,13 @@ class PageHeader extends UIComponent {
 
 		parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
 		$this->simplify_all_background_colors();
+	}
+
+	protected function get_filtered_classes(): array {
+		return array_merge(
+			parent::get_filtered_classes(),
+			['page-section']
+		);
 	}
 
 	protected function get_html_attributes(): array {

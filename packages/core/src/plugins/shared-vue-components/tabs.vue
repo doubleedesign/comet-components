@@ -15,8 +15,6 @@ export default {
 		}
 	},
 	data() {
-		console.log(this.isResponsive);
-
 		return {
 			debouncedResize: null,
 			// Initially open the first panel
@@ -26,8 +24,6 @@ export default {
 			// Replace generic responsive-panel classes with tab-specific classes if isResponsive is true
 			// (allows us to skip some processing if we didn't come from ResponsivePanels context)
 			tabs: this.isResponsive ? this.panels.map((panel: PanelItem) => {
-				console.log(panel.summary);
-
 				return ({
 					wrapper: {
 						...panel.summary,
@@ -162,7 +158,7 @@ export default {
 
     .tabs__tab-list {
         margin: 0;
-        padding: 0;
+        padding: 0 !important;
         display: flex;
 
         .tabs__tab-list__item {

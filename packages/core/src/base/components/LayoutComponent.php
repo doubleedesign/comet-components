@@ -10,11 +10,13 @@ abstract class LayoutComponent extends UIComponent {
 		$this->set_background_color_from_attrs($attributes);
 		$this->set_layout_alignment_from_attrs($attributes);
 
-		if($this instanceof Container && !$this->withWrapper) {
-			$this->remove_redundant_background_colors();
-		}
-		else {
-			$this->simplify_all_background_colors();
+		if(!$this->exclude_from_background_simplification()) {
+			if($this instanceof Container && !$this->withWrapper) {
+				$this->remove_redundant_background_colors();
+			}
+			else {
+				$this->simplify_all_background_colors();
+			}
 		}
 	}
 
@@ -48,6 +50,16 @@ abstract class LayoutComponent extends UIComponent {
 		}
 
 		return $attributes;
+	}
+
+	private function exclude_from_background_simplification(): bool {
+		foreach($this->innerComponents as $component) {
+			if($component instanceof CallToAction) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

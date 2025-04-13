@@ -64,15 +64,19 @@ trait BackgroundColor {
 		// If this component does not have a background set but its children all have the same background and/or no background,
 		// remove the backgrounds from the children and apply that singular set background to this component
 		if(!$this->backgroundColor && isset($this->innerComponents)) {
-			$this->set_background_color_based_on_children();
+			$this->set_background_color_based_on_inner_components();
 		}
 	}
 
 	/**
-	 * @description If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS. This method is public as there are some components where we want to do this, but not assign a background colour to the component.
+	 * @description If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS.
+	 * This is available to component classes because there are some components where we want to do this, but not assign a background colour to the component.
 	 * @return void
 	 */
-	public function remove_redundant_background_colors(): void {
+	protected function remove_redundant_background_colors(): void {
+		// Bail if there's fewer than 2 inner components
+		if(count($this->innerComponents) < 2) return;
+
 		$childrenWithSameBackground = array_filter($this->innerComponents, function($child) {
 			if(method_exists($child, 'get_background_color')) {
 				return $child->get_background_color() === $this->backgroundColor;
@@ -99,10 +103,12 @@ trait BackgroundColor {
 	 * "hoist" that singular set background to this component and remove the backgrounds from the children
 	 * @return void
 	 */
-	private function set_background_color_based_on_children(): void {
-		if($this->backgroundColor) {
-			return; // No need to set the background if it's already set
-		}
+	protected function set_background_color_based_on_inner_components(): void {
+		// No need to set the background if it's already set
+		if($this->backgroundColor) return;
+
+		// Bail if there's fewer than 2 inner components
+		if(count($this->innerComponents) < 2) return;
 
 		// Collect the child backgrounds, with in-place filtering to remove duplicates
 		$childBackgrounds = array_reduce($this->innerComponents, function($carry, $child) {
