@@ -1,0 +1,36 @@
+{
+	"name": "doubleedesign/comet-calendar",
+	"type": "wordpress-plugin",
+	"version": "0.0.2",
+	"authors": [
+		{
+			"name": "Leesa Ward",
+			"email": "leesa@doubleedesign.com.au"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Doubleedesign\\Comet\\WordPress\\Calendar\\": "src/"
+		}
+	},
+	"require": {
+		"doubleedesign/comet-components-core": "*",
+		"composer/installers": "^2.0"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../core",
+			"options": {
+				"symlink": true
+			}
+		}
+	],
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	}
+}

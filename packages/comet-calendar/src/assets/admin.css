@@ -1,0 +1,3 @@
+.interface-navigable-region.edit-post-meta-boxes-main:has(#normal-sortables:not(:empty)) {
+	min-height: 400px !important;
+}

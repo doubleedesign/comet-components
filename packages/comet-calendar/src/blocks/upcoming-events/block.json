@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "comet/upcoming-events",
+	"title": "Upcoming Events",
+	"icon": "calendar-alt",
+	"editorScript": "file:./index.js",
+	"category": "content",
+	"parent": [
+		"comet/container",
+		"core/column",
+		"core/group",
+		"core/block"
+	],
+	"description": "Display a list of upcoming events.",
+	"keywords": [
+		"events",
+		"calendar"
+	],
+	"textdomain": "comet",
+	"editorStyle": [
+		"comet-calendar-style"
+	],
+	"supports": {
+		"mode": false,
+		"jsx": true,
+		"innerBlocks": true,
+		"anchor": true,
+		"ariaLabel": false,
+		"align": false,
+		"html": false,
+		"multiple": false,
+		"color": {
+			"gradients": true,
+			"theme": true,
+			"text": false,
+			"background": false,
+			"__experimentalDefaultControls": {
+				"theme": true
+			}
+		}
+	}
+}

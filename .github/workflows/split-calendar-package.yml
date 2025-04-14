@@ -1,11 +1,11 @@
-name: Split Core Package
+name: Split Comet Calendar package
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'packages/core/**'
+      - 'packages/comet-calendar/**'
 
 jobs:
   split:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Split Repository
         run: |
-          git subtree split --prefix=packages/core -b split-branch
+          git subtree split --prefix=packages/comet-calendar -b split-branch
 
       - name: Clone and push to target repository
         env:
@@ -31,5 +31,5 @@ jobs:
           git pull $GITHUB_WORKSPACE split-branch
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-          git remote add origin "https://${GH_TOKEN}@github.com/doubleedesign/comet-components-core.git"
+          git remote add origin "https://${GH_TOKEN}@github.com/doubleedesign/comet-calendar.git"
           git push -u origin master --force
