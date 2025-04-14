@@ -1,6 +1,7 @@
 {
     "name": "doubleedesign/comet-canvas",
     "type": "wordpress-theme",
+	"description": "WordPress parent theme to support the intended implementation of Comet Components in WordPress.",
 	"version": "0.0.2",
     "autoload": {
         "psr-4": {
