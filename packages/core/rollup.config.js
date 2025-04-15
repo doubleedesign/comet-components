@@ -11,6 +11,8 @@ export default {
 	plugins: [
 		resolve(),
 		{
+			// Allow ES module imports in dist.js by updating the import paths
+			// to what they need to be when imported in /vendor/doubleedesign/comet-components/core/dist/dist.js
 			name: 'remap-import-paths',
 			resolveId(source) {
 				if (source.includes('vendor')) {
@@ -18,8 +20,15 @@ export default {
 
 					return {
 						id: path.resolve(`../../../${shortPath}`),
-						external: true
+						external: true // ES import in the dist.js file instead of copying its contents in
 					};
+				}
+				if (source.includes('plugins')) {
+					const shortPath = source.split('plugins')[1];
+					return {
+						id: path.resolve(`../src/plugins/${shortPath}`),
+						external: true // ES import in the dist.js file instead of copying its contents in
+					}
 				}
 
 				return null;
