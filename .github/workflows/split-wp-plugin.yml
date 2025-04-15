@@ -1,11 +1,11 @@
-name: Split Comet Calendar package
+name: Split Comet Plugin Package
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'packages/comet-calendar/**'
+      - 'packages/comet-plugin/**'
 
 jobs:
   split:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Split Repository
         run: |
-          git subtree split --prefix=packages/comet-calendar -b split-branch
+          git subtree split --prefix=packages/comet-plugin -b split-branch
 
       - name: Clone split branch to temp directory
         run: |
@@ -37,4 +37,4 @@ jobs:
           branch: master
           force: true
           directory: /tmp/split-repo
-          repository: doubleedesign/comet-calendar
+          repository: doubleedesign/comet-plugin

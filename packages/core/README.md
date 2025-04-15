@@ -11,4 +11,3 @@ Documentation can be found at [cometcomponents.io](https://cometcomponents.io/do
 If you're reading this from GitHub, you're seeing the mirror of the [Comet Components](https://github.com/doubleedesign/comet-components) core package that is here for the purposes of publishing to [Packagist](https://packagist.org/packages/doubleedesign/comet-components-core) and installing via Composer.
 
 Development of this project belongs in the main [Comet Components](https://github.com/doubleedesign/comet-components) monorepo.
-

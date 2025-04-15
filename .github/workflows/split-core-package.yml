@@ -21,9 +21,7 @@ jobs:
         run: |
           git subtree split --prefix=packages/core -b split-branch
 
-      - name: Clone and push to target repository
-        env:
-          GH_TOKEN: ${{ secrets.COMET_TOKEN }}
+      - name: Clone split branch to temp directory
         run: |
           mkdir -p /tmp/split-repo
           cd /tmp/split-repo
@@ -31,5 +29,12 @@ jobs:
           git pull $GITHUB_WORKSPACE split-branch
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-          git remote add origin "https://${GH_TOKEN}@github.com/doubleedesign/comet-components-core.git"
-          git push -u origin master --force
+
+      - name: Push to target repository
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.COMET_TOKEN }}
+          branch: master
+          force: true
+          directory: /tmp/split-repo
+          repository: doubleedesign/comet-components-core

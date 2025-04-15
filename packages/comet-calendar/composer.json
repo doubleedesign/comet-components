@@ -1,6 +1,7 @@
 {
 	"name": "doubleedesign/comet-calendar",
 	"type": "wordpress-plugin",
+	"description": "WordPress plugin for centrally managing events and displaying them using Comet Components.",
 	"version": "0.0.2",
 	"homepage": "https://cometcomponents.io",
 	"authors": [

@@ -1,6 +1,7 @@
 {
 	"name": "doubleedesign/comet-components-core",
 	"type": "library",
+	"description": "PHP-driven web UI component library focused on clean and accessible HTML, reusability, and structured flexibility.",
 	"version": "0.0.2",
 	"homepage": "https://cometcomponents.io",
 	"authors": [
