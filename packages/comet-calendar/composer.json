@@ -4,6 +4,8 @@
 	"description": "WordPress plugin for centrally managing events and displaying them using Comet Components.",
 	"version": "0.0.2",
 	"homepage": "https://cometcomponents.io",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"authors": [
 		{
 			"name": "Leesa Ward",
@@ -15,24 +17,5 @@
 			"Doubleedesign\\Comet\\WordPress\\Calendar\\": "src/"
 		}
 	},
-	"require": {
-		"doubleedesign/comet-components-core": "*",
-		"composer/installers": "^2.0"
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"repositories": [
-		{
-			"type": "path",
-			"url": "../core",
-			"options": {
-				"symlink": true
-			}
-		}
-	],
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true
-		}
-	}
+	"require": {}
 }

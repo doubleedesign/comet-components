@@ -13,7 +13,6 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/services" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/roots/wordpress-core-installer" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/test/coverage" />

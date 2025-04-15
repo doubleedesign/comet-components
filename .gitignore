@@ -1,22 +1,18 @@
 node_modules
-vendor/*
-!vendor/autoload.php
-/wordpress
-/cache
-!dist
-!packages/core/dist
-packages/**/vendor
 packages/**/node_modules
-packages/core/cache
-*storybook.log
+vendor/**/*
+!vendor/autoload.php
+!packages/core/dist
+packages/**/vendor/**/
+!packages/**/vendor/autoload.php
+!packages/**/vendor/composer
 
-# Symlinks
-/test/browser/assets/*.css
-/test/browser/stories/*
-/test/browser/components/*
-/test/browser/pages/*
-/docs-site/docs/.vuepress/.cache/
-/docs-site/docs/.vuepress/.temp/
+# Logs, caches, etc
+/cache
+*storybook.log
+packages/core/cache
+docs-site/docs/.vuepress/.cache
+docs-site/docs/.vuepress/.temp
 
 # Playwright
 /test-results/
@@ -29,5 +25,7 @@ packages/core/cache
 /test/.phpunit.cache
 /test/phpunit-report
 .phpunit.cache
+
+# Local dev SSL
 /.cert/cert.pem
 /.cert/key.pem

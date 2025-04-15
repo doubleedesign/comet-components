@@ -52,8 +52,6 @@ class Fields {
 	function load_acf_fields_from_this_plugin($paths): array {
 		$paths[] = COMET_CALENDAR_PLUGIN_PATH . '/src/acf-json';
 
-		error_log(print_r($paths, true));
-
 		return $paths;
 	}
 }
