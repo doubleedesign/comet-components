@@ -1,4 +1,4 @@
-import '../vendor/feimosi/baguettebox.js/src/baguetteBox.js';
+import '../../../feimosi/baguettebox.js/src/baguetteBox.js';
 
 /**
 * vue v3.5.13

@@ -17,7 +17,7 @@ export default {
 					const shortPath = source.split('vendor')[1];
 
 					return {
-						id: path.resolve(`../vendor/${shortPath}`),
+						id: path.resolve(`../../../${shortPath}`),
 						external: true
 					};
 				}

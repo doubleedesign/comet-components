@@ -225,7 +225,9 @@ The above Composer configuration installs the below:
 - [Comet Canvas theme](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-canvas)
 - [Block Supports Extended plugin](https://github.com/humanmade/block-supports-extended) by Human Made
 - [Breadcrumbs plugin](https://github.com/doubleedesign/doublee-breadcrumbs)  by Double-E Design
-- [Gutenberg plugin](https://github.com/WordPress/gutenberg) for a newer version of the block editor than ships with WordPress core (due to a bug it solves)
+- [Gutenberg plugin](https://github.com/WordPress/gutenberg) for a newer version of the block editor than ships with WordPress core (due to a bug it solves).
+
+Alternatively, you can remove the Gutenberg plugin from the `composer.json` file and install it the traditional way. Similarly, Block Supports Extended and Breadcrumbs can be downloaded from GitHub and installed via SFTP or zip upload if preferred.
 
 :::
 
@@ -239,5 +241,15 @@ Remove these from the `composer.json` file if you don't want to use them.
 :::details Other plugins
 
 - [Double-E Design Base Plugin](https://github.com/doubleedesign/doublee-base-plugin) - provides site "Global Options", some admin customisations, user role customisations, and other features and customisations commonly used for Double-E Design websites.
+
+:::
+
+## Troubleshooting
+
+:::details Latest version not installing
+1. Delete the folder of the plugin or theme you are trying to update
+2. Run `composer clear-cache`
+3. Run `composer update --prefer-source`
+4. Run `composer-postinstall.ps1` or equivalent commands as detailed above.
 
 :::

@@ -14,11 +14,9 @@ class Healthcheck {
 		$missingFiles = $this->get_missing_files();
 		$unimplementedRender = $this->get_unimplemented_render_functions();
 		$missingBundleScss = $this->get_bundle_missing_scss_imports();
-		$missingWpScss = $this->get_wp_blocks_missing_scss_imports();
 
 		$this->log_missing_files($missingFiles);
 		$this->log_unimplemented_render_functions($unimplementedRender);
-		$this->log_wp_blocks_missing_scss_imports($missingWpScss);
 		$this->log_bundle_missing_scss_imports($missingBundleScss);
 
 		$this->log_with_colour("=================================================", 'cyan');
@@ -46,13 +44,6 @@ class Healthcheck {
 		}
 		else {
 			$this->log_with_colour('Missing SCSS imports in bundle: 0', 'green');
-		}
-
-		if(count($missingWpScss) > 0) {
-			$this->log_with_colour('Missing SCSS imports in WordPress plugin: ' . count($missingWpScss), 'yellow');
-		}
-		else {
-			$this->log_with_colour('Missing SCSS imports in WordPress plugin: 0', 'green');
 		}
 
 		$this->log_with_colour("\nScroll up for details. ", 'cyan');
@@ -200,27 +191,6 @@ class Healthcheck {
 	private function log_bundle_missing_scss_imports(array $missingImports): void {
 		if(count($missingImports) > 0) {
 			$this->log_with_colour('The following SCSS files exist but are not imported in the bundle.scss file:', 'yellow');
-			print_r($missingImports);
-		}
-	}
-
-	private function get_wp_blocks_missing_scss_imports(): array {
-		$scssFiles = $this->get_scss_files();
-		$pluginBlocksFile = dirname(__DIR__, 1) . '\packages\comet-plugin\src\blocks.scss';
-		$pluginTemplatePartsFile = dirname(__DIR__, 1) . '\packages\comet-plugin\src\template-parts.scss';
-		$pluginFileContents = file_get_contents($pluginBlocksFile) . file_get_contents($pluginTemplatePartsFile);
-		$imported = explode("\n", $pluginFileContents);
-		array_walk($imported, function(&$value) {
-			$value = array_reverse(explode('/', $value))[0];
-			$value = trim(str_replace('";', '', $value));
-		});
-
-		return array_diff($scssFiles, $imported);
-	}
-
-	private function log_wp_blocks_missing_scss_imports(array $missingImports): void {
-		if(count($missingImports) > 0) {
-			$this->log_with_colour('The following SCSS files exist but are not imported in the WordPress plugin blocks.scss or template-parts.scss file:', 'yellow');
 			print_r($missingImports);
 		}
 	}

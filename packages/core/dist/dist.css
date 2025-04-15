@@ -3487,5 +3487,13 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
 .table__header {
   border-bottom: 3px solid color-mix(in srgb, var(--color-light) 80%, black);
 }
+.responsive-panels {
+  position: relative;
+}
+@media (prefers-reduced-motion) {
+  .responsive-panels [class^=panel-switch] {
+    transition: none;
+  }
+}
 
 /*# sourceMappingURL=dist.css.map */

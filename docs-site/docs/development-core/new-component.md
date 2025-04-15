@@ -35,10 +35,8 @@ Add the SCSS file to `blocks.scss` or `template-parts.scss` (depending on what i
 cd packages/comet-plugin/src
 ```
 ```bash:no-line-numbers
-sass blocks.scss:blocks.css
+sass bundle.scss:bundle.css
 ```
-```bash:no-line-numbers
-sass template-parts.scss:template-parts.css
 ```
 ```bash:no-line-numbers
 sass editor.scss:editor.css
@@ -48,10 +46,7 @@ sass editor.scss:editor.css
 cd packages/comet-plugin/src
 ```
 ```powershell:no-line-numbers
-sass blocks.scss:blocks.css
-```
-```powershell:no-line-numbers
-sass template-parts.scss:template-parts.css
+sass bundle.css:bundle.css
 ```
 ```powershell:no-line-numbers
 sass editor.scss:editor.css
