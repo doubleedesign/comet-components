@@ -1,17 +1,18 @@
 {
-    "name": "doubleedesign/comet-canvas",
-    "type": "wordpress-theme",
+	"name": "doubleedesign/comet-canvas",
+	"type": "wordpress-theme",
 	"version": "0.0.2",
-    "autoload": {
-        "psr-4": {
-            "Doubleedesign\\CometCanvas\\": "src"
-        }
-    },
-    "authors": [
-        {
-            "name": "Leesa Ward",
-            "email": "leesa@doubleedesign.com.au"
-        }
-    ],
-    "require": {}
+	"homepage": "https://cometcomponents.io",
+	"autoload": {
+		"psr-4": {
+			"Doubleedesign\\CometCanvas\\": "src"
+		}
+	},
+	"authors": [
+		{
+			"name": "Leesa Ward",
+			"email": "leesa@doubleedesign.com.au"
+		}
+	],
+	"require": {}
 }
