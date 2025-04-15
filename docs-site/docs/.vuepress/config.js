@@ -94,8 +94,9 @@ function generateSidebar({ excludeFolders }) {
 		'Installation',
 		'Usage',
 		'Development (Core)',
-		'Technical Deep Dives',
+		'Development (WordPress)',
 		'New Implementations',
+		'Technical Deep Dives',
 		'Local Dev Deep Dives',
 	];
 	const items = [];
@@ -115,6 +116,9 @@ function generateSidebar({ excludeFolders }) {
 			}
 			else if(folderName === 'development-new') {
 				sectionTitle = 'New Implementations';
+			}
+			else if(folderName === 'development-wp') {
+				sectionTitle = 'Development (WordPress)';
 			}
 			else {
 				// Try to extract title from README if it exists
