@@ -22,10 +22,10 @@ This guide is written for Windows users. MacOS and Linux users will need to slig
 - Git installed on your machine
 - [Chocolatey](https://chocolatey.org/) package manager installed on your machine
 - Sufficient privileges to do the following on your machine:
-  - install software on your machine
-  - add entries to the hosts file
-  - install certificates
-  - add certificates to the trusted root store.
+	- install software on your machine
+	- add entries to the hosts file
+	- install certificates
+	- add certificates to the trusted root store.
 
 ## Clone the repo
 
@@ -123,8 +123,17 @@ The project contains multiple sub-packages, and uses both [Composer](https://get
 A convenience script is provided to install all dependencies in the project root and all `packages`. You can run it from the project root (`comet-components` directory) with:
 
 ```powershell::no-line-numbers
+npm run refresh:all:dev
+```
+
+This version uses `composer.local.json` if it exists, to symlink the core package to its usages in the other packages.
+
+For a standard install, use:
+
+```powershell::no-line-numbers
 npm run refresh:all
 ```
+
 :::warning
 Some of the underling scripts are PowerShell scripts, which have not been tested in non-Windows environments. PowerShell for MacOS exists, but you may need to adapt the script for it to work; or alternatively replace it with a shell script. The source code of all the scripts can be found in the `scripts` directory in the project root.
 :::

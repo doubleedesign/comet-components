@@ -10,28 +10,30 @@ position: 3
 
 Run these from the root of the project.
 
-| Command                          | Description                                                                                                                                                      |
-|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `npm run refresh:composer`       | Refresh Composer dependencies and autoloading for the root and all packages  <Badge type="warning" text="Requires PowerShell"/>                                  |
-| `npm run refresh:npm`            | Run `npm install` in the root and all packages, and `rollup` in packages that use it  <Badge type="warning" text="Requires PowerShell"/>                         |
-| `npm run refresh:all`            | Install/update Composer and NPM dependencies in the root and all packages <Badge type="warning" text="Requires PowerShell"/>                                     |
-| `npm run refresh:autoload`       | Run `composer dump-autoload -o` for the root and all packages (skip updating dependencies)  <Badge type="warning" text="Requires PowerShell"/>                   |
-| `npm run refresh:npmpackages`    | Run `npm install` and `rollup` in the packages only (skips installing/updating root dev deps like Storybook)  <Badge type="warning" text="Requires PowerShell"/> |
-| `php ./scripts/healthcheck.php`  | Check for expected files                                                                                                                                         |
-| `php ./scripts/generate-xml.php` | Regenerate the XML schema for Tycho Template syntax.                                                                                                             |
+| Command                          | Description                                                                                                                                                              |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `npm run refresh:composer`       | Refresh Composer dependencies and autoloading for the root and all packages  <Badge type="warning" text="Requires PowerShell"/>                                          |
+| `npm run refresh:npm`            | Run `npm install` in the root and all packages, and `rollup` in packages that use it  <Badge type="warning" text="Requires PowerShell"/>                                 |
+| `npm run refresh:all`            | Install/update Composer and NPM dependencies in the root and all packages <Badge type="warning" text="Requires PowerShell"/>                                             |
+| `npm run refresh:autoload`       | Run `composer dump-autoload -o` for the root and all packages (skip updating dependencies)  <Badge type="warning" text="Requires PowerShell"/>                           |
+| `npm run refresh:composer:dev`   | Refresh Composer dependencies and autoloading for the root and all packages, using `composer.local.json` if available <Badge type="warning" text="Requires PowerShell"/> |
+| `npm run refresh:npmpackages`    | Run `npm install` and `rollup` in the packages only (skips installing/updating root dev deps like Storybook)  <Badge type="warning" text="Requires PowerShell"/>         |
+| `php ./scripts/healthcheck.php`  | Check for expected files                                                                                                                                                 |
+| `php ./scripts/generate-xml.php` | Regenerate the XML schema for Tycho Template syntax.                                                                                                                     |
 
 ### Equivalent standalone commands
 
 These commands need to be run in the relevant folder. Running in the root will only run the command for the root, not the packages. `cd` into the package folder
 first if you want to run these for a package.
 
-| Command                     | Description                                                                                                                                                                    |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `composer install`          | Install Composer dependencies as per `composer.json`                                                                                                                           |
-| `composer update`           | Update Composer dependencies as per `composer.json`                                                                                                                            |
-| `composer dump-autoload -o` | Refresh Composer autoloader after adding new dependencies or classes                                                                                                           |
-| `npm install`               | Install all NPM dependencies as per `package.json`                                                                                                                             |
-| `npm run build`             | Run Rollup to compile JS using the package's `rollup.config.js`. For example, for the `core` package this bundles all component JS files and their imports into a single file. |
+| Command                                                  | Description                                                                                                                                                                    |
+|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `composer install`                                       | Install Composer dependencies as per `composer.json`                                                                                                                           |
+| `composer update`                                        | Update Composer dependencies as per `composer.json`                                                                                                                            |
+| `composer dump-autoload -o`                              | Refresh Composer autoloader after adding new dependencies or classes                                                                                                           |
+| `npm install`                                            | Install all NPM dependencies as per `package.json`                                                                                                                             |
+| `npm run build`                                          | Run Rollup to compile JS using the package's `rollup.config.js`. For example, for the `core` package this bundles all component JS files and their imports into a single file. |
+| `$env:COMPOSER = "composer.local.json"; composer update` | Update Composer dependencies using `composer.local.json` if it exists                                                                                                          |
 
 ## Asset compilation
 
@@ -92,6 +94,6 @@ php scripts/generate-trait-docs.php
 
 ## Testing
 
-| Command               | Description                                         |
-|-----------------------|-----------------------------------------------------|
-| `npm run storybook`   | Run Storybook for component demos and documentation |
+| Command             | Description                                         |
+|---------------------|-----------------------------------------------------|
+| `npm run storybook` | Run Storybook for component demos and documentation |

@@ -12,10 +12,12 @@
 		"generate:json": "php scripts/generate-json-defs.php",
 		"generate:stories": "php scripts/generate-stories.php",
 		"refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
-		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
+		"refresh:composer:dev": "npm run refresh:composer -- -local",
 		"refresh:autoload": "npm run refresh:composer -- -autoload",
+		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
 		"refresh:npmpackages": "npm run refresh:npm -- -packagesOnly",
-		"refresh:all": "npm run refresh:composer && npm run refresh:npm"
+		"refresh:all": "npm run refresh:composer && npm run refresh:npm",
+		"refresh:all:dev": "npm run refresh:composer:dev && npm run refresh:npm"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",

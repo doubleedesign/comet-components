@@ -11,7 +11,6 @@ This is the entry point for the detailed, multi-option setup instructions I orig
 If you prefer a prescriptive, "decisions, not options" quick start guide, you can find that in the [Local Dev Quick Start](../development/setup.md) section.
 :::
 
-
 [[toc]]
 
 ## Prerequisites
@@ -38,11 +37,11 @@ Windows-specific setup options and instructions are listed in the [Windows setup
 ::: tabs#shell
 @tab WSL (Bash)
 ```bash:no-line-numbers
-npm run refresh:all
+npm run refresh:all:dev
 ```
 @tab PowerShell
 ```powershell:no-line-numbers
-npm run refresh:all
+npm run refresh:all:dev
 ```
 :::
 

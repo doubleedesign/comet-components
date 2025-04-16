@@ -1,14 +1,16 @@
 param (
-	[switch]$autoload
+	[switch]$autoload,
+	[switch]$local
 )
 
-Write-Host "Starting Composer refresh script"
+Write-Host "Starting Composer refresh script" -ForegroundColor Green
 
 # Function to run composer commands in a directory
 function Run-Composer {
 	param (
 		[string]$directory,
-		[switch]$autoloadOnly
+		[switch]$autoloadOnly,
+		[switch]$local
 	)
 	Write-Host "Running composer commands in $directory"
 	Push-Location $directory
@@ -20,7 +22,16 @@ function Run-Composer {
 	}
 
 	if (-not $autoloadOnly) {
-		composer update --prefer-source
+		# Use composer.local.json if available
+		$fileExists = Test-Path "$directory\composer.local.json"
+		if ($local -and $fileExists) {
+			Write-Host "Using local dev Composer configuration for $directory" -ForegroundColor Cyan
+			$env:COMPOSER = "composer.local.json"; composer update --prefer-source
+		}
+		else {
+			Write-Host "Using default Composer configuration for $directory" -ForegroundColor Cyan
+			composer update --prefer-source
+		}
 	}
 	composer dump-autoload -o
 
@@ -38,7 +49,7 @@ Run-Composer $ROOT_DIR -autoloadOnly:$autoload
 
 # Run composer commands in each package
 Get-ChildItem -Directory "packages" | ForEach-Object {
-	Run-Composer $_.FullName -autoloadOnly:$autoload
+	Run-Composer $_.FullName -autoloadOnly:$autoload -local:$local
 }
 
-Write-Host "All done!"
+Write-Host "All done!" - ForegroundColor Green
