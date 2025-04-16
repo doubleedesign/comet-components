@@ -43,8 +43,8 @@ So while I solemnly swear I am not a Swiftie, when I was trying to come up with 
 
 ## Roadmap
 
-### 1.0.0 Dreamers Are Waiting
-The first stable release of Comet Components, which is expected to include:
+### 0.1.0 Dreamers Are Waiting
+The first beta release of Comet Components, which is expected to include:
 - completion of all essential features/improvements/enhancements and documentation marked as TODO
 - publishing of the Storybook
 - extensive automated test coverage.
