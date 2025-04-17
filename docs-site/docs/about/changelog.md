@@ -4,6 +4,8 @@
 For fun and gratitude, Comet's releases are named after albums that can somehow be associated with a person, event, or even an offhand comment that influenced either the contents of the release itself, or the author's career as a developer.
 :::
 
+[[toc]]
+
 ## Current version
 
 ### 0.0.2 London Calling (10 April 2025)
@@ -43,9 +45,9 @@ So while I solemnly swear I am not a Swiftie, when I was trying to come up with 
 
 ## Roadmap
 
-### 1.0.0 Dreamers Are Waiting
-The first stable release of Comet Components, which is expected to include:
-- completion of all essential features/improvements/enhancements and documentation marked as TODO
+### 0.1.0 Dreamers Are Waiting
+The first beta release of Comet Components, which is expected to include:
+- completion of most essential features/improvements/enhancements and documentation marked as TODO
 - publishing of the Storybook
 - extensive automated test coverage.
 
@@ -57,3 +59,12 @@ Sarah was one of the people who encouraged me to start [my business](https://www
 This release gets its name from Crowded House, a band Sarah and I both love, and...something about being a dreamer fits in there somewhere!
 :::
 
+### 0.2.0 For Those About To Rock, We Salute You
+
+This is the pencilling-in of the development of an integration for [SilverStripe CMS](https://www.silverstripe.org/) and [Elemental](https://github.com/silverstripe/silverstripe-elemental). The version number may change as this release may be pushed back to prioritise completion of the WordPress integration as that's already in use.
+
+:::details For Those About To Rock, We Salute You - the story
+The year was 2010, and I was studying my Diploma of IT (Web Development) alongside three new friends known as "the boys from TAFE" (I was one of only two women in my class). My brother hooked me up with a real project to build for one of my final assessment tasks - the first database driven CMS site I ever built myself, for which I used SilverStripe. 
+
+According to my belatedly-populated Setlist.fm profile, I only attended two concerts in 2010 (that I remember, anyway) - Taylor Swift and AC/DC. I attended the latter with my brother, whose cricket club that first SilverStripe site was for. From their discography, I selected _For Those About To Rock, We Salute You_ as a nostalgic nod to that group of us at TAFE who were just starting to rock in the tech world.
+:::

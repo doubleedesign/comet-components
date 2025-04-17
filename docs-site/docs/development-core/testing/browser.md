@@ -25,6 +25,10 @@ herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-component
 herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-close.php
 ```
 
+:::warning
+The above `php.ini` config affects all local sites using the same instance of PHP. So you'll want to comment this out when working on other projects.
+:::
+
 3. Enable HTTPS for the local site by doing one of the following:
   - open the Herd GUI > Dashboard > Open Sites > Comet Compoenents, and tick the "Enable HTTPS" checkbox
   - in PowerShell, run `herd secure` from the project root directory.

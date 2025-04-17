@@ -1,8 +1,9 @@
 ---
-title: Composer
+title: Composer (Standalone)
+position: 1
 ---
 
-# Installing with Composer
+# Setup in a standalone PHP project
 
 You can install Comet Components Core into any PHP project using Composer:
 

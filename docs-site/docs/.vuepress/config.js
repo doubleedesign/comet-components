@@ -95,6 +95,7 @@ function generateSidebar({ excludeFolders }) {
 		'Usage',
 		'Development (Core)',
 		'Development (WordPress)',
+		'Development (SilverStripe CMS)',
 		'New Implementations',
 		'Technical Deep Dives',
 		'Local Dev Deep Dives',
@@ -119,6 +120,9 @@ function generateSidebar({ excludeFolders }) {
 			}
 			else if(folderName === 'development-wp') {
 				sectionTitle = 'Development (WordPress)';
+			}
+			else if(folderName === 'development-ss') {
+				sectionTitle = 'Development (SilverStripe CMS)';
 			}
 			else {
 				// Try to extract title from README if it exists

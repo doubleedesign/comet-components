@@ -1,5 +1,6 @@
 ---
 title: WordPress - Block Editor
+position: 2
 ---
 
 # Setup for WordPress - Block Editor (Gutenberg)
