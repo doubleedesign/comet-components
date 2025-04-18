@@ -53,7 +53,7 @@ class ComponentStoryGenerator {
 	}
 
 	private function processFile(string $filePath): void {
-		// Read JSON from the file
+		// Read JSON from the definition file
 		$content = file_get_contents($filePath);
 		$json = json_decode($content, true);
 		$shortName = self::kebab_case($json['name']);
@@ -62,12 +62,31 @@ class ComponentStoryGenerator {
 		// Get the category from the WordPress plugin's block support JSON file
 		$category = ucfirst(self::get_category_from_wordpress_plugin_json($json['name'])) ?? 'Uncategorised';
 
+		// Determine tags from the various JSON files:
+		// 1. Values in the component's JSON file
+		$tags = [];
+		if(isset($json['vue']) && $json['vue'] === true) {
+			array_push($tags, 'vue');
+		}
+		// 2. Is this a custom WordPress block? As determined by presence of a matching directory in packages/comet-plugin/src/blocks
+		$blockJsonPath = dirname(__DIR__, 1) . "/packages/comet-plugin/src/blocks/$shortName";
+		if(file_exists($blockJsonPath)) {
+			array_push($tags, 'wordpress-block');
+		}
+		// 3. Is this a supported WordPress core block?
+		$blockSupportJson = json_decode(file_get_contents(dirname(__DIR__, 1) . '/packages/comet-plugin/src/block-support.json'), true);
+		if($blockSupportJson['core']['supported']['core/' . $shortName]) {
+			array_push($tags, 'wordpress-block');
+		}
+		// Note: This doesn't cover 100% of cases, such as renamed blocks and plugin blocks; a small number will need tags manually added
+
+
 		$this->generateComponentOutputPage($json['name'], $shortName, $attributes);
-		$this->generateStoryFile($json['name'], $shortName, $attributes, $category);
+		$this->generateStoryFile($json['name'], $shortName, $attributes, $category, $tags);
 	}
 
 	private function generateComponentOutputPage($name, $shortName, $attributes): void {
-			// If the file already exists, bail unless the overwrite flag is set
+		// If the file already exists, bail unless the overwrite flag is set
 		if(file_exists("$this->testComponentDirectory/$shortName.php") && !$this->overwrite) {
 			print_r("Browser output example file already exists for $name, skipping\n");
 			return;
@@ -100,7 +119,7 @@ class ComponentStoryGenerator {
 		file_put_contents($outputPath, $fileContent);
 	}
 
-	private function generateStoryFile($name, $shortName, $attributes, $category): void {
+	private function generateStoryFile($name, $shortName, $attributes, $category, $tags): void {
 		// If the file already exists, bail unless the overwrite flag is set
 		if(file_exists("$this->sourceDirectory/__tests__/$shortName.stories.json") && !$this->overwrite) {
 			print_r("Storybook file already exists for $name, skipping\n");
@@ -109,6 +128,7 @@ class ComponentStoryGenerator {
 
 		$storyFile = [
 			'title'      => sprintf('Components/%s/%s', $category, $name),
+			'tags'       => $tags,
 			'parameters' => [
 				'docs'   => [
 					"description" => [

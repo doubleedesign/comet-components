@@ -1,36 +1,54 @@
 {
-	"title": "Components/Structure/Group",
+	"title": "Components/Layout/Accordion",
 	"tags": [
+		"vue",
 		"wordpress-block"
 	],
 	"parameters": {
 		"docs": {
 			"description": {
-				"component": "Group components together for layout or structure purposes."
+				"component": ""
 			}
 		},
 		"server": {
-			"id": "group.php",
-			"url": "/packages/core/src/components/group/__tests__",
+			"id": "accordion.php",
+			"url": "/packages/core/src/components/Accordion/__tests__",
 			"params": {
 				"__debug": true
 			}
 		}
 	},
 	"args": {
-		"backgroundColor": "",
+		"colorTheme": "primary",
+		"icon": "fa-plus",
+		"iconPrefix": "fa-solid",
+		"orientation": "vertical",
 		"tagName": "div",
 		"testId": ""
 	},
 	"argTypes": {
-		"backgroundColor": {
-			"description": "Background colour keyword",
+		"classes": {
+			"description": "CSS classes",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": [
+						"accordion"
+					]
+				},
+				"type": {
+					"summary": "array<string>"
+				}
+			}
+		},
+		"colorTheme": {
+			"description": "Colour keyword for the fill or outline colour",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": ""
+					"summary": "primary"
 				},
 				"type": {
 					"summary": "ThemeColor"
@@ -49,24 +67,51 @@
 				"white"
 			]
 		},
-		"class": {
-			"description": "CSS classes",
+		"icon": {
+			"description": "Icon class name for the icon to use for the expand/collapse indicator.",
 			"control": {
-				"type": "select"
+				"type": "text"
 			},
-			"options": [
-				"",
-				"group",
-				"group--breakout"
-			],
 			"table": {
 				"defaultValue": {
-					"summary": ""
+					"summary": "fa-plus"
 				},
 				"type": {
 					"summary": "string"
 				}
 			}
+		},
+		"iconPrefix": {
+			"description": "Icon prefix class name",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "fa-solid"
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"orientation": {
+			"description": "",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "vertical"
+				},
+				"type": {
+					"summary": "Orientation"
+				}
+			},
+			"options": [
+				"horizontal",
+				"vertical"
+			]
 		},
 		"tagName": {
 			"description": "The HTML tag to use for this component",
@@ -82,10 +127,7 @@
 				}
 			},
 			"options": [
-				"div",
-				"section",
-				"article",
-				"aside"
+				"div"
 			]
 		},
 		"testId": {

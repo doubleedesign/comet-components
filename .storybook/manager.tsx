@@ -1,6 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { addons } from '@storybook/manager-api';
 import comet from './theme.ts';
 import './manager.css';
+import { VueComponentIcon } from './custom-components/icon-items/VueComponentIcon.tsx';
 
 addons.setConfig({
 	theme: comet,
@@ -12,7 +15,21 @@ addons.setConfig({
 				//return !item.tags?.includes('docsOnly') || item.type === 'docs';
 				return item.type === 'docs';
 			}
-		}
+		},
+		renderLabel: (item) => {
+			if(item.tags.includes('vue')) {
+				return (
+					<>
+						{item.name}
+						<span className="sbdocs__icon">
+							<VueComponentIcon tooltipPosition="right" asLink={false} />
+						</span>
+					</>
+				);
+			}
+
+			return item.name;
+		},
 	},
 });
 

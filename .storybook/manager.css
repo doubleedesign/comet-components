@@ -51,6 +51,34 @@
 	}
 }
 
+.tippy-content {
+	font-family: solitaire-mvb-pro, sans-serif;
+	font-weight: 300;
+}
+
+.sidebar-item {
+
+	a {
+		display: flex;
+		align-items: center;
+
+		.sbdocs__icon {
+			display: inline-block;
+			margin-inline-start: auto;
+			padding-inline-end: 0.25rem;
+
+			.sbdocs__icon__inner {
+
+				svg {
+					display: block;
+					width: 1.125rem;
+					height: 1.125rem;
+				}
+			}
+		}
+	}
+}
+
 .search-field {
 	width: calc(100% - 2.5rem);
 	max-width: calc(100% - 2.5rem);

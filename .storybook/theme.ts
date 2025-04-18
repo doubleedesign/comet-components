@@ -10,5 +10,5 @@ export default create({
 	colorSecondary: '#845ec2',
 
 	fontBase: 'solitaire-mvb-pro, sans-serif',
-	fontCode: 'Hack, "Fira Code", "Source Code Pro", monospace',
+	fontCode: 'Hack, "Fira Code", "Source Code Pro", monospace'
 });
