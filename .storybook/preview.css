@@ -42,11 +42,7 @@
 
 	/** Within the stories themselves **/
 	.sbdocs-preview .docs-story {
-		font-family: initial;
-
-		h1, h2, h3 {
-			font-family: initial;
-		}
+		font-family: inherit;
 	}
 }
 

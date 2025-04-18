@@ -41,6 +41,7 @@ $globalBackground = Config::get_global_background();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php Assets::get_instance()->render_global_stylesheet_html(); ?>
 	<?php Assets::get_instance()->render_global_script_html(); ?>
+	<link href="https://use.typekit.net/daf8wql.css"/>
 	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
 </head>
 <body data-global-background="<?php echo $globalBackground; ?>">
