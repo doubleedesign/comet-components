@@ -20,7 +20,14 @@ function Run-NPM {
 	Write-Host "Running NPM commands in $directory"
 	Push-Location $directory
 
-	npm install
+	# In root directory, run with --legacy-peer-deps
+	if ($directory -eq $ROOT_DIR) {
+		Write-Host "Running NPM install with --legacy-peer-deps"
+		npm install --legacy-peer-deps
+	} else {
+		Write-Host "Running NPM install"
+		npm install
+	}
 
 	Pop-Location
 }
