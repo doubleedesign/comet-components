@@ -357,7 +357,7 @@ herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components
 This is to wrap test pages with the required opening and closing HTML.
 
 :::warning
-The above `php.ini` config affects all local sites using the same instance of PHP. So you'll want to comment this out when working on other projects.
+The above `php.ini` config affects all local sites using the same instance of PHP. Ensure your wrapper files contain checks to ensure they don't affect other sites.
 :::
 
 ## Ensure test pages load

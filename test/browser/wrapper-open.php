@@ -1,12 +1,15 @@
 <?php
-use Doubleedesign\Comet\Core\{Assets, Config};
-
 // If the request has not come from a browser (e.g., it has come from a unit test or CLI command), bail early
 if(!isset($_SERVER['HTTP_USER_AGENT'])) return;
 
+// Skip all this if this is not Comet Components
+// Useful for local development where php.ini applies to multiple sites
+if(!in_array($_SERVER['HTTP_HOST'], ['comet-components.test', 'cometcomponents.io'])) return;
+
 // Allow Storybook to access this server
-$storybook = 'https://storybook.comet-components.test:6006';
-if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
+$storybook = ['https://storybook.comet-components.test:6006', 'https://storybook.cometcomponents.io'];
+if(isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $storybook)) {
+	$storybook = $_SERVER['HTTP_ORIGIN'];
 	header("Access-Control-Allow-Origin: " . $storybook);
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
 	header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
@@ -17,6 +20,8 @@ if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $storybook) {
 		exit;
 	}
 }
+
+use Doubleedesign\Comet\Core\{Assets, Config};
 
 // Autoload dependencies using Composer
 require_once __DIR__ . '/../../packages/core/vendor/autoload.php';

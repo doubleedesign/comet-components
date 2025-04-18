@@ -26,12 +26,13 @@ herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components
 ```
 
 :::warning
-The above `php.ini` config affects all local sites using the same instance of PHP. So you'll want to comment this out when working on other projects.
+The above `php.ini` config affects all local sites using the same instance of PHP. Ensure your wrapper files contain checks to ensure they don't affect other sites.
 :::
 
 3. Enable HTTPS for the local site by doing one of the following:
-  - open the Herd GUI > Dashboard > Open Sites > Comet Compoenents, and tick the "Enable HTTPS" checkbox
-  - in PowerShell, run `herd secure` from the project root directory.
+
+- open the Herd GUI > Dashboard > Open Sites > Comet Compoenents, and tick the "Enable HTTPS" checkbox
+- in PowerShell, run `herd secure` from the project root directory.
 
 4. Restart the PHP service in Herd so that the updated configuration is loaded.
 
@@ -44,13 +45,13 @@ https://comet-components.test/packages/core/src/components/Columns/__tests__/pag
 ## Option 2: Basic PHP web server
 
 Run the following command in the project root directory to start a basic PHP web server:
-	
+
 ```bash
 php ./test/browser/start.php
 ```
 
 This will start a PHP web server on port 6001. For maximum compatibility with default local dev configurations and path resolution workarounds, it is recommended to:
-- add a hosts file entry so you can access this at https://comet-components.test 
+- add a hosts file entry so you can access this at https://comet-components.test
 - generate a local self-signed SSL certificate and add it to your system's trusted root certificate store.
 
 An example of a testing page URL with the hosts file entry and certificate is:
