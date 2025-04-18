@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Preview } from '@storybook/server';
-import { Controls, Description, DocsContainer, Subtitle, Title, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
+import { Controls, Description, DocsContainer, Subtitle, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
 import { Primary } from './blocks/Primary.tsx';
 import { Stories } from './blocks/Stories.tsx';
 import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
@@ -10,6 +10,7 @@ import comet from './theme.ts';
 import { PhpCodeBlock } from './custom-components/PhpCodeBlock.tsx';
 import { withRelativeUrls, withServerPageStates } from './decorators';
 import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
+import { Title } from './blocks/Title.tsx';
 
 // Log all events
 // import { addons } from '@storybook/preview-api';
@@ -74,7 +75,6 @@ const preview: Preview = {
 				withToolbar: true,
 			},
 			components: {
-
 				// code: (props: { className?: string, children: any }) => {
 				// 	// For PHP, use the same custom component as is used for source code in the component docs
 				// 	if(props?.className === 'language-php') {

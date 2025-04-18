@@ -1,5 +1,9 @@
 {
 	"title": "Components/Layout/ResponsivePanels",
+	"tags": [
+		"vue",
+		"wordpress"
+	],
 	"parameters": {
 		"docs": {
 			"description": {

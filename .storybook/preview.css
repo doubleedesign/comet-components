@@ -5,6 +5,10 @@
 	--comet-docs-heading-font: gelica, sans-serif;
 }
 
+.tippy-content {
+	font-family: solitaire-mvb-pro, sans-serif;
+}
+
 #storybook-docs {
 	font-family: var(--comet-docs-body-font);
 
@@ -59,10 +63,37 @@
 	container-type: inline-size;
 }
 
-.sbdocs-title + p {
-	br {
-		display: block;
-		margin-bottom: 0.75rem;
+.sbdocs-title {
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&:first-child {
+		margin-block-start: var(--spacing-lg);
+	}
+
+	.sbdocs-title__icons {
+		display: flex;
+		list-style: none;
+		align-items: center;
+		gap: var(--spacing-md);
+
+		.sbdocs-title__icons__item {
+
+			.sbdocs-title__icons__item__link {
+				display: inline-flex;
+				align-items: center;
+				width: 2.5rem;
+			}
+		}
+	}
+
+	+ p {
+		br {
+			display: block;
+			margin-bottom: 0.75rem;
+		}
 	}
 }
 
