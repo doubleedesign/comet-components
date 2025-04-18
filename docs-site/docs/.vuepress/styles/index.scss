@@ -142,6 +142,10 @@ small {
 
 .vp-sidebar {
 
+	.vp-sidebar-item.vp-sidebar-heading {
+		font-size: 1em;
+	}
+
 	.vp-sidebar-item.collapsible {
 		display: flex;
 		align-items: center;

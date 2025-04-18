@@ -1,8 +1,9 @@
 ---
+title: Overview
 position: 0
 ---
 
-# Overview
+# Core library development overview
 
 :::info
 This section of the docs covers developing the Comet Components core library itself.

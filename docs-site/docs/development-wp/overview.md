@@ -1,8 +1,9 @@
 ---
+title: Overview
 position: 0
 ---
 
-# Overview
+# WordPress integration development
 
 :::info
 This section of the docs covers developing the Comet Components suite of WordPress plugins (Comet Plugin, Comet Calendar, Comet Table Block, etc.) themselves.

@@ -356,6 +356,10 @@ herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components
 ```
 This is to wrap test pages with the required opening and closing HTML.
 
+:::warning
+The above `php.ini` config affects all local sites using the same instance of PHP. So you'll want to comment this out when working on other projects.
+:::
+
 ## Ensure test pages load
 
 Navigate to a test page such as http://comet-components.test/test/browser/pages/container-colours.php in your browser. You should see the page content with styling applied.
