@@ -7,7 +7,7 @@ position: 9
 
 [[toc]]
 
-## Local development environment
+## Dev environment
 
 ::: details Where is PHP, Node, Composer, etc running from?
 ::: tabs#shell
@@ -92,6 +92,38 @@ C:\Users\YOUR_USERNAME\.config\herd\bin
 
 :::
 
+:::details print_r, var_dump, etc output not shown in the browser
+If you are using the `TychoService` class to render your components, the output of `print_r`, `var_dump`, etc. will not be shown in the browser due to how the parser handles or ignores certain node types. The core package is configured to support the Symfony VarDumper, which doesn't have this problem and also has the benefit of sending the debugging output to Laravel Herd's Dumps feature if you run your project in that environment. To use:
+
+```php
+\Symfony\Component\VarDumper\VarDumper::dump($thing_you_want_to_dump);
+```
+
+In SilverStripe CMS, you don't need to qualify the `VarDumper` class with the namespace, as it is already available. You can just use `dump()`.
+
+:warning: If you are running the project through Herd, the VarDumper output will _only_ be shown in the Dumps window, and not
+:::
+
+:::details "Class not found" errors in the browser when running through Laravel Herd
+Make sure the `php.ini` file for the currently selected version of PHP in Herd contains the append and prepend values for the `wrapper_open` and `wrapper_close` files. See the [browser testing](./testing/browser.md) page for full details.
+
+If that configuration is correct and the class is one you recently added, try running `composer dump-autoload -o` in the root or the package where you added the file. This will regenerate the autoload files and ensure that any new classes are included.
+:::
+
+:::details WordPress running slowly when Xdebug is enabled
+When developing for the WordPress plugin, running with Xdebug on can slow things down. If loading the editor or saving seems unduly slow, test with Xdebug off to confirm if it's just that or if you have an actual performance issue.
+:::
+
+## PhpStorm
+
+:::details Missing, incomplete, or incorrect attribute hinting in PhpStorm when using Tycho Template syntax
+The XML definition file is generated from the component JSON definition files, and is automatically updated when you run the generator for JSON definitions. You can also run its update script manually with:
+
+```powershell:no-line-numbers
+php scripts/generate-xml.php
+```
+:::
+
 :::details [Windows] "Is not a valid Win32 application" error when using a PhpStorm file watcher
 If this error is occurring for an NPM package and you ran `npm install` from WSL, it may not have installed the Windows binaries in the `node_modules/.bin` directory for the tool you're trying to use. There are two workarounds:
 
@@ -124,27 +156,7 @@ Below is an example of the test run output and the coverage tool window.
 [![PhpStorm test run output and coverage](/phpstorm-coverage-window.png)
 :::
 
-:::details print_r, var_dump, etc output not shown in the browser
-If you are using the `TychoService` class to render your components, the output of `print_r`, `var_dump`, etc. will not be shown in the browser due to how the parser handles or ignores certain node types. The core package is configured to support the Symfony VarDumper, which doesn't have this problem and also has the benefit of sending the debugging output to Laravel Herd's Dumps feature if you run your project in that environment. To use:
-
-```php
-\Symfony\Component\VarDumper\VarDumper::dump($thing_you_want_to_dump);
-```
-:::warning
-If you are running the project through Herd, the debug output will _only_ be shown in the Dumps window, and not in your browser.
-:::
-
-:::details "Class not found" errors in the browser when running through Laravel Herd
-Make sure the `php.ini` file for the currently selected version of PHP in Herd contains the append and prepend values for the `wrapper_open` and `wrapper_close` files. See the [browser testing](./testing/browser.md) page for full details.
-
-If that configuration is correct and the class is one you recently added, try running `composer dump-autoload -o` in the root or the package where you added the file. This will regenerate the autoload files and ensure that any new classes are included.
-:::
-
-:::details WordPress running slowly when Xdebug is enabled
-When developing for the WordPress plugin, running with Xdebug on can slow things down. If loading the editor or saving seems unduly slow, test with Xdebug off to confirm if it's just that or if you have an actual performance issue.
-:::
-
-## Front-end development
+## Front-end
 
 ::: details Component JavaScript not loading in the browser
 Is the script loaded either independently, or as part of the `dist.js` bundle? If not, either:
@@ -202,6 +214,6 @@ This error occurs when using Node version 23 - in which case switching to a 20.x
 
 ## Documentation site changes
 
-:::details Error "SEARCH_INDEX" is not exported by "docs/.vuepress/.temp/internal/searchIndex.js" when running the build step
+:::details Error '"SEARCH_INDEX" is not exported' when running the build step
 This error occurs when you try to build the docs site while the dev version is running. Stop the dev version and run `npm run docs:build` from the `docs-site` directory again.
 :::

@@ -9,6 +9,8 @@ position: 0
 This section, including the Theming and Extending pages, details how to use Comet Components in your own code. If you're looking for information on using the WordPress plugin in the block editor, see the [WordPress usage page](./wordpress.md).
 :::
 
+Specifications and interactive demos of many components can be found in the [Storybook](https://stroybook.cometcomponents.io).
+
 [[toc]]
 
 ## Installation and configuration
@@ -90,16 +92,4 @@ foreach($components as $component) {
 Wrapping the components in `<TychoTemplate xmlns="schema/components.xsd">` provides basic IDE autocompletion and validation, and a somewhat useful "go to definition" response (it goes to the schema file, not the PHP class as would be ideal).
 
 The schema file is located in the core package, in the `tycho-fetch.xsd` file. Because Tycho, the Labrador Retriever, is fetching the definition for the component you threw onto the page...or something like that. :laugh:
-
-The XML definition file is generated from the component JSON definition files, and can be updated with:
-
-::: tabs#shell
-@tab WSL (Bash)
-```bash:no-line-numbers
-php scripts/generate-xml.php
-```
-@tab PowerShell
-```powershell:no-line-numbers
-php scripts/generate-xml.php
-```
 :::

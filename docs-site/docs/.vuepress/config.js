@@ -39,6 +39,10 @@ export default defineUserConfig({
 			{
 				text: 'Development',
 				link: '/development-core/overview.html',
+			},
+			{
+				text: 'Storybook',
+				link: 'https://storybook.cometcomponents.io'
 			}
 		],
 		sidebar: [

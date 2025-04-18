@@ -3,7 +3,7 @@ home: true
 title: Home
 #heroImage: /hero.png
 actions:
-  - text: Dev docs
+  - text: Documentation
     link: /intro.html
     type: primary
 

@@ -5,7 +5,6 @@ import * as path from 'node:path';
 
 const config: StorybookConfig = {
 	stories: [
-		'../docs/**/*.mdx',
 		'../packages/core/src/components/**/*.stories.@(json|yaml|yml)'
 	],
 	addons: [
