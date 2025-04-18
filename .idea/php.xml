@@ -206,7 +206,7 @@
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
   <component name="PhpRuntimeConfiguration">
     <extensions>
       <extension name="Ev" enabled="false" />

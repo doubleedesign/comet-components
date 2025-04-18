@@ -19,7 +19,8 @@ class Assets {
 			$this->domain = 'https://comet-components.test'; // TODO: Get this from .env
 		}
 		else {
-			$isStorybookProd = $origin && str_contains($origin, 'storybook.cometcomponents.io');
+			$referrer = $_SERVER['HTTP_REFERER'] ?? null;
+			$isStorybookProd = $referrer && str_contains($referrer, 'storybook.cometcomponents.io');
 			if($isStorybookProd) {
 				$this->domain = 'https://cometcomponents.io';
 			}
