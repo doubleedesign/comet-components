@@ -6,13 +6,18 @@ if(!isset($_SERVER['HTTP_USER_AGENT'])) return;
 // Useful for local development where php.ini applies to multiple sites
 if(!in_array($_SERVER['HTTP_HOST'], ['comet-components.test', 'cometcomponents.io'])) return;
 
-// Allow Storybook to access this server
 $storybook = ['https://storybook.comet-components.test:6006', 'https://storybook.cometcomponents.io'];
 if(isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $storybook)) {
+	// Allow Storybook to access this server
 	$storybook = $_SERVER['HTTP_ORIGIN'];
 	header("Access-Control-Allow-Origin: " . $storybook);
 	header("Access-Control-Allow-Headers: Content-Type, Authorization");
 	header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+
+	// Disable asset caching
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+	header("Pragma: no-cache");
+	header("Expires: 0");
 
 	// Handle preflight requests
 	if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

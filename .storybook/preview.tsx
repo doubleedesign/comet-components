@@ -18,6 +18,7 @@ import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx
 // Object.values(events).forEach((event) => {
 // 	channel.on(event, (data) => {
 // 		console.log(event, data);
+// 		debugger;
 // 	});
 // });
 

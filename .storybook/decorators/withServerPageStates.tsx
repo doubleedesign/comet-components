@@ -1,8 +1,47 @@
 import { addons } from '@storybook/preview-api';
-import events, { DOCS_RENDERED, STORY_RENDER_PHASE_CHANGED } from '@storybook/core-events';
+import events, { STORY_RENDER_PHASE_CHANGED, STORY_RENDERED, STORY_FINISHED } from '@storybook/core-events';
+export const withServerPageStates = (StoryFn, context) => {
+	const channel = addons.getChannel();
+
+	//For debugging - log all events that are available here
+	//Logging from preview.tsx shows events that this function can't see
+	// Object.values(events).forEach((event) => {
+	// 	channel.on(event, (data) => {
+	// 		console.log('on', event, data);
+	// 		debugger;
+	// 	});
+	// });
+
+	channel.on(STORY_RENDER_PHASE_CHANGED, (data) => {
+		if(context.viewMode !== 'docs') return;
+
+		// Add loader div to all stories as early as possible
+		// Annoyingly, the first event received by this decorator is STORY_RENDER_PHASE_CHANGED with the newPhase 'completed'
+		if(data?.newPhase === 'completed') {
+			addLoaders();
+			displayLoaders();
+		}
+
+		// Display loaders if the story is reloading
+		if(data?.newPhase === 'loading' || data?.newPhase === 'rendering') {
+			displayLoaders();
+		}
+	});
+
+	channel.on(STORY_FINISHED, (data) => {
+		if(data.status === 'success') {
+			hideLoaders();
+		}
+		else {
+			console.error(`withServerPageStates decorator - story finished event with error: ${data.error}`);
+		}
+	});
+
+	return StoryFn();
+};
 
 function addLoaders() {
-	const allDocsStoryCssSelector = '.sbdocs-preview .docs-story';
+	const allDocsStoryCssSelector = '.docs-story';
 	const storyPreviews = document.querySelectorAll(allDocsStoryCssSelector);
 	if(storyPreviews) {
 		storyPreviews.forEach((storyPreview) => {
@@ -21,48 +60,73 @@ function addLoaders() {
 	}
 }
 
-export const withServerPageStates = (StoryFn, context) => {
-	const channel = addons.getChannel();
+function displayLoaders() {
+	const allDocsStoryCssSelector = '.docs-story';
+	const storyPreviews = document.querySelectorAll(allDocsStoryCssSelector);
+	if(storyPreviews) {
+		storyPreviews.forEach((storyPreview) => {
+			const parent = storyPreview.closest('.sbdocs-preview');
+			// Bail if the loader is not present
+			if(!parent || !parent.querySelector('.sb-loader')) return;
 
-	// Add loader div to all stories as early as possible
-	channel.on(DOCS_RENDERED, () => {
-		if(context.viewMode !== 'docs') return;
+			const loader = parent.querySelector('.sb-loader');
+			// @ts-expect-error TS2339: Property style does not exist on type Element
+			loader.style.display = 'block';
+		});
+	}
+}
 
-		addLoaders();
-	});
+function hideLoaders() {
+	const allDocsStoryCssSelector = '.docs-story';
+	const storyPreviews = document.querySelectorAll(allDocsStoryCssSelector);
+	// Using div qualifier because we don't want this to capture the injected <style> which has the same attribute
+	const isStoryForVueComponent = document.querySelector('div[data-vue-component]');
 
-	channel.on(STORY_RENDER_PHASE_CHANGED, ({ newPhase, storyId }) => {
-		if(context.viewMode !== 'docs') return;
+	if(storyPreviews) {
+		storyPreviews.forEach(async (storyPreview) => {
+			const parent = storyPreview.closest('.sbdocs-preview');
+			// Bail if the loader is not present
+			if(!parent || !parent.querySelector('.sb-loader')) return;
 
-		// sometimes DOCS_RENDERED won't be emitted before this, so add loaders now if they don't already exist
-		if(newPhase === 'loading' || newPhase === 'rendering') {
-			addLoaders();
-		}
-
-		// Note: Custom .story--${storyId} classes are added in the component override for the Canvas block
-		// @see ./.storybook/blocks/Canvas.tsx
-		const storyCssSelector = `.sbdocs-preview.story--${storyId} .docs-story`;
-		const storyPreview = document.querySelector(storyCssSelector);
-		if(!storyPreview) return;
-
-		const loader = storyPreview.closest('.sbdocs-preview').querySelector('.sb-loader');
-
-		if(storyId && storyPreview && loader) {
-			if (newPhase === 'loading' || newPhase === 'rendering') {
-				storyPreview.classList.add('sbdocs-preview--story-loading');
-				// @ts-expect-error TS2339: Property style does not exist on type Element
-				loader.style.display = 'block';
-			}
-			if (newPhase === 'completed') {
-				storyPreview.classList.remove('sbdocs-preview--story-loading');
+			// Vue components take a little longer to load
+			if(isStoryForVueComponent) {
+				await waitForContent(isStoryForVueComponent);
+				const loader = parent.querySelector('.sb-loader');
 				// @ts-expect-error TS2339: Property style does not exist on type Element
 				loader.style.display = 'none';
 			}
-		}
-		else if(storyId) {
-			console.warn(`withServerPageStates decorator could not find the story selector: ${storyCssSelector}`);
-		}
-	});
 
-	return StoryFn();
-};
+			// Otherwise, remove the loader straight away
+			const loader = parent.querySelector('.sb-loader');
+			// @ts-expect-error TS2339: Property style does not exist on type Element
+			loader.style.display = 'none';
+		});
+	}
+}
+
+function waitForContent(selector, maxAttempts = 30, interval = 500) {
+	return new Promise((resolve, reject) => {
+		let attempts = 0;
+
+		const checkContent = () => {
+			const content = selector.querySelector('div');
+
+			if (content) {
+				resolve(content);
+
+				return;
+			}
+
+			attempts++;
+			if (attempts >= maxAttempts) {
+				reject(new Error('Timeout waiting for Vue component content to load'));
+
+				return;
+			}
+
+			setTimeout(checkContent, interval);
+		};
+
+		checkContent();
+	});
+}

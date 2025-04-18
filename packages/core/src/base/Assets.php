@@ -189,8 +189,9 @@ class Assets {
 			}, array_keys($attributes), $attributes);
 
 			return sprintf(
-				'<script src="%s" %s></script>',
+				'<script src="%s?v=%s" %s></script>',
 				htmlspecialchars($item['path'], ENT_QUOTES, 'UTF-8'),
+				time(), // v=time() to bust the cache and ensure Vue components reload when request params change
 				implode(' ', $attributeString)
 			);
 		}, $this->scripts);
