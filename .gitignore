@@ -29,3 +29,6 @@ docs-site/docs/.vuepress/.temp
 # Local dev SSL
 /.cert/cert.pem
 /.cert/key.pem
+
+# Builds
+storybook-static
