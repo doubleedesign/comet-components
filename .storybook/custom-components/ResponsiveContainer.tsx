@@ -88,7 +88,7 @@ function OpenInNewTabButton() {
 
 		const path = `${basePath}?${urlParams.toString()}`;
 
-		let baseUrl = 'https://comet-components.io';
+		let baseUrl = 'https://cometcomponents.io';
 		if (window.location.hostname === 'storybook.comet-components.test') {
 			baseUrl = 'https://comet-components.test';
 		}
