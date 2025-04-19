@@ -1,0 +1,71 @@
+{
+	"title": "Text/Details",
+	"tags": [
+		"wordpress-block"
+	],
+	"parameters": {
+		"server": {
+			"id": "details.php",
+			"url": "/packages/core/src/components/Details/__tests__",
+			"params": {
+				"__debug": true
+			}
+		}
+	},
+	"args": {
+		"tagName": "details",
+		"testId": ""
+	},
+	"argTypes": {
+		"tagName": {
+			"description": "The HTML tag to use for this component",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": "details"
+				},
+				"type": {
+					"summary": "Tag"
+				}
+			},
+			"options": [
+				"details"
+			]
+		},
+		"classes": {
+			"description": "CSS classes",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": [
+						"details"
+					]
+				},
+				"type": {
+					"summary": "array<string>"
+				}
+			}
+		},
+		"testId": {
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		}
+	},
+	"stories": [
+		{
+			"name": "Playground",
+			"args": [],
+			"tags": [
+				"docsOnly"
+			]
+		}
+	]
+}

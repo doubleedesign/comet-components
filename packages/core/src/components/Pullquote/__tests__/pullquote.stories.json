@@ -1,0 +1,160 @@
+{
+	"title": "Text/Pullquote",
+	"tags": [
+		"wordpress-block"
+	],
+	"parameters": {
+		"server": {
+			"id": "pullquote.php",
+			"url": "/packages/core/src/components/Pullquote/__tests__",
+			"params": {
+				"__debug": true
+			}
+		}
+	},
+	"args": {
+		"tagName": "blockquote",
+		"colorTheme": "",
+		"testId": "",
+		"citation": "",
+		"textAlign": "",
+		"textColor": ""
+	},
+	"argTypes": {
+		"tagName": {
+			"description": "The HTML tag to use for this component",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": "blockquote"
+				},
+				"type": {
+					"summary": "Tag"
+				}
+			},
+			"options": [
+				"blockquote"
+			]
+		},
+		"colorTheme": {
+			"description": "Colour keyword for the fill or outline colour",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "ThemeColor"
+				}
+			},
+			"options": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		},
+		"classes": {
+			"description": "CSS classes",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": {
+						"1": "pullquote"
+					}
+				},
+				"type": {
+					"summary": "array<string>"
+				}
+			}
+		},
+		"testId": {
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"citation": {
+			"description": "Optional citation for the quote",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"textAlign": {
+			"description": "",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "Alignment"
+				}
+			},
+			"options": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			]
+		},
+		"textColor": {
+			"description": "",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "ThemeColor"
+				}
+			},
+			"options": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		}
+	},
+	"stories": [
+		{
+			"name": "Playground",
+			"args": [],
+			"tags": [
+				"docsOnly"
+			]
+		}
+	]
+}

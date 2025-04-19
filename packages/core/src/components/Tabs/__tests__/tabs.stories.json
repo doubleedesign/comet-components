@@ -1,12 +1,13 @@
 {
-	"title": "Text/ButtonGroup",
+	"title": "Layout/Tabs",
 	"tags": [
+		"vue",
 		"wordpress-block"
 	],
 	"parameters": {
 		"server": {
-			"id": "button-group.php",
-			"url": "/packages/core/src/components/ButtonGroup/__tests__",
+			"id": "tabs.php",
+			"url": "/packages/core/src/components/Tabs/__tests__",
 			"params": {
 				"__debug": true
 			}
@@ -14,9 +15,8 @@
 	},
 	"args": {
 		"tagName": "div",
-		"orientation": "horizontal",
-		"hAlign": "start",
-		"vAlign": "start",
+		"orientation": "vertical",
+		"colorTheme": "",
 		"testId": ""
 	},
 	"argTypes": {
@@ -42,7 +42,7 @@
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "horizontal"
+					"summary": "vertical"
 				},
 				"type": {
 					"summary": "Orientation"
@@ -53,46 +53,30 @@
 				"vertical"
 			]
 		},
-		"hAlign": {
-			"description": "Horizontal alignment, if applicable",
+		"colorTheme": {
+			"description": "Colour keyword for the fill or outline colour",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "start"
+					"summary": ""
 				},
 				"type": {
-					"summary": "Alignment"
+					"summary": "ThemeColor"
 				}
 			},
 			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
-		},
-		"vAlign": {
-			"description": "Vertical alignment, if applicable",
-			"control": {
-				"type": "select"
-			},
-			"table": {
-				"defaultValue": {
-					"summary": "start"
-				},
-				"type": {
-					"summary": "Alignment"
-				}
-			},
-			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
 			]
 		},
 		"classes": {
@@ -101,7 +85,7 @@
 			"table": {
 				"defaultValue": {
 					"summary": [
-						"button-group"
+						"tabs"
 					]
 				},
 				"type": {

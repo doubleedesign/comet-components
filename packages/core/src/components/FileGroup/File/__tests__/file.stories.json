@@ -1,0 +1,200 @@
+{
+	"title": "Media/File",
+	"tags": [],
+	"parameters": {
+		"server": {
+			"id": "file.php",
+			"url": "/packages/core/src/components/File/__tests__",
+			"params": {
+				"__debug": true
+			}
+		}
+	},
+	"args": {
+		"tagName": "div",
+		"size": "",
+		"colorTheme": "null",
+		"iconPrefix": "fa-solid",
+		"icon": "fa-file",
+		"url": "",
+		"testId": "",
+		"description": "",
+		"mimeType": "",
+		"title": "",
+		"uploadDate": ""
+	},
+	"argTypes": {
+		"tagName": {
+			"description": "The HTML tag to use for this component",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": "div"
+				},
+				"type": {
+					"summary": "Tag"
+				}
+			},
+			"options": [
+				"div"
+			]
+		},
+		"size": {
+			"description": "",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"colorTheme": {
+			"description": "Colour keyword for the fill or outline colour",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "null"
+				},
+				"type": {
+					"summary": "ThemeColor"
+				}
+			},
+			"options": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		},
+		"iconPrefix": {
+			"description": "Icon prefix class name",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": "fa-solid"
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"icon": {
+			"description": "Icon class name; default values set for file types including PDF, plain text, calendar, Word, Excel, ZIP, GZIP, TAR, and 7z",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": "fa-file"
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"url": {
+			"description": "",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"classes": {
+			"description": "CSS classes",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": [
+						"file"
+					]
+				},
+				"type": {
+					"summary": "array<string>"
+				}
+			}
+		},
+		"testId": {
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"description": {
+			"description": "",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"mimeType": {
+			"description": "MIME type of the file",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string|mixed"
+				}
+			}
+		},
+		"title": {
+			"description": "",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"uploadDate": {
+			"description": "",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		}
+	},
+	"stories": [
+		{
+			"name": "Playground",
+			"args": [],
+			"tags": [
+				"docsOnly"
+			]
+		}
+	]
+}

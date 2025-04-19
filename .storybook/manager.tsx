@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { addons } from '@storybook/manager-api';
 import comet from './theme.ts';
 import './manager.css';
@@ -11,10 +10,10 @@ addons.setConfig({
 	sidebar: {
 		showRoots: true,
 		filters: {
-			// Customise which stories are shown in the sidebar
 			patterns: (item) => {
+				// If there is only docs, show it as a top-level item
 				return !item.tags?.includes('docsOnly') || item.type === 'docs';
-			}
+			},
 		},
 		renderLabel: (item) => {
 			if(item.tags.includes('vue')) {

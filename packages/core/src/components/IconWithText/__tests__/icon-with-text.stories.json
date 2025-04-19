@@ -1,12 +1,10 @@
 {
-	"title": "Text/ButtonGroup",
-	"tags": [
-		"wordpress-block"
-	],
+	"title": "Text/IconWithText",
+	"tags": [],
 	"parameters": {
 		"server": {
-			"id": "button-group.php",
-			"url": "/packages/core/src/components/ButtonGroup/__tests__",
+			"id": "icon-with-text.php",
+			"url": "/packages/core/src/components/IconWithText/__tests__",
 			"params": {
 				"__debug": true
 			}
@@ -14,10 +12,11 @@
 	},
 	"args": {
 		"tagName": "div",
-		"orientation": "horizontal",
-		"hAlign": "start",
-		"vAlign": "start",
-		"testId": ""
+		"colorTheme": "primary",
+		"iconPrefix": "fa-solid",
+		"icon": "",
+		"testId": "",
+		"label": ""
 	},
 	"argTypes": {
 		"tagName": {
@@ -35,65 +34,55 @@
 				"div"
 			]
 		},
-		"orientation": {
-			"description": "Orientation of the component content, if applicable",
+		"colorTheme": {
+			"description": "Colour keyword for the fill or outline colour",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "horizontal"
+					"summary": "primary"
 				},
 				"type": {
-					"summary": "Orientation"
+					"summary": "ThemeColor"
 				}
 			},
 			"options": [
-				"horizontal",
-				"vertical"
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
 			]
 		},
-		"hAlign": {
-			"description": "Horizontal alignment, if applicable",
-			"control": {
-				"type": "select"
-			},
+		"iconPrefix": {
+			"description": "Icon prefix class name",
+			"control": false,
 			"table": {
 				"defaultValue": {
-					"summary": "start"
+					"summary": "fa-solid"
 				},
 				"type": {
-					"summary": "Alignment"
+					"summary": "string"
 				}
-			},
-			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
+			}
 		},
-		"vAlign": {
-			"description": "Vertical alignment, if applicable",
-			"control": {
-				"type": "select"
-			},
+		"icon": {
+			"description": "Icon class name",
+			"control": false,
 			"table": {
 				"defaultValue": {
-					"summary": "start"
+					"summary": ""
 				},
 				"type": {
-					"summary": "Alignment"
+					"summary": "string"
 				}
-			},
-			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
+			}
 		},
 		"classes": {
 			"description": "CSS classes",
@@ -101,7 +90,7 @@
 			"table": {
 				"defaultValue": {
 					"summary": [
-						"button-group"
+						"icon-with-text"
 					]
 				},
 				"type": {
@@ -111,6 +100,18 @@
 		},
 		"testId": {
 			"description": "Optionally add a data-testid attribute for automated tests",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"label": {
+			"description": "",
 			"control": false,
 			"table": {
 				"defaultValue": {

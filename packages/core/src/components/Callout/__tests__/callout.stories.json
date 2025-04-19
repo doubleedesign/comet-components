@@ -1,0 +1,125 @@
+{
+    "title": "UI/Callout",
+    "tags": [
+        "wordpress-block"
+    ],
+    "parameters": {
+        "server": {
+            "id": "callout.php",
+            "url": "/packages/core/src/components/Callout/__tests__",
+            "params": {
+                "__debug": true
+            }
+        }
+    },
+    "args": {
+        "tagName": "div",
+        "colorTheme": "info",
+        "iconPrefix": "fa-solid",
+        "icon": "",
+        "testId": ""
+    },
+    "argTypes": {
+        "tagName": {
+            "description": "The HTML tag to use for this component",
+            "control": false,
+            "table": {
+                "defaultValue": {
+                    "summary": "div"
+                },
+                "type": {
+                    "summary": "Tag"
+                }
+            },
+            "options": [
+                "div"
+            ]
+        },
+        "colorTheme": {
+            "description": "Colour keyword for the fill or outline colour",
+            "control": {
+                "type": "select"
+            },
+            "table": {
+                "defaultValue": {
+                    "summary": "info"
+                },
+                "type": {
+                    "summary": "ThemeColor"
+                }
+            },
+            "options": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
+        },
+        "iconPrefix": {
+            "description": "Icon prefix class name",
+            "control": false,
+            "table": {
+                "defaultValue": {
+                    "summary": "fa-solid"
+                },
+                "type": {
+                    "summary": "string"
+                }
+            }
+        },
+        "icon": {
+            "description": "Icon class name; default value set for success, warning, error, and info color themes",
+            "control": false,
+            "table": {
+                "defaultValue": {
+                    "summary": ""
+                },
+                "type": {
+                    "summary": "string"
+                }
+            }
+        },
+        "classes": {
+            "description": "CSS classes",
+            "control": false,
+            "table": {
+                "defaultValue": {
+                    "summary": [
+                        "callout",
+                        "callout--info"
+                    ]
+                },
+                "type": {
+                    "summary": "array<string>"
+                }
+            }
+        },
+        "testId": {
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "control": false,
+            "table": {
+                "defaultValue": {
+                    "summary": ""
+                },
+                "type": {
+                    "summary": "string"
+                }
+            }
+        }
+    },
+    "stories": [
+        {
+            "name": "Playground",
+            "args": [],
+            "tags": [
+                "docsOnly"
+            ]
+        }
+    ]
+}

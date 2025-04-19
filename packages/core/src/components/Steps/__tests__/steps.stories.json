@@ -1,23 +1,26 @@
 {
-	"title": "Text/ButtonGroup",
+	"title": "UI/Steps",
 	"tags": [
 		"wordpress-block"
 	],
 	"parameters": {
 		"server": {
-			"id": "button-group.php",
-			"url": "/packages/core/src/components/ButtonGroup/__tests__",
+			"id": "steps.php",
+			"url": "/packages/core/src/components/Steps/__tests__",
 			"params": {
 				"__debug": true
 			}
 		}
 	},
 	"args": {
-		"tagName": "div",
-		"orientation": "horizontal",
+		"tagName": "ol",
+		"orientation": "vertical",
 		"hAlign": "start",
 		"vAlign": "start",
-		"testId": ""
+		"colorTheme": "",
+		"backgroundColor": "",
+		"testId": "",
+		"maxPerRow": ""
 	},
 	"argTypes": {
 		"tagName": {
@@ -25,14 +28,14 @@
 			"control": false,
 			"table": {
 				"defaultValue": {
-					"summary": "div"
+					"summary": "ol"
 				},
 				"type": {
 					"summary": "Tag"
 				}
 			},
 			"options": [
-				"div"
+				"ol"
 			]
 		},
 		"orientation": {
@@ -42,7 +45,7 @@
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "horizontal"
+					"summary": "vertical"
 				},
 				"type": {
 					"summary": "Orientation"
@@ -95,19 +98,57 @@
 				"match-parent"
 			]
 		},
-		"classes": {
-			"description": "CSS classes",
-			"control": false,
+		"colorTheme": {
+			"description": "Colour keyword for the fill or outline colour",
+			"control": {
+				"type": "select"
+			},
 			"table": {
 				"defaultValue": {
-					"summary": [
-						"button-group"
-					]
+					"summary": ""
 				},
 				"type": {
-					"summary": "array<string>"
+					"summary": "ThemeColor"
 				}
-			}
+			},
+			"options": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
+		},
+		"backgroundColor": {
+			"description": "Background colour keyword",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "ThemeColor"
+				}
+			},
+			"options": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			]
 		},
 		"testId": {
 			"description": "Optionally add a data-testid attribute for automated tests",
@@ -118,6 +159,37 @@
 				},
 				"type": {
 					"summary": "string"
+				}
+			}
+		},
+		"class": {
+			"description": "CSS classes",
+			"control": {
+				"type": "select"
+			},
+			"options": [
+				"",
+				"is-style-numbered",
+				"is-style-simple"
+			],
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"maxPerRow": {
+			"description": "The maximum number of steps to display per row when orientation is horizontal",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "int"
 				}
 			}
 		}

@@ -1,12 +1,12 @@
 {
-	"title": "Text/ButtonGroup",
+	"title": "Media/FileGroup",
 	"tags": [
 		"wordpress-block"
 	],
 	"parameters": {
 		"server": {
-			"id": "button-group.php",
-			"url": "/packages/core/src/components/ButtonGroup/__tests__",
+			"id": "file-group.php",
+			"url": "/packages/core/src/components/FileGroup/__tests__",
 			"params": {
 				"__debug": true
 			}
@@ -14,9 +14,7 @@
 	},
 	"args": {
 		"tagName": "div",
-		"orientation": "horizontal",
-		"hAlign": "start",
-		"vAlign": "start",
+		"colorTheme": "primary",
 		"testId": ""
 	},
 	"argTypes": {
@@ -35,64 +33,30 @@
 				"div"
 			]
 		},
-		"orientation": {
-			"description": "Orientation of the component content, if applicable",
+		"colorTheme": {
+			"description": "Colour keyword for the fill or outline colour",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "horizontal"
+					"summary": "primary"
 				},
 				"type": {
-					"summary": "Orientation"
+					"summary": "ThemeColor"
 				}
 			},
 			"options": [
-				"horizontal",
-				"vertical"
-			]
-		},
-		"hAlign": {
-			"description": "Horizontal alignment, if applicable",
-			"control": {
-				"type": "select"
-			},
-			"table": {
-				"defaultValue": {
-					"summary": "start"
-				},
-				"type": {
-					"summary": "Alignment"
-				}
-			},
-			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
-		},
-		"vAlign": {
-			"description": "Vertical alignment, if applicable",
-			"control": {
-				"type": "select"
-			},
-			"table": {
-				"defaultValue": {
-					"summary": "start"
-				},
-				"type": {
-					"summary": "Alignment"
-				}
-			},
-			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
 			]
 		},
 		"classes": {
@@ -101,7 +65,7 @@
 			"table": {
 				"defaultValue": {
 					"summary": [
-						"button-group"
+						"file-group"
 					]
 				},
 				"type": {

@@ -1,0 +1,243 @@
+{
+	"title": "Media/Image",
+	"tags": [
+		"wordpress-block"
+	],
+	"parameters": {
+		"server": {
+			"id": "image.php",
+			"url": "/packages/core/src/components/Image/__tests__",
+			"params": {
+				"__debug": true
+			}
+		}
+	},
+	"args": {
+		"tagName": "figure",
+		"href": "",
+		"testId": "",
+		"align": "",
+		"alt": "",
+		"aspectRatio": "",
+		"caption": "",
+		"height": "",
+		"isParallax": "false",
+		"scale": "contain",
+		"src": "",
+		"title": "",
+		"width": ""
+	},
+	"argTypes": {
+		"tagName": {
+			"description": "The HTML tag to use for this component",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": "figure"
+				},
+				"type": {
+					"summary": "Tag"
+				}
+			},
+			"options": [
+				"figure"
+			]
+		},
+		"href": {
+			"description": "URL to link to",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"testId": {
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"align": {
+			"description": "Image alignment",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			},
+			"options": [
+				"left",
+				"center",
+				"right",
+				"full"
+			]
+		},
+		"alt": {
+			"description": "Alternative text",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"aspectRatio": {
+			"description": "Crop image to the given aspect ratio",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "AspectRatio"
+				}
+			},
+			"options": [
+				"4:3",
+				"3:4",
+				"1:1",
+				"16:9",
+				"9:16",
+				"3:2",
+				"2:3"
+			]
+		},
+		"caption": {
+			"description": "Optional image caption (to appear below the image)",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"class": {
+			"description": "CSS classes",
+			"control": {
+				"type": "select"
+			},
+			"options": [
+				"",
+				"is-style-rounded"
+			],
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"height": {
+			"description": "Set a fixed height for the image",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"isParallax": {
+			"description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": "false"
+				},
+				"type": {
+					"summary": "bool"
+				}
+			}
+		},
+		"scale": {
+			"description": "How to handle how the image fits the available space",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "contain"
+				},
+				"type": {
+					"summary": "string"
+				}
+			},
+			"options": [
+				"contain",
+				"cover"
+			]
+		},
+		"src": {
+			"description": "Image source URL",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"title": {
+			"description": "Optional image title (appears on hover)",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"width": {
+			"description": "Set a fixed width for the image",
+			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		}
+	},
+	"stories": [
+		{
+			"name": "Playground",
+			"args": [],
+			"tags": [
+				"docsOnly"
+			]
+		}
+	]
+}

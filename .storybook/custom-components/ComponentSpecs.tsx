@@ -34,13 +34,18 @@ export function ComponentSpecs({ componentName }) {
 	if (!specs) return;
 
 	let belongsInside = Array.isArray(specs?.belongsInside)
-		? `Inside ${list_to_string_with_oxford_comma(specs?.belongsInside)}`
+		? `Inside ${list_to_string_with_oxford_comma(specs?.belongsInside, 'and/or')}`
 		: `Inside ${specs?.belongsInside}`;
 	if(specs?.belongsInside === 'LayoutComponent') {
 		belongsInside = 'Inside any structure or layout component';
 	}
 	if(!specs?.belongsInside) {
-		belongsInside = 'At the top level of the document';
+		if(componentName === 'Container') {
+			belongsInside = 'At the top level of the document, and within SiteHeader, SiteFooter, Banner, and PageHeader components';
+		}
+		else {
+			belongsInside = 'At the top level of the document';
+		}
 	}
 	// Some specific overrides
 	if(componentName === 'Banner') {
@@ -129,7 +134,7 @@ export function ComponentSpecs({ componentName }) {
 
 			<div className="comet-component-code-preview-wrapper">
 				<h3>Basic usage</h3>
-				<p><a href="#" target="_blank">More about usage syntax <ArrowTopRightIcon/></a></p>
+				<p><a href="https://cometcomponents.io/docs/usage/overview.html" target="_blank">More about usage syntax <ArrowTopRightIcon/></a></p>
 				<PhpCodeBlock codeString={exampleCode}/>
 			</div>
 		</div>

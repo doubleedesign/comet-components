@@ -1,98 +1,87 @@
 {
-	"title": "Text/ButtonGroup",
-	"tags": [
-		"wordpress-block"
-	],
+	"title": "UI/PageHeader",
+	"tags": [],
 	"parameters": {
 		"server": {
-			"id": "button-group.php",
-			"url": "/packages/core/src/components/ButtonGroup/__tests__",
+			"id": "page-header.php",
+			"url": "/packages/core/src/components/PageHeader/__tests__",
 			"params": {
 				"__debug": true
 			}
 		}
 	},
 	"args": {
-		"tagName": "div",
-		"orientation": "horizontal",
-		"hAlign": "start",
-		"vAlign": "start",
+		"tagName": "header",
+		"size": "$this->breadcrumbs",
+		"backgroundColor": "",
 		"testId": ""
 	},
 	"argTypes": {
 		"tagName": {
 			"description": "The HTML tag to use for this component",
-			"control": false,
+			"control": {
+				"type": "select"
+			},
 			"table": {
 				"defaultValue": {
-					"summary": "div"
+					"summary": "header"
 				},
 				"type": {
 					"summary": "Tag"
 				}
 			},
 			"options": [
-				"div"
+				"header",
+				"div",
+				"section"
 			]
 		},
-		"orientation": {
-			"description": "Orientation of the component content, if applicable",
+		"size": {
+			"description": "Keyword specifying the relative width of the container for the inner content",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "horizontal"
+					"summary": "$this->breadcrumbs"
 				},
 				"type": {
-					"summary": "Orientation"
+					"summary": "ContainerSize"
 				}
 			},
 			"options": [
-				"horizontal",
-				"vertical"
+				"default",
+				"wide",
+				"fullwidth",
+				"narrow",
+				"narrower",
+				"small"
 			]
 		},
-		"hAlign": {
-			"description": "Horizontal alignment, if applicable",
+		"backgroundColor": {
+			"description": "Background colour keyword",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "start"
+					"summary": ""
 				},
 				"type": {
-					"summary": "Alignment"
+					"summary": "ThemeColor"
 				}
 			},
 			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
-		},
-		"vAlign": {
-			"description": "Vertical alignment, if applicable",
-			"control": {
-				"type": "select"
-			},
-			"table": {
-				"defaultValue": {
-					"summary": "start"
-				},
-				"type": {
-					"summary": "Alignment"
-				}
-			},
-			"options": [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
 			]
 		},
 		"classes": {
@@ -101,7 +90,8 @@
 			"table": {
 				"defaultValue": {
 					"summary": [
-						"button-group"
+						"page-header",
+						"page-section"
 					]
 				},
 				"type": {
