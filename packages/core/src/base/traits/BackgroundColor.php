@@ -111,6 +111,8 @@ trait BackgroundColor {
 		if(count($this->innerComponents) < 2) return;
 
 		// Collect the child backgrounds, with in-place filtering to remove duplicates
+		// But do not filter out null values, because that would set the background of a parent when it shouldn't
+		// just because *some* children don't have an explicit background
 		$childBackgrounds = array_reduce($this->innerComponents, function($carry, $child) {
 			if(method_exists($child, 'get_background_color')) {
 				if(!in_array($child->get_background_color(), $carry)) {
@@ -119,11 +121,6 @@ trait BackgroundColor {
 			}
 			return $carry;
 		}, []);
-
-		// Filter out null values
-		$childBackgrounds = array_values(array_filter($childBackgrounds, function($background) {
-			return $background !== null;
-		}));
 
 		// If there is one colour left standing, set it as this component's background and remove it from the children
 		if(count($childBackgrounds) === 1) {
