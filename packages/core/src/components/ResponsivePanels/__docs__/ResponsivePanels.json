@@ -5,7 +5,9 @@
 	"abstract": false,
 	"vue": true,
 	"isInner": false,
-	"belongsInside": "LayoutComponent",
+	"belongsInside": [
+		"Container"
+	],
 	"attributes": {
 		"breakpoint": {
 			"type": "string",

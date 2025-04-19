@@ -4,7 +4,7 @@
 	"extends": "UIComponent",
 	"abstract": false,
 	"isInner": false,
-	"belongsInside": "LayoutComponent",
+	"belongsInside": null,
 	"attributes": {
 		"backgroundColor": {
 			"type": "ThemeColor",

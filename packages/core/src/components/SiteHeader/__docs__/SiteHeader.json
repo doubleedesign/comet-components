@@ -1,142 +1,142 @@
 {
-    "name": "SiteHeader",
+	"name": "SiteHeader",
 	"description": "Render a site header with a logo, responsive menu, and optional additional components.",
 	"extends": "LayoutComponent",
 	"abstract": false,
 	"vue": true,
 	"isInner": false,
-	"belongsInside": "LayoutComponent",
+	"belongsInside": null,
 	"attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ],
-            "inherited": true
-        },
-        "breakpoint": {
-            "type": "string",
-            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu;"
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "site-header",
-                "layout-block"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "hAlign": {
-            "type": "Alignment",
-            "description": "Horizontal alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start",
-            "inherited": true
-        },
-        "icon": {
-            "type": "string",
-            "description": "Icon class name; for the responsive menu toggle button",
-            "default": "fa-bars"
-        },
-        "iconPrefix": {
-            "type": "string",
-            "description": "Icon prefix class name",
-            "default": "fa-solid"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "logoUrl": {
-            "type": "string",
-            "description": "The URL of the site logo image"
-        },
-        "responsiveStyle": {
-            "type": "string",
-            "description": "The layout style of the responsive menu",
-            "supported": [
-                "default",
-                "overlay"
-            ],
-            "default": "default"
-        },
-        "size": {
-            "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "default"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "submenuIcon": {
-            "type": "string",
-            "description": "Icon class name for the submenu toggle button in responsive mode",
-            "default": "fa-chevron-down"
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "header"
-            ],
-            "default": "header",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        },
-        "vAlign": {
-            "type": "Alignment",
-            "description": "Vertical alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start",
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context \"responsive\" (note: only one responsive group is supported)",
-        "required": true
-    }
+		"backgroundColor": {
+			"type": "ThemeColor",
+			"description": "Background colour keyword",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			],
+			"inherited": true
+		},
+		"breakpoint": {
+			"type": "string",
+			"description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu;"
+		},
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"site-header",
+				"layout-block"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"hAlign": {
+			"type": "Alignment",
+			"description": "Horizontal alignment, if applicable",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "start",
+			"inherited": true
+		},
+		"icon": {
+			"type": "string",
+			"description": "Icon class name; for the responsive menu toggle button",
+			"default": "fa-bars"
+		},
+		"iconPrefix": {
+			"type": "string",
+			"description": "Icon prefix class name",
+			"default": "fa-solid"
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"logoUrl": {
+			"type": "string",
+			"description": "The URL of the site logo image"
+		},
+		"responsiveStyle": {
+			"type": "string",
+			"description": "The layout style of the responsive menu",
+			"supported": [
+				"default",
+				"overlay"
+			],
+			"default": "default"
+		},
+		"size": {
+			"type": "ContainerSize",
+			"description": "Keyword specifying the relative width of the container for the inner content",
+			"supported": [
+				"default",
+				"wide",
+				"fullwidth",
+				"narrow",
+				"narrower",
+				"small"
+			],
+			"default": "default"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"submenuIcon": {
+			"type": "string",
+			"description": "Icon class name for the submenu toggle button in responsive mode",
+			"default": "fa-chevron-down"
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"header"
+			],
+			"default": "header",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		},
+		"vAlign": {
+			"type": "Alignment",
+			"description": "Vertical alignment, if applicable",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "start",
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<Renderable>",
+		"description": "The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context \"responsive\" (note: only one responsive group is supported)",
+		"required": true
+	}
 }
