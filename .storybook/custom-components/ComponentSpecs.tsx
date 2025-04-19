@@ -4,25 +4,24 @@ import 'tippy.js/dist/tippy.css';
 import { PhpCodeBlock } from './PhpCodeBlock.tsx';
 import { ArrowTopRightIcon } from '@storybook/icons';
 
+type ComponentContentDefProps = {
+	type: string;
+	description: string;
+	required?: boolean;
+};
+
 type ComponentDefinition = {
 	name: string;
 	description: string;
 	extends: string;
 	abstract: boolean;
 	isInner: boolean;
-	belongsInside: string | null;
+	belongsInside: string | string[] | null;
 	attributes: object;
-	content: {
-		type: string;
-		description: string;
-		required?: boolean;
-	},
-	innerComponents: {
-		type: string;
-		description: string;
-		required?: boolean;
-	}
-	[key: string]: unknown;
+	content: ComponentContentDefProps;
+	innerComponents: ComponentContentDefProps;
+	// Special cases where a component has something different to $content or $innerComponents
+	[key: string]: ComponentContentDefProps | unknown;
 };
 
 /**
@@ -34,12 +33,18 @@ export function ComponentSpecs({ componentName }) {
 	const { specs, cssInfo } = useComponentSpecs(componentName);
 	if (!specs) return;
 
-	let belongsInside = specs?.belongsInside;
+	let belongsInside = Array.isArray(specs?.belongsInside)
+		? `Inside ${list_to_string_with_oxford_comma(specs?.belongsInside)}`
+		: `Inside ${specs?.belongsInside}`;
 	if(specs?.belongsInside === 'LayoutComponent') {
 		belongsInside = 'Inside any structure or layout component';
 	}
 	if(!specs?.belongsInside) {
 		belongsInside = 'At the top level of the document';
+	}
+	// Some specific overrides
+	if(componentName === 'Banner') {
+		belongsInside = 'At the top level of the document or inside a Container component';
 	}
 
 	let exampleCode = '// TODO: This needs an example!';
@@ -57,7 +62,22 @@ export function ComponentSpecs({ componentName }) {
 			contentType = ' can be of any component type that extends the Renderable abstract class';
 		}
 		else {
-			contentType = ` should be ${strippedContentType} components`;
+			const multipleContentTypes = strippedContentType.split('|');
+			contentType = ` should be ${list_to_string_with_oxford_comma(multipleContentTypes, 'and/or')} components`;
+		}
+	}
+	else if(specs?.data) {
+		contentType = (specs?.data as ComponentContentDefProps)?.description;
+	}
+	else if(specs?.files) {
+		contentType = (specs?.files as ComponentContentDefProps)?.description;
+	}
+	if(specs?.breadcrumbs) {
+		if(specs?.content) {
+			contentType = ' + ' + (specs?.breadcrumbs as ComponentContentDefProps)?.description;
+		}
+		else {
+			contentType = (specs?.breadcrumbs as ComponentContentDefProps)?.description;
 		}
 	}
 
@@ -86,7 +106,7 @@ export function ComponentSpecs({ componentName }) {
 						</th>
 						<td>
 							<p>{belongsInside}</p>
-							{cssInfo?.containerQueries && (
+							{(cssInfo?.containerQueries && componentName !== 'Banner') && (
 								<p>
 									{/* eslint-disable-next-line max-len */}
 									<strong>Note: </strong>This component's default CSS utilises <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries" target="_blank">container queries</a>.
@@ -186,4 +206,12 @@ function useComponentSpecs(componentName: string) {
 	}, [componentName, fetchJsonDef]);
 
 	return { specs, cssInfo, loading, error };
+}
+
+function list_to_string_with_oxford_comma(list: string[], lastJoinword = 'and') {
+	if(list.length === 0) return '';
+	if(list.length === 1) return list[0];
+	if(list.length === 2) return `${list[0]} ${lastJoinword} ${list[1]}`;
+
+	return `${list.slice(0, -1).join(', ')}, ${lastJoinword} ${list[list.length - 1]}`;
 }

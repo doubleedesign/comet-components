@@ -7,6 +7,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { VueComponentIcon } from '../custom-components/icon-items/VueComponentIcon.tsx';
 import { WordPressAvailableIcon } from '../custom-components/icon-items/WordPressAvailableIcon.tsx';
+import { JavaScriptComponentIcon } from '../custom-components/icon-items/JavaScriptComponentIcon.tsx';
 
 interface TitleProps {
 	/**
@@ -50,6 +51,11 @@ export const Title: FunctionComponent<TitleProps> = (props) => {
 		if (preparedMeta?.tags?.includes('vue')) {
 			icons.push(
 				<VueComponentIcon />
+			);
+		}
+		if (preparedMeta?.tags?.includes('javascript')) {
+			icons.push(
+				<JavaScriptComponentIcon tooltip="Vanilla JavaScript-enhanced component"/>
 			);
 		}
 		if (preparedMeta?.tags?.includes('wordpress-block')) {

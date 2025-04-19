@@ -4,6 +4,7 @@ import { addons } from '@storybook/manager-api';
 import comet from './theme.ts';
 import './manager.css';
 import { VueComponentIcon } from './custom-components/icon-items/VueComponentIcon.tsx';
+import { JavaScriptComponentIcon } from './custom-components/icon-items/JavaScriptComponentIcon.tsx';
 
 addons.setConfig({
 	theme: comet,
@@ -22,6 +23,16 @@ addons.setConfig({
 						{item.name}
 						<span className="sbdocs__icon">
 							<VueComponentIcon tooltipPosition="right" asLink={false} />
+						</span>
+					</>
+				);
+			}
+			if(item.tags.includes('javascript')) {
+				return (
+					<>
+						{item.name}
+						<span className="sbdocs__icon">
+							<JavaScriptComponentIcon tooltipPosition="right" asLink={false} />
 						</span>
 					</>
 				);
