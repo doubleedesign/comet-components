@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Preview } from '@storybook/server';
-import { Controls, Description, DocsContainer, Subtitle, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
+import { Controls, DocsContainer, Subtitle, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
 import { Primary } from './blocks/Primary.tsx';
 import { Stories } from './blocks/Stories.tsx';
 import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
@@ -11,6 +11,7 @@ import { PhpCodeBlock } from './custom-components/PhpCodeBlock.tsx';
 import { withRelativeUrls, withServerPageStates } from './decorators';
 import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
 import { Title } from './blocks/Title.tsx';
+import { Description } from './blocks/Description.tsx';
 
 // Log all events
 // import { addons } from '@storybook/preview-api';
@@ -118,11 +119,13 @@ const preview: Preview = {
 						<div className="controls-wrapper">
 							<h2 className="section-heading">Attributes</h2>
 							<p>The public properties you can assign to your component at creation time using the <code>$attributes</code> argument.</p>
+							{/* eslint-disable-next-line max-len */}
+							<p>You can also assign any <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes" target="_blank">HTML attributes</a> that are valid for the selected tag.</p>
 							<Controls/>
 						</div>
-						<div className="stories-wrapper">
-							<Stories includePrimary={false} title="Variations and examples"/>
-						</div>
+						{/*<div className="stories-wrapper">*/}
+						{/*	<Stories includePrimary={false} title="Variations and examples"/>*/}
+						{/*</div>*/}
 					</Unstyled>
 				);
 			}

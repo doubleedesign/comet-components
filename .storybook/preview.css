@@ -8,6 +8,14 @@
 .tippy-content {
 	font-family: solitaire-mvb-pro, sans-serif;
 	font-weight: 300;
+	max-width: 10rem;
+	text-align: start;
+}
+
+.tippy-box[data-placement="bottom"] {
+	.tippy-content {
+		text-align: center;
+	}
 }
 
 .sbdocs__icons {
@@ -56,6 +64,73 @@
 	}
 }
 
+.comet-component-specs {
+	margin-block-end: 3rem;
+
+	table {
+		width: 100%;
+		font-size: 0.9rem;
+		margin-block-start: 2rem;
+		/** same as the docs story and controls table */
+		border: 1px solid hsla(203, 50%, 30%, 0.15);
+		box-shadow: rgba(0, 0, 0, 0.10) 0 1px 3px 0;
+
+		tr {
+			th, td {
+				vertical-align: top;
+				/** same as the docs story and controls table */
+				padding: 10px 20px;
+				border-bottom: 1px solid hsla(203, 50%, 30%, 0.15);
+			}
+
+			&:last-of-type {
+				th, td {
+					border-bottom: 0;
+				}
+			}
+
+			th[scope="row"] {
+				width: 8rem;
+				text-align: left;
+
+				a {
+					display: inline-block;
+					margin-inline-start: 0.25rem;
+					opacity: 0.65;
+
+					&:hover, &:focus, &:active {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+
+	.comet-component-code-preview-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		margin: 1rem 0;
+
+		a {
+			font-size: 0.9rem;
+			color: var(--color-primary);
+			font-weight: 400;
+
+			&:hover, &:focus, &:active {
+				color: var(--color-secondary);
+			}
+		}
+
+		code {
+			width: 100%;
+			flex-basis: 100%;
+			margin-block-start: 0.25rem !important;
+		}
+	}
+}
+
 #storybook-docs {
 	font-family: var(--comet-docs-body-font);
 
@@ -98,6 +173,11 @@
 
 	* {
 		font-family: var(--comet-docs-body-font);
+		font-size: 0.9rem;
+	}
+
+	td {
+		font-weight: 300;
 	}
 }
 

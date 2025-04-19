@@ -59,10 +59,11 @@ class ComponentStoryGenerator {
 		$shortName = self::kebab_case($json['name']);
 		// Exclude some attributes handled internally , not suitable for Storybook, or not suitable to autogenerate
 		$attributes = array_diff_key($json['attributes'], array_flip(['id', 'style', 'context']));
-		// If the component extends LayoutComponent, the category should be Layout by default
-		// (for some this may be manually changed to something like Structure, but this is a sensible default)
-		if(isset($json['extends']) && $json['extends'] === 'LayoutComponent') {
-			$category = 'Layout';
+		if(in_array($shortName, ['container', 'group', 'site-header', 'site-footer'])) {
+			$category = 'Structure';
+		}
+		else if(isset($json['extends'])) {
+			$category = str_replace('Component', '', $json['extends']);
 		}
 		// Otherwise, get the category from the WordPress plugin's block support JSON file
 		else {
@@ -87,10 +88,8 @@ class ComponentStoryGenerator {
 		}
 		// Note: The above tag logic doesn't cover 100% of cases, such as renamed blocks and plugin blocks; a small number will need tags manually added
 
-		$description = $json['description'] ?? self::get_description_from_wordpress_block_json($json['name']);
-
 		$this->generateComponentOutputPage($json['name'], $shortName, $attributes);
-		$this->generateStoryFile($json['name'], $shortName, $description, $attributes, $category, $tags);
+		$this->generateStoryFile($json['name'], $shortName, $attributes, $category, $tags);
 	}
 
 	private function generateComponentOutputPage($name, $shortName, $attributes): void {
@@ -127,7 +126,7 @@ class ComponentStoryGenerator {
 		file_put_contents($outputPath, $fileContent);
 	}
 
-	private function generateStoryFile($name, $shortName, $description, $attributes, $category, $tags): void {
+	private function generateStoryFile($name, $shortName, $attributes, $category, $tags): void {
 		// If the file already exists, bail unless the overwrite flag is set
 		if(file_exists("$this->sourceDirectory/__tests__/$shortName.stories.json") && !$this->overwrite) {
 			$this->log("Storybook file already exists for $name, skipping\n", 'info');
@@ -138,11 +137,6 @@ class ComponentStoryGenerator {
 			'title'      => sprintf('%s/%s', $category, $name),
 			'tags'       => $tags,
 			'parameters' => [
-				'docs'   => [
-					"description" => [
-						"component" => $description
-					]
-				],
 				'server' => [
 					"id"     => self::kebab_case($shortName) . '.php',
 					'url'    => sprintf('/packages/core/src/components/%s/__tests__', $name),
@@ -153,7 +147,28 @@ class ComponentStoryGenerator {
 			]
 		];
 
-		$argsOrder = ['tagName', 'size', 'breakpoint', 'allowStacking', 'orientation', 'hAlign', 'vAlign', 'colorTheme', 'backgroundColor', 'gradient', 'iconPrefix', 'icon', 'classes', 'testId'];
+		$argsOrder = [
+			'content',
+			'innerComponents',
+			'tagName',
+			'size',
+			'breakpoint',
+			'allowStacking',
+			'orientation',
+			'hAlign',
+			'vAlign',
+			'colorTheme',
+			'isOutline',
+			'backgroundColor',
+			'gradient',
+			'iconPrefix',
+			'icon',
+			'href',
+			'url',
+			'target',
+			'classes',
+			'testId'
+		];
 
 		$storyFile['args'] = array_reduce(array_keys($attributes), function($acc, $attr) use ($attributes) {
 			// Do not show a specified class name by default (the auto-generated ones within the component will still be where they need to be)
@@ -211,11 +226,19 @@ class ComponentStoryGenerator {
 				return $acc;
 			}
 
+			$showControl = true;
 			$noConrol = ['classes', 'gradient', 'testId'];
+			if(in_array($attr, $noConrol)) {
+				$showControl = false;
+			}
+			$noOfOptions = isset($data['supported']) ? count($data['supported']) : 1;
+			if($noOfOptions < 2) {
+				$showControl = false;
+			}
 
 			$acc[$attr] = [
 				'description' => $data['description'] ?? '',
-				'control'     => in_array($attr, $noConrol) ? false : ['type' => self::propertyTypeToControl($propType)],
+				'control'     => $showControl ? ['type' => self::propertyTypeToControl($propType)] : false,
 				'table'       => [
 					'defaultValue' => [
 						'summary' => $data['default'] ?? ''
