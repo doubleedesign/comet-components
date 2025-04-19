@@ -37,6 +37,11 @@
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
             "inherited": true
         },
+        "href": {
+            "type": "string",
+            "description": "URL to link to if using <a> tag.",
+            "default": ""
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",

@@ -149,8 +149,9 @@ class ComponentClassesToJsonDefinitions {
 					}
 
 					// Check if there is a Vue component in this component's directory
-					$vueFile = Utils::kebab_case(basename($filePath) . '.vue');
+					$vueFile = Utils::kebab_case(str_replace('.php', '', basename($filePath)) . '.vue');
 					$vueFilePath = dirname($filePath) . '\\' . $vueFile;
+					echo $vueFilePath;
 					if(file_exists($vueFilePath)) {
 						$result['vue'] = true;
 					}
@@ -175,8 +176,8 @@ class ComponentClassesToJsonDefinitions {
 				$this->exportToJson($outputPath, $result);
 				$this->log("Exported component definition JSON to $outputPath\n", 'success');
 			}
-			catch(ReflectionException $e) {
-				error_log("Error analyzing class $className: " . $e->getMessage());
+			catch(ReflectionException|Exception $e) {
+				$this->log("Error processing class $className: " . $e->getMessage(), 'error');
 			}
 		}
 	}
@@ -376,6 +377,9 @@ class ComponentClassesToJsonDefinitions {
 					else if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Table') {
 						$instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
 					}
+					else if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\ListItemComplex') {
+						$instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
+					}
 					else {
 						$instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
 					}
@@ -504,7 +508,7 @@ class ComponentClassesToJsonDefinitions {
 					];
 				}
 				catch(\Throwable $e) {
-					error_log($e->getMessage());
+					$this->log("Error processing AllowedTags or DefaultTag attributes: " . $e->getMessage(), 'error');
 				}
 			}
 

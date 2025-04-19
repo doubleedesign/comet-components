@@ -38,6 +38,7 @@
         },
         "hAlign": {
             "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
             "supported": [
                 "start",
                 "end",
@@ -79,6 +80,7 @@
         },
         "vAlign": {
             "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
             "supported": [
                 "start",
                 "end",

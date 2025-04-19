@@ -4,11 +4,6 @@
 		"wordpress-block"
 	],
 	"parameters": {
-		"docs": {
-			"description": {
-				"component": "Group components together for layout or structure purposes."
-			}
-		},
 		"server": {
 			"id": "group.php",
 			"url": "/packages/core/src/components/group/__tests__",
@@ -37,6 +32,7 @@
 				}
 			},
 			"options": [
+				"none",
 				"primary",
 				"secondary",
 				"accent",

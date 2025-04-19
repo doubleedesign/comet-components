@@ -5,11 +5,6 @@
 		"wordpress-block"
 	],
 	"parameters": {
-		"docs": {
-			"description": {
-				"component": "Display grouped panels of content as an Accordion or Tabs depending on available space. Uses Vue to determine which to show and only renders the HTML for the current view. <br>It does not use display:none to hide panels, so browser search functionality picks up content in visually hidden panels; there is also handling within the component to automatically open (for accordion mode) or switch to (for tabs mode) the panel containing the highlighted phrase."
-			}
-		},
 		"server": {
 			"id": "responsive-panels.php",
 			"url": "/packages/core/src/components/ResponsivePanels/__tests__",

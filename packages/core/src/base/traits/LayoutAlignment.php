@@ -2,7 +2,15 @@
 namespace Doubleedesign\Comet\Core;
 
 trait LayoutAlignment {
+	/**
+	 * @var Alignment|null $hAlign
+	 * @description Horizontal alignment, if applicable
+	 */
 	protected ?Alignment $hAlign = Alignment::START;
+	/**
+	 * @var Alignment|null $vAlign
+	 * @description Vertical alignment, if applicable
+	 */
 	protected ?Alignment $vAlign = Alignment::START;
 
 	/**
@@ -13,10 +21,10 @@ trait LayoutAlignment {
 		// In WordPress, some blocks have $attributes['theSetting'] and some have $attributes['layout']['theSetting'] so we need to account for both
 		// Also different blocks have different attributes for vertical  alignment that we need to handle
 
-		$hAlign = $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null;
+		$hAlign = $attributes['hAlign'] ?? $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null;
 		$this->hAlign = isset($hAlign) ? Alignment::fromString($hAlign) : null;
 
-		$vAlign = $attributes['alignItems'] ?? $attributes['layout']['alignItems'] ?? $attributes['verticalAlignment'] ?? null;
+		$vAlign = $attributes['vAlign'] ?? $attributes['alignItems'] ?? $attributes['layout']['alignItems'] ?? $attributes['verticalAlignment'] ?? null;
 		$this->vAlign = isset($vAlign) ? Alignment::fromString($vAlign) : null;
 	}
 }

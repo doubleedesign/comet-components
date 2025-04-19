@@ -17,6 +17,11 @@ class Heading extends TextElementExtended {
 	 * @supported-values is-style-accent, is-style-small
 	 */
 	protected ?array $classes = [];
+	/**
+	 * @var int|null $level
+	 * @description Heading level (1-6). Default is 2. Cannot be used in conjunction with tagName.
+	 */
+	protected ?int $level = 2;
 
 	function __construct(array $attributes, string $content) {
 		$proposedTag = Tag::H2;

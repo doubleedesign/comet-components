@@ -59,10 +59,10 @@
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
-		}
+        }
 	},
 	"innerComponents": {
-		"type": "array",
+        "type": "array<Renderable>",
 		"description": "Array of menu item details",
 		"required": true,
 		"inherited": true

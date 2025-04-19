@@ -1,7 +1,10 @@
 {
     "name": "TableHeaderCell",
+    "description": null,
     "extends": "TableCell",
     "abstract": false,
+    "isInner": true,
+    "belongsInside": "Table",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
@@ -48,6 +51,11 @@
                 "th"
             ],
             "default": "th",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
         "textAlign": {

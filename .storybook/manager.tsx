@@ -10,10 +10,9 @@ addons.setConfig({
 	sidebar: {
 		showRoots: true,
 		filters: {
-			//Customise which stories are shown in the sidebar
+			// Customise which stories are shown in the sidebar
 			patterns: (item) => {
-				//return !item.tags?.includes('docsOnly') || item.type === 'docs';
-				return item.type === 'docs';
+				return !item.tags?.includes('docsOnly') || item.type === 'docs';
 			}
 		},
 		renderLabel: (item) => {

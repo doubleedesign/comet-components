@@ -2,7 +2,7 @@
 use Doubleedesign\Comet\Core\Button;
 
 // Attribute keys fetched from component JSON definition
-$attributeKeys = ['classes', 'colorTheme', 'isOutline', 'tagName'];
+$attributeKeys = ['colorTheme', 'isOutline', 'tagName', 'href'];
 // Filter the request query vars to only those matching the above
 $attributes = array_filter($_REQUEST, function($key) use ($attributeKeys) {
 	return in_array($key, $attributeKeys) && $_REQUEST[$key] !== '' && $_REQUEST[$key] !== 'false';
@@ -10,3 +10,8 @@ $attributes = array_filter($_REQUEST, function($key) use ($attributeKeys) {
 
 $component = new Button($attributes, 'Lorem ipsum');
 $component->render();
+
+// Workaround for wrapper-close not loading from php.ini in Laravel Herd
+if(getEnv('SERVER_NAME') === 'comet-components.test') {
+	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+}

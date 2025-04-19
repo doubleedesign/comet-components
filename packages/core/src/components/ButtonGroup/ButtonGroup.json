@@ -21,6 +21,7 @@
         },
         "hAlign": {
             "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
             "supported": [
                 "start",
                 "end",
@@ -37,6 +38,7 @@
         },
         "orientation": {
             "type": "Orientation",
+            "description": "Orientation of the component content, if applicable",
             "supported": [
                 "horizontal",
                 "vertical"
@@ -64,6 +66,7 @@
         },
         "vAlign": {
             "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
             "supported": [
                 "start",
                 "end",

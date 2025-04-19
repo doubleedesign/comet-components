@@ -5,11 +5,6 @@
 		"wordpress-theme"
 	],
 	"parameters": {
-		"docs": {
-			"description": {
-				"component": "Render a site header with a logo, responsive menu, and optional additional components."
-			}
-		},
 		"server": {
 			"id": "site-header.php",
 			"url": "/packages/core/src/components/SiteHeader/__tests__",
@@ -47,6 +42,7 @@
 				}
 			},
 			"options": [
+				"none",
 				"primary",
 				"secondary",
 				"accent",

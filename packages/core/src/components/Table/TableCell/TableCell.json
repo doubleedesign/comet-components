@@ -1,7 +1,10 @@
 {
     "name": "TableCell",
+    "description": null,
     "extends": "TextElement",
     "abstract": false,
+    "isInner": true,
+    "belongsInside": "Table",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
@@ -47,6 +50,11 @@
                 "td"
             ],
             "default": "td",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
         "textAlign": {

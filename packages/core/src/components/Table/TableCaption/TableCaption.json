@@ -1,7 +1,10 @@
 {
     "name": "TableCaption",
+    "description": null,
     "extends": "TextElement",
     "abstract": false,
+    "isInner": true,
+    "belongsInside": "Table",
     "attributes": {
         "classes": {
             "type": "array<string>",
@@ -43,6 +46,11 @@
                 "caption"
             ],
             "default": "caption",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
         "textAlign": {

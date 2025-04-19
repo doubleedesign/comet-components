@@ -25,6 +25,11 @@
             "description": "Unique identifier",
             "inherited": true
         },
+        "level": {
+            "type": "int",
+            "description": "Heading level (1-6). Default is 2. Cannot be used in conjunction with tagName.",
+            "default": 2
+        },
         "style": {
             "type": "array",
             "description": "Inline styles",

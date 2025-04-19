@@ -2,6 +2,10 @@
 namespace Doubleedesign\Comet\Core;
 
 trait LayoutOrientation {
+	/**
+	 * @var Orientation|null $orientation
+	 * @description Orientation of the component content, if applicable
+	 */
 	protected ?Orientation $orientation = Orientation::VERTICAL;
 
 	/**

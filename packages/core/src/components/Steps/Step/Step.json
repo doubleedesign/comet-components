@@ -1,34 +1,16 @@
 {
-    "name": "Tabs",
-    "description": "Display grouped content in a tabbed interface.",
-    "extends": "PanelGroupComponent",
+    "name": "Step",
+    "description": null,
+    "extends": "UIComponent",
     "abstract": false,
-    "vue": true,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
+    "isInner": true,
+    "belongsInside": "Steps",
     "attributes": {
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "tabs"
-            ],
-            "inherited": true
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
+                "steps__step"
             ],
             "inherited": true
         },
@@ -42,16 +24,6 @@
             "description": "Unique identifier",
             "inherited": true
         },
-        "orientation": {
-            "type": "Orientation",
-            "description": "Orientation of the component content, if applicable",
-            "supported": [
-                "horizontal",
-                "vertical"
-            ],
-            "default": "vertical",
-            "inherited": true
-        },
         "style": {
             "type": "array",
             "description": "Inline styles",
@@ -61,9 +33,9 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "li"
             ],
-            "default": "div",
+            "default": "li",
             "inherited": true
         },
         "testId": {
@@ -73,7 +45,7 @@
         }
     },
     "innerComponents": {
-        "type": "array<TabPanel>",
+        "type": "array<Heading|Paragraph|ListComponent|Image|ButtonGroup>",
         "description": "Inner components to be rendered within this component",
         "required": true
     }

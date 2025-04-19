@@ -63,7 +63,7 @@ export function ComponentSpecs({ componentName }) {
 
 	return (
 		<div className="comet-component-specs">
-			<p>{specs?.description}</p>
+			<p dangerouslySetInnerHTML={{ __html: specs?.description }}/>
 			<table>
 				<tbody>
 					<tr>

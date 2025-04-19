@@ -39,6 +39,7 @@
         },
         "hAlign": {
             "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
             "supported": [
                 "start",
                 "end",
@@ -77,6 +78,7 @@
         },
         "vAlign": {
             "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
             "supported": [
                 "start",
                 "end",
@@ -86,6 +88,10 @@
             ],
             "default": "start",
             "inherited": true
+        },
+        "width": {
+            "type": "string",
+            "description": "Optionally set the width of the column. Note: This may be overridden to stack columns on small viewports."
         }
     },
     "innerComponents": {

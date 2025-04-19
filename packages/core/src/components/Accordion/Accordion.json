@@ -53,6 +53,7 @@
         },
         "orientation": {
             "type": "Orientation",
+            "description": "Orientation of the component content, if applicable",
             "supported": [
                 "horizontal",
                 "vertical"

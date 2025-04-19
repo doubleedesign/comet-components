@@ -19,6 +19,11 @@ class Button extends Renderable {
 	 */
 	protected ?bool $isOutline = false;
 	/**
+	 * @var string|null $href
+	 * @description URL to link to if using <a> tag.
+	 */
+	protected ?string $href = '';
+	/**
 	 * @var string $content
 	 * @description Plain text or basic HTML
 	 */

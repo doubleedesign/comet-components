@@ -4,11 +4,6 @@
 		"wordpress-theme"
 	],
 	"parameters": {
-		"docs": {
-			"description": {
-				"component": ""
-			}
-		},
 		"server": {
 			"id": "site-footer.php",
 			"url": "/packages/core/src/components/SiteFooter/__tests__",
@@ -38,6 +33,7 @@
 				}
 			},
 			"options": [
+				"none",
 				"primary",
 				"secondary",
 				"accent",

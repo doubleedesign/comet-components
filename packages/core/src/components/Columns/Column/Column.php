@@ -6,9 +6,9 @@ namespace Doubleedesign\Comet\Core;
 class Column extends LayoutComponent {
 	/**
 	 * @var ?string $width
-	 * Optional set width of the column. Note: This may be overridden to stack columns on small viewports.
+	 * @description Optionally set the width of the column. Note: This may be overridden to stack columns on small viewports.
 	 */
-	private ?string $width;
+	protected ?string $width;
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct(
