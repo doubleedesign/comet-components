@@ -91,6 +91,9 @@ class TychoService {
 			if(strtolower($tagName) === $tagName) {
 				$ComponentClass = match ($tagName) {
 					'div' => 'Doubleedesign\\Comet\\Core\\Group',
+					'p' => 'Doubleedesign\\Comet\\Core\\Paragraph',
+					'ul', 'ol' => 'Doubleedesign\\Comet\\Core\\ListComponent',
+					'li' => 'Doubleedesign\\Comet\\Core\\ListItem',
 					default => throw new Exception("Component class $ComponentClass not found"),
 				};
 			}
@@ -154,7 +157,13 @@ class TychoService {
 				$value = str_contains($value, '.') ? (float)$value : (int)$value;
 			}
 
-			// TODO: Handle arrays such as inline styles
+			// Handle classes
+			// The StringArray type in the XML schema is a space-separated list of strings, so we need to turn that into an array
+			if($name === 'classes') {
+				$value = array_filter(explode(' ', $value), fn($class) => $class !== '');
+			}
+
+			// TODO: Handle other arrays such as inline styles
 
 			$attributes[$name] = $value;
 		}

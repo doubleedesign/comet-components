@@ -88,6 +88,13 @@ foreach($components as $component) {
 }
 ```
 
+Single-dimension array values, such as `$classes,` are passed as space-separated strings:
+
+```xml
+
+<Heading classes="is-style-accent some-special-class">Some heading</Heading>
+```
+
 :::info
 Wrapping the components in `<TychoTemplate xmlns="schema/components.xsd">` provides basic IDE autocompletion and validation, and a somewhat useful "go to definition" response (it goes to the schema file, not the PHP class as would be ideal).
 
