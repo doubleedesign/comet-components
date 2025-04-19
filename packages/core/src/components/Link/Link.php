@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Link component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Display a link with a contextual icon.
+ */
 #[AllowedTags([Tag::A])]
 #[DefaultTag(Tag::A)]
 class Link extends Renderable {

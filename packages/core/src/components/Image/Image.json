@@ -1,5 +1,6 @@
 {
     "name": "Image",
+    "description": "Render an image with optional caption, link, and display options such as aspect ratio and behaviour within its container.",
     "extends": "Renderable",
     "abstract": false,
     "isInner": false,

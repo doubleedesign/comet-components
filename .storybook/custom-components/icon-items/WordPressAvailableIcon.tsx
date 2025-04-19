@@ -1,10 +1,17 @@
 import React from 'react';
+import { type ComponentIconProps } from './types.ts';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { ComponentIconProps } from './types.ts';
+import { Icon, blockDefault, brush } from '@wordpress/icons';
 
-export function WordPressAvailableIcon({ tooltipPosition = 'bottom', asLink = true, tooltip = 'Available as a WordPress block' }: ComponentIconProps) {
-	const icon = (
+export function WordPressAvailableIcon({
+	tooltipPosition = 'bottom',
+	asLink = true,
+	scope = 'block'
+}: ComponentIconProps & {
+	scope?: 'block' | 'theme'
+}) {
+	const mainIcon = (
 		<svg viewBox="0 0 122.52 122.523" xmlns="http://www.w3.org/2000/svg">
 			<g fill="#21759b">
 				<path d="m8.708 61.26c0 20.802 12.089 38.779 29.619 47.298l-25.069-68.686c-2.916 6.536-4.55 13.769-4.55 21.388z"/>
@@ -20,19 +27,23 @@ export function WordPressAvailableIcon({ tooltipPosition = 'bottom', asLink = tr
 		</svg>
 	);
 
+	const tooltip = scope === 'theme' ? 'Implemented in Comet Canvas WordPress theme' : 'Available as a WordPress block';
+
 	return asLink ? (
 		<Tippy content={tooltip} placement={tooltipPosition}>
 			<a className="sbdocs__icon__inner sbdocs__icon__inner--wordpress"
 				href="https://cometcomponents.io/docs/installation/wordpress.html"
 				target="_blank"
 			>
-				{icon}
+				<span className="wp-main-icon">{mainIcon}</span>
+				<span className="wp-type-icon">{scope === 'theme' ? <i className="fa-solid fa-paintbrush-fine"></i> : <Icon icon={ blockDefault } />}</span>
 			</a>
 		</Tippy>
 	) : (
 		<Tippy content={tooltip} placement={tooltipPosition}>
 			<span tabIndex={0} className="sbdocs__icon__item sbdocs__icon__item--wordpress">
-				{icon}
+				<span className="wp-main-icon">{mainIcon}</span>
+				<span className="wp-type-icon">{scope === 'theme' ?<i className="fa-solid fa-paintbrush-fine"></i> : <Icon icon={ blockDefault } />}</span>
 			</span>
 		</Tippy>
 	);

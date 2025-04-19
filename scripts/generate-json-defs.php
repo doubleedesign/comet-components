@@ -115,9 +115,9 @@ class ComponentClassesToJsonDefinitions {
 		// Get file contents
 		$content = file_get_contents($filePath);
 
-		// Extract namespace if exists
 		$namespace = '';
 		if(preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
+			// Extract namespace if exists
 			$namespace = $matches[1] . '\\';
 		}
 
@@ -167,13 +167,13 @@ class ComponentClassesToJsonDefinitions {
 				// Sort the result into the desired order
 				$result = Utils::sort_associative_array_with_given_key_order(
 					$result,
-					['name', 'extends', 'abstract', 'vue', 'isInner', 'belongsInside', 'attributes', 'content', 'innerComponents']
+					['name', 'description', 'extends', 'abstract', 'vue', 'isInner', 'belongsInside', 'attributes', 'content', 'innerComponents']
 				);
 
 				// Export the data to a JSON file
 				$outputPath = str_replace('.php', '.json', $reflectionClass->getFileName());
 				$this->exportToJson($outputPath, $result);
-				print_r("Exported component definition JSON to $outputPath\n");
+				$this->log("Exported component definition JSON to $outputPath\n", 'success');
 			}
 			catch(ReflectionException $e) {
 				error_log("Error analyzing class $className: " . $e->getMessage());
@@ -223,18 +223,26 @@ class ComponentClassesToJsonDefinitions {
 			}
 		}
 
+		// Get the description of the class from the docblock at the top
+		// (it should be prefixed by @description)
+		$docComment = $reflectionClass->getDocComment();
+		if($docComment && preg_match('/@description\s+(.+)/', $docComment, $matches)) {
+			$description = trim($matches[1]);
+		}
+
 		$finalAttrs = array_filter($properties, function($key) {
 			return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
 		}, ARRAY_FILTER_USE_KEY);
 		ksort($finalAttrs);
 
 		$result = [
-			'name'       => array_reverse(explode('\\', $className))[0],
-			'extends'    => $parentClass
+			'name'        => array_reverse(explode('\\', $className))[0],
+			'description' => $description ?? null,
+			'extends'     => $parentClass
 				? ($parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null)
 				: null,
-			'abstract'   => $reflectionClass->isAbstract(),
-			'attributes' => $finalAttrs
+			'abstract'    => $reflectionClass->isAbstract(),
+			'attributes'  => $finalAttrs
 		];
 
 		if(isset($properties['content'])) {
@@ -543,6 +551,26 @@ class ComponentClassesToJsonDefinitions {
 	public function exportToJson(string $outputPath, array $data): void {
 		$json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 		file_put_contents($outputPath, $json);
+	}
+
+	private static function log(string $message, string $type): void {
+		// ANSI colour codes
+		$red = "\033[0;31m";
+		$green = "\033[0;32m";
+		$yellow = "\033[0;33m";
+		$cyan = "\033[0;36m";
+		$white = "\033[0;37m";
+		$reset = "\033[0m";
+
+		$color = match ($type) {
+			'info' => $cyan,
+			'success' => $green,
+			'error' => $red,
+			'warning' => $yellow,
+			default => $white,
+		};
+
+		echo $color . $message . $reset;
 	}
 }
 

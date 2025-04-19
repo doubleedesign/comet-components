@@ -1,14 +1,16 @@
 {
     "name": "Separator",
+    "description": "Visually separate content with a styled horizontal line.",
     "extends": "Renderable",
     "abstract": false,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "separator",
-                ""
+                "separator"
             ],
             "inherited": true
         },
@@ -51,6 +53,11 @@
                 "hr"
             ],
             "default": "hr",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         }
     }

@@ -212,6 +212,12 @@ When trying to use the same page for multiple tests, you may get this error beca
 This error occurs when using Node version 23 - in which case switching to a 20.x version should solve it.
 :::
 
+## Storybook
+
+:::details Changes to Storybook config not being picked up in dev mode
+Restart the Storybook server. This issue is particularly common with `main.ts` and `manager.ts` - any changes to these usually require a restart.
+:::
+
 ## Documentation site changes
 
 :::details Error '"SEARCH_INDEX" is not exported' when running the build step

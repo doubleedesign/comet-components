@@ -1,5 +1,6 @@
 {
     "name": "LinkGroup",
+    "description": "Render a group of Link components with a common color theme.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
@@ -60,9 +61,10 @@
             "inherited": true
         }
     },
-	"links": {
-		"type": "array<Link|array<string,string>",
-		"description": "Either an array of Link objects or an array of associative arrays corresponding to Link fields",
-		"required": true
-	}
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true,
+        "inherited": true
+    }
 }

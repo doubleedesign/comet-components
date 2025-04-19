@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Separator component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Visually separate content with a styled horizontal line.
+ */
 #[AllowedTags([Tag::HR])]
 #[DefaultTag(Tag::HR)]
 class Separator extends Renderable {

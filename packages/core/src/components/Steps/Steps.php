@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Steps component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Feature a series of steps in a horizontal or vertical orientation.
+ */
 #[AllowedTags([Tag::OL])]
 #[DefaultTag(Tag::OL)]
 class Steps extends LayoutComponent {

@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * List component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Renders a list of items, either ordered or unordered.
+ */
 #[AllowedTags([Tag::UL, Tag::OL])]
 #[DefaultTag(Tag::UL)]
 class ListComponent extends UIComponent {

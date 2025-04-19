@@ -1,6 +1,14 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * ResponsivePanels component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Display grouped panels of content as an Accordion or Tabs depending on available space.
+ *              Uses Vue to determine which to show and only renders the HTML for the current view.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class ResponsivePanels extends PanelGroupComponent {

@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Callout component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Highlight an important message in a callout box.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class Callout extends UIComponent {

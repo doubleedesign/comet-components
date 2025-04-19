@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Container component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Create a section with semantic meaning that controls the maximum width of its contents.
+ */
 #[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV])]
 #[DefaultTag(Tag::SECTION)]
 class Container extends LayoutComponent {

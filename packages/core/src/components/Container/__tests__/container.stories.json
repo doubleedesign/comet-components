@@ -1,12 +1,12 @@
 {
-	"title": "Components/Structure/Container",
+	"title": "Structure/Container",
 	"tags": [
 		"wordpress-block"
 	],
 	"parameters": {
 		"docs": {
 			"description": {
-				"component": "Create a section that controls the maximum width of its contents, can have a background colour, etc."
+				"component": "Create a section with semantic meaning that controls the maximum width of its contents."
 			}
 		},
 		"server": {
@@ -18,13 +18,66 @@
 		}
 	},
 	"args": {
-		"backgroundColor": "",
-		"gradient": "",
-		"size": "default",
+		"withWrapper": "true",
 		"tagName": "section",
-		"withWrapper": "true"
+		"size": "default",
+		"backgroundColor": "",
+		"gradient": ""
 	},
 	"argTypes": {
+		"withWrapper": {
+			"description": "Whether to wrap the container element so that the background is full-width",
+			"control": {
+				"type": "boolean"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "true"
+				},
+				"type": {
+					"summary": "bool"
+				}
+			}
+		},
+		"tagName": {
+			"description": "The HTML tag to use for this component",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "section"
+				},
+				"type": {
+					"summary": "Tag"
+				}
+			},
+			"options": [
+				"section",
+				"main",
+				"div"
+			]
+		},
+		"size": {
+			"description": "Keyword specifying the relative width of the container for the inner content",
+			"control": {
+				"type": "select"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": "default"
+				},
+				"type": {
+					"summary": "ContainerSize"
+				}
+			},
+			"options": [
+				"default",
+				"wide",
+				"fullwidth",
+				"narrow"
+			]
+		},
 		"backgroundColor": {
 			"description": "Background colour keyword",
 			"control": {
@@ -51,20 +104,6 @@
 				"white"
 			]
 		},
-		"classes": {
-			"description": "CSS classes",
-			"control": false,
-			"table": {
-				"defaultValue": {
-					"summary": [
-						"container"
-					]
-				},
-				"type": {
-					"summary": "array<string>"
-				}
-			}
-		},
 		"gradient": {
 			"description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)",
 			"control": "none",
@@ -77,56 +116,17 @@
 				}
 			}
 		},
-		"size": {
-			"description": "Keyword specifying the relative width of the container for the inner content",
-			"control": {
-				"type": "select"
-			},
+		"classes": {
+			"description": "CSS classes",
+			"control": false,
 			"table": {
 				"defaultValue": {
-					"summary": "default"
+					"summary": [
+						"container"
+					]
 				},
 				"type": {
-					"summary": "ContainerSize"
-				}
-			},
-			"options": [
-				"default",
-				"wide",
-				"fullwidth",
-				"narrow"
-			]
-		},
-		"tagName": {
-			"description": "The HTML tag to use for this component",
-			"control": {
-				"type": "select"
-			},
-			"table": {
-				"defaultValue": {
-					"summary": "section"
-				},
-				"type": {
-					"summary": "Tag"
-				}
-			},
-			"options": [
-				"section",
-				"main",
-				"div"
-			]
-		},
-		"withWrapper": {
-			"description": "Whether to wrap the container element so that the background is full-width",
-			"control": {
-				"type": "boolean"
-			},
-			"table": {
-				"defaultValue": {
-					"summary": "true"
-				},
-				"type": {
-					"summary": "bool"
+					"summary": "array<string>"
 				}
 			}
 		}

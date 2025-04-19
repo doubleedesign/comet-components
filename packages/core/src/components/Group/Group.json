@@ -1,5 +1,6 @@
 {
     "name": "Group",
+    "description": "Group components together for layout or structure purposes.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

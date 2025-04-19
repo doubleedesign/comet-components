@@ -1,5 +1,6 @@
 {
     "name": "Container",
+    "description": "Create a section with semantic meaning that controls the maximum width of its contents.",
     "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,

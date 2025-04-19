@@ -1,5 +1,6 @@
 {
     "name": "Accordion",
+    "description": "Group content into expandable/collapsible panels.",
     "extends": "PanelGroupComponent",
     "abstract": false,
     "vue": true,

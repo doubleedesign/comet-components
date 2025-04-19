@@ -1,5 +1,6 @@
 {
     "name": "Link",
+    "description": "Display a link with a contextual icon.",
     "extends": "Renderable",
     "abstract": false,
     "isInner": false,

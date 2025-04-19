@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * SiteHeader component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a site header with a logo, responsive menu, and optional additional components.
+ */
 #[AllowedTags([Tag::HEADER])]
 #[DefaultTag(Tag::HEADER)]
 class SiteHeader extends LayoutComponent {
@@ -11,6 +18,7 @@ class SiteHeader extends LayoutComponent {
 	/**
 	 * @var ?ContainerSize $size
 	 * @description Keyword specifying the relative width of the container for the inner content
+	 * @default-value default
 	 */
 	protected ?ContainerSize $size = ContainerSize::DEFAULT;
 	/**

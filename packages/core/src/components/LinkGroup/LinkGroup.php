@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * LinkGroup component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a group of Link components with a common color theme.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class LinkGroup extends UIComponent {

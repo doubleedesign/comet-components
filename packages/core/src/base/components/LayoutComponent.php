@@ -21,7 +21,7 @@ abstract class LayoutComponent extends UIComponent {
 	}
 
 	protected function get_filtered_classes(): array {
-		if((!$this instanceof Column) && (!$this instanceof ContentWrapper) && (!$this instanceof ImageWrapper)) {
+		if((!$this instanceof Column) && (!$this instanceof ContentWrapper) && (!$this instanceof ImageWrapper) && (!$this instanceof Steps)) {
 			return array_merge(
 				parent::get_filtered_classes(),
 				['layout-block']

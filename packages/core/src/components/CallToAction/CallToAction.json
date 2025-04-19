@@ -1,5 +1,6 @@
 {
     "name": "CallToAction",
+    "description": "Highlight important information and prompt the user to take action.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Group component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Group components together for layout or structure purposes.
+ */
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
 class Group extends UIComponent {

@@ -1,5 +1,6 @@
 {
     "name": "ListComponent",
+    "description": "Renders a list of items, either ordered or unordered.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

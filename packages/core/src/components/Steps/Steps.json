@@ -1,7 +1,10 @@
 {
     "name": "Steps",
+    "description": "Feature a series of steps in a horizontal or vertical orientation.",
     "extends": "LayoutComponent",
     "abstract": false,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
@@ -93,6 +96,11 @@
                 "ol"
             ],
             "default": "ol",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
         "vAlign": {

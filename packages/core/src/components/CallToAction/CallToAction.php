@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Call-To-Action component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Highlight important information and prompt the user to take action.
+ */
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
 class CallToAction extends UIComponent {

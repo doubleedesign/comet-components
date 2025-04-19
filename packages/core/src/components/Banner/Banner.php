@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Banner component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description A "hero" banner with an image background and optional overlay, with a container for inner content.
+ */
 #[AllowedTags([Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class Banner extends LayoutComponent {
@@ -146,7 +153,7 @@ class Banner extends LayoutComponent {
 
 		return $styles;
 	}
-	
+
 	function get_inline_styles(): array {
 		$styles['min-height'] = $this->minHeight . 'px';
 		$styles['max-height'] = $this->maxHeight . 'vh';

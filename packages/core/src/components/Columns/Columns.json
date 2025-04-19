@@ -1,5 +1,6 @@
 {
     "name": "Columns",
+    "description": "Organise content visually with a column-based layout.",
     "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,

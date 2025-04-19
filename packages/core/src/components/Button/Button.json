@@ -1,5 +1,6 @@
 {
     "name": "Button",
+    "description": "Prompt the user to take an action with a button or button-style link.",
     "extends": "Renderable",
     "abstract": false,
     "isInner": false,

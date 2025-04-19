@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Accordion component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Group content into expandable/collapsible panels.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class Accordion extends PanelGroupComponent {

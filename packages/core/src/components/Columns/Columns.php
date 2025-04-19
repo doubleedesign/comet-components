@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Columns component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Organise content visually with a column-based layout.
+ */
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::DIV)]
 class Columns extends LayoutComponent {

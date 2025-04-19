@@ -1,5 +1,6 @@
 {
     "name": "Details",
+    "description": "A component that renders a single expandable/collapsible panel.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

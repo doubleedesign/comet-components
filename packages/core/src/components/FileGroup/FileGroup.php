@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * FileGroup component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Display a list of downloadable file links with details about them.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class FileGroup extends UIComponent {

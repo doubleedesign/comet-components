@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * ButtonGroup component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Semantically and visually group buttons together.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class ButtonGroup extends UIComponent {

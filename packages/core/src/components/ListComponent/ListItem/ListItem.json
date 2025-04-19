@@ -1,22 +1,15 @@
 {
     "name": "ListItem",
+    "description": null,
     "extends": null,
     "abstract": false,
     "isInner": true,
     "belongsInside": "ListComponent",
     "attributes": [],
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"li"
-			],
-			"default": "li",
-			"inherited": true
-		}
-	},
-	"content": {
-		"type": "string"
-	},
-	"innerComponents": {
-		"type": "array"
-	}
+    "content": {
+        "type": "string"
+    },
+    "innerComponents": {
+        "type": "array"
+    }
 }

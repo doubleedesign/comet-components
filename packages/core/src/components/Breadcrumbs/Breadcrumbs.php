@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Breadcrumbs component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a breadcrumb navigation list.
+ */
 #[AllowedTags([Tag::NAV])]
 #[DefaultTag(Tag::NAV)]
 class Breadcrumbs extends UIComponent {

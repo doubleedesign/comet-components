@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Button component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Prompt the user to take an action with a button or button-style link.
+ */
 #[AllowedTags([Tag::A, Tag::BUTTON])]
 #[DefaultTag(Tag::A)]
 class Button extends Renderable {

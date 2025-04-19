@@ -1,8 +1,7 @@
 {
-	"title": "Layout/Accordion",
+	"title": "Structure/SiteFooter",
 	"tags": [
-		"vue",
-		"wordpress-block"
+		"wordpress-theme"
 	],
 	"parameters": {
 		"docs": {
@@ -11,44 +10,28 @@
 			}
 		},
 		"server": {
-			"id": "accordion.php",
-			"url": "/packages/core/src/components/Accordion/__tests__",
+			"id": "site-footer.php",
+			"url": "/packages/core/src/components/SiteFooter/__tests__",
 			"params": {
 				"__debug": true
 			}
 		}
 	},
 	"args": {
-		"colorTheme": "primary",
-		"icon": "fa-plus",
-		"iconPrefix": "fa-solid",
-		"orientation": "vertical",
-		"tagName": "div",
+		"backgroundColor": "",
+		"size": "default",
+		"tagName": "footer",
 		"testId": ""
 	},
 	"argTypes": {
-		"classes": {
-			"description": "CSS classes",
-			"control": false,
-			"table": {
-				"defaultValue": {
-					"summary": [
-						"accordion"
-					]
-				},
-				"type": {
-					"summary": "array<string>"
-				}
-			}
-		},
-		"colorTheme": {
-			"description": "Colour keyword for the fill or outline colour",
+		"backgroundColor": {
+			"description": "Background colour keyword",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "primary"
+					"summary": ""
 				},
 				"type": {
 					"summary": "ThemeColor"
@@ -67,50 +50,40 @@
 				"white"
 			]
 		},
-		"icon": {
-			"description": "Icon class name for the icon to use for the expand/collapse indicator.",
-			"control": {
-				"type": "text"
-			},
+		"classes": {
+			"description": "CSS classes",
+			"control": false,
 			"table": {
 				"defaultValue": {
-					"summary": "fa-plus"
+					"summary": [
+						"site-footer"
+					]
 				},
 				"type": {
-					"summary": "string"
+					"summary": "array<string>"
 				}
 			}
 		},
-		"iconPrefix": {
-			"description": "Icon prefix class name",
-			"control": {
-				"type": "text"
-			},
-			"table": {
-				"defaultValue": {
-					"summary": "fa-solid"
-				},
-				"type": {
-					"summary": "string"
-				}
-			}
-		},
-		"orientation": {
-			"description": "",
+		"size": {
+			"description": "Keyword specifying the relative width of the container for the inner content",
 			"control": {
 				"type": "select"
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "vertical"
+					"summary": "default"
 				},
 				"type": {
-					"summary": "Orientation"
+					"summary": "ContainerSize"
 				}
 			},
 			"options": [
-				"horizontal",
-				"vertical"
+				"default",
+				"wide",
+				"fullwidth",
+				"narrow",
+				"narrower",
+				"small"
 			]
 		},
 		"tagName": {
@@ -120,21 +93,19 @@
 			},
 			"table": {
 				"defaultValue": {
-					"summary": "div"
+					"summary": "footer"
 				},
 				"type": {
 					"summary": "Tag"
 				}
 			},
 			"options": [
-				"div"
+				"footer"
 			]
 		},
 		"testId": {
 			"description": "Optionally add a data-testid attribute for automated tests",
-			"control": {
-				"type": "text"
-			},
+			"control": false,
 			"table": {
 				"defaultValue": {
 					"summary": ""

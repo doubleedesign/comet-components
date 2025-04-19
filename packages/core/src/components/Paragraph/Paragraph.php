@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Paragraph component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a paragraph element, optionally with a theme style applied.
+ */
 #[AllowedTags([Tag::P])]
 #[DefaultTag(Tag::P)]
 class Paragraph extends TextElementExtended {

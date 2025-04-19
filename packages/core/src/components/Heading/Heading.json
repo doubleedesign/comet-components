@@ -1,5 +1,6 @@
 {
     "name": "Heading",
+    "description": "Render a heading element, optionally with a theme style applied.",
     "extends": "TextElementExtended",
     "abstract": false,
     "isInner": false,

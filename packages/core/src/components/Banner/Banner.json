@@ -1,5 +1,6 @@
 {
     "name": "Banner",
+    "description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content.",
     "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,
@@ -7,7 +8,7 @@
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
-            "description": "The background colour of the content area",
+            "description": "Background colour keyword",
             "supported": [
                 "primary",
                 "secondary",

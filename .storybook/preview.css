@@ -14,7 +14,7 @@
 	display: flex;
 	list-style: none;
 	align-items: center;
-	gap: var(--spacing-md);
+	gap: var(--spacing-xs);
 }
 
 .sbdocs__icon {
@@ -22,7 +22,37 @@
 	.sbdocs__icon__inner {
 		display: inline-flex;
 		align-items: center;
-		width: 2.5rem;
+		position: relative;
+
+		svg {
+			width: 2.5rem;
+		}
+
+		&:hover, &:focus, &:active {
+			color: currentColor;
+		}
+
+		.wp-type-icon {
+			background: #40464d;
+			border-radius: 100%;
+			padding: 0.25rem;
+			box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+			width: fit-content;
+			aspect-ratio: 1/1;
+			line-height: 0;
+			position: absolute;
+			bottom: -0.25rem;
+			right: -0.75rem;
+
+			svg {
+				width: 1rem;
+				height: 1rem;
+
+				path {
+					fill: white;
+				}
+			}
+		}
 	}
 }
 

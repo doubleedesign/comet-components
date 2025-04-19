@@ -1,5 +1,6 @@
 {
     "name": "ImageAndText",
+    "description": "Display some featured text alongside an image.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

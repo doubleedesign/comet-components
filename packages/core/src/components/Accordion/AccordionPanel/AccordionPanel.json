@@ -1,5 +1,6 @@
 {
     "name": "AccordionPanel",
+    "description": null,
     "extends": "PanelComponent",
     "abstract": false,
     "isInner": true,

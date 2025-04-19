@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * IconWithText component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Display an icon with an associated text label.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class IconWithText extends UIComponent {

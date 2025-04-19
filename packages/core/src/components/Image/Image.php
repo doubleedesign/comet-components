@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Image component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render an image with optional caption, link, and display options such as aspect ratio and behaviour within its container.
+ */
 #[AllowedTags([Tag::FIGURE])]
 #[DefaultTag(Tag::FIGURE)]
 class Image extends Renderable {

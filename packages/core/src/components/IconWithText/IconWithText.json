@@ -1,5 +1,6 @@
 {
     "name": "IconWithText",
+    "description": "Display an icon with an associated text label.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

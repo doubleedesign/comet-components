@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * ImageAndText component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Display some featured text alongside an image.
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class ImageAndText extends UIComponent {

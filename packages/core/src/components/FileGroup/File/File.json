@@ -1,5 +1,6 @@
 {
     "name": "File",
+    "description": null,
     "extends": "Renderable",
     "abstract": false,
     "isInner": true,

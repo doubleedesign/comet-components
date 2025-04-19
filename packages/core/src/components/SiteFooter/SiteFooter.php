@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * SiteFooter component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a footer with inner components such as a Menu.
+ */
 #[AllowedTags([Tag::FOOTER])]
 #[DefaultTag(Tag::FOOTER)]
 class SiteFooter extends UIComponent {
@@ -10,6 +17,7 @@ class SiteFooter extends UIComponent {
 	/**
 	 * @var ?ContainerSize $size
 	 * @description Keyword specifying the relative width of the container for the inner content
+	 * @default-value default
 	 */
 	protected ?ContainerSize $size = ContainerSize::DEFAULT;
 

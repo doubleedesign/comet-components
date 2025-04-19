@@ -1,5 +1,6 @@
 {
     "name": "ButtonGroup",
+    "description": "Semantically and visually group buttons together.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

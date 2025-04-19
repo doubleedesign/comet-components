@@ -52,10 +52,14 @@ export const Title: FunctionComponent<TitleProps> = (props) => {
 				<VueComponentIcon />
 			);
 		}
-
 		if (preparedMeta?.tags?.includes('wordpress-block')) {
 			icons.push(
 				<WordPressAvailableIcon />
+			);
+		}
+		if (preparedMeta?.tags?.includes('wordpress-theme')) {
+			icons.push(
+				<WordPressAvailableIcon scope="theme" />
 			);
 		}
 

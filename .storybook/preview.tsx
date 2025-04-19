@@ -23,7 +23,6 @@ import { Title } from './blocks/Title.tsx';
 // 	});
 // });
 
-
 const preview: Preview = {
 	parameters: {
 		viewMode: 'story',
@@ -41,13 +40,10 @@ const preview: Preview = {
 		options: {
 			storySort: {
 				order: [
-					'Introduction',
-					'Releases',
-					'Components',
-					'Implementations',
-					'Extending',
-					'Development',
-					'Code Foundations',
+					'Structure',
+					'Layout',
+					'Text',
+					'**'
 				],
 			},
 		},
@@ -57,6 +53,7 @@ const preview: Preview = {
 				color: /(background|color)$/i,
 				date: /Date$/i,
 			},
+			sort: 'none' // get order from story files
 		},
 		backgrounds: {
 			disable: true
@@ -73,6 +70,9 @@ const preview: Preview = {
 			},
 			canvas: {
 				withToolbar: true,
+			},
+			controls: {
+				sort: 'none' // get order from story files
 			},
 			components: {
 				// code: (props: { className?: string, children: any }) => {

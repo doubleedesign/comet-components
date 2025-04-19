@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Menu component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a navigation menu that can have multiple levels of lists.
+ */
 #[AllowedTags([Tag::NAV])]
 #[DefaultTag(Tag::NAV)]
 class Menu extends UIComponent {

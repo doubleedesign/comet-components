@@ -97,6 +97,11 @@ class Utils {
 	 * @return array
 	 */
 	public static function array_flat(array $array): array {
+		// If the array is empty, bail early
+		if(empty($array)) {
+			return [];
+		}
+		
 		// This is an array of arrays and needs to be flattened
 		if(is_array($array[0])) {
 			return array_merge(...$array);

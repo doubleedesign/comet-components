@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Pageheader component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a page header with the page title and optional breadcrumb navigation.
+ */
 #[AllowedTags([Tag::HEADER, Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::HEADER)]
 class PageHeader extends UIComponent {

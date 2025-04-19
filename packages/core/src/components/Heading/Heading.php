@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Heading component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a heading element, optionally with a theme style applied.
+ */
 #[AllowedTags([Tag::H1, Tag::H2, Tag::H3, Tag::H4, Tag::H5, Tag::H6])]
 #[DefaultTag(Tag::H2)]
 class Heading extends TextElementExtended {

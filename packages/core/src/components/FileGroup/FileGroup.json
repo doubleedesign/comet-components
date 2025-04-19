@@ -1,5 +1,6 @@
 {
     "name": "FileGroup",
+    "description": "Display a list of downloadable file links with details about them.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
@@ -60,10 +61,10 @@
             "inherited": true
         }
     },
-	"files": {
-		"type": "array<File|array<string,string>",
-		"description": "Either an array of File objects or an array of associative arrays corresponding to File fields",
-		"required": true,
-		"inherited": true
-	}
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true,
+        "inherited": true
+    }
 }

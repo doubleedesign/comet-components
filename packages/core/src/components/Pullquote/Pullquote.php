@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Pullquote component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Feature a quote or excerpt, with an optional citation.
+ */
 #[AllowedTags([Tag::BLOCKQUOTE])]
 #[DefaultTag(Tag::BLOCKQUOTE)]
 class Pullquote extends TextElementExtended {

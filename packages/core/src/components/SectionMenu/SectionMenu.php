@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * SectionMenu component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Render a menu for the current section of your site, such as in the sidebar.
+ */
 #[AllowedTags([Tag::NAV])]
 #[DefaultTag(Tag::NAV)]
 class SectionMenu extends Menu {

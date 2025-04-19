@@ -1,5 +1,6 @@
 {
     "name": "Gallery",
+    "description": "Display a grid of images with optional captions, with a range of layout options.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

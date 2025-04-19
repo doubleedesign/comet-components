@@ -1,5 +1,6 @@
 {
     "name": "Callout",
+    "description": "Highlight an important message in a callout box.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

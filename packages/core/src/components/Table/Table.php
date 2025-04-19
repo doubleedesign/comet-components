@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * Table component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description Display tabular data with support for responsive stacking, sticky headers and footers, row headers, and merged cells.
+ */
 #[AllowedTags([Tag::TABLE])]
 #[DefaultTag(Tag::TABLE)]
 class Table extends Renderable {

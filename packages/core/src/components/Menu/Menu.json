@@ -1,39 +1,47 @@
 {
-	"name": "Menu",
-	"extends": "UIComponent",
-	"abstract": false,
-	"attributes": {
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"default": [
-				"menu"
-			],
-			"inherited": true
-		},
-		"context": {
-			"type": "string",
-			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-			"inherited": true
-		},
-		"id": {
-			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"style": {
-			"type": "array",
-			"description": "Inline styles",
-			"inherited": true
-		},
-		"tagName": {
-			"type": "Tag",
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"nav"
-			],
-			"default": "nav",
-			"inherited": true
+    "name": "Menu",
+    "description": "Render a navigation menu that can have multiple levels of lists.",
+    "extends": "UIComponent",
+    "abstract": false,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
+    "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "menu"
+            ],
+            "inherited": true
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+            "inherited": true
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "nav"
+            ],
+            "default": "nav",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
 		}
 	},
 	"innerComponents": {

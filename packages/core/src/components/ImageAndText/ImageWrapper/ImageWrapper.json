@@ -1,5 +1,6 @@
 {
     "name": "ImageWrapper",
+    "description": null,
     "extends": "LayoutComponent",
     "abstract": false,
     "isInner": true,

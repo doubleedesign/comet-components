@@ -1,5 +1,6 @@
 {
     "name": "Breadcrumbs",
+    "description": "Render a breadcrumb navigation list.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,

@@ -59,8 +59,15 @@ class ComponentStoryGenerator {
 		$shortName = self::kebab_case($json['name']);
 		// Exclude some attributes handled internally , not suitable for Storybook, or not suitable to autogenerate
 		$attributes = array_diff_key($json['attributes'], array_flip(['id', 'style', 'context']));
-		// Get the category from the WordPress plugin's block support JSON file
-		$category = ucfirst(self::get_category_from_wordpress_plugin_json($json['name'])) ?? 'Uncategorised';
+		// If the component extends LayoutComponent, the category should be Layout by default
+		// (for some this may be manually changed to something like Structure, but this is a sensible default)
+		if(isset($json['extends']) && $json['extends'] === 'LayoutComponent') {
+			$category = 'Layout';
+		}
+		// Otherwise, get the category from the WordPress plugin's block support JSON file
+		else {
+			$category = ucfirst(self::get_category_from_wordpress_plugin_json($json['name'])) ?? 'Uncategorised';
+		}
 
 		// Determine tags from the various JSON files:
 		// 1. Values in the component's JSON file
@@ -75,20 +82,21 @@ class ComponentStoryGenerator {
 		}
 		// 3. Is this a supported WordPress core block?
 		$blockSupportJson = json_decode(file_get_contents(dirname(__DIR__, 1) . '/packages/comet-plugin/src/block-support.json'), true);
-		if($blockSupportJson['core']['supported']['core/' . $shortName]) {
+		if(isset($blockSupportJson['core']['supported']['core/' . $shortName])) {
 			array_push($tags, 'wordpress-block');
 		}
-		// Note: This doesn't cover 100% of cases, such as renamed blocks and plugin blocks; a small number will need tags manually added
+		// Note: The above tag logic doesn't cover 100% of cases, such as renamed blocks and plugin blocks; a small number will need tags manually added
 
+		$description = $json['description'] ?? self::get_description_from_wordpress_block_json($json['name']);
 
 		$this->generateComponentOutputPage($json['name'], $shortName, $attributes);
-		$this->generateStoryFile($json['name'], $shortName, $attributes, $category, $tags);
+		$this->generateStoryFile($json['name'], $shortName, $description, $attributes, $category, $tags);
 	}
 
 	private function generateComponentOutputPage($name, $shortName, $attributes): void {
 		// If the file already exists, bail unless the overwrite flag is set
 		if(file_exists("$this->testComponentDirectory/$shortName.php") && !$this->overwrite) {
-			print_r("Browser output example file already exists for $name, skipping\n");
+			$this->log("Browser output example file already exists for $name, skipping\n", 'info');
 			return;
 		}
 
@@ -119,20 +127,20 @@ class ComponentStoryGenerator {
 		file_put_contents($outputPath, $fileContent);
 	}
 
-	private function generateStoryFile($name, $shortName, $attributes, $category, $tags): void {
+	private function generateStoryFile($name, $shortName, $description, $attributes, $category, $tags): void {
 		// If the file already exists, bail unless the overwrite flag is set
 		if(file_exists("$this->sourceDirectory/__tests__/$shortName.stories.json") && !$this->overwrite) {
-			print_r("Storybook file already exists for $name, skipping\n");
+			$this->log("Storybook file already exists for $name, skipping\n", 'info');
 			return;
 		}
 
 		$storyFile = [
-			'title'      => sprintf('Components/%s/%s', $category, $name),
+			'title'      => sprintf('%s/%s', $category, $name),
 			'tags'       => $tags,
 			'parameters' => [
 				'docs'   => [
 					"description" => [
-						"component" => self::get_description_from_wordpress_block_json($name)
+						"component" => $description
 					]
 				],
 				'server' => [
@@ -145,6 +153,8 @@ class ComponentStoryGenerator {
 			]
 		];
 
+		$argsOrder = ['tagName', 'size', 'breakpoint', 'allowStacking', 'orientation', 'hAlign', 'vAlign', 'colorTheme', 'backgroundColor', 'gradient', 'iconPrefix', 'icon', 'classes', 'testId'];
+
 		$storyFile['args'] = array_reduce(array_keys($attributes), function($acc, $attr) use ($attributes) {
 			// Do not show a specified class name by default (the auto-generated ones within the component will still be where they need to be)
 			if($attr === 'classes') return $acc;
@@ -152,8 +162,17 @@ class ComponentStoryGenerator {
 			$acc[$attr] = $attributes[$attr]['default'] ?? '';
 			return $acc;
 		}, []);
+		// Sort the args based on the specified order by key
+		uksort($storyFile['args'], function($a, $b) use ($argsOrder) {
+			$aIndex = array_search($a, $argsOrder);
+			$bIndex = array_search($b, $argsOrder);
+			if($aIndex === false && $bIndex === false) return 0;
+			if($aIndex === false) return 1;
+			if($bIndex === false) return -1;
+			return $aIndex <=> $bIndex;
+		});
 
-		$storyFile['argTypes'] = array_reduce(array_keys($attributes), function($acc, $attr) use ($attributes) {
+		$storyFile ['argTypes'] = array_reduce(array_keys($attributes), function($acc, $attr) use ($attributes) {
 			// Special handling for classes - include "supported" values but not the default or generated classes
 			// This allows auto-generation of options like "accent heading" and "lead paragraph" without also including BEM classnames and the like
 			if($attr === 'classes' && isset($attributes[$attr]['supported'])) {
@@ -178,7 +197,7 @@ class ComponentStoryGenerator {
 			if($attr === 'gradient') {
 				$acc[$attr] = [
 					'description' => $data['description'] ?? '',
-					'control'     => 'none',
+					'control'     => false,
 					'table'       => [
 						'defaultValue' => [
 							'summary' => $data['default'] ?? ''
@@ -192,9 +211,11 @@ class ComponentStoryGenerator {
 				return $acc;
 			}
 
+			$noConrol = ['classes', 'gradient', 'testId'];
+
 			$acc[$attr] = [
 				'description' => $data['description'] ?? '',
-				'control'     => $attr === 'classes' ? false : ['type' => self::propertyTypeToControl($propType)],
+				'control'     => in_array($attr, $noConrol) ? false : ['type' => self::propertyTypeToControl($propType)],
 				'table'       => [
 					'defaultValue' => [
 						'summary' => $data['default'] ?? ''
@@ -211,6 +232,18 @@ class ComponentStoryGenerator {
 
 			return $acc;
 		}, []);
+		// Sort the argTypes based on the specified order by key
+		uksort($storyFile['argTypes'], function($a, $b) use ($argsOrder) {
+			// Sort the argTypes based on the specified order
+			$aIndex = array_search($a, $argsOrder);
+			$bIndex = array_search($b, $argsOrder);
+
+			if($aIndex === false && $bIndex === false) return 0;
+			if($aIndex === false) return 1;
+			if($bIndex === false) return -1;
+
+			return $aIndex <=> $bIndex;
+		});
 
 		$stories = [
 			[
@@ -220,60 +253,64 @@ class ComponentStoryGenerator {
 			]
 		];
 
+		// Remove this if re-adding the below functionality to generate multiple stories
+		$storyFile['stories'] = $stories;
+
 		// Collect boolean attributes to generate variations for each of the options
 		$booleanAttributes = array_filter($attributes, function($attr) {
 			return $attr['type'] === 'bool';
 		});
 
-		// Components to skip generating stories for (they are to be done manually, or not at all for whatever reason)
-		$skip = ['Container', 'Columns', 'Column', 'Group', 'Banner'];
-		if(in_array($name, $skip)) {
-			$storyFile['stories'] = $stories;
-		}
-		else {
-			foreach($storyFile['argTypes'] as $propName => $settings) {
-				// Common properties that we don't want individual stories for
-				if(in_array($propName, ['tagName', 'classes', 'backgroundColor', 'textAlign'])) continue;
-
-				// Generate stories for properties with options specified
-				if(!isset($settings['options'])) continue;
-
-				foreach($settings['options'] as $option) {
-					// Adjust label for "is-style-*" class names
-					$displayName = $option;
-					if(str_starts_with($option, 'is-style-')) {
-						$displayName = substr($option, 9) . ' style';
-					}
-					$stories[] = [
-						'name' => ucfirst($propName) . ': ' . ucfirst($displayName),
-						'args' => [
-							$propName => $option
-						]
-					];
-
-					if(!empty($booleanAttributes)) {
-						foreach($booleanAttributes as $boolAttrName => $boolAttrSettings) {
-							$boolAttrDisplayName = $boolAttrName;
-							// Adjust label for things like "isOutline" be "Outline" etc
-							if(str_starts_with($boolAttrName, 'is')) {
-								$boolAttrDisplayName = substr($boolAttrName, 2);
-							}
-
-							$stories[] = [
-								'name' => ucfirst($option) . ' - ' . $boolAttrDisplayName,
-								'args' => [
-									$propName     => $option,
-									$boolAttrName => true
-								]
-							];
-						}
-					}
-				}
-			}
-			$storyFile['stories'] = array_values(array_filter($stories, function($story) {
-				return !empty($story['name']);
-			}));
-		}
+		// Skip generating individual stories for now
+//		// Components to skip generating further stories for (they are to be done manually, or not at all for whatever reason)
+//		$skip = ['Container', 'Columns', 'Column', 'Group', 'Banner', 'SiteHeader'];
+//		if(in_array($name, $skip)) {
+//			$storyFile['stories'] = $stories;
+//		}
+//		else {
+//			foreach($storyFile['argTypes'] as $propName => $settings) {
+//				// Common properties that we don't want individual stories for
+//				if(in_array($propName, ['tagName', 'classes', 'backgroundColor', 'textAlign'])) continue;
+//
+//				// Generate stories for properties with options specified
+//				if(!isset($settings['options'])) continue;
+//
+//				foreach($settings['options'] as $option) {
+//					// Adjust label for "is-style-*" class names
+//					$displayName = $option;
+//					if(str_starts_with($option, 'is-style-')) {
+//						$displayName = substr($option, 9) . ' style';
+//					}
+//					$stories[] = [
+//						'name' => ucfirst($propName) . ': ' . ucfirst($displayName),
+//						'args' => [
+//							$propName => $option
+//						]
+//					];
+//
+//					if(!empty($booleanAttributes)) {
+//						foreach($booleanAttributes as $boolAttrName => $boolAttrSettings) {
+//							$boolAttrDisplayName = $boolAttrName;
+//							// Adjust label for things like "isOutline" be "Outline" etc
+//							if(str_starts_with($boolAttrName, 'is')) {
+//								$boolAttrDisplayName = substr($boolAttrName, 2);
+//							}
+//
+//							$stories[] = [
+//								'name' => ucfirst($option) . ' - ' . $boolAttrDisplayName,
+//								'args' => [
+//									$propName     => $option,
+//									$boolAttrName => true
+//								]
+//							];
+//						}
+//					}
+//				}
+//			}
+//			$storyFile['stories'] = array_values(array_filter($stories, function($story) {
+//				return !empty($story['name']);
+//			}));
+//		}
 
 		// Export the processed data as a JSON file
 		$outputPath = $this->sourceDirectory . '\\' . $name . '\\__tests__\\' . strtolower($shortName) . '.stories.json';
@@ -289,7 +326,13 @@ class ComponentStoryGenerator {
 	 */
 	public function exportToJson(string $outputPath, array $data): void {
 		$json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-		file_put_contents($outputPath, $json);
+		try {
+			file_put_contents($outputPath, $json);
+			$this->log("Exported to $outputPath\n", 'success');
+		}
+		catch(Exception $e) {
+			$this->log("Failed to export to $outputPath: {$e->getMessage()}\n", 'error');
+		}
 	}
 
 	private static function propertyTypeToControl($propType): string {
@@ -323,10 +366,12 @@ class ComponentStoryGenerator {
 		}
 
 		// Then core block description overrides from the WordPress plugin
-		$json = json_decode(file_get_contents(dirname(__DIR__, 1) . '/packages/comet-plugin/src/block-support.json'));
-		$customDescription = $json->core->supported->{'core/' . strtolower($block_name)}->description;
-		if(isset($customDescription)) {
-			return $customDescription;
+		$json = json_decode(file_get_contents(dirname(__DIR__, 1) . '/packages/comet-plugin/src/block-support.json'), true);
+		if(isset($json['core']['supported']['core/' . strtolower($block_name)])) {
+			$customDescription = $json['core']['supported']['core/' . strtolower($block_name)]['description'] ?? null;
+			if(isset($customDescription)) {
+				return $customDescription;
+			}
 		}
 
 		$coreBlocksDir = dirname(__DIR__, 1) . '/wordpress/wp-includes/blocks'; // WP installed as Composer dependency
@@ -362,6 +407,26 @@ class ComponentStoryGenerator {
 
 		return $items;
 	}
+
+	private static function log(string $message, string $type): void {
+		// ANSI colour codes
+		$red = "\033[0;31m";
+		$green = "\033[0;32m";
+		$yellow = "\033[0;33m";
+		$cyan = "\033[0;36m";
+		$white = "\033[0;37m";
+		$reset = "\033[0m";
+
+		$color = match ($type) {
+			'info' => $cyan,
+			'success' => $green,
+			'error' => $red,
+			'warning' => $yellow,
+			default => $white,
+		};
+
+		echo $color . $message . $reset;
+	}
 }
 
 
@@ -376,7 +441,6 @@ try {
 	else {
 		$instance->runAll();
 	}
-	echo "Done!\n";
 }
 catch(Exception $e) {
 	echo "Error: " . $e->getMessage() . "\n";
