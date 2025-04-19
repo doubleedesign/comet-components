@@ -38,7 +38,14 @@ class ComponentStoryGenerator {
 	/** @noinspection PhpUnhandledExceptionInspection */
 	public function runSingle($component): void {
 		// Ensure JSON definition file exists
-		$filePath = $this->sourceDirectory . '\\' . $component . '\\' . $component . '.json';
+		// Selectively allow stories for some inner components
+		if($component === 'File') {
+			$filePath = $this->sourceDirectory . '\\FileGroup\\File\\__docs__\\File.json';
+		}
+		// Otherwise, look for main component JSON files
+		else {
+			$filePath = $this->sourceDirectory . '\\' . $component . '\\__docs__\\' . $component . '.json';
+		}
 		if(!file_exists($filePath)) {
 			throw new RuntimeException("Component class $component not found");
 		}

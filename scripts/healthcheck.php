@@ -67,7 +67,8 @@ class Healthcheck {
 
 		foreach($all as $dir) {
 			$componentName = basename($dir);
-			if(!file_exists($dir . '\\' . $componentName . '.json')) {
+			if(!file_exists($dir . '\\' . '/__docs__/' . $componentName . '.json')) {
+				echo $dir . '\\' . $componentName . '/__docs__/' . $componentName . '.json';
 				$fileCollections['JSON'][] = $componentName;
 			}
 			if(!glob($dir . '\\*.blade.php')) {
@@ -89,7 +90,7 @@ class Healthcheck {
 			if(!file_exists($this->testPageDir . self::kebab_case($componentName) . '.php')) {
 				$fileCollections['test page'][] = $componentName;
 			}
-			if(!file_exists($this->componentDir . self::kebab_case($componentName) . '__tests__' . '.stories.json')) {
+			if(!file_exists($this->componentDir . self::kebab_case($componentName) . '/__tests__/' . '.stories.json')) {
 				$fileCollections['stories'][] = $componentName;
 			}
 			if(!file_exists($this->componentDir . '__tests__' . $componentName . '.spec.ts')) {

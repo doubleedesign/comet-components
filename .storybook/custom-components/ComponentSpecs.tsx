@@ -145,10 +145,10 @@ function useComponentSpecs(componentName: string) {
 
 	const fetchJsonDef = useCallback(async () => {
 		if(window.location.hostname.startsWith('storybook.comet-components.test')) {
-			return await fetch(`https://comet-components.test/packages/core/src/components/${componentName}/${componentName}.json`);
+			return await fetch(`https://comet-components.test/packages/core/src/components/${componentName}/__docs__/${componentName}.json`);
 		}
 
-		return await fetch(`https://cometcomponents.io/packages/core/src/components/${componentName}/${componentName}.json`);
+		return await fetch(`https://cometcomponents.io/packages/core/src/components/${componentName}/__docs__/${componentName}.json`);
 	}, [componentName]);
 
 	const fetchCss = useCallback(async () => {

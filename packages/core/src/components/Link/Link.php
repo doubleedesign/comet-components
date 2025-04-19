@@ -19,6 +19,10 @@ class Link extends Renderable {
 	 */
 	protected ?string $icon;
 
+	/**
+	 * @var string $content
+	 * @description Plain text or basic HTML
+	 */
 	protected string $content;
 
 	function __construct(array $attributes, string $content) {

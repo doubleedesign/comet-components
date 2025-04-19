@@ -12,6 +12,10 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::NAV)]
 class Breadcrumbs extends UIComponent {
 
+	/**
+	 * @param array $attributes
+	 * @param array $breadcrumbs Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page
+	 */
 	function __construct(array $attributes, array $breadcrumbs) {
 		$listItems = array_map(function($breadcrumb) {
 			$linkAttributes = ['href' => trim($breadcrumb['url'] !== '') ? $breadcrumb['url'] : '#'];

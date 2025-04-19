@@ -67,6 +67,11 @@
 .comet-component-specs {
 	margin-block-end: 3rem;
 
+	p br {
+		display: block;
+		margin-block-end: var(--spacing-xs);
+	}
+
 	table {
 		width: 100%;
 		font-size: 0.9rem;

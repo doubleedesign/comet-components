@@ -316,7 +316,6 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
         'Doubleedesign\\Comet\\Core\\ContentWrapper' => __DIR__ . '/../..' . '/src/components/ImageAndText/ContentWrapper/ContentWrapper.php',
         'Doubleedesign\\Comet\\Core\\DefaultTag' => __DIR__ . '/../..' . '/src/base/attributes/DefaultTag.php',
         'Doubleedesign\\Comet\\Core\\Details' => __DIR__ . '/../..' . '/src/components/Details/Details.php',
-        'Doubleedesign\\Comet\\Core\\Embed' => __DIR__ . '/../..' . '/src/components/Embed/Embed.php',
         'Doubleedesign\\Comet\\Core\\File' => __DIR__ . '/../..' . '/src/components/FileGroup/File/File.php',
         'Doubleedesign\\Comet\\Core\\FileGroup' => __DIR__ . '/../..' . '/src/components/FileGroup/FileGroup.php',
         'Doubleedesign\\Comet\\Core\\Gallery' => __DIR__ . '/../..' . '/src/components/Gallery/Gallery.php',

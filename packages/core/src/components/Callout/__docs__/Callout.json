@@ -1,14 +1,23 @@
 {
-    "name": "CallToAction",
-    "description": "Highlight important information and prompt the user to take action.",
+    "name": "Callout",
+    "description": "Highlight an important message in a callout box.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
-        "backgroundColor": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "callout",
+                "callout--info"
+            ],
+            "inherited": true
+        },
+        "colorTheme": {
             "type": "ThemeColor",
-            "description": "Background colour keyword",
+            "description": "Colour keyword for the fill or outline colour",
             "supported": [
                 "primary",
                 "secondary",
@@ -20,20 +29,22 @@
                 "light",
                 "dark",
                 "white"
-            ]
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "call-to-action"
             ],
-            "inherited": true
+            "default": "info"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
             "inherited": true
+        },
+        "icon": {
+            "type": "string",
+            "description": "Icon class name; default value set for success, warning, error, and info color themes"
+        },
+        "iconPrefix": {
+            "type": "string",
+            "description": "Icon prefix class name",
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
@@ -49,9 +60,7 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div",
-                "section",
-                "aside"
+                "div"
             ],
             "default": "div",
             "inherited": true
@@ -63,9 +72,8 @@
         }
     },
     "innerComponents": {
-        "type": "array<Renderable>",
+        "type": "array<Heading|ListComponent|Paragraph|ButtonGroup|Button|Separator>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

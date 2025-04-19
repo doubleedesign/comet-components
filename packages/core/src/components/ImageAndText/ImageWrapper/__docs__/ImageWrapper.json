@@ -1,22 +1,14 @@
 {
-    "name": "FileGroup",
-    "description": "Display a list of downloadable file links with details about them.",
-    "extends": "UIComponent",
+    "name": "ImageWrapper",
+    "description": null,
+    "extends": "LayoutComponent",
     "abstract": false,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
+    "isInner": true,
+    "belongsInside": "ImageAndText",
     "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "file-group"
-            ],
-            "inherited": true
-        },
-        "colorTheme": {
+        "backgroundColor": {
             "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
+            "description": "Background colour keyword",
             "supported": [
                 "primary",
                 "secondary",
@@ -29,17 +21,43 @@
                 "dark",
                 "white"
             ],
-            "default": "primary"
+            "inherited": true
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "image-and-text__image"
+            ],
+            "inherited": true
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
             "inherited": true
         },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start",
+            "inherited": true
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
+        },
+        "maxWidth": {
+            "type": "float",
+            "required": true,
+            "default": 100
         },
         "style": {
             "type": "array",
@@ -58,6 +76,19 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "start",
             "inherited": true
         }
     },

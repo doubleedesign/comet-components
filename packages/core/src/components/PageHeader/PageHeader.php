@@ -18,14 +18,14 @@ class PageHeader extends UIComponent {
 	 * @var string $title
 	 * @description The title of the page
 	 */
-	protected string $title;
+	protected string $content;
 	/**
 	 * @var array $breadcrumbs
 	 * @description Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page
 	 */
 	protected array $breadcrumbs;
 
-	function __construct(array $attributes, string $title, array $breadcrumbs = []) {
+	function __construct(array $attributes, string $content, array $breadcrumbs = []) {
 		$this->set_background_color_from_attrs($attributes);
 		$this->set_size_from_attrs($attributes);
 		$this->breadcrumbs = $breadcrumbs;
@@ -40,7 +40,7 @@ class PageHeader extends UIComponent {
 				],
 				array_merge(
 					$this->innerComponents,
-					[new Heading(['level' => 1], $title)]
+					[new Heading(['level' => 1], $content)]
 				)
 			)
 		);

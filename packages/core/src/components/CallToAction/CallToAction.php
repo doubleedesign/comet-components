@@ -14,6 +14,11 @@ class CallToAction extends UIComponent {
 	use BackgroundColor;
 
 	/**
+	 * @var array<Heading|Paragraph|ListComponent|ButtonGroup> $innerComponents
+	 */
+	protected array $innerComponents;
+
+	/**
 	 * @param array $attributes
 	 * @param array<Heading|Paragraph|ButtonGroup> $innerComponents
 	 */

@@ -155,7 +155,6 @@ return array(
     'Doubleedesign\\Comet\\Core\\ContentWrapper' => $baseDir . '/src/components/ImageAndText/ContentWrapper/ContentWrapper.php',
     'Doubleedesign\\Comet\\Core\\DefaultTag' => $baseDir . '/src/base/attributes/DefaultTag.php',
     'Doubleedesign\\Comet\\Core\\Details' => $baseDir . '/src/components/Details/Details.php',
-    'Doubleedesign\\Comet\\Core\\Embed' => $baseDir . '/src/components/Embed/Embed.php',
     'Doubleedesign\\Comet\\Core\\File' => $baseDir . '/src/components/FileGroup/File/File.php',
     'Doubleedesign\\Comet\\Core\\FileGroup' => $baseDir . '/src/components/FileGroup/FileGroup.php',
     'Doubleedesign\\Comet\\Core\\Gallery' => $baseDir . '/src/components/Gallery/Gallery.php',

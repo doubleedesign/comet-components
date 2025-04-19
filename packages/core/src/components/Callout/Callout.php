@@ -19,6 +19,10 @@ class Callout extends UIComponent {
 	 * @description Icon class name; default value set for success, warning, error, and info color themes
 	 */
 	protected ?string $icon;
+	/**
+	 * @var array<Heading|ListComponent|Paragraph|ButtonGroup|Button|Separator> $innerComponents
+	 */
+	protected array $innerComponents;
 
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.Callout.callout');

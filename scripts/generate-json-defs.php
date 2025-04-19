@@ -171,8 +171,14 @@ class ComponentClassesToJsonDefinitions {
 					['name', 'description', 'extends', 'abstract', 'vue', 'isInner', 'belongsInside', 'attributes', 'content', 'innerComponents']
 				);
 
+				// Ensure __docs__ folder exists
+				$outputDir = dirname($filePath) . '\\__docs__';
+				if(!is_dir($outputDir)) {
+					mkdir($outputDir, 0777, true);
+				}
+
 				// Export the data to a JSON file
-				$outputPath = str_replace('.php', '.json', $reflectionClass->getFileName());
+				$outputPath = $outputDir . '\\' . $result['name'] . '.json';
 				$this->exportToJson($outputPath, $result);
 				$this->log("Exported component definition JSON to $outputPath\n", 'success');
 			}

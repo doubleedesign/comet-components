@@ -1,6 +1,6 @@
 {
-    "name": "PageHeader",
-    "description": "Render a page header with the page title and optional breadcrumb navigation.",
+    "name": "CallToAction",
+    "description": "Highlight important information and prompt the user to take action.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
@@ -22,17 +22,11 @@
                 "white"
             ]
         },
-        "breadcrumbs": {
-            "type": "array",
-            "description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
-            "required": true
-        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "page-header",
-                "page-section"
+                "call-to-action"
             ],
             "inherited": true
         },
@@ -46,19 +40,6 @@
             "description": "Unique identifier",
             "inherited": true
         },
-        "size": {
-            "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "$this->breadcrumbs"
-        },
         "style": {
             "type": "array",
             "description": "Inline styles",
@@ -68,28 +49,22 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "header",
                 "div",
-                "section"
+                "section",
+                "aside"
             ],
-            "default": "header",
+            "default": "div",
             "inherited": true
         },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
-        },
-        "title": {
-            "type": "string",
-            "description": "The title of the page",
-            "required": true
         }
     },
     "innerComponents": {
-        "type": "array<Renderable>",
+        "type": "array<Heading|Paragraph|ListComponent|ButtonGroup>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }
