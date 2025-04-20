@@ -93,6 +93,8 @@ class Image extends Renderable {
 		$this->classes = $attributes['classes'] ?? [];
 		$this->align = $attributes['align'] ?? null;
 		$this->isParallax = $attributes['isParallax'] ?? $this->isParallax;
+		$this->height = $attributes['height'] ?? null;
+		$this->width = $attributes['width'] ?? null;
 
 		parent::__construct($attributes, 'components.Image.image');
 	}

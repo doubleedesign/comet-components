@@ -69,14 +69,14 @@ class Banner extends LayoutComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		$this->imageUrl = $attributes['imageUrl'] ?? '';
 		$this->imageAlt = $attributes['imageAlt'] ?? '';
-		$this->overlayColor = $attributes['overlayColor'] ? ThemeColor::tryFrom($attributes['overlayColor']) : $this->overlayColor;
+		$this->overlayColor = isset($attributes['overlayColor']) ? ThemeColor::tryFrom($attributes['overlayColor']) : $this->overlayColor;
 		$this->overlayOpacity = $attributes['overlayOpacity'] ?? $this->overlayOpacity;
 		$this->isParallax = $attributes['isParallax'] ?? $this->isParallax;
 		$this->minHeight = $attributes['minHeight'] ?? $this->minHeight;
 		$this->maxHeight = $attributes['maxHeight'] ?? $this->maxHeight;
 
 		// WordPress provides focal point as 0-1, but we want 0-100
-		if($attributes['focalPoint']) {
+		if(isset($attributes['focalPoint']) && is_array($attributes['focalPoint'])) {
 			$focalPointX = $attributes['focalPoint']['x'] < 1 ? $attributes['focalPoint']['x'] * 100 : $attributes['focalPoint']['x'];
 			$focalPointY = $attributes['focalPoint']['y'] < 1 ? $attributes['focalPoint']['y'] * 100 : $attributes['focalPoint']['y'];
 			$this->focalPoint = [intval($focalPointX), intval($focalPointY)];
@@ -140,7 +140,7 @@ class Banner extends LayoutComponent {
 		$attrs = $this->get_html_attributes();
 
 		return array_filter($attrs, function($key) {
-			return $key !== 'data-background';
+			return $key !== 'data-background' && $key !== 'style';
 		}, ARRAY_FILTER_USE_KEY);
 	}
 
@@ -154,20 +154,25 @@ class Banner extends LayoutComponent {
 		return $styles;
 	}
 
-	function get_inline_styles(): array {
+	function get_inline_styles_string(): string {
 		$styles['min-height'] = $this->minHeight . 'px';
-		$styles['max-height'] = $this->maxHeight . 'vh';
+		$styles['max-height'] = $this->maxHeight . 'dvh';
 
-		return $styles;
+		$result = '';
+		foreach($styles as $key => $value) {
+			$result .= $key . ':' . $value . ';';
+		}
+
+		return $result;
 	}
 
 	function render(): void {
 		$blade = BladeService::getInstance();
 
 		echo $blade->make($this->bladeFile, [
-			// No attributes here because they get passed down to the inner Container
-			'classes'  => $this->get_filtered_classes_string(),
-			'children' => $this->innerComponents
+			'attributes' => ['style' => $this->get_inline_styles_string()],
+			'classes'    => $this->get_filtered_classes_string(),
+			'children'   => $this->innerComponents
 		])->render();
 	}
 }

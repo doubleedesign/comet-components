@@ -12,11 +12,10 @@
 	},
 	"args": {
 		"tagName": "div",
-		"colorTheme": "primary",
+		"label": "",
 		"iconPrefix": "fa-solid",
-		"icon": "",
-		"testId": "",
-		"label": ""
+		"icon": "fa-circle-check",
+		"colorTheme": "primary"
 	},
 	"argTypes": {
 		"tagName": {
@@ -62,7 +61,9 @@
 		},
 		"iconPrefix": {
 			"description": "Icon prefix class name",
-			"control": false,
+			"control": {
+				"type": "text"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": "fa-solid"
@@ -74,7 +75,9 @@
 		},
 		"icon": {
 			"description": "Icon class name",
-			"control": false,
+			"control": {
+				"type": "text"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": ""
@@ -112,7 +115,9 @@
 		},
 		"label": {
 			"description": "",
-			"control": false,
+			"control": {
+				"type": "text"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": ""

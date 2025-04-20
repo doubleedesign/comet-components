@@ -1,6 +1,8 @@
 {
 	"title": "Navigation/Breadcrumbs",
-	"tags": [],
+	"tags": [
+		"wordpress-theme"
+	],
 	"parameters": {
 		"server": {
 			"id": "breadcrumbs.php",

@@ -15,7 +15,6 @@
 	"args": {
 		"tagName": "table",
 		"allowStacking": "true",
-		"testId": "",
 		"caption": "",
 		"sticky": ""
 	},
@@ -37,7 +36,9 @@
 		},
 		"allowStacking": {
 			"description": "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
-			"control": false,
+			"control": {
+				"type": "boolean"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": "true"

@@ -15,22 +15,19 @@
 	"args": {
 		"tagName": "section",
 		"hAlign": "start",
-		"vAlign": "start",
-		"backgroundColor": "",
-		"testId": "",
+		"vAlign": "center",
+		"backgroundColor": "dark",
 		"containerSize": "default",
 		"contentMaxWidth": 50,
 		"focalPoint": [
 			50,
 			50
 		],
-		"imageAlt": "",
-		"imageUrl": "",
 		"isParallax": "false",
-		"maxHeight": 100,
+		"maxHeight": 40,
 		"minHeight": 600,
 		"overlayColor": "dark",
-		"overlayOpacity": 0
+		"overlayOpacity": 30
 	},
 	"argTypes": {
 		"tagName": {
@@ -104,6 +101,7 @@
 				}
 			},
 			"options": [
+				"none",
 				"primary",
 				"secondary",
 				"accent",
@@ -167,7 +165,9 @@
 		},
 		"contentMaxWidth": {
 			"description": "The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)",
-			"control": false,
+			"control": {
+				"type": "number"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": 50
@@ -179,7 +179,15 @@
 		},
 		"focalPoint": {
 			"description": "The X and Y coordinates of the focal point of the image",
-			"control": false,
+			"control": {
+				"type": "array",
+				"options": {
+					"number": {
+						"min": 0,
+						"max": 100
+					}
+				}
+			},
 			"table": {
 				"defaultValue": {
 					"summary": [
@@ -188,7 +196,7 @@
 					]
 				},
 				"type": {
-					"summary": "array<int,"
+					"summary": "array<int,int>"
 				}
 			}
 		},
@@ -218,7 +226,9 @@
 		},
 		"isParallax": {
 			"description": "Whether the banner should have a fixed background (also known as a parallax effect)",
-			"control": false,
+			"control": {
+				"type": "boolean"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": "false"
@@ -230,7 +240,9 @@
 		},
 		"maxHeight": {
 			"description": "The maximum height of the banner (in vh)",
-			"control": false,
+			"control": {
+				"type": "number"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": 100
@@ -242,7 +254,9 @@
 		},
 		"minHeight": {
 			"description": "The minimum height of the banner (in px)",
-			"control": false,
+			"control": {
+				"type": "number"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": 600
@@ -266,6 +280,7 @@
 				}
 			},
 			"options": [
+				"none",
 				"primary",
 				"secondary",
 				"accent",
@@ -280,7 +295,9 @@
 		},
 		"overlayOpacity": {
 			"description": "The opacity of the overlay on top of the image (set to 0 to disable the overlay)",
-			"control": false,
+			"control": {
+				"type": "number"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": 0

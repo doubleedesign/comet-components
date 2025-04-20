@@ -51,6 +51,9 @@ export function ComponentSpecs({ componentName }) {
 	if(componentName === 'Banner') {
 		belongsInside = 'At the top level of the document or inside a Container component';
 	}
+	if(componentName === 'Breadcrumbs') {
+		belongsInside = 'Inside any structure or layout component and inside the PageHeader component';
+	}
 
 	let exampleCode = '// TODO: This needs an example!';
 	if(specs?.content) {
@@ -58,6 +61,12 @@ export function ComponentSpecs({ componentName }) {
 	}
 	if(specs?.innerComponents) {
 		exampleCode = `$component = new ${specs.name}($attributes, $innerComponents);\n$component->render();`;
+	}
+	if(componentName === 'Image') {
+		exampleCode = `$component = new ${specs.name}($attributes);\n$component->render();`;
+	}
+	if(componentName === 'Breadcrumbs') {
+		exampleCode = `$component = new ${specs.name}($attributes, $breadcrumbs);\n$component->render();`;
 	}
 
 	let contentType = '';
@@ -121,14 +130,14 @@ export function ComponentSpecs({ componentName }) {
 							)}
 						</td>
 					</tr>
-					<tr>
+					{(specs?.innerComponents || specs?.content) &&<tr>
 						<th scope="row">{specs?.innerComponents ? 'Inner components' : 'Content'}</th>
 						<td>
 							<p>
 								{specs?.innerComponents?.description ?? specs?.content?.description} {contentType}
 							</p>
 						</td>
-					</tr>
+					</tr>}
 				</tbody>
 			</table>
 

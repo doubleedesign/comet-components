@@ -29,6 +29,11 @@
             "description": "Inline styles",
             "inherited": true
         },
+        "summary": {
+            "type": "string",
+            "description": "The title of the panel, summarising the content.",
+            "required": true
+        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",

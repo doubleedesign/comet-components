@@ -15,9 +15,8 @@
 	},
 	"args": {
 		"tagName": "div",
-		"orientation": "vertical",
-		"colorTheme": "",
-		"testId": ""
+		"colorTheme": "primary",
+		"orientation": "vertical"
 	},
 	"argTypes": {
 		"tagName": {

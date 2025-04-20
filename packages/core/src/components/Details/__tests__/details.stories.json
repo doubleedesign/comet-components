@@ -14,7 +14,7 @@
 	},
 	"args": {
 		"tagName": "details",
-		"testId": ""
+		"summary": "Example details panel"
 	},
 	"argTypes": {
 		"tagName": {
@@ -49,6 +49,20 @@
 		"testId": {
 			"description": "Optionally add a data-testid attribute for automated tests",
 			"control": false,
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"summary": {
+			"description": "The title of the panel, summarising the content.",
+			"control": {
+				"type": "text"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": ""

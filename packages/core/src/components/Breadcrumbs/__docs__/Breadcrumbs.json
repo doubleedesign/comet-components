@@ -4,7 +4,10 @@
 	"extends": "UIComponent",
 	"abstract": false,
 	"isInner": false,
-	"belongsInside": "LayoutComponent",
+	"belongsInside": [
+		"LayoutComponent",
+		"PageHeader"
+	],
 	"attributes": {
 		"classes": {
 			"type": "array<string>",

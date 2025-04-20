@@ -1,6 +1,8 @@
 {
 	"title": "UI/PageHeader",
-	"tags": [],
+	"tags": [
+		"wordpress-block"
+	],
 	"parameters": {
 		"server": {
 			"id": "page-header.php",
@@ -12,7 +14,7 @@
 	},
 	"args": {
 		"tagName": "header",
-		"size": "$this->breadcrumbs",
+		"size": "default",
 		"backgroundColor": "",
 		"testId": ""
 	},

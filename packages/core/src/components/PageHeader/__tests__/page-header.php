@@ -3,11 +3,27 @@ use Doubleedesign\Comet\Core\PageHeader;
 use Doubleedesign\Comet\Core\{Paragraph};
 
 // Attribute keys from component JSON definition
-$attributeKeys = ['backgroundColor', 'breadcrumbs', 'classes', 'size', 'tagName', 'testId', 'title'];
+$attributeKeys = ['backgroundColor', 'classes', 'size', 'title'];
 // Filter the request query vars to only those matching the above
 $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
 
-$innerComponents = [new Paragraph([], 'page-header component')];
+$breadcrumbs = [
+	[
+		'title'   => 'Home',
+		'url'     => 'https://storybook.comet-components.test:6006',
+		'current' => false,
+	],
+	[
+		'title'   => 'Page header example',
+		'url'     => '#',
+		'current' => true,
+	],
+];
 
-$component = new PageHeader($attributes, $innerComponents);
+$component = new PageHeader($attributes, 'Page header example', $breadcrumbs);
 $component->render();
+
+// Workaround for wrapper-close not loading from php.ini in Laravel Herd
+if(getEnv('SERVER_NAME') === 'comet-components.test') {
+	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+}

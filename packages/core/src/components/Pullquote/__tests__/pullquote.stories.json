@@ -14,11 +14,11 @@
 	},
 	"args": {
 		"tagName": "blockquote",
-		"colorTheme": "",
-		"testId": "",
+		"colorTheme": "secondary",
 		"citation": "",
 		"textAlign": "",
-		"textColor": ""
+		"textColor": "",
+		"classes": ""
 	},
 	"argTypes": {
 		"tagName": {
@@ -67,9 +67,7 @@
 			"control": false,
 			"table": {
 				"defaultValue": {
-					"summary": {
-						"1": "pullquote"
-					}
+					"summary": "pullquote"
 				},
 				"type": {
 					"summary": "array<string>"

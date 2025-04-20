@@ -14,18 +14,13 @@
 	},
 	"args": {
 		"tagName": "figure",
-		"href": "",
-		"testId": "",
-		"align": "",
-		"alt": "",
-		"aspectRatio": "",
-		"caption": "",
+		"alt": "Bicycle in Amsterdam",
+		"caption": "Bicycle in Amsterdam",
+		"title": "Bicycle in Amsterdam",
+		"width": "400px",
 		"height": "",
 		"isParallax": "false",
-		"scale": "contain",
-		"src": "",
-		"title": "",
-		"width": ""
+		"scale": "contain"
 	},
 	"argTypes": {
 		"tagName": {
@@ -43,8 +38,26 @@
 				"figure"
 			]
 		},
-		"href": {
-			"description": "URL to link to",
+		"classes": {
+			"description": "CSS classes",
+			"control": {
+				"type": "select"
+			},
+			"options": [
+				"",
+				"is-style-rounded"
+			],
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"src": {
+			"description": "Image source URL",
 			"control": false,
 			"table": {
 				"defaultValue": {
@@ -55,9 +68,53 @@
 				}
 			}
 		},
-		"testId": {
-			"description": "Optionally add a data-testid attribute for automated tests",
-			"control": false,
+		"href": {
+			"description": "URL to link to",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"caption": {
+			"description": "Optional image caption (to appear below the image)",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"title": {
+			"description": "Optional image title (appears on hover)",
+			"control": {
+				"type": "text"
+			},
+			"table": {
+				"defaultValue": {
+					"summary": ""
+				},
+				"type": {
+					"summary": "string"
+				}
+			}
+		},
+		"alt": {
+			"description": "Alternative text",
+			"control": {
+				"type": "text"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": ""
@@ -87,18 +144,6 @@
 				"full"
 			]
 		},
-		"alt": {
-			"description": "Alternative text",
-			"control": false,
-			"table": {
-				"defaultValue": {
-					"summary": ""
-				},
-				"type": {
-					"summary": "string"
-				}
-			}
-		},
 		"aspectRatio": {
 			"description": "Crop image to the given aspect ratio",
 			"control": {
@@ -113,6 +158,7 @@
 				}
 			},
 			"options": [
+				"none",
 				"4:3",
 				"3:4",
 				"1:1",
@@ -122,27 +168,11 @@
 				"2:3"
 			]
 		},
-		"caption": {
-			"description": "Optional image caption (to appear below the image)",
-			"control": false,
-			"table": {
-				"defaultValue": {
-					"summary": ""
-				},
-				"type": {
-					"summary": "string"
-				}
-			}
-		},
-		"class": {
-			"description": "CSS classes",
+		"width": {
+			"description": "Set a fixed width for the image",
 			"control": {
-				"type": "select"
+				"type": "text"
 			},
-			"options": [
-				"",
-				"is-style-rounded"
-			],
 			"table": {
 				"defaultValue": {
 					"summary": ""
@@ -154,7 +184,9 @@
 		},
 		"height": {
 			"description": "Set a fixed height for the image",
-			"control": false,
+			"control": {
+				"type": "text"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": ""
@@ -166,7 +198,9 @@
 		},
 		"isParallax": {
 			"description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
-			"control": false,
+			"control": {
+				"type": "boolean"
+			},
 			"table": {
 				"defaultValue": {
 					"summary": "false"
@@ -194,32 +228,8 @@
 				"cover"
 			]
 		},
-		"src": {
-			"description": "Image source URL",
-			"control": false,
-			"table": {
-				"defaultValue": {
-					"summary": ""
-				},
-				"type": {
-					"summary": "string"
-				}
-			}
-		},
-		"title": {
-			"description": "Optional image title (appears on hover)",
-			"control": false,
-			"table": {
-				"defaultValue": {
-					"summary": ""
-				},
-				"type": {
-					"summary": "string"
-				}
-			}
-		},
-		"width": {
-			"description": "Set a fixed width for the image",
+		"testId": {
+			"description": "Optionally add a data-testid attribute for automated tests",
 			"control": false,
 			"table": {
 				"defaultValue": {

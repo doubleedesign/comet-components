@@ -30,6 +30,7 @@ use Doubleedesign\Comet\Core\{Assets, Config};
 
 // Autoload dependencies using Composer
 require_once __DIR__ . '/../../packages/core/vendor/autoload.php';
+require_once __DIR__ . '/../common/mocks.php';
 
 // Set global config
 $globalBackground = Config::get_global_background();

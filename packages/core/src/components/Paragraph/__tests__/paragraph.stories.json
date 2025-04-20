@@ -14,7 +14,7 @@
 	},
 	"args": {
 		"tagName": "p",
-		"testId": "",
+		"classes": "",
 		"textAlign": "",
 		"textColor": ""
 	},

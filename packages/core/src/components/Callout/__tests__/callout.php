@@ -11,3 +11,8 @@ $innerComponents = [new Paragraph([], 'callout component')];
 
 $component = new Callout($attributes, $innerComponents);
 $component->render();
+
+// Workaround for wrapper-close not loading from php.ini in Laravel Herd
+if(getEnv('SERVER_NAME') === 'comet-components.test') {
+	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+}

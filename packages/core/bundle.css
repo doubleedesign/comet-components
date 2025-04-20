@@ -2274,6 +2274,9 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
   padding-block-end: 0;
 }
 
+.details__summary {
+  cursor: pointer;
+}
 .pullquote {
   text-align: center;
   padding: var(--spacing-md);
@@ -2427,6 +2430,9 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
   width: auto;
   margin: 0 auto;
   display: block;
+}
+.image.is-style-rounded img {
+  border-radius: 100%;
 }
 
 /*!
