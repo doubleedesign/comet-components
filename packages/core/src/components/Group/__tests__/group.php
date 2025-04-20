@@ -1,6 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\Group;
-use Doubleedesign\Comet\Core\{Heading, Image};
+use Doubleedesign\Comet\Core\{Group, Heading};
 use const Doubleedesign\Comet\TestUtils\MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT;
 
 // Attribute keys from component JSON definition
@@ -10,11 +9,6 @@ $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys)
 
 $innerComponents = [
 	new Heading(['level' => 3, 'classes' => 'is-style-small'], 'Group example'),
-	new Image([
-		'src'         => 'https://cometcomponents.io/test/assets/example-image-2.jpg',
-		'aspectRatio' => '1:1',
-		'width'       => '300px'
-	]),
 	...MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT
 ];
 
