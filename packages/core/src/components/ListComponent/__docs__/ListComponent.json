@@ -1,51 +1,47 @@
 {
-    "name": "ListComponent",
-    "description": "Renders a list of items, either ordered or unordered.",
-    "extends": "UIComponent",
-    "abstract": false,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "ul",
-                "ol"
-            ],
-            "default": "ul",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<ListItem>",
-        "description": "List item objects to render inside this list",
-        "required": true
-    }
+	"name": "ListComponent",
+	"description": "Renders a list of items, either ordered or unordered.",
+	"extends": "UIComponent",
+	"abstract": false,
+	"isInner": false,
+	"belongsInside": "LayoutComponent",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"ordered": {
+			"type": "boolean",
+			"description": "Whether to render an ordered list (ol) or unordered list (ul)",
+			"default": false,
+			"inherited": false
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<ListItem>",
+		"description": "List item objects to render inside this list",
+		"required": true
+	}
 }
