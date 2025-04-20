@@ -1,5 +1,5 @@
 import { addons } from '@storybook/preview-api';
-import events, { STORY_RENDER_PHASE_CHANGED, STORY_RENDERED, STORY_FINISHED } from '@storybook/core-events';
+import events, { STORY_RENDER_PHASE_CHANGED, STORY_FINISHED, STORY_ARGS_UPDATED } from '@storybook/core-events';
 export const withServerPageStates = (StoryFn, context) => {
 	const channel = addons.getChannel();
 
@@ -35,6 +35,11 @@ export const withServerPageStates = (StoryFn, context) => {
 		else {
 			console.error(`withServerPageStates decorator - story finished event with error: ${data.error}`);
 		}
+	});
+
+	channel.on(STORY_ARGS_UPDATED, (data) => {
+		// Chuck the updated args into local storage so the custom ResponsiveContainer component can pick them up
+		localStorage.setItem('storyArgs', JSON.stringify(data.args));
 	});
 
 	return StoryFn();

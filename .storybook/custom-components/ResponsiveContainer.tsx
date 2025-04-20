@@ -74,6 +74,7 @@ function OpenInNewTabButton() {
 
 	const fullUrl = useMemo(() => {
 		let args = {};
+		// Handle default args
 		if (context.args) {
 			// Convert all values to strings and filter out undefined/null/empty values
 			args = Object.entries(context.args)
@@ -84,7 +85,20 @@ function OpenInNewTabButton() {
 					return acc;
 				}, {});
 		}
-		const urlParams = new URLSearchParams(args);
+		// Handle custom args (put in local storage by withServerPageStates decorator)
+		const customArgs = JSON.parse(localStorage.getItem('storyArgs'));
+		if (customArgs) {
+			// Convert all values to strings and filter out undefined/null/empty values
+			Object.entries(customArgs)
+				.filter(([key, value]) => value !== undefined && value !== null && value !== '')
+				.reduce((acc, [key, value]) => {
+					acc[key] = String(value);
+
+					return acc;
+				}, {});
+		}
+
+		const urlParams = new URLSearchParams({ ...args, ...customArgs });
 
 		const path = `${basePath}?${urlParams.toString()}`;
 
