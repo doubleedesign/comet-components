@@ -100,7 +100,7 @@ class ComponentStoryGenerator {
 	}
 
 	private function generateComponentOutputPage($name, $shortName, $attributes): void {
-		// If the file already exists, bail unless the overwrite flag is set
+		// If the test file already exists, bail unless the overwrite flag is set
 		if(file_exists("$this->testComponentDirectory/$shortName.php") && !$this->overwrite) {
 			$this->log("Browser output example file already exists for $name, skipping\n", 'info');
 			return;
@@ -121,6 +121,12 @@ class ComponentStoryGenerator {
 		\$attributeKeys = [$attributeKeys];
 		// Filter the request query vars to only those matching the above
 		\$attributes = array_filter(\$_REQUEST, fn(\$key) => in_array(\$key, \$attributeKeys), ARRAY_FILTER_USE_KEY);
+		// Make true and false strings proper booleans
+		\$attributes = array_map(fn(\$value) => \$value === 'true' ? true : (\$value === 'false' ? false : \$value), \$attributes);
+		// Filter out any attributes that are empty or false
+		\$attributes = array_filter(\$attributes, function(\$value) {
+			return \$value !== '' && \$value !== 'false' && \$value !== 'none' && \$value !== 'null';
+		});
 		
 		\$innerComponents = [new Paragraph([], '$shortName component')];
 		
@@ -134,8 +140,8 @@ class ComponentStoryGenerator {
 	}
 
 	private function generateStoryFile($name, $shortName, $attributes, $category, $tags): void {
-		// If the file already exists, bail unless the overwrite flag is set
-		if(file_exists("$this->sourceDirectory/__tests__/$shortName.stories.json") && !$this->overwrite) {
+		// If the story file already exists, bail unless the overwrite flag is set
+		if(file_exists("$this->sourceDirectory\\$name\\__tests__\\$shortName.stories.json") && !$this->overwrite) {
 			$this->log("Storybook file already exists for $name, skipping\n", 'info');
 			return;
 		}
