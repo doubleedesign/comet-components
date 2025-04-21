@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Doubleedesign\\CometCanvas\\BlockEditorConfig' => $baseDir . '/src/BlockEditorConfig.php',
     'Doubleedesign\\CometCanvas\\NavMenus' => $baseDir . '/src/NavMenus.php',
     'Doubleedesign\\CometCanvas\\SectionMenuBuilder' => $baseDir . '/src/SectionMenuBuilder.php',
     'Doubleedesign\\CometCanvas\\SiteHealth' => $baseDir . '/src/SiteHealth.php',

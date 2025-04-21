@@ -22,6 +22,7 @@ class ComposerStaticInite0f45452dbd314f3d53d0cf8e99b7624
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Doubleedesign\\CometCanvas\\BlockEditorConfig' => __DIR__ . '/../..' . '/src/BlockEditorConfig.php',
         'Doubleedesign\\CometCanvas\\NavMenus' => __DIR__ . '/../..' . '/src/NavMenus.php',
         'Doubleedesign\\CometCanvas\\SectionMenuBuilder' => __DIR__ . '/../..' . '/src/SectionMenuBuilder.php',
         'Doubleedesign\\CometCanvas\\SiteHealth' => __DIR__ . '/../..' . '/src/SiteHealth.php',
