@@ -204,6 +204,7 @@
       <path value="$PROJECT_DIR$/packages/comet-calendar/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/comet-canvas/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
+      <path value="$USER_HOME$/LocalSites/vanilla-playground/app/public" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
