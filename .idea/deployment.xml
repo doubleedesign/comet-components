@@ -31,6 +31,9 @@
             <excludedPath local="true" path="$PROJECT_DIR$/README.md" />
             <excludedPath local="true" path="$PROJECT_DIR$/packages/core/node_modules" />
             <excludedPath local="true" path="$PROJECT_DIR$/packages/core/cache" />
+            <excludedPath local="true" path="$PROJECT_DIR$/packages/comet-plugin" />
+            <excludedPath local="true" path="$PROJECT_DIR$/packages/comet-canvas" />
+            <excludedPath local="true" path="$PROJECT_DIR$/packages/comet-calendar" />
           </excludedPaths>
         </serverdata>
       </paths>
