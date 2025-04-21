@@ -12,6 +12,7 @@ import { withRelativeUrls, withServerPageStates } from './decorators';
 import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
 import { Title } from './blocks/Title.tsx';
 import { Description } from './blocks/Description.tsx';
+import { CommonAttributes } from './custom-components/CommonAttributes.tsx';
 
 // Log all events
 // import { addons } from '@storybook/preview-api';
@@ -42,8 +43,11 @@ const preview: Preview = {
 			storySort: {
 				order: [
 					'Structure',
+					'Navigation',
 					'Layout',
+					'UI',
 					'Text',
+					'Media',
 					'**'
 				],
 			},
@@ -119,9 +123,8 @@ const preview: Preview = {
 						<div className="controls-wrapper">
 							<h2 className="section-heading">Attributes</h2>
 							<p>The public properties you can assign to your component at creation time using the <code>$attributes</code> argument.</p>
-							{/* eslint-disable-next-line max-len */}
-							<p>You can also assign any <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes" target="_blank">HTML attributes</a> that are valid for the selected tag.</p>
 							<Controls/>
+							<CommonAttributes/>
 						</div>
 						{/*<div className="stories-wrapper">*/}
 						{/*	<Stories includePrimary={false} title="Variations and examples"/>*/}

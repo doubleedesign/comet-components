@@ -3,31 +3,11 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { PhpCodeBlock } from './PhpCodeBlock.tsx';
 import { ArrowTopRightIcon } from '@storybook/icons';
-
-type ComponentContentDefProps = {
-	type: string;
-	description: string;
-	required?: boolean;
-};
-
-type ComponentDefinition = {
-	name: string;
-	description: string;
-	extends: string;
-	abstract: boolean;
-	isInner: boolean;
-	belongsInside: string | string[] | null;
-	attributes: object;
-	content: ComponentContentDefProps;
-	innerComponents: ComponentContentDefProps;
-	// Special cases where a component has something different to $content or $innerComponents
-	[key: string]: ComponentContentDefProps | unknown;
-};
+import { ComponentDefinition, ComponentContentDefProps } from './types.ts';
 
 /**
  * Component to fetch and display description and usage information directly from the component's JSON definition file
- * @param componentName
- * @constructor
+ * @param componentName - PascalCase name of the component to fetch specs for
  */
 export function ComponentSpecs({ componentName }) {
 	const { specs, cssInfo } = useComponentSpecs(componentName);
