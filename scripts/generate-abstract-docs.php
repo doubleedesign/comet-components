@@ -8,7 +8,7 @@ class AbstractClassDocGenerator {
 	private string $outputDirectory;
 
 	public function __construct() {
-		$this->baseSourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components';
+		$this->baseSourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components\__docs__\\';
 		$this->mainComponentSourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
 		$this->outputDirectory = dirname(__DIR__, 1) . '\docs-site\docs\technical-deep-dives\php-architecture';
 

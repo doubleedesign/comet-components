@@ -10,14 +10,14 @@
 		},
 		"context": {
 			"type": "string",
-			"description": "The parent component or variant if contextually relevant"
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant"
 		},
 		"id": {
 			"type": "string",
 			"description": "Unique identifier"
 		},
 		"style": {
-			"type": "array",
+			"type": "array<string,string>",
 			"description": "Inline styles"
 		},
 		"tagName": {
@@ -126,6 +126,14 @@
 				null
 			],
 			"default": "div"
+		},
+		"shortName": {
+			"type": "string",
+			"description": " The name of the component without any namespacing, prefixes, etc. Derived from the Blade filename by default."
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests"
 		}
 	}
 }
