@@ -301,6 +301,21 @@
 <xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="IconLinks">
+		<xs:complexType>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="vAlign" type="Alignment"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="links" type="array"/>
+<xs:attribute name="orientation" type="Orientation"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="iconPrefix" type="xs:string"/>
+<xs:attribute name="hAlign" type="Alignment"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="IconWithText">
 		<xs:complexType>
 			<xs:attribute name="testId" type="xs:string"/>
@@ -442,7 +457,7 @@
 	<xs:element name="ListComponent">
 		<xs:complexType>
 			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="ordered" type="xs:boolean"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>

@@ -386,6 +386,9 @@ class ComponentClassesToJsonDefinitions {
 					else if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\ListItemComplex') {
 						$instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
 					}
+					else if($this->currentClass->getName() === 'Doubleedesign\Comet\Core\IconLinks') {
+						$instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
+					}
 					else {
 						$instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
 					}

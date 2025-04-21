@@ -26,17 +26,18 @@ Developers looking to use the library in their projects should refer to the [Usa
 
 ### Third-party plugins
 
-| Plugin      | Description       | Details/Rationale                                                                                                                         |
-|-------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| BaguetteBox | Vanilla JS plugin | Used to enable lightbox functionality in the `Gallery` component.                                                                         |
+| Plugin                                                  | Description       | Details/Rationale                                                 |
+|---------------------------------------------------------|-------------------|-------------------------------------------------------------------|
+| [BaguetteBox](https://github.com/feimosi/baguetteBox.js | Vanilla JS plugin | Used to enable lightbox functionality in the `Gallery` component. |
+| [Tippy](https://atomiks.github.io/tippyjs/)             | Vanilla JS plugin | Used to enable styled, animated tooltips for selected components. |
 
 ## Dev Tooling
 
-| Technology | Description                | Details/Rationale                                                                                                                                                                                                                                                                                                   |
-|------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| SCSS       | CSS preprocessor           | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                                                                                                                                   |
-| Rollup     | JavaScript bundler         | Used to bundle the core package's JavaScript into one file, to make it easier for implementations to use. (I previously had import path issues when trying to use the individual scripts in the WP plugin for example - this solves those.)                                                                         |
-| Composer   | PHP package manager        | Used to manage PHP dependencies, and within packages other dependencies that should be uploaded to the server. Dev-only dependencies should be installed at the project root, so that packages' `vendor` folders contain only production dependencies.                                     |
+| Technology | Description                | Details/Rationale                                                                                                                                                                                                                                                                                                    |
+|------------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SCSS       | CSS preprocessor           | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                                                                                                                                    |
+| Rollup     | JavaScript bundler         | Used to bundle the core package's JavaScript into one file, to make it easier for implementations to use. (I previously had import path issues when trying to use the individual scripts in the WP plugin for example - this solves those.)                                                                          |
+| Composer   | PHP package manager        | Used to manage PHP dependencies, and within packages other dependencies that should be uploaded to the server. Dev-only dependencies should be installed at the project root, so that packages' `vendor` folders contain only production dependencies.                                                               |
 | NPM        | JavaScript package manager | Used to manage JavaScript dependencies and build scripts. Primarily for local development and tooling (e.g. Storybook, Rollup). `node_modules` for any package should not be uploaded to the server - any JavaScript dependencies that reside here need to be compiled into production bundles that do get uploaded. |
 
 ## Directory structure

@@ -1,0 +1,15 @@
+.icon-links {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-sm);
+}
+.icon-links__item {
+  font-size: 2rem;
+  display: inline-block;
+  text-decoration: none;
+}
+.icon-links__item:hover, .icon-links__item:focus, .icon-links__item:active {
+  color: var(--color-accent);
+}
+
+/*# sourceMappingURL=icon-links.css.map */

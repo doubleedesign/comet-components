@@ -322,6 +322,7 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
         'Doubleedesign\\Comet\\Core\\Group' => __DIR__ . '/../..' . '/src/components/Group/Group.php',
         'Doubleedesign\\Comet\\Core\\Heading' => __DIR__ . '/../..' . '/src/components/Heading/Heading.php',
         'Doubleedesign\\Comet\\Core\\Icon' => __DIR__ . '/../..' . '/src/base/traits/Icon.php',
+        'Doubleedesign\\Comet\\Core\\IconLinks' => __DIR__ . '/../..' . '/src/components/IconLinks/IconLinks.php',
         'Doubleedesign\\Comet\\Core\\IconWithText' => __DIR__ . '/../..' . '/src/components/IconWithText/IconWithText.php',
         'Doubleedesign\\Comet\\Core\\Image' => __DIR__ . '/../..' . '/src/components/Image/Image.php',
         'Doubleedesign\\Comet\\Core\\ImageAndText' => __DIR__ . '/../..' . '/src/components/ImageAndText/ImageAndText.php',

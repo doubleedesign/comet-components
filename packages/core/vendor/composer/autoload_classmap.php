@@ -161,6 +161,7 @@ return array(
     'Doubleedesign\\Comet\\Core\\Group' => $baseDir . '/src/components/Group/Group.php',
     'Doubleedesign\\Comet\\Core\\Heading' => $baseDir . '/src/components/Heading/Heading.php',
     'Doubleedesign\\Comet\\Core\\Icon' => $baseDir . '/src/base/traits/Icon.php',
+    'Doubleedesign\\Comet\\Core\\IconLinks' => $baseDir . '/src/components/IconLinks/IconLinks.php',
     'Doubleedesign\\Comet\\Core\\IconWithText' => $baseDir . '/src/components/IconWithText/IconWithText.php',
     'Doubleedesign\\Comet\\Core\\Image' => $baseDir . '/src/components/Image/Image.php',
     'Doubleedesign\\Comet\\Core\\ImageAndText' => $baseDir . '/src/components/ImageAndText/ImageAndText.php',

@@ -1,7 +1,11 @@
+import '../src/plugins/tippy/popper.min.js';
+import '../src/plugins/tippy/tippy.min.js';
 import * as Vue from '../src/plugins/vue-wrapper/src/vue.esm-browser.js';
 import { loadModule } from '../src/plugins/vue-wrapper/src/vue3-sfc-loader.esm.js';
 import { BASE_PATH, vueSfcLoaderOptions } from '../src/plugins/vue-wrapper/src/index.js';
 import '../../../feimosi/baguettebox.js/src/baguetteBox.js';
+
+tippy('[data-tippy-content]');
 
 Vue.createApp({
 	components: {
