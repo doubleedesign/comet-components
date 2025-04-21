@@ -6,8 +6,8 @@ use DateTime;
 class Events {
 
 	public function __construct() {
-		add_action('init', [$this, 'create_event_cpt']);
-		add_action('init', [$this, 'register_custom_permalink_placeholder']);
+		add_action('init', [$this, 'create_event_cpt'], 15);
+		add_action('init', [$this, 'register_custom_permalink_placeholder'], 15);
 		add_filter('post_type_link', [$this, 'populate_custom_permalink'], 10, 2);
 		add_action('acf/update_field_group', [$this, 'save_acf_fields_to_plugin'], 1, 1);
 		add_action('pre_get_posts', [$this, 'customise_event_archive']);

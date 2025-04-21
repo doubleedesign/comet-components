@@ -21,7 +21,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Doubleedesign\Comet\WordPress\Calendar\{
 	Events,
 	Fields,
-	Admin
+	Admin,
+	BlockEditorConfig
 };
 
 /**
@@ -47,3 +48,4 @@ register_uninstall_hook(__FILE__, 'uninstall_comet_calendar');
 new Fields();
 new Events();
 new Admin();
+new BlockEditorConfig();
