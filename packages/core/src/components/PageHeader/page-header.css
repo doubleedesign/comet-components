@@ -1,7 +1,7 @@
 .page-header {
   padding-block: var(--spacing-md);
 }
-@media (min-width: 960px) {
+@media (min-width: 940px) {
   .page-header {
     padding-block: var(--spacing-xl);
   }
@@ -11,7 +11,7 @@
     padding-block: var(--spacing-xxl);
   }
 }
-@container (min-width: 960px) {
+@container (min-width: 940px) {
   .page-header {
     padding-block: var(--spacing-xl);
   }

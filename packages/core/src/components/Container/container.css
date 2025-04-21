@@ -2,7 +2,7 @@
   padding-block: var(--spacing-md);
   padding-inline: 0;
 }
-@media (min-width: 960px) {
+@media (min-width: 940px) {
   .page-section {
     padding-block: var(--spacing-xl);
   }

@@ -7,7 +7,7 @@
     text-align: revert;
   }
 }
-@container (min-width: 960px) {
+@container (min-width: 940px) {
   .call-to-action {
     padding: var(--spacing-xl);
   }

@@ -26,10 +26,10 @@ Developers looking to use the library in their projects should refer to the [Usa
 
 ### Third-party plugins
 
-| Plugin                                                  | Description       | Details/Rationale                                                 |
-|---------------------------------------------------------|-------------------|-------------------------------------------------------------------|
-| [BaguetteBox](https://github.com/feimosi/baguetteBox.js | Vanilla JS plugin | Used to enable lightbox functionality in the `Gallery` component. |
-| [Tippy](https://atomiks.github.io/tippyjs/)             | Vanilla JS plugin | Used to enable styled, animated tooltips for selected components. |
+| Plugin                                                   | Description       | Details/Rationale                                                 |
+|----------------------------------------------------------|-------------------|-------------------------------------------------------------------|
+| [BaguetteBox](https://github.com/feimosi/baguetteBox.js) | Vanilla JS plugin | Used to enable lightbox functionality in the `Gallery` component. |
+| [Tippy](https://atomiks.github.io/tippyjs/)              | Vanilla JS plugin | Used to enable styled, animated tooltips for selected components. |
 
 ## Dev Tooling
 

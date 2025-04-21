@@ -49,6 +49,14 @@ class SiteFooter extends UIComponent {
 		return $attributes;
 	}
 
+	protected function get_filtered_classes(): array {
+		$classes = parent::get_filtered_classes();
+
+		array_push($classes, 'page-section');
+
+		return $classes;
+	}
+
 	function render(): void {
 		$blade = BladeService::getInstance();
 

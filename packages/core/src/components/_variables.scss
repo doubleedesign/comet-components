@@ -1,5 +1,13 @@
 @use 'functions' as *;
 
+$widths: (
+	'wide': 1440px,
+	'contained': 1140px,
+	'narrow': 940px,
+	'narrower': 768px,
+	'small': 600px
+);
+
 $colors: ();
 $hslColors: ();
 
@@ -27,15 +35,6 @@ $hslColors: ();
 		$name: $color,
 	));
 }
-
-
-$widths: (
-	'wide': 1440px,
-	'contained': 1140px,
-	'narrow': 940px,
-	'narrower': 768px,
-	'small': 600px
-);
 
 $baseFontSize: 1rem;
 $typeScale: 1.414;
