@@ -118,7 +118,8 @@
 			"table": {
 				"defaultValue": {
 					"summary": [
-						"container"
+						"container",
+						"layout-block"
 					]
 				},
 				"type": {

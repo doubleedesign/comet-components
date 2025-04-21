@@ -14,8 +14,7 @@
 	},
 	"args": {
 		"backgroundColor": "",
-		"tagName": "div",
-		"testId": ""
+		"tagName": "div"
 	},
 	"argTypes": {
 		"backgroundColor": {
@@ -45,19 +44,21 @@
 				"white"
 			]
 		},
-		"class": {
+		"classes": {
 			"description": "CSS classes",
 			"control": {
 				"type": "select"
 			},
 			"options": [
 				"",
-				"group",
 				"group--breakout"
 			],
 			"table": {
 				"defaultValue": {
-					"summary": ""
+					"summary": [
+						"group",
+						"layout-block"
+					]
 				},
 				"type": {
 					"summary": "string"
