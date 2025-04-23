@@ -18,7 +18,7 @@
             },
             "choices": {
                 "single": "Single date",
-                "period": "Date range",
+                "range": "Date range",
                 "multi": "Multiple dates, same time",
                 "multi_extended": "Multiple dates, different times"
             },
@@ -69,8 +69,8 @@
                         "class": "",
                         "id": ""
                     },
-                    "display_format": "d\/m\/Y",
-                    "return_format": "d\/m\/Y",
+                    "display_format": "F j, Y",
+                    "return_format": "F j, Y",
                     "first_day": 1,
                     "allow_in_bindings": 0
                 },
@@ -125,7 +125,7 @@
                     {
                         "field": "field_67fc4e065a4bc",
                         "operator": "==",
-                        "value": "period"
+                        "value": "range"
                     }
                 ]
             ],
@@ -134,7 +134,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
+            "layout": "table",
             "sub_fields": [
                 {
                     "key": "field_67fc4f325a4c9",
@@ -168,7 +168,7 @@
                             {
                                 "field": "field_67fc4e065a4bc",
                                 "operator": "==",
-                                "value": "period"
+                                "value": "range"
                             }
                         ]
                     ],
@@ -439,5 +439,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1744590048
+    "modified": 1745378161
 }

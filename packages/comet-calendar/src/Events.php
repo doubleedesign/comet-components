@@ -12,8 +12,14 @@ class Events {
 		add_action('acf/update_field_group', [$this, 'save_acf_fields_to_plugin'], 1, 1);
 		add_action('pre_get_posts', [$this, 'customise_event_archive']);
 		add_action('get_user_option_meta-box-order_event', [$this, 'metabox_order']);
+
+		// Customisation of list in admin, including inline editing
+		add_action('admin_head', 'acf_form_head', 5);
 		add_filter('manage_event_posts_columns', [$this, 'add_admin_list_columns'], 20);
 		add_filter('manage_event_posts_custom_column', [$this, 'populate_admin_list_columns'], 30, 2);
+		add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_js'], 5);
+		add_action('acf/save_post', [$this, 'handle_inline_acf_form_submit'], 11);
+
 		add_action('add_meta_boxes', [$this, 'remove_yoast_metabox'], 100);
 	}
 
@@ -192,13 +198,43 @@ class Events {
 			$checkbox,
 			$one,
 			array(
-				'event_date' => __('Event date', 'comet'),
-				'location'   => __('Location', 'comet'),
+				'hacky_extra' => __('', 'comet'),
+				'event_date'  => __('Event date', 'comet'),
+				'location'    => __('Location', 'comet'),
 			),
 			$two
 		);
 	}
 
+	private function display_wrapped_acf_form($formId, $postId, $fields): void {
+		echo <<<HTML
+		<div class="row-actions">
+			<span class="inline hide-if-no-js">
+				<button class="button-link button-link--acf" aria-controls="$formId">Quick edit</button>
+			</span>
+		</div>
+		<div class="admin-column-acf-form" data-form-id="$formId">
+		HTML;
+
+		acf_form(array(
+			'id'                 => $formId,
+			'post_id'            => $postId,
+			'form'               => true,
+			'form_attributes'    => array(
+				'method' => 'post'
+			),
+			'fields'             => $fields,
+			'html_before_fields' => '<div class="acf-spinner"></div>',
+			'html_after_fields'  => '<button class="button cancel" type="reset">Cancel</button>',
+			'ajax'               => true, // Note: ACF's AJAX doesn't work in this context, see handle_inline_acf_form_submit() and admin.js for handling
+			'return'             => ''
+		));
+
+		echo <<<HTML
+		</div>
+		HTML;
+
+	}
 
 	/**
 	 * Populate the custom columns in the admin list
@@ -209,21 +245,97 @@ class Events {
 	 * @return void
 	 */
 	function populate_admin_list_columns($column_name, $post_id): void {
-		if($column_name === 'event_date') {
-			$raw_date = get_post_meta($post_id, 'start_date', true);
-			if($raw_date) {
-				$date_object = DateTime::createFromFormat('Ymd', $raw_date);
-				$formatted_date = $date_object->format('d F Y');
 
-				echo $formatted_date;
+		/**
+		 * Using acf_form() here is not a standard/expected use of it, and the post list itself is also a form
+		 * which makes adding the ACF forms inside less than ideal semantically but much easier than something more custom.
+		 * But for some unknown reason, only the second and subsequent ACF forms are actually <form>s,
+		 * so this one is here as a hidden decoy to make the real ones for location and date work.
+		 */
+		if($column_name === 'hacky_extra') {
+			echo '<div style="display:none;">';
+			acf_form(array(
+				'id'      => 'acf-form-decoy',
+				'post_id' => $post_id,
+				'fields'  => array('not_a_real_field'),
+				'form'    => true,
+				'ajax'    => false,
+				'return'  => ''
+			));
+			echo '</div>';
+		}
+
+		if($column_name === 'event_date') {
+			// Date type is a select list with values that should match up to the names of the groups that contain the detailed data
+			$date_type = get_field('type');
+			$date_data = get_field($date_type);
+			$field = get_field_object($date_type, $post_id);
+			$field_key = $field['key'];
+
+			$output = '';
+			switch($date_type) {
+				case 'single':
+					$output = $date_data['date'];
+					break;
+				case 'range':
+					$output = $date_data['start_date'] . ' - ' . $date_data['end_date'];
+					break;
+				case 'multi':
+					foreach($date_data['dates'] as $date) {
+						$output .= $date['date'] . '<br>';
+					}
+					break;
+				case 'multi_extended':
+					foreach($date_data as $date) {
+						$output .= $date['date'] . '<br>';
+					}
+					break;
 			}
+
+			echo <<<HTML
+			<span class="acf-field-value" data-field-key="$field_key" data-post-id="$post_id">$output</span>
+			HTML;
+
+			$form_id = 'acf-form-event-date-' . $post_id;
+			$this->display_wrapped_acf_form($form_id, $post_id, ['type', 'single', 'range', 'multi', 'multi_extended']);
 		}
 
 		if($column_name === 'location') {
-			echo get_post_meta($post_id, 'location', true);
+			$field = get_field_object('location', $post_id);
+			$field_key = $field['key'];
+			$value = get_post_meta($post_id, 'location', true);
+
+			// Display the field value wrapped in ID and field key identifiers so the JS can update it when inline edits are saved
+			echo <<<HTML
+			<span class="acf-field-value" data-field-key="$field_key" data-post-id="$post_id">$value</span>
+			HTML;
+
+			$form_id = 'acf-form-location-' . $post_id;
+			$this->display_wrapped_acf_form($form_id, $post_id, ['location']);
 		}
 	}
 
+	function enqueue_admin_js(): void {
+		$js_path = plugin_dir_url(__FILE__) . 'assets/admin.js';
+		wp_enqueue_script('comet-calendar-admin', $js_path, array(), COMET_CALENDAR_VERSION, true);
+	}
+
+	/**
+	 * Additional handling for the AJAX form submission from the inline ACF forms in the admin list
+	 * ACF takes care of the actual data save, this just sends a JSON response back to the JavaScript rather than the whole page HTML
+	 * @param $post_id
+	 * @return void
+	 */
+	function handle_inline_acf_form_submit($post_id): void {
+		if(isset($_POST['custom_acf_inline_form']) && $_POST['custom_acf_inline_form'] === 'true') {
+			wp_send_json_success([
+				'post_id' => $post_id,
+				'fields'  => $_POST['acf'] ?? [],
+			]);
+
+			wp_die();
+		}
+	}
 
 	/**
 	 * Don't show Yoast SEO on Event edit screen

@@ -1,3 +1,118 @@
 .interface-navigable-region.edit-post-meta-boxes-main:has(#normal-sortables:not(:empty)) {
 	min-height: 400px !important;
 }
+
+.post-type-event {
+	.inline-edit-wrapper {
+		/* Hide the date field in quick edit on events because it's the post date not the event date, so is potentially confusing */
+		.inline-edit-date {
+			display: none;
+
+			+ br {
+				display: none;
+			}
+		}
+	}
+
+	.wp-list-form--loading {
+		pointer-events: none;
+		opacity: 0.25;
+	}
+}
+
+.column-hacky_extra {
+	width: 0;
+}
+
+.column-event_date {
+	width: 600px;
+}
+
+td .acf-field-value {
+	display: block;
+	margin-block-end: 0.5rem;
+}
+
+.admin-column-acf-form {
+	display: none; /* showing is handled by JS and should set to display:flex */
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.25rem;
+	position: relative;
+	padding-block-end: 0.5rem;
+
+	&.admin-column-acf-form--loading {
+		pointer-events: none;
+
+		.acf-field, button, .acf-form-submit {
+			opacity: 0.25;
+		}
+
+		.acf-spinner {
+			position: absolute;
+			z-index: 2000;
+			width: 2rem;
+			height: 2rem;
+			left: calc(50% - 1rem);
+			top: calc(50% - 1rem);
+		}
+	}
+
+	.acf-form {
+		width: 100%;
+		display: contents;
+	}
+
+	.acf-fields {
+		display: contents;
+
+		> .acf-field {
+			padding: 0;
+			width: 100%;
+			flex-basis: 100%;
+			border: 0;
+		}
+	}
+
+	&[data-form-id^="acf-form-event-date"],
+	.acf-field[data-name="location"] {
+		.acf-label {
+			visibility: hidden;
+			height: 0;
+		}
+
+		[data-type="time_picker"] {
+			.acf-label {
+				visibility: visible;
+				height: auto;
+				margin-block-end: 0;
+			}
+		}
+	}
+
+	.acf-field[data-name="multi"] {
+		.acf-field-time-picker {
+			padding: 0.5rem;
+			background: white;
+			border: 1px solid #d5d9dd;
+			margin-block-end: 0.5rem;
+		}
+	}
+
+	.acf-field.acf-field-select {
+		select {
+			max-width: 100%;
+		}
+	}
+
+	.acf-repeater {
+		margin-block-end: 1rem;
+	}
+
+	.admin-column-acf-form__buttons {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.25rem;
+	}
+}
