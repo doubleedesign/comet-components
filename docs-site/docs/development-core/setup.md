@@ -19,10 +19,10 @@ This guide is written for Windows users. MacOS and Linux users will need to slig
 [[toc]]
 
 ## Prerequisites
-- Git installed on your machine
 - [Chocolatey](https://chocolatey.org/) package manager installed on your machine
+- [Git](https://git-scm.com/) installed on your machine (`choco install git` and/or your GUI of choice)
 - Sufficient privileges to do the following on your machine:
-	- install software on your machine
+	- install software
 	- add entries to the hosts file
 	- install certificates
 	- add certificates to the trusted root store.
@@ -47,7 +47,11 @@ git checkout -b <your-branch-name>
 Laravel Herd is an all-in-one local development environment tool for PHP and Node. It takes the place of the likes of WAMP, MAMP, or XAMPP for PHP, and Node Version Manager (NVM) for Node, while also providing [Composer](https://getcomposer.org/) and [Xdebug](https://xdebug.org/) out of the box.
 
 1. If you already have Node installed on your machine, remove it so Herd can install the version of NVM it requires and thus manage Node for you. (Other instances of PHP can stay if you want.)
-2. Download and install [Laravel Herd Pro](https://herd.laravel.com/)
+2. Download and install [Laravel Herd Pro](https://herd.laravel.com/), or install via Chocolatey with:
+
+```powershell::no-line-numbers
+choco install laravel-herd
+```
 
 :::details Do I really need to pay for Pro?
 No, but without Pro you won't have built-in Xdebug, the Dumps feature, or database services.
@@ -140,7 +144,14 @@ Some of the underling scripts are PowerShell scripts, which have not been tested
 
 ## Set up the IDE
 
-[PhpStorm](https://www.jetbrains.com/phpstorm) is a powerful, fully-featured IDE for PHP and JavaScript development and testing. Download and install it.
+[PhpStorm](https://www.jetbrains.com/phpstorm) is a powerful, fully-featured IDE for PHP and JavaScript development and testing. Download and run the JetBrains Toolbox installer or the standalone installer from the Jetbrains website, or use Chocolatey with one of these equivalent options:
+
+```powershell::no-line-numbers
+choco install jetbrainstoolbox
+```
+```powershell::no-line-numbers
+choco install phpstorm
+```
 
 :::details Do I really have to use PhpStorm? What about VSCode?
 No, you don't have to use PhpStorm, but all IDE-specific information in these docs is written for it.
