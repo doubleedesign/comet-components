@@ -11,7 +11,6 @@ class Events {
 		add_filter('post_type_link', [$this, 'populate_custom_permalink'], 10, 2);
 		add_action('acf/update_field_group', [$this, 'save_acf_fields_to_plugin'], 1, 1);
 		add_action('pre_get_posts', [$this, 'customise_event_archive']);
-		add_action('get_user_option_meta-box-order_event', [$this, 'metabox_order']);
 
 		// Customisation of list in admin, including the quick add form and inline editing
 		add_action('admin_head', 'acf_form_head', 5);
@@ -165,26 +164,7 @@ class Events {
 		return $query;
 	}
 
-
-	/**
-	 * By default, show the featured image metabox above everything except the Publish metabox
-	 * for this CPT
-	 * @return array
-	 */
-	function metabox_order(): array {
-
-		return array(
-			'side' => join(
-				",",
-				array(
-					'submitdiv',
-					'postimagediv'
-				)
-			),
-		);
-	}
-
-
+	
 	/**
 	 * Add an ACF form at the top of the Events list in the admin
 	 * Note: This requires some JS to aid handling or we get a white screen on save, see admin.js
