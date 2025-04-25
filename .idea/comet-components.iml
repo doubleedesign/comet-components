@@ -14,6 +14,8 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-calendar/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\Calendar\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas/src" isTestSource="false" packagePrefix="Doubleedesign\CometCanvas\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/core/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />
@@ -110,6 +112,9 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/openpsa/ranger" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/test/unit/.phpunit.cache" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

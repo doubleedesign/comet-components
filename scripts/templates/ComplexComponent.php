@@ -1,6 +1,13 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+/**
+ * ComplexComponent component
+ *
+ * @package Doubleedesign\Comet\Core
+ * @version 1.0.0
+ * @description
+ */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class ComplexComponent extends UIComponent {

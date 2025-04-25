@@ -7,13 +7,15 @@ import { execSync } from 'child_process';
 // WSL command: 'npm run generate component -- --name=YourThing --type=complex'
 // PowerShell command: 'npm run generate component -- --name YourThing --type complex' (no equals signs)
 const args = process.argv.slice(2);
-if(args[0] !== 'component' || !args[1] || !args[1].startsWith('--name=')) {
-	console.error('Invalid command. Usage: npm run generate component -- --name=<name> --type=<simple or complex>');
+if(args[0] !== 'component' || args.length < 3) {
+	console.error('Invalid command. Usage: \n Bash: npm run generate component -- --name=<name> --type=<simple or complex> \n PowerShell: npm run generate component -- --name <name> --type <simple or complex>');
 	process.exit(1);
 }
-const componentName = args[1].split('=')[1];
-const componentType = args[2].split('=')[1];
-if(args[2] && !['simple', 'complex', 'wrapper'].includes(componentType)) {
+
+// Split is for the Bash command, PowerShell command doesn't need it because it doesn't use equals signs
+const componentName = args[1].split('=')[1] ?? args[2];
+const componentType = args[2].split('=')[1] ?? args[4];
+if(componentType && !['simple', 'complex', 'wrapper'].includes(componentType)) {
 	console.error('Invalid type. Valid types are "simple", "complex", and "wrapper".');
 	console.log('Usage: npm run generate component -- --name=<name> --type=<simple or complex>');
 	process.exit(1);
@@ -25,7 +27,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	const classTemplateFile = readFileSync(`./scripts/templates/${Case.pascal(componentType)}Component.php`, 'utf8');
 	// The template for the Blade template file that will be used to render the component
 	const bladeTemplateFile = readFileSync('./scripts/templates/template.blade.php', 'utf8');
-	// The template for the CSS file for non-trivial comopnents
+	// The template for the CSS file for non-trivial components
 	const cssTemplateFile = readFileSync('./scripts/templates/template.scss', 'utf8');
 
 	const shortName = Case.kebab(componentName);

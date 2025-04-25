@@ -20,6 +20,7 @@ class ComponentClassesToJsonDefinitions {
 
 	public function __construct() {
 		require_once(__DIR__ . '/../vendor/autoload.php');
+		require_once(__DIR__ . '/../packages/core/vendor/autoload.php');
 		$this->mainComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
 		$this->baseComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components';
 	}
