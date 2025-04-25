@@ -1,3 +1,259 @@
 .interface-navigable-region.edit-post-meta-boxes-main:has(#normal-sortables:not(:empty)) {
 	min-height: 400px !important;
 }
+
+.post-type-event {
+	/** Hide the default date filter because that's the post date, not the event date, which is unintuitive */
+	.actions:not(.bulkactions) {
+		#filter-by-date, label[for="filter-by-date"] {
+			display: none;
+		}
+
+		input[type="submit"] {
+			display: none; /* Remove this if other filters are added in the future */
+		}
+	}
+
+	.row-actions:has(+ .admin-column-acf-form) {
+		margin-top: -0.25rem;
+	}
+
+	.inline-edit-wrapper {
+		/* Hide the date field in quick edit on events because it's the post date not the event date, so is potentially confusing */
+		.inline-edit-date {
+			display: none;
+
+			+ br {
+				display: none;
+			}
+		}
+	}
+
+	.wp-list-form--loading {
+		pointer-events: none;
+		opacity: 0.25;
+	}
+}
+
+.column-hacky_extra {
+	width: 0;
+}
+
+.column-event_date {
+	width: 500px;
+}
+
+.column-external_link {
+	.external-link {
+		display: inline-flex;
+		align-items: center;
+
+		svg {
+			width: 0.8em;
+			height: 0.8em;
+			display: inline-block;
+			margin-inline-start: 0.25rem;
+			color: inherit;
+			transform: translateY(-1px);
+		}
+	}
+
+	.acf-input .link-wrap {
+		width: 100%;
+		box-sizing: border-box;
+	}
+}
+
+td .acf-field-value {
+	display: block;
+	margin-block-end: 0.5rem;
+}
+
+/** ACF forms added to the admin rows */
+.admin-column-acf-form {
+	display: none; /* showing is handled by JS and should set to display:flex */
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.25rem;
+	position: relative;
+	padding-block-end: 0.5rem;
+
+	&.admin-column-acf-form--loading {
+		pointer-events: none;
+
+		.acf-field, button, .acf-form-submit {
+			opacity: 0.25;
+		}
+
+		.acf-spinner {
+			position: absolute;
+			z-index: 2000;
+			width: 2rem;
+			height: 2rem;
+			left: calc(50% - 1rem);
+			top: calc(50% - 1rem);
+		}
+	}
+
+	.acf-form {
+		width: 100%;
+		display: contents;
+	}
+
+	.acf-fields {
+		display: contents;
+
+		> .acf-field {
+			padding: 0;
+			width: 100%;
+			flex-basis: 100%;
+			border: 0;
+		}
+
+		.acf-input:has(> table) {
+			border: 1px solid #ccd0d4;
+			padding: 0.25rem;
+			border-radius: 0.25rem;
+			background: white;
+
+			> table {
+				border: 0;
+
+				th {
+					padding-block: 0;
+				}
+			}
+		}
+	}
+
+	&[data-form-id^="acf-form-event-date"],
+	.acf-field[data-name="location"] {
+		.acf-label {
+			visibility: hidden;
+			height: 0;
+		}
+
+		[data-type="time_picker"] {
+			.acf-label {
+				visibility: visible;
+				height: auto;
+				margin-block-end: 0;
+			}
+		}
+	}
+
+	.acf-field[data-name="multi"] {
+		.acf-field-time-picker {
+			padding: 0.5rem;
+			background: white;
+			border: 1px solid #d5d9dd;
+			margin-block-end: 0.5rem;
+		}
+	}
+
+	.acf-field.acf-field-select {
+		select {
+			max-width: 100%;
+		}
+	}
+
+	.acf-repeater {
+		margin-block-end: 1rem;
+	}
+
+	.admin-column-acf-form__buttons {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.25rem;
+	}
+}
+
+/** ACF form added to the top of the admin post list for quick add */
+.admin-quick-add {
+	margin-block: 1rem;
+
+	.acf-notice {
+		width: 100%;
+		flex-basis: 100%;
+		order: -5;
+		box-sizing: border-box;
+	}
+
+	.postbox-header {
+		padding-inline-end: 0.5rem;
+
+		.toggle-indicator::before {
+			font: normal 20px/1 dashicons;
+			content: '\f142';
+		}
+
+		[aria-expanded="false"] .toggle-indicator::before {
+			content: '\f140';
+		}
+	}
+
+	.acf-form {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 0.5rem;
+		padding: 1rem;
+
+		&[aria-hidden="true"] {
+			display: none;
+		}
+
+		.acf-fields {
+			display: contents;
+
+			&:after {
+				display: none;
+			}
+
+			> .acf-field {
+				width: 100%;
+				flex-basis: 100%;
+				padding: 0;
+				border: 0;
+
+				&[data-name="_post_title"] {
+					width: calc(75% - 0.5rem);
+					flex-basis: calc(75% - 0.5rem);
+				}
+
+				&[data-name="type"] {
+					width: 25%;
+					flex-basis: 25%;
+					order: -1;
+				}
+
+				&[data-name="single"],
+				&[data-name="range"],
+				&[data-name="multi"],
+				&[data-name="multi_extended"] {
+
+					> .acf-label {
+						visibility: hidden;
+						height: 0;
+					}
+				}
+
+				&[data-name="location"],
+				&[data-name="external_link"] {
+					margin-block-start: 0.5rem;
+				}
+			}
+
+			.acf-input:has(> table) {
+				border: 1px solid #ccd0d4;
+				padding: 0.25rem;
+				border-radius: 0.25rem;
+
+				> table {
+					border: 0;
+				}
+			}
+		}
+	}
+}

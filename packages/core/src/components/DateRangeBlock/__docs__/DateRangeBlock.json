@@ -4,7 +4,10 @@
 	"extends": "DateComponent",
 	"abstract": false,
 	"isInner": false,
-	"belongsInside": "LayoutComponent",
+	"belongsInside": [
+		"EventCard",
+		"LayoutComponent"
+	],
 	"attributes": {
 		"classes": {
 			"type": "array<string>",
