@@ -164,7 +164,7 @@ class Events {
 		return $query;
 	}
 
-	
+
 	/**
 	 * Add an ACF form at the top of the Events list in the admin
 	 * Note: This requires some JS to aid handling or we get a white screen on save, see admin.js
@@ -222,13 +222,17 @@ class Events {
 		$one = array_slice($columns, 0, (array_search('title', array_keys($columns))) + 1, true);
 		$two = array_diff($columns, $one);
 
+		// Remove the post date column
+		unset($two['date']);
+
 		return array_merge(
 			$checkbox,
 			$one,
 			array(
-				'hacky_extra' => __('', 'comet'),
-				'event_date'  => __('Event date', 'comet'),
-				'location'    => __('Location', 'comet'),
+				'hacky_extra'   => __('', 'comet'),
+				'event_date'    => __('Event date', 'comet'),
+				'location'      => __('Location', 'comet'),
+				'external_link' => __('External link', 'comet'),
 			),
 			$two
 		);
@@ -340,6 +344,25 @@ class Events {
 
 			$form_id = 'acf-form-location-' . $post_id;
 			$this->display_wrapped_acf_form($form_id, $post_id, ['location']);
+		}
+
+		if($column_name === 'external_link') {
+			$field = get_field_object('external_link', $post_id);
+			$field_key = $field['key'];
+			$value = get_post_meta($post_id, 'external_link', true);
+			$link = '';
+			if($value) {
+				$icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d="M336 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l121.4 0L212.7 276.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L480 54.6 480 176c0 8.8 7.2 16 16 16s16-7.2 16-16l0-160c0-8.8-7.2-16-16-16L336 0zM64 32C28.7 32 0 60.7 0 96L0 448c0 35.3 28.7 64 64 64l352 0c35.3 0 64-28.7 64-64l0-144c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 144c0 17.7-14.3 32-32 32L64 480c-17.7 0-32-14.3-32-32L32 96c0-17.7 14.3-32 32-32l144 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L64 32z"/></svg>';
+				$link = '<a class="external-link" href="' . esc_url($value['url']) . '" target="_blank" rel="noopener noreferrer">' . esc_html($value['title']) . $icon . '</a>';
+			}
+
+			// Display the field value wrapped in ID and field key identifiers so the JS can update it when inline edits are saved
+			echo <<<HTML
+			<span class="acf-field-value" data-field-key="$field_key" data-post-id="$post_id">$link</span>
+			HTML;
+
+			$form_id = 'acf-form-external-link-' . $post_id;
+			$this->display_wrapped_acf_form($form_id, $post_id, ['external_link']);
 		}
 	}
 

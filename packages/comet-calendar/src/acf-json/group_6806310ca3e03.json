@@ -8,7 +8,7 @@
             "name": "enable_event_detail_pages",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "If disabled, event detail URLs will redirect to the Events page, where a simple list of events is shown.",
+            "instructions": "If disabled, event detail URLs will redirect to the Events page, where a simple list of events is shown. Items in event lists will not link to the detail page.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -42,5 +42,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1745236352
+    "modified": 1745553323
 }

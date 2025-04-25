@@ -14,6 +14,10 @@
 		}
 	}
 
+	.row-actions:has(+ .admin-column-acf-form) {
+		margin-top: -0.25rem;
+	}
+
 	.inline-edit-wrapper {
 		/* Hide the date field in quick edit on events because it's the post date not the event date, so is potentially confusing */
 		.inline-edit-date {
@@ -37,6 +41,27 @@
 
 .column-event_date {
 	width: 600px;
+}
+
+.column-external_link {
+	.external-link {
+		display: inline-flex;
+		align-items: center;
+
+		svg {
+			width: 0.8em;
+			height: 0.8em;
+			display: inline-block;
+			margin-inline-start: 0.25rem;
+			color: inherit;
+			transform: translateY(-1px);
+		}
+	}
+
+	.acf-input .link-wrap {
+		width: 100%;
+		box-sizing: border-box;
+	}
 }
 
 td .acf-field-value {

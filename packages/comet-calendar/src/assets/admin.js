@@ -139,11 +139,16 @@ document.addEventListener('DOMContentLoaded', function () {
 						if(response?.data?.fields && response?.data?.post_id) {
 							Object.entries(response.data.fields).forEach(([key, value]) => {
 								const text = document.querySelector(`.acf-field-value[data-field-key="${key}"][data-post-id="${response.data.post_id}"]`);
-								if (text) {
+								// Link field
+								if(Object.keys(response.data.fields['field_680b0560ee067']).includes('url') && Object.keys(value).includes('title')) {
+									text.innerHTML = `<a href="${value.url}" target="_blank">${value.title}</a>`;
+								}
+								else if(text) {
 									if(typeof value === 'string') {
 										text.innerHTML = format_data(value);
 									}
 									if(typeof value === 'object') {
+										// Probably a date range field
 										if(Object.values(value).length === 2) {
 											text.innerHTML = Object.values(value)
 												.map(val => format_data(val))

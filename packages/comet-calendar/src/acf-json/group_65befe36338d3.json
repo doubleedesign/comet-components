@@ -419,6 +419,23 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_680b0560ee067",
+            "label": "External link",
+            "name": "external_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Link to ticketing or other external website if applicable",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -439,5 +456,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1745378161
+    "modified": 1745552785
 }
