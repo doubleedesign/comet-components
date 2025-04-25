@@ -13,12 +13,15 @@ class Events {
 		add_action('pre_get_posts', [$this, 'customise_event_archive']);
 		add_action('get_user_option_meta-box-order_event', [$this, 'metabox_order']);
 
-		// Customisation of list in admin, including inline editing
+		// Customisation of list in admin, including the quick add form and inline editing
 		add_action('admin_head', 'acf_form_head', 5);
+		add_filter('views_edit-event', [$this, 'display_quick_add_form'], 11);
+		add_action('admin_notices', array($this, 'display_quick_add_success_message'), 10);
 		add_filter('manage_event_posts_columns', [$this, 'add_admin_list_columns'], 20);
 		add_filter('manage_event_posts_custom_column', [$this, 'populate_admin_list_columns'], 30, 2);
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_js'], 5);
 		add_action('acf/save_post', [$this, 'handle_inline_acf_form_submit'], 11);
+		add_action('acf/save_post', [$this, 'handle_acf_quick_add_form_submit'], 20);
 
 		add_action('add_meta_boxes', [$this, 'remove_yoast_metabox'], 100);
 	}
@@ -183,6 +186,51 @@ class Events {
 
 
 	/**
+	 * Add an ACF form at the top of the Events list in the admin
+	 * Note: This requires some JS to aid handling or we get a white screen on save, see admin.js
+	 * @param $views
+	 * @return mixed
+	 */
+	function display_quick_add_form($views): mixed {
+
+		// Copy as much of the HTML structure/classes etc from ACF post boxes so we get the same styling
+		$headerHtml = <<<HTML
+		<div class="postbox-header">
+			<h2>Quick Add</h2>
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text">Toggle panel: Quick Add</span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+		</div>
+		HTML;
+
+		echo '<div id="poststuff">';
+		echo '<div class="admin-quick-add postbox acf-postbox">';
+		echo $headerHtml;
+		acf_form(array(
+			'post_id'           => 'new_post',
+			'post_title'        => true,
+			'post_content'      => false,
+			'new_post'          => array(
+				'post_type'   => 'event',
+				'post_status' => 'publish'
+			),
+			'form'              => true,
+			'form_attributes'   => array(
+				'method' => 'post'
+			),
+			'ajax'              => true,
+			'html_after_fields' => '<button class="button cancel" type="reset">Cancel</button>',
+			'submit_value'      => 'Add event'
+		));
+		echo '</div>';
+		echo '</div>';
+
+		return $views;
+	}
+
+
+	/**
 	 * Add custom columns to the admin list
 	 *
 	 * @param $columns
@@ -315,6 +363,11 @@ class Events {
 		}
 	}
 
+
+	/**
+	 * Enqueue the JS for the admin page custom form handling
+	 * @return void
+	 */
 	function enqueue_admin_js(): void {
 		$js_path = plugin_dir_url(__FILE__) . 'assets/admin.js';
 		wp_enqueue_script('comet-calendar-admin', $js_path, array(), COMET_CALENDAR_VERSION, true);
@@ -336,6 +389,51 @@ class Events {
 			wp_die();
 		}
 	}
+
+	/**
+	 * Additional handling for the AJAX form submission from the ACF quick add form in the admin list
+	 * ACF takes care of the actual data save, this just sends a JSON response back to the JavaScript rather than the whole page HTML
+	 * @param $post_id
+	 * @return void
+	 */
+	function handle_acf_quick_add_form_submit($post_id): void {
+		if(isset($_POST['custom_acf_quick_add_form']) && $_POST['custom_acf_quick_add_form'] === 'true') {
+			// We only have access to the submitted data here, not the resulting post ID, but we can infer it with a query for the most recently added event
+			// Note: The \ before WP_Query is very important, otherwise it looks for that class in the Comet Calendar namespace
+			$query = new \WP_Query(array(
+				'post_type'      => 'event',
+				'posts_per_page' => 1,
+				'orderby'        => 'post_date',
+				'order'          => 'DESC',
+			));
+			$post_id = $query->posts[0]->ID;
+			wp_send_json_success([
+				'post_id' => $post_id,
+			]);
+
+			wp_die();
+		}
+	}
+
+	/**
+	 * Display a success message after the quick add form is submitted and returns successfully
+	 * @return void
+	 */
+	function display_quick_add_success_message(): void {
+		if(!isset($_GET['post_type']) || $_GET['post_type'] !== 'event') return;
+		if(!isset($_GET['added'])) return;
+
+		$post_id = $_GET['added'];
+		$post_title = get_the_title($post_id);
+
+		echo <<<HTML
+		<div class="notice notice-success is-dismissible comet-quick-add-success">
+			<p>Event "$post_title" added successfully.</p>
+		</div>
+		HTML;
+
+	}
+
 
 	/**
 	 * Don't show Yoast SEO on Event edit screen

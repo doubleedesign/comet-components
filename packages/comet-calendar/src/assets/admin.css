@@ -3,6 +3,17 @@
 }
 
 .post-type-event {
+	/** Hide the default date filter because that's the post date, not the event date, which is unintuitive */
+	.actions:not(.bulkactions) {
+		#filter-by-date, label[for="filter-by-date"] {
+			display: none;
+		}
+
+		input[type="submit"] {
+			display: none; /* Remove this if other filters are added in the future */
+		}
+	}
+
 	.inline-edit-wrapper {
 		/* Hide the date field in quick edit on events because it's the post date not the event date, so is potentially confusing */
 		.inline-edit-date {
@@ -33,6 +44,7 @@ td .acf-field-value {
 	margin-block-end: 0.5rem;
 }
 
+/** ACF forms added to the admin rows */
 .admin-column-acf-form {
 	display: none; /* showing is handled by JS and should set to display:flex */
 	width: 100%;
@@ -72,6 +84,21 @@ td .acf-field-value {
 			width: 100%;
 			flex-basis: 100%;
 			border: 0;
+		}
+
+		.acf-input:has(> table) {
+			border: 1px solid #ccd0d4;
+			padding: 0.25rem;
+			border-radius: 0.25rem;
+			background: white;
+
+			> table {
+				border: 0;
+
+				th {
+					padding-block: 0;
+				}
+			}
 		}
 	}
 
@@ -114,5 +141,87 @@ td .acf-field-value {
 		display: flex;
 		justify-content: flex-end;
 		gap: 0.25rem;
+	}
+}
+
+/** ACF form added to the top of the admin post list for quick add */
+.admin-quick-add {
+	margin-block: 1rem;
+
+	.postbox-header {
+		padding-inline-end: 0.5rem;
+
+		.toggle-indicator::before {
+			font: normal 20px/1 dashicons;
+			content: '\f142';
+		}
+
+		[aria-expanded="false"] .toggle-indicator::before {
+			content: '\f140';
+		}
+	}
+
+	.acf-form {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 0.5rem;
+		padding: 1rem;
+
+		&[aria-hidden="true"] {
+			display: none;
+		}
+
+		.acf-fields {
+			display: contents;
+
+			&:after {
+				display: none;
+			}
+
+			> .acf-field {
+				width: 100%;
+				flex-basis: 100%;
+				padding: 0;
+				border: 0;
+
+				&[data-name="_post_title"] {
+					width: calc(75% - 0.5rem);
+					flex-basis: calc(75% - 0.5rem);
+				}
+
+				&[data-name="type"] {
+					width: 25%;
+					flex-basis: 25%;
+					order: -1;
+				}
+
+				&[data-name="single"],
+				&[data-name="range"],
+				&[data-name="multi"],
+				&[data-name="multi_extended"] {
+
+					> .acf-label {
+						visibility: hidden;
+						height: 0;
+					}
+				}
+
+				&[data-name="location"],
+				&[data-name="external_link"] {
+					margin-block-start: 0.5rem;
+				}
+			}
+
+			.acf-input:has(> table) {
+				border: 1px solid #ccd0d4;
+				padding: 0.25rem;
+				border-radius: 0.25rem;
+
+				> table {
+					border: 0;
+				}
+			}
+		}
 	}
 }
