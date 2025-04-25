@@ -1,0 +1,69 @@
+{
+    "name": "DateBlock",
+    "description": "Display a date.",
+    "extends": "Renderable",
+    "abstract": false,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
+    "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "date-block"
+            ],
+            "inherited": true
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
+            "inherited": true
+        },
+        "date": {
+            "type": "DateTime",
+            "description": "The date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "locale": {
+            "type": "string",
+            "description": "The locale to be used for formatting the date.",
+            "required": true,
+            "default": "en_AU"
+        },
+        "showDay": {
+            "type": "bool",
+            "description": "Whether to show the day of the week.",
+            "required": true,
+            "default": "false"
+        },
+        "showYear": {
+            "type": "bool",
+            "description": "Whether to show the year.",
+            "required": true,
+            "default": "true"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "time"
+            ],
+            "default": "time",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        }
+    }
+}

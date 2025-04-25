@@ -1,0 +1,37 @@
+@use '../functions' as *;
+@use '../variables' as *;
+
+.date-block {
+	min-width: 3rem;
+	max-width: 5rem;
+	display: flex;
+	gap: var(--spacing-xxs);
+	flex-direction: column;
+	padding-block: var(--spacing-xs);
+
+	@each $name, $color in $colors {
+		&[data-color-theme="#{$name}"] {
+			background: var(--color-#{$name});
+			color: var(--readable-color-#{$name});
+		}
+	}
+
+	&__day,
+	&__date,
+	&__month,
+	&__year {
+		display: block;
+		text-align: center;
+		line-height: 1;
+		font-weight: var(--font-weight-light);
+	}
+
+	&__day {
+		font-size: 0.8rem;
+	}
+
+	&__date {
+		font-weight: var(--font-weight-bold);
+		font-size: $baseFontSize * pow($typeScale, 2);
+	}
+}

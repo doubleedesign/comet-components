@@ -1,0 +1,25 @@
+@use '../DateBlock/date-block' as *;
+@use '../functions' as *;
+@use '../variables' as *;
+
+
+.date-range-block {
+	@extend .date-block;
+
+	&__days {
+		@extend .date-block__day;
+	}
+
+	&__dates {
+		font-size: $baseFontSize * pow($typeScale, 1.5);
+		@extend .date-block__date;
+	}
+
+	&__month {
+		@extend .date-block__month;
+	}
+
+	&__year {
+		@extend .date-block__year;
+	}
+}

@@ -224,6 +224,36 @@
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="DateBlock">
+		<xs:complexType>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="showDay" type="xs:boolean"/>
+<xs:attribute name="showYear" type="xs:boolean"/>
+<xs:attribute name="locale" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="date" type="DateTime"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DateRangeBlock">
+		<xs:complexType>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="showYear" type="xs:boolean"/>
+<xs:attribute name="startDate" type="DateTime"/>
+<xs:attribute name="locale" type="xs:string"/>
+<xs:attribute name="showDay" type="xs:boolean"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="endDate" type="DateTime"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="colorTheme" type="ThemeColor"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="Details">
 		<xs:complexType>
 			<xs:attribute name="tagName" type="xs:string"/>
