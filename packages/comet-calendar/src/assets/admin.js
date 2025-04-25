@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
 	// Target the admin post list for Events only
 	if(document.body.classList.contains('post-type-event') && document.body.classList.contains('edit-php')) {
 
@@ -23,46 +22,53 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Handle Quick Add form submissions
 		// Its default submission causes a white screen, so we need some custom processing
-		const quickAdd = document.querySelector('.admin-quick-add .acf-form');
-		quickAdd.addEventListener('submit', function(event) {
-			event.preventDefault();
+		if(quickAddForm) {
+			quickAddForm.addEventListener('submit', function (event) {
+				event.preventDefault();
+				event.stopPropagation();
 
-			const formAction = this.getAttribute('action');
-			const formData = new FormData(this);
-			// Custom flag to identify the request for custom additional processing in PHP
-			formData.append('custom_acf_quick_add_form', 'true');
+				const formAction = this.getAttribute('action');
+				const formData = new FormData(this);
+				// Custom flag to identify the request for custom additional processing in PHP
+				formData.append('custom_acf_quick_add_form', 'true');
 
-			fetch(formAction, {
-				method: 'POST',
-				body: formData,
-				headers: {
-					'X-Requested-With': 'XMLHttpRequest',
-					'Accept': 'application/json',
-					cache: 'no-store',
-					credentials: 'same-origin'
-				}
-			})
-				.then(response => {
-					if(response.status === 200 || response.status === 201) {
-						return handle_maybe_json_response(response);
+				fetch(formAction, {
+					method: 'POST',
+					body: formData,
+					headers: {
+						'X-Requested-With': 'XMLHttpRequest',
+						'Accept': 'application/json',
+						cache: 'no-store',
+						credentials: 'same-origin'
 					}
 				})
-				.then(response => {
-					// Refresh the page with the new post ID in the URL, which the PHP will use to insert an admin confirmation message
-					if(response?.data?.post_id) {
-						const postId = response.data.post_id;
-						const url = new URL(window.location.href);
-						url.searchParams.set('added', postId);
-						window.location.href = url.toString();
-					}
-					else {
-						alert('Problem processing the response, please refresh the page to see the updated data');
-					}
-				})
-				.catch(error => {
-					console.error(error);
-				});
-		});
+					.then(response => {
+						if (response.status === 200 || response.status === 201) {
+							return handle_maybe_json_response(response);
+						}
+					})
+					.then(response => {
+						// Refresh the page with the new post ID in the URL, which the PHP will use to insert an admin confirmation message
+						if (response?.data?.post_id) {
+							const postId = response.data.post_id;
+							const url = new URL(window.location.href);
+							url.searchParams.set('added', postId);
+							window.location.href = url.toString();
+						}
+						else {
+							alert('Problem processing the response, please refresh the page to see the updated data');
+						}
+					})
+					.catch(error => {
+						console.error(error);
+					});
+			});
+
+			// Clear validation messages on reset
+			quickAddForm.addEventListener('reset', function () {
+				unvalidate_quick_add_form();
+			});
+		}
 
 		// Show/hide inline ACF forms (added in the custom columns in Events.php)
 		const acfInlineButtons = document.querySelectorAll('.button-link--acf');
@@ -98,6 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		forms.forEach(function (form) {
 			form.addEventListener('submit', function (event) {
 				event.preventDefault();
+				event.stopImmediatePropagation();
+
+				dim_quick_add_form();
 
 				const parent = this.closest('.admin-column-acf-form');
 				const spinner = this.querySelector('.acf-spinner');
@@ -124,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 				})
 					.then(response => {
-						if (response.status === 200) {
+						if (response?.status === 200) {
 							if (parent && spinner) {
 								parent.style.display = 'none';
 								parent.classList.remove('admin-column-acf-form--loading');
@@ -133,17 +142,21 @@ document.addEventListener('DOMContentLoaded', function () {
 							}
 						}
 
+						unvalidate_quick_add_form();
+
 						return handle_maybe_json_response(response);
 					})
 					.then(response => {
 						if(response?.data?.fields && response?.data?.post_id) {
 							Object.entries(response.data.fields).forEach(([key, value]) => {
 								const text = document.querySelector(`.acf-field-value[data-field-key="${key}"][data-post-id="${response.data.post_id}"]`);
-								// Link field
-								if(Object.keys(response.data.fields['field_680b0560ee067']).includes('url') && Object.keys(value).includes('title')) {
-									text.innerHTML = `<a href="${value.url}" target="_blank">${value.title}</a>`;
-								}
-								else if(text) {
+								if(text) {
+									// Link field
+									if(response.data.fields['field_680b0560ee067'] &&
+										Object.keys(response.data.fields['field_680b0560ee067']).includes('url') &&
+										Object.keys(value).includes('title')) {
+										text.innerHTML = `<a href="${value.url}" target="_blank">${value.title}</a>`;
+									}
 									if(typeof value === 'string') {
 										text.innerHTML = format_data(value);
 									}
@@ -176,6 +189,8 @@ document.addEventListener('DOMContentLoaded', function () {
 					.catch(error => {
 						console.error(error);
 					});
+
+				unvalidate_form(quickAddForm);
 			});
 
 			form.addEventListener('reset', function (event) {
@@ -236,4 +251,46 @@ function handle_maybe_json_response(response) {
 			console.error(e);
 		}
 	});
+}
+
+/**
+ * The new post form gets validated by ACF on any other form submit on the admin page, and I can't find a way to stop it
+ * so these are hacks to make it look like this isn't what's happening and remove the validation messages if the submission came from another form
+ * (add this to other forms' submit events).
+ * unvalidate_quick_add_form() can also be used to clear the validation messages on reset
+ */
+function dim_quick_add_form() {
+	const form = document.querySelector('.admin-quick-add .acf-form');
+	if(!form) return;
+
+	form.style.opacity = 0.25;
+	form.style['pointer-events'] = 'none';
+
+	const button = form.querySelector('.acf-form-submit');
+	if(button) {
+		button.style.display = 'none';
+	}
+}
+function unvalidate_quick_add_form() {
+	const form = document.querySelector('.admin-quick-add .acf-form');
+	if(!form) return;
+
+	form.classList.remove('is-validating');
+	form.classList.remove('is-invalid');
+
+	const errorMessages = form.querySelectorAll('.acf-error-message');
+	errorMessages.forEach(function (message) {
+		message.remove();
+	});
+
+	// Undo the styling hacks from dim_quick_add_form
+	setTimeout(() => {
+		form.style.opacity = 1;
+		form.style['pointer-events'] = 'auto';
+		const button = form.querySelector('.acf-form-submit');
+		if (button) {
+			button.style.display = 'inline-block';
+		}
+	}, 300);
+
 }

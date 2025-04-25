@@ -40,7 +40,7 @@
 }
 
 .column-event_date {
-	width: 600px;
+	width: 500px;
 }
 
 .column-external_link {
@@ -172,6 +172,13 @@ td .acf-field-value {
 /** ACF form added to the top of the admin post list for quick add */
 .admin-quick-add {
 	margin-block: 1rem;
+
+	.acf-notice {
+		width: 100%;
+		flex-basis: 100%;
+		order: -5;
+		box-sizing: border-box;
+	}
 
 	.postbox-header {
 		padding-inline-end: 0.5rem;

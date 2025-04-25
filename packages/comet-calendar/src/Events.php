@@ -22,6 +22,7 @@ class Events {
 		add_action('acf/save_post', [$this, 'handle_inline_acf_form_submit'], 11);
 		add_action('acf/save_post', [$this, 'handle_acf_quick_add_form_submit'], 20);
 
+		// Misc
 		add_action('add_meta_boxes', [$this, 'remove_yoast_metabox'], 100);
 	}
 
@@ -173,7 +174,7 @@ class Events {
 	 */
 	function display_quick_add_form($views): mixed {
 
-		// Copy as much of the HTML structure/classes etc from ACF post boxes so we get the same styling
+		// Copy as much of the HTML structure/classes etc. from ACF post meta boxes so we get the same styling
 		$headerHtml = <<<HTML
 		<div class="postbox-header">
 			<h2>Quick Add</h2>
@@ -188,6 +189,7 @@ class Events {
 		echo '<div class="admin-quick-add postbox acf-postbox">';
 		echo $headerHtml;
 		acf_form(array(
+			'id'                => 'acf-form-quick-add',
 			'post_id'           => 'new_post',
 			'post_title'        => true,
 			'post_content'      => false,
@@ -197,11 +199,12 @@ class Events {
 			),
 			'form'              => true,
 			'form_attributes'   => array(
-				'method' => 'post'
+				'method' => 'post',
 			),
-			'ajax'              => true,
+			'ajax'              => true, // Note: ACF's AJAX doesn't fully work in this context, see form submission functions below and admin.js for custom handling
 			'html_after_fields' => '<button class="button cancel" type="reset">Cancel</button>',
-			'submit_value'      => 'Add event'
+			'submit_value'      => 'Add event',
+			'return'            => '',
 		));
 		echo '</div>';
 		echo '</div>';
@@ -253,13 +256,13 @@ class Events {
 			'post_id'            => $postId,
 			'form'               => true,
 			'form_attributes'    => array(
-				'method' => 'post'
+				'method' => 'post',
 			),
 			'fields'             => $fields,
 			'html_before_fields' => '<div class="acf-spinner"></div>',
 			'html_after_fields'  => '<button class="button cancel" type="reset">Cancel</button>',
-			'ajax'               => true, // Note: ACF's AJAX doesn't work in this context, see handle_inline_acf_form_submit() and admin.js for handling
-			'return'             => ''
+			'ajax'               => true, // Note: ACF's AJAX doesn't fully work in this context, see form submission functions below and admin.js for custom handling
+			'return'             => '',
 		));
 
 		echo <<<HTML
@@ -348,6 +351,8 @@ class Events {
 
 		if($column_name === 'external_link') {
 			$field = get_field_object('external_link', $post_id);
+			if(!$field) return;
+
 			$field_key = $field['key'];
 			$value = get_post_meta($post_id, 'external_link', true);
 			$link = '';
