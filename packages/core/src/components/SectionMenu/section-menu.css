@@ -269,7 +269,7 @@
   border-color: var(--color-white);
 }
 .section-navigation__menu-list__item .menu-list__item__link[target=_blank]::after {
-  font-family: "Font Awesome 6 Pro Light";
+  font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Light";
   content: "\f08e";
   font-size: 0.8rem;
 }

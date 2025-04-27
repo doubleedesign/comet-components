@@ -144,7 +144,7 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
 }
 .site-header__menu-list__item__link[target=_blank]:after {
   content: "\f061";
-  font-family: "Font Awesome 6 Pro Solid";
+  font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
   padding-inline-start: var(--spacing-xs);
 }
 .site-header__menu-list__item:has([aria-current=page]) > a {
@@ -234,7 +234,7 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
 }
 .site-header__menu-list__item .menu-list__item__link[target=_blank]:after {
   content: "\f08e";
-  font-family: "Font Awesome 6 Pro Solid";
+  font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
   display: inline-block;
   padding-inline-start: var(--spacing-xs);
   font-size: 0.85em;

@@ -173,7 +173,7 @@
 
 						&:after {
 							content: '\f061';
-							font-family: "Font Awesome 6 Pro Solid";
+							font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
 							padding-inline-start: var(--spacing-xs);
 						}
 					}
@@ -286,7 +286,7 @@
 
 								&:after {
 									content: '\f08e';
-									font-family: "Font Awesome 6 Pro Solid";
+									font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
 									display: inline-block;
 									padding-inline-start: var(--spacing-xs);
 									font-size: 0.85em;
