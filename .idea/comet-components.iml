@@ -117,6 +117,7 @@
       <excludeFolder url="file://$MODULE_DIR$/test/unit/.phpunit.cache" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/openpsa" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />
