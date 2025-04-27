@@ -4,6 +4,7 @@
  * (which is logical to avoid over-coupling this plugin with the Comet Canvas theme),
  * it also makes sense to include default archive and single event templates here too.
  */
+use Doubleedesign\Comet\WordPress\Calendar\Events;
 use Doubleedesign\Comet\Core\{PageHeader, Container, EventList, EventCard, DateBlock, DateRangeBlock};
 use Doubleedesign\Comet\WordPress\PreprocessedHTML;
 
@@ -22,43 +23,6 @@ else {
 $pageHeader->render();
 
 
-function get_date_block($event_id): DateBlock|DateRangeBlock|null {
-	$type = get_field('type', $event_id);
-	$dateComponent = null;
-	$sortDate = get_post_meta($event_id, 'sort_date', true);
-	// is the sort date in the past? If so, show the year. For upcoming dates, don't show the year
-	$isUpcoming = $sortDate && $sortDate >= (new DateTime())->format('Ymd');
-	switch($type) {
-		case 'single':
-			$rawDate = get_post_meta($event_id, 'single_date', true);
-			$formattedDate = (new DateTime($rawDate))->format('Y-m-d');
-			$dateComponent = new DateBlock([
-				'date'       => $formattedDate,
-				'showDay'    => $isUpcoming,
-				'showYear'   => !$isUpcoming,
-				'colorTheme' => $isUpcoming ? 'secondary' : 'dark'
-			]);
-			break;
-		case 'range':
-			$rawStartDate = get_post_meta($event_id, 'range_start_date', true);
-			$rawEndDate = get_post_meta($event_id, 'range_end_date', true);
-			$startDate = (new DateTime($rawStartDate))->format('Y-m-d');
-			$endDate = (new DateTime($rawEndDate))->format('Y-m-d');
-			$dateComponent = new DateRangeBlock([
-				'showDay'    => $isUpcoming,
-				'showYear'   => !$isUpcoming,
-				'start_date' => $startDate,
-				'end_date'   => $endDate,
-				'colorTheme' => $isUpcoming ? 'secondary' : 'dark'
-			]);
-			break;
-		default:
-			break;
-	}
-
-	return $dateComponent;
-}
-
 // Upcoming
 $events = Doubleedesign\Comet\WordPress\Calendar\Events::get_upcoming_event_ids(100);
 $cards = array_map(function($eventId) {
@@ -67,7 +31,7 @@ $cards = array_map(function($eventId) {
 		$detailUrl = get_option('options_enable_event_detail_pages') ? get_the_permalink($eventId) : null;
 		$location = get_field('location', $eventId);
 		$externalLink = get_field('external_link', $eventId);
-		$dateComponent = get_date_block($eventId);
+		$dateComponent = Events::get_date_block($eventId);
 
 		return new EventCard([
 			'dateComponent' => $dateComponent,
@@ -102,7 +66,7 @@ if(have_posts()) {
 			$detailUrl = get_option('options_enable_event_detail_pages') ? get_the_permalink() : null;
 			$location = get_field('location');
 			$externalLink = get_field('external_link');
-			$dateComponent = get_date_block(get_the_ID());
+			$dateComponent = Events::get_date_block(get_the_ID());
 
 			array_push($cards, new EventCard([
 				'dateComponent' => $dateComponent,

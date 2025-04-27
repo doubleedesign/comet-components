@@ -1,9 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\WordPress\Calendar;
-
+use Doubleedesign\Comet\Core\{DateBlock, DateRangeBlock};
 use DateTime;
 use Exception;
-use IntlDateFormatter;
 
 class Events {
 
@@ -471,6 +470,7 @@ class Events {
 	function save_common_event_date($post_id): void {
 		if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 		if(!isset($_POST['acf'])) return;
+		if(get_post_type($post_id) !== 'event') return;
 
 		$current_date_type = get_post_meta($post_id, 'type', true);
 		switch($current_date_type) {
@@ -529,6 +529,43 @@ class Events {
 		$query = new \WP_Query($args);
 
 		return wp_list_pluck($query->posts, 'ID');
+	}
+
+	public static function get_date_block(int $event_id, ?string $colorTheme = null): DateBlock|DateRangeBlock|null {
+		$type = get_field('type', $event_id);
+		$dateComponent = null;
+		$sortDate = get_post_meta($event_id, 'sort_date', true);
+		// is the sort date in the past? If so, show the year. For upcoming dates, don't show the year
+		$isUpcoming = $sortDate && $sortDate >= (new DateTime())->format('Ymd');
+		switch($type) {
+			case 'single':
+				$rawDate = get_post_meta($event_id, 'single_date', true);
+				$formattedDate = (new DateTime($rawDate))->format('Y-m-d');
+				$dateComponent = new DateBlock([
+					'date'       => $formattedDate,
+					'showDay'    => $isUpcoming,
+					'showYear'   => !$isUpcoming,
+					'colorTheme' => $colorTheme ?? ($isUpcoming ? 'secondary' : 'dark')
+				]);
+				break;
+			case 'range':
+				$rawStartDate = get_post_meta($event_id, 'range_start_date', true);
+				$rawEndDate = get_post_meta($event_id, 'range_end_date', true);
+				$startDate = (new DateTime($rawStartDate))->format('Y-m-d');
+				$endDate = (new DateTime($rawEndDate))->format('Y-m-d');
+				$dateComponent = new DateRangeBlock([
+					'showDay'    => $isUpcoming,
+					'showYear'   => !$isUpcoming,
+					'start_date' => $startDate,
+					'end_date'   => $endDate,
+					'colorTheme' => $colorTheme ?? ($isUpcoming ? 'secondary' : 'dark')
+				]);
+				break;
+			default:
+				break;
+		}
+
+		return $dateComponent;
 	}
 
 }

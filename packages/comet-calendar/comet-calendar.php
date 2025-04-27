@@ -23,7 +23,8 @@ use Doubleedesign\Comet\WordPress\Calendar\{
 	Fields,
 	TemplateHandler,
 	Admin,
-	BlockEditorConfig
+	BlockEditorConfig,
+	Blocks
 };
 
 /**
@@ -51,3 +52,4 @@ new Events();
 new TemplateHandler();
 new Admin();
 new BlockEditorConfig();
+new Blocks();

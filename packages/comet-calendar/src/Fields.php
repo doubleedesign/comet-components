@@ -35,7 +35,7 @@ class Fields {
 	 * @return void
 	 */
 	function save_acf_fields_to_this_plugin($group): void {
-		$groups = array_diff(scandir(COMET_CALENDAR_PLUGIN_PATH . '/src/acf-json'), ['..', '.']);
+		$groups = array_diff(scandir(WP_PLUGIN_DIR . '/comet-calendar/src/acf-json'), ['..', '.']);
 
 		if(in_array($group['key'] . '.json', array_values($groups))) {
 			self::override_acf_json_save_location();

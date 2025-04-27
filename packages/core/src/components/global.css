@@ -39,6 +39,7 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --button-border-radius: 0;
+  --typescale: 1.414;
 }
 
 * {

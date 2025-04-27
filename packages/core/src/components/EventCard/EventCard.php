@@ -84,12 +84,6 @@ class EventCard extends UIComponent {
 
 	}
 
-	protected function get_html_attributes(): array {
-		return array_merge(parent::get_html_attributes(), [
-			'data-background' => 'white'
-		]);
-	}
-
 	private function apply_context_to_inner_components($components, $append = ''): void {
 		array_walk($components, function($component) use ($append) {
 			if($component instanceof Group || $component instanceof Heading) {

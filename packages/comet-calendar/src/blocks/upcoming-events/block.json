@@ -21,13 +21,10 @@
 		"calendar"
 	],
 	"textdomain": "comet",
-	"editorStyle": [
-		"comet-calendar-style"
-	],
 	"supports": {
-		"mode": false,
+		"mode": true,
 		"jsx": true,
-		"innerBlocks": true,
+		"innerBlocks": false,
 		"anchor": true,
 		"ariaLabel": false,
 		"align": false,

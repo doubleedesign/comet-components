@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: white;
 }
 .event-card__content__heading, .events__list__card__content__heading {
   margin-block: 0;
