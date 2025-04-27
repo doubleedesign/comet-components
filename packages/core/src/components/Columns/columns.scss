@@ -69,6 +69,7 @@
 	// Adjust layout if any of the columns has a preset width
 	&:has(> .columns__column--has-own-width) {
 		display: flex;
+		flex-wrap: nowrap;
 		gap: var(--spacing-md);
 
 		@include container-width-up('narrow') {

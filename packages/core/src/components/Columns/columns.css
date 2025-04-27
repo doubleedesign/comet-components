@@ -48,6 +48,7 @@
 }
 .columns:has(> .columns__column--has-own-width) {
   display: flex;
+  flex-wrap: nowrap;
   gap: var(--spacing-md);
 }
 @container (min-width: 940px) {
