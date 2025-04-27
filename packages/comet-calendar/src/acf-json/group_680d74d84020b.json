@@ -1,0 +1,67 @@
+{
+    "key": "group_680d74d84020b",
+    "title": "Calendar Page",
+    "fields": [
+        {
+            "key": "field_680d74d8d3a0c",
+            "label": "Page title",
+            "name": "events_page_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Note: A lowercase version of this is also used for the event URLs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Calendar",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_680d7510d43da",
+            "label": "Show past events",
+            "name": "show_past_events",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Whether to show the \"Past events\" section on the page. Note: This will not stop direct links to past events from working if \"Enable event detail pages\" is on. To completely hide an event from public view without deleting it form the admin, make it a draft, private, or manually add a redirect in its settings.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "calendar-settings"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1745717044
+}

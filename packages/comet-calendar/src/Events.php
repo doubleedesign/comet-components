@@ -31,12 +31,16 @@ class Events {
 	 * @return void
 	 */
 	function create_event_cpt(): void {
+		$page_title = get_option('options_events_page_title');
+		$title = !empty($page_title) ? $page_title : __('Events', 'comet');
+		$slug = strtolower(sanitize_title($title)) ?? 'events';
+
 		$labels = array(
-			'name'                  => _x('Events', 'Post Type General Name', 'comet'),
+			'name'                  => _x($title, 'Post Type General Name', 'comet'),
 			'singular_name'         => _x('Event', 'Post Type Singular Name', 'comet'),
 			'menu_name'             => __('Events', 'comet'),
 			'name_admin_bar'        => __('Event', 'comet'),
-			'archives'              => __('Events', 'comet'),
+			'archives'              => __($title, 'comet'),
 			'attributes'            => __('Event Attributes', 'comet'),
 			'parent_item_colon'     => __('Parent Event:', 'comet'),
 			'all_items'             => __('Events', 'comet'),
@@ -61,7 +65,7 @@ class Events {
 			'filter_items_list'     => __('Filter items list', 'comet'),
 		);
 		$rewrite = array(
-			'slug'       => 'events/%year%', // Placeholder handled by populate_custom_permalink_rewrite
+			'slug'       => $slug . '/%year%', // Placeholder handled by populate_custom_permalink_rewrite
 			'with_front' => true,
 			'pages'      => true,
 			'feeds'      => true,
@@ -81,7 +85,7 @@ class Events {
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,
-			'has_archive'         => 'events',
+			'has_archive'         => $slug,
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
@@ -89,6 +93,7 @@ class Events {
 		);
 
 		register_post_type('event', $args);
+		flush_rewrite_rules();
 	}
 
 
