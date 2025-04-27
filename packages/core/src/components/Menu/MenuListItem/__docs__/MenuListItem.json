@@ -1,58 +1,58 @@
 {
-    "name": "MenuListItem",
-    "description": null,
-    "extends": "UIComponent",
-    "abstract": false,
-    "isInner": true,
-    "belongsInside": "Menu",
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "menu-list-item"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "isCurrentParent": {
-            "type": "bool",
-            "required": true,
-            "default": "false"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "li"
-            ],
-            "default": "li",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
-    }
+	"name": "MenuListItem",
+	"description": null,
+	"extends": "UIComponent",
+	"abstract": false,
+	"isInner": true,
+	"belongsInside": "Menu",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"menu-list-item"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"isCurrentParent": {
+			"type": "bool",
+			"required": true,
+			"default": "false"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"li"
+			],
+			"default": "li",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<Renderable>",
+		"description": "Inner components to be rendered within this component",
+		"required": true,
+		"inherited": true
+	}
 }

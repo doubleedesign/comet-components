@@ -1,52 +1,52 @@
 {
-    "name": "Step",
-    "description": null,
-    "extends": "UIComponent",
-    "abstract": false,
-    "isInner": true,
-    "belongsInside": "Steps",
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "steps__step"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "li"
-            ],
-            "default": "li",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<Heading|Paragraph|ListComponent|Image|ButtonGroup>",
-        "description": "Inner components to be rendered within this component",
-        "required": true
-    }
+	"name": "Step",
+	"description": null,
+	"extends": "UIComponent",
+	"abstract": false,
+	"isInner": true,
+	"belongsInside": "Steps",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"steps__step"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"li"
+			],
+			"default": "li",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<Heading|Paragraph|ListComponent|Image|ButtonGroup>",
+		"description": "Inner components to be rendered within this component",
+		"required": true
+	}
 }

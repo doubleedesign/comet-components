@@ -1,52 +1,52 @@
 {
-    "name": "ImageAndText",
-    "description": "Display some featured text alongside an image.",
-    "extends": "UIComponent",
-    "abstract": false,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "image-and-text"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div"
-            ],
-            "default": "div",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<ImageWrapper|ContentWrapper>",
-        "description": "Inner components to be rendered within this component",
-        "required": true
-    }
+	"name": "ImageAndText",
+	"description": "Display some featured text alongside an image.",
+	"extends": "UIComponent",
+	"abstract": false,
+	"isInner": false,
+	"belongsInside": "LayoutComponent",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"image-and-text"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"div"
+			],
+			"default": "div",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<ImageWrapper|ContentWrapper>",
+		"description": "Inner components to be rendered within this component",
+		"required": true
+	}
 }

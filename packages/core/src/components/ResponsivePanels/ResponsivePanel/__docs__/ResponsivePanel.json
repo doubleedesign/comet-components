@@ -1,63 +1,63 @@
 {
-    "name": "ResponsivePanel",
-    "description": null,
-    "extends": "PanelComponent",
-    "abstract": false,
-    "isInner": true,
-    "belongsInside": "ResponsivePanels",
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "responsive-panel__content"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "subtitle": {
-            "type": "string",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div",
-                "details"
-            ],
-            "default": "div",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        },
-        "title": {
-            "type": "string",
-            "required": true,
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
-    }
+	"name": "ResponsivePanel",
+	"description": null,
+	"extends": "PanelComponent",
+	"abstract": false,
+	"isInner": true,
+	"belongsInside": "ResponsivePanels",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"responsive-panel__content"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"subtitle": {
+			"type": "string",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"div",
+				"details"
+			],
+			"default": "div",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		},
+		"title": {
+			"type": "string",
+			"required": true,
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<Renderable>",
+		"description": "Inner components to be rendered within this component",
+		"required": true,
+		"inherited": true
+	}
 }

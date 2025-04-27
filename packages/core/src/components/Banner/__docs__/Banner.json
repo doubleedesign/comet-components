@@ -1,177 +1,177 @@
 {
-    "name": "Banner",
-    "description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content.",
-    "extends": "LayoutComponent",
-    "abstract": false,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
-    "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ],
-            "inherited": true
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "banner",
-                "layout-block"
-            ],
-            "inherited": true
-        },
-        "containerSize": {
-            "type": "ContainerSize",
-            "description": "The size of the container for the content",
-            "required": true,
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "default"
-        },
-        "contentMaxWidth": {
-            "type": "int",
-            "description": "The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)",
-            "required": true,
-            "default": 50
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "focalPoint": {
-            "type": "array<int,",
-            "description": "The X and Y coordinates of the focal point of the image",
-            "required": true,
-            "default": [
-                50,
-                50
-            ]
-        },
-        "hAlign": {
-            "type": "Alignment",
-            "description": "Horizontal alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "imageAlt": {
-            "type": "string",
-            "description": "The alt text for the image",
-            "required": true
-        },
-        "imageUrl": {
-            "type": "string",
-            "description": "The URL of the image to display in the banner",
-            "required": true
-        },
-        "isParallax": {
-            "type": "bool",
-            "description": "Whether the banner should have a fixed background (also known as a parallax effect)",
-            "required": true,
-            "default": "false"
-        },
-        "maxHeight": {
-            "type": "int",
-            "description": "The maximum height of the banner (in vh)",
-            "required": true,
-            "default": 100
-        },
-        "minHeight": {
-            "type": "int",
-            "description": "The minimum height of the banner (in px)",
-            "required": true,
-            "default": 600
-        },
-        "overlayColor": {
-            "type": "ThemeColor",
-            "description": "The color of the overlay on top of the image",
-            "required": true,
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ],
-            "default": "dark"
-        },
-        "overlayOpacity": {
-            "type": "int",
-            "description": "The opacity of the overlay on top of the image (set to 0 to disable the overlay)",
-            "required": true,
-            "default": 0
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "section"
-            ],
-            "default": "section",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        },
-        "vAlign": {
-            "type": "Alignment",
-            "description": "Vertical alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start",
-            "inherited": true
-        }
-    },
-    "innerComponents": {
-        "type": "array<Heading|Paragraph|ButtonGroup>",
-        "description": "Inner components to be rendered within this component",
-        "required": true
-    }
+	"name": "Banner",
+	"description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content.",
+	"extends": "LayoutComponent",
+	"abstract": false,
+	"isInner": false,
+	"belongsInside": "LayoutComponent",
+	"attributes": {
+		"backgroundColor": {
+			"type": "ThemeColor",
+			"description": "Background colour keyword",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			],
+			"inherited": true
+		},
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"banner",
+				"layout-block"
+			],
+			"inherited": true
+		},
+		"containerSize": {
+			"type": "ContainerSize",
+			"description": "The size of the container for the content",
+			"required": true,
+			"supported": [
+				"default",
+				"wide",
+				"fullwidth",
+				"narrow",
+				"narrower",
+				"small"
+			],
+			"default": "default"
+		},
+		"contentMaxWidth": {
+			"type": "int",
+			"description": "The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)",
+			"required": true,
+			"default": 50
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"focalPoint": {
+			"type": "array<int,",
+			"description": "The X and Y coordinates of the focal point of the image",
+			"required": true,
+			"default": [
+				50,
+				50
+			]
+		},
+		"hAlign": {
+			"type": "Alignment",
+			"description": "Horizontal alignment, if applicable",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "start",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"imageAlt": {
+			"type": "string",
+			"description": "The alt text for the image",
+			"required": true
+		},
+		"imageUrl": {
+			"type": "string",
+			"description": "The URL of the image to display in the banner",
+			"required": true
+		},
+		"isParallax": {
+			"type": "bool",
+			"description": "Whether the banner should have a fixed background (also known as a parallax effect)",
+			"required": true,
+			"default": "false"
+		},
+		"maxHeight": {
+			"type": "int",
+			"description": "The maximum height of the banner (in vh)",
+			"required": true,
+			"default": 100
+		},
+		"minHeight": {
+			"type": "int",
+			"description": "The minimum height of the banner (in px)",
+			"required": true,
+			"default": 600
+		},
+		"overlayColor": {
+			"type": "ThemeColor",
+			"description": "The color of the overlay on top of the image",
+			"required": true,
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			],
+			"default": "dark"
+		},
+		"overlayOpacity": {
+			"type": "int",
+			"description": "The opacity of the overlay on top of the image (set to 0 to disable the overlay)",
+			"required": true,
+			"default": 0
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"section"
+			],
+			"default": "section",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		},
+		"vAlign": {
+			"type": "Alignment",
+			"description": "Vertical alignment, if applicable",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "start",
+			"inherited": true
+		}
+	},
+	"innerComponents": {
+		"type": "array<Heading|Paragraph|ButtonGroup>",
+		"description": "Inner components to be rendered within this component",
+		"required": true
+	}
 }

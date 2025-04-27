@@ -1,85 +1,85 @@
 {
-    "name": "ButtonGroup",
-    "description": "Semantically and visually group buttons together.",
-    "extends": "UIComponent",
-    "abstract": false,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "button-group"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "hAlign": {
-            "type": "Alignment",
-            "description": "Horizontal alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start"
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "orientation": {
-            "type": "Orientation",
-            "description": "Orientation of the component content, if applicable",
-            "supported": [
-                "horizontal",
-                "vertical"
-            ],
-            "default": "horizontal"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div"
-            ],
-            "default": "div",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        },
-        "vAlign": {
-            "type": "Alignment",
-            "description": "Vertical alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "start"
-        }
-    },
-    "innerComponents": {
-        "type": "array<Button>",
-        "description": "Button objects to render inside the ButtonGroup",
-        "required": true
-    }
+	"name": "ButtonGroup",
+	"description": "Semantically and visually group buttons together.",
+	"extends": "UIComponent",
+	"abstract": false,
+	"isInner": false,
+	"belongsInside": "LayoutComponent",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"button-group"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"hAlign": {
+			"type": "Alignment",
+			"description": "Horizontal alignment, if applicable",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "start"
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"orientation": {
+			"type": "Orientation",
+			"description": "Orientation of the component content, if applicable",
+			"supported": [
+				"horizontal",
+				"vertical"
+			],
+			"default": "horizontal"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"div"
+			],
+			"default": "div",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		},
+		"vAlign": {
+			"type": "Alignment",
+			"description": "Vertical alignment, if applicable",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"default": "start"
+		}
+	},
+	"innerComponents": {
+		"type": "array<Button>",
+		"description": "Button objects to render inside the ButtonGroup",
+		"required": true
+	}
 }

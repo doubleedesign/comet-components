@@ -1,74 +1,74 @@
 {
-    "name": "TableCaption",
-    "description": null,
-    "extends": "TextElement",
-    "abstract": false,
-    "isInner": true,
-    "belongsInside": "Table",
-    "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "table__caption"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant",
-            "inherited": true
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
-        },
-        "position": {
-            "type": "string",
-            "description": "Position of the caption relative to the table",
-            "required": true,
-            "supported": [
-                "top",
-                "bottom"
-            ],
-            "default": "bottom"
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles",
-            "inherited": true
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "caption"
-            ],
-            "default": "caption",
-            "inherited": true
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        },
-        "textAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "inherited": true
-        }
-    },
-    "content": {
-        "type": "string",
-        "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": true
-    }
+	"name": "TableCaption",
+	"description": null,
+	"extends": "TextElement",
+	"abstract": false,
+	"isInner": true,
+	"belongsInside": "Table",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"table__caption"
+			],
+			"inherited": true
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"position": {
+			"type": "string",
+			"description": "Position of the caption relative to the table",
+			"required": true,
+			"supported": [
+				"top",
+				"bottom"
+			],
+			"default": "bottom"
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"caption"
+			],
+			"default": "caption",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		},
+		"textAlign": {
+			"type": "Alignment",
+			"supported": [
+				"start",
+				"end",
+				"center",
+				"justify",
+				"match-parent"
+			],
+			"inherited": true
+		}
+	},
+	"content": {
+		"type": "string",
+		"description": "Plain text or basic HTML",
+		"required": true,
+		"inherited": true
+	}
 }

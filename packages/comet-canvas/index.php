@@ -4,7 +4,7 @@ use Doubleedesign\Comet\Core\PageHeader;
 get_header();
 
 if(!is_front_page()) {
-	if(class_exists("Doubleedesign\Breadcrumbs\Breadcrumbs")) {
+	if(class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
 		$breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
 		$pageHeader = new PageHeader(['size' => 'narrow'], get_the_title(), $breadcrumbs);
 	}
@@ -15,5 +15,14 @@ if(!is_front_page()) {
 	$pageHeader->render();
 }
 
-the_content();
+if(is_page()) {
+	the_content();
+}
+if(is_archive() && have_posts()) {
+	while(have_posts()) {
+//		the_post();
+//		echo get_the_title();
+	}
+}
+
 get_footer();
