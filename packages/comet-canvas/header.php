@@ -38,4 +38,4 @@ $headerComponent->render();
 <!--<a class="skip-link screen-reader-text" href="#primary">-->
 <?php //esc_html_e('Skip to content', 'comet'); ?><!--</a>-->
 
-<main class="layout-block page-section">
+<main class="site-content layout-block page-section">

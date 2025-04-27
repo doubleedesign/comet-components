@@ -15,8 +15,15 @@
 		padding-block: var(--spacing-xl);
 	}
 
+	.breadcrumbs {
+		width: 100%;
+		flex-basis: 100%;
+	}
+
 	h1 {
 		margin-top: var(--spacing-xs);
 		margin-bottom: 0;
+		width: 100%;
+		flex-basis: 100%;
 	}
 }

@@ -52,6 +52,7 @@ body {
 [data-valign],
 [data-halign] {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 // Default alignments. Note that components can override with their own stuff that they do with these values,

@@ -58,6 +58,7 @@ body {
 [data-valign],
 [data-halign] {
   display: flex;
+  flex-wrap: wrap;
 }
 
 [data-valign=start] {
@@ -1062,9 +1063,15 @@ form input[type=button] {
     padding-block: var(--spacing-xl);
   }
 }
+.page-header .breadcrumbs {
+  width: 100%;
+  flex-basis: 100%;
+}
 .page-header h1 {
   margin-top: var(--spacing-xs);
   margin-bottom: 0;
+  width: 100%;
+  flex-basis: 100%;
 }
 
 .breadcrumbs__list {

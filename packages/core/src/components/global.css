@@ -57,6 +57,7 @@ body {
 [data-valign],
 [data-halign] {
   display: flex;
+  flex-wrap: wrap;
 }
 
 [data-valign=start] {

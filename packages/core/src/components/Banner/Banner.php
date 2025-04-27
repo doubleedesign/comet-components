@@ -11,6 +11,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class Banner extends LayoutComponent {
+	use LayoutAlignment;
+
 	/**
 	 * @var ContainerSize $containerSize
 	 * @description The size of the container for the content
@@ -83,6 +85,7 @@ class Banner extends LayoutComponent {
 		}
 
 		parent::__construct($attributes, $innerComponents, 'components.Banner.banner');
+		$this->set_layout_alignment_from_attrs($attributes);
 		$this->transform_inner_components();
 	}
 
@@ -108,6 +111,8 @@ class Banner extends LayoutComponent {
 						'withWrapper' => false,
 						'tagName'     => 'div',
 						'context'     => 'banner',
+						'hAlign'      => $this->hAlign->value,
+						'vAlign'      => $this->vAlign->value,
 					]
 				),
 				[new Group(

@@ -17,6 +17,6 @@ $iconLinksComponent = new IconLinks([
 $footerComponent = new SiteFooter(['backgroundColor' => 'dark'], [$iconLinksComponent, $menuComponent]);
 $footerComponent->render();
 
-wp_footer(); ?>n
+wp_footer(); ?>
 </body>
 </html>
