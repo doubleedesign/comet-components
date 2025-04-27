@@ -34,11 +34,11 @@ abstract class LayoutComponent extends UIComponent {
 	protected function get_html_attributes(): array {
 		$attributes = parent::get_html_attributes();
 
-		if(isset($this->hAlign)) {
+		if(isset($this->hAlign) && !$this->hAlign->isDefault()) {
 			$attributes['data-halign'] = $this->hAlign->value;
 		}
 
-		if(isset($this->vAlign)) {
+		if(isset($this->vAlign) && !$this->vAlign->isDefault()) {
 			$attributes['data-valign'] = $this->vAlign->value;
 		}
 

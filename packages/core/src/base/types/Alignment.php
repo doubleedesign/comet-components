@@ -17,4 +17,8 @@ enum Alignment: string {
 			default => self::MATCH_PARENT
 		};
 	}
+
+	public function isDefault(): bool {
+		return $this === self::MATCH_PARENT || $this === self::START;
+	}
 }

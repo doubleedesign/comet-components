@@ -6,12 +6,12 @@ trait LayoutAlignment {
 	 * @var Alignment|null $hAlign
 	 * @description Horizontal alignment, if applicable
 	 */
-	protected ?Alignment $hAlign = Alignment::START;
+	protected ?Alignment $hAlign = Alignment::MATCH_PARENT;
 	/**
 	 * @var Alignment|null $vAlign
 	 * @description Vertical alignment, if applicable
 	 */
-	protected ?Alignment $vAlign = Alignment::START;
+	protected ?Alignment $vAlign = Alignment::MATCH_PARENT;
 
 	/**
 	 * @param array $attributes
