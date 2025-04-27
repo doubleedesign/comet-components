@@ -22,10 +22,6 @@ class ComposerStaticInit587c85fae325cc4799a46f189dfa77f8
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Doubleedesign\\Comet\\WordPress\\Calendar\\Admin' => __DIR__ . '/../..' . '/src/Admin.php',
-        'Doubleedesign\\Comet\\WordPress\\Calendar\\BlockEditorConfig' => __DIR__ . '/../..' . '/src/BlockEditorConfig.php',
-        'Doubleedesign\\Comet\\WordPress\\Calendar\\Events' => __DIR__ . '/../..' . '/src/Events.php',
-        'Doubleedesign\\Comet\\WordPress\\Calendar\\Fields' => __DIR__ . '/../..' . '/src/Fields.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

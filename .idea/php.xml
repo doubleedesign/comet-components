@@ -203,11 +203,11 @@
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/packages/comet-calendar/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/comet-canvas/vendor/composer" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
       <path value="$USER_HOME$/LocalSites/vanilla-playground/app/public" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
   <component name="PhpRuntimeConfiguration">
     <extensions>
       <extension name="Ev" enabled="false" />
@@ -312,6 +312,7 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-plugin/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
       <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/test/unit/phpunit.xml" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" use_configuration_file="true" />
     </phpunit_settings>
   </component>
