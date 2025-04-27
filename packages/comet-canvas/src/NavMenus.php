@@ -172,7 +172,7 @@ class NavMenus {
 						$item->is_current_parent = true;
 					}
 				}
-				else if($item->type == 'post_type_archive' && $current->name == $item->object) {
+				else if($item->type == 'post_type_archive' && isset($current->name) && $current->name == $item->object) {
 					$item->is_current = true;
 				}
 
