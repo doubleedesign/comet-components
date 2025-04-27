@@ -1,3 +1,37 @@
-
+.event-card {
+  border: 1px solid color-mix(in srgb, var(--color-light) 90%, black);
+  display: flex;
+  flex-wrap: nowrap;
+}
+.event-card__heading {
+  margin-block: 0;
+}
+.event-card__content {
+  padding: var(--spacing-sm);
+}
+.event-card__content__inner__links {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+}
+.event-card__content__inner__links a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.event-card__content__inner__links a span {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration 0.2s ease-in-out;
+}
+.event-card__content__inner__links a i, .event-card__content__inner__links a svg {
+  order: 2;
+  padding-inline-start: var(--spacing-xxs);
+  font-size: 0.8em;
+  transform: translateY(-0.2em);
+}
+.event-card__content__inner__links a:hover span, .event-card__content__inner__links a:focus span, .event-card__content__inner__links a:active span {
+  text-decoration-color: currentColor;
+}
 
 /*# sourceMappingURL=event-card.css.map */

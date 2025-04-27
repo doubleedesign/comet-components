@@ -2,6 +2,8 @@
 namespace Doubleedesign\Comet\WordPress\Calendar;
 
 use DateTime;
+use Exception;
+use IntlDateFormatter;
 
 class Events {
 
@@ -21,6 +23,9 @@ class Events {
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_js'], 5);
 		add_action('acf/save_post', [$this, 'handle_inline_acf_form_submit'], 11);
 		add_action('acf/save_post', [$this, 'handle_acf_quick_add_form_submit'], 20);
+
+		// Add a common date field to use for query filtering and sorting
+		add_action('acf/save_post', [$this, 'save_common_event_date'], 20);
 
 		// Misc
 		add_action('add_meta_boxes', [$this, 'remove_yoast_metabox'], 100);
@@ -135,7 +140,8 @@ class Events {
 
 
 	/**
-	 * Alter the default query for the CPT archive
+	 * Alter the default query for the CPT archive to only show past events
+	 * (Upcoming to be handled in the template with its own query, allowing past events to use WP default pagination)
 	 *
 	 * @param $query
 	 *
@@ -144,23 +150,22 @@ class Events {
 	function customise_event_archive($query): mixed {
 		if(is_post_type_archive('event') && isset($query->query['post_type']) && $query->query['post_type'] === 'event') {
 			if($query->is_main_query() && !is_admin()) {
-				//$query->set('meta_key', 'start_date');
-				//$query->set('orderby', 'meta_value');$query->set('orderby', 'post_date');
+				$query->set('meta_key', 'sort_date');
 				$query->set('order', 'DESC');
 				$query->set('meta_type', 'DATE');
 
-				// Filter out upcoming events because they will be displayed separately in the template
+				// Filter out upcoming events
 				$query->set('meta_query', array(
 					'relation' => 'OR',
 					array(
-						'key'     => 'start_date',
+						'key'     => 'sort_date',
 						'value'   => current_time('Y-m-d'),
 						'compare' => '<',
 						'type'    => 'DATE'
 					),
-					// But include events without a start_date
+					// But include events without a date
 					array(
-						'key'     => 'start_date',
+						'key'     => 'sort_date',
 						'compare' => 'NOT EXISTS',
 					),
 				));
@@ -233,11 +238,17 @@ class Events {
 		// Remove the post date column
 		unset($two['date']);
 
+		// TODO: Improve this
+		$sortColTooltip = <<<HTML
+		<span tabindex="0" title="Set automatically from the first date. Refresh the page after editing dates to see this updated.">?</span>
+		HTML;
+
 		return array_merge(
 			$checkbox,
 			$one,
 			array(
 				'hacky_extra'   => __('', 'comet'),
+				'sort_date'     => __("Sorted as $sortColTooltip", 'comet'),
 				'event_date'    => __('Event date', 'comet'),
 				'location'      => __('Location', 'comet'),
 				'external_link' => __('External link', 'comet'),
@@ -283,6 +294,7 @@ class Events {
 	 * @param $post_id
 	 *
 	 * @return void
+	 * @throws Exception
 	 */
 	function populate_admin_list_columns($column_name, $post_id): void {
 
@@ -304,6 +316,15 @@ class Events {
 			));
 			echo '</div>';
 		}
+
+		if($column_name === 'sort_date') {
+			$value = get_post_meta($post_id, 'sort_date', true);
+			if(!empty($value)) {
+				$date = new DateTime($value);
+				echo $date->format('Y-m-d');
+			}
+		}
+
 
 		if($column_name === 'event_date') {
 			// Date type is a select list with values that should match up to the names of the groups that contain the detailed data
@@ -356,7 +377,6 @@ class Events {
 
 		if($column_name === 'external_link') {
 			$field = get_field_object('external_link', $post_id);
-			if(!$field) return;
 
 			$field_key = $field['key'];
 			$value = get_post_meta($post_id, 'external_link', true);
@@ -447,6 +467,36 @@ class Events {
 
 	}
 
+	/**
+	 * Save the common event date to post meta for query sorting and filtering
+	 * @param $post_id
+	 * @return void
+	 */
+	function save_common_event_date($post_id): void {
+		if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+		if(!isset($_POST['acf'])) return;
+
+		$current_date_type = get_post_meta($post_id, 'type', true);
+		switch($current_date_type) {
+			case 'single':
+				$date = get_post_meta($post_id, 'single_date', true);
+				break;
+			case 'range':
+				$date = get_post_meta($post_id, 'range_start_date', true);
+				break;
+			case 'multi':
+				$date = get_post_meta($post_id, 'multi_dates_0_date', true);
+				break;
+			case 'multi_extended':
+				$date = get_post_meta($post_id, 'multi_extended_0_date', true);
+				break;
+			default:
+				$date = '';
+				break;
+		}
+
+		update_post_meta($post_id, 'sort_date', $date);
+	}
 
 	/**
 	 * Don't show Yoast SEO on Event edit screen
@@ -467,12 +517,12 @@ class Events {
 		$args = array(
 			'post_type'      => 'event',
 			'posts_per_page' => $qty,
-			'meta_key'       => 'start_date',
+			'meta_key'       => 'sort_date',
 			'orderby'        => 'meta_value',
 			'order'          => 'ASC',
 			'meta_query'     => array(
 				array(
-					'key'     => 'start_date',
+					'key'     => 'sort_date',
 					'value'   => $today,
 					'compare' => '>=',
 					'type'    => 'DATE'
@@ -480,7 +530,7 @@ class Events {
 			)
 		);
 
-		$query = new WP_Query($args);
+		$query = new \WP_Query($args);
 
 		return wp_list_pluck($query->posts, 'ID');
 	}

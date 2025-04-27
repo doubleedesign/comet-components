@@ -6,7 +6,7 @@ class Admin {
 		add_action('acf/init', [$this, 'register_options_page'], 5);
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_css']);
 		add_action('admin_bar_menu', [$this, 'add_archive_page_admin_bar_link'], 200);
-		add_filter('acf/update_value', [$this, 'maybe_flush_permalinks'], 20, 3);
+		add_filter('acf/update_value/name=events_page_title', [$this, 'maybe_flush_permalinks'], 20, 3);
 	}
 
 	function register_options_page(): void {

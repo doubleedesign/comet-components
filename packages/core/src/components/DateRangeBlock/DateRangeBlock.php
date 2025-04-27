@@ -14,16 +14,16 @@ use OpenPsa\Ranger\Ranger;
 #[DefaultTag(Tag::TIME)]
 class DateRangeBlock extends DateComponent {
 	/**
-	 * @var DateTime|null $startDate
+	 * @var DateTime|string|null $startDate
 	 * @description The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.
 	 */
-	protected DateTime|null $startDate;
+	protected DateTime|string|null $startDate;
 
 	/**
-	 * @var DateTime|null $endDate
+	 * @var DateTime|string|null $endDate
 	 * @description The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.
 	 */
-	protected DateTime|null $endDate;
+	protected DateTime|string|null $endDate;
 
 	private Ranger $ranger;
 

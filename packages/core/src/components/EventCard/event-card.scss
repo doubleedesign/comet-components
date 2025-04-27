@@ -1,3 +1,52 @@
-.date-block-event {
+@use '../functions' as *;
 
+.event-card {
+	border: 1px solid darken('light', 10%);
+	display: flex;
+	flex-wrap: nowrap;
+
+	&__heading {
+		margin-block: 0;
+	}
+
+	&__content {
+		padding: var(--spacing-sm);
+
+		&__inner {
+
+			&__location {
+			}
+
+			&__links {
+				display: flex;
+				justify-content: flex-end;
+				gap: var(--spacing-md);
+
+				a {
+					display: inline-flex;
+					align-items: center;
+					text-decoration: none;
+
+					span {
+						text-decoration: underline;
+						text-decoration-color: transparent;
+						transition: text-decoration 0.2s ease-in-out;
+					}
+
+					i, svg {
+						order: 2;
+						padding-inline-start: var(--spacing-xxs);
+						font-size: 0.8em;
+						transform: translateY(-0.2em);
+					}
+
+					&:hover, &:focus, &:active {
+						span {
+							text-decoration-color: currentColor;
+						}
+					}
+				}
+			}
+		}
+	}
 }

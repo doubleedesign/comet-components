@@ -204,6 +204,8 @@
       <path value="$PROJECT_DIR$/packages/comet-calendar/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/comet-canvas/vendor/composer" />
       <path value="$USER_HOME$/LocalSites/vanilla-playground/app/public" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>

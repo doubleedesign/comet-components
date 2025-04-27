@@ -1,0 +1,80 @@
+@use '../EventCard/event-card' as *;
+@use '../mixins' as *;
+@use '../variables' as *;
+
+@mixin stack-until($breakpointName) {
+	@include container-width-down($breakpointName) {
+
+		.event__list__card {
+			grid-column: 1 / -1;
+			width: 100% !important;
+			min-width: 100%;
+		}
+	}
+}
+
+
+.events {
+	width: 100%;
+
+	&__heading {
+	}
+
+	&__list {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-gap: var(--spacing-md);
+
+		@include container-width-up('narrow') {
+			grid-gap: var(--spacing-lg);
+		}
+
+		&[data-max-per-row="2"], &[data-max-per-row="4"] {
+			grid-template-columns: repeat(1, 1fr);
+			@include stack-until('small');
+
+			@include container-width-up('small') {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
+		&[data-max-per-row="3"] {
+			@include container-width-up('narrower') {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+
+		&[data-max-per-row="4"] {
+			@include container-width-up('narrow') {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
+
+		&__card {
+			@extend .event-card;
+
+			&__heading {
+				@extend .event-card__heading;
+			}
+
+			&__content {
+				@extend .event-card__content;
+
+				&__inner {
+					@extend .event-card__content__inner;
+
+					&__location {
+						@extend .event-card__content__inner__location;
+					}
+
+					&__links {
+						@extend .event-card__content__inner__links;
+					}
+				}
+			}
+		}
+	}
+
+}

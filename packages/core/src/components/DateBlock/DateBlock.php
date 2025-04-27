@@ -73,12 +73,16 @@ class DateBlock extends DateComponent {
 	protected function get_html_attributes(): array {
 		$attrs = parent::get_html_attributes();
 
-		$attrs['datetime'] = $this->date->format('Y-m-d');
+		if($this->date) {
+			$attrs['datetime'] = $this->date->format('Y-m-d');
+		}
 
 		return $attrs;
 	}
 
 	function render(): void {
+		if($this->date === null) return;
+
 		$blade = BladeService::getInstance();
 
 		echo $blade->make($this->bladeFile, [

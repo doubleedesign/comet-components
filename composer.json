@@ -31,7 +31,8 @@
 	},
 	"require": {
 		"ext-dom": "*",
-		"ext-libxml": "*"
+		"ext-libxml": "*",
+		"ext-intl": "*"
 	},
 	"require-dev": {
 		"antecedent/patchwork": "^2.2.1",

@@ -333,12 +333,11 @@
 	</xs:element>
 	<xs:element name="IconLinks">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="style" type="InlineStyle"/>
+			<xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="links" type="array"/>
+<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="orientation" type="Orientation"/>
+<xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="hAlign" type="Alignment"/>
