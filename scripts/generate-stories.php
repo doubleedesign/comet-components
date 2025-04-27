@@ -47,7 +47,7 @@ class ComponentStoryGenerator {
 			$filePath = $this->sourceDirectory . '\\' . $component . '\\__docs__\\' . $component . '.json';
 		}
 		if(!file_exists($filePath)) {
-			throw new RuntimeException("Component class $component not found");
+			throw new RuntimeException("Component JSON definition for $component not found");
 		}
 
 		// Ensure tests directory exists in the component directory and create it if it doesn't

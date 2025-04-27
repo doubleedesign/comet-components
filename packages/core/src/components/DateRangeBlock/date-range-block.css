@@ -1,0 +1,67 @@
+.date-block, .date-range-block {
+  min-width: 3rem;
+  max-width: 5rem;
+  display: flex;
+  gap: var(--spacing-xxs);
+  flex-direction: column;
+  padding-block: var(--spacing-xs);
+}
+.date-block[data-color-theme=primary], [data-color-theme=primary].date-range-block {
+  background: var(--color-primary);
+  color: var(--readable-color-primary);
+}
+.date-block[data-color-theme=secondary], [data-color-theme=secondary].date-range-block {
+  background: var(--color-secondary);
+  color: var(--readable-color-secondary);
+}
+.date-block[data-color-theme=accent], [data-color-theme=accent].date-range-block {
+  background: var(--color-accent);
+  color: var(--readable-color-accent);
+}
+.date-block[data-color-theme=info], [data-color-theme=info].date-range-block {
+  background: var(--color-info);
+  color: var(--readable-color-info);
+}
+.date-block[data-color-theme=warning], [data-color-theme=warning].date-range-block {
+  background: var(--color-warning);
+  color: var(--readable-color-warning);
+}
+.date-block[data-color-theme=success], [data-color-theme=success].date-range-block {
+  background: var(--color-success);
+  color: var(--readable-color-success);
+}
+.date-block[data-color-theme=error], [data-color-theme=error].date-range-block {
+  background: var(--color-error);
+  color: var(--readable-color-error);
+}
+.date-block[data-color-theme=light], [data-color-theme=light].date-range-block {
+  background: var(--color-light);
+  color: var(--readable-color-light);
+}
+.date-block[data-color-theme=dark], [data-color-theme=dark].date-range-block {
+  background: var(--color-dark);
+  color: var(--readable-color-dark);
+}
+.date-block[data-color-theme=white], [data-color-theme=white].date-range-block {
+  background: var(--color-white);
+  color: var(--readable-color-white);
+}
+.date-block__day, .date-range-block__days, .date-block__date, .date-range-block__dates, .date-block__month, .date-range-block__month, .date-block__year, .date-range-block__year {
+  display: block;
+  text-align: center;
+  line-height: 1;
+  font-weight: var(--font-weight-light);
+}
+.date-block__day, .date-range-block__days {
+  font-size: 0.8rem;
+}
+.date-block__date, .date-range-block__dates {
+  font-weight: var(--font-weight-bold);
+  font-size: 1.999396rem;
+}
+
+.date-range-block__dates {
+  font-size: 1.68141189rem;
+}
+
+/*# sourceMappingURL=date-range-block.css.map */

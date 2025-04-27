@@ -112,6 +112,9 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/openpsa/ranger" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/test/unit/.phpunit.cache" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

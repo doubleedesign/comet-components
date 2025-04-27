@@ -139,4 +139,22 @@ Foundational PHP classes for defining common fields and methods for components.
 	</tr>
 	<tr>	<td><ul><li><code>subtitle</code></li><li><code>title</code></li></ul></td></tr>
 </table>	
+</div><div class="abstract-class-doc" id="DateComponent">
+	
+## DateComponent
+
+<table>
+	<tr><th scope='row'>Extends</th><td><code>Renderable</code></td></tr>
+		<tr>
+		<th scope="row">Extended by</th>
+		<td>
+			<ul><li><code>DateBlock</code></li><li><code>DateRangeBlock</code></li></ul>
+		</td>
+</tr>
+	<tr>
+		<th scope="row" rowspan="2">Properties</th>
+		<td><ul><li>All properties from <code>Renderable</code></li></ul></td>
+	</tr>
+	<tr>	<td><ul><li><code>colorTheme</code></li><li><code>locale</code></li><li><code>showDay</code></li><li><code>showYear</code></li></ul></td></tr>
+</table>	
 </div>

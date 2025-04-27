@@ -42,7 +42,7 @@ export function ComponentSpecs({ componentName }) {
 	if(specs?.innerComponents) {
 		exampleCode = `$component = new ${specs.name}($attributes, $innerComponents);\n$component->render();`;
 	}
-	if(componentName === 'Image') {
+	if(['Image', 'DateBlock', 'DateRangeBlock'].includes(componentName)) {
 		exampleCode = `$component = new ${specs.name}($attributes);\n$component->render();`;
 	}
 	if(componentName === 'Breadcrumbs') {

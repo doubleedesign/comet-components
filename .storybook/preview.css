@@ -224,6 +224,11 @@
 	td {
 		font-weight: 300;
 	}
+
+	#control-startDate-time,
+	#control-endDate-time {
+		display: none;
+	}
 }
 
 .sbdocs-wrapper {

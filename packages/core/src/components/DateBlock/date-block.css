@@ -1,0 +1,63 @@
+.date-block {
+  min-width: 3rem;
+  max-width: 5rem;
+  display: flex;
+  gap: var(--spacing-xxs);
+  flex-direction: column;
+  padding-block: var(--spacing-xs);
+}
+.date-block[data-color-theme=primary] {
+  background: var(--color-primary);
+  color: var(--readable-color-primary);
+}
+.date-block[data-color-theme=secondary] {
+  background: var(--color-secondary);
+  color: var(--readable-color-secondary);
+}
+.date-block[data-color-theme=accent] {
+  background: var(--color-accent);
+  color: var(--readable-color-accent);
+}
+.date-block[data-color-theme=info] {
+  background: var(--color-info);
+  color: var(--readable-color-info);
+}
+.date-block[data-color-theme=warning] {
+  background: var(--color-warning);
+  color: var(--readable-color-warning);
+}
+.date-block[data-color-theme=success] {
+  background: var(--color-success);
+  color: var(--readable-color-success);
+}
+.date-block[data-color-theme=error] {
+  background: var(--color-error);
+  color: var(--readable-color-error);
+}
+.date-block[data-color-theme=light] {
+  background: var(--color-light);
+  color: var(--readable-color-light);
+}
+.date-block[data-color-theme=dark] {
+  background: var(--color-dark);
+  color: var(--readable-color-dark);
+}
+.date-block[data-color-theme=white] {
+  background: var(--color-white);
+  color: var(--readable-color-white);
+}
+.date-block__day, .date-block__date, .date-block__month, .date-block__year {
+  display: block;
+  text-align: center;
+  line-height: 1;
+  font-weight: var(--font-weight-light);
+}
+.date-block__day {
+  font-size: 0.8rem;
+}
+.date-block__date {
+  font-weight: var(--font-weight-bold);
+  font-size: 1.999396rem;
+}
+
+/*# sourceMappingURL=date-block.css.map */

@@ -47,6 +47,7 @@ const preview: Preview = {
 					'Layout',
 					'UI',
 					'Text',
+					'Calendar',
 					'Media',
 					'**'
 				],
