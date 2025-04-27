@@ -222,14 +222,17 @@ abstract class Renderable {
 	 */
 	protected function get_html_attributes(): array {
 		$baseAttributes = $this->get_filtered_attributes();
-		$styles = $this->get_inline_styles();
+		$styles = $this->get_inline_styles() ?? [];
 
 		$attrs = array_merge(
 			$baseAttributes,
 			array(
 				'id'    => $this->get_id(),
-				'style' => implode(';',
-					array_map(fn($key, $value) => $key . ':' . $value,
+				'style' => join(';',
+					array_map(function($key, $value) {
+						if(is_array($value)) return null; // Skip WordPress's style arrays
+						return $key . ':' . $value;
+					},
 						array_keys($styles),
 						array_values($styles),
 					)
