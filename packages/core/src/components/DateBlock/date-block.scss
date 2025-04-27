@@ -5,6 +5,8 @@
 	min-width: 3rem;
 	max-width: 5rem;
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	gap: var(--spacing-xxs);
 	flex-direction: column;
 	padding-block: var(--spacing-xs);
@@ -32,6 +34,6 @@
 
 	&__date {
 		font-weight: var(--font-weight-bold);
-		font-size: $baseFontSize * pow($typeScale, 2);
+		font-size: $baseFontSize * pow($typeScale, 1.5);
 	}
 }

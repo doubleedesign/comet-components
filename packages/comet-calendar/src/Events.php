@@ -153,20 +153,16 @@ class Events {
 				$query->set('meta_key', 'sort_date');
 				$query->set('order', 'DESC');
 				$query->set('meta_type', 'DATE');
+				$query->set('orderby', 'meta_value');
 
-				// Filter out upcoming events
 				$query->set('meta_query', array(
 					'relation' => 'OR',
 					array(
+						// Filter out upcoming events
 						'key'     => 'sort_date',
 						'value'   => current_time('Y-m-d'),
 						'compare' => '<',
-						'type'    => 'DATE'
-					),
-					// But include events without a date
-					array(
-						'key'     => 'sort_date',
-						'compare' => 'NOT EXISTS',
+						'type'    => 'DATE',
 					),
 				));
 			}

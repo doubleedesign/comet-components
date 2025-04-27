@@ -2,6 +2,8 @@
   min-width: 3rem;
   max-width: 5rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: var(--spacing-xxs);
   flex-direction: column;
   padding-block: var(--spacing-xs);
@@ -57,11 +59,11 @@
 }
 .date-block__date, .date-range-block__dates {
   font-weight: var(--font-weight-bold);
-  font-size: 1.999396rem;
+  font-size: 1.68141189rem;
 }
 
 .date-range-block__dates {
-  font-size: 1.68141189rem;
+  font-size: 1.5419197166rem;
 }
 
 /*# sourceMappingURL=date-range-block.css.map */

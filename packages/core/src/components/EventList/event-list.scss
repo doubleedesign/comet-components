@@ -18,6 +18,11 @@
 	width: 100%;
 
 	&__heading {
+
+		[data-background="white"] &,
+		[data-background="light"] & {
+			color: var(--color-primary);
+		}
 	}
 
 	&__list {
@@ -55,12 +60,12 @@
 		&__card {
 			@extend .event-card;
 
-			&__heading {
-				@extend .event-card__heading;
-			}
-
 			&__content {
 				@extend .event-card__content;
+
+				&__heading {
+					@extend .event-card__content__heading;
+				}
 
 				&__inner {
 					@extend .event-card__content__inner;

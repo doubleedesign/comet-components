@@ -14,7 +14,7 @@
  */
 
 const COMET_CALENDAR_VERSION = '0.0.2';
-define('COMET_CALENDAR_PLUGIN_PATH', plugin_dir_path(__FILE__));
+const COMET_CALENDAR_PLUGIN_PATH = '/wp-content/plugins/comet-calendar/';
 
 require_once __DIR__ . '/vendor/autoload.php';
 

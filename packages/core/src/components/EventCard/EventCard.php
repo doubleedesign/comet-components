@@ -90,6 +90,17 @@ class EventCard extends UIComponent {
 		]);
 	}
 
+	private function apply_context_to_inner_components($components, $append = ''): void {
+		array_walk($components, function($component) use ($append) {
+			if($component instanceof Group || $component instanceof Heading) {
+				$component->set_context("{$this->context}__{$this->shortName}{$append}");
+			}
+			if($component instanceof Group && $component->innerComponents) {
+				$this->apply_context_to_inner_components($component->innerComponents, "__{$component->shortName}");
+			}
+		});
+	}
+
 	function render(): void {
 		$blade = BladeService::getInstance();
 
@@ -97,19 +108,7 @@ class EventCard extends UIComponent {
 		if($this->context === 'events__list') {
 			$this->tagName = Tag::LI;
 			$this->shortName = 'card';
-
-			array_walk($this->innerComponents, function($component) {
-				if($component instanceof Group || $component instanceof Heading) {
-					$component->set_context("{$this->context}__{$this->shortName}");
-				}
-				if($component instanceof Group && $component->innerComponents) {
-					array_walk($component->innerComponents, function($child) use ($component) {
-						if($child instanceof Group || $child instanceof Heading) {
-							$child->set_context("{$this->context}__{$this->shortName}__{$component->shortName}");
-						}
-					});
-				}
-			});
+			$this->apply_context_to_inner_components($this->innerComponents);
 		}
 
 		echo $blade->make($this->bladeFile, [

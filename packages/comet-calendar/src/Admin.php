@@ -25,7 +25,7 @@ class Admin {
 	}
 
 	function enqueue_admin_css(): void {
-		$currentDir = plugin_dir_url(__FILE__);
+		$currentDir = COMET_CALENDAR_PLUGIN_PATH . 'src/';
 
 		$css_path = $currentDir . 'assets/admin.css';
 		wp_enqueue_style('comet-calendar-admin', $css_path, array(), COMET_CALENDAR_VERSION);

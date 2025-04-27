@@ -11,7 +11,7 @@
 	}
 
 	&__dates {
-		font-size: $baseFontSize * pow($typeScale, 1.5);
+		font-size: $baseFontSize * pow($typeScale, 1.25);
 		@extend .date-block__date;
 	}
 

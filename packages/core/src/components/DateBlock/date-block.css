@@ -2,6 +2,8 @@
   min-width: 3rem;
   max-width: 5rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: var(--spacing-xxs);
   flex-direction: column;
   padding-block: var(--spacing-xs);
@@ -57,7 +59,7 @@
 }
 .date-block__date {
   font-weight: var(--font-weight-bold);
-  font-size: 1.999396rem;
+  font-size: 1.68141189rem;
 }
 
 /*# sourceMappingURL=date-block.css.map */
