@@ -1,5 +1,5 @@
 ---
-title: In custom plugins and themes
+title: Custom plugins and themes
 position: 1
 ---
 
