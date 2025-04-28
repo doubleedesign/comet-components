@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Comet plugins and theme
 position: 0
 ---
 
@@ -8,7 +8,7 @@ position: 0
 :::info
 This section of the docs covers developing the Comet Components suite of WordPress plugins (Comet Plugin, Comet Calendar, Comet Table Block, etc.) themselves.
 
-For guidance on implementing Comet Components in your own plugins and themes, see the [Wordpress usage](../usage/wordpress.md) section.
+For guidance on implementing Comet Components in your own plugins and themes, see the [Custom Plugins and Themes](./custom-plugins-themes.md) page.
 :::
 
 [[toc]]
@@ -33,11 +33,115 @@ To use your local copy of Comet Components packages in your dev site instead of 
    ```bash
    npm run refresh:all:dev
    ```
+
    The `:dev` version of the refresh script uses `composer.local.json` where available, which should be configured to symlink local package usages (e.g., the `comet-plugin` package's installation of `comet-components-core`).
 
-2. In your WordPress site, if you have already installed the theme and plugins using the [suggested Composer configuration](../installation/wordpress.md):
-	- delete those directories
-	- add the below script to your project root as `symlinks.ps1` or (or equivalent Bash script), and update any paths as necessary
+2. In your WordPress site, add a modified version of the the [suggested Composer configuration](../installation/wordpress.md) that symlinks to your local copy of the theme and plugins, like the below.
+
+   Optionally, you can save this as `composer.dev.json` and run install/update commands with:
+
+   ```powershell:no-line-numbers
+   $env:COMPOSER = "composer.dev.json"; composer update --prefer-source
+   ```
+
+   ```json
+   {
+       "name": "your-project-name",
+       "description": "Custom WordPress site",
+       "type": "project",
+       "private": true,
+       "minimum-stability": "dev",
+       "prefer-stable": true,
+       "require": {
+           "php": "^8.2",
+           "doubleedesign/comet-calendar": "dev-master",
+           "doubleedesign/comet-plugin": "dev-master",
+           "doubleedesign/comet-table-block": "dev-main",
+           "doubleedesign/comet-canvas": "dev-master",
+           "wpackagist-plugin/gutenberg": "^19.8.0",
+           "composer/installers": "^2.0",
+           "doubleedesign/doublee-base-plugin": "dev-master",
+           "doubleedesign/doublee-breadcrumbs": "dev-main",
+           "humanmade/block-supports-extended": "^0.2.0"
+       },
+       "config": {
+           "allow-plugins": {
+               "composer/installers": true
+           },
+           "preferred-install": {
+               "doubleedesign/comet-components-core": "dist"
+           }
+       },
+       "repositories": [
+           {
+               "type": "composer",
+               "url": "https://wpackagist.org"
+           },
+          {
+            "type": "path",
+            "url": "../../../../PhpStormProjects/comet-components/packages/comet-plugin",
+            "options": {
+                "symlink": true
+            }
+            },
+          {
+            "type": "path",
+            "url": "../../../../PhpStormProjects/comet-components/packages/comet-calendar",
+            "options": {
+                "symlink": true
+			  
+          {
+            "type": "path",
+            "url": "../../../../PhpStormProjects/comet-table-block",
+            "options": {
+                "symlink": true
+			  
+           {
+            "type": "path",
+            "url": "../../../../PhpStormProjects/comet-components/packages/comet-canvas",
+            "options": {
+                "symlink": true
+			  
+           {
+               "type": "vcs",
+               "url": "https://github.com/doubleedesign/doublee-base-plugin"
+           },
+           {
+               "type": "vcs",
+               "url": "https://github.com/doubleedesign/doublee-breadcrumbs"
+           },
+           {
+               "type": "vcs",
+               "url": "https://github.com/humanmade/block-supports-extended"
+           },
+           {
+               "type": "vcs",
+               "url": "https://github.com/doubleedesign/baguetteBox.js"
+           }
+       ],
+       "extra": {
+           "installer-paths": {
+               "wp-content/plugins/{$name}/": [
+                   "type:wordpress-plugin",
+                   "doubleedesign/comet-calendar",
+                   "doubleedesign/comet-plugin",
+                   "doubleedesign/comet-table-block",
+                   "doubleedesign/doublee-base-plugin",
+                   "doubleedesign/doublee-breadcrumbs",
+                   "humanmade/block-supports-extended",
+                   "wpackagist-plugin/gutenberg"
+               ],
+               "wp-content/themes/{$name}/": [
+                   "type:wordpress-theme",
+                   "doubleedesign/comet-canvas"
+               ]
+           },
+           "resolve-dependencies": false
+       }
+   }
+   ```
+
+Alternatively, you can use a PowerShell script in your project root such as the below. First delete the existing directories, update the paths in the script, and then run it to create symlinks to the dev packages.
 
 :::details PowerShell script to create symlinks from the dev packages to a WordPress installation
 ```powershell
@@ -150,10 +254,3 @@ foreach ($link in $symlinks) {
 }
 ```
 :::
-
-3. Run it with:
-
-   ```powershell:no-line-numbers
-   .\symlinks.ps1
-   ```
-
