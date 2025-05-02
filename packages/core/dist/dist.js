@@ -7,21 +7,41 @@ import '../../../feimosi/baguettebox.js/src/baguetteBox.js';
 
 tippy('[data-tippy-content]');
 
-Vue.createApp({
-	components: {
-		Tabs: Vue.defineAsyncComponent(() => {
-			return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/tabs.vue`, vueSfcLoaderOptions);
-		}),
-	}
-}).mount('[data-vue-component="tabs"]');
+const tabs = document.querySelectorAll('[data-vue-component="tabs"]');
+if (tabs.length > 0) {
+	// Add a unique attribute to use as the mount point
+	// (can't use ID because that could be set by consumers)
+	tabs.forEach((tab, index) => {
+		// Add a unique attribute to use as the mount point
+		// (can't use ID because that could be set to a custom value by consumers)
+		tab.setAttribute('data-tabs-instance', `tabs-${index}`);
 
-Vue.createApp({
-	components: {
-		Accordion: Vue.defineAsyncComponent(() => {
-			return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/accordion.vue`, vueSfcLoaderOptions);
-		}),
-	}
-}).mount('[data-vue-component="accordion"]');
+		Vue.createApp({
+			components: {
+				Tabs: Vue.defineAsyncComponent(() => {
+					return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/tabs.vue`, vueSfcLoaderOptions);
+				}),
+			}
+		}).mount(`[data-tabs-instance="tabs-${index}"]`);
+	});
+}
+
+const accordions = document.querySelectorAll('[data-vue-component="accordion"]');
+if (accordions.length > 0) {
+	accordions.forEach((accordion, index) => {
+		// Add a unique attribute to use as the mount point
+		// (can't use ID because that could be set to a custom value by consumers)
+		accordion.setAttribute('data-accordion-instance', `accordion-${index}`);
+
+		Vue.createApp({
+			components: {
+				Accordion: Vue.defineAsyncComponent(() => {
+					return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/accordion.vue`, vueSfcLoaderOptions);
+				}),
+			}
+		}).mount(`[data-accordion-instance="accordion-${index}"]`);
+	});
+}
 
 window.addEventListener('load', function() {
 	if(!document.querySelector('.gallery')) return;
@@ -37,10 +57,19 @@ Vue.createApp({
 	}
 }).mount('[data-vue-component="site-header__responsive"]');
 
-Vue.createApp({
-	components: {
-		ResponsivePanels: Vue.defineAsyncComponent(() => {
-			return loadModule(`${BASE_PATH}/src/components/ResponsivePanels/responsive-panels.vue`, vueSfcLoaderOptions);
-		}),
-	}
-}).mount('[data-vue-component="responsive-panels"]');
+const panels = document.querySelectorAll('[data-vue-component="responsive-panels"]');
+if (panels.length > 0) {
+	panels.forEach((panel, index) => {
+		// Add a unique attribute to use as the mount point
+		// (can't use ID because that could be set to a custom value by consumers)
+		panel.setAttribute('data-responsive-panels-instance', `responsive-panels-${index}`);
+
+		Vue.createApp({
+			components: {
+				ResponsivePanels: Vue.defineAsyncComponent(() => {
+					return loadModule(`${BASE_PATH}/src/components/ResponsivePanels/responsive-panels.vue`, vueSfcLoaderOptions);
+				}),
+			}
+		}).mount(`[data-responsive-panels-instance="responsive-panels-${index}"]`);
+	});
+}

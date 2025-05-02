@@ -22,12 +22,6 @@ This is a response (pun not intended) and solution to the practice of rendering 
 Vue is awesome and a great way to achieve client-side interactive and responsive features, but it is important to understand that Vue SFC loader essentially turns every component using it into a miniature Vue application. If you're using it so much that you start noticing performance degradation, you might want to just build a full Vue application instead.
 :::
 
-:::danger
-A limitation of the current implementation is that each Vue-enhanced component can only be used once per page. Not much of a problem for `SiteHeader`, but something that is on the roadmap to be fixed for other components such as `ResponsivePanels`, at which point these docs will be updated to detail how to remove this restriction for new components.
-
-When creating a Vue-enhanced component that can be used as a WordPress block, add `multiple:false` to the `supports` object in `block.json` to impose the restriction within the editor.
-:::
-
 ## Create a Vue-enhanced Comet Component
 
 1. [Create a new component](../../development-core/new-component.md) as you would for a standard PHP component.
