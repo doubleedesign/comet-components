@@ -10,10 +10,10 @@ global $post;
 
 if(class_exists("Doubleedesign\Breadcrumbs\Breadcrumbs")) {
 	$breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
-	$pageHeader = new PageHeader(['size' => 'narrow'], get_the_title(), $breadcrumbs);
+	$pageHeader = new PageHeader(['size' => 'default'], get_the_title(), $breadcrumbs);
 }
 else {
-	$pageHeader = new PageHeader(['size' => 'narrow'], get_the_title());
+	$pageHeader = new PageHeader(['size' => 'default'], get_the_title());
 }
 
 // Process block strings so custom Comet rendering is applied, rather than rendering raw WP blocks

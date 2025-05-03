@@ -8,7 +8,7 @@ class Blocks {
 		add_action('init', [$this, 'register_block_fields']);
 	}
 
-	function register_blocks() {
+	function register_blocks(): void {
 		$block_folders = scandir(dirname(__DIR__, 1) . '/src/blocks');
 		foreach($block_folders as $folder) {
 			if($folder === '.' || $folder === '..') continue;

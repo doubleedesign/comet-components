@@ -19,8 +19,11 @@ class ThemeStyle {
 		add_action('init', [$this, 'set_icon_prefix'], 10);
 
 		if(is_admin()) {
+			// using enqueue_block_assets to ensure this runs in the pattern editor iframe (as opposed to enqueue_block_editor_assets)
+			// but note that this hook also runs on the front-end, that's why the is_admin() check - or we would double up on styles because of using a bundled stylesheet on the front-end
 			add_action('enqueue_block_assets', [$this, 'add_css_variables_to_block_editor'], 25);
-			add_action('enqueue_block_assets', [$this, 'enqueue_theme_stylesheets'], 30);
+			add_action('enqueue_block_assets', [$this, 'enqueue_theme_stylesheets'], 50);
+			add_action('enqueue_block_assets', [$this, 'enqueue_editor_specific_css'], 50);
 		}
 	}
 
@@ -55,17 +58,48 @@ class ThemeStyle {
 	function enqueue_theme_stylesheets(): void {
 		$parent = get_template_directory() . '/style.css';
 		$child = get_stylesheet_directory() . '/style.css';
+		$deps = is_admin() ? array('wp-edit-blocks') : [];
 
 		if(file_exists($parent)) {
 			$parent = get_template_directory_uri() . '/style.css';
-			wp_enqueue_style('comet-canvas', $parent, [], '0.0.2'); // TODO: Get this dynamically
+			wp_enqueue_style('comet-canvas', $parent, $deps, '0.0.2'); // TODO: Get this dynamically
 		}
 
 		if(file_exists($child)) {
 			$child = get_stylesheet_directory_uri() . '/style.css';
 			$theme = wp_get_theme();
 			$slug = sanitize_title($theme->get('Name'));
-			wp_enqueue_style($slug, $child, [], $theme->get('Version'));
+
+			if(WP_ENVIRONMENT_TYPE === 'local') {
+				wp_enqueue_style($slug, $child, $deps, time()); // bust cache locally
+			}
+			else {
+				wp_enqueue_style($slug, $child, $deps, $theme->get('Version'));
+			}
+		}
+	}
+
+	function enqueue_editor_specific_css(): void {
+		$parent = get_template_directory() . '/editor.css';
+		$child = get_stylesheet_directory() . '/editor.css';
+		$deps = is_admin() ? array('wp-edit-blocks') : [];
+
+		if(file_exists($parent)) {
+			$parent = get_template_directory_uri() . '/editor.css';
+			wp_enqueue_style('comet-canvas-editor', $parent, $deps, '0.0.2'); // TODO: Get this dynamically
+		}
+
+		if(file_exists($child)) {
+			$child = get_stylesheet_directory_uri() . '/editor.css';
+			$theme = wp_get_theme();
+			$slug = sanitize_title($theme->get('Name')) . '-editor';
+
+			if(WP_ENVIRONMENT_TYPE === 'local') {
+				wp_enqueue_style($slug, $child, $deps, time()); // bust cache locally
+			}
+			else {
+				wp_enqueue_style($slug, $child, $deps, $theme->get('Version'));
+			}
 		}
 	}
 

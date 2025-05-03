@@ -6,10 +6,10 @@ get_header();
 if(!is_front_page()) {
 	if(class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
 		$breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
-		$pageHeader = new PageHeader(['size' => 'narrow'], get_the_title(), $breadcrumbs);
+		$pageHeader = new PageHeader(['size' => 'default'], get_the_title(), $breadcrumbs);
 	}
 	else {
-		$pageHeader = new PageHeader(['size' => 'narrow'], get_the_title());
+		$pageHeader = new PageHeader(['size' => 'default'], get_the_title());
 	}
 
 	$pageHeader->render();

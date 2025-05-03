@@ -59,7 +59,6 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/doctrine/inflector" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/ezyang/htmlpurifier" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/feimosi/baguettebox.js" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/illuminate/bus" />
@@ -117,7 +116,6 @@
       <excludeFolder url="file://$MODULE_DIR$/test/unit/.phpunit.cache" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/symfony/intl" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/openpsa" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

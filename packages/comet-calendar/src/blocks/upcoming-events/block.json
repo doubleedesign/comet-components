@@ -16,6 +16,12 @@
 		"mode": "preview",
 		"renderTemplate": "render.php"
 	},
+	"editorStyle": [
+		"comet-event-list-style",
+		"comet-event-card-style",
+		"comet-date-block-style",
+		"comet-date-range-block-style"
+	],
 	"keywords": [
 		"events",
 		"calendar"

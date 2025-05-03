@@ -114,13 +114,18 @@ body {
 
 // Basic theme styling for elements with a background colour attribute specified
 @each $name, $color in $colors {
+	body[data-global-background="#{$name}"] {
+		background-color: var(--color-#{$name});
+		color: var(--readable-color-#{$name});
+	}
+
 	[data-background="#{$name}"] {
 		// Apply background colour and default padding if it is different to the global background
 		&:not(body[data-global-background="#{$name}"] &) {
 			background-color: var(--color-#{$name});
 			color: var(--readable-color-#{$name});
 
-			&:not(.page-section) {
+			&.layout-block:not(.page-section) {
 				@include nested-padding();
 			}
 		}

@@ -223,6 +223,7 @@ export default {
             .accordion__panel__title__main {
                 grid-column: 1;
                 grid-row: 1;
+                font-weight: var(--font-weight-semibold);
             }
 
             .accordion__panel__title__subtitle {

@@ -24,6 +24,7 @@ class ComposerStaticInit587c85fae325cc4799a46f189dfa77f8
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doubleedesign\\Comet\\WordPress\\Calendar\\Admin' => __DIR__ . '/../..' . '/src/Admin.php',
         'Doubleedesign\\Comet\\WordPress\\Calendar\\BlockEditorConfig' => __DIR__ . '/../..' . '/src/BlockEditorConfig.php',
+        'Doubleedesign\\Comet\\WordPress\\Calendar\\Blocks' => __DIR__ . '/../..' . '/src/Blocks.php',
         'Doubleedesign\\Comet\\WordPress\\Calendar\\Events' => __DIR__ . '/../..' . '/src/Events.php',
         'Doubleedesign\\Comet\\WordPress\\Calendar\\Fields' => __DIR__ . '/../..' . '/src/Fields.php',
         'Doubleedesign\\Comet\\WordPress\\Calendar\\TemplateHandler' => __DIR__ . '/../..' . '/src/TemplateHandler.php',

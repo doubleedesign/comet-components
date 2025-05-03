@@ -204,14 +204,17 @@
       <path value="$PROJECT_DIR$/packages/comet-calendar/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/comet-canvas/vendor/composer" />
       <path value="$USER_HOME$/LocalSites/vanilla-playground/app/public" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/packages/core/vendor/openpsa/ranger" />
       <path value="$PROJECT_DIR$/packages/core/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.4">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
   <component name="PhpRuntimeConfiguration">
     <extensions>
       <extension name="Ev" enabled="false" />

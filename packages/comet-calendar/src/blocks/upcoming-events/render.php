@@ -1,12 +1,14 @@
 <?php /** @noinspection PhpUnhandledExceptionInspection */
-use Doubleedesign\Comet\WordPress\Calendar\Events;
+use Doubleedesign\Comet\WordPress\Calendar\{Events, BlockEditorConfig};
 use Doubleedesign\Comet\Core\{EventList, EventCard};
+
+//$inEditorContext = isset($block['mode']) && $block['mode'] === 'preview';
 
 $heading = $block['data']['heading'] ?? 'Upcoming Events';
 $perRow = $block['data']['max_items_per_row'] ?? 3;
 $totalItems = $block['data']['total_items'] ?? 3;
 $events = Events::get_upcoming_event_ids($totalItems);
-$colorTheme = $block['colorTheme'] ?? null;
+$colorTheme = $block['colorTheme'] ?? BlockEditorConfig::hex_to_theme_color_name($block['style']['elements']['theme']['color']['background']) ?? null;
 
 $cards = array_map(function($eventId) use ($colorTheme) {
 	if(get_post_meta('sort_date', $eventId, true) !== '') { // Skip events without dates
