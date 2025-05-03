@@ -2,11 +2,6 @@
 
 .group {
 
-	&:not(:has(.container)) {
-		display: grid;
-		gap: var(--spacing-md);
-	}
-
 	&--breakout {
 		width: max-content;
 

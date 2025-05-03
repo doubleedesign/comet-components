@@ -1026,10 +1026,6 @@ form input[type=button] {
   padding-block-start: 0;
 }
 
-.group:not(:has(.container)) {
-  display: grid;
-  gap: var(--spacing-md);
-}
 .group--breakout {
   width: max-content;
 }
@@ -3495,7 +3491,7 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
   border-collapse: collapse;
   border: 1px solid color-mix(in srgb, var(--color-light) 90%, black);
   font-size: 1rem;
-  margin: var(--spacing-md) 0 var(--spacing-lg) 0;
+  margin: var(--spacing-md) 0 var(--spacing-xl) 0;
 }
 .table:first-child {
   margin-block-start: 0;
@@ -3508,6 +3504,10 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
 }
 .table th {
   background: var(--color-light);
+  font-weight: var(--font-weight-semibold);
+}
+.table td {
+  font-weight: var(--font-weight-light);
 }
 .table__caption {
   caption-side: bottom;
