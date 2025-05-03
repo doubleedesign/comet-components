@@ -5,31 +5,39 @@
   display: block;
   max-width: 100%;
 }
-.image[data-aspect-ratio=square] {
+.image[data-aspect-ratio=square],
+.image > [data-aspect-ratio=square] {
   aspect-ratio: 1/1;
 }
-.image[data-aspect-ratio=standard] {
+.image[data-aspect-ratio=standard],
+.image > [data-aspect-ratio=standard] {
   aspect-ratio: 4/3;
 }
-.image[data-aspect-ratio=portrait] {
+.image[data-aspect-ratio=portrait],
+.image > [data-aspect-ratio=portrait] {
   aspect-ratio: 3/4;
 }
-.image[data-aspect-ratio="16-9"] {
+.image[data-aspect-ratio="16-9"],
+.image > [data-aspect-ratio="16-9"] {
   aspect-ratio: 16/9;
 }
-.image[data-aspect-ratio=classic] {
+.image[data-aspect-ratio=classic],
+.image > [data-aspect-ratio=classic] {
   aspect-ratio: 3/2;
 }
-.image[data-aspect-ratio=classic-portrait] {
+.image[data-aspect-ratio=classic_portrait],
+.image > [data-aspect-ratio=classic_portrait] {
   aspect-ratio: 2/3;
 }
-.image[data-behaviour=cover] img {
+.image[data-behaviour=cover] img,
+.image > [data-behaviour=cover] img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
 }
-.image[data-behaviour=contain] img {
+.image[data-behaviour=contain] img,
+.image > [data-behaviour=contain] img {
   width: 100%;
   height: auto;
   object-fit: contain;

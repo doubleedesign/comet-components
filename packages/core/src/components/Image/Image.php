@@ -127,9 +127,18 @@ class Image extends Renderable {
 		return $styles;
 	}
 
-	public function get_outer_html_attributes(): array {
+	public function get_outer_wrapper_html_attributes(): array {
 		$attrs = [
-			'data-align'        => $this->align ?? null,
+			'data-align' => $this->align ?? null,
+		];
+
+		return array_filter($attrs, function($value) {
+			return $value !== null && $value !== 'false';
+		});
+	}
+
+	public function get_inner_wrapper_html_attributes(): array {
+		$attrs = [
 			'data-aspect-ratio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
 			'data-behaviour'    => $this->scale ?? null,
 			'data-parallax'     => $this->isParallax ? 'true' : 'false',
@@ -159,7 +168,8 @@ class Image extends Renderable {
 			'caption'        => $this->caption,
 			'captionClasses' => $this->context ? [$this->context . '__image__caption'] : ['image__caption'],
 			'classes'        => implode(' ', $this->get_filtered_classes()),
-			'outerAttrs'     => $this->get_outer_html_attributes(),
+			'outerAttrs'     => $this->get_outer_wrapper_html_attributes(),
+			'innerAttrs'     => $this->get_inner_wrapper_html_attributes(),
 			'attributes'     => $this->get_html_attributes(),
 		])->render();
 	}
