@@ -3,7 +3,7 @@
 .group {
 
 	&--breakout {
-		width: max-content;
+		width: 100cqw; // use the width of the closest container
 
 		.container & {
 			max-width: var(--width-contained);
