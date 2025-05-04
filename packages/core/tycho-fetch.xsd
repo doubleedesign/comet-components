@@ -380,56 +380,19 @@
 <xs:attribute name="align" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="ContentWrapper">
-		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="maxWidth" type="xs:float"/>
-<xs:attribute name="overlayAmount" type="xs:float"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="hAlign" type="Alignment"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="backgroundColor" type="ThemeColor"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="ImageWrapper">
-		<xs:complexType>
-			<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="maxWidth" type="xs:float"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="hAlign" type="Alignment"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="backgroundColor" type="ThemeColor"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="ImageWrapper">
-		<xs:complexType>
-			<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="maxWidth" type="xs:float"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="hAlign" type="Alignment"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="backgroundColor" type="ThemeColor"/>
-		</xs:complexType>
-	</xs:element>
 	<xs:element name="ImageAndText">
 		<xs:complexType>
 			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="imageMaxWidth" type="xs:int"/>
+<xs:attribute name="overlayAmount" type="xs:int"/>
+<xs:attribute name="imageAlign" type="Alignment"/>
+<xs:attribute name="imageFirst" type="xs:boolean"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="contentMaxWidth" type="xs:int"/>
+<xs:attribute name="contentAlign" type="Alignment"/>
 <xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
 	</xs:element>

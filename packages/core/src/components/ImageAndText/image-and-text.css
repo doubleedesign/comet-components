@@ -6,7 +6,7 @@
   display: flex;
 }
 @container (max-width: 768px) {
-  .image-and-text__image > div {
+  .image-and-text__image__inner {
     max-width: 100% !important;
     flex-basis: 100% !important;
   }
@@ -19,7 +19,7 @@
   z-index: 200;
 }
 @container (max-width: 768px) {
-  .image-and-text__content > div {
+  .image-and-text__content__inner {
     max-width: 100% !important;
     flex-basis: 100% !important;
   }

@@ -114,7 +114,7 @@ trait BackgroundColor {
 		// But do not filter out null values, because that would set the background of a parent when it shouldn't
 		// just because *some* children don't have an explicit background
 		$childBackgrounds = array_reduce($this->innerComponents, function($carry, $child) {
-			if(method_exists($child, 'get_background_color')) {
+			if(method_exists($child, 'get_background_color') && $child->get_background_color() !== null) {
 				if(!in_array($child->get_background_color(), $carry)) {
 					$carry[] = $child->get_background_color();
 				}
