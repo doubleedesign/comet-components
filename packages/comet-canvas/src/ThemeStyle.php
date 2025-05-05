@@ -70,7 +70,7 @@ class ThemeStyle {
 			$theme = wp_get_theme();
 			$slug = sanitize_title($theme->get('Name'));
 
-			if(WP_ENVIRONMENT_TYPE === 'local') {
+			if(defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local') {
 				wp_enqueue_style($slug, $child, $deps, time()); // bust cache locally
 			}
 			else {
@@ -94,7 +94,7 @@ class ThemeStyle {
 			$theme = wp_get_theme();
 			$slug = sanitize_title($theme->get('Name')) . '-editor';
 
-			if(WP_ENVIRONMENT_TYPE === 'local') {
+			if(defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local') {
 				wp_enqueue_style($slug, $child, $deps, time()); // bust cache locally
 			}
 			else {
