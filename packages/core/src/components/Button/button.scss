@@ -32,9 +32,9 @@
 	}
 
 	@each $name, $color in $colors {
-		&--#{$name} {
+		&[data-color-theme="#{$name}"] {
 
-			&:not([class*="--outline"]) {
+			&:not(.is-style-outline) {
 				background-color: var(--color-#{$name});
 				border: 1px solid var(--color-#{$name});
 				color: var(--readable-color-#{$name});
@@ -46,7 +46,7 @@
 				}
 			}
 
-			&--outline {
+			&.is-style-outline {
 				border: 1px solid var(--color-#{$name});
 				background-color: transparent;
 				color: var(--color-#{$name});

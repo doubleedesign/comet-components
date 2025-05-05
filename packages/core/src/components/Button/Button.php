@@ -39,9 +39,7 @@ class Button extends Renderable {
     }
 
     public function get_filtered_classes(): array {
-        $classes = array_filter(parent::get_filtered_classes(), function($class) {
-            return !str_starts_with($class, 'is-style-outline') && $class !== 'is-style-outline';
-        });
+        $classes = parent::get_filtered_classes();
 
         $result = array_merge(
             [
@@ -53,6 +51,16 @@ class Button extends Renderable {
         );
 
         return array_unique($result);
+    }
+
+    protected function get_html_attributes(): array {
+        $attrs = parent::get_html_attributes();
+
+        if ($this->colorTheme) {
+            $attrs['data-color-theme'] = $this->colorTheme->value;
+        }
+
+        return $attrs;
     }
 
     public function render(): void {
