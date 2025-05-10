@@ -4,54 +4,54 @@ import Tabs from '../../plugins/shared-vue-components/tabs.vue';
 import type { PanelItem } from './types.ts';
 
 export default {
-	name: 'ResponsivePanels',
-	components: { Accordion, Tabs },
-	inheritAttrs: true,
-	props: {
-		panels: {
-			type: Array as () => PanelItem[],
-			required: true,
-		},
-		breakpoint: String,
-		icon: String
-	},
-	data() {
-		return {
-			showAsTabs: false, // to be swapped when breakpoint is reached
-			debouncedResize: null
-		};
-	},
-	mounted() {
-		// Check available space and determine which component to show on initial load, without a wait
-		this.checkAvailableSpaceAndMaybeSwitch();
-		// Store a reference to the debounced function rather than applying it directly, so it can be cleaned up later
-		this.debouncedResize = this.debounce(this.checkAvailableSpaceAndMaybeSwitch, 200);
-		// Recalculate on resize, after a short wait
-		window.addEventListener('resize', this.debouncedResize);
-	},
-	beforeUnmount() {
-		// Remove the exact same function reference
-		window.removeEventListener('resize', this.debouncedResize);
-	},
-	methods: {
-		checkAvailableSpaceAndMaybeSwitch() {
-			const container = this.$el;
-			const containerWidth = container ? container.clientWidth : 0;
-			const breakpointNumber = this.breakpoint.endsWith('px')
-				? parseInt(this.breakpoint.replace('px', ''))
-				: parseInt(this.breakpoint.replace('rem', '')) * 16;
+    name: 'ResponsivePanels',
+    components: { Accordion, Tabs },
+    inheritAttrs: true,
+    props: {
+        panels: {
+            type: Array as () => PanelItem[],
+            required: true,
+        },
+        breakpoint: String,
+        icon: String
+    },
+    data() {
+        return {
+            showAsTabs: false, // to be swapped when breakpoint is reached
+            debouncedResize: null
+        };
+    },
+    mounted() {
+        // Check available space and determine which component to show on initial load, without a wait
+        this.checkAvailableSpaceAndMaybeSwitch();
+        // Store a reference to the debounced function rather than applying it directly, so it can be cleaned up later
+        this.debouncedResize = this.debounce(this.checkAvailableSpaceAndMaybeSwitch, 200);
+        // Recalculate on resize, after a short wait
+        window.addEventListener('resize', this.debouncedResize);
+    },
+    beforeUnmount() {
+        // Remove the exact same function reference
+        window.removeEventListener('resize', this.debouncedResize);
+    },
+    methods: {
+        checkAvailableSpaceAndMaybeSwitch() {
+            const container = this.$el;
+            const containerWidth = container ? container.clientWidth : 0;
+            const breakpointNumber = this.breakpoint.endsWith('px')
+                ? parseInt(this.breakpoint.replace('px', ''))
+                : parseInt(this.breakpoint.replace('rem', '')) * 16;
 
-			this.showAsTabs = containerWidth >= breakpointNumber;
-		},
-		debounce(func: Function, delay: number) {
-			let timerId;
+            this.showAsTabs = containerWidth >= breakpointNumber;
+        },
+        debounce(func: Function, delay: number) {
+            let timerId;
 
-			return function () {
-				clearTimeout(timerId);
-				timerId = setTimeout(func, delay);
-			};
-		},
-	}
+            return function () {
+                clearTimeout(timerId);
+                timerId = setTimeout(func, delay);
+            };
+        },
+    }
 };
 </script>
 

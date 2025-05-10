@@ -1,11 +1,13 @@
 import '../src/plugins/tippy/popper.min.js';
 import '../src/plugins/tippy/tippy.min.js';
-import * as Vue from '../src/plugins/vue-wrapper/src/vue.esm-browser.js';
+import VueLoader from '../src/plugins/vue-wrapper/src/vue-loader.js';
 import { loadModule } from '../src/plugins/vue-wrapper/src/vue3-sfc-loader.esm.js';
 import { BASE_PATH, vueSfcLoaderOptions } from '../src/plugins/vue-wrapper/src/index.js';
 import '../../../feimosi/baguettebox.js/src/baguetteBox.js';
 
 tippy('[data-tippy-content]');
+
+const Vue$3 = await VueLoader;
 
 const tabs = document.querySelectorAll('[data-vue-component="tabs"]');
 if (tabs.length > 0) {
@@ -16,15 +18,17 @@ if (tabs.length > 0) {
 		// (can't use ID because that could be set to a custom value by consumers)
 		tab.setAttribute('data-tabs-instance', `tabs-${index}`);
 
-		Vue.createApp({
+		Vue$3.createApp({
 			components: {
-				Tabs: Vue.defineAsyncComponent(() => {
+				Tabs: Vue$3.defineAsyncComponent(() => {
 					return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/tabs.vue`, vueSfcLoaderOptions);
 				}),
 			}
 		}).mount(`[data-tabs-instance="tabs-${index}"]`);
 	});
 }
+
+const Vue$2 = await VueLoader;
 
 const accordions = document.querySelectorAll('[data-vue-component="accordion"]');
 if (accordions.length > 0) {
@@ -33,9 +37,9 @@ if (accordions.length > 0) {
 		// (can't use ID because that could be set to a custom value by consumers)
 		accordion.setAttribute('data-accordion-instance', `accordion-${index}`);
 
-		Vue.createApp({
+		Vue$2.createApp({
 			components: {
-				Accordion: Vue.defineAsyncComponent(() => {
+				Accordion: Vue$2.defineAsyncComponent(() => {
 					return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/accordion.vue`, vueSfcLoaderOptions);
 				}),
 			}
@@ -49,13 +53,17 @@ window.addEventListener('load', function() {
 	window.baguetteBox.run('.gallery');
 });
 
-Vue.createApp({
+const Vue$1 = await VueLoader;
+
+Vue$1.createApp({
 	components: {
-		SiteHeaderResponsive: Vue.defineAsyncComponent(() => {
+		SiteHeaderResponsive: Vue$1.defineAsyncComponent(() => {
 			return loadModule(`${BASE_PATH}/src/components/SiteHeader/site-header-responsive.vue`, vueSfcLoaderOptions);
 		}),
 	}
 }).mount('[data-vue-component="site-header__responsive"]');
+
+const Vue = await VueLoader;
 
 const panels = document.querySelectorAll('[data-vue-component="responsive-panels"]');
 if (panels.length > 0) {

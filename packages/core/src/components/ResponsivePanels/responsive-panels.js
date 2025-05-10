@@ -1,4 +1,5 @@
-import * as Vue from '../../plugins/vue-wrapper/src/vue.esm-browser.js';
+import VueLoader from '../../plugins/vue-wrapper/src/vue-loader.js';
+const Vue = await VueLoader;
 import { loadModule } from  '../../plugins/vue-wrapper/src/vue3-sfc-loader.esm.js';
 import { vueSfcLoaderOptions, BASE_PATH } from '../../plugins/vue-wrapper/src/index.js';
 
@@ -18,4 +19,3 @@ if (panels.length > 0) {
 		}).mount(`[data-responsive-panels-instance="responsive-panels-${index}"]`);
 	});
 }
-

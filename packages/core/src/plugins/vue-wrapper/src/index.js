@@ -1,4 +1,5 @@
-import * as Vue from "./vue.esm-browser.js";
+import VueLoader from './vue-loader.js';
+const Vue = await VueLoader;
 
 export const vueSfcLoaderOptions = {
 	moduleCache: {vue: Vue},
