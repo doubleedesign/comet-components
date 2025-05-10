@@ -1,5 +1,5 @@
 .group--breakout {
-  width: max-content;
+  width: 100cqw;
 }
 .container .group--breakout {
   max-width: var(--width-contained);

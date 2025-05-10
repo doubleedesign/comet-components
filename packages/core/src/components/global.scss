@@ -228,6 +228,10 @@ h1, h2, h3 {
 	}
 }
 
+p:empty {
+	display: none;
+}
+
 .is-style-lead {
 	font-weight: 600;
 	font-size: $baseFontSize * 1.125;

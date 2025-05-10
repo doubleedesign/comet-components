@@ -24,6 +24,13 @@
 		&__column {
 			&:is(main) {
 				grid-column: span 3;
+
+				> .column__inner {
+
+					> .group:not(:first-child) {
+						padding-block: var(--spacing-md);
+					}
+				}
 			}
 
 			&:is(aside) {

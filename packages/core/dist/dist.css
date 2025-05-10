@@ -878,6 +878,10 @@ h1.is-style-small, h2.is-style-small, h3.is-style-small {
   text-transform: uppercase;
 }
 
+p:empty {
+  display: none;
+}
+
 .is-style-lead {
   font-weight: 600;
   font-size: 1.125rem;
@@ -1077,7 +1081,7 @@ form input[type=button] {
 }
 
 .group--breakout {
-  width: max-content;
+  width: 100cqw;
 }
 .container .group--breakout {
   max-width: var(--width-contained);
@@ -3379,7 +3383,7 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
   display: flex;
 }
 @container (max-width: 768px) {
-  .image-and-text__image > div {
+  .image-and-text__image__inner {
     max-width: 100% !important;
     flex-basis: 100% !important;
   }
@@ -3392,7 +3396,7 @@ body .site-header__responsive--overlay .site-header__responsive__content[data-op
   z-index: 200;
 }
 @container (max-width: 768px) {
-  .image-and-text__content > div {
+  .image-and-text__content__inner {
     max-width: 100% !important;
     flex-basis: 100% !important;
   }

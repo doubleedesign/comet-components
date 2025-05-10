@@ -33,4 +33,11 @@
   }
 }
 
-/*# sourceMappingURL=image-and-text.css.map */
+.image-and-text .wp-block[data-type="comet/image-and-text-content"]:nth-child(1):has([style^="--overlay-amount"]) .image-and-text__content {
+  margin-block-end: var(--overlay-amount);
+}
+.image-and-text .wp-block[data-type="comet/image-and-text-content"]:nth-child(2):has([style^="--overlay-amount"]) .image-and-text__content {
+  margin-block-start: var(--overlay-amount);
+}
+
+/*# sourceMappingURL=editor.css.map */

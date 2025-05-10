@@ -11,7 +11,7 @@
 
 	&__image {
 
-		> div {
+		&__inner {
 			@include container-width-down('narrower') {
 				max-width: 100% !important;
 				flex-basis: 100% !important;
@@ -27,17 +27,19 @@
 		position: relative;
 		z-index: 200;
 
-		> div {
+		&__inner {
 			@include container-width-down('narrower') {
 				max-width: 100% !important;
 				flex-basis: 100% !important;
 			}
 		}
 
+		// When it's content is before image
 		&:nth-of-type(1) {
 			margin-block-end: var(--overlay-amount);
 		}
 
+		// When content is after image
 		@include container-width-up('narrower') {
 			&:nth-of-type(2) {
 				margin-block-start: var(--overlay-amount);
