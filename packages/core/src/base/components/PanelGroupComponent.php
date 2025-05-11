@@ -34,8 +34,8 @@ abstract class PanelGroupComponent extends UIComponent {
 		}
 	}
 
-	public function get_panel_data_for_vue(): false|string {
-		return json_encode($this->panels);
+	protected function get_panels(): array {
+		return $this->panels;
 	}
 
 	protected function get_html_attributes(): array {

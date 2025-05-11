@@ -25,7 +25,7 @@ class Tabs extends PanelGroupComponent {
 		echo $blade->make($this->bladeFile, [
 			'classes'    => $this->get_filtered_classes_string(),
 			'attributes' => $this->get_html_attributes(),
-			'panels'     => $this->get_panel_data_for_vue(),
+			'panels'     => $this->get_panels(),
 		])->render();
 	}
 }

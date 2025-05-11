@@ -29,12 +29,6 @@ class ResponsivePanels extends PanelGroupComponent {
 	/** @var array<ResponsivePanel> */
 	protected array $innerComponents;
 
-	/**
-	 * @var array
-	 * @description Panels transformed for use by the Vue component.
-	 */
-	private array $panels = [];
-
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents, 'components.ResponsivePanels.responsive-panels');
 		$this->breakpoint = $attributes['breakpoint'] ?? '768px';
@@ -48,7 +42,7 @@ class ResponsivePanels extends PanelGroupComponent {
 			'classes'    => $this->get_filtered_classes(),
 			'attributes' => $this->get_html_attributes(),
 			'breakpoint' => $this->breakpoint,
-			'panels'     => $this->get_panel_data_for_vue(),
+			'panels'     => $this->get_panels(),
 			'icon'       => "$this->iconPrefix $this->icon"
 		])->render();
 	}
