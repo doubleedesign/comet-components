@@ -74,13 +74,26 @@ In `File > Settings > Tools > File Watchers`:
 ## Linting and formatting
 
 :::details PHP (General)
-A standalone formatter has not been configured for PHP in this project (other than Blade templates as per the file watcher detailed above). The author's preferred configuration is included in the repository for PhpStorm's built-in formatter. You can find these settings in `File > Settings > Editor > Code Style > PHP`, selecting `Project` in the `Scheme` dropdown at the top should you need to modify them.
 
-You can enable enforcing formatting rules on save in `File > Settings > Tools > Actions on save` by ticking the `Reformat code` option.
+Configuration for [Laravel Pint](https://laravel.com/docs/12.x/pint) is included for linting and formatting PHP code. 
 
-:warning: Important: Ensure JavaScript and TypeScript are not ticked in the list of file types to reformat on save, to avoid conflicts with ESLint.
+Pint is built on top of [PHP CS Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer), so you can find details of the available configuration options on the [PHP-CS-Fixer Configurator](https://mlocati.github.io/php-cs-fixer-configurator/#version:3.75) site. Pint provides a convenient JSON configuration format and out-of-the-box support for running with newer versions of PHP as the CLI interpreter than the versions that PHP CS Fixer can lint[^1]. 
 
-![Actions on save.png](/phpstorm-save.png)
+To configure Pint to run automatically in PhpStorm and highlight problems as you work:
+1. Go to `File > Settings > PHP > Quality Tools > Laravel Pint`
+2. Toggle the switch to enable Pint
+3. Fill in the path to the `pint.json` file in the root of the project
+4. Next to the "Configuration: System PHP" dropdown, click the three dots and fill in the path to the Pint executable in the dialog that appears (shown below is the `.bat` file for use in Windows; MacOS and Linux users should select the equivalent file which can be found in the same directory).
+5. Click OK to save the executable path and close that pop-up, and Apply to save the Pint settings without closing the settings window.
+6. Go to `PHP > Quality Tools` and select "Laravel Pint" as the external formatter. This will ensure that the Pint configuration is used for formatting and linting in the IDE, including formatting on save.
+7. Go to `File > Settings > Editor > Inspections` and ensure the "Laravel Pint validation" inspection is enabled.
+
+For more information on using Pint with PhpStorm, see the [PhpStorm documentation](https://www.jetbrains.com/help/phpstorm/using-laravel-pint.html).
+
+![Pint settings](/phpstorm-pint.png)
+
+
+[^1]: This does not necessarily mean that newer language features are supported for linting - it just means you can run the linter with a newer version of PHP, whereas PHP CS Fixer errors and requires some environment configuration to allow it. At the time of writing, PHP CS Fixer supports up to PHP 8.3, but Pint works when run with PHP 8.4.7 as the CLI interpreter. 
 :::
 
 :::details PHP (Blade templates)

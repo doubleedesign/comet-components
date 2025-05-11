@@ -305,14 +305,16 @@ $ProjectFileDir$\packages\core\node_modules\.bin\rollup
 
 A combination of tools and configurations are provided to ensure consistent code formatting across the project.
 
-:::details PHP (General) - PhpStorm formatter
-1. Go to `File > Settings > Editor > Code Style > PHP`;
-2. Ensure the `Project` scheme is selected in the dropdown at the top.
-3. Go to `File > Settings > Actions on save`.
-4. Tick `Reformat code`.
-5. In the `Reformat code` option, open the `File types` list and **untick** Blade, JavaScript, and TypeScript. Ensure PHP *is* ticked.
+:::details PHP (General) - Laravel Pint
+1. Go to `File > Settings > PHP > Quality Tools > Laravel Pint`
+2. Toggle the switch to enable Pint
+3. Fill in the path to the `pint.json` file in the root of the project
+4. Next to the "Configuration: System PHP" dropdown, click the three dots and fill in the path to the Pint executable (`pint.bat`) in the dialog that appears.
+5. Click OK to save the executable path and close that pop-up, and Apply to save the Pint settings without closing the settings window.
+6. Go to `PHP > Quality Tools` and select "Laravel Pint" as the external formatter. This will ensure that the Pint configuration is used for formatting and linting in the IDE, including formatting on save.
+7. Go to `File > Settings > Editor > Inspections` and ensure the "Laravel Pint validation" inspection is enabled.
 
-[![PHPStorm PHP code style settings](/phpstorm-php-codestyle.png)
+![Pint settings](/phpstorm-pint.png)
 :::
 
 :::details Blade templates - Blade formatter

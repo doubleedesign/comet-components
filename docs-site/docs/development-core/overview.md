@@ -33,12 +33,33 @@ Developers looking to use the library in their projects should refer to the [Usa
 
 ## Dev Tooling
 
-| Technology | Description                | Details/Rationale                                                                                                                                                                                                                                                                                                    |
+### Dependency management
+
+| Technology | Description                | Details                                                                                                                                                                                                                                                                                                              |
 |------------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| SCSS       | CSS preprocessor           | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS.                                                                                                                                                                    |
-| Rollup     | JavaScript bundler         | Used to bundle the core package's JavaScript into one file, to make it easier for implementations to use. (I previously had import path issues when trying to use the individual scripts in the WP plugin for example - this solves those.)                                                                          |
 | Composer   | PHP package manager        | Used to manage PHP dependencies, and within packages other dependencies that should be uploaded to the server. Dev-only dependencies should be installed at the project root, so that packages' `vendor` folders contain only production dependencies.                                                               |
 | NPM        | JavaScript package manager | Used to manage JavaScript dependencies and build scripts. Primarily for local development and tooling (e.g. Storybook, Rollup). `node_modules` for any package should not be uploaded to the server - any JavaScript dependencies that reside here need to be compiled into production bundles that do get uploaded. |
+
+### Asset compilation
+| Technology | Description        | Details/Rationale                                                                                                                                 |
+|------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| SCSS       | CSS preprocessor   | Intended to not be essential for consuming projects, but used in Comet Core for improved developer experience for the library's foundational CSS. |
+| Rollup     | JavaScript bundler | Used to bundle the core package's JavaScript into one file to make it easier for implementations to use.                                          |
+
+### Linting and formatting
+
+| Tool            | Language(s)                 | Details/Rationale                                                                                                                                                                                                                                                                                                                                  |
+|-----------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ESLint          | JavaScript, TypeScript, Vue | Used with a range of plugins to enforce consistent and preferred code style in JavaScript and TypeScript, including Vue template files, as well as help identify and avoid potential bugs. Chosen for its comprehensiveness and flexibility (as opposed to more opinionated tools such as Prettier) as well as its native-feeling IDE integration. |
+| Laravel Pint    | PHP                         | Used to enforce consistent and preferred code style in PHP classes, tests, and procedural code. Chosen for its PHP 8.4+ CLI compatibility, straightforward configuration and use; and in combination with is underlying technology (PHP CS Fixer), its comprehensive options and PhpStorm's built-in integration.                                  |
+| Blade formatter | PHP                         | Used to enforce consistent code style in Blade template files. Selected for its straightforward configuration and use with PhpStorm file watchers.                                                                                                                                                                                                 |
+
+### Convenience scripts
+| Tool                 | Details/Rationale                                                                                                                                                                                                                                        | 
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Microsoft PowerShell | A range of convenience scripts for combining common commands that need to be run in multiple places and/or in succession are written in PowerShell, because they essentially replicate and automate what a human would be typing into the terminal.      |
+| PHP                  | Convenience scripts such as documentation generators are written in PHP, as they deal with PHP code - writing the scripts in PHP means we can use built-in functionality such as reflection and docblock parsing to generate custom documentation files. |
+| TypeScript and Node  | A small number of convenience scripts are written in TypeScript and run from the command line using Node, for no particular reason - they simply predate the PHP scripts and there has been no need to update them.                                      |
 
 ## Directory structure
 
