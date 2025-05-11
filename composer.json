@@ -36,12 +36,6 @@
 	},
 	"require-dev": {
 		"antecedent/patchwork": "^2.2.1",
-		"illuminate/view": "^10.0",
-		"illuminate/filesystem": "^10.0",
-		"illuminate/events": "^10.0",
-		"illuminate/container": "^10.0",
-		"illuminate/support": "^10.0",
-		"ezyang/htmlpurifier": "^4.18",
 		"phluent/phluent": "^0.5.3",
 		"symfony/var-dumper": "^7.2",
 		"pestphp/pest": "*",
