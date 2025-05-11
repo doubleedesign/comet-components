@@ -12,39 +12,40 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::NAV)]
 class Breadcrumbs extends UIComponent {
 
-	/**
-	 * @param array $attributes
-	 * @param array $breadcrumbs Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page
-	 */
-	function __construct(array $attributes, array $breadcrumbs) {
-		$listItems = array_map(function($breadcrumb) {
-			$linkAttributes = ['href' => trim($breadcrumb['url'] !== '') ? $breadcrumb['url'] : '#'];
-			if(isset($breadcrumb['current']) && $breadcrumb['current']) {
-				$linkAttributes['aria-current'] = 'page';
-			}
+    /**
+     * @param  array  $attributes
+     * @param  array  $breadcrumbs  Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page
+     */
+    public function __construct(array $attributes, array $breadcrumbs) {
+        $listItems = array_map(function($breadcrumb) {
+            $linkAttributes = ['href' => trim($breadcrumb['url'] !== '') ? $breadcrumb['url'] : '#'];
+            if (isset($breadcrumb['current']) && $breadcrumb['current']) {
+                $linkAttributes['aria-current'] = 'page';
+            }
 
-			ob_start();
-			$link = new Link($linkAttributes, $breadcrumb['title']);
-			$link->render();
-			$linkHtml = ob_get_clean();
-			return new ListItem(
-				['context' => 'breadcrumbs__list'],
-				$linkHtml
-			);
-		}, $breadcrumbs);
+            ob_start();
+            $link = new Link($linkAttributes, $breadcrumb['title']);
+            $link->render();
+            $linkHtml = ob_get_clean();
 
-		$innerComponents = [new ListComponent(['ordered' => true, 'context' => 'breadcrumbs'], $listItems)];
+            return new ListItem(
+                ['context' => 'breadcrumbs__list'],
+                $linkHtml
+            );
+        }, $breadcrumbs);
 
-		parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
-	}
+        $innerComponents = [new ListComponent(['ordered' => true, 'context' => 'breadcrumbs'], $listItems)];
 
-	function render(): void {
-		$blade = BladeService::getInstance();
+        parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
+    }
 
-		echo $blade->make($this->bladeFile, [
-			'classes'    => $this->get_filtered_classes_string(),
-			'attributes' => $this->get_html_attributes(),
-			'children'   => $this->innerComponents
-		])->render();
-	}
+    public function render(): void {
+        $blade = BladeService::getInstance();
+
+        echo $blade->make($this->bladeFile, [
+            'classes'    => $this->get_filtered_classes_string(),
+            'attributes' => $this->get_html_attributes(),
+            'children'   => $this->innerComponents
+        ])->render();
+    }
 }

@@ -12,85 +12,90 @@ use DateTime, IntlDateFormatter;
 #[AllowedTags([Tag::TIME])]
 #[DefaultTag(Tag::TIME)]
 class DateBlock extends DateComponent {
-	/**
-	 * @var DateTime|null $date
-	 * @description The date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.
-	 */
-	protected DateTime|null $date;
+    /**
+     * @var DateTime|null $date
+     * @description The date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.
+     */
+    protected ?DateTime $date;
 
-	function __construct(array $attributes) {
-		parent::__construct($attributes, 'components.DateBlock.date-block');
-		$this->date = $this->convert_date($attributes['date']) ?? null;
-	}
+    public function __construct(array $attributes) {
+        parent::__construct($attributes, 'components.DateBlock.date-block');
+        $this->date = $this->convert_date($attributes['date']) ?? null;
+    }
 
-	/**
-	 * Return a string representation of the date in a suitable format for the aria-label
-	 * @return string
-	 */
-	public function get_accessible_date_string(): string {
-		if($this->date === null) return '';
+    /**
+     * Return a string representation of the date in a suitable format for the aria-label
+     *
+     * @return string
+     */
+    public function get_accessible_date_string(): string {
+        if ($this->date === null) {
+            return '';
+        }
 
-		// Day Date Month Year
-		if($this->showDay && $this->showYear) {
-			$formatter = new IntlDateFormatter(
-				$this->locale,
-				IntlDateFormatter::FULL,
-				IntlDateFormatter::NONE
-			);
-			$formatter->setPattern('EEEE, d MMMM y'); // Day, date, month, year
-		}
-		// Day Date Month
-		else if($this->showDay && !$this->showYear) {
-			$formatter = new IntlDateFormatter(
-				$this->locale,
-				IntlDateFormatter::MEDIUM,
-				IntlDateFormatter::NONE
-			);
-			$formatter->setPattern('EEEE, d MMMM'); // Day, date, month
-		}
-		// Date Month Year
-		else if($this->showYear && !$this->showDay) {
-			$formatter = new IntlDateFormatter(
-				$this->locale,
-				IntlDateFormatter::LONG,
-				IntlDateFormatter::NONE
-			);
-			$formatter->setPattern('d MMMM y'); // Date, month, year
-		}
-		// Fallback: Just date and month
-		else {
-			$formatter = new IntlDateFormatter(
-				$this->locale,
-				IntlDateFormatter::LONG,
-				IntlDateFormatter::NONE
-			);
-			$formatter->setPattern('d MMMM'); // Just date and month
-		}
+        // Day Date Month Year
+        if ($this->showDay && $this->showYear) {
+            $formatter = new IntlDateFormatter(
+                $this->locale,
+                IntlDateFormatter::FULL,
+                IntlDateFormatter::NONE
+            );
+            $formatter->setPattern('EEEE, d MMMM y'); // Day, date, month, year
+        }
+        // Day Date Month
+        else if ($this->showDay && !$this->showYear) {
+            $formatter = new IntlDateFormatter(
+                $this->locale,
+                IntlDateFormatter::MEDIUM,
+                IntlDateFormatter::NONE
+            );
+            $formatter->setPattern('EEEE, d MMMM'); // Day, date, month
+        }
+        // Date Month Year
+        else if ($this->showYear && !$this->showDay) {
+            $formatter = new IntlDateFormatter(
+                $this->locale,
+                IntlDateFormatter::LONG,
+                IntlDateFormatter::NONE
+            );
+            $formatter->setPattern('d MMMM y'); // Date, month, year
+        }
+        // Fallback: Just date and month
+        else {
+            $formatter = new IntlDateFormatter(
+                $this->locale,
+                IntlDateFormatter::LONG,
+                IntlDateFormatter::NONE
+            );
+            $formatter->setPattern('d MMMM'); // Just date and month
+        }
 
-		return $formatter->format($this->date);
-	}
+        return $formatter->format($this->date);
+    }
 
-	protected function get_html_attributes(): array {
-		$attrs = parent::get_html_attributes();
+    protected function get_html_attributes(): array {
+        $attrs = parent::get_html_attributes();
 
-		if($this->date) {
-			$attrs['datetime'] = $this->date->format('Y-m-d');
-		}
+        if ($this->date) {
+            $attrs['datetime'] = $this->date->format('Y-m-d');
+        }
 
-		return $attrs;
-	}
+        return $attrs;
+    }
 
-	function render(): void {
-		if($this->date === null) return;
+    public function render(): void {
+        if ($this->date === null) {
+            return;
+        }
 
-		$blade = BladeService::getInstance();
+        $blade = BladeService::getInstance();
 
-		echo $blade->make($this->bladeFile, [
-			'classes'    => implode(' ', $this->get_filtered_classes()),
-			'attributes' => $this->get_html_attributes(),
-			'date'       => $this->date,
-			'showDay'    => $this->showDay,
-			'showYear'   => $this->showYear,
-		])->render();
-	}
+        echo $blade->make($this->bladeFile, [
+            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'attributes' => $this->get_html_attributes(),
+            'date'       => $this->date,
+            'showDay'    => $this->showDay,
+            'showYear'   => $this->showYear,
+        ])->render();
+    }
 }

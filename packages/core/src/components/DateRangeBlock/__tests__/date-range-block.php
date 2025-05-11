@@ -1,6 +1,5 @@
 <?php
 use Doubleedesign\Comet\Core\DateRangeBlock;
-use Doubleedesign\Comet\Core\{Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['colorTheme', 'startDate', 'endDate', 'locale', 'showDay', 'showYear'];
@@ -10,20 +9,20 @@ $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys)
 $attributes = array_map(fn($value) => $value === 'true' ? true : ($value === 'false' ? false : $value), $attributes);
 // Filter out any attributes that are empty or false
 $attributes = array_filter($attributes, function($value) {
-	return $value !== '' && $value !== 'false' && $value !== 'none' && $value !== 'null';
+    return $value !== '' && $value !== 'false' && $value !== 'none' && $value !== 'null';
 });
 
 // Convert date2 from the format Storybook provides to a supported one
 try {
-	$attributes['startDate'] = (new DateTime($attributes['startDate']))->format('Y-m-d');
-	$attributes['endDate'] = (new DateTime($attributes['endDate'])->format('Y-m-d'));
-	$component = new DateRangeBlock($attributes);
-	$component->render();
+    $attributes['startDate'] = (new DateTime($attributes['startDate']))->format('Y-m-d');
+    $attributes['endDate'] = (new DateTime($attributes['endDate'])->format('Y-m-d'));
+    $component = new DateRangeBlock($attributes);
+    $component->render();
 }
-catch(Exception $e) {
+catch (Exception $e) {
 }
 
 // Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if(getEnv('SERVER_NAME') === 'comet-components.test') {
-	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+if (getenv('SERVER_NAME') === 'comet-components.test') {
+    require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
 }

@@ -1,6 +1,5 @@
 <?php
 use Doubleedesign\Comet\Core\Image;
-use Doubleedesign\Comet\Core\{Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['align', 'alt', 'aspectRatio', 'caption', 'classes', 'height', 'width', 'href', 'isParallax', 'scale', 'title'];
@@ -11,18 +10,17 @@ $attributes = array_map(fn($value) => $value === 'true' ? true : ($value === 'fa
 // Filter out "none" and empty values
 $attributes = array_filter($attributes, fn($value) => $value !== 'none' && $value !== '');
 // Make classes an array if passed
-if(isset($attributes['classes'])) {
-	$attributes['classes'] = array_map('trim', explode(' ', $attributes['classes']));
+if (isset($attributes['classes'])) {
+    $attributes['classes'] = array_map('trim', explode(' ', $attributes['classes']));
 }
 
 $component = new Image([
-	...$attributes,
-	'src' => 'https://cometcomponents.io/test/assets/example-image-1.jpg',
+    ...$attributes,
+    'src' => 'https://cometcomponents.io/test/assets/example-image-1.jpg',
 ]);
 $component->render();
 
 // Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if(getEnv('SERVER_NAME') === 'comet-components.test') {
-	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+if (getenv('SERVER_NAME') === 'comet-components.test') {
+    require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
 }
-

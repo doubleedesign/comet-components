@@ -9,19 +9,19 @@ $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys)
 $attributes = array_map(fn($value) => $value === 'true' ? true : ($value === 'false' ? false : $value), $attributes);
 // Filter out any attributes that are empty or false
 $attributes = array_filter($attributes, function($value) {
-	return $value !== '' && $value !== 'false' && $value !== 'none' && $value !== 'null';
+    return $value !== '' && $value !== 'false' && $value !== 'none' && $value !== 'null';
 });
 
 // Convert date from the format Storybook provides to a supported one
 try {
-	$attributes['date'] = new DateTime($attributes['date']);
-	$component = new DateBlock($attributes);
-	$component->render();
+    $attributes['date'] = new DateTime($attributes['date']);
+    $component = new DateBlock($attributes);
+    $component->render();
 }
-catch(Exception $e) {
+catch (Exception $e) {
 }
 
 // Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if(getEnv('SERVER_NAME') === 'comet-components.test') {
-	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+if (getenv('SERVER_NAME') === 'comet-components.test') {
+    require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
 }

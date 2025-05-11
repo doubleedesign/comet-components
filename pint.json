@@ -80,6 +80,7 @@
 		"not_operator_with_successor_space": false,
 		"no_whitespace_before_comma_in_array": true,
 		"array_push": false,
+		"array_syntax": false,
 		"trailing_comma_in_multiline": false,
 		"single_quote": false,
 		"heredoc_to_nowdoc": false,

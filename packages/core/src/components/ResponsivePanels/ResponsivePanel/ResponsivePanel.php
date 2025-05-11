@@ -7,12 +7,12 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class ResponsivePanel extends PanelComponent {
 
-	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents, 'components.ResponsivePanels.ResponsivePanel.responsive-panel');
-		$this->context = 'responsive-panel';
-	}
+    public function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents, 'components.ResponsivePanels.ResponsivePanel.responsive-panel');
+        $this->context = 'responsive-panel';
+    }
 
-	protected function get_bem_name(): ?string {
-		return 'responsive-panel__content';
-	}
+    protected function get_bem_name(): ?string {
+        return 'responsive-panel__content';
+    }
 }

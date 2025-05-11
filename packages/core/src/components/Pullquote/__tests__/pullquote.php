@@ -1,6 +1,5 @@
 <?php
 use Doubleedesign\Comet\Core\Pullquote;
-use Doubleedesign\Comet\Core\{Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['citation', 'classes', 'colorTheme', 'textAlign', 'textColor'];
@@ -13,6 +12,6 @@ $component = new Pullquote($attributes, $content);
 $component->render();
 
 // Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if(getEnv('SERVER_NAME') === 'comet-components.test') {
-	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+if (getenv('SERVER_NAME') === 'comet-components.test') {
+    require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
 }

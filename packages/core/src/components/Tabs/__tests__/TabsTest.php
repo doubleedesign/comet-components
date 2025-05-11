@@ -1,15 +1,16 @@
 <?php
 /** @noinspection PhpUnhandledExceptionInspection */
 use Doubleedesign\Comet\Core\{Paragraph, TabPanel, TabPanelContent, TabPanelTitle, Tabs};
-beforeEach(function () {
+
+beforeEach(function() {
     $this->panels = [
-  			new TabPanel([], [
-  				new TabPanelTitle([], 'Panel 1 title'),
-  				new TabPanelContent([], [new Paragraph([], 'Panel 1 content')])
-  			]),
-  		];
+        new TabPanel([], [
+            new TabPanelTitle([], 'Panel 1 title'),
+            new TabPanelContent([], [new Paragraph([], 'Panel 1 content')])
+        ]),
+    ];
 });
-test('bem class structure', function () {
+test('bem class structure', function() {
     ob_start();
     $component = new Tabs([], $this->panels);
     $component->render();
@@ -29,7 +30,7 @@ test('bem class structure', function () {
     expect(explode(' ', $tabContentWrapper->getAttribute('class')))->toContain('tabs__content');
     expect($tabContentItem->getAttribute('class'))->toEqual('tabs__content__tab-panel');
 });
-test('role attributes', function () {
+test('role attributes', function() {
     ob_start();
     $component = new Tabs([], $this->panels);
     $component->render();
@@ -47,7 +48,7 @@ test('role attributes', function () {
     expect($tabListItemLink->getAttribute('role'))->toEqual('tab');
     expect($tabContentItem->getAttribute('role'))->toEqual('tabpanel');
 });
-test('orientation attribute', function () {
+test('orientation attribute', function() {
     ob_start();
     $component = new Tabs(['orientation' => 'vertical'], $this->panels);
     $component->render();
@@ -59,7 +60,7 @@ test('orientation attribute', function () {
 
     expect($wrapper->getAttribute('data-orientation'))->toEqual('vertical');
 });
-test('colour theme attribute', function () {
+test('colour theme attribute', function() {
     ob_start();
     $component = new Tabs(['colorTheme' => 'secondary'], $this->panels);
     $component->render();

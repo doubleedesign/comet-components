@@ -11,49 +11,49 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::DIV)]
 class Columns extends LayoutComponent {
-	private int $qty;
+    private int $qty;
 
-	/**
-	 * @var bool $allowStacking
-	 * @description Whether to adapt the layout by stacking columns when the viewport or container is narrow
-	 */
-	protected bool $allowStacking = true;
+    /**
+     * @var bool $allowStacking
+     * @description Whether to adapt the layout by stacking columns when the viewport or container is narrow
+     */
+    protected bool $allowStacking = true;
 
-	/**
-	 * @var array<Column> $innerComponents
-	 * @description Inner column components
-	 */
-	protected array $innerComponents;
+    /**
+     * @var array<Column> $innerComponents
+     * @description Inner column components
+     */
+    protected array $innerComponents;
 
-	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $updatedInnerComponents ?? $innerComponents, 'components.Columns.columns');
-		$this->qty = count($innerComponents);
-		$this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? true;
+    public function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $updatedInnerComponents ?? $innerComponents, 'components.Columns.columns');
+        $this->qty = count($innerComponents);
+        $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? true;
 
-		// If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
-		$columnWidths = array_map(function($column) {
-			return $column->get_width();
-		}, $innerComponents);
-		if(count(array_unique($columnWidths)) === 1) {
-			$updatedInnerComponents = [];
-			foreach($innerComponents as $column) {
-				$column->set_width(null);
-				$updatedInnerComponents[] = $column;
-			}
-		}
+        // If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
+        $columnWidths = array_map(function($column) {
+            return $column->get_width();
+        }, $innerComponents);
+        if (count(array_unique($columnWidths)) === 1) {
+            $updatedInnerComponents = [];
+            foreach ($innerComponents as $column) {
+                $column->set_width(null);
+                $updatedInnerComponents[] = $column;
+            }
+        }
 
-		$this->innerComponents = $updatedInnerComponents ?? $innerComponents;
-	}
+        $this->innerComponents = $updatedInnerComponents ?? $innerComponents;
+    }
 
-	function get_html_attributes(): array {
-		$attributes = parent::get_html_attributes();
+    public function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
 
-		if($this->allowStacking) {
-			$attributes['data-allow-layout-stacking'] = 'true';
-		}
+        if ($this->allowStacking) {
+            $attributes['data-allow-layout-stacking'] = 'true';
+        }
 
-		$attributes['data-count'] = $this->qty;
+        $attributes['data-count'] = $this->qty;
 
-		return $attributes;
-	}
+        return $attributes;
+    }
 }

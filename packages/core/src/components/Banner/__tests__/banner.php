@@ -1,7 +1,6 @@
 <?php
 use Doubleedesign\Comet\Core\{Banner, Heading, ButtonGroup};
-use const Doubleedesign\Comet\TestUtils\MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT;
-use const Doubleedesign\Comet\TestUtils\MOCK_INNER_COMPONENTS_BUTTONS;
+use const Doubleedesign\Comet\TestUtils\{MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT, MOCK_INNER_COMPONENTS_BUTTONS};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['backgroundColor', 'classes', 'containerSize', 'contentMaxWidth', 'focalPoint', 'hAlign', 'vAlign', 'isParallax', 'maxHeight', 'minHeight', 'overlayColor', 'overlayOpacity', 'tagName'];
@@ -9,23 +8,22 @@ $attributeKeys = ['backgroundColor', 'classes', 'containerSize', 'contentMaxWidt
 $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
 
 $innerComponents = [
-	new Heading([], 'Banner example'),
-	...MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT,
-	new ButtonGroup([], MOCK_INNER_COMPONENTS_BUTTONS)
+    new Heading([], 'Banner example'),
+    ...MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT,
+    new ButtonGroup([], MOCK_INNER_COMPONENTS_BUTTONS)
 ];
 
 $component = new Banner(
-	[
-		...$attributes,
-		'imageUrl' => 'https://cometcomponents.io/test/assets/example-image-2.jpg',
-		'imageAlt' => 'View of Big Ben in London',
-	],
-	$innerComponents
+    [
+        ...$attributes,
+        'imageUrl' => 'https://cometcomponents.io/test/assets/example-image-2.jpg',
+        'imageAlt' => 'View of Big Ben in London',
+    ],
+    $innerComponents
 );
 $component->render();
 
 // Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if(getEnv('SERVER_NAME') === 'comet-components.test') {
-	require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
+if (getenv('SERVER_NAME') === 'comet-components.test') {
+    require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
 }
-

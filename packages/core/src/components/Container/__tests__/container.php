@@ -8,7 +8,6 @@ $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys)
 // Make true and false strings proper booleans
 $attributes = array_map(fn($value) => $value === 'true' ? true : ($value === 'false' ? false : $value), $attributes);
 
-
 $innerComponents = [new Paragraph([], 'Container component')];
 
 $component = new Container($attributes, $innerComponents);

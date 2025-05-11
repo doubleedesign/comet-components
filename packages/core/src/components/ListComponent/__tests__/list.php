@@ -9,19 +9,19 @@ $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys)
 $attributes = array_map(fn($value) => $value === 'true' ? true : ($value === 'false' ? false : $value), $attributes);
 // Filter out any attributes that are empty or false
 $attributes = array_filter($attributes, function($value) {
-	return $value !== '' && $value !== 'false' && $value !== 'none' && $value !== 'null';
+    return $value !== '' && $value !== 'false' && $value !== 'none' && $value !== 'null';
 });
 
 $innerComponents = [
-	new ListItem([], 'List item 1'),
-	new ListItem([], 'List item 2'),
-	new ListItem([], 'List item 3 with nested list', [
-		new ListComponent([], [
-			new ListItem([], 'Nested list item 1'),
-			new ListItem([], 'Nested list item 2'),
-		]),
-	]),
-	new ListItem([], 'List item 4'),
+    new ListItem([], 'List item 1'),
+    new ListItem([], 'List item 2'),
+    new ListItem([], 'List item 3 with nested list', [
+        new ListComponent([], [
+            new ListItem([], 'Nested list item 1'),
+            new ListItem([], 'Nested list item 2'),
+        ]),
+    ]),
+    new ListItem([], 'List item 4'),
 ];
 
 $component = new ListComponent($attributes, $innerComponents);

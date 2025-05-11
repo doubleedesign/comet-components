@@ -1,6 +1,5 @@
 <?php
 use Doubleedesign\Comet\Core\Heading;
-use Doubleedesign\Comet\Core\{Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['classes', 'level', 'testId', 'textAlign', 'textColor'];

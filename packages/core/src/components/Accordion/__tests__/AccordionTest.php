@@ -1,22 +1,22 @@
 <?php
 use Doubleedesign\Comet\Core\{
-	Accordion,
-	AccordionPanel,
-	AccordionPanelContent,
-	AccordionPanelTitle,
-	Paragraph
+    Accordion,
+    AccordionPanel,
+    AccordionPanelContent,
+    AccordionPanelTitle,
+    Paragraph
 };
 
-beforeEach(function () {
+beforeEach(function() {
     $this->panels = [
-  			new AccordionPanel([], [
-  				new AccordionPanelTitle([], 'Panel 1 title'),
-  				new AccordionPanelContent([], [new Paragraph([], 'Panel 1 content')])
-  			]),
-  		];
+        new AccordionPanel([], [
+            new AccordionPanelTitle([], 'Panel 1 title'),
+            new AccordionPanelContent([], [new Paragraph([], 'Panel 1 content')])
+        ]),
+    ];
 });
 
-test('bem class structure', function () {
+test('bem class structure', function() {
     ob_start();
     $component = new Accordion([], $this->panels);
     $component->render();
@@ -35,7 +35,7 @@ test('bem class structure', function () {
     expect($content->getAttribute('class'))->toEqual('accordion__panel__content');
 });
 
-test('colour theme attribute', function () {
+test('colour theme attribute', function() {
     ob_start();
     $component = new Accordion(['colorTheme' => 'accent'], $this->panels);
     $component->render();

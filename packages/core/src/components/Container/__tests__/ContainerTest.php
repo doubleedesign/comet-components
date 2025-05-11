@@ -2,7 +2,7 @@
 use Doubleedesign\Comet\Core\Container;
 use function Patchwork\redefine;
 
-test('same bg as global is ignored', function () {
+test('same bg as global is ignored', function() {
     redefine('Doubleedesign\Comet\Core\Config::get_global_background', fn() => 'dark');
 
     ob_start();

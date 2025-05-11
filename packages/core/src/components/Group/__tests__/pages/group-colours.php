@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{Assets, TychoService};
+use Doubleedesign\Comet\Core\{TychoService};
 
 $page = <<<TYCHO
 <TychoTemplate xmlns="schema/components.xsd">
@@ -82,17 +82,16 @@ $page = <<<TYCHO
 TYCHO;
 
 try {
-	$components = TychoService::parse($page);
-	foreach($components as $component) {
-		$component->render();
-	}
+    $components = TychoService::parse($page);
+    foreach ($components as $component) {
+        $component->render();
+    }
 }
-catch(Exception $e) {
-	echo $e->getMessage();
+catch (Exception $e) {
+    echo $e->getMessage();
 }
 
 // Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if(getEnv('SERVER_NAME') === 'comet-components.test') {
-	require_once dirname(__DIR__, 7) . '/test/browser/wrapper-close.php';
+if (getenv('SERVER_NAME') === 'comet-components.test') {
+    require_once dirname(__DIR__, 7) . '/test/browser/wrapper-close.php';
 }
-

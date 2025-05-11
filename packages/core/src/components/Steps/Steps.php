@@ -11,61 +11,63 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::OL])]
 #[DefaultTag(Tag::OL)]
 class Steps extends LayoutComponent {
-	use LayoutOrientation;
-	use ColorTheme;
+    use ColorTheme;
+    use LayoutOrientation;
 
-	/**
-	 * @var array<Step> $innerComponents
-	 */
-	protected array $innerComponents;
-	/**
-	 * @var int|null $maxPerRow
-	 * @description The maximum number of steps to display per row when orientation is horizontal
-	 */
-	protected ?int $maxPerRow = null;
-	/**
-	 * @var array<string> $classes
-	 * @description CSS classes
-	 * @supported-values is-style-numbered, is-style-simple
-	 */
-	protected array|null $classes;
+    /**
+     * @var array<Step> $innerComponents
+     */
+    protected array $innerComponents;
 
-	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents, 'components.Steps.steps');
-		$this->set_orientation_from_attrs($attributes);
-		$this->set_color_theme_from_attrs($attributes);
-		if($this->orientation === Orientation::HORIZONTAL) {
-			$this->maxPerRow = isset($attributes['maxPerRow']) ? intval($attributes['maxPerRow']) : 3;
-		}
-		else {
-			$this->maxPerRow = null;
-		}
-	}
+    /**
+     * @var int|null $maxPerRow
+     * @description The maximum number of steps to display per row when orientation is horizontal
+     */
+    protected ?int $maxPerRow = null;
 
-	function get_html_attributes(): array {
-		$attributes = array_merge(
-			parent::get_html_attributes(),
-			['data-orientation' => $this->orientation->value]
-		);
+    /**
+     * @var array<string> $classes
+     * @description CSS classes
+     * @supported-values is-style-numbered, is-style-simple
+     */
+    protected ?array $classes;
 
-		if($this->orientation === Orientation::HORIZONTAL && isset($this->maxPerRow)) {
-			$attributes['data-max-per-row'] = $this->maxPerRow;
-		}
+    public function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents, 'components.Steps.steps');
+        $this->set_orientation_from_attrs($attributes);
+        $this->set_color_theme_from_attrs($attributes);
+        if ($this->orientation === Orientation::HORIZONTAL) {
+            $this->maxPerRow = isset($attributes['maxPerRow']) ? intval($attributes['maxPerRow']) : 3;
+        }
+        else {
+            $this->maxPerRow = null;
+        }
+    }
 
-		if(isset($this->colorTheme)) {
-			$attributes['data-color-theme'] = $this->colorTheme->value;
-		}
+    public function get_html_attributes(): array {
+        $attributes = array_merge(
+            parent::get_html_attributes(),
+            ['data-orientation' => $this->orientation->value]
+        );
 
-		return $attributes;
-	}
+        if ($this->orientation === Orientation::HORIZONTAL && isset($this->maxPerRow)) {
+            $attributes['data-max-per-row'] = $this->maxPerRow;
+        }
 
-	function render(): void {
-		$blade = BladeService::getInstance();
+        if (isset($this->colorTheme)) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
 
-		echo $blade->make($this->bladeFile, [
-			'classes'    => $this->get_filtered_classes_string(),
-			'attributes' => $this->get_html_attributes(),
-			'children'   => $this->innerComponents
-		])->render();
-	}
+        return $attributes;
+    }
+
+    public function render(): void {
+        $blade = BladeService::getInstance();
+
+        echo $blade->make($this->bladeFile, [
+            'classes'    => $this->get_filtered_classes_string(),
+            'attributes' => $this->get_html_attributes(),
+            'children'   => $this->innerComponents
+        ])->render();
+    }
 }
