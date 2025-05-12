@@ -5,6 +5,7 @@
 	"web-types": "web-types.json",
 	"description": "",
 	"author": "Leesa Ward",
+	"homepage": "https://cometcomponents.io",
 	"devDependencies": {
 		"@rollup/plugin-node-resolve": "^16.0.0",
 		"@typescript-eslint/parser": "^8.29.0",
