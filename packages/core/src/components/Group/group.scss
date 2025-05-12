@@ -4,6 +4,8 @@
 
 	&--breakout {
 		width: 100cqw; // use the width of the closest container
+		position: relative;
+		z-index: 300;
 
 		.container & {
 			max-width: var(--width-contained);

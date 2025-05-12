@@ -1,5 +1,7 @@
 .group--breakout {
   width: 100cqw;
+  position: relative;
+  z-index: 300;
 }
 .container .group--breakout {
   max-width: var(--width-contained);
