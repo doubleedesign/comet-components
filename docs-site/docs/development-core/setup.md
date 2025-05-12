@@ -95,12 +95,12 @@ nvm use <version>
 6. Tell Herd where the project is using one of the following methods:
 
 - In the Herd GUI, go to `General` in the left menu, and add `PHPStormProjects` the `Herd Paths`. This will make Herd pick up all directories in `PHPStormProjects` as projects.
-- From the Herd GUI Dashboard, click `Open Sites` and in the screen that appears, click `Add` and select the directory you cloned the repo into.
+- From the Herd GUI Dashboard, navigate to "Sites" from the sidebar, click `Add`, and select the directory you cloned the repo into.
 - From the `comet-components` directory your terminal, type `herd link`.
 
 7. Enable HTTPS for the site by:
 
-- going to the Herd GUI, clicking on the `Sites` tab, and enabling HTTPS for the site you just added, OR
+- going to the Herd GUI, navigating to "Sites", and enabling HTTPS for the site you just added, OR
 - in your terminal from the project root, run `herd secure`.
 
 This will create a self-signed certificate for you, which is suitable for local development.

@@ -31,7 +31,7 @@ The above `php.ini` config affects all local sites using the same instance of PH
 
 3. Enable HTTPS for the local site by doing one of the following:
 
-- open the Herd GUI > Dashboard > Open Sites > Comet Compoenents, and tick the "Enable HTTPS" checkbox
+- open the Herd GUI and go to `Sites > Comet Components`, and tick the "Enable HTTPS" checkbox
 - in PowerShell, run `herd secure` from the project root directory.
 
 4. Restart the PHP service in Herd so that the updated configuration is loaded.
