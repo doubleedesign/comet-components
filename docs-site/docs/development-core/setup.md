@@ -306,6 +306,9 @@ $ProjectFileDir$\packages\core\node_modules\.bin\rollup
 A combination of tools and configurations are provided to ensure consistent code formatting across the project.
 
 :::details PHP (General) - Laravel Pint
+[Laravel Pint](https://laravel.com/docs/12.x/pint) is a code style fixer for PHP built on top of [PHP CS Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer), which is used to ensure consistent code formatting and standards adherence across the project. It is installed as a project dependency and configuration is defined `./pint.json`.
+
+To configure PhpStorm to show Pint warnings and automatic fixes, follow these steps:
 1. Go to `File > Settings > PHP > Quality Tools > Laravel Pint`
 2. Toggle the switch to enable Pint
 3. Fill in the path to the `pint.json` file in the root of the project
@@ -344,20 +347,12 @@ To configure PhpStorm to automatically format Blade templates on save, follow th
 :::details JavaScript and TypeScript - ESLint
 [ESLint](https://eslint.org/) is installed as a project dependency and configuration for linting and formatting JavaScript and TypeScript code is defined in `./eslint.config.js`.
 
-Configure PhpStorm to run ESLint on save and fix issues automatically where possible by following these steps:
+To configure PhpStorm to run ESLint on save and fix issues automatically where possible, follow these steps:
 1. Go to `File > Settings > Languages & Frameworks > JavaScript > Code Quality Tools > ESLint`.
 2. Select `Automatic ESLint configuration`.
 3. Tick `Run eslint --fix on save`.
 
 :::
-
-### Pest
-
-Configuration of Pest/PHPUnit is mostly handled in its configuration file (`./test/phpunit.xml`) and the Run configuration.
-
-You can check and tweak the default settings for PhpStorm under `File > Settings > Languages & Frameworks > PHP > Test Frameworks` (shown below) and for the run configuration under `Run > Edit Configurations`.
-
-![Pest settings](/phpstorm-pest.png)
 
 ## Update the `php.ini` file
 
@@ -377,7 +372,17 @@ The above `php.ini` config affects all local sites using the same instance of PH
 
 Navigate to a test page such as http://comet-components.test/test/browser/pages/container-colours.php in your browser. You should see the page content with styling applied.
 
-## Set up Playwright
+## Set up automated testing tools
+
+### Pest
+
+Configuration of Pest/PHPUnit is mostly handled in its configuration file (`./test/phpunit.xml`) and the Run configuration.
+
+You can check and tweak the default settings for PhpStorm under `File > Settings > Languages & Frameworks > PHP > Test Frameworks` (shown below) and for the run configuration under `Run > Edit Configurations`.
+
+![Pest settings](/phpstorm-pest.png)
+
+### Playwright
 
 Playwright itself should be installed in the project by the refresh script listed above, but you may need to install the browsers it uses.
 
