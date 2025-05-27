@@ -1,43 +1,25 @@
 import React from 'react';
-import type { Preview } from '@storybook/server';
-import { Controls, DocsContainer, Subtitle, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
-import { Primary } from './blocks/Primary.tsx';
-import { Stories } from './blocks/Stories.tsx';
-import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
-import './preview.css';
-import './custom-components/CodePanels.style.css';
-import comet from './theme.ts';
-import { PhpCodeBlock } from './custom-components/PhpCodeBlock.tsx';
-import { withRelativeUrls, withServerPageStates } from './decorators';
-import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
+import type { Preview } from '@storybook/html';
 import { Title } from './blocks/Title.tsx';
 import { Description } from './blocks/Description.tsx';
+import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
+import { Primary } from './blocks/Primary.tsx';
 import { CommonAttributes } from './custom-components/CommonAttributes.tsx';
-
-// Log all events
-// import { addons } from '@storybook/preview-api';
-// import events from '@storybook/core-events';
-// const channel = addons.getChannel();
-// Object.values(events).forEach((event) => {
-// 	channel.on(event, (data) => {
-// 		console.log(event, data);
-// 		debugger;
-// 	});
-// });
+import { Controls, DocsContainer, Subtitle, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
+import comet from './theme.ts';
+import './preview.css';
+import './custom-components/CodePanels.style.css';
 
 const preview: Preview = {
 	parameters: {
 		viewMode: 'story',
-		server: {
-			fetchStoryTimeout: 5000,
-			maxSimultaneousRequests: 2,
-			reconnectionAttempts: 5,
-			disableConsoleLog: false,
-			autoRefresh: true,
-			handleArgsUpdates: true,
-			fetchOptions: {
-				cache: 'no-store'
+		controls: {
+			disableSaveFromUI: true,
+			matchers: {
+				color: /(background|color)$/i,
+				date: /Date$/i,
 			},
+			sort: 'none' // get order from story files
 		},
 		options: {
 			storySort: {
@@ -52,17 +34,6 @@ const preview: Preview = {
 					'**'
 				],
 			},
-		},
-		controls: {
-			disableSaveFromUI: true,
-			matchers: {
-				color: /(background|color)$/i,
-				date: /Date$/i,
-			},
-			sort: 'none' // get order from story files
-		},
-		backgrounds: {
-			disable: true
 		},
 		actions: {
 			disable: true
@@ -133,15 +104,14 @@ const preview: Preview = {
 					</Unstyled>
 				);
 			}
-		}
+		},
+		tags: ['autodocs'],
 	},
-	tags: ['autodocs'],
 };
 
 export const decorators = [
-	withRelativeUrls,
 	//withCodeTabs,
-	withServerPageStates
 ];
+
 
 export default preview;

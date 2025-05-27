@@ -17,6 +17,7 @@
 		"vue-eslint-parser": "^10.1.3"
 	},
 	"scripts": {
-		"build": "rollup -c"
+		"build": "rollup -c",
+		"eslint": "eslint --ext .js,.ts,.vue src --fix"
 	}
 }

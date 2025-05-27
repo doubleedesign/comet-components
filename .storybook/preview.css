@@ -5,6 +5,35 @@
 	--comet-docs-heading-font: gelica, sans-serif;
 }
 
+
+.announcement-banner {
+	position: sticky;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	text-align: center;
+	font-weight: 300;
+	font-family: var(--comet-docs-body-font);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+	strong {
+		font-weight: 600;
+		display: block;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	.announcement-banner__info {
+		background: color-mix(in srgb, #00d2fc, black 20%);
+		color: white;
+		padding: 0.5rem;
+	}
+}
+
+
 .tippy-content {
 	font-family: solitaire-mvb-pro, sans-serif;
 	font-weight: 300;
@@ -297,22 +326,6 @@
 /* This wraps .story--components-grouping-container and includes the heading */
 .sb-anchor:has(.story--components-grouping-container) {
 	margin-block: var(--spacing-lg);
-}
-
-/* Before the loader has been added, make the story area appear disabled */
-.sbdocs-preview > div {
-	opacity: 0.25;
-	pointer-events: none;
-}
-/* When the loader appears */
-.sbdocs-preview:has(.sb-loader[style="display: block;"]) > div:not(.sb-loader) {
-	opacity: 0.25;
-	pointer-events: none;
-}
-/* When the loader is present but hidden */
-.sbdocs-preview:has(.sb-loader[style="display: none;"]) > div:not(.sb-loader) {
-	opacity: 1;
-	pointer-events: auto;
 }
 
 .docs-wrapper {
