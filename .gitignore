@@ -33,3 +33,6 @@ docs-site/docs/.vuepress/.temp
 # Builds
 storybook-static
 docs
+/packages/core/coverage/
+
+test/unit/coverage/

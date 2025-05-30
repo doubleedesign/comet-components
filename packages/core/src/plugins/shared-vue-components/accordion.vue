@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PanelItem } from '../../components/ResponsivePanels/types.ts';
+import type { PanelItem } from '@/components/ResponsivePanels/types';
 
 export default {
 	name: 'Accordion',
@@ -24,19 +24,25 @@ export default {
 				return {
 					summary: {
 						...panel.summary,
-						classes: panel.summary.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel')),
+						classes: panel?.summary?.classes?.map((className: string) => className.replace('responsive-panel', 'accordion__panel')) ?? [],
 						title: {
 							...panel.summary.title,
-							classes: panel.summary.title.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
+							classes: panel?.summary?.title?.classes?.map((className: string) => {
+								return className.replace('responsive-panel', 'accordion__panel');
+							}) ?? []
 						},
 						subtitle: {
 							...panel?.summary?.subtitle,
-							classes: panel?.summary?.subtitle?.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
+							classes: panel?.summary?.subtitle?.classes?.map((className: string) => {
+								return className.replace('responsive-panel', 'accordion__panel');
+							}) ?? []
 						},
 					},
 					content: {
 						...panel.content,
-						classes: panel.content.classes.map((className: string) => className.replace('responsive-panel', 'accordion__panel'))
+						classes: panel?.content?.classes?.map((className: string) => {
+							return className.replace('responsive-panel', 'accordion__panel');
+						}) ?? []
 					}
 				};
 			}) : this.panels,
