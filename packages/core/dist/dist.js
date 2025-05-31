@@ -9,42 +9,62 @@ tippy('[data-tippy-content]');
 
 const Vue$3 = await VueLoader;
 
-const tabs = document.querySelectorAll('[data-vue-component="tabs"]');
-if (tabs.length > 0) {
-	// Add a unique attribute to use as the mount point
-	// (can't use ID because that could be set by consumers)
-	tabs.forEach((tab, index) => {
-		// Add a unique attribute to use as the mount point
-		// (can't use ID because that could be set to a custom value by consumers)
-		tab.setAttribute('data-tabs-instance', `tabs-${index}`);
+// Run on initial page load (works on the front-end)
+init$2();
 
-		Vue$3.createApp({
-			components: {
-				Tabs: Vue$3.defineAsyncComponent(() => {
-					return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/tabs.vue`, vueSfcLoaderOptions);
-				}),
-			}
-		}).mount(`[data-tabs-instance="tabs-${index}"]`);
-	});
+// Run on event trigger (makes it work for ACF blocks in the WP block editor where code is set up to trigger it appropriately)
+window.addEventListener('ReloadVueTabs', (e) => {
+	init$2();
+});
+
+function init$2() {
+	const tabs = document.querySelectorAll('[data-vue-component="tabs"]');
+	if (tabs.length > 0) {
+		// Add a unique attribute to use as the mount point
+		// (can't use ID because that could be set by consumers)
+		tabs.forEach((tab, index) => {
+			// Add a unique attribute to use as the mount point
+			// (can't use ID because that could be set to a custom value by consumers)
+			tab.setAttribute('data-tabs-instance', `tabs-${index}`);
+
+			Vue$3.createApp({
+				components: {
+					Tabs: Vue$3.defineAsyncComponent(() => {
+						return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/tabs.vue`, vueSfcLoaderOptions);
+					}),
+				}
+			}).mount(`[data-tabs-instance="tabs-${index}"]`);
+		});
+	}
 }
 
 const Vue$2 = await VueLoader;
 
-const accordions = document.querySelectorAll('[data-vue-component="accordion"]');
-if (accordions.length > 0) {
-	accordions.forEach((accordion, index) => {
-		// Add a unique attribute to use as the mount point
-		// (can't use ID because that could be set to a custom value by consumers)
-		accordion.setAttribute('data-accordion-instance', `accordion-${index}`);
+// Run on initial page load (works on the front-end)
+init$1();
 
-		Vue$2.createApp({
-			components: {
-				Accordion: Vue$2.defineAsyncComponent(() => {
-					return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/accordion.vue`, vueSfcLoaderOptions);
-				}),
-			}
-		}).mount(`[data-accordion-instance="accordion-${index}"]`);
-	});
+// Run on event trigger (makes it work for ACF blocks in the WP block editor where code is set up to trigger it appropriately)
+window.addEventListener('ReloadVueAccordions', (e) => {
+	init$1();
+});
+
+function init$1() {
+	const accordions = document.querySelectorAll('[data-vue-component="accordion"]');
+	if (accordions.length > 0) {
+		accordions.forEach((accordion, index) => {
+			// Add a unique attribute to use as the mount point
+			// (can't use ID because that could be set to a custom value by consumers)
+			accordion.setAttribute('data-accordion-instance', `accordion-${index}`);
+
+			Vue$2.createApp({
+				components: {
+					Accordion: Vue$2.defineAsyncComponent(() => {
+						return loadModule(`${BASE_PATH}/src/plugins/shared-vue-components/accordion.vue`, vueSfcLoaderOptions);
+					}),
+				}
+			}).mount(`[data-accordion-instance="accordion-${index}"]`);
+		});
+	}
 }
 
 window.addEventListener('load', function() {
@@ -69,7 +89,7 @@ const Vue = await VueLoader;
 init();
 
 // Run on event trigger (makes it work for ACF blocks in the WP block editor where code is set up to trigger it appropriately)
-window.addEventListener('ReloadResponsivePanels', (e) => {
+window.addEventListener('ReloadVueResponsivePanels', (e) => {
 	init();
 });
 
