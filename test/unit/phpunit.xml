@@ -30,6 +30,7 @@
         <exclude>
             <directory>vendor</directory>
             <directory suffix="Test.php">../../packages/core/src</directory>
+            <directory suffix=".php">../../packages/core/src/**/__tests__/</directory>
             <directory suffix="blade.php">../../packages/core/src</directory>
         </exclude>
     </source>
