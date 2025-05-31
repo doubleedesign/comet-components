@@ -20,11 +20,14 @@ docs-site/docs/.vuepress/.temp
 /blob-report/
 /playwright/.cache/
 
-# PHPUnit
+# PHPUnit/Pest
 /test-results
 /test/.phpunit.cache
 /test/phpunit-report
 .phpunit.cache
+
+# Jest
+/packages/core/coverage/
 
 # Local dev SSL
 /.cert/cert.pem
