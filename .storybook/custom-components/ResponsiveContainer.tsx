@@ -64,54 +64,14 @@ export const ResponsiveContainer = ({ children }) => {
 };
 
 function OpenInNewTabButton() {
-	const storedContext = JSON.parse(localStorage.getItem('storyContext'));
-	const context = storedContext?.primaryStory;
-	if (!context.parameters.server) {
-		return null;
-	}
+	const [cachedUrl, setCachedUrl] = useState('');
 
-	const basePath = `${context.parameters.server.url}/${context.parameters.server.id}`;
-
-	const fullUrl = useMemo(() => {
-		let args = {};
-		// Handle default args
-		if (context.args) {
-			// Convert all values to strings and filter out undefined/null/empty values
-			args = Object.entries(context.args)
-				.filter(([key, value]) => value !== undefined && value !== null && value !== '')
-				.reduce((acc, [key, value]) => {
-					acc[key] = String(value);
-
-					return acc;
-				}, {});
-		}
-		// Handle custom args (put in local storage by withServerPageStates decorator)
-		const customArgs = JSON.parse(localStorage.getItem('storyArgs'));
-		if (customArgs) {
-			// Convert all values to strings and filter out undefined/null/empty values
-			Object.entries(customArgs)
-				.filter(([key, value]) => value !== undefined && value !== null && value !== '')
-				.reduce((acc, [key, value]) => {
-					acc[key] = String(value);
-
-					return acc;
-				}, {});
-		}
-
-		const urlParams = new URLSearchParams({ ...args, ...customArgs });
-
-		const path = `${basePath}?${urlParams.toString()}`;
-
-		let baseUrl = 'https://cometcomponents.io';
-		if (window.location.hostname === 'storybook.comet-components.test') {
-			baseUrl = 'https://comet-components.test';
-		}
-
-		return `${baseUrl}${path}`;
-	}, [context.args, context.parameters.server.url, context.parameters.server.id]);
+	document.addEventListener('storyArgsUpdatedCustom', (event) => {
+		setCachedUrl(localStorage.getItem('storyUrlWithParams'));
+	});
 
 	return (
-		<a href={fullUrl} target="_blank">
+		<a href={cachedUrl} target="_blank">
 			Open in a new tab
 			<ArrowTopRightIcon/>
 		</a>

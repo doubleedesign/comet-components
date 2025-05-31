@@ -2,7 +2,7 @@ import type { FunctionComponent, ReactNode } from 'react';
 import React, { useMemo } from 'react';
 
 import type { ComponentTitle, PreparedMeta, Renderer } from 'storybook/internal/types';
-import { useOf, type Of } from '@storybook/blocks';
+import { useOf, type Of } from '@storybook/addon-docs/blocks';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { VueComponentIcon } from '../custom-components/icon-items/VueComponentIcon.tsx';

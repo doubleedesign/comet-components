@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import type { FC } from 'react';
 
 import type { ModuleExport, ModuleExports } from 'storybook/internal/types';
-import { DocsContext, type SourceProps, useSourceProps, SourceContext, type StoryProps, Story, useOf } from '@storybook/blocks';
+import { DocsContext, type SourceProps, useSourceProps, SourceContext, type StoryProps, Story, useOf } from '@storybook/addon-docs/blocks';
 import { Preview, type PreviewProps, type Layout } from './components/Preview.tsx';
 
 type CanvasProps = Pick<PreviewProps, 'withToolbar' | 'additionalActions' | 'className'> & {
@@ -13,7 +13,7 @@ type CanvasProps = Pick<PreviewProps, 'withToolbar' | 'additionalActions' | 'cla
 	 * Pass the export defining a story to render that story
 	 *
 	 * ```jsx
-	 * import { Meta, Canvas } from '@storybook/blocks';
+	 * import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 	 * import * as ButtonStories from './Button.stories';
 	 *
 	 * <Meta of={ButtonStories} />
@@ -25,7 +25,7 @@ type CanvasProps = Pick<PreviewProps, 'withToolbar' | 'additionalActions' | 'cla
 	 * Pass all exports of the CSF file if this MDX file is unattached
 	 *
 	 * ```jsx
-	 * import { Canvas } from '@storybook/blocks';
+	 * import { Canvas } from '@storybook/addon-docs/blocks';
 	 * import * as ButtonStories from './Button.stories';
 	 *
 	 * <Canvas of={ButtonStories.Primary} meta={ButtonStories} />;

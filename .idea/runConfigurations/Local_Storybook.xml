@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Local Storybook" type="JavaScriptTestRunnerPlaywright" nameIsGenerated="true">
+    <config value="$PROJECT_DIR$/.storybook/playwright.config.ts" />
+    <node-interpreter value="node" />
+    <playwright-package value="$PROJECT_DIR$/node_modules/@playwright/test" />
+    <working-dir value="$PROJECT_DIR$" />
+    <envs />
+    <scope-kind value="TEST" />
+    <test-file value="$PROJECT_DIR$/.storybook/__tests__/storybook-local.spec.ts" />
+    <test-names>
+      <test-name value="Local Storybook" />
+    </test-names>
+    <method v="2" />
+  </configuration>
+</component>

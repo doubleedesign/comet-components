@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnhandledExceptionInspection */
 namespace Doubleedesign\Comet\WordPress\Calendar;
 use Doubleedesign\Comet\Core\{DateBlock, DateRangeBlock};
 use DateTime;

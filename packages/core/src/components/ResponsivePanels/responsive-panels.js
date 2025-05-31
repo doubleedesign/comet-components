@@ -7,11 +7,11 @@ import { vueSfcLoaderOptions, BASE_PATH } from '../../plugins/vue-wrapper/src/in
 init();
 
 // Run on event trigger (makes it work for ACF blocks in the WP block editor where code is set up to trigger it appropriately)
-window.addEventListener('ReloadResponsivePanels', (e) => {
+window.addEventListener('ReloadVueResponsivePanels', (e) => {
 	init();
 });
 
-function init() {
+export function init() {
 	const instances = document.querySelectorAll('[data-vue-component="responsive-panels"]');
 	if (instances.length > 0) {
 		instances.forEach((instance, index) => {

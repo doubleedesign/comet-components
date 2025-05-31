@@ -1,43 +1,41 @@
 import React from 'react';
-import type { Preview } from '@storybook/server';
-import { Controls, DocsContainer, Subtitle, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
-import { Primary } from './blocks/Primary.tsx';
-import { Stories } from './blocks/Stories.tsx';
-import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
-import './preview.css';
-import './custom-components/CodePanels.style.css';
-import comet from './theme.ts';
-import { PhpCodeBlock } from './custom-components/PhpCodeBlock.tsx';
-import { withRelativeUrls, withServerPageStates } from './decorators';
-import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
+import type { Preview } from '@storybook/html-vite';
 import { Title } from './blocks/Title.tsx';
 import { Description } from './blocks/Description.tsx';
+import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
+import { Primary } from './blocks/Primary.tsx';
 import { CommonAttributes } from './custom-components/CommonAttributes.tsx';
+import { Controls, DocsContainer, Subtitle, Unstyled } from '@storybook/addon-docs/blocks';
+import comet from './theme.ts';
+import './preview.css';
+import './custom-components/CodePanels.style.css';
+import { addons } from 'storybook/preview-api';
+const channel = addons.getChannel();
 
 // Log all events
-// import { addons } from '@storybook/preview-api';
-// import events from '@storybook/core-events';
-// const channel = addons.getChannel();
+// import events from 'storybook/internal/core-events';
 // Object.values(events).forEach((event) => {
 // 	channel.on(event, (data) => {
 // 		console.log(event, data);
-// 		debugger;
+// 		//debugger;
 // 	});
 // });
+
+channel.on('storyArgsUpdated', (data) => {
+	// Dispatch an event that the ResponsiveContainer can pick up to re-fetch the URL (set in the story files) from local storage
+	document.dispatchEvent(new Event('storyArgsUpdatedCustom'));
+});
 
 const preview: Preview = {
 	parameters: {
 		viewMode: 'story',
-		server: {
-			fetchStoryTimeout: 5000,
-			maxSimultaneousRequests: 2,
-			reconnectionAttempts: 5,
-			disableConsoleLog: false,
-			autoRefresh: true,
-			handleArgsUpdates: true,
-			fetchOptions: {
-				cache: 'no-store'
+		controls: {
+			disableSaveFromUI: true,
+			matchers: {
+				color: /(background|color)$/i,
+				date: /Date$/i,
 			},
+			sort: 'none' // get order from story files
 		},
 		options: {
 			storySort: {
@@ -52,17 +50,6 @@ const preview: Preview = {
 					'**'
 				],
 			},
-		},
-		controls: {
-			disableSaveFromUI: true,
-			matchers: {
-				color: /(background|color)$/i,
-				date: /Date$/i,
-			},
-			sort: 'none' // get order from story files
-		},
-		backgrounds: {
-			disable: true
 		},
 		actions: {
 			disable: true
@@ -99,9 +86,6 @@ const preview: Preview = {
 			container: ({ children, context }) => {
 				const component = context?.primaryStory?.title.split('/')?.reverse()[0]?.toLowerCase() || 'default';
 
-				// Extremely hacky way to get the context to where I need it in the ResponsiveContainer
-				localStorage.setItem('storyContext', JSON.stringify(context));
-
 				return (
 					<div className={`docs-wrapper docs-wrapper--${component}`}>
 						<DocsContainer context={context}>
@@ -133,15 +117,14 @@ const preview: Preview = {
 					</Unstyled>
 				);
 			}
-		}
+		},
+		tags: ['autodocs'],
 	},
-	tags: ['autodocs'],
 };
 
 export const decorators = [
-	withRelativeUrls,
 	//withCodeTabs,
-	withServerPageStates
 ];
+
 
 export default preview;
