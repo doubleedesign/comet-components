@@ -64,7 +64,11 @@ export const ResponsiveContainer = ({ children }) => {
 };
 
 function OpenInNewTabButton() {
-	const cachedUrl = localStorage.getItem('storyUrlWithParams');
+	const [cachedUrl, setCachedUrl] = useState('');
+
+	document.addEventListener('storyArgsUpdatedCustom', (event) => {
+		setCachedUrl(localStorage.getItem('storyUrlWithParams'));
+	});
 
 	return (
 		<a href={cachedUrl} target="_blank">
