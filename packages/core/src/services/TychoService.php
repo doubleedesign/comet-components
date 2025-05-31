@@ -17,7 +17,7 @@ class TychoService {
      * @return array<Renderable> Component objects
      * @throws Exception If the template is invalid
      */
-    public static function parse(string $template, array $variables = []): mixed {
+    public static function parse(string $template, array $variables = []): array {
         if (self::$dom === null) {
             self::$dom = new DOMDocument();
         }
@@ -32,7 +32,7 @@ class TychoService {
         $internalErrors = libxml_use_internal_errors(true);
 
         // Add a root element to ensure we have valid XML
-        self::$dom->loadXML("<root>{$template}</root>", LIBXML_NOERROR);
+        self::$dom->loadXML("<root>$template</root>", LIBXML_NOERROR);
 
         // Clear errors and restore reporting
         libxml_clear_errors();

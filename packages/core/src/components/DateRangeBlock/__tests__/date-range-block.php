@@ -15,7 +15,7 @@ $attributes = array_filter($attributes, function($value) {
 // Convert date2 from the format Storybook provides to a supported one
 try {
     $attributes['startDate'] = (new DateTime($attributes['startDate']))->format('Y-m-d');
-    $attributes['endDate'] = (new DateTime($attributes['endDate'])->format('Y-m-d'));
+    $attributes['endDate'] = ((new DateTime($attributes['endDate']))->format('Y-m-d'));
     $component = new DateRangeBlock($attributes);
     $component->render();
 }

@@ -91,10 +91,10 @@ class EventCard extends UIComponent {
     private function apply_context_to_inner_components($components, $append = ''): void {
         array_walk($components, function($component) use ($append) {
             if ($component instanceof Group || $component instanceof Heading) {
-                $component->set_context("{$this->context}__{$this->shortName}{$append}");
+                $component->set_context("{$this->context}__$this->shortName{$append}");
             }
             if ($component instanceof Group && $component->innerComponents) {
-                $this->apply_context_to_inner_components($component->innerComponents, "__{$component->shortName}");
+                $this->apply_context_to_inner_components($component->innerComponents, "__$component->shortName");
             }
         });
     }

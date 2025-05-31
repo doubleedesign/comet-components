@@ -16,6 +16,7 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/core/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />
@@ -96,6 +97,7 @@
       <excludeFolder url="file://$MODULE_DIR$/test/unit/.phpunit.cache" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/phpstan/phpstan" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

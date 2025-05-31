@@ -38,10 +38,10 @@ test('default bem class structure', function() {
     $item = $firstList->getElementsByTagName('li')->item(0);
     $link = $item->getElementsByTagName('a')->item(0);
 
-    expect($wrapper->className)->toEqual('menu');
-    expect($firstList->className)->toEqual('menu-list');
-    expect($item->className)->toEqual('menu-list__item');
-    expect($link->className)->toEqual('menu-list__item__link');
+    expect($wrapper->className)->toEqual('menu')
+        ->and($firstList->className)->toEqual('menu-list')
+        ->and($item->className)->toEqual('menu-list__item')
+        ->and($link->className)->toEqual('menu-list__item__link');
 });
 test('context bem class structure', function() {
     ob_start();
@@ -56,8 +56,8 @@ test('context bem class structure', function() {
     $item = $firstList->getElementsByTagName('li')->item(0);
     $link = $item->getElementsByTagName('a')->item(0);
 
-    expect($wrapper->className)->toEqual('footer__menu');
-    expect($firstList->className)->toEqual('footer__menu-list');
-    expect($item->className)->toEqual('footer__menu-list__item');
-    expect($link->className)->toEqual('footer__menu-list__item__link');
+    expect($wrapper->className)->toEqual('footer__menu')
+        ->and($firstList->className)->toEqual('footer__menu-list')
+        ->and($item->className)->toEqual('footer__menu-list__item')
+        ->and($link->className)->toEqual('footer__menu-list__item__link');
 });

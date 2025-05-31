@@ -25,6 +25,8 @@ class BladeService {
      * and registering custom directives
      *
      * @return void
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     private static function initialize(): void {
         $filesystem = new Filesystem();
