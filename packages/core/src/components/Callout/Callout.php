@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Callout component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Highlight an important message in a callout box.
  */
@@ -15,13 +15,12 @@ class Callout extends UIComponent {
     use Icon;
 
     /**
-     * @var ?string $icon
      * @description Icon class name; default value set for success, warning, error, and info color themes
      */
     protected ?string $icon;
 
     /**
-     * @var array<Heading|ListComponent|Paragraph|ButtonGroup|Button|Separator> $innerComponents
+     * @var array<Heading|ListComponent|Paragraph|ButtonGroup|Button|Separator>
      */
     protected array $innerComponents;
 
@@ -59,7 +58,7 @@ class Callout extends UIComponent {
             'iconPrefix' => $this->iconPrefix,
             'icon'       => $this->icon,
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Gallery component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display a grid of images with optional captions, with a range of layout options.
  */
@@ -12,20 +12,18 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::FIGURE)]
 class Gallery extends UIComponent {
     /**
-     * @var int $columns
      * @description The number of columns to use for the layout (may be overridden to fewer in small containers/viewports)
      * @supported-values 1, 2, 3, 4, 5, 6, 7, 8
      */
     protected int $columns = 3;
 
     /**
-     * @var string|null $caption
      * @description Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>
      */
     protected ?string $caption;
 
     /**
-     * @var array<Image> $innerComponents
+     * @var array<Image>
      * @description The image components to display in the gallery
      */
     protected array $innerComponents;
@@ -54,7 +52,7 @@ class Gallery extends UIComponent {
             if (count($this->innerComponents) % 2 === 0) {
                 $attributes['data-interim-columns'] = 2;
             }
-            else if (count($this->innerComponents) % 3 === 0) {
+            elseif (count($this->innerComponents) % 3 === 0) {
                 $attributes['data-interim-columns'] = 3;
             }
         }
@@ -69,7 +67,7 @@ class Gallery extends UIComponent {
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
             'children'   => $this->innerComponents,
-            'caption'    => $this->caption
+            'caption'    => $this->caption,
         ])->render();
     }
 }

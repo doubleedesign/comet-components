@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\Menu;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{Menu, Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['classes', 'tagName', 'testId'];

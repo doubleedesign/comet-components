@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\IconLinks;
 
 // Attribute keys from component JSON definition
@@ -12,23 +13,23 @@ $attributes = array_filter($attributes, function($value) {
     return $value !== '' && $value !== 'false' && $value !== 'none' && $value !== 'null';
 });
 
-$links = array(
+$links = [
     [
-        "label" => "GitHub",
-        "icon"  => "fa-github",
-        "url"   => "https://github.com/doubleedesign/comet-components"
+        'label' => 'GitHub',
+        'icon'  => 'fa-github',
+        'url'   => 'https://github.com/doubleedesign/comet-components',
     ],
     [
-        "label" => "npm",
-        "icon"  => "fa-npm",
-        "url"   => "https://www.npmjs.com/~doubleedesign"
+        'label' => 'npm',
+        'icon'  => 'fa-npm',
+        'url'   => 'https://www.npmjs.com/~doubleedesign',
     ],
     [
-        "label" => "Facebook",
-        "icon"  => "fa-facebook",
-        "url"   => "https://www.facebook.com/doubleedesign"
-    ]
-);
+        'label' => 'Facebook',
+        'icon'  => 'fa-facebook',
+        'url'   => 'https://www.facebook.com/doubleedesign',
+    ],
+];
 
 $component = new IconLinks($attributes, $links);
 $component->render();

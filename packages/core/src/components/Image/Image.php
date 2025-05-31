@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Image component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render an image with optional caption, link, and display options such as aspect ratio and behaviour within its container.
  */
@@ -12,70 +12,60 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::FIGURE)]
 class Image extends Renderable {
     /**
-     * @var string $src
      * @description Image source URL
      */
     protected string $src;
 
     /**
-     * @var array<string> $classes
+     * @var array<string>
      * @description CSS classes
      * @supported-values is-style-rounded
      */
     protected ?array $classes = [];
 
     /**
-     * @var string $alt
      * @description Alternative text
      */
     protected string $alt = '';
 
     /**
-     * @var string|null $title
      * @description Optional image title (appears on hover)
      */
     protected ?string $title = null;
 
     /**
-     * @var string|null $caption
      * @description Optional image caption (to appear below the image)
      */
     protected ?string $caption = null;
 
     /**
-     * @var AspectRatio|null $aspectRatio
      * @description Crop image to the given aspect ratio
      * @supported-values 4/3,
      */
     protected ?AspectRatio $aspectRatio = null;
 
     /**
-     * @var string|null $scale
      * @description How to handle how the image fits the available space
      * @supported-values contain, cover
      */
     protected ?string $scale = 'contain';
 
     /**
-     * @var string|null $href
      * @description URL to link to
      */
     protected ?string $href = null;
 
     /**
-     * @var string|null $height
      * @description Set a fixed height for the image
      */
     protected ?string $height = null;
 
     /**
-     * @var string|null $width
      * @description Set a fixed width for the image
      */
     protected ?string $width = null;
 
     /**
-     * @var string|null $align
      * @description Image alignment
      * @supported-values left, center, right, full
      * Dev notes: There are fewer options than the layout alignment values, that's why they're not using the Alignment enum
@@ -83,7 +73,6 @@ class Image extends Renderable {
     protected ?string $align = null;
 
     /**
-     * @var bool $isParallax
      * @description In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)
      */
     protected bool $isParallax = false;
@@ -111,8 +100,6 @@ class Image extends Renderable {
 
     /**
      * @param  string<'cover'|'contain'>  $behaviour
-     *
-     * @return void
      */
     public function set_behaviour(string $behaviour): void {
         $this->scale = $behaviour;
@@ -165,7 +152,7 @@ class Image extends Renderable {
             parent::get_html_attributes(),
             [
                 'alt'   => $this->alt,
-                'title' => $this->title
+                'title' => $this->title,
             ]
         );
     }

@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Accordion component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Group content into expandable/collapsible panels.
  */
@@ -14,7 +14,6 @@ class Accordion extends PanelGroupComponent {
     use Icon;
 
     /**
-     * @var ?string $icon
      * @description Icon class name for the icon to use for the expand/collapse indicator.
      */
     protected ?string $icon;
@@ -34,7 +33,7 @@ class Accordion extends PanelGroupComponent {
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
             'panels'     => $this->get_panels(),
-            'icon'       => "$this->iconPrefix $this->icon"
+            'icon'       => "$this->iconPrefix $this->icon",
         ])->render();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\File;
 
 // Attribute keys from component JSON definition

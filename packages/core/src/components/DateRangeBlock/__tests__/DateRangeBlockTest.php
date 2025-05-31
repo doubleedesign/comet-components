@@ -1,6 +1,7 @@
 <?php
+
 /** @noinspection PhpUnhandledExceptionInspection */
-use Doubleedesign\Comet\Core\{DateRangeBlock};
+use Doubleedesign\Comet\Core\DateRangeBlock;
 
 describe('DateRangeBlock', function() {
 

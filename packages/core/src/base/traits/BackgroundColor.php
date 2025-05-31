@@ -1,15 +1,14 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 trait BackgroundColor {
     /**
-     * @var ?ThemeColor $backgroundColor
      * @description Background colour keyword
      */
     protected ?ThemeColor $backgroundColor = null;
 
     /**
-     * @param  array  $attributes
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
     protected function set_background_color_from_attrs(array $attributes): void {
@@ -25,8 +24,6 @@ trait BackgroundColor {
 
     /**
      * @description Get the background colour of the component.
-     *
-     * @return ?ThemeColor
      */
     public function get_background_color(): ?ThemeColor {
         return $this->backgroundColor;
@@ -34,15 +31,12 @@ trait BackgroundColor {
 
     /**
      * @description Allows the background colour of a component to be set based on contextual factors not available at instantiation.
-     * @param  string|null|ThemeColor  $backgroundColor
-     *
-     * @return void
      */
     public function set_background_color(ThemeColor|string|null $backgroundColor): void {
         if ($backgroundColor instanceof ThemeColor) {
             $this->backgroundColor = $backgroundColor;
         }
-        else if (is_string($backgroundColor)) {
+        elseif (is_string($backgroundColor)) {
             $this->backgroundColor = ThemeColor::tryFrom($backgroundColor);
         }
         else {
@@ -53,8 +47,6 @@ trait BackgroundColor {
     /**
      * @description Clean up duplication of background colours between this and its inner components simplify HTML and CSS. Runs either remove_redundant_background_colors() or set_background_color_based_on_children() as appropriate.
      * NOTE: This must be run after the constructor and after set_background_color_from_attrs() to ensure the backgrounds and innerComponents are available
-     *
-     * @return void
      */
     public function simplify_all_background_colors(): void {
         // If all backgrounds set on direct children of this component are the same as this component's background,
@@ -73,8 +65,6 @@ trait BackgroundColor {
     /**
      * @description If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS.
      * This is available to component classes because there are some components where we want to do this, but not assign a background colour to the component.
-     *
-     * @return void
      */
     protected function remove_redundant_background_colors(): void {
         // Bail if there's fewer than 2 inner components
@@ -108,8 +98,6 @@ trait BackgroundColor {
     /**
      * If this component does not have a background set but its children all have the same background and/or no background,
      * "hoist" that singular set background to this component and remove the backgrounds from the children
-     *
-     * @return void
      */
     protected function set_background_color_based_on_inner_components(): void {
         // No need to set the background if it's already set
@@ -149,5 +137,4 @@ trait BackgroundColor {
 
         $this->innerComponents = $updatedInnerComponents ?? $this->innerComponents;
     }
-
 }

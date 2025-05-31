@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * List component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Renders a list of items, either ordered or unordered.
  */
@@ -37,7 +37,7 @@ class ListComponent extends UIComponent {
             'ordered'    => $this->ordered,
             'classes'    => implode(',', $this->get_filtered_classes()),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

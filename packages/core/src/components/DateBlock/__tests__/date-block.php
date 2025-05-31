@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\DateBlock;
 
 // Attribute keys from component JSON definition

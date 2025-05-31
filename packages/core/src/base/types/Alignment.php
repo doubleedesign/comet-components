@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 enum Alignment: string {

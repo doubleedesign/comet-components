@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\Gallery;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{Gallery, Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['caption', 'classes', 'columns', 'tagName', 'testId'];

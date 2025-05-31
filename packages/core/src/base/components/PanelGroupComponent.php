@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV])]
@@ -8,7 +9,6 @@ abstract class PanelGroupComponent extends UIComponent {
     use LayoutOrientation;
 
     /**
-     * @var array
      * @description Panel data transformed for use by the relevant Vue component.
      */
     private array $panels = [];
@@ -50,5 +50,4 @@ abstract class PanelGroupComponent extends UIComponent {
 
         return $attributes;
     }
-
 }

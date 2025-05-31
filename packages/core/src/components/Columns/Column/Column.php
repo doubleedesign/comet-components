@@ -1,11 +1,11 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV, Tag::MAIN, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
 class Column extends LayoutComponent {
     /**
-     * @var ?string $width
      * @description Optionally set the width of the column. Note: This may be overridden to stack columns on small viewports.
      */
     protected ?string $width;

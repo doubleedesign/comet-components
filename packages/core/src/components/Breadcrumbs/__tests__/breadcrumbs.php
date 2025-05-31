@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\Breadcrumbs;
 
 // Attribute keys from component JSON definition

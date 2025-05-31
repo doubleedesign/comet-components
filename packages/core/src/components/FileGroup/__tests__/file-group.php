@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\FileGroup;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{FileGroup, Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['classes', 'colorTheme', 'tagName', 'testId'];

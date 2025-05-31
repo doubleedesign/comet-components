@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\Steps;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{Paragraph, Steps};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['backgroundColor', 'classes', 'colorTheme', 'hAlign', 'maxPerRow', 'orientation', 'tagName', 'testId', 'vAlign'];

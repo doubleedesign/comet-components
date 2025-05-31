@@ -1,19 +1,17 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Breadcrumbs component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render a breadcrumb navigation list.
  */
 #[AllowedTags([Tag::NAV])]
 #[DefaultTag(Tag::NAV)]
 class Breadcrumbs extends UIComponent {
-
     /**
-     * @param  array  $attributes
      * @param  array  $breadcrumbs  Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page
      */
     public function __construct(array $attributes, array $breadcrumbs) {
@@ -45,7 +43,7 @@ class Breadcrumbs extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

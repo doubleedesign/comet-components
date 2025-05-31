@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\SiteHeader;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{Paragraph, SiteHeader};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['backgroundColor', 'breakpoint', 'classes', 'hAlign', 'icon', 'iconPrefix', 'logoUrl', 'responsiveStyle', 'size', 'submenuIcon', 'tagName', 'testId', 'vAlign'];

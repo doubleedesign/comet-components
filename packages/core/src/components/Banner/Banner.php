@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Banner component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description A "hero" banner with an image background and optional overlay, with a container for inner content.
  */
@@ -14,67 +14,58 @@ class Banner extends LayoutComponent {
     use LayoutAlignment;
 
     /**
-     * @var ContainerSize $containerSize
      * @description The size of the container for the content
      */
     protected ContainerSize $containerSize = ContainerSize::DEFAULT;
 
     /**
-     * @var int $contentMaxWidth
      * @description The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)
      */
     protected int $contentMaxWidth = 50;
 
     /**
-     * @var string $imageUrl
      * @description The URL of the image to display in the banner
      */
     protected string $imageUrl;
 
     /**
-     * @var string $imageAlt
      * @description The alt text for the image
      */
     protected string $imageAlt;
 
     /**
-     * @var ThemeColor $overlayColor
      * @description The color of the overlay on top of the image
      */
     protected ThemeColor $overlayColor = ThemeColor::DARK;
 
     /**
-     * @var int $overlayOpacity
      * @description The opacity of the overlay on top of the image (set to 0 to disable the overlay)
      */
     protected int $overlayOpacity = 0;
 
     /**
-     * @var bool $isParallax
      * @description Whether the banner should have a fixed background (also known as a parallax effect)
      */
     protected bool $isParallax = false;
 
     /**
-     * @var int $minHeight
      * @description The minimum height of the banner (in px)
      */
     protected int $minHeight = 600;
 
     /**
-     * @var int $maxHeight
      * @description The maximum height of the banner (in vh)
      */
     protected int $maxHeight = 100;
 
     /**
-     * @var array<int, int> $focalPoint
+     * @var array<int, int>
      * @description The X and Y coordinates of the focal point of the image
      */
     protected array $focalPoint = [50, 50];
 
     /**
-     * @var array<Heading|Paragraph|ButtonGroup> $innerComponents
+     * @var array<Heading|Paragraph|ButtonGroup>
      */
     protected array $innerComponents;
 
@@ -110,7 +101,7 @@ class Banner extends LayoutComponent {
                     'scale'      => 'cover',
                     'context'    => 'banner',
                     'isParallax' => $this->isParallax,
-                    'style'      => $this->get_image_block_inline_styles()
+                    'style'      => $this->get_image_block_inline_styles(),
                 ]
             ),
             new Container(
@@ -131,10 +122,10 @@ class Banner extends LayoutComponent {
                         'context'         => 'banner__container',
                         'shortName'       => 'inner',
                         'style'           => [
-                            'max-width' => $this->contentMaxWidth . '%'
-                        ]
+                            'max-width' => $this->contentMaxWidth . '%',
+                        ],
                     ],
-                    $rawInnerComponents)
+                    $rawInnerComponents),
                 ]
             ),
             new Group(
@@ -143,11 +134,11 @@ class Banner extends LayoutComponent {
                     'shortName'       => 'overlay',
                     'backgroundColor' => $this->overlayColor->value ?? null,
                     'style'           => [
-                        'opacity' => $this->overlayOpacity / 100
-                    ]
+                        'opacity' => $this->overlayOpacity / 100,
+                    ],
                 ],
                 []
-            )
+            ),
         ];
     }
 
@@ -187,7 +178,7 @@ class Banner extends LayoutComponent {
         echo $blade->make($this->bladeFile, [
             'attributes' => ['style' => $this->get_inline_styles_string()],
             'classes'    => $this->get_filtered_classes_string(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

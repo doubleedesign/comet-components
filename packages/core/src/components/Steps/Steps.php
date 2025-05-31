@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Steps component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Feature a series of steps in a horizontal or vertical orientation.
  */
@@ -15,18 +15,17 @@ class Steps extends LayoutComponent {
     use LayoutOrientation;
 
     /**
-     * @var array<Step> $innerComponents
+     * @var array<Step>
      */
     protected array $innerComponents;
 
     /**
-     * @var int|null $maxPerRow
      * @description The maximum number of steps to display per row when orientation is horizontal
      */
     protected ?int $maxPerRow = null;
 
     /**
-     * @var array<string> $classes
+     * @var array<string>
      * @description CSS classes
      * @supported-values is-style-numbered, is-style-simple
      */
@@ -67,7 +66,7 @@ class Steps extends LayoutComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

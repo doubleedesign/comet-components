@@ -1,11 +1,13 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
-use DateTime, IntlDateFormatter;
+
+use DateTime;
+use IntlDateFormatter;
 
 /**
  * DateBlock component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display a date.
  */
@@ -13,7 +15,6 @@ use DateTime, IntlDateFormatter;
 #[DefaultTag(Tag::TIME)]
 class DateBlock extends DateComponent {
     /**
-     * @var DateTime|null $date
      * @description The date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.
      */
     protected ?DateTime $date;
@@ -25,8 +26,6 @@ class DateBlock extends DateComponent {
 
     /**
      * Return a string representation of the date in a suitable format for the aria-label
-     *
-     * @return string
      */
     public function get_accessible_date_string(): string {
         if ($this->date === null) {
@@ -43,7 +42,7 @@ class DateBlock extends DateComponent {
             $formatter->setPattern('EEEE, d MMMM y'); // Day, date, month, year
         }
         // Day Date Month
-        else if ($this->showDay && !$this->showYear) {
+        elseif ($this->showDay && !$this->showYear) {
             $formatter = new IntlDateFormatter(
                 $this->locale,
                 IntlDateFormatter::MEDIUM,
@@ -52,7 +51,7 @@ class DateBlock extends DateComponent {
             $formatter->setPattern('EEEE, d MMMM'); // Day, date, month
         }
         // Date Month Year
-        else if ($this->showYear && !$this->showDay) {
+        elseif ($this->showYear && !$this->showDay) {
             $formatter = new IntlDateFormatter(
                 $this->locale,
                 IntlDateFormatter::LONG,

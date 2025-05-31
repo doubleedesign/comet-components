@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Link component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display a link with a contextual icon.
  */
@@ -14,13 +14,11 @@ class Link extends Renderable {
     use Icon;
 
     /**
-     * @var ?string $icon
      * @description Icon class name; for link-group context default value is 'fa-link', or 'fa-arrow-up-right-from-square' if target is '_blank'
      */
     protected ?string $icon;
 
     /**
-     * @var string $content
      * @description Plain text or basic HTML
      */
     protected string $content;
@@ -53,7 +51,7 @@ class Link extends Renderable {
             'attributes' => $this->get_html_attributes(),
             'iconPrefix' => $this->iconPrefix ?? null,
             'icon'       => $this->icon ?? null,
-            'content'    => $this->content
+            'content'    => $this->content,
         ])->render();
     }
 }

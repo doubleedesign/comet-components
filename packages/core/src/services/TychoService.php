@@ -1,6 +1,12 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
-use DOMDocument, DOMElement, DOMNode, ReflectionClass, Exception;
+
+use DOMDocument;
+use DOMElement;
+use DOMNode;
+use Exception;
+use ReflectionClass;
 
 class TychoService {
     /**
@@ -42,7 +48,7 @@ class TychoService {
         $rootNode = self::$dom->documentElement->firstChild;
 
         if (!$rootNode) {
-            throw new Exception("No valid component found in template");
+            throw new Exception('No valid component found in template');
         }
 
         // If this is a TychoTemplate wrapper, process all the children
@@ -57,9 +63,9 @@ class TychoService {
         }
 
         // Otherwise, support a single node // TODO: Make this also support multiple nodes
-        return array(
-            self::node_to_component($rootNode, $variables)
-        );
+        return [
+            self::node_to_component($rootNode, $variables),
+        ];
     }
 
     /**

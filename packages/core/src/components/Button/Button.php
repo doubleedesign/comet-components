@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Button component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Prompt the user to take an action with a button or button-style link.
  */
@@ -14,19 +14,16 @@ class Button extends Renderable {
     use ColorTheme;
 
     /**
-     * @var ?bool $isOutline
      * @description Whether to use outline style instead of solid/filled
      */
     protected ?bool $isOutline = false;
 
     /**
-     * @var string|null $href
      * @description URL to link to if using <a> tag.
      */
     protected ?string $href = '';
 
     /**
-     * @var string $content
      * @description Plain text or basic HTML
      */
     protected string $content;

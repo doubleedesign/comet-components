@@ -1,11 +1,11 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::CAPTION])]
 #[DefaultTag(Tag::CAPTION)]
 class TableCaption extends TextElement {
     /**
-     * @var string $position
      * @description Position of the caption relative to the table
      * @supported-values top, bottom
      */

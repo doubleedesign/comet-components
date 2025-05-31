@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Pullquote component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Feature a quote or excerpt, with an optional citation.
  */
@@ -14,7 +14,6 @@ class Pullquote extends TextElementExtended {
     use ColorTheme;
 
     /**
-     * @var string|null $citation
      * @description Optional citation for the quote
      */
     protected ?string $citation = null;
@@ -50,8 +49,8 @@ class Pullquote extends TextElementExtended {
             'classes'    => implode(' ', $this->get_filtered_classes()),
             'attributes' => $this->get_html_attributes(),
             // TODO: Need to handle text colour on the paragraph/citation
-            'content'    => $this->content,
-            'citation'   => $this->citation,
+            'content'  => $this->content,
+            'citation' => $this->citation,
         ])->render();
     }
 }

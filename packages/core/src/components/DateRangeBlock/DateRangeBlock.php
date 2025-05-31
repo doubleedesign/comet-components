@@ -1,12 +1,14 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
-use DateTime, IntlDateFormatter;
+
+use DateTime;
+use IntlDateFormatter;
 use OpenPsa\Ranger\Ranger;
 
 /**
  * DateRangeBlock component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display a date range.
  */
@@ -14,13 +16,11 @@ use OpenPsa\Ranger\Ranger;
 #[DefaultTag(Tag::TIME)]
 class DateRangeBlock extends DateComponent {
     /**
-     * @var DateTime|string|null $startDate
      * @description The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.
      */
     protected DateTime|string|null $startDate;
 
     /**
-     * @var DateTime|string|null $endDate
      * @description The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.
      */
     protected DateTime|string|null $endDate;

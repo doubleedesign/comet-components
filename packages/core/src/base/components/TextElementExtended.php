@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 abstract class TextElementExtended extends TextElement {
@@ -18,5 +19,4 @@ abstract class TextElementExtended extends TextElement {
 
         return $attributes;
     }
-
 }

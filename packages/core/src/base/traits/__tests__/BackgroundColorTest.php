@@ -1,13 +1,10 @@
 <?php
+
 use Doubleedesign\Comet\Core\{BackgroundColor, ThemeColor};
 
 /**
  * Function to create a generic component class that uses the trait
  * allowing it to stay local to this test/file
- *
- * @param  array  $attributes
- *
- * @return object
  */
 function create_component_with_bg_color(array $attributes): object {
     return new class($attributes) {
@@ -25,11 +22,6 @@ function create_component_with_bg_color(array $attributes): object {
 
 /**
  * Function to create a component class that uses the trait and can handle inner components
- *
- * @param  array  $attributes
- * @param  array  $innerComponents
- *
- * @return object
  */
 function create_component_with_inner_components(array $attributes = [], array $innerComponents = []): object {
     return new class($attributes, $innerComponents) {

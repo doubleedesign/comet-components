@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * IconWithText component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display an icon with an associated text label.
  */
@@ -21,7 +21,7 @@ class IconWithText extends UIComponent {
         $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
         $this->set_icon_from_attrs([
             'iconPrefix' => $attributes['iconPrefix'] ?? 'fa-duotone fa-solid',
-            ...$attributes
+            ...$attributes,
         ]);
     }
 
@@ -40,7 +40,7 @@ class IconWithText extends UIComponent {
             'attributes' => $this->get_html_attributes(),
             'iconPrefix' => $this->iconPrefix,
             'icon'       => $this->icon,
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

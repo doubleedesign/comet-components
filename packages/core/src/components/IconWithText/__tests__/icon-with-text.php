@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\IconWithText;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{IconWithText, Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['classes', 'colorTheme', 'icon', 'iconPrefix', 'label'];

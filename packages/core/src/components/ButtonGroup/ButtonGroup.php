@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * ButtonGroup component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Semantically and visually group buttons together.
  */
@@ -50,7 +50,7 @@ class ButtonGroup extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
 
     }

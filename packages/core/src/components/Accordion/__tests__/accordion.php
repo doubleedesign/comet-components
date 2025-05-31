@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\{Accordion, AccordionPanel, Heading, Paragraph};
 
 // Attribute keys from component JSON definition
@@ -19,7 +20,7 @@ $component = new Accordion(
             [
                 new Heading([], 'The cushions are the essence of the chair!'),
                 new Paragraph([], "Come on, Ross, you're a paleontologist. Dig a little deeper. Just to be clear, comedy with the plates will not be well-received. Okay, well, who identified this restaurant's tone as \"pretentious-comma-garlicky\"?"),
-                new Paragraph([], "Wow. I haven't seen you this worked-up since you did that dog-food commercial and you thought you were gonna be with a real talking dog. Yeah, that was a disappointment If you want to receive emails about my upcoming shows, please give me money so I can buy a computer. We said aloof, not a doof! You don't have a TV? What's all your furniture pointed at?")
+                new Paragraph([], "Wow. I haven't seen you this worked-up since you did that dog-food commercial and you thought you were gonna be with a real talking dog. Yeah, that was a disappointment If you want to receive emails about my upcoming shows, please give me money so I can buy a computer. We said aloof, not a doof! You don't have a TV? What's all your furniture pointed at?"),
             ]
         ),
         new AccordionPanel(
@@ -28,15 +29,15 @@ $component = new Accordion(
                 'subtitle' => 'Subtitle 2',
             ],
             [
-                new Paragraph([], 'This is the content of panel 2')
+                new Paragraph([], 'This is the content of panel 2'),
             ]
         ),
         new AccordionPanel(
             [
-                'title' => 'Panel 3'
+                'title' => 'Panel 3',
             ],
             [
-                new Paragraph([], 'This is the content of panel 3')
+                new Paragraph([], 'This is the content of panel 3'),
             ]
         ),
         new AccordionPanel(
@@ -45,7 +46,7 @@ $component = new Accordion(
                 'subtitle' => 'Subtitle 4',
             ],
             [
-                new Paragraph([], 'This is the content of panel 4')
+                new Paragraph([], 'This is the content of panel 4'),
             ]
         ),
     ]);

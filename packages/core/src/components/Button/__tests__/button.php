@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\Button;
 
 // Attribute keys fetched from component JSON definition

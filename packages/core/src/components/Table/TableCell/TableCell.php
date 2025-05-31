@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::TD])]
@@ -7,7 +8,6 @@ class TableCell extends TextElement {
     use BackgroundColor;
 
     /**
-     * @var string|null $verticalAlign
      * @description Vertical alignment of the cell content
      * @supported-values top, middle, bottom
      */

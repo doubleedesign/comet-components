@@ -1,4 +1,5 @@
 <?php
+
 /** @noinspection PhpUnhandledExceptionInspection */
 use Doubleedesign\Comet\Core\Menu;
 
@@ -7,21 +8,21 @@ beforeEach(function() {
         [
             'title'           => 'Home',
             'link_attributes' => [
-                'href' => '/'
-            ]
+                'href' => '/',
+            ],
         ],
         [
             'title'           => 'About',
             'link_attributes' => [
-                'href' => '/about'
+                'href' => '/about',
             ],
         ],
         [
             'title'           => 'Contact',
             'link_attributes' => [
-                'href' => '/contact'
-            ]
-        ]
+                'href' => '/contact',
+            ],
+        ],
     ];
 });
 

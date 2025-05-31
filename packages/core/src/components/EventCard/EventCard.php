@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * DateBlockEvent component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display a summary of an event including title, date, location and links.
  */
@@ -12,31 +12,27 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class EventCard extends UIComponent {
     /**
-     * @var ?DateBlock|DateRangeBlock $dateComponent
+     * @var ?DateBlock|DateRangeBlock
      * @description The component displaying the date.
      */
     protected DateBlock|DateRangeBlock|null $dateComponent;
 
     /**
-     * @var string $title
      * @description The name of the event.
      */
     protected string $name;
 
     /**
-     * @var string|null $detailUrl
      * @description The URL to be used for the detail page.
      */
     protected ?string $detailUrl;
 
     /**
-     * @var array|null $externalLink
      * @description An associative array with fields URL, label, and target for an external link to a separate ticketing, registration, or other third-party site.
      */
     protected ?array $externalLink = [];
 
     /**
-     * @var string|null $location
      * @description The location of the event, such as the name of the venue or an address.
      */
     protected ?string $location;
@@ -52,14 +48,14 @@ class EventCard extends UIComponent {
         $links = [];
         if ($this->location) {
             array_push($transformedInnerComponents, new Group(['shortName' => 'location'], [
-                new IconWithText(['icon' => 'fa-map-location-dot', 'colorTheme' => 'secondary'], [new Paragraph([], $this->location)])
+                new IconWithText(['icon' => 'fa-map-location-dot', 'colorTheme' => 'secondary'], [new Paragraph([], $this->location)]),
             ]));
         }
         if ($this->detailUrl) {
             array_push($links, new Link([
                 'href'       => $this->detailUrl,
                 'iconPrefix' => 'fa-light',
-                'icon'       => 'fa-arrow-right'
+                'icon'       => 'fa-arrow-right',
             ], 'Read more')
             );
         }
@@ -68,7 +64,7 @@ class EventCard extends UIComponent {
                 'href'       => $this->externalLink['url'],
                 'target'     => $this->externalLink['target'] ?? null,
                 'iconPrefix' => 'fa-regular',
-                'icon'       => 'fa-arrow-up-right-from-square'
+                'icon'       => 'fa-arrow-up-right-from-square',
             ], $this->externalLink['title'] ?? 'Read more')
             );
         }
@@ -81,7 +77,7 @@ class EventCard extends UIComponent {
             new Group(['shortName' => 'content'], [
                 new Heading(['level' => 3], $this->name),
                 new Group(['shortName' => 'content__inner'], $transformedInnerComponents),
-            ])
+            ]),
         ] : [];
 
         parent::__construct($attributes, $newInnerComponents, 'components.EventCard.event-card');
@@ -113,7 +109,7 @@ class EventCard extends UIComponent {
             'tag'        => $this->tagName->value,
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

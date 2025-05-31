@@ -1,5 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\{Columns, Column, Paragraph};
+
+use Doubleedesign\Comet\Core\{Column, Columns, Paragraph};
 
 $innerComponents = $_REQUEST['innerComponents'] ?? null;
 // Attribute keys from component JSON definition
@@ -15,7 +16,7 @@ $innerColumns = [
     new Column([], [new Paragraph([], 'Look at me! I\'m Chandler! Could I BE wearing any more clothes?')]),
     new Column([], [new Paragraph([], 'Be sleepy! And grumpy! Stop naming dwarves!')]),
     new Column(['backgroundColor' => 'light'], [
-        new Paragraph([], 'The messers become the messees. Fried chicken could be fricken. Three bathrooms in this place, and I threw up in a coat closet. Gum would be perfection. Well, the fridge broke, so I had to eat everything. Paper! Snow! A ghost! I understand why Superman is here, but why is there a porcupine at the Easter Bunny\'s funeral?')
+        new Paragraph([], 'The messers become the messees. Fried chicken could be fricken. Three bathrooms in this place, and I threw up in a coat closet. Gum would be perfection. Well, the fridge broke, so I had to eat everything. Paper! Snow! A ghost! I understand why Superman is here, but why is there a porcupine at the Easter Bunny\'s funeral?'),
     ]),
 ];
 
@@ -23,7 +24,7 @@ if ($innerComponents) {
     $innerComponents = json_decode($innerComponents, true);
     $innerColumns = array_map(function($item) {
         return new Column($item['attributes'], [
-            new Paragraph([], $item['content'])
+            new Paragraph([], $item['content']),
         ]);
     }, $innerComponents);
 }

@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Group component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Group components together for layout or structure purposes.
  */
@@ -14,7 +14,7 @@ class Group extends UIComponent {
     use BackgroundColor;
 
     /**
-     * @var ?array<string> $classes
+     * @var ?array<string>
      * @supported-values group, group--breakout
      */
     protected ?array $classes;
@@ -41,7 +41,7 @@ class Group extends UIComponent {
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;
         }
-        else if (isset($this->gradient)) {
+        elseif (isset($this->gradient)) {
             $attributes['data-background'] = 'gradient-' . $this->gradient;
         }
 
@@ -55,7 +55,7 @@ class Group extends UIComponent {
             'tag'        => $this->tagName->value,
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

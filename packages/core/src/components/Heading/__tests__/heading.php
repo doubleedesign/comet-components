@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\Heading;
 
 // Attribute keys from component JSON definition

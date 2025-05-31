@@ -1,5 +1,7 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
+
 use DateTime;
 use Exception;
 
@@ -7,19 +9,16 @@ abstract class DateComponent extends Renderable {
     use ColorTheme;
 
     /**
-     * @var string
      * @description The locale to be used for formatting the date.
      */
     protected string $locale = 'en_AU';
 
     /**
-     * @var bool $showDay
      * @description Whether to show the day of the week.
      */
     protected bool $showDay = false;
 
     /**
-     * @var bool $showYear
      * @description Whether to show the year.
      */
     protected bool $showYear = true;

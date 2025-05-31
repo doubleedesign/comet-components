@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV])]
@@ -12,14 +13,13 @@ class File extends Renderable {
     protected ?string $size;
 
     /**
-     * @var string|mixed|null $mimeType
+     * @var string|mixed|null
      * @description MIME type of the file
      */
     protected ?string $mimeType;
     protected ?string $uploadDate;
 
     /**
-     * @var ?string $icon
      * @description Icon class name; default values set for file types including PDF, plain text, calendar, Word, Excel, ZIP, GZIP, TAR, and 7z
      * @default-value fa-file
      */
@@ -77,7 +77,7 @@ class File extends Renderable {
             'size'        => $this->size,
             'mimeType'    => $this->mimeType,
             'uploadDate'  => $this->uploadDate,
-            'bem_prefix'  => $this->get_bem_name()
+            'bem_prefix'  => $this->get_bem_name(),
         ])->render();
     }
 }

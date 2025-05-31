@@ -1,5 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\{ButtonGroup, Button};
+
+use Doubleedesign\Comet\Core\{Button, ButtonGroup};
 
 // Attribute keys fetched from component JSON definition
 $attributeKeys = ['hAlign', 'vAlign', 'orientation'];

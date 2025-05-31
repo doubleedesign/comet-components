@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\Callout;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{Callout, Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['classes', 'colorTheme', 'icon', 'iconPrefix', 'tagName', 'testId'];

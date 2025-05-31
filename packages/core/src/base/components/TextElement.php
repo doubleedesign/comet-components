@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([...Settings::BLOCK_PHRASING_ELEMENTS, ...Settings::INLINE_PHRASING_ELEMENTS])]
@@ -7,7 +8,6 @@ abstract class TextElement extends Renderable {
     use TextAlign;
 
     /**
-     * @var string $content
      * @description Plain text or basic HTML
      */
     protected string $content;
@@ -51,8 +51,6 @@ abstract class TextElement extends Renderable {
 
     /**
      * Default render method (child classes may override this)
-     *
-     * @return void
      */
     public function render(): void {
         $blade = BladeService::getInstance();

@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\{Container, Paragraph};
 
 // Attribute keys from component JSON definition

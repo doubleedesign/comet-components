@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Call-To-Action component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Highlight important information and prompt the user to take action.
  */
@@ -14,12 +14,11 @@ class CallToAction extends UIComponent {
     use BackgroundColor;
 
     /**
-     * @var array<Heading|Paragraph|ListComponent|ButtonGroup> $innerComponents
+     * @var array<Heading|Paragraph|ListComponent|ButtonGroup>
      */
     protected array $innerComponents;
 
     /**
-     * @param  array  $attributes
      * @param  array<Heading|Paragraph|ButtonGroup>  $innerComponents
      */
     public function __construct(array $attributes, array $innerComponents) {
@@ -43,7 +42,7 @@ class CallToAction extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

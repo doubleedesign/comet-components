@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * ResponsivePanels component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display grouped panels of content as an Accordion or Tabs depending on available space.
  *              Uses Vue to determine which to show and only renders the HTML for the current view.
@@ -15,13 +15,11 @@ class ResponsivePanels extends PanelGroupComponent {
     use Icon;
 
     /**
-     * @var string $breakpoint
      * @description The container breakpoint at which to switch between accordion and tabs
      */
     protected string $breakpoint;
 
     /**
-     * @var ?string $icon
      * @description Icon class name for the icon to use for the expand/collapse indicator in accordion mode
      */
     protected ?string $icon;
@@ -43,7 +41,7 @@ class ResponsivePanels extends PanelGroupComponent {
             'attributes' => $this->get_html_attributes(),
             'breakpoint' => $this->breakpoint,
             'panels'     => $this->get_panels(),
-            'icon'       => "$this->iconPrefix $this->icon"
+            'icon'       => "$this->iconPrefix $this->icon",
         ])->render();
     }
 }

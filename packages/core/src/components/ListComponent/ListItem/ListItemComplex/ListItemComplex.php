@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::LI])]
@@ -9,8 +10,6 @@ class ListItemComplex extends UIComponent {
     /**
      * ListItemComplex constructor.
      *
-     * @param  array  $attributes
-     * @param  string  $content
      * @param  array<ListComponent>  $nestedLists
      */
     public function __construct(array $attributes, string $content, array $nestedLists) {
@@ -27,7 +26,7 @@ class ListItemComplex extends UIComponent {
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
             'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

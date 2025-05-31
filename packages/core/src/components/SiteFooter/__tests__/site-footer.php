@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\SiteFooter;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{Paragraph, SiteFooter};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['size', 'backgroundColor', 'tagName', 'classes'];

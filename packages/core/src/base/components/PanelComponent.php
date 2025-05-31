@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV, Tag::DETAILS])]
@@ -20,20 +21,20 @@ abstract class PanelComponent extends UIComponent {
     }
 
     public function get_summary(): ?array {
-        return array(
+        return [
             'attributes' => [],
             'classes'    => ["{$this->context}__title"],
             'title'      => $this->get_title(),
-            'subtitle'   => $this->get_subtitle()
-        );
+            'subtitle'   => $this->get_subtitle(),
+        ];
     }
 
     private function get_title(): array {
-        return array(
+        return [
             'attributes' => [],
             'classes'    => ["{$this->context}__title__main"],
-            'content'    => $this->title
-        );
+            'content'    => $this->title,
+        ];
     }
 
     private function get_subtitle(): ?array {
@@ -41,11 +42,11 @@ abstract class PanelComponent extends UIComponent {
             return null;
         }
 
-        return array(
+        return [
             'attributes' => [],
             'classes'    => ["{$this->context}__title__subtitle"],
-            'content'    => $this->subtitle
-        );
+            'content'    => $this->subtitle,
+        ];
     }
 
     public function get_content(): ?array {
@@ -53,11 +54,11 @@ abstract class PanelComponent extends UIComponent {
         $this->render();
         $content = ob_get_clean();
 
-        return array(
+        return [
             'attributes' => $this->get_html_attributes(),
             'classes'    => $this->get_filtered_classes(),
             'content'    => trim($content),
-        );
+        ];
     }
 
     public function render(): void {
@@ -65,7 +66,7 @@ abstract class PanelComponent extends UIComponent {
 
         // These components render their children directly without their own wrappers because that's handled by get_content() and Vue
         echo $blade->make($this->bladeFile, [
-            'children' => $this->innerComponents
+            'children' => $this->innerComponents,
         ])->render();
     }
 }

@@ -1,9 +1,11 @@
 <?php
+
 /** @noinspection PhpUnhandledExceptionInspection */
 
 namespace Doubleedesign\Comet\Core;
-use ReflectionClass;
+
 use DOMDocument;
+use ReflectionClass;
 
 describe('TychoService', function() {
 
@@ -11,7 +13,7 @@ describe('TychoService', function() {
 
         test('Boolean attribute value', function() {
             $instance = new TychoService();
-            $node = <<<TYCHO
+            $node = <<<'TYCHO'
 			<Container withWrapper="false"></Container>
 			TYCHO;
             $dom = new DOMDocument();
@@ -28,7 +30,7 @@ describe('TychoService', function() {
 
         test('Integer attribute value', function() {
             $instance = new TychoService();
-            $node = <<<TYCHO
+            $node = <<<'TYCHO'
 			<Steps maxPerRow="2"></Steps>
 			TYCHO;
             $dom = new DOMDocument();
@@ -45,7 +47,7 @@ describe('TychoService', function() {
 
         test('Classes attribute - space-separated string to array', function() {
             $instance = new TychoService();
-            $node = <<<TYCHO
+            $node = <<<'TYCHO'
 			<Heading classes="class1 class2">
 				Hello world
 			</Heading>

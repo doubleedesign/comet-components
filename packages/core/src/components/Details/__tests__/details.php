@@ -1,6 +1,7 @@
 <?php
-use Doubleedesign\Comet\Core\Details;
+
 use const Doubleedesign\Comet\TestUtils\MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT;
+use Doubleedesign\Comet\Core\Details;
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['summary'];

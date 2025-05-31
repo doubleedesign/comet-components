@@ -1,6 +1,7 @@
 <?php
-use Doubleedesign\Comet\Core\{Banner, Heading, ButtonGroup};
+
 use const Doubleedesign\Comet\TestUtils\{MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT, MOCK_INNER_COMPONENTS_BUTTONS};
+use Doubleedesign\Comet\Core\{Banner, ButtonGroup, Heading};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['backgroundColor', 'classes', 'containerSize', 'contentMaxWidth', 'focalPoint', 'hAlign', 'vAlign', 'isParallax', 'maxHeight', 'minHeight', 'overlayColor', 'overlayOpacity', 'tagName'];
@@ -10,7 +11,7 @@ $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys)
 $innerComponents = [
     new Heading([], 'Banner example'),
     ...MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT,
-    new ButtonGroup([], MOCK_INNER_COMPONENTS_BUTTONS)
+    new ButtonGroup([], MOCK_INNER_COMPONENTS_BUTTONS),
 ];
 
 $component = new Banner(

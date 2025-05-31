@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * LinkGroup component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render a group of Link components with a common color theme.
  */
@@ -14,7 +14,6 @@ class LinkGroup extends UIComponent {
     use ColorTheme;
 
     /**
-     * @param  array  $attributes
      * @param array<Link|array<string,string> $links - Either an array of Link objects or an array of associative arrays corresponding to Link fields
      */
     public function __construct(array $attributes, array $links) {
@@ -46,7 +45,7 @@ class LinkGroup extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

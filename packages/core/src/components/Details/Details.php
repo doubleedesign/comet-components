@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Details component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description A component that renders a single expandable/collapsible panel.
  */
@@ -29,7 +29,7 @@ class Details extends UIComponent {
             'summary'    => $this->summary,
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

@@ -1,23 +1,19 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 trait LayoutAlignment {
     /**
-     * @var Alignment|null $hAlign
      * @description Horizontal alignment, if applicable
      */
     protected ?Alignment $hAlign = Alignment::MATCH_PARENT;
 
     /**
-     * @var Alignment|null $vAlign
      * @description Vertical alignment, if applicable
      */
     protected ?Alignment $vAlign = Alignment::MATCH_PARENT;
 
     /**
-     * @param  array  $attributes
-     * @param  Alignment  $defaultHorizontal
-     * @param  Alignment  $defaultVertical
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
     protected function set_layout_alignment_from_attrs(array $attributes, Alignment $defaultHorizontal = Alignment::MATCH_PARENT, Alignment $defaultVertical = Alignment::MATCH_PARENT): void {

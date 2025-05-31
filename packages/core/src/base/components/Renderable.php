@@ -1,59 +1,53 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
+
 use ReflectionClass;
 
 abstract class Renderable {
     /**
-     * @var array<string, string|int|array|null> $rawAttributes
+     * @var array<string, string|int|array|null>
      * @description Raw attributes passed to the component constructor as key-value pairs
      */
     private array $rawAttributes;
 
     /**
-     * @var ?Tag
      * @description The HTML tag to use for this component
      */
     protected ?Tag $tagName = Tag::DIV;
 
     /**
-     * @var string|null $id
      * @description Unique identifier
      */
     protected ?string $id;
 
     /**
-     * @var array<string> $classes
+     * @var array<string>
      * @description CSS classes
      */
     protected ?array $classes = [];
 
     /**
-     * @var array|null $style
      * @description Inline styles
      */
     protected ?array $style = null;
 
     /**
-     * @var ?string $context
      * @description The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).
      */
     protected ?string $context = null;
 
     /**
      * The dot-delimited path to the Blade template file
-     *
-     * @var string
      */
     protected string $bladeFile;
 
     /**
-     * @var string $shortName
      * @description The name of the component without any namespacing, prefixes, etc. Derived from the Blade filename by default.
      */
     protected string $shortName;
 
     /**
-     * @var string|null $testId
      * @description Optionally add a data-testid attribute for automated tests
      */
     protected ?string $testId;
@@ -180,7 +174,7 @@ abstract class Renderable {
             'is-style-default',
             // unwanted WordPress classes that are handled in other ways
             'is-stacked-on-mobile',
-            'is-not-stacked-on-mobile'
+            'is-not-stacked-on-mobile',
         ];
 
         $result = array_merge(
@@ -237,7 +231,7 @@ abstract class Renderable {
 
         $attrs = array_merge(
             $baseAttributes,
-            array(
+            [
                 'id'    => $this->get_id(),
                 'style' => implode(';',
                     array_map(function($key, $value) {
@@ -250,8 +244,8 @@ abstract class Renderable {
                         array_keys($styles),
                         array_values($styles),
                     )
-                )
-            )
+                ),
+            ]
         );
 
         if ($this->testId) {

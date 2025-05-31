@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * EventList component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description
  */
@@ -12,19 +12,17 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::UL)]
 class EventList extends UIComponent {
     /**
-     * @var ?string $heading
      * @description The heading for the list.
      */
     protected ?string $heading;
 
     /**
-     * @var array<EventCard> $innerComponents
+     * @var array<EventCard>
      * @description Event cards to display.
      */
     protected array $innerComponents;
 
     /**
-     * @var int $maxItemsPerRow
      * @description The maximum number of items to display per row, when the viewport is wide enough to accommodate.
      */
     protected int $maxItemsPerRow = 3;
@@ -60,7 +58,7 @@ class EventList extends UIComponent {
             'tag'        => $this->tagName->value,
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

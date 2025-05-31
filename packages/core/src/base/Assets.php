@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 class Assets {
@@ -47,10 +48,6 @@ class Assets {
     /**
      * Transform a filesystem path to just the package bit
      * OR if we are coming from Storybook, the package bit preceded by the main project domain
-     *
-     * @param  $absolute_path
-     *
-     * @return string
      */
     private function get_relative_or_domain_path($absolute_path): string {
         // If the path contains 'vendor', split before that and return the second part
@@ -82,8 +79,6 @@ class Assets {
      * Add a global stylesheet to the asset loader
      *
      * @param  string  $absolute_path  - filesystem path to the stylesheet (e.g. C:/Users/path/to/project/packages/core/src/components/global.css)
-     *
-     * @return void
      */
     public function add_global_stylesheet(string $absolute_path): void {
         $path = $this->get_relative_or_domain_path($absolute_path);
@@ -96,8 +91,6 @@ class Assets {
      * Add a global script to the asset loader
      *
      * @param  string  $absolute_path  - filesystem path to the script (e.g. C:/Users/path/to/file)
-     *
-     * @return void
      */
     public function add_global_script(string $absolute_path): void {
         $path = $this->get_relative_or_domain_path($absolute_path);
@@ -110,8 +103,6 @@ class Assets {
      * Add a component stylesheet to the asset loader
      *
      * @param  string  $absolute_path  - filesystem path to the stylesheet (e.g. C:/Users/path/to/file)
-     *
-     * @return void
      */
     public function add_stylesheet(string $absolute_path): void {
         $path = $this->get_relative_or_domain_path($absolute_path);
@@ -125,8 +116,6 @@ class Assets {
      *
      * @param  string  $absolute_path  - filesystem path to the script (e.g. C:/Users/path/to/file)
      * @param  array  $attributes  - HTML attributes to add to the script tag, such as type="module"
-     *
-     * @return void
      */
     public function add_script(string $absolute_path, array $attributes): void {
         $path = $this->get_relative_or_domain_path($absolute_path);
@@ -146,8 +135,6 @@ class Assets {
     /**
      * Render the global stylesheets as HTML <link> tags
      * This is suitable for use in the <head> of a document
-     *
-     * @return void
      */
     public function render_global_stylesheet_html(): void {
         $styles = array_map(function($style) {
@@ -160,8 +147,6 @@ class Assets {
     /**
      * Render the component stylesheets as HTML <link> tags
      * IMPORTANT: This needs to be run after components have been instantiated, otherwise their stylesheets won't be added in time
-     *
-     * @return void
      */
     public function render_component_stylesheet_html(): void {
         $styles = array_map(function($style) {
@@ -175,8 +160,6 @@ class Assets {
      * Render the global scripts as HTML script tags
      * This is suitable for use in the <head> of a document, or at the end of the <body>
      * but if component scripts rely on them, you should ensure these are rendered first
-     *
-     * @return void
      */
     public function render_global_script_html(): void {
         $scripts = array_map(function($script) {
@@ -191,8 +174,6 @@ class Assets {
      * IMPORTANT: This needs to be run after components have been instantiated, otherwise their scripts won't be added in time
      * Suitable for use at the end of the document, just before the closing <body> tag
      * and should be run after the global scripts if they rely on any of those
-     *
-     * @return void
      */
     public function render_component_script_html(): void {
         $scripts = array_map(function($item) {

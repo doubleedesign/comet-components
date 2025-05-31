@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\{ListComponent, ListItem};
 
 // Attribute keys from component JSON definition

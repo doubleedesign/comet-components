@@ -1,17 +1,14 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
+
 use HTMLPurifier;
 use HTMLPurifier_Config;
 use Traversable;
 
 class Utils {
-
     /**
      * If a string value has spaces, convert it to kebab case
-     *
-     * @param  string  $value
-     *
-     * @return string
      */
     public static function kebab_case(string $value): string {
         // Account for PascalCase
@@ -32,10 +29,6 @@ class Utils {
 
     /**
      * Convert string value to PascalCase
-     *
-     * @param  string  $value
-     *
-     * @return string
      */
     public static function pascal_case(string $value): string {
         $value = str_replace(['-', '_'], ' ', $value);
@@ -72,10 +65,6 @@ class Utils {
      * account for components with reserved words as names having "Component" appended (e.g., ListComponent),
      * account for some other edge cases where I really really want to rename a component,
      * and add the namespace to return the full class name
-     *
-     * @param  string  $name
-     *
-     * @return string
      */
     public static function get_class_name(string $name): string {
         $reserved_words = ['List'];
@@ -102,17 +91,13 @@ class Utils {
 
     /**
      * Ensure an indexed array of objects is flat
-     *
-     * @param  array  $array
-     *
-     * @return array
      */
     public static function array_flat(array $array): array {
         // If the array is empty, bail early
         if (empty($array)) {
             return [];
         }
-        
+
         // This is an array of arrays and needs to be flattened
         if (is_array($array[0])) {
             return array_merge(...$array);
@@ -123,11 +108,6 @@ class Utils {
 
     /**
      * Deep merging of a multidimensional array where one is a partial variation of the other
-     *
-     * @param  array  $original
-     * @param  array  $partial
-     *
-     * @return array
      */
     public static function array_merge_deep(array $original, array $partial): array {
         $result = $original;
@@ -139,7 +119,7 @@ class Utils {
                 $result[$key] = $value;
             }
             // If both are associative arrays, merge recursively
-            else if (is_array($original[$key])) {
+            elseif (is_array($original[$key])) {
                 $result[$key] = self::array_merge_deep($original[$key], $value);
             }
         }

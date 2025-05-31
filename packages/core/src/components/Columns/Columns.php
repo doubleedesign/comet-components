@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Columns component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Organise content visually with a column-based layout.
  */
@@ -14,13 +14,12 @@ class Columns extends LayoutComponent {
     private int $qty;
 
     /**
-     * @var bool $allowStacking
      * @description Whether to adapt the layout by stacking columns when the viewport or container is narrow
      */
     protected bool $allowStacking = true;
 
     /**
-     * @var array<Column> $innerComponents
+     * @var array<Column>
      * @description Inner column components
      */
     protected array $innerComponents;

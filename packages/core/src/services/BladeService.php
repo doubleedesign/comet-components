@@ -1,15 +1,21 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
+
+use Illuminate\Events\Dispatcher;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\{Factory as ViewFactory, FileViewFinder};
 use Illuminate\View\Engines\{CompilerEngine, EngineResolver};
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\{Filesystem\Filesystem, Events\Dispatcher};
-use RuntimeException, InvalidArgumentException;
+use InvalidArgumentException;
+use RuntimeException;
 
 class BladeService {
     private static ?ViewFactory $blade = null;
     private static ?BladeCompiler $compiler = null;
+
     private const CACHE_DIR = '/cache/blade';
+
     private const TEMPLATE_DIR = '/';
 
     public static function getInstance(): ViewFactory {
@@ -24,7 +30,6 @@ class BladeService {
      * Set up the Blade templating service by creating the compiler, resolver, and view finder,
      * and registering custom directives
      *
-     * @return void
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -47,9 +52,7 @@ class BladeService {
     /**
      * Create the Blade compiler
      *
-     * @param  Filesystem  $filesystem
      *
-     * @return BladeCompiler
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -80,8 +83,6 @@ class BladeService {
 
     /**
      * Create the Blade engine resolver
-     *
-     * @return EngineResolver
      */
     private static function createEngineResolver(): EngineResolver {
         $resolver = new EngineResolver();
@@ -95,9 +96,7 @@ class BladeService {
     /**
      * Create the Blade view finder
      *
-     * @param  Filesystem  $filesystem
      *
-     * @return FileViewFinder
      * @throws RuntimeException
      */
     private static function createViewFinder(Filesystem $filesystem): FileViewFinder {
@@ -120,7 +119,6 @@ class BladeService {
     /**
      * Register custom Blade template directives
      *
-     * @return void
      * @throws InvalidArgumentException
      */
     private static function registerDirectives(): void {
@@ -129,8 +127,6 @@ class BladeService {
 
     /**
      * Content of the custom attributes directive
-     *
-     * @return callable
      */
     private static function getAttributesDirective(): callable {
         return function($expression) {

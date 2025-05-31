@@ -1,7 +1,8 @@
 <?php
-use Doubleedesign\Comet\Core\{TychoService};
 
-$page = <<<TYCHO
+use Doubleedesign\Comet\Core\TychoService;
+
+$page = <<<'TYCHO'
 <TychoTemplate xmlns="schema/components.xsd">
 	<Container testId="example-1" withWrapper="false">
 		<Group>Adjacent groups no background</Group>

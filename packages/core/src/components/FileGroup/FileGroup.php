@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * FileGroup component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display a list of downloadable file links with details about them.
  */
@@ -14,7 +14,6 @@ class FileGroup extends UIComponent {
     use ColorTheme;
 
     /**
-     * @param  array  $attributes
      * @param array<File|array<string,string> $files - Either an array of File objects or an array of associative arrays corresponding to File fields
      */
     public function __construct(array $attributes, array $files) {
@@ -32,7 +31,7 @@ class FileGroup extends UIComponent {
                 'size'        => $file['size'] ?? '',
                 'mimeType'    => $file['mimeType'],
                 'uploadDate'  => $file['date'] ?? '',
-                'colorTheme'  => $file['colorTheme'] ?? null // selectively enables per-file color theme styling
+                'colorTheme'  => $file['colorTheme'] ?? null, // selectively enables per-file color theme styling
             ]);
         }, $files);
 
@@ -52,7 +51,7 @@ class FileGroup extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

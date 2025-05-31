@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * ImageAndText component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display some featured text alongside an image.
  */
@@ -12,43 +12,37 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class ImageAndText extends UIComponent {
     /**
-     * @var int $imageMaxWidth
      * @description The maximum width of the image as a percentage of the available space; may be ignored in small viewports/containers.
      */
     protected int $imageMaxWidth = 50;
 
     /**
-     * @var int $contentMaxWidth
      * @description The maximum width of the content as a percentage of the available space; may be ignored in small viewports/containers.
      */
     protected int $contentMaxWidth = 50;
 
     /**
-     * @var Alignment $imageAlign
      * @description The horizontal alignment of the image within the available space.
      */
     protected Alignment $imageAlign = Alignment::START;
 
     /**
-     * @var Alignment $contentAlign
      * @description The horizontal alignment of the content within the available space.
      */
     protected Alignment $contentAlign = Alignment::START;
 
     /**
-     * @var int $overlayAmount
      * @description The amount in pixels to overlay the content over the image.
      */
     protected int $overlayAmount = 0;
 
     /**
-     * @var bool $imageFirst
      * @description Whether the image should be rendered first in the HTML.
      */
     protected bool $imageFirst = true;
 
     /**
-     * @var array<Image|Renderable> $innerComponents
+     * @var array<Image|Renderable>
      * @description An Image component, plus one or more other components to be rendered in the content area.
      */
     protected array $innerComponents;
@@ -73,7 +67,7 @@ class ImageAndText extends UIComponent {
             new Group([
                 'context'     => 'image-and-text',
                 'shortName'   => 'image',
-                'data-halign' => $this->imageAlign->value
+                'data-halign' => $this->imageAlign->value,
             ], [
                 new Group([
                     'context'   => 'image-and-text__image',
@@ -81,26 +75,26 @@ class ImageAndText extends UIComponent {
                     'style'     => [
                         'max-width'  => $this->imageMaxWidth . '%',
                         'flex-basis' => $this->imageMaxWidth . '%',
-                    ]
-                ], [$imageComponent])
+                    ],
+                ], [$imageComponent]),
             ]),
             new Group([
                 'context'     => 'image-and-text',
                 'shortName'   => 'content',
                 'data-halign' => $this->contentAlign->value,
                 'style'       => [
-                    '--overlay-amount' => '-' . $this->overlayAmount . 'px'
-                ]
+                    '--overlay-amount' => '-' . $this->overlayAmount . 'px',
+                ],
             ], [
                 new Group([
                     'context'   => 'image-and-text__content',
                     'shortName' => 'inner',
                     'style'     => [
                         'max-width'  => $this->contentMaxWidth . '%',
-                        'flex-basis' => $this->contentMaxWidth . '%'
-                    ]
+                        'flex-basis' => $this->contentMaxWidth . '%',
+                    ],
                 ], $filteredInnerComponents),
-            ])
+            ]),
         ];
 
         if (!$this->imageFirst) {
@@ -116,7 +110,7 @@ class ImageAndText extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

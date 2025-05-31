@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\Container;
 use function Patchwork\redefine;
 

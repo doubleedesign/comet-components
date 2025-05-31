@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV])]
@@ -9,15 +10,11 @@ class IconLinks extends Renderable {
 
     /**
      * Array of arrays with URL, label, and icon class name
-     *
-     * @var array
      */
     protected array $links = [];
 
     /**
      * Class name prefix for the icons
-     *
-     * @var string|null
      */
     protected ?string $iconPrefix = 'fa-brands';
 
@@ -54,7 +51,7 @@ class IconLinks extends Renderable {
             'classes'    => implode(' ', $this->get_filtered_classes()),
             'attributes' => $this->get_html_attributes(),
             'iconPrefix' => $this->iconPrefix,
-            'items'      => $this->links
+            'items'      => $this->links,
         ])->render();
     }
 }

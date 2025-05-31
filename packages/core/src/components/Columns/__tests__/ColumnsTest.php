@@ -1,5 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\{Columns, Column};
+
+use Doubleedesign\Comet\Core\{Column, Columns};
 use Doubleedesign\Comet\TestUtils\PestUtils;
 
 describe('Columns', function() {
@@ -10,7 +11,7 @@ describe('Columns', function() {
             ['backgroundColor' => 'light'],
             [
                 new Column(['backgroundColor' => 'light'], []),
-                new Column(['backgroundColor' => 'light'], [])
+                new Column(['backgroundColor' => 'light'], []),
             ]
         );
         $component->render();
@@ -32,7 +33,7 @@ describe('Columns', function() {
             ['backgroundColor' => 'light'],
             [
                 new Column(['backgroundColor' => 'light'], []),
-                new Column(['backgroundColor' => 'primary'], [])
+                new Column(['backgroundColor' => 'primary'], []),
             ]
         );
         $component->render();

@@ -1,6 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\CallToAction;
-use Doubleedesign\Comet\Core\{Paragraph};
+
+use Doubleedesign\Comet\Core\{CallToAction, Paragraph};
 
 // Attribute keys from component JSON definition
 $attributeKeys = ['backgroundColor', 'classes', 'tagName', 'testId'];

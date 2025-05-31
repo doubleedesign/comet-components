@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Pageheader component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render a page header with the page title and optional breadcrumb navigation.
  */
@@ -15,13 +15,11 @@ class PageHeader extends UIComponent {
     use LayoutContainerSize;
 
     /**
-     * @var string $title
      * @description The title of the page
      */
     protected string $content;
 
     /**
-     * @var array $breadcrumbs
      * @description Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page
      */
     protected array $breadcrumbs;
@@ -32,7 +30,7 @@ class PageHeader extends UIComponent {
         $this->breadcrumbs = $breadcrumbs;
         $this->innerComponents = !empty($breadcrumbs) ? [new Breadcrumbs([], $this->breadcrumbs)] : [];
 
-        $this->innerComponents = array(
+        $this->innerComponents = [
             new Container(
                 [
                     'size'        => $this->size->value,
@@ -43,8 +41,8 @@ class PageHeader extends UIComponent {
                     $this->innerComponents,
                     [new Heading(['level' => 1], $content)]
                 )
-            )
-        );
+            ),
+        ];
 
         parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
         $this->simplify_all_background_colors();
@@ -73,7 +71,7 @@ class PageHeader extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

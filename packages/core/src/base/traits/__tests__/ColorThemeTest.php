@@ -1,13 +1,10 @@
 <?php
+
 use Doubleedesign\Comet\Core\{ColorTheme, ThemeColor};
 
 /**
  * Function to create a generic component class that uses the trait
  * allowing it to stay local to this test/file
- *
- * @param  array  $attributes
- *
- * @return object
  */
 function create_component_with_color_theme(array $attributes): object {
     return new class($attributes) {

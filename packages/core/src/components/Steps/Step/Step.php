@@ -1,11 +1,12 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::LI])]
 #[DefaultTag(Tag::LI)]
 class Step extends UIComponent {
     /**
-     * @var array<Heading|Paragraph|ListComponent|Image|ButtonGroup> $innerComponents
+     * @var array<Heading|Paragraph|ListComponent|Image|ButtonGroup>
      */
     protected array $innerComponents;
 
@@ -25,7 +26,7 @@ class Step extends UIComponent {
             'classes'      => $this->get_filtered_classes_string(),
             'innerClasses' => implode(' ', $this->get_inner_classes()),
             'attributes'   => $this->get_html_attributes(),
-            'children'     => $this->innerComponents
+            'children'     => $this->innerComponents,
         ])->render();
     }
 }

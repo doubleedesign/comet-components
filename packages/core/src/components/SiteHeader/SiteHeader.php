@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * SiteHeader component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render a site header with a logo, responsive menu, and optional additional components.
  */
@@ -16,46 +16,40 @@ class SiteHeader extends LayoutComponent {
     use LayoutContainerSize;
 
     /**
-     * @var ?ContainerSize $size
      * @description Keyword specifying the relative width of the container for the inner content
      * @default-value default
      */
     protected ?ContainerSize $size = ContainerSize::DEFAULT;
 
     /**
-     * @var ?string $breakpoint
      * @description Viewport breakpoint (in pixels or rem) at which to switch from the "mobile" style menu to "desktop" style menu;
      *              use 0 to always use the "mobile" style or null to always use the "desktop" style
      */
     protected ?string $breakpoint = null;
 
     /**
-     * @var string|null $logoUrl
      * @description The URL of the site logo image
      */
     protected ?string $logoUrl = null;
 
     /**
-     * @var array<Renderable> $innerComponents
+     * @var array<Renderable>
      * @description The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context "responsive" (note: only one responsive group is supported)
      */
     protected array $innerComponents;
 
     /**
-     * @var ?string $icon
      * @description Icon class name; for the responsive menu toggle button
      * @default-value fa-bars
      */
     protected ?string $icon;
 
     /**
-     * @var string|null $submenuIcon
      * @description Icon class name for the submenu toggle button in responsive mode
      */
     protected ?string $submenuIcon = 'fa-chevron-down';
 
     /**
-     * @var string|null $style
      * @description The layout style of the responsive menu
      * @supported-values default, overlay
      */
@@ -89,7 +83,7 @@ class SiteHeader extends LayoutComponent {
                 'src'     => $this->logoUrl,
                 'alt'     => 'Site logo',
                 'href'    => '/',
-                'classes' => ['site-header__logo']
+                'classes' => ['site-header__logo'],
             ])
             : null;
         $this->innerComponents = array_merge([$logo], Utils::array_flat(array_map(function($component) {
@@ -173,7 +167,7 @@ class SiteHeader extends LayoutComponent {
                 'breakpoint' => null,
                 'classes'    => $this->get_filtered_classes_string(),
                 'attributes' => $this->get_html_attributes(),
-                'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false], $this->innerComponents)]
+                'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false], $this->innerComponents)],
             ])->render();
         }
         else {
@@ -191,7 +185,7 @@ class SiteHeader extends LayoutComponent {
                 'responsiveComponentsStart' => $this->get_prerendered_html($this->responsiveComponentsBeforeMenu),
                 'responsiveComponentsEnd'   => $this->get_prerendered_html($this->responsiveComponentsAfterMenu),
                 'responsiveMenuData'        => json_encode($this->menuData),
-                'menuComponentHtml'         => $this->get_prerendered_html([$this->menuComponent])
+                'menuComponentHtml'         => $this->get_prerendered_html([$this->menuComponent]),
             ])->render();
         }
     }

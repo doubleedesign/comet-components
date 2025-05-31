@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 abstract class LayoutComponent extends UIComponent {
@@ -21,7 +22,7 @@ abstract class LayoutComponent extends UIComponent {
     }
 
     protected function get_filtered_classes(): array {
-        if ((!$this instanceof Column) && (!$this instanceof ContentWrapper) && (!$this instanceof ImageWrapper) && (!$this instanceof Steps)) {
+        if ((!$this instanceof Column) && (!$this instanceof Steps)) {
             return array_merge(
                 parent::get_filtered_classes(),
                 ['layout-block']
@@ -45,7 +46,7 @@ abstract class LayoutComponent extends UIComponent {
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;
         }
-        else if (isset($this->gradient)) {
+        elseif (isset($this->gradient)) {
             $attributes['data-background'] = 'gradient-' . $this->gradient;
         }
 
@@ -64,8 +65,6 @@ abstract class LayoutComponent extends UIComponent {
 
     /**
      * Default render method (child classes may override this)
-     *
-     * @return void
      */
     public function render(): void {
         $blade = BladeService::getInstance();
@@ -74,7 +73,7 @@ abstract class LayoutComponent extends UIComponent {
             'tag'        => $this->tagName->value,
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

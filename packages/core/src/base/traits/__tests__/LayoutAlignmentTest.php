@@ -1,15 +1,11 @@
 <?php
 
-use PHPUnit\Framework\{Attributes\Test};
-use Doubleedesign\Comet\Core\{LayoutAlignment, Alignment};
+use Doubleedesign\Comet\Core\{Alignment, LayoutAlignment};
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Function to create a generic component class that uses the trait
  * allowing it to stay local to this test/file
- *
- * @param  array  $attributes
- *
- * @return object
  */
 function create_component_With_layout_alignment(array $attributes): object {
     return new class($attributes) {

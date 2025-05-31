@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Menu component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render a navigation menu that can have multiple levels of lists.
  */
@@ -14,7 +14,6 @@ class Menu extends UIComponent {
     private array $rawMenuData;
 
     /**
-     * @param  array  $attributes
      * @param  array<MenuItem>  $menuItems
      *
      * @phpstan-type MenuItem array{
@@ -31,16 +30,13 @@ class Menu extends UIComponent {
     public function __construct(array $attributes, array $menuItems) {
         $this->rawMenuData = $menuItems;
         $innerComponents = [
-            new MenuList($attributes, $this->array_to_items($menuItems, $attributes['context'] ?? ''))
+            new MenuList($attributes, $this->array_to_items($menuItems, $attributes['context'] ?? '')),
         ];
 
         parent::__construct($attributes, $innerComponents, 'components.Menu.menu');
     }
 
     /**
-     * @param  array  $items
-     * @param  string|null  $context
-     *
      * @return array<MenuListItem>
      */
     private function array_to_items(array $items, ?string $context = ''): array {
@@ -50,7 +46,7 @@ class Menu extends UIComponent {
                     'id'              => $item['id'] ?? null,
                     'classes'         => $item['classes'] ?? '',
                     'context'         => $context ? "{$context}__menu-list" : 'menu-list',
-                    'isCurrentParent' => $item['isCurrentParent'] ?? 'false'
+                    'isCurrentParent' => $item['isCurrentParent'] ?? 'false',
                 ],
                 [
                     new Link(
@@ -59,7 +55,7 @@ class Menu extends UIComponent {
                             ['context' => $context ? "{$context}__menu-list__item" : 'menu-list__item']
                         ),
                         $item['title']
-                    )
+                    ),
                 ]
             );
 
@@ -79,8 +75,6 @@ class Menu extends UIComponent {
      * Get the menu items as a plain array to pass to JavaScript
      *
      * @param  array<MenuList>|null  $components  - initially null, used for recursion
-     *
-     * @return array
      */
     public function get_raw_menu_data(?array $components): array {
         $components = $components ?? $this->innerComponents;
@@ -120,7 +114,7 @@ class Menu extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

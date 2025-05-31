@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * SiteFooter component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render a footer with inner components such as a Menu.
  */
@@ -15,7 +15,6 @@ class SiteFooter extends UIComponent {
     use LayoutContainerSize;
 
     /**
-     * @var ?ContainerSize $size
      * @description Keyword specifying the relative width of the container for the inner content
      * @default-value default
      */
@@ -29,10 +28,10 @@ class SiteFooter extends UIComponent {
             new Container(
                 [
                     'size'        => $this->size->value,
-                    'withWrapper' => false
+                    'withWrapper' => false,
                 ],
                 $innerComponents
-            )
+            ),
         ];
 
         parent::__construct($attributes, $this->innerComponents, 'components.SiteFooter.site-footer');
@@ -63,7 +62,7 @@ class SiteFooter extends UIComponent {
         echo $blade->make($this->bladeFile, [
             'classes'    => $this->get_filtered_classes_string(),
             'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
+            'children'   => $this->innerComponents,
         ])->render();
     }
 }

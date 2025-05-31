@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Table component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Display tabular data with support for responsive stacking, sticky headers and footers, row headers, and merged cells.
  */
@@ -12,7 +12,6 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::TABLE)]
 class Table extends Renderable {
     /**
-     * @var bool $allowStacking
      * @description Whether to adapt the layout by stacking columns when the viewport or container is narrow
      */
     protected bool $allowStacking = true;
@@ -25,31 +24,29 @@ class Table extends Renderable {
     protected ?string $sticky;
 
     /**
-     * @var TableCaption|array|null $caption
      * @description Caption object, or content and attributes corresponding to a Caption object
      */
     protected TableCaption|array|null $caption = null;
 
     /**
-     * @var array<array<TableHeaderCell>> $thead
+     * @var array<array<TableHeaderCell>>
      * @description Array of rows of TableHeaderCells for the table header
      */
     private array $thead;
 
     /**
-     * @var array<array<TableCell>> $tbody
+     * @var array<array<TableCell>>
      * @description Array of rows of TableCells or TableHeaderCells for the table body
      */
     private array $tbody;
 
     /**
-     * @var array<array<TableCell>> $tfoot
+     * @var array<array<TableCell>>
      * @description Array of rows of TableCells for the table footer
      */
     private array $tfoot;
 
     /**
-     * @param  array  $attributes
      * @param array<string, array<TableCell|array> $data - Associative array with thead, tbody and tfoot keys, which have indexed arrays of rows of TableCells or arrays of attributes and content for TableCell objects
      */
     public function __construct(array $attributes, array $data) {
@@ -64,7 +61,7 @@ class Table extends Renderable {
                 ? $attributes['caption']
                 : new TableCaption($attributes['caption']['attributes'], $attributes['caption']['content']);
         }
-        else if (isset($attributes['tableCaption'])) {
+        elseif (isset($attributes['tableCaption'])) {
             $this->caption = $attributes['tableCaption'] instanceof TableCaption
                 ? $attributes['tableCaption']
                 : new TableCaption($attributes['tableCaption']['attributes'], $attributes['tableCaption']['content']);
@@ -116,7 +113,7 @@ class Table extends Renderable {
             'thead'      => $this->thead,
             'tbody'      => $this->tbody,
             'tfoot'      => $this->tfoot,
-            'caption'    => $this->caption
+            'caption'    => $this->caption,
         ])->render();
     }
 }

@@ -1,10 +1,10 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 /**
  * Heading component
  *
- * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description Render a heading element, optionally with a theme style applied.
  */
@@ -12,14 +12,13 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::H2)]
 class Heading extends TextElementExtended {
     /**
-     * @var array<string> $classes
+     * @var array<string>
      * @description CSS classes
      * @supported-values is-style-accent, is-style-small
      */
     protected ?array $classes = [];
 
     /**
-     * @var int|null $level
      * @description Heading level (1-6). Default is 2. Cannot be used in conjunction with tagName.
      */
     protected ?int $level = 2;

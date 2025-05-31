@@ -1,4 +1,5 @@
 <?php
+
 namespace Doubleedesign\Comet\Core;
 
 // Note: This component's tag changes responsively,
@@ -6,7 +7,6 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::DETAILS])]
 #[DefaultTag(Tag::DIV)]
 class ResponsivePanel extends PanelComponent {
-
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.ResponsivePanels.ResponsivePanel.responsive-panel');
         $this->context = 'responsive-panel';
