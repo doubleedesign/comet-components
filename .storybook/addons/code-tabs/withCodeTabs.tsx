@@ -1,4 +1,4 @@
-import { addons } from '@storybook/preview-api';
+import { addons } from 'storybook/preview-api';
 import { RENDER_PREVIEW_TAB, GET_PREVIEW_HTML } from './constants.tsx';
 
 export const withCodeTabs = (StoryFn, context) => {

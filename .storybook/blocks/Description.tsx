@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import { Markdown, useOf, type Of } from '@storybook/blocks';
+import { Markdown, useOf, type Of } from '@storybook/addon-docs/blocks';
 import { ComponentSpecs } from '../custom-components/ComponentSpecs.tsx';
 
 export enum DescriptionType {

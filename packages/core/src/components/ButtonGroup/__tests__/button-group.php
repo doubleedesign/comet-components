@@ -13,8 +13,3 @@ $innerComponents = [
 
 $component = new ButtonGroup($attributes, $innerComponents);
 $component->render();
-
-// Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if (getenv('SERVER_NAME') === 'comet-components.test') {
-    require_once dirname(__DIR__, 6) . '/test/browser/wrapper-close.php';
-}

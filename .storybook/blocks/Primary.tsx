@@ -1,7 +1,7 @@
 // @source https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/blocks/Primary.tsx
 import type { FC } from 'react';
 import React, { useContext } from 'react';
-import { DocsContext, Of, useOf } from '@storybook/blocks';
+import { DocsContext, Of, useOf } from '@storybook/addon-docs/blocks';
 import { DocsStory } from './DocsStory.tsx';
 
 interface PrimaryProps {

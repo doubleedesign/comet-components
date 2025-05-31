@@ -1,14 +1,30 @@
 import React from 'react';
-import type { Preview } from '@storybook/html';
+import type { Preview } from '@storybook/html-vite';
 import { Title } from './blocks/Title.tsx';
 import { Description } from './blocks/Description.tsx';
 import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
 import { Primary } from './blocks/Primary.tsx';
 import { CommonAttributes } from './custom-components/CommonAttributes.tsx';
-import { Controls, DocsContainer, Subtitle, Unstyled, CodeOrSourceMdx } from '@storybook/blocks';
+import { Controls, DocsContainer, Subtitle, Unstyled } from '@storybook/addon-docs/blocks';
 import comet from './theme.ts';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
+import { addons } from 'storybook/preview-api';
+const channel = addons.getChannel();
+
+// Log all events
+// import events from 'storybook/internal/core-events';
+// Object.values(events).forEach((event) => {
+// 	channel.on(event, (data) => {
+// 		console.log(event, data);
+// 		//debugger;
+// 	});
+// });
+
+channel.on('storyArgsUpdated', (data) => {
+	// Dispatch an event that the ResponsiveContainer can pick up to re-fetch the URL (set in the story files) from local storage
+	document.dispatchEvent(new Event('storyArgsUpdatedCustom'));
+});
 
 const preview: Preview = {
 	parameters: {
@@ -69,9 +85,6 @@ const preview: Preview = {
 			},
 			container: ({ children, context }) => {
 				const component = context?.primaryStory?.title.split('/')?.reverse()[0]?.toLowerCase() || 'default';
-
-				// Extremely hacky way to get the context to where I need it in the ResponsiveContainer
-				localStorage.setItem('storyContext', JSON.stringify(context));
 
 				return (
 					<div className={`docs-wrapper docs-wrapper--${component}`}>

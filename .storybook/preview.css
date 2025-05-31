@@ -31,6 +31,10 @@
 		color: white;
 		padding: 0.5rem;
 	}
+
+	.sb-main-padded & {
+		display: none; /** Keeps on docs, hides from the standalone story view */
+	}
 }
 
 
