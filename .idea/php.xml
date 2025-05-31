@@ -192,10 +192,8 @@
       <path value="$USER_HOME$/LocalSites/vanilla-playground/app/public" />
       <path value="$PROJECT_DIR$/packages/core/vendor/openpsa/ranger" />
       <path value="$PROJECT_DIR$/packages/core/vendor/symfony/intl" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
       <path value="$PROJECT_DIR$/vendor/laravel/pint" />
     </include_path>
   </component>
