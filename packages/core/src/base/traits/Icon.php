@@ -12,7 +12,7 @@ trait Icon {
     /**
      * @description Icon class name
      */
-    protected ?string $icon;
+    protected ?string $icon = null;
 
     protected function set_icon_from_attrs(array $attributes, ?string $default = null): void {
         if (!isset($attributes['icon']) && $default === null) {

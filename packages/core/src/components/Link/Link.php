@@ -16,7 +16,7 @@ class Link extends Renderable {
     /**
      * @description Icon class name; for link-group context default value is 'fa-link', or 'fa-arrow-up-right-from-square' if target is '_blank'
      */
-    protected ?string $icon;
+    protected ?string $icon = null;
 
     /**
      * @description Plain text or basic HTML

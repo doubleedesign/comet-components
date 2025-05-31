@@ -57,13 +57,13 @@ trait BackgroundColor {
     public function simplify_all_background_colors(): void {
         // If all backgrounds set on direct children of this component are the same as this component's background,
         // remove the background from those children
-        if (isset($this->backgroundColor) && isset($this->innerComponents)) {
+        if (isset($this->backgroundColor) && isset($this->innerComponents) && count($this->innerComponents) > 1) {
             $this->remove_redundant_background_colors();
         }
 
         // If this component does not have a background set but its children all have the same background and/or no background,
         // remove the backgrounds from the children and apply that singular set background to this component
-        if (!$this->backgroundColor && isset($this->innerComponents)) {
+        if (!$this->backgroundColor && isset($this->innerComponents) && count($this->innerComponents) > 1) {
             $this->set_background_color_based_on_inner_components();
         }
     }
@@ -73,11 +73,6 @@ trait BackgroundColor {
      * This is available to component classes because there are some components where we want to do this, but not assign a background colour to the component.
      */
     protected function remove_redundant_background_colors(): void {
-        // Bail if there's fewer than 2 inner components
-        if (count($this->innerComponents) < 2) {
-            return;
-        }
-
         $childrenWithSameBackground = array_filter($this->innerComponents, function($child) {
             if (method_exists($child, 'get_background_color')) {
                 return $child->get_background_color() === $this->backgroundColor;
@@ -106,16 +101,6 @@ trait BackgroundColor {
      * "hoist" that singular set background to this component and remove the backgrounds from the children
      */
     protected function set_background_color_based_on_inner_components(): void {
-        // No need to set the background if it's already set
-        if ($this->backgroundColor) {
-            return;
-        }
-
-        // Bail if there's fewer than 2 inner components
-        if (count($this->innerComponents) < 2) {
-            return;
-        }
-
         // Collect the child backgrounds, with in-place filtering to remove duplicates
         // But do not filter out null values, because that would set the background of a parent when it shouldn't
         // just because *some* children don't have an explicit background

@@ -21,7 +21,7 @@ trait LayoutContainerSize {
         }
 
         if ($this->size !== null) {
-            $this->add_attributes(['size' => $this->size->value]);
+            $this->add_attributes(['data-size' => $this->size->value]);
         }
     }
 }

@@ -9,9 +9,6 @@
     <option name="pestRunnerSettings">
       <PestRunner configuration_file="$PROJECT_DIR$/test/unit/phpunit.xml" directory="$PROJECT_DIR$/packages/core/src" method="" use_alternative_configuration_file="true" />
     </option>
-    <option name="runnerSettings">
-      <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/test/unit/phpunit.xml" directory="$PROJECT_DIR$/packages/core/src" method="" use_alternative_configuration_file="true" />
-    </option>
     <method v="2" />
   </configuration>
 </component>
