@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { addons, useStorybookApi } from '@storybook/manager-api';
-import { API_StoryEntry } from '@storybook/types';
+import { addons, useStorybookApi } from 'storybook/manager-api';
+import { API_StoryEntry } from 'storybook/internal/types';
 import { omit } from 'lodash';
 import { mockPhpSourceCode } from '../../utils.ts';
 import { PhpCodeBlock } from '../../custom-components/PhpCodeBlock.tsx';
