@@ -49,136 +49,181 @@ function create_component_with_inner_components(array $attributes = [], array $i
     };
 }
 
-describe('Set background color from attributes', function() {
-    $spy = Mockery::spy(BackgroundColor::class);
-    $spy->shouldAllowMockingProtectedMethods();
+describe('BackgroundColor', function() {
 
-    test('sets valid value', function() use ($spy) {
-        $component = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+    describe('Set background colour from attributes', function() {
+        $spy = Mockery::spy(BackgroundColor::class);
+        $spy->shouldAllowMockingProtectedMethods();
 
-        $spy->shouldReceive('set_background_color_from_attrs');
-        expect($component->get_background_color())->toBe(ThemeColor::SECONDARY);
+        test('sets valid value from string', function() use ($spy) {
+            $component = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+
+            $spy->shouldReceive('set_background_color_from_attrs');
+            expect($component->get_background_color())->toBe(ThemeColor::SECONDARY);
+        });
+
+        test('sets valid value from ThemeColor enum', function() use ($spy) {
+            $component = create_component_with_bg_color(['backgroundColor' => ThemeColor::ACCENT]);
+
+            $spy->shouldReceive('set_background_color_from_attrs');
+            expect($component->get_background_color())->toBe(ThemeColor::ACCENT);
+        });
+
+        test('sets null when invalid', function() use ($spy) {
+            $component = create_component_with_bg_color(['backgroundColor' => '#FFF']);
+
+            $spy->shouldReceive('set_background_color_from_attrs');
+            expect($component->get_background_color())->toBeNull();
+        });
     });
 
-    test('sets null when invalid', function() use ($spy) {
-        $component = create_component_with_bg_color(['backgroundColor' => '#FFF']);
+    describe('Set background colour after instantiation', function() {
+        $spy = Mockery::spy(BackgroundColor::class);
+        $spy->shouldAllowMockingProtectedMethods();
 
-        $spy->shouldReceive('set_background_color_from_attrs');
-        expect($component->get_background_color())->toBeNull();
-    });
-});
+        test('sets valid value from string', function() use ($spy) {
+            $component = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $component->set_background_color('accent');
 
-describe('Remove redundant background colours from direct inner components', function() {
-    $spy = Mockery::spy(BackgroundColor::class);
-    $spy->shouldAllowMockingProtectedMethods();
+            expect($component->get_background_color())->toBe(ThemeColor::ACCENT);
+        });
 
-    test('it removes background when all backgrounds match the component', function() use ($spy) {
-        $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
-        $child2 = create_component_with_bg_color(['backgroundColor' => 'primary']);
-        $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+        test('sets valid value from ThemeColor enum', function() use ($spy) {
+            $component = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $component->set_background_color(ThemeColor::SECONDARY);
 
-        $parent = create_component_with_inner_components(
-            ['backgroundColor' => 'primary'],
-            [$child1, $child2, $child3]
-        );
-
-        $parent->simplify_all_background_colors();
-
-        $spy->shouldReceive('remove_redundant_background_colors');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY);
-        foreach ($parent->innerComponents as $child) {
-            expect($child->get_background_color())->toBeNull();
-        }
+            expect($component->get_background_color())->toBe(ThemeColor::SECONDARY);
+        });
     });
 
-    test('it removes only the same background when inner components are mixed', function() use ($spy) {
-        $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
-        $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
-        $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
+    describe('Remove redundant background colours from direct inner components', function() {
+        $spy = Mockery::spy(BackgroundColor::class);
+        $spy->shouldAllowMockingProtectedMethods();
 
-        $parent = create_component_with_inner_components(
-            ['backgroundColor' => 'primary'],
-            [$child1, $child2, $child3]
-        );
+        test('it removes background when all backgrounds match the component', function() use ($spy) {
+            $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $child2 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
 
-        $parent->simplify_all_background_colors();
+            $parent = create_component_with_inner_components(
+                ['backgroundColor' => 'primary'],
+                [$child1, $child2, $child3]
+            );
 
-        $spy->shouldReceive('remove_redundant_background_colors');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_color())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[2]->get_background_color())->toBe(ThemeColor::ACCENT);
+            $parent->simplify_all_background_colors();
+
+            $spy->shouldReceive('remove_redundant_background_colors');
+            expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY);
+            foreach ($parent->innerComponents as $child) {
+                expect($child->get_background_color())->toBeNull();
+            }
+        });
+
+        test('it removes only the same background when inner components are mixed', function() use ($spy) {
+            $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+            $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
+
+            $parent = create_component_with_inner_components(
+                ['backgroundColor' => 'primary'],
+                [$child1, $child2, $child3]
+            );
+
+            $parent->simplify_all_background_colors();
+
+            $spy->shouldReceive('remove_redundant_background_colors');
+            expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
+                ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
+                ->and($parent->innerComponents[1]->get_background_color())->toBe(ThemeColor::SECONDARY)
+                ->and($parent->innerComponents[2]->get_background_color())->toBe(ThemeColor::ACCENT);
+        });
+
+        test('it does nothing if there is only one inner component', function() use ($spy) {
+            $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+
+            $parent = create_component_with_inner_components(
+                ['backgroundColor' => 'primary'],
+                [$child1]
+            );
+
+            $parent->simplify_all_background_colors();
+
+            $spy->shouldNotHaveReceived('remove_redundant_background_colors');
+            expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
+                ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY);
+        });
     });
 
-    test('it does nothing if there is only one inner component', function() use ($spy) {
-        $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+    describe('Set background colour based on inner components', function() {
+        $spy = Mockery::spy(BackgroundColor::class);
+        $spy->shouldAllowMockingProtectedMethods();
 
-        $parent = create_component_with_inner_components(
-            ['backgroundColor' => 'primary'],
-            [$child1]
-        );
+        test('it does not set a background from the inner components when one is already set on the component itself', function() use ($spy) {
+            $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+            $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
 
-        $parent->simplify_all_background_colors();
+            $parent = create_component_with_inner_components(
+                ['backgroundColor' => 'dark'],
+                [$child1, $child2, $child3]
+            );
 
-        $spy->shouldNotHaveReceived('remove_redundant_background_colors');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY);
-    });
-});
+            $parent->simplify_all_background_colors();
 
-describe('Set background colour based on inner components', function() {
-    $spy = Mockery::spy(BackgroundColor::class);
-    $spy->shouldAllowMockingProtectedMethods();
+            $spy->shouldNotHaveReceived('set_background_color_based_on_inner_components');
+            expect($parent->get_background_color())->toBe(ThemeColor::DARK);
+        });
 
-    test('it sets a background when all inner components have the same background', function() use ($spy) {
-        $child1 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
-        $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
-        $child3 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+        test('it sets a background when all inner components have the same background', function() use ($spy) {
+            $child1 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+            $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+            $child3 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
 
-        $parent = create_component_with_inner_components(
-            [], // No background
-            [$child1, $child2, $child3]
-        );
+            $parent = create_component_with_inner_components(
+                [], // No background
+                [$child1, $child2, $child3]
+            );
 
-        $parent->simplify_all_background_colors();
+            $parent->simplify_all_background_colors();
 
-        $spy->shouldReceive('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[2]->get_background_color())->toBeNull();
-    });
+            $spy->shouldReceive('set_background_color_based_on_inner_components');
+            expect($parent->get_background_color())->toBe(ThemeColor::SECONDARY)
+                ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
+                ->and($parent->innerComponents[1]->get_background_color())->toBeNull()
+                ->and($parent->innerComponents[2]->get_background_color())->toBeNull();
+        });
 
-    test('it does nothing when children have different backgrounds', function() use ($spy) {
-        $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
-        $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
-        $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
+        test('it does nothing when children have different backgrounds', function() use ($spy) {
+            $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+            $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
 
-        $parent = create_component_with_inner_components(
-            [], // No background
-            [$child1, $child2, $child3]
-        );
+            $parent = create_component_with_inner_components(
+                [], // No background
+                [$child1, $child2, $child3]
+            );
 
-        $parent->simplify_all_background_colors();
+            $parent->simplify_all_background_colors();
 
-        $spy->shouldReceive('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[1]->get_background_color())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[2]->get_background_color())->toBe(ThemeColor::ACCENT);
-    });
+            $spy->shouldReceive('set_background_color_based_on_inner_components');
+            expect($parent->get_background_color())->toBeNull()
+                ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY)
+                ->and($parent->innerComponents[1]->get_background_color())->toBe(ThemeColor::SECONDARY)
+                ->and($parent->innerComponents[2]->get_background_color())->toBe(ThemeColor::ACCENT);
+        });
 
-    test('it does nothing if there is only one inner component', function() use ($spy) {
-        $child = create_component_with_bg_color(['backgroundColor' => 'primary']);
-        $parent = create_component_with_inner_components(
-            [], // No background
-            [$child]
-        );
+        test('it does nothing if there is only one inner component', function() use ($spy) {
+            $child = create_component_with_bg_color(['backgroundColor' => 'primary']);
+            $parent = create_component_with_inner_components(
+                [], // No background
+                [$child]
+            );
 
-        $parent->simplify_all_background_colors();
+            $parent->simplify_all_background_colors();
 
-        $spy->shouldNotHaveReceived('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY);
+            $spy->shouldNotHaveReceived('set_background_color_based_on_inner_components');
+            expect($parent->get_background_color())->toBeNull()
+                ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY);
+        });
     });
 });

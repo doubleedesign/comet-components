@@ -10,10 +10,10 @@ trait TextAlign {
      */
     protected function set_text_align_from_attrs(array $attributes): void {
         if (isset($attributes['align'])) {
-            $this->textAlign = Alignment::tryFrom($attributes['align']) ?? null;
+            $this->textAlign = Alignment::fromString($attributes['align']) ?? null;
         }
-        if (isset($attributes['textAlign'])) {
-            $this->textAlign = Alignment::tryFrom($attributes['textAlign']) ?? null;
+        else if (isset($attributes['textAlign'])) {
+            $this->textAlign = Alignment::fromString($attributes['textAlign']) ?? null;
         }
     }
 }

@@ -27,14 +27,18 @@ function create_component_with_color_theme(array $attributes): object {
     };
 }
 
-test('sets valid value', function() {
-    $component = create_component_with_color_theme(['colorTheme' => 'secondary']);
+describe('ColorTheme', function() {
 
-    expect($component->get_color_theme())->toBe(ThemeColor::SECONDARY);
-});
+    test('sets valid value', function() {
+        $component = create_component_with_color_theme(['colorTheme' => 'secondary']);
 
-test('sets null background color', function() {
-    $component = create_component_with_color_theme(['colorTheme' => '#FFF']);
+        expect($component->get_color_theme())->toBe(ThemeColor::SECONDARY);
+    });
 
-    expect($component->get_color_theme())->toBeNull();
+    test('sets null background color when the provided value is not a ThemeColor', function() {
+        $component = create_component_with_color_theme(['colorTheme' => '#FFF']);
+
+        expect($component->get_color_theme())->toBeNull();
+    });
+
 });
