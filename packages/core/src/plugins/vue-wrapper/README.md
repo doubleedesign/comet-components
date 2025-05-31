@@ -6,7 +6,9 @@ ES6 modules in Comet Components.
 
 ## Updating
 
-Updated versions of the compiled files can be found at:
+The `postinstall` script in the Core `package.json` will automatically download the latest builds of Vue (dev and prod) and put them in the `packages/core/src/plugins/vue-wrapper/src` directory. This should automatically happen when you run `npm install` in the Core directory.
+
+Alternatively, updated versions of the compiled files can be found at:
 
 - [Vue dist on Unpkg](https://unpkg.com/browse/vue@3.5.13/dist/) (then select version from the dropdown)
 - [Vue SFC Loader on NPM](https://www.npmjs.com/package/vue3-sfc-loader?activeTab=code)
