@@ -157,8 +157,3 @@ try {
 catch (Exception $e) {
     echo $e->getMessage();
 }
-
-// Workaround for wrapper-close not loading from php.ini in Laravel Herd
-if (getenv('SERVER_NAME') === 'comet-components.test') {
-    require_once dirname(__DIR__, 7) . '/test/browser/wrapper-close.php';
-}
