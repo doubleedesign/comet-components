@@ -1,67 +1,55 @@
 <?php
-namespace Doubleedesign\Comet\Core\__tests__;
-use Doubleedesign\Comet\Core\ContainerSize;
-use PHPUnit\Framework\{TestCase, Attributes\TestDox, Attributes\Test};
 
-#[TestDox("ContainerSize")]
-class ContainerSizeTest extends TestCase {
-    #[TestDox('It returns WIDE for "wide"')]
-    #[Test] public function from_string_wide() {
+use Doubleedesign\Comet\Core\ContainerSize;
+
+describe('ContainerSize', function() {
+    it('returns WIDE for "wide"', function() {
         $result = ContainerSize::tryFrom('wide');
         expect($result)->toBe(ContainerSize::WIDE);
-    }
+    });
 
-    #[TestDox('It returns FULLWIDTH for "fullwidth"')]
-    #[Test] public function from_string_fullwidth() {
+    it('returns FULLWIDTH for "fullwidth"', function() {
         $result = ContainerSize::tryFrom('fullwidth');
         expect($result)->toBe(ContainerSize::FULLWIDTH);
-    }
+    });
 
-    #[TestDox('It returns NARROW for "narrow"')]
-    #[Test] public function from_string_narrow() {
+    it('returns NARROW for "narrow"', function() {
         $result = ContainerSize::tryFrom('narrow');
         expect($result)->toBe(ContainerSize::NARROW);
-    }
+    });
 
-    #[TestDox('It returns NARROWER for "narrower"')]
-    #[Test] public function from_string_narrower() {
+    it('returns NARROWER for "narrower"', function() {
         $result = ContainerSize::tryFrom('narrower');
         expect($result)->toBe(ContainerSize::NARROWER);
-    }
+    });
 
-    #[TestDox('It returns DEFAULT for "default"')]
-    #[Test] public function from_string_default() {
+    it('returns DEFAULT for "default"', function() {
         $result = ContainerSize::tryFrom('default');
         expect($result)->toBe(ContainerSize::DEFAULT);
-    }
+    });
 
-    #[TestDox('It returns null when an invalid value is passed')]
-    #[Test] public function from_string_invalid() {
+    it('returns null when an invalid value is passed', function() {
         $result = ContainerSize::tryFrom('invalid');
         expect($result)->toBeNull();
-    }
+    });
 
-    #[TestDox('It returns WIDE for WordPress wide style')]
-    #[Test] public function from_wordpress_class_name_wide() {
+    it('returns WIDE for WordPress wide style', function() {
         $result = ContainerSize::from_wordpress_class_name('is-style-wide');
         expect($result)->toBe(ContainerSize::WIDE);
-    }
+    });
 
-    #[TestDox('It returns FULLWIDTH for WordPress fullwidth style')]
-    #[Test] public function from_wordpress_class_name_fullwidth() {
+    it('returns FULLWIDTH for WordPress fullwidth style', function() {
         $result = ContainerSize::from_wordpress_class_name('is-style-fullwidth');
         expect($result)->toBe(ContainerSize::FULLWIDTH);
-    }
+    });
 
-    #[TestDox('It returns NARROW for WordPress narrow style')]
-    #[Test] public function from_wordpress_class_name_narrow() {
+    it('returns NARROW for WordPress narrow style', function() {
         $result = ContainerSize::from_wordpress_class_name('is-style-narrow');
         expect($result)->toBe(ContainerSize::NARROW);
-    }
+    });
 
-    #[TestDox('It returns DEFAULT if an unsupported WordPress style is passed')]
-    #[Test] public function from_wordpress_class_name_default() {
+    it('returns DEFAULT if an unsupported WordPress style is passed', function() {
         $result = ContainerSize::from_wordpress_class_name('is-style-unsupported');
         expect($result)->toBe(ContainerSize::DEFAULT);
-    }
-}
+    });
+});
