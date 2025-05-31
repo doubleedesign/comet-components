@@ -10,8 +10,7 @@ position: 1
 ## About the setup
 
 The unit tests are set up to use [Pest](https://pestphp.com/), with the following utility add-on libraries:
-- [Patchwork](https://patchwork2.org/) for convenient mocking functions that support class methods 
-- [Phluent](https://github.com/Haberkamp/phluent) for convenient plain-English assertion syntax.
+- [Patchwork](https://patchwork2.org/) for convenient mocking functions that support class methods
 
 Pest uses [PHPUnit](https://phpunit.de/index.html) under the hood, but provides a syntax similar to JavaScript test runners such as Jest and Playwright.
 
@@ -79,12 +78,11 @@ In this example, `$wrapper` will be a [DOMElement](https://www.php.net/manual/en
 A utility function, `PestUtils::getElementsByClassName()`, is available to get elements by their class name instead of just their tag name.
 :::
 
-
 ## Running tests
 
 To run a test file from the terminal:
 :::warning
-// TODO: Updated instructions to come 
+// TODO: Updated instructions to come
 :::
 
 To run all tests in a file in PhpStorm:
@@ -105,7 +103,6 @@ A PhpStorm Run Configuration has been included in this repository for running al
 ![Run with coverage screenshot](/phpstorm-run-with-coverage.png)]
 
 ## Troubleshooting
-
 
 :::details Logging to the console
 

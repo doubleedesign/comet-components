@@ -1,6 +1,5 @@
 <?php
 use Doubleedesign\Comet\Core\{ColorTheme, ThemeColor};
-use function Phluent\Expect;
 
 /**
  * Function to create a generic component class that uses the trait
@@ -27,11 +26,11 @@ function create_component_with_color_theme(array $attributes): object {
 test('sets valid value', function() {
     $component = create_component_with_color_theme(['colorTheme' => 'secondary']);
 
-    Expect($component->get_color_theme())->toBe(ThemeColor::SECONDARY);
+    expect($component->get_color_theme())->toBe(ThemeColor::SECONDARY);
 });
 
 test('sets null background color', function() {
     $component = create_component_with_color_theme(['colorTheme' => '#FFF']);
 
-    Expect($component->get_color_theme())->toBeNull();
+    expect($component->get_color_theme())->toBeNull();
 });

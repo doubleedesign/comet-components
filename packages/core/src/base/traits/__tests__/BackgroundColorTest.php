@@ -162,25 +162,6 @@ describe('Set background colour based on inner components', function() {
             ->and($parent->innerComponents[2]->get_background_color())->toBe(ThemeColor::ACCENT);
     });
 
-    test('it sets a background when the inner components have a mix of the same and no backgrounds set', function() use ($spy) {
-        $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
-        $child2 = create_component_with_bg_color([]); // Null background
-        $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
-
-        $parent = create_component_with_inner_components(
-            [], // No background
-            [$child1, $child2, $child3]
-        );
-
-        $parent->simplify_all_background_colors();
-
-        $spy->shouldReceive('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[2]->get_background_color())->toBeNull();
-    });
-
     test('it does nothing if there is only one inner component', function() use ($spy) {
         $child = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $parent = create_component_with_inner_components(

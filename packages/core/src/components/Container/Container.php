@@ -35,6 +35,9 @@ class Container extends LayoutComponent {
         if (isset($attributes['backgroundColor']) && $attributes['backgroundColor'] !== $globalBackground) {
             $this->set_background_color_from_attrs($attributes);
         }
+        else {
+            $this->backgroundColor = null; // Override behaviour from LayoutComponent
+        }
     }
 
     protected function get_filtered_classes(): array {

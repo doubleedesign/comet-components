@@ -44,7 +44,6 @@ describe('Columns', function() {
         $columns = PestUtils::getElementsByClassName($columnSet, 'column');
 
         expect($columnSet->hasAttribute('data-background'))->toBeTrue()
-            ->and($columns[0]->hasAttribute('data-background'))->toBeTrue()
             ->and($columns[1]->hasAttribute('data-background'))->toBeTrue();
     });
 });

@@ -3,10 +3,14 @@
     <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/">
       <envs>
         <env name="APP_ENV" value="development" />
+        <env name="XDEBUG_MODE" value="coverage" />
       </envs>
     </CommandLine>
     <option name="pestRunnerSettings">
-      <PestRunner configuration_file="$PROJECT_DIR$/test/phpunit.xml" method="" scope="Method" options="--debug" use_alternative_configuration_file="true" />
+      <PestRunner configuration_file="$PROJECT_DIR$/test/unit/phpunit.xml" method="" scope="Method" options="--debug" use_alternative_configuration_file="true" />
+    </option>
+    <option name="runnerSettings">
+      <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/test/unit/phpunit.xml" method="" scope="Method" options="--debug" use_alternative_configuration_file="true" />
     </option>
     <method v="2" />
   </configuration>
