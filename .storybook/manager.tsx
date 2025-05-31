@@ -1,5 +1,5 @@
 import React from 'react';
-import { addons } from '@storybook/manager-api';
+import { addons } from 'storybook/manager-api';
 import comet from './theme.ts';
 import './manager.css';
 import { VueComponentIcon } from './custom-components/icon-items/VueComponentIcon.tsx';

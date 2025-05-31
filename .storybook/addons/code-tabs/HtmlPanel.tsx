@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addons } from '@storybook/manager-api';
+import { addons } from 'storybook/manager-api';
 import { HtmlCodeBlock } from '../../custom-components/HtmlCodeBlock.tsx';
 import { RENDER_PREVIEW_TAB, GET_PREVIEW_HTML } from './constants.tsx';
 
