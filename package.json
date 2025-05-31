@@ -5,7 +5,7 @@
 	"author": "Leesa Ward",
 	"type": "module",
 	"scripts": {
-		"storybook": "storybook dev -p 6006 --https --ssl-cert .cert/cert.pem --ssl-key .cert/key.pem --host storybook.comet-components.test",
+		"storybook": "npx kill-port 6006 && storybook dev -p 6006 --https --ssl-cert .cert/cert.pem --ssl-key .cert/key.pem --host storybook.comet-components.test",
 		"build-storybook": "storybook build",
 		"docs": "cd docs-site && npm run docs:dev",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
@@ -17,7 +17,8 @@
 		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
 		"refresh:npmpackages": "npm run refresh:npm -- -packagesOnly",
 		"refresh:all": "npm run refresh:composer && npm run refresh:npm",
-		"refresh:all:dev": "npm run refresh:composer:dev && npm run refresh:npm"
+		"refresh:all:dev": "npm run refresh:composer:dev && npm run refresh:npm",
+		"test:storybook": "playwright test -c .storybook/playwright.config.ts"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",
