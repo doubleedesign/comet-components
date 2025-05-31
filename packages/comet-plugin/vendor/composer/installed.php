@@ -31,7 +31,7 @@
         'doubleedesign/comet-components-core' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '88aed009f02bda62bd31c79543cd03a53b162ded',
+            'reference' => 'eb19cac3019c0cb3fbe1bcd56ba6b3b4d7fef3ea',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doubleedesign/comet-components-core',
             'aliases' => array(

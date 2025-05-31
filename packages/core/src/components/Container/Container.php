@@ -20,13 +20,14 @@ class Container extends LayoutComponent {
 
     /**
      * @description Name of a gradient to use for the background (requires accompanying CSS to be defined)
+     * Not limited by a trait because implementations could have all kinds of gradients they handle themselves
      */
-    protected ?string $gradient; // TODO: Not limited by a trait because implementations could have all kinds of gradients they handle themselves
+    protected ?string $gradient;
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Container.container');
         $this->set_size_from_attrs($attributes);
-        $this->gradient = $attributes['gradient'] ?? null;
+        $this->gradient = !empty($attributes['gradient']) ? $attributes['gradient'] : null;
         $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
 
         $globalBackground = Config::get_global_background();
@@ -62,10 +63,7 @@ class Container extends LayoutComponent {
             $attributes['data-size'] = $this->size->value;
         }
 
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-        elseif (isset($this->gradient)) {
+        if (isset($this->gradient)) {
             $attributes['data-background'] = 'gradient-' . $this->gradient;
         }
 

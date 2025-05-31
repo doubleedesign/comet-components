@@ -15,9 +15,15 @@ trait BackgroundColor {
         if (isset($attributes['backgroundColor'])) {
             if ($attributes['backgroundColor'] instanceof ThemeColor) {
                 $this->backgroundColor = $attributes['backgroundColor'];
+                $this->add_attributes([
+                    'data-background' => $this->backgroundColor->value,
+                ]);
             }
             else {
                 $this->backgroundColor = ThemeColor::tryFrom($attributes['backgroundColor']);
+                $this->add_attributes([
+                    'data-background' => $this->backgroundColor?->value,
+                ]);
             }
         }
     }

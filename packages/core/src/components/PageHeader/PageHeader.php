@@ -55,16 +55,6 @@ class PageHeader extends UIComponent {
         );
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-
-        return $attributes;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

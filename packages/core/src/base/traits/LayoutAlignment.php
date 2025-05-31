@@ -24,5 +24,10 @@ trait LayoutAlignment {
 
         $vAlign = $attributes['vAlign'] ?? $attributes['alignItems'] ?? $attributes['layout']['alignItems'] ?? $attributes['verticalAlignment'] ?? null;
         $this->vAlign = isset($vAlign) ? Alignment::fromString($vAlign) : $defaultVertical;
+
+        $this->add_attributes([
+            'data-halign' => $this->hAlign->value,
+            'data-valign' => $this->vAlign->value,
+        ]);
     }
 }

@@ -195,6 +195,7 @@
       <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/openpsa/ranger" />
       <path value="$PROJECT_DIR$/vendor/laravel/pint" />
       <path value="$PROJECT_DIR$/packages/core/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2">
@@ -297,7 +298,6 @@
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/packages/core/vendor/bin/phpstan" />
-      <PhpStanConfiguration asDefaultInterpreter="true" deletedFromTheList="true" />
     </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">

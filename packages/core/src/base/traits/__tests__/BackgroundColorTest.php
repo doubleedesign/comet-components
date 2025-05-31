@@ -9,6 +9,7 @@ use Doubleedesign\Comet\Core\{BackgroundColor, ThemeColor};
 function create_component_with_bg_color(array $attributes): object {
     return new class($attributes) {
         use BackgroundColor;
+        private array $rawAttributes = [];
 
         public function __construct(array $attributes) {
             $this->set_background_color_from_attrs($attributes);
@@ -16,6 +17,12 @@ function create_component_with_bg_color(array $attributes): object {
 
         public function get_background_color() {
             return $this->backgroundColor;
+        }
+
+        // Simulate adding attributes to the component like Renderable does,
+        // but keep them in this instance for isolation
+        public function add_attributes(array $attributes): void {
+            $this->rawAttributes = array_merge($this->rawAttributes, $attributes);
         }
     };
 }
@@ -27,10 +34,17 @@ function create_component_with_inner_components(array $attributes = [], array $i
     return new class($attributes, $innerComponents) {
         use BackgroundColor;
         public array $innerComponents = [];
+        private array $rawAttributes = [];
 
         public function __construct(array $attributes, array $innerComponents = []) {
             $this->set_background_color_from_attrs($attributes);
             $this->innerComponents = $innerComponents;
+        }
+
+        // Simulate adding attributes to the component like Renderable does,
+        // but keep them in this instance for isolation
+        public function add_attributes(array $attributes): void {
+            $this->rawAttributes = array_merge($this->rawAttributes, $attributes);
         }
     };
 }

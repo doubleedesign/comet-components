@@ -130,16 +130,6 @@ class SiteHeader extends LayoutComponent {
         $this->responsiveComponentsAfterMenu = array_slice($responsiveInnerComponents, $mainMenuIndex + 1);
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-
-        return $attributes;
-    }
-
     protected function get_inner_container_html_attributes(): array {
         $attributes = [];
 

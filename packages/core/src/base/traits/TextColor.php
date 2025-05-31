@@ -12,5 +12,9 @@ trait TextColor {
         $this->textColor = isset($attributes['textColor'])
             ? ThemeColor::tryFrom($attributes['textColor'])
             : null;
+
+        if ($this->textColor !== null) {
+            $this->add_attributes(['data-text-color' => $this->textColor->value]);
+        }
     }
 }

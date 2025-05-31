@@ -25,13 +25,6 @@ class IconWithText extends UIComponent {
         ]);
     }
 
-    public function get_html_attributes(): array {
-        return array_merge(
-            parent::get_html_attributes(),
-            ['data-color-theme' => $this->colorTheme->value]
-        );
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

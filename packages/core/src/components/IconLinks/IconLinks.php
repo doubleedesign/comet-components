@@ -26,24 +26,6 @@ class IconLinks extends Renderable {
         $this->iconPrefix = $attributes['iconPrefix'] ?? $this->iconPrefix;
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->orientation)) {
-            $attributes['data-orientation'] = $this->orientation->value;
-        }
-
-        if (isset($this->hAlign)) {
-            $attributes['data-hAlign'] = $this->hAlign->value;
-        }
-
-        if (isset($this->vAlign)) {
-            $attributes['data-vAlign'] = $this->vAlign->value;
-        }
-
-        return $attributes;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

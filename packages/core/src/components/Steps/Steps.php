@@ -44,17 +44,10 @@ class Steps extends LayoutComponent {
     }
 
     public function get_html_attributes(): array {
-        $attributes = array_merge(
-            parent::get_html_attributes(),
-            ['data-orientation' => $this->orientation->value]
-        );
-
+        $attributes = parent::get_html_attributes();
+        
         if ($this->orientation === Orientation::HORIZONTAL && isset($this->maxPerRow)) {
             $attributes['data-max-per-row'] = $this->maxPerRow;
-        }
-
-        if (isset($this->colorTheme)) {
-            $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
         return $attributes;

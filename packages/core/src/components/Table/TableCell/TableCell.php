@@ -20,16 +20,6 @@ class TableCell extends TextElement {
         $this->verticalAlign = $attributes['verticalAlign'] ?? null;
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-
-        return $attributes;
-    }
-
     public function get_inline_styles(): array {
         $styles = parent::get_inline_styles();
 

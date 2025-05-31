@@ -50,16 +50,6 @@ class Button extends Renderable {
         return array_unique($result);
     }
 
-    protected function get_html_attributes(): array {
-        $attrs = parent::get_html_attributes();
-
-        if ($this->colorTheme) {
-            $attrs['data-color-theme'] = $this->colorTheme->value;
-        }
-
-        return $attrs;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

@@ -173,12 +173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doubleedesign/comet-components-core.git",
-                "reference": "88aed009f02bda62bd31c79543cd03a53b162ded"
+                "reference": "eb19cac3019c0cb3fbe1bcd56ba6b3b4d7fef3ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doubleedesign/comet-components-core/zipball/88aed009f02bda62bd31c79543cd03a53b162ded",
-                "reference": "88aed009f02bda62bd31c79543cd03a53b162ded",
+                "url": "https://api.github.com/repos/doubleedesign/comet-components-core/zipball/eb19cac3019c0cb3fbe1bcd56ba6b3b4d7fef3ea",
+                "reference": "eb19cac3019c0cb3fbe1bcd56ba6b3b4d7fef3ea",
                 "shasum": ""
             },
             "require": {
@@ -192,7 +192,7 @@
                 "illuminate/view": "^10.0",
                 "openpsa/ranger": "^0.5.8"
             },
-            "time": "2025-05-31T00:00:17+00:00",
+            "time": "2025-05-31T07:37:40+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",

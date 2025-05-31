@@ -18,16 +18,6 @@ class TableCaption extends TextElement {
         $this->position = $attributes['position'] ?? $this->position;
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->position)) {
-            $attributes['data-position'] = $this->position;
-        }
-
-        return $attributes;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

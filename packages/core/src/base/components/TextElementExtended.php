@@ -9,14 +9,4 @@ abstract class TextElementExtended extends TextElement {
         parent::__construct($attributes, $content, $bladeFile);
         $this->set_text_color_from_attrs($attributes);
     }
-
-    public function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->textColor)) {
-            $attributes['data-text-color'] = $this->textColor->value;
-        }
-
-        return $attributes;
-    }
 }

@@ -123,6 +123,9 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/symfony" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/voku" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/phpstan/phpstan" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/phpstan" />
+      <excludeFolder url="file://$MODULE_DIR$/test/unit/coverage" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

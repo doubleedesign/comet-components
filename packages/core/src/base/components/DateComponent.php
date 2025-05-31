@@ -65,7 +65,6 @@ abstract class DateComponent extends Renderable {
         $attrs = parent::get_html_attributes();
 
         $attrs['aria-label'] = $this->get_accessible_date_string();
-        $attrs['data-color-theme'] = $this->colorTheme->value;
 
         return $attrs;
     }

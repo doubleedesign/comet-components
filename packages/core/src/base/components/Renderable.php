@@ -187,6 +187,10 @@ abstract class Renderable {
         return array_unique($result);
     }
 
+    protected function add_attributes(array $attributes): void {
+        $this->rawAttributes = array_merge($this->rawAttributes, $attributes);
+    }
+
     /**
      * Get the valid/supported HTML attributes for the given tag
      *

@@ -38,16 +38,6 @@ class SiteFooter extends UIComponent {
         $this->simplify_all_background_colors();
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-
-        return $attributes;
-    }
-
     protected function get_filtered_classes(): array {
         $classes = parent::get_filtered_classes();
 

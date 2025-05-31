@@ -8,8 +8,11 @@ abstract class LayoutComponent extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
-        $this->set_background_color_from_attrs($attributes);
         $this->set_layout_alignment_from_attrs($attributes);
+
+        if (!$this instanceof Container) {
+            $this->set_background_color_from_attrs($attributes);
+        }
 
         if (!$this->exclude_from_background_simplification()) {
             if ($this instanceof Container && !$this->withWrapper) {
@@ -30,27 +33,6 @@ abstract class LayoutComponent extends UIComponent {
         }
 
         return parent::get_filtered_classes();
-    }
-
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
-            $attributes['data-halign'] = $this->hAlign->value;
-        }
-
-        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
-            $attributes['data-valign'] = $this->vAlign->value;
-        }
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-        elseif (isset($this->gradient)) {
-            $attributes['data-background'] = 'gradient-' . $this->gradient;
-        }
-
-        return $attributes;
     }
 
     private function exclude_from_background_simplification(): bool {

@@ -15,5 +15,9 @@ trait LayoutOrientation {
         // In WordPress, some blocks have $attributes['theSetting'] and some have $attributes['layout']['theSetting'] so we need to account for both
         $orientation = $attributes['orientation'] ?? $attributes['layout']['orientation'] ?? null;
         $this->orientation = isset($orientation) ? Orientation::tryFrom($orientation) : $default;
+
+        $this->add_attributes([
+            'data-orientation' => $this->orientation->value,
+        ]);
     }
 }

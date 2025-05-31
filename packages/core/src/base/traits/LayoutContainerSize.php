@@ -19,5 +19,9 @@ trait LayoutContainerSize {
         elseif (isset($attributes['className'])) {
             $this->size = ContainerSize::from_wordpress_class_name($attributes['className']);
         }
+
+        if ($this->size !== null) {
+            $this->add_attributes(['size' => $this->size->value]);
+        }
     }
 }

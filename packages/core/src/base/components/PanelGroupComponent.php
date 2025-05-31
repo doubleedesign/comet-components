@@ -36,18 +36,4 @@ abstract class PanelGroupComponent extends UIComponent {
     protected function get_panels(): array {
         return $this->panels;
     }
-
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->orientation)) {
-            $attributes['data-orientation'] = $this->orientation->value;
-        }
-
-        if (isset($this->colorTheme)) {
-            $attributes['data-color-theme'] = $this->colorTheme->value;
-        }
-
-        return $attributes;
-    }
 }

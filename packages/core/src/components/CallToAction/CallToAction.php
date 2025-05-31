@@ -26,16 +26,6 @@ class CallToAction extends UIComponent {
         $this->set_background_color_from_attrs($attributes);
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-
-        return $attributes;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

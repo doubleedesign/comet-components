@@ -38,10 +38,7 @@ class Group extends UIComponent {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-        elseif (isset($this->gradient)) {
+        if (isset($this->gradient)) {
             $attributes['data-background'] = 'gradient-' . $this->gradient;
         }
 

@@ -35,14 +35,6 @@ class Separator extends Renderable {
         });
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        $attributes['data-color-theme'] = $this->color->value;
-
-        return $attributes;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

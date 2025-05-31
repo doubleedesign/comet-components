@@ -10,6 +10,7 @@ use PHPUnit\Framework\Attributes\Test;
 function create_component_With_layout_alignment(array $attributes): object {
     return new class($attributes) {
         use LayoutAlignment;
+        private array $rawAttributes = [];
 
         public function __construct(array $attributes) {
             $this->set_layout_alignment_from_attrs($attributes);
@@ -21,6 +22,12 @@ function create_component_With_layout_alignment(array $attributes): object {
 
         public function get_vAlign() {
             return $this->vAlign;
+        }
+
+        // Simulate adding attributes to the component like Renderable does,
+        // but keep them in this instance for isolation
+        public function add_attributes(array $attributes): void {
+            $this->rawAttributes = array_merge($this->rawAttributes, $attributes);
         }
     };
 }

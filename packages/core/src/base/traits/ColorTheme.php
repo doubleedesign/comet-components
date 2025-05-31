@@ -15,5 +15,9 @@ trait ColorTheme {
         $this->colorTheme = isset($attributes['colorTheme'])
             ? ThemeColor::tryFrom($attributes['colorTheme'])
             : $default;
+
+        if ($this->colorTheme !== null) {
+            $this->add_attributes(['data-color-theme' => $this->colorTheme->value]);
+        }
     }
 }

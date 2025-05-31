@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\Container;
+use Doubleedesign\Comet\Core\{Container};
 use function Patchwork\redefine;
 
 test('same bg as global is ignored', function() {

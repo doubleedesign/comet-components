@@ -26,24 +26,6 @@ class ButtonGroup extends UIComponent {
         $this->set_layout_alignment_from_attrs($attributes);
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->orientation)) {
-            $attributes['data-orientation'] = $this->orientation->value;
-        }
-
-        if (isset($this->hAlign)) {
-            $attributes['data-halign'] = $this->hAlign->value;
-        }
-
-        if (isset($this->vAlign)) {
-            $attributes['data-valign'] = $this->vAlign->value;
-        }
-
-        return $attributes;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

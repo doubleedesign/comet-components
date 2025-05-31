@@ -40,11 +40,4 @@ class SectionMenu extends Menu {
         // so we don't want section-menu__menu as would be the default
         return 'section-navigation';
     }
-
-    protected function get_html_attributes(): array {
-        return array_merge(
-            parent::get_html_attributes(),
-            ['data-color-theme' => $this->colorTheme->value]
-        );
-    }
 }

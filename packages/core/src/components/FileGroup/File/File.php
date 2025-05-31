@@ -51,16 +51,10 @@ class File extends Renderable {
     }
 
     public function get_html_attributes(): array {
-        $attributes = array_merge(
+        return array_merge(
             parent::get_html_attributes(),
             ['href' => $this->url]
         );
-
-        if ($this->colorTheme) {
-            $attributes['data-color-theme'] = $this->colorTheme->value;
-        }
-
-        return $attributes;
     }
 
     public function render(): void {
