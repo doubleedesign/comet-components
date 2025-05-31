@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/html';
+import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
 import { Alignment, ALIGNMENT_OPTIONS, ThemeColor, THEME_COLORS } from '../../../../test/storybook-helpers.ts';
 
@@ -125,7 +125,7 @@ export default meta;
 type Story = StoryObj<ColumnsProps>;
 
 export const Playground: Story = {
-	tags: ['docsOnly']
+	tags: []
 };
 
 export const TwoEqualColumns: Story = {

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/html';
+import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
 
 type DateBlockProps = {
@@ -109,5 +109,5 @@ export default meta;
 type Story = StoryObj<DateBlockProps>;
 
 export const Playground: Story = {
-	tags: ['docsOnly']
+	tags: []
 };

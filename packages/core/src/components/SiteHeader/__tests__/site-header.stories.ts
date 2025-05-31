@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/html';
+import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
 import { Alignment } from "../../../../test/storybook-helpers.ts";
 
@@ -246,5 +246,5 @@ export default meta;
 type Story = StoryObj<SiteHeaderProps>;
 
 export const Playground: Story = {
-	tags: ['docsOnly']
+	tags: []
 };

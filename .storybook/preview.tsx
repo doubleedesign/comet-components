@@ -1,19 +1,19 @@
 import React from 'react';
-import type { Preview } from '@storybook/html';
+import type { Preview } from '@storybook/html-vite';
 import { Title } from './blocks/Title.tsx';
 import { Description } from './blocks/Description.tsx';
 import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
 import { Primary } from './blocks/Primary.tsx';
 import { CommonAttributes } from './custom-components/CommonAttributes.tsx';
-import { Controls, DocsContainer, Subtitle, Unstyled } from '@storybook/blocks';
+import { Controls, DocsContainer, Subtitle, Unstyled } from '@storybook/addon-docs/blocks';
 import comet from './theme.ts';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
-import { addons } from '@storybook/preview-api';
+import { addons } from 'storybook/preview-api';
 const channel = addons.getChannel();
 
 // Log all events
-// import events from '@storybook/core-events';
+// import events from 'storybook/internal/core-events';
 // Object.values(events).forEach((event) => {
 // 	channel.on(event, (data) => {
 // 		console.log(event, data);

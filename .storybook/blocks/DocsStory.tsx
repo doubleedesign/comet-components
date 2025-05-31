@@ -1,7 +1,7 @@
 // @source https://github.com/storybookjs/storybook/blob/next/code/lib/blocks/src/blocks/DocsStory.tsx
 import type { FC } from 'react';
 import React from 'react';
-import { Anchor, Description, Subheading, useOf, type DocsStoryProps } from '@storybook/blocks';
+import { Anchor, Description, Subheading, useOf, type DocsStoryProps } from '@storybook/addon-docs/blocks';
 import { Canvas } from './Canvas.tsx';
 
 export const DocsStory: FC<DocsStoryProps> = ({

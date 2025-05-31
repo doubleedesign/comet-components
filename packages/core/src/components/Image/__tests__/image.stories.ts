@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/html';
+import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
 
 type ImageProps = {
@@ -246,5 +246,5 @@ export default meta;
 type Story = StoryObj<ImageProps>;
 
 export const Playground: Story = {
-	tags: ['docsOnly']
+	tags: []
 };

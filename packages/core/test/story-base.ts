@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/html';
+import type { Meta } from '@storybook/html-vite';
 
 export const createStoryBase = (ComponentName: string) => ({
 	// These are used for the custom "open in new tab" link

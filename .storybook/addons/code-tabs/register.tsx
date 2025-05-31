@@ -1,6 +1,6 @@
 import React from 'react';
-import { addons, types } from '@storybook/manager-api';
-import { DOCS_PREPARED, DOCS_RENDERED, STORY_PREPARED, SET_CURRENT_STORY } from '@storybook/core-events';
+import { addons, types } from 'storybook/manager-api';
+import { DOCS_PREPARED, DOCS_RENDERED, STORY_PREPARED, SET_CURRENT_STORY } from 'storybook/internal/core-events';
 import { ADDON_ID } from './constants.tsx';
 import { PhpPanel } from './PhpPanel.tsx';
 import { HtmlPanel } from './HtmlPanel.tsx';

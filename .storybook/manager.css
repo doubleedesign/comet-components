@@ -1,11 +1,11 @@
 @import url("https://use.typekit.net/daf8wql.css");
 
-.sb-bar {
-	display: none;
-}
+.sb-bar[data-test-id="sb-preview-toolbar"] {
+	display: none; /* Hide on docs pages */
 
-#root.is-story-page .sb-bar {
-	display: block;
+	#root:has(#storybook-panel-root) & {
+		display: block; /* Show on standalone story view */
+	}
 }
 
 .sidebar-header {
@@ -58,7 +58,7 @@
 
 .sidebar-item {
 
-	a {
+	a, button {
 		display: flex;
 		align-items: center;
 
@@ -68,12 +68,20 @@
 			padding-inline-end: 0.25rem;
 
 			.sbdocs__icon__inner {
-
 				svg {
 					display: block;
 					width: 1.125rem;
 					height: 1.125rem;
 				}
+			}
+
+			/** The button when there is multiple pages for a component, i.e., docs and stories */
+			[data-icon="component"] {
+			}
+
+			[data-nodetype="document"] &,
+			[data-nodetype="story"] & {
+				display: none;
 			}
 		}
 	}
