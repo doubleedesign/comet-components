@@ -5,8 +5,7 @@ on:
     branches:
       - master
     paths:
-      ## TODO: This needs to support more than one package
-      - 'packages/core-standalone/responsive-panels/**'
+      - 'packages/core-standalone/**'
 
 jobs:
   split:
@@ -18,7 +17,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      ## TODO: This needs to support more than one package
       - name: Split Repository
         run: |
           git subtree split --prefix=packages/core-standalone/responsive-panels -b split-branch
@@ -36,7 +34,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.COMET_TOKEN }}
-          branch: master
+          branch: main
           force: true
           directory: /tmp/split-repo
           repository: doubleedesign/comet-components-responsive-panels

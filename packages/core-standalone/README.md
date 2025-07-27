@@ -16,4 +16,5 @@ php scripts/export-standalone-package.php --component=YourComponentName
 
 The latter are stored in the `dist` folder of the standalone package which is uploaded to Git.
 
-To set one up to be split to a standalone repository for Composer installation or easy download from GitHub, add it to the `./github/workflows/split-core-standalone.yml` file.
+To set one up to be split to a standalone repository for Composer installation or easy download from GitHub, add it to the `./github/workflows/split-core-standalone.yml` file or create a similar action.
+
