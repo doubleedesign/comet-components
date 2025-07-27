@@ -1,5 +1,6 @@
 // This file is to bundle all the SCSS files into one file in dist/dist.css
 // To see if any are missing, run php scripts/healthcheck.php from the project root
+@use "./src/components/common.scss";
 @use "./src/components/global.scss";
 @use "./src/components/Container/container.scss";
 @use "./src/components/Group/group.scss";
