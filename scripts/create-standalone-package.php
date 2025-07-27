@@ -219,18 +219,18 @@ class ComponentStandalonePackageGenerator {
             'authors'     => $coreComposerData['authors'],
             'autoload'    => [
                 "classmap" => [
-                    "src/components/",
-                    "src/components/**/"
+                    "dist/src/components/",
+                    "dist/src/components/**/"
                 ],
                 'psr-4' => [
                     "Doubleedesign\\Comet\\Core\\" => [
-                        "src/base/types/",
-                        "src/base/types/",
-                        "src/base/attributes/",
-                        "src/base/traits/",
-                        "src/base/components/",
-                        "src/base/",
-                        "src/services/"
+                        "dist/src/base/types/",
+                        "dist/src/base/types/",
+                        "dist/src/base/attributes/",
+                        "dist/src/base/traits/",
+                        "dist/src/base/components/",
+                        "dist/src/base/",
+                        "dist/src/services/"
                     ]
                 ]
             ],

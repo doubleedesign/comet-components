@@ -38,7 +38,6 @@ storybook-static
 docs
 packages/core/coverage/
 packages/core-standalone/**/src/*
-packages/core-standalone/*/composer.json
 !packages/core-standalone/**/dist/**/
 packages/core-standalone/**/dist/vendor
 

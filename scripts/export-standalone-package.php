@@ -18,8 +18,8 @@ class ComponentStandalonePackageExporter {
 
     public function export(): void {
         // Copy composer.json from core-standalone/<component-name> to dist
-        $composerJsonPath = $this->packagePath . '/composer.json';
-        copy($composerJsonPath, $this->distPath . '/composer.json');
+        //        $composerJsonPath = $this->packagePath . '/composer.json';
+        //        copy($composerJsonPath, $this->distPath . '/composer.json');
 
         // Convert all the symlinks from the src directory , including recursing into directories,
         // into copies of the real files in the dist directory, keeping the same structure
