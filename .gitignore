@@ -36,6 +36,10 @@ docs-site/docs/.vuepress/.temp
 # Builds
 storybook-static
 docs
-/packages/core/coverage/
+packages/core/coverage/
+packages/core-standalone/**/src/*
+packages/core-standalone/*/composer.json
+!packages/core-standalone/**/dist/**/
+packages/core-standalone/**/dist/vendor
 
 test/unit/coverage/

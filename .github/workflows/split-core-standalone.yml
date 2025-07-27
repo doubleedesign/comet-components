@@ -1,0 +1,42 @@
+name: Split Into Standalone Packages
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      ## TODO: This needs to support more than one package
+      - 'packages/core-standalone/responsive-panels/**'
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      ## TODO: This needs to support more than one package
+      - name: Split Repository
+        run: |
+          git subtree split --prefix=packages/core-standalone/responsive-panels -b split-branch
+
+      - name: Clone split branch to temp directory
+        run: |
+          mkdir -p /tmp/split-repo
+          cd /tmp/split-repo
+          git init
+          git pull $GITHUB_WORKSPACE split-branch
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+      - name: Push to target repository
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.COMET_TOKEN }}
+          branch: master
+          force: true
+          directory: /tmp/split-repo
+          repository: doubleedesign/comet-components-responsive-panels
