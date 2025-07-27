@@ -52,11 +52,35 @@ class ComponentStandalonePackageGenerator {
         $command = "Remove-Item -Path \"$testsPath\" -Force -Recurse -ErrorAction SilentlyContinue";
         shell_exec($this->powershellPath . ' -Command ' . $command);
 
-        // $this->symlink_main_component_files($sourcePath);
-        // $this->process_php_dependencies($sourcePath);
-        //  $this->symlink_plugins($sourcePath);
+        $this->symlink_main_component_files($sourcePath);
+        $this->process_php_dependencies($sourcePath);
+        $this->symlink_plugins($sourcePath);
 
         $this->create_composer_file();
+
+        // Create PreprocessedHtml class in the target components directory
+        $preprocessedHtmlPath = $this->targetDirectory . '/components/PreprocessedHTML.php';
+        $preprocessedHtmlContent = <<<PHP
+<?php
+namespace Doubleedesign\Comet\Core;
+
+/**
+ * Utility class to handle the rendering of preprocessed HTML content
+ * so it can be inserted into a Comet component as an "innerComponent"
+ */
+class PreprocessedHTML {
+	private string \$content;
+
+	function __construct(string \$content) {
+		\$this->content = \$content;
+	}
+
+	public function render(): void {
+		echo \Utils::sanitise_content(\$this->content);
+	}
+}
+PHP;
+        file_put_contents($preprocessedHtmlPath, $preprocessedHtmlContent);
     }
 
     /**
