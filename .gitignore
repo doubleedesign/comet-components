@@ -40,5 +40,6 @@ packages/core/coverage/
 packages/core-standalone/**/src/*
 !packages/core-standalone/**/dist/**/
 packages/core-standalone/**/dist/vendor
+!packages/core-standalone/**/src/**/src/*
 
 test/unit/coverage/
