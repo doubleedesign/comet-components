@@ -95,7 +95,7 @@ class PreprocessedHTML {
 	}
 
 	public function render(): void {
-		echo \Utils::sanitise_content(\$this->content);
+		echo Utils::sanitise_content(\$this->content);
 	}
 }
 PHP;
