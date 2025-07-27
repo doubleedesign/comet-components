@@ -26,10 +26,10 @@ class ComponentStandalonePackageExporter {
         $this->copy_symlinked_to_real($this->packagePath . '/src', $this->distPath . '/src');
 
         // Run composer install in the dist directory
-        shell_exec("$this->powershellPath -Command \"cd {$this->distPath} && composer install --no-dev");
+        // shell_exec("$this->powershellPath -Command \"cd {$this->distPath} && composer install --no-dev");
 
         // And generate autoload files
-        shell_exec("$this->powershellPath -Command \"cd {$this->distPath} && composer dump-autoload -o");
+        // shell_exec("$this->powershellPath -Command \"cd {$this->distPath} && composer dump-autoload -o");
     }
 
     private function copy_symlinked_to_real(string $sourcePath, string $destPath): void {

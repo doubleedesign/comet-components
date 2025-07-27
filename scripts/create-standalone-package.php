@@ -28,6 +28,25 @@ class ComponentStandalonePackageGenerator {
     public function generate_package(): void {
         $sourcePath = $this->sourceDirectory . DIRECTORY_SEPARATOR . $this->componentName;
 
+        // Symlink some essential files
+        // TODO: Clean up this verbose repetitive code
+        $utilsPath = dirname(__DIR__, 1) . '\packages\core\src\base\Utils.php';
+        $packageUtilsPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'Utils.php';
+        $command = "New-Item -ItemType SymbolicLink -Path \"$packageUtilsPath\" -Target \"$utilsPath\" -Force";
+        shell_exec($this->powershellPath . ' -Command ' . $command);
+        $configPath = dirname(__DIR__, 1) . '\packages\core\src\base\Config.php';
+        $packageConfigPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'Config.php';
+        $command = "New-Item -ItemType SymbolicLink -Path \"$packageConfigPath\" -Target \"$configPath\" -Force";
+        shell_exec($this->powershellPath . ' -Command ' . $command);
+        $settingsPath = dirname(__DIR__, 1) . '\packages\core\src\base\Settings.php';
+        $packageSettingsPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'Settings.php';
+        $command = "New-Item -ItemType SymbolicLink -Path \"$packageSettingsPath\" -Target \"$settingsPath\" -Force";
+        shell_exec($this->powershellPath . ' -Command ' . $command);
+        $globalCssPath = dirname(__DIR__, 1) . '\packages\core\src\components\global.css';
+        $packageGlobalCssPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'global.css';
+        $command = "New-Item -ItemType SymbolicLink -Path \"$packageGlobalCssPath\" -Target \"$globalCssPath\" -Force";
+        shell_exec($this->powershellPath . ' -Command ' . $command);
+
         // Symlink the whole services directory to the same place in the standalone package
         $sourceServicesPath = dirname(__DIR__, 1) . '\packages\core\src\services';
         $packageServicesPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'services';
