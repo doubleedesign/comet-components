@@ -1,11 +1,11 @@
-name: Split Into Standalone Packages
+name: Publish Responsive Panels standalone package
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'packages/core-standalone/**'
+      - 'packages/core-standalone/responsive-panels/**'
 
 jobs:
   split:

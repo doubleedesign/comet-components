@@ -1,4 +1,4 @@
-name: Split Comet Plugin Package
+name: Publish Comet Plugin Package
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Split Comet Calendar package
+name: Publish Comet Calendar package
 
 on:
   push:

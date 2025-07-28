@@ -1,4 +1,4 @@
-name: Split Comet Canvas Package
+name: Publish Comet Canvas Package
 
 on:
   push:

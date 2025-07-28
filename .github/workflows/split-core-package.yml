@@ -1,4 +1,4 @@
-name: Split Core Package
+name: Publish Core Package
 
 on:
   push:
