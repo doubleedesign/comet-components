@@ -31,6 +31,10 @@ Or if you have already set up your Composer configuration, you can install Comet
 composer require doubleedesign/comet-components-core
 ```
 
+:::tip Standalone components
+Alternatively, if you don't require the whole library, some components are available as [standalone packages](../installation/composer.md#standalone-packages). The installation process is essentially the same, but you would replace `doubleedesign/comet-components-core` with the name of the standalone package you want to install, such as `doubleedesign/comet-responsive-panels`.
+:::
+
 ## Composer autoloading
 
 Comet Components Core uses Composer's autoloading system to load its classes. This means that to make the component classes available to your implementation, you need to ensure your implementation's autoloader is up-to-date:
@@ -63,9 +67,9 @@ Nothing will break - the options will be set to their defaults.
 ## Loading assets
 
 ### Comet's assets
-Implementations need a way to load Comet Components Core's CSS and JavaScript files. There are three asset loading methods you can choose from or use a combination of:
+Implementations need a way to load Comet Components Core's CSS and JavaScript files. There are multiple asset loading methods you can choose from or use a combination of depending on your use case:
 
-:::details Load the bundled CSS and JS
+:::details Load the bundled CSS and JS <Badge type="warning" text="Full library only" vertical="middle" />
 The simplest way to load the assets is by loading the bundled JavaScript and CSS files using whatever method your system uses to put stuff in the document `<head>`.
 
 The paths from your project root (or wherever your Composer `vendor` folder is) are:
@@ -82,16 +86,18 @@ The JavaScript file's `<script>` tag also requires the following attributes:
 
 An example of the result in WordPress is:
 ```html
-<script id="comet-components-js" 
-		type="module" 
-		src="http://vanilla-playground.local/wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core/dist/dist.js" 
-		data-base-path="/wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core">
+
+<script id="comet-components-js"
+		type="module"
+		src="http://vanilla-playground.local/wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core/dist/dist.js"
+		data-base-path="/wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core"
+>
 </script>
 
 ```
 :::
 
-:::details Use the Comet `Assets` class
+:::details Use the Comet `Assets` class <Badge type="warning" text="Full library only" vertical="middle" />
 Component CSS and JS files that follow the kebab-case naming convention are automatically added to the `Assets` class, which has utility methods that can be used to load the global assets plus just the assets for components that have been rendered on the page.
 
 The below methods will render the HTML for the global assets (such as `global.css`):
@@ -111,10 +117,11 @@ Assets::get_instance()->render_component_script_html();
 Examples of this in action for testing pages can be found in `./test/browser/wrapper-open.php` and `./test/browser/wrapper-close.php`.
 
 :::warning
-Remember, PHP reads your page top-to-bottom. This means that you can't load component assets in the `<head>` unless you have somehow instantiated the components before calling the asset loader there ([output buffering](https://www.php.net/manual/en/ref.outcontrol.php) is one way you could do this). Loading assets at the bottom of the page is the easiest way to ensure that the assets are loaded after the components have been rendered, but can cause a flash of unstyled content (FOUC) when the page first loads.
+Remember, PHP reads your page top-to-bottom. This means that you can't load component assets in the
+`<head>` unless you have somehow instantiated the components before calling the asset loader there ([output buffering](https://www.php.net/manual/en/ref.outcontrol.php) is one way you could do this). Loading assets at the bottom of the page is the easiest way to ensure that the assets are loaded after the components have been rendered, but can cause a flash of unstyled content (FOUC) when the page first loads.
 :::
 
-:::details Load the global CSS + individual CSS and JS files 
+:::details Load the global CSS + individual CSS and JS files <Badge type="warning" text="Full library" vertical="middle" /> <Badge type="important" text="Standalone components" vertical="middle" />
 Each component is designed to be fairly self-contained in terms of assets, so that you can load just what you need. How you achieve this depends on how your system determines which components are in use.
 
 Some common styling is located in `global.css`, which you will need to load however your system handles loading site-wide CSS. The path from your project root (or wherever your Composer `vendor` folder is) is:
@@ -123,7 +130,7 @@ Some common styling is located in `global.css`, which you will need to load howe
 ```
 :::
 
-:::details Your own bundling
+:::details Your own bundling <Badge type="warning" text="Full library" vertical="middle" /> <Badge type="important" text="Standalone components" vertical="middle" />
 The source SCSS and JS files are included in the Composer installation. You can use these to build your own bundle(s) that contain only the components you need. This is a good option if you want to load a single CSS and/or JS file but reduce the size of it by only including the components you need.
 :::
 
