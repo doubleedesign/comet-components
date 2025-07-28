@@ -47,7 +47,7 @@ php scripts/export-standalone-package.php --component YourComponentName
 This script follows the symlinks from the standalone package's `src` directory and copies the real files into the `dist` directory, ready for publishing.
 
 :::note Packages of multiple components
-While this hasn't been done yet, there may be some cases where it makes sense to combine a small number of components into a single standalone package (for example, `FileGroup` and `File`). The scripts don't currently support this directly, but with some minor manual intervention it should be straightforward to do. Using the script to generate packages for each component and then manually combining them into one will probably meet most use cases.
+While this hasn't been done yet, there may be some cases where it makes sense to combine a small number of components into a single standalone package. The scripts don't currently support this directly, but with some minor manual intervention it should be straightforward to do. Using the script to generate packages for each component and then manually combining them into one will probably meet most use cases.
 :::
 
 ## Automatic publishing and updating
