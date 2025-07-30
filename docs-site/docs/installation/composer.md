@@ -29,6 +29,9 @@ The core library contains a lot of components, some of which require additional 
 
 The following components are available as standalone packages, published on Packagist:
 - [Responsive Panels](https://packagist.org/packages/doubleedesign/comet-responsive-panels)
+- [FileGroup and File](https://packagist.org/packages/doubleedesign/comet-file-group)
+
+You can always find the latest available packages on the author's [Packagist profile](https://packagist.org/packages/doubleedesign/).
 
 :::tip
 Dev documentation on how to create a standalone package for a component can be found in [Development (Core) -> Standalone Component Packages](../development-core/standalone-packages.md).

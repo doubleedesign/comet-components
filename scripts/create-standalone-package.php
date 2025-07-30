@@ -202,24 +202,20 @@ class ComponentStandalonePackageGenerator {
             'authors'     => $coreComposerData['authors'],
             'autoload'    => [
                 "classmap" => [
-                    "dist/src/components/",
-                    "dist/src/components/**/"
+                    "src/components/",
+                    "src/components/**/"
                 ],
                 'psr-4' => [
                     "Doubleedesign\\Comet\\Core\\" => [
-                        "dist/src/base/types/",
-                        "dist/src/base/types/",
-                        "dist/src/base/attributes/",
-                        "dist/src/base/traits/",
-                        "dist/src/base/components/",
-                        "dist/src/base/",
-                        "dist/src/services/"
+                        "src/base/traits/",
+                        "src/base/components/",
+                        "src/base/",
                     ]
                 ]
             ],
             // TODO: Packaging date stuff needs Ranger, gallery needs BaguetteBox, etc.
             "require" => [
-                'doubleedesign/comet-standalone-launchpad' => $coreComposerData['version']
+                'doubleedesign/comet-components-launchpad' => $coreComposerData['version']
             ]
         ];
 

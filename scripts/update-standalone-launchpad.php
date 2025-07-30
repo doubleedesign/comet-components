@@ -105,25 +105,20 @@ PHP;
         $coreComposerData = json_decode(file_get_contents($coreComposerFilePath), true);
 
         $composerData = [
-            'name'        => 'doubleedesign/comet-standalone-launchpad',
+            'name'        => 'doubleedesign/comet-components-launchpad',
             'description' => 'Base package of common dependencies for Comet Components standalone packages',
             'version'     => $coreComposerData['version'],
             'homepage'    => $coreComposerData['homepage'],
             'authors'     => $coreComposerData['authors'],
             'autoload'    => [
-                "classmap" => [
-                    "dist/src/components/",
-                    "dist/src/components/**/"
-                ],
                 'psr-4' => [
                     "Doubleedesign\\Comet\\Core\\" => [
-                        "dist/src/base/types/",
-                        "dist/src/base/types/",
-                        "dist/src/base/attributes/",
-                        "dist/src/base/traits/",
-                        "dist/src/base/components/",
-                        "dist/src/base/",
-                        "dist/src/services/"
+                        "src/base/types/",
+                        "src/base/attributes/",
+                        "src/base/traits/",
+                        "src/base/components/",
+                        "src/base/",
+                        "src/services/"
                     ]
                 ]
             ],

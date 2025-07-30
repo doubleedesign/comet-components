@@ -1,32 +1,27 @@
 {
-    "name": "doubleedesign/comet-file-group",
-    "description": "Standalone package for FileGroup from the Comet Components library",
-    "version": "0.0.2",
-    "homepage": "https://cometcomponents.io",
-    "authors": [
-        {
-            "name": "Leesa Ward",
-            "email": "leesa@doubleedesign.com.au"
-        }
-    ],
-    "autoload": {
-        "classmap": [
-            "dist/src/components/",
-            "dist/src/components/**/"
-        ],
-        "psr-4": {
-            "Doubleedesign\\Comet\\Core\\": [
-                "dist/src/base/types/",
-                "dist/src/base/types/",
-                "dist/src/base/attributes/",
-                "dist/src/base/traits/",
-                "dist/src/base/components/",
-                "dist/src/base/",
-                "dist/src/services/"
-            ]
-        }
-    },
-    "require": {
-        "doubleedesign/comet-standalone-launchpad": "0.0.2"
-    }
+	"name": "doubleedesign/comet-file-group",
+	"description": "Standalone package for FileGroup from the Comet Components library",
+	"version": "0.0.2",
+	"homepage": "https://cometcomponents.io",
+	"authors": [
+		{
+			"name": "Leesa Ward",
+			"email": "leesa@doubleedesign.com.au"
+		}
+	],
+	"autoload": {
+		"classmap": [
+			"src/components/",
+			"src/components/**/"
+		],
+		"psr-4": {
+			"Doubleedesign\\Comet\\Core\\": [
+				"src/base/traits/",
+				"src/base/"
+			]
+		}
+	},
+	"require": {
+		"doubleedesign/comet-components-launchpad": "0.0.2"
+	}
 }
