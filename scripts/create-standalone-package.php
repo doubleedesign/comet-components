@@ -214,8 +214,10 @@ class ComponentStandalonePackageGenerator {
                 ]
             ],
             // TODO: Packaging date stuff needs Ranger, gallery needs BaguetteBox, etc.
+            // TODO: Implement proper versioning, preferably with automatic version bumps
             "require" => [
-                'doubleedesign/comet-components-launchpad' => $coreComposerData['version']
+                // 'doubleedesign/comet-components-launchpad' => $coreComposerData['version']
+                'doubleedesign/comet-components-launchpad' => 'dev-main'
             ]
         ];
 
