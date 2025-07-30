@@ -14,7 +14,7 @@
 				<span class="{{ $bem_prefix }}__content__meta__size">{{ $size }}</span>
 			@endif
 			@if ($uploadDate)
-				<span class="{{ $bem_prefix }}__content__meta__date">{{ $uploadDdate }}</span>
+				<span class="{{ $bem_prefix }}__content__meta__date">{{ $uploadDate }}</span>
 			@endif
 		</div>
 	</div>
