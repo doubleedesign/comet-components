@@ -1,0 +1,33 @@
+{
+    "component": "FileGroup",
+    "generated_at": "2025-07-30T02:44:08+00:00",
+    "files": [
+        {
+            "type": "directory",
+            "destination": "packages/core-standalone/file-group/src/base"
+        },
+        {
+            "type": "directory",
+            "destination": "packages/core-standalone/file-group/src/base/traits"
+        },
+        {
+            "type": "file",
+            "destination": "packages/core-standalone/file-group/src/base/traits/ColorTheme.php",
+            "source": "packages/core/src/base/traits/ColorTheme.php"
+        },
+        {
+            "type": "file",
+            "destination": "packages/core-standalone/file-group/src/base/traits/Icon.php",
+            "source": "packages/core/src/base/traits/Icon.php"
+        },
+        {
+            "type": "directory",
+            "destination": "packages/core-standalone/file-group/src/components"
+        },
+        {
+            "type": "directory",
+            "destination": "packages/core-standalone/file-group/src/components/FileGroup",
+            "source": "packages/core/src/components/FileGroup"
+        }
+    ]
+}

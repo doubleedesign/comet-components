@@ -1,0 +1,186 @@
+name: Publish standalone packages
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/core-standalone/**'
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.detect.outputs.packages }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed packages
+        id: detect
+        run: |
+          # Get list of changed files in the last commit
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          
+          # Find packages that have changes
+          PACKAGES=()
+          
+          for file in $CHANGED_FILES; do
+            if [[ $file == packages/core-standalone/* ]]; then
+              # Extract package name (e.g., packages/core-standalone/file-group/... -> file-group)
+              PACKAGE=$(echo "$file" | cut -d'/' -f3)
+          
+              # Only add if it's not already in the array and it's a valid package directory
+              if [[ ! " ${PACKAGES[@]} " =~ " ${PACKAGE} " ]] && [[ -d "packages/core-standalone/$PACKAGE" ]]; then
+                PACKAGES+=("$PACKAGE")
+              fi
+            fi
+          done
+          
+          # Convert array to JSON format
+          if [ ${#PACKAGES[@]} -eq 0 ]; then
+            PACKAGES_JSON="[]"
+          else
+            PACKAGES_JSON=$(printf '%s\n' "${PACKAGES[@]}" | jq -R . | jq -s -c .)
+          fi
+          
+          echo "packages=$PACKAGES_JSON" >> $GITHUB_OUTPUT
+          
+          echo "Detected changed packages: ${PACKAGES[@]}"
+          echo "JSON output: $PACKAGES_JSON"
+
+  publish:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.packages != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: ${{ fromJson(needs.detect-changes.outputs.packages) }}
+      max-parallel: 1  # Process one at a time to avoid conflicts
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set package variables
+        id: vars
+        run: |
+          echo "repo_name=comet-components-${{ matrix.package }}" >> $GITHUB_OUTPUT
+
+      - name: Copy files to standalone package directory
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          MANIFEST_FILE="packages/core-standalone/$PACKAGE/build-manifest.json"
+          
+          if [ ! -f "$MANIFEST_FILE" ]; then
+            echo "Error: Manifest file not found at $MANIFEST_FILE"
+            echo "Please ensure the manifest file exists in the repository"
+            exit 1
+          fi
+          
+          echo "Processing manifest file for package: $PACKAGE"
+          echo "Manifest file: $MANIFEST_FILE"
+          
+          # Process manifest file using Python
+          python3 << EOF
+          import json
+          import os
+          import shutil
+          from pathlib import Path
+          
+          package = "$PACKAGE"
+          manifest_file = f"packages/core-standalone/{package}/build-manifest.json"
+          
+          # Read the manifest
+          with open(manifest_file, 'r') as f:
+              manifest = json.load(f)
+          
+          print(f"Processing {len(manifest['files'])} items from manifest for {package}...")
+          
+          for file_info in manifest['files']:
+              dest_path = Path(file_info['destination'])
+          
+              if file_info['type'] == 'directory':
+                  # Create directory if it doesn't exist
+                  if 'source' in file_info:
+                      # Directory with source - copy entire directory
+                      source_path = Path(file_info['source'])
+                      if source_path.exists():
+                          if dest_path.exists():
+                              shutil.rmtree(dest_path)
+                          shutil.copytree(source_path, dest_path)
+                          print(f"Copied directory: {file_info['source']} -> {file_info['destination']}")
+                      else:
+                          print(f"Warning: Source directory not found: {source_path}")
+                  else:
+                      # Empty directory - just create it
+                      dest_path.mkdir(parents=True, exist_ok=True)
+                      print(f"Created directory: {file_info['destination']}")
+          
+              elif file_info['type'] == 'file':
+                  # Copy file
+                  source_path = Path(file_info['source'])
+          
+                  if not source_path.exists():
+                      print(f"Warning: Source file not found: {source_path}")
+                      continue
+          
+                  # Create parent directories if they don't exist
+                  dest_path.parent.mkdir(parents=True, exist_ok=True)
+                  shutil.copy2(source_path, dest_path)
+                  print(f"Copied file: {file_info['source']} -> {file_info['destination']}")
+          
+          print(f"File copying completed successfully for {package}!")
+          EOF
+
+      - name: Temporarily commit copied files
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          
+          # Force add files even if they're in .gitignore, because src is ignored for local use
+          git add --force packages/core-standalone/$PACKAGE/
+          
+          # Check if there are actually files to commit
+          if git diff --cached --quiet; then
+            echo "No files to commit for $PACKAGE"
+            exit 0
+          fi
+          
+          git commit -m "Temporary commit for subtree split - copied files from manifest for $PACKAGE"
+
+      - name: Split Repository
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          git subtree split --prefix=packages/core-standalone/$PACKAGE -b split-branch-$PACKAGE
+
+      - name: Clone split branch to temp directory
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          mkdir -p /tmp/split-repo-$PACKAGE
+          cd /tmp/split-repo-$PACKAGE
+          git init
+          git pull $GITHUB_WORKSPACE split-branch-$PACKAGE
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+      - name: Push to target repository
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.COMET_TOKEN }}
+          branch: main
+          force: true
+          directory: /tmp/split-repo-${{ matrix.package }}
+          repository: doubleedesign/${{ steps.vars.outputs.repo_name }}
+
+      - name: Clean up temporary commit from monorepo
+        run: |
+          # Reset the monorepo to remove the temporary commit
+          git reset --hard HEAD~1
+          echo "Temporary commit removed from monorepo"
+

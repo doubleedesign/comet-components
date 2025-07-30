@@ -91,6 +91,9 @@ PHP;
         file_put_contents($preprocessedHtmlPath, $preprocessedHtmlContent);
 
         $this->create_composer_file();
+
+        $manifestCommand = "php " . __DIR__ . DIRECTORY_SEPARATOR . "create-standalone-manifest.php --component=Launchpad";
+        shell_exec($manifestCommand);
     }
 
     private function create_composer_file(): void {

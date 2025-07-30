@@ -17,9 +17,20 @@ class ComponentStandalonePackageGenerator {
         $this->targetDirectory = dirname(__DIR__, 1) . '\packages\core-standalone\\' . self::kebab_case($this->componentName) . '\src';
         $this->powershellPath = '"C:\Program Files\PowerShell\7\pwsh.exe"';
 
-        if (!is_dir($this->targetDirectory)) {
-            mkdir($this->targetDirectory, 0755, true);
+        // Delete and recreate the target directory and config files to ensure a clean state
+        if (is_dir($this->targetDirectory)) {
+            rmdir($this->targetDirectory);
+            // Delete Composer and manifest files one level up
+            $composerFile = dirname($this->targetDirectory) . DIRECTORY_SEPARATOR . 'composer.json';
+            $manifestFile = dirname($this->targetDirectory) . DIRECTORY_SEPARATOR . 'build-manifest.json';
+            if (file_exists($composerFile)) {
+                unlink($composerFile);
+            }
+            if (file_exists($manifestFile)) {
+                unlink($manifestFile);
+            }
         }
+        mkdir($this->targetDirectory, 0755, true);
 
         require_once __DIR__ . '/../vendor/autoload.php';
         require_once __DIR__ . '/../packages/core/vendor/autoload.php';
@@ -33,6 +44,9 @@ class ComponentStandalonePackageGenerator {
         $this->symlink_plugins($sourcePath);
 
         $this->create_composer_file();
+
+        $manifestCommand = "php " . __DIR__ . DIRECTORY_SEPARATOR . "create-standalone-manifest.php --component=" . $this->componentName;
+        shell_exec($manifestCommand);
     }
 
     /**
@@ -54,24 +68,6 @@ class ComponentStandalonePackageGenerator {
         }
         catch (Exception $e) {
             throw new Exception("Failed to create symlink for component: " . $e->getMessage());
-        }
-
-        // Delete the __docs__ and __tests__ directory symlinks if they exist
-        // TODO: Fix this deleting the source files, not just the symlinks
-        $docsPath = $packagePath . DIRECTORY_SEPARATOR . '__docs__';
-        $testsPath = $packagePath . DIRECTORY_SEPARATOR . '__tests__';
-        $command = "Remove-Item -Path \"$docsPath\" -Force -Recurse -ErrorAction SilentlyContinue";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-        $command = "Remove-Item -Path \"$testsPath\" -Force -Recurse -ErrorAction SilentlyContinue";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-
-        // Likewise in any subdirectories
-        $subfolders = glob($packagePath . DIRECTORY_SEPARATOR . '**', GLOB_ONLYDIR);
-        foreach ($subfolders as $subfolder) {
-            $command = "Remove-Item -Path \"$packagePath" . DIRECTORY_SEPARATOR . basename($subfolder) . DIRECTORY_SEPARATOR . '__docs__' . "\" -Force -Recurse -ErrorAction SilentlyContinue";
-            shell_exec($this->powershellPath . '-Command ' . $command);
-            $command = "Remove-Item -Path \"$packagePath" . DIRECTORY_SEPARATOR . basename($subfolder) . DIRECTORY_SEPARATOR . '__tests__' . "\" -Force -Recurse -ErrorAction SilentlyContinue";
-            shell_exec($this->powershellPath . ' -Command ' . $command);
         }
     }
 
