@@ -146,6 +146,14 @@ jobs:
           # Force add files even if they're in .gitignore, because src is ignored for local use
           git add --force packages/core-standalone/$PACKAGE/
           
+          # Remove .scss and .css.map files from the commit
+          git rm -r --cached packages/core-standalone/$PACKAGE/**/*.scss
+          git rm -r --cached packages/core-standalone/$PACKAGE/**/*.css.map
+          
+          # Remove any __docs__ and __tests__ directories from the commit, including in subdirectories, if they exist
+          find packages/core-standalone/$PACKAGE -type d -name '__docs__' -exec git rm -r --cached {} +
+          find packages/core-standalone/$PACKAGE -type d -name '__tests__' -exec git rm -r --cached {} +
+  
           # Check if there are actually files to commit
           if git diff --cached --quiet; then
             echo "No files to commit for $PACKAGE"
