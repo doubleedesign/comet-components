@@ -38,8 +38,6 @@ storybook-static
 docs
 packages/core/coverage/
 packages/core-standalone/**/src/*
-!packages/core-standalone/**/dist/**/
-packages/core-standalone/**/dist/vendor
-!packages/core-standalone/**/src/**/src/*
+!packages/core-standalone/launchpad/src/base/components/PreprocessedHTML.php
 
 test/unit/coverage/
