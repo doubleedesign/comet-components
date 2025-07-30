@@ -8,6 +8,23 @@ For fun and gratitude, Comet's releases are named after albums that can somehow 
 
 ## Current version
 
+### 0.0.3 Rocket Man (30 July 2025)
+
+- Standalone packages for `ResponsivePanels` and `FileGroup`, and the supporting `Launchpad` package
+- Scripts for generating/updating standalone packages
+- Updates to `Config` and `BladeService` to support specifying where to find Blade templates (necessary for standalone packages to work).
+
+:::details Rocket Man - the story
+This update arose solely from wanting to use a small number of Comet Components in a WordPress plugin that I was a) trying to keep generic and b) was initially going into an existing client site, so I didn't want to bloat the plugin with the entire core library and its dependencies. It was not planned far ahead of time so I hadn't put any thought into the song/album.
+
+As part of this work, I needed to think of a name for the foundational package. I tried to think of something space themed to go with "Comet", which led me to rocket takeoffs - hence "launchpad". Which put _Rocket Man_ in my head, because that's how my brain works!
+
+:::
+
+---
+
+## Release History
+
 ### 0.0.2 London Calling (10 April 2025)
 This second alpha release is focused on completion and refinement of the initial set of Vue-enhanced components, notably completion of `ResponsivePanels` and refactoring of `Accordion` and `Tabs` to use the same Vue components, ensuring consistency and removing Bootstrap from the project dependencies.
 
@@ -15,10 +32,6 @@ This second alpha release is focused on completion and refinement of the initial
 This release is named for where I met [Derek Mwanza](https://www.creativeconnections.co.uk/) and he told me about using Vue selectively in his WordPress sites. (Amusingly, this was at a React conference!). While we didn't get a chance to dig into the specifics of
 _how_ he does this, I was fascinated by the idea and quickly investigated it further when I next had a project that could benefit from it. This mere seed of an idea has been instrumental in solving some pain points in responsive markup and client-side interactivity for me, and hence in the direction of Comet Components.
 :::
-
----
-
-## Release History
 
 ### 0.0.1 Fearless (6 April 2025)
 
@@ -64,7 +77,7 @@ This release gets its name from Crowded House, a band Sarah and I both love, and
 This is the pencilling-in of the development of an integration for [SilverStripe CMS](https://www.silverstripe.org/) and [Elemental](https://github.com/silverstripe/silverstripe-elemental). The version number may change as this release may be pushed back to prioritise completion of the WordPress integration as that's already in use.
 
 :::details For Those About To Rock, We Salute You - the story
-The year was 2010, and I was studying my Diploma of IT (Web Development) alongside three new friends known as "the boys from TAFE" (I was one of only two women in my class). My brother hooked me up with a real project to build for one of my final assessment tasks - the first database driven CMS site I ever built myself, for which I used SilverStripe. 
+The year was 2010, and I was studying my Diploma of IT (Web Development) alongside three new friends known as "the boys from TAFE" (I was one of only two women in my class). My brother hooked me up with a real project to build for one of my final assessment tasks - the first database driven CMS site I ever built myself, for which I used SilverStripe.
 
 According to my belatedly-populated Setlist.fm profile, I only attended two concerts in 2010 (that I remember, anyway) - Taylor Swift and AC/DC. I attended the latter with my brother, whose cricket club that first SilverStripe site was for. From their discography, I selected _For Those About To Rock, We Salute You_ as a nostalgic nod to that group of us at TAFE who were just starting to rock in the tech world.
 :::

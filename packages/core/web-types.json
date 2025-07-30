@@ -1,6 +1,6 @@
 {
 	"name": "comet-components",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"contributions": {
 		"html": {
 			"elements": [
