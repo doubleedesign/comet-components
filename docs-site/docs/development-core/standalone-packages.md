@@ -56,7 +56,7 @@ Like the core library and WordPress plugin, the standalone packages can (and sho
 
 Steps a core developer needs to do:
 1. Create and initialise a new repository on GitHub for the standalone package, prefixed with `comet-` and the name of the component in kebab-case (this should usually match what's in the generated `composer.json` file)
-2. Create a [GitHub personal access token](https://github.com/settings/personal-access-tokens) with appropriate repository permissions
+2. Create a [GitHub personal access token](https://github.com/settings/personal-access-tokens) with appropriate permissions for Actions workflows and access to the monorepo and new repo
 3. Add the token as an [actions secret in the monorepo](https://github.com/doubleedesign/comet-components/settings/secrets/actions), called `COMET_TOKEN` (or another name that matches what it's called in the GitHub action)
 4. [Submit the repo to Packagist](https://packagist.org/packages/submit) after the first publish makes `composer.json` available in the repo.
 

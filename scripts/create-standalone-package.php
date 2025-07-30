@@ -78,6 +78,7 @@ class ComponentStandalonePackageGenerator {
         $this->create_composer_file();
 
         // Create PreprocessedHtml class in the target components directory
+        // TODO: Update this so it only creates this class for packages where it is needed
         $preprocessedHtmlPath = $this->targetDirectory . '/components/PreprocessedHTML.php';
         $preprocessedHtmlContent = <<<PHP
 <?php

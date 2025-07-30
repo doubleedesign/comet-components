@@ -1,0 +1,94 @@
+{
+    "name": "File",
+    "description": null,
+    "extends": "Renderable",
+    "abstract": false,
+    "isInner": true,
+    "belongsInside": "FileGroup",
+    "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "file"
+            ],
+            "inherited": true
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for the fill or outline colour",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "null"
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "inherited": true
+        },
+        "description": {
+            "type": "string"
+        },
+        "icon": {
+            "type": "string",
+            "description": "Icon class name; default values set for file types including PDF, plain text, calendar, Word, Excel, ZIP, GZIP, TAR, and 7z",
+            "default": "fa-file"
+        },
+        "iconPrefix": {
+            "type": "string",
+            "description": "Icon prefix class name",
+            "default": "fa-solid"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "mimeType": {
+            "type": "string|mixed",
+            "description": "MIME type of the file"
+        },
+        "size": {
+            "type": "string"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div"
+            ],
+            "default": "div",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "uploadDate": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string",
+            "required": true
+        }
+    }
+}
