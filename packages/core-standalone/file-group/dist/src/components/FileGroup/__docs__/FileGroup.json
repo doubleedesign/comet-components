@@ -1,0 +1,70 @@
+{
+	"name": "FileGroup",
+	"description": "Display a list of downloadable file links with details about them.",
+	"extends": "UIComponent",
+	"abstract": false,
+	"isInner": false,
+	"belongsInside": "LayoutComponent",
+	"attributes": {
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"file-group"
+			],
+			"inherited": true
+		},
+		"colorTheme": {
+			"type": "ThemeColor",
+			"description": "Colour keyword for the fill or outline colour",
+			"supported": [
+				"primary",
+				"secondary",
+				"accent",
+				"error",
+				"success",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"white"
+			],
+			"default": "primary"
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+			"inherited": true
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier",
+			"inherited": true
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles",
+			"inherited": true
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"div"
+			],
+			"default": "div",
+			"inherited": true
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests",
+			"inherited": true
+		}
+	},
+	"files": {
+		"type": "File|array<string,string>",
+		"description": "Either an array of File objects or an array of associative arrays corresponding to File fields",
+		"required": true,
+		"inherited": false
+	}
+}

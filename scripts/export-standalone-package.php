@@ -8,7 +8,12 @@ class ComponentStandalonePackageExporter {
 
     public function __construct($args) {
         $this->packageName = $args['component'];
-        $this->packagePath = __DIR__ . '/../packages/core-standalone/' . $this->kebab_case($this->packageName);
+        if ($this->packageName === 'Launchpad') {
+            $this->packagePath = __DIR__ . '/../packages/core-standalone/launchpad';
+        }
+        else {
+            $this->packagePath = __DIR__ . '/../packages/core-standalone/' . $this->kebab_case($this->packageName);
+        }
         $this->powershellPath = '"C:\Program Files\PowerShell\7\pwsh.exe"';
 
         // Create dist folder

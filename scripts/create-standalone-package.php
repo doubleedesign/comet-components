@@ -28,79 +28,11 @@ class ComponentStandalonePackageGenerator {
     public function generate_package(): void {
         $sourcePath = $this->sourceDirectory . DIRECTORY_SEPARATOR . $this->componentName;
 
-        // Symlink some essential files
-        // TODO: Clean up this verbose repetitive code
-        $utilsPath = dirname(__DIR__, 1) . '\packages\core\src\base\Utils.php';
-        $packageUtilsPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'Utils.php';
-        $command = "New-Item -ItemType SymbolicLink -Path \"$packageUtilsPath\" -Target \"$utilsPath\" -Force";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-        $configPath = dirname(__DIR__, 1) . '\packages\core\src\base\Config.php';
-        $packageConfigPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'Config.php';
-        $command = "New-Item -ItemType SymbolicLink -Path \"$packageConfigPath\" -Target \"$configPath\" -Force";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-        $settingsPath = dirname(__DIR__, 1) . '\packages\core\src\base\Settings.php';
-        $packageSettingsPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'Settings.php';
-        $command = "New-Item -ItemType SymbolicLink -Path \"$packageSettingsPath\" -Target \"$settingsPath\" -Force";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-        $globalCssPath = dirname(__DIR__, 1) . '\packages\core\src\components\global.css';
-        $packageGlobalCssPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'global.css';
-        $command = "New-Item -ItemType SymbolicLink -Path \"$packageGlobalCssPath\" -Target \"$globalCssPath\" -Force";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-
-        // Symlink the whole services directory to the same place in the standalone package
-        $sourceServicesPath = dirname(__DIR__, 1) . '\packages\core\src\services';
-        $packageServicesPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'services';
-        $command = "New-Item -ItemType SymbolicLink -Path \"$packageServicesPath\" -Target \"$sourceServicesPath\" -Force";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-
-        // Also attributes, probably just need all of those too
-        $sourceAttributesPath = dirname(__DIR__, 1) . '\packages\core\src\base\attributes';
-        $packageAttributesPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base\attributes';
-        $command = "New-Item -ItemType SymbolicLink -Path \"$packageAttributesPath\" -Target \"$sourceAttributesPath\" -Force";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-
-        // Symlink the source base/types directory to the same place in the standalone package
-        // because I can't be bothered to figure out how to work out which types we need
-        $sourceBaseTypesPath = dirname(__DIR__, 1) . '\packages\core\src\base\types';
-        $packageBaseTypesPath = $this->targetDirectory . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'types';
-        $command = "New-Item -ItemType SymbolicLink -Path \"$packageBaseTypesPath\" -Target \"$sourceBaseTypesPath\" -Force";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-
-        // Delete the __tests__ directory symlink for the types folder
-        $testsPath = $packageBaseTypesPath . DIRECTORY_SEPARATOR . '__tests__';
-        $command = "Remove-Item -Path \"$testsPath\" -Force -Recurse -ErrorAction SilentlyContinue";
-        shell_exec($this->powershellPath . ' -Command ' . $command);
-
         $this->symlink_main_component_files($sourcePath);
         $this->process_php_dependencies($sourcePath);
         $this->symlink_plugins($sourcePath);
 
         $this->create_composer_file();
-
-        // Create PreprocessedHtml class in the target components directory
-        // TODO: Update this so it only creates this class for packages where it is needed
-        $preprocessedHtmlPath = $this->targetDirectory . '/components/PreprocessedHTML.php';
-        $preprocessedHtmlContent = <<<PHP
-<?php
-namespace Doubleedesign\Comet\Core;
-
-/**
- * Utility class to handle the rendering of preprocessed HTML content
- * so it can be inserted into a Comet component as an "innerComponent"
- */
-class PreprocessedHTML {
-	private string \$content;
-
-	function __construct(string \$content) {
-		\$this->content = \$content;
-	}
-
-	public function render(): void {
-		echo Utils::sanitise_content(\$this->content);
-	}
-}
-PHP;
-        file_put_contents($preprocessedHtmlPath, $preprocessedHtmlContent);
     }
 
     /**
@@ -125,6 +57,7 @@ PHP;
         }
 
         // Delete the __docs__ and __tests__ directory symlinks if they exist
+        // TODO: Fix this deleting the source files, not just the symlinks
         $docsPath = $packagePath . DIRECTORY_SEPARATOR . '__docs__';
         $testsPath = $packagePath . DIRECTORY_SEPARATOR . '__tests__';
         $command = "Remove-Item -Path \"$docsPath\" -Force -Recurse -ErrorAction SilentlyContinue";
@@ -133,7 +66,7 @@ PHP;
         shell_exec($this->powershellPath . ' -Command ' . $command);
 
         // Likewise in any subdirectories
-        $subfolders = glob($sourcePath . DIRECTORY_SEPARATOR . '**', GLOB_ONLYDIR);
+        $subfolders = glob($packagePath . DIRECTORY_SEPARATOR . '**', GLOB_ONLYDIR);
         foreach ($subfolders as $subfolder) {
             $command = "Remove-Item -Path \"$packagePath" . DIRECTORY_SEPARATOR . basename($subfolder) . DIRECTORY_SEPARATOR . '__docs__' . "\" -Force -Recurse -ErrorAction SilentlyContinue";
             shell_exec($this->powershellPath . '-Command ' . $command);
@@ -207,7 +140,17 @@ PHP;
      * @throws Exception
      */
     private function symlink_php_dependencies(array $dependencies): void {
-        foreach ($dependencies as $dependency) {
+        // Filter out dependencies included in the Launchpad package
+        // TODO: Make this dynamic by checking what's actually in the Launchpad package
+        $filtered_dependencies = array_filter($dependencies, function($dependency) {
+            // Exclude dependencies that are part of the core launchpad package
+            return !in_array($dependency['name'], [
+                'Doubleedesign\Comet\Core\Renderable',
+                'Doubleedesign\Comet\Core\UIComponent'
+            ]);
+        });
+
+        foreach ($filtered_dependencies as $dependency) {
             $shortPath = str_replace("C:\Users\LeesaWard\PHPStormProjects\comet-components\packages\core\src\\", "", $dependency['path']);
             $targetPath = $this->targetDirectory . DIRECTORY_SEPARATOR . $shortPath;
 
@@ -279,17 +222,9 @@ PHP;
                 ]
             ],
             // TODO: Packaging date stuff needs Ranger, gallery needs BaguetteBox, etc.
-            "require" => array_reduce(
-                array_keys($coreComposerData['require']),
-                function($carry, $dep) use ($coreComposerData) {
-                    if (str_starts_with($dep, 'illuminate/') || $dep === 'ezyang/htmlpurifier') {
-                        $carry[$dep] = $coreComposerData['require'][$dep];
-                    }
-
-                    return $carry;
-                },
-                []
-            )
+            "require" => [
+                'doubleedesign/comet-standalone-launchpad' => $coreComposerData['version']
+            ]
         ];
 
         file_put_contents($composerFilePath, json_encode($composerData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
