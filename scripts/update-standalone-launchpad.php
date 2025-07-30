@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Script to generate the Comet Components standalone package dependency "launchpad" package
+ * TODO: Put this in a post-commit script so it runs automatically when a component is added or updated.
+ */
 class ComponentStandaloneLaunchpadPackageGenerator {
     private string $sourceDirectory;
     private string $targetDirectory;

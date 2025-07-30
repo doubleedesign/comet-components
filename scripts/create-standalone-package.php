@@ -4,6 +4,7 @@
  * Create a standalone package for a Comet component.
  * This file symlinks everything so we don't duplicate it for dev.
  * To create the package that can be used elsewhere, use the export-standalone-package.php script.
+ * TODO: Put this in a post-commit script so it runs automatically when a component is added or updated.
  */
 class ComponentStandalonePackageGenerator {
     private string $componentName;

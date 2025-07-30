@@ -10,7 +10,7 @@ class BladeService {
     private static ?ViewFactory $blade = null;
     private static ?BladeCompiler $compiler = null;
     private const CACHE_DIR = '/cache/blade';
-    private const TEMPLATE_DIR = '/';
+    private const TEMPLATE_DIR = DIRECTORY_SEPARATOR;
 
     public static function getInstance(): ViewFactory {
         if (self::$blade === null) {
@@ -104,15 +104,18 @@ class BladeService {
             throw new RuntimeException("Template directory not found: $templatePath");
         }
 
-        // If we are in WordPress, allow overriding from the theme
+        // Allow for directory paths to be set in the config
+        $componentPaths = Config::get_blade_component_paths();
+
+        // If we are in WordPress with the block editor, allow overriding from the theme
         if (class_exists('WP_Block')) {
             $wpThemeOverridePath = get_stylesheet_directory() . '/';
             $wpParentThemeOverridePath = get_template_directory() . '/';
 
-            return new FileViewFinder($filesystem, [$wpThemeOverridePath, $wpParentThemeOverridePath, $templatePath]);
+            return new FileViewFinder($filesystem, [$wpThemeOverridePath, $wpParentThemeOverridePath, $templatePath, ...$componentPaths]);
         }
 
-        return new FileViewFinder($filesystem, [$templatePath]);
+        return new FileViewFinder($filesystem, [$templatePath, ...$componentPaths]);
     }
 
     /**
