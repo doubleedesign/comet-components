@@ -44,6 +44,7 @@ class File extends Renderable {
                 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'fa-file-lines',
                 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'fa-file-spreadsheet',
                 'application/zip', 'application/x-gzip', 'application/x-tar', 'application/x-7z-compressed' => 'fa-file-zipper',
+                'img/png', 'image/jpeg', 'image/jpg', 'image/gif' => 'fa-file-image',
                 default => 'fa-file',
             };
         }
