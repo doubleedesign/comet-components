@@ -4,18 +4,18 @@
 			<i class="{{ $iconPrefix }} {{ $icon }}"></i>
 		</span>
 	@endif
-	<div class="{{ $bem_prefix }}__content">
+	<span class="{{ $bem_prefix }}__content">
 		<span class="{{ $bem_prefix }}__content__title">{{ $title }}</span>
 		@if ($description)
 			<span class="{{ $bem_prefix }}__content__description">{{ $description }}</span>
 		@endif
-		<div class="{{ $bem_prefix }}__meta">
+		<span class="{{ $bem_prefix }}__meta">
 			@if ($size)
 				<span class="{{ $bem_prefix }}__content__meta__size">{{ $size }}</span>
 			@endif
 			@if ($uploadDate)
 				<span class="{{ $bem_prefix }}__content__meta__date">{{ $uploadDate }}</span>
 			@endif
-		</div>
-	</div>
+		</span>
+	</span>
 </a>
