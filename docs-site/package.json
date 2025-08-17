@@ -1,6 +1,6 @@
 {
 	"name": "comet-components-docs",
-	"version": "0.0.3",
+	"version": "0.1.1",
 	"type": "module",
 	"scripts": {
 		"docs:build": "vuepress build docs",

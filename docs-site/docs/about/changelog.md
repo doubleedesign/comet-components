@@ -8,6 +8,10 @@ For fun and gratitude, Comet's releases are named after albums that can somehow 
 
 ## Current version
 
+### 0.1.1 
+
+Minor update that adds some fixes to the `ResponsivePanels` and `FileGroup` components. Change of versioning so I can more easily make minor patches without a full named release.
+
 ### 0.0.3 Rocket Man (30 July 2025)
 
 - Standalone packages for `ResponsivePanels` and `FileGroup`, and the supporting `Launchpad` package
@@ -58,7 +62,7 @@ So while I solemnly swear I am not a Swiftie, when I was trying to come up with 
 
 ## Roadmap
 
-### 0.1.0 Dreamers Are Waiting
+### 0.2.0 Dreamers Are Waiting
 The first beta release of Comet Components, which is expected to include:
 - completion of most essential features/improvements/enhancements and documentation marked as TODO
 - publishing of the Storybook
