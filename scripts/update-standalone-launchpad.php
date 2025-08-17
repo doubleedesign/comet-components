@@ -12,7 +12,7 @@ class ComponentStandaloneLaunchpadPackageGenerator {
     public function __construct() {
         $this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
         $this->targetDirectory = dirname(__DIR__, 1) . '\packages\core-standalone\\launchpad\\src';
-        $this->powershellPath = '"C:\Program Files\PowerShell\7\pwsh.exe"';
+        $this->powershellPath = '"C:\Program Files\PowerShell\7\pwsh.exe" -NoProfile';
 
         require_once __DIR__ . '/../vendor/autoload.php';
         require_once __DIR__ . '/../packages/core/vendor/autoload.php';

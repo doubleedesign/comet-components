@@ -11,12 +11,14 @@ class ComponentStandalonePackageGenerator {
     private string $sourceDirectory;
     private string $targetDirectory;
     private string $powershellPath;
+    private string $username;
 
     public function __construct($args) {
         $this->componentName = $args['component'];
         $this->sourceDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
         $this->targetDirectory = dirname(__DIR__, 1) . '\packages\core-standalone\\' . self::kebab_case($this->componentName) . '\src';
-        $this->powershellPath = '"C:\Program Files\PowerShell\7\pwsh.exe"';
+        $this->powershellPath = '"C:\Program Files\PowerShell\7\pwsh.exe" -NoProfile';
+        $this->username = getenv('USERNAME') ?: getenv('USER');
 
         // Delete and recreate the target directory and config files to ensure a clean state
         if (is_dir($this->targetDirectory)) {
@@ -148,7 +150,7 @@ class ComponentStandalonePackageGenerator {
         });
 
         foreach ($filtered_dependencies as $dependency) {
-            $shortPath = str_replace("C:\Users\LeesaWard\PHPStormProjects\comet-components\packages\core\src\\", "", $dependency['path']);
+            $shortPath = str_replace("C:\Users\\$this->username\PhpStormProjects\comet-components\packages\core\src\\", "", $dependency['path']);
             $targetPath = $this->targetDirectory . DIRECTORY_SEPARATOR . $shortPath;
 
             $command = "New-Item -ItemType SymbolicLink -Path \"$targetPath\" -Target \"{$dependency['path']}\" -Force";
