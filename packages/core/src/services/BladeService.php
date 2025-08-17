@@ -109,8 +109,8 @@ class BladeService {
 
         // If we are in WordPress with the block editor, allow overriding from the theme
         if (class_exists('WP_Block')) {
-            $wpThemeOverridePath = get_stylesheet_directory() . '/';
-            $wpParentThemeOverridePath = get_template_directory() . '/';
+            $wpThemeOverridePath = get_stylesheet_directory() . DIRECTORY_SEPARATOR;
+            $wpParentThemeOverridePath = get_template_directory() . DIRECTORY_SEPARATOR;
 
             return new FileViewFinder($filesystem, [$wpThemeOverridePath, $wpParentThemeOverridePath, $templatePath, ...$componentPaths]);
         }
