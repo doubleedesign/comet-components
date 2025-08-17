@@ -72,13 +72,17 @@ export default {
 		recalculateHeight() {
 			// Get the height of the panels before any CSS to set the height of the overall element accordingly
 			const panels = this.$el.querySelectorAll('[role="tabpanel"]');
-			const maxHeight = Array.from(panels).reduce((max: number, panel) => {
+			const maxPanelHeight = Array.from(panels).reduce((max: number, panel) => {
 				const height = (panel as HTMLElement).scrollHeight;
 
 				return height > max ? height : max;
 			}, 0);
 
-			return maxHeight;
+			// But if the list is higher, we want to use that
+			const tablist = this.$el.querySelector('[role="tablist"]');
+			const listHeight = tablist.scrollHeight;
+
+			return Math.max(maxPanelHeight, listHeight);
 		},
 		// Open/close panels
 		togglePanel(event: Event, index: number) {
