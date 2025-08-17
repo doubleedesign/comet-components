@@ -15,7 +15,7 @@ Installation docs for existing standalone packages can be found in [Installation
 The packages aren't 100% standalone - they all have one key dependency, the "launchpad" package. Update this package by running:
 
 ```powershell
-php scripts/update-launchpad-package.php
+php scripts/update-standalone-launchpad.php
 ```
 
 This script:
