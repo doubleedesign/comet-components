@@ -1,11 +1,11 @@
-name: Publish Comet Plugin (Block Editor) Package
+name: Publish Comet Plugin (ACF) Package
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'packages/comet-plugin/**'
+      - 'packages/comet-plugin-acf/**'
 
 jobs:
   split:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Split Repository
         run: |
-          git subtree split --prefix=packages/comet-plugin -b split-branch
+          git subtree split --prefix=packages/comet-plugin-acf -b split-branch
 
       - name: Clone split branch to temp directory
         run: |
@@ -37,4 +37,4 @@ jobs:
           branch: master
           force: true
           directory: /tmp/split-repo
-          repository: doubleedesign/comet-plugin
+          repository: doubleedesign/comet-plugin-acf
