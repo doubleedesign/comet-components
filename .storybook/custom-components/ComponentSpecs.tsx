@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { PhpCodeBlock } from './PhpCodeBlock.tsx';
 import { ArrowTopRightIcon } from '@storybook/icons';
-import { ComponentDefinition, ComponentContentDefProps } from './types.ts';
+import { ComponentContentDefProps, ComponentDefinition } from './types.ts';
 
 /**
  * Component to fetch and display description and usage information directly from the component's JSON definition file
@@ -137,20 +137,52 @@ function useComponentSpecs(componentName: string) {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<Error | null>(null);
 
-	const fetchJsonDef = useCallback(async () => {
-		if(window.location.hostname.startsWith('storybook.comet-components.test')) {
-			return await fetch(`https://comet-components.test/packages/core/src/components/${componentName}/__docs__/${componentName}.json`);
-		}
+	const kebabCase = useCallback((str: string) => {
+		return str
+			.replace(/([a-z])([A-Z])/g, '$1-$2')
+			.replace(/[\s_]+/g, '-')
+			.toLowerCase();
+	}, []);
 
-		return await fetch(`https://cometcomponents.io/packages/core/src/components/${componentName}/__docs__/${componentName}.json`);
+	const fetchJsonDef = useCallback(async () => {
+		const url = window.location.hostname.startsWith('storybook.comet-components.test')
+			? `https://comet-components.test/packages/core/src/components/${componentName}/__docs__/${componentName}.json`
+			: `https://cometcomponents.io/packages/core/src/components/${componentName}/__docs__/${componentName}.json`;
+
+		try {
+			return await fetch(url, {
+				method: 'GET',
+				mode: 'cors',
+				cache: 'no-cache',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+		}
+		catch (error) {
+			console.error('Fetch error:', error);
+			throw error;
+		}
 	}, [componentName]);
 
 	const fetchCss = useCallback(async () => {
-		if(window.location.hostname.startsWith('storybook.comet-components.test')) {
-			return await fetch(`https://comet-components.test/packages/core/src/components/${componentName}/${componentName}.css`);
-		}
+		try {
+			if (window.location.hostname.startsWith('storybook.comet-components.test')) {
+				console.log('testing fetch from local');
 
-		return await fetch(`https://cometcomponents.io/packages/core/src/components/${componentName}/${componentName}.css`);
+				return await fetch(`https://comet-components.test/packages/core/src/components/${componentName}/${kebabCase(componentName)}.css`, {
+					method: 'GET',
+					mode: 'cors',
+					cache: 'no-cache',
+				});
+			}
+
+			return await fetch(`https://cometcomponents.io/packages/core/src/components/${componentName}/${kebabCase(componentName)}.css`);
+		}
+		catch (error) {
+			console.error('Fetch error:', error);
+			throw error;
+		}
 	}, [componentName]);
 
 	useEffect(() => {

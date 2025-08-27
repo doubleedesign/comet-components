@@ -448,5 +448,26 @@ npm run storybook
 Use the "network" URL to access it: https://storybook.comet-components.test:6006/ and ensure that your browser sees the connection as secure.
 
 :::details Cross-origin (CORS) errors
-The project is configured to allow Storybook to request the test pages from the local development site in `./browser/test/wrapper-open.php`, which you should have configured `php.ini` to use as the `herd_auto_prepend_file` in step 7 above. If you still have CORS problems, there are a number of browser extensions you can use to work around it.
+The project is configured to allow Storybook to request the test pages from the local development site in `./browser/test/wrapper-open.php`, which you should have configured `php.ini` to use as the `herd_auto_prepend_file` in step 7 above. If you still have CORS problems, you can try the below server configurations, or alternatively browser extensions that disable CORS (for local development).
+
+If using Apache, add this to `.htaccess` in the project root, updating the server paths and domain as needed:
+
+```htaccess
+php_value auto_prepend_file "/home/YOUR_USERNAME/public_html/test/browser/wrapper-open.php"
+php_value auto_append_file "/home/YOUR_USERNAME/public_html/test/browser/wrapper-close.php"
+
+# Enable CORS for storybook subdomain
+<IfModule mod_headers.c>
+    SetEnvIf Origin "^https://storybook\.comet-components\.test$" ORIGIN_SUB_DOMAIN=$0
+    Header set Access-Control-Allow-Origin "%{ORIGIN_SUB_DOMAIN}e" env=ORIGIN_SUB_DOMAIN
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+    Header set Access-Control-Allow-Credentials "true"
+</IfModule>
+
+# Handle preflight OPTIONS requests
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+```
 :::
