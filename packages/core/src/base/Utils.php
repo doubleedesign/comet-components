@@ -23,6 +23,9 @@ class Utils {
         // Also replace double underscores (used for BEM naming manipulations)
         $value = str_replace('__', '-', $value);
 
+        // And single underscores
+        $value = str_replace('_', '-', $value);
+
         // Convert whitespace to hyphens and make lowercase
         $value = trim(strtolower(preg_replace('/\s+/', '-', $value)));
 
@@ -112,7 +115,7 @@ class Utils {
         if (empty($array)) {
             return [];
         }
-        
+
         // This is an array of arrays and needs to be flattened
         if (is_array($array[0])) {
             return array_merge(...$array);
