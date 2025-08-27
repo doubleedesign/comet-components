@@ -1,7 +1,7 @@
 {
-	"name": "doubleedesign/comet-canvas",
+	"name": "doubleedesign/comet-canvas-classic",
 	"type": "wordpress-theme",
-	"description": "WordPress parent theme to support the intended implementation of Comet Components in WordPress with the block editor.",
+	"description": "WordPress parent theme to support the intended implementation of Comet Components in WordPress when using Classic Editor + ACF Pro, and in ClassicPress with ACF Pro.",
 	"version": "0.0.3",
 	"homepage": "https://cometcomponents.io",
 	"minimum-stability": "dev",
@@ -14,7 +14,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Doubleedesign\\CometCanvas\\": "src"
+			"Doubleedesign\\CometCanvas\\Classic\\": "src"
 		}
 	},
 	"require": {}
