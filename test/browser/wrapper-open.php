@@ -1,5 +1,5 @@
 <?php
-if (str_contains($_SERVER['HTTP_ORIGIN'], '.test')) {
+if (isset($_SERVER['HTTP_ORIGIN']) && str_contains($_SERVER['HTTP_ORIGIN'], '.test')) {
     require_once 'cors.php';
 }
 
