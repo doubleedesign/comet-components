@@ -1,8 +1,8 @@
 <?php
-use Doubleedesign\Comet\Core\{Config, SiteHeader, Group, Menu};
-use Doubleedesign\CometCanvas\Classic\NavMenus;
+use Doubleedesign\Comet\Core\{SiteHeader, Group, Menu};
+use Doubleedesign\CometCanvas\Classic\{NavMenus, ThemeStyle};
 
-$globalBackground = Config::get_global_background();
+$globalBackground = ThemeStyle::get_global_background();
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> lang="en">

@@ -55,11 +55,23 @@ class ThemeStyle {
 
     public function set_global_background(): void {
         $color = apply_filters('comet_canvas_global_background', 'white');
-        Config::set_global_background($color);
+        if (class_exists('Doubleedesign\Comet\Core\Config')) {
+            Config::set_global_background($color);
+        }
+    }
+
+    public static function get_global_background(): string {
+        if (!class_exists('Doubleedesign\Comet\Core\Config')) {
+            return 'white';
+        }
+
+        return Config::get_global_background();
     }
 
     public function set_icon_prefix(): void {
         $prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
-        Config::set_icon_prefix($prefix);
+        if (class_exists('Doubleedesign\Comet\Core\Config')) {
+            Config::set_icon_prefix($prefix);
+        }
     }
 }
