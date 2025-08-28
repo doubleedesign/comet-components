@@ -42,7 +42,7 @@ class ResponsivePanels extends PanelGroupComponent {
             'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'breakpoint' => $this->breakpoint,
-            'panels'     => $this->get_panels(),
+            'panels'     => json_encode($this->get_panels()),
             'icon'       => "$this->iconPrefix $this->icon"
         ])->render();
     }
