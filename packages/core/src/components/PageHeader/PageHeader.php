@@ -12,6 +12,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::HEADER)]
 class PageHeader extends UIComponent {
     use BackgroundColor;
+    use ColorTheme;
     use LayoutContainerSize;
 
     /**
@@ -27,7 +28,11 @@ class PageHeader extends UIComponent {
     protected array $breadcrumbs;
 
     public function __construct(array $attributes, string $content, array $breadcrumbs = []) {
-        $this->set_background_color_from_attrs($attributes);
+        $globalBackground = Config::get_global_background();
+        if (isset($attributes['backgroundColor']) && $attributes['backgroundColor'] !== $globalBackground) {
+            $this->set_background_color_from_attrs($attributes);
+        }
+        $this->set_color_theme_from_attrs($attributes);
         $this->set_size_from_attrs($attributes);
         $this->breadcrumbs = $breadcrumbs;
         $this->innerComponents = !empty($breadcrumbs) ? [new Breadcrumbs([], $this->breadcrumbs)] : [];
@@ -35,7 +40,7 @@ class PageHeader extends UIComponent {
         $this->innerComponents = array(
             new Container(
                 [
-                    'size'        => $this->size->value,
+                    'size'        => $this->size->value ?? ContainerSize::DEFAULT->value,
                     'withWrapper' => false,
                     'tagName'     => Tag::DIV->value,
                 ],
@@ -60,6 +65,9 @@ class PageHeader extends UIComponent {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
+        if (isset($this->colorTheme)) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;
         }

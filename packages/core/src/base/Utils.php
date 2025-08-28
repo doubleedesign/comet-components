@@ -9,11 +9,15 @@ class Utils {
     /**
      * If a string value has spaces, convert it to kebab case
      *
-     * @param  string  $value
+     * @param  string|null  $value
      *
      * @return string
      */
-    public static function kebab_case(string $value): string {
+    public static function kebab_case(?string $value): string {
+        if (!$value) {
+            return '';
+        }
+
         // Account for PascalCase
         $value = preg_replace('/([a-z])([A-Z])/', '$1 $2', $value);
 
@@ -44,6 +48,10 @@ class Utils {
         $value = str_replace(['-', '_'], ' ', $value);
 
         return str_replace(' ', '', ucwords($value));
+    }
+
+    public static function camel_case(string $value): string {
+        return lcfirst(self::Pascal_case($value));
     }
 
     /**
