@@ -1,11 +1,11 @@
-name: Publish Comet Canvas (WP Blocks) Package
+name: Publish Comet Canvas (ACF) Package
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'packages/comet-canvas/**'
+      - 'packages/comet-canvas-classic/**'
 
 jobs:
   split:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Split Repository
         run: |
-          git subtree split --prefix=packages/comet-canvas -b split-branch
+          git subtree split --prefix=packages/comet-canvas-classic -b split-branch
 
       - name: Clone split branch to temp directory
         run: |
@@ -37,4 +37,4 @@ jobs:
           branch: master
           force: true
           directory: /tmp/split-repo
-          repository: doubleedesign/comet-canvas
+          repository: doubleedesign/comet-canvas-classic
