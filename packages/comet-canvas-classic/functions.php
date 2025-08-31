@@ -1,13 +1,6 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-use Doubleedesign\CometCanvas\Classic\{ThemeStyle, NavMenus, SiteHealth, WpAdmin, TinyMCEConfig, Frontend};
 
-new ThemeStyle();
-new NavMenus();
-new Frontend();
+require_once __DIR__.'/vendor/autoload.php';
+use Doubleedesign\CometCanvas\Classic\CometCanvas;
 
-if (is_admin()) {
-    new TinyMCEConfig();
-    new WpAdmin();
-    new SiteHealth();
-}
+new CometCanvas;

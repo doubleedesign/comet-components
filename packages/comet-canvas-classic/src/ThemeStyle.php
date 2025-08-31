@@ -11,7 +11,7 @@ class ThemeStyle {
     }
 
     public static function get_colours(): array {
-        $default_colours = array(
+        return array(
             '000000'       => 'Black',
             'FFFFFF'       => 'White',
             '845ec2'       => 'Primary',
@@ -24,9 +24,6 @@ class ThemeStyle {
             '4b4453'       => 'Dark',
             'F0F0F2'       => 'Light'
         );
-
-        // Use this to set colours from child themes
-        return apply_filters('comet_canvas_colour_palette', $default_colours);
     }
 
     public function enqueue_theme_stylesheets(): void {

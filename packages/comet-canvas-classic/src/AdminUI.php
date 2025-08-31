@@ -2,7 +2,7 @@
 namespace Doubleedesign\CometCanvas\Classic;
 use JetBrains\PhpStorm\NoReturn;
 
-class WpAdmin {
+class AdminUI {
 
     public function __construct() {
         add_action('admin_head', [$this, 'add_colour_css_variables_to_admin'], 1);

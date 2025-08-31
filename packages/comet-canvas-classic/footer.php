@@ -1,12 +1,12 @@
 <?php
 use Doubleedesign\Comet\Core\{SiteFooter, Menu, IconLinks};
-use Doubleedesign\CometCanvas\Classic\NavMenus;
+use Doubleedesign\CometCanvas\Classic\CometCanvas;
 
 ?>
 </main>
 
 <?php
-$menuItems = NavMenus::get_simplified_nav_menu_items_by_location('footer');
+$menuItems = CometCanvas::get_simplified_nav_menu_items_by_location('footer');
 $menuComponent = new Menu(['context' => 'site-footer'], $menuItems);
 $socials = get_field('social_media_links', 'options');
 if ($socials) {

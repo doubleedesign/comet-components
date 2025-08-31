@@ -1,8 +1,8 @@
 <?php
 use Doubleedesign\Comet\Core\{SiteHeader, Group, Menu};
-use Doubleedesign\CometCanvas\Classic\{NavMenus, ThemeStyle};
+use Doubleedesign\CometCanvas\Classic\CometCanvas;
 
-$globalBackground = ThemeStyle::get_global_background();
+$globalBackground = CometCanvas::get_global_background();
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> lang="en">
@@ -18,7 +18,7 @@ $globalBackground = ThemeStyle::get_global_background();
 <?php wp_body_open(); ?>
 
 <?php
-$menuItems = NavMenus::get_simplified_nav_menu_items_by_location('primary');
+$menuItems = CometCanvas::get_simplified_nav_menu_items_by_location('primary');
 $menuComponent = new Menu(['context' => 'site-header'], $menuItems);
 $logoId = get_option('options_logo');
 $logoUrl = wp_get_attachment_image_url($logoId, 'full');

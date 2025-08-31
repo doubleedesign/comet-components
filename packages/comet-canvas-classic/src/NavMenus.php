@@ -63,7 +63,7 @@ class NavMenus {
      *
      * @return array
      */
-    public static function get_nav_menu_items_by_location(string $location, array $args = []): array {
+    protected static function get_nav_menu_items_by_location(string $location, array $args = []): array {
         $locations = get_nav_menu_locations();
         $page_for_posts = get_option('page_for_posts');
 

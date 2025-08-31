@@ -7,4 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Doubleedesign\\CometCanvas\\Classic\\AdminUI' => $baseDir . '/src/AdminUI.php',
+    'Doubleedesign\\CometCanvas\\Classic\\CometCanvas' => $baseDir . '/src/CometCanvas.php',
+    'Doubleedesign\\CometCanvas\\Classic\\Frontend' => $baseDir . '/src/Frontend.php',
+    'Doubleedesign\\CometCanvas\\Classic\\NavMenus' => $baseDir . '/src/NavMenus.php',
+    'Doubleedesign\\CometCanvas\\Classic\\SectionMenuBuilder' => $baseDir . '/src/SectionMenuBuilder.php',
+    'Doubleedesign\\CometCanvas\\Classic\\SiteHealth' => $baseDir . '/src/SiteHealth.php',
+    'Doubleedesign\\CometCanvas\\Classic\\ThemeStyle' => $baseDir . '/src/ThemeStyle.php',
+    'Doubleedesign\\CometCanvas\\Classic\\TinyMCEConfig' => $baseDir . '/src/TinyMCEConfig.php',
 );
