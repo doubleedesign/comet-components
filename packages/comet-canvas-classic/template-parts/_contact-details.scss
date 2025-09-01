@@ -1,0 +1,13 @@
+.contact-details {
+	font-style: normal;
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: var(--spacing-md);
+	row-gap: var(--spacing-xs);
+
+	&__address {
+		display: block;
+		width: 100%;
+		flex-basis: 100%;
+	}
+}
