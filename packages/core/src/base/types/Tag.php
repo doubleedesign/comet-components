@@ -183,6 +183,7 @@ enum Tag: string {
             self::DEL      => ['cite', 'datetime'],
             self::DETAILS  => ['open', 'name'],
             self::DIALOG   => ['open', 'aria-modal'],
+            self::DIV      => ['role'],
             self::EMBED    => ['height', 'src', 'type', 'width'],
             self::FIELDSET => ['disabled', 'form', 'name'],
             self::FORM     => ['accept-charset', 'autocomplete', 'name', 'rel'],
