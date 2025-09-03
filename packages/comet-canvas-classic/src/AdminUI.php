@@ -19,7 +19,7 @@ class AdminUI {
      * so they can be used in ACF fields etc
      */
     public function add_colour_css_variables_to_admin(): void {
-        $colours = ThemeStyle::get_colours();
+        $colours = CometCanvas::get_theme_colours();
 
         if (!empty($colours)) {
             echo '<style>:root {';

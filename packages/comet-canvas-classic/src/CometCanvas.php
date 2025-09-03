@@ -55,6 +55,16 @@ final class CometCanvas {
         return $author . '\\' . $theme;
     }
 
+    public static function get_theme_colours(): array {
+        $child_namespace = (new self())->get_child_theme_namespace();
+        $themeStyleClass = $child_namespace && class_exists($child_namespace . '\\ThemeStyle')
+            ? $child_namespace . '\\ThemeStyle'
+            : __NAMESPACE__ . '\\ThemeStyle';
+
+        /** @var ThemeStyle $themeStyleClass */
+        return $themeStyleClass::get_colours();
+    }
+
     public static function get_simplified_nav_menu_items_by_location(string $location, array $args = []): array {
         $child_namespace = (new self())->get_child_theme_namespace();
         $navMenuClass = $child_namespace && class_exists($child_namespace . '\\NavMenus')
