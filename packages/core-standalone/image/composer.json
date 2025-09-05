@@ -1,0 +1,26 @@
+{
+    "name": "doubleedesign/comet-components-image",
+    "description": "Standalone package for Image from the Comet Components library",
+    "version": "0.1.1",
+    "homepage": "https://cometcomponents.io",
+    "authors": [
+        {
+            "name": "Leesa Ward",
+            "email": "leesa@doubleedesign.com.au"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src/components/",
+            "src/components/**/"
+        ],
+        "psr-4": {
+            "Doubleedesign\\Comet\\Core\\": [
+                "src/components/"
+            ]
+        }
+    },
+    "require": {
+        "doubleedesign/comet-components-launchpad": "dev-main"
+    }
+}
