@@ -2,7 +2,7 @@
 namespace Doubleedesign\CometCanvas\Classic;
 use Doubleedesign\Comet\Core\Config;
 
-class ThemeStyle {
+class ThemeStyle implements IThemeStyle {
     public function __construct() {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_theme_stylesheets'], 20);
         // Set defaults for components as per Config class in the core package

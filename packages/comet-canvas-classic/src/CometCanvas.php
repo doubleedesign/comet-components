@@ -4,6 +4,13 @@ namespace Doubleedesign\CometCanvas\Classic;
 
 use Doubleedesign\Comet\Core\Utils;
 
+/**
+ * This class sets up some core PHP stuff, notably allowing child themes to replace certain classes rather than extend them.
+ * This means parent theme classes don't get instantiated at all,
+ * meaning we can avoid things like the parent theme registering a menu only to have the child theme unregister it.
+ * TODO: Is there a way to enforce child theme classes to implement the interfaces to ensure all required methods are present?
+ */
+
 final class CometCanvas {
     public function __construct() {
         add_filter('extra_theme_headers', [$this, 'register_namespace_header']);
