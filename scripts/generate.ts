@@ -8,21 +8,23 @@ import { execSync } from 'child_process';
 // PowerShell command: 'npm run generate component -- --name YourThing --type complex' (no equals signs)
 const args = process.argv.slice(2);
 if(args[0] !== 'component' || args.length < 3) {
+	// eslint-disable-next-line max-len
 	console.error('Invalid command. Usage: \n Bash: npm run generate component -- --name=<name> --type=<simple or complex> \n PowerShell: npm run generate component -- --name <name> --type <simple or complex>');
 	process.exit(1);
 }
 
 // Split is for the Bash command, PowerShell command doesn't need it because it doesn't use equals signs
-const componentName = args[1].split('=')[1] ?? args[2];
-const componentType = args[2].split('=')[1] ?? args[4];
+const componentName = args[1].split('=')[1] ?? args[1];
+const componentType = args[2].split('=')[1] ?? args[2];
 if(componentType && !['simple', 'complex', 'wrapper'].includes(componentType)) {
 	console.error('Invalid type. Valid types are "simple", "complex", and "wrapper".');
 	console.log('Usage: npm run generate component -- --name=<name> --type=<simple or complex>');
 	process.exit(1);
 }
 
+console.log(`Generating ${componentType} component: ${componentName}`);
+
 function generateSkeletonFiles({ componentName, componentType }) {
-	console.log(`Generating ${componentType} component: ${componentName}`);
 	// The template for the core PHP class for this component
 	const classTemplateFile = readFileSync(`./scripts/templates/${Case.pascal(componentType)}Component.php`, 'utf8');
 	// The template for the Blade template file that will be used to render the component

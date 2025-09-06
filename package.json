@@ -9,7 +9,7 @@
 		"build-storybook": "storybook build",
 		"docs": "cd docs-site && npm run docs:dev",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
-		"generate:json": "php scripts/generate-json-defs.php",
+		"generate:docs": "php scripts/generate-docs.php",
 		"generate:stories": "php scripts/generate-stories.php",
 		"refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
 		"refresh:composer:dev": "npm run refresh:composer -- -local",
