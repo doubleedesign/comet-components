@@ -10,6 +10,7 @@ return array(
     'Doubleedesign\\CometCanvas\\Classic\\AdminUI' => $baseDir . '/src/AdminUI.php',
     'Doubleedesign\\CometCanvas\\Classic\\CometCanvas' => $baseDir . '/src/CometCanvas.php',
     'Doubleedesign\\CometCanvas\\Classic\\Frontend' => $baseDir . '/src/Frontend.php',
+    'Doubleedesign\\CometCanvas\\Classic\\IThemeStyle' => $baseDir . '/src/IThemeStyle.php',
     'Doubleedesign\\CometCanvas\\Classic\\NavMenus' => $baseDir . '/src/NavMenus.php',
     'Doubleedesign\\CometCanvas\\Classic\\SectionMenuBuilder' => $baseDir . '/src/SectionMenuBuilder.php',
     'Doubleedesign\\CometCanvas\\Classic\\SiteHealth' => $baseDir . '/src/SiteHealth.php',

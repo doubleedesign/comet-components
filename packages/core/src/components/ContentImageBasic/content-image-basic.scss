@@ -1,0 +1,38 @@
+// See common.scss for base .image styles
+.image--basic {
+	&:not(.gallery &) {
+		&:not(:first-child):not(:last-child) {
+			margin-block: var(--spacing-md);
+		}
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	&.is-style-rounded {
+		img {
+			border-radius: 100%;
+		}
+	}
+
+	[data-behaviour="cover"],
+	> [data-behaviour="cover"] {
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center center;
+		}
+	}
+
+	&[data-behaviour="contain"],
+	> [data-behaviour="contain"] {
+		img {
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+		}
+	}
+}

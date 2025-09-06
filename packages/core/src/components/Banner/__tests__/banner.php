@@ -3,7 +3,7 @@ use Doubleedesign\Comet\Core\{Banner, Heading, ButtonGroup};
 use const Doubleedesign\Comet\TestUtils\{MOCK_INNER_COMPONENTS_BLOCK_OF_TEXT, MOCK_INNER_COMPONENTS_BUTTONS};
 
 // Attribute keys from component JSON definition
-$attributeKeys = ['backgroundColor', 'classes', 'containerSize', 'contentMaxWidth', 'focalPoint', 'hAlign', 'vAlign', 'isParallax', 'maxHeight', 'minHeight', 'overlayColor', 'overlayOpacity', 'tagName'];
+$attributeKeys = ['backgroundColor', 'classes', 'containerSize', 'contentMaxWidth', 'hAlign', 'vAlign', 'isParallax', 'maxHeight', 'minHeight', 'overlayColor', 'overlayOpacity', 'tagName'];
 // Filter the request query vars to only those matching the above
 $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
 

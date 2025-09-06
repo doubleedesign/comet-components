@@ -1,5 +1,6 @@
 .responsive-panels {
   position: relative;
+  width: 100%;
 }
 @media (prefers-reduced-motion) {
   .responsive-panels [class^=panel-switch] {

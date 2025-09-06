@@ -9,7 +9,6 @@ type BannerProps = {
 	backgroundColor: 'none' | ThemeColor;
 	containerSize: ContainerSize;
 	contentMaxWidth: number;
-	focalPoint: [number, number];
 	isParallax: boolean;
 	maxHeight: number;
 	minHeight: number;
@@ -31,7 +30,6 @@ const meta = {
 		backgroundColor: "dark",
 		containerSize: "default",
 		contentMaxWidth: 50,
-		focalPoint: [50, 50],
 		isParallax: false,
 		maxHeight: 40,
 		minHeight: 600,

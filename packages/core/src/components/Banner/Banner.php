@@ -68,12 +68,6 @@ class Banner extends LayoutComponent {
     protected int $maxHeight = 100;
 
     /**
-     * @var array<int, int> $focalPoint
-     * @description The X and Y coordinates of the focal point of the image
-     */
-    protected array $focalPoint = [50, 50];
-
-    /**
      * @var array<Heading|Paragraph|ButtonGroup> $innerComponents
      */
     protected array $innerComponents;
@@ -87,13 +81,6 @@ class Banner extends LayoutComponent {
         $this->minHeight = $attributes['minHeight'] ?? $this->minHeight;
         $this->maxHeight = $attributes['maxHeight'] ?? $this->maxHeight;
 
-        // WordPress provides focal point as 0-1, but we want 0-100
-        if (isset($attributes['focalPoint']) && is_array($attributes['focalPoint'])) {
-            $focalPointX = $attributes['focalPoint']['x'] < 1 ? $attributes['focalPoint']['x'] * 100 : $attributes['focalPoint']['x'];
-            $focalPointY = $attributes['focalPoint']['y'] < 1 ? $attributes['focalPoint']['y'] * 100 : $attributes['focalPoint']['y'];
-            $this->focalPoint = [intval($focalPointX), intval($focalPointY)];
-        }
-
         parent::__construct($attributes, $innerComponents, 'components.Banner.banner');
         $this->set_layout_alignment_from_attrs($attributes);
         $this->transform_inner_components();
@@ -103,14 +90,12 @@ class Banner extends LayoutComponent {
         $rawInnerComponents = $this->innerComponents;
 
         $this->innerComponents = [
-            new Image(
+            new CoverImage(
                 [
                     'src'        => $this->imageUrl,
                     'alt'        => $this->imageAlt ?? '',
-                    'scale'      => 'cover',
                     'context'    => 'banner',
                     'isParallax' => $this->isParallax,
-                    'style'      => $this->get_image_block_inline_styles()
                 ]
             ),
             new Container(
@@ -157,16 +142,6 @@ class Banner extends LayoutComponent {
         return array_filter($attrs, function($key) {
             return $key !== 'data-background' && $key !== 'style';
         }, ARRAY_FILTER_USE_KEY);
-    }
-
-    private function get_image_block_inline_styles(): array {
-        $styles = [];
-
-        if (!$this->isParallax && $this->focalPoint) {
-            $styles['object-position'] = $this->focalPoint[0] . '% ' . $this->focalPoint[1] . '%';
-        }
-
-        return $styles;
     }
 
     public function get_inline_styles_string(): string {

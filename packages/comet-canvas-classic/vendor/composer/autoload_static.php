@@ -25,6 +25,7 @@ class ComposerStaticInit36a77d18546f079e8f2294a2ffff0b8f
         'Doubleedesign\\CometCanvas\\Classic\\AdminUI' => __DIR__ . '/../..' . '/src/AdminUI.php',
         'Doubleedesign\\CometCanvas\\Classic\\CometCanvas' => __DIR__ . '/../..' . '/src/CometCanvas.php',
         'Doubleedesign\\CometCanvas\\Classic\\Frontend' => __DIR__ . '/../..' . '/src/Frontend.php',
+        'Doubleedesign\\CometCanvas\\Classic\\IThemeStyle' => __DIR__ . '/../..' . '/src/IThemeStyle.php',
         'Doubleedesign\\CometCanvas\\Classic\\NavMenus' => __DIR__ . '/../..' . '/src/NavMenus.php',
         'Doubleedesign\\CometCanvas\\Classic\\SectionMenuBuilder' => __DIR__ . '/../..' . '/src/SectionMenuBuilder.php',
         'Doubleedesign\\CometCanvas\\Classic\\SiteHealth' => __DIR__ . '/../..' . '/src/SiteHealth.php',

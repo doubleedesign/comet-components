@@ -25,22 +25,29 @@ class Gallery extends UIComponent {
     protected ?string $caption;
 
     /**
-     * @var array<Image> $innerComponents
+     * @var bool $imageCrop
+     * @description Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)
+     */
+    protected bool $imageCrop = true;
+
+    /**
+     * @var array<ContentImageBasic> $innerComponents
      * @description The image components to display in the gallery
      */
     protected array $innerComponents;
 
     public function __construct(array $attributes, array $innerComponents) {
-        $innerComponentsWithContext = array_map(function(Image $component) use ($attributes) {
+        $innerComponentsWithContext = array_map(function(ContentImageBasic $component) use ($attributes) {
             $component->set_context('gallery');
-            $component->set_behaviour($attributes['imageCrop'] ? 'cover' : 'contain');
+            $component->set_behaviour((isset($attributes['imageCrop']) && $attributes['imageCrop'] === 'true')) ? 'cover' : 'contain';
 
             return $component;
         }, $innerComponents);
 
         parent::__construct($attributes, $innerComponentsWithContext, 'components.Gallery.gallery');
         $this->columns = $attributes['columns'] ?? $this->columns;
-        $this->caption = !empty(trim($attributes['caption'])) ? trim($attributes['caption']) : null;
+        $this->caption = (isset($attributes['caption']) && !empty(trim($attributes['caption']))) ? trim($attributes['caption']) : null;
+        $this->imageCrop = $attributes['imageCrop'] ?? $this->imageCrop;
     }
 
     public function get_html_attributes(): array {

@@ -8,7 +8,20 @@ For fun and gratitude, Comet's releases are named after albums that can somehow 
 
 ## Current version
 
-### 0.1.1 
+### 0.2.0 Such Pretty Forks in the Road (6 September 2025)
+
+- Major refactor of the `Image` component into multiple more focused components to better manage valid combinations of attributes: `CoverImage`, `ContentImageBasic`, and `ContentImageAdvanced`
+- Addition of the WIP for a ClassicPress / WordPress Classic Editor + Advanced Custom Fields integration plugin and theme
+
+:::details Such Pretty Forks in the Road - the story
+In my humble opinion, Alanis Morissette's best album; tracks from which were stuck in my head while working on this release, and feeling appropriate due to the sense of impending forks in my own road that I was feeling at the time.
+:::
+
+---
+
+## Release History
+
+### 0.1.1
 
 Minor update that adds some fixes to the `ResponsivePanels` and `FileGroup` components. Change of versioning so I can more easily make minor patches without a full named release.
 
@@ -24,10 +37,6 @@ This update arose solely from wanting to use a small number of Comet Components 
 As part of this work, I needed to think of a name for the foundational package. I tried to think of something space themed to go with "Comet", which led me to rocket takeoffs - hence "launchpad". Which put _Rocket Man_ in my head, because that's how my brain works!
 
 :::
-
----
-
-## Release History
 
 ### 0.0.2 London Calling (10 April 2025)
 This second alpha release is focused on completion and refinement of the initial set of Vue-enhanced components, notably completion of `ResponsivePanels` and refactoring of `Accordion` and `Tabs` to use the same Vue components, ensuring consistency and removing Bootstrap from the project dependencies.

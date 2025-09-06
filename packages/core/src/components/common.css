@@ -167,4 +167,42 @@ form input[type=button] {
   font-size: 1rem;
 }
 
+.image[data-align=left] {
+  float: left;
+  margin-right: var(--spacing-md);
+}
+.image[data-align=right] {
+  float: right;
+  margin-left: var(--spacing-md);
+}
+.image[data-align=center] {
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+.image [data-aspect-ratio=square],
+.image > [data-aspect-ratio=square] {
+  aspect-ratio: 1/1;
+}
+.image [data-aspect-ratio=standard],
+.image > [data-aspect-ratio=standard] {
+  aspect-ratio: 4/3;
+}
+.image [data-aspect-ratio=portrait],
+.image > [data-aspect-ratio=portrait] {
+  aspect-ratio: 3/4;
+}
+.image [data-aspect-ratio="16-9"],
+.image > [data-aspect-ratio="16-9"] {
+  aspect-ratio: 16/9;
+}
+.image [data-aspect-ratio=classic],
+.image > [data-aspect-ratio=classic] {
+  aspect-ratio: 3/2;
+}
+.image [data-aspect-ratio=classic_portrait],
+.image > [data-aspect-ratio=classic_portrait] {
+  aspect-ratio: 2/3;
+}
+
 /*# sourceMappingURL=common.css.map */

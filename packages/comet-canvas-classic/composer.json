@@ -2,7 +2,7 @@
 	"name": "doubleedesign/comet-canvas-classic",
 	"type": "wordpress-theme",
 	"description": "WordPress parent theme to support the intended implementation of Comet Components in WordPress when using Classic Editor + ACF Pro, and in ClassicPress with ACF Pro.",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"homepage": "https://cometcomponents.io",
 	"minimum-stability": "dev",
 	"prefer-stable": true,

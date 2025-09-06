@@ -33,7 +33,7 @@ class ThemeStyle implements IThemeStyle {
 
         if (file_exists($parent)) {
             $parent = get_template_directory_uri() . '/style.css';
-            wp_enqueue_style('comet-canvas', $parent, $deps, '0.0.3'); // TODO: Get version dynamically
+            wp_enqueue_style('comet-canvas', $parent, $deps, '0.1.0'); // TODO: Get version dynamically
         }
 
         if (file_exists($child)) {

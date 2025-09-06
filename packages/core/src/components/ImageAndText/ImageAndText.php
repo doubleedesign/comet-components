@@ -48,7 +48,7 @@ class ImageAndText extends UIComponent {
     protected bool $imageFirst = true;
 
     /**
-     * @var array<Image|Renderable> $innerComponents
+     * @var array<ContentImageComponent|Renderable> $innerComponents
      * @description An Image component, plus one or more other components to be rendered in the content area.
      */
     protected array $innerComponents;

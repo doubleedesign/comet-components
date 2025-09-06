@@ -85,7 +85,7 @@ class SiteHeader extends LayoutComponent {
         $this->submenuIcon = $attributes['submenuIcon'] ?? $this->submenuIcon;
         $this->logoUrl = $attributes['logoUrl'] ?? null;
         $logo = isset($attributes['logoUrl'])
-            ? new Image([
+            ? new ContentImageBasic([
                 'src'     => $this->logoUrl,
                 'alt'     => 'Site logo',
                 'href'    => '/',

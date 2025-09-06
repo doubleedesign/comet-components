@@ -1,36 +1,30 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
-import { createStoryBase } from "../../../../test/story-base.ts";
+import { createStoryBase } from "../../../../test/story-base";
 
-type ImageProps = {
+type ContentImageAdvancedProps = {
 	tagName: 'figure';
 	alt: string;
 	caption: string;
 	title: string;
-	width: string;
-	height: string;
-	isParallax: boolean;
-	scale: 'contain' | 'cover';
-	classes?: '' | 'is-style-rounded';
 	src?: string;
 	href?: string;
 	align?: 'left' | 'center' | 'right' | 'full';
 	aspectRatio?: 'none' | '4:3' | '3:4' | '1:1' | '16:9' | '9:16' | '3:2' | '2:3';
-
+	focalPoint?: { x: number; y: number; };
+	offset?: { x: number; y: number; };
 }
 
 const meta = {
-	title: 'Media/Image',
-	tags: ['wordpress-block', 'autodocs'],
-	...createStoryBase('Image'),
+	title: 'Media/Content Image (Advanced)',
+	tags: ['autodocs'],
+	...createStoryBase('ContentImageAdvanced'),
 	args: {
 		tagName: "figure",
 		alt: "Bicycle in Amsterdam",
 		caption: "Bicycle in Amsterdam",
 		title: "Bicycle in Amsterdam",
-		width: "400px",
-		height: "",
-		isParallax: false,
-		scale: "contain"
+		focalPoint: { x: 50, y: 50 },
+		offset: { x: 0, y: 0 },
 	},
 	argTypes: {
 		tagName: {
@@ -47,24 +41,6 @@ const meta = {
 			options: [
 				"figure"
 			]
-		},
-		classes: {
-			description: "CSS classes",
-			control: {
-				type: "select"
-			},
-			options: [
-				"",
-				"is-style-rounded"
-			],
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "string"
-				}
-			}
 		},
 		src: {
 			description: "Image source URL",
@@ -178,72 +154,39 @@ const meta = {
 				"2:3"
 			]
 		},
-		width: {
-			description: "Set a fixed width for the image",
+		focalPoint: {
+			description: "Focal point for the image (x and y coordinates from 0 to 100)",
 			control: {
-				type: "text"
+				type: "object"
 			},
 			table: {
 				defaultValue: {
-					summary: ""
+					summary: "{ x: 50, y: 50 }"
 				},
 				type: {
-					summary: "string"
+					summary: "{ x: number; y: number; }"
 				}
 			}
 		},
-		height: {
-			description: "Set a fixed height for the image",
+		offset: {
+			description: "Offset the image position (x and y coordinates in percentages) to customise the aspect ratio cropping",
 			control: {
-				type: "text"
+				type: "object"
 			},
 			table: {
 				defaultValue: {
-					summary: ""
+					summary: "{ x: 0, y: 0 }"
 				},
 				type: {
-					summary: "string"
+					summary: "{ x: number; y: number; }"
 				}
 			}
 		},
-		isParallax: {
-			description: "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
-			control: {
-				type: "boolean"
-			},
-			table: {
-				defaultValue: {
-					summary: "false"
-				},
-				type: {
-					summary: "bool"
-				}
-			}
-		},
-		scale: {
-			description: "How to handle how the image fits the available space",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "contain"
-				},
-				type: {
-					summary: "string"
-				}
-			},
-			options: [
-				"contain",
-				"cover"
-			]
-		},
-
 	},
-} satisfies Meta<ImageProps>;
+} satisfies Meta<ContentImageAdvancedProps>;
 
 export default meta;
-type Story = StoryObj<ImageProps>;
+type Story = StoryObj<ContentImageAdvancedProps>;
 
 export const Playground: Story = {
 	tags: []

@@ -62,7 +62,7 @@ class ThemeStyle {
 
         if (file_exists($parent)) {
             $parent = get_template_directory_uri() . '/style.css';
-            wp_enqueue_style('comet-canvas', $parent, $deps, '0.0.3'); // TODO: Get this dynamically
+            wp_enqueue_style('comet-canvas', $parent, $deps, '0.2.0'); // TODO: Get this dynamically
         }
 
         if (file_exists($child)) {
@@ -86,7 +86,7 @@ class ThemeStyle {
 
         if (file_exists($parent)) {
             $parent = get_template_directory_uri() . '/editor.css';
-            wp_enqueue_style('comet-canvas-editor', $parent, $deps, '0.0.3'); // TODO: Get this dynamically
+            wp_enqueue_style('comet-canvas-editor', $parent, $deps, '0.2.0'); // TODO: Get this dynamically
         }
 
         if (file_exists($child)) {
