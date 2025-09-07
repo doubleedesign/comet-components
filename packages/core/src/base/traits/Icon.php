@@ -20,7 +20,7 @@ trait Icon {
             return;
         }
 
-        $this->iconPrefix = $attributes['iconPrefix'] ?? Config::get_icon_prefix();
+        $this->iconPrefix = $attributes['iconPrefix'] ?? Config::getInstance()->get('icon_prefix');
         $this->icon = $attributes['icon'] ?? $default ?? null;
     }
 }

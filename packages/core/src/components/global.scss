@@ -27,6 +27,10 @@
 	align-items: flex-end;
 }
 
+[data-valign="match-parent"] {
+	align-items: inherit;
+}
+
 [data-halign="start"] {
 	justify-content: flex-start;
 }
@@ -43,6 +47,10 @@
 	justify-content: space-between;
 }
 
+[data-halign="match-parent"] {
+	justify-content: inherit;
+}
+
 [data-orientation="horizontal"] {
 	display: flex;
 	flex-direction: row;
@@ -53,15 +61,26 @@
 	flex-direction: column;
 }
 
+.layout-block {
+	// Allow the alignment inheritance to cascade down to children if the parent of this element has this set
+	&:not([data-halign]) {
+		justify-content: inherit;
+	}
+	&:not([data-valign]) {
+		align-items: inherit;
+	}
+}
+
 @each $name, $color in $colors {
 	[data-color-theme="#{$name}"] {
 		// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
 		--theme-color: var(--color-#{$name});
-		--theme-text-color: var(--readable-color-#{$name});
+		--theme-color-inverse: var(--readable-color-#{$name});
 	}
 }
 
 // Basic theme styling for elements with a text colour attribute specified
+// This should be used sparingly - use the color theme setting as much as is practical
 @each $name, $color in $colors {
 	[data-text-color="#{$name}"] {
 		color: var(--color-#{$name});
@@ -73,6 +92,16 @@
 	body[data-global-background="#{$name}"] {
 		background-color: var(--color-#{$name});
 		color: var(--readable-color-#{$name});
+	}
+
+	[data-color-theme="#{$name}"] {
+		h1, h2, h3, h4 {
+			color: var(--color-#{$name});
+		}
+
+		[data-background=#{$name}] & {
+			color: inherit;
+		}
 	}
 
 	[data-background="#{$name}"] {

@@ -20,6 +20,10 @@
   align-items: flex-end;
 }
 
+[data-valign=match-parent] {
+  align-items: inherit;
+}
+
 [data-halign=start] {
   justify-content: flex-start;
 }
@@ -36,6 +40,10 @@
   justify-content: space-between;
 }
 
+[data-halign=match-parent] {
+  justify-content: inherit;
+}
+
 [data-orientation=horizontal] {
   display: flex;
   flex-direction: row;
@@ -46,54 +54,61 @@
   flex-direction: column;
 }
 
+.layout-block:not([data-halign]) {
+  justify-content: inherit;
+}
+.layout-block:not([data-valign]) {
+  align-items: inherit;
+}
+
 [data-color-theme=primary] {
   --theme-color: var(--color-primary);
-  --theme-text-color: var(--readable-color-primary);
+  --theme-color-inverse: var(--readable-color-primary);
 }
 
 [data-color-theme=secondary] {
   --theme-color: var(--color-secondary);
-  --theme-text-color: var(--readable-color-secondary);
+  --theme-color-inverse: var(--readable-color-secondary);
 }
 
 [data-color-theme=accent] {
   --theme-color: var(--color-accent);
-  --theme-text-color: var(--readable-color-accent);
+  --theme-color-inverse: var(--readable-color-accent);
 }
 
 [data-color-theme=info] {
   --theme-color: var(--color-info);
-  --theme-text-color: var(--readable-color-info);
+  --theme-color-inverse: var(--readable-color-info);
 }
 
 [data-color-theme=warning] {
   --theme-color: var(--color-warning);
-  --theme-text-color: var(--readable-color-warning);
+  --theme-color-inverse: var(--readable-color-warning);
 }
 
 [data-color-theme=success] {
   --theme-color: var(--color-success);
-  --theme-text-color: var(--readable-color-success);
+  --theme-color-inverse: var(--readable-color-success);
 }
 
 [data-color-theme=error] {
   --theme-color: var(--color-error);
-  --theme-text-color: var(--readable-color-error);
+  --theme-color-inverse: var(--readable-color-error);
 }
 
 [data-color-theme=light] {
   --theme-color: var(--color-light);
-  --theme-text-color: var(--readable-color-light);
+  --theme-color-inverse: var(--readable-color-light);
 }
 
 [data-color-theme=dark] {
   --theme-color: var(--color-dark);
-  --theme-text-color: var(--readable-color-dark);
+  --theme-color-inverse: var(--readable-color-dark);
 }
 
 [data-color-theme=white] {
   --theme-color: var(--color-white);
-  --theme-text-color: var(--readable-color-white);
+  --theme-color-inverse: var(--readable-color-white);
 }
 
 [data-text-color=primary] {
@@ -139,6 +154,13 @@
 body[data-global-background=primary] {
   background-color: var(--color-primary);
   color: var(--readable-color-primary);
+}
+
+[data-color-theme=primary] h1, [data-color-theme=primary] h2, [data-color-theme=primary] h3, [data-color-theme=primary] h4 {
+  color: var(--color-primary);
+}
+[data-background=primary] [data-color-theme=primary] {
+  color: inherit;
 }
 
 [data-background=primary]:not(body[data-global-background=primary] [data-background=primary]) {
@@ -202,6 +224,13 @@ body[data-global-background=secondary] {
   color: var(--readable-color-secondary);
 }
 
+[data-color-theme=secondary] h1, [data-color-theme=secondary] h2, [data-color-theme=secondary] h3, [data-color-theme=secondary] h4 {
+  color: var(--color-secondary);
+}
+[data-background=secondary] [data-color-theme=secondary] {
+  color: inherit;
+}
+
 [data-background=secondary]:not(body[data-global-background=secondary] [data-background=secondary]) {
   background-color: var(--color-secondary);
   color: var(--readable-color-secondary);
@@ -261,6 +290,13 @@ body[data-global-background=secondary] [data-background]:not([data-background=se
 body[data-global-background=accent] {
   background-color: var(--color-accent);
   color: var(--readable-color-accent);
+}
+
+[data-color-theme=accent] h1, [data-color-theme=accent] h2, [data-color-theme=accent] h3, [data-color-theme=accent] h4 {
+  color: var(--color-accent);
+}
+[data-background=accent] [data-color-theme=accent] {
+  color: inherit;
 }
 
 [data-background=accent]:not(body[data-global-background=accent] [data-background=accent]) {
@@ -324,6 +360,13 @@ body[data-global-background=info] {
   color: var(--readable-color-info);
 }
 
+[data-color-theme=info] h1, [data-color-theme=info] h2, [data-color-theme=info] h3, [data-color-theme=info] h4 {
+  color: var(--color-info);
+}
+[data-background=info] [data-color-theme=info] {
+  color: inherit;
+}
+
 [data-background=info]:not(body[data-global-background=info] [data-background=info]) {
   background-color: var(--color-info);
   color: var(--readable-color-info);
@@ -383,6 +426,13 @@ body[data-global-background=info] [data-background]:not([data-background=info]) 
 body[data-global-background=warning] {
   background-color: var(--color-warning);
   color: var(--readable-color-warning);
+}
+
+[data-color-theme=warning] h1, [data-color-theme=warning] h2, [data-color-theme=warning] h3, [data-color-theme=warning] h4 {
+  color: var(--color-warning);
+}
+[data-background=warning] [data-color-theme=warning] {
+  color: inherit;
 }
 
 [data-background=warning]:not(body[data-global-background=warning] [data-background=warning]) {
@@ -446,6 +496,13 @@ body[data-global-background=success] {
   color: var(--readable-color-success);
 }
 
+[data-color-theme=success] h1, [data-color-theme=success] h2, [data-color-theme=success] h3, [data-color-theme=success] h4 {
+  color: var(--color-success);
+}
+[data-background=success] [data-color-theme=success] {
+  color: inherit;
+}
+
 [data-background=success]:not(body[data-global-background=success] [data-background=success]) {
   background-color: var(--color-success);
   color: var(--readable-color-success);
@@ -505,6 +562,13 @@ body[data-global-background=success] [data-background]:not([data-background=succ
 body[data-global-background=error] {
   background-color: var(--color-error);
   color: var(--readable-color-error);
+}
+
+[data-color-theme=error] h1, [data-color-theme=error] h2, [data-color-theme=error] h3, [data-color-theme=error] h4 {
+  color: var(--color-error);
+}
+[data-background=error] [data-color-theme=error] {
+  color: inherit;
 }
 
 [data-background=error]:not(body[data-global-background=error] [data-background=error]) {
@@ -568,6 +632,13 @@ body[data-global-background=light] {
   color: var(--readable-color-light);
 }
 
+[data-color-theme=light] h1, [data-color-theme=light] h2, [data-color-theme=light] h3, [data-color-theme=light] h4 {
+  color: var(--color-light);
+}
+[data-background=light] [data-color-theme=light] {
+  color: inherit;
+}
+
 [data-background=light]:not(body[data-global-background=light] [data-background=light]) {
   background-color: var(--color-light);
   color: var(--readable-color-light);
@@ -629,6 +700,13 @@ body[data-global-background=dark] {
   color: var(--readable-color-dark);
 }
 
+[data-color-theme=dark] h1, [data-color-theme=dark] h2, [data-color-theme=dark] h3, [data-color-theme=dark] h4 {
+  color: var(--color-dark);
+}
+[data-background=dark] [data-color-theme=dark] {
+  color: inherit;
+}
+
 [data-background=dark]:not(body[data-global-background=dark] [data-background=dark]) {
   background-color: var(--color-dark);
   color: var(--readable-color-dark);
@@ -688,6 +766,13 @@ body[data-global-background=dark] [data-background]:not([data-background=dark]) 
 body[data-global-background=white] {
   background-color: var(--color-white);
   color: var(--readable-color-white);
+}
+
+[data-color-theme=white] h1, [data-color-theme=white] h2, [data-color-theme=white] h3, [data-color-theme=white] h4 {
+  color: var(--color-white);
+}
+[data-background=white] [data-color-theme=white] {
+  color: inherit;
 }
 
 [data-background=white]:not(body[data-global-background=white] [data-background=white]) {

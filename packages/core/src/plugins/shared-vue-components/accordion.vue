@@ -206,6 +206,7 @@ export default {
             padding: var(--spacing-sm);
             margin-block-start: var(--spacing-xxs);
             background: color-mix(in srgb, var(--theme-color) 10%, white);
+            color: var(--theme-color);
             /* Default: Main title and icon only */
             display: flex;
             align-items: center;
@@ -223,7 +224,7 @@ export default {
             .accordion__panel[open] &,
             &:hover, &:focus, &:active {
                 background: var(--theme-color);
-                color: var(--theme-text-color);
+                color: var(--theme-color-inverse);
             }
 
             .accordion__panel__title__main {

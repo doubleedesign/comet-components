@@ -2,6 +2,8 @@
 
 namespace Doubleedesign\CometCanvas\Classic;
 
+use Doubleedesign\Comet\Core\Config;
+
 class TinyMCEConfig {
 
     public function __construct() {
@@ -51,7 +53,7 @@ class TinyMCEConfig {
      * @return array
      */
     public function add_theme_colours($settings): array {
-        $colours = ThemeStyle::get_colours();
+        $colours = Config::getInstance()->get_theme_colours();
 
         if (!empty($colours)) {
             $map = array();

@@ -16,6 +16,10 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas-classic/src" isTestSource="false" packagePrefix="Doubleedesign\CometCanvas\Classic\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\Classic\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/core/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />
@@ -124,6 +128,52 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/core/coverage" />
       <excludeFolder url="file://$MODULE_DIR$/packages/standalone" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core-standalone" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-canvas-classic/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/carbonphp/carbon-doctrine-types" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doubleedesign/comet-components-core" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/feimosi/baguettebox.js" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/bus" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/collections" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/conditionable" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/container" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/events" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/macroable" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/pipeline" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/support" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate/view" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/nesbot/carbon" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/openpsa/ranger" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/psr/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/translation" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/translation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/voku/portable-ascii" />
+      <excludeFolder url="file://$MODULE_DIR$/docs" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/carbonphp" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doctrine" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doubleedesign" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/ezyang" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/feimosi" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/nesbot" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/openpsa" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/psr" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/voku" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/phpstan" />
+      <excludeFolder url="file://$MODULE_DIR$/test/unit/coverage" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

@@ -2,7 +2,7 @@
 use Doubleedesign\Comet\Core\{Config, SiteHeader, Group, Menu};
 use Doubleedesign\CometCanvas\NavMenus;
 
-$globalBackground = Config::get_global_background();
+$globalBackground = Config::getInstance()->get('global_background')
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> lang="en">

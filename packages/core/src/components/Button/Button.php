@@ -38,27 +38,15 @@ class Button extends Renderable {
         $this->content = $content;
     }
 
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        $result = array_merge(
-            [
-                'button',
-                "button--{$this->colorTheme->value}",
-                ...($this->isOutline ? ["button--{$this->colorTheme->value}--outline"] : []),
-            ],
-            $classes
-        );
-
-        return array_unique($result);
-    }
-
     protected function get_html_attributes(): array {
         $attrs = parent::get_html_attributes();
 
         if ($this->colorTheme) {
             $attrs['data-color-theme'] = $this->colorTheme->value;
         }
+		if($this->isOutline) {
+			$attrs['data-style'] = 'outline';
+		}
 
         return $attrs;
     }

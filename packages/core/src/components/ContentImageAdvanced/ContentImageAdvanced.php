@@ -41,7 +41,7 @@ class ContentImageAdvanced extends ContentImageComponent {
     public function __construct(array $attributes) {
         $this->focalPoint = $attributes['focalPoint'] ?? null;
         $this->offset = $attributes['offset'] ?? $attributes['imageOffset'] ?? null;
-        $this->aspectRatio = $attributes['aspectRatio'] ?? $this->aspectRatio;
+        $this->aspectRatio = AspectRatio::tryFrom($attributes['aspectRatio']) ?? $this->aspectRatio;
         parent::__construct($attributes, 'components.ContentImage.content-image');
         $this->shortName = 'image';
     }
@@ -61,9 +61,7 @@ class ContentImageAdvanced extends ContentImageComponent {
         return $properties;
     }
 
-    #[NotImplemented]
     public function render(): void {
-        // Check the render method of the parent and see if it needs to be overridden,
-        // if not then remove this method and the annotation
+        echo 'image render to come';
     }
 }

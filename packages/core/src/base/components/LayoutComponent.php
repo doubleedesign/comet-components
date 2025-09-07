@@ -18,9 +18,11 @@ abstract class LayoutComponent extends UIComponent {
                 $this->simplify_all_background_colors();
             }
         }
-    }
+	}
 
     protected function get_filtered_classes(): array {
+		// FIXME: Why don't ContentWrapper and ImageWrapper exist?
+	    // See Utils::get_class_name() for where it seems to come from
         if ((!$this instanceof Column) && (!$this instanceof ContentWrapper) && (!$this instanceof ImageWrapper) && (!$this instanceof Steps)) {
             return array_merge(
                 parent::get_filtered_classes(),
@@ -54,7 +56,7 @@ abstract class LayoutComponent extends UIComponent {
 
     private function exclude_from_background_simplification(): bool {
         foreach ($this->innerComponents as $component) {
-            if ($component instanceof CallToAction) {
+            if ($component instanceof CallToAction && $component->isNested === true) {
                 return true;
             }
         }

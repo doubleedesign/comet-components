@@ -1,16 +1,14 @@
 <?php
-
 namespace Doubleedesign\CometCanvas\Classic;
-
-use Doubleedesign\Comet\Core\Utils;
+use Doubleedesign\Comet\Core\{Utils};
 
 /**
  * This class sets up some core PHP stuff, notably allowing child themes to replace certain classes rather than extend them.
  * This means parent theme classes don't get instantiated at all,
  * meaning we can avoid things like the parent theme registering a menu only to have the child theme unregister it.
  * TODO: Is there a way to enforce child theme classes to implement the interfaces to ensure all required methods are present?
+ * TODO: PHP doesn't have package-private classes, how can we prevent direct use of classes like ThemeStyle and enforce coming through this one?
  */
-
 final class CometCanvas {
     public function __construct() {
         add_filter('extra_theme_headers', [$this, 'register_namespace_header']);
@@ -24,9 +22,10 @@ final class CometCanvas {
     }
 
     public function init(): void {
+        new ThemeStyle();
+
         $this->instantiate_theme_class('NavMenus');
         $this->instantiate_theme_class('Frontend');
-        $this->instantiate_theme_class('ThemeStyle');
 
         if (is_admin()) {
             $this->instantiate_theme_class('TinyMCEConfig');
@@ -62,16 +61,6 @@ final class CometCanvas {
         return $author . '\\' . $theme;
     }
 
-    public static function get_theme_colours(): array {
-        $child_namespace = (new self())->get_child_theme_namespace();
-        $themeStyleClass = $child_namespace && class_exists($child_namespace . '\\ThemeStyle')
-            ? $child_namespace . '\\ThemeStyle'
-            : __NAMESPACE__ . '\\ThemeStyle';
-
-        /** @var ThemeStyle $themeStyleClass */
-        return $themeStyleClass::get_colours();
-    }
-
     public static function get_simplified_nav_menu_items_by_location(string $location, array $args = []): array {
         $child_namespace = (new self())->get_child_theme_namespace();
         $navMenuClass = $child_namespace && class_exists($child_namespace . '\\NavMenus')
@@ -81,15 +70,4 @@ final class CometCanvas {
         /** @var NavMenus $navMenuClass */
         return $navMenuClass::get_simplified_nav_menu_items_by_location($location, $args);
     }
-
-    public static function get_global_background(): string {
-        $child_namespace = (new self())->get_child_theme_namespace();
-        $themeStyleClass = $child_namespace && class_exists($child_namespace . '\\ThemeStyle')
-            ? $child_namespace . '\\ThemeStyle'
-            : __NAMESPACE__ . '\\ThemeStyle';
-
-        /** @var ThemeStyle $themeStyleClass */
-        return $themeStyleClass::get_global_background();
-    }
-
 }

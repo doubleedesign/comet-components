@@ -23,193 +23,193 @@
   justify-content: center;
   gap: var(--spacing-xs);
 }
-.button[data-color-theme=primary]:not(.is-style-outline) {
+.button[data-color-theme=primary]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-primary);
   border: 1px solid var(--color-primary);
   color: var(--readable-color-primary);
 }
-.button[data-color-theme=primary]:not(.is-style-outline):hover, .button[data-color-theme=primary]:not(.is-style-outline):focus, .button[data-color-theme=primary]:not(.is-style-outline):active {
+.button[data-color-theme=primary]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=primary]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=primary]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-primary) 80%, black);
   border-color: color-mix(in srgb, var(--color-primary) 80%, black);
   color: var(--readable-color-primary);
 }
-.button[data-color-theme=primary].is-style-outline {
+.button[data-color-theme=primary].is-style-outline, .button[data-color-theme=primary][data-style=outline] {
   border: 1px solid var(--color-primary);
   background-color: transparent;
   color: var(--color-primary);
 }
-.button[data-color-theme=primary].is-style-outline:hover, .button[data-color-theme=primary].is-style-outline:focus, .button[data-color-theme=primary].is-style-outline:active {
+.button[data-color-theme=primary].is-style-outline:hover, .button[data-color-theme=primary].is-style-outline:focus, .button[data-color-theme=primary].is-style-outline:active, .button[data-color-theme=primary][data-style=outline]:hover, .button[data-color-theme=primary][data-style=outline]:focus, .button[data-color-theme=primary][data-style=outline]:active {
   background: var(--color-primary);
   color: var(--readable-color-primary);
 }
-.button[data-color-theme=secondary]:not(.is-style-outline) {
+.button[data-color-theme=secondary]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
   color: var(--readable-color-secondary);
 }
-.button[data-color-theme=secondary]:not(.is-style-outline):hover, .button[data-color-theme=secondary]:not(.is-style-outline):focus, .button[data-color-theme=secondary]:not(.is-style-outline):active {
+.button[data-color-theme=secondary]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=secondary]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=secondary]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-secondary) 80%, black);
   border-color: color-mix(in srgb, var(--color-secondary) 80%, black);
   color: var(--readable-color-secondary);
 }
-.button[data-color-theme=secondary].is-style-outline {
+.button[data-color-theme=secondary].is-style-outline, .button[data-color-theme=secondary][data-style=outline] {
   border: 1px solid var(--color-secondary);
   background-color: transparent;
   color: var(--color-secondary);
 }
-.button[data-color-theme=secondary].is-style-outline:hover, .button[data-color-theme=secondary].is-style-outline:focus, .button[data-color-theme=secondary].is-style-outline:active {
+.button[data-color-theme=secondary].is-style-outline:hover, .button[data-color-theme=secondary].is-style-outline:focus, .button[data-color-theme=secondary].is-style-outline:active, .button[data-color-theme=secondary][data-style=outline]:hover, .button[data-color-theme=secondary][data-style=outline]:focus, .button[data-color-theme=secondary][data-style=outline]:active {
   background: var(--color-secondary);
   color: var(--readable-color-secondary);
 }
-.button[data-color-theme=accent]:not(.is-style-outline) {
+.button[data-color-theme=accent]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-accent);
   border: 1px solid var(--color-accent);
   color: var(--readable-color-accent);
 }
-.button[data-color-theme=accent]:not(.is-style-outline):hover, .button[data-color-theme=accent]:not(.is-style-outline):focus, .button[data-color-theme=accent]:not(.is-style-outline):active {
+.button[data-color-theme=accent]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=accent]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=accent]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-accent) 80%, black);
   border-color: color-mix(in srgb, var(--color-accent) 80%, black);
   color: var(--readable-color-accent);
 }
-.button[data-color-theme=accent].is-style-outline {
+.button[data-color-theme=accent].is-style-outline, .button[data-color-theme=accent][data-style=outline] {
   border: 1px solid var(--color-accent);
   background-color: transparent;
   color: var(--color-accent);
 }
-.button[data-color-theme=accent].is-style-outline:hover, .button[data-color-theme=accent].is-style-outline:focus, .button[data-color-theme=accent].is-style-outline:active {
+.button[data-color-theme=accent].is-style-outline:hover, .button[data-color-theme=accent].is-style-outline:focus, .button[data-color-theme=accent].is-style-outline:active, .button[data-color-theme=accent][data-style=outline]:hover, .button[data-color-theme=accent][data-style=outline]:focus, .button[data-color-theme=accent][data-style=outline]:active {
   background: var(--color-accent);
   color: var(--readable-color-accent);
 }
-.button[data-color-theme=info]:not(.is-style-outline) {
+.button[data-color-theme=info]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-info);
   border: 1px solid var(--color-info);
   color: var(--readable-color-info);
 }
-.button[data-color-theme=info]:not(.is-style-outline):hover, .button[data-color-theme=info]:not(.is-style-outline):focus, .button[data-color-theme=info]:not(.is-style-outline):active {
+.button[data-color-theme=info]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=info]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=info]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-info) 80%, black);
   border-color: color-mix(in srgb, var(--color-info) 80%, black);
   color: var(--readable-color-info);
 }
-.button[data-color-theme=info].is-style-outline {
+.button[data-color-theme=info].is-style-outline, .button[data-color-theme=info][data-style=outline] {
   border: 1px solid var(--color-info);
   background-color: transparent;
   color: var(--color-info);
 }
-.button[data-color-theme=info].is-style-outline:hover, .button[data-color-theme=info].is-style-outline:focus, .button[data-color-theme=info].is-style-outline:active {
+.button[data-color-theme=info].is-style-outline:hover, .button[data-color-theme=info].is-style-outline:focus, .button[data-color-theme=info].is-style-outline:active, .button[data-color-theme=info][data-style=outline]:hover, .button[data-color-theme=info][data-style=outline]:focus, .button[data-color-theme=info][data-style=outline]:active {
   background: var(--color-info);
   color: var(--readable-color-info);
 }
-.button[data-color-theme=warning]:not(.is-style-outline) {
+.button[data-color-theme=warning]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-warning);
   border: 1px solid var(--color-warning);
   color: var(--readable-color-warning);
 }
-.button[data-color-theme=warning]:not(.is-style-outline):hover, .button[data-color-theme=warning]:not(.is-style-outline):focus, .button[data-color-theme=warning]:not(.is-style-outline):active {
+.button[data-color-theme=warning]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=warning]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=warning]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-warning) 80%, black);
   border-color: color-mix(in srgb, var(--color-warning) 80%, black);
   color: var(--readable-color-warning);
 }
-.button[data-color-theme=warning].is-style-outline {
+.button[data-color-theme=warning].is-style-outline, .button[data-color-theme=warning][data-style=outline] {
   border: 1px solid var(--color-warning);
   background-color: transparent;
   color: var(--color-warning);
 }
-.button[data-color-theme=warning].is-style-outline:hover, .button[data-color-theme=warning].is-style-outline:focus, .button[data-color-theme=warning].is-style-outline:active {
+.button[data-color-theme=warning].is-style-outline:hover, .button[data-color-theme=warning].is-style-outline:focus, .button[data-color-theme=warning].is-style-outline:active, .button[data-color-theme=warning][data-style=outline]:hover, .button[data-color-theme=warning][data-style=outline]:focus, .button[data-color-theme=warning][data-style=outline]:active {
   background: var(--color-warning);
   color: var(--readable-color-warning);
 }
-.button[data-color-theme=success]:not(.is-style-outline) {
+.button[data-color-theme=success]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-success);
   border: 1px solid var(--color-success);
   color: var(--readable-color-success);
 }
-.button[data-color-theme=success]:not(.is-style-outline):hover, .button[data-color-theme=success]:not(.is-style-outline):focus, .button[data-color-theme=success]:not(.is-style-outline):active {
+.button[data-color-theme=success]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=success]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=success]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-success) 80%, black);
   border-color: color-mix(in srgb, var(--color-success) 80%, black);
   color: var(--readable-color-success);
 }
-.button[data-color-theme=success].is-style-outline {
+.button[data-color-theme=success].is-style-outline, .button[data-color-theme=success][data-style=outline] {
   border: 1px solid var(--color-success);
   background-color: transparent;
   color: var(--color-success);
 }
-.button[data-color-theme=success].is-style-outline:hover, .button[data-color-theme=success].is-style-outline:focus, .button[data-color-theme=success].is-style-outline:active {
+.button[data-color-theme=success].is-style-outline:hover, .button[data-color-theme=success].is-style-outline:focus, .button[data-color-theme=success].is-style-outline:active, .button[data-color-theme=success][data-style=outline]:hover, .button[data-color-theme=success][data-style=outline]:focus, .button[data-color-theme=success][data-style=outline]:active {
   background: var(--color-success);
   color: var(--readable-color-success);
 }
-.button[data-color-theme=error]:not(.is-style-outline) {
+.button[data-color-theme=error]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-error);
   border: 1px solid var(--color-error);
   color: var(--readable-color-error);
 }
-.button[data-color-theme=error]:not(.is-style-outline):hover, .button[data-color-theme=error]:not(.is-style-outline):focus, .button[data-color-theme=error]:not(.is-style-outline):active {
+.button[data-color-theme=error]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=error]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=error]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-error) 80%, black);
   border-color: color-mix(in srgb, var(--color-error) 80%, black);
   color: var(--readable-color-error);
 }
-.button[data-color-theme=error].is-style-outline {
+.button[data-color-theme=error].is-style-outline, .button[data-color-theme=error][data-style=outline] {
   border: 1px solid var(--color-error);
   background-color: transparent;
   color: var(--color-error);
 }
-.button[data-color-theme=error].is-style-outline:hover, .button[data-color-theme=error].is-style-outline:focus, .button[data-color-theme=error].is-style-outline:active {
+.button[data-color-theme=error].is-style-outline:hover, .button[data-color-theme=error].is-style-outline:focus, .button[data-color-theme=error].is-style-outline:active, .button[data-color-theme=error][data-style=outline]:hover, .button[data-color-theme=error][data-style=outline]:focus, .button[data-color-theme=error][data-style=outline]:active {
   background: var(--color-error);
   color: var(--readable-color-error);
 }
-.button[data-color-theme=light]:not(.is-style-outline) {
+.button[data-color-theme=light]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-light);
   border: 1px solid var(--color-light);
   color: var(--readable-color-light);
 }
-.button[data-color-theme=light]:not(.is-style-outline):hover, .button[data-color-theme=light]:not(.is-style-outline):focus, .button[data-color-theme=light]:not(.is-style-outline):active {
+.button[data-color-theme=light]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=light]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=light]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-light) 80%, black);
   border-color: color-mix(in srgb, var(--color-light) 80%, black);
   color: var(--readable-color-light);
 }
-.button[data-color-theme=light].is-style-outline {
+.button[data-color-theme=light].is-style-outline, .button[data-color-theme=light][data-style=outline] {
   border: 1px solid var(--color-light);
   background-color: transparent;
   color: var(--color-light);
 }
-.button[data-color-theme=light].is-style-outline:hover, .button[data-color-theme=light].is-style-outline:focus, .button[data-color-theme=light].is-style-outline:active {
+.button[data-color-theme=light].is-style-outline:hover, .button[data-color-theme=light].is-style-outline:focus, .button[data-color-theme=light].is-style-outline:active, .button[data-color-theme=light][data-style=outline]:hover, .button[data-color-theme=light][data-style=outline]:focus, .button[data-color-theme=light][data-style=outline]:active {
   background: var(--color-light);
   color: var(--readable-color-light);
 }
-.button[data-color-theme=dark]:not(.is-style-outline) {
+.button[data-color-theme=dark]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-dark);
   border: 1px solid var(--color-dark);
   color: var(--readable-color-dark);
 }
-.button[data-color-theme=dark]:not(.is-style-outline):hover, .button[data-color-theme=dark]:not(.is-style-outline):focus, .button[data-color-theme=dark]:not(.is-style-outline):active {
+.button[data-color-theme=dark]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=dark]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=dark]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-dark) 80%, black);
   border-color: color-mix(in srgb, var(--color-dark) 80%, black);
   color: var(--readable-color-dark);
 }
-.button[data-color-theme=dark].is-style-outline {
+.button[data-color-theme=dark].is-style-outline, .button[data-color-theme=dark][data-style=outline] {
   border: 1px solid var(--color-dark);
   background-color: transparent;
   color: var(--color-dark);
 }
-.button[data-color-theme=dark].is-style-outline:hover, .button[data-color-theme=dark].is-style-outline:focus, .button[data-color-theme=dark].is-style-outline:active {
+.button[data-color-theme=dark].is-style-outline:hover, .button[data-color-theme=dark].is-style-outline:focus, .button[data-color-theme=dark].is-style-outline:active, .button[data-color-theme=dark][data-style=outline]:hover, .button[data-color-theme=dark][data-style=outline]:focus, .button[data-color-theme=dark][data-style=outline]:active {
   background: var(--color-dark);
   color: var(--readable-color-dark);
 }
-.button[data-color-theme=white]:not(.is-style-outline) {
+.button[data-color-theme=white]:not(.is-style-outline):not([data-style=outline]) {
   background-color: var(--color-white);
   border: 1px solid var(--color-white);
   color: var(--readable-color-white);
 }
-.button[data-color-theme=white]:not(.is-style-outline):hover, .button[data-color-theme=white]:not(.is-style-outline):focus, .button[data-color-theme=white]:not(.is-style-outline):active {
+.button[data-color-theme=white]:not(.is-style-outline):not([data-style=outline]):hover, .button[data-color-theme=white]:not(.is-style-outline):not([data-style=outline]):focus, .button[data-color-theme=white]:not(.is-style-outline):not([data-style=outline]):active {
   background-color: color-mix(in srgb, var(--color-white) 80%, black);
   border-color: color-mix(in srgb, var(--color-white) 80%, black);
   color: var(--readable-color-white);
 }
-.button[data-color-theme=white].is-style-outline {
+.button[data-color-theme=white].is-style-outline, .button[data-color-theme=white][data-style=outline] {
   border: 1px solid var(--color-white);
   background-color: transparent;
   color: var(--color-white);
 }
-.button[data-color-theme=white].is-style-outline:hover, .button[data-color-theme=white].is-style-outline:focus, .button[data-color-theme=white].is-style-outline:active {
+.button[data-color-theme=white].is-style-outline:hover, .button[data-color-theme=white].is-style-outline:focus, .button[data-color-theme=white].is-style-outline:active, .button[data-color-theme=white][data-style=outline]:hover, .button[data-color-theme=white][data-style=outline]:focus, .button[data-color-theme=white][data-style=outline]:active {
   background: var(--color-white);
   color: var(--readable-color-white);
 }

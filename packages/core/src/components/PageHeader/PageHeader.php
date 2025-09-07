@@ -28,7 +28,7 @@ class PageHeader extends UIComponent {
     protected array $breadcrumbs;
 
     public function __construct(array $attributes, string $content, array $breadcrumbs = []) {
-        $globalBackground = Config::get_global_background();
+        $globalBackground = Config::getInstance()->get('global_background');
         if (isset($attributes['backgroundColor']) && $attributes['backgroundColor'] !== $globalBackground) {
             $this->set_background_color_from_attrs($attributes);
         }

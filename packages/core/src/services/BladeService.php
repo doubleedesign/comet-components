@@ -105,7 +105,7 @@ class BladeService {
         }
 
         // Allow for directory paths to be set in the config
-        $componentPaths = Config::get_blade_component_paths();
+        $componentPaths = Config::getInstance()->get('blade_component_paths');
 
         // If we are in WordPress with the block editor, allow overriding from the theme
         if (class_exists('WP_Block')) {

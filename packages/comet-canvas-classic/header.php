@@ -1,8 +1,8 @@
 <?php
-use Doubleedesign\Comet\Core\{SiteHeader, Group, Menu};
+use Doubleedesign\Comet\Core\{Config, SiteHeader, Group, Menu};
 use Doubleedesign\CometCanvas\Classic\CometCanvas;
 
-$globalBackground = CometCanvas::get_global_background();
+$globalBackground = Config::getInstance()->get('global_background');
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> lang="en">

@@ -4,6 +4,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::DETAILS])]
 #[DefaultTag(Tag::DIV)]
 abstract class PanelComponent extends UIComponent {
+    use BackgroundColor;
+
     /** @var array<Renderable> */
     protected array $innerComponents;
     protected string $title;
@@ -17,6 +19,14 @@ abstract class PanelComponent extends UIComponent {
 
     protected function get_bem_name(): ?string {
         return "{$this->context}__panel__content";
+    }
+
+    protected function get_html_attributes(): array {
+        $attrs = parent::get_html_attributes();
+
+        unset($attrs['title']); // We don't want to pass a HTML title down to the panel content
+
+        return $attrs;
     }
 
     public function get_summary(): ?array {

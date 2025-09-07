@@ -10,8 +10,9 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
-class CallToAction extends UIComponent {
-    use BackgroundColor;
+class CallToAction extends LayoutComponent {
+    use ColorTheme;
+    use LayoutContainerSize;
 
     /**
      * @var array<Heading|Paragraph|ListComponent|ButtonGroup> $innerComponents
@@ -19,19 +20,32 @@ class CallToAction extends UIComponent {
     protected array $innerComponents;
 
     /**
+     * @var bool $isNested
+     * @description Whether this CallToAction is nested inside another LayoutComponent
+     * @default-value true
+     */
+    protected bool $isNested = true;
+
+    /**
      * @param  array  $attributes
      * @param  array<Heading|Paragraph|ButtonGroup>  $innerComponents
      */
     public function __construct(array $attributes, array $innerComponents) {
+        $this->isNested = isset($attributes['isNested']) ? filter_var($attributes['isNested'], FILTER_VALIDATE_BOOLEAN) : $this->isNested;
+        if (!$this->isNested) {
+            $this->set_size_from_attrs($attributes);
+            $this->add_container($innerComponents);
+        }
+
         parent::__construct($attributes, $innerComponents, 'components.CallToAction.call-to-action');
-        $this->set_background_color_from_attrs($attributes);
+        $this->set_color_theme_from_attrs($attributes);
     }
 
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
+        if (isset($this->colorTheme)) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
         return $attributes;

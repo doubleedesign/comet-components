@@ -1,0 +1,12 @@
+// Styles for the accordion wrapper
+// Inner accordion styles are in the Vue component
+@use '../variables' as *;
+
+// Global handling of white doesn't always automatically apply here so we need to override it
+.accordion[data-background="white"] {
+	background: white;
+}
+
+.accordion-intro {
+	padding-block-end: var(--spacing-md);
+}

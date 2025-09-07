@@ -1,5 +1,6 @@
 <?php
 namespace Doubleedesign\CometCanvas\Classic;
+use Doubleedesign\Comet\Core\Config;
 use JetBrains\PhpStorm\NoReturn;
 
 class AdminUI {
@@ -19,7 +20,7 @@ class AdminUI {
      * so they can be used in ACF fields etc
      */
     public function add_colour_css_variables_to_admin(): void {
-        $colours = CometCanvas::get_theme_colours();
+        $colours = Config::getInstance()->get_theme_colours();
 
         if (!empty($colours)) {
             echo '<style>:root {';

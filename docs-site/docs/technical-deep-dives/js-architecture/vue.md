@@ -168,6 +168,6 @@ For Vue components that are shared amongst multiple PHP components (for example,
 :::
 
 :::tip
-Pass the `data-color-theme` attribute to your component to make the localised CSS variables `--theme-color` and `--theme-text-color` available to your Vue component's vanilla CSS, removing the need to manually specify the styles for every theme colour.
+Pass the `data-color-theme` attribute to your component to make the localised CSS variable `--theme-color` available to your Vue component's vanilla CSS, removing the need to manually specify the styles for every theme colour.
 :::
 

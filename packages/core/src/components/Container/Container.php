@@ -31,7 +31,7 @@ class Container extends LayoutComponent {
         $this->gradient = $attributes['gradient'] ?? null;
         $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
 
-        $globalBackground = Config::get_global_background();
+        $globalBackground = Config::getInstance()->get('global_background');
         if (isset($attributes['backgroundColor']) && $attributes['backgroundColor'] !== $globalBackground) {
             $this->set_background_color_from_attrs($attributes);
         }
@@ -50,6 +50,11 @@ class Container extends LayoutComponent {
         return array_unique(array_merge($classes, [$this->shortName]));
     }
 
+    /**
+     * Outer classes to use if withWrapper is true
+     *
+     * @return string[]
+     */
     protected function get_outer_classes(): array {
         return ['layout-block', 'page-section'];
     }

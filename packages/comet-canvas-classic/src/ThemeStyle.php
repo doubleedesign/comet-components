@@ -2,28 +2,14 @@
 namespace Doubleedesign\CometCanvas\Classic;
 use Doubleedesign\Comet\Core\Config;
 
-class ThemeStyle implements IThemeStyle {
+class ThemeStyle {
     public function __construct() {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_theme_stylesheets'], 20);
         // Set defaults for components as per Config class in the core package
+        add_action('init', [$this, 'set_colours'], 10);
         add_action('init', [$this, 'set_global_background'], 10);
         add_action('init', [$this, 'set_icon_prefix'], 10);
-    }
-
-    public static function get_colours(): array {
-        return array(
-            '000000'       => 'Black',
-            'FFFFFF'       => 'White',
-            '845ec2'       => 'Primary',
-            '00c9a7'       => 'Secondary',
-            'ba3caf'       => 'Accent',
-            '00d2fc'       => 'Info',
-            'f9c971'       => 'Warning',
-            '00c9a6'       => 'Success',
-            'd23e3e'       => 'Error',
-            '4b4453'       => 'Dark',
-            'F0F0F2'       => 'Light'
-        );
+        add_action('init', [$this, 'set_component_defaults'], 10);
     }
 
     public function enqueue_theme_stylesheets(): void {
@@ -33,7 +19,7 @@ class ThemeStyle implements IThemeStyle {
 
         if (file_exists($parent)) {
             $parent = get_template_directory_uri() . '/style.css';
-            wp_enqueue_style('comet-canvas', $parent, $deps, '0.1.0'); // TODO: Get version dynamically
+            wp_enqueue_style('comet-canvas', $parent, $deps, COMET_VERSION);
         }
 
         if (file_exists($child)) {
@@ -50,25 +36,53 @@ class ThemeStyle implements IThemeStyle {
         }
     }
 
-    public function set_global_background(): void {
-        $color = apply_filters('comet_canvas_global_background', 'white');
+    public function set_colours(): void {
+        $defaults = array(
+            '000000'       => 'Black',
+            'FFFFFF'       => 'White',
+            '845ec2'       => 'Primary',
+            '00c9a7'       => 'Secondary',
+            'ba3caf'       => 'Accent',
+            '00d2fc'       => 'Info',
+            'f9c971'       => 'Warning',
+            '00c9a6'       => 'Success',
+            'd23e3e'       => 'Error',
+            '4b4453'       => 'Dark',
+            'F0F0F2'       => 'Light'
+        );
+
+        $colours = apply_filters('comet_canvas_theme_colours', $defaults);
+
         if (class_exists('Doubleedesign\Comet\Core\Config')) {
-            Config::set_global_background($color);
+            Config::getInstance()->set('theme_colours', $colours);
         }
     }
 
-    public static function get_global_background(): string {
-        if (!class_exists('Doubleedesign\Comet\Core\Config')) {
-            return 'white';
-        }
+    public function set_global_background(): void {
+        $color = apply_filters('comet_canvas_global_background', 'white');
 
-        return Config::get_global_background();
+        if (class_exists('Doubleedesign\Comet\Core\Config')) {
+            Config::getInstance()->set('global_background', $color);
+        }
     }
 
     public function set_icon_prefix(): void {
         $prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
+
         if (class_exists('Doubleedesign\Comet\Core\Config')) {
-            Config::set_icon_prefix($prefix);
+            Config::getInstance()->set('icon_prefix', $prefix);
+        }
+    }
+
+    public function set_component_defaults(): void {
+        $defaults = apply_filters('comet_canvas_component_defaults', []);
+
+        if (class_exists('Doubleedesign\Comet\Core\Config')) {
+            foreach ($defaults as $componentName => $settings) {
+                $existing = Config::getInstance()->get('component_defaults') ?? [];
+                $existing[$componentName] = array_merge($existing[$componentName] ?? [], $settings);
+                Config::getInstance()->set('component_defaults', $existing);
+            }
         }
     }
 }

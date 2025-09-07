@@ -4,6 +4,7 @@
 	flex-wrap: wrap;
 	column-gap: var(--spacing-md);
 	row-gap: var(--spacing-xs);
+	font-size: var(--font-size-sm, 0.9rem);
 
 	&__address {
 		display: block;

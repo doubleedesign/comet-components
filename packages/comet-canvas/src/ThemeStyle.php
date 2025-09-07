@@ -105,11 +105,11 @@ class ThemeStyle {
 
     public function set_global_background(): void {
         $color = apply_filters('comet_canvas_global_background', 'white');
-        Config::set_global_background($color);
+        Config::getInstance()->set('global_background', $color);
     }
 
     public function set_icon_prefix(): void {
         $prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
-        Config::set_icon_prefix($prefix);
+        Config::getInstance()->set('default_icon_prefix', $prefix);
     }
 }

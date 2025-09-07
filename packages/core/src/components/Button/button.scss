@@ -35,7 +35,8 @@
 	@each $name, $color in $colors {
 		&[data-color-theme="#{$name}"] {
 
-			&:not(.is-style-outline) {
+			// .is-style-outline is here to account for what the WP block editor does.
+			&:not(.is-style-outline):not([data-style="outline"]) {
 				background-color: var(--color-#{$name});
 				border: 1px solid var(--color-#{$name});
 				color: var(--readable-color-#{$name});
@@ -47,7 +48,8 @@
 				}
 			}
 
-			&.is-style-outline {
+			&.is-style-outline,
+			&[data-style="outline"] {
 				border: 1px solid var(--color-#{$name});
 				background-color: transparent;
 				color: var(--color-#{$name});
