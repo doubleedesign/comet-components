@@ -13,6 +13,7 @@ final class CometCanvas {
     public function __construct() {
         add_filter('extra_theme_headers', [$this, 'register_namespace_header']);
         add_action('after_setup_theme', [$this, 'init']);
+        add_action('plugins_loaded', [$this, 'after_plugins_initialised'], 20);
     }
 
     public function register_namespace_header($headers) {
@@ -23,6 +24,7 @@ final class CometCanvas {
 
     public function init(): void {
         new ThemeStyle();
+        new SharedContent();
 
         $this->instantiate_theme_class('NavMenus');
         $this->instantiate_theme_class('Frontend');
