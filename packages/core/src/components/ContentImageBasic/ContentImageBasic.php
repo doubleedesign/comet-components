@@ -33,12 +33,18 @@ class ContentImageBasic extends ContentImageComponent {
      */
     protected ?string $width = null;
 
+    /**
+     * @var string|null $href
+     * @description URL to link to
+     */
+    protected ?string $href = null;
+
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.ContentImageBasic.content-image-basic');
         $this->scale = $attributes['scale'] ?? 'contain';
         $this->height = $attributes['height'] ?? null;
         $this->width = $attributes['width'] ?? null;
-        $this->shortName = 'image';
+        $this->href = $attributes['href'] ?? null;
     }
 
     /**
@@ -68,14 +74,14 @@ class ContentImageBasic extends ContentImageComponent {
 
     public function get_inner_wrapper_html_attributes(): array {
         return [
-            ...parent::get_inner_wrapper_html_attributes(),
             'data-behaviour'    => $this->scale ?? null,
         ];
     }
 
     public function get_filtered_classes(): array {
-        return [...parent::get_filtered_classes(),
-            $this->context ? "{$this->context}__{$this->shortName}--basic" : "{$this->shortName}--basic"
+        return [
+            ...parent::get_filtered_classes(),
+            $this->get_bem_name() . "--basic"
         ];
     }
 
@@ -86,7 +92,7 @@ class ContentImageBasic extends ContentImageComponent {
             'src'            => $this->src,
             'href'           => $this->href,
             'caption'        => $this->caption,
-            'captionClasses' => $this->context ? [$this->context . "__{$this->shortName}__caption"] : ["{$this->shortName}__caption"],
+            'captionClasses' => ["{$this->get_bem_name()}__caption"],
             'classes'        => implode(' ', $this->get_filtered_classes()),
             'outerAttrs'     => $this->get_outer_wrapper_html_attributes(),
             'innerAttrs'     => $this->get_inner_wrapper_html_attributes(),

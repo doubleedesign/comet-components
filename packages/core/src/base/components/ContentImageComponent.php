@@ -23,12 +23,6 @@ abstract class ContentImageComponent extends ImageComponent {
      */
     protected ?string $align = null;
 
-    /**
-     * @var string|null $href
-     * @description URL to link to
-     */
-    protected ?string $href = null;
-
     public function __construct(array $attributes, string $bladeFile) {
         $this->aspectRatio = isset($attributes['aspectRatio'])
             ? ($attributes['aspectRatio'] == '1'
@@ -37,10 +31,15 @@ abstract class ContentImageComponent extends ImageComponent {
             : null;
         $this->caption = $attributes['caption'] ?? null;
         $this->align = $attributes['align'] ?? null;
-        $this->href = $attributes['href'] ?? null;
         parent::__construct($attributes, $bladeFile);
+        $this->shortName = 'image';
     }
 
+    /**
+     * Layout attributes for the element wrapping both the image and the caption (if there is one)
+     *
+     * @return array
+     */
     public function get_outer_wrapper_html_attributes(): array {
         $attrs = [
             'data-align' => $this->align ?? null,
@@ -50,16 +49,4 @@ abstract class ContentImageComponent extends ImageComponent {
             return $value !== null && $value !== 'false';
         });
     }
-
-    public function get_inner_wrapper_html_attributes(): array {
-        $attrs = [
-            'class'             => $this->shortName . '__inner',
-            'data-aspect-ratio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
-        ];
-
-        return array_filter($attrs, function($value) {
-            return $value !== null && $value !== 'false';
-        });
-    }
-
 }

@@ -1,4 +1,32 @@
 // See common.scss for base .image styles
 .image--advanced {
-	
+	display: flex;
+	width: 100%;
+	height: fit-content;
+	overflow: hidden;
+
+		&__image {
+			overflow: hidden;
+			// aspect ratio is applied to this element using a data attribute, see common.scss
+
+			&__inner {
+				overflow: visible;
+				max-width: none !important;
+				width: fit-content;
+				height: fit-content;
+				transition: all 0.3s ease-in-out;
+				position: relative;
+				left: var(--offset-x, 0);
+				top: var(--offset-y, 0);
+
+				img {
+					width: calc(100% - var(--offset-x, 0));
+					height: calc(100% - var(--offset-y, 0));
+				}
+			}
+		}
+
+
+	&__caption {
+	}
 }
