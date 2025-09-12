@@ -1,4 +1,4 @@
 <?php
 get_header();
-the_content();
+do_action('comet_canvas_blog_top_content');
 get_footer();

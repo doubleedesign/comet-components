@@ -25,6 +25,7 @@ final class CometCanvas {
     public function init(): void {
         new ThemeStyle();
         new SharedContent();
+        new Fields();
 
         $this->instantiate_theme_class('NavMenus');
         $this->instantiate_theme_class('Frontend');

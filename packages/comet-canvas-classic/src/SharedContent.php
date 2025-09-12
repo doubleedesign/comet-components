@@ -25,7 +25,7 @@ class SharedContent extends \Doubleedesign\Comet\WordPress\Classic\Fields {
         if ($field['key'] === 'field_shared-content-modules') {
 
             return sprintf(
-                __('Click the "%s" button to add a section to the content of every page that uses the default page template', 'comet'),
+                __('Click the "%s" button to add a section to the content of every page that uses the default page template (except the homepage)', 'comet'),
                 $field['button_label']
             );
         }
@@ -60,7 +60,7 @@ class SharedContent extends \Doubleedesign\Comet\WordPress\Classic\Fields {
         $fields = array(
             'key'                    => 'group_shared-content-modules',
             'title'                  => 'Appended content',
-            'description'            => 'Content to append to every page that uses the default page template',
+            'description'            => 'Content to append to every page that uses the default page template (except the homepage)',
             'fields'                 => array(
                 array(
                     'key' 			 => 'field_shared-content-info',
@@ -72,7 +72,7 @@ class SharedContent extends \Doubleedesign\Comet\WordPress\Classic\Fields {
                     'key'               => 'field_shared-content-modules',
                     'label'             => 'Content modules',
                     'name'              => 'appended_content_modules',
-                    'instructions'      => 'These sections will be added to the end of the content of every page that uses the default page template. This enables you to define and edit them in one place, and have them be the same across the site automatically.',
+                    'instructions'      => 'These sections will be added to the end of the content of every page that uses the default page template (except the homepage, which has a special template not selectable in the admin). This enables you to define and edit them in one place, and have them be the same across the site automatically.',
                     'type'              => 'flexible_content',
                     'layouts'           => $modules,
                     'button_label'      => 'Add section',
