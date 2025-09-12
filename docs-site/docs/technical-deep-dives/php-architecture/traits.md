@@ -165,6 +165,84 @@ class MyComponent {
 
 <div>
 
+
+## ImageCropProperties
+
+<dl>
+
+<dt>Property</dt>
+<dd>
+	<code>aspectRatio</code> 
+	<strong>Type:</strong> <code>AspectRatio</code>
+	
+<p>Crop banner image to the given aspect ratio</p>
+</dd>\n
+<dt>Property</dt>
+<dd>
+	<code>focalPoint</code> 
+	<strong>Type:</strong> <code>?array</code>
+	
+<p>The focal point of the image to use when cropping - x and y values between 0 and 100</p>
+</dd>\n
+<dt>Property</dt>
+<dd>
+	<code>offset</code> 
+	<strong>Type:</strong> <code>?array</code>
+	
+<p>The percentage offsets of the image to use when cropping</p>
+</dd>
+
+<dt>Method</dt>
+<dd>
+	<code>set_aspect_ratio_from_attrs</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>\n
+<dt>Method</dt>
+<dd>
+	<code>set_focal_point_from_attrs</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>\n
+<dt>Method</dt>
+<dd>
+	<code>set_image_offset_from_attrs</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>\n
+<dt>Method</dt>
+<dd>
+	<code>get_local_css_properties</code> 
+	<strong>Returns:</strong> <code>string</code>
+	
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use ImageCropProperties;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->set_aspect_ratio_from_attrs($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+
 ## LayoutAlignment
 
 <dl>
