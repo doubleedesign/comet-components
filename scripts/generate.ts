@@ -14,8 +14,8 @@ if(args[0] !== 'component' || args.length < 3) {
 }
 
 // Split is for the Bash command, PowerShell command doesn't need it because it doesn't use equals signs
-const componentName = args[1].split('=')[1] ?? args[1];
-const componentType = args[2].split('=')[1] ?? args[2];
+const componentName = args[1].split('=')[1] ?? args[2];
+const componentType = args[2].split('=')[1] ?? args[4];
 if(componentType && !['simple', 'complex', 'wrapper'].includes(componentType)) {
 	console.error('Invalid type. Valid types are "simple", "complex", and "wrapper".');
 	console.log('Usage: npm run generate component -- --name=<name> --type=<simple or complex>');

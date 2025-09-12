@@ -223,6 +223,59 @@
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="ContentImageAdvanced">
+		<xs:complexType>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="offset" type="array{x:"/>
+<xs:attribute name="src" type="xs:string"/>
+<xs:attribute name="href" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="focalPoint" type="FocalPoint"/>
+<xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="caption" type="xs:complexType"/>
+<xs:attribute name="aspectRatio" type="AspectRatio"/>
+<xs:attribute name="alt" type="xs:string"/>
+<xs:attribute name="align" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContentImageBasic">
+		<xs:complexType>
+			<xs:attribute name="width" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="scale" type="xs:string"/>
+<xs:attribute name="src" type="xs:string"/>
+<xs:attribute name="href" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="height" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="caption" type="xs:complexType"/>
+<xs:attribute name="aspectRatio" type="AspectRatio"/>
+<xs:attribute name="alt" type="xs:string"/>
+<xs:attribute name="align" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CoverImage">
+		<xs:complexType>
+			<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="src" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="isParallax" type="xs:boolean"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="alt" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="DateBlock">
 		<xs:complexType>
 			<xs:attribute name="testId" type="xs:string"/>
@@ -356,27 +409,6 @@
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="Image">
-		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="src" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="isParallax" type="xs:boolean"/>
-<xs:attribute name="scale" type="xs:string"/>
-<xs:attribute name="href" type="xs:string"/>
-<xs:attribute name="alt" type="xs:string"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="height" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="caption" type="xs:complexType"/>
-<xs:attribute name="aspectRatio" type="AspectRatio"/>
-<xs:attribute name="title" type="xs:string"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="width" type="xs:string"/>
-<xs:attribute name="align" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ImageAndText">

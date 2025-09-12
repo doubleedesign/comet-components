@@ -6,7 +6,7 @@ namespace Doubleedesign\Comet\Core;
  *
  * @package Doubleedesign\Comet\Core
  * @version 1.0.0
- * @description A "hero" banner with an image background and optional overlay, with a container for inner content.
+ * @description A "hero" banner with an image background and optional overlay, with a container for inner content. Supports parallax effect, minHeight and maxHeight.
  */
 #[AllowedTags([Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
