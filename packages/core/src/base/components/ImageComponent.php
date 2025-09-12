@@ -38,7 +38,7 @@ abstract class ImageComponent extends Renderable {
     }
 
     public function get_filtered_classes(): array {
-        $classes = array_merge(parent::get_filtered_classes(), [$this->shortName]);
+        $classes = array_merge(parent::get_filtered_classes(), [$this->get_bem_name()]);
 
         return array_unique($classes);
     }

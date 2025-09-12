@@ -6,8 +6,10 @@
 }
 .image--advanced__image {
   overflow: hidden;
+  min-width: 100%;
 }
 .image--advanced__image__inner {
+  min-width: 100%;
   overflow: visible;
   max-width: none !important;
   width: fit-content;

@@ -54,6 +54,13 @@ class Utils {
         return lcfirst(self::Pascal_case($value));
     }
 
+    public static function camel_case_array_keys(array $array): array {
+        return array_combine(
+            array_map(fn($key) => self::camel_case($key), array_keys($array)),
+            $array
+        );
+    }
+
     /**
      * Sanitise content string using HTMLPurifier
      *
@@ -74,6 +81,9 @@ class Utils {
         // but in that case we'd also have to pass all their attributes, which may be overkill
         $allowedTagsAsTags = array_map(fn($tag) => "<$tag->value>", $allowedTags);
         $updatedContent = strip_tags($content, $allowedTagsAsTags);
+
+        // Strip empty paragraphs (including those with only whitespace or &nbsp;)
+        $updatedContent = preg_replace('/<p>(\s|&nbsp;)*<\/p>/', '', $updatedContent);
 
         return $purifier->purify($updatedContent);
     }
@@ -130,6 +140,18 @@ class Utils {
         }
 
         return $array;
+    }
+
+    /**
+     * Pick key-value pairs from an associative array based on keys
+     *
+     * @param  $array
+     * @param  $keys
+     *
+     * @return array
+     */
+    public static function array_pick($array, $keys) {
+        return array_intersect_key($array, array_flip($keys));
     }
 
     /**

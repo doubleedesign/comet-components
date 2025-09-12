@@ -37,9 +37,10 @@ class Gallery extends UIComponent {
     protected array $innerComponents;
 
     public function __construct(array $attributes, array $innerComponents) {
+        $this->imageCrop = $attributes['imageCrop'] ?? $this->imageCrop;
         $innerComponentsWithContext = array_map(function(ContentImageBasic $component) use ($attributes) {
             $component->set_context('gallery');
-            $component->set_behaviour((isset($attributes['imageCrop']) && $attributes['imageCrop'] === 'true') ? 'cover' : 'contain');
+            $component->set_behaviour($this->imageCrop ? 'cover' : 'contain');
 
             return $component;
         }, $innerComponents);
@@ -47,7 +48,6 @@ class Gallery extends UIComponent {
         parent::__construct($attributes, $innerComponentsWithContext, 'components.Gallery.gallery');
         $this->columns = $attributes['columns'] ?? $this->columns;
         $this->caption = (isset($attributes['caption']) && !empty(trim($attributes['caption']))) ? trim($attributes['caption']) : null;
-        $this->imageCrop = $attributes['imageCrop'] ?? $this->imageCrop;
     }
 
     public function get_html_attributes(): array {
