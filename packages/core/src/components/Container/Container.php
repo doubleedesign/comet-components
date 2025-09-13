@@ -82,6 +82,14 @@ class Container extends LayoutComponent {
             $attributes['data-size'] = $this->size->value;
         }
 
+        if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
+            $attributes['data-halign'] = $this->hAlign->value;
+        }
+
+        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
+            $attributes['data-valign'] = $this->vAlign->value;
+        }
+
         return $attributes;
     }
 
