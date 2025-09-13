@@ -36,7 +36,7 @@ class PageHeader extends Container {
             [new Heading(['level' => 1], $content)]
         );
 
-        parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
+        parent::__construct($attributes, $this->innerComponents);
     }
 
     protected function get_html_attributes(): array {
@@ -58,15 +58,4 @@ class PageHeader extends Container {
         return $classes;
     }
 
-    public function render(): void {
-        $blade = BladeService::getInstance();
-
-        echo $blade->make($this->bladeFile, [
-            'outerClasses'    => $this->get_outer_classes(),
-            'classes'         => $this->get_filtered_classes_string(),
-            'attributes'      => $this->get_html_attributes(),
-            'innerAttributes' => $this->get_inner_attributes(),
-            'children'        => $this->innerComponents
-        ])->render();
-    }
 }

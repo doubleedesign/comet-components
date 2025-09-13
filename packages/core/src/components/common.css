@@ -56,27 +56,27 @@ body {
 }
 
 h3 {
-  font-size: 1.414rem;
+  font-size: calc(1rem * var(--typescale));
   line-height: 1.2;
 }
 h3.is-style-accent {
-  font-size: 1.7675rem;
+  font-size: calc(1.25rem * var(--typescale));
 }
 
 h2 {
-  font-size: 1.999396rem;
+  font-size: calc(1rem * var(--typescale) * var(--typescale));
   line-height: 1.2;
 }
 h2.is-style-accent {
-  font-size: 2.499245rem;
+  font-size: calc(1.25rem * var(--typescale) * var(--typescale));
 }
 
 h1 {
-  font-size: 2.827145944rem;
+  font-size: calc(1rem * var(--typescale) * var(--typescale) * var(--typescale));
   line-height: 1.2;
 }
 h1.is-style-accent {
-  font-size: 3.53393243rem;
+  font-size: calc(1.25rem * var(--typescale) * var(--typescale) * var(--typescale));
 }
 
 h1 {

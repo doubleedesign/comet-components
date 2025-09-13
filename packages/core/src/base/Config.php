@@ -87,13 +87,13 @@ class Config {
         return $this->get('theme_colours');
     }
 
-	public function set_theme_colours(array $colours): void {
-		$this->theme_colours = $colours;
-	}
+    public function set_theme_colours(array $colours): void {
+        $this->theme_colours = $colours;
+    }
 
-	public function set_icon_prefix($prefix) {
-		$this->icon_prefix = $prefix;
-	}
+    public function set_icon_prefix($prefix) {
+        $this->icon_prefix = $prefix;
+    }
 
     public function get_component_defaults(string $component): array {
         $defaults = $this->get('component_defaults');
@@ -105,5 +105,9 @@ class Config {
         $defaults = $this->get('component_defaults', []);
         $defaults[$component] = $settings;
         $this->component_defaults = $defaults;
+    }
+
+    public function set_blade_component_paths(array $paths): void {
+        $this->blade_component_paths = array_unique(array_merge($this->blade_component_paths, $paths));
     }
 }

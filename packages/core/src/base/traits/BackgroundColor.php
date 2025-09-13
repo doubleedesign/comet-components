@@ -10,9 +10,13 @@ trait BackgroundColor {
 
     /**
      * @param  array  $attributes
+     * @param  ThemeColor|null  $fallback
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
-    protected function set_background_color_from_attrs(array $attributes): void {
+    protected function set_background_color_from_attrs(array $attributes, ?ThemeColor $fallback = null): void {
+        if (!isset($attributes['backgroundColor']) && isset($fallback)) {
+            $attributes['backgroundColor'] = $fallback->value;
+        }
         // Only set a background color if this is nested OR the background color is different from the global background
         // So we don't set background attributes on top-level components when not needed
         $globalBackground = Config::getInstance()->get_global_background();

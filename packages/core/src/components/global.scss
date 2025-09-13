@@ -66,6 +66,7 @@
 	&:not([data-halign]) {
 		justify-content: inherit;
 	}
+
 	&:not([data-valign]) {
 		align-items: inherit;
 	}
@@ -105,28 +106,11 @@
 	}
 
 	[data-background="#{$name}"] {
-		// Apply background colour and default padding if it is different to the global background
-		&:not(body[data-global-background="#{$name}"] &) {
-			background-color: var(--color-#{$name});
-			color: var(--readable-color-#{$name});
+		background-color: var(--color-#{$name});
+		color: var(--readable-color-#{$name});
 
-			&.layout-block:not(.page-section) {
-				@include nested-padding();
-			}
-		}
-
-		// Or if it has an ancestor with a different background to itself and to the global background
-		@at-root {
-			[data-background]:not([data-background="#{$name}"]) & {
-				background-color: var(--color-#{$name});
-				color: var(--readable-color-#{$name});
-
-				// Reset child elements that match global background
-				body[data-global-background="#{$name}"] & [data-background="#{$name}"] {
-					background-color: transparent;
-					color: inherit;
-				}
-			}
+		&.layout-block:not(.page-section) {
+			@include nested-padding();
 		}
 	}
 

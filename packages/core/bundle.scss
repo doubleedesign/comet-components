@@ -11,6 +11,7 @@
 @use "./src/components/SiteHeader/site-header.scss";
 @use "./src/components/SiteFooter/site-footer.scss";
 @use "./src/components/Accordion/accordion.scss";
+@use "./src/components/Card/card.scss";
 @use "./src/components/Columns/columns.scss";
 @use "./src/components/Columns/Column/column.scss";
 @use "./src/components/ButtonGroup/button-group.scss";
@@ -29,6 +30,7 @@
 @use "./src/components/IconWithText/icon-with-text.scss";
 @use "./src/components/ImageAndText/image-and-text.scss";
 @use "./src/components/Banner/banner.scss";
+@use "./src/components/BannerAdvanced/banner-advanced.scss";
 @use "./src/components/Separator/separator.scss";
 @use "./src/components/Table/table.scss";
 @use "./src/components/ResponsivePanels/responsive-panels.scss";

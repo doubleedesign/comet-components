@@ -1,0 +1,56 @@
+.card-list { // This class is expected to be added on the containing element of multiple cards
+	display: grid !important;
+	gap: var(--spacing-md);
+
+	@container (min-width: 840px) {
+		gap: var(--spacing-xl);
+	}
+}
+
+.card-wrapper {
+	container-type: inline-size;
+}
+
+.card {
+
+	@container (min-width: 600px) {
+		&[data-layout-orientation='horizontal'] {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+		}
+	}
+
+	&__image {
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: var(--focal-point-x, 50%) var(--focal-point-y, 50%);
+		}
+	}
+
+	&__content {
+		padding: var(--spacing-sm);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		@container (min-width: 600px) {
+			padding: var(--spacing-md);
+		}
+
+		@container (min-width: 840px) {
+			padding: var(--spacing-lg);
+		}
+
+		.is-style-small {
+			margin-block-end: 0;
+		}
+
+		.button {
+			margin-block-start: auto;
+		}
+	}
+}

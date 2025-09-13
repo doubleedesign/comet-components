@@ -99,6 +99,10 @@ class Container extends LayoutComponent {
      * @return string[]
      */
     protected function get_outer_classes(): array {
+        if ($this->isNested) {
+            return [$this->context];
+        }
+
         return [$this->context, 'layout-block', 'page-section'];
     }
 

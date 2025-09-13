@@ -28,6 +28,8 @@ class SiteFooter extends UIComponent {
         $this->innerComponents = [
             new Container(
                 [
+					'tagName' => 'div',
+					'context' => 'site-footer__container',
                     'size'        => $this->size->value,
                     'withWrapper' => false
                 ],

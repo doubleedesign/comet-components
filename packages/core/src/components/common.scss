@@ -54,13 +54,24 @@ body {
 
 @each $heading, $i in ('h3': 1, 'h2': 2, 'h1': 3) {
 	#{$heading} {
-		font-size: $baseFontSize * pow($typeScale, $i);
+		// Can't use SASS pow() with vanilla CSS variables, so this is a workaround for that
+		@if $i == 1 {
+			font-size: calc($baseFontSize * var(--typescale));
+		} @else if $i == 2 {
+			font-size: calc($baseFontSize * var(--typescale) * var(--typescale));
+		} @else if $i == 3 {
+			font-size: calc($baseFontSize * var(--typescale) * var(--typescale) * var(--typescale));
+		}
 		line-height: 1.2;
 
-		// Accent font is often a handwriting or other stylised font that looks visually smaller,
-		// so this sets a default to account for that
 		&.is-style-accent {
-			font-size: ($baseFontSize * 1.25) * pow($typeScale, $i);
+			@if $i == 1 {
+				font-size: calc(($baseFontSize * 1.25) * var(--typescale));
+			} @else if $i == 2 {
+				font-size: calc(($baseFontSize * 1.25) * var(--typescale) * var(--typescale));
+			} @else if $i == 3 {
+				font-size: calc(($baseFontSize * 1.25) * var(--typescale) * var(--typescale) * var(--typescale));
+			}
 		}
 	}
 }

@@ -37,6 +37,13 @@ class Column extends LayoutComponent {
         return $classes;
     }
 
+    protected function get_inner_classes(): array {
+        return [
+            $this->shortName . '__inner',
+            ...($this->context !== 'columns' ? [$this->context] : [])
+        ];
+    }
+
     public function get_inline_styles(): array {
         $styles = parent::get_inline_styles();
 
@@ -46,5 +53,17 @@ class Column extends LayoutComponent {
         }
 
         return $styles;
+    }
+
+    public function render(): void {
+        $blade = BladeService::getInstance();
+
+        echo $blade->make($this->bladeFile, [
+            'tag'          => $this->tagName->value,
+            'classes'      => $this->get_filtered_classes_string(),
+            'innerClasses' => implode(' ', $this->get_inner_classes()),
+            'attributes'   => $this->get_html_attributes(),
+            'children'     => $this->innerComponents
+        ])->render();
     }
 }
