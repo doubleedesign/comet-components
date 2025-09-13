@@ -10,6 +10,8 @@ class ThemeStyle {
         add_action('init', [$this, 'set_global_background'], 10);
         add_action('init', [$this, 'set_icon_prefix'], 10);
         add_action('init', [$this, 'set_component_defaults'], 10);
+
+        add_theme_support('post-thumbnails', ['post']);
     }
 
     public function enqueue_theme_stylesheets(): void {
