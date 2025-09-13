@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{AllowedTags, DefaultTag, Tag, Utils};
+use Doubleedesign\Comet\Core\{AllowedTags, Config, DefaultTag, Tag, Utils};
 
 /**
  * This script generates JSON and XML files that summarise the details of component classes written in PHP.
@@ -20,6 +20,8 @@ class ComponentClassesToJsonDefinitions {
     public function __construct() {
         require_once __DIR__ . '/../vendor/autoload.php';
         require_once __DIR__ . '/../packages/core/vendor/autoload.php';
+        Config::init();
+
         $this->mainComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
         $this->baseComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components';
     }
@@ -608,15 +610,17 @@ class ComponentClassesToJsonDefinitions {
 }
 
 // Usage: php generate-docs.php
-//        or php generate-docs.php --component MyComponent
-//        or php generate-docs.php --base MyBaseComponent for base abstract component classes
+//        or php generate-docs.php --component MyComponent (Bash)
+//           php generate-docs.php component MyComponent (PowerShell)
+//        or php generate-docs.php --base MyBaseComponent for base abstract component classes (Bash)
+//           php generate-docs.php base MyBaseComponent (PowerShell)
 try {
     $instance = new ComponentClassesToJsonDefinitions();
-    if (isset($argv[1]) && $argv[1] === '--component') {
+    if (isset($argv[1]) && ($argv[1] === '--component' || $argv[1] === 'component') && isset($argv[2])) {
         $instance->runSingle($argv[2]);
         shell_exec('php scripts/generate-xml.php');
     }
-    else if (isset($argv[1]) && $argv[1] === '--base') {
+    else if (isset($argv[1]) && ($argv[1] === '--base' || $argv[1] === 'base') && isset($argv[2])) {
         $instance->runSingleBase($argv[2]);
     }
     else {

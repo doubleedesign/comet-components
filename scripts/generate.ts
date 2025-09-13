@@ -7,16 +7,16 @@ import { execSync } from 'child_process';
 // WSL command: 'npm run generate component -- --name=YourThing --type=complex'
 // PowerShell command: 'npm run generate component -- --name YourThing --type complex' (no equals signs)
 const args = process.argv.slice(2);
-if(args[0] !== 'component' || args.length < 3) {
+if (args[0] !== 'component' || args.length < 3) {
 	// eslint-disable-next-line max-len
 	console.error('Invalid command. Usage: \n Bash: npm run generate component -- --name=<name> --type=<simple or complex> \n PowerShell: npm run generate component -- --name <name> --type <simple or complex>');
 	process.exit(1);
 }
 
 // Split is for the Bash command, PowerShell command doesn't need it because it doesn't use equals signs
-const componentName = args[1].split('=')[1] ?? args[2];
-const componentType = args[2].split('=')[1] ?? args[4];
-if(componentType && !['simple', 'complex', 'wrapper'].includes(componentType)) {
+const componentName = args[1].split('=')[1] ?? args[1];
+const componentType = args[2].split('=')[1] ?? args[2];
+if (componentType && !['simple', 'complex', 'wrapper'].includes(componentType)) {
 	console.error('Invalid type. Valid types are "simple", "complex", and "wrapper".');
 	console.log('Usage: npm run generate component -- --name=<name> --type=<simple or complex>');
 	process.exit(1);
@@ -35,7 +35,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	const shortName = Case.kebab(componentName);
 	let className = Case.pascal(componentName);
 	const reservedWords = ['List'];
-	if(reservedWords.includes(className)) {
+	if (reservedWords.includes(className)) {
 		className = `${className}Component`;
 	}
 
@@ -46,7 +46,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 	const classExists = existsSync(classPath);
 	const templateExists = existsSync(templatePath);
 
-	if(!classExists) {
+	if (!classExists) {
 		const templateClassName = `${Case.pascal(componentType)}Component`;
 		mkdirSync(path.dirname(classPath), { recursive: true }); // Create directory if it doesn't exist
 		const classOutput = classTemplateFile
@@ -55,7 +55,7 @@ function generateSkeletonFiles({ componentName, componentType }) {
 			.replaceAll('this-component', shortName);
 		writeFileSync(classPath, classOutput, 'utf8');
 
-		if(existsSync(classPath)) {
+		if (existsSync(classPath)) {
 			console.log(`Class file created successfully at ${classPath}`);
 		}
 	}
@@ -63,12 +63,12 @@ function generateSkeletonFiles({ componentName, componentType }) {
 		console.log(`Class file for ${componentName} already exists, skipping`);
 	}
 
-	if(!templateExists) {
+	if (!templateExists) {
 		const templateOutput = bladeTemplateFile;
 		mkdirSync(path.dirname(templatePath), { recursive: true });
 		writeFileSync(templatePath, templateOutput, 'utf8');
 
-		if(existsSync(templatePath)) {
+		if (existsSync(templatePath)) {
 			console.log(`Blade template file created successfully at ${templatePath}`);
 		}
 	}
@@ -76,14 +76,14 @@ function generateSkeletonFiles({ componentName, componentType }) {
 		console.log(`Template file for ${componentName} already exists, skipping`);
 	}
 
-	if(componentType !== 'simple') {
+	if (componentType !== 'simple') {
 		const cssPath = `./packages/core/src/components/${className}/${shortName}.scss`;
 		const cssExists = existsSync(cssPath);
-		if(!cssExists) {
+		if (!cssExists) {
 			const cssOutput = cssTemplateFile.replace('component', shortName);
 			writeFileSync(cssPath, cssOutput, 'utf8');
 
-			if(existsSync(cssPath)) {
+			if (existsSync(cssPath)) {
 				console.log(`CSS file created successfully at ${cssPath}`);
 			}
 		}
