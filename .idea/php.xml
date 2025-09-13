@@ -2,7 +2,7 @@
 <project version="4">
   <component name="LaravelPint">
     <laravel_pint_settings>
-      <LaravelPintConfiguration asDefaultInterpreter="true" tool_path="$PROJECT_DIR$/vendor/bin/pint" />
+      <LaravelPintConfiguration asDefaultInterpreter="true" tool_path="$USER_HOME$/AppData/Roaming/Composer/vendor/bin/pint" />
     </laravel_pint_settings>
   </component>
   <component name="LaravelPintOptionsConfiguration">
@@ -196,38 +196,38 @@
       <path value="$PROJECT_DIR$/vendor/laravel/pint" />
       <path value="$PROJECT_DIR$/packages/core/vendor/phpstan/phpstan" />
       <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-profanity" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
       <path value="$PROJECT_DIR$/packages/comet-canvas-classic/vendor/composer" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/macroable" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/pipeline" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/support" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/view" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/doubleedesign/comet-components-core" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/composer" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/psr/clock" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/psr/simple-cache" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/voku/portable-ascii" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/ezyang/htmlpurifier" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/nesbot/carbon" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/feimosi/baguettebox.js" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/openpsa/ranger" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/intl" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/composer" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/psr/clock" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/carbonphp/carbon-doctrine-types" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/bus" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/collections" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/conditionable" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/container" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/translation" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/contracts" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/conditionable" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/macroable" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/collections" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/pipeline" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/bus" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/container" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/events" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/support" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/filesystem" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/illuminate/view" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/feimosi/baguettebox.js" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3">
@@ -338,8 +338,9 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/core/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-plugin/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-plugin/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-canvas-classic/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
     </phpunit_settings>
   </component>
   <component name="Psalm">

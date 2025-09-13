@@ -2,13 +2,10 @@
 require_once __DIR__ . '/vendor/autoload.php';
 use Doubleedesign\CometCanvas\{ThemeStyle, NavMenus, SiteHealth, WpAdmin, BlockEditorConfig};
 
-add_action('registered_post_type', function() {
+add_action('plugins_loaded', function() {
     if (!class_exists('Doubleedesign\Comet\Core\Config')) {
         wp_die('<p>Comet Components Core Config class not found in Comet Canvas theme. Perhaps you need to install or update Composer dependencies.</p><p>If you are working locally with symlinked packages, you might want <code>$env:COMPOSER = "composer.local.json"; composer update</code>.</p>');
     }
-    // Ensure global config is initialized
-	// TODO Figure out why this is throwing 'undefined method' exceptions here but not when called in the theme on plugins_loaded
-    Doubleedesign\Comet\Core\Config::getInstance();
 }, 1);
 
 new ThemeStyle();

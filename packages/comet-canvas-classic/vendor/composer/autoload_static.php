@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit36a77d18546f079e8f2294a2ffff0b8f
+class ComposerStaticInitcbbf8d5698ec153204ae9b31c81fa7e6
 {
     public static $prefixLengthsPsr4 = array (
         'D' => 
@@ -23,12 +23,13 @@ class ComposerStaticInit36a77d18546f079e8f2294a2ffff0b8f
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doubleedesign\\CometCanvas\\Classic\\AdminUI' => __DIR__ . '/../..' . '/src/AdminUI.php',
-        'Doubleedesign\\CometCanvas\\Classic\\CometCanvas' => __DIR__ . '/../..' . '/src/CometCanvas.php',
+        'Doubleedesign\\CometCanvas\\Classic\\Fields' => __DIR__ . '/../..' . '/src/Fields.php',
         'Doubleedesign\\CometCanvas\\Classic\\Frontend' => __DIR__ . '/../..' . '/src/Frontend.php',
-        'Doubleedesign\\CometCanvas\\Classic\\IThemeStyle' => __DIR__ . '/../..' . '/src/IThemeStyle.php',
         'Doubleedesign\\CometCanvas\\Classic\\NavMenus' => __DIR__ . '/../..' . '/src/NavMenus.php',
         'Doubleedesign\\CometCanvas\\Classic\\SectionMenuBuilder' => __DIR__ . '/../..' . '/src/SectionMenuBuilder.php',
+        'Doubleedesign\\CometCanvas\\Classic\\SharedContent' => __DIR__ . '/../..' . '/src/SharedContent.php',
         'Doubleedesign\\CometCanvas\\Classic\\SiteHealth' => __DIR__ . '/../..' . '/src/SiteHealth.php',
+        'Doubleedesign\\CometCanvas\\Classic\\ThemeEntrypoint' => __DIR__ . '/../..' . '/src/ThemeEntrypoint.php',
         'Doubleedesign\\CometCanvas\\Classic\\ThemeStyle' => __DIR__ . '/../..' . '/src/ThemeStyle.php',
         'Doubleedesign\\CometCanvas\\Classic\\TinyMCEConfig' => __DIR__ . '/../..' . '/src/TinyMCEConfig.php',
     );
@@ -36,9 +37,9 @@ class ComposerStaticInit36a77d18546f079e8f2294a2ffff0b8f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit36a77d18546f079e8f2294a2ffff0b8f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit36a77d18546f079e8f2294a2ffff0b8f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit36a77d18546f079e8f2294a2ffff0b8f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcbbf8d5698ec153204ae9b31c81fa7e6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcbbf8d5698ec153204ae9b31c81fa7e6::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitcbbf8d5698ec153204ae9b31c81fa7e6::$classMap;
 
         }, null, ClassLoader::class);
     }

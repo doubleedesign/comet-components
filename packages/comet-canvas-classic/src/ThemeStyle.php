@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\CometCanvas\Classic;
-use Doubleedesign\Comet\Core\Config;
+use Doubleedesign\Comet\Core\{Config};
 
 class ThemeStyle {
     public function __construct() {
@@ -54,15 +54,15 @@ class ThemeStyle {
         $colours = apply_filters('comet_canvas_theme_colours', $defaults);
 
         if (class_exists('Doubleedesign\Comet\Core\Config')) {
-            Config::getInstance()->set('theme_colours', $colours);
+            Config::getInstance()->set_theme_colours($colours);
         }
     }
 
     public function set_global_background(): void {
         $color = apply_filters('comet_canvas_global_background', 'white');
 
-        if (class_exists('Doubleedesign\Comet\Core\Config')) {
-            Config::getInstance()->set('global_background', $color);
+        if (class_exists('Doubleedesign\Comet\Core\Config') && $color !== null) {
+            Config::getInstance()->set_global_background($color);
         }
     }
 
@@ -70,7 +70,7 @@ class ThemeStyle {
         $prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
 
         if (class_exists('Doubleedesign\Comet\Core\Config')) {
-            Config::getInstance()->set('icon_prefix', $prefix);
+            Config::getInstance()->set_icon_prefix($prefix);
         }
     }
 
@@ -79,9 +79,9 @@ class ThemeStyle {
 
         if (class_exists('Doubleedesign\Comet\Core\Config')) {
             foreach ($defaults as $componentName => $settings) {
-                $existing = Config::getInstance()->get('component_defaults') ?? [];
-                $existing[$componentName] = array_merge($existing[$componentName] ?? [], $settings);
-                Config::getInstance()->set('component_defaults', $existing);
+                $defaults = Config::getInstance()->get_component_defaults($componentName);
+                $defaults[$componentName] = array_merge($existing[$componentName] ?? [], $settings);
+                Config::getInstance()->set_component_defaults($componentName, $defaults[$componentName]);
             }
         }
     }

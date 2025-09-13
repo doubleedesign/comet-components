@@ -7,6 +7,7 @@ class NavMenus {
         add_action('init', [$this, 'register_menus'], 20);
         add_filter('nav_menu_link_attributes', [$this, 'menu_link_classes'], 10, 4);
         add_filter('nav_menu_submenu_css_class', [$this, 'menu_submenu_classes'], 10, 2);
+        add_filter('comet_get_simplified_menu_items_by_location', [$this, 'get_simplified_nav_menu_items_by_location'], 10, 1);
     }
 
     /**
@@ -63,7 +64,7 @@ class NavMenus {
      *
      * @return array
      */
-    protected static function get_nav_menu_items_by_location(string $location, array $args = []): array {
+    protected function get_nav_menu_items_by_location(string $location, array $args = []): array {
         $locations = get_nav_menu_locations();
         $page_for_posts = get_option('page_for_posts');
 
@@ -117,8 +118,8 @@ class NavMenus {
         return [];
     }
 
-    public static function get_simplified_nav_menu_items_by_location(string $location) {
-        $items = self::get_nav_menu_items_by_location($location);
+    public function get_simplified_nav_menu_items_by_location(string $location): array {
+        $items = $this->get_nav_menu_items_by_location($location);
         $result = array_reduce($items, function($acc, $item) {
             // menu_item_parent is the corresponding nav_menu_item ID, not the post/taxonomy object ID
             if ($item->menu_item_parent > 0) {

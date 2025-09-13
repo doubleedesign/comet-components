@@ -20,6 +20,7 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\Classic\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas-classic/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />
@@ -160,18 +161,6 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/docs" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/carbonphp" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doctrine" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doubleedesign" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/ezyang" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/feimosi" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/nesbot" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/openpsa" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/psr" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/voku" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/phpstan" />
       <excludeFolder url="file://$MODULE_DIR$/test/unit/coverage" />
     </content>
