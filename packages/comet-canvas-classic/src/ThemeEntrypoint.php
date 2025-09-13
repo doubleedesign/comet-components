@@ -26,7 +26,7 @@ class ThemeEntrypoint {
     }
 
     /**
-     * Only instantiate a class from the theme entrypoint if the child theme doesn't have one with the same name.
+     * Only instantiate a class from the theme entrypoint if the child theme doesn't have one with the same name that extends it.
      * This assumes child theme classes will extend parent theme classes and call parent constructors.
      *
      * @param  $class
@@ -36,7 +36,7 @@ class ThemeEntrypoint {
     public function maybe_instantiate_class($class): void {
         try {
             $class_name = (new ReflectionClass($class))->getShortName();
-            if (!$this->child_theme_has_class($class_name)) {
+            if (!$this->child_theme_has_extending_class($class_name)) {
                 new $class();
             }
         }
@@ -45,10 +45,19 @@ class ThemeEntrypoint {
         }
     }
 
-    private function child_theme_has_class($class_name): bool {
+    private function child_theme_has_extending_class($class_name): bool {
         $child_namespace = $this->get_child_theme_namespace();
 
-        return class_exists($child_namespace . '\\' . $class_name);
+        $exists = class_exists($child_namespace . '\\' . $class_name);
+
+        // Check if it extends the parent theme class
+        if ($exists) {
+            $child_class = new ReflectionClass($child_namespace . '\\' . $class_name);
+
+            return $child_class->isSubclassOf(__NAMESPACE__ . '\\' . $class_name);
+        }
+
+        return false;
     }
 
     public function get_child_theme_namespace(): string {
