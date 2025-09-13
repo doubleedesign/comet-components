@@ -53,6 +53,7 @@ class ContentImageAdvanced extends ContentImageComponent {
             // because we were getting to too many layers of attribute/class methods when we can just do stuff in the template
             'bemPrefix'   => $this->get_bem_name(),
             'aspectRatio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
+            'caption'     => $this->caption ?? null
         ])->render();
     }
 }
