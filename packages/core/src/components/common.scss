@@ -52,7 +52,6 @@ body {
 	line-height: 1.4;
 }
 
-
 @each $heading, $i in ('h3': 1, 'h2': 2, 'h1': 3) {
 	#{$heading} {
 		font-size: $baseFontSize * pow($typeScale, $i);
@@ -216,7 +215,7 @@ form {
 		max-width: calc(100vw - var(--spacing-md) * 2);
 	}
 
-	&[data-size="wide"]{
+	&[data-size="wide"] {
 		max-width: calc(var(--width-wide) - var(--spacing-md) * 2);
 	}
 

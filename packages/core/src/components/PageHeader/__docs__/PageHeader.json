@@ -1,83 +1,151 @@
 {
-	"name": "PageHeader",
-	"description": "Render a page header with the page title and optional breadcrumb navigation.",
-	"extends": "UIComponent",
+    "name": "PageHeader",
+    "description": "Render a page header with the page title and optional breadcrumb navigation.",
+    "extends": "Container",
 	"abstract": false,
 	"isInner": false,
 	"belongsInside": null,
 	"attributes": {
 		"backgroundColor": {
 			"type": "ThemeColor",
-			"description": "Background colour keyword",
-			"supported": [
-				"primary",
-				"secondary",
-				"accent",
-				"error",
-				"success",
-				"warning",
-				"info",
-				"light",
-				"dark",
-				"white"
-			]
-		},
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"default": [
-				"page-header",
-				"page-section"
-			],
-			"inherited": true
-		},
-		"context": {
-			"type": "string",
-			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-			"inherited": true
-		},
-		"id": {
-			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"size": {
-			"type": "ContainerSize",
-			"description": "Keyword specifying the relative width of the container for the inner content",
-			"supported": [
-				"default",
-				"wide",
-				"fullwidth",
-				"narrow",
-				"narrower",
-				"small"
-			],
-			"default": "$this->breadcrumbs"
-		},
-		"style": {
-			"type": "array",
-			"description": "Inline styles",
-			"inherited": true
-		},
-		"tagName": {
-			"type": "Tag",
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"header",
-				"div",
-				"section"
-			],
-			"default": "header",
-			"inherited": true
-		},
-		"testId": {
-			"type": "string",
-			"description": "Optionally add a data-testid attribute for automated tests",
-			"inherited": true
-		}
-	},
-	"content": {
-		"type": "string",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "inherited": true
+        },
+        "breadcrumbs": {
+            "type": "array",
+            "description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
+            "required": true
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "page-header",
+                "layout-block"
+            ],
+            "inherited": true
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for the fill or outline colour",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "$this->breadcrumbs"
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "inherited": true
+        },
+        "gradient": {
+            "type": "string",
+            "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)",
+            "inherited": true
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
+            "inherited": true
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "required": true,
+            "default": "false",
+            "inherited": true
+        },
+        "size": {
+            "type": "ContainerSize",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+            "supported": [
+                "default",
+                "wide",
+                "fullwidth",
+                "narrow",
+                "narrower",
+                "small"
+            ],
+            "default": "default",
+            "inherited": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "header",
+                "div",
+                "section"
+            ],
+            "default": "header",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
+            "inherited": true
+        },
+        "withWrapper": {
+            "type": "bool",
+            "description": "Whether to wrap the container element so that the background is full-width",
+            "default": "true",
+            "inherited": true
+        }
+    },
+    "content": {
+        "type": "string",
 		"description": "The title of the page",
 		"required": true
 	},

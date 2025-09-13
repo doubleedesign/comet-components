@@ -31,7 +31,10 @@ trait ImageCropProperties {
     }
 
     protected function set_focal_point_from_attrs(array $attributes): void {
-        $field = $attributes['focalPoint'];
+        $field = $attributes['focalPoint'] ?? null;
+        if (!$field) {
+            return;
+        }
 
         if (is_array($field) && isset($field['x']) && isset($field['y'])) {
             $this->focalPoint = [
@@ -42,9 +45,12 @@ trait ImageCropProperties {
     }
 
     protected function set_image_offset_from_attrs(array $attributes): void {
-        $field = $attributes['offset'] ?? $attributes['imageOffset'];
+        $field = $attributes['offset'] ?? $attributes['imageOffset'] ?? null;
+        if (!$field) {
+            return;
+        }
 
-        if (is_array($field) && isset($field['x']) && isset($field['y'])) {
+        if (isset($field['x']) && isset($field['y']) && is_array($field)) {
             $this->offset = [
                 'x' => max(0, min(100, (int)$field['x'])),
                 'y' => max(0, min(100, (int)$field['y'])),

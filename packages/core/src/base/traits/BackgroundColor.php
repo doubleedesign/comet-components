@@ -13,13 +13,21 @@ trait BackgroundColor {
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
     protected function set_background_color_from_attrs(array $attributes): void {
-        if (isset($attributes['backgroundColor'])) {
-            if ($attributes['backgroundColor'] instanceof ThemeColor) {
-                $this->backgroundColor = $attributes['backgroundColor'];
-            }
-            else {
-                $this->backgroundColor = ThemeColor::tryFrom($attributes['backgroundColor']);
-            }
+        // Only set a background color if this is nested OR the background color is different from the global background
+        // So we don't set background attributes on top-level components when not needed
+        $globalBackground = Config::getInstance()->get_global_background();
+        $isSameAsGlobal = isset($attributes['backgroundColor']) && $attributes['backgroundColor'] === $globalBackground;
+        $isNested = (isset($this->isNested) && $this->isNested) || (isset($attributes['isNested']) && $attributes['isNested']);
+
+        if ((!$isNested && $isSameAsGlobal) || !isset($attributes['backgroundColor'])) {
+            return;
+        }
+
+        if ($attributes['backgroundColor'] instanceof ThemeColor) {
+            $this->backgroundColor = $attributes['backgroundColor'];
+        }
+        else {
+            $this->backgroundColor = ThemeColor::tryFrom($attributes['backgroundColor']) ?? null;
         }
     }
 
