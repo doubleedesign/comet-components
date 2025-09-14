@@ -7,9 +7,11 @@
 .image--advanced__image {
   overflow: hidden;
   min-width: 100%;
+  container-type: size;
 }
 .image--advanced__image__inner {
   min-width: 100%;
+  min-height: 100cqh;
   overflow: visible;
   max-width: none !important;
   width: fit-content;
@@ -22,6 +24,8 @@
 .image--advanced__image__inner img {
   width: calc(100% - var(--offset-x, 0));
   height: calc(100% - var(--offset-y, 0));
+  min-height: 100cqh;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=content-image-advanced.css.map */

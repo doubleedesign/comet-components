@@ -1,0 +1,107 @@
+.banner-v2 {
+	padding-block-start: 0;
+	position: relative;
+
+	&__image {
+		display: flex;
+		width: 100%;
+		height: fit-content;
+		overflow: hidden;
+		justify-content: center; // Centre if banner becomes narrower than the viewport in order to fit the aspect ratio height
+
+		&__frame {
+			overflow: hidden;
+			min-width: 100%; // for images smaller than the container
+			// aspect ratio is applied to this element using a data attribute, see common.scss
+			// Set height to smaller of 65vh or proportional width (helps with handling images shorter than the available space)
+			// Calc is the reverse of the aspect ratio to get the height from the width
+			&[data-aspect-ratio="cinematic"] {
+				height: min(65vh, calc(100vw * 9 / 21));
+			}
+			&[data-aspect-ratio="cinemascope"] {
+				height: min(65vh, calc(100vw * 1 / 2.35));
+			}
+			&[data-aspect-ratio="cinematic"] {
+				height: min(65vh, calc(100vw * 9 / 21));
+			}
+			&[data-aspect-ratio="wide"] {
+				height: min(65vh, calc(100vw * 16 / 9));
+			}
+			&[data-aspect-ratio="standard"] {
+				height: min(65vh, calc(100vw * 3 / 4));
+			}
+			&[data-aspect-ratio="classic"] {
+				height: min(65vh, calc(100vw * 3 / 2));
+			}
+			&[data-aspect-ratio="classic_portrait"] {
+				height: min(65vh, calc(100vw * 2 / 3));
+			}
+			&[data-aspect-ratio="portrait"] {
+				height: min(65vh, calc(100vw * 4 / 3));
+			}
+			&[data-aspect-ratio="tall"] {
+				height: min(65vh, calc(100vw * 16 / 9));
+			}
+			&[data-aspect-ratio="square"] {
+				height: min(65vh, 100vw);
+			}
+
+			&__inner {
+				min-width: 100%; // for images smaller than the container
+				overflow: visible;
+				max-width: none !important;
+				width: fit-content;
+				height: fit-content;
+				transition: all 0.3s ease-in-out;
+				position: relative;
+				left: var(--offset-x, 0);
+				top: var(--offset-y, 0);
+
+				img {
+					width: calc(100% - var(--offset-x, 0));
+					height: calc(100% - var(--offset-y, 0));
+				}
+			}
+		}
+	}
+
+	&__content {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+
+		&__container {
+			height: 100%;
+		}
+
+		&__inner {
+			background: var(--theme-color);
+			background: linear-gradient(
+					5deg,
+					color-mix(in srgb, var(--theme-color) 80%, black) 0%,
+					color-mix(in srgb, var(--theme-color) 90%, black) 50%,
+					var(--theme-color) 80%
+			);
+			color: var(--theme-color-inverse);
+			padding: var(--spacing-lg);
+
+			h1 {
+				color: var(--theme-color-inverse);
+
+				> span:first-child {
+					display: block;
+					font-size: 0.5em;
+				}
+			}
+
+			.button[data-style="outline"]{
+				background: var(--theme-color-inverse);
+			}
+		}
+	}
+}

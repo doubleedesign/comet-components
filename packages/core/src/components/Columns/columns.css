@@ -1,10 +1,10 @@
 .columns {
   display: grid;
-  grid-gap: var(--spacing-md);
+  grid-gap: var(--spacing-lg);
 }
 @container (min-width: 940px) {
   .columns {
-    grid-gap: var(--spacing-lg);
+    grid-gap: var(--spacing-xl);
   }
 }
 .columns[data-count="2"][data-allow-layout-stacking=true], .columns[data-count="4"][data-allow-layout-stacking=true], .columns[data-count="6"][data-allow-layout-stacking=true] {

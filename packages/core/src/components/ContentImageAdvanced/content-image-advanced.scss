@@ -5,29 +5,32 @@
 	height: fit-content;
 	overflow: hidden;
 
-		&__image {
-			overflow: hidden;
+	&__image {
+		overflow: hidden;
+		min-width: 100%; // for images smaller than the container
+		container-type: size;
+		// aspect ratio is applied to this element using a data attribute, see common.scss
+
+		&__inner {
 			min-width: 100%; // for images smaller than the container
-			// aspect ratio is applied to this element using a data attribute, see common.scss
+			min-height: 100cqh;
+			overflow: visible;
+			max-width: none !important;
+			width: fit-content;
+			height: fit-content;
+			transition: all 0.3s ease-in-out;
+			position: relative;
+			left: var(--offset-x, 0);
+			top: var(--offset-y, 0);
 
-			&__inner {
-				min-width: 100%; // for images smaller than the container
-				overflow: visible;
-				max-width: none !important;
-				width: fit-content;
-				height: fit-content;
-				transition: all 0.3s ease-in-out;
-				position: relative;
-				left: var(--offset-x, 0);
-				top: var(--offset-y, 0);
-
-				img {
-					width: calc(100% - var(--offset-x, 0));
-					height: calc(100% - var(--offset-y, 0));
-				}
+			img {
+				width: calc(100% - var(--offset-x, 0));
+				height: calc(100% - var(--offset-y, 0));
+				min-height: 100cqh;
+				object-fit: cover;
 			}
 		}
-
+	}
 
 	&__caption {
 	}

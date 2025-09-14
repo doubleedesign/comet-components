@@ -1,0 +1,91 @@
+.banner-v2 {
+  padding-block-start: 0;
+  position: relative;
+}
+.banner-v2__image {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  overflow: hidden;
+  justify-content: center;
+}
+.banner-v2__image__frame {
+  overflow: hidden;
+  min-width: 100%;
+}
+.banner-v2__image__frame[data-aspect-ratio=cinematic] {
+  height: min(65vh, 42.8571428571vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=cinemascope] {
+  height: min(65vh, 42.5531914894vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=cinematic] {
+  height: min(65vh, 42.8571428571vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=wide] {
+  height: min(65vh, 177.7777777778vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=standard] {
+  height: min(65vh, 75vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=classic] {
+  height: min(65vh, 150vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=classic_portrait] {
+  height: min(65vh, 66.6666666667vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=portrait] {
+  height: min(65vh, 133.3333333333vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=tall] {
+  height: min(65vh, 177.7777777778vw);
+}
+.banner-v2__image__frame[data-aspect-ratio=square] {
+  height: min(65vh, 100vw);
+}
+.banner-v2__image__frame__inner {
+  min-width: 100%;
+  overflow: visible;
+  max-width: none !important;
+  width: fit-content;
+  height: fit-content;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  left: var(--offset-x, 0);
+  top: var(--offset-y, 0);
+}
+.banner-v2__image__frame__inner img {
+  width: calc(100% - var(--offset-x, 0));
+  height: calc(100% - var(--offset-y, 0));
+}
+.banner-v2__content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.banner-v2__content__container {
+  height: 100%;
+}
+.banner-v2__content__inner {
+  background: var(--theme-color);
+  background: linear-gradient(5deg, color-mix(in srgb, var(--theme-color) 80%, black) 0%, color-mix(in srgb, var(--theme-color) 90%, black) 50%, var(--theme-color) 80%);
+  color: var(--theme-color-inverse);
+  padding: var(--spacing-lg);
+}
+.banner-v2__content__inner h1 {
+  color: var(--theme-color-inverse);
+}
+.banner-v2__content__inner h1 > span:first-child {
+  display: block;
+  font-size: 0.5em;
+}
+.banner-v2__content__inner .button[data-style=outline] {
+  background: var(--theme-color-inverse);
+}
+
+/*# sourceMappingURL=banner-v2.css.map */

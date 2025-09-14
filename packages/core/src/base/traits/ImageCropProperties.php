@@ -78,7 +78,7 @@ trait ImageCropProperties {
 
         // Return as a string to use in the style attribute
         return implode(';', array_map(
-            fn($key, $value) => "$key:$value;",
+            fn($key, $value) => "$key:$value",
             array_keys($properties),
             $properties
         ));

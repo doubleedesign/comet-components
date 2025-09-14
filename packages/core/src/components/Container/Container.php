@@ -43,13 +43,17 @@ class Container extends LayoutComponent {
             return !in_array($class, ['is-style-wide', 'is-style-fullwidth', 'is-style-narrow', 'container--wide', 'container--fullwidth', 'container--narrow']);
         });
 
-        if (!$this->withWrapper) {
+        if (!$this->withWrapper && !$this->isNested) {
             $classes[] = 'layout-block';
             // Replace BEM name (context + shortname) with just the context
             // (with a wrapper, it should have the context on the wrapper and the BEM name here)
             $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_name());
             array_push($classes, $this->context);
             $filtered = array_unique(array_merge($classes, [$this->shortName]));
+        }
+        else if ($this->isNested) {
+            array_push($classes, $this->get_bem_name());
+            $filtered = array_unique($classes);
         }
         else {
             // Do not include the shortname here - we can use CSS to target classes ending in __container (the BEM name) instead of doubling up
