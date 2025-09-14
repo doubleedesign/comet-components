@@ -42,11 +42,13 @@ $author_card = new Card([
 ]);
 
 $content_component = new CopyBlock([
-    'tagName'     => 'article',
-    'isNested'    => false,
-    'withWrapper' => false,
-    'context'     => 'post-content',
-    'size'        => 'narrow',
+    'tagName'         => 'article',
+    // Associate this <article> with its headline contained in the page header component
+    'aria-labelledby' => 'page-header--post-' . get_the_id(),
+    'isNested'        => false,
+    'withWrapper'     => false,
+    'context'         => 'post-content',
+    'size'            => 'default',
 ], [
     ...(isset($image) ? [$image] : []),
     new PreprocessedHTML([], $content)]
