@@ -8,7 +8,7 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.0
  * @description Create a section with semantic meaning that controls the maximum width of its contents.
  */
-#[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV])]
+#[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV, Tag::ARTICLE, Tag::FOOTER])]
 #[DefaultTag(Tag::SECTION)]
 class Container extends LayoutComponent {
     use LayoutContainerSize;
@@ -100,7 +100,7 @@ class Container extends LayoutComponent {
      */
     protected function get_outer_classes(): array {
         if ($this->isNested) {
-            return [$this->context];
+            return !empty($this->context) ? [$this->context] : [];
         }
 
         return [$this->context, 'layout-block', 'page-section'];

@@ -35,8 +35,18 @@ if (have_posts()) {
     }
 }
 
-$intro = new Column(['width' => '30%'], [new CopyBlock(['isNested' => true, 'context' => 'copy-block'], [new PreprocessedHTML([], get_category(get_queried_object_id())->description)])]);
-$list = new Column(['context' => 'card-list', 'width' => '70%'], $cards);
+$category_id = get_queried_object_id();
+$description = get_term_meta($category_id, 'category_description', true);
+
+$intro = new Column(
+    ['width' => '36%'],
+    [new CopyBlock(['isNested' => true, 'context' => 'copy-block'], [new PreprocessedHTML([], wpautop($description))])]
+);
+
+$list = new Column(
+    ['context' => 'card-list', 'width' => '65%'],
+    $cards
+);
 
 $component = new Container(
     ['size' => 'default'],

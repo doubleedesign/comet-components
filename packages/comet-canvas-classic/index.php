@@ -6,6 +6,36 @@ do_action('comet_canvas_blog_top_content');
 
 if (is_home()) {
     // Get all categories and show cards for them
+    $categories = get_categories();
+    $cards = [];
+    foreach ($categories as $category) {
+        $category_link = get_category_link($category->term_id);
+        $description = get_term_meta($category->term_id, 'category_description', true);
+        $image_id = get_term_meta($category->term_id, 'category_image', true);
+        $alt = get_post_meta(get_post_thumbnail_id($image_id), '_wp_attachment_image_alt', true);
+
+        $cards[] = new Card([
+            'heading'     => $category->name,
+            'bodyText'    => wpautop($description),
+            'image'       => [
+                'src' => $image_id ? wp_get_attachment_url($image_id) : '',
+                'alt' => $alt,
+            ],
+            'link'        => [
+                'href'      => esc_url($category_link),
+                'content'   => 'View posts',
+                'isOutline' => true
+            ],
+            'colorTheme'  => 'primary',
+            'orientation' => 'horizontal'
+        ]);
+    }
+
+    $component = new Container(
+        ['size' => 'default'],
+        $cards
+    );
+    $component->render();
 }
 else {
     $cards = [];

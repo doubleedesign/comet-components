@@ -11,6 +11,8 @@ class ThemeStyle {
         add_action('init', [$this, 'set_icon_prefix'], 10);
         add_action('init', [$this, 'set_component_defaults'], 10);
 
+        add_filter('breadcrumbs_filter_list', [$this, 'add_blog_page_to_category_breadcrumbs']);
+
         add_theme_support('post-thumbnails', ['post']);
     }
 
@@ -86,5 +88,23 @@ class ThemeStyle {
                 Config::getInstance()->set_component_defaults($componentName, $defaults[$componentName]);
             }
         }
+    }
+
+    public function add_blog_page_to_category_breadcrumbs(array $items): array {
+        if (is_category()) {
+            $before = array_slice($items, 0, 1);
+            $after = array_slice($items, 1);
+
+            return array(
+                ...$before,
+                array(
+                    'title' => get_the_title(get_option('page_for_posts')),
+                    'url'   => get_permalink(get_option('page_for_posts')),
+                ),
+                ...$after,
+            );
+        }
+
+        return $items;
     }
 }

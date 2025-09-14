@@ -1,7 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ASIDE])]
+#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ASIDE, Tag::ARTICLE])]
 #[DefaultTag(Tag::DIV)]
 class CopyBlock extends Container {
     use ColorTheme;
@@ -9,9 +9,6 @@ class CopyBlock extends Container {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents);
         $this->set_color_theme_from_attrs($attributes);
-        if ($this->isNested) {
-            $this->withWrapper = false;
-        }
         if (!isset($attributes['tagName']) && !$this->isNested) {
             $this->tagName = Tag::SECTION;
         }

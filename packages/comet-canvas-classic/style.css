@@ -21,4 +21,8 @@
   flex-basis: 100%;
 }
 
+.breadcrumbs__list__item:has(a[href="#"]) {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */

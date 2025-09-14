@@ -8,7 +8,7 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.0
  * @description
  */
-#[AllowedTags([Tag::DIV, Tag::ARTICLE])]
+#[AllowedTags([Tag::DIV, Tag::ARTICLE, Tag::FOOTER])]
 #[DefaultTag(Tag::DIV)]
 class Card extends UIComponent {
     use BackgroundColor;
@@ -121,12 +121,24 @@ class Card extends UIComponent {
         return $attributes;
     }
 
+    protected function get_filtered_classes(): array {
+        $classes = parent::get_filtered_classes();
+
+        // Include shortname even if there is also context
+        return array_unique([
+            $this->shortName,
+            $this->get_bem_name(),
+            ...$classes
+        ]);
+    }
+
     public function render(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
             'tag'               => $this->tagName->value,
             'bemName'           => $this->get_bem_name(),
+            'shortName'         => $this->shortName,
             'classes'           => $this->get_filtered_classes_string(),
             'attributes'        => $this->get_html_attributes(),
             'imageWrapperAttrs' => $this->get_image_wrapper_attributes(),

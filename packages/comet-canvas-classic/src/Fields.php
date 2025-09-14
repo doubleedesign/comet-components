@@ -4,10 +4,54 @@ namespace Doubleedesign\CometCanvas\Classic;
 class Fields {
 
     public function __construct() {
+        add_action('acf/include_fields', [$this, 'add_category_fields']);
         add_filter('acf/load_field/name=content_modules', [$this, 'simplify_flexibles_for_posts']);
         add_filter('acf/load_field/name=content_modules', [$this, 'simplify_flexibles_for_blog_page']);
         add_filter('comet_acf_flexible_content_is_nested', [$this, 'declare_post_modules_nested'], 10, 3);
         add_filter('gettext', [$this, 'you_are_editing_page_for_posts_message']);
+    }
+
+    public function add_category_fields(): void {
+        acf_add_local_field_group(array(
+            'key'    => 'group_category-fields',
+            'title'  => 'Category fields',
+            'fields' => array(
+                array(
+                    'key'               => 'field__category-description',
+                    'label'             => 'Category description',
+                    'name'              => 'category_description',
+                    'type'              => 'wysiwyg',
+                    'toolbar'           => 'minimal',
+                ),
+                array(
+                    'key'               => 'field__category-image',
+                    'label'             => 'Category image',
+                    'name'              => 'category_image',
+                    'type'              => 'image',
+                    'return_format'     => 'array',
+                    'library'           => 'all',
+                    'preview_size'      => 'medium',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param'    => 'taxonomy',
+                        'operator' => '==',
+                        'value'    => 'category',
+                    ),
+                ),
+            ),
+            'menu_order'            => 0,
+            'position'              => 'normal',
+            'style'                 => 'default',
+            'label_placement'       => 'top',
+            'instruction_placement' => 'label',
+            'hide_on_screen'        => '',
+            'active'                => true,
+            'description'           => '',
+            'show_in_rest'          => 0,
+        ));
     }
 
     public function simplify_flexibles_for_posts($field): array {
