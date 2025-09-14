@@ -40,6 +40,7 @@ class BladeService {
         );
 
         self::registerDirectives();
+        self::stripFragmentsWhenCompiling();
     }
 
     /**
@@ -125,7 +126,29 @@ class BladeService {
      * @throws InvalidArgumentException
      */
     private static function registerDirectives(): void {
+        self::$compiler->directive('opentag', self::getOpenTagDirective());
+        self::$compiler->directive('closetag', self::getCloseTagDirective());
         self::$compiler->directive('attributes', self::getAttributesDirective());
+    }
+
+    private static function getOpenTagDirective(): callable {
+        return function($expression) {
+            $expression = trim($expression, '()');
+
+            return "<?php 
+            echo '<' . htmlspecialchars($expression, ENT_QUOTES, 'UTF-8');
+        ?>";
+        };
+    }
+
+    private static function getCloseTagDirective(): callable {
+        return function($expression) {
+            $expression = trim($expression, '()');
+
+            return "<?php 
+            echo '</' . htmlspecialchars($expression, ENT_QUOTES, 'UTF-8') . '>';
+        ?>";
+        };
     }
 
     /**
@@ -142,4 +165,20 @@ class BladeService {
            } ?>", $expression);
         };
     }
+
+    /**
+     * <blade-fragment> tags are used purely for auto-formatting purposes in some Blade templates,
+     * where we need a HTML tag so that the indentation is correct, but we don't want that tag to appear in the final output.
+     * This function hooks into the compilation process to strip out those tags while preserving their content.
+     *
+     * @return void
+     */
+    private static function stripFragmentsWhenCompiling(): void {
+        // Hook into the compilation process to strip blade-fragment tags
+        self::$compiler->extend(function($value) {
+            // Strip blade-fragment tags but preserve their content
+            return preg_replace('/<blade-fragment[^>]*>(.*?)<\/blade-fragment>/s', '$1', $value);
+        });
+    }
+
 }
