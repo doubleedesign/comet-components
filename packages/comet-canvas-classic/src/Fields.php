@@ -9,6 +9,7 @@ class Fields {
         add_filter('acf/load_field/name=content_modules', [$this, 'simplify_flexibles_for_blog_page']);
         add_filter('comet_acf_flexible_content_is_nested', [$this, 'declare_post_modules_nested'], 10, 3);
         add_filter('gettext', [$this, 'you_are_editing_page_for_posts_message']);
+        add_filter('comet_acf_get_basic_modules', [$this, 'add_contact_details_module']);
     }
 
     public function add_category_fields(): void {
@@ -175,6 +176,27 @@ class Fields {
         }
 
         return $translated_text;
+    }
+
+    public function add_contact_details_module($modules) {
+        $site_name = get_bloginfo('name');
+
+        $modules['layout_contact-details'] = array(
+            'key'        => 'layout_contact-details',
+            'name'       => 'contact_details',
+            'label'      => 'Contact details',
+            'display'    => 'block',
+            'sub_fields' => array(
+                array(
+                    'key'     => 'field_contact-details_message',
+                    'name'    => 'message',
+                    'type'    => 'message',
+                    'message' => "Contact details can be edited in the <a href='/wp-admin/admin.php?page=acf-options-global-options'>{$site_name} settings</a>."
+                )
+            )
+        );
+
+        return $modules;
     }
 
 }

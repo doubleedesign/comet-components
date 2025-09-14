@@ -20,6 +20,9 @@
   width: 100%;
   flex-basis: 100%;
 }
+.contact-details-wrapper.layout-block .contact-details {
+  font-size: var(--font-size-base, 1rem);
+}
 
 .breadcrumbs__list__item:has(a[href="#"]) {
   display: none;

@@ -11,4 +11,8 @@
 		width: 100%;
 		flex-basis: 100%;
 	}
+
+	.contact-details-wrapper.layout-block & {
+		font-size: var(--font-size-base, 1rem);
+	}
 }

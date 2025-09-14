@@ -34,7 +34,7 @@ $headerComponent = new SiteHeader(
 $headerComponent->render();
 ?>
 
-<!--<a class="skip-link screen-reader-text" href="#primary">-->
+<!--<a class="skip-link screen-reader-text" href="#content">-->
 <?php // esc_html_e('Skip to content', 'comet');?><!--</a>-->
 
-<main class="site-content layout-block page-section">
+<main id="content" class="site-content layout-block page-section">
