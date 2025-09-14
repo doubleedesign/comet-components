@@ -1,0 +1,12 @@
+.breadcrumbs {
+
+	&__list {
+
+		&__item {
+
+			&:has(a[href="#"]) {
+				display: none;
+			}
+		}
+	}
+}
