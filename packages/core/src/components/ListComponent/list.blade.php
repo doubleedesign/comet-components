@@ -1,17 +1,11 @@
 @if ($ordered)
-    <ol @if ($classes) @class($classes) @endif @attributes($attributes)>
-        @foreach ($children as $child)
-            @if (method_exists($child, 'render'))
-                {{ $child->render() }}
-            @endif
-        @endforeach
-    </ol>
+	<ol @class($classes) @attributes($attributes)>
+		@include('components._blade-partials.children')
+
+	</ol>
 @else
-    <ul @if ($classes) @class($classes) @endif @attributes($attributes)>
-        @foreach ($children as $child)
-            @if (method_exists($child, 'render'))
-                {{ $child->render() }}
-            @endif
-        @endforeach
-    </ul>
+	<ul @class($classes) @attributes($attributes)>>
+		@include('components._blade-partials.children')
+
+	</ul>
 @endif

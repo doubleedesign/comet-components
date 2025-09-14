@@ -1,7 +1,3 @@
-<section @if ($classes) @class($classes) @endif @attributes($attributes)>
-	@foreach ($children as $child)
-		@if (method_exists($child, 'render'))
-			{{ $child->render() }}
-		@endif
-	@endforeach
+<section @class($classes) @attributes($attributes)>
+	@include('components._blade-partials.children')
 </section>

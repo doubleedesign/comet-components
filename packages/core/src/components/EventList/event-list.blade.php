@@ -4,11 +4,11 @@
 			{{ $heading->render() }}
 		@endif
 	@endif
-	<{{ $tag }} @if ($classes) @class($classes) @endif @attributes($attributes)>
-		@foreach ($children as $child)
-			@if (method_exists($child, 'render'))
-				{{ $child->render() }}
-			@endif
-		@endforeach
-		</{{ $tag }}>
+	@opentag($tag) @if ($classes)
+		@class($classes)
+	@endif @attributes($attributes)>
+	<blade-fragment>
+		@include('components._blade-partials.children')
+	</blade-fragment>
+	@closetag($tag)
 </div>

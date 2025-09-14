@@ -1,4 +1,4 @@
-<time @if ($classes) @class($classes) @endif @attributes($attributes)>
+<time @class($classes) @attributes($attributes)>
 	@if ($days !== null)
 		<span class="date-range-block__days">
 			{{ $days }}

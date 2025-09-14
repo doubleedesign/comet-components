@@ -1,6 +1,6 @@
 @if ($withWrapper)
 	@opentag($tag) @class($outerClasses) @attributes($attributes)>
-	<div @if ($classes) @class($classes) @endif @attributes($innerAttributes)>
+	<div @class($classes) @attributes($innerAttributes)>
 		@include('components._blade-partials.children')
 	</div>
 	@closetag($tag)

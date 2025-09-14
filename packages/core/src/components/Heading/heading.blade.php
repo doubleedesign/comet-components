@@ -1,3 +1,5 @@
-<{{ $tag }} @if ($classes) @class($classes) @endif @attributes($attributes)>
-    {!! $content !!}
-    </{{ $tag }}>
+@opentag($tag) @if ($classes)
+	@class($classes)
+@endif @attributes($attributes)>
+{!! $content !!}
+@closetag($tag)

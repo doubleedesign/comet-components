@@ -1,4 +1,4 @@
-<time @if ($classes) @class($classes) @endif @attributes($attributes)>
+<time @class($classes) @attributes($attributes)>
 	@if ($showDay)
 		<span class="date-block__day">
 			{{ $date->format('D') }}

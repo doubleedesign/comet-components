@@ -1,5 +1,7 @@
-@foreach ($children as $child)
-	@if (gettype($child) === 'object' && method_exists($child, 'render'))
-		{{ $child->render() }}
-	@endif
-@endforeach
+@if ($children)
+	@foreach ($children as $child)
+		@if (gettype($child) === 'object' && method_exists($child, 'render'))
+			{{ $child->render() }}
+		@endif
+	@endforeach
+@endif

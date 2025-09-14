@@ -1,10 +1,8 @@
-<figure @if ($classes) @class($classes) @endif @attributes($attributes)>
-    @foreach ($children as $child)
-        @if (method_exists($child, 'render'))
-            {{ $child->render() }}
-        @endif
-    @endforeach
-    @if ($caption)
-        <figcaption class="gallery__caption">{!! $caption !!}</figcaption>
-    @endif
+<figure @class($classes) @attributes($attributes)>
+	<blade-fragment>
+		@include('components._blade-partials.children')
+	</blade-fragment>
+	@if ($caption)
+		<figcaption class="gallery__caption">{!! $caption !!}</figcaption>
+	@endif
 </figure>

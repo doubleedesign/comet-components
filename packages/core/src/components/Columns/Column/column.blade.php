@@ -1,9 +1,5 @@
-<{{ $tag }} @if ($classes) @class($classes) @endif @attributes($attributes)>
-	<div @class($innerClasses)>
-		@foreach ($children as $child)
-			@if (method_exists($child, 'render'))
-				{{ $child->render() }}
-			@endif
-		@endforeach
-	</div>
-	</{{ $tag }}>
+@opentag($tag) @class($classes) @attributes($attributes)>
+<div @class($innerClasses)>
+	@include('components._blade-partials.children')
+</div>
+@closetag($tag)

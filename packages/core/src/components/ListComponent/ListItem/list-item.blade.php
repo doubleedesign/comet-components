@@ -1,12 +1,10 @@
-<li @if ($classes) @class($classes) @endif @attributes($attributes)>
-    @if (!empty($content))
-        {!! $content !!}
-    @endif
-    @if (!empty($children))
-        @foreach ($children as $child)
-            @if (method_exists($child, 'render'))
-                {{ $child->render() }}
-            @endif
-        @endforeach
-    @endif
+<li @class($classes) @attributes($attributes)>
+	@if (!empty($content))
+		{!! $content !!}
+	@endif
+	@if (!empty($children))
+		<blade-fragment>
+			@include('components._blade-partials.children')
+		</blade-fragment>
+	@endif
 </li>

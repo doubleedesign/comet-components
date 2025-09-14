@@ -1,3 +1,3 @@
-<th @if ($classes) @class($classes) @endif @attributes($attributes)>
-    {!! $content !!}
+<th @class($classes) @attributes($attributes)>
+	{!! $content !!}
 </th>

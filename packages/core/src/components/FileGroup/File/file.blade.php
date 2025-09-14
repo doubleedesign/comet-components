@@ -1,4 +1,4 @@
-<a @if ($classes) @class($classes) @endif @attributes($attributes) target="_blank">
+<a @class($classes) @attributes($attributes) target="_blank">
 	@if ($icon)
 		<span class="{{ $bem_prefix }}__icon" aria-label="File type: {{ $mimeType }}">
 			<i class="{{ $iconPrefix }} {{ $icon }}"></i>
