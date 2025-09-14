@@ -14,21 +14,37 @@ class LinkGroup extends UIComponent {
     use ColorTheme;
 
     /**
+     * @var string|null $heading Optional heading text for the link group section
+     */
+    protected ?string $heading;
+
+    /**
      * @param  array  $attributes
      * @param array<Link|array<string,string> $links - Either an array of Link objects or an array of associative arrays corresponding to Link fields
      */
     public function __construct(array $attributes, array $links) {
         $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
-        $innerComponents = array_map(function($link) {
-            if ($link instanceof Link) {
-                return $link;
-            }
+        $innerComponents = [];
 
-            return new Link(
-                array_merge($link['attributes'], ['context' => 'link-group']),
-                $link['content']
-            );
-        }, $links);
+        if ($attributes['heading']) {
+            $this->heading = $attributes['heading'];
+            array_push($innerComponents, new Heading(['level' => 2], $this->heading));
+            unset($attributes['heading']);
+        }
+
+        $innerComponents = array_merge(
+            $innerComponents,
+            array_map(function($link) {
+                if ($link instanceof Link) {
+                    return $link;
+                }
+
+                return new Link(
+                    array_merge($link['attributes'], ['context' => 'link-group']),
+                    $link['content']
+                );
+            }, $links)
+        );
 
         parent::__construct($attributes, $innerComponents, 'components.LinkGroup.link-group');
     }
