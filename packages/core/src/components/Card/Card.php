@@ -50,7 +50,8 @@ class Card extends UIComponent {
      * @description Whether to render the entire card as a link (if a link is provided); otherwise a button will be used
      */
     protected bool $cardAsLink = false;
-    private bool $isNested = true;
+    protected bool $isNested = true;
+    protected bool $withWrapper = true;
 
     public function __construct(array $attributes, ?array $aboveContentComponents = null) {
         $this->image = $this->validate_image_attributes($attributes['image'] ?? []);
@@ -60,6 +61,7 @@ class Card extends UIComponent {
         $this->cardAsLink = $attributes['cardAsLink'] ?? $this->cardAsLink;
         $this->isNested = true; // Cards are typically used as nested components
         $this->aboveContentComponents = $aboveContentComponents ?? null;
+        $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
 
         $innerComponents = $this->aboveContentComponents ?? [];
         if (!empty($this->heading)) {
@@ -137,7 +139,11 @@ class Card extends UIComponent {
 
         echo $blade->make($this->bladeFile, [
             'tag'               => $this->tagName->value,
+            'withWrapper'       => $this->withWrapper,
+            'isLink'            => !empty($this->link) && $this->cardAsLink,
+            'linkAttrs'         => $this->link,
             'bemName'           => $this->get_bem_name(),
+            'context'           => $this->context,
             'shortName'         => $this->shortName,
             'classes'           => $this->get_filtered_classes_string(),
             'attributes'        => $this->get_html_attributes(),
