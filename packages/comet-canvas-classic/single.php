@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{Container, ContentImageBasic, CopyBlock};
+use Doubleedesign\Comet\Core\{Container, ContentImageBasic};
 use Doubleedesign\Comet\WordPress\Classic\PreprocessedHTML;
 
 get_header();
@@ -27,7 +27,7 @@ if ($image_url) {
     ]);
 }
 
-$content_component = new CopyBlock([
+$content_component = new Container([
     'tagName'         => 'article',
     // Associate this <article> with its headline contained in the page header component
     'aria-labelledby' => 'page-header--post-' . get_the_id(),
@@ -37,7 +37,8 @@ $content_component = new CopyBlock([
     'size'            => 'default',
 ], [
     ...(isset($image) ? [$image] : []),
-    new PreprocessedHTML([], $content)]
+    new PreprocessedHTML([], $content),
+]
 );
 
 $footer = new Container([

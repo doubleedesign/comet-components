@@ -160,7 +160,7 @@ abstract class Renderable {
             if (str_starts_with($this->shortName, $kebabContext)) {
                 $shortNameToUse = str_replace("$kebabContext-", '', $this->shortName);
             }
-
+			
             return $this->context . '__' . $shortNameToUse;
         }
 

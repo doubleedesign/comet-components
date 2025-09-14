@@ -12,6 +12,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class Group extends UIComponent {
     use BackgroundColor;
+    use ColorTheme;
 
     /**
      * @var ?array<string> $classes
@@ -19,8 +20,15 @@ class Group extends UIComponent {
      */
     protected ?array $classes;
 
+    /**
+     * @var bool $isNested
+     * @description Whether this container is nested inside another element; used for simplifying layout and background colour handling
+     */
+    protected bool $isNested = true;
+
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Group.group');
+        $this->set_color_theme_from_attrs($attributes);
 
         // Allow groups without a specified background to be transparent, rather than defaulting to the fallback
         if (isset($attributes['backgroundColor'])) {
@@ -36,12 +44,19 @@ class Group extends UIComponent {
             return parent::get_filtered_classes();
         }
 
-        return array_merge(parent::get_filtered_classes(), ['layout-block']);
+        if (!$this->isNested) {
+            return array_merge(parent::get_filtered_classes(), ['layout-block']);
+        }
+
+        return array_merge(parent::get_filtered_classes());
     }
 
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
+        if (isset($this->colorTheme)) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;
         }

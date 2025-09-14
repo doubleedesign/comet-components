@@ -1,19 +1,13 @@
 @if ($withWrapper)
-	<{{ $tag }} @if ($outerClasses) @class($outerClasses) @endif @attributes($attributes)>
-		<div @if ($classes) @class($classes) @endif @attributes($innerAttributes)>
-			@foreach ($children as $child)
-				@if (gettype($child) === 'object' && method_exists($child, 'render'))
-					{{ $child->render() }}
-				@endif
-			@endforeach
-		</div>
-		</{{ $tag }}>
-	@else
-		<{{ $tag }} @if ($classes) @class($classes) @endif @attributes([...$attributes, ...$innerAttributes])>
-			@foreach ($children as $child)
-				@if (gettype($child) === 'object' && method_exists($child, 'render'))
-					{{ $child->render() }}
-				@endif
-			@endforeach
-			</{{ $tag }}>
+	@opentag($tag) @class($outerClasses) @attributes($attributes)>
+	<div @if ($classes) @class($classes) @endif @attributes($innerAttributes)>
+		@include('components._blade-partials.children')
+	</div>
+	@closetag($tag)
+@else
+	@opentag($tag) @class($classes) @attributes([...$attributes, ...$innerAttributes])>
+	<blade-fragment>
+		@include('components._blade-partials.children')
+	</blade-fragment>
+	@closetag($tag)
 @endif
