@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{Card, Container, ContentImageBasic, CopyBlock};
+use Doubleedesign\Comet\Core\{Container, ContentImageBasic, CopyBlock};
 use Doubleedesign\Comet\WordPress\Classic\PreprocessedHTML;
 
 get_header();
@@ -26,21 +26,6 @@ if ($image_url) {
     ]);
 }
 
-$author_id = get_the_author_id();
-$user_query = new WP_User_Query(['include' => [$author_id]]);
-$author_data = $user_query->get_results()[0]->data;
-$author_card = new Card([
-    'context'    => 'author-bio',
-    'heading'    => "<span>About the author</span>" . $author_data->display_name,
-    'bodyText'   => get_user_meta($author_id, 'description', true),
-    'colorTheme' => 'primary',
-    'link'       => [
-        'href'      => $author_data->user_url ?: get_author_posts_url($author_id),
-        'content'   => 'More about ' . get_user_meta($author_id, 'first_name', true) ?? $author_data->display_name ?? 'the author',
-        'isOutline' => true
-    ]
-]);
-
 $content_component = new CopyBlock([
     'tagName'         => 'article',
     // Associate this <article> with its headline contained in the page header component
@@ -59,9 +44,9 @@ $footer = new Container([
     'context'     => 'post-footer',
     'isNested'    => false,
     'withWrapper' => false,
-    'size'        => 'narrow'
+    'size'        => 'default'
 ], [
-    $author_card
+    comet_get_author_card(),
 ]);
 
 $content_component->render();
