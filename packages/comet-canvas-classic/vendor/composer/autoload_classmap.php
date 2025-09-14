@@ -14,6 +14,7 @@ return array(
     'Doubleedesign\\CometCanvas\\Classic\\SectionMenuBuilder' => $baseDir . '/src/SectionMenuBuilder.php',
     'Doubleedesign\\CometCanvas\\Classic\\SharedContent' => $baseDir . '/src/SharedContent.php',
     'Doubleedesign\\CometCanvas\\Classic\\SiteHealth' => $baseDir . '/src/SiteHealth.php',
+    'Doubleedesign\\CometCanvas\\Classic\\TemplateParts' => $baseDir . '/src/TemplateParts.php',
     'Doubleedesign\\CometCanvas\\Classic\\ThemeEntrypoint' => $baseDir . '/src/ThemeEntrypoint.php',
     'Doubleedesign\\CometCanvas\\Classic\\ThemeStyle' => $baseDir . '/src/ThemeStyle.php',
     'Doubleedesign\\CometCanvas\\Classic\\TinyMCEConfig' => $baseDir . '/src/TinyMCEConfig.php',

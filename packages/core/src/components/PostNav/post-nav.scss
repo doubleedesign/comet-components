@@ -1,0 +1,59 @@
+.post-nav {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--spacing-md);
+
+	@container (min-width: 800px) {
+		grid-template-columns: repeat(10, 1fr);
+	}
+
+	&__link {
+		text-decoration: underline;
+		text-decoration-color: transparent;
+		color: var(--theme-color);
+		transition: all 0.3s ease;
+
+		@container (min-width: 800px) {
+			grid-column: span 3;
+		}
+
+		&:hover, &:focus, &:active {
+			text-decoration-color: currentColor;
+		}
+
+		> span > span {
+			display: block;
+			font-size: var(--font-size-xs);
+			font-weight: var(--font-weight-semibold);
+			text-transform: uppercase;
+		}
+
+		> i, > svg {
+			transition: all 0.2s ease;
+		}
+
+		&--prev {
+			&:hover, &:focus, &:active {
+				> i, > svg {
+					transform: translateX(-0.5rem);
+				}
+			}
+		}
+
+		// Should always be in the last column
+		&--next {
+			text-align: end;
+
+			&:hover, &:focus, &:active {
+				> i, > svg {
+					transform: translateX(0.5rem);
+				}
+			}
+
+			@container (min-width: 800px) {
+				grid-column: span 3 / -1;
+			}
+		}
+	}
+}

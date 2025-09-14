@@ -10,3 +10,22 @@
 /* Import partials */
 @import 'template-parts/contact-details';
 @import 'template-parts/breadcrumbs';
+@import 'template-parts/post-nav';
+
+.post-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-lg);
+	container-type: unset; // allows .breakout to work if used inside .post-content
+
+	@media (min-width: 840px) {
+		gap: var(--spacing-xl);
+	}
+}
+
+.post-footer {
+	margin-block-start: var(--spacing-lg);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-lg);
+}

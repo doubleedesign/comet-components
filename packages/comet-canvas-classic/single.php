@@ -48,6 +48,7 @@ $footer = new Container([
     'size'        => 'default'
 ], [
     comet_get_author_card(),
+    comet_get_post_nav() ?? []
 ]);
 
 $content_component->render();

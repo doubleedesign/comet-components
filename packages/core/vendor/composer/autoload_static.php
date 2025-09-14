@@ -378,6 +378,7 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
         'Doubleedesign\\Comet\\Core\\PanelComponent' => __DIR__ . '/../..' . '/src/base/components/PanelComponent.php',
         'Doubleedesign\\Comet\\Core\\PanelGroupComponent' => __DIR__ . '/../..' . '/src/base/components/PanelGroupComponent.php',
         'Doubleedesign\\Comet\\Core\\Paragraph' => __DIR__ . '/../..' . '/src/components/Paragraph/Paragraph.php',
+        'Doubleedesign\\Comet\\Core\\PostNav' => __DIR__ . '/../..' . '/src/components/PostNav/PostNav.php',
         'Doubleedesign\\Comet\\Core\\Pullquote' => __DIR__ . '/../..' . '/src/components/Pullquote/Pullquote.php',
         'Doubleedesign\\Comet\\Core\\Renderable' => __DIR__ . '/../..' . '/src/base/components/Renderable.php',
         'Doubleedesign\\Comet\\Core\\ResponsivePanel' => __DIR__ . '/../..' . '/src/components/ResponsivePanels/ResponsivePanel/ResponsivePanel.php',

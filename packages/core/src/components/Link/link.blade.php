@@ -1,4 +1,4 @@
-<a @if ($classes) @class($classes) @endif @attributes($attributes)>
+<a @class($classes) @attributes($attributes)>
 	@if ($icon)
 		<i class="{{ $iconPrefix }} {{ $icon }}"></i>
 	@endif

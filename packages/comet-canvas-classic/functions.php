@@ -20,3 +20,7 @@ add_action('init', function() {
 function comet_get_author_card(): Card {
     return TemplateParts::get_author_card();
 }
+
+function comet_get_post_nav(): PostNav {
+    return TemplateParts::get_post_nav();
+}

@@ -204,6 +204,7 @@ return array(
     'Doubleedesign\\Comet\\Core\\PanelComponent' => $baseDir . '/src/base/components/PanelComponent.php',
     'Doubleedesign\\Comet\\Core\\PanelGroupComponent' => $baseDir . '/src/base/components/PanelGroupComponent.php',
     'Doubleedesign\\Comet\\Core\\Paragraph' => $baseDir . '/src/components/Paragraph/Paragraph.php',
+    'Doubleedesign\\Comet\\Core\\PostNav' => $baseDir . '/src/components/PostNav/PostNav.php',
     'Doubleedesign\\Comet\\Core\\Pullquote' => $baseDir . '/src/components/Pullquote/Pullquote.php',
     'Doubleedesign\\Comet\\Core\\Renderable' => $baseDir . '/src/base/components/Renderable.php',
     'Doubleedesign\\Comet\\Core\\ResponsivePanel' => $baseDir . '/src/components/ResponsivePanels/ResponsivePanel/ResponsivePanel.php',

@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\CometCanvas\Classic;
-use Doubleedesign\Comet\Core\{Card};
+use Doubleedesign\Comet\Core\{Card, PostNav};
 use WP_User_Query;
 
 /**
@@ -31,6 +31,37 @@ class TemplateParts {
                 'content'   => 'More about ' . get_user_meta($author_id, 'first_name', true) ?? $author_data->display_name ?? 'the author',
                 'isOutline' => true
             ]
+        ]);
+    }
+
+    public static function get_post_nav(): PostNav {
+        $prev_post = get_previous_post();
+        $next_post = get_next_post();
+
+        $prev_link = $prev_post ? get_permalink($prev_post->ID) : null;
+        $next_link = $next_post ? get_permalink($next_post->ID) : null;
+
+        $prev = null;
+        $next = null;
+
+        if ($prev_link) {
+            $prev = [
+                'href'    => $prev_link,
+                'content' => get_the_title($prev_post->ID)
+            ];
+        }
+
+        if ($next_link) {
+            $next = [
+                'href'    => $next_link,
+                'content' => get_the_title($next_post->ID)
+            ];
+        }
+
+        return new PostNav([
+            'links'      => array_filter([$prev, $next]),
+            'entityName' => 'Article',
+            'colorTheme' => 'secondary'
         ]);
     }
 }
