@@ -202,6 +202,41 @@ form {
 	aspect-ratio: 2/3;
 }
 
+[data-aspect-ratio="cinematic"] {
+	aspect-ratio: 21/9;
+}
+
+[data-aspect-ratio="cinemascope"] {
+	aspect-ratio: 2.35/1;
+}
+
+// Allow an item to "break out" of its parent width to take up the full container width when inside something else with a narrower width
+// (assuming it's also inside a container, defined by container-type: inline-size)
+// (so this only works in things like columns, not directly in containers, unless you unset container-type on the container)
+.breakout {
+	// use the width of the closest container
+	width: 100cqw;
+	position: relative;
+	z-index: 300;
+	padding-inline: var(--spacing-md); // same as container so it doesn't overflow container's edges
+
+	.container & {
+		max-width: var(--width-contained);
+	}
+
+	[data-size="fullwidth"] & {
+		max-width: 100vw;
+	}
+
+	[data-size="wide"] & {
+		max-width: var(--width-wide);
+	}
+
+	[data-size="narrow"] & {
+		max-width: var(--width-narrow);
+	}
+}
+
 .divider {
 	display: flex;
 	justify-content: center;

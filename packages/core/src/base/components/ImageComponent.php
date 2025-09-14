@@ -13,7 +13,7 @@ abstract class ImageComponent extends Renderable {
     /**
      * @var array<string> $classes
      * @description CSS classes
-     * @supported-values is-style-rounded
+     * @supported-values is-style-rounded, breakout
      */
     protected ?array $classes = [];
 

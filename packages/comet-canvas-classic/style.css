@@ -25,4 +25,23 @@
   display: none;
 }
 
+.post-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  container-type: unset;
+}
+@media (min-width: 840px) {
+  .post-content {
+    gap: var(--spacing-xl);
+  }
+}
+
+.post-footer {
+  margin-block-start: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
 /*# sourceMappingURL=style.css.map */

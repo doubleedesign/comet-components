@@ -192,6 +192,33 @@ form input[type=button] {
   aspect-ratio: 2/3;
 }
 
+[data-aspect-ratio=cinematic] {
+  aspect-ratio: 21/9;
+}
+
+[data-aspect-ratio=cinemascope] {
+  aspect-ratio: 2.35/1;
+}
+
+.breakout, .group--breakout {
+  width: 100cqw;
+  position: relative;
+  z-index: 300;
+  padding-inline: var(--spacing-md);
+}
+.container .breakout, .container .group--breakout {
+  max-width: var(--width-contained);
+}
+[data-size=fullwidth] .breakout, [data-size=fullwidth] .group--breakout {
+  max-width: 100vw;
+}
+[data-size=wide] .breakout, [data-size=wide] .group--breakout {
+  max-width: var(--width-wide);
+}
+[data-size=narrow] .breakout, [data-size=narrow] .group--breakout {
+  max-width: var(--width-narrow);
+}
+
 .divider {
   display: flex;
   justify-content: center;
@@ -1169,24 +1196,6 @@ body[data-global-background=white] {
 }
 .container [data-background*=gradient-white] + [data-background*=gradient-white], .page-section > [class*=__container] [data-background*=gradient-white] + [data-background*=gradient-white] {
   padding-block-start: 0;
-}
-
-.group--breakout {
-  width: 100cqw;
-  position: relative;
-  z-index: 300;
-}
-.container .group--breakout {
-  max-width: var(--width-contained);
-}
-[data-size=fullwidth] .group--breakout {
-  max-width: 100vw;
-}
-[data-size=wide] .group--breakout {
-  max-width: var(--width-wide);
-}
-[data-size=narrow] .group--breakout {
-  max-width: var(--width-narrow);
 }
 
 .page-header {

@@ -24,11 +24,7 @@ abstract class ContentImageComponent extends ImageComponent {
     protected ?string $align = null;
 
     public function __construct(array $attributes, string $bladeFile) {
-        $this->aspectRatio = isset($attributes['aspectRatio'])
-            ? ($attributes['aspectRatio'] == '1'
-                ? AspectRatio::tryFrom('1:1')
-                : AspectRatio::tryFrom(str_replace('/', ':', $attributes['aspectRatio'])))
-            : null;
+        $this->aspectRatio = isset($attributes['aspectRatio']) ? AspectRatio::fromString($attributes['aspectRatio']) : null;
         $this->caption = $attributes['caption'] ?? null;
         $this->align = $attributes['align'] ?? null;
         parent::__construct($attributes, $bladeFile);

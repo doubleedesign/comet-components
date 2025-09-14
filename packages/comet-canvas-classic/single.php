@@ -20,9 +20,10 @@ if ($image_url) {
         'src'         => $image_url,
         'alt'         => $image_alt,
         'caption'     => $image_caption,
-        'aspectRatio' => '16:9',
+        'aspectRatio' => 'cinemascope',
         'scale'       => 'cover',
         'isNested'    => true,
+        'classes'     => ['breakout']
     ]);
 }
 

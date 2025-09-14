@@ -21,8 +21,12 @@ class Group extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Group.group');
-        $this->set_background_color_from_attrs($attributes);
-        $this->simplify_all_background_colors();
+
+        // Allow groups without a specified background to be transparent, rather than defaulting to the fallback
+        if (isset($attributes['backgroundColor'])) {
+            $this->set_background_color_from_attrs($attributes);
+            $this->simplify_all_background_colors();
+        }
         // Allow something other than "group" to be used as the shortName, primarily for automatic BEM class naming
         $this->shortName = $attributes['shortName'] ?? $this->shortName;
     }
