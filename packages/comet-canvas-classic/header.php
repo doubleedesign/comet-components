@@ -10,9 +10,22 @@ $globalBackground = Config::getInstance()->get('global_background');
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<title><?php wp_title(); ?></title>
+	<script type="text/javascript">
+		// Hide body and make it visible again after a short delay to avoid flash of unstyled content
+		// and to avoid showing content before animations kick in (if they are present)
+		// This is done here in case anything goes wrong with other JS files
+		// - so the content will always become visible even if animation JS breaks for example
+		document.addEventListener('DOMContentLoaded', function() {
+			document.body.style.opacity = "0";
+			setTimeout(function () {
+				document.body.style.opacity = "1";
+			}, 100);
+		});
+	</script>
 	<?php wp_head(); ?>
 </head>
 
+<?php // Opacity 0 on initial load so we don't get a flash of content before the animations, if present?>
 <body <?php body_class('frontend'); ?> data-global-background="<?php echo $globalBackground; ?>">
 <?php wp_body_open(); ?>
 
