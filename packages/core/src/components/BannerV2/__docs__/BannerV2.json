@@ -1,0 +1,163 @@
+{
+    "name": "BannerV2",
+    "description": "A \"hero\" banner with an image background and a container for inner content. Supports setting the aspect ratio and crop position (focal point and/or offsets) for the image.",
+    "extends": "UIComponent",
+    "abstract": false,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
+    "attributes": {
+        "aspectRatio": {
+            "type": "AspectRatio",
+            "description": "Crop banner image to the given aspect ratio",
+            "supported": [
+                "4:3",
+                "3:4",
+                "1:1",
+                "16:9",
+                "9:16",
+                "3:2",
+                "2:3",
+                "21:9",
+                "2.35:1"
+            ]
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "banner-v2",
+                "page-section"
+            ],
+            "inherited": true
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for the fill or outline colour",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "cinematic"
+        },
+        "containerWidth": {
+            "type": "ContainerSize",
+            "description": "The max width of the inner content container",
+            "required": true,
+            "supported": [
+                "default",
+                "wide",
+                "fullwidth",
+                "narrow",
+                "narrower",
+                "small"
+            ]
+        },
+        "contentMaxWidth": {
+            "type": "int",
+            "description": "The max width of the content inside the inner container, as a percentage",
+            "default": 100
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "inherited": true
+        },
+        "focalPoint": {
+            "type": "array{x:",
+            "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
+            "default": {
+                "x": 50,
+                "y": 50
+            }
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "image": {
+            "type": "array{src:string,",
+            "required": true,
+            "default": []
+        },
+        "offset": {
+            "type": "array{x:",
+            "description": "The percentage offsets of the image to use when cropping",
+            "default": {
+                "x": 0,
+                "y": 0
+            }
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div",
+                "section"
+            ],
+            "default": "section",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "width": {
+            "type": "ContainerSize",
+            "description": "The max width of the banner overall",
+            "required": true,
+            "supported": [
+                "default",
+                "wide",
+                "fullwidth",
+                "narrow",
+                "narrower",
+                "small"
+            ]
+        }
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true,
+        "inherited": true
+    }
+}

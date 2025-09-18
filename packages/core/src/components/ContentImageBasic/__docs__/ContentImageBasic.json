@@ -4,118 +4,121 @@
 	"extends": "ContentImageComponent",
 	"abstract": false,
 	"isInner": false,
-	"belongsInside": "LayoutComponent",
-	"attributes": {
-		"align": {
-			"type": "string",
-			"description": "Image alignment",
-			"supported": [
-				"left",
-				"center",
-				"right",
-				"full"
-			],
-			"inherited": true
-		},
-		"alt": {
-			"type": "string",
-			"description": "Alternative text",
-			"required": true,
-			"default": "",
-			"inherited": true
-		},
-		"aspectRatio": {
-			"type": "AspectRatio",
-			"description": "Crop image to the given aspect ratio",
-			"supported": [
-				"4:3",
-				"3:4",
-				"1:1",
-				"16:9",
-				"9:16",
-				"3:2",
-				"2:3"
-			],
-			"inherited": true
-		},
-		"caption": {
-			"type": "string",
-			"description": "Optional image caption (to appear below the image)",
-			"inherited": true
-		},
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"supported": [
-				"is-style-rounded"
-			],
-			"default": [
-				"image"
-			],
-			"inherited": true
-		},
-		"context": {
-			"type": "string",
-			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-			"inherited": true
-		},
-		"height": {
-			"type": "string",
-			"description": "Set a fixed height for the image"
-		},
-		"href": {
-			"type": "string",
-			"description": "URL to link to",
-			"inherited": true
-		},
-		"id": {
-			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"scale": {
-			"type": "string",
-			"description": "How to handle how the image fits the available space",
-			"supported": [
-				"contain",
-				"cover"
-			],
-			"default": "contain"
-		},
-		"src": {
-			"type": "string",
-			"description": "Image source URL",
-			"required": true,
-			"inherited": true
-		},
-		"style": {
-			"type": "array",
-			"description": "Inline styles",
-			"inherited": true
-		},
-		"tagName": {
-			"type": "Tag",
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"figure",
-				"div"
-			],
-			"default": "div",
-			"inherited": true
-		},
-		"testId": {
-			"type": "string",
-			"description": "Optionally add a data-testid attribute for automated tests",
-			"inherited": true
-		},
-		"title": {
-			"type": "string",
-			"description": "Optional image title (appears on hover)",
-			"inherited": true
-		},
-		"width": {
-			"type": "string",
-			"description": "Set a fixed width for the image"
-		}
-	}
+    "belongsInside": "LayoutComponent",
+    "attributes": {
+        "align": {
+            "type": "string",
+            "description": "Image alignment",
+            "supported": [
+                "left",
+                "center",
+                "right",
+                "full"
+            ],
+            "inherited": true
+        },
+        "alt": {
+            "type": "string",
+            "description": "Alternative text",
+            "required": true,
+            "default": "",
+            "inherited": true
+        },
+        "aspectRatio": {
+            "type": "AspectRatio",
+            "description": "Crop image to the given aspect ratio",
+            "supported": [
+                "4:3",
+                "3:4",
+                "1:1",
+                "16:9",
+                "9:16",
+                "3:2",
+                "2:3",
+                "21:9",
+                "2.35:1"
+            ],
+            "inherited": true
+        },
+        "caption": {
+            "type": "string",
+            "description": "Optional image caption (to appear below the image)",
+            "inherited": true
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "supported": [
+                "is-style-rounded",
+                "breakout"
+            ],
+            "default": [
+                "image",
+                "image--basic"
+            ],
+            "inherited": true
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "inherited": true
+        },
+        "height": {
+            "type": "string",
+            "description": "Set a fixed height for the image"
+        },
+        "href": {
+            "type": "string",
+            "description": "URL to link to"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "scale": {
+            "type": "string",
+            "description": "How to handle how the image fits the available space",
+            "supported": [
+                "contain",
+                "cover"
+            ],
+            "default": "contain"
+        },
+        "src": {
+            "type": "string",
+            "description": "Image source URL",
+            "required": true,
+            "inherited": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "figure",
+                "div"
+            ],
+            "default": "div",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "title": {
+            "type": "string",
+            "description": "Optional image title (appears on hover)",
+            "inherited": true
+        },
+        "width": {
+            "type": "string",
+            "description": "Set a fixed width for the image"
+        }
+    }
 }

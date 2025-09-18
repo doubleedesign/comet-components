@@ -1,7 +1,7 @@
 {
-    "name": "DateBlock",
-    "description": "Display a date.",
-    "extends": "DateComponent",
+    "name": "PostNav",
+    "description": null,
+    "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
@@ -10,7 +10,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "date-block"
+                "post-nav"
             ],
             "inherited": true
         },
@@ -29,42 +29,29 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "default": "$this->validate_link_attributes($link"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
             "inherited": true
         },
-        "date": {
-            "type": "DateTime",
-            "description": "The date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
+        "entityName": {
+            "type": "string",
+            "description": "The name of the entity type being navigated, e.g. \"Post\", \"Product\", \"Article\", etc.",
+            "required": true,
+            "default": "Post"
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
         },
-        "locale": {
-            "type": "string",
-            "description": "The locale to be used for formatting the date.",
+        "links": {
+            "type": "array{href:string,",
+            "description": "Links to include. Intended to be 1 or 2 only (previous and next).",
             "required": true,
-            "default": "en_AU",
-            "inherited": true
-        },
-        "showDay": {
-            "type": "bool",
-            "description": "Whether to show the day of the week.",
-            "required": true,
-            "default": "false",
-            "inherited": true
-        },
-        "showYear": {
-            "type": "bool",
-            "description": "Whether to show the year.",
-            "required": true,
-            "default": "true",
-            "inherited": true
+            "default": []
         },
         "style": {
             "type": "array",
@@ -75,9 +62,10 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "time"
+                "div",
+                "nav"
             ],
-            "default": "time",
+            "default": "nav",
             "inherited": true
         },
         "testId": {
@@ -85,5 +73,11 @@
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         }
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true,
+        "inherited": true
     }
 }

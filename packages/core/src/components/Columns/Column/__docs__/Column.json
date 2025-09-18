@@ -1,10 +1,10 @@
 {
-    "name": "AccordionPanel",
+    "name": "Column",
     "description": null,
-    "extends": "PanelComponent",
+    "extends": "LayoutComponent",
     "abstract": false,
     "isInner": true,
-    "belongsInside": "Accordion",
+    "belongsInside": "Columns",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor",
@@ -27,7 +27,8 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion__panel__content"
+                "column",
+                "columns__column"
             ],
             "inherited": true
         },
@@ -36,9 +37,29 @@
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
             "inherited": true
         },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
+            "inherited": true
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
+            "inherited": true
+        },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "required": true,
+            "default": "false",
             "inherited": true
         },
         "style": {
@@ -46,17 +67,15 @@
             "description": "Inline styles",
             "inherited": true
         },
-        "subtitle": {
-            "type": "string",
-            "inherited": true
-        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "details"
+                "div",
+                "main",
+                "aside"
             ],
-            "default": "details",
+            "default": "div",
             "inherited": true
         },
         "testId": {
@@ -64,10 +83,22 @@
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
-        "title": {
-            "type": "string",
-            "required": true,
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
             "inherited": true
+        },
+        "width": {
+            "type": "string",
+            "description": "Optionally set the width of the column. Note: This may be overridden to stack columns on small viewports."
         }
     },
     "innerComponents": {

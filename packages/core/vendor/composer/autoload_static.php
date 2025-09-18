@@ -322,7 +322,7 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
         'Doubleedesign\\Comet\\Core\\Assets' => __DIR__ . '/../..' . '/src/base/Assets.php',
         'Doubleedesign\\Comet\\Core\\BackgroundColor' => __DIR__ . '/../..' . '/src/base/traits/BackgroundColor.php',
         'Doubleedesign\\Comet\\Core\\Banner' => __DIR__ . '/../..' . '/src/components/Banner/Banner.php',
-        'Doubleedesign\\Comet\\Core\\BannerV2' => __DIR__ . '/../..' . '/src/components/BannerAdvanced/BannerV2.php',
+        'Doubleedesign\\Comet\\Core\\BannerV2' => __DIR__ . '/../..' . '/src/components/BannerV2/BannerV2.php',
         'Doubleedesign\\Comet\\Core\\BladeService' => __DIR__ . '/../..' . '/src/services/BladeService.php',
         'Doubleedesign\\Comet\\Core\\Breadcrumbs' => __DIR__ . '/../..' . '/src/components/Breadcrumbs/Breadcrumbs.php',
         'Doubleedesign\\Comet\\Core\\Button' => __DIR__ . '/../..' . '/src/components/Button/Button.php',

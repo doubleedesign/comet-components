@@ -148,7 +148,7 @@ return array(
     'Doubleedesign\\Comet\\Core\\Assets' => $baseDir . '/src/base/Assets.php',
     'Doubleedesign\\Comet\\Core\\BackgroundColor' => $baseDir . '/src/base/traits/BackgroundColor.php',
     'Doubleedesign\\Comet\\Core\\Banner' => $baseDir . '/src/components/Banner/Banner.php',
-    'Doubleedesign\\Comet\\Core\\BannerV2' => $baseDir . '/src/components/BannerAdvanced/BannerV2.php',
+    'Doubleedesign\\Comet\\Core\\BannerV2' => $baseDir . '/src/components/BannerV2/BannerV2.php',
     'Doubleedesign\\Comet\\Core\\BladeService' => $baseDir . '/src/services/BladeService.php',
     'Doubleedesign\\Comet\\Core\\Breadcrumbs' => $baseDir . '/src/components/Breadcrumbs/Breadcrumbs.php',
     'Doubleedesign\\Comet\\Core\\Button' => $baseDir . '/src/components/Button/Button.php',

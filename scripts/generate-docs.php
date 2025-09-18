@@ -405,6 +405,12 @@ class ComponentClassesToJsonDefinitions {
                     else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\IconLinks') {
                         $instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
                     }
+                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Accordion') {
+                        $instance = $this->currentClass->newInstance([], [], [], 'dummy.blade.php');
+                    }
+                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PostNav') {
+                        $instance = $this->currentClass->newInstance([], 'dummy.blade.php');
+                    }
                     else {
                         $instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
                     }
@@ -609,7 +615,8 @@ class ComponentClassesToJsonDefinitions {
     }
 }
 
-// Usage: php generate-docs.php
+// Usage: cd into /scripts first, then:
+//        php generate-docs.php
 //        or php generate-docs.php --component MyComponent (Bash)
 //           php generate-docs.php component MyComponent (PowerShell)
 //        or php generate-docs.php --base MyBaseComponent for base abstract component classes (Bash)
@@ -618,7 +625,7 @@ try {
     $instance = new ComponentClassesToJsonDefinitions();
     if (isset($argv[1]) && ($argv[1] === '--component' || $argv[1] === 'component') && isset($argv[2])) {
         $instance->runSingle($argv[2]);
-        shell_exec('php scripts/generate-xml.php');
+        shell_exec('php generate-xml.php');
     }
     else if (isset($argv[1]) && ($argv[1] === '--base' || $argv[1] === 'base') && isset($argv[2])) {
         $instance->runSingleBase($argv[2]);

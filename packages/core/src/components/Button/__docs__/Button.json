@@ -10,8 +10,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "button",
-                "button--primary"
+                "button"
             ],
             "inherited": true
         },

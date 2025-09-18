@@ -1,6 +1,6 @@
 {
     "name": "Banner",
-    "description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content.",
+    "description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content. Supports parallax effect, minHeight and maxHeight.",
     "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,
@@ -84,6 +84,13 @@
             "type": "string",
             "description": "The URL of the image to display in the banner",
             "required": true
+        },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "required": true,
+            "default": "false",
+            "inherited": true
         },
         "isParallax": {
             "type": "bool",

@@ -1,74 +1,75 @@
 {
-	"name": "CoverImage",
-	"description": "A featured image that covers the width of its container, with optional parallax effect; ideal for banners and similar",
-	"extends": "ImageComponent",
-	"abstract": false,
-	"isInner": false,
-	"belongsInside": "LayoutComponent",
-	"attributes": {
-		"alt": {
-			"type": "string",
-			"description": "Alternative text",
-			"required": true,
-			"default": "",
-			"inherited": true
-		},
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"supported": [
-				"is-style-rounded"
-			],
-			"default": [
-				"cover-image"
-			],
-			"inherited": true
-		},
-		"context": {
-			"type": "string",
-			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-			"inherited": true
-		},
-		"id": {
-			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"isParallax": {
-			"type": "bool",
-			"description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
-			"required": true,
-			"default": "false"
-		},
-		"src": {
-			"type": "string",
-			"description": "Image source URL",
-			"required": true,
-			"inherited": true
-		},
-		"style": {
-			"type": "array",
-			"description": "Inline styles",
-			"inherited": true
-		},
-		"tagName": {
-			"type": "Tag",
-			"description": "The HTML tag to use for this component",
-			"supported": [
-				"div"
-			],
-			"default": "div",
-			"inherited": true
-		},
-		"testId": {
-			"type": "string",
-			"description": "Optionally add a data-testid attribute for automated tests",
-			"inherited": true
-		},
-		"title": {
-			"type": "string",
-			"description": "Optional image title (appears on hover)",
-			"inherited": true
-		}
-	}
+    "name": "CoverImage",
+    "description": "*/",
+    "extends": "ImageComponent",
+    "abstract": false,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
+    "attributes": {
+        "alt": {
+            "type": "string",
+            "description": "Alternative text",
+            "required": true,
+            "default": "",
+            "inherited": true
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "supported": [
+                "is-style-rounded",
+                "breakout"
+            ],
+            "default": [
+                "cover-image"
+            ],
+            "inherited": true
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "inherited": true
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "isParallax": {
+            "type": "bool",
+            "description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
+            "required": true,
+            "default": "false"
+        },
+        "src": {
+            "type": "string",
+            "description": "Image source URL",
+            "required": true,
+            "inherited": true
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles",
+            "inherited": true
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "div"
+            ],
+            "default": "div",
+            "inherited": true
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "title": {
+            "type": "string",
+            "description": "Optional image title (appears on hover)",
+            "inherited": true
+        }
+    }
 }

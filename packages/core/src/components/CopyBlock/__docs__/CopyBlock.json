@@ -1,7 +1,7 @@
 {
-    "name": "CallToAction",
-    "description": "Highlight important information and prompt the user to take action.",
-    "extends": "Container",
+    "name": "CopyBlock",
+    "description": null,
+    "extends": "Group",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
@@ -26,8 +26,12 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
+            "supported": [
+                "group",
+                "group--breakout"
+            ],
             "default": [
-                "container",
+                "copy-block",
                 "layout-block"
             ],
             "inherited": true
@@ -47,29 +51,11 @@
                 "dark",
                 "white"
             ],
-            "default": "$innercomponents"
+            "inherited": true
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
-        },
-        "gradient": {
-            "type": "string",
-            "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)",
-            "inherited": true
-        },
-        "hAlign": {
-            "type": "Alignment",
-            "description": "Horizontal alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent",
             "inherited": true
         },
         "id": {
@@ -77,33 +63,11 @@
             "description": "Unique identifier",
             "inherited": true
         },
-        "innerSize": {
-            "type": "ContainerSize",
-            "description": "The size of the inner container. If not set, defaults to the size of the outer container. Allows for a section to have a different, wider background than the inner block.",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "null"
-        },
         "isNested": {
             "type": "bool",
-            "description": "Whether this CallToAction is nested inside another LayoutComponent",
+            "description": "Whether this copy block is nested inside another component; determines whether to wrap in a container",
             "required": true,
-            "default": "true"
-        },
-        "orientation": {
-            "type": "Orientation",
-            "description": "Orientation of the component content, if applicable",
-            "supported": [
-                "horizontal",
-                "vertical"
-            ],
-            "default": "$innercomponents"
+            "default": "false"
         },
         "size": {
             "type": "ContainerSize",
@@ -116,8 +80,7 @@
                 "narrower",
                 "small"
             ],
-            "default": "default",
-            "inherited": true
+            "default": "default"
         },
         "style": {
             "type": "array",
@@ -130,7 +93,8 @@
             "supported": [
                 "div",
                 "section",
-                "aside"
+                "aside",
+                "article"
             ],
             "default": "div",
             "inherited": true
@@ -140,29 +104,16 @@
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
-        "vAlign": {
-            "type": "Alignment",
-            "description": "Vertical alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent",
-            "inherited": true
-        },
         "withWrapper": {
             "type": "bool",
-            "description": "Whether to wrap the container element so that the background is full-width",
-            "default": "true",
-            "inherited": true
+            "description": "Whether to wrap the container element so that the background is full-width (only applies if not nested)",
+            "default": "true"
         }
     },
     "innerComponents": {
-        "type": "array<Heading|Paragraph|ListComponent|ButtonGroup>",
+        "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true
+        "required": true,
+        "inherited": true
     }
 }

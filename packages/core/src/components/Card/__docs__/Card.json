@@ -1,12 +1,31 @@
 {
-    "name": "Accordion",
-    "description": "Group content into expandable/collapsible panels.",
-    "extends": "PanelGroupComponent",
+    "name": "Card",
+    "description": "*/",
+    "extends": "UIComponent",
     "abstract": false,
-    "vue": true,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "aboveContentComponents": {
+            "type": "array<Renderable>",
+            "description": "Optional array of components to render above the main content; allows for things like tags, badges, etc",
+            "default": []
+        },
+        "aspectRatio": {
+            "type": "AspectRatio",
+            "description": "Crop banner image to the given aspect ratio",
+            "supported": [
+                "4:3",
+                "3:4",
+                "1:1",
+                "16:9",
+                "9:16",
+                "3:2",
+                "2:3",
+                "21:9",
+                "2.35:1"
+            ]
+        },
         "backgroundColor": {
             "type": "ThemeColor",
             "description": "Background colour keyword",
@@ -21,20 +40,24 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
-        "beforeComponents": {
-            "type": "array<Renderable>",
-            "description": "Components to render before the accordion (e.g. heading, intro text).",
+        "bodyText": {
+            "type": "string",
+            "description": "Text content of the card; will be put into a paragraph; expects plain text / simple inline HTML",
+            "required": true
+        },
+        "cardAsLink": {
+            "type": "bool",
+            "description": "Whether to render the entire card as a link (if a link is provided); otherwise a button will be used",
             "required": true,
-            "default": []
+            "default": "false"
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion"
+                "card"
             ],
             "inherited": true
         },
@@ -53,33 +76,53 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "default": "white"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
             "inherited": true
         },
-        "icon": {
-            "type": "string",
-            "description": "Icon class name for the icon to use for the expand/collapse indicator."
+        "focalPoint": {
+            "type": "array{x:",
+            "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
+            "default": {
+                "x": 50,
+                "y": 50
+            }
         },
-        "iconPrefix": {
+        "heading": {
             "type": "string",
-            "description": "Icon prefix class name",
-            "default": "fa-solid"
+            "description": "Heading text of the card; will be put into an H3 by default; expects plain text / simple inline HTML",
+            "required": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
         },
+        "image": {
+            "type": "array{src:string,",
+            "required": true
+        },
         "isNested": {
             "type": "bool",
-            "description": "Whether this PanelGroup is nested inside another LayoutComponent",
             "required": true,
-            "default": "true",
-            "inherited": true
+            "default": "true"
+        },
+        "link": {
+            "type": "array{href:string,",
+            "description": "Optional link for the card",
+            "required": true,
+            "default": []
+        },
+        "offset": {
+            "type": "array{x:",
+            "description": "The percentage offsets of the image to use when cropping",
+            "default": {
+                "x": 0,
+                "y": 0
+            }
         },
         "orientation": {
             "type": "Orientation",
@@ -88,22 +131,7 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical",
-            "inherited": true
-        },
-        "size": {
-            "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "default",
-            "inherited": true
+            "default": "standard"
         },
         "style": {
             "type": "array",
@@ -114,7 +142,9 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "article",
+                "footer"
             ],
             "default": "div",
             "inherited": true
@@ -123,11 +153,17 @@
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
+        },
+        "withWrapper": {
+            "type": "bool",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {
-        "type": "array<AccordionPanel>",
+        "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true
+        "required": true,
+        "inherited": true
     }
 }
