@@ -99,8 +99,6 @@ If you are using the `TychoService` class to render your components, the output 
 \Symfony\Component\VarDumper\VarDumper::dump($thing_you_want_to_dump);
 ```
 
-In SilverStripe CMS, you don't need to qualify the `VarDumper` class with the namespace, as it is already available. You can just use `dump()`.
-
 :warning: If you are running the project through Herd, the VarDumper output will _only_ be shown in the Dumps window, and not
 :::
 

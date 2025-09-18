@@ -98,8 +98,9 @@ function generateSidebar({ excludeFolders }) {
 		'Installation',
 		'Usage',
 		'Development (Core)',
-		'Development (WordPress)',
-		'Development (SilverStripe CMS)',
+		'Development (WordPress Classic)',
+		'Development (WordPress Blocks)',
+		'Development (Statamic)',
 		'New Implementations',
 		'Technical Deep Dives',
 		'Local Dev Deep Dives',
@@ -116,17 +117,20 @@ function generateSidebar({ excludeFolders }) {
 			let sectionTitle;
 
 			// Hackily manually name the items for certain folders
-			if(folderName === 'development-core') {
+			if (folderName === 'development-core') {
 				sectionTitle = 'Development (Core)';
 			}
-			else if(folderName === 'development-new') {
+			else if (folderName === 'development-new') {
 				sectionTitle = 'New Implementations';
 			}
-			else if(folderName === 'development-wp') {
-				sectionTitle = 'Development (WordPress)';
+			else if (folderName === 'development-wp-blocks') {
+				sectionTitle = 'Development (WordPress Blocks)';
 			}
-			else if(folderName === 'development-ss') {
-				sectionTitle = 'Development (SilverStripe CMS)';
+			else if (folderName === 'development-wp-classic') {
+				sectionTitle = 'Development (WordPress Classic)';
+			}
+			else if (folderName === 'development-statamic') {
+				sectionTitle = 'Development (Statamic)';
 			}
 			else {
 				// Try to extract title from README if it exists

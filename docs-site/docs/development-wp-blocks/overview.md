@@ -3,7 +3,7 @@ title: Comet plugins and theme
 position: 0
 ---
 
-# WordPress integration development
+# WordPress integration development (Block Editor)
 
 :::info
 This section of the docs covers developing the Comet Components suite of WordPress plugins (Comet Plugin, Comet Calendar, Comet Table Block, etc.) themselves.

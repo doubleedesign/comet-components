@@ -6,8 +6,10 @@ position: 0
 # Usage overview
 
 :::important
-This section, including the Theming and Extending pages, details how to use Comet Components in your own code. If you're looking for information on using the WordPress plugin in the block editor, see the [WordPress usage page](./wordpress.md).
-:::
+This section, including the Theming and Extending pages, details how to use Comet Components in your own code. If you're looking for information on using the WordPress plugins and parent starter themes, see:
+- [WordPress installation and setup - Block Editor](../installation/wordpress-blocks.md)
+- [WordPress installation and setup - Classic Editor + ACF](../installation/wordpress-classic.md)
+  :::
 
 Specifications and interactive demos of many components can be found in the [Storybook](https://stroybook.cometcomponents.io).
 

@@ -87,7 +87,7 @@ This release gets its name from Crowded House, a band Sarah and I both love, and
 
 ### 0.2.0 For Those About To Rock, We Salute You
 
-This is the pencilling-in of the development of an integration for [SilverStripe CMS](https://www.silverstripe.org/) and [Elemental](https://github.com/silverstripe/silverstripe-elemental). The version number may change as this release may be pushed back to prioritise completion of the WordPress integration as that's already in use.
+~~This is the pencilling-in of the development of an integration for [SilverStripe CMS](https://www.silverstripe.org/) and [Elemental](https://github.com/silverstripe/silverstripe-elemental). The version number may change as this release may be pushed back to prioritise completion of the WordPress integration as that's already in use.~~ Plans for SilverStripe CMS have been shelved (for now) in favour of Statamic.
 
 :::details For Those About To Rock, We Salute You - the story
 The year was 2010, and I was studying my Diploma of IT (Web Development) alongside three new friends known as "the boys from TAFE" (I was one of only two women in my class). My brother hooked me up with a real project to build for one of my final assessment tasks - the first database driven CMS site I ever built myself, for which I used SilverStripe.

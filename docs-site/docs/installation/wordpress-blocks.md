@@ -1,6 +1,6 @@
 ---
 title: WordPress - Block Editor
-position: 2
+position: 3
 ---
 
 # Setup for WordPress - Block Editor (Gutenberg)
@@ -18,8 +18,8 @@ position: 2
 :::details Comet Components plugin <Badge type="tip" text="Essential" vertical="middle" />
 The Comet Components plugin provides:
 
-- implementations of WordPress core blocks listed in its `block-support.json` file
-- additional blocks and variations that correspond to Comet components such as `Container`, `Call-to-Action`, `Callout`,  `FileGroup`, `Accordion`, and `Tabs`
+- implementations of WordPress core blocks listed in its `block-support.json` file, as Comet Component versions
+- additional blocks and variations that correspond to selected Comet components such as `Container`, `Call-to-Action`, `Callout`,  `FileGroup`, `Accordion`, and `Tabs`
 - support for using Comet Components for reusable blocks (synced patterns), such as a call-to-action used in multiple places on a site.
 
 Comet Components blocks utilise core blocks and options where practical, but some blocks do use ACF Pro where it provides a better user experience.

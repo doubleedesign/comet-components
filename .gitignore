@@ -35,7 +35,7 @@ docs-site/docs/.vuepress/.temp
 
 # Builds
 storybook-static
-docs
+docs/*
 packages/core/coverage/
 packages/core-standalone/**/src/*
 !packages/core-standalone/launchpad/src/base/components/PreprocessedHTML.php
