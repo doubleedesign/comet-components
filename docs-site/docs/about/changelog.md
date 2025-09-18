@@ -8,10 +8,13 @@ For fun and gratitude, Comet's releases are named after albums that can somehow 
 
 ## Current version
 
-### 0.2.0 Such Pretty Forks in the Road (6 September 2025)
+### 0.2.0 Such Pretty Forks in the Road (18 September 2025)
 
 - Major refactor of the `Image` component into multiple more focused components to better manage valid combinations of attributes: `CoverImage`, `ContentImageBasic`, and `ContentImageAdvanced`
 - Addition of the WIP for a ClassicPress / WordPress Classic Editor + Advanced Custom Fields integration plugin and theme
+- Addition of Card component
+- Addition of PostNav component
+- Addition of BannerV2 component and removal of some unused options in original Banner component
 
 :::details Such Pretty Forks in the Road - the story
 In my humble opinion, Alanis Morissette's best album; tracks from which were stuck in my head while working on this release, and feeling appropriate due to the sense of impending forks in my own road that I was feeling at the time.
