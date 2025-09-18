@@ -41,3 +41,7 @@ packages/core-standalone/**/src/*
 !packages/core-standalone/launchpad/src/base/components/PreprocessedHTML.php
 
 test/unit/coverage/
+
+.idea/copilot.data.migration.agent.xml
+
+.idea/copilot.data.migration.edit.xml

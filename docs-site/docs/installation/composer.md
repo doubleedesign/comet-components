@@ -52,7 +52,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 ```php
 use Doubleedesign\Comet\Core\Config;
 
-Config::set_blade_component_paths([
+Config::getInstance()->set_blade_component_paths([
     __DIR__ . '\\vendor\\doubleedesign\\comet-responsive-panels\\src',
 ]);
 ```

@@ -8,7 +8,7 @@ position: 1
 
 ## Global PHP configuration
 
-The `Config` class provides static methods to set and get several options to be made available to components at runtime, such as global background colour and default icon prefix. In general usage, these can be set directly. 
+The `Config` class provides static methods to set and get several options to be made available to components at runtime, such as global background colour and default icon prefix. In general usage, these can be set directly.
 
 In WordPress, themes (other than Comet Canvas) don't generally have direct access to the `Config` class, unless you have installed the Comet Components core library yourself. Comet Canvas provides filters so that child themes can easily override the defaults from `functions.php`.
 
@@ -29,14 +29,14 @@ You can set a global background colour for your site using this line of code in 
 For a "vanilla" project this could be as simple as calling it at the top of the page:
 
 ```php
-Config::set_global_background('dark');
+Config::getInstance()->set_global_background('dark');
 ```
 
 You then simply need to add the `data-global-background` attribute to the `body` tag:
 
 ```php
 <?php
-$globalBackground = Config::get_global_background();
+$globalBackground = Config::getInstance()->get_global_background();
 ?>
 <body data-global-background="<?php echo $globalBackground; ?>">
 ```
@@ -60,7 +60,7 @@ The default `iconPrefix` is Font Awesome's `fa-solid`, but this can be overridde
 You can set a default icon prefix for your site using this line of code in an appropriate location:
 
 ```php
-Config::set_icon_prefix('fa-duotone fa-solid');
+Config::getInstance()->set_icon_prefix('fa-duotone fa-solid');
 ```
 :::
 
@@ -74,7 +74,8 @@ add_filter('comet_canvas_default_icon_prefix', fn() => 'fa-light', 20);
 
 ## Global CSS configuration
 
-Many design tokens are set as CSS variables in Comet's stylesheets, allowing you to easily override them without any special tooling. Sass can be useful for calculating values (such as for the readable colour variables) but it is not essential. You can hit the ground running with a simple vanilla stylesheet that sets the variables you want to change. The full list of tokens can be found in the `:root` selector in [global.css](https://github.com/doubleedesign/comet-components/blob/master/packages/core/src/components/global.css) and in the list below.
+Many design tokens are set as CSS variables in Comet's stylesheets, allowing you to easily override them without any special tooling. Sass can be useful for calculating values (such as for the readable colour variables) but it is not essential. You can hit the ground running with a simple vanilla stylesheet that sets the variables you want to change. The full list of tokens can be found in the
+`:root` selector in [global.css](https://github.com/doubleedesign/comet-components/blob/master/packages/core/src/components/global.css) and in the list below.
 
 :::important
 For WordPress usage, some tokens should be set in your theme's `theme.json` so that they take effect in the editor as well.

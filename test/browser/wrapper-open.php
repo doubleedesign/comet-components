@@ -20,8 +20,9 @@ use Doubleedesign\Comet\Core\{Assets, Config};
 require_once __DIR__ . '/../../packages/core/vendor/autoload.php';
 require_once __DIR__ . '/../common/mocks.php';
 
-// Set global config
-$globalBackground = Config::get_global_background();
+// Initialise and set global config
+Config::init();
+$globalBackground = Config::getInstance()->get_global_background();
 ?>
 <!DOCTYPE html>
 <html lang="en">

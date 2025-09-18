@@ -55,7 +55,7 @@ Implementations need a way to set the global configuration for the components, w
 
 The most basic way, using the global background setting as an example, is like so:
 ```php
-Config::set_global_background($color);
+Config::getInstance()->set_global_background($color);
 ```
 
 Depending on the way your CMS works, you may need to do this in a particular place. For example, the Comet Canvas WordPress theme does it in an action hook (and provides a filter for child themes to change it).
