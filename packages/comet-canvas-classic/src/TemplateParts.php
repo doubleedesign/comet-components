@@ -35,6 +35,8 @@ class TemplateParts {
     }
 
     public static function get_post_nav(): PostNav {
+        $entityName = get_post_type() == 'post' ? 'Article' : get_post_type_object(get_post_type())->labels->singular_name;
+
         $prev_post = get_previous_post();
         $next_post = get_next_post();
 
@@ -60,7 +62,7 @@ class TemplateParts {
 
         return new PostNav([
             'links'      => array_filter([$prev, $next]),
-            'entityName' => 'Article',
+            'entityName' => $entityName,
             'colorTheme' => 'secondary'
         ]);
     }
