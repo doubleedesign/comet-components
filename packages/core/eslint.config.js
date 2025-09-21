@@ -4,6 +4,7 @@ import vueEslintParser from 'vue-eslint-parser';
 import globals from 'globals';
 import rootConfig from '../../eslint.config.js';
 import tsParser from '@typescript-eslint/parser';
+import stylisticPlugin from '@stylistic/eslint-plugin-js';
 
 // Extract rules and plugins from root config
 const rootRules = rootConfig[0].rules || {};
@@ -30,6 +31,16 @@ export default [
 		rules: {
 			...rootRules,
 			'vue/multi-word-component-names': 'off',
+			'@typescript-eslint/no-explicit-any': 'warn',
+			'@typescript-eslint/no-unused-vars': 'warn'
+		}
+	},
+	{
+		files: ['./src/components/**/*.js'],
+		ignores: ['dist', 'node_modules/**'],
+		rules: rootRules,
+		plugins: {
+			'@stylistic': stylisticPlugin,
 		}
 	}
 ];

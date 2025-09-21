@@ -5,7 +5,7 @@ import { loadModule } from '../src/plugins/vue-wrapper/src/vue3-sfc-loader.esm.j
 import { BASE_PATH, vueSfcLoaderOptions } from '../src/plugins/vue-wrapper/src/index.js';
 import '../../../feimosi/baguettebox.js/src/baguetteBox.js';
 
-tippy('[data-tippy-content]');
+tippy('.icon-links__item[data-tippy-content]', { appendTo: 'parent' });
 
 const Vue$3 = await VueLoader;
 

@@ -79,9 +79,7 @@ export default [
 					'maxBOF': 0
 				}
 			],
-			'block-spacing': 'error',
-			'@typescript-eslint/no-explicit-any': 'warn',
-			'@typescript-eslint/no-unused-vars': 'warn'
+			'block-spacing': 'error'
 		}
 	},
 ];
