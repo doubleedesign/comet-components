@@ -42,6 +42,4 @@ packages/core-standalone/**/src/*
 
 test/unit/coverage/
 
-.idea/copilot.data.migration.agent.xml
-
-.idea/copilot.data.migration.edit.xml
+.idea/copilot*

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectTasksOptions">
-    <TaskOptions isEnabled="true">
-      <option name="arguments" value="--color --source-map $FileName$:$FileNameWithoutExtension$.css" />
+    <TaskOptions isEnabled="false">
+      <option name="arguments" value="--update $FileDir$:$FileDir$ --load-path=$ProjectFileDir$\packages --quiet-deps" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="scss" />
       <option name="immediateSync" value="true" />
-      <option name="name" value="SCSS - Core package components" />
-      <option name="output" value="$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map" />
+      <option name="name" value="SCSS - all packages" />
+      <option name="output" value="$ProjectFileDir$/**/*.css:$ProjectFileDir$/**/*.css.map" />
       <option name="outputFilters">
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="program" value="$PROJECT_DIR$/../../../../ProgramData/chocolatey/bin/sass" />
+      <option name="program" value="sass" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Core package" />
+      <option name="scopeName" value="All Places" />
       <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="$FileDir$" />
+      <option name="workingDir" value="$ProjectFileDir$/packages" />
       <envs />
     </TaskOptions>
     <TaskOptions isEnabled="true">
@@ -61,48 +61,28 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="false">
-      <option name="arguments" value="--update $FileDir$:$FileDir$ --load-path=$ProjectFileDir$\packages --quiet-deps" />
-      <option name="checkSyntaxErrors" value="true" />
-      <option name="description" />
-      <option name="exitCodeBehavior" value="ERROR" />
-      <option name="fileExtension" value="scss" />
-      <option name="immediateSync" value="true" />
-      <option name="name" value="SCSS - all packages" />
-      <option name="output" value="$ProjectFileDir$/**/*.css:$ProjectFileDir$/**/*.css.map" />
-      <option name="outputFilters">
-        <array />
-      </option>
-      <option name="outputFromStdout" value="false" />
-      <option name="program" value="sass" />
-      <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="All Places" />
-      <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="$ProjectFileDir$/packages" />
-      <envs />
-    </TaskOptions>
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
+      <option name="arguments" value="--color --source-map --quiet-deps $FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="scss" />
       <option name="immediateSync" value="true" />
-      <option name="name" value="SCSS - WP plugin Blocks" />
+      <option name="name" value="SCSS - Core package components" />
       <option name="output" value="$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map" />
       <option name="outputFilters">
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="program" value="sass" />
+      <option name="program" value="$PROJECT_DIR$/../../../../ProgramData/chocolatey/bin/sass" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Plugin (blocks)" />
+      <option name="scopeName" value="Core package" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="bundle.scss:dist/dist.css" />
+      <option name="arguments" value="bundle.scss:dist/dist.css --quiet-deps" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
@@ -121,27 +101,27 @@
       <option name="workingDir" value="$ProjectFileDir$/packages/core" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
-      <option name="arguments" value="--color --source-map $FileName$:$FileNameWithoutExtension$.css" />
+    <TaskOptions isEnabled="false">
+      <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="scss" />
       <option name="immediateSync" value="true" />
-      <option name="name" value="SCSS - Theme" />
+      <option name="name" value="SCSS - WP plugin Blocks" />
       <option name="output" value="$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map" />
       <option name="outputFilters">
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="program" value="$PROJECT_DIR$/../../../../ProgramData/chocolatey/bin/sass" />
+      <option name="program" value="sass" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Theme" />
+      <option name="scopeName" value="WP plugin blocks" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -156,7 +136,27 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="sass" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Plugin (ACF)" />
+      <option name="scopeName" value="WP plugin ACF" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$FileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="false">
+      <option name="arguments" value="--color --source-map $FileName$:$FileNameWithoutExtension$.css" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="scss" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="SCSS - Theme classic" />
+      <option name="output" value="$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PROJECT_DIR$/../../../../ProgramData/chocolatey/bin/sass" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="WP theme classic" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
