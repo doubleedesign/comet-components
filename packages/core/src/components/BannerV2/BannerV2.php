@@ -78,7 +78,7 @@ class BannerV2 extends UIComponent {
             )
         );
 
-        parent::__construct($attributes, $transformedInnerComponents, 'components.BannerAdvanced.banner-v2');
+        parent::__construct($attributes, $transformedInnerComponents, 'components.BannerV2.banner-v2');
     }
 
     private function validate_image_attributes(array $image): array {
