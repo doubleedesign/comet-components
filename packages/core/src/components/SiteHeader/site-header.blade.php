@@ -4,7 +4,7 @@
 	</header>
 @else
 	<header @class($classes) @attributes($attributes)>
-		<div class="container" @attributes($containerAttributes)>
+		<div class="site-header__container" @attributes($containerAttributes)>
 			@foreach ($persistentComponentsStart as $child)
 				@if (method_exists($child, 'render'))
 					{{ $child->render() }}

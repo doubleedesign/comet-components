@@ -102,7 +102,7 @@ class SiteHeader extends LayoutComponent {
             }
         }, $innerComponents)));
 
-        // Find any Groups with responsive context
+        // Find the group with responsive context if there is one
         // note: This only checks the top level and will ignore Groups inside other components
         // if there are multiple menu components, only the first one will be treated as the main menu,
         // any others will be rendered in-place (allows for things like user account links that don't need special treatment)
@@ -146,6 +146,13 @@ class SiteHeader extends LayoutComponent {
         return $attributes;
     }
 
+    protected function get_filtered_classes(): array {
+        return array_unique([
+            ...parent::get_filtered_classes(),
+            'page-section'
+        ]);
+    }
+
     protected function get_inner_container_html_attributes(): array {
         $attributes = [];
 
@@ -173,7 +180,7 @@ class SiteHeader extends LayoutComponent {
                 'breakpoint' => null,
                 'classes'    => $this->get_filtered_classes_string(),
                 'attributes' => $this->get_html_attributes(),
-                'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false], $this->innerComponents)]
+                'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false, 'context' => $this->shortName], $this->innerComponents)]
             ])->render();
         }
         else {

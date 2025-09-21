@@ -63,6 +63,12 @@
 			width: 100%;
 			flex-basis: 100%;
 			padding-inline: var(--spacing-sm);
+
+			&[data-open="true"] {
+				@at-root body:has(&) {
+					overflow: hidden;
+				}
+			}
 		}
 
 		&--default {

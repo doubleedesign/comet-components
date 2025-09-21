@@ -51,6 +51,10 @@
   flex-basis: 100%;
   padding-inline: var(--spacing-sm);
 }
+body:has(.site-header__responsive__content[data-open=true]) {
+  overflow: hidden;
+}
+
 .site-header__responsive--default .site-header__responsive__content {
   height: 0;
   max-height: 0;
