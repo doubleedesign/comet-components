@@ -6,6 +6,22 @@
  * Use common.scss for styles that should not be packaged with standalone components.
  */
 
+:root {
+	--width-wide: #{map-get($widths, 'wide')};
+	--width-contained: #{map-get($widths, 'contained')};
+	--width-narrow: #{map-get($widths, 'narrow')};
+	--width-small: #{map-get($widths, 'small')};
+
+	--spacing-xxs: 0.25rem;
+	/* Augmented fourth scale - 1.414 */
+	--spacing-xs: 0.5rem;
+	--spacing-sm: 0.707rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 1.414rem;
+	--spacing-xl: 2rem;
+	--spacing-xxl: 2.827rem;
+}
+
 
 [data-valign],
 [data-halign] {

@@ -2,6 +2,21 @@
  * Global CSS that gets used in standalone packages as well as entirely Comet-based projects.
  * Use common.scss for styles that should not be packaged with standalone components.
  */
+:root {
+  --width-wide: 1440px;
+  --width-contained: 1140px;
+  --width-narrow: 940px;
+  --width-small: 600px;
+  --spacing-xxs: 0.25rem;
+  /* Augmented fourth scale - 1.414 */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.707rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.414rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 2.827rem;
+}
+
 [data-valign],
 [data-halign] {
   display: flex;
