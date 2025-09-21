@@ -520,6 +520,20 @@
 <xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="LabelWithTooltip">
+		<xs:complexType>
+			<xs:attribute name="tooltip" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="textAlign" type="Alignment"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="iconPrefix" type="xs:string"/>
+<xs:attribute name="icon" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="Link">
 		<xs:complexType>
 			<xs:attribute name="testId" type="xs:string"/>

@@ -7,6 +7,10 @@ import '../../../feimosi/baguettebox.js/src/baguetteBox.js';
 
 tippy('.icon-links__item[data-tippy-content]', { appendTo: 'parent' });
 
+tippy('.label-with-tooltip [data-tippy-content]', {
+	appendTo: 'parent'
+});
+
 const Vue$3 = await VueLoader;
 
 // Run on initial page load (works on the front-end)

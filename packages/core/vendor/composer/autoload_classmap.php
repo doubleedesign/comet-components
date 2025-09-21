@@ -185,6 +185,7 @@ return array(
     'Doubleedesign\\Comet\\Core\\ImageAndText' => $baseDir . '/src/components/ImageAndText/ImageAndText.php',
     'Doubleedesign\\Comet\\Core\\ImageComponent' => $baseDir . '/src/base/components/ImageComponent.php',
     'Doubleedesign\\Comet\\Core\\ImageCropProperties' => $baseDir . '/src/base/traits/ImageCropProperties.php',
+    'Doubleedesign\\Comet\\Core\\LabelWithTooltip' => $baseDir . '/src/components/LabelWithTooltip/LabelWithTooltip.php',
     'Doubleedesign\\Comet\\Core\\LayoutAlignment' => $baseDir . '/src/base/traits/LayoutAlignment.php',
     'Doubleedesign\\Comet\\Core\\LayoutComponent' => $baseDir . '/src/base/components/LayoutComponent.php',
     'Doubleedesign\\Comet\\Core\\LayoutContainerSize' => $baseDir . '/src/base/traits/LayoutContainerSize.php',

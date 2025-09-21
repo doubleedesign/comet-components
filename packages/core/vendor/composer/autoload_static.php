@@ -359,6 +359,7 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
         'Doubleedesign\\Comet\\Core\\ImageAndText' => __DIR__ . '/../..' . '/src/components/ImageAndText/ImageAndText.php',
         'Doubleedesign\\Comet\\Core\\ImageComponent' => __DIR__ . '/../..' . '/src/base/components/ImageComponent.php',
         'Doubleedesign\\Comet\\Core\\ImageCropProperties' => __DIR__ . '/../..' . '/src/base/traits/ImageCropProperties.php',
+        'Doubleedesign\\Comet\\Core\\LabelWithTooltip' => __DIR__ . '/../..' . '/src/components/LabelWithTooltip/LabelWithTooltip.php',
         'Doubleedesign\\Comet\\Core\\LayoutAlignment' => __DIR__ . '/../..' . '/src/base/traits/LayoutAlignment.php',
         'Doubleedesign\\Comet\\Core\\LayoutComponent' => __DIR__ . '/../..' . '/src/base/components/LayoutComponent.php',
         'Doubleedesign\\Comet\\Core\\LayoutContainerSize' => __DIR__ . '/../..' . '/src/base/traits/LayoutContainerSize.php',
