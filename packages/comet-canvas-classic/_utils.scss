@@ -1,0 +1,31 @@
+/**
+ * Use these utilities in child theme SCSS files using by importing this file:
+ * @use 'path/to/comet-canvas-classic/_utils' as *;
+ */
+
+/**
+ * This is a copy of the mixin from the core package to make it available easily in themes
+ * without adding a Composer dependency to the parent theme package or requiring specific file paths to work
+ * (e.g., working in the monorepo vs in a project)
+ * @see packages/core/src/components/_bem-mixin.scss for more details.
+ */
+@mixin bem-block($block, $elements: ()) {
+	// Generic component name, e.g., .card
+	.#{$block} {
+		@content;
+	}
+
+	// Apply the same styles for contextual BEM elements where the element matches this block name
+	// e.g., .profile__card
+	[class$="__#{$block}"] {
+		@extend .#{$block};
+	}
+
+	// Apply the same styles for the provided generic child elements (e.g., .card__content)
+	// to contextually named children (e.g., .profile__card__content)
+	@each $element in $elements {
+		[class$="__#{$block}__#{$element}"] {
+			@extend .#{$block}__#{$element};
+		}
+	}
+}

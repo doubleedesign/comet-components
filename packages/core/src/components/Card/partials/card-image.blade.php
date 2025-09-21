@@ -1,5 +1,5 @@
 @if ($image)
-	<div class="{{ $shortName }}__image {{ $bemName }}__image" @attributes($imageWrapperAttrs)>
+	<div class="{{ $bemName }}__image" @attributes($imageWrapperAttrs)>
 		<img @attributes($image) />
 	</div>
 @endif

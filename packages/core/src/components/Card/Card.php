@@ -128,7 +128,6 @@ class Card extends UIComponent {
 
         // Include shortname even if there is also context
         return array_unique([
-            $this->shortName,
             $this->get_bem_name(),
             ...$classes
         ]);

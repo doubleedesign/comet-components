@@ -1,4 +1,5 @@
 import './src/components/IconLinks/icon-links.js';
+import './src/components/LabelWithTooltip/label-with-tooltip.js';
 import './src/components/Tabs/tabs.js';
 import './src/components/Accordion/accordion.js';
 import './src/components/Gallery/gallery.js';

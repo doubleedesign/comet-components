@@ -1,7 +1,9 @@
 @use '../functions' as *;
 @use '../variables' as *;
+@use '../mixins' as *;
+@use '../bem-mixin' as *;
 
-.table {
+@include bem-block('table') {
 	min-width: 100%;
 	width: fit-content;
 	font-family: var(--font-family-body);

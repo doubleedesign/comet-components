@@ -1,3 +1,3 @@
-<div class="{{ $shortName }}__content {{ $bemName }}__content">
+<div class="{{ $bemName }}__content">
 	@include('components._blade-partials.children')
 </div>

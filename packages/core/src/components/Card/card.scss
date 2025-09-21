@@ -1,3 +1,6 @@
+@use '../mixins' as *;
+@use '../bem-mixin' as *;
+
 .card-list { // This class is expected to be added on the containing element of multiple cards
 	display: grid !important;
 	gap: var(--spacing-md);
@@ -11,9 +14,9 @@
 	container-type: inline-size;
 }
 
-.card {
+@include bem-block('card', ('image', 'content')) {
 
-	@container (min-width: 600px) {
+	@include container-width-up('small') {
 		&[data-layout-orientation='horizontal'] {
 			display: grid;
 			grid-template-columns: 1fr 2fr;

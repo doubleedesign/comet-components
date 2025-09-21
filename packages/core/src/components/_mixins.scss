@@ -1,12 +1,5 @@
 @use 'variables' as *;
-
-$widths: (
-	'wide': 1440px,
-	'contained': 1140px,
-	'narrow': 940px,
-	'narrower': 768px,
-	'small': 600px
-);
+@forward './bem-mixin';
 
 @mixin container-width-up($widthName) {
 	@container (min-width: #{map-get($widths, $widthName)}) {

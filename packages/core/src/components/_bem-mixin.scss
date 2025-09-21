@@ -1,0 +1,30 @@
+///**
+// * Standalone mixin to define BEM blocks and elements with contextual naming support.
+// * Make this available in your theme or other custom stylesheets:
+// * You can put it once in a common file of utilities imported in partials:
+//       @forward 'path/to/vendor/doubleedesign/comet-components-core/src/components/bem-mixin';
+//       Then in your file: @use 'path/to/common' as *;
+// * Alternatively, use it in each file directly:
+// 	   @use 'path/to/vendor/doubleedesign/comet-components-core/src/components/bem-mixin' as *;
+// */
+
+@mixin bem-block($block, $elements: ()) {
+	// Generic component name, e.g., .card
+	.#{$block} {
+		@content;
+	}
+
+	// Apply the same styles for contextual BEM elements where the element matches this block name
+	// e.g., .profile__card
+	[class$="__#{$block}"] {
+		@extend .#{$block};
+	}
+
+	// Apply the same styles for the provided generic child elements (e.g., .card__content)
+	// to contextually named children (e.g., .profile__card__content)
+	@each $element in $elements {
+		[class$="__#{$block}__#{$element}"] {
+			@extend .#{$block}__#{$element};
+		}
+	}
+}
