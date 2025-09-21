@@ -10,10 +10,12 @@ class TableHeaderCell extends TableCell {
      */
     protected ?string $width;
 
-    public function __construct(array $attributes, string $content) {
-        parent::__construct($attributes, $content);
-        $this->bladeFile = 'components.Table.TableHeaderCell.table-header-cell';
+    public function __construct(array $attributes, string|LabelWithTooltip $content) {
+        parent::__construct($attributes,
+            gettype($content) === 'string' ? $content : $content->content,
+        );
         $this->width = $attributes['width'] ?? null;
+        $this->innerComponents = gettype($content) === 'string' ? [] : [$content];
     }
 
     public function get_inline_styles(): array {

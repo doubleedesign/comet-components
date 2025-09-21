@@ -1,4 +1,4 @@
-.table {
+.table, [class$=__table] {
   min-width: 100%;
   width: fit-content;
   font-family: var(--font-family-body);
@@ -7,20 +7,20 @@
   font-size: 1rem;
   margin: var(--spacing-md) 0 var(--spacing-xl) 0;
 }
-.table:first-child {
+.table:first-child, [class$=__table]:first-child {
   margin-block-start: 0;
 }
-.table th, .table td {
+.table th, [class$=__table] th, .table td, [class$=__table] td {
   text-align: start;
   padding: var(--spacing-xs);
   border-bottom: 1px solid color-mix(in srgb, var(--color-light) 90%, black);
   vertical-align: top;
 }
-.table th {
+.table th, [class$=__table] th {
   background: var(--color-light);
   font-weight: var(--font-weight-semibold);
 }
-.table td {
+.table td, [class$=__table] td {
   font-weight: var(--font-weight-light);
 }
 .table__caption {

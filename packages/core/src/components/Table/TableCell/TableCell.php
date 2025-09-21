@@ -12,9 +12,14 @@ class TableCell extends TextElement {
      * @supported-values top, middle, bottom
      */
     protected ?string $verticalAlign;
+    protected array $innerComponents;
 
-    public function __construct(array $attributes, string $content) {
-        parent::__construct($attributes, $content, 'components.Table.TableCell.table-cell');
+    public function __construct(array $attributes, string|LabelWithTooltip $content) {
+        parent::__construct($attributes,
+            gettype($content) === 'string' ? $content : $content->content,
+            'components.Table.TableCell.table-cell'
+        );
+        $this->innerComponents = gettype($content) === 'string' ? [] : [$content];
         $this->set_text_align_from_attrs($attributes);
         $this->set_background_color_from_attrs($attributes);
         $this->verticalAlign = $attributes['verticalAlign'] ?? null;
@@ -38,5 +43,19 @@ class TableCell extends TextElement {
         }
 
         return $styles;
+    }
+
+    public function render(): void {
+        $blade = BladeService::getInstance();
+
+        echo $blade->make($this->bladeFile, [
+            'tag'             => $this instanceof TableHeaderCell ? 'th' : 'td',
+            'classes'         => $this->get_filtered_classes(),
+            'attributes'      => $this->get_html_attributes(),
+			// FIXME allow data-* attributes in inline HTML in content
+            //'content'         => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
+	        'content' => $this->content,
+            'innerComponents' => $this->innerComponents,
+        ])->render();
     }
 }
