@@ -137,7 +137,7 @@ class Container extends LayoutComponent {
             'outerClasses'    => $this->get_outer_classes(),
             'attributes'      => $this->get_html_attributes(),
             'innerAttributes' => $this->get_inner_attributes(),
-            'classes'         => $this->get_filtered_classes_string(),
+            'classes'         => $this->get_filtered_classes(),
             'children'        => $this->innerComponents
         ])->render();
     }

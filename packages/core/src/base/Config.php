@@ -64,10 +64,6 @@ class Config {
         return $this->config;
     }
 
-    public function merge(array $config): void {
-        $this->config = array_merge($this->config, $config);
-    }
-
     // Convenience methods for common operations
     public function get_global_background(): string {
         return $this->get('global_background')->value;

@@ -1,5 +1,6 @@
 // See common.scss for base .image styles
-.image--basic {
+.image--basic,
+[class$="image--basic"] {
 	&:not(.gallery &) {
 		&:not(:first-child):not(:last-child) {
 			margin-block: var(--spacing-md);

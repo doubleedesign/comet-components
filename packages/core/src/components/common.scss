@@ -12,20 +12,6 @@
 		--readable-color-#{$name}: #{if(map-get($hslColors, #{$name}-l) > 60, black, white)};
 	}
 
-	--width-wide: #{map-get($widths, 'wide')};
-	--width-contained: #{map-get($widths, 'contained')};
-	--width-narrow: #{map-get($widths, 'narrow')};
-	--width-small: #{map-get($widths, 'small')};
-
-	--spacing-xxs: 0.25rem;
-	/* Augmented fourth scale - 1.414 */
-	--spacing-xs: 0.5rem;
-	--spacing-sm: 0.707rem;
-	--spacing-md: 1rem;
-	--spacing-lg: 1.414rem;
-	--spacing-xl: 2rem; // rounded up from 1.999 for testing performance
-	--spacing-xxl: 2.827rem;
-
 	--font-size-sm: 0.875rem;
 
 	--font-weight-light: 300;
