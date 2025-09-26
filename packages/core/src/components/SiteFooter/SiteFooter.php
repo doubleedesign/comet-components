@@ -28,8 +28,8 @@ class SiteFooter extends UIComponent {
         $this->innerComponents = [
             new Container(
                 [
-					'tagName' => 'div',
-					'context' => 'site-footer__container',
+                    'tagName'     => 'div',
+                    'context'     => 'site-footer__container',
                     'size'        => $this->size->value,
                     'withWrapper' => false
                 ],
@@ -52,18 +52,17 @@ class SiteFooter extends UIComponent {
     }
 
     protected function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        array_push($classes, 'page-section');
-
-        return $classes;
+        return array_unique([
+            ...parent::get_filtered_classes(),
+            'page-section'
+        ]);
     }
 
     public function render(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes_string(),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'children'   => $this->innerComponents
         ])->render();

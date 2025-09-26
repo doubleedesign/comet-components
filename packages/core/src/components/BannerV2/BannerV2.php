@@ -126,7 +126,7 @@ class BannerV2 extends UIComponent {
             'tag'               => $this->tagName->value,
             'bemPrefix'         => $this->get_bem_name(),
             'attributes'        => $this->get_html_attributes(),
-            'classes'           => $this->get_filtered_classes_string(),
+            'classes'           => $this->get_filtered_classes(),
             'imageWrapperAttrs' => $this->get_image_wrapper_attributes(),
             'imageAttrs'        => $this->image,
             'children'          => $this->innerComponents

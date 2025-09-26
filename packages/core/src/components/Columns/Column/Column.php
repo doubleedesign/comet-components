@@ -62,7 +62,7 @@ class Column extends LayoutComponent {
 
         echo $blade->make($this->bladeFile, [
             'tag'          => $this->tagName->value,
-            'classes'      => $this->get_filtered_classes_string(),
+            'classes'      => $this->get_filtered_classes(),
             'innerClasses' => implode(' ', $this->get_inner_classes()),
             'attributes'   => $this->get_html_attributes(),
             'children'     => $this->innerComponents

@@ -178,7 +178,7 @@ class SiteHeader extends LayoutComponent {
         if ($this->breakpoint === null) {
             echo $blade->make($this->bladeFile, [
                 'breakpoint' => null,
-                'classes'    => $this->get_filtered_classes_string(),
+                'classes'    => $this->get_filtered_classes(),
                 'attributes' => $this->get_html_attributes(),
                 'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false, 'context' => $this->shortName], $this->innerComponents)]
             ])->render();
@@ -186,7 +186,7 @@ class SiteHeader extends LayoutComponent {
         else {
             echo $blade->make($this->bladeFile, [
                 'containerAttributes'       => $this->get_inner_container_html_attributes(),
-                'classes'                   => $this->get_filtered_classes_string(),
+                'classes'                   => $this->get_filtered_classes(),
                 'attributes'                => $this->get_html_attributes(),
                 'breakpoint'                => $this->breakpoint,
                 'responsiveStyle'           => $this->responsiveStyle,

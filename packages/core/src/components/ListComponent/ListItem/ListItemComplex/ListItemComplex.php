@@ -24,7 +24,7 @@ class ListItemComplex extends UIComponent {
 
         echo $blade->make($this->bladeFile, [
             'tag'        => $this->tagName->value,
-            'classes'    => $this->get_filtered_classes_string(),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
             'children'   => $this->innerComponents

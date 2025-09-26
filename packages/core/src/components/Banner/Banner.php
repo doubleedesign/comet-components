@@ -161,7 +161,7 @@ class Banner extends LayoutComponent {
 
         echo $blade->make($this->bladeFile, [
             'attributes' => ['style' => $this->get_inline_styles_string()],
-            'classes'    => $this->get_filtered_classes_string(),
+            'classes'    => $this->get_filtered_classes(),
             'children'   => $this->innerComponents
         ])->render();
     }

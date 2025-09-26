@@ -144,7 +144,7 @@ class Card extends UIComponent {
             'bemName'           => $this->get_bem_name(),
             'context'           => $this->context,
             'shortName'         => $this->shortName,
-            'classes'           => $this->get_filtered_classes_string(),
+            'classes'           => $this->get_filtered_classes(),
             'attributes'        => $this->get_html_attributes(),
             'imageWrapperAttrs' => $this->get_image_wrapper_attributes(),
             'image'             => $this->image,

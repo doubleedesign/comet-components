@@ -64,7 +64,7 @@ class Accordion extends PanelGroupComponent {
         echo $blade->make($this->bladeFile, [
             'introAttributes'  => $this->get_intro_attributes(),
             'beforeComponents' => $this->beforeComponents,
-            'classes'          => $this->get_filtered_classes_string(),
+            'classes'          => $this->get_filtered_classes(),
             'attributes'       => $this->get_html_attributes(),
             'panels'           => $this->get_panels(),
             'icon'             => "$this->iconPrefix $this->icon"
