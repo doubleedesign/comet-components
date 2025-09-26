@@ -49,7 +49,7 @@ class PageHeader extends Container {
         return $attributes;
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         $classes = parent::get_filtered_classes();
 
         // Replace '__page-header' with '__container' before returning

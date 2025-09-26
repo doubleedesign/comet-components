@@ -51,7 +51,7 @@ class SiteFooter extends UIComponent {
         return $attributes;
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         return array_unique([
             ...parent::get_filtered_classes(),
             'page-section'

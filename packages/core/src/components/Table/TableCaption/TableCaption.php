@@ -32,7 +32,7 @@ class TableCaption extends TextElement {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
         ])->render();

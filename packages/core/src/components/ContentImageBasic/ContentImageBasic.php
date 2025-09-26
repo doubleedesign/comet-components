@@ -40,11 +40,13 @@ class ContentImageBasic extends ContentImageComponent {
     protected ?string $href = null;
 
     public function __construct(array $attributes) {
+        $this->set_bem_modifier('basic');
         parent::__construct($attributes, 'components.ContentImageBasic.content-image-basic');
         $this->scale = $attributes['scale'] ?? 'contain';
         $this->height = $attributes['height'] ?? null;
         $this->width = $attributes['width'] ?? null;
         $this->href = $attributes['href'] ?? null;
+        $this->set_bem_modifier('basic');
     }
 
     /**
@@ -80,10 +82,6 @@ class ContentImageBasic extends ContentImageComponent {
         ];
     }
 
-    protected function get_bem_name(): ?string {
-        return parent::get_bem_name() . "--basic";
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 
@@ -91,8 +89,8 @@ class ContentImageBasic extends ContentImageComponent {
             'src'            => $this->src,
             'href'           => $this->href,
             'caption'        => $this->caption,
-            'captionClasses' => ["{$this->get_bem_name()}__caption"],
-            'classes'        => implode(' ', $this->get_filtered_classes()),
+            'captionClasses' => ["{$this->get_bem_prefix()}__caption"],
+            'classes'        => $this->get_filtered_classes(),
             'outerAttrs'     => $this->get_outer_wrapper_html_attributes(),
             'innerAttrs'     => $this->get_inner_wrapper_html_attributes(),
             'attributes'     => $this->get_html_attributes(),

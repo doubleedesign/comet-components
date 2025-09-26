@@ -16,15 +16,11 @@ class ContentImageAdvanced extends ContentImageComponent {
 
     // Note: To simplify the layout calculations, this component does not support wrapping the image in a link.
     public function __construct(array $attributes) {
+        $this->set_bem_modifier('advanced');
+        parent::__construct($attributes, 'components.ContentImageAdvanced.content-image-advanced');
         $this->set_focal_point_from_attrs($attributes);
         $this->set_image_offset_from_attrs($attributes);
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);
-        parent::__construct($attributes, 'components.ContentImageAdvanced.content-image-advanced');
-        $this->shortName = 'image';
-    }
-
-    protected function get_bem_name(): string {
-        return parent::get_bem_name() . "--advanced";
     }
 
     public function get_outer_wrapper_html_attributes(): array {
@@ -38,12 +34,12 @@ class ContentImageAdvanced extends ContentImageComponent {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'     => implode(' ', $this->get_filtered_classes()),
+            'classes'     => $this->get_filtered_classes(),
             'outerAttrs'  => $this->get_outer_wrapper_html_attributes(),
             'attributes'  => $this->get_html_attributes(), // Attributes for the image itself
             'src'         => $this->src, // Blade template in IDE is happier if we specify src explicitly
             // because we were getting to too many layers of attribute/class methods when we can just do stuff in the template
-            'bemPrefix'   => $this->get_bem_name(),
+            'bemPrefix'   => $this->get_bem_prefix(),
             'aspectRatio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
             'caption'     => $this->caption ?? null
         ])->render();

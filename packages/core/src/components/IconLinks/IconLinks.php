@@ -51,7 +51,7 @@ class IconLinks extends Renderable {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'iconPrefix' => $this->iconPrefix,
             'items'      => $this->links

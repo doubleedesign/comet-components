@@ -101,7 +101,7 @@ class BannerV2 extends UIComponent {
         return $attributes;
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         $classes = parent::get_filtered_classes();
 
         array_push($classes, 'page-section'); // makes the inner container styling work with *__container syntax
@@ -124,7 +124,7 @@ class BannerV2 extends UIComponent {
 
         echo $blade->make($this->bladeFile, [
             'tag'               => $this->tagName->value,
-            'bemPrefix'         => $this->get_bem_name(),
+            'bemPrefix'         => $this->get_bem_prefix(),
             'attributes'        => $this->get_html_attributes(),
             'classes'           => $this->get_filtered_classes(),
             'imageWrapperAttrs' => $this->get_image_wrapper_attributes(),

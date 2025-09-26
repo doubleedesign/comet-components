@@ -31,25 +31,6 @@ abstract class TextElement extends Renderable {
     }
 
     /**
-     * Get the valid/supported classes for this component
-     *
-     * @return array<string>
-     */
-    protected function get_filtered_classes(): array {
-        $current_classes = parent::get_filtered_classes();
-        $bem_name = $this->get_bem_name();
-
-        // I want the BEM name in Renderable so it gets applied to all other component types,
-        // and text elements with explicit context,
-        // but don't want it for most basic text elements like headings and paragraphs
-        if (!$this->context) {
-            unset($current_classes[array_search($bem_name, $current_classes)]);
-        }
-
-        return $current_classes;
-    }
-
-    /**
      * Default render method (child classes may override this)
      *
      * @return void
@@ -59,7 +40,7 @@ abstract class TextElement extends Renderable {
 
         echo $blade->make($this->bladeFile, [
             'tag'        => $this->tagName->value,
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
         ])->render();

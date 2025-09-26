@@ -15,7 +15,7 @@ class Step extends UIComponent {
     }
 
     protected function get_inner_classes(): array {
-        return [$this->get_bem_name() . '__inner'];
+        return [$this->get_bem_prefix() . '__inner'];
     }
 
     public function render(): void {

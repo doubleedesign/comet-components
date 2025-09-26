@@ -33,7 +33,7 @@ class CoverImage extends ImageComponent {
 
         echo $blade->make($this->bladeFile, [
             'src'               => $this->src,
-            'classes'           => implode(' ', $this->get_filtered_classes()),
+            'classes'           => $this->get_filtered_classes(),
             'attributes'        => $this->get_html_attributes(),
             'wrapperAttributes' => $this->get_wrapper_html_attributes(),
         ])->render();

@@ -34,12 +34,6 @@ abstract class Renderable {
     protected ?array $style = null;
 
     /**
-     * @var ?string $context
-     * @description The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).
-     */
-    protected ?string $context = null;
-
-    /**
      * The dot-delimited path to the Blade template file
      *
      * @var string
@@ -64,9 +58,7 @@ abstract class Renderable {
         $this->classes = $this->set_classes_from_attributes($attributes);
         $this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
         $this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
-        $this->context = $attributes['context'] ?? $this->context;
         $this->bladeFile = $bladeFile;
-        $this->shortName = array_reverse(explode('.', $this->bladeFile))[0];
         $this->testId = $attributes['testId'] ?? null;
 
         // If we are in WordPress, allow overriding Blade template from the theme
@@ -131,30 +123,12 @@ abstract class Renderable {
         $this->tagName = $requestedTag;
     }
 
-    protected function set_context(string $context): void {
-        $this->context = $context;
-    }
-
     public function get_id(): ?string {
         return $this->id;
     }
 
     public function set_id(string $id): void {
         $this->id = $id;
-    }
-
-    protected function get_bem_name(): ?string {
-        if ($this->context) {
-            $kebabContext = Utils::kebab_case($this->context);
-            $shortNameToUse = $this->shortName;
-            if (str_starts_with($this->shortName, $kebabContext)) {
-                $shortNameToUse = str_replace("$kebabContext-", '', $this->shortName);
-            }
-
-            return $this->context . '__' . $shortNameToUse;
-        }
-
-        return $this->shortName;
     }
 
     /**
@@ -166,8 +140,8 @@ abstract class Renderable {
      *
      * @return array<string>
      */
-    protected function get_filtered_classes(): array {
-        return array_filter(array_unique([$this->get_bem_name(), ...$this->classes]));
+    public function get_filtered_classes(): array {
+        return array_filter($this->classes);
     }
 
     /**
@@ -196,17 +170,19 @@ abstract class Renderable {
             'is-not-stacked-on-mobile'
         ];
 
-        $result = array_merge(
-            [$this->get_bem_name()],
-            array_filter($classes, function($class) use ($redundant_classes) {
-                return !in_array($class, $redundant_classes) && !str_starts_with($class, 'wp-elements-');
-            })
-        );
+        // Strip out redundant/unwanted classes
+        $result = array_filter($classes, function($class) use ($redundant_classes) {
+            return !in_array($class, $redundant_classes) && !str_starts_with($class, 'wp-elements-');
+        });
 
-        // Transform WordPress block style class names
-        return array_map(function($class) {
-            return str_replace('is-style-', "{$this->get_bem_name()}--", $class);
-        }, $result);
+        // Transform WordPress block style class names into BEM modifiers
+        array_walk($result, function(&$class) {
+            if (str_starts_with($class, 'is-style-')) {
+                $this->set_bem_modifier(str_replace('is-style-', '', $class));
+            }
+        });
+
+        return array_unique($result);
     }
 
     /**

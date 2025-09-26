@@ -11,7 +11,7 @@ class MenuListItem extends UIComponent {
      * @param  array<Link|MenuList>  $innerComponents
      */
     public function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.Menu.MenuListItem.menu-list-item');
+        parent::__construct($attributes, $innerComponents, 'components.Menu.MenuList.MenuListItem.menu-list-item');
         $this->isCurrentParent = $attributes['isCurrentParent'] ?? false;
     }
 
@@ -22,13 +22,13 @@ class MenuListItem extends UIComponent {
         return $attributes;
     }
 
-    protected function get_bem_name(): ?string {
+    public function get_bem_prefix(): string {
         // Lil hack to fix the BEM name when there is context because it's not *quite* working as designed
         if (isset($this->context)) {
             return "{$this->context}__item";
         }
 
-        return parent::get_bem_name();
+        return parent::get_bem_prefix();
     }
 
     public function render(): void {

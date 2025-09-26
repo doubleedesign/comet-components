@@ -9,6 +9,7 @@ class MenuList extends UIComponent {
      * @param  array<MenuListItem>  $menuItems
      */
     public function __construct(array $attributes, array $menuItems) {
+        $this->context = 'menu';
         parent::__construct($attributes, $menuItems, 'components.Menu.MenuList.menu-list');
     }
 

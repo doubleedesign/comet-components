@@ -78,7 +78,7 @@ class File extends Renderable {
             'size'        => $this->size,
             'mimeType'    => $this->mimeType,
             'uploadDate'  => $this->uploadDate,
-            'bem_prefix'  => $this->get_bem_name()
+            'bem_prefix'  => $this->get_bem_prefix()
         ])->render();
     }
 }

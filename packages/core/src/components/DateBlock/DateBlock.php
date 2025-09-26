@@ -91,7 +91,7 @@ class DateBlock extends DateComponent {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'date'       => $this->date,
             'showDay'    => $this->showDay,

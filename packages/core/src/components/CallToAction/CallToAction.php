@@ -57,7 +57,7 @@ class CallToAction extends Container {
         if ($this->isNested) {
             // Replace BEM name (context + shortname) with just the context
             // (with a wrapper, it should have the context on the wrapper and the BEM name here)
-            $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_name());
+            $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_prefix());
             array_push($classes, $this->context);
         }
 
@@ -95,7 +95,7 @@ class CallToAction extends Container {
         return $attributes;
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         $classes = parent::get_filtered_classes();
 
         // Replace '__call-to-action' with '__container'

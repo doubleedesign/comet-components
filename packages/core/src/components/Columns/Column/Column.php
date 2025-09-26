@@ -29,7 +29,7 @@ class Column extends LayoutComponent {
         $this->width = $width;
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         $classes = array_merge([$this->shortName], parent::get_filtered_classes());
 
         if (isset($this->width)) {

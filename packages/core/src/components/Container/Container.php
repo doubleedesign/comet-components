@@ -37,7 +37,7 @@ class Container extends LayoutComponent {
      *
      * @return array<string>
      */
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         $classes = array_filter(parent::get_filtered_classes(), function($class) {
             // Filter out WordPress + other classes used for the size (size is applied elsewhere)
             return !in_array($class, ['is-style-wide', 'is-style-fullwidth', 'is-style-narrow', 'container--wide', 'container--fullwidth', 'container--narrow']);
@@ -47,12 +47,12 @@ class Container extends LayoutComponent {
             $classes[] = 'layout-block';
             // Replace BEM name (context + shortname) with just the context
             // (with a wrapper, it should have the context on the wrapper and the BEM name here)
-            $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_name());
+            $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_prefix());
             array_push($classes, $this->context);
             $filtered = array_unique(array_merge($classes, [$this->shortName]));
         }
         else if ($this->isNested) {
-            array_push($classes, $this->get_bem_name());
+            array_push($classes, $this->get_bem_prefix());
             $filtered = array_unique($classes);
         }
         else {

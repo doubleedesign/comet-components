@@ -131,7 +131,7 @@ class Card extends UIComponent {
             'withWrapper'       => $this->withWrapper,
             'isLink'            => !empty($this->link) && $this->cardAsLink,
             'linkAttrs'         => $this->link,
-            'bemName'           => $this->get_bem_name(),
+            'bemName'           => $this->get_bem_prefix(),
             'context'           => $this->context,
             'shortName'         => $this->shortName,
             'classes'           => $this->get_filtered_classes(),

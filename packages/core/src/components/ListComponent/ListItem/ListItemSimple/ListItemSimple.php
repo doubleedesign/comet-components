@@ -10,12 +10,12 @@ class ListItemSimple extends TextElementExtended {
         parent::__construct($attributes, $content, $bladeFile);
     }
 
-    protected function get_bem_name(): string {
+    public function get_bem_prefix(): string {
         if ($this->context && str_ends_with($this->context, '__list')) {
-            return str_replace('list-item', 'item', parent::get_bem_name());
+            return str_replace('list-item', 'item', parent::get_bem_prefix());
         }
 
-        return parent::get_bem_name();
+        return parent::get_bem_prefix();
     }
 
     public function render(): void {
@@ -23,7 +23,7 @@ class ListItemSimple extends TextElementExtended {
 
         echo $blade->make($this->bladeFile, [
             'tag'        => $this->tagName->value,
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             // Workaround for TextElement's sanitisation stripping aria attributes out of rendered link output passed as $content in breadcrumbs,
             // because HTML Purifier simply would not cooperate

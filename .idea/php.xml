@@ -197,7 +197,6 @@
       <path value="$PROJECT_DIR$/packages/core/vendor/phpstan/phpstan" />
       <path value="$PROJECT_DIR$/vendor/pestphp/pest-plugin-profanity" />
       <path value="$PROJECT_DIR$/packages/comet-canvas-classic/vendor/composer" />
-      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/openpsa/ranger" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/symfony/intl" />
@@ -229,6 +228,7 @@
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/feimosi/baguettebox.js" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/doubleedesign/comet-components-core" />
       <path value="$PROJECT_DIR$/vendor/sirbrillig/spies" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3">
@@ -335,14 +335,6 @@
   </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
-  </component>
-  <component name="PhpUnit">
-    <phpunit_settings>
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/core/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-plugin/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-canvas-classic/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
-    </phpunit_settings>
   </component>
   <component name="Psalm">
     <Psalm_settings>

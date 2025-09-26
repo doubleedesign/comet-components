@@ -28,21 +28,19 @@ class CopyBlock extends Group {
         }
 
         if (!$this->isNested) {
-
-	        // Add anything here that Container doesn't support but Group does
-	        $innerAttrs = array_merge(
-		        Utils::array_pick($attributes, ['colorTheme', 'isNested']),
-		        [
-			        'context'   => ($this->shortName ?? 'copy-block') . '__container',
-			        'shortName' => 'inner'
-		        ]
-	        );
+            // Add anything here that Container doesn't support but Group does
+            $innerAttrs = array_merge(
+                Utils::array_pick($attributes, ['colorTheme', 'isNested']),
+                [
+                    'context'   => ($this->shortName ?? 'copy-block') . '__container',
+                    'shortName' => 'inner'
+                ]
+            );
 
             $containerAttrs = array_merge(
                 ['context' => 'copy-block'],
                 array_diff($attributes, $innerAttrs)
             );
-
 
             $innerComponents = [
                 new Container(
@@ -56,7 +54,7 @@ class CopyBlock extends Group {
         parent::__construct($attributes, $innerComponents);
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         $classes = parent::get_filtered_classes();
 
         if ($this->isNested) {
@@ -66,14 +64,6 @@ class CopyBlock extends Group {
         }
 
         return $classes;
-    }
-
-    protected function get_bem_name(): ?string {
-        if ($this->isNested) {
-            return 'copy-block';
-        }
-
-        return parent::get_bem_name();
     }
 
     public function render(): void {

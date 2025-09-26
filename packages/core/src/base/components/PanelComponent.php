@@ -17,10 +17,6 @@ abstract class PanelComponent extends UIComponent {
         $this->subtitle = isset($attributes['subtitle']) ? Utils::sanitise_content($attributes['subtitle']) : null;
     }
 
-    protected function get_bem_name(): ?string {
-        return "{$this->context}__panel__content";
-    }
-
     protected function get_html_attributes(): array {
         $attrs = parent::get_html_attributes();
 

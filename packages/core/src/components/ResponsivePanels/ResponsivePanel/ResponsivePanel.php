@@ -12,7 +12,7 @@ class ResponsivePanel extends PanelComponent {
         $this->context = 'responsive-panel';
     }
 
-    protected function get_bem_name(): ?string {
+    public function get_bem_prefix(): string {
         return 'responsive-panel__content';
     }
 }

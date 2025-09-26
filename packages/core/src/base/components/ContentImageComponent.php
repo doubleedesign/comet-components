@@ -25,11 +25,10 @@ abstract class ContentImageComponent extends ImageComponent {
     protected ?string $align = null;
 
     public function __construct(array $attributes, string $bladeFile) {
+        parent::__construct($attributes, $bladeFile);
         $this->aspectRatio = isset($attributes['aspectRatio']) ? AspectRatio::fromString($attributes['aspectRatio']) : null;
         $this->caption = $attributes['caption'] ?? null;
         $this->align = $attributes['align'] ?? null;
-        parent::__construct($attributes, $bladeFile);
-        $this->shortName = 'image';
     }
 
     /**

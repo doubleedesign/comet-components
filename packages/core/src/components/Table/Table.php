@@ -186,8 +186,8 @@ class Table extends Renderable {
         // TODO: How to render a colgroup if the first column should be sticky, so that the css can be applied to that?
 
         echo $blade->make($this->bladeFile, [
-            'bemPrefix'  => $this->get_bem_name(),
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'bemPrefix'  => $this->get_bem_prefix(),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'thead'      => $this->thead,
             'tbody'      => $this->tbody,

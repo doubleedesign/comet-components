@@ -34,12 +34,9 @@ class SectionMenu extends Menu {
         );
 
         $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
-    }
-
-    protected function get_bem_name(): ?string {
         // We don't expect this to have a wrapper with 'section-menu' class - this *is* the wrapper,
         // so we don't want section-menu__menu as would be the default
-        return 'section-navigation';
+        $this->set_bem_block('section-navigation');
     }
 
     protected function get_html_attributes(): array {

@@ -11,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::A, Tag::BUTTON])]
 #[DefaultTag(Tag::A)]
 class Button extends Renderable {
+    use BlockElementModifier;
     use ColorTheme;
 
     /**
@@ -33,6 +34,7 @@ class Button extends Renderable {
 
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, 'components.Button.button');
+        $this->init_bem_classes($this->bladeFile);
         $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
         $this->isOutline = $attributes['isOutline'] ?? false;
         $this->content = $content;
@@ -44,9 +46,9 @@ class Button extends Renderable {
         if ($this->colorTheme) {
             $attrs['data-color-theme'] = $this->colorTheme->value;
         }
-		if($this->isOutline) {
-			$attrs['data-style'] = 'outline';
-		}
+        if ($this->isOutline) {
+            $attrs['data-style'] = 'outline';
+        }
 
         return $attrs;
     }
@@ -56,7 +58,7 @@ class Button extends Renderable {
 
         echo $blade->make($this->bladeFile, [
             'tag'        => $this->tagName->value,
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
         ])->render();

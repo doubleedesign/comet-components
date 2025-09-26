@@ -29,7 +29,7 @@ abstract class LayoutComponent extends UIComponent {
         }
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         // FIXME: Why don't ContentWrapper and ImageWrapper exist?
         // See Utils::get_class_name() for where it seems to come from
         if ((!$this instanceof Column) && (!$this instanceof ContentWrapper) && (!$this instanceof ImageWrapper) && (!$this instanceof Steps)) {

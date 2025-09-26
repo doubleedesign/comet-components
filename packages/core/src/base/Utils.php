@@ -213,6 +213,31 @@ class Utils {
         return $result;
     }
 
+    /**
+     * Compare two indexed arrays and cancel out matching values from the start until they stop matching,
+     * and return the remainder of the $main array.
+     * Examples: [card, card-body, card-image] vs [card, card-body] returns [card-image]
+     *           [card, card-body, card-image] vs [card, card-image] returns [card-body, card-image]
+     *
+     * @param  array  $main
+     * @param  array  $compareTo
+     *
+     * @return array
+     */
+    public static function array_diff_end(array $main, array $compareTo): array {
+        $i = 0;
+        while ($i < count($main)) {
+            if (isset($compareTo[$i]) && $main[$i] === $compareTo[$i]) {
+                $i++;
+            }
+            else {
+                break;
+            }
+        }
+
+        return array_slice($main, $i) ?? [];
+    }
+
     public static function get_first_phrase_from_html_string(string $content): string {
         // Remove any leading/trailing whitespace
         $trimmed = trim($content);

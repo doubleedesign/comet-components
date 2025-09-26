@@ -16,7 +16,7 @@ $innerComponents = [
 $component = new Banner(
     [
         ...$attributes,
-        'imageUrl' => 'https://cometcomponents.io/test/assets/example-image-2.jpg',
+        'imageUrl' => 'https://cometcomponents.io/tests/assets/example-image-2.jpg',
         'imageAlt' => 'View of Big Ben in London',
     ],
     $innerComponents

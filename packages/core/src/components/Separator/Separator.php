@@ -30,14 +30,6 @@ class Separator extends Renderable {
         $this->color = ThemeColor::tryFrom($attributes['color'] ?? '') ?? ThemeColor::tryFrom($attributes['backgroundColor'] ?? '') ?? $this->color;
     }
 
-    protected function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        return array_filter($classes, function($class) {
-            return $class !== 'separator--default' && !str_starts_with($class, 'is-style-');
-        });
-    }
-
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 

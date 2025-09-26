@@ -5,7 +5,7 @@
         <env name="APP_ENV" value="development" />
       </envs>
     </CommandLine>
-    <PestRunner configuration_file="$PROJECT_DIR$/tests/unit/phpunit.xml" method="" scope="File" use_alternative_configuration_file="true" />
+    <PestRunner method="" scope="File" />
     <method v="2" />
   </configuration>
 </component>

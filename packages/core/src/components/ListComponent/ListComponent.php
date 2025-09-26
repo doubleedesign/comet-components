@@ -25,17 +25,12 @@ class ListComponent extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.ListComponent.list');
     }
 
-    protected function get_filtered_classes(): array {
-        // Renderable usually adds the BEM class name, but we don't want a class of "list" on every list
-        return array_filter(parent::get_filtered_classes(), fn($class) => $class !== $this->shortName);
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
             'ordered'    => $this->ordered,
-            'classes'    => implode(',', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'children'   => $this->innerComponents
         ])->render();

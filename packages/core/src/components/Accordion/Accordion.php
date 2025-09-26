@@ -28,7 +28,7 @@ class Accordion extends PanelGroupComponent {
      */
     protected array $beforeComponents = [];
 
-    public function __construct(array $attributes, array $innerComponents, ?array $beforeComponents) {
+    public function __construct(array $attributes, array $innerComponents, ?array $beforeComponents = []) {
         $this->set_icon_from_attrs($attributes, 'fa-plus');
         $this->isNested = $attributes['isNested'] ?? $this->isNested;
         $this->beforeComponents = $beforeComponents ?? $this->beforeComponents;

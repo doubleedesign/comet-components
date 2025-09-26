@@ -27,19 +27,18 @@ class Group extends UIComponent {
     protected bool $isNested = true;
 
     public function __construct(array $attributes, array $innerComponents) {
+        // Allow something other than "group" to be used as the shortName, primarily for automatic BEM class naming
+        $this->shortName = $attributes['shortName'] ?? $this->shortName;
         parent::__construct($attributes, $innerComponents, 'components.Group.group');
         $this->set_color_theme_from_attrs($attributes);
-
         // Allow groups without a specified background to be transparent, rather than defaulting to the fallback
         if (isset($attributes['backgroundColor'])) {
             $this->set_background_color_from_attrs($attributes);
             $this->simplify_all_background_colors();
         }
-        // Allow something other than "group" to be used as the shortName, primarily for automatic BEM class naming
-        $this->shortName = $attributes['shortName'] ?? $this->shortName;
     }
 
-    protected function get_filtered_classes(): array {
+    public function get_filtered_classes(): array {
         if (!$this->isNested) {
             return array_merge(parent::get_filtered_classes(), ['layout-block']);
         }
