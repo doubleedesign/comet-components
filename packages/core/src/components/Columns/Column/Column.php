@@ -6,7 +6,9 @@ namespace Doubleedesign\Comet\Core;
 class Column extends LayoutComponent {
     /**
      * @var ?string $width
-     * @description Optionally set the width of the column. Note: This may be overridden to stack columns on small viewports.
+     * @description Optionally set the width of the column, if you absolutely must do it explicitly instead of in your own CSS
+     * (ideally this should not be set in HTML, but things like the WP block editor kinda make it necessary to handle this use case)
+     * Note: This may be overridden to stack columns on small viewports.
      */
     protected ?string $width;
 
@@ -27,7 +29,7 @@ class Column extends LayoutComponent {
         $this->width = $width;
     }
 
-    public function get_filtered_classes(): array {
+    protected function get_filtered_classes(): array {
         $classes = array_merge([$this->shortName], parent::get_filtered_classes());
 
         if (isset($this->width)) {

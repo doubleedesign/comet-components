@@ -45,7 +45,7 @@ class Columns extends LayoutComponent {
         $this->innerComponents = $updatedInnerComponents ?? $innerComponents;
     }
 
-    public function get_html_attributes(): array {
+    protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
         if ($this->allowStacking) {

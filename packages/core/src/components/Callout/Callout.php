@@ -41,14 +41,14 @@ class Callout extends UIComponent {
         $this->set_icon_from_attrs($attributes);
     }
 
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
 
         if ($this->colorTheme) {
-            array_push($classes, "callout--{$this->colorTheme->value}");
+            $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
-        return $classes;
+        return $attributes;
     }
 
     public function render(): void {

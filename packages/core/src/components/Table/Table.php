@@ -163,7 +163,7 @@ class Table extends Renderable {
         }, $rows);
     }
 
-    public function get_html_attributes(): array {
+    protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
         // Only add stacking attribute if it is explicitly set.

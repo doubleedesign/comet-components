@@ -58,7 +58,7 @@ class ContentImageBasic extends ContentImageComponent {
         $this->scale = $behaviour;
     }
 
-    public function get_inline_styles(): array {
+    protected function get_inline_styles(): array {
         $styles = [];
 
         if ($this->height) {

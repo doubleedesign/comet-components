@@ -50,7 +50,7 @@ class Gallery extends UIComponent {
         $this->caption = (isset($attributes['caption']) && !empty(trim($attributes['caption']))) ? trim($attributes['caption']) : null;
     }
 
-    public function get_html_attributes(): array {
+    protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
         $attributes['data-max-columns'] = $this->columns;

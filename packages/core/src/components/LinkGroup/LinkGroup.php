@@ -49,7 +49,7 @@ class LinkGroup extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.LinkGroup.link-group');
     }
 
-    public function get_html_attributes(): array {
+    protected function get_html_attributes(): array {
         return array_merge(
             parent::get_html_attributes(),
             ['data-color-theme' => $this->colorTheme->value]
@@ -60,7 +60,7 @@ class LinkGroup extends UIComponent {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes_string(),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'children'   => $this->innerComponents
         ])->render();

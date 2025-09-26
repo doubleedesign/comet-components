@@ -9,7 +9,7 @@ abstract class TextElementExtended extends TextElement {
         $this->set_text_color_from_attrs($attributes);
     }
 
-    public function get_html_attributes(): array {
+    protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
         if (isset($this->textColor)) {

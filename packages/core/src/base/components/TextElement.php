@@ -35,7 +35,7 @@ abstract class TextElement extends Renderable {
      *
      * @return array<string>
      */
-    public function get_filtered_classes(): array {
+    protected function get_filtered_classes(): array {
         $current_classes = parent::get_filtered_classes();
         $bem_name = $this->get_bem_name();
 

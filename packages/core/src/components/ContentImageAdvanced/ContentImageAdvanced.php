@@ -34,7 +34,7 @@ class ContentImageAdvanced extends ContentImageComponent {
         ];
     }
 
-    public function get_filtered_classes(): array {
+    protected function get_filtered_classes(): array {
         return array_unique([
             $this->shortName,
             $this->get_bem_name(),

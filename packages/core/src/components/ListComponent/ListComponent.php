@@ -25,8 +25,8 @@ class ListComponent extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.ListComponent.list');
     }
 
-    public function get_filtered_classes(): array {
-        // UIComponent usually adds the BEM class name, but we don't want a class of "list" on every list
+    protected function get_filtered_classes(): array {
+        // Renderable usually adds the BEM class name, but we don't want a class of "list" on every list
         return array_filter(parent::get_filtered_classes(), fn($class) => $class !== $this->shortName);
     }
 

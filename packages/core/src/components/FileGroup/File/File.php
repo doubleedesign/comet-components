@@ -51,7 +51,7 @@ class File extends Renderable {
         $this->set_icon_from_attrs($attributes);
     }
 
-    public function get_html_attributes(): array {
+    protected function get_html_attributes(): array {
         $attributes = array_merge(
             parent::get_html_attributes(),
             ['href' => $this->url]

@@ -37,13 +37,12 @@ abstract class ImageComponent extends Renderable {
         parent::__construct($attributes, $bladeFile);
     }
 
-    public function get_filtered_classes(): array {
+    protected function get_html_attributes(): array {
         $classes = array_merge(parent::get_filtered_classes(), [$this->get_bem_name()]);
 
         return array_unique($classes);
     }
 
-    public function get_html_attributes(): array {
         return array_merge(
             parent::get_html_attributes(),
             [

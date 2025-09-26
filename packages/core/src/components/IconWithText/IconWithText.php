@@ -25,7 +25,7 @@ class IconWithText extends UIComponent {
         ]);
     }
 
-    public function get_html_attributes(): array {
+    protected function get_html_attributes(): array {
         return array_merge(
             parent::get_html_attributes(),
             ['data-color-theme' => $this->colorTheme->value]
@@ -36,7 +36,7 @@ class IconWithText extends UIComponent {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes_string(),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'iconPrefix' => $this->iconPrefix,
             'icon'       => $this->icon,
