@@ -46,12 +46,6 @@ class LabelWithTooltip extends TextElement {
         return $attributes;
     }
 
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        return array_unique(array_merge($classes, [$this->get_bem_name()]));
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

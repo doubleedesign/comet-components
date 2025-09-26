@@ -80,11 +80,8 @@ class ContentImageBasic extends ContentImageComponent {
         ];
     }
 
-    public function get_filtered_classes(): array {
-        return [
-            ...parent::get_filtered_classes(),
-            $this->get_bem_name() . "--basic"
-        ];
+    protected function get_bem_name(): ?string {
+        return parent::get_bem_name() . "--basic";
     }
 
     public function render(): void {

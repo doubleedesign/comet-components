@@ -40,15 +40,11 @@ class Group extends UIComponent {
     }
 
     protected function get_filtered_classes(): array {
-        if ($this->context) {
-            return parent::get_filtered_classes();
-        }
-
         if (!$this->isNested) {
             return array_merge(parent::get_filtered_classes(), ['layout-block']);
         }
 
-        return array_merge(parent::get_filtered_classes());
+        return parent::get_filtered_classes();
     }
 
     protected function get_html_attributes(): array {

@@ -123,16 +123,6 @@ class Card extends UIComponent {
         return $attributes;
     }
 
-    protected function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        // Include shortname even if there is also context
-        return array_unique([
-            $this->get_bem_name(),
-            ...$classes
-        ]);
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

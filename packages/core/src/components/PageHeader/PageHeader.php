@@ -52,10 +52,8 @@ class PageHeader extends Container {
     protected function get_filtered_classes(): array {
         $classes = parent::get_filtered_classes();
 
-        // Replace '__page-header' with '__container'
-        $classes = array_map(fn($class) => str_replace('__page-header', '__container', $class), $classes);
-
-        return $classes;
+        // Replace '__page-header' with '__container' before returning
+        return array_map(fn($class) => str_replace('__page-header', '__container', $class), $classes);
     }
 
 }

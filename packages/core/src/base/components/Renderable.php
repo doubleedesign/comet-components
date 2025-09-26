@@ -167,7 +167,7 @@ abstract class Renderable {
      * @return array<string>
      */
     protected function get_filtered_classes(): array {
-        $current_classes = $this->classes;
+        return array_unique([$this->get_bem_name(), ...$this->classes]);
     }
 
     /**
