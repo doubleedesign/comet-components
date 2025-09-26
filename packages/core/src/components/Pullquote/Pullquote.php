@@ -11,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::BLOCKQUOTE])]
 #[DefaultTag(Tag::BLOCKQUOTE)]
 class Pullquote extends TextElementExtended {
+    use BackgroundColor;
     use ColorTheme;
 
     /**
@@ -23,24 +24,21 @@ class Pullquote extends TextElementExtended {
         parent::__construct($attributes, $content, 'components.Pullquote.pullquote');
         $this->set_color_theme_from_attrs($attributes);
         $this->citation = $attributes['citation'] ?? null;
+        $this->set_color_theme_from_attrs($attributes);
     }
 
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-        $classes[] = $this->get_bem_name();
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
 
-        if (isset($this->backgroundColor)) {
-            $classes[] = 'bg-' . $this->backgroundColor->value;
+        if ($this->backgroundColor) {
+            $attributes['data-background-color'] = $this->backgroundColor->value;
         }
 
-        return $classes;
-    }
+        if ($this->colorTheme) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
 
-    public function get_html_attributes(): array {
-        return array_merge(
-            parent::get_html_attributes(),
-            ['data-color-theme' => $this->colorTheme->value]
-        );
+        return $attributes;
     }
 
     public function render(): void {
