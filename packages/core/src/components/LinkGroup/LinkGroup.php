@@ -26,7 +26,7 @@ class LinkGroup extends UIComponent {
         $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
         $innerComponents = [];
 
-        if ($attributes['heading']) {
+        if (isset($attributes['heading'])) {
             $this->heading = $attributes['heading'];
             array_push($innerComponents, new Heading(['level' => 2], $this->heading));
             unset($attributes['heading']);

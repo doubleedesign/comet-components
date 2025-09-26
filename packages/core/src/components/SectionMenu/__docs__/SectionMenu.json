@@ -60,11 +60,11 @@
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         }
-	},
-	"innerComponents": {
+    },
+    "innerComponents": {
         "type": "array<Renderable>",
-		"description": "Array of menu item details",
-		"required": true,
-		"inherited": true
-	}
+        "description": "Inner components to be rendered within this component",
+        "required": true,
+        "inherited": true
+    }
 }

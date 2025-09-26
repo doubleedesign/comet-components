@@ -20,7 +20,7 @@ class DateBlock extends DateComponent {
 
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.DateBlock.date-block');
-        $this->date = $this->convert_date($attributes['date']) ?? null;
+        $this->date = isset($attributes['date']) ? $this->convert_date($attributes['date']) : null;
     }
 
     /**

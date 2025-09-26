@@ -1,54 +1,38 @@
 {
-    "name": "Gallery",
-    "description": "Display a grid of images with optional captions, with a range of layout options.",
+    "name": "EventList",
+    "description": "*/",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
-        "caption": {
-            "type": "string",
-            "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>"
-        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "gallery"
+                "events__list"
             ],
             "inherited": true
-        },
-        "columns": {
-            "type": "int",
-            "description": "The number of columns to use for the layout (may be overridden to fewer in small containers/viewports)",
-            "required": true,
-            "supported": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8"
-            ],
-            "default": 3
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
             "inherited": true
         },
+        "heading": {
+            "type": "string",
+            "description": "The heading for the list."
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
         },
-        "imageCrop": {
-            "type": "bool",
-            "description": "Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)",
+        "maxItemsPerRow": {
+            "type": "int",
+            "description": "The maximum number of items to display per row, when the viewport is wide enough to accommodate.",
             "required": true,
-            "default": "true"
+            "default": 3
         },
         "style": {
             "type": "array",
@@ -59,10 +43,10 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "figure",
-                "div"
+                "ul",
+                "ol"
             ],
-            "default": "figure",
+            "default": "ul",
             "inherited": true
         },
         "testId": {
@@ -72,8 +56,8 @@
         }
     },
     "innerComponents": {
-        "type": "array<ContentImageBasic>",
-        "description": "The image components to display in the gallery",
+        "type": "array<EventCard>",
+        "description": "Event cards to display.",
         "required": true
     }
 }

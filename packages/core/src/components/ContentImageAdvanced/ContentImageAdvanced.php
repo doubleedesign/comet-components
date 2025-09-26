@@ -4,6 +4,7 @@ namespace Doubleedesign\Comet\Core;
 /**
  * ContentImageAdvanced component
  *
+ * @description An image within content that supports advanced cropping options (aspect ratio, focal point and/or offsets).
  * @package Doubleedesign\Comet\Core
  * @version 1.0.0
  * @description
@@ -14,7 +15,6 @@ class ContentImageAdvanced extends ContentImageComponent {
     use ImageCropProperties;
 
     // Note: To simplify the layout calculations, this component does not support wrapping the image in a link.
-
     public function __construct(array $attributes) {
         $this->set_focal_point_from_attrs($attributes);
         $this->set_image_offset_from_attrs($attributes);
@@ -32,13 +32,6 @@ class ContentImageAdvanced extends ContentImageComponent {
             parent::get_outer_wrapper_html_attributes(),
             'style' => $this->get_local_css_properties()
         ];
-    }
-
-    protected function get_filtered_classes(): array {
-        return array_unique([
-            $this->shortName,
-            ...parent::get_filtered_classes()
-        ]);
     }
 
     public function render(): void {

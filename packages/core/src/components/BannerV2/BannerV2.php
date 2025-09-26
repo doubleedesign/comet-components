@@ -26,13 +26,13 @@ class BannerV2 extends UIComponent {
      * @var ContainerSize $size
      * @description The max width of the banner overall
      */
-    protected ContainerSize $width;
+    protected ContainerSize $width = ContainerSize::FULLWIDTH;
 
     /**
      * @var ContainerSize $innerSize
      * @description The max width of the inner content container
      */
-    protected ContainerSize $containerWidth;
+    protected ContainerSize $containerWidth = ContainerSize::DEFAULT;
 
     /**
      * @var int|null $contentMaxWidth
@@ -42,8 +42,8 @@ class BannerV2 extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         $this->image = $this->validate_image_attributes($attributes['image'] ?? []);
-        $this->width = ContainerSize::tryFrom($attributes['width']) ?? ContainerSize::FULLWIDTH;
-        $this->containerWidth = ContainerSize::tryFrom($attributes['containerWidth']) ?? ContainerSize::DEFAULT;
+        $this->width = isset($attributes['width']) ? ContainerSize::tryFrom($attributes['width']) : $this->width;
+        $this->containerWidth = isset($attributes['containerWidth']) ? ContainerSize::tryFrom($attributes['containerWidth']) : $this->containerWidth;
         $this->contentMaxWidth = isset($attributes['contentMaxWidth']) ? min(max(0, (int)$attributes['contentMaxWidth']), 100) : null;
 
         $this->set_color_theme_from_attrs($attributes);

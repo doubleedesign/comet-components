@@ -4,9 +4,9 @@ namespace Doubleedesign\Comet\Core;
 /**
  * ContentImageBasic component
  *
- * @package Doubleedesign\Comet\Core
- * @version 1.0.0
- * @description
+ * @description A basic image within page content
+ * @package     Doubleedesign\Comet\Core
+ * @version     1.0.0
  */
 #[AllowedTags([Tag::FIGURE, Tag::DIV])]
 #[DefaultTag(Tag::DIV)]

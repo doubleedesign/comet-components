@@ -6,6 +6,22 @@
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
+        },
         "citation": {
             "type": "string",
             "description": "Optional citation for the quote"

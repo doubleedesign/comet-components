@@ -65,12 +65,19 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start",
+            "default": "match-parent",
             "inherited": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
+            "inherited": true
+        },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "required": true,
+            "default": "false",
             "inherited": true
         },
         "maxPerRow": {
@@ -115,7 +122,7 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start",
+            "default": "match-parent",
             "inherited": true
         }
     },

@@ -37,14 +37,14 @@
 		"context": {
 			"type": "string",
 			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-			"inherited": true
-		},
-		"endDate": {
-			"type": "DateTime",
-			"description": "The end date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
-		},
-		"id": {
-			"type": "string",
+            "inherited": true
+        },
+        "endDate": {
+            "type": "DateTime|string",
+            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
+        },
+        "id": {
+            "type": "string",
 			"description": "Unique identifier",
 			"inherited": true
 		},
@@ -54,26 +54,26 @@
 			"required": true,
 			"default": "en_AU",
 			"inherited": true
-		},
-		"showDay": {
-			"type": "bool",
-			"description": "Whether to show the days of the week.",
-			"required": true,
-			"default": "false",
-			"inherited": true
-		},
-		"showYear": {
-			"type": "bool",
-			"description": "Whether to show the year(s).",
-			"required": true,
-			"default": "true",
-			"inherited": true
-		},
-		"startDate": {
-			"type": "DateTime",
-			"description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
-		},
-		"style": {
+        },
+        "showDay": {
+            "type": "bool",
+            "description": "Whether to show the day of the week.",
+            "required": true,
+            "default": "false",
+            "inherited": true
+        },
+        "showYear": {
+            "type": "bool",
+            "description": "Whether to show the year.",
+            "required": true,
+            "default": "true",
+            "inherited": true
+        },
+        "startDate": {
+            "type": "DateTime|string",
+            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
+        },
+        "style": {
 			"type": "array",
 			"description": "Inline styles",
 			"inherited": true
@@ -91,6 +91,6 @@
 			"type": "string",
 			"description": "Optionally add a data-testid attribute for automated tests",
 			"inherited": true
-		}
-	}
+        }
+    }
 }

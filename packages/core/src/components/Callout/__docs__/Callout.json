@@ -10,8 +10,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "callout",
-                "callout--info"
+                "callout"
             ],
             "inherited": true
         },

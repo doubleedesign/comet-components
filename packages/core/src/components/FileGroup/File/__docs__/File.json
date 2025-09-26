@@ -1,14 +1,22 @@
 {
-    "name": "Group",
-    "description": "Group components together for layout or structure purposes.",
-    "extends": "UIComponent",
+    "name": "File",
+    "description": null,
+    "extends": "Renderable",
     "abstract": false,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
+    "isInner": true,
+    "belongsInside": "FileGroup",
     "attributes": {
-        "backgroundColor": {
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "file"
+            ],
+            "inherited": true
+        },
+        "colorTheme": {
             "type": "ThemeColor",
-            "description": "Background colour keyword",
+            "description": "Colour keyword for the fill or outline colour",
             "supported": [
                 "primary",
                 "secondary",
@@ -20,35 +28,38 @@
                 "light",
                 "dark",
                 "white"
-            ]
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "supported": [
-                "group",
-                "group--breakout"
             ],
-            "default": [
-                "group",
-                "layout-block"
-            ]
+            "default": "null"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
             "inherited": true
         },
+        "description": {
+            "type": "string"
+        },
+        "icon": {
+            "type": "string",
+            "description": "Icon class name; default values set for file types including PDF, plain text, calendar, Word, Excel, ZIP, GZIP, TAR, and 7z",
+            "default": "fa-file"
+        },
+        "iconPrefix": {
+            "type": "string",
+            "description": "Icon prefix class name",
+            "default": "fa-solid"
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
         },
-        "isNested": {
-            "type": "bool",
-            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
-            "required": true,
-            "default": "true"
+        "mimeType": {
+            "type": "string|mixed",
+            "description": "MIME type of the file"
+        },
+        "size": {
+            "type": "string"
         },
         "style": {
             "type": "array",
@@ -59,10 +70,7 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div",
-                "section",
-                "article",
-                "aside"
+                "div"
             ],
             "default": "div",
             "inherited": true
@@ -71,12 +79,16 @@
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "uploadDate": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string",
+            "required": true
         }
-    },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
     }
 }

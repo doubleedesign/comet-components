@@ -389,11 +389,11 @@
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="showYear" type="xs:boolean"/>
-<xs:attribute name="startDate" type="DateTime"/>
+<xs:attribute name="startDate" type="DateTime|string"/>
 <xs:attribute name="locale" type="xs:string"/>
 <xs:attribute name="showDay" type="xs:boolean"/>
 <xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="endDate" type="DateTime"/>
+<xs:attribute name="endDate" type="DateTime|string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
@@ -407,6 +407,52 @@
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EventCard">
+		<xs:complexType>
+			<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="name" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="location" type="xs:string"/>
+<xs:attribute name="externalLink" type="array"/>
+<xs:attribute name="detailUrl" type="xs:string"/>
+<xs:attribute name="dateComponent" type="DateBlock|DateRangeBlock"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EventList">
+		<xs:complexType>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="maxItemsPerRow" type="xs:int"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="heading" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="File">
+		<xs:complexType>
+			<xs:attribute name="uploadDate" type="xs:string"/>
+<xs:attribute name="url" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="mimeType" type="xs:string"/>
+<xs:attribute name="size" type="xs:string"/>
+<xs:attribute name="iconPrefix" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="icon" type="xs:string"/>
+<xs:attribute name="description" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
 	</xs:element>
@@ -442,9 +488,10 @@
 	</xs:element>
 	<xs:element name="Gallery">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="imageCrop" type="xs:boolean"/>
 <xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="columns" type="xs:int"/>
@@ -456,9 +503,11 @@
 		<xs:complexType>
 			<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
@@ -478,11 +527,12 @@
 	</xs:element>
 	<xs:element name="IconLinks">
 		<xs:complexType>
-			<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="orientation" type="Orientation"/>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="links" type="array"/>
+<xs:attribute name="orientation" type="Orientation"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="hAlign" type="Alignment"/>
@@ -548,10 +598,11 @@
 	</xs:element>
 	<xs:element name="LinkGroup">
 		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="heading" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
@@ -586,9 +637,10 @@
 	</xs:element>
 	<xs:element name="ListComponent">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="ordered" type="xs:boolean"/>
+			<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="ordered" type="xs:boolean"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
@@ -671,31 +723,48 @@
 	</xs:element>
 	<xs:element name="Pullquote">
 		<xs:complexType>
-			<xs:attribute name="textColor" type="ThemeColor"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="textAlign" type="Alignment"/>
-<xs:attribute name="style" type="InlineStyle"/>
+			<xs:attribute name="textAlign" type="Alignment"/>
+<xs:attribute name="textColor" type="ThemeColor"/>
 <xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="citation" type="xs:string"/>
+<xs:attribute name="backgroundColor" type="ThemeColor"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResponsivePanel">
+		<xs:complexType>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="subtitle" type="xs:string"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ResponsivePanels">
 		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="orientation" type="Orientation"/>
+			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="iconPrefix" type="xs:string"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="orientation" type="Orientation"/>
+<xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
 <xs:attribute name="icon" type="xs:string"/>
+<xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="breakpoint" type="xs:string"/>
+<xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="SectionMenu">
@@ -734,21 +803,22 @@
 	</xs:element>
 	<xs:element name="SiteHeader">
 		<xs:complexType>
-			<xs:attribute name="vAlign" type="Alignment"/>
+			<xs:attribute name="submenuIcon" type="xs:string"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="submenuIcon" type="xs:string"/>
-<xs:attribute name="responsiveStyle" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
-<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="logoUrl" type="xs:string"/>
+<xs:attribute name="responsiveStyle" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="breakpoint" type="xs:string"/>
 <xs:attribute name="icon" type="xs:string"/>
 <xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="breakpoint" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
+<xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
@@ -764,13 +834,14 @@
 	</xs:element>
 	<xs:element name="Steps">
 		<xs:complexType>
-			<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="orientation" type="Orientation"/>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="maxPerRow" type="xs:int"/>
+<xs:attribute name="orientation" type="Orientation"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
 <xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
@@ -832,26 +903,30 @@
 	</xs:element>
 	<xs:element name="TabPanel">
 		<xs:complexType>
-			<xs:attribute name="title" type="xs:string"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="title" type="xs:string"/>
 <xs:attribute name="subtitle" type="xs:string"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Tabs">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
 <xs:attribute name="orientation" type="Orientation"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="TychoTemplate"/>

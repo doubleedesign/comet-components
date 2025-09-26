@@ -26,13 +26,13 @@
 				"start",
 				"end",
 				"center",
-				"justify",
-				"match-parent"
-			],
-			"default": "center"
-		},
-		"iconPrefix": {
-			"type": "string",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "iconPrefix": {
+            "type": "string",
 			"default": "fa-brands"
 		},
 		"id": {

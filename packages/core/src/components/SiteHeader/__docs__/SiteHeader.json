@@ -1,12 +1,11 @@
 {
 	"name": "SiteHeader",
-	"description": "Render a site header with a logo, responsive menu, and optional additional components.",
-	"extends": "LayoutComponent",
-	"abstract": false,
-	"vue": true,
-	"isInner": false,
-	"belongsInside": null,
-	"attributes": {
+    "description": "Render a site header with a logo, responsive menu, and optional additional components.",
+    "extends": "LayoutComponent",
+    "abstract": false,
+    "isInner": false,
+    "belongsInside": null,
+    "attributes": {
 		"backgroundColor": {
 			"type": "ThemeColor",
 			"description": "Background colour keyword",
@@ -23,20 +22,21 @@
 				"white"
 			],
 			"inherited": true
-		},
-		"breakpoint": {
-			"type": "string",
-			"description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu;"
-		},
-		"classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"default": [
-				"site-header",
-				"layout-block"
-			],
-			"inherited": true
-		},
+        },
+        "breakpoint": {
+            "type": "string",
+            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style"
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "site-header",
+                "layout-block",
+                "page-section"
+            ],
+            "inherited": true
+        },
 		"context": {
 			"type": "string",
 			"description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
@@ -49,13 +49,13 @@
 				"start",
 				"end",
 				"center",
-				"justify",
-				"match-parent"
-			],
-			"default": "start",
-			"inherited": true
-		},
-		"icon": {
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
+            "inherited": true
+        },
+        "icon": {
 			"type": "string",
 			"description": "Icon class name; for the responsive menu toggle button",
 			"default": "fa-bars"
@@ -67,12 +67,19 @@
 		},
 		"id": {
 			"type": "string",
-			"description": "Unique identifier",
-			"inherited": true
-		},
-		"logoUrl": {
-			"type": "string",
-			"description": "The URL of the site logo image"
+            "description": "Unique identifier",
+            "inherited": true
+        },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "required": true,
+            "default": "false",
+            "inherited": true
+        },
+        "logoUrl": {
+            "type": "string",
+            "description": "The URL of the site logo image"
 		},
 		"responsiveStyle": {
 			"type": "string",
@@ -127,16 +134,16 @@
 				"start",
 				"end",
 				"center",
-				"justify",
-				"match-parent"
-			],
-			"default": "start",
-			"inherited": true
-		}
-	},
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
+            "inherited": true
+        }
+    },
 	"innerComponents": {
 		"type": "array<Renderable>",
 		"description": "The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context \"responsive\" (note: only one responsive group is supported)",
-		"required": true
-	}
+        "required": true
+    }
 }

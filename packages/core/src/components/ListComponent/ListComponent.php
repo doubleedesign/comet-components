@@ -11,7 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::UL, Tag::OL])]
 #[DefaultTag(Tag::UL)]
 class ListComponent extends UIComponent {
-    private bool $ordered;
+    protected bool $ordered;
 
     /**
      * @var array<ListItem>

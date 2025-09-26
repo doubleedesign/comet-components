@@ -44,13 +44,13 @@ abstract class Renderable {
      *
      * @var string
      */
-    protected string $bladeFile;
+    protected string $bladeFile = '';
 
     /**
      * @var string $shortName
      * @description The name of the component without any namespacing, prefixes, etc. Derived from the Blade filename by default.
      */
-    protected string $shortName;
+    protected string $shortName = '';
 
     /**
      * @var string|null $testId
@@ -167,7 +167,7 @@ abstract class Renderable {
      * @return array<string>
      */
     protected function get_filtered_classes(): array {
-        return array_unique([$this->get_bem_name(), ...$this->classes]);
+        return array_filter(array_unique([$this->get_bem_name(), ...$this->classes]));
     }
 
     /**

@@ -58,7 +58,8 @@
                 "narrow",
                 "narrower",
                 "small"
-            ]
+            ],
+            "default": "default"
         },
         "contentMaxWidth": {
             "type": "int",
@@ -151,7 +152,8 @@
                 "narrow",
                 "narrower",
                 "small"
-            ]
+            ],
+            "default": "fullwidth"
         }
     },
     "innerComponents": {

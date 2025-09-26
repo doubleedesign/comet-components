@@ -83,5 +83,9 @@
         "description": "Plain text or basic HTML",
         "required": true,
         "inherited": true
+    },
+    "innerComponents": {
+        "type": "array",
+        "required": true
     }
 }

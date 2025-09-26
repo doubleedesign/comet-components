@@ -1,9 +1,9 @@
 {
-	"name": "ContentImageAdvanced",
-	"description": "An image within page content that includes advanced cropping options",
-	"extends": "ContentImageComponent",
-	"abstract": false,
-	"isInner": false,
+    "name": "ContentImageAdvanced",
+    "description": "An image within content that supports advanced cropping options (aspect ratio, focal point and/or offsets).",
+    "extends": "ContentImageComponent",
+    "abstract": false,
+    "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
         "align": {

@@ -148,7 +148,9 @@ class ComponentClassesToJsonDefinitions {
                 }
                 else {
                     $result['isInner'] = false;
-                    if ($className === 'Doubleedesign\Comet\Core\Container') {
+                    // TODO: Find a better way to handle this
+                    $canBeTopLevel = ['Doubleedesign\Comet\Core\Container', 'Doubleedesign\Comet\Core\PageHeader', 'Doubleedesign\Comet\Core\SiteHeader', 'Doubleedesign\Comet\Core\SiteFooter'];
+                    if (in_array($className, $canBeTopLevel)) {
                         $result['belongsInside'] = null;
                     }
                     else {
@@ -158,11 +160,10 @@ class ComponentClassesToJsonDefinitions {
                     // Check if there is a Vue component in this component's directory
                     $vueFile = Utils::kebab_case(str_replace('.php', '', basename($filePath)) . '.vue');
                     $vueFilePath = dirname($filePath) . '\\' . $vueFile;
-                    echo $vueFilePath;
                     if (file_exists($vueFilePath)) {
                         $result['vue'] = true;
                     }
-                    // Workaround for ones known to have a common Vue component
+                    // Workaround for ones known to have a common Vue component (i.e., it's not in the same folder as the PHP class)
                     // TODO: Should check the actual folder of these to get this dynamically
                     if (in_array($className, [
                         'Doubleedesign\Comet\Core\Accordion',
@@ -187,7 +188,7 @@ class ComponentClassesToJsonDefinitions {
                 // Export the data to a JSON file
                 $outputPath = $outputDir . '\\' . $result['name'] . '.json';
                 $this->exportToJson($outputPath, $result);
-                $this->log("Exported component definition JSON to $outputPath\n", 'success');
+                $this->log("Exported component definition JSON to $outputPath", 'success');
             }
             catch (ReflectionException|Exception $e) {
                 $this->log("Error processing class $className: " . $e->getMessage(), 'error');
@@ -240,9 +241,7 @@ class ComponentClassesToJsonDefinitions {
         // Get the description of the class from the docblock at the top
         // (it should be prefixed by @description)
         $docComment = $reflectionClass->getDocComment();
-        if ($docComment && preg_match('/@description\s+(.+)/', $docComment, $matches)) {
-            $description = trim($matches[1]);
-        }
+        $description = $this->getDescription($docComment);
 
         $finalAttrs = array_filter($properties, function($key) {
             return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
@@ -273,6 +272,33 @@ class ComponentClassesToJsonDefinitions {
         $this->processedClasses[$className] = $result; // Mark as processed to prevent infinite recursion
 
         return $result;
+    }
+
+    private function getDescription($docComment): ?string {
+        if ($docComment && preg_match('/@description\s+(.+)/', $docComment, $matches)) {
+            // Get the first line based on the @description tag
+            $description = trim($matches[1]);
+
+            // Get the next 2 lines and check if they should also be included in the description
+            $lines = explode("\n", $docComment);
+            $description_line = array_key_first(array_filter($lines, function($line) {
+                return str_contains($line, '@description');
+            }));
+            $maybe_one_or_two_more_lines = array_filter(
+                array_slice($lines, $description_line + 1, 2),
+                fn($line) => trim($line) !== ''
+                    && trim($line) !== '*/'
+                    && !str_starts_with(trim($line), "* @")
+                    && !str_starts_with(trim($line), '* @dev-notes')
+            );
+            if (!empty($maybe_one_or_two_more_lines)) {
+                $description .= ' ' . trim(implode(' ', array_map(fn($line) => trim(ltrim($line, '* ')), $maybe_one_or_two_more_lines)));
+            }
+
+            return trim($description);
+        }
+
+        return null;
     }
 
     private function getVisibility(ReflectionProperty $property): string {
@@ -399,6 +425,12 @@ class ComponentClassesToJsonDefinitions {
                     else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Table') {
                         $instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
                     }
+                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableCell') {
+                        $instance = $this->currentClass->newInstance([], '', 'dummy.blade.php');
+                    }
+                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableHeaderCell') {
+                        $instance = $this->currentClass->newInstance([], '', 'dummy.blade.php');
+                    }
                     else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\ListItemComplex') {
                         $instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
                     }
@@ -435,7 +467,7 @@ class ComponentClassesToJsonDefinitions {
         // Get type details from docblock if available
         $docComment = $property->getDocComment();
         if ($docComment && preg_match('/@description\s+(.+)/', $docComment, $matches)) {
-            $description = trim($matches[1]);
+            $description = $this->getDescription($docComment);
         }
         // Try to get description from parent class if it exists
         else {
@@ -445,7 +477,7 @@ class ComponentClassesToJsonDefinitions {
                     $parentProperty = $parentClass->getProperty($property->getName());
                     $parentDocComment = $parentProperty->getDocComment();
                     if ($parentDocComment && preg_match('/@description\s+(.+)/', $parentDocComment, $matches)) {
-                        $description = trim($matches[1]);
+                        $description = $this->getDescription($parentDocComment);
                     }
                 }
                 catch (ReflectionException $e) {
@@ -575,7 +607,7 @@ class ComponentClassesToJsonDefinitions {
             // TODO: Should this allow for more than one type?
             return array_filter($processedTypes, function($type) {
                 return str_starts_with($type['type'], 'Doubleedesign\Comet\Core');
-            })[0];
+            })[0] ?? [];
         }
 
         return [];
@@ -611,7 +643,14 @@ class ComponentClassesToJsonDefinitions {
             default   => $white,
         };
 
-        echo $color . $message . $reset;
+        echo $color . $message . $reset . "\n";
+
+        if ($type === 'error') {
+            \Symfony\Component\VarDumper\VarDumper::dump([
+                'message'     => $message,
+                'backtrace'   => debug_backtrace()
+            ]);
+        }
     }
 }
 
@@ -622,6 +661,10 @@ class ComponentClassesToJsonDefinitions {
 //        or php generate-docs.php --base MyBaseComponent for base abstract component classes (Bash)
 //           php generate-docs.php base MyBaseComponent (PowerShell)
 try {
+    set_error_handler(function($severity, $message, $file, $line) {
+        throw new ErrorException($message, 0, $severity, $file, $line);
+    });
+
     $instance = new ComponentClassesToJsonDefinitions();
     if (isset($argv[1]) && ($argv[1] === '--component' || $argv[1] === 'component') && isset($argv[2])) {
         $instance->runSingle($argv[2]);
@@ -638,4 +681,8 @@ try {
 }
 catch (Exception $e) {
     echo "Error: " . $e->getMessage() . "\n";
+    \Symfony\Component\VarDumper\VarDumper::dump($e);
+}
+finally {
+    restore_error_handler();
 }

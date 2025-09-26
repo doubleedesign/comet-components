@@ -28,8 +28,8 @@ class DateRangeBlock extends DateComponent {
 
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.DateRangeBlock.date-range-block');
-        $this->startDate = $this->convert_date($attributes['startDate'] ?? $attributes['start_date']) ?? null;
-        $this->endDate = $this->convert_date($attributes['endDate'] ?? $attributes['end_date']) ?? null;
+        $this->startDate = isset($attributes['startDate']) ? $this->convert_date($attributes['startDate']) : null;
+        $this->endDate = isset($attributes['endDate']) ? $this->convert_date($attributes['endDate']) : null;
         $this->ranger = new Ranger($this->locale);
     }
 

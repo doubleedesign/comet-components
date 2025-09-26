@@ -19,7 +19,8 @@ abstract class ContentImageComponent extends ImageComponent {
      * @var string|null $align
      * @description Image alignment
      * @supported-values left, center, right, full
-     * Dev notes: There are fewer options than the layout alignment values, that's why they're not using the Alignment enum
+     *
+     * @dev-notes There are fewer options than the layout alignment values, that's why they're not using the Alignment enum
      */
     protected ?string $align = null;
 
