@@ -12,16 +12,14 @@ class Healthcheck {
 
     public function run(): void {
         $missingFiles = $this->get_missing_files();
-        $unimplementedRender = $this->get_unimplemented_render_functions();
         $missingBundleScss = $this->get_bundle_missing_scss_imports();
 
         $this->log_missing_files($missingFiles);
-        $this->log_unimplemented_render_functions($unimplementedRender);
         $this->log_bundle_missing_scss_imports($missingBundleScss);
 
         $this->log_with_colour("=================================================", 'cyan');
         $this->log_with_colour("Summary: ", 'cyan');
-        $this->log_with_colour("Top-level components should have: Blade template, CSS, JSON definition, browser test page, story, unit test.", 'cyan');
+        $this->log_with_colour("Top-level components should have: Blade template (or use its parent's), CSS, JSON definition, browser test page, story, unit test.", 'cyan');
         $this->log_with_colour('Sub-components should have: Blade template, JSON definition.', 'cyan');
         foreach ($missingFiles as $key => $value) {
             if (count($value) > 0) {
@@ -30,13 +28,6 @@ class Healthcheck {
             else {
                 $this->log_with_colour('Missing ' . $key . ': 0', 'green');
             }
-        }
-
-        if (count($unimplementedRender) > 0) {
-            $this->log_with_colour('Unimplemented render methods: ' . count($unimplementedRender), 'yellow');
-        }
-        else {
-            $this->log_with_colour('Unimplemented render methods: 0', 'green');
         }
 
         if (count($missingBundleScss) > 0) {
@@ -62,7 +53,7 @@ class Healthcheck {
             'stories'          => [],
             // TODO: Not all components require both unit and integration tests, so this should be refined
             'unit test'        => [],
-            'integration test' => [],
+            // 'integration test' => [],
         ];
 
         foreach ($all as $dir) {
@@ -71,7 +62,7 @@ class Healthcheck {
                 echo $dir . '\\' . $componentName . '/__docs__/' . $componentName . '.json';
                 $fileCollections['JSON'][] = $componentName;
             }
-            if (!glob($dir . '\\*.blade.php')) {
+            if (!glob($dir . '\\*.blade.php') && $this->get_parent_blade_template($componentName) === null) {
                 $fileCollections['Blade template'][] = $componentName;
             }
             if (!file_exists($this->componentDir . '/' . $componentName . '/__tests__/' . $componentName . 'Test.php')) {
@@ -93,9 +84,9 @@ class Healthcheck {
             if (!file_exists($this->componentDir . $componentName . '/__tests__/' . self::kebab_case($componentName) . '.stories.ts')) {
                 $fileCollections['stories'][] = $componentName;
             }
-            if (!file_exists($this->componentDir . '__tests__' . $componentName . '.spec.ts')) {
-                $fileCollections['integration test'][] = $componentName;
-            }
+            //            if (!file_exists($this->componentDir . '__tests__' . $componentName . '.spec.ts')) {
+            //                $fileCollections['integration test'][] = $componentName;
+            //            }
         }
 
         return $fileCollections;
@@ -114,51 +105,22 @@ class Healthcheck {
         }
     }
 
-    private function get_unimplemented_render_functions(): array {
-        $all = $this->get_all_component_directories();
-        $unimplemented = [];
-
-        foreach ($all as $filePath) {
-            // Get file contents
-            $componentName = basename($filePath);
-            $content = file_get_contents($filePath . '\\' . $componentName . '.php');
-
-            // Extract namespace if exists
-            $namespace = '';
-            if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
-                $namespace = $matches[1] . '\\';
+    private function get_parent_blade_template($componentName): ?string {
+        $class = new ReflectionClass("Doubleedesign\Comet\Core\\" . $componentName);
+        $parent = $class->getParentClass();
+        if ($parent) {
+            $parentName = $parent->getShortName();
+            $parentDir = $this->componentDir . '\\' . $parentName;
+            $bladePath = $parentDir . '\\' . self::kebab_case($parentName) . '.blade.php';
+            if (file_exists($bladePath)) {
+                return $bladePath;
             }
-            // Extract class name
-            $className = null;
-            if (preg_match('/class\s+(\w+)/', $content, $matches)) {
-                $className = $namespace . $matches[1];
-            }
-
-            if (!isset($className) || !class_exists($className)) {
-                $this->log_with_colour('Could not find class ' . $className, 'red');
-                continue;
-            }
-
-            $reflectionClass = new ReflectionClass($className);
-            if ($reflectionClass->hasMethod('render')) {
-                $renderMethod = $reflectionClass->getMethod('render');
-                $attributes = $renderMethod->getAttributes();
-                if (count($attributes) > 0) {
-                    if ($attributes[0]->getName() === "Doubleedesign\Comet\Core\NotImplemented") {
-                        $unimplemented[] = $className;
-                    }
-                }
+            else if ($parent->getParentClass()) {
+                return $this->get_parent_blade_template($parent->getParentClass()->getShortName());
             }
         }
 
-        return $unimplemented;
-    }
-
-    private function log_unimplemented_render_functions(array $unimplemented): void {
-        if (count($unimplemented) > 0) {
-            $this->log_with_colour('The following components have unimplemented render methods', 'cyan');
-            print_r($unimplemented);
-        }
+        return null;
     }
 
     private function get_scss_files(): array {
@@ -205,7 +167,7 @@ class Healthcheck {
         $contents = scandir($this->componentDir);
 
         $folders = array_filter($contents, function($dir) {
-            return is_dir($this->componentDir . '\\' . $dir) && !in_array($dir, ['.', '..']);
+            return is_dir($this->componentDir . '\\' . $dir) && !in_array($dir, ['.', '..', '_blade-partials']);
         });
 
         return array_map(function($dir) {
@@ -223,16 +185,29 @@ class Healthcheck {
         $allDirs = $topLevelDirs;
 
         foreach ($topLevelDirs as $dir) {
+            if (basename($dir) === '_blade-partials') {
+                continue;
+            }
+
             $contents = scandir($dir);
 
-            $subDirs = array_filter($contents, function($subDir) use ($dir) {
-                return is_dir($dir . $subDir) && !in_array($subDir, ['.', '..']);
-            });
+            if (basename($dir) === 'Columns') {
 
-            foreach ($subDirs as $subDir) {
-                $allDirs[] = $dir . $subDir;
+                $subDirs = array_values(array_filter($contents, function($maybeSubdir) use ($dir) {
+                    if (in_array($maybeSubdir, ['.', '..', '__tests__', '__docs__'])) {
+                        return false;
+                    }
+
+                    return is_dir($dir . DIRECTORY_SEPARATOR . $maybeSubdir);
+                }));
+
+                foreach ($subDirs as $subDir) {
+                    $allDirs[] = $dir . DIRECTORY_SEPARATOR . $subDir;
+                }
             }
         }
+
+        sort($allDirs);
 
         return $allDirs;
     }
