@@ -61,6 +61,7 @@ abstract class Renderable {
     public function __construct(array $attributes, string $bladeFile) {
         $this->rawAttributes = $attributes;
         $this->set_tag($attributes['tagName'] ?? null);
+        $this->classes = $this->set_classes_from_attributes($attributes);
         $this->id = isset($attributes['id']) ? Utils::kebab_case($attributes['id']) : null;
         $this->style = (isset($attributes['style']) && is_array($attributes['style'])) ? $attributes['style'] : null;
         $this->context = $attributes['context'] ?? $this->context;
@@ -81,17 +82,6 @@ abstract class Renderable {
                 }
             }
         }
-
-        $classes = [];
-        // Handle WordPress block implementation of classes (className string)
-        if (isset($attributes['className']) && is_string($attributes['className'])) {
-            $classes = explode(' ', $attributes['className']);
-        }
-        // Handle preferred implementation of classes (array)
-        if (isset($attributes['classes']) && is_array($attributes['classes'])) {
-            $classes = array_merge($classes, $attributes['classes']);
-        }
-        $this->classes = $classes;
 
         // If a CSS and/or JS file is in the directory, add it/them to the asset loader if it's available
         if (class_exists('Doubleedesign\Comet\Core\Assets')) {
@@ -160,7 +150,7 @@ abstract class Renderable {
             if (str_starts_with($this->shortName, $kebabContext)) {
                 $shortNameToUse = str_replace("$kebabContext-", '', $this->shortName);
             }
-			
+
             return $this->context . '__' . $shortNameToUse;
         }
 
@@ -178,6 +168,27 @@ abstract class Renderable {
      */
     protected function get_filtered_classes(): array {
         $current_classes = $this->classes;
+    }
+
+    /**
+     * Initial cleanup of classes passed in as attributes
+     * For context, this was almost called something like "clean_up_wp_block_editor_cruft"
+     *
+     * @param  $attributes
+     *
+     * @return array
+     */
+    private function set_classes_from_attributes($attributes): array {
+        $classes = [];
+        // Handle WordPress block implementation of classes (className string)
+        if (isset($attributes['className']) && is_string($attributes['className'])) {
+            $classes = explode(' ', $attributes['className']);
+        }
+        // Handle preferred implementation of classes (array)
+        if (isset($attributes['classes']) && is_array($attributes['classes'])) {
+            $classes = array_merge($classes, $attributes['classes']);
+        }
+
         $redundant_classes = [
             'is-style-default',
             // unwanted WordPress classes that are handled in other ways
@@ -187,12 +198,15 @@ abstract class Renderable {
 
         $result = array_merge(
             [$this->get_bem_name()],
-            array_filter($current_classes, function($class) use ($redundant_classes) {
+            array_filter($classes, function($class) use ($redundant_classes) {
                 return !in_array($class, $redundant_classes) && !str_starts_with($class, 'wp-elements-');
             })
         );
 
-        return array_unique($result);
+        // Transform WordPress block style class names
+        return array_map(function($class) {
+            return str_replace('is-style-', "{$this->get_bem_name()}--", $class);
+        }, $result);
     }
 
     /**

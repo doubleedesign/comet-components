@@ -22,22 +22,4 @@ abstract class UIComponent extends Renderable {
         $this->innerComponents = $innerComponents;
     }
 
-    protected function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        // Transform WordPress class names
-        return array_map(function($class) {
-            return str_replace('is-style-', "{$this->get_bem_name()}--", $class);
-        }, $classes);
-    }
-
-    /**
-     * Get the filtered class list for this component as a string
-     *
-     * @return string
-     */
-    protected function get_filtered_classes_string(): string {
-        return implode(' ', $this->get_filtered_classes());
-    }
-
 }
