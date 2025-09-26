@@ -228,6 +228,7 @@
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/ezyang/htmlpurifier" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/feimosi/baguettebox.js" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-acf/vendor/doubleedesign/comet-components-core" />
+      <path value="$PROJECT_DIR$/vendor/sirbrillig/spies" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3">

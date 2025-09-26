@@ -28,6 +28,7 @@
 		"ordered_imports": {
 			"sort_algorithm": "none"
 		},
+		"no_alias_functions": false,
 		"elseif": false,
 		"control_structure_continuation_position": {
 			"position": "next_line"

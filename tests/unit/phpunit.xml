@@ -16,14 +16,19 @@
         <ini name="error_reporting" value="E_ALL"/>
         <ini name="xdebug.mode" value="coverage"/>
     </php>
+    <testsuites>
+        <testsuite name="Core">
+            <directory>../../packages/core/src</directory>
+        </testsuite>
+    </testsuites>
     <source>
         <include>
-            <directory suffix=".php">../packages/core/src</directory>
+            <directory suffix=".php">../../packages/core/src</directory>
         </include>
         <exclude>
             <directory>vendor</directory>
-            <directory suffix="Test.php">../packages/core/src</directory>
-            <directory suffix="blade.php">../packages/core/src</directory>
+            <directory suffix="Test.php">../../packages/core/src</directory>
+            <directory suffix="blade.php">../../packages/core/src</directory>
         </exclude>
     </source>
 </phpunit>

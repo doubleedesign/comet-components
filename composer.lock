@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74584fdb23c395f5bc465f4f8c7b991c",
+    "content-hash": "482acfa9e494b57f0be38b5056ebda7c",
     "packages": [],
     "packages-dev": [
         {
@@ -3133,6 +3133,64 @@
                 }
             ],
             "time": "2025-02-07T05:00:38+00:00"
+        },
+        {
+            "name": "sirbrillig/spies",
+            "version": "v1.10.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sirbrillig/spies.git",
+                "reference": "2b19c09e8ad06fb299bd1b8b55cd749b72c0a851"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sirbrillig/spies/zipball/2b19c09e8ad06fb299bd1b8b55cd749b72c0a851",
+                "reference": "2b19c09e8ad06fb299bd1b8b55cd749b72c0a851",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "antecedent/patchwork": "^2.0.0",
+                "phpunit/phpunit": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Spies/functions.php"
+                ],
+                "psr-0": {
+                    "Spies": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Payton Swick",
+                    "email": "payton@foolord.com"
+                }
+            ],
+            "description": "Easier spies, stubs, and mocking for PHP tests",
+            "homepage": "https://github.com/sirbrillig/spies",
+            "keywords": [
+                "mocking",
+                "phpunit",
+                "spies",
+                "spy",
+                "stubs"
+            ],
+            "support": {
+                "issues": "https://github.com/sirbrillig/spies/issues",
+                "source": "https://github.com/sirbrillig/spies/tree/v1.10.2"
+            },
+            "time": "2022-02-10T23:11:24+00:00"
         },
         {
             "name": "staabm/side-effects-detector",
