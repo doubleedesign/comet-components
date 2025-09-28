@@ -1,5 +1,4 @@
 @use '../mixins' as *;
-@use '../IconLinks/icon-links';
 
 .site-footer {
 	padding-block: var(--spacing-lg);
@@ -8,7 +7,7 @@
 		padding-block: var(--spacing-xl);
 	}
 
-	.container {
+	&__container {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -20,23 +19,18 @@
 		color: inherit;
 	}
 
-	&__icon-links {
-		@extend .icon-links;
-	}
-
 	&__menu {
 
-		&-list {
+		&__list {
 			display: block;
 
 			&__item {
 				display: block;
 				margin-block-end: var(--spacing-sm);
 			}
-
-			.menu-list {
-				margin-inline-start: 0;
-			}
 		}
+	}
+
+	&__icon-links {
 	}
 }

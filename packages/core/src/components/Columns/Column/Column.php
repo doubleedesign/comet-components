@@ -30,7 +30,7 @@ class Column extends LayoutComponent {
     }
 
     public function get_filtered_classes(): array {
-        $classes = array_merge([$this->shortName], parent::get_filtered_classes());
+        $classes = parent::get_filtered_classes();
 
         if (isset($this->width)) {
             $classes[] = 'columns__column--has-own-width';
@@ -41,8 +41,8 @@ class Column extends LayoutComponent {
 
     protected function get_inner_classes(): array {
         return [
-            $this->shortName . '__inner',
-            ...($this->context !== 'columns' ? [$this->context] : [])
+            $this->get_shortname() . '__inner',
+            ...($this->get_context() !== 'columns' ? [$this->get_context()] : [])
         ];
     }
 

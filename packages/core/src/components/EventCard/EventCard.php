@@ -91,10 +91,10 @@ class EventCard extends UIComponent {
     private function apply_context_to_inner_components($components, $append = ''): void {
         array_walk($components, function($component) use ($append) {
             if ($component instanceof Group || $component instanceof Heading) {
-                $component->set_context("{$this->context}__{$this->shortName}{$append}");
+                $component->update_context("{$this->get_context()}__{$this->get_shortname()}{$append}");
             }
             if ($component instanceof Group && $component->innerComponents) {
-                $this->apply_context_to_inner_components($component->innerComponents, "__{$component->shortName}");
+                $this->apply_context_to_inner_components($component->innerComponents, "__{$component->get_shortname()}");
             }
         });
     }
@@ -103,9 +103,9 @@ class EventCard extends UIComponent {
         $blade = BladeService::getInstance();
 
         // The context isn't available in the constructor if it was updated by the parent EventList, so we need to make some adjustments here
-        if ($this->context === 'events__list') {
+        if ($this->get_context() === 'events__list') {
             $this->tagName = Tag::LI;
-            $this->shortName = 'card';
+            $this->set_shortname('card');
             $this->apply_context_to_inner_components($this->innerComponents);
         }
 

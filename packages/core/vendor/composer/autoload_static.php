@@ -150,10 +150,11 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
             0 => __DIR__ . '/../..' . '/src/base/types',
             1 => __DIR__ . '/../..' . '/src/base/attributes',
             2 => __DIR__ . '/../..' . '/src/base/traits',
-            3 => __DIR__ . '/../..' . '/src/base/annotations',
-            4 => __DIR__ . '/../..' . '/src/base/components',
-            5 => __DIR__ . '/../..' . '/src/base',
-            6 => __DIR__ . '/../..' . '/src/services',
+            3 => __DIR__ . '/../..' . '/src/base/interfaces',
+            4 => __DIR__ . '/../..' . '/src/base/annotations',
+            5 => __DIR__ . '/../..' . '/src/base/components',
+            6 => __DIR__ . '/../..' . '/src/base',
+            7 => __DIR__ . '/../..' . '/src/services',
         ),
         'Doctrine\\Inflector\\' => 
         array (
@@ -291,7 +292,6 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
         'Doubleedesign\\Comet\\Core\\ContentImageAdvanced' => __DIR__ . '/../..' . '/src/components/ContentImageAdvanced/ContentImageAdvanced.php',
         'Doubleedesign\\Comet\\Core\\ContentImageBasic' => __DIR__ . '/../..' . '/src/components/ContentImageBasic/ContentImageBasic.php',
         'Doubleedesign\\Comet\\Core\\ContentImageComponent' => __DIR__ . '/../..' . '/src/base/components/ContentImageComponent.php',
-        'Doubleedesign\\Comet\\Core\\Context' => __DIR__ . '/../..' . '/src/base/traits/Context.php',
         'Doubleedesign\\Comet\\Core\\ContextHierarchy' => __DIR__ . '/../..' . '/src/base/traits/ContextHierarchy.php',
         'Doubleedesign\\Comet\\Core\\CopyBlock' => __DIR__ . '/../..' . '/src/components/CopyBlock/CopyBlock.php',
         'Doubleedesign\\Comet\\Core\\CoverImage' => __DIR__ . '/../..' . '/src/components/CoverImage/CoverImage.php',

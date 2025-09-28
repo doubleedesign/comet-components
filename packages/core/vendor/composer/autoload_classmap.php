@@ -117,7 +117,6 @@ return array(
     'Doubleedesign\\Comet\\Core\\ContentImageAdvanced' => $baseDir . '/src/components/ContentImageAdvanced/ContentImageAdvanced.php',
     'Doubleedesign\\Comet\\Core\\ContentImageBasic' => $baseDir . '/src/components/ContentImageBasic/ContentImageBasic.php',
     'Doubleedesign\\Comet\\Core\\ContentImageComponent' => $baseDir . '/src/base/components/ContentImageComponent.php',
-    'Doubleedesign\\Comet\\Core\\Context' => $baseDir . '/src/base/traits/Context.php',
     'Doubleedesign\\Comet\\Core\\ContextHierarchy' => $baseDir . '/src/base/traits/ContextHierarchy.php',
     'Doubleedesign\\Comet\\Core\\CopyBlock' => $baseDir . '/src/components/CopyBlock/CopyBlock.php',
     'Doubleedesign\\Comet\\Core\\CoverImage' => $baseDir . '/src/components/CoverImage/CoverImage.php',

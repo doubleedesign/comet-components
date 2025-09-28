@@ -48,8 +48,8 @@ class Container extends LayoutComponent {
             // Replace BEM name (context + shortname) with just the context
             // (with a wrapper, it should have the context on the wrapper and the BEM name here)
             $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_prefix());
-            array_push($classes, $this->context);
-            $filtered = array_unique(array_merge($classes, [$this->shortName]));
+            array_push($classes, $this->get_context());
+            $filtered = array_unique(array_merge($classes, [$this->get_context()]));
         }
         else if ($this->isNested) {
             array_push($classes, $this->get_bem_prefix());
@@ -62,10 +62,10 @@ class Container extends LayoutComponent {
 
         // Sort them so the context is always first if present
         usort($filtered, function($a, $b) {
-            if ($a === $this->context) {
+            if ($a === $this->get_context()) {
                 return -1;
             }
-            if ($b === $this->context) {
+            if ($b === $this->get_context()) {
                 return 1;
             }
 
@@ -104,10 +104,10 @@ class Container extends LayoutComponent {
      */
     protected function get_outer_classes(): array {
         if ($this->isNested) {
-            return !empty($this->context) ? [$this->context] : [];
+            return !empty($this->get_context()) ? [$this->get_context()] : [];
         }
 
-        return [$this->context, 'layout-block', 'page-section'];
+        return [$this->get_context(), 'layout-block', 'page-section'];
     }
 
     /**

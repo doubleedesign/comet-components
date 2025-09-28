@@ -109,7 +109,7 @@ class SiteHeader extends LayoutComponent {
         $responsiveGroupIndex = 0;
         $responsiveInnerComponents = [];
         foreach ($innerComponents as $index => $component) {
-            if ($component instanceof Group && $component->context === 'responsive') {
+            if ($component instanceof Group && $component->get_context() === 'responsive') {
                 $responsiveInnerComponents = $component->innerComponents;
                 $responsiveGroupIndex = $index;
             }
@@ -180,7 +180,7 @@ class SiteHeader extends LayoutComponent {
                 'breakpoint' => null,
                 'classes'    => $this->get_filtered_classes(),
                 'attributes' => $this->get_html_attributes(),
-                'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false, 'context' => $this->shortName], $this->innerComponents)]
+                'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false, 'context' => $this->get_shortname()], $this->innerComponents)]
             ])->render();
         }
         else {

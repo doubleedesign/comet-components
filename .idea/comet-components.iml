@@ -17,12 +17,12 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas-classic/src" isTestSource="false" packagePrefix="Doubleedesign\CometCanvas\Classic\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\Classic\" />
-      <sourceFolder url="file://$MODULE_DIR$/packages/core/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas-classic/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests/common" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/tests/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/test/common" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/interfaces" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />

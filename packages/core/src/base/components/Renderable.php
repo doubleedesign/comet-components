@@ -3,6 +3,8 @@ namespace Doubleedesign\Comet\Core;
 use ReflectionClass;
 
 abstract class Renderable {
+    use ContextHierarchy;
+
     /**
      * @var array<string, string|int|array|null> $rawAttributes
      * @description Raw attributes passed to the component constructor as key-value pairs
@@ -34,19 +36,6 @@ abstract class Renderable {
     protected ?array $style = null;
 
     /**
-     * The dot-delimited path to the Blade template file
-     *
-     * @var string
-     */
-    protected string $bladeFile = '';
-
-    /**
-     * @var string $shortName
-     * @description The name of the component without any namespacing, prefixes, etc. Derived from the Blade filename by default.
-     */
-    protected string $shortName = '';
-
-    /**
      * @var string|null $testId
      * @description Optionally add a data-testid attribute for automated tests
      */
@@ -61,19 +50,19 @@ abstract class Renderable {
         $this->bladeFile = $bladeFile;
         $this->testId = $attributes['testId'] ?? null;
 
-        // If we are in WordPress, allow overriding Blade template from the theme
-        if (class_exists('WP_Block') && function_exists('get_template_directory') && function_exists('get_stylesheet_directory')) {
-            $themeBladeFile = get_stylesheet_directory() . "/components/{$this->shortName}.blade.php";
-            if (file_exists($themeBladeFile)) {
-                $this->bladeFile = "components.{$this->shortName}";
-            }
-            else {
-                $parentThemeBladeFile = get_template_directory() . "/components/{$this->shortName}.blade.php";
-                if (file_exists($parentThemeBladeFile)) {
-                    $this->bladeFile = str_replace('/', '\\', $parentThemeBladeFile);
-                }
-            }
-        }
+        // FIXME If we are in WordPress, allow overriding Blade template from the theme
+        //        if (class_exists('WP_Block') && function_exists('get_template_directory') && function_exists('get_stylesheet_directory')) {
+        //            $themeBladeFile = get_stylesheet_directory() . "/components/{$this->shortName}.blade.php";
+        //            if (file_exists($themeBladeFile)) {
+        //                $this->bladeFile = "components.{$this->shortName}";
+        //            }
+        //            else {
+        //                $parentThemeBladeFile = get_template_directory() . "/components/{$this->shortName}.blade.php";
+        //                if (file_exists($parentThemeBladeFile)) {
+        //                    $this->bladeFile = str_replace('/', '\\', $parentThemeBladeFile);
+        //                }
+        //            }
+        //        }
 
         // If a CSS and/or JS file is in the directory, add it/them to the asset loader if it's available
         if (class_exists('Doubleedesign\Comet\Core\Assets')) {

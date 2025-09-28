@@ -1,10 +1,12 @@
-.icon-links {
+@use '../bem-mixin' as *;
+
+@include bem-block('icon-links', ('item')) {
 	display: flex;
 	gap: var(--spacing-sm);
 	padding: 0 var(--spacing-sm);
 
 	&__item {
-		font-size: 2rem;
+		font-size: 1.5rem;
 		display: inline-block;
 		text-decoration: none;
 

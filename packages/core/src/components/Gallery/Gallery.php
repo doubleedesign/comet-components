@@ -39,7 +39,7 @@ class Gallery extends UIComponent {
     public function __construct(array $attributes, array $innerComponents) {
         $this->imageCrop = $attributes['imageCrop'] ?? $this->imageCrop;
         $innerComponentsWithContext = array_map(function(ContentImageBasic $component) use ($attributes) {
-            $component->set_context('gallery');
+            $component->update_context('gallery');
             $component->set_behaviour($this->imageCrop ? 'cover' : 'contain');
 
             return $component;

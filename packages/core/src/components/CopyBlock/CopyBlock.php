@@ -19,9 +19,11 @@ class CopyBlock extends Group {
     protected bool $isNested = false;
 
     public function __construct(array $attributes, array $innerComponents) {
+        if (!isset($attributes['shortName'])) {
+            $attributes['shortName'] = 'copy-block';
+        }
+
         $this->isNested = $attributes['isNested'] ?? $this->isNested;
-        // Group allows for custom shortname from $attributes; default to copy-block if not set (otherwise it would be group)
-        $this->shortName = $attributes['shortName'] ?? 'copy-block';
 
         if (!isset($attributes['tagName']) && !$this->isNested) {
             $this->tagName = Tag::SECTION;
@@ -32,7 +34,7 @@ class CopyBlock extends Group {
             $innerAttrs = array_merge(
                 Utils::array_pick($attributes, ['colorTheme', 'isNested']),
                 [
-                    'context'   => ($this->shortName ?? 'copy-block') . '__container',
+                    'context'   => ($this->get_shortname() ?? 'copy-block') . '__container',
                     'shortName' => 'inner'
                 ]
             );
@@ -52,6 +54,7 @@ class CopyBlock extends Group {
         }
 
         parent::__construct($attributes, $innerComponents);
+
     }
 
     public function get_filtered_classes(): array {

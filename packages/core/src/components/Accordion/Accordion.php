@@ -38,14 +38,14 @@ class Accordion extends PanelGroupComponent {
     public function get_container_attributes(): array {
         return [
             'withWrapper'     => true,
-            'classes'         => [$this->context ? "{$this->context}__{$this->shortName}-wrapper" : "{$this->shortName}-wrapper"],
+            'classes'         => [$this->get_context() ? "{$this->get_context()}__{$this->get_shortname()}-wrapper" : "{$this->get_shortname()}-wrapper"],
             'size'            => $this->size ?? null
         ];
     }
 
     public function get_intro_attributes(): array {
         $attrs = [
-            'class' => $this->context ? "{$this->context}__{$this->shortName}-intro" : "{$this->shortName}-intro"
+            'class' => $this->get_context() ? "{$this->get_context()}__{$this->get_shortname()}-intro" : "{$this->get_shortname()}-intro"
         ];
 
         if ($this->colorTheme) {

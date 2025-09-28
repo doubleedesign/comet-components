@@ -1,5 +1,4 @@
 <?php
-/** @noinspection MultipleExpectChainableInspection */
 use Doubleedesign\Comet\Core\{BlockElementModifier};
 
 /**
@@ -16,20 +15,12 @@ function create_component_with_bem_trait(string $bladeFile, ?string $context = n
     return new class($bladeFile, $context, $shortName) {
         use BlockElementModifier;
         protected array $classes = [];
-        protected ?string $context = null;
-        protected string $shortName = '';
 
         public function __construct($bladeFile, $context, $shortName) {
-            $this->shortName = $shortName;
-            $this->context = $context;
-            $this->init_bem_classes($bladeFile);
+            $this->init_bem_structure($bladeFile, $context, $shortName);
         }
     };
 }
-
-afterEach(function() {
-    Mockery::close();
-});
 
 describe('Component is the block (top-level)', function() {
     test('default result', function() {
@@ -47,7 +38,7 @@ describe('Component is the block (top-level)', function() {
     test('with explicit context', function() {
         $component = create_component_with_bem_trait('components.Accordion.accordion', 'test-wrapper');
 
-        expect($component->get_bem_structure())->toEqual([
+        expect($component->get_bem_structure())->toMatchArray([
             'block'    => 'test-wrapper',
             'element'  => 'accordion',
             'modifier' => null
@@ -214,7 +205,8 @@ describe('Component is the element (nested)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['panel__title']);
     });
 
-    test('with repeated words that are not in the chain format that should be transformed', function() {
+    test('repeated words that are not at the start of component names should not be stripped', function() {
+        // Menu is the repeated word here but submenu should be kept because Menu is not at the start
         $component = create_component_with_bem_trait('components.Menu.SubMenu.sub-menu');
 
         expect($component->get_bem_structure())->toMatchArray([
@@ -226,7 +218,7 @@ describe('Component is the element (nested)', function() {
     });
 });
 
-// TODO: May need more explicit shortname handling in these cases
+// TODO: May need to test explicit shortname handling more in these cases
 describe('Component is the element (deeply nested)', function() {
 
     describe('where each level is prefixed by the preceding level component name', function() {
@@ -244,14 +236,14 @@ describe('Component is the element (deeply nested)', function() {
         });
 
         test('explicit context is prepended', function() {
-            $component = create_component_with_bem_trait('components.Menu.MenuList.MenuListItem.menu-list-item', 'navigation');
+            $component = create_component_with_bem_trait('components.Menu.MenuList.MenuListItem.menu-list-item', 'site-header');
 
             expect($component->get_bem_structure())->toMatchArray([
-                'block'    => 'navigation__menu__list',
+                'block'    => 'site-header__menu__list',
                 'element'  => 'item',
                 'modifier' => null
             ])
-                ->and($component->get_bem_classes())->toMatchArray(['navigation__menu__list__item']);
+                ->and($component->get_bem_classes())->toMatchArray(['site-header__menu__list__item']);
 
         });
     });
@@ -282,15 +274,40 @@ describe('Component is the element (deeply nested)', function() {
         });
     });
 
-    test('repeated words that are not at the start of component names should not be stripped', function() {
-        // Menu is the repeated word here but submenu should be kept because Menu is not at the start
-        $component = create_component_with_bem_trait('components.Menu.SubMenu.SubMenuItem.sub-menu-item');
+    describe('where the end of the block name matches the start of the element name', function() {
 
-        expect($component->get_bem_structure())->toMatchArray([
-            'block'    => 'menu__sub-menu',
-            'element'  => 'item',
-            'modifier' => null
-        ])
-            ->and($component->get_bem_classes())->toMatchArray(['menu__sub-menu__item']);
+        test('kebab-cased words at the start of the element that match the end of the block should be stripped', function() {
+            $component = create_component_with_bem_trait('components.Menu.SubMenu.SubMenuItem.sub-menu-item');
+
+            expect($component->get_bem_structure())->toMatchArray([
+                'block'    => 'menu__sub-menu',
+                'element'  => 'item',
+                'modifier' => null
+            ])
+                ->and($component->get_bem_classes())->toMatchArray(['menu__sub-menu__item']);
+        });
+
+        test('if the element is a single word that matches the end of the block, it should not be made empty', function() {
+            $component = create_component_with_bem_trait('components.Menu.SubMenu.SubMenuItem.item');
+
+            expect($component->get_bem_structure())->toMatchArray([
+                'block'    => 'menu__sub-menu',
+                'element'  => 'item',
+                'modifier' => null
+            ])
+                ->and($component->get_bem_classes())->toMatchArray(['menu__sub-menu__item']);
+        });
+
+        test('explicit context is prepended', function() {
+            $component = create_component_with_bem_trait('components.Menu.SubMenu.SubMenuItem.sub-menu-item', 'site-header');
+
+            expect($component->get_bem_structure())->toMatchArray([
+                'block'    => 'site-header__menu__sub-menu',
+                'element'  => 'item',
+                'modifier' => null
+            ])
+                ->and($component->get_bem_classes())->toMatchArray(['site-header__menu__sub-menu__item']);
+
+        });
     });
 });

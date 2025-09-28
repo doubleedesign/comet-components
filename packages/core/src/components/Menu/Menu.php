@@ -30,44 +30,54 @@ class Menu extends UIComponent {
      */
     public function __construct(array $attributes, array $menuItems) {
         $this->rawMenuData = $menuItems;
-        $innerComponents = [
-            new MenuList($attributes, $this->array_to_items($menuItems, $attributes['context'] ?? ''))
-        ];
 
-        parent::__construct($attributes, $innerComponents, 'components.Menu.menu');
+        parent::__construct($attributes, [], 'components.Menu.menu');
+        $this->innerComponents = [
+            new MenuList($attributes, $this->array_to_items($menuItems, 1, $this->get_context()))
+        ];
     }
 
     /**
      * @param  array  $items
+     * @param  int  $level
      * @param  string|null  $context
      *
      * @return array<MenuListItem>
      */
-    private function array_to_items(array $items, ?string $context = ''): array {
-        return array_map(function($item) use ($context) {
+    private function array_to_items(array $items, int $level, ?string $context = ''): array {
+        return array_map(function($item) use ($level, $context) {
             $itemObject = new MenuListItem(
                 [
-                    'id'              => $item['id'] ?? null,
+                    'id'              => $item['id'] ?? Utils::kebab_case($item['title']),
                     'classes'         => $item['classes'] ?? '',
-                    'context'         => $context ? "{$context}__menu-list" : 'menu-list',
-                    'isCurrentParent' => $item['isCurrentParent'] ?? 'false'
+                    'isCurrentParent' => $item['isCurrentParent'] ?? 'false',
+                    'context'         => $context,
+                    'shortName'       => 'item'
                 ],
                 [
                     new Link(
                         array_merge(
                             $item['link_attributes'] ?? [],
-                            ['context' => $context ? "{$context}__menu-list__item" : 'menu-list__item']
+                            ['context' => $level > 1 && $context
+                                ? "{$context}__item"
+                                : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
+                            ]
                         ),
                         $item['title']
                     )
                 ]
             );
 
+            if ($level > 1) {
+                $itemObject->set_bem_block($context);
+                $itemObject->update_context($context, true);
+            }
+
             // Handle nested lists
             if (!empty($item['children'])) {
                 $itemObject->innerComponents[] = new MenuList(
-                    [],
-                    $this->array_to_items($item['children'])
+                    ['context' => $context, 'shortName' => 'sub-menu'],
+                    $this->array_to_items($item['children'], $level + 1, "{$context}__menu__sub-menu")
                 );
             }
 
@@ -106,7 +116,7 @@ class Menu extends UIComponent {
                 ...$item->get_html_attributes(),
                 'id'              => $item->get_id(),
                 'title'           => $link->get_content(),
-                'classes'         => array_merge($item->get_filtered_classes()),
+                'classes'         => $item->get_filtered_classes(),
                 'link_attributes' => $linkAttrs,
                 'children'        => !empty($children) ? $this->get_raw_menu_data($children) : []];
         }, $list);

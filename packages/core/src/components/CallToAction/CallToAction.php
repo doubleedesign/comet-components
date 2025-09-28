@@ -58,7 +58,7 @@ class CallToAction extends Container {
             // Replace BEM name (context + shortname) with just the context
             // (with a wrapper, it should have the context on the wrapper and the BEM name here)
             $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_prefix());
-            array_push($classes, $this->context);
+            array_push($classes, $this->get_context());
         }
 
         array_push($classes, 'container');

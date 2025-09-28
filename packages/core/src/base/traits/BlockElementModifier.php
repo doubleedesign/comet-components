@@ -1,78 +1,97 @@
 <?php
 namespace Doubleedesign\Comet\Core;
+use Exception;
 
+/**
+ *  TODO: This and ContextHierarchy are very tightly coupled.
+ *        The separation is largely for dev readability/understanding (as well as not having BEM stuff in classes that won't use it),
+ *        but given they call each other's methods it's probably a code smell that should be tidied up.
+ */
 trait BlockElementModifier {
-    use Context;
     use ContextHierarchy;
+
+    /**
+     * @var string $shortName
+     * @description The name of the component without any namespacing, prefixes, etc.
+     *              Derived from the Blade filename if not explicitly set.
+     */
+    private string $shortName = '';
+    private ?string $explicit_context = null;
     private string $block = '';
     private ?string $element = null;
     private ?string $modifier = null;
     private int $levelsDeep = 0;
 
-    /**
-     * @var string $shortName
-     * @description The short name of the component, derived from the blade file name by default.
-     */
-    protected string $shortName = '';
+    protected function init_bem_structure(string $bladeFile, ?string $override_context = null, ?string $override_shortname = null): static {
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $this->init_context($bladeFile)
+            ->with_explicit_context($override_context)
+            ->and_bem($override_shortname);
 
-    protected function init_bem_classes($bladeFile): void {
-        $this->shortName = !empty($this->shortName) ? $this->shortName : array_reverse(explode('.', $bladeFile))[0];
-        // If the component does not have explicitly set context, derive it from the blade file path
-        $this->context = $this->init_context_from_blade_file($bladeFile, $this->context);
+        return $this;
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function and_bem(?string $override_shortname): void {
+        if (empty($this->bladeFile)) {
+            throw new Exception('Blade file not set. Ensure init_context() has been called first, or call init_bem_structure() instead.');
+        }
+
+        if ($override_shortname) {
+            $attributes['shortName'] = $override_shortname;
+        }
+        $this->shortName = isset($attributes['shortName']) ? (string)$attributes['shortName'] : array_reverse(explode('.', $this->bladeFile))[0];
+
+        $final_context = $this->get_context(); // gets it from the Context trait
 
         // Determine how many levels deep we are for multi-level elements
-        if (!empty($this->context) && str_contains($this->context, '__')) {
-            $this->levelsDeep = count(explode('__', $this->context));
+        if (!empty($final_context) && str_contains($final_context, '__')) {
+            $this->levelsDeep = count(explode('__', $final_context));
         }
 
         // If no context, this is probably a top-level component, so it is the block
-        if (empty($this->context)) {
-            $this->set_bem_block($this->shortName);
+        if (empty($final_context)) {
+            $this->set_bem_block($this->get_shortname());
         }
         else {
-            $this->set_bem_block($this->context);
-            $this->set_bem_element($this->shortName);
+            $this->set_bem_block($final_context);
+            $this->set_bem_element($this->get_shortname());
         }
-
-        $this->classes = array_unique(
-            array_merge(
-                $this->get_bem_classes(),
-                $this->classes
-            )
-        );
     }
 
+    // TODO: If this is set from outside, do we then need to update the element?
     public function set_bem_block(string $block): void {
         $this->block = $block;
     }
 
+    // TODO: If this is set from outside, how to handle context? Do we need to?
     public function set_bem_element(?string $element): void {
+        if ($this->implicit_context === null) {
+            $this->element = $element;
 
-        // Handle multi-level e.g., menu-list-item with context (and block) menu__list should be "item" for the element
-        if ($this->levelsDeep > 1 && str_contains($element, '-')) {
-            $kebabBlock = str_replace('__', '-', $this->block);
-            // Transform cases like MenuList -> MenuListItem to MenuList -> Item
-            if (str_starts_with($element, $kebabBlock)) {
-                $element = str_replace($kebabBlock . '-', '', $element);
-            }
-            // Transform cases like CardContent -> CardImage to CardContent -> Image
-            else {
-                $blockParts = explode('__', $this->block);
-                $componentParts = explode('-', $element);
-                $end = Utils::array_diff_end($componentParts, $blockParts);
-                $element = join('-', $end);
-            }
+            return;
         }
 
-        // Transform duplicate naming in one level so that things like card -> card-body will become card__body not card__card-body
-        else if (str_contains($element, $this->context)) {
-            $element = str_replace($this->context . '-', '', $element);
-        }
+        // Where the element matches the block, remove repetition
+        // e.g., menu-list -> menu-list-item becomes menu-list -> item
+        $compareTo = preg_split('/(-|__)/', $this->implicit_context);
+        $componentParts = explode('-', $element);
+        $endDiff = Utils::array_diff_end($componentParts, $compareTo);
+        $element = join('-', $endDiff);
 
-        // ...also if there was explicit context added in any case, handle that
-        $splitContext = $this->context ? explode('__', $this->context) : [];
-        if (!empty($splitContext) && str_contains($element, end($splitContext))) {
-            $element = str_replace(end($splitContext) . '-', '', $element);
+        // Handle where a kebab-cased element matches the end of a block after the above transformation
+        // e.g., Menu -> SubMenu -> SubMenuItem would be menu__sub-menu -> sub-menu-item, but we want just item for the element
+        if ($this->levelsDeep > 1) {
+            $blockParts = explode('__', $this->block);
+            $blockEnd = end($blockParts);
+            $blockEndParts = explode('-', $blockEnd);
+            $itemParts = explode('-', $element);
+            if (count($blockEndParts) > 1 && count($itemParts) > 1) {
+                $endDiff = Utils::array_diff_end($itemParts, $blockEndParts);
+                $element = join('-', $endDiff);
+            }
         }
 
         $this->element = $element;
@@ -120,8 +139,20 @@ trait BlockElementModifier {
         ]);
     }
 
+    public function get_filtered_classes(): array {
+        return array_unique(
+            array_merge(
+                $this->get_bem_classes(),
+                $this->classes
+            )
+        );
+    }
+
     public function get_bem_prefix(): string {
         return $this->get_bem_classes()[0];
     }
 
+    public function get_shortname(): string {
+        return $this->shortName;
+    }
 }

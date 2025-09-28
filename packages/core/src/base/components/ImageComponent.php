@@ -5,7 +5,6 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 abstract class ImageComponent extends Renderable {
     use BlockElementModifier;
-    use Context;
 
     /**
      * @var string $src
@@ -37,10 +36,8 @@ abstract class ImageComponent extends Renderable {
         $this->alt = $attributes['alt'] ?? '';
         $this->title = $attributes['title'] ?? null;
         $this->classes = $attributes['classes'] ?? [];
-        $this->shortName = 'image';
         parent::__construct($attributes, $bladeFile);
-        $this->set_context_from_attributes($attributes);
-        $this->init_bem_classes($bladeFile);
+        $this->init_bem_structure($bladeFile, @$attributes['context'], $attributes['shortName'] ?? 'image');
     }
 
     protected function get_html_attributes(): array {
@@ -52,9 +49,5 @@ abstract class ImageComponent extends Renderable {
                 'title' => $this->title
             ]
         );
-    }
-
-    public function get_bem_prefix() {
-        return array_reverse($this->get_bem_classes())[0] ?? $this->shortName;
     }
 }

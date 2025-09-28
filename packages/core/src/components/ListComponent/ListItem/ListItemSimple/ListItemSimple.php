@@ -11,7 +11,7 @@ class ListItemSimple extends TextElementExtended {
     }
 
     public function get_bem_prefix(): string {
-        if ($this->context && str_ends_with($this->context, '__list')) {
+        if ($this->get_context() && str_ends_with($this->get_context(), '__list')) {
             return str_replace('list-item', 'item', parent::get_bem_prefix());
         }
 
@@ -28,7 +28,7 @@ class ListItemSimple extends TextElementExtended {
             // Workaround for TextElement's sanitisation stripping aria attributes out of rendered link output passed as $content in breadcrumbs,
             // because HTML Purifier simply would not cooperate
             // and we generally expect to have enough control over breadcrumb input data this is probably ok
-            'content'    => $this->context ? $this->content : Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
+            'content'    => $this->get_context() ? $this->content : Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
         ])->render();
     }
 }

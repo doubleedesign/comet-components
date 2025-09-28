@@ -37,12 +37,10 @@ class EventList extends UIComponent {
         // Automatically add event-list context to the cards if they don't already have their own context set
         // Modify components in place rather than copying because it's more performant
         array_walk($innerComponents, function($card) {
-            if ($card instanceof EventCard && !$card->context) {
-                $card->set_context('events__list');
+            if ($card instanceof EventCard && !$card->get_context()) {
+                $card->update_context('events__list');
             }
         });
-
-        $this->shortName = 'events__list';
     }
 
     protected function get_html_attributes(): array {

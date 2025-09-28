@@ -46,7 +46,6 @@ class ContentImageBasic extends ContentImageComponent {
         $this->height = $attributes['height'] ?? null;
         $this->width = $attributes['width'] ?? null;
         $this->href = $attributes['href'] ?? null;
-        $this->set_bem_modifier('basic');
     }
 
     /**

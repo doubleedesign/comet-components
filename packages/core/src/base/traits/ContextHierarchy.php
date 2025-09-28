@@ -3,35 +3,82 @@ namespace Doubleedesign\Comet\Core;
 
 use Exception;
 
+/**
+ * Trait to manage component context and shortName.
+ * Used within the BlockElementModifier trait for BEM naming,
+ * but can also be used by components not implementing BEM that require context/shortname awareness and overriding ability.
+ *
+ * TODO: This and BlockElementModifier are very tightly coupled.
+ *       The separation is largely for dev readability/understanding (as well as not having BEM stuff in classes that won't use it),
+ *       but given they call each other's methods it's probably a code smell that should be tidied up.
+ */
 trait ContextHierarchy {
-    private string $shortName = '';
+    /**
+     * @var ?string $context
+     * @description By default, the kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).
+     *              Can alternatively be explicitly set at the component level; kebab-case format is expected.
+     *              Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.
+     */
+    private ?string $context = null;
+    private ?string $implicit_context = null;
+    private ?string $explicit_context = null;
+    private ?string $default_shortName = null;
+
+    /**
+     * @var array $hierarchy
+     * @description The hierarchy of component names derived from the Blade file path
+     */
     private array $hierarchy = [];
-    private ?string $assumed_context = '';
+
+    /**
+     * The dot-delimited path to the Blade template file
+     *
+     * @var string
+     */
+    protected string $bladeFile = '';
+
+    public function get_context(): ?string {
+        return $this->context;
+    }
+
+    protected function init_context(string $bladeFile): static {
+        $this->bladeFile = $bladeFile;
+
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $this->init_from_blade_file($bladeFile);
+
+        return $this;
+    }
 
     /**
      * Initially set context according to some assumptions based on the blade file path.
-     * Some components may override this method to provide more specific or customised context.
      * This supports components that are intended to be nested as shown by being nested in the directory structure,
      * such as accordion panels, columns, etc., to have a multi-element BEM class structure out-of-the-box.
      *
      * @param  string  $bladeFile
      *
      * @return ContextHierarchy
+     * @throws Exception
      */
-    protected function init_context_from_blade_file(string $bladeFile): static {
-        $this->shortName = array_reverse(explode('.', $bladeFile))[0];
+    private function init_from_blade_file(string $bladeFile): static {
+        if (empty($this->bladeFile)) {
+            throw new Exception('ContextHierarchy: Blade filename not set. Ensure init_context() has been called first.');
+        }
+
+        $this->default_shortName = array_reverse(explode('.', $bladeFile))[0];
         $this->prepare_hierarchy($bladeFile);
 
-        // Top-level component -> no context
+        // Top-level component -> no implicit context
         if (count($this->hierarchy) <= 1) {
-            $this->assumed_context = null;
+            $this->implicit_context = null;
 
             return $this;
         }
 
         // First-level child -> return the parent component name
         if (count($this->hierarchy) == 2) {
-            $this->assumed_context = strtolower($this->hierarchy[0]);
+            $this->implicit_context = strtolower($this->hierarchy[0]);
+            $this->context = $this->implicit_context;
 
             return $this;
         }
@@ -56,9 +103,64 @@ trait ContextHierarchy {
             return array_merge($carry, [$end]);
         }, [strtolower($hierarchy[0])]);
 
-        $this->assumed_context = join('__', array_map('strtolower', $simplified));
+        $this->implicit_context = join('__', array_map('strtolower', $simplified));
+        $this->context = $this->implicit_context;
 
         return $this;
+    }
+
+    /**
+     * Account for explicitly set context when determining the final context to use.
+     *
+     * @param  string|null  $explicit_context
+     *
+     * @return ContextHierarchy
+     * @throws Exception
+     */
+    protected function with_explicit_context(?string $explicit_context): static {
+        if (empty($this->hierarchy)) {
+            throw new Exception('Context hierarchy not prepared. Ensure init_from_blade_file() has been called first.');
+        }
+
+        // If no explicit context was given, do nothing
+        if ($explicit_context === null) {
+            return $this;
+        }
+
+        // If the explicit context matches the component's own shortName, ignore it
+        // Note: On first call, shortName might not be set yet because BEM initialisation happens after context initialisation
+        // - that's why we also check against default_shortName; this can result in some edge cases with explicit shortnames that need handling.
+        if ($explicit_context === $this->default_shortName || (method_exists($this, 'get_shortname') && $explicit_context === $this->get_shortname())) {
+            return $this;
+        }
+
+        // Don't double up
+        if ($this->implicit_context === $explicit_context) {
+            return $this;
+        }
+
+        // If this is a top-level component or has no implicit context for some other reason, return the explicitly provided context as-is
+        if ($this->implicit_context === null) {
+            $this->explicit_context = $explicit_context;
+            $this->context = $explicit_context;
+
+            return $this;
+        }
+
+        $this->explicit_context = $explicit_context;
+        $this->context = $explicit_context . '__' . $this->implicit_context;
+
+        return $this;
+    }
+
+    public function update_context(string $context, ?bool $clear_previous = false): void {
+        if ($clear_previous) {
+            $this->context = $context;
+        }
+        else {
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $this->with_explicit_context($context)->and_bem($this->shortName);
+        }
     }
 
     private function prepare_hierarchy(string $bladeFile): void {
@@ -72,35 +174,5 @@ trait ContextHierarchy {
         array_pop($hierarchy);
 
         $this->hierarchy = $hierarchy;
-    }
-
-    /**
-     * Account for explicitly set context when determining the final context to use.
-     *
-     * @param  string|null  $explicit_context
-     *
-     * @return string|null
-     * @throws Exception
-     */
-    protected function with_explicit_context(?string $explicit_context): ?string {
-        if (empty($this->hierarchy) || empty($this->shortName)) {
-            throw new Exception('ContextHierarchy trait not initialised. Please call init_context_from_blade_file() before calling add_explicit_context().');
-        }
-
-        // If the explicit context is the same as the current component name or the assumed context, don't double up
-        if ($this->shortName === $explicit_context || $this->assumed_context === $explicit_context) {
-            return $this->assumed_context;
-        }
-
-        // If this is a top-level component or has no assumed context for some other reason, return the explicitly provided context as-is
-        if ($this->assumed_context === null) {
-            return $explicit_context;
-        }
-
-        return $explicit_context . '__' . $this->assumed_context;
-    }
-
-    public function get_basic_context(): ?string {
-        return $this->assumed_context;
     }
 }

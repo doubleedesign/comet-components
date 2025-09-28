@@ -12,7 +12,6 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::A)]
 class Link extends Renderable {
     use BlockElementModifier;
-    use Context;
     use Icon;
 
     /**
@@ -30,10 +29,9 @@ class Link extends Renderable {
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, 'components.Link.link');
         $this->content = $content;
-        $this->set_context_from_attributes($attributes);
-        $this->init_bem_classes('components.Link.link');
+        $this->init_bem_structure('components.Link.link', @$attributes['context'], @$attributes['shortName']);
 
-        if (!isset($attributes['icon']) && $this->context === 'link-group') {
+        if (!isset($attributes['icon']) && $this->get_context() === 'link-group') {
             if (isset($attributes['target']) && $attributes['target'] === '_blank') {
                 $attributes['icon'] = 'fa-arrow-up-right-from-square';
             }

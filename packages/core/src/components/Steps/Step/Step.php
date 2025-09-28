@@ -11,7 +11,6 @@ class Step extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Steps.Step.step');
-        $this->context = 'steps';
     }
 
     protected function get_inner_classes(): array {

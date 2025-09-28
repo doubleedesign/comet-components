@@ -22,15 +22,6 @@ class MenuListItem extends UIComponent {
         return $attributes;
     }
 
-    public function get_bem_prefix(): string {
-        // Lil hack to fix the BEM name when there is context because it's not *quite* working as designed
-        if (isset($this->context)) {
-            return "{$this->context}__item";
-        }
-
-        return parent::get_bem_prefix();
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

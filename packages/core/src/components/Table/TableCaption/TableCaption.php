@@ -14,7 +14,6 @@ class TableCaption extends TextElement {
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, $content, 'components.Table.TableCaption.table-caption');
         $this->set_text_align_from_attrs($attributes);
-        $this->context = 'table';
         $this->position = $attributes['position'] ?? $this->position;
     }
 

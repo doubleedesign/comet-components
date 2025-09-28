@@ -6,6 +6,5 @@ namespace Doubleedesign\Comet\Core;
 class TabPanel extends PanelComponent {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Tabs.TabPanel.tab-panel');
-        $this->context = 'tabs';
     }
 }

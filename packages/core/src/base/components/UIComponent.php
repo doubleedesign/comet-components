@@ -5,7 +5,6 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 abstract class UIComponent extends Renderable {
     use BlockElementModifier;
-    use Context;
 
     /**
      * @var array<Renderable> $innerComponents
@@ -22,10 +21,8 @@ abstract class UIComponent extends Renderable {
      */
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $bladeFile);
-        $this->context = isset($attributes['context']) ? (string)$attributes['context'] : $this->context;
+        $this->init_bem_structure($bladeFile, @$attributes['context'], @$attributes['shortName']);
         $this->innerComponents = $innerComponents;
-        $this->set_context_from_attributes($attributes);
-        $this->init_bem_classes($bladeFile);
     }
 
     public function get_filtered_classes(): array {

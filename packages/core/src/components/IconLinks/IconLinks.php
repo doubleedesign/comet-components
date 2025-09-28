@@ -4,6 +4,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class IconLinks extends Renderable {
+    use BlockElementModifier;
     use LayoutAlignment;
     use LayoutOrientation;
 
@@ -23,6 +24,7 @@ class IconLinks extends Renderable {
 
     public function __construct(array $attributes, array $links) {
         parent::__construct($attributes, 'components.IconLinks.icon-links');
+        $this->init_bem_structure('components.IconLinks.icon-links', @$attributes['context'], @$attributes['shortName']);
         $this->set_layout_alignment_from_attrs($attributes, Alignment::CENTER);
         $this->set_orientation_from_attrs($attributes, Orientation::HORIZONTAL);
         $this->links = $links;
@@ -54,7 +56,8 @@ class IconLinks extends Renderable {
             'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'iconPrefix' => $this->iconPrefix,
-            'items'      => $this->links
+            'items'      => $this->links,
+            'itemClass'  => $this->get_bem_prefix() . '__item',
         ])->render();
     }
 }
