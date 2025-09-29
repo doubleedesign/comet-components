@@ -1,30 +1,8 @@
 @use '../mixins' as *;
 @use '../variables' as *;
+@use '../bem-mixin' as *;
 
-.page-section {
-	@include section-padding();
-	@each $name, $color in $colors {
-		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
-			padding-block-start: 0;
-		}
-	}
-
-	// Treat no-background containers the same as those with the same solid background
-	&:not([data-background]) + &:not([data-background]) {
-		padding-block-start: 0;
-	}
-
-	// Can't use ends with (class$="__container") because other classes like .layout-block can be appended :(
-	// (this is one of the reasons minimising the number of classes is a good idea...)
-	// Using the direct child combinator (>) will catch most intended use cases while reducing the risk of catching unintended nested elements
-	// which just means some other elements that are not inside .page-section and are not .container
-	// but are a BEM __container and should behave like one need to extend .container as well
-	> [class*="__container"] {
-		@extend .container;
-	}
-}
-
-.container {
+@include bem-block('container') {
 	margin: 0 auto;
 	container-type: inline-size;
 	width: 100%;

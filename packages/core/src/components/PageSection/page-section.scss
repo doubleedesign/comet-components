@@ -1,0 +1,17 @@
+@use '../mixins' as *;
+@use '../variables' as *;
+
+.page-section {
+	@include section-padding();
+
+	@each $name, $color in $colors {
+		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
+			padding-block-start: 0;
+		}
+	}
+
+	// Treat no-background containers the same as those with the same solid background
+	&:not([data-background]) + &:not([data-background]) {
+		padding-block-start: 0;
+	}
+}

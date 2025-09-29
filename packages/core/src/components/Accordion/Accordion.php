@@ -30,7 +30,7 @@ class Accordion extends PanelGroupComponent {
 
     public function __construct(array $attributes, array $innerComponents, ?array $beforeComponents = []) {
         $this->set_icon_from_attrs($attributes, 'fa-plus');
-        $this->isNested = $attributes['isNested'] ?? $this->isNested;
+        $this->set_is_nested(@$attributes['isNested'] ?? false);
         $this->beforeComponents = $beforeComponents ?? $this->beforeComponents;
         parent::__construct($attributes, $innerComponents, 'components.Accordion.accordion');
     }
@@ -73,14 +73,14 @@ class Accordion extends PanelGroupComponent {
 
     protected function render_with_wrapper(): void {
         $inner = $this;
-        $inner->isNested = true; // Prevent infinite loop
+        $inner->set_is_nested(true); // Prevent infinite loop
 
         $withWrapper = new Container($this->get_container_attributes(), [$inner]);
         $withWrapper->render();
     }
 
     public function render(): void {
-        if (!$this->isNested) {
+        if (!$this->get_is_nested()) {
             $this->render_with_wrapper();
         }
         else {

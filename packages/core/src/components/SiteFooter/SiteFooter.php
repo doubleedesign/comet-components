@@ -29,9 +29,9 @@ class SiteFooter extends UIComponent {
             new Container(
                 [
                     'tagName'     => 'div',
-                    'context'     => 'site-footer__container',
+                    'context'     => 'site-footer',
                     'size'        => $this->size->value,
-                    'withWrapper' => false
+                    'withWrapper' => false,
                 ],
                 $innerComponents
             )

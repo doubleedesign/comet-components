@@ -25,62 +25,36 @@ class Container extends LayoutComponent {
      */
     protected ?string $gradient; // TODO: Not limited by a trait because implementations could have all kinds of gradients they handle themselves
 
+    /**
+     * @var Tag|null $wrapperTag
+     * @description Store a reference to the provided tag for use in the wrapping PageSection if applicable
+     */
+    private ?Tag $wrapperTag = Tag::SECTION;
+
     public function __construct(array $attributes, array $innerComponents, string $bladeFile = 'components.Container.container') {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->set_size_from_attrs($attributes);
         $this->gradient = $attributes['gradient'] ?? null;
         $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
-    }
 
-    /**
-     * Classes to be applied to the container element, filtering out CMS size classes and adjusting for withWrapper
-     *
-     * @return array<string>
-     */
-    public function get_filtered_classes(): array {
-        $classes = array_filter(parent::get_filtered_classes(), function($class) {
-            // Filter out WordPress + other classes used for the size (size is applied elsewhere)
-            return !in_array($class, ['is-style-wide', 'is-style-fullwidth', 'is-style-narrow', 'container--wide', 'container--fullwidth', 'container--narrow']);
-        });
-
-        if (!$this->withWrapper && !$this->isNested) {
-            $classes[] = 'layout-block';
-            // Replace BEM name (context + shortname) with just the context
-            // (with a wrapper, it should have the context on the wrapper and the BEM name here)
-            $classes = array_filter($classes, fn($class) => $class !== $this->get_bem_prefix());
-            array_push($classes, $this->get_context());
-            $filtered = array_unique(array_merge($classes, [$this->get_context()]));
-        }
-        else if ($this->isNested) {
-            array_push($classes, $this->get_bem_prefix());
-            $filtered = array_unique($classes);
+        if ($this->withWrapper) {
+            if ($this->get_context()) {
+                // The wrapping PageSection takes the tagName given,
+                $this->wrapperTag = $this->tagName;
+                // ... so we override the Container's tag so we don't get stuff like section -> section
+                $this->set_tag('div');
+                // The block should already be set by the context trait, so we add container here so this becomes theContext__container
+                $this->set_bem_element('container');
+            }
         }
         else {
-            // Do not include the shortname here - we can use CSS to target classes ending in __container (the BEM name) instead of doubling up
-            $filtered = array_unique($classes);
+            // If rendering without a wrapper, we want just the block (as set in the trait), not theBlock__container
+            // (we manually add 'container' class in get_filtered_classes so we get "theBlock container")
+            $this->set_bem_element(null);
         }
-
-        // Sort them so the context is always first if present
-        usort($filtered, function($a, $b) {
-            if ($a === $this->get_context()) {
-                return -1;
-            }
-            if ($b === $this->get_context()) {
-                return 1;
-            }
-
-            return 0;
-        });
-
-        return $filtered;
     }
 
-    /**
-     * Attributes to always be applied to the container element, whether it has a wrapper or not
-     *
-     * @return array<string, string>
-     */
-    protected function get_inner_attributes(): array {
+    protected function get_html_attributes(): array {
         $attributes = [];
         if (isset($this->size) && $this->size !== ContainerSize::DEFAULT) {
             $attributes['data-size'] = $this->size->value;
@@ -94,51 +68,60 @@ class Container extends LayoutComponent {
             $attributes['data-valign'] = $this->vAlign->value;
         }
 
-        return $attributes;
-    }
-
-    /**
-     * Outer classes to use if withWrapper is true
-     *
-     * @return string[]
-     */
-    protected function get_outer_classes(): array {
-        if ($this->isNested) {
-            return !empty($this->get_context()) ? [$this->get_context()] : [];
-        }
-
-        return [$this->get_context(), 'layout-block', 'page-section'];
-    }
-
-    /**
-     * Attributes applied to the wrapper if withWrapper is true, or to the container element if not
-     *
-     * @return array<string, string>
-     */
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-        else if (isset($this->gradient)) {
-            $attributes['data-background'] = 'gradient-' . $this->gradient;
+        if (!$this->withWrapper) {
+            if (isset($this->backgroundColor)) {
+                $attributes['data-background'] = $this->backgroundColor->value;
+            }
+            else if (isset($this->gradient)) {
+                $attributes['data-background'] = 'gradient-' . $this->gradient;
+            }
         }
 
         return $attributes;
     }
 
-    public function render(): void {
+    public function get_filtered_classes(): array {
+        $classes = parent::get_filtered_classes();
+
+        if (!$this->withWrapper) {
+            array_push($classes, 'container');
+        }
+
+        return array_unique($classes);
+    }
+
+    protected function render_with_wrapper(): void {
+        $inner = $this;
+        $inner->set_is_nested(true); // Prevent infinite loop
+
+        $withWrapper = new PageSection([
+            'shortName'       => $this->get_shortname() === 'container' ? null : $this->get_shortname(),
+            'context'         => $this->get_context(),
+            'tagName'         => $this->wrapperTag->value,
+            'backgroundColor' => $this->backgroundColor ?? null,
+            'gradient'        => $this->gradient ?? null,
+        ], [$inner]);
+        $withWrapper->render();
+    }
+
+    protected function render_standalone(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
             'tag'             => $this->tagName->value,
             'withWrapper'     => $this->withWrapper,
-            'outerClasses'    => $this->get_outer_classes(),
             'attributes'      => $this->get_html_attributes(),
-            'innerAttributes' => $this->get_inner_attributes(),
             'classes'         => $this->get_filtered_classes(),
             'children'        => $this->innerComponents
         ])->render();
+    }
+
+    public function render(): void {
+        if (!$this->get_is_nested()) {
+            $this->render_with_wrapper();
+        }
+        else {
+            $this->render_standalone();
+        }
     }
 }

@@ -20,13 +20,6 @@ class CallToAction extends Container {
     protected array $innerComponents;
 
     /**
-     * @var bool $isNested
-     * @description Whether this CallToAction is nested inside another LayoutComponent
-     * @default-value true
-     */
-    protected bool $isNested = false;
-
-    /**
      * @var ContainerSize|null $innerSize
      * @description The size of the inner container. If not set, defaults to the size of the outer container. Allows for a section to have a different, wider background than the inner block.
      * @default-value null
@@ -39,7 +32,7 @@ class CallToAction extends Container {
      */
     public function __construct(array $attributes, array $innerComponents) {
         $this->withWrapper = true;
-        $this->isNested = isset($attributes['isNested']) ? filter_var($attributes['isNested'], FILTER_VALIDATE_BOOLEAN) : $this->isNested;
+        $this->set_is_nested(@$attributes['isNested'] ?? false);
         $this->innerSize = isset($attributes['innerSize']) ? ContainerSize::tryFrom($attributes['innerSize']) : $this->innerSize;
         $this->set_color_theme_from_attrs($attributes);
         $this->set_background_color_from_attrs($attributes);

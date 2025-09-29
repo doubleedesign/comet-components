@@ -55,6 +55,10 @@ trait BlockElementModifier {
         if (empty($final_context)) {
             $this->set_bem_block($this->get_shortname());
         }
+        // If context and shortname are the same, do not double up for block and element
+        elseif ($final_context === $this->get_shortname()) {
+            $this->set_bem_block($final_context);
+        }
         else {
             $this->set_bem_block($final_context);
             $this->set_bem_element($this->get_shortname());

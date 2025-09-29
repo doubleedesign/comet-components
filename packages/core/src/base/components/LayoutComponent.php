@@ -4,16 +4,11 @@ namespace Doubleedesign\Comet\Core;
 abstract class LayoutComponent extends UIComponent {
     use BackgroundColor;
     use LayoutAlignment;
-
-    /**
-     * @var bool $isNested
-     * @description Whether this container is nested inside another element; used for simplifying layout and background colour handling
-     */
-    protected bool $isNested = false;
+    use NestedState;
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
-        $this->isNested = $attributes['isNested'] ?? $this->isNested;
+        $this->set_is_nested(@$attributes['isNested'] ?? false);
         $this->set_layout_alignment_from_attrs($attributes);
         $this->set_background_color_from_attrs($attributes);
 
@@ -29,18 +24,19 @@ abstract class LayoutComponent extends UIComponent {
         }
     }
 
-    public function get_filtered_classes(): array {
-        // FIXME: Why don't ContentWrapper and ImageWrapper exist?
-        // See Utils::get_class_name() for where it seems to come from
-        if ((!$this instanceof Column) && (!$this instanceof ContentWrapper) && (!$this instanceof ImageWrapper) && (!$this instanceof Steps)) {
-            return array_merge(
-                parent::get_filtered_classes(),
-                ['layout-block']
-            );
-        }
-
-        return parent::get_filtered_classes();
-    }
+    // FIXME: Refine when layout-block is needed and add it back in only then
+    //    public function get_filtered_classes(): array {
+    //        // FIXME: Why don't ContentWrapper and ImageWrapper exist?
+    //        // See Utils::get_class_name() for where it seems to come from
+    //        if ((!$this instanceof Column) && (!$this instanceof ContentWrapper) && (!$this instanceof ImageWrapper) && (!$this instanceof Steps)) {
+    //            return array_merge(
+    //                parent::get_filtered_classes(),
+    //                ['layout-block']
+    //            );
+    //        }
+    //
+    //        return parent::get_filtered_classes();
+    //    }
 
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();

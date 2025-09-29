@@ -26,11 +26,25 @@ abstract class UIComponent extends Renderable {
     }
 
     public function get_filtered_classes(): array {
-        return array_unique(
+        $classes = array_unique(
             array_merge(
                 $this->get_bem_classes(),
                 parent::get_filtered_classes()
             )
         );
+
+        // Sort them so the context is always first if present
+        usort($classes, function($a, $b) {
+            if ($a === $this->get_context()) {
+                return -1;
+            }
+            if ($b === $this->get_context()) {
+                return 1;
+            }
+
+            return 0;
+        });
+
+        return $classes;
     }
 }

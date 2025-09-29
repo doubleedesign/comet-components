@@ -8,6 +8,7 @@ abstract class PanelGroupComponent extends UIComponent {
     use ColorTheme;
     use LayoutContainerSize;
     use LayoutOrientation;
+    use NestedState;
 
     /**
      * @var array
@@ -15,15 +16,9 @@ abstract class PanelGroupComponent extends UIComponent {
      */
     private array $panels = [];
 
-    /**
-     * @var bool $isNested
-     * @description Whether this PanelGroup is nested inside another LayoutComponent
-     * @default-value true
-     */
-    protected bool $isNested = true;
-
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
-        if (!$this->isNested) {
+        $this->set_is_nested(@$attributes['isNested'] ?? true);
+        if (!$this->get_is_nested()) {
             $this->set_size_from_attrs($attributes);
         }
         if (!isset($attributes['backgroundColor'])) {

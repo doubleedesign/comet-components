@@ -58,6 +58,17 @@ describe('Component is the block (top-level)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['custom-thing']);
     });
 
+    test('it does not double up when explicit context and explicit shortName are the same', function() {
+        $component = create_component_with_bem_trait('components.Group.group', 'custom', 'custom');
+
+        expect($component->get_bem_structure())->toMatchArray([
+            'block'    => 'custom',
+            'element'  => null,
+            'modifier' => null
+        ])
+            ->and($component->get_bem_classes())->toMatchArray(['custom']);
+    });
+
     test('it ignores empty explicit context string', function() {
         $component = create_component_with_bem_trait('components.Accordion.accordion', '');
 
@@ -142,7 +153,7 @@ describe('Component is the element (nested)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['table__custom-thing']);
     });
 
-    test('with explicit context that repeats the component name', function() {
+    test('with explicit context that repeats the component name per the blade file', function() {
         $component = create_component_with_bem_trait('components.Accordion.AccordionPanel.accordion-panel', 'accordion');
 
         expect($component->get_bem_structure())->toMatchArray([
@@ -218,7 +229,6 @@ describe('Component is the element (nested)', function() {
     });
 });
 
-// TODO: May need to test explicit shortname handling more in these cases
 describe('Component is the element (deeply nested)', function() {
 
     describe('where each level is prefixed by the preceding level component name', function() {

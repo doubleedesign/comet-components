@@ -2,41 +2,33 @@
 namespace Doubleedesign\Comet\Core;
 
 /**
- * Group component
+ * PageSection component
  *
  * @package Doubleedesign\Comet\Core
  * @version 1.0.0
- * @description Group components together for layout or structure purposes.
+ * @description Create a full-width section to separate content areas, with optional background color or gradient.
+ *              Intended for automatic use as the wrapper for Container components.
  */
-#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE, Tag::ASIDE])]
-#[DefaultTag(Tag::DIV)]
-class Group extends UIComponent {
-    use BackgroundColor;
-    use ColorTheme;
-    use NestedState;
-
-    /**
-     * @var ?array<string> $classes
-     * @supported-values group, group--breakout
-     */
-    protected ?array $classes;
+#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN])]
+#[DefaultTag(Tag::SECTION)]
+class PageSection extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.Group.group');
-        $this->set_color_theme_from_attrs($attributes);
-        // Allow groups without a specified background to be transparent, rather than defaulting to the fallback
-        if (isset($attributes['backgroundColor'])) {
-            $this->set_background_color_from_attrs($attributes);
-            $this->simplify_all_background_colors();
-        }
+        parent::__construct($attributes, $innerComponents, 'components.PageSection.page-section');
+        // PageSection should only ever be a top-level component (BEM block) it should never be nested (BEM element)
+        $this->set_bem_element(null);
+    }
+
+    public function get_filtered_classes(): array {
+        return array_merge(
+            parent::get_filtered_classes(),
+            ['page-section']
+        );
     }
 
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-        if (isset($this->colorTheme)) {
-            $attributes['data-color-theme'] = $this->colorTheme->value;
-        }
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;
         }
@@ -57,4 +49,5 @@ class Group extends UIComponent {
             'children'   => $this->innerComponents
         ])->render();
     }
+
 }

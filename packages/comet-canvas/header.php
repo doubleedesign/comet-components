@@ -23,19 +23,19 @@ $menuComponent = new Menu(['context' => 'site-header'], $menuItems);
 $logoId = get_option('options_logo');
 $logoUrl = wp_get_attachment_image_url($logoId, 'full');
 $headerComponent = new SiteHeader(
-	[
-		'logoUrl'         => $logoUrl,
-		'size'            => 'wide',
-		'breakpoint'      => '860px',
-		'responsiveStyle' => 'default',
-		'submenuIcon'     => 'fa-caret-down'
-	],
-	[new Group(['context' => 'responsive'], [$menuComponent])]
+    [
+        'logoUrl'         => $logoUrl,
+        'size'            => 'wide',
+        'breakpoint'      => '860px',
+        'responsiveStyle' => 'default',
+        'submenuIcon'     => 'fa-caret-down'
+    ],
+    [new Group(['context' => 'responsive'], [$menuComponent])]
 );
 $headerComponent->render();
 ?>
 
 <!--<a class="skip-link screen-reader-text" href="#primary">-->
-<?php //esc_html_e('Skip to content', 'comet'); ?><!--</a>-->
-
-<main class="site-content layout-block page-section">
+<?php // esc_html_e('Skip to content', 'comet');?><!--</a>-->
+<?php /* TODO: Is layout-block needed here? */ ?>
+<main class="site-content page-section">
