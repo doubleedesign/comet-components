@@ -1,12 +1,16 @@
 <?php
-use Doubleedesign\Comet\Core\Container;
+use Doubleedesign\Comet\Core\{Config, Container};
 use function Patchwork\redefine;
 
-test('same bg as global is ignored', function() {
+beforeEach(function() {
+    Config::init();
+});
+
+test('same bg as global is ignored if container is not nested', function() {
     redefine('Doubleedesign\Comet\Core\Config::getInstance()->get_global_background', fn() => 'dark');
 
     ob_start();
-    $component = new Container(['backgroundColor' => 'dark'], []);
+    $component = new Container(['backgroundColor' => 'dark', 'isNested' => false], []);
     $component->render();
     $output = ob_get_clean();
 

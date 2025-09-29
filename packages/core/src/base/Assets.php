@@ -29,6 +29,10 @@ class Assets {
         $srcDir = dirname(__FILE__, 2);
         $absolute_path = $srcDir . '/components/global.css';
         $this->add_global_stylesheet($absolute_path);
+
+        // And the common CSS
+        $absolute_path = $srcDir . '/components/common.css';
+        $this->add_global_stylesheet($absolute_path);
     }
 
     // Singleton pattern to get the instance of the class in things that want to use it
