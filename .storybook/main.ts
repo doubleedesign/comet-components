@@ -5,7 +5,10 @@ const config: StorybookConfig = {
 		'../packages/core/src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)',
 		'../packages/core/src/components/**/*.docs.@(mdx)',
 	],
-	'addons': ['@storybook/addon-docs'],
+	'addons': [
+		'@storybook/addon-docs',
+		'./addons/code-tabs/preset.ts'
+	],
 	'framework': {
 		'name': '@storybook/html-vite',
 		'options': {}

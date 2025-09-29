@@ -10,10 +10,13 @@ import comet from './theme.ts';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
 import { addons } from 'storybook/preview-api';
+import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
+
 const channel = addons.getChannel();
 
 // Log all events
 // import events from 'storybook/internal/core-events';
+//
 // Object.values(events).forEach((event) => {
 // 	channel.on(event, (data) => {
 // 		console.log(event, data);
@@ -102,12 +105,13 @@ const preview: Preview = {
 						<Description/>
 						<div className="breakout">
 							<ResponsiveContainer>
-								<Primary />
+								<Primary/>
 							</ResponsiveContainer>
 						</div>
 						<div className="controls-wrapper">
 							<h2 className="section-heading">Attributes</h2>
-							<p>The public properties you can assign to your component at creation time using the <code>$attributes</code> argument.</p>
+							<p>The public properties you can assign to your component at creation time using
+								the <code>$attributes</code> argument.</p>
 							<Controls/>
 							<CommonAttributes/>
 						</div>
@@ -123,7 +127,7 @@ const preview: Preview = {
 };
 
 export const decorators = [
-	//withCodeTabs,
+	withCodeTabs,
 ];
 
 

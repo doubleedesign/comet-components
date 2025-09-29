@@ -1,10 +1,14 @@
 @import url("https://use.typekit.net/svp5arr.css");
 
 .sb-bar[data-test-id="sb-preview-toolbar"] {
-	display: none; /* Hide on docs pages */
+	/* Hide on docs pages by default */
+	display: none;
 
+	/* Show on standalone story view */
+
+	.is-story-page &,
 	#root:has(#storybook-panel-root) & {
-		display: block; /* Show on standalone story view */
+		display: block;
 	}
 }
 
@@ -76,6 +80,7 @@
 			}
 
 			/** The button when there is multiple pages for a component, i.e., docs and stories */
+
 			[data-icon="component"] {
 			}
 

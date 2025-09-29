@@ -16,22 +16,22 @@ addons.setConfig({
 			},
 		},
 		renderLabel: (item) => {
-			if(item.tags.includes('vue')) {
+			if (item.tags.includes('vue')) {
 				return (
 					<>
 						{item.name}
 						<span className="sbdocs__icon">
-							<VueComponentIcon tooltipPosition="right" asLink={false} />
+							<VueComponentIcon tooltipPosition="right" asLink={false}/>
 						</span>
 					</>
 				);
 			}
-			if(item.tags.includes('javascript')) {
+			if (item.tags.includes('javascript')) {
 				return (
 					<>
 						{item.name}
 						<span className="sbdocs__icon">
-							<JavaScriptComponentIcon tooltipPosition="right" asLink={false} />
+							<JavaScriptComponentIcon tooltipPosition="right" asLink={false}/>
 						</span>
 					</>
 				);

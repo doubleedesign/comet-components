@@ -5,7 +5,7 @@
 	"author": "Leesa Ward",
 	"type": "module",
 	"scripts": {
-		"storybook": "npx kill-port 6006 && storybook dev -p 6006 --https --ssl-cert .cert/cert.pem --ssl-key .cert/key.pem --host storybook.comet-components.test",
+		"storybook": "npx kill-port 6006 && storybook dev --debug -p 6006 --https --ssl-cert .cert/cert.pem --ssl-key .cert/key.pem --host storybook.comet-components.test",
 		"build-storybook": "storybook build",
 		"docs": "cd docs-site && npm run docs:dev",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",

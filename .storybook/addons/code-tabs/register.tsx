@@ -9,7 +9,7 @@ import { HtmlPanel } from './HtmlPanel.tsx';
 // Hacky workaround to force switch back to Canvas tab if a custom code tab is active
 // updateQueryParams is the event emitted when the Canvas tab is clicked on, but programmatically emitting that doesn't work
 function switchToCanvasTab(channel) {
-	if(window.location.search.endsWith('code-tabs/html-result') || window.location.search.endsWith('code-tabs/php-input')) {
+	if (window.location.search.endsWith('code-tabs/html-result') || window.location.search.endsWith('code-tabs/php-input')) {
 		const canvasButton: HTMLButtonElement | undefined = Array.from(document.querySelectorAll('.sb-bar button'))
 			.find(button => {
 				return button.textContent.trim() === 'Canvas';
@@ -46,14 +46,14 @@ addons.register(ADDON_ID, () => {
 	});
 
 	// Add the custom tabs
-	addons.add(`${ADDON_ID}/php-input`, {
-		type: types.TAB,
-		title: PHP_TAB_BUTTON_LABEL,
-		render: () => <PhpPanel />
-	});
+	// addons.add(`${ADDON_ID}/php-input`, {
+	// 	type: types.PANEL,
+	// 	title: PHP_TAB_BUTTON_LABEL,
+	// 	render: () => <PhpPanel/>
+	// });
 	addons.add(`${ADDON_ID}/html-result`, {
 		type: types.TAB,
 		title: HTML_TAB_BUTTON_LABEL,
-		render: () => <HtmlPanel />
+		render: () => <HtmlPanel/>
 	});
 });
