@@ -48,7 +48,7 @@ class Menu extends UIComponent {
         return array_map(function($item) use ($level, $context) {
             $itemObject = new MenuListItem(
                 [
-                    'id'              => $item['id'] ?? Utils::kebab_case($item['title']),
+                    'id'              => $item['id'] ?? null,
                     'classes'         => $item['classes'] ?? '',
                     'isCurrentParent' => $item['isCurrentParent'] ?? 'false',
                     'context'         => $context,
@@ -114,7 +114,8 @@ class Menu extends UIComponent {
 
             return [
                 ...$item->get_html_attributes(),
-                'id'              => $item->get_id(),
+                // if there is no explicit ID, only generate one if there is a submenu (for aria attributes)
+                'id'              => $item->get_id(!empty($children)),
                 'title'           => $link->get_content(),
                 'classes'         => $item->get_filtered_classes(),
                 'link_attributes' => $linkAttrs,

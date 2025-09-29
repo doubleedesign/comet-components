@@ -15,6 +15,21 @@ class MenuListItem extends UIComponent {
         $this->isCurrentParent = $attributes['isCurrentParent'] ?? false;
     }
 
+    /**
+     * Get the ID of the menu item, generating one if it's empty and requested (e.g., for IDs and aria attributes for submenus and their triggers)
+     *
+     * @param  bool  $generate_if_empty
+     *
+     * @return string|null
+     */
+    public function get_id(bool $generate_if_empty = false): ?string {
+        if ($generate_if_empty && empty($this->id)) {
+            $this->id = 'menu-item-' . uniqid();
+        }
+
+        return $this->id;
+    }
+
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
         $attributes['data-current-parent'] = $this->isCurrentParent ? 'true' : null;
