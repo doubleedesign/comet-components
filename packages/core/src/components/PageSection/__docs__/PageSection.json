@@ -1,16 +1,34 @@
 {
-    "name": "IconWithText",
-    "description": "Display an icon with an associated text label.",
-    "extends": "UIComponent",
+    "name": "PageSection",
+    "description": "A basic full-width section to separate content areas, with optional background color or gradient. Intended for automatic use as the wrapper for Container components and as the parent for components that are not intended to be nested, such as those extending WrappedLayoutComponent.",
+    "extends": "Renderable",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "inherited": true
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "icon-with-text"
+                "page-section",
+                "page-section"
             ],
             "inherited": true
         },
@@ -29,35 +47,12 @@
                 "dark",
                 "white"
             ],
-            "default": "primary"
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
-        },
-        "icon": {
-            "type": "string",
-            "description": "Icon class name"
-        },
-        "iconPrefix": {
-            "type": "string",
-            "description": "Icon prefix class name",
-            "default": "fa-solid"
+            "inherited": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
-        },
-        "label": {
-            "type": "string"
-        },
-        "shortName": {
-            "type": "string",
-            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-            "required": true,
-            "default": "icon-with-text"
         },
         "style": {
             "type": "array",
@@ -68,9 +63,13 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "section",
+                "header",
+                "footer",
+                "main"
             ],
-            "default": "div",
+            "default": "section",
             "inherited": true
         },
         "testId": {
@@ -79,14 +78,9 @@
             "inherited": true
         }
     },
-    "content": {
-        "type": "string",
-        "required": true
-    },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

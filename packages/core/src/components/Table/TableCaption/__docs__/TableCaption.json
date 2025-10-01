@@ -9,14 +9,7 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [
-                "table__caption"
-            ],
-            "inherited": true
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "default": [],
             "inherited": true
         },
         "id": {

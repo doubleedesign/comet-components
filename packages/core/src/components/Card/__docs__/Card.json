@@ -80,8 +80,8 @@
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null"
         },
         "focalPoint": {
             "type": "array{x:",
@@ -107,6 +107,7 @@
         },
         "isNested": {
             "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
             "default": "true"
         },
@@ -132,6 +133,12 @@
                 "vertical"
             ],
             "default": "standard"
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "card"
         },
         "style": {
             "type": "array",

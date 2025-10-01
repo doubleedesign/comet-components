@@ -20,7 +20,8 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": true
         },
         "citation": {
             "type": "string",
@@ -29,9 +30,9 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": {
-                "1": "pullquote"
-            },
+            "default": [
+                "pullquote"
+            ],
             "inherited": true
         },
         "colorTheme": {
@@ -48,11 +49,12 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
             "inherited": true
         },
         "id": {

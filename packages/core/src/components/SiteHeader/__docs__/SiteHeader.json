@@ -1,7 +1,7 @@
 {
     "name": "SiteHeader",
     "description": "Render a site header with a logo, responsive menu, and optional additional components.",
-    "extends": "LayoutComponent",
+    "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": null,
@@ -31,50 +31,29 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "site-header",
-                "layout-block",
-                "page-section"
+                "site-header"
             ],
             "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
-        },
-        "hAlign": {
-            "type": "Alignment",
-            "description": "Horizontal alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
             "inherited": true
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name; for the responsive menu toggle button",
-            "default": "fa-bars"
+            "description": "Icon class name",
+            "inherited": true
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid"
+            "default": "fa-solid",
+            "inherited": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
-            "inherited": true
-        },
-        "isNested": {
-            "type": "bool",
-            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
-            "required": true,
-            "default": "false",
             "inherited": true
         },
         "logoUrl": {
@@ -92,7 +71,7 @@
         },
         "size": {
             "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
             "supported": [
                 "default",
                 "wide",
@@ -101,7 +80,8 @@
                 "narrower",
                 "small"
             ],
-            "default": "default"
+            "default": "'alt'     => 'site logo',\n                'href'    => '/',\n                'classes' => ['site-header__logo']\n            ]",
+            "inherited": true
         },
         "style": {
             "type": "array",
@@ -125,19 +105,6 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
-        },
-        "vAlign": {
-            "type": "Alignment",
-            "description": "Vertical alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent",
             "inherited": true
         }
     },

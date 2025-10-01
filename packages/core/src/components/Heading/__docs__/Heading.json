@@ -13,11 +13,14 @@
                 "is-style-accent",
                 "is-style-small"
             ],
-            "default": []
+            "default": [
+                "heading"
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null",
             "inherited": true
         },
         "id": {
@@ -29,6 +32,13 @@
             "type": "int",
             "description": "Heading level (1-6). Default is 2. Cannot be used in conjunction with tagName.",
             "default": 2
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "heading",
+            "inherited": true
         },
         "style": {
             "type": "array",

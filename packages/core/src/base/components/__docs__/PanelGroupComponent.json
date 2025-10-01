@@ -1,9 +1,27 @@
 {
     "name": "PanelGroupComponent",
+    "description": null,
     "extends": "UIComponent",
     "abstract": true,
-    "vue": true,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ]
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
@@ -29,21 +47,40 @@
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
         },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+            "required": true,
+            "default": "false"
+        },
         "orientation": {
             "type": "Orientation",
+            "description": "Orientation of the component content, if applicable",
             "supported": [
                 "horizontal",
                 "vertical"
             ],
             "default": "vertical"
+        },
+        "size": {
+            "type": "ContainerSize",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+            "supported": [
+                "default",
+                "wide",
+                "fullwidth",
+                "narrow",
+                "narrower",
+                "small"
+            ],
+            "default": "$innercomponents, $bladefile"
         },
         "style": {
             "type": "array",

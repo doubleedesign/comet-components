@@ -1,18 +1,25 @@
 {
-    "name": "ListItemComplex",
+    "name": "ImageComponent",
     "description": null,
-    "extends": "UIComponent",
-    "abstract": false,
-    "isInner": true,
-    "belongsInside": "ListComponent",
+    "extends": "Renderable",
+    "abstract": true,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
     "attributes": {
+        "alt": {
+            "type": "string",
+            "description": "Alternative text",
+            "required": true,
+            "default": ""
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [
-                "listcomponent__list-item"
+            "supported": [
+                "is-style-rounded",
+                "breakout"
             ],
-            "inherited": true
+            "default": []
         },
         "context": {
             "type": "string",
@@ -24,6 +31,11 @@
             "description": "Unique identifier",
             "inherited": true
         },
+        "src": {
+            "type": "string",
+            "description": "Image source URL",
+            "required": true
+        },
         "style": {
             "type": "array",
             "description": "Inline styles",
@@ -33,24 +45,20 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "li"
+                "figure",
+                "div"
             ],
-            "default": "li",
+            "default": "div",
             "inherited": true
         },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
+        },
+        "title": {
+            "type": "string",
+            "description": "Optional image title (appears on hover)"
         }
-    },
-    "content": {
-        "type": "string"
-    },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
     }
 }

@@ -16,12 +16,20 @@
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null",
             "inherited": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
+            "inherited": true
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "breadcrumbs",
             "inherited": true
         },
         "style": {

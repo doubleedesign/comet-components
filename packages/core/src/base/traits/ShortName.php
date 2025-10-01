@@ -5,6 +5,7 @@ trait ShortName {
     /**
      * @var string $shortName
      * @description The name of the component without any namespacing, prefixes, etc.
+     *              Used for BEM block/element naming.
      *              Derived from the Blade filename if not explicitly set.
      */
     private string $shortName = '';

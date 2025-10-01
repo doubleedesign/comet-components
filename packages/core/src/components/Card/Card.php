@@ -15,6 +15,7 @@ class Card extends UIComponent {
     use ColorTheme;
     use ImageCropProperties;
     use LayoutOrientation;
+    use NestedState;
 
     /**
      * @var array<Renderable> $aboveContentComponents
@@ -60,6 +61,7 @@ class Card extends UIComponent {
         $this->cardAsLink = $attributes['cardAsLink'] ?? $this->cardAsLink;
         $this->aboveContentComponents = $aboveContentComponents ?? null;
         $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
+        $this->set_is_nested(@$attributes['isNested'] ?? true);
 
         $innerComponents = $this->aboveContentComponents ?? [];
         if (!empty($this->heading)) {

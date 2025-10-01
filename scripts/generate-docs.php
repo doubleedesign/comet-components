@@ -232,18 +232,19 @@ class ComponentClassesToJsonDefinitions {
         // Collect properties from traits
         $traits = $reflectionClass->getTraits();
         foreach ($traits as $trait) {
-            foreach ($trait->getProperties() as $property) {
-                if ($this->getVisibility($property) !== 'private') {
-                    $this->declaringClass = $trait;
-                    $propertyType = $this->getPropertyType($property);
-                    $propertyName = $property->getName();
+            $traitData = $this->getTraitData($trait, $reflectionClass);
+            $properties = array_merge($properties, $traitData);
+        }
 
-                    // Only add if not already defined in the class
-                    if (!isset($properties[$propertyName])) {
-                        $properties[$propertyName] = $propertyType;
-                    }
-                }
+        // And ancestor class traits
+        $ancestor = $parentClass;
+        while ($ancestor && $ancestor->getName() !== 'Doubleedesign\Comet\Core\Renderable') {
+            $ancestorTraits = $ancestor->getTraits();
+            foreach ($ancestorTraits as $trait) {
+                $traitData = $this->getTraitData($trait, $reflectionClass);
+                $properties = array_merge($properties, $traitData);
             }
+            $ancestor = $ancestor->getParentClass();
         }
 
         // Get the description of the class from the docblock at the top
@@ -251,8 +252,12 @@ class ComponentClassesToJsonDefinitions {
         $docComment = $reflectionClass->getDocComment();
         $description = $this->getDescription($docComment);
 
-        $finalAttrs = array_filter($properties, function($key) {
-            return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
+        $finalAttrs = array_filter($properties, function($key) use ($reflectionClass) {
+            if ($reflectionClass->isAbstract()) {
+                return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
+            }
+
+            return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile']);
         }, ARRAY_FILTER_USE_KEY);
         ksort($finalAttrs);
 
@@ -280,6 +285,20 @@ class ComponentClassesToJsonDefinitions {
         $this->processedClasses[$className] = $result; // Mark as processed to prevent infinite recursion
 
         return $result;
+    }
+
+    private function getTraitData(ReflectionClass $trait, ReflectionClass $component): array {
+        $privatePropertiesToInclude = ['context', 'shortName', 'isNested'];
+        $properties = [];
+
+        foreach ($trait->getProperties() as $property) {
+            if (($this->getVisibility($property) !== 'private') || (in_array($property->getName(), $privatePropertiesToInclude))) {
+                $propertyName = $property->getName();
+                $properties[$propertyName] = $this->getPropertyType($property);
+            }
+        }
+
+        return $properties ?? [];
     }
 
     private function getDescription($docComment): ?string {
@@ -422,54 +441,56 @@ class ComponentClassesToJsonDefinitions {
             }
         }
 
-        // If this is the $classes property, compute the actual default classes (e.g. the shortName or BEM name with context)
-        if ($property->getName() === 'classes' && !$this->currentClass->isAbstract()) {
-            if ($this->currentClass->hasMethod('get_filtered_classes')) {
-                try {
-                    // Special handling for some classes that don't follow the usual pattern of parameters
-                    if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
-                        $instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
-                    }
-                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Table') {
-                        $instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
-                    }
-                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableCell') {
-                        $instance = $this->currentClass->newInstance([], '', 'dummy.blade.php');
-                    }
-                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableHeaderCell') {
-                        $instance = $this->currentClass->newInstance([], '', 'dummy.blade.php');
-                    }
-                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\ListItemComplex') {
-                        $instance = $this->currentClass->newInstance([], '', [], 'dummy.blade.php');
-                    }
-                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\IconLinks') {
-                        $instance = $this->currentClass->newInstance([], [], 'dummy.blade.php');
-                    }
-                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Accordion') {
-                        $instance = $this->currentClass->newInstance([], [], [], 'dummy.blade.php');
-                    }
-                    else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PostNav') {
-                        $instance = $this->currentClass->newInstance([], 'dummy.blade.php');
-                    }
-                    else {
-                        $instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '', 'dummy.blade.php');
-                    }
+        // Compute the actual defaults for some properties
+        if (!$this->currentClass->isAbstract()) {
+            if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
+                $instance = $this->currentClass->newInstance([], '', []);
+            }
+            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Table') {
+                $instance = $this->currentClass->newInstance([], []);
+            }
+            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableCell') {
+                $instance = $this->currentClass->newInstance([], '');
+            }
+            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableHeaderCell') {
+                $instance = $this->currentClass->newInstance([], '');
+            }
+            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\ListItemComplex') {
+                $instance = $this->currentClass->newInstance([], '', []);
+            }
+            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\IconLinks') {
+                $instance = $this->currentClass->newInstance([], []);
+            }
+            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Accordion') {
+                $instance = $this->currentClass->newInstance([], [], []);
+            }
+            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PostNav') {
+                $instance = $this->currentClass->newInstance([]);
+            }
+            else {
+                $instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '');
+            }
 
-                    $defaultValue = $this->currentClass->getMethod('get_filtered_classes')->invoke($instance);
-                }
-                catch (ReflectionException $e) {
-                    // If we can't create an instance of current class, fall back to parent
-                    if ($this->declaringClass->hasMethod('get_filtered_classes')) {
-                        $parentInstance = $this->declaringClass->newInstance([], [], 'dummy.blade.php');
-                        $defaultValue = $this->declaringClass->getMethod('get_filtered_classes')->invoke($parentInstance);
-                    }
-                }
+            $classes = $this->currentClass->getMethod('get_filtered_classes')->invoke($instance);
+            $context = $this->currentClass->getMethod('get_context')->invoke($instance) ?? 'null';
+            $shortName = $this->currentClass->getMethod('get_shortname')->invoke($instance) ?? 'null';
+            $nested = $this->currentClass->getMethod('get_is_nested')->invoke($instance) ?? false;
+
+            switch ($propertyName) {
+                case 'classes':
+                    $defaultValue = $classes;
+                    break;
+                case 'context':
+                    $defaultValue = $context;
+                    break;
+                case 'shortName':
+                    $defaultValue = $shortName;
+                    break;
+                case 'isNested':
+                    $defaultValue = $nested ? 'true' : 'false';
+                    break;
             }
-            else if ($this->declaringClass->hasMethod('get_filtered_classes')) {
-                // Use parent's method if current class doesn't have it
-                $instance = $this->declaringClass->newInstance([], [], 'dummy.blade.php');
-                $defaultValue = $this->declaringClass->getMethod('get_filtered_classes')->invoke($instance);
-            }
+
         }
 
         // Get type details from docblock if available
@@ -670,6 +691,9 @@ class ComponentClassesToJsonDefinitions {
 //           php generate-docs.php base MyBaseComponent (PowerShell)
 try {
     set_error_handler(function($severity, $message, $file, $line) {
+        if (str_contains($message, 'Undefined array key')) {
+            return;
+        }
         throw new ErrorException($message, 0, $severity, $file, $line);
     });
 

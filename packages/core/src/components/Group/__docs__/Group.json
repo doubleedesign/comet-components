@@ -30,14 +30,30 @@
                 "group--breakout"
             ],
             "default": [
-                "group",
-                "layout-block"
+                "group"
             ]
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for the fill or outline colour",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white"
+            ],
+            "default": "rather than defaulting to the fallback\r\n        if (isset($attributes['backgroundcolor']"
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null"
         },
         "id": {
             "type": "string",
@@ -46,9 +62,15 @@
         },
         "isNested": {
             "type": "bool",
-            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "true"
+            "default": "false"
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "group"
         },
         "style": {
             "type": "array",

@@ -5,6 +5,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::TD)]
 class TableCell extends TextElement {
     use BackgroundColor;
+    use BlockElementModifier;
 
     /**
      * @var string|null $verticalAlign
@@ -52,9 +53,9 @@ class TableCell extends TextElement {
             'tag'             => $this instanceof TableHeaderCell ? 'th' : 'td',
             'classes'         => $this->get_filtered_classes(),
             'attributes'      => $this->get_html_attributes(),
-			// FIXME allow data-* attributes in inline HTML in content
-            //'content'         => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
-	        'content' => $this->content,
+            // FIXME allow data-* attributes in inline HTML in content
+            // 'content'         => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
+            'content'         => $this->content,
             'innerComponents' => $this->innerComponents,
         ])->render();
     }

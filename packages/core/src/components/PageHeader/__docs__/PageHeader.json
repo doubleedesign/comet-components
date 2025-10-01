@@ -1,13 +1,13 @@
 {
     "name": "PageHeader",
     "description": "Render a page header with the page title and optional breadcrumb navigation.",
-    "extends": "Container",
-	"abstract": false,
-	"isInner": false,
-	"belongsInside": null,
-	"attributes": {
-		"backgroundColor": {
-			"type": "ThemeColor",
+    "extends": "WrappedLayoutComponent",
+    "abstract": false,
+    "isInner": false,
+    "belongsInside": null,
+    "attributes": {
+        "backgroundColor": {
+            "type": "ThemeColor",
             "description": "Background colour keyword",
             "supported": [
                 "primary",
@@ -32,8 +32,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "page-header",
-                "layout-block"
+                "page-header"
             ],
             "inherited": true
         },
@@ -52,16 +51,12 @@
                 "dark",
                 "white"
             ],
-            "default": "$this->breadcrumbs"
+            "default": "$this->breadcrumbs",
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
-        },
-        "gradient": {
-            "type": "string",
-            "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
             "inherited": true
         },
         "hAlign": {
@@ -84,23 +79,9 @@
         },
         "isNested": {
             "type": "bool",
-            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
             "default": "false",
-            "inherited": true
-        },
-        "size": {
-            "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "default",
             "inherited": true
         },
         "style": {
@@ -136,22 +117,17 @@
             ],
             "default": "match-parent",
             "inherited": true
-        },
-        "withWrapper": {
-            "type": "bool",
-            "description": "Whether to wrap the container element so that the background is full-width",
-            "default": "true",
-            "inherited": true
         }
     },
     "content": {
         "type": "string",
-		"description": "The title of the page",
-		"required": true
-	},
-	"breadcrumbs": {
-		"type": "array",
-		"description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
-		"required": true
-	}
+        "description": "The title of the page",
+        "required": true
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true,
+        "inherited": true
+    }
 }

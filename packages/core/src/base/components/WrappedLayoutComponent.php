@@ -13,11 +13,13 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
     private ?Tag $wrapperTag;
     private array $wrapperAttrs;
     private array $containerAttrs;
+    private array $ariaAttrs;
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile, bool $withContainer = true) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->wrapperTag = $this->tagName;
-        $this->wrapperAttrs = Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme']);
+        $this->ariaAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'aria-') || $key === 'role', ARRAY_FILTER_USE_KEY);
+        $this->wrapperAttrs = array_merge(Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme']), $this->ariaAttrs);
         $this->containerAttrs = Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']);
 
         $orphanedAttrs = array_diff(
@@ -25,6 +27,7 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
             array_merge(
                 array_keys($this->wrapperAttrs),
                 array_keys($this->containerAttrs),
+                array_keys($this->ariaAttrs),
                 ['shortName', 'context', 'isNested', 'tagName', 'classes'] // handled elsewhere
             )
         );
@@ -48,6 +51,7 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
     protected function render_standalone(): void {
         $blade = BladeService::getInstance();
 
+        // TODO: Not sure this properly handles the case of there not being a wrapper at all (i.e., isNested is true from the beginning)
         echo $blade->make($this->bladeFile, [
             'tag'             => $this->tagName->value,
             'attributes'      => $this->get_html_attributes(),

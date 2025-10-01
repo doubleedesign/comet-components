@@ -9,9 +9,7 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [
-                "file"
-            ],
+            "default": [],
             "inherited": true
         },
         "colorTheme": {
@@ -29,11 +27,7 @@
                 "dark",
                 "white"
             ],
-            "default": "null"
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "default": "null",
             "inherited": true
         },
         "description": {
@@ -41,13 +35,14 @@
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name; default values set for file types including PDF, plain text, calendar, Word, Excel, ZIP, GZIP, TAR, and 7z",
-            "default": "fa-file"
+            "description": "Icon class name",
+            "inherited": true
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid"
+            "default": "fa-solid",
+            "inherited": true
         },
         "id": {
             "type": "string",

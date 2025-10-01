@@ -15,8 +15,9 @@ use Exception;
 trait ContextHierarchy {
     /**
      * @var ?string $context
-     * @description By default, the kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).
-     *              Can alternatively be explicitly set at the component level; kebab-case format is expected.
+     * @description The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).
+     *
+     * @dev-notes   Can alternatively be explicitly set at the component level; kebab-case format is expected.
      *              Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.
      */
     private ?string $context = null;

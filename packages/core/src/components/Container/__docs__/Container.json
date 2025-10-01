@@ -1,7 +1,7 @@
 {
     "name": "Container",
     "description": "Create a section with semantic meaning that controls the maximum width of its contents.",
-    "extends": "LayoutComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": null,
@@ -20,22 +20,20 @@
                 "light",
                 "dark",
                 "white"
+            ]
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [
+                "container"
             ],
             "inherited": true
         },
-        "classes": {
-			"type": "array<string>",
-			"description": "CSS classes",
-			"default": [
-				"container",
-				"layout-block"
-			],
-			"inherited": true
-        },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null"
         },
         "gradient": {
             "type": "string",
@@ -51,8 +49,7 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
+            "default": "match-parent"
         },
         "id": {
             "type": "string",
@@ -61,10 +58,24 @@
         },
         "isNested": {
             "type": "bool",
-            "description": "Whether this container is nested inside another element; used for simplifying layout and background colour handling",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false",
-            "inherited": true
+            "default": "false"
+        },
+        "orientation": {
+            "type": "Orientation",
+            "description": "Orientation of the component content, if applicable",
+            "supported": [
+                "horizontal",
+                "vertical"
+            ],
+            "default": "null"
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "container"
         },
         "size": {
             "type": "ContainerSize",
@@ -77,7 +88,7 @@
                 "narrower",
                 "small"
             ],
-            "default": "default"
+            "default": "null"
         },
         "style": {
             "type": "array",
@@ -112,13 +123,7 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
-        },
-        "withWrapper": {
-            "type": "bool",
-            "description": "Whether to wrap the container element so that the background is full-width",
-            "default": "true"
+            "default": "match-parent"
         }
     },
     "innerComponents": {

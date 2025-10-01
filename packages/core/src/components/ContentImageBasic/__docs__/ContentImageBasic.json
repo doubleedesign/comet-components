@@ -1,9 +1,9 @@
 {
-	"name": "ContentImageBasic",
-	"description": "A basic image within page content",
-	"extends": "ContentImageComponent",
-	"abstract": false,
-	"isInner": false,
+    "name": "ContentImageBasic",
+    "description": "A basic image within page content",
+    "extends": "ContentImageComponent",
+    "abstract": false,
+    "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
         "align": {
@@ -60,7 +60,8 @@
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null",
             "inherited": true
         },
         "height": {
@@ -84,6 +85,13 @@
                 "cover"
             ],
             "default": "contain"
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "image",
+            "inherited": true
         },
         "src": {
             "type": "string",

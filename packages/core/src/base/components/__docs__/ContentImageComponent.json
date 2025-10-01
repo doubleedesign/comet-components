@@ -1,17 +1,46 @@
 {
-    "name": "CoverImage",
-    "description": "*/",
+    "name": "ContentImageComponent",
+    "description": null,
     "extends": "ImageComponent",
-    "abstract": false,
+    "abstract": true,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "align": {
+            "type": "string",
+            "description": "Image alignment",
+            "supported": [
+                "left",
+                "center",
+                "right",
+                "full"
+            ]
+        },
         "alt": {
             "type": "string",
             "description": "Alternative text",
             "required": true,
             "default": "",
             "inherited": true
+        },
+        "aspectRatio": {
+            "type": "AspectRatio",
+            "description": "Crop image to the given aspect ratio",
+            "supported": [
+                "4:3",
+                "3:4",
+                "1:1",
+                "16:9",
+                "9:16",
+                "3:2",
+                "2:3",
+                "21:9",
+                "2.35:1"
+            ]
+        },
+        "caption": {
+            "type": "string",
+            "description": "Optional image caption (to appear below the image)"
         },
         "classes": {
             "type": "array<string>",
@@ -20,33 +49,17 @@
                 "is-style-rounded",
                 "breakout"
             ],
-            "default": [
-                "image"
-            ],
+            "default": [],
             "inherited": true
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
-            "inherited": true
-        },
-        "isParallax": {
-            "type": "bool",
-            "description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
-            "required": true,
-            "default": "false"
-        },
-        "shortName": {
-            "type": "string",
-            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-            "required": true,
-            "default": "image",
             "inherited": true
         },
         "src": {
@@ -64,6 +77,7 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
+                "figure",
                 "div"
             ],
             "default": "div",

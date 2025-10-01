@@ -164,7 +164,7 @@ abstract class Renderable {
             return !in_array($class, $redundant_classes) && !str_starts_with($class, 'wp-elements-');
         });
 
-        // Transform WordPress block style class names into BEM modifiers
+        // FIXME Transform WordPress block style class names into BEM modifiers
         array_walk($result, function(&$class) {
             if (str_starts_with($class, 'is-style-')) {
                 $this->set_bem_modifier(str_replace('is-style-', '', $class));

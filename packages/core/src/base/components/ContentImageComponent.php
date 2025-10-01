@@ -2,6 +2,8 @@
 
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::FIGURE, Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
 abstract class ContentImageComponent extends ImageComponent {
     /**
      * @var AspectRatio|null $aspectRatio

@@ -1,22 +1,14 @@
 {
-    "name": "PostNav",
+    "name": "WrappedLayoutComponent",
     "description": null,
-    "extends": "UIComponent",
-    "abstract": false,
+    "extends": "LayoutComponent",
+    "abstract": true,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "post-nav"
-            ],
-            "inherited": true
-        },
-        "colorTheme": {
+        "backgroundColor": {
             "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
+            "description": "Background colour keyword",
             "supported": [
                 "primary",
                 "secondary",
@@ -29,7 +21,12 @@
                 "dark",
                 "white"
             ],
-            "default": "$this->validate_link_attributes($link",
+            "inherited": true
+        },
+        "classes": {
+            "type": "array<string>",
+            "description": "CSS classes",
+            "default": [],
             "inherited": true
         },
         "context": {
@@ -37,22 +34,30 @@
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
             "inherited": true
         },
-        "entityName": {
-            "type": "string",
-            "description": "The name of the entity type being navigated, e.g. \"Post\", \"Product\", \"Article\", etc.",
-            "required": true,
-            "default": "Post"
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
+            "inherited": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
         },
-        "links": {
-            "type": "array{href:string,",
-            "description": "Links to include. Intended to be 1 or 2 only (previous and next).",
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": []
+            "default": "false",
+            "inherited": true
         },
         "style": {
             "type": "array",
@@ -63,15 +68,31 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
+                "section",
+                "main",
                 "div",
-                "nav"
+                "article",
+                "footer"
             ],
-            "default": "nav",
+            "default": "section",
             "inherited": true
         },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
             "inherited": true
         }
     },

@@ -21,8 +21,7 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "beforeComponents": {
             "type": "array<Renderable>",
@@ -52,17 +51,16 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null"
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name for the icon to use for the expand/collapse indicator."
+            "description": "Icon class name"
         },
         "iconPrefix": {
             "type": "string",
@@ -76,10 +74,9 @@
         },
         "isNested": {
             "type": "bool",
-            "description": "Whether this PanelGroup is nested inside another LayoutComponent",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "true",
-            "inherited": true
+            "default": "true"
         },
         "orientation": {
             "type": "Orientation",
@@ -88,8 +85,13 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical",
-            "inherited": true
+            "default": "vertical"
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "accordion"
         },
         "size": {
             "type": "ContainerSize",
@@ -102,8 +104,7 @@
                 "narrower",
                 "small"
             ],
-            "default": "default",
-            "inherited": true
+            "default": "default"
         },
         "style": {
             "type": "array",

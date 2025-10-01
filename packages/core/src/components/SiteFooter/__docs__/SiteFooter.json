@@ -1,7 +1,7 @@
 {
     "name": "SiteFooter",
     "description": "Render a footer with inner components such as a Menu.",
-    "extends": "UIComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": null,
@@ -20,20 +20,33 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": true
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "site-footer",
-                "page-section"
+                "site-footer"
             ],
             "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "inherited": true
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
             "inherited": true
         },
         "id": {
@@ -41,18 +54,12 @@
             "description": "Unique identifier",
             "inherited": true
         },
-        "size": {
-            "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "default"
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+            "required": true,
+            "default": "false",
+            "inherited": true
         },
         "style": {
             "type": "array",
@@ -71,6 +78,19 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests",
+            "inherited": true
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
             "inherited": true
         }
     },

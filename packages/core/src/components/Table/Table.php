@@ -11,6 +11,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::TABLE])]
 #[DefaultTag(Tag::TABLE)]
 class Table extends Renderable {
+    use BlockElementModifier;
+
     /**
      * @var ?bool|null $allowStacking
      * @description Optionally specify whether to adapt the layout by stacking columns when the viewport or container is narrow. Do not set if your theme will handle it on a case-by-case basis with custom CSS.
@@ -63,6 +65,7 @@ class Table extends Renderable {
         parent::__construct($attributes, 'components.Table.table');
         $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
         $this->sticky = $attributes['sticky'] ?? false;
+        $this->init_bem_structure('components.Table.table');
 
         // For some unknown reason, WordPress doesn't like me setting the attribute to "caption" in BlockRenderer.php in the plugin, but tableCaption works,
         // but since I really prefer just 'caption' we need to handle both options here

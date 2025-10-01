@@ -10,7 +10,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "section-navigation"
+                "section-navigation__menu"
             ],
             "inherited": true
         },
@@ -29,11 +29,12 @@
                 "dark",
                 "white"
             ],
-            "default": "primary"
+            "default": "primary",
+            "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
             "inherited": true
         },
         "id": {

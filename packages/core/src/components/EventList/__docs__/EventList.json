@@ -10,13 +10,14 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "events__list"
+                "event-list"
             ],
             "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null",
             "inherited": true
         },
         "heading": {
@@ -33,6 +34,13 @@
             "description": "The maximum number of items to display per row, when the viewport is wide enough to accommodate.",
             "required": true,
             "default": 3
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "event-list",
+            "inherited": true
         },
         "style": {
             "type": "array",

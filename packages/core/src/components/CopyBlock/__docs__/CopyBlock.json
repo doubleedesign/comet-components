@@ -1,7 +1,7 @@
 {
     "name": "CopyBlock",
     "description": null,
-    "extends": "Group",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
@@ -26,36 +26,28 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "supported": [
-                "group",
-                "group--breakout"
-            ],
             "default": [
-                "copy-block",
-                "layout-block"
-            ],
-            "inherited": true
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
+                "copy"
             ],
             "inherited": true
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM name of the parent component or variant if contextually relevant. May be automatically set by parent component(s).",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "null",
+            "inherited": true
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
             "inherited": true
         },
         "id": {
@@ -65,22 +57,17 @@
         },
         "isNested": {
             "type": "bool",
-            "description": "Whether this copy block is nested inside another component; determines whether to wrap in a container",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false"
+            "default": "false",
+            "inherited": true
         },
-        "size": {
-            "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
-            "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "default"
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "copy",
+            "inherited": true
         },
         "style": {
             "type": "array",
@@ -104,10 +91,18 @@
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         },
-        "withWrapper": {
-            "type": "bool",
-            "description": "Whether to wrap the container element so that the background is full-width (only applies if not nested)",
-            "default": "true"
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent",
+            "inherited": true
         }
     },
     "innerComponents": {

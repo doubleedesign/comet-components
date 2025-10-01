@@ -1,6 +1,6 @@
 {
-    "name": "IconWithText",
-    "description": "Display an icon with an associated text label.",
+    "name": "EventCard",
+    "description": "Display a summary of an event including title, date, location and links.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
@@ -10,54 +10,49 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "icon-with-text"
+                "event-card"
             ],
             "inherited": true
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ],
-            "default": "primary"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "default": "null",
+            "inherited": true
         },
-        "icon": {
-            "type": "string",
-            "description": "Icon class name"
+        "dateComponent": {
+            "type": "DateBlock|DateRangeBlock",
+            "description": "The component displaying the date."
         },
-        "iconPrefix": {
+        "detailUrl": {
             "type": "string",
-            "description": "Icon prefix class name",
-            "default": "fa-solid"
+            "description": "The URL to be used for the detail page."
+        },
+        "externalLink": {
+            "type": "array",
+            "description": "An associative array with fields URL, label, and target for an external link to a separate ticketing, registration, or other third-party site.",
+            "default": []
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
         },
-        "label": {
-            "type": "string"
+        "location": {
+            "type": "string",
+            "description": "The location of the event, such as the name of the venue or an address."
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the event.",
+            "required": true
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "icon-with-text"
+            "default": "event-card",
+            "inherited": true
         },
         "style": {
             "type": "array",
@@ -68,7 +63,8 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "li"
             ],
             "default": "div",
             "inherited": true
@@ -78,10 +74,6 @@
             "description": "Optionally add a data-testid attribute for automated tests",
             "inherited": true
         }
-    },
-    "content": {
-        "type": "string",
-        "required": true
     },
     "innerComponents": {
         "type": "array<Renderable>",
