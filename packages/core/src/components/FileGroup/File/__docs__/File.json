@@ -9,7 +9,9 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
+            "default": [
+                "filegroup__file"
+            ],
             "inherited": true
         },
         "colorTheme": {
@@ -28,21 +30,28 @@
                 "white"
             ],
             "default": "null",
-            "inherited": true
+            "inherited": false
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "filegroup",
+            "inherited": false
         },
         "description": {
-            "type": "string"
+            "type": "string",
+            "inherited": false
         },
         "icon": {
             "type": "string",
             "description": "Icon class name",
-            "inherited": true
+            "inherited": false
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
             "default": "fa-solid",
-            "inherited": true
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -51,10 +60,19 @@
         },
         "mimeType": {
             "type": "string|mixed",
-            "description": "MIME type of the file"
+            "description": "MIME type of the file",
+            "inherited": false
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "file",
+            "inherited": false
         },
         "size": {
-            "type": "string"
+            "type": "string",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -76,14 +94,17 @@
             "inherited": true
         },
         "title": {
-            "type": "string"
+            "type": "string",
+            "inherited": false
         },
         "uploadDate": {
-            "type": "string"
+            "type": "string",
+            "inherited": false
         },
         "url": {
             "type": "string",
-            "required": true
+            "required": true,
+            "inherited": false
         }
     }
 }

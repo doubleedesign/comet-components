@@ -30,18 +30,19 @@
                 "white"
             ],
             "default": "$this->validate_link_attributes($link",
-            "inherited": true
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "inherited": false
         },
         "entityName": {
             "type": "string",
             "description": "The name of the entity type being navigated, e.g. \"Post\", \"Product\", \"Article\", etc.",
             "required": true,
-            "default": "Post"
+            "default": "Post",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -52,7 +53,15 @@
             "type": "array{href:string,",
             "description": "Links to include. Intended to be 1 or 2 only (previous and next).",
             "required": true,
-            "default": []
+            "default": [],
+            "inherited": false
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "post-nav",
+            "inherited": false
         },
         "style": {
             "type": "array",

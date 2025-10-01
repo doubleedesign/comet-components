@@ -8,7 +8,8 @@
     "attributes": {
         "caption": {
             "type": "string",
-            "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>"
+            "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>",
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -32,12 +33,12 @@
                 "7",
                 "8"
             ],
-            "default": 3
+            "default": 3,
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "id": {
@@ -49,7 +50,8 @@
             "type": "bool",
             "description": "Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)",
             "required": true,
-            "default": "true"
+            "default": "true",
+            "inherited": false
         },
         "shortName": {
             "type": "string",
@@ -82,6 +84,7 @@
     "innerComponents": {
         "type": "array<ContentImageBasic>",
         "description": "The image components to display in the gallery",
-        "required": true
+        "required": true,
+        "inherited": false
     }
 }

@@ -15,18 +15,25 @@
         "icon": {
             "type": "string",
             "description": "Icon class name",
-            "inherited": true
+            "inherited": false
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
             "default": "fa-solid",
-            "inherited": true
+            "inherited": false
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "label-with-tooltip",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -57,12 +64,13 @@
                 "justify",
                 "match-parent"
             ],
-            "inherited": true
+            "inherited": false
         },
         "tooltip": {
             "type": "string",
             "description": "The text to use in the tooltip; if not provided, the icon + tooltip will not be rendered, only the label text will",
-            "required": true
+            "required": true,
+            "inherited": false
         }
     },
     "content": {

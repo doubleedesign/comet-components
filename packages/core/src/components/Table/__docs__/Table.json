@@ -8,21 +8,37 @@
     "attributes": {
         "allowStacking": {
             "type": "bool",
-            "description": "Optionally specify whether to adapt the layout by stacking columns when the viewport or container is narrow. Do not set if your theme will handle it on a case-by-case basis with custom CSS."
+            "description": "Optionally specify whether to adapt the layout by stacking columns when the viewport or container is narrow. Do not set if your theme will handle it on a case-by-case basis with custom CSS.",
+            "inherited": false
         },
         "caption": {
             "type": "TableCaption|array",
-            "description": "Caption object, or content and attributes corresponding to a Caption object"
+            "description": "Caption object, or content and attributes corresponding to a Caption object",
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
+            "default": [
+                "table"
+            ],
+            "inherited": true
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
             "inherited": true
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
+            "inherited": true
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "table",
             "inherited": true
         },
         "sticky": {
@@ -31,7 +47,8 @@
             "supported": [
                 "header",
                 "first-column"
-            ]
+            ],
+            "inherited": false
         },
         "style": {
             "type": "array",

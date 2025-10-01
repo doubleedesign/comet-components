@@ -20,8 +20,8 @@ class Container extends WrappedLayoutComponent {
      */
     protected ?string $gradient; // TODO: Not limited by a trait because implementations could have all kinds of gradients they handle themselves
 
-    public function __construct(array $attributes, array $innerComponents, string $bladeFile = 'components.Container.container') {
-        parent::__construct($attributes, $innerComponents, $bladeFile);
+    public function __construct(array $attributes, array $innerComponents) {
+        parent::__construct($attributes, $innerComponents, 'components.Container.container');
         $this->set_size_from_attrs($attributes);
         $this->set_orientation_from_attrs($attributes, null);
         $this->gradient = $attributes['gradient'] ?? null;

@@ -17,7 +17,6 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "id": {

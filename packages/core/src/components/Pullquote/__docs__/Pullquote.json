@@ -21,11 +21,12 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "inherited": false
         },
         "citation": {
             "type": "string",
-            "description": "Optional citation for the quote"
+            "description": "Optional citation for the quote",
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -50,17 +51,24 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "inherited": false
         },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "pullquote",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -90,7 +98,7 @@
                 "justify",
                 "match-parent"
             ],
-            "inherited": true
+            "inherited": false
         },
         "textColor": {
             "type": "ThemeColor",
@@ -106,7 +114,7 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "inherited": false
         }
     },
     "content": {

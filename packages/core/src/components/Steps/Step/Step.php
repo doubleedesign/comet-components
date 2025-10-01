@@ -5,7 +5,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::LI)]
 class Step extends UIComponent {
     /**
-     * @var array<Heading|Paragraph|ListComponent|Image|ButtonGroup> $innerComponents
+     * @var array<Heading|Paragraph|ListComponent|ImageComponent|ButtonGroup> $innerComponents
      */
     protected array $innerComponents;
 

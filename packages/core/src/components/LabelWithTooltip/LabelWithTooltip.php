@@ -5,6 +5,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::SPAN)]
 class LabelWithTooltip extends TextElement {
     use Icon;
+    use ShortName;
 
     /**
      * @var string $tooltip
@@ -17,6 +18,7 @@ class LabelWithTooltip extends TextElement {
         $this->set_icon_from_attrs($attributes, 'fa-circle-info');
         $this->tooltip = $attributes['tooltip'] ?? '';
         $this->id = $this->generate_id_for_tooltip();
+        $this->set_shortname(@$attributes['shortName'] ?? 'label-with-tooltip');
     }
 
     /**

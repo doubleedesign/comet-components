@@ -17,7 +17,7 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "inherited": false
         },
         "hAlign": {
             "type": "Alignment",
@@ -29,7 +29,8 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -43,13 +44,15 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "horizontal"
+            "default": "horizontal",
+            "inherited": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "button-group"
+            "default": "button-group",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -80,12 +83,14 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         }
     },
     "innerComponents": {
         "type": "array<Button>",
         "description": "Button objects to render inside the ButtonGroup",
-        "required": true
+        "required": true,
+        "inherited": false
     }
 }

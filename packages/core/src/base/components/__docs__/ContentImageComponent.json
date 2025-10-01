@@ -14,7 +14,8 @@
                 "center",
                 "right",
                 "full"
-            ]
+            ],
+            "inherited": false
         },
         "alt": {
             "type": "string",
@@ -36,11 +37,13 @@
                 "2:3",
                 "21:9",
                 "2.35:1"
-            ]
+            ],
+            "inherited": false
         },
         "caption": {
             "type": "string",
-            "description": "Optional image caption (to appear below the image)"
+            "description": "Optional image caption (to appear below the image)",
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",

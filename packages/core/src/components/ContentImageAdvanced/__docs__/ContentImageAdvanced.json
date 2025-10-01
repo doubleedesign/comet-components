@@ -37,7 +37,8 @@
                 "2:3",
                 "21:9",
                 "2.35:1"
-            ]
+            ],
+            "inherited": false
         },
         "caption": {
             "type": "string",
@@ -60,7 +61,7 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "inherited": false
         },
         "focalPoint": {
             "type": "array{x:",
@@ -68,7 +69,8 @@
             "default": {
                 "x": 50,
                 "y": 50
-            }
+            },
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -81,13 +83,15 @@
             "default": {
                 "x": 0,
                 "y": 0
-            }
+            },
+            "inherited": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "image"
+            "default": "image",
+            "inherited": false
         },
         "src": {
             "type": "string",

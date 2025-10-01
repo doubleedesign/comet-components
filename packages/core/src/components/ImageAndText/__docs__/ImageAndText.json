@@ -25,18 +25,19 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start"
+            "default": "start",
+            "inherited": false
         },
         "contentMaxWidth": {
             "type": "int",
             "description": "The maximum width of the content as a percentage of the available space; may be ignored in small viewports/containers.",
             "required": true,
-            "default": 50
+            "default": 50,
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "id": {
@@ -55,25 +56,29 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start"
+            "default": "start",
+            "inherited": false
         },
         "imageFirst": {
             "type": "bool",
             "description": "Whether the image should be rendered first in the HTML.",
             "required": true,
-            "default": "true"
+            "default": "true",
+            "inherited": false
         },
         "imageMaxWidth": {
             "type": "int",
             "description": "The maximum width of the image as a percentage of the available space; may be ignored in small viewports/containers.",
             "required": true,
-            "default": 50
+            "default": 50,
+            "inherited": false
         },
         "overlayAmount": {
             "type": "int",
             "description": "The amount in pixels to overlay the content over the image.",
             "required": true,
-            "default": 0
+            "default": 0,
+            "inherited": false
         },
         "shortName": {
             "type": "string",
@@ -105,6 +110,7 @@
     "innerComponents": {
         "type": "array<ContentImageComponent|Renderable>",
         "description": "An Image component, plus one or more other components to be rendered in the content area.",
-        "required": true
+        "required": true,
+        "inherited": false
     }
 }

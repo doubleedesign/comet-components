@@ -15,12 +15,12 @@
             ],
             "default": [
                 "heading"
-            ]
+            ],
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "id": {
@@ -31,7 +31,8 @@
         "level": {
             "type": "int",
             "description": "Heading level (1-6). Default is 2. Cannot be used in conjunction with tagName.",
-            "default": 2
+            "default": 2,
+            "inherited": false
         },
         "shortName": {
             "type": "string",

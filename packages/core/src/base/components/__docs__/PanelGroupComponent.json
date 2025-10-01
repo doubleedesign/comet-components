@@ -20,7 +20,8 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -43,11 +44,13 @@
                 "dark",
                 "white"
             ],
-            "default": "primary"
+            "default": "primary",
+            "inherited": false
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -58,7 +61,8 @@
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false"
+            "default": "false",
+            "inherited": false
         },
         "orientation": {
             "type": "Orientation",
@@ -67,7 +71,8 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical"
+            "default": "vertical",
+            "inherited": false
         },
         "size": {
             "type": "ContainerSize",
@@ -80,7 +85,8 @@
                 "narrower",
                 "small"
             ],
-            "default": "$innercomponents, $bladefile"
+            "default": "$innercomponents, $bladefile",
+            "inherited": false
         },
         "style": {
             "type": "array",

@@ -17,12 +17,12 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "heading": {
             "type": "string",
-            "description": "The heading for the list."
+            "description": "The heading for the list.",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -33,7 +33,8 @@
             "type": "int",
             "description": "The maximum number of items to display per row, when the viewport is wide enough to accommodate.",
             "required": true,
-            "default": 3
+            "default": 3,
+            "inherited": false
         },
         "shortName": {
             "type": "string",
@@ -66,6 +67,7 @@
     "innerComponents": {
         "type": "array<EventCard>",
         "description": "Event cards to display.",
-        "required": true
+        "required": true,
+        "inherited": false
     }
 }

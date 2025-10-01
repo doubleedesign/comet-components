@@ -28,7 +28,6 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "id": {
@@ -40,7 +39,8 @@
             "type": "bool",
             "description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
             "required": true,
-            "default": "false"
+            "default": "false",
+            "inherited": false
         },
         "shortName": {
             "type": "string",

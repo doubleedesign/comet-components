@@ -443,52 +443,46 @@ class ComponentClassesToJsonDefinitions {
 
         // Compute the actual defaults for some properties
         if (!$this->currentClass->isAbstract()) {
-            if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PageHeader') {
-                $instance = $this->currentClass->newInstance([], '', []);
-            }
-            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Table') {
-                $instance = $this->currentClass->newInstance([], []);
-            }
-            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableCell') {
-                $instance = $this->currentClass->newInstance([], '');
-            }
-            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\TableHeaderCell') {
-                $instance = $this->currentClass->newInstance([], '');
-            }
-            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\ListItemComplex') {
-                $instance = $this->currentClass->newInstance([], '', []);
-            }
-            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\IconLinks') {
-                $instance = $this->currentClass->newInstance([], []);
-            }
-            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\Accordion') {
-                $instance = $this->currentClass->newInstance([], [], []);
-            }
-            else if ($this->currentClass->getName() === 'Doubleedesign\Comet\Core\PostNav') {
-                $instance = $this->currentClass->newInstance([]);
-            }
-            else {
-                $instance = $this->currentClass->newInstance([], $content_type === 'array' ? [] : '');
+            $instance = $this->currentClass->newInstanceArgs(
+                array_map(function($param) {
+                    try {
+                        if (!method_exists($param->getType(), 'getName')) {
+                            return '';
+                        }
+
+                        return match ($param->getType()?->getName()) {
+                            'array'  => [],
+                            'string' => '',
+                            'int'    => 0,
+                            'float'  => 0.0,
+                            'bool'   => false,
+                            default  => null
+                        };
+                    }
+                    catch (ReflectionException) {
+                        return null;
+                    }
+                }, $this->currentClass->getConstructor()?->getParameters() ?? [])
+            );
+
+            if ($propertyName === 'classes' && method_exists($instance, 'get_filtered_classes')) {
+                $classes = $this->currentClass->getMethod('get_filtered_classes')?->invoke($instance) ?? [];
+                $defaultValue = $classes;
             }
 
-            $classes = $this->currentClass->getMethod('get_filtered_classes')->invoke($instance);
-            $context = $this->currentClass->getMethod('get_context')->invoke($instance) ?? 'null';
-            $shortName = $this->currentClass->getMethod('get_shortname')->invoke($instance) ?? 'null';
-            $nested = $this->currentClass->getMethod('get_is_nested')->invoke($instance) ?? false;
+            if ($propertyName === 'context' && method_exists($instance, 'get_context')) {
+                $context = $this->currentClass->getMethod('get_context')?->invoke($instance) ?? null;
+                $defaultValue = $context;
+            }
 
-            switch ($propertyName) {
-                case 'classes':
-                    $defaultValue = $classes;
-                    break;
-                case 'context':
-                    $defaultValue = $context;
-                    break;
-                case 'shortName':
-                    $defaultValue = $shortName;
-                    break;
-                case 'isNested':
-                    $defaultValue = $nested ? 'true' : 'false';
-                    break;
+            if ($propertyName === 'shortName' && method_exists($instance, 'get_shortname')) {
+                $shortName = $this->currentClass->getMethod('get_shortname')?->invoke($instance) ?? null;
+                $defaultValue = $shortName;
+            }
+
+            if ($propertyName === 'isNested' && method_exists($instance, 'get_is_nested')) {
+                $isNested = $this->currentClass->getMethod('get_is_nested')?->invoke($instance) ?? false;
+                $defaultValue = $isNested;
             }
 
         }
@@ -566,7 +560,17 @@ class ComponentClassesToJsonDefinitions {
             'inherited'   => $this->declaringClass->getName() !== $this->currentClass->getName()
         ];
 
-        return array_filter($result, fn($value) => $value !== null && $value !== false, ARRAY_FILTER_USE_BOTH);
+        return array_filter($result, function($value, $key) {
+            if (in_array($key, ['context', 'shortName'])) {
+                return true;
+            }
+
+            if ($key === 'required' && $value === false) {
+                return false;
+            }
+
+            return $value !== null;
+        }, ARRAY_FILTER_USE_BOTH);
     }
 
     /**

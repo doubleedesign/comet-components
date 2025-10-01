@@ -20,7 +20,8 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -44,12 +45,13 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "inherited": false
         },
         "hAlign": {
             "type": "Alignment",
@@ -61,7 +63,8 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -72,13 +75,15 @@
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false"
+            "default": false,
+            "inherited": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "call-to-action"
+            "default": "call-to-action",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -111,7 +116,8 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         }
     },
     "innerComponents": {

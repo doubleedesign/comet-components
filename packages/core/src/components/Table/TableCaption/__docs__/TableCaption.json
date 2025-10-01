@@ -12,6 +12,11 @@
             "default": [],
             "inherited": true
         },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "inherited": true
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
@@ -25,7 +30,15 @@
                 "top",
                 "bottom"
             ],
-            "default": "bottom"
+            "default": "bottom",
+            "inherited": false
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "",
+            "inherited": true
         },
         "style": {
             "type": "array",

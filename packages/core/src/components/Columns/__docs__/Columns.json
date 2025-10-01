@@ -10,7 +10,8 @@
             "type": "bool",
             "description": "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
             "required": true,
-            "default": "true"
+            "default": "true",
+            "inherited": false
         },
         "backgroundColor": {
             "type": "ThemeColor",
@@ -40,7 +41,6 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "hAlign": {
@@ -65,7 +65,7 @@
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false",
+            "default": false,
             "inherited": true
         },
         "shortName": {
@@ -112,6 +112,7 @@
     "innerComponents": {
         "type": "array<Column>",
         "description": "Inner column components",
-        "required": true
+        "required": true,
+        "inherited": false
     }
 }

@@ -21,7 +21,7 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -29,10 +29,22 @@
             "default": [],
             "inherited": true
         },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "inherited": false
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier",
             "inherited": true
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -62,7 +74,7 @@
                 "justify",
                 "match-parent"
             ],
-            "inherited": true
+            "inherited": false
         },
         "verticalAlign": {
             "type": "string",
@@ -71,7 +83,8 @@
                 "top",
                 "middle",
                 "bottom"
-            ]
+            ],
+            "inherited": false
         }
     },
     "content": {
@@ -82,6 +95,7 @@
     },
     "innerComponents": {
         "type": "array",
-        "required": true
+        "required": true,
+        "inherited": false
     }
 }

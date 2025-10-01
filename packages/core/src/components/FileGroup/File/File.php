@@ -4,6 +4,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class File extends Renderable {
+    use BlockElementModifier;
     use ColorTheme;
     use Icon;
     protected string $url;
@@ -27,6 +28,7 @@ class File extends Renderable {
 
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.FileGroup.File.file');
+        $this->init_bem_structure('components.FileGroup.File.file');
         $this->set_color_theme_from_attrs($attributes, null);
         $this->set_icon_from_attrs($attributes);
         $this->url = $attributes['url'] ?? '';

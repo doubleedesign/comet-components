@@ -20,7 +20,8 @@
                 "light",
                 "dark",
                 "white"
-            ]
+            ],
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -33,11 +34,12 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "inherited": false
         },
         "gradient": {
             "type": "string",
-            "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)"
+            "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)",
+            "inherited": false
         },
         "hAlign": {
             "type": "Alignment",
@@ -49,7 +51,8 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -60,7 +63,8 @@
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false"
+            "default": false,
+            "inherited": false
         },
         "orientation": {
             "type": "Orientation",
@@ -69,13 +73,15 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "null"
+            "default": "null",
+            "inherited": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "container"
+            "default": "container",
+            "inherited": false
         },
         "size": {
             "type": "ContainerSize",
@@ -88,7 +94,8 @@
                 "narrower",
                 "small"
             ],
-            "default": "null"
+            "default": "null",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -123,7 +130,8 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         }
     },
     "innerComponents": {

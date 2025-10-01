@@ -43,18 +43,19 @@
                 "narrower",
                 "small"
             ],
-            "default": "default"
+            "default": "default",
+            "inherited": false
         },
         "contentMaxWidth": {
             "type": "int",
             "description": "The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)",
             "required": true,
-            "default": 50
+            "default": 50,
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "hAlign": {
@@ -78,37 +79,42 @@
         "imageAlt": {
             "type": "string",
             "description": "The alt text for the image",
-            "required": true
+            "required": true,
+            "inherited": false
         },
         "imageUrl": {
             "type": "string",
             "description": "The URL of the image to display in the banner",
-            "required": true
+            "required": true,
+            "inherited": false
         },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false",
+            "default": false,
             "inherited": true
         },
         "isParallax": {
             "type": "bool",
             "description": "Whether the banner should have a fixed background (also known as a parallax effect)",
             "required": true,
-            "default": "false"
+            "default": "false",
+            "inherited": false
         },
         "maxHeight": {
             "type": "int",
             "description": "The maximum height of the banner (in vh)",
             "required": true,
-            "default": 100
+            "default": 100,
+            "inherited": false
         },
         "minHeight": {
             "type": "int",
             "description": "The minimum height of the banner (in px)",
             "required": true,
-            "default": 600
+            "default": 600,
+            "inherited": false
         },
         "overlayColor": {
             "type": "ThemeColor",
@@ -126,13 +132,15 @@
                 "dark",
                 "white"
             ],
-            "default": "dark"
+            "default": "dark",
+            "inherited": false
         },
         "overlayOpacity": {
             "type": "int",
             "description": "The opacity of the overlay on top of the image (set to 0 to disable the overlay)",
             "required": true,
-            "default": 0
+            "default": 0,
+            "inherited": false
         },
         "shortName": {
             "type": "string",
@@ -177,6 +185,7 @@
     "innerComponents": {
         "type": "array<Heading|Paragraph|ButtonGroup>",
         "description": "Inner components to be rendered within this component",
-        "required": true
+        "required": true,
+        "inherited": false
     }
 }

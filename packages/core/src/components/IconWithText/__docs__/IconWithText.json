@@ -29,21 +29,24 @@
                 "dark",
                 "white"
             ],
-            "default": "primary"
+            "default": "primary",
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "inherited": false
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name"
+            "description": "Icon class name",
+            "inherited": false
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid"
+            "default": "fa-solid",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -51,13 +54,15 @@
             "inherited": true
         },
         "label": {
-            "type": "string"
+            "type": "string",
+            "inherited": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "icon-with-text"
+            "default": "icon-with-text",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -81,7 +86,8 @@
     },
     "content": {
         "type": "string",
-        "required": true
+        "required": true,
+        "inherited": false
     },
     "innerComponents": {
         "type": "array<Renderable>",

@@ -19,7 +19,8 @@
                 "2:3",
                 "21:9",
                 "2.35:1"
-            ]
+            ],
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -45,7 +46,8 @@
                 "dark",
                 "white"
             ],
-            "default": "cinematic"
+            "default": "cinematic",
+            "inherited": false
         },
         "containerWidth": {
             "type": "ContainerSize",
@@ -59,17 +61,19 @@
                 "narrower",
                 "small"
             ],
-            "default": "default"
+            "default": "default",
+            "inherited": false
         },
         "contentMaxWidth": {
             "type": "int",
             "description": "The max width of the content inside the inner container, as a percentage",
-            "default": 100
+            "default": 100,
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "inherited": false
         },
         "focalPoint": {
             "type": "array{x:",
@@ -77,7 +81,8 @@
             "default": {
                 "x": 50,
                 "y": 50
-            }
+            },
+            "inherited": false
         },
         "hAlign": {
             "type": "Alignment",
@@ -89,7 +94,8 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -99,7 +105,8 @@
         "image": {
             "type": "array{src:string,",
             "required": true,
-            "default": []
+            "default": [],
+            "inherited": false
         },
         "offset": {
             "type": "array{x:",
@@ -107,13 +114,15 @@
             "default": {
                 "x": 0,
                 "y": 0
-            }
+            },
+            "inherited": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "banner-v2"
+            "default": "banner-v2",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -145,7 +154,8 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "match-parent",
+            "inherited": false
         },
         "width": {
             "type": "ContainerSize",
@@ -159,7 +169,8 @@
                 "narrower",
                 "small"
             ],
-            "default": "fullwidth"
+            "default": "fullwidth",
+            "inherited": false
         }
     },
     "innerComponents": {

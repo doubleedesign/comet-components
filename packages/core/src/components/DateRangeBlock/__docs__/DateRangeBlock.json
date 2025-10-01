@@ -31,7 +31,8 @@
         },
         "endDate": {
             "type": "DateTime|string",
-            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
+            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -43,6 +44,13 @@
             "description": "The locale to be used for formatting the date.",
             "required": true,
             "default": "en_AU",
+            "inherited": true
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "date-range-block",
             "inherited": true
         },
         "showDay": {
@@ -61,7 +69,8 @@
         },
         "startDate": {
             "type": "DateTime|string",
-            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
+            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.",
+            "inherited": false
         },
         "style": {
             "type": "array",

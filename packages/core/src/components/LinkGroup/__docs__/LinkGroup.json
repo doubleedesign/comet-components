@@ -29,15 +29,17 @@
                 "dark",
                 "white"
             ],
-            "default": "info"
+            "default": "info",
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null"
+            "inherited": false
         },
         "heading": {
-            "type": "string"
+            "type": "string",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -48,7 +50,8 @@
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "link-group"
+            "default": "link-group",
+            "inherited": false
         },
         "style": {
             "type": "array",

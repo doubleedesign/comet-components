@@ -21,12 +21,13 @@
                 "dark",
                 "white"
             ],
-            "inherited": true
+            "inherited": false
         },
         "breadcrumbs": {
             "type": "array",
             "description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
-            "required": true
+            "required": true,
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -52,12 +53,12 @@
                 "white"
             ],
             "default": "$this->breadcrumbs",
-            "inherited": true
+            "inherited": false
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "inherited": false
         },
         "hAlign": {
             "type": "Alignment",
@@ -70,7 +71,7 @@
                 "match-parent"
             ],
             "default": "match-parent",
-            "inherited": true
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -81,8 +82,15 @@
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false",
-            "inherited": true
+            "default": false,
+            "inherited": false
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "page-header",
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -116,13 +124,14 @@
                 "match-parent"
             ],
             "default": "match-parent",
-            "inherited": true
+            "inherited": false
         }
     },
     "content": {
         "type": "string",
         "description": "The title of the page",
-        "required": true
+        "required": true,
+        "inherited": false
     },
     "innerComponents": {
         "type": "array<Renderable>",

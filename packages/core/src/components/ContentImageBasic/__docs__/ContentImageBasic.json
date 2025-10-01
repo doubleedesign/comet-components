@@ -61,16 +61,17 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "height": {
             "type": "string",
-            "description": "Set a fixed height for the image"
+            "description": "Set a fixed height for the image",
+            "inherited": false
         },
         "href": {
             "type": "string",
-            "description": "URL to link to"
+            "description": "URL to link to",
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -84,7 +85,8 @@
                 "contain",
                 "cover"
             ],
-            "default": "contain"
+            "default": "contain",
+            "inherited": false
         },
         "shortName": {
             "type": "string",
@@ -126,7 +128,8 @@
         },
         "width": {
             "type": "string",
-            "description": "Set a fixed width for the image"
+            "description": "Set a fixed width for the image",
+            "inherited": false
         }
     }
 }

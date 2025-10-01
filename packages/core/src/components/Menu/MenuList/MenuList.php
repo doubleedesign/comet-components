@@ -7,10 +7,9 @@ class MenuList extends UIComponent {
     /**
      * @param  array  $attributes
      * @param  array<MenuListItem>  $menuItems
-     * @param  string  $bladeFile
      */
-    public function __construct(array $attributes, array $menuItems, string $bladeFile = 'components.Menu.MenuList.menu-list') {
-        parent::__construct($attributes, $menuItems, $bladeFile);
+    public function __construct(array $attributes, array $menuItems) {
+        parent::__construct($attributes, $menuItems, 'components.Menu.MenuList.menu-list');
     }
 
     public function render(): void {

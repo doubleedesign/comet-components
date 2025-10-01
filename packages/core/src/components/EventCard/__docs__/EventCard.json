@@ -17,21 +17,23 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "dateComponent": {
             "type": "DateBlock|DateRangeBlock",
-            "description": "The component displaying the date."
+            "description": "The component displaying the date.",
+            "inherited": false
         },
         "detailUrl": {
             "type": "string",
-            "description": "The URL to be used for the detail page."
+            "description": "The URL to be used for the detail page.",
+            "inherited": false
         },
         "externalLink": {
             "type": "array",
             "description": "An associative array with fields URL, label, and target for an external link to a separate ticketing, registration, or other third-party site.",
-            "default": []
+            "default": [],
+            "inherited": false
         },
         "id": {
             "type": "string",
@@ -40,12 +42,14 @@
         },
         "location": {
             "type": "string",
-            "description": "The location of the event, such as the name of the venue or an address."
+            "description": "The location of the event, such as the name of the venue or an address.",
+            "inherited": false
         },
         "name": {
             "type": "string",
             "description": "The name of the event.",
-            "required": true
+            "required": true,
+            "inherited": false
         },
         "shortName": {
             "type": "string",

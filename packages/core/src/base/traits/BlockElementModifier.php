@@ -33,10 +33,7 @@ trait BlockElementModifier {
             throw new Exception('Blade file not set. Ensure init_context() has been called first, or call init_bem_structure() instead.');
         }
 
-        if ($override_shortname) {
-            $attributes['shortName'] = $override_shortname;
-        }
-        $this->set_shortname(isset($attributes['shortName']) ? (string)$attributes['shortName'] : array_reverse(explode('.', $this->bladeFile))[0]);
+        $this->set_shortname($override_shortname);
 
         $final_context = $this->get_context(); // gets it from the Context trait
 

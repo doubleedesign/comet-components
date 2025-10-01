@@ -27,7 +27,8 @@
                 "dark",
                 "white"
             ],
-            "default": "primary"
+            "default": "primary",
+            "inherited": false
         },
         "id": {
             "type": "string",

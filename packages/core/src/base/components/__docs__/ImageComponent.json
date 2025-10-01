@@ -10,7 +10,8 @@
             "type": "string",
             "description": "Alternative text",
             "required": true,
-            "default": ""
+            "default": "",
+            "inherited": false
         },
         "classes": {
             "type": "array<string>",
@@ -19,7 +20,8 @@
                 "is-style-rounded",
                 "breakout"
             ],
-            "default": []
+            "default": [],
+            "inherited": false
         },
         "context": {
             "type": "string",
@@ -34,7 +36,8 @@
         "src": {
             "type": "string",
             "description": "Image source URL",
-            "required": true
+            "required": true,
+            "inherited": false
         },
         "style": {
             "type": "array",
@@ -58,7 +61,8 @@
         },
         "title": {
             "type": "string",
-            "description": "Optional image title (appears on hover)"
+            "description": "Optional image title (appears on hover)",
+            "inherited": false
         }
     }
 }

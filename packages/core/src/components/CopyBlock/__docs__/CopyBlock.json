@@ -34,7 +34,6 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "null",
             "inherited": true
         },
         "hAlign": {
@@ -59,7 +58,7 @@
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false",
+            "default": false,
             "inherited": true
         },
         "shortName": {

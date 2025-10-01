@@ -17,6 +17,7 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+            "default": "menu__list",
             "inherited": true
         },
         "id": {
@@ -27,7 +28,15 @@
         "isCurrentParent": {
             "type": "bool",
             "required": true,
-            "default": "false"
+            "default": "false",
+            "inherited": false
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "menu-list-item",
+            "inherited": true
         },
         "style": {
             "type": "array",
