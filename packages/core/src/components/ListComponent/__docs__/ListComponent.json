@@ -11,35 +11,29 @@
             "description": "CSS classes",
             "default": [
                 "list"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "ordered": {
             "type": "bool",
-            "required": true,
-            "inherited": false
+            "required": true
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "list",
-            "inherited": true
+            "default": "list"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -48,19 +42,16 @@
                 "ul",
                 "ol"
             ],
-            "default": "ul",
-            "inherited": true
+            "default": "ul"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<ListItem>",
         "description": "List item objects to render inside this list",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

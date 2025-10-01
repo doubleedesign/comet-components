@@ -14,15 +14,13 @@
                 "center",
                 "right",
                 "full"
-            ],
-            "inherited": true
+            ]
         },
         "alt": {
             "type": "string",
             "description": "Alternative text",
             "required": true,
-            "default": "",
-            "inherited": true
+            "default": ""
         },
         "aspectRatio": {
             "type": "AspectRatio",
@@ -37,13 +35,11 @@
                 "2:3",
                 "21:9",
                 "2.35:1"
-            ],
-            "inherited": false
+            ]
         },
         "caption": {
             "type": "string",
-            "description": "Optional image caption (to appear below the image)",
-            "inherited": true
+            "description": "Optional image caption (to appear below the image)"
         },
         "classes": {
             "type": "array<string>",
@@ -55,13 +51,11 @@
             "default": [
                 "image",
                 "image--advanced"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "focalPoint": {
             "type": "array{x:",
@@ -69,13 +63,11 @@
             "default": {
                 "x": 50,
                 "y": 50
-            },
-            "inherited": false
+            }
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "offset": {
             "type": "array{x:",
@@ -83,26 +75,22 @@
             "default": {
                 "x": 0,
                 "y": 0
-            },
-            "inherited": false
+            }
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "image",
-            "inherited": false
+            "default": "image"
         },
         "src": {
             "type": "string",
             "description": "Image source URL",
-            "required": true,
-            "inherited": true
+            "required": true
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -111,18 +99,15 @@
                 "figure",
                 "div"
             ],
-            "default": "figure",
-            "inherited": true
+            "default": "figure"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "title": {
             "type": "string",
-            "description": "Optional image title (appears on hover)",
-            "inherited": true
+            "description": "Optional image title (appears on hover)"
         }
     }
 }

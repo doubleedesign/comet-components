@@ -21,23 +21,20 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "beforeComponents": {
             "type": "array<Renderable>",
             "description": "Components to render before the accordion (e.g. heading, intro text).",
             "required": true,
-            "default": [],
-            "inherited": false
+            "default": []
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "accordion"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -53,36 +50,30 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name",
-            "inherited": false
+            "description": "Icon class name"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid",
-            "inherited": false
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": true,
-            "inherited": false
+            "default": true
         },
         "orientation": {
             "type": "Orientation",
@@ -91,15 +82,13 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical",
-            "inherited": false
+            "default": "vertical"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "accordion",
-            "inherited": false
+            "default": "accordion"
         },
         "size": {
             "type": "ContainerSize",
@@ -112,13 +101,11 @@
                 "narrower",
                 "small"
             ],
-            "default": "default",
-            "inherited": false
+            "default": "default"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -126,19 +113,16 @@
             "supported": [
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<AccordionPanel>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

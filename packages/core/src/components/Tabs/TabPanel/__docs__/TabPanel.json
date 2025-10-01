@@ -20,43 +20,36 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "tabs__tab-panel"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "tabs",
-            "inherited": true
+            "default": "tabs"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "tab-panel",
-            "inherited": true
+            "default": "tab-panel"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "subtitle": {
-            "type": "string",
-            "inherited": true
+            "type": "string"
         },
         "tagName": {
             "type": "Tag",
@@ -64,24 +57,20 @@
             "supported": [
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "title": {
             "type": "string",
-            "required": true,
-            "inherited": true
+            "required": true
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

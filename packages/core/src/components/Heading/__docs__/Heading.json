@@ -15,36 +15,30 @@
             ],
             "default": [
                 "heading"
-            ],
-            "inherited": false
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "level": {
             "type": "int",
             "description": "Heading level (1-6). Default is 2. Cannot be used in conjunction with tagName.",
-            "default": 2,
-            "inherited": false
+            "default": 2
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "heading",
-            "inherited": true
+            "default": "heading"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -57,13 +51,11 @@
                 "h5",
                 "h6"
             ],
-            "default": "h2",
-            "inherited": true
+            "default": "h2"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "textAlign": {
             "type": "Alignment",
@@ -73,8 +65,7 @@
                 "center",
                 "justify",
                 "match-parent"
-            ],
-            "inherited": true
+            ]
         },
         "textColor": {
             "type": "ThemeColor",
@@ -89,14 +80,12 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

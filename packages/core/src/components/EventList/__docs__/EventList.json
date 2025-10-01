@@ -11,42 +11,35 @@
             "description": "CSS classes",
             "default": [
                 "event-list"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "heading": {
             "type": "string",
-            "description": "The heading for the list.",
-            "inherited": false
+            "description": "The heading for the list."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "maxItemsPerRow": {
             "type": "int",
             "description": "The maximum number of items to display per row, when the viewport is wide enough to accommodate.",
             "required": true,
-            "default": 3,
-            "inherited": false
+            "default": 3
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "event-list",
-            "inherited": true
+            "default": "event-list"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -55,19 +48,16 @@
                 "ul",
                 "ol"
             ],
-            "default": "ul",
-            "inherited": true
+            "default": "ul"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<EventCard>",
         "description": "Event cards to display.",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

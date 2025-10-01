@@ -20,8 +20,7 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "classes": {
             "type": "array<string>",
@@ -29,8 +28,7 @@
             "default": [
                 "page-section",
                 "page-section"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -46,25 +44,21 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "page-section",
-            "inherited": false
+            "default": "page-section"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -76,19 +70,16 @@
                 "footer",
                 "main"
             ],
-            "default": "section",
-            "inherited": true
+            "default": "section"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

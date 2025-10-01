@@ -20,21 +20,18 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "citation": {
             "type": "string",
-            "description": "Optional citation for the quote",
-            "inherited": false
+            "description": "Optional citation for the quote"
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "pullquote"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -50,30 +47,25 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "pullquote",
-            "inherited": false
+            "default": "pullquote"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -81,13 +73,11 @@
             "supported": [
                 "blockquote"
             ],
-            "default": "blockquote",
-            "inherited": true
+            "default": "blockquote"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "textAlign": {
             "type": "Alignment",
@@ -97,8 +87,7 @@
                 "center",
                 "justify",
                 "match-parent"
-            ],
-            "inherited": false
+            ]
         },
         "textColor": {
             "type": "ThemeColor",
@@ -113,14 +102,12 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

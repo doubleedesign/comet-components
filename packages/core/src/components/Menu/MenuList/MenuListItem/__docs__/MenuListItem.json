@@ -11,37 +11,31 @@
             "description": "CSS classes",
             "default": [
                 "menu__list__item"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "menu__list",
-            "inherited": true
+            "default": "menu__list"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "isCurrentParent": {
             "type": "bool",
             "required": true,
-            "default": "false",
-            "inherited": false
+            "default": "false"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "menu-list-item",
-            "inherited": true
+            "default": "menu-list-item"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -49,19 +43,16 @@
             "supported": [
                 "li"
             ],
-            "default": "li",
-            "inherited": true
+            "default": "li"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

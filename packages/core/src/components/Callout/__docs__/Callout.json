@@ -11,8 +11,7 @@
             "description": "CSS classes",
             "default": [
                 "callout"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -29,41 +28,34 @@
                 "dark",
                 "white"
             ],
-            "default": "info",
-            "inherited": false
+            "default": "info"
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name",
-            "inherited": false
+            "description": "Icon class name"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid",
-            "inherited": false
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "callout",
-            "inherited": false
+            "default": "callout"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -71,19 +63,16 @@
             "supported": [
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Heading|ListComponent|Paragraph|ButtonGroup|Button|Separator>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

@@ -14,30 +14,25 @@
             ],
             "default": [
                 "paragraph"
-            ],
-            "inherited": false
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "paragraph",
-            "inherited": true
+            "default": "paragraph"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -45,13 +40,11 @@
             "supported": [
                 "p"
             ],
-            "default": "p",
-            "inherited": true
+            "default": "p"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "textAlign": {
             "type": "Alignment",
@@ -61,8 +54,7 @@
                 "center",
                 "justify",
                 "match-parent"
-            ],
-            "inherited": true
+            ]
         },
         "textColor": {
             "type": "ThemeColor",
@@ -77,14 +69,12 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

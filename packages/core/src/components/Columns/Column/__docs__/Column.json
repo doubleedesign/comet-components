@@ -20,22 +20,19 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "columns__column"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "columns",
-            "inherited": true
+            "default": "columns"
         },
         "hAlign": {
             "type": "Alignment",
@@ -47,32 +44,27 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
+            "default": "match-parent"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": false,
-            "inherited": true
+            "default": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "column",
-            "inherited": true
+            "default": "column"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -82,13 +74,11 @@
                 "main",
                 "aside"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "vAlign": {
             "type": "Alignment",
@@ -100,19 +90,16 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
+            "default": "match-parent"
         },
         "width": {
             "type": "string",
-            "description": "Optionally set the width of the column, if you absolutely must do it explicitly instead of in your own CSS (ideally this should not be set in HTML, but things like the WP block editor kind of make it necessary to handle this use case). Note: This may be overridden to stack columns on small viewports.",
-            "inherited": false
+            "description": "Optionally set the width of the column, if you absolutely must do it explicitly instead of in your own CSS (ideally this should not be set in HTML, but things like the WP block editor kind of make it necessary to handle this use case). Note: This may be overridden to stack columns on small viewports."
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

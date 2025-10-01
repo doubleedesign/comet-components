@@ -20,47 +20,39 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "breakpoint": {
             "type": "string",
-            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style",
-            "inherited": false
+            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style"
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "site-header"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name",
-            "inherited": false
+            "description": "Icon class name"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid",
-            "inherited": false
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "logoUrl": {
             "type": "string",
-            "description": "The URL of the site logo image",
-            "inherited": false
+            "description": "The URL of the site logo image"
         },
         "responsiveStyle": {
             "type": "string",
@@ -69,15 +61,13 @@
                 "default",
                 "overlay"
             ],
-            "default": "default",
-            "inherited": false
+            "default": "default"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "site-header",
-            "inherited": false
+            "default": "site-header"
         },
         "size": {
             "type": "ContainerSize",
@@ -90,19 +80,16 @@
                 "narrower",
                 "small"
             ],
-            "default": "'alt'     => 'site logo',\n                'href'    => '/',\n                'classes' => ['site-header__logo']\n            ]",
-            "inherited": false
+            "default": "'alt'     => 'site logo',\n                'href'    => '/',\n                'classes' => ['site-header__logo']\n            ]"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "submenuIcon": {
             "type": "string",
             "description": "Icon class name for the submenu toggle button in responsive mode",
-            "default": "fa-chevron-down",
-            "inherited": false
+            "default": "fa-chevron-down"
         },
         "tagName": {
             "type": "Tag",
@@ -110,19 +97,16 @@
             "supported": [
                 "header"
             ],
-            "default": "header",
-            "inherited": true
+            "default": "header"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context \"responsive\" (note: only one responsive group is supported)",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

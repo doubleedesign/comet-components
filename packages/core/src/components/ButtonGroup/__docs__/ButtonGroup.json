@@ -11,13 +11,11 @@
             "description": "CSS classes",
             "default": [
                 "button-group"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "hAlign": {
             "type": "Alignment",
@@ -29,13 +27,11 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": false
+            "default": "match-parent"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "orientation": {
             "type": "Orientation",
@@ -44,20 +40,17 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "horizontal",
-            "inherited": false
+            "default": "horizontal"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "button-group",
-            "inherited": false
+            "default": "button-group"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -65,13 +58,11 @@
             "supported": [
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "vAlign": {
             "type": "Alignment",
@@ -83,14 +74,12 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": false
+            "default": "match-parent"
         }
     },
     "innerComponents": {
         "type": "array<Button>",
         "description": "Button objects to render inside the ButtonGroup",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

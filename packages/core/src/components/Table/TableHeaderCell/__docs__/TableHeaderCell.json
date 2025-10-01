@@ -20,36 +20,30 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
-            "inherited": true
+            "default": []
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "",
-            "inherited": true
+            "default": ""
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -57,13 +51,11 @@
             "supported": [
                 "th"
             ],
-            "default": "th",
-            "inherited": true
+            "default": "th"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "textAlign": {
             "type": "Alignment",
@@ -73,8 +65,7 @@
                 "center",
                 "justify",
                 "match-parent"
-            ],
-            "inherited": true
+            ]
         },
         "verticalAlign": {
             "type": "string",
@@ -83,24 +74,20 @@
                 "top",
                 "middle",
                 "bottom"
-            ],
-            "inherited": true
+            ]
         },
         "width": {
             "type": "string",
-            "description": "Fixed width of the cell, including units",
-            "inherited": false
+            "description": "Fixed width of the cell, including units"
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": true
+        "required": true
     },
     "innerComponents": {
         "type": "array",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

@@ -11,8 +11,7 @@
             "description": "CSS classes",
             "default": [
                 "section-navigation__menu"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -29,31 +28,26 @@
                 "dark",
                 "white"
             ],
-            "default": "primary",
-            "inherited": false
+            "default": "primary"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "section-navigation",
-            "inherited": false
+            "default": "section-navigation"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "menu",
-            "inherited": false
+            "default": "menu"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -61,19 +55,16 @@
             "supported": [
                 "nav"
             ],
-            "default": "nav",
-            "inherited": true
+            "default": "nav"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

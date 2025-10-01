@@ -11,41 +11,34 @@
             "description": "CSS classes",
             "default": [
                 "link"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name",
-            "inherited": false
+            "description": "Icon class name"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid",
-            "inherited": false
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "link",
-            "inherited": false
+            "default": "link"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -53,19 +46,16 @@
             "supported": [
                 "a"
             ],
-            "default": "a",
-            "inherited": true
+            "default": "a"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

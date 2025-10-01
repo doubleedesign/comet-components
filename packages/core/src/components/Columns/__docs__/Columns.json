@@ -10,8 +10,7 @@
             "type": "bool",
             "description": "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
             "required": true,
-            "default": "true",
-            "inherited": false
+            "default": "true"
         },
         "backgroundColor": {
             "type": "ThemeColor",
@@ -27,21 +26,18 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "columns"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "hAlign": {
             "type": "Alignment",
@@ -53,32 +49,27 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
+            "default": "match-parent"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": false,
-            "inherited": true
+            "default": false
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "columns",
-            "inherited": true
+            "default": "columns"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -87,13 +78,11 @@
                 "div",
                 "section"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "vAlign": {
             "type": "Alignment",
@@ -105,14 +94,12 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
+            "default": "match-parent"
         }
     },
     "innerComponents": {
         "type": "array<Column>",
         "description": "Inner column components",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

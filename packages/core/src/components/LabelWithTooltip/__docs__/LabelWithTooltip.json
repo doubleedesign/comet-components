@@ -9,36 +9,30 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
-            "inherited": true
+            "default": []
         },
         "icon": {
             "type": "string",
-            "description": "Icon class name",
-            "inherited": false
+            "description": "Icon class name"
         },
         "iconPrefix": {
             "type": "string",
             "description": "Icon prefix class name",
-            "default": "fa-solid",
-            "inherited": false
+            "default": "fa-solid"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "label-with-tooltip",
-            "inherited": false
+            "default": "label-with-tooltip"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -47,13 +41,11 @@
                 "span",
                 "label"
             ],
-            "default": "span",
-            "inherited": true
+            "default": "span"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "textAlign": {
             "type": "Alignment",
@@ -63,20 +55,17 @@
                 "center",
                 "justify",
                 "match-parent"
-            ],
-            "inherited": false
+            ]
         },
         "tooltip": {
             "type": "string",
             "description": "The text to use in the tooltip; if not provided, the icon + tooltip will not be rendered, only the label text will",
-            "required": true,
-            "inherited": false
+            "required": true
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

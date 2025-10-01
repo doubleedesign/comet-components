@@ -11,13 +11,11 @@
             "description": "CSS classes",
             "default": [
                 "icon-links"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "hAlign": {
             "type": "Alignment",
@@ -29,24 +27,20 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": false
+            "default": "match-parent"
         },
         "iconPrefix": {
             "type": "string",
-            "default": "fa-brands",
-            "inherited": false
+            "default": "fa-brands"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "links": {
             "type": "array",
             "required": true,
-            "default": [],
-            "inherited": false
+            "default": []
         },
         "orientation": {
             "type": "Orientation",
@@ -55,20 +49,17 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "horizontal",
-            "inherited": false
+            "default": "horizontal"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "icon-links",
-            "inherited": false
+            "default": "icon-links"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -76,13 +67,11 @@
             "supported": [
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "vAlign": {
             "type": "Alignment",
@@ -94,8 +83,7 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": false
+            "default": "match-parent"
         }
     }
 }

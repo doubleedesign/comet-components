@@ -10,8 +10,7 @@
             "type": "string",
             "description": "Alternative text",
             "required": true,
-            "default": "",
-            "inherited": false
+            "default": ""
         },
         "classes": {
             "type": "array<string>",
@@ -20,29 +19,24 @@
                 "is-style-rounded",
                 "breakout"
             ],
-            "default": [],
-            "inherited": false
+            "default": []
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "src": {
             "type": "string",
             "description": "Image source URL",
-            "required": true,
-            "inherited": false
+            "required": true
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -51,18 +45,15 @@
                 "figure",
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "title": {
             "type": "string",
-            "description": "Optional image title (appears on hover)",
-            "inherited": false
+            "description": "Optional image title (appears on hover)"
         }
     }
 }

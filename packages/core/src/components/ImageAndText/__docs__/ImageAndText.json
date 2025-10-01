@@ -11,8 +11,7 @@
             "description": "CSS classes",
             "default": [
                 "image-and-text"
-            ],
-            "inherited": true
+            ]
         },
         "contentAlign": {
             "type": "Alignment",
@@ -25,25 +24,21 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start",
-            "inherited": false
+            "default": "start"
         },
         "contentMaxWidth": {
             "type": "int",
             "description": "The maximum width of the content as a percentage of the available space; may be ignored in small viewports/containers.",
             "required": true,
-            "default": 50,
-            "inherited": false
+            "default": 50
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "imageAlign": {
             "type": "Alignment",
@@ -56,41 +51,35 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "start",
-            "inherited": false
+            "default": "start"
         },
         "imageFirst": {
             "type": "bool",
             "description": "Whether the image should be rendered first in the HTML.",
             "required": true,
-            "default": "true",
-            "inherited": false
+            "default": "true"
         },
         "imageMaxWidth": {
             "type": "int",
             "description": "The maximum width of the image as a percentage of the available space; may be ignored in small viewports/containers.",
             "required": true,
-            "default": 50,
-            "inherited": false
+            "default": 50
         },
         "overlayAmount": {
             "type": "int",
             "description": "The amount in pixels to overlay the content over the image.",
             "required": true,
-            "default": 0,
-            "inherited": false
+            "default": 0
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "image-and-text",
-            "inherited": true
+            "default": "image-and-text"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -98,19 +87,16 @@
             "supported": [
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<ContentImageComponent|Renderable>",
         "description": "An Image component, plus one or more other components to be rendered in the content area.",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

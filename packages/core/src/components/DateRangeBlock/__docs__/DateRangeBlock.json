@@ -9,8 +9,7 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
-            "inherited": true
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -26,56 +25,47 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "endDate": {
             "type": "DateTime|string",
-            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.",
-            "inherited": false
+            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "locale": {
             "type": "string",
             "description": "The locale to be used for formatting the date.",
             "required": true,
-            "default": "en_AU",
-            "inherited": true
+            "default": "en_AU"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "date-range-block",
-            "inherited": true
+            "default": "date-range-block"
         },
         "showDay": {
             "type": "bool",
             "description": "Whether to show the day of the week.",
             "required": true,
-            "default": "false",
-            "inherited": true
+            "default": "false"
         },
         "showYear": {
             "type": "bool",
             "description": "Whether to show the year.",
             "required": true,
-            "default": "true",
-            "inherited": true
+            "default": "true"
         },
         "startDate": {
             "type": "DateTime|string",
-            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format.",
-            "inherited": false
+            "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -83,13 +73,11 @@
             "supported": [
                 "time"
             ],
-            "default": "time",
-            "inherited": true
+            "default": "time"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     }
 }

@@ -9,18 +9,15 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
-            "inherited": true
+            "default": []
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -56,13 +53,11 @@
                 "bdi",
                 "bdo"
             ],
-            "default": "span",
-            "inherited": true
+            "default": "span"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "textAlign": {
             "type": "Alignment",
@@ -72,14 +67,12 @@
                 "center",
                 "justify",
                 "match-parent"
-            ],
-            "inherited": false
+            ]
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

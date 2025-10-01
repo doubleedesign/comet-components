@@ -20,16 +20,14 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": true
+            ]
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "banner"
-            ],
-            "inherited": true
+            ]
         },
         "containerSize": {
             "type": "ContainerSize",
@@ -43,20 +41,17 @@
                 "narrower",
                 "small"
             ],
-            "default": "default",
-            "inherited": false
+            "default": "default"
         },
         "contentMaxWidth": {
             "type": "int",
             "description": "The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)",
             "required": true,
-            "default": 50,
-            "inherited": false
+            "default": 50
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "hAlign": {
             "type": "Alignment",
@@ -68,53 +63,45 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
+            "default": "match-parent"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "imageAlt": {
             "type": "string",
             "description": "The alt text for the image",
-            "required": true,
-            "inherited": false
+            "required": true
         },
         "imageUrl": {
             "type": "string",
             "description": "The URL of the image to display in the banner",
-            "required": true,
-            "inherited": false
+            "required": true
         },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": false,
-            "inherited": true
+            "default": false
         },
         "isParallax": {
             "type": "bool",
             "description": "Whether the banner should have a fixed background (also known as a parallax effect)",
             "required": true,
-            "default": "false",
-            "inherited": false
+            "default": "false"
         },
         "maxHeight": {
             "type": "int",
             "description": "The maximum height of the banner (in vh)",
             "required": true,
-            "default": 100,
-            "inherited": false
+            "default": 100
         },
         "minHeight": {
             "type": "int",
             "description": "The minimum height of the banner (in px)",
             "required": true,
-            "default": 600,
-            "inherited": false
+            "default": 600
         },
         "overlayColor": {
             "type": "ThemeColor",
@@ -132,27 +119,23 @@
                 "dark",
                 "white"
             ],
-            "default": "dark",
-            "inherited": false
+            "default": "dark"
         },
         "overlayOpacity": {
             "type": "int",
             "description": "The opacity of the overlay on top of the image (set to 0 to disable the overlay)",
             "required": true,
-            "default": 0,
-            "inherited": false
+            "default": 0
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "banner",
-            "inherited": true
+            "default": "banner"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -160,13 +143,11 @@
             "supported": [
                 "section"
             ],
-            "default": "section",
-            "inherited": true
+            "default": "section"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "vAlign": {
             "type": "Alignment",
@@ -178,14 +159,12 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": true
+            "default": "match-parent"
         }
     },
     "innerComponents": {
         "type": "array<Heading|Paragraph|ButtonGroup>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

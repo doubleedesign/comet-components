@@ -11,31 +11,26 @@
             "description": "CSS classes",
             "default": [
                 "listcomponent__list-item"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "listcomponent",
-            "inherited": true
+            "default": "listcomponent"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "list-item",
-            "inherited": true
+            "default": "list-item"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -43,23 +38,19 @@
             "supported": [
                 "li"
             ],
-            "default": "li",
-            "inherited": true
+            "default": "li"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "content": {
-        "type": "string",
-        "inherited": false
+        "type": "string"
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

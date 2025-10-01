@@ -19,8 +19,7 @@
                 "2:3",
                 "21:9",
                 "2.35:1"
-            ],
-            "inherited": false
+            ]
         },
         "classes": {
             "type": "array<string>",
@@ -28,8 +27,7 @@
             "default": [
                 "banner-v2",
                 "page-section"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -46,8 +44,7 @@
                 "dark",
                 "white"
             ],
-            "default": "cinematic",
-            "inherited": false
+            "default": "cinematic"
         },
         "containerWidth": {
             "type": "ContainerSize",
@@ -61,19 +58,16 @@
                 "narrower",
                 "small"
             ],
-            "default": "default",
-            "inherited": false
+            "default": "default"
         },
         "contentMaxWidth": {
             "type": "int",
             "description": "The max width of the content inside the inner container, as a percentage",
-            "default": 100,
-            "inherited": false
+            "default": 100
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "focalPoint": {
             "type": "array{x:",
@@ -81,8 +75,7 @@
             "default": {
                 "x": 50,
                 "y": 50
-            },
-            "inherited": false
+            }
         },
         "hAlign": {
             "type": "Alignment",
@@ -94,19 +87,16 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": false
+            "default": "match-parent"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "image": {
             "type": "array{src:string,",
             "required": true,
-            "default": [],
-            "inherited": false
+            "default": []
         },
         "offset": {
             "type": "array{x:",
@@ -114,20 +104,17 @@
             "default": {
                 "x": 0,
                 "y": 0
-            },
-            "inherited": false
+            }
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "banner-v2",
-            "inherited": false
+            "default": "banner-v2"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -136,13 +123,11 @@
                 "div",
                 "section"
             ],
-            "default": "section",
-            "inherited": true
+            "default": "section"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "vAlign": {
             "type": "Alignment",
@@ -154,8 +139,7 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent",
-            "inherited": false
+            "default": "match-parent"
         },
         "width": {
             "type": "ContainerSize",
@@ -169,14 +153,12 @@
                 "narrower",
                 "small"
             ],
-            "default": "fullwidth",
-            "inherited": false
+            "default": "fullwidth"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

@@ -11,30 +11,25 @@
             "description": "CSS classes",
             "default": [
                 "breadcrumbs"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "breadcrumbs",
-            "inherited": true
+            "default": "breadcrumbs"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -42,19 +37,16 @@
             "supported": [
                 "nav"
             ],
-            "default": "nav",
-            "inherited": true
+            "default": "nav"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-			"inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
 		}
 	},
 	"breadcrumbs": {
 		"type": "array",
 		"description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
 		"required": true,
-		"inherited": false
 	}
 }

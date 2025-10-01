@@ -8,16 +8,14 @@
     "attributes": {
         "caption": {
             "type": "string",
-            "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>",
-            "inherited": false
+            "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>"
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "gallery"
-            ],
-            "inherited": true
+            ]
         },
         "columns": {
             "type": "int",
@@ -33,37 +31,31 @@
                 "7",
                 "8"
             ],
-            "default": 3,
-            "inherited": false
+            "default": 3
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "imageCrop": {
             "type": "bool",
             "description": "Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)",
             "required": true,
-            "default": "true",
-            "inherited": false
+            "default": "true"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "gallery",
-            "inherited": true
+            "default": "gallery"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -72,19 +64,16 @@
                 "figure",
                 "div"
             ],
-            "default": "figure",
-            "inherited": true
+            "default": "figure"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<ContentImageBasic>",
         "description": "The image components to display in the gallery",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

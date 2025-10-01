@@ -11,8 +11,7 @@
             "description": "CSS classes",
             "default": [
                 "post-nav"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -29,44 +28,37 @@
                 "dark",
                 "white"
             ],
-            "default": "$this->validate_link_attributes($link",
-            "inherited": false
+            "default": "$this->validate_link_attributes($link"
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "entityName": {
             "type": "string",
             "description": "The name of the entity type being navigated, e.g. \"Post\", \"Product\", \"Article\", etc.",
             "required": true,
-            "default": "Post",
-            "inherited": false
+            "default": "Post"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "links": {
             "type": "array{href:string,",
             "description": "Links to include. Intended to be 1 or 2 only (previous and next).",
             "required": true,
-            "default": [],
-            "inherited": false
+            "default": []
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "post-nav",
-            "inherited": false
+            "default": "post-nav"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -75,19 +67,16 @@
                 "div",
                 "nav"
             ],
-            "default": "nav",
-            "inherited": true
+            "default": "nav"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

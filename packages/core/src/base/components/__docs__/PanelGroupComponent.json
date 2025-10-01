@@ -20,14 +20,12 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "inherited": false
+            ]
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
-            "inherited": true
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -44,25 +42,21 @@
                 "dark",
                 "white"
             ],
-            "default": "primary",
-            "inherited": false
+            "default": "primary"
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": "false",
-            "inherited": false
+            "default": "false"
         },
         "orientation": {
             "type": "Orientation",
@@ -71,8 +65,7 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "vertical",
-            "inherited": false
+            "default": "vertical"
         },
         "size": {
             "type": "ContainerSize",
@@ -85,13 +78,11 @@
                 "narrower",
                 "small"
             ],
-            "default": "$innercomponents, $bladefile",
-            "inherited": false
+            "default": "$innercomponents, $bladefile"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -99,19 +90,16 @@
             "supported": [
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

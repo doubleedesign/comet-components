@@ -14,15 +14,13 @@
                 "center",
                 "right",
                 "full"
-            ],
-            "inherited": false
+            ]
         },
         "alt": {
             "type": "string",
             "description": "Alternative text",
             "required": true,
-            "default": "",
-            "inherited": true
+            "default": ""
         },
         "aspectRatio": {
             "type": "AspectRatio",
@@ -37,13 +35,11 @@
                 "2:3",
                 "21:9",
                 "2.35:1"
-            ],
-            "inherited": false
+            ]
         },
         "caption": {
             "type": "string",
-            "description": "Optional image caption (to appear below the image)",
-            "inherited": false
+            "description": "Optional image caption (to appear below the image)"
         },
         "classes": {
             "type": "array<string>",
@@ -52,29 +48,24 @@
                 "is-style-rounded",
                 "breakout"
             ],
-            "default": [],
-            "inherited": true
+            "default": []
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "src": {
             "type": "string",
             "description": "Image source URL",
-            "required": true,
-            "inherited": true
+            "required": true
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -83,18 +74,15 @@
                 "figure",
                 "div"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         },
         "title": {
             "type": "string",
-            "description": "Optional image title (appears on hover)",
-            "inherited": true
+            "description": "Optional image title (appears on hover)"
         }
     }
 }

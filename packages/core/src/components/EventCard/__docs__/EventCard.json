@@ -11,57 +11,47 @@
             "description": "CSS classes",
             "default": [
                 "event-card"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "dateComponent": {
             "type": "DateBlock|DateRangeBlock",
-            "description": "The component displaying the date.",
-            "inherited": false
+            "description": "The component displaying the date."
         },
         "detailUrl": {
             "type": "string",
-            "description": "The URL to be used for the detail page.",
-            "inherited": false
+            "description": "The URL to be used for the detail page."
         },
         "externalLink": {
             "type": "array",
             "description": "An associative array with fields URL, label, and target for an external link to a separate ticketing, registration, or other third-party site.",
-            "default": [],
-            "inherited": false
+            "default": []
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "location": {
             "type": "string",
-            "description": "The location of the event, such as the name of the venue or an address.",
-            "inherited": false
+            "description": "The location of the event, such as the name of the venue or an address."
         },
         "name": {
             "type": "string",
             "description": "The name of the event.",
-            "required": true,
-            "inherited": false
+            "required": true
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "event-card",
-            "inherited": true
+            "default": "event-card"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -70,19 +60,16 @@
                 "div",
                 "li"
             ],
-            "default": "div",
-            "inherited": true
+            "default": "div"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
-        "required": true,
-        "inherited": true
+        "required": true
     }
 }

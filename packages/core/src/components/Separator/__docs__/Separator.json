@@ -9,8 +9,7 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": [],
-            "inherited": true
+            "default": []
         },
         "color": {
             "type": "ThemeColor",
@@ -27,18 +26,15 @@
                 "dark",
                 "white"
             ],
-            "default": "primary",
-            "inherited": false
+            "default": "primary"
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -46,13 +42,11 @@
             "supported": [
                 "hr"
             ],
-            "default": "hr",
-            "inherited": true
+            "default": "hr"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     }
 }

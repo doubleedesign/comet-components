@@ -8,38 +8,32 @@
     "attributes": {
         "allowStacking": {
             "type": "bool",
-            "description": "Optionally specify whether to adapt the layout by stacking columns when the viewport or container is narrow. Do not set if your theme will handle it on a case-by-case basis with custom CSS.",
-            "inherited": false
+            "description": "Optionally specify whether to adapt the layout by stacking columns when the viewport or container is narrow. Do not set if your theme will handle it on a case-by-case basis with custom CSS."
         },
         "caption": {
             "type": "TableCaption|array",
-            "description": "Caption object, or content and attributes corresponding to a Caption object",
-            "inherited": false
+            "description": "Caption object, or content and attributes corresponding to a Caption object"
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "table"
-            ],
-            "inherited": true
+            ]
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": true
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "table",
-            "inherited": true
+            "default": "table"
         },
         "sticky": {
             "type": "string",
@@ -47,13 +41,11 @@
             "supported": [
                 "header",
                 "first-column"
-            ],
-            "inherited": false
+            ]
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -61,13 +53,11 @@
             "supported": [
                 "table"
             ],
-            "default": "table",
-            "inherited": true
+            "default": "table"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     }
 }

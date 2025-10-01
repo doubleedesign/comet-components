@@ -11,8 +11,7 @@
             "description": "CSS classes",
             "default": [
                 "button"
-            ],
-            "inherited": true
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -29,42 +28,35 @@
                 "dark",
                 "white"
             ],
-            "default": "primary",
-            "inherited": false
+            "default": "primary"
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "inherited": false
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "href": {
             "type": "string",
             "description": "URL to link to if using <a> tag.",
-            "default": "",
-            "inherited": false
+            "default": ""
         },
         "id": {
             "type": "string",
-            "description": "Unique identifier",
-            "inherited": true
+            "description": "Unique identifier"
         },
         "isOutline": {
             "type": "bool",
             "description": "Whether to use outline style instead of solid/filled",
-            "default": "false",
-            "inherited": false
+            "default": "false"
         },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "button",
-            "inherited": false
+            "default": "button"
         },
         "style": {
             "type": "array",
-            "description": "Inline styles",
-            "inherited": true
+            "description": "Inline styles"
         },
         "tagName": {
             "type": "Tag",
@@ -73,19 +65,16 @@
                 "a",
                 "button"
             ],
-            "default": "a",
-            "inherited": true
+            "default": "a"
         },
         "testId": {
             "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests",
-            "inherited": true
+            "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
     "content": {
         "type": "string",
         "description": "Plain text or basic HTML",
-        "required": true,
-        "inherited": false
+        "required": true
     }
 }

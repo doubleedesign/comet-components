@@ -7,11 +7,9 @@
     "belongsInside": "ListComponent",
     "attributes": [],
     "content": {
-        "type": "string",
-        "inherited": false
+        "type": "string"
     },
     "innerComponents": {
-        "type": "array",
-        "inherited": false
+        "type": "array"
     }
 }
