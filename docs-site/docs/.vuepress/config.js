@@ -8,6 +8,7 @@ import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab';
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { searchPlugin } from '@vuepress/plugin-search';
+import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
 
 const docsDir = path.resolve(__dirname, '../');
 
@@ -80,7 +81,14 @@ export default defineUserConfig({
 			theme: 'coldark-dark',
 			preloadLanguages: ['php', 'html', 'css', 'scss', 'js', 'json', 'bash', 'powershell'],
 		}),
-		searchPlugin()
+		searchPlugin(),
+		registerComponentsPlugin({
+			components: {
+				ComponentMapPage: path.resolve(__dirname, './components/ComponentMapPage.vue'),
+				ComponentMap: path.resolve(__dirname, './components/ComponentMap.vue'),
+				Modal: path.resolve(__dirname, './components/Modal.vue'),
+			}
+		}),
 	],
 
 	bundler: viteBundler(),

@@ -9,24 +9,26 @@
 		"docs:update-package": "npx vp-update"
 	},
 	"devDependencies": {
-		"vuepress": "next",
 		"@vuepress/bundler-vite": "next",
 		"@vuepress/plugin-markdown-ext": "next",
 		"@vuepress/plugin-markdown-tab": "next",
 		"@vuepress/plugin-prismjs": "next",
+		"@vuepress/plugin-register-components": "next",
 		"@vuepress/plugin-search": "next",
 		"@vuepress/theme-default": "next",
+		"eslint": "*",
+		"eslint-plugin-vue": "*",
 		"generate-vue-cli": "^0.0.2",
 		"prism-themes": "^1.9.0",
 		"sass": "^1.86.0",
 		"sass-embedded": "^1.86.0",
 		"sass-loader": "^16.0.5",
 		"vue": "^3.5.13",
-		"eslint": "*",
-		"eslint-plugin-vue": "*",
-		"vue-eslint-parser": "*"
+		"vue-eslint-parser": "*",
+		"vuepress": "next"
 	},
 	"dependencies": {
-		"case": "^1.6.3"
+		"case": "^1.6.3",
+		"lodash": "^4.17.21"
 	}
 }
