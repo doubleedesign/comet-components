@@ -9,13 +9,7 @@ use Exception;
  */
 trait BlockElementModifier {
     use ContextHierarchy;
-
-    /**
-     * @var string $shortName
-     * @description The name of the component without any namespacing, prefixes, etc.
-     *              Derived from the Blade filename if not explicitly set.
-     */
-    private string $shortName = '';
+    use ShortName;
     private ?string $explicit_context = null;
     private string $block = '';
     private ?string $element = null;
@@ -42,7 +36,7 @@ trait BlockElementModifier {
         if ($override_shortname) {
             $attributes['shortName'] = $override_shortname;
         }
-        $this->shortName = isset($attributes['shortName']) ? (string)$attributes['shortName'] : array_reverse(explode('.', $this->bladeFile))[0];
+        $this->set_shortname(isset($attributes['shortName']) ? (string)$attributes['shortName'] : array_reverse(explode('.', $this->bladeFile))[0]);
 
         $final_context = $this->get_context(); // gets it from the Context trait
 
@@ -154,9 +148,5 @@ trait BlockElementModifier {
 
     public function get_bem_prefix(): string {
         return $this->get_bem_classes()[0];
-    }
-
-    public function get_shortname(): string {
-        return $this->shortName;
     }
 }

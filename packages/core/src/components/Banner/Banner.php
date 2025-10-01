@@ -103,7 +103,7 @@ class Banner extends LayoutComponent {
                     $this->get_container_attributes(),
                     [
                         'size'        => $this->containerSize->value,
-                        'withWrapper' => false,
+                        'isNested'    => true,
                         'tagName'     => 'div',
                         'context'     => 'banner',
                         'hAlign'      => $this->hAlign->value,

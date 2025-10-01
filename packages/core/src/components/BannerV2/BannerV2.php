@@ -60,7 +60,6 @@ class BannerV2 extends UIComponent {
                     'size'        => $this->containerWidth,
                     'hAlign'      => $this->hAlign,
                     'vAlign'      => $this->vAlign,
-                    'withWrapper' => false,
                     'isNested'    => true,
                 ],
                 [new Group(

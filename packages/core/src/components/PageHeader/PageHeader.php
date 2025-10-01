@@ -10,7 +10,7 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::HEADER, Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::HEADER)]
-class PageHeader extends Container {
+class PageHeader extends WrappedLayoutComponent {
     use ColorTheme;
 
     /**
@@ -29,14 +29,13 @@ class PageHeader extends Container {
         $this->set_color_theme_from_attrs($attributes);
         $this->breadcrumbs = $breadcrumbs;
         $this->innerComponents = !empty($breadcrumbs) ? [new Breadcrumbs([], $this->breadcrumbs)] : [];
-        $this->withWrapper = true;
 
         $this->innerComponents = array_merge(
             $this->innerComponents,
             [new Heading(['level' => 1], $content)]
         );
 
-        parent::__construct($attributes, $this->innerComponents);
+        parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
     }
 
     protected function get_html_attributes(): array {
@@ -48,12 +47,4 @@ class PageHeader extends Container {
 
         return $attributes;
     }
-
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        // Replace '__page-header' with '__container' before returning
-        return array_map(fn($class) => str_replace('__page-header', '__container', $class), $classes);
-    }
-
 }

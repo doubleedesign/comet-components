@@ -32,7 +32,6 @@ $content_component = new Container([
     // Associate this <article> with its headline contained in the page header component
     'aria-labelledby' => 'page-header--post-' . get_the_id(),
     'isNested'        => false,
-    'withWrapper'     => false,
     'context'         => 'post-content',
     'size'            => 'default',
 ], [
@@ -45,7 +44,6 @@ $footer = new Container([
     'tagName'     => 'footer',
     'context'     => 'post-footer',
     'isNested'    => false,
-    'withWrapper' => false,
     'size'        => 'default'
 ], [
     comet_get_author_card(),

@@ -10,7 +10,7 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::HEADER])]
 #[DefaultTag(Tag::HEADER)]
-class SiteHeader extends LayoutComponent {
+class SiteHeader extends UIComponent {
     use BackgroundColor;
     use Icon;
     use LayoutContainerSize;
@@ -77,7 +77,7 @@ class SiteHeader extends LayoutComponent {
         }
 
         parent::__construct($attributes, $innerComponents, 'components.SiteHeader.site-header');
-        $this->set_background_color_from_attrs($attributes);
+
         $this->set_size_from_attrs($attributes);
         $this->set_icon_from_attrs($attributes);
         $this->breakpoint = $attributes['breakpoint'] ?? $this->breakpoint;
@@ -146,13 +146,6 @@ class SiteHeader extends LayoutComponent {
         return $attributes;
     }
 
-    public function get_filtered_classes(): array {
-        return array_unique([
-            ...parent::get_filtered_classes(),
-            'page-section'
-        ]);
-    }
-
     protected function get_inner_container_html_attributes(): array {
         $attributes = [];
 
@@ -180,7 +173,7 @@ class SiteHeader extends LayoutComponent {
                 'breakpoint' => null,
                 'classes'    => $this->get_filtered_classes(),
                 'attributes' => $this->get_html_attributes(),
-                'children'   => [new Container(['size' => $this->size->value, 'withWrapper' => false, 'context' => $this->get_shortname()], $this->innerComponents)]
+                'children'   => [new Container(['size' => $this->size->value, 'isNested' => true, 'context' => $this->get_shortname()], $this->innerComponents)]
             ])->render();
         }
         else {

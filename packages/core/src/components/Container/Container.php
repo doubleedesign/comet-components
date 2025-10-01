@@ -10,14 +10,9 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV, Tag::ARTICLE, Tag::FOOTER])]
 #[DefaultTag(Tag::SECTION)]
-class Container extends LayoutComponent {
+class Container extends WrappedLayoutComponent {
     use LayoutContainerSize;
-
-    /**
-     * @var bool|null $withWrapper
-     * @description Whether to wrap the container element so that the background is full-width
-     */
-    protected ?bool $withWrapper = true;
+    use LayoutOrientation;
 
     /**
      * @var string|null $gradient
@@ -25,33 +20,46 @@ class Container extends LayoutComponent {
      */
     protected ?string $gradient; // TODO: Not limited by a trait because implementations could have all kinds of gradients they handle themselves
 
-    /**
-     * @var Tag|null $wrapperTag
-     * @description Store a reference to the provided tag for use in the wrapping PageSection if applicable
-     */
-    private ?Tag $wrapperTag = Tag::SECTION;
-
     public function __construct(array $attributes, array $innerComponents, string $bladeFile = 'components.Container.container') {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->set_size_from_attrs($attributes);
+        $this->set_orientation_from_attrs($attributes, null);
         $this->gradient = $attributes['gradient'] ?? null;
-        $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
+        $this->set_is_nested(@$attributes['isNested'] ?? false);
+    }
 
-        if ($this->withWrapper) {
-            if ($this->get_context()) {
-                // The wrapping PageSection takes the tagName given,
-                $this->wrapperTag = $this->tagName;
-                // ... so we override the Container's tag so we don't get stuff like section -> section
-                $this->set_tag('div');
-                // The block should already be set by the context trait, so we add container here so this becomes theContext__container
-                $this->set_bem_element('container');
-            }
+    /**
+     * Nested state can be updated from outside (notably in the render methods of WrappedLayoutComponent)
+     * so we need to make the relevant updates when that happens, not just in the constructor
+     *
+     * @param  bool  $isNested
+     *
+     * @return void
+     */
+    public function set_is_nested(?bool $isNested): void {
+        parent::set_is_nested($isNested);
+        if ($this->get_is_nested()) {
+            // The wrapping PageSection takes the tagName given,
+            // so we override the Container's tag so we don't get stuff like section -> section
+            $this->set_tag('div');
+            // The block should already be set by the context trait, so we add container here so this becomes theContext__container
+            $this->set_bem_element('container');
         }
         else {
             // If rendering without a wrapper, we want just the block (as set in the trait), not theBlock__container
             // (we manually add 'container' class in get_filtered_classes so we get "theBlock container")
             $this->set_bem_element(null);
         }
+    }
+
+    public function get_filtered_classes(): array {
+        $classes = parent::get_filtered_classes();
+
+        if (!$this->get_is_nested()) {
+            array_push($classes, 'container');
+        }
+
+        return array_unique($classes);
     }
 
     protected function get_html_attributes(): array {
@@ -68,7 +76,12 @@ class Container extends LayoutComponent {
             $attributes['data-valign'] = $this->vAlign->value;
         }
 
-        if (!$this->withWrapper) {
+        // we don't check against a default here we only want orientation added to the HTML if explicitly set
+        if (isset($this->orientation)) {
+            $attributes['data-orientation'] = $this->orientation->value;
+        }
+
+        if ($this->get_is_nested()) {
             if (isset($this->backgroundColor)) {
                 $attributes['data-background'] = $this->backgroundColor->value;
             }
@@ -80,48 +93,4 @@ class Container extends LayoutComponent {
         return $attributes;
     }
 
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        if (!$this->withWrapper) {
-            array_push($classes, 'container');
-        }
-
-        return array_unique($classes);
-    }
-
-    protected function render_with_wrapper(): void {
-        $inner = $this;
-        $inner->set_is_nested(true); // Prevent infinite loop
-
-        $withWrapper = new PageSection([
-            'shortName'       => $this->get_shortname() === 'container' ? null : $this->get_shortname(),
-            'context'         => $this->get_context(),
-            'tagName'         => $this->wrapperTag->value,
-            'backgroundColor' => $this->backgroundColor ?? null,
-            'gradient'        => $this->gradient ?? null,
-        ], [$inner]);
-        $withWrapper->render();
-    }
-
-    protected function render_standalone(): void {
-        $blade = BladeService::getInstance();
-
-        echo $blade->make($this->bladeFile, [
-            'tag'             => $this->tagName->value,
-            'withWrapper'     => $this->withWrapper,
-            'attributes'      => $this->get_html_attributes(),
-            'classes'         => $this->get_filtered_classes(),
-            'children'        => $this->innerComponents
-        ])->render();
-    }
-
-    public function render(): void {
-        if (!$this->get_is_nested()) {
-            $this->render_with_wrapper();
-        }
-        else {
-            $this->render_standalone();
-        }
-    }
 }

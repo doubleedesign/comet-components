@@ -3,15 +3,15 @@ use Doubleedesign\Comet\Core\{TychoService};
 
 $page = <<<TYCHO
 <TychoTemplate xmlns="schema/components.xsd">
-	<Container testId="example-1" withWrapper="false">
+	<Container testId="example-1">
 		<Group>Adjacent groups no background</Group>
 		<Group>...in a basic container</Group>
 	</Container>
-	<Container testId="example-2" withWrapper="false">
+	<Container testId="example-2">
 		<Group backgroundColor="light">Adjacent light background</Group>
 		<Group backgroundColor="light">...in a basic container</Group>
 	</Container>
-	<Container testId="example-3" withWrapper="false">
+	<Container testId="example-3">
 		<Group backgroundColor="dark">Group dark background</Group>
 		<Group backgroundColor="primary">Group primary background</Group>
 	</Container>

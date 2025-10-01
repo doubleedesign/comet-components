@@ -12,7 +12,7 @@ describe('TychoService', function() {
         test('Boolean attribute value', function() {
             $instance = new TychoService();
             $node = <<<TYCHO
-			<Container withWrapper="false"></Container>
+			<Container></Container>
 			TYCHO;
             $dom = new DOMDocument();
             $dom->loadXML($node);

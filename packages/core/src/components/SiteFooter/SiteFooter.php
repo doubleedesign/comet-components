@@ -10,61 +10,9 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::FOOTER])]
 #[DefaultTag(Tag::FOOTER)]
-class SiteFooter extends UIComponent {
-    use BackgroundColor;
-    use LayoutContainerSize;
-
-    /**
-     * @var ?ContainerSize $size
-     * @description Keyword specifying the relative width of the container for the inner content
-     * @default-value default
-     */
-    protected ?ContainerSize $size = ContainerSize::DEFAULT;
+class SiteFooter extends WrappedLayoutComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
-        $this->set_background_color_from_attrs($attributes);
-        $this->set_size_from_attrs($attributes);
-
-        $this->innerComponents = [
-            new Container(
-                [
-                    'tagName'     => 'div',
-                    'context'     => 'site-footer',
-                    'size'        => $this->size->value,
-                    'withWrapper' => false,
-                ],
-                $innerComponents
-            )
-        ];
-
-        parent::__construct($attributes, $this->innerComponents, 'components.SiteFooter.site-footer');
-        $this->simplify_all_background_colors();
-    }
-
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-
-        return $attributes;
-    }
-
-    public function get_filtered_classes(): array {
-        return array_unique([
-            ...parent::get_filtered_classes(),
-            'page-section'
-        ]);
-    }
-
-    public function render(): void {
-        $blade = BladeService::getInstance();
-
-        echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes(),
-            'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
-        ])->render();
+        parent::__construct($attributes, $innerComponents, 'components.SiteFooter.site-footer');
     }
 }

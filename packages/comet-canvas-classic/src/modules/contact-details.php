@@ -14,7 +14,6 @@ else {
     $component = new Container(
         [
             'context'     => 'contact-details-wrapper',
-            'withWrapper' => false,
         ],
         [new PreprocessedHTML([], $content)]
     );

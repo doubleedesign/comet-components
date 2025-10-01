@@ -37,7 +37,7 @@ class Accordion extends PanelGroupComponent {
 
     public function get_container_attributes(): array {
         return [
-            'withWrapper'     => true,
+            'isNested'        => false,
             'classes'         => [$this->get_context() ? "{$this->get_context()}__{$this->get_shortname()}-wrapper" : "{$this->get_shortname()}-wrapper"],
             'size'            => $this->size ?? null
         ];

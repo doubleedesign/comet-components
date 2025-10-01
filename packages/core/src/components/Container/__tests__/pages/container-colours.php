@@ -28,7 +28,7 @@ $page = <<<TYCHO
 		<Paragraph>Container primary background</Paragraph>
 	</Container>
 	
-	<Container backgroundColor="white" withWrapper="false" testId="example-5">
+	<Container backgroundColor="white" testId="example-5">
 		<Paragraph>No page section wrapper, first thing with a background, but it's the same as the global background</Paragraph>
 	</Container>
 </TychoTemplate>

@@ -26,19 +26,4 @@ trait LayoutContainerSize {
             $this->size = ContainerSize::from_wordpress_class_name($attributes['className']);
         }
     }
-
-    public function add_container(&$innerComponents): void {
-        $innerComponents = array(
-            new Container(
-                [
-                    'size'            => $this->size->value ?? ContainerSize::DEFAULT->value,
-                    'withWrapper'     => false,
-                    'tagName'         => Tag::DIV->value,
-                    'backgroundColor' => $this->backgroundColor?->value ?? null,
-                    'hAlign'          => $this->hAlign?->value ?? null,
-                ],
-                $innerComponents
-            )
-        );
-    }
 }

@@ -2,7 +2,7 @@
 use Doubleedesign\Comet\Core\{Container, Paragraph};
 
 // Attribute keys from component JSON definition
-$attributeKeys = ['context', 'backgroundColor', 'classes', 'gradient', 'size', 'tagName', 'withWrapper'];
+$attributeKeys = ['context', 'backgroundColor', 'classes', 'gradient', 'size', 'tagName'];
 // Filter the request query vars to only those matching the above
 $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
 // Make true and false strings proper booleans

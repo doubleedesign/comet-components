@@ -4,7 +4,7 @@ use Doubleedesign\Comet\Core\{TychoService};
 $page = <<<TYCHO
 <TychoTemplate xmlns="schema/components.xsd">
 	<Separator color="dark"/>
-	<Container testId="example-1" withWrapper="false">
+	<Container testId="example-1">
 		<Columns>
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
@@ -18,7 +18,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-2" withWrapper="false">
+	<Container testId="example-2">
 		<Columns>
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
@@ -42,7 +42,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-3" withWrapper="false" backgroundColor="light">
+	<Container testId="example-3" backgroundColor="light">
 		<Columns backgroundColor="light">
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
@@ -50,7 +50,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-4" withWrapper="false" backgroundColor="light">
+	<Container testId="example-4" backgroundColor="light">
 		<Columns backgroundColor="dark">
 			<Column>Column 1</Column>
 			<Column backgroundColor="accent">Column 2</Column>
@@ -58,7 +58,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-5" withWrapper="false" backgroundColor="dark">
+	<Container testId="example-5" backgroundColor="dark">
 		<Columns backgroundColor="dark">
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
@@ -74,7 +74,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-6" withWrapper="false" backgroundColor="light">
+	<Container testId="example-6" backgroundColor="light">
 		<Columns backgroundColor="dark">
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
@@ -90,7 +90,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-7" withWrapper="false" backgroundColor="primary">
+	<Container testId="example-7" backgroundColor="primary">
 		<Columns backgroundColor="dark">
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
@@ -106,7 +106,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-8" withWrapper="false" backgroundColor="primary">
+	<Container testId="example-8" backgroundColor="primary">
 		<Columns backgroundColor="dark">
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
@@ -122,7 +122,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-9" withWrapper="false">
+	<Container testId="example-9">
 		<Columns>
 			<Column backgroundColor="white">Column 1</Column>
 			<Column>Column 2</Column>
@@ -130,7 +130,7 @@ $page = <<<TYCHO
 	</Container>
 	
 	<Separator color="dark"/>
-	<Container testId="example-10" withWrapper="false">
+	<Container testId="example-10">
 		<Columns backgroundColor="white">
 			<Column>Column 1</Column>
 			<Column>Column 2</Column>
