@@ -109,5 +109,9 @@
             "type": "string",
             "description": "Optional image title (appears on hover)"
         }
-    }
+    },
+    "traits": [
+        "ImageCropProperties",
+        "BlockElementModifier"
+    ]
 }

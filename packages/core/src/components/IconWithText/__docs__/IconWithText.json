@@ -81,5 +81,10 @@
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "ColorTheme",
+        "Icon",
+        "BlockElementModifier"
+    ]
 }

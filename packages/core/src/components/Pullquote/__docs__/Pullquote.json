@@ -109,5 +109,12 @@
         "type": "string",
         "description": "Plain text or basic HTML",
         "required": true
-    }
+    },
+    "traits": [
+        "BackgroundColor",
+        "ColorTheme",
+        "BlockElementModifier",
+        "TextColor",
+        "TextAlign"
+    ]
 }

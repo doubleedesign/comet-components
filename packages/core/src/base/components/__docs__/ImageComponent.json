@@ -55,5 +55,8 @@
             "type": "string",
             "description": "Optional image title (appears on hover)"
         }
-    }
+    },
+    "traits": [
+        "BlockElementModifier"
+    ]
 }

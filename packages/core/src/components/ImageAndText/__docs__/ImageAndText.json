@@ -98,5 +98,8 @@
         "type": "array<ContentImageComponent|Renderable>",
         "description": "An Image component, plus one or more other components to be rendered in the content area.",
         "required": true
-    }
+    },
+    "traits": [
+        "BlockElementModifier"
+    ]
 }

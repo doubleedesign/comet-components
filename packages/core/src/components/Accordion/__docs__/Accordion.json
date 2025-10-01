@@ -124,5 +124,14 @@
         "type": "array<AccordionPanel>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "Icon",
+        "BackgroundColor",
+        "ColorTheme",
+        "LayoutContainerSize",
+        "LayoutOrientation",
+        "NestedState",
+        "BlockElementModifier"
+    ]
 }

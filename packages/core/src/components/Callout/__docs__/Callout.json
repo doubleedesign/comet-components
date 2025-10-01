@@ -74,5 +74,10 @@
         "type": "array<Heading|ListComponent|Paragraph|ButtonGroup|Button|Separator>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "ColorTheme",
+        "Icon",
+        "BlockElementModifier"
+    ]
 }

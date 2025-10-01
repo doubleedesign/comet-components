@@ -85,5 +85,10 @@
             ],
             "default": "match-parent"
         }
-    }
+    },
+    "traits": [
+        "BlockElementModifier",
+        "LayoutAlignment",
+        "LayoutOrientation"
+    ]
 }

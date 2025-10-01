@@ -90,5 +90,10 @@
             "type": "string",
             "required": true
         }
-    }
+    },
+    "traits": [
+        "BlockElementModifier",
+        "ColorTheme",
+        "Icon"
+    ]
 }

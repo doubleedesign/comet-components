@@ -79,5 +79,9 @@
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
         }
-    }
+    },
+    "traits": [
+        "ColorTheme",
+        "ShortName"
+    ]
 }

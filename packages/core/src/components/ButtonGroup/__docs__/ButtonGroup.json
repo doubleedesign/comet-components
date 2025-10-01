@@ -81,5 +81,10 @@
         "type": "array<Button>",
         "description": "Button objects to render inside the ButtonGroup",
         "required": true
-    }
+    },
+    "traits": [
+        "LayoutAlignment",
+        "LayoutOrientation",
+        "BlockElementModifier"
+    ]
 }

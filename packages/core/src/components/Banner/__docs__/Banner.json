@@ -166,5 +166,12 @@
         "type": "array<Heading|Paragraph|ButtonGroup>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "LayoutAlignment",
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
+        "BlockElementModifier"
+    ]
 }

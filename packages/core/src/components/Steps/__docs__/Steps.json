@@ -127,5 +127,13 @@
         "type": "array<Step>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "ColorTheme",
+        "LayoutOrientation",
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
+        "BlockElementModifier"
+    ]
 }

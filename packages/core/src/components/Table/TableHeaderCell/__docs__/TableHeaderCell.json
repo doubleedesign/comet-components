@@ -89,5 +89,10 @@
     "innerComponents": {
         "type": "array",
         "required": true
-    }
+    },
+    "traits": [
+        "BackgroundColor",
+        "BlockElementModifier",
+        "TextAlign"
+    ]
 }

@@ -11,5 +11,6 @@
     },
     "innerComponents": {
         "type": "array"
-    }
+    },
+    "traits": []
 }

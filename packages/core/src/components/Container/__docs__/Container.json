@@ -124,5 +124,13 @@
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "LayoutContainerSize",
+        "LayoutOrientation",
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
+        "BlockElementModifier"
+    ]
 }

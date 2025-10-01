@@ -75,5 +75,8 @@
         "type": "array<ContentImageBasic>",
         "description": "The image components to display in the gallery",
         "required": true
-    }
+    },
+    "traits": [
+        "BlockElementModifier"
+    ]
 }

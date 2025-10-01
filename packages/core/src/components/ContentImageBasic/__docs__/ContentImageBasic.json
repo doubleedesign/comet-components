@@ -114,5 +114,8 @@
             "type": "string",
             "description": "Set a fixed width for the image"
         }
-    }
+    },
+    "traits": [
+        "BlockElementModifier"
+    ]
 }

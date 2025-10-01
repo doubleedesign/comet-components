@@ -101,5 +101,11 @@
         "type": "array<Column>",
         "description": "Inner column components",
         "required": true
-    }
+    },
+    "traits": [
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
+        "BlockElementModifier"
+    ]
 }

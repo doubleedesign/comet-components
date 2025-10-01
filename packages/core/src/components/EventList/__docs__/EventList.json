@@ -59,5 +59,8 @@
         "type": "array<EventCard>",
         "description": "Event cards to display.",
         "required": true
-    }
+    },
+    "traits": [
+        "BlockElementModifier"
+    ]
 }

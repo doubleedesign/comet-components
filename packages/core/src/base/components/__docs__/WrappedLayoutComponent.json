@@ -90,5 +90,11 @@
         "type": "array<Renderable>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
+        "BlockElementModifier"
+    ]
 }

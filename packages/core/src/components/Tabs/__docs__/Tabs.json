@@ -109,5 +109,13 @@
         "type": "array<TabPanel>",
         "description": "Inner components to be rendered within this component",
         "required": true
-    }
+    },
+    "traits": [
+        "BackgroundColor",
+        "ColorTheme",
+        "LayoutContainerSize",
+        "LayoutOrientation",
+        "NestedState",
+        "BlockElementModifier"
+    ]
 }

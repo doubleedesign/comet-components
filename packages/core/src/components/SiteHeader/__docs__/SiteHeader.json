@@ -108,5 +108,11 @@
         "type": "array<Renderable>",
         "description": "The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context \"responsive\" (note: only one responsive group is supported)",
         "required": true
-    }
+    },
+    "traits": [
+        "BackgroundColor",
+        "Icon",
+        "LayoutContainerSize",
+        "BlockElementModifier"
+    ]
 }

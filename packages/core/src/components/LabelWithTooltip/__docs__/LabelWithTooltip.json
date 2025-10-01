@@ -67,5 +67,10 @@
         "type": "string",
         "description": "Plain text or basic HTML",
         "required": true
-    }
+    },
+    "traits": [
+        "Icon",
+        "ShortName",
+        "TextAlign"
+    ]
 }

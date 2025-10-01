@@ -231,9 +231,11 @@ class ComponentClassesToJsonDefinitions {
 
         // Collect properties from traits
         $traits = $reflectionClass->getTraits();
+        $traitNames = [];
         foreach ($traits as $trait) {
             $traitData = $this->getTraitData($trait, $reflectionClass);
             $properties = array_merge($properties, $traitData);
+            $traitNames[] = $trait->getShortName();
         }
 
         // And ancestor class traits
@@ -243,6 +245,7 @@ class ComponentClassesToJsonDefinitions {
             foreach ($ancestorTraits as $trait) {
                 $traitData = $this->getTraitData($trait, $reflectionClass);
                 $properties = array_merge($properties, $traitData);
+                $traitNames[] = $trait->getShortName();
             }
             $ancestor = $ancestor->getParentClass();
         }
@@ -268,6 +271,7 @@ class ComponentClassesToJsonDefinitions {
                 ? ($parentClass->getName() ? array_reverse(explode('\\', $parentClass->getName()))[0] : null)
                 : null,
             'abstract'    => $reflectionClass->isAbstract(),
+            'traits'      => $traitNames,
             'attributes'  => $finalAttrs
         ];
 
