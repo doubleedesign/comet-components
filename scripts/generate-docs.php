@@ -274,8 +274,29 @@ class ComponentClassesToJsonDefinitions {
         if (isset($properties['content'])) {
             $result['content'] = $properties['content'];
         }
-        if (isset($properties['innerComponents'])) {
+        if (isset($properties['innerComponents']) && $reflectionClass->getName() !== 'Doubleedesign\Comet\Core\Breadcrumbs') {
             $result['innerComponents'] = $properties['innerComponents'];
+        }
+        if ($reflectionClass->getName() === 'Doubleedesign\Comet\Core\Breadcrumbs') {
+            // Get params of constructor
+            $constructor = $reflectionClass->getConstructor();
+            $params = $constructor ? $constructor->getParameters() : [];
+            $paramsToAdd = array_filter($params, fn($param) => $param->getName() !== 'attributes');
+            foreach ($paramsToAdd as $param) {
+                $paramType = $param->getType();
+                $paramName = $param->getName();
+                $docComment = $constructor->getDocComment();
+                $description = preg_match('/@param\s+' . preg_quote($paramType?->getName() ?? 'mixed', '/') . '\s+\$' . preg_quote($paramName, '/') . '\s+(.+)/', $docComment, $matches);
+                $description = $description ? trim($matches[1]) : null;
+
+                if ($paramType) {
+                    $result[$paramName] = [
+                        'type'        => $paramType instanceof ReflectionNamedType ? $paramType->getName() : 'mixed',
+                        'description' => $description,
+                        'required'    => true,
+                    ];
+                }
+            }
         }
 
         if (array_reverse(explode('\\', $className))[0] === 'Image') {

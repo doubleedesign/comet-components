@@ -42,11 +42,11 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
-		}
-	},
-	"breadcrumbs": {
-		"type": "array",
-		"description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
-		"required": true,
-	}
+        }
+    },
+    "breadcrumbs": {
+        "type": "array",
+        "description": "Indexed array of breadcrumb associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
+        "required": true
+    }
 }
