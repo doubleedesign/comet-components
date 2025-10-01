@@ -1,0 +1,38 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"allowImportingTsExtensions": true,
+		"types": [
+			"node",
+			"vue",
+		],
+		"paths": {
+			"@/*": [
+				"./src/*"
+			]
+		},
+		"lib": [
+			"ESNext",
+			"DOM",
+			"DOM.Iterable"
+		],
+		"allowJs": true,
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		"src/**/*.test.ts",
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

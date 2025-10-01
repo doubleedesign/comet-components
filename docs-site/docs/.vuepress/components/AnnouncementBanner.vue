@@ -65,4 +65,4 @@ export default {
         padding: 0.5rem;
     }
 }
-</style>;
+</style>

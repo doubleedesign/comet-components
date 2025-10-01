@@ -63,9 +63,15 @@
 		"ts-node": "^10.9.2",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.32.1",
-		"vite": "^6.3.5"
+		"vite": "^7.1.5",
+		"vue-eslint-parser": "^10.1.3",
+		"eslint-plugin-vue": "^10.0.0"
 	},
 	"overrides": {
 		"storybook": "$storybook"
-	}
+	},
+	"workspaces": [
+		"packages/core",
+		"docs-site"
+	]
 }
