@@ -52,7 +52,14 @@ This provides a central location for validation logic and documentation, reducin
 	<code>remove_redundant_background_colors</code> 
 	<strong>Returns:</strong> <code>void</code>
 
-<p>If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS. This method is public as there are some components where we want to do this, but not assign a background colour to the component.</p>
+<p>If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_background_color_based_on_inner_components</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
 </dd>
 </dl>
 
@@ -67,6 +74,147 @@ class MyComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
 		$this->set_background_color_from_attrs($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+## BlockElementModifier
+
+Note: This trait initialises context with the `ContextHierarchy` trait, so do not explicitly initialise both traits in the same class.
+
+<dl>
+
+<dt>Property</dt>
+<dd>
+	<code>bladeFile</code> 
+	<strong>Type:</strong> <code>string</code>
+
+<p></p>
+</dd>
+
+<dt>Method</dt>
+<dd>
+	<code>init_bem_structure</code> 
+	<strong>Returns:</strong> <code>static</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>and_bem</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_bem_block</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_bem_element</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_bem_modifier</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_bem_structure</code> 
+	<strong>Returns:</strong> <code>array</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_bem_classes</code> 
+	<strong>Returns:</strong> <code>array</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_filtered_classes</code> 
+	<strong>Returns:</strong> <code>array</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_bem_prefix</code> 
+	<strong>Returns:</strong> <code>string</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_context</code> 
+	<strong>Returns:</strong> <code>?string</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>init_context</code> 
+	<strong>Returns:</strong> <code>static</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>with_explicit_context</code> 
+	<strong>Returns:</strong> <code>static</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>update_context</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_shortname</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_shortname</code> 
+	<strong>Returns:</strong> <code>string</code>
+
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use BlockElementModifier;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->init_bem_structure($attributes);
 	}
 }
 ```
@@ -108,6 +256,70 @@ class MyComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
 		$this->set_color_theme_from_attrs($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+## ContextHierarchy
+
+Note: This trait is initialised within the `BlockElementModifier` trait. Only initialise this trait in a component class that is not using BEM.
+
+<dl>
+
+<dt>Property</dt>
+<dd>
+	<code>bladeFile</code> 
+	<strong>Type:</strong> <code>string</code>
+
+<p></p>
+</dd>
+
+<dt>Method</dt>
+<dd>
+	<code>get_context</code> 
+	<strong>Returns:</strong> <code>?string</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>init_context</code> 
+	<strong>Returns:</strong> <code>static</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>with_explicit_context</code> 
+	<strong>Returns:</strong> <code>static</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>update_context</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use ContextHierarchy;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->init_context($attributes)->with_explicit_context($attributes['context'] ?? null);
 	}
 }
 ```
@@ -165,7 +377,6 @@ class MyComponent {
 
 <div>
 
-
 ## ImageCropProperties
 
 <dl>
@@ -174,21 +385,21 @@ class MyComponent {
 <dd>
 	<code>aspectRatio</code> 
 	<strong>Type:</strong> <code>AspectRatio</code>
-	
+
 <p>Crop banner image to the given aspect ratio</p>
-</dd>\n
+</dd>
 <dt>Property</dt>
 <dd>
 	<code>focalPoint</code> 
 	<strong>Type:</strong> <code>?array</code>
-	
+
 <p>The focal point of the image to use when cropping - x and y values between 0 and 100</p>
-</dd>\n
+</dd>
 <dt>Property</dt>
 <dd>
 	<code>offset</code> 
 	<strong>Type:</strong> <code>?array</code>
-	
+
 <p>The percentage offsets of the image to use when cropping</p>
 </dd>
 
@@ -196,28 +407,28 @@ class MyComponent {
 <dd>
 	<code>set_aspect_ratio_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p></p>
-</dd>\n
+</dd>
 <dt>Method</dt>
 <dd>
 	<code>set_focal_point_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p></p>
-</dd>\n
+</dd>
 <dt>Method</dt>
 <dd>
 	<code>set_image_offset_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
-	
+
 <p></p>
-</dd>\n
+</dd>
 <dt>Method</dt>
 <dd>
 	<code>get_local_css_properties</code> 
 	<strong>Returns:</strong> <code>string</code>
-	
+
 <p></p>
 </dd>
 </dl>
@@ -242,7 +453,6 @@ class MyComponent {
 
 <div>
 
-
 ## LayoutAlignment
 
 <dl>
@@ -252,14 +462,14 @@ class MyComponent {
 	<code>hAlign</code> 
 	<strong>Type:</strong> <code>Alignment</code>
 
-<p></p>
+<p>Horizontal alignment, if applicable</p>
 </dd>
 <dt>Property</dt>
 <dd>
 	<code>vAlign</code> 
 	<strong>Type:</strong> <code>Alignment</code>
 
-<p></p>
+<p>Vertical alignment, if applicable</p>
 </dd>
 
 <dt>Method</dt>
@@ -300,7 +510,7 @@ class MyComponent {
 	<code>size</code> 
 	<strong>Type:</strong> <code>ContainerSize</code>
 
-<p>Keyword specifying the relative width of the container for the inner content</p>
+<p>Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.</p>
 </dd>
 
 <dt>Method</dt>
@@ -341,7 +551,7 @@ class MyComponent {
 	<code>orientation</code> 
 	<strong>Type:</strong> <code>Orientation</code>
 
-<p></p>
+<p>Orientation of the component content, if applicable</p>
 </dd>
 
 <dt>Method</dt>
@@ -364,6 +574,88 @@ class MyComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
 		$this->set_orientation_from_attrs($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+## NestedState
+
+<dl>
+
+
+<dt>Method</dt>
+<dd>
+	<code>set_is_nested</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_is_nested</code> 
+	<strong>Returns:</strong> <code>bool</code>
+
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use NestedState;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->set_is_nested($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+## ShortName
+
+<dl>
+
+
+<dt>Method</dt>
+<dd>
+	<code>set_shortname</code> 
+	<strong>Returns:</strong> <code>void</code>
+
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_shortname</code> 
+	<strong>Returns:</strong> <code>string</code>
+
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use ShortName;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->set_shortname($attributes);
 	}
 }
 ```

@@ -27,11 +27,19 @@ class ComponentClassesToJsonDefinitions {
     }
 
     public function runAll(): void {
-        // Get all PHP files in the directory
+        // Get all PHP files in the directories
         /** @noinspection PhpUnhandledExceptionInspection */
-        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mainComponentDirectory));
+        $baseComponents = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->baseComponentDirectory));
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $mainComponents = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mainComponentDirectory));
 
-        foreach ($files as $file) {
+        foreach ($baseComponents as $file) {
+            if ($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php')) {
+                $this->processFile($file->getPathname());
+            }
+        }
+
+        foreach ($mainComponents as $file) {
             if ($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php')) {
                 $this->processFile($file->getPathname());
             }

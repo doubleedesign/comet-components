@@ -4,7 +4,7 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV, Tag::ARTICLE, Tag::FOOTER])]
 #[DefaultTag(Tag::SECTION)]
-class WrappedLayoutComponent extends LayoutComponent {
+abstract class WrappedLayoutComponent extends LayoutComponent {
     /**
      * @var Tag|null $wrapperTag
      * @description Store a reference to the provided tag for use in the wrapping PageSection if applicable
