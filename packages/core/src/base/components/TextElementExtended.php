@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([...Settings::BLOCK_PHRASING_ELEMENTS, ...Settings::INLINE_PHRASING_ELEMENTS])]
+#[DefaultTag(Tag::SPAN)]
 abstract class TextElementExtended extends TextElement {
     use BlockElementModifier;
     use TextColor;

@@ -33,17 +33,42 @@ class ComponentClassesToJsonDefinitions {
         /** @noinspection PhpUnhandledExceptionInspection */
         $mainComponents = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mainComponentDirectory));
 
+        $megaFileData = [];
+
         foreach ($baseComponents as $file) {
-            if ($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php')) {
-                $this->processFile($file->getPathname());
+            if ($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php') && !str_ends_with($file->getPathname(), '.blade.php')) {
+                $result = $this->processFile($file->getPathname());
+                if ($result) {
+                    array_push($megaFileData, $result);
+                }
+                else {
+                    $this->log("No result generated for base component file: " . $file->getPathname(), 'warning');
+                }
             }
         }
 
         foreach ($mainComponents as $file) {
-            if ($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php')) {
-                $this->processFile($file->getPathname());
+            if (
+                $file->isFile() && $file->getExtension() === 'php'
+                && !str_ends_with($file->getPathname(), 'Test.php')
+                && !str_ends_with($file->getPathname(), '.blade.php')
+                && !str_contains($file->getPathname(), '__tests__')
+            ) {
+                $result = $this->processFile($file->getPathname());
+                if ($result) {
+                    array_push($megaFileData, $result);
+                }
+                else {
+                    $this->log("No result generated for main component file: " . $file->getPathname(), 'warning');
+                }
             }
         }
+
+        // Write megafile to where it will be used in VuePress
+        $outputDir = dirname(__DIR__, 1) . '/docs-site/docs/.vuepress/components';
+        $outputPath = $outputDir . '/all-components.json';
+        $this->exportToJson($outputPath, $megaFileData);
+        $this->log("Exported mega-file of all component definitions to $outputPath", 'success');
     }
 
     /** @noinspection PhpUnhandledExceptionInspection */
@@ -126,7 +151,7 @@ class ComponentClassesToJsonDefinitions {
         }
     }
 
-    private function processFile(string $filePath): void {
+    private function processFile(string $filePath): ?array {
         // Get file contents
         $content = file_get_contents($filePath);
 
@@ -197,11 +222,18 @@ class ComponentClassesToJsonDefinitions {
                 $outputPath = $outputDir . '\\' . $result['name'] . '.json';
                 $this->exportToJson($outputPath, $result);
                 $this->log("Exported component definition JSON to $outputPath", 'success');
+
+                // Return it for compilation into mega-file if using runAll
+                return $result;
             }
             catch (ReflectionException|Exception $e) {
                 $this->log("Error processing class $className: " . $e->getMessage(), 'error');
+
+                return null;
             }
         }
+
+        return null;
     }
 
     /**
@@ -625,14 +657,14 @@ class ComponentClassesToJsonDefinitions {
 
                     return [
                         'type'      => str_replace("$namespace\\", '', $typeName),
-                        'supported' => array_values(array_map(function($tag) {
-                            return $tag->value;
-                        }, $allowedTags)),
+                        'supported' => array_values(array_map(fn($tag) => $tag->value, $allowedTags)),
                         'default'   => $defaultTag->value
                     ];
                 }
                 catch (\Throwable $e) {
                     $this->log("Error processing AllowedTags or DefaultTag attributes: " . $e->getMessage(), 'error');
+
+                    return [];
                 }
             }
 

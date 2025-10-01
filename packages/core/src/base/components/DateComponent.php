@@ -3,6 +3,8 @@ namespace Doubleedesign\Comet\Core;
 use DateTime;
 use Exception;
 
+#[AllowedTags([Tag::TIME])]
+#[DefaultTag(Tag::TIME)]
 abstract class DateComponent extends Renderable {
     use ColorTheme;
     use ShortName;

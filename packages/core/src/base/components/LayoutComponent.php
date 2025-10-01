@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::MAIN, Tag::HEADER, Tag::FOOTER, Tag::ASIDE, Tag::NAV, Tag::ARTICLE])]
+#[DefaultTag(Tag::DIV)]
 abstract class LayoutComponent extends UIComponent {
     use BackgroundColor;
     use LayoutAlignment;
