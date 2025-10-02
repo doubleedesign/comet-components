@@ -1,5 +1,6 @@
 @use 'variables' as *;
 @forward './bem-mixin';
+@forward './bem-class-selectors';
 
 @mixin container-width-up($widthName) {
 	@container (min-width: #{map-get($widths, $widthName)}) {

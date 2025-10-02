@@ -1,6 +1,8 @@
+@use '../bem-class-selectors' as *;
+
 // See common.scss for base .image styles
 .image--basic,
-[class$="image--basic"] {
+#{class-contains('image--basic')} {
 	&:not(.gallery &) {
 		&:not(:first-child):not(:last-child) {
 			margin-block: var(--spacing-md);

@@ -1,11 +1,14 @@
 @use '../mixins' as *;
 @use '../variables' as *;
+@use '../bem-mixin' as *;
+@use '../bem-class-selectors' as *;
 
 @mixin stack-columns-until($breakpointName) {
 	@include container-width-down($breakpointName) {
 		flex-wrap: wrap;
 
-		.column {
+		.column,
+		#{class-ends-with('__column')} {
 			grid-column: 1 / -1;
 			width: 100% !important;
 			flex-basis: 100% !important;
@@ -14,7 +17,7 @@
 	}
 }
 
-.columns {
+@include bem-block('columns', ('column')) {
 	// Default/auto layout
 	display: grid;
 	grid-gap: var(--spacing-lg);
@@ -67,7 +70,7 @@
 	}
 
 	// Adjust layout if any of the columns has a preset width
-	&:has(> .columns__column--has-own-width) {
+	&:has(> #{class-contains('columns__column--has-own-width')}) {
 		display: flex;
 		flex-wrap: nowrap;
 		gap: var(--spacing-md);
@@ -84,7 +87,8 @@
 			@each $color2, $value in $colors {
 				@if $color != $color2 {
 					&:has(> [data-background="#{$color2}"]) {
-						.columns__column {
+						.columns__column,
+						#{class-ends-with('__column')} {
 							@include nested-padding();
 						}
 					}
@@ -102,7 +106,8 @@
 	// then all children should have padding so they align
 	&:not([data-background]) {
 		&:has(> [data-background]) {
-			.columns__column {
+			.columns__column,
+			#{class-ends-with('__column')} {
 				@include nested-padding();
 			}
 		}

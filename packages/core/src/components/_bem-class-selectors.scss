@@ -1,0 +1,11 @@
+@function class-begins-with($partial) {
+	@return '[class^="#{$partial}"]';
+}
+
+@function class-contains($partial) {
+	@return '[class*="#{$partial}"]';
+}
+
+@function class-ends-with($partial) {
+	@return '[class$="#{$partial}"]';
+}

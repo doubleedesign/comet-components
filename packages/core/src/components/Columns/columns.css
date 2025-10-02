@@ -1,9 +1,9 @@
-.columns {
+.columns, [class$=__columns] {
   display: grid;
   grid-gap: var(--spacing-lg);
 }
 @container (min-width: 940px) {
-  .columns {
+  .columns, [class$=__columns] {
     grid-gap: var(--spacing-xl);
   }
 }
