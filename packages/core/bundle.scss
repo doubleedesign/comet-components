@@ -3,6 +3,7 @@
 // If sorting these, always keep the global and common files at the top because components should be able to contextually override them easily
 @use "./src/components/global.scss";
 @use "./src/components/common.scss";
+@use "./src/components/Container/container.scss";
 
 @use "./src/components/Accordion/accordion.scss";
 @use "./src/components/Banner/banner.scss";
@@ -15,10 +16,9 @@
 @use "./src/components/Card/card.scss";
 @use "./src/components/Columns/Column/column.scss";
 @use "./src/components/Columns/columns.scss";
-@use "./src/components/Container/container.scss";
 @use "./src/components/ContentImageAdvanced/content-image-advanced.scss";
 @use "./src/components/ContentImageBasic/content-image-basic.scss";
-@use "./src/components/CopyBlock/copy-block.scss";
+@use "./src/components/Copy/copy.scss";
 @use "./src/components/CoverImage/cover-image.scss";
 @use "./src/components/DateBlock/date-block.scss";
 @use "./src/components/DateRangeBlock/date-range-block.scss";

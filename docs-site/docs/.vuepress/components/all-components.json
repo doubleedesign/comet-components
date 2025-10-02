@@ -2662,7 +2662,7 @@
         ]
     },
     {
-        "name": "CopyBlock",
+        "name": "Copy",
         "description": null,
         "extends": "WrappedLayoutComponent",
         "abstract": false,

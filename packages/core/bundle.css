@@ -1034,74 +1034,6 @@ form input[type=button] {
   max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
 }
 
-.accordion[data-background=white] {
-  background: white;
-}
-
-.accordion-intro {
-  padding-block-end: var(--spacing-md);
-}
-
-.banner {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  height: 600px;
-}
-@media (min-height: 600px) {
-  .banner {
-    height: 100dvh;
-  }
-}
-.banner__image {
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
-.banner__image .image {
-  display: contents;
-}
-.banner__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.banner__image[data-parallax=true] {
-  clip-path: inset(0 0 0 0);
-}
-.banner__image[data-parallax=true] .image {
-  position: static;
-  height: 100%;
-}
-.banner__image[data-parallax=true] img {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  object-position: center bottom;
-  z-index: 1;
-}
-.banner__container, .banner__overlay {
-  position: absolute;
-  inset: 0 0 0 0;
-}
-.banner__container {
-  z-index: 100;
-  display: flex;
-}
-.banner__container__inner {
-  position: relative;
-  z-index: 200;
-}
-@container (max-width:768px) {
-  .banner__container__inner {
-    max-width: 100% !important;
-  }
-}
-
 .container, .banner-v2__content__container, [class$=__container] {
   margin: 0 auto;
   container-type: inline-size;
@@ -1220,6 +1152,74 @@ form input[type=button] {
 }
 .container [data-background*=gradient-white] + [data-background*=gradient-white], .banner-v2__content__container [data-background*=gradient-white] + [data-background*=gradient-white], [class$=__container] [data-background*=gradient-white] + [data-background*=gradient-white] {
   padding-block-start: 0;
+}
+
+.accordion[data-background=white] {
+  background: white;
+}
+
+.accordion-intro {
+  padding-block-end: var(--spacing-md);
+}
+
+.banner {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  height: 600px;
+}
+@media (min-height: 600px) {
+  .banner {
+    height: 100dvh;
+  }
+}
+.banner__image {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.banner__image .image {
+  display: contents;
+}
+.banner__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.banner__image[data-parallax=true] {
+  clip-path: inset(0 0 0 0);
+}
+.banner__image[data-parallax=true] .image {
+  position: static;
+  height: 100%;
+}
+.banner__image[data-parallax=true] img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: 1;
+}
+.banner__container, .banner__overlay {
+  position: absolute;
+  inset: 0 0 0 0;
+}
+.banner__container {
+  z-index: 100;
+  display: flex;
+}
+.banner__container__inner {
+  position: relative;
+  z-index: 200;
+}
+@container (max-width:768px) {
+  .banner__container__inner {
+    max-width: 100% !important;
+  }
 }
 
 .banner-v2 {

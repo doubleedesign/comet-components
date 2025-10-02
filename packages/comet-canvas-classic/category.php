@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{Container, Columns, Column, Card, CopyBlock};
+use Doubleedesign\Comet\Core\{Container, Columns, Column, Card, Copy};
 use Doubleedesign\Comet\WordPress\Classic\PreprocessedHTML;
 
 get_header();
@@ -40,7 +40,7 @@ $description = get_term_meta($category_id, 'category_description', true);
 
 $intro = new Column(
     ['width' => '36%'],
-    [new CopyBlock(['isNested' => true], [new PreprocessedHTML([], wpautop($description))])]
+    [new Copy(['isNested' => true], [new PreprocessedHTML([], wpautop($description))])]
 );
 
 $list = new Column(

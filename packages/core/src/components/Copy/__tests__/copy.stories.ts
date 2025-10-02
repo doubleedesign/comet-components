@@ -6,19 +6,19 @@ import {
 import { createStoryBase } from "../../../../test/story-base.ts";
 
 // TODO: Complete type, args, argTypes
-type CopyBlockProps = {
+type CopyProps = {
 	colorTheme: ThemeColor;
 	tagName: 'div';
 }
 
 const meta = {
-	title: 'Text/CopyBlock',
+	title: 'Text/Copy',
 	tags: ['autodocs'],
-	...createStoryBase('CopyBlock'),
-} satisfies Meta<CopyBlockProps>;
+	...createStoryBase('Copy'),
+} satisfies Meta<CopyProps>;
 
 export default meta;
-type Story = StoryObj<CopyBlockProps>;
+type Story = StoryObj<CopyProps>;
 
 export const Playground: Story = {
 	tags: []
