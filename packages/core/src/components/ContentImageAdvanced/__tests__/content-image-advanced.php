@@ -1,5 +1,11 @@
 <?php
-use Doubleedesign\Comet\Core\ContentImageAdvanced;
+use Doubleedesign\Comet\Core\{ContentImageAdvanced, FocalPointPicker};
+
+// Set up some defaults so if this is rendered outside of Storybook, it works
+$defaults = [
+    'src'     => 'https://cometcomponents.io/tests/assets/example-image-1.jpg',
+    'tagName' => 'figure',
+];
 
 $attributeKeys = ['tagName', 'alt', 'caption', 'title', 'src', 'align', 'aspectRatio'];
 $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
@@ -14,5 +20,9 @@ $attributes['offset'] = [
     'y' => isset($_REQUEST['offsetY']) ? (int)$_REQUEST['offsetY'] : 0,
 ];
 
-$component = new ContentImageAdvanced($attributes);
+ob_start();
+$component = new ContentImageAdvanced([...$defaults, ...$attributes]);
 $component->render();
+$html = ob_get_clean();
+$wrapper = new FocalPointPicker($html);
+$wrapper->render();

@@ -13,14 +13,15 @@
 	"autoload": {
 		"classmap": [
 			"src/components/",
-			"src/components/**/"
+			"src/components/**/",
+			"src/plugins/",
+			"src/plugins/**/"
 		],
 		"psr-4": {
 			"Doubleedesign\\Comet\\Core\\": [
 				"src/base/types/",
 				"src/base/attributes/",
 				"src/base/traits/",
-				"src/base/interfaces/",
 				"src/base/annotations/",
 				"src/base/components/",
 				"src/base/",

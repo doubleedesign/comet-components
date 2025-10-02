@@ -1,0 +1,6 @@
+#storybook-root:has(.with-focal-point-picker) {
+	max-height: 800px;
+}
+
+.with-focal-point-picker {
+}

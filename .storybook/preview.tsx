@@ -9,6 +9,7 @@ import { Controls, DocsContainer, Subtitle, Unstyled } from '@storybook/addon-do
 import comet from './theme.ts';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
+import './decorators/focal-point-picker.css';
 import { addons } from 'storybook/preview-api';
 import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
 
@@ -127,7 +128,7 @@ const preview: Preview = {
 };
 
 export const decorators = [
-	withCodeTabs,
+	withCodeTabs
 ];
 
 

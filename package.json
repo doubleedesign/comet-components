@@ -49,6 +49,7 @@
 		"dotenv": "^16.4.7",
 		"eslint": "^9.24.0",
 		"eslint-plugin-storybook": "^9.1.0-alpha.1",
+		"eslint-plugin-vue": "^10.0.0",
 		"esm": "^3.2.25",
 		"highlight.js": "^11.11.1",
 		"js-beautify": "^1.15.1",
@@ -64,8 +65,7 @@
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.32.1",
 		"vite": "^7.1.5",
-		"vue-eslint-parser": "^10.1.3",
-		"eslint-plugin-vue": "^10.0.0"
+		"vue-eslint-parser": "^10.1.3"
 	},
 	"overrides": {
 		"storybook": "$storybook"
@@ -73,5 +73,8 @@
 	"workspaces": [
 		"packages/core",
 		"docs-site"
-	]
+	],
+	"dependencies": {
+		"vue": "^3.5.22"
+	}
 }
