@@ -3521,7 +3521,7 @@
                     "dark",
                     "white"
                 ],
-                "default": "rather than defaulting to the fallback\n        if (isset($attributes['backgroundcolor']"
+                "default": "rather than defaulting to the fallback\r\n        if (isset($attributes['backgroundcolor']"
             },
             "context": {
                 "type": "string",
@@ -4240,38 +4240,22 @@
     {
         "name": "ListItem",
         "description": null,
-        "extends": null,
-        "abstract": false,
-        "isInner": true,
-        "belongsInside": "ListComponent",
-        "attributes": [],
-        "content": {
-            "type": "string"
-        },
-        "innerComponents": {
-            "type": "array"
-        },
-        "traits": []
-    },
-    {
-        "name": "ListItemComplex",
-        "description": null,
         "extends": "UIComponent",
         "abstract": false,
         "isInner": true,
-        "belongsInside": "ListComponent",
+        "belongsInside": "List",
         "attributes": {
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "listcomponent__list-item"
+                    "list__item"
                 ]
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-                "default": "listcomponent"
+                "default": "list"
             },
             "id": {
                 "type": "string",
@@ -4310,89 +4294,6 @@
         },
         "traits": [
             "BlockElementModifier"
-        ]
-    },
-    {
-        "name": "ListItemSimple",
-        "description": null,
-        "extends": "TextElementExtended",
-        "abstract": false,
-        "isInner": true,
-        "belongsInside": "ListComponent",
-        "attributes": {
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": [
-                    "listcomponent__list-item"
-                ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-                "default": "listcomponent"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "list-item"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "li"
-                ],
-                "default": "li"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "textAlign": {
-                "type": "Alignment",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ]
-            },
-            "textColor": {
-                "type": "ThemeColor",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white"
-                ]
-            }
-        },
-        "content": {
-            "type": "string",
-            "description": "Plain text or basic HTML",
-            "required": true
-        },
-        "traits": [
-            "BlockElementModifier",
-            "TextColor",
-            "TextAlign"
         ]
     },
     {
@@ -5612,7 +5513,7 @@
                     "narrower",
                     "small"
                 ],
-                "default": "'alt'     => 'site logo',\r\n                'href'    => '/',\r\n                'classes' => ['site-header__logo']\r\n            ]"
+                "default": "'alt'     => 'site logo',\n                'href'    => '/',\n                'classes' => ['site-header__logo']\n            ]"
             },
             "style": {
                 "type": "array",

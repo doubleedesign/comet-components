@@ -22,7 +22,7 @@ class ListComponent extends UIComponent {
     public function __construct(array $attributes, array $innerComponents) {
         $this->ordered = $attributes['ordered'] ?? false;
         $this->tagName = $this->ordered ? Tag::OL : Tag::UL;
-        parent::__construct($attributes, $innerComponents, 'components.ListComponent.list');
+        parent::__construct($attributes, $innerComponents, 'components.List.list');
     }
 
     public function render(): void {

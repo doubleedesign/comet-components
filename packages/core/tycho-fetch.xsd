@@ -632,7 +632,7 @@
 <xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="ListItemComplex">
+	<xs:element name="ListItem">
 		<xs:complexType>
 			<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
@@ -641,24 +641,6 @@
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="ListItemSimple">
-		<xs:complexType>
-			<xs:attribute name="textAlign" type="Alignment"/>
-<xs:attribute name="textColor" type="ThemeColor"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="shortName" type="xs:string"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="ListItem">
-		<xs:complexType>
-			
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ListComponent">

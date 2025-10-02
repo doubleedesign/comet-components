@@ -3,19 +3,12 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::LI])]
 #[DefaultTag(Tag::LI)]
-class ListItemSimple extends TextElementExtended {
+class ListItem extends UIComponent {
+    protected ?string $content;
 
-    public function __construct(array $attributes, string $content) {
-        $bladeFile = 'components.ListComponent.ListItem.list-item';
-        parent::__construct($attributes, $content, $bladeFile);
-    }
-
-    public function get_bem_prefix(): string {
-        if ($this->get_context() && str_ends_with($this->get_context(), '__list')) {
-            return str_replace('list-item', 'item', parent::get_bem_prefix());
-        }
-
-        return parent::get_bem_prefix();
+    public function __construct(array $attributes, string $content, array $nestedLists = []) {
+        $this->content = $content;
+        parent::__construct($attributes, $nestedLists, 'components.List.ListItem.list-item');
     }
 
     public function render(): void {
@@ -29,6 +22,7 @@ class ListItemSimple extends TextElementExtended {
             // because HTML Purifier simply would not cooperate
             // and we generally expect to have enough control over breadcrumb input data this is probably ok
             'content'    => $this->get_context() ? $this->content : Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
+            'children'   => $this->innerComponents
         ])->render();
     }
 }

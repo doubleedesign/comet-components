@@ -29,7 +29,7 @@ class Breadcrumbs extends UIComponent {
             $linkHtml = ob_get_clean();
 
             return new ListItem(
-                ['context' => 'breadcrumbs__list'],
+                ['context' => 'breadcrumbs'],
                 $linkHtml
             );
         }, $breadcrumbs);

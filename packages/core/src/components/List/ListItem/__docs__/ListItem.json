@@ -1,22 +1,22 @@
 {
-    "name": "ListItemSimple",
+    "name": "ListItem",
     "description": null,
-    "extends": "TextElementExtended",
+    "extends": "UIComponent",
     "abstract": false,
     "isInner": true,
-    "belongsInside": "ListComponent",
+    "belongsInside": "List",
     "attributes": {
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "listcomponent__list-item"
+                "list__item"
             ]
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "listcomponent"
+            "default": "list"
         },
         "id": {
             "type": "string",
@@ -43,41 +43,17 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
-        },
-        "textAlign": {
-            "type": "Alignment",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ]
-        },
-        "textColor": {
-            "type": "ThemeColor",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ]
         }
     },
     "content": {
-        "type": "string",
-        "description": "Plain text or basic HTML",
+        "type": "string"
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
         "required": true
     },
     "traits": [
-        "BlockElementModifier",
-        "TextColor",
-        "TextAlign"
+        "BlockElementModifier"
     ]
 }
