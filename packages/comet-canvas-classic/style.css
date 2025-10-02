@@ -32,6 +32,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+}
+.post-content__container {
   container-type: unset;
 }
 @media (min-width: 840px) {

@@ -206,20 +206,22 @@ form {
 	z-index: 300;
 	padding-inline: var(--spacing-md); // same as container so it doesn't overflow container's edges
 
-	.container & {
-		max-width: var(--width-contained);
-	}
+	@at-root {
+		[class*="container"] & {
+			max-width: var(--width-contained);
+		}
 
-	[data-size="fullwidth"] & {
-		max-width: 100vw;
-	}
+		[class*="container"][data-size="fullwidth"] & {
+			max-width: 100vw;
+		}
 
-	[data-size="wide"] & {
-		max-width: var(--width-wide);
-	}
+		[class*="container"][data-size="wide"] & {
+			max-width: var(--width-wide);
+		}
 
-	[data-size="narrow"] & {
-		max-width: var(--width-narrow);
+		[class*="container"][data-size="narrow"] & {
+			max-width: var(--width-narrow);
+		}
 	}
 }
 
