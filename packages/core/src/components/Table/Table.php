@@ -65,7 +65,7 @@ class Table extends Renderable {
         parent::__construct($attributes, 'components.Table.table');
         $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
         $this->sticky = $attributes['sticky'] ?? false;
-        $this->init_bem_structure('components.Table.table');
+        $this->init_bem_structure('components.Table.table', @$attributes['context']);
 
         // For some unknown reason, WordPress doesn't like me setting the attribute to "caption" in BlockRenderer.php in the plugin, but tableCaption works,
         // but since I really prefer just 'caption' we need to handle both options here
