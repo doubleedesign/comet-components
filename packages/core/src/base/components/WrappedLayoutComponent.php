@@ -15,12 +15,23 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
     private array $containerAttrs;
     private array $ariaAttrs;
 
-    public function __construct(array $attributes, array $innerComponents, string $bladeFile, bool $withContainer = true) {
+    /**
+     * @var bool $withContainer
+     * @description Whether to wrap the inner components in a Container. Defaults to true if the component is not nested.
+     *              Will be ignored if the component is already a Container or is nested.
+     */
+    protected bool $withContainer = true;
+
+    public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->wrapperTag = $this->tagName;
         $this->ariaAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'aria-') || $key === 'role', ARRAY_FILTER_USE_KEY);
         $this->wrapperAttrs = array_merge(Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme']), $this->ariaAttrs);
         $this->containerAttrs = Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']);
+        // Initially set withContainer to whatever is in the attributes
+        $this->withContainer = $attributes['withContainer'] ?? $this->withContainer;
+        // ...but then check the other conditions and update accordingly
+        $this->withContainer = $this->should_add_container();
 
         $orphanedAttrs = array_diff(
             array_keys($attributes),
@@ -37,7 +48,7 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
 
         // If this is not already a Container, wrap its contents in one
         // this saves having to add a container in almost every component that extends this class
-        if (!$this instanceof Container && $withContainer) {
+        if (!$this instanceof Container && $this->withContainer) {
             $this->innerComponents = array(
                 new Container([
                     'isNested' => true,
@@ -46,6 +57,14 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
                 ], $this->innerComponents)
             );
         }
+    }
+
+    private function should_add_container(): bool {
+        if ($this instanceof Container) return false;
+
+        if ($this->get_is_nested()) return false;
+
+        return $this->withContainer;
     }
 
     protected function render_standalone(): void {
