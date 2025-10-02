@@ -27,7 +27,7 @@
 	}
 
 	&[data-count="2"], &[data-count="4"], &[data-count="6"] {
-		&[data-allow-layout-stacking="true"] {
+		&:not([data-allow-layout-stacking="false"]) {
 			grid-template-columns: repeat(1, 1fr);
 			@include stack-columns-until('small');
 
@@ -38,7 +38,7 @@
 	}
 
 	&[data-count="4"] {
-		&[data-allow-layout-stacking="true"] {
+		&:not([data-allow-layout-stacking="false"]) {
 			@include container-width-up('narrow') {
 				grid-template-columns: repeat(4, 1fr);
 			}
@@ -46,7 +46,7 @@
 	}
 
 	&[data-count="3"], &[data-count="6"] {
-		&[data-allow-layout-stacking="true"] {
+		&:not([data-allow-layout-stacking="false"]) {
 			@include container-width-up('narrower') {
 				grid-template-columns: repeat(3, 1fr);
 			}
@@ -54,7 +54,7 @@
 	}
 
 	&[data-count="5"] {
-		&[data-allow-layout-stacking="true"] {
+		&:not([data-allow-layout-stacking="false"]) {
 			@include container-width-up('narrow') {
 				grid-template-columns: repeat(5, 1fr);
 			}
@@ -62,7 +62,7 @@
 	}
 
 	&[data-count="6"] {
-		&[data-allow-layout-stacking="true"] {
+		&:not([data-allow-layout-stacking="false"]) {
 			@include container-width-up('narrow') {
 				grid-template-columns: repeat(5, 1fr);
 			}

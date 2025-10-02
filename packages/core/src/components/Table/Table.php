@@ -15,7 +15,9 @@ class Table extends Renderable {
 
     /**
      * @var ?bool|null $allowStacking
-     * @description Optionally specify whether to adapt the layout by stacking columns when the viewport or container is narrow. Do not set if your theme will handle it on a case-by-case basis with custom CSS.
+     * @description Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow.
+     *              Does not put the attribute in the HTML unless explicitly set.
+     *              You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS.
      */
     protected ?bool $allowStacking = null;
 
@@ -172,8 +174,8 @@ class Table extends Renderable {
         // Only add stacking attribute if it is explicitly set.
         // It's the kind of thing that's necessary for generic use cases where admins would choose to enable or disable it,
         // but in many bespoke themes/sites it should be taken care of in specific CSS rather than bloating the HTML.
-        if ($this->allowStacking !== null && $this->allowStacking) {
-            $attributes['data-allow-layout-stacking'] = 'true';
+        if ($this->allowStacking !== null) {
+            $attributes['data-allow-layout-stacking'] = $this->allowStacking ? 'true' : 'false';
         }
 
         if ($this->sticky) {

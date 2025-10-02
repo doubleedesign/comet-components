@@ -1743,14 +1743,20 @@ form input[type=button] {
     grid-gap: var(--spacing-xl);
   }
 }
-.columns[data-count="2"][data-allow-layout-stacking=true], .columns[data-count="4"][data-allow-layout-stacking=true], .columns[data-count="6"][data-allow-layout-stacking=true] {
+.columns[data-count="2"]:not([data-allow-layout-stacking=false]), [data-count="2"][class$=__columns]:not([data-allow-layout-stacking=false]), .columns[data-count="4"]:not([data-allow-layout-stacking=false]), [data-count="4"][class$=__columns]:not([data-allow-layout-stacking=false]), .columns[data-count="6"]:not([data-allow-layout-stacking=false]), [data-count="6"][class$=__columns]:not([data-allow-layout-stacking=false]) {
   grid-template-columns: repeat(1, 1fr);
 }
 @container (max-width: 600px) {
-  .columns[data-count="2"][data-allow-layout-stacking=true], .columns[data-count="4"][data-allow-layout-stacking=true], .columns[data-count="6"][data-allow-layout-stacking=true] {
+  .columns[data-count="2"]:not([data-allow-layout-stacking=false]), [data-count="2"][class$=__columns]:not([data-allow-layout-stacking=false]), .columns[data-count="4"]:not([data-allow-layout-stacking=false]), [data-count="4"][class$=__columns]:not([data-allow-layout-stacking=false]), .columns[data-count="6"]:not([data-allow-layout-stacking=false]), [data-count="6"][class$=__columns]:not([data-allow-layout-stacking=false]) {
     flex-wrap: wrap;
   }
-  .columns[data-count="2"][data-allow-layout-stacking=true] .column, .columns[data-count="4"][data-allow-layout-stacking=true] .column, .columns[data-count="6"][data-allow-layout-stacking=true] .column {
+  .columns[data-count="2"]:not([data-allow-layout-stacking=false]) .column, [data-count="2"][class$=__columns]:not([data-allow-layout-stacking=false]) .column,
+  .columns[data-count="2"]:not([data-allow-layout-stacking=false]) [class$=__column],
+  [data-count="2"][class$=__columns]:not([data-allow-layout-stacking=false]) [class$=__column], .columns[data-count="4"]:not([data-allow-layout-stacking=false]) .column, [data-count="4"][class$=__columns]:not([data-allow-layout-stacking=false]) .column,
+  .columns[data-count="4"]:not([data-allow-layout-stacking=false]) [class$=__column],
+  [data-count="4"][class$=__columns]:not([data-allow-layout-stacking=false]) [class$=__column], .columns[data-count="6"]:not([data-allow-layout-stacking=false]) .column, [data-count="6"][class$=__columns]:not([data-allow-layout-stacking=false]) .column,
+  .columns[data-count="6"]:not([data-allow-layout-stacking=false]) [class$=__column],
+  [data-count="6"][class$=__columns]:not([data-allow-layout-stacking=false]) [class$=__column] {
     grid-column: 1/-1;
     width: 100% !important;
     flex-basis: 100% !important;

@@ -15,9 +15,11 @@ class Columns extends LayoutComponent {
 
     /**
      * @var bool $allowStacking
-     * @description Whether to adapt the layout by stacking columns when the viewport or container is narrow
+     * @description Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow.
+     *              Defaults to true behaviour but does not put the attribute in the HTML unless explicitly set.
+     *              You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS.
      */
-    protected bool $allowStacking = true;
+    protected ?bool $allowStacking = null;
 
     /**
      * @var array<Column> $innerComponents
@@ -28,7 +30,7 @@ class Columns extends LayoutComponent {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $updatedInnerComponents ?? $innerComponents, 'components.Columns.columns');
         $this->qty = count($innerComponents);
-        $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? true;
+        $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
 
         // If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
         $columnWidths = array_map(function($column) {
@@ -48,8 +50,8 @@ class Columns extends LayoutComponent {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-        if ($this->allowStacking) {
-            $attributes['data-allow-layout-stacking'] = 'true';
+        if ($this->allowStacking !== null) {
+            $attributes['data-allow-layout-stacking'] = $this->allowStacking ? 'true' : 'false';
         }
 
         $attributes['data-count'] = $this->qty;
