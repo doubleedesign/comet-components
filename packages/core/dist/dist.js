@@ -5,7 +5,7 @@ import { loadModule } from '../src/plugins/vue-wrapper/src/vue3-sfc-loader.esm.j
 import { BASE_PATH, vueSfcLoaderOptions } from '../src/plugins/vue-wrapper/src/index.js';
 import '../../../feimosi/baguettebox.js/src/baguetteBox.js';
 
-tippy('.icon-links__item[data-tippy-content]', { appendTo: 'parent' });
+tippy('[class$="icon-links__item"][data-tippy-content]', { appendTo: 'parent' });
 
 tippy('.label-with-tooltip [data-tippy-content]', {
 	appendTo: 'parent'
