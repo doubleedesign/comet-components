@@ -1,86 +1,135 @@
-// FIXME the required should be imported from somewhere more generic, rather than coupling to another component like this
-@use '../Container/container' as *;
+@use '../mixins' as *;
 
 .banner-v2 {
 	padding-block-start: 0;
 	position: relative;
+	container-type: inline-size;
+	max-width: 1920px;
+	margin-inline: auto;
 
 	&__image {
 		display: flex;
 		width: 100%;
-		height: fit-content;
 		overflow: hidden;
-		justify-content: center; // Centre if banner becomes narrower than the viewport in order to fit the aspect ratio height
+		// Default styles for smaller containers (ignore aspect ratio settings)
+		height: 50dvh;
+
+		// Containers large enough to use the aspect ratio settings
+		@include container-width-up('narrower') {
+			height: fit-content;
+			justify-content: center; // Centre if banner becomes narrower than the viewport in order to fit the aspect ratio height
+		}
 
 		&__frame {
 			overflow: hidden;
-			min-width: 100%; // for images smaller than the container
-			// aspect ratio is applied to this element using a data attribute, see common.scss
-			// Set height to smaller of 65vh or proportional width (helps with handling images shorter than the available space)
-			// Calc is the reverse of the aspect ratio to get the height from the width
-			&[data-aspect-ratio="cinematic"] {
-				height: min(65vh, calc(100vw * 9 / 21));
-			}
-			&[data-aspect-ratio="cinemascope"] {
-				height: min(65vh, calc(100vw * 1 / 2.35));
-			}
-			&[data-aspect-ratio="cinematic"] {
-				height: min(65vh, calc(100vw * 9 / 21));
-			}
-			&[data-aspect-ratio="wide"] {
-				height: min(65vh, calc(100vw * 16 / 9));
-			}
-			&[data-aspect-ratio="standard"] {
-				height: min(65vh, calc(100vw * 3 / 4));
-			}
-			&[data-aspect-ratio="classic"] {
-				height: min(65vh, calc(100vw * 3 / 2));
-			}
-			&[data-aspect-ratio="classic_portrait"] {
-				height: min(65vh, calc(100vw * 2 / 3));
-			}
-			&[data-aspect-ratio="portrait"] {
-				height: min(65vh, calc(100vw * 4 / 3));
-			}
-			&[data-aspect-ratio="tall"] {
-				height: min(65vh, calc(100vw * 16 / 9));
-			}
-			&[data-aspect-ratio="square"] {
-				height: min(65vh, 100vw);
+			container-type: size;
+			//min-width: 100%; // for images smaller than the container
+
+			// Containers large enough to use the aspect ratio settings
+			@include container-width-up('narrower') {
+				// aspect ratio is applied to this element using a data attribute, see common.scss
+				// Set height to smaller of 65vh or proportional width (helps with handling images shorter than the available space)
+				// Calc is the reverse of the aspect ratio to get the height from the width
+				&[data-aspect-ratio="cinematic"] {
+					height: min(65vh, calc(100vw * 21 / 9));
+				}
+
+				&[data-aspect-ratio="cinemascope"] {
+					height: min(65vh, calc(100vw * 1 / 2.35));
+				}
+
+				&[data-aspect-ratio="cinematic"] {
+					height: min(65vh, calc(100vw * 9 / 21));
+				}
+
+				&[data-aspect-ratio="wide"] {
+					height: min(65vh, calc(100vw * 16 / 9));
+				}
+
+				&[data-aspect-ratio="standard"] {
+					height: min(65vh, calc(100vw * 3 / 4));
+				}
+
+				&[data-aspect-ratio="classic"] {
+					height: min(65vh, calc(100vw * 3 / 2));
+				}
+
+				&[data-aspect-ratio="classic_portrait"] {
+					height: min(65vh, calc(100vw * 2 / 3));
+				}
+
+				&[data-aspect-ratio="portrait"] {
+					height: min(65vh, calc(100vw * 4 / 3));
+				}
+
+				&[data-aspect-ratio="tall"] {
+					height: min(65vh, calc(100vw * 16 / 9));
+				}
+
+				&[data-aspect-ratio="square"] {
+					height: min(65vh, 100vw);
+				}
 			}
 
 			&__inner {
 				min-width: 100%; // for images smaller than the container
-				overflow: visible;
-				max-width: none !important;
-				width: fit-content;
-				height: fit-content;
-				transition: all 0.3s ease-in-out;
-				position: relative;
-				left: var(--offset-x, 0);
-				top: var(--offset-y, 0);
+				// Default styles for smaller containers (ignore aspect ratio settings)
+				height: 100cqh;
+				object-fit: cover;
+
+				// Containers large enough to use the aspect ratio settings
+				@include container-width-up('narrower') {
+					overflow: visible;
+					max-width: none !important;
+					width: fit-content;
+					height: fit-content;
+					transition: all 0.3s ease-in-out;
+					position: relative;
+				}
 
 				img {
-					width: calc(100% - var(--offset-x, 0));
-					height: calc(100% - var(--offset-y, 0));
+					// Default styles for smaller containers (ignore aspect ratio settings)
+					height: 100%;
+					width: 100%;
+					object-fit: cover;
+					object-position: var(--focal-point-x) var(--focal-point-y);
+
+					// Containers large enough to use the aspect ratio settings
+					@include container-width-up('narrower') {
+						object-fit: none;
+						object-position: unset;
+						width: calc(100% + abs(var(--offset-x, 0)));
+						min-height: 100cqh;
+						height: calc(100% + abs(var(--offset-y, 0)));
+						position: relative;
+						left: var(--offset-x);
+						top: var(--offset-y);
+					}
 				}
+
 			}
 		}
 	}
 
 	&__content {
 		width: 100%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 100;
+		margin-block-start: -10dvh;
+
+		@include container-width-up('narrower') {
+			margin-block-start: 0;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 100;
+		}
 
 		&__container {
-			height: 100%;
-			@extend .container;
+			@include container-width-up('narrower') {
+				height: 100%;
+			}
 		}
 
 		&__inner {
@@ -103,8 +152,12 @@
 				}
 			}
 
-			.button[data-style="outline"]{
+			.button[data-style="outline"] {
 				background: var(--theme-color-inverse);
+			}
+
+			@include container-width-down('narrower') {
+				max-width: unset !important;
 			}
 		}
 	}

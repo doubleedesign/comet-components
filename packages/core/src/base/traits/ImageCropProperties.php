@@ -2,10 +2,10 @@
 namespace Doubleedesign\Comet\Core;
 
 /**
- * TODO: Image property refinements
- * Do we really need focal point *and* offset - how would it be handled if both were set but didn't actually work together?
- * How to handle focal point/offset if there is no aspect ratio set - they wouldn't do anything out of the box
- * That case should probably be treated as a ContentImageBasic instead - how to enforce that?
+ * TODO: Image property refinements/documentation
+ * Certain combinations of properties are designed to work together whereas others will/should be ignored depending on the scenario.
+ * e.g., aspect ratio + offset for cropped images;
+ *       focal point with object-fit:cover for when aspect ratio is not used / is ignored (e.g., banners in small containers/viewports)
  */
 trait ImageCropProperties {
     /**
@@ -50,10 +50,12 @@ trait ImageCropProperties {
             return;
         }
 
+        // TODO This needs some more work either here or in the SCSS (ContentImageAdvanced, BannerV2, others?) to ensure that no blank space is left.
+        // Setting width in SCSS to account for it is one way that works in some scenarios, but not all, especially when aspect ratio cropping comes into play.
         if (isset($field['x']) && isset($field['y']) && is_array($field)) {
             $this->offset = [
-                'x' => max(0, min(100, (int)$field['x'])),
-                'y' => max(0, min(100, (int)$field['y'])),
+                'x' => max(-200, min(100, (int)$field['x'])),
+                'y' => max(-200, min(100, (int)$field['y'])),
             ];
         }
     }

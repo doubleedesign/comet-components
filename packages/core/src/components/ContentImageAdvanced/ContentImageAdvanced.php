@@ -25,7 +25,7 @@ class ContentImageAdvanced extends ContentImageComponent {
 
     public function get_outer_wrapper_html_attributes(): array {
         return [
-            parent::get_outer_wrapper_html_attributes(),
+            ...parent::get_outer_wrapper_html_attributes(),
             'style' => $this->get_local_css_properties()
         ];
     }
@@ -34,11 +34,10 @@ class ContentImageAdvanced extends ContentImageComponent {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
+            'tag'         => $this->tagName->value,
             'classes'     => $this->get_filtered_classes(),
             'outerAttrs'  => $this->get_outer_wrapper_html_attributes(),
             'attributes'  => $this->get_html_attributes(), // Attributes for the image itself
-            'src'         => $this->src, // Blade template in IDE is happier if we specify src explicitly
-            // because we were getting to too many layers of attribute/class methods when we can just do stuff in the template
             'bemPrefix'   => $this->get_bem_structure()['modifier'] ? "{$this->get_bem_prefix()}--{$this->get_bem_structure()['modifier']}" : $this->get_bem_prefix(),
             'aspectRatio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
             'caption'     => $this->caption ?? null

@@ -1,195 +1,111 @@
-.container, .banner-v2__content__container, [class$=__container] {
-  margin: 0 auto;
-  container-type: inline-size;
-  width: 100%;
-  padding-inline: var(--spacing-md);
-  max-width: var(--width-contained);
-}
-.container:has(> .layout-block + .layout-block), .banner-v2__content__container:has(> .layout-block + .layout-block), [class$=__container]:has(> .layout-block + .layout-block) {
-  display: grid;
-  gap: var(--spacing-md);
-}
-.container[data-size=fullwidth], [data-size=fullwidth].banner-v2__content__container, [data-size=fullwidth][class$=__container] {
-  max-width: 100vw;
-}
-.container[data-size=fullwidth][data-background], [data-size=fullwidth][data-background].banner-v2__content__container, [data-size=fullwidth][data-background][class$=__container], [data-background] .container[data-size=fullwidth], [data-background] [data-size=fullwidth].banner-v2__content__container, [data-background] [data-size=fullwidth][class$=__container], .page-section .container[data-size=fullwidth], .page-section [data-size=fullwidth].banner-v2__content__container, .page-section [data-size=fullwidth][class$=__container], .site-header .container[data-size=fullwidth], .site-header [data-size=fullwidth].banner-v2__content__container, .site-header [data-size=fullwidth][class$=__container] {
-  max-width: calc(100vw - var(--spacing-md) * 2);
-}
-.container[data-size=wide], [data-size=wide].banner-v2__content__container, [data-size=wide][class$=__container] {
-  max-width: var(--width-wide);
-}
-.container[data-size=wide][data-background], [data-size=wide][data-background].banner-v2__content__container, [data-size=wide][data-background][class$=__container], [data-background] .container[data-size=wide], [data-background] [data-size=wide].banner-v2__content__container, [data-background] [data-size=wide][class$=__container], .page-section .container[data-size=wide], .page-section [data-size=wide].banner-v2__content__container, .page-section [data-size=wide][class$=__container], .site-header .container[data-size=wide], .site-header [data-size=wide].banner-v2__content__container, .site-header [data-size=wide][class$=__container] {
-  max-width: calc(var(--width-wide) - var(--spacing-md) * 2);
-}
-.container[data-size=narrow], [data-size=narrow].banner-v2__content__container, [data-size=narrow][class$=__container] {
-  max-width: var(--width-narrow);
-}
-.container[data-size=narrow][data-background], [data-size=narrow][data-background].banner-v2__content__container, [data-size=narrow][data-background][class$=__container], [data-background] .container[data-size=narrow], [data-background] [data-size=narrow].banner-v2__content__container, [data-background] [data-size=narrow][class$=__container], .page-section .container[data-size=narrow], .page-section [data-size=narrow].banner-v2__content__container, .page-section [data-size=narrow][class$=__container], .site-header .container[data-size=narrow], .site-header [data-size=narrow].banner-v2__content__container, .site-header [data-size=narrow][class$=__container] {
-  max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
-}
-.container [data-background=primary] + [data-background*=gradient-primary], .banner-v2__content__container [data-background=primary] + [data-background*=gradient-primary], [class$=__container] [data-background=primary] + [data-background*=gradient-primary] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-primary] + [data-background=primary], .banner-v2__content__container [data-background*=gradient-][data-background*=-primary] + [data-background=primary], [class$=__container] [data-background*=gradient-][data-background*=-primary] + [data-background=primary] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-primary] + [data-background*=gradient-primary], .banner-v2__content__container [data-background*=gradient-primary] + [data-background*=gradient-primary], [class$=__container] [data-background*=gradient-primary] + [data-background*=gradient-primary] {
-  padding-block-start: 0;
-}
-.container [data-background=secondary] + [data-background*=gradient-secondary], .banner-v2__content__container [data-background=secondary] + [data-background*=gradient-secondary], [class$=__container] [data-background=secondary] + [data-background*=gradient-secondary] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-secondary] + [data-background=secondary], .banner-v2__content__container [data-background*=gradient-][data-background*=-secondary] + [data-background=secondary], [class$=__container] [data-background*=gradient-][data-background*=-secondary] + [data-background=secondary] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-secondary] + [data-background*=gradient-secondary], .banner-v2__content__container [data-background*=gradient-secondary] + [data-background*=gradient-secondary], [class$=__container] [data-background*=gradient-secondary] + [data-background*=gradient-secondary] {
-  padding-block-start: 0;
-}
-.container [data-background=accent] + [data-background*=gradient-accent], .banner-v2__content__container [data-background=accent] + [data-background*=gradient-accent], [class$=__container] [data-background=accent] + [data-background*=gradient-accent] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-accent] + [data-background=accent], .banner-v2__content__container [data-background*=gradient-][data-background*=-accent] + [data-background=accent], [class$=__container] [data-background*=gradient-][data-background*=-accent] + [data-background=accent] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-accent] + [data-background*=gradient-accent], .banner-v2__content__container [data-background*=gradient-accent] + [data-background*=gradient-accent], [class$=__container] [data-background*=gradient-accent] + [data-background*=gradient-accent] {
-  padding-block-start: 0;
-}
-.container [data-background=info] + [data-background*=gradient-info], .banner-v2__content__container [data-background=info] + [data-background*=gradient-info], [class$=__container] [data-background=info] + [data-background*=gradient-info] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-info] + [data-background=info], .banner-v2__content__container [data-background*=gradient-][data-background*=-info] + [data-background=info], [class$=__container] [data-background*=gradient-][data-background*=-info] + [data-background=info] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-info] + [data-background*=gradient-info], .banner-v2__content__container [data-background*=gradient-info] + [data-background*=gradient-info], [class$=__container] [data-background*=gradient-info] + [data-background*=gradient-info] {
-  padding-block-start: 0;
-}
-.container [data-background=warning] + [data-background*=gradient-warning], .banner-v2__content__container [data-background=warning] + [data-background*=gradient-warning], [class$=__container] [data-background=warning] + [data-background*=gradient-warning] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-warning] + [data-background=warning], .banner-v2__content__container [data-background*=gradient-][data-background*=-warning] + [data-background=warning], [class$=__container] [data-background*=gradient-][data-background*=-warning] + [data-background=warning] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-warning] + [data-background*=gradient-warning], .banner-v2__content__container [data-background*=gradient-warning] + [data-background*=gradient-warning], [class$=__container] [data-background*=gradient-warning] + [data-background*=gradient-warning] {
-  padding-block-start: 0;
-}
-.container [data-background=success] + [data-background*=gradient-success], .banner-v2__content__container [data-background=success] + [data-background*=gradient-success], [class$=__container] [data-background=success] + [data-background*=gradient-success] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-success] + [data-background=success], .banner-v2__content__container [data-background*=gradient-][data-background*=-success] + [data-background=success], [class$=__container] [data-background*=gradient-][data-background*=-success] + [data-background=success] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-success] + [data-background*=gradient-success], .banner-v2__content__container [data-background*=gradient-success] + [data-background*=gradient-success], [class$=__container] [data-background*=gradient-success] + [data-background*=gradient-success] {
-  padding-block-start: 0;
-}
-.container [data-background=error] + [data-background*=gradient-error], .banner-v2__content__container [data-background=error] + [data-background*=gradient-error], [class$=__container] [data-background=error] + [data-background*=gradient-error] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-error] + [data-background=error], .banner-v2__content__container [data-background*=gradient-][data-background*=-error] + [data-background=error], [class$=__container] [data-background*=gradient-][data-background*=-error] + [data-background=error] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-error] + [data-background*=gradient-error], .banner-v2__content__container [data-background*=gradient-error] + [data-background*=gradient-error], [class$=__container] [data-background*=gradient-error] + [data-background*=gradient-error] {
-  padding-block-start: 0;
-}
-.container [data-background=light] + [data-background*=gradient-light], .banner-v2__content__container [data-background=light] + [data-background*=gradient-light], [class$=__container] [data-background=light] + [data-background*=gradient-light] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-light] + [data-background=light], .banner-v2__content__container [data-background*=gradient-][data-background*=-light] + [data-background=light], [class$=__container] [data-background*=gradient-][data-background*=-light] + [data-background=light] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-light] + [data-background*=gradient-light], .banner-v2__content__container [data-background*=gradient-light] + [data-background*=gradient-light], [class$=__container] [data-background*=gradient-light] + [data-background*=gradient-light] {
-  padding-block-start: 0;
-}
-.container [data-background=dark] + [data-background*=gradient-dark], .banner-v2__content__container [data-background=dark] + [data-background*=gradient-dark], [class$=__container] [data-background=dark] + [data-background*=gradient-dark] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-dark] + [data-background=dark], .banner-v2__content__container [data-background*=gradient-][data-background*=-dark] + [data-background=dark], [class$=__container] [data-background*=gradient-][data-background*=-dark] + [data-background=dark] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-dark] + [data-background*=gradient-dark], .banner-v2__content__container [data-background*=gradient-dark] + [data-background*=gradient-dark], [class$=__container] [data-background*=gradient-dark] + [data-background*=gradient-dark] {
-  padding-block-start: 0;
-}
-.container [data-background=white] + [data-background*=gradient-white], .banner-v2__content__container [data-background=white] + [data-background*=gradient-white], [class$=__container] [data-background=white] + [data-background*=gradient-white] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-][data-background*=-white] + [data-background=white], .banner-v2__content__container [data-background*=gradient-][data-background*=-white] + [data-background=white], [class$=__container] [data-background*=gradient-][data-background*=-white] + [data-background=white] {
-  padding-block-start: 0;
-}
-.container [data-background*=gradient-white] + [data-background*=gradient-white], .banner-v2__content__container [data-background*=gradient-white] + [data-background*=gradient-white], [class$=__container] [data-background*=gradient-white] + [data-background*=gradient-white] {
-  padding-block-start: 0;
-}
-
 .banner-v2 {
   padding-block-start: 0;
   position: relative;
+  container-type: inline-size;
+  max-width: 1920px;
+  margin-inline: auto;
 }
 .banner-v2__image {
   display: flex;
   width: 100%;
-  height: fit-content;
   overflow: hidden;
-  justify-content: center;
+  height: 50dvh;
+}
+@container (min-width: 768px) {
+  .banner-v2__image {
+    height: fit-content;
+    justify-content: center;
+  }
 }
 .banner-v2__image__frame {
   overflow: hidden;
-  min-width: 100%;
+  container-type: size;
 }
-.banner-v2__image__frame[data-aspect-ratio=cinematic] {
-  height: min(65vh, 42.8571428571vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=cinemascope] {
-  height: min(65vh, 42.5531914894vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=cinematic] {
-  height: min(65vh, 42.8571428571vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=wide] {
-  height: min(65vh, 177.7777777778vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=standard] {
-  height: min(65vh, 75vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=classic] {
-  height: min(65vh, 150vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=classic_portrait] {
-  height: min(65vh, 66.6666666667vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=portrait] {
-  height: min(65vh, 133.3333333333vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=tall] {
-  height: min(65vh, 177.7777777778vw);
-}
-.banner-v2__image__frame[data-aspect-ratio=square] {
-  height: min(65vh, 100vw);
+@container (min-width: 768px) {
+  .banner-v2__image__frame[data-aspect-ratio=cinematic] {
+    height: min(65vh, 233.3333333333vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=cinemascope] {
+    height: min(65vh, 42.5531914894vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=cinematic] {
+    height: min(65vh, 42.8571428571vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=wide] {
+    height: min(65vh, 177.7777777778vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=standard] {
+    height: min(65vh, 75vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=classic] {
+    height: min(65vh, 150vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=classic_portrait] {
+    height: min(65vh, 66.6666666667vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=portrait] {
+    height: min(65vh, 133.3333333333vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=tall] {
+    height: min(65vh, 177.7777777778vw);
+  }
+  .banner-v2__image__frame[data-aspect-ratio=square] {
+    height: min(65vh, 100vw);
+  }
 }
 .banner-v2__image__frame__inner {
   min-width: 100%;
-  overflow: visible;
-  max-width: none !important;
-  width: fit-content;
-  height: fit-content;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  left: var(--offset-x, 0);
-  top: var(--offset-y, 0);
+  height: 100cqh;
+  object-fit: cover;
+}
+@container (min-width: 768px) {
+  .banner-v2__image__frame__inner {
+    overflow: visible;
+    max-width: none !important;
+    width: fit-content;
+    height: fit-content;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+  }
 }
 .banner-v2__image__frame__inner img {
-  width: calc(100% - var(--offset-x, 0));
-  height: calc(100% - var(--offset-y, 0));
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: var(--focal-point-x) var(--focal-point-y);
+}
+@container (min-width: 768px) {
+  .banner-v2__image__frame__inner img {
+    object-fit: none;
+    object-position: unset;
+    width: calc(100% + abs(var(--offset-x, 0)));
+    min-height: 100cqh;
+    height: calc(100% + abs(var(--offset-y, 0)));
+    position: relative;
+    left: var(--offset-x);
+    top: var(--offset-y);
+  }
 }
 .banner-v2__content {
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+  margin-block-start: -10dvh;
 }
-.banner-v2__content__container {
-  height: 100%;
+@container (min-width: 768px) {
+  .banner-v2__content {
+    margin-block-start: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+}
+@container (min-width: 768px) {
+  .banner-v2__content__container {
+    height: 100%;
+  }
 }
 .banner-v2__content__inner {
   background: var(--theme-color);
@@ -206,6 +122,11 @@
 }
 .banner-v2__content__inner .button[data-style=outline] {
   background: var(--theme-color-inverse);
+}
+@container (max-width: 768px) {
+  .banner-v2__content__inner {
+    max-width: unset !important;
+  }
 }
 
 /*# sourceMappingURL=banner-v2.css.map */

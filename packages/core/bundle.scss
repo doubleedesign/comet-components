@@ -3,6 +3,7 @@
 // If sorting these, always keep the global and common files at the top because components should be able to contextually override them easily
 @use "./src/components/global.scss";
 @use "./src/components/common.scss";
+@use "./src/components/PageSection/page-section.scss";
 @use "./src/components/Container/container.scss";
 @use "./src/components/Button/button.scss";
 
@@ -35,7 +36,6 @@
 @use "./src/components/LinkGroup/link-group.scss";
 @use "./src/components/Menu/menu.scss";
 @use "./src/components/PageHeader/page-header.scss";
-@use "./src/components/PageSection/page-section.scss";
 @use "./src/components/PostNav/post-nav.scss";
 @use "./src/components/Pullquote/pullquote.scss";
 @use "./src/components/ResponsivePanels/responsive-panels.scss";
