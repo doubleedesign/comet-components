@@ -39,7 +39,7 @@ class ContentImageAdvanced extends ContentImageComponent {
             'attributes'  => $this->get_html_attributes(), // Attributes for the image itself
             'src'         => $this->src, // Blade template in IDE is happier if we specify src explicitly
             // because we were getting to too many layers of attribute/class methods when we can just do stuff in the template
-            'bemPrefix'   => $this->get_bem_prefix(),
+            'bemPrefix'   => $this->get_bem_structure()['modifier'] ? "{$this->get_bem_prefix()}--{$this->get_bem_structure()['modifier']}" : $this->get_bem_prefix(),
             'aspectRatio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
             'caption'     => $this->caption ?? null
         ])->render();
