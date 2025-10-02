@@ -30,10 +30,9 @@ if ($image_url) {
 $content_component = new Container([
     'tagName'         => 'article',
     // Associate this <article> with its headline contained in the page header component
-    'aria-labelledby' => 'page-header--post-' . get_the_id(),
-    'isNested'        => false,
-    'context'         => 'post-content',
-    'size'            => 'default',
+    'aria-labelledby'   => 'page-header--post-' . get_the_id(),
+    'isNested'          => false,
+    'shortName'         => 'post-content',
 ], [
     ...(isset($image) ? [$image] : []),
     new PreprocessedHTML([], $content),
@@ -41,10 +40,10 @@ $content_component = new Container([
 );
 
 $footer = new Container([
-    'tagName'     => 'footer',
-    'context'     => 'post-footer',
-    'isNested'    => false,
-    'size'        => 'default'
+    'tagName'       => 'footer',
+    'shortName'     => 'post-footer',
+    'isNested'      => false,
+    'size'          => 'default'
 ], [
     comet_get_author_card(),
     comet_get_post_nav() ?? []
