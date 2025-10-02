@@ -4107,13 +4107,15 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
 .site-header__menu__sub-menu--responsive[data-open=true] {
   opacity: 1;
 }
-.site-header__menu__sub-menu--responsive .site-header__sub-menu__item {
+.site-header__menu__sub-menu--responsive .site-header__menu__sub-menu__item {
   margin: 0;
+  background: transparent;
 }
-.site-header__menu__sub-menu--responsive .site-header__sub-menu__item__link {
-  padding: 0;
+.site-header__menu__sub-menu--responsive .site-header__menu__sub-menu__item__link {
   background: transparent;
   color: inherit;
+  padding-block: var(--spacing-xs);
+  padding-inline: 0;
 }
 
 .steps {

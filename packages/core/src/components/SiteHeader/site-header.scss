@@ -326,13 +326,15 @@
 					opacity: 1;
 				}
 
-				.site-header__sub-menu__item {
+				.site-header__menu__sub-menu__item {
 					margin: 0;
+					background: transparent;
 
 					&__link {
-						padding: 0;
 						background: transparent;
 						color: inherit;
+						padding-block: var(--spacing-xs);
+						padding-inline: 0;
 					}
 				}
 			}
