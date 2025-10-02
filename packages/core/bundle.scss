@@ -4,12 +4,12 @@
 @use "./src/components/global.scss";
 @use "./src/components/common.scss";
 @use "./src/components/Container/container.scss";
+@use "./src/components/Button/button.scss";
 
 @use "./src/components/Accordion/accordion.scss";
 @use "./src/components/Banner/banner.scss";
 @use "./src/components/BannerV2/banner-v2.scss";
 @use "./src/components/Breadcrumbs/breadcrumbs.scss";
-@use "./src/components/Button/button.scss";
 @use "./src/components/ButtonGroup/button-group.scss";
 @use "./src/components/CallToAction/call-to-action.scss";
 @use "./src/components/Callout/callout.scss";
