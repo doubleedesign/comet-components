@@ -22,6 +22,14 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
      */
     protected bool $withContainer = true;
 
+    /**
+     * @var bool $isWrapped
+     * @description Internal flag to prevent double nesting when a component that extends this one is wrapped in another one.
+     *              Different to isNested because that can be true from the beginning, whereas this is only set after the wrapper is applied.
+     * 			    Passed down to Blade templates to handle avoiding double-ups.
+     */
+    private bool $isWrapped = false;
+
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->wrapperTag = $this->tagName;
@@ -67,12 +75,16 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
         return $this->withContainer;
     }
 
+    public function get_is_wrapped(): bool {
+        return $this->isWrapped;
+    }
+
     protected function render_standalone(): void {
         $blade = BladeService::getInstance();
 
-        // TODO: Not sure this properly handles the case of there not being a wrapper at all (i.e., isNested is true from the beginning)
         echo $blade->make($this->bladeFile, [
             'tag'             => $this->tagName->value,
+            'isWrapped'       => $this->isWrapped,
             'attributes'      => $this->get_html_attributes(),
             'classes'         => $this->get_filtered_classes(),
             'children'        => $this->innerComponents
@@ -82,6 +94,7 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
     final protected function render_with_wrapper(): void {
         $inner = $this;
         $inner->set_is_nested(true); // Prevent infinite loop
+        $inner->isWrapped = true; // Passed down to Blade templates to handle avoiding double-ups
 
         $withWrapper = new PageSection([
             'shortName'       => $this->get_shortname(),
