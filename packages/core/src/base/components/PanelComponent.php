@@ -28,7 +28,7 @@ abstract class PanelComponent extends UIComponent {
     public function get_summary(): ?array {
         return array(
             'attributes' => [],
-            'classes'    => ["{$this->get_context()}__title"],
+            'classes'    => ["{$this->get_bem_prefix()}__title"],
             'title'      => $this->get_title(),
             'subtitle'   => $this->get_subtitle()
         );
@@ -37,7 +37,7 @@ abstract class PanelComponent extends UIComponent {
     private function get_title(): array {
         return array(
             'attributes' => [],
-            'classes'    => ["{$this->get_context()}__title__main"],
+            'classes'    => ["{$this->get_bem_prefix()}__title__main"],
             'content'    => $this->title
         );
     }
@@ -49,9 +49,19 @@ abstract class PanelComponent extends UIComponent {
 
         return array(
             'attributes' => [],
-            'classes'    => ["{$this->get_context()}__title__subtitle"],
+            'classes'    => ["{$this->get_bem_prefix()}__title__subtitle"],
             'content'    => $this->subtitle
         );
+    }
+
+    public function get_filtered_classes(): array {
+        return array_map(function($class) {
+            if ($class === $this->get_bem_prefix()) {
+                return "{$class}__content";
+            }
+
+            return $class;
+        }, parent::get_filtered_classes());
     }
 
     public function get_content(): ?array {

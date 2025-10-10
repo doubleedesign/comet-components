@@ -12,79 +12,54 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::DIV)]
 class Accordion extends PanelGroupComponent {
     use Icon;
+    use NestedState;
 
     /**
      * @var ?string $icon
      * @description Icon class name for the icon to use for the expand/collapse indicator.
      */
     protected ?string $icon;
-
-    /** @var array<AccordionPanel> */
-    protected array $innerComponents;
+    protected bool $withContainer = true;
 
     /**
-     * @var array<Renderable> $beforeComponents
-     * @description Components to render before the accordion (e.g. heading, intro text).
+     * @var array<AccordionPanel> $innerComponents
+     * @description Panels to include in the accordion.
      */
-    protected array $beforeComponents = [];
+    protected array $innerComponents;
+    private bool $hasRenderedWrapper = false;
+    private WrappedPanelGroup $wrappedComponent;
 
     public function __construct(array $attributes, array $innerComponents, ?array $beforeComponents = []) {
         $this->set_icon_from_attrs($attributes, 'fa-plus');
         $this->set_is_nested(@$attributes['isNested'] ?? false);
-        $this->beforeComponents = $beforeComponents ?? $this->beforeComponents;
+
+        // Create inner PanelGroupComponent
         parent::__construct($attributes, $innerComponents, 'components.Accordion.accordion');
-    }
 
-    public function get_container_attributes(): array {
-        return [
-            'isNested'        => false,
-            'classes'         => [$this->get_context() ? "{$this->get_context()}__{$this->get_shortname()}-wrapper" : "{$this->get_shortname()}-wrapper"],
-            'size'            => $this->size ?? null
-        ];
-    }
-
-    public function get_intro_attributes(): array {
-        $attrs = [
-            'class' => $this->get_context() ? "{$this->get_context()}__{$this->get_shortname()}-intro" : "{$this->get_shortname()}-intro"
-        ];
-
-        if ($this->colorTheme) {
-            $attrs['data-color-theme'] = $this->colorTheme->value;
-        }
-        if ($this->backgroundColor) {
-            $attrs['data-background'] = $this->backgroundColor->value;
-        }
-
-        return $attrs;
-    }
-
-    protected function render_standalone(): void {
-        $blade = BladeService::getInstance();
-
-        echo $blade->make($this->bladeFile, [
-            'introAttributes'  => $this->get_intro_attributes(),
-            'beforeComponents' => $this->beforeComponents,
-            'classes'          => $this->get_filtered_classes(),
-            'attributes'       => $this->get_html_attributes(),
-            'panels'           => $this->get_panels(),
-            'icon'             => "$this->iconPrefix $this->icon"
-        ])->render();
-    }
-
-    protected function render_with_wrapper(): void {
-        $inner = $this;
-        $inner->set_is_nested(true); // Prevent infinite loop
-
-        $withWrapper = new Container($this->get_container_attributes(), [$inner]);
-        $withWrapper->render();
+        // Add intro and wrappers
+        $this->wrappedComponent = new WrappedPanelGroup(
+            array_merge($attributes, [
+                'shortName' => $this->get_shortname()
+            ]),
+            $beforeComponents,
+            $this
+        );
     }
 
     public function render(): void {
-        if (!$this->get_is_nested()) {
-            $this->render_with_wrapper();
+        $blade = BladeService::getInstance();
+
+        if (!$this->hasRenderedWrapper) {
+            $this->hasRenderedWrapper = true; // updating this before actually rendering prevents infinite loops
+            $this->wrappedComponent->render();
         }
         else {
-            $this->render_standalone();
+            echo $blade->make($this->bladeFile, [
+                'classes'    => $this->get_filtered_classes(),
+                'attributes' => $this->get_html_attributes(),
+                'panels'     => $this->get_panels(),
+                'icon'       => "$this->iconPrefix $this->icon",
+            ])->render();
         }
     }
 }

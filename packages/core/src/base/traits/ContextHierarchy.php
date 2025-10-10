@@ -154,7 +154,7 @@ trait ContextHierarchy {
         return $this;
     }
 
-    public function update_context(string $context, ?bool $clear_previous = false): void {
+    public function update_context(string $context, ?bool $clear_previous = false): static {
         if ($clear_previous) {
             $this->context = $context;
         }
@@ -162,6 +162,9 @@ trait ContextHierarchy {
             /** @noinspection PhpUnhandledExceptionInspection */
             $this->with_explicit_context($context)->and_bem($this->shortName);
         }
+
+        // Allow for method chaining like update_context(...)->and_bem(...)
+        return $this;
     }
 
     private function prepare_hierarchy(string $bladeFile): void {
