@@ -1,6 +1,6 @@
 {
-    "name": "CallToAction",
-    "description": "Highlight important information and prompt the user to take action.",
+    "name": "WrappedPanelGroup",
+    "description": null,
     "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
@@ -22,28 +22,16 @@
                 "white"
             ]
         },
+        "beforeComponents": {
+            "type": "array<Renderable>",
+            "description": "Components to render before the main component (e.g. heading, intro text).",
+            "required": true,
+            "default": []
+        },
         "classes": {
             "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "call-to-action"
-            ]
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white"
-            ]
+            "description": "Not used - this component renders its children directly",
+            "default": []
         },
         "context": {
             "type": "string",
@@ -75,7 +63,7 @@
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "call-to-action"
+            "default": "wrapped-panel-group"
         },
         "style": {
             "type": "array",
@@ -86,8 +74,7 @@
             "description": "The HTML tag to use for this component",
             "supported": [
                 "div",
-                "section",
-                "aside"
+                "section"
             ],
             "default": "section"
         },
@@ -120,7 +107,6 @@
         "required": true
     },
     "traits": [
-        "ColorTheme",
         "BackgroundColor",
         "LayoutAlignment",
         "NestedState",

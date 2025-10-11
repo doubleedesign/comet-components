@@ -78,7 +78,7 @@
                 "narrower",
                 "small"
             ],
-            "default": "$innercomponents, $bladefile"
+            "default": "default"
         },
         "style": {
             "type": "array",
@@ -95,6 +95,11 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
+        },
+        "withContainer": {
+            "type": "bool",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {

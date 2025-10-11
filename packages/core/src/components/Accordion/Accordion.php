@@ -19,7 +19,12 @@ class Accordion extends PanelGroupComponent {
      * @description Icon class name for the icon to use for the expand/collapse indicator.
      */
     protected ?string $icon;
-    protected bool $withContainer = true;
+
+    /**
+     * @var array<Renderable> $beforeComponents
+     * @description Components to render before the main component (e.g. heading, intro text).
+     */
+    protected array $beforeComponents = [];
 
     /**
      * @var array<AccordionPanel> $innerComponents
@@ -32,6 +37,7 @@ class Accordion extends PanelGroupComponent {
     public function __construct(array $attributes, array $innerComponents, ?array $beforeComponents = []) {
         $this->set_icon_from_attrs($attributes, 'fa-plus');
         $this->set_is_nested(@$attributes['isNested'] ?? false);
+        $this->beforeComponents = $beforeComponents ?? [];
 
         // Create inner PanelGroupComponent
         parent::__construct($attributes, $innerComponents, 'components.Accordion.accordion');
@@ -41,7 +47,7 @@ class Accordion extends PanelGroupComponent {
             array_merge($attributes, [
                 'shortName' => $this->get_shortname()
             ]),
-            $beforeComponents,
+            $this->beforeComponents,
             $this
         );
     }

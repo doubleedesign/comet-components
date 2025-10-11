@@ -481,7 +481,7 @@
                     "narrower",
                     "small"
                 ],
-                "default": "$innercomponents, $bladefile"
+                "default": "default"
             },
             "style": {
                 "type": "array",
@@ -498,6 +498,11 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "withContainer": {
+                "type": "bool",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -875,6 +880,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -916,7 +927,7 @@
             },
             "beforeComponents": {
                 "type": "array<Renderable>",
-                "description": "Components to render before the accordion (e.g. heading, intro text).",
+                "description": "Components to render before the main component (e.g. heading, intro text).",
                 "required": true,
                 "default": []
             },
@@ -964,7 +975,7 @@
                 "type": "bool",
                 "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
                 "required": true,
-                "default": true
+                "default": false
             },
             "orientation": {
                 "type": "Orientation",
@@ -1009,15 +1020,21 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "withContainer": {
+                "type": "bool",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
             "type": "array<AccordionPanel>",
-            "description": "Inner components to be rendered within this component",
+            "description": "Panels to include in the accordion.",
             "required": true
         },
         "traits": [
             "Icon",
+            "NestedState",
             "BackgroundColor",
             "ColorTheme",
             "LayoutContainerSize",
@@ -1054,7 +1071,7 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "accordion__panel"
+                    "accordion__panel__content"
                 ]
             },
             "context": {
@@ -1873,6 +1890,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -2186,9 +2209,7 @@
         "attributes": {
             "allowStacking": {
                 "type": "bool",
-                "description": "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
-                "required": true,
-                "default": "true"
+                "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Defaults to true behaviour but does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
             },
             "backgroundColor": {
                 "type": "ThemeColor",
@@ -2407,6 +2428,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -2692,6 +2719,23 @@
                     "copy"
                 ]
             },
+            "colorTheme": {
+                "type": "ThemeColor",
+                "description": "Colour keyword for the fill or outline colour",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white"
+                ],
+                "default": "default to div tag unless specified otherwise in the attributes\n        if ($this->get_is_nested("
+            },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
@@ -2737,7 +2781,7 @@
                     "aside",
                     "article"
                 ],
-                "default": "div"
+                "default": "section"
             },
             "testId": {
                 "type": "string",
@@ -2754,6 +2798,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -2762,6 +2812,7 @@
             "required": true
         },
         "traits": [
+            "ColorTheme",
             "BackgroundColor",
             "LayoutAlignment",
             "NestedState",
@@ -3520,8 +3571,7 @@
                     "light",
                     "dark",
                     "white"
-                ],
-                "default": "rather than defaulting to the fallback\r\n        if (isset($attributes['backgroundcolor']"
+                ]
             },
             "context": {
                 "type": "string",
@@ -4582,6 +4632,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "content": {
@@ -4630,7 +4686,6 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "page-section",
                     "page-section"
                 ]
             },
@@ -4672,7 +4727,8 @@
                     "section",
                     "header",
                     "footer",
-                    "main"
+                    "main",
+                    "article"
                 ],
                 "default": "section"
             },
@@ -5011,7 +5067,7 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "responsivepanels__responsive-panel"
+                    "responsivepanels__responsive-panel__content"
                 ]
             },
             "context": {
@@ -5138,7 +5194,7 @@
                 "type": "bool",
                 "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
                 "required": true,
-                "default": true
+                "default": false
             },
             "orientation": {
                 "type": "Orientation",
@@ -5183,6 +5239,11 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "withContainer": {
+                "type": "bool",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -5417,6 +5478,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -5754,7 +5821,7 @@
         "attributes": {
             "allowStacking": {
                 "type": "bool",
-                "description": "Optionally specify whether to adapt the layout by stacking columns when the viewport or container is narrow. Do not set if your theme will handle it on a case-by-case basis with custom CSS."
+                "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
             },
             "caption": {
                 "type": "TableCaption|array",
@@ -6104,7 +6171,7 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "tabs__tab-panel"
+                    "tabs__tab-panel__content"
                 ]
             },
             "context": {
@@ -6216,7 +6283,7 @@
                 "type": "bool",
                 "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
                 "required": true,
-                "default": true
+                "default": false
             },
             "orientation": {
                 "type": "Orientation",
@@ -6261,6 +6328,11 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "withContainer": {
+                "type": "bool",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -6273,6 +6345,121 @@
             "ColorTheme",
             "LayoutContainerSize",
             "LayoutOrientation",
+            "NestedState",
+            "BlockElementModifier"
+        ]
+    },
+    {
+        "name": "WrappedPanelGroup",
+        "description": null,
+        "extends": "WrappedLayoutComponent",
+        "abstract": false,
+        "isInner": false,
+        "belongsInside": "LayoutComponent",
+        "attributes": {
+            "backgroundColor": {
+                "type": "ThemeColor",
+                "description": "Background colour keyword",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white"
+                ]
+            },
+            "beforeComponents": {
+                "type": "array<Renderable>",
+                "description": "Components to render before the main component (e.g. heading, intro text).",
+                "required": true,
+                "default": []
+            },
+            "classes": {
+                "type": "array<string>",
+                "description": "Not used - this component renders its children directly",
+                "default": []
+            },
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "hAlign": {
+                "type": "Alignment",
+                "description": "Horizontal alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "id": {
+                "type": "string",
+                "description": "Unique identifier"
+            },
+            "isNested": {
+                "type": "bool",
+                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+                "required": true,
+                "default": false
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "required": true,
+                "default": "wrapped-panel-group"
+            },
+            "style": {
+                "type": "array",
+                "description": "Inline styles"
+            },
+            "tagName": {
+                "type": "Tag",
+                "description": "The HTML tag to use for this component",
+                "supported": [
+                    "div",
+                    "section"
+                ],
+                "default": "section"
+            },
+            "testId": {
+                "type": "string",
+                "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "vAlign": {
+                "type": "Alignment",
+                "description": "Vertical alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
+            }
+        },
+        "innerComponents": {
+            "type": "array<Renderable>",
+            "description": "Inner components to be rendered within this component",
+            "required": true
+        },
+        "traits": [
+            "BackgroundColor",
+            "LayoutAlignment",
             "NestedState",
             "BlockElementModifier"
         ]

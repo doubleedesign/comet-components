@@ -84,6 +84,12 @@
                 "match-parent"
             ],
             "default": "match-parent"
+        },
+        "withContainer": {
+            "type": "bool",
+            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {

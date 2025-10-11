@@ -26,7 +26,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "accordion__panel"
+                "accordion__panel__content"
             ]
         },
         "context": {

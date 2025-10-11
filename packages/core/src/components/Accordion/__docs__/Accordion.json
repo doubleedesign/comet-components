@@ -25,7 +25,7 @@
         },
         "beforeComponents": {
             "type": "array<Renderable>",
-            "description": "Components to render before the accordion (e.g. heading, intro text).",
+            "description": "Components to render before the main component (e.g. heading, intro text).",
             "required": true,
             "default": []
         },
@@ -73,7 +73,7 @@
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
-            "default": true
+            "default": false
         },
         "orientation": {
             "type": "Orientation",
@@ -118,15 +118,21 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
+        },
+        "withContainer": {
+            "type": "bool",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {
         "type": "array<AccordionPanel>",
-        "description": "Inner components to be rendered within this component",
+        "description": "Panels to include in the accordion.",
         "required": true
     },
     "traits": [
         "Icon",
+        "NestedState",
         "BackgroundColor",
         "ColorTheme",
         "LayoutContainerSize",

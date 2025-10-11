@@ -26,7 +26,6 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "page-section",
                 "page-section"
             ]
         },
@@ -68,7 +67,8 @@
                 "section",
                 "header",
                 "footer",
-                "main"
+                "main",
+                "article"
             ],
             "default": "section"
         },

@@ -10,6 +10,12 @@ class WrappedPanelGroup extends WrappedLayoutComponent {
      */
     protected array $beforeComponents = [];
 
+    /**
+     * @var ?array<string> $classes
+     * @description Not used - this component renders its children directly
+     */
+    protected ?array $classes = [];
+
     public function __construct(array $attributes, array $beforeComponents, PanelGroupComponent $innerSelf) {
         $this->beforeComponents = $beforeComponents;
 
@@ -23,5 +29,10 @@ class WrappedPanelGroup extends WrappedLayoutComponent {
         );
 
         parent::__construct($attributes, [$wrappedIntro, $innerSelf], 'components.WrappedPanelGroup.wrapped-panel-group');
+    }
+
+    public function get_filtered_classes(): array {
+        // This component renders its children directly, so this is here for clarity/documentation
+        return [];
     }
 }

@@ -47,8 +47,7 @@
                 "light",
                 "dark",
                 "white"
-            ],
-            "default": "rather than defaulting to the fallback\r\n        if (isset($attributes['backgroundcolor']"
+            ]
         },
         "context": {
             "type": "string",

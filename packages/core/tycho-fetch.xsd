@@ -89,7 +89,8 @@
 	</xs:element>
 	<xs:element name="Accordion">
 		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
+			<xs:attribute name="withContainer" type="xs:boolean"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="style" type="InlineStyle"/>
@@ -207,6 +208,7 @@
 	<xs:element name="CallToAction">
 		<xs:complexType>
 			<xs:attribute name="vAlign" type="Alignment"/>
+<xs:attribute name="withContainer" type="xs:boolean"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="shortName" type="xs:string"/>
@@ -294,6 +296,7 @@
 	<xs:element name="Container">
 		<xs:complexType>
 			<xs:attribute name="vAlign" type="Alignment"/>
+<xs:attribute name="withContainer" type="xs:boolean"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
@@ -351,15 +354,17 @@
 	</xs:element>
 	<xs:element name="Copy">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="style" type="InlineStyle"/>
+			<xs:attribute name="vAlign" type="Alignment"/>
+<xs:attribute name="withContainer" type="xs:boolean"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="isNested" type="xs:boolean"/>
+<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="shortName" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
 <xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
@@ -706,7 +711,8 @@
 	</xs:element>
 	<xs:element name="PageHeader">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="withContainer" type="xs:boolean"/>
+<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
@@ -792,7 +798,8 @@
 	</xs:element>
 	<xs:element name="ResponsivePanels">
 		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
+			<xs:attribute name="withContainer" type="xs:boolean"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="style" type="InlineStyle"/>
@@ -833,7 +840,8 @@
 	</xs:element>
 	<xs:element name="SiteFooter">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="withContainer" type="xs:boolean"/>
+<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
@@ -967,6 +975,7 @@
 	<xs:element name="Tabs">
 		<xs:complexType>
 			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="withContainer" type="xs:boolean"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="shortName" type="xs:string"/>
@@ -977,6 +986,23 @@
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="backgroundColor" type="ThemeColor"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="WrappedPanelGroup">
+		<xs:complexType>
+			<xs:attribute name="vAlign" type="Alignment"/>
+<xs:attribute name="withContainer" type="xs:boolean"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="shortName" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
+<xs:attribute name="hAlign" type="Alignment"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="beforeComponents" type="array<Renderable>"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>

@@ -4,20 +4,27 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 abstract class PanelGroupComponent extends UIComponent {
+    use BackgroundColor;
     use ColorTheme;
+    use LayoutContainerSize;
     use LayoutOrientation;
+    use NestedState;
 
     /**
      * @var array<PanelComponent> $panels
      * @description Panel data transformed for use by the relevant Vue component.
      */
     private array $panels = [];
+    protected bool $withContainer = true;
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->prepare_inner_components_for_vue($innerComponents);
         $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
+        $this->set_background_color_from_attrs($attributes);
         $this->set_orientation_from_attrs($attributes);
+        $this->set_is_nested(@$attributes['isNested'] ?? false);
+        $this->set_size_from_attrs($attributes);
     }
 
     private function prepare_inner_components_for_vue($rawInnerComponents): void {

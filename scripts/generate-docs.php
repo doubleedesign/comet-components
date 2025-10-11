@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{AllowedTags, Config, DefaultTag, Tag, Utils};
+use Doubleedesign\Comet\Core\{Accordion, AllowedTags, Config, DefaultTag, Tag, Utils};
 
 /**
  * This script generates JSON and XML files that summarise the details of component classes written in PHP.
@@ -120,24 +120,6 @@ class ComponentClassesToJsonDefinitions {
             $this->processFile($filePath);
 
             return;
-        }
-
-        // Specific edge cases
-        if (in_array($component, ['ListItem', 'ListItemSimple', 'ListItemComplex'])) {
-            if ($component === 'ListItem') {
-                $filePath = $this->mainComponentDirectory . '\ListComponent\ListItem\ListItem.php';
-            }
-            else {
-                $filePath = $this->mainComponentDirectory . '\ListComponent\ListItem\\' . $component . "\\$component.php";
-            }
-            if (file_exists($filePath)) {
-                $this->processFile($filePath);
-
-                return;
-            }
-        }
-        else {
-            throw new RuntimeException("Component $component not found");
         }
     }
 
@@ -505,6 +487,10 @@ class ComponentClassesToJsonDefinitions {
                     try {
                         if (!method_exists($param->getType(), 'getName')) {
                             return '';
+                        }
+
+                        if ($param->getType()->getName() === 'Doubleedesign\Comet\Core\PanelGroupComponent') {
+                            return new Accordion([], []);
                         }
 
                         return match ($param->getType()?->getName()) {

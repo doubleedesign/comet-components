@@ -8,9 +8,7 @@
     "attributes": {
         "allowStacking": {
             "type": "bool",
-            "description": "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
-            "required": true,
-            "default": "true"
+            "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Defaults to true behaviour but does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
         },
         "backgroundColor": {
             "type": "ThemeColor",
