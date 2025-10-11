@@ -50,6 +50,8 @@ class Columns extends WrappedLayoutComponent {
             'shortName'  => 'columns',
             'data-count' => $this->qty,
             ...($this->allowStacking !== null ? ['data-allow-layout-stacking' => $this->allowStacking ? 'true' : 'false'] : []),
+            ...($this->hAlign && !$this->hAlign->isDefault() ? ['data-halign' => $this->hAlign->value] : []),
+            ...($this->vAlign && !$this->vAlign->isDefault() ? ['data-valign' => $this->vAlign->value] : [])
         ], $updatedInnerComponents);
         $updatedInnerComponents = $this->withContainer ? [$wrappedCols] : $updatedInnerComponents;
 
@@ -66,6 +68,14 @@ class Columns extends WrappedLayoutComponent {
         });
     }
 
+    /**
+     * Get HTML attributes for the component
+     * Note: In this case, this only applies when the component is nested, as when not nested the attributes are applied to the wrapper.
+     *       We can't use this method to get them for that because the parent constructor needs to be called after the Group is created in order to include it,
+     *       and we can't update them after the fact because Group doesn't actually support alignment properties - the HTML attributes are added explicitly (which isn't the best, but will do for now)
+     *
+     * @return array<string, string> Array of HTML attributes
+     */
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
         $attributes['data-count'] = $this->qty;

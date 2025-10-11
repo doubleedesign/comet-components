@@ -51,10 +51,21 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
             Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme']),
             $this->ariaAttrs
         );
-        $this->containerAttrs = array_merge(
-            Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']),
-            $this->dataAttrs
-        );
+
+        // FIXME Try not to have this condition here, Columns should somehow look after this itself
+        if ($this instanceof Columns) {
+            $this->containerAttrs = array_merge(
+                Utils::array_pick($attributes, ['size', 'orientation']),
+                $this->dataAttrs
+            );
+        }
+        else {
+            $this->containerAttrs = array_merge(
+                Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']),
+                $this->dataAttrs
+            );
+        }
+
         // Initially set withContainer to whatever is in the attributes
         $this->withContainer = $attributes['withContainer'] ?? $this->withContainer;
         // ...but then check the other conditions and update accordingly
