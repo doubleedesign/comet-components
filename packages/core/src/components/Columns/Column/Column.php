@@ -13,10 +13,7 @@ class Column extends LayoutComponent {
     protected ?string $width;
 
     public function __construct(array $attributes, array $innerComponents) {
-        parent::__construct(
-            array_merge(['context' => 'columns'], $attributes),
-            $innerComponents,
-            'components.Columns.Column.column');
+        parent::__construct($attributes, $innerComponents, 'components.Columns.Column.column');
         $this->width = $attributes['width'] ?? null;
         $this->tagName = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::DIV;
     }
@@ -33,17 +30,10 @@ class Column extends LayoutComponent {
         $classes = parent::get_filtered_classes();
 
         if (isset($this->width)) {
-            $classes[] = 'columns__column--has-own-width';
+            $classes[] = $this->get_bem_prefix() . '--has-own-width';
         }
 
         return $classes;
-    }
-
-    protected function get_inner_classes(): array {
-        return [
-            $this->get_shortname() . '__inner',
-            ...($this->get_context() !== 'columns' ? [$this->get_context()] : [])
-        ];
     }
 
     public function get_inline_styles(): array {
@@ -63,7 +53,6 @@ class Column extends LayoutComponent {
         echo $blade->make($this->bladeFile, [
             'tag'          => $this->tagName->value,
             'classes'      => $this->get_filtered_classes(),
-            'innerClasses' => implode(' ', $this->get_inner_classes()),
             'attributes'   => $this->get_html_attributes(),
             'children'     => $this->innerComponents
         ])->render();

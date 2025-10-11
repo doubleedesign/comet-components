@@ -13,7 +13,19 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
     private ?Tag $wrapperTag;
     private array $wrapperAttrs;
     private array $containerAttrs;
-    private array $ariaAttrs;
+
+    /**
+     * @var array $ariaAttrs
+     * @description Allow for aria-* attributes to be passed down to the wrapper explicitly
+     */
+    protected array $ariaAttrs;
+
+    /**
+     * @var array $dataAttrs
+     * @description Allow for data-* attributes to be passed down to the container explicitly;
+     *              useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)
+     */
+    protected array $dataAttrs;
 
     /**
      * @var bool $withContainer
@@ -34,8 +46,15 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->wrapperTag = $this->tagName;
         $this->ariaAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'aria-') || $key === 'role', ARRAY_FILTER_USE_KEY);
-        $this->wrapperAttrs = array_merge(Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme']), $this->ariaAttrs);
-        $this->containerAttrs = Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']);
+        $this->dataAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'data-'), ARRAY_FILTER_USE_KEY);
+        $this->wrapperAttrs = array_merge(
+            Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme']),
+            $this->ariaAttrs
+        );
+        $this->containerAttrs = array_merge(
+            Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']),
+            $this->dataAttrs
+        );
         // Initially set withContainer to whatever is in the attributes
         $this->withContainer = $attributes['withContainer'] ?? $this->withContainer;
         // ...but then check the other conditions and update accordingly

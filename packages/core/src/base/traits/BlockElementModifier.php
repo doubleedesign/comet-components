@@ -57,16 +57,18 @@ trait BlockElementModifier {
     }
 
     // TODO: If this is set from outside, do we then need to update the element?
-    public function set_bem_block(string $block): void {
+    public function set_bem_block(string $block): static {
         $this->block = $block;
+
+        return $this;
     }
 
     // TODO: If this is set from outside, how to handle context? Do we need to?
-    public function set_bem_element(?string $element): void {
+    public function set_bem_element(?string $element): static {
         if ($this->implicit_context === null) {
             $this->element = $element;
 
-            return;
+            return $this;
         }
 
         // Where the element matches the block, remove repetition
@@ -90,10 +92,14 @@ trait BlockElementModifier {
         }
 
         $this->element = $element;
+
+        return $this;
     }
 
-    public function set_bem_modifier(?string $modifier): void {
+    public function set_bem_modifier(?string $modifier): static {
         $this->modifier = $modifier;
+
+        return $this;
     }
 
     private function get_block_class(): string {

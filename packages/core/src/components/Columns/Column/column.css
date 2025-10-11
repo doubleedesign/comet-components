@@ -1,11 +1,7 @@
-.column, [class$=__column] {
+.column {
   min-width: 0;
   display: flex;
   flex-direction: column;
-}
-.column__inner, [class$=__column__inner] {
-  display: flow-root;
-  width: 100%;
 }
 
 /*# sourceMappingURL=column.css.map */

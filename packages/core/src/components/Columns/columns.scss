@@ -17,7 +17,7 @@
 	}
 }
 
-@include bem-block('columns', ('column')) {
+@mixin column-layout() {
 	// Default/auto layout
 	display: grid;
 	grid-gap: var(--spacing-lg);
@@ -70,7 +70,7 @@
 	}
 
 	// Adjust layout if any of the columns has a preset width
-	&:has(> #{class-contains('columns__column--has-own-width')}) {
+	&:has(> #{class-contains('--has-own-width')}) {
 		display: flex;
 		flex-wrap: nowrap;
 		gap: var(--spacing-md);
@@ -78,6 +78,18 @@
 		@include container-width-up('narrow') {
 			gap: var(--spacing-lg);
 		}
+	}
+}
+
+@include bem-block('columns', ('container', 'column')) {
+
+	&__container {
+		display: grid;
+		@include column-layout();
+	}
+
+	&:not(:has(#{class-contains('__container')})) {
+		@include column-layout();
 	}
 
 	// If this element has at least one child with a different background colour set, all children should have padding so they align

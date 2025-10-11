@@ -1,5 +1,5 @@
 @opentag($tag) @class($classes) @attributes($attributes)>
-<div @class($innerClasses)>
+<blade-fragment>
 	@include('components._blade-partials.children')
-</div>
+</blade-fragment>
 @closetag($tag)

@@ -21,6 +21,13 @@ class Group extends UIComponent {
      */
     protected ?array $classes;
 
+    /**
+     * @var array $dataAttrs
+     * @description Allow for data-* attributes to be passed down to the group explicitly;
+     *              useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)
+     */
+    protected array $dataAttrs;
+
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Group.group');
         $this->set_color_theme_from_attrs($attributes);
@@ -29,6 +36,8 @@ class Group extends UIComponent {
             $this->set_background_color_from_attrs($attributes);
             $this->simplify_all_background_colors();
         }
+
+        $this->dataAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'data-'), ARRAY_FILTER_USE_KEY);
     }
 
     protected function get_html_attributes(): array {
@@ -44,7 +53,7 @@ class Group extends UIComponent {
             $attributes['data-background'] = 'gradient-' . $this->gradient;
         }
 
-        return $attributes;
+        return array_merge($attributes, $this->dataAttrs);
     }
 
     public function render(): void {

@@ -90,7 +90,9 @@ class Container extends WrappedLayoutComponent {
             }
         }
 
-        return $attributes;
+        $explicitDataAttrs = array_filter(parent::get_html_attributes(), fn($key) => str_starts_with($key, 'data-'), ARRAY_FILTER_USE_KEY);
+
+        return array_merge($attributes, $explicitDataAttrs);
     }
 
 }
