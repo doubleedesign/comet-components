@@ -1,17 +1,35 @@
 @use '../mixins' as *;
 @use '../variables' as *;
 
-.page-section {
-	@include section-padding();
+body {
+	> header,
+	> footer,
+	> section,
+	> article,
+	> div {
+		@include section-padding();
+	}
 
-	@each $name, $color in $colors {
-		&[data-background="#{$name}"] + &[data-background="#{$name}"] {
-			padding-block-start: 0;
+	> main {
+		> section,
+		> header,
+		> footer,
+		> article,
+		> div {
+			@include section-padding();
 		}
 	}
+}
 
-	// Treat no-background containers the same as those with the same solid background
-	&:not([data-background]) + &:not([data-background]) {
+// Adjacent section overrides to not double up on padding when backgrounds are the same
+@each $name, $color in $colors {
+	body > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"],
+	body > main > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"] {
 		padding-block-start: 0;
 	}
+}
+
+body > :not([data-background]):not(hr) + :not([data-background]),
+body > main > :not([data-background]):not(hr) + :not([data-background]) {
+	padding-block-start: 0;
 }

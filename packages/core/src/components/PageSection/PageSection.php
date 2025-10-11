@@ -34,7 +34,7 @@ class PageSection extends Renderable {
     public function get_filtered_classes(): array {
         return array_merge(
             parent::get_filtered_classes(),
-            [$this->get_shortname(), 'page-section']
+            [$this->get_shortname()]
         );
     }
 

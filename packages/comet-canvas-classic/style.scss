@@ -13,9 +13,6 @@
 @import 'template-parts/post-nav';
 
 .post-content {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-lg);
 
 	&__container {
 		container-type: unset; // allows .breakout to work if used inside .post-content__container
@@ -27,7 +24,6 @@
 }
 
 .post-footer {
-	margin-block-start: var(--spacing-lg);
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-lg);

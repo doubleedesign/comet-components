@@ -28,11 +28,6 @@
   display: none;
 }
 
-.post-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
 .post-content__container {
   container-type: unset;
 }
@@ -43,7 +38,6 @@
 }
 
 .post-footer {
-  margin-block-start: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);

@@ -4,4 +4,8 @@
 	display: flex;
 	gap: var(--spacing-sm);
 	padding-block: var(--spacing-sm);
+
+	&:last-child {
+		padding-block-end: 0;
+	}
 }

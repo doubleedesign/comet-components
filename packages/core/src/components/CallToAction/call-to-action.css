@@ -1,5 +1,5 @@
 .call-to-action {
-  padding: var(--spacing-lg);
+  padding-inline: var(--spacing-lg);
   text-align: center;
 }
 @container (min-width: 600px) {
@@ -9,11 +9,8 @@
 }
 @container (min-width: 940px) {
   .call-to-action {
-    padding: var(--spacing-xl);
+    padding-inline: var(--spacing-xl);
   }
-}
-.call-to-action .button-group:last-child {
-  padding-block-end: 0;
 }
 
 /*# sourceMappingURL=call-to-action.css.map */

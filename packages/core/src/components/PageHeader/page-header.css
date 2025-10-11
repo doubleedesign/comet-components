@@ -1,21 +1,3 @@
-.page-header {
-  padding-block: var(--spacing-md);
-}
-@media (min-width: 940px) {
-  .page-header {
-    padding-block: var(--spacing-xl);
-  }
-}
-@media (min-width: 1440px) {
-  .page-header {
-    padding-block: var(--spacing-xxl);
-  }
-}
-@container (min-width: 940px) {
-  .page-header {
-    padding-block: var(--spacing-xl);
-  }
-}
 .page-header .breadcrumbs {
   width: 100%;
   flex-basis: 100%;

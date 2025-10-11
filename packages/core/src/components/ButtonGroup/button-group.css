@@ -3,5 +3,8 @@
   gap: var(--spacing-sm);
   padding-block: var(--spacing-sm);
 }
+.button-group:last-child {
+  padding-block-end: 0;
+}
 
 /*# sourceMappingURL=button-group.css.map */
