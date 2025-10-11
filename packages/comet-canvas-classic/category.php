@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{Columns, Column, Card, Copy, Group};
+use Doubleedesign\Comet\Core\{Columns, Column, CardList, Card, Copy};
 use Doubleedesign\Comet\WordPress\Classic\PreprocessedHTML;
 
 get_header();
@@ -29,15 +29,15 @@ if (have_posts()) {
                 'content'   => 'Read more',
                 'isOutline' => true
             ],
-            'colorTheme'        => 'primary',
-            'orientation'       => 'horizontal'
+            'orientation'       => 'horizontal',
+            // no need to set colour theme unless it differs from that of the CardList
         ]);
     }
 }
 
 $list = (new Column(
     [],
-    [new Group(['shortName' => 'card-list', 'role' => 'group'], $cards)]
+    [new CardList(['colorTheme' => 'primary', 'gridLayout' => false], $cards)]
 ))->set_bem_modifier('posts');
 
 $category_id = get_queried_object_id();

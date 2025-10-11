@@ -1,17 +1,11 @@
 @use '../mixins' as *;
 @use '../bem-mixin' as *;
 
-.card-list { // This class is expected to be added on the containing element of multiple cards
-	display: grid !important;
-	gap: var(--spacing-md);
-
-	@container (min-width: 840px) {
-		gap: var(--spacing-xl);
-	}
-}
-
 @include bem-block('card', ('image', 'content')) {
-	container-type: inline-size;
+	// Note: Default orientation is vertical, which shouldn't add the HTML attribute explicitly.
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 
 	@include container-width-up('small') {
 		&[data-layout-orientation='horizontal'] {
@@ -23,7 +17,10 @@
 	&__image {
 		overflow: hidden;
 		width: 100%;
-		height: 100%;
+
+		[data-layout-orientation='horizontal'] & {
+			height: 100%;
+		}
 
 		img {
 			width: 100%;
@@ -38,6 +35,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
+		flex-grow: 1;
 		background: white;
 
 		@container (min-width: 600px) {

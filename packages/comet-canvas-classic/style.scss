@@ -11,12 +11,13 @@
 @import 'template-parts/contact-details';
 @import 'template-parts/breadcrumbs';
 @import 'template-parts/post-nav';
+@import 'template-parts/latest-posts';
 
 .category {
 	&__columns {
 		display: flex !important;
 		flex-direction: column;
-		
+
 		@container (min-width: 940px) {
 			flex-direction: row;
 		}

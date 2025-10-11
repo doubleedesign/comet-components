@@ -1,0 +1,9 @@
+.latest-posts {
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		margin-block-end: var(--spacing-md);
+		align-items: center;
+	}
+}

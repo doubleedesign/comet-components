@@ -1,0 +1,35 @@
+@use '../mixins' as *;
+@use '../bem-mixin' as *;
+
+@include bem-block('card-list', ('item')) {
+	display: grid;
+	gap: var(--spacing-md);
+	container-type: inline-size;
+	grid-template-columns: 1fr;
+
+	@include container-width-up('narrow') {
+		gap: var(--spacing-lg);
+	}
+
+	&[data-max-per-row="2"], &[data-max-per-row="4"] {
+		@include container-width-up('small') {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	&[data-max-per-row="3"] {
+		@include container-width-up('small') {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	&[data-max-per-row="4"] {
+		@include container-width-up('large') {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+
+	&__item {
+		container-type: inline-size;
+	}
+}

@@ -28,6 +28,13 @@
   display: none;
 }
 
+.latest-posts__header {
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: var(--spacing-md);
+  align-items: center;
+}
+
 .category__columns {
   display: flex !important;
   flex-direction: column;

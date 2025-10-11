@@ -82,7 +82,7 @@ class Card extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.Card.card');
 
         $this->set_color_theme_from_attrs($attributes);
-        $this->set_background_color_from_attrs($attributes, ThemeColor::WHITE);
+        $this->set_background_color_from_attrs($attributes);
         $this->set_orientation_from_attrs($attributes);
         // Optional advanced image configuration
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);
@@ -104,7 +104,7 @@ class Card extends UIComponent {
         if (isset($this->colorTheme)) {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
-        if (isset($this->orientation)) {
+        if (isset($this->orientation) && !$this->orientation->isDefault()) {
             $attributes['data-layout-orientation'] = $this->orientation->value;
         }
         if (isset($this->backgroundColor)) {
