@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+#[AllowedTags([Tag::DIV, Tag::SECTION])]
+#[DefaultTag(Tag::SECTION)]
 class WrappedPanelGroup extends WrappedLayoutComponent {
     /**
      * @var array<Renderable> $beforeComponents

@@ -5,9 +5,11 @@
 	position: relative;
 	z-index: 500;
 
-	.container {
+	&__container {
 		display: flex;
 		flex-wrap: nowrap;
+		flex-direction: row;
+		gap: 0;
 	}
 
 	&__logo {

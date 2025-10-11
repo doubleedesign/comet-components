@@ -9,9 +9,14 @@
 	padding-inline: var(--spacing-md);
 	max-width: var(--width-contained);
 
-	&:has(> .layout-block + .layout-block) {
-		display: grid;
+	article > & {
+		display: flex;
+		flex-direction: column;
 		gap: var(--spacing-md);
+
+		@include media-breakpoint-up('narrow') {
+			gap: var(--spacing-lg);
+		}
 	}
 
 	&[data-size="fullwidth"] {

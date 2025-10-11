@@ -2,9 +2,11 @@
   position: relative;
   z-index: 500;
 }
-.site-header .container {
+.site-header__container {
   display: flex;
   flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 0;
 }
 .site-header__logo {
   display: block;

@@ -8,6 +8,10 @@
 		grid-template-columns: repeat(10, 1fr);
 	}
 
+	&:not(:first-child) {
+		margin-block-start: var(--spacing-md);
+	}
+
 	&__link {
 		text-decoration: underline;
 		text-decoration-color: transparent;

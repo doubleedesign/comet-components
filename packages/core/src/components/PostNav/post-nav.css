@@ -9,6 +9,9 @@
     grid-template-columns: repeat(10, 1fr);
   }
 }
+.post-nav:not(:first-child) {
+  margin-block-start: var(--spacing-md);
+}
 .post-nav__link {
   text-decoration: underline;
   text-decoration-color: transparent;
