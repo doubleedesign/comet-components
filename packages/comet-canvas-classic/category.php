@@ -1,5 +1,5 @@
 <?php
-use Doubleedesign\Comet\Core\{Container, Columns, Column, Card, Copy};
+use Doubleedesign\Comet\Core\{Columns, Column, Card, Copy, Group};
 use Doubleedesign\Comet\WordPress\Classic\PreprocessedHTML;
 
 get_header();
@@ -35,23 +35,22 @@ if (have_posts()) {
     }
 }
 
+$list = (new Column(
+    [],
+    [new Group(['shortName' => 'card-list', 'role' => 'group'], $cards)]
+))->set_bem_modifier('posts');
+
 $category_id = get_queried_object_id();
 $description = get_term_meta($category_id, 'category_description', true);
+if (!empty($description)) {
+    $intro = (new Column(
+        [],
+        [new Copy(['isNested' => true], [new PreprocessedHTML([], wpautop($description))])]
+    ))->set_bem_modifier('intro');
+}
 
-$intro = new Column(
-    ['width' => '36%'],
-    [new Copy(['isNested' => true], [new PreprocessedHTML([], wpautop($description))])]
-);
-
-$list = new Column(
-    ['context' => 'card-list', 'width' => '65%'],
-    $cards
-);
-
-$component = new Container(
-    ['size' => 'default'],
-    [new Columns([], [$intro, $list])]
-);
+$innerComponents = isset($intro) ? [$intro, $list] : [$list];
+$component = new Columns(['shortName' => 'category'], $innerComponents);
 $component->render();
 
 get_footer();
