@@ -1826,10 +1826,9 @@ article > .container, article > [class$=__container] {
   }
 }
 
-.card-wrapper {
+.card, [class$=__card] {
   container-type: inline-size;
 }
-
 @container (min-width: 600px) {
   .card[data-layout-orientation=horizontal], [data-layout-orientation=horizontal][class$=__card] {
     display: grid;

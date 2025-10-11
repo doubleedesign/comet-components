@@ -10,11 +10,8 @@
 	}
 }
 
-.card-wrapper {
-	container-type: inline-size;
-}
-
 @include bem-block('card', ('image', 'content')) {
+	container-type: inline-size;
 
 	@include container-width-up('small') {
 		&[data-layout-orientation='horizontal'] {

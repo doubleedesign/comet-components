@@ -8,7 +8,7 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.0
  * @description
  */
-#[AllowedTags([Tag::DIV, Tag::ARTICLE, Tag::FOOTER])]
+#[AllowedTags([Tag::DIV, Tag::ARTICLE, Tag::FOOTER, Tag::A])]
 #[DefaultTag(Tag::DIV)]
 class Card extends UIComponent {
     use BackgroundColor;
@@ -88,6 +88,10 @@ class Card extends UIComponent {
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);
         $this->set_focal_point_from_attrs($attributes);
         $this->set_image_offset_from_attrs($attributes);
+
+        if ($this->cardAsLink) {
+            $this->set_tag('a');
+        }
     }
 
     private function validate_image_attributes(array $image): array {
@@ -128,12 +132,7 @@ class Card extends UIComponent {
 
         echo $blade->make($this->bladeFile, [
             'tag'               => $this->tagName->value,
-            'withWrapper'       => $this->withWrapper,
-            'isLink'            => !empty($this->link) && $this->cardAsLink,
-            'linkAttrs'         => $this->link,
             'bemName'           => $this->get_bem_prefix(),
-            'context'           => $this->get_context(),
-            'shortName'         => $this->get_shortname(),
             'classes'           => $this->get_filtered_classes(),
             'attributes'        => $this->get_html_attributes(),
             'imageWrapperAttrs' => $this->get_image_wrapper_attributes(),
