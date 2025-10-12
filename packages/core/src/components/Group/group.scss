@@ -1,9 +1,8 @@
 @use '../mixins' as *;
-@use '../common' as *;
 
 .group {
 
 	&--breakout {
-		@extend .breakout; // backwards compatibility after moving breakout to common.scss
+		@include breakout(); // backwards compatibility after moving breakout to common.scss
 	}
 }

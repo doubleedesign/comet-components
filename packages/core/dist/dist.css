@@ -894,14 +894,20 @@ p:empty {
   display: none;
 }
 
-.is-style-lead {
+.is-style-lead,
+.lead {
   font-weight: 600;
   font-size: 1.125rem;
+  color: var(--theme-color);
 }
-.is-style-lead a {
+.is-style-lead a,
+.lead a {
   color: inherit;
 }
-.is-style-lead a:hover, .is-style-lead a:focus, .is-style-lead a:active {
+.is-style-lead a:hover, .is-style-lead a:focus, .is-style-lead a:active,
+.lead a:hover,
+.lead a:focus,
+.lead a:active {
   color: color-mix(in hsl, currentColor, black 20%);
 }
 
@@ -956,25 +962,25 @@ form input[type=button] {
   aspect-ratio: 2.35/1;
 }
 
-.breakout, .group--breakout {
+.breakout {
   width: 100cqw;
   position: relative;
   z-index: 300;
   padding-inline: var(--spacing-md);
 }
-[class*=container] .breakout, [class*=container] .group--breakout {
+[class*=container] .breakout {
   max-width: var(--width-contained);
 }
 
-[class*=container][data-size=fullwidth] .breakout, [class*=container][data-size=fullwidth] .group--breakout {
+[class*=container][data-size=fullwidth] .breakout {
   max-width: 100vw;
 }
 
-[class*=container][data-size=wide] .breakout, [class*=container][data-size=wide] .group--breakout {
+[class*=container][data-size=wide] .breakout {
   max-width: var(--width-wide);
 }
 
-[class*=container][data-size=narrow] .breakout, [class*=container][data-size=narrow] .group--breakout {
+[class*=container][data-size=narrow] .breakout {
   max-width: var(--width-narrow);
 }
 
@@ -1851,8 +1857,8 @@ article > .container, article > [class$=__container] {
   display: flex;
   flex-direction: column;
 }
-@container (min-width: 600px) {
-  .card[data-layout-orientation=horizontal], [data-layout-orientation=horizontal][class$=__card] {
+@container (min-width: 500px) {
+  .card:has([class*=image])[data-layout-orientation=horizontal], [class$=__card]:has([class*=image])[data-layout-orientation=horizontal] {
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
@@ -1898,6 +1904,13 @@ article > .container, article > [class$=__container] {
 }
 .card__content .is-style-small, [class$=__card__content] .is-style-small {
   margin-block-end: 0;
+}
+.card__content p, [class$=__card__content] p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card__content .button, [class$=__card__content] .button {
   margin-block-start: auto;
@@ -3198,6 +3211,28 @@ article > .container, article > [class$=__container] {
   display: block;
   text-align: center;
   grid-column: 1/-1;
+}
+
+.group--breakout {
+  width: 100cqw;
+  position: relative;
+  z-index: 300;
+  padding-inline: var(--spacing-md);
+}
+[class*=container] .group--breakout {
+  max-width: var(--width-contained);
+}
+
+[class*=container][data-size=fullwidth] .group--breakout {
+  max-width: 100vw;
+}
+
+[class*=container][data-size=wide] .group--breakout {
+  max-width: var(--width-wide);
+}
+
+[class*=container][data-size=narrow] .group--breakout {
+  max-width: var(--width-narrow);
 }
 
 .icon-links, [class$=__icon-links] {

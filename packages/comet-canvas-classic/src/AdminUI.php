@@ -11,7 +11,7 @@ class AdminUI {
         add_action('login_enqueue_scripts', [$this, 'login_logo']);
         add_action('admin_menu', [$this, 'remove_metaboxes']);
         add_action('add_meta_boxes', [$this, 'remove_metaboxes'], 99);
-        add_action('after_setup_theme', [$this, 'register_theme_support'], 11);
+        add_action('init', [$this, 'register_theme_support'], 5);
         add_action('admin_notices', [$this, 'required_plugin_notification'], 10);
     }
 

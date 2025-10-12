@@ -136,7 +136,7 @@ class Card extends UIComponent {
             'classes'           => $this->get_filtered_classes(),
             'attributes'        => $this->get_html_attributes(),
             'imageWrapperAttrs' => $this->get_image_wrapper_attributes(),
-            'image'             => $this->image,
+            'image'             => $this->image['src'] ? $this->image : null,
             'children'          => $this->innerComponents
         ])->render();
     }
