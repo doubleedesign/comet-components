@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
 }
-@container (min-width: 600px) {
-  .card[data-layout-orientation=horizontal], [data-layout-orientation=horizontal][class$=__card] {
+@container (min-width: 500px) {
+  .card:has([class*=image])[data-layout-orientation=horizontal], [class$=__card]:has([class*=image])[data-layout-orientation=horizontal] {
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
@@ -50,6 +50,13 @@
 }
 .card__content .is-style-small, [class$=__card__content] .is-style-small {
   margin-block-end: 0;
+}
+.card__content p, [class$=__card__content] p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card__content .button, [class$=__card__content] .button {
   margin-block-start: auto;

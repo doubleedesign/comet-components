@@ -1,5 +1,6 @@
 @use '../mixins' as *;
 @use '../bem-mixin' as *;
+@use '../bem-class-selectors' as *;
 
 @include bem-block('card', ('image', 'content')) {
 	// Note: Default orientation is vertical, which shouldn't add the HTML attribute explicitly.
@@ -7,10 +8,12 @@
 	display: flex;
 	flex-direction: column;
 
-	@include container-width-up('small') {
-		&[data-layout-orientation='horizontal'] {
-			display: grid;
-			grid-template-columns: 1fr 2fr;
+	@container (min-width: 500px) {
+		&:has(#{class-contains('image')}) {
+			&[data-layout-orientation='horizontal'] {
+				display: grid;
+				grid-template-columns: 1fr 2fr;
+			}
 		}
 	}
 
@@ -57,6 +60,10 @@
 
 		.is-style-small {
 			margin-block-end: 0;
+		}
+
+		p {
+			@include line-clamp(4);
 		}
 
 		.button {

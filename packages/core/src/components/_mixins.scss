@@ -64,3 +64,11 @@
 	}
 }
 
+@mixin line-clamp($lineCount) {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lineCount;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
