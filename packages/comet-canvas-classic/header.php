@@ -50,4 +50,4 @@ $headerComponent->render();
 <!--<a class="skip-link screen-reader-text" href="#content">-->
 <?php // esc_html_e('Skip to content', 'comet');?><!--</a>-->
 <?php /* TODO: Is layout-block needed here? */ ?>
-<main id="content" class="site-content page-section">
+<main id="content" class="site-content">

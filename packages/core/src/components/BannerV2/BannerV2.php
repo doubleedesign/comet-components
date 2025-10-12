@@ -100,14 +100,6 @@ class BannerV2 extends UIComponent {
         return $attributes;
     }
 
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        array_push($classes, 'page-section'); // makes the inner container styling work with *__container syntax
-
-        return $classes;
-    }
-
     protected function get_image_wrapper_attributes(): array {
         $attributes = [];
 

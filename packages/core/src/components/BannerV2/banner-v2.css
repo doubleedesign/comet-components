@@ -11,7 +11,7 @@
   overflow: hidden;
   height: 50dvh;
 }
-@container (min-width: 768px) {
+@container (min-width: 940px) {
   .banner-v2__image {
     height: fit-content;
     justify-content: center;
@@ -21,36 +21,10 @@
   overflow: hidden;
   container-type: size;
 }
-@container (min-width: 768px) {
-  .banner-v2__image__frame[data-aspect-ratio=cinematic] {
-    height: min(65vh, 233.3333333333vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=cinemascope] {
-    height: min(65vh, 42.5531914894vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=cinematic] {
-    height: min(65vh, 42.8571428571vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=wide] {
-    height: min(65vh, 177.7777777778vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=standard] {
-    height: min(65vh, 75vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=classic] {
-    height: min(65vh, 150vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=classic_portrait] {
-    height: min(65vh, 66.6666666667vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=portrait] {
-    height: min(65vh, 133.3333333333vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=tall] {
-    height: min(65vh, 177.7777777778vw);
-  }
-  .banner-v2__image__frame[data-aspect-ratio=square] {
-    height: min(65vh, 100vw);
+@container (min-width: 940px) {
+  .banner-v2__image__frame {
+    width: 100%;
+    height: auto;
   }
 }
 .banner-v2__image__frame__inner {
@@ -58,7 +32,7 @@
   height: 100cqh;
   object-fit: cover;
 }
-@container (min-width: 768px) {
+@container (min-width: 940px) {
   .banner-v2__image__frame__inner {
     overflow: visible;
     max-width: none !important;
@@ -74,7 +48,7 @@
   object-fit: cover;
   object-position: var(--focal-point-x) var(--focal-point-y);
 }
-@container (min-width: 768px) {
+@container (min-width: 940px) {
   .banner-v2__image__frame__inner img {
     object-fit: none;
     object-position: unset;
@@ -90,7 +64,7 @@
   width: 100%;
   margin-block-start: -10dvh;
 }
-@container (min-width: 768px) {
+@container (min-width: 940px) {
   .banner-v2__content {
     margin-block-start: 0;
     height: 100%;
@@ -102,7 +76,7 @@
     z-index: 100;
   }
 }
-@container (min-width: 768px) {
+@container (min-width: 940px) {
   .banner-v2__content__container {
     height: 100%;
   }
@@ -123,9 +97,10 @@
 .banner-v2__content__inner .button[data-style=outline] {
   background: var(--theme-color-inverse);
 }
-@container (max-width: 768px) {
+@media (max-width: 767px) {
   .banner-v2__content__inner {
-    max-width: unset !important;
+    max-width: 75cqw !important;
+    margin-inline: auto;
   }
 }
 

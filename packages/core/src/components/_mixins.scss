@@ -21,10 +21,10 @@
 }
 
 @mixin section-padding() {
-	padding-block: var(--spacing-md);
+	padding-block: var(--spacing-lg);
 	padding-inline: 0;
 
-	@include media-breakpoint-up('narrow') {
+	@include media-breakpoint-up('narrower') {
 		padding-block: var(--spacing-xl);
 	}
 

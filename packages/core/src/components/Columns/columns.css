@@ -11,7 +11,7 @@
 .columns__container[data-count="2"]:not([data-allow-layout-stacking=false]), [data-count="2"][class$=__columns__container]:not([data-allow-layout-stacking=false]), .columns__container[data-count="4"]:not([data-allow-layout-stacking=false]), [data-count="4"][class$=__columns__container]:not([data-allow-layout-stacking=false]), .columns__container[data-count="6"]:not([data-allow-layout-stacking=false]), [data-count="6"][class$=__columns__container]:not([data-allow-layout-stacking=false]) {
   grid-template-columns: repeat(1, 1fr);
 }
-@container (max-width: 600px) {
+@container (max-width: 768px - 1px) {
   .columns__container[data-count="2"]:not([data-allow-layout-stacking=false]), [data-count="2"][class$=__columns__container]:not([data-allow-layout-stacking=false]), .columns__container[data-count="4"]:not([data-allow-layout-stacking=false]), [data-count="4"][class$=__columns__container]:not([data-allow-layout-stacking=false]), .columns__container[data-count="6"]:not([data-allow-layout-stacking=false]), [data-count="6"][class$=__columns__container]:not([data-allow-layout-stacking=false]) {
     flex-wrap: wrap;
   }
@@ -28,17 +28,17 @@
     min-width: 100%;
   }
 }
-@container (min-width: 600px) {
+@container (min-width: 768px) {
   .columns__container[data-count="2"]:not([data-allow-layout-stacking=false]), [data-count="2"][class$=__columns__container]:not([data-allow-layout-stacking=false]), .columns__container[data-count="4"]:not([data-allow-layout-stacking=false]), [data-count="4"][class$=__columns__container]:not([data-allow-layout-stacking=false]), .columns__container[data-count="6"]:not([data-allow-layout-stacking=false]), [data-count="6"][class$=__columns__container]:not([data-allow-layout-stacking=false]) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@container (min-width: 940px) {
+@container (min-width: 768px) {
   .columns__container[data-count="4"]:not([data-allow-layout-stacking=false]), [data-count="4"][class$=__columns__container]:not([data-allow-layout-stacking=false]) {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@container (min-width: 768px) {
+@container (min-width: 940px) {
   .columns__container[data-count="3"]:not([data-allow-layout-stacking=false]), [data-count="3"][class$=__columns__container]:not([data-allow-layout-stacking=false]), .columns__container[data-count="6"]:not([data-allow-layout-stacking=false]), [data-count="6"][class$=__columns__container]:not([data-allow-layout-stacking=false]) {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -75,7 +75,7 @@
 .columns:not(:has([class*=__container]))[data-count="2"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="2"]:not([data-allow-layout-stacking=false]), .columns:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]), .columns:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]) {
   grid-template-columns: repeat(1, 1fr);
 }
-@container (max-width: 600px) {
+@container (max-width: 768px - 1px) {
   .columns:not(:has([class*=__container]))[data-count="2"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="2"]:not([data-allow-layout-stacking=false]), .columns:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]), .columns:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]) {
     flex-wrap: wrap;
   }
@@ -92,17 +92,17 @@
     min-width: 100%;
   }
 }
-@container (min-width: 600px) {
+@container (min-width: 768px) {
   .columns:not(:has([class*=__container]))[data-count="2"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="2"]:not([data-allow-layout-stacking=false]), .columns:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]), .columns:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@container (min-width: 940px) {
+@container (min-width: 768px) {
   .columns:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="4"]:not([data-allow-layout-stacking=false]) {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@container (min-width: 768px) {
+@container (min-width: 940px) {
   .columns:not(:has([class*=__container]))[data-count="3"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="3"]:not([data-allow-layout-stacking=false]), .columns:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]), [class$=__columns]:not(:has([class*=__container]))[data-count="6"]:not([data-allow-layout-stacking=false]) {
     grid-template-columns: repeat(3, 1fr);
   }

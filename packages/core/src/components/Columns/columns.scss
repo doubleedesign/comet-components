@@ -3,8 +3,8 @@
 @use '../bem-mixin' as *;
 @use '../bem-class-selectors' as *;
 
-@mixin stack-columns-until($breakpointName) {
-	@include container-width-down($breakpointName) {
+@mixin stack-columns-until($breakpoint) {
+	@container (max-width: #{map-get($widths, $breakpoint)} - 1px) {
 		flex-wrap: wrap;
 
 		.column,
@@ -29,9 +29,9 @@
 	&[data-count="2"], &[data-count="4"], &[data-count="6"] {
 		&:not([data-allow-layout-stacking="false"]) {
 			grid-template-columns: repeat(1, 1fr);
-			@include stack-columns-until('small');
+			@include stack-columns-until('narrower');
 
-			@include container-width-up('small') {
+			@include container-width-up('narrower') {
 				grid-template-columns: repeat(2, 1fr);
 			}
 		}
@@ -39,7 +39,7 @@
 
 	&[data-count="4"] {
 		&:not([data-allow-layout-stacking="false"]) {
-			@include container-width-up('narrow') {
+			@include container-width-up('narrower') {
 				grid-template-columns: repeat(4, 1fr);
 			}
 		}
@@ -47,7 +47,7 @@
 
 	&[data-count="3"], &[data-count="6"] {
 		&:not([data-allow-layout-stacking="false"]) {
-			@include container-width-up('narrower') {
+			@include container-width-up('narrow') {
 				grid-template-columns: repeat(3, 1fr);
 			}
 		}

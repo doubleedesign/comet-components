@@ -1,4 +1,7 @@
 @use '../mixins' as *;
+@use '../variables' as *;
+
+$aspectRatioBreakpoint: 'narrow'; // Breakpoint at which to start using the aspect ratio settings instead of having the image take up more height
 
 .banner-v2 {
 	padding-block-start: 0;
@@ -15,7 +18,7 @@
 		height: 50dvh;
 
 		// Containers large enough to use the aspect ratio settings
-		@include container-width-up('narrower') {
+		@include container-width-up($aspectRatioBreakpoint) {
 			height: fit-content;
 			justify-content: center; // Centre if banner becomes narrower than the viewport in order to fit the aspect ratio height
 		}
@@ -26,49 +29,9 @@
 			//min-width: 100%; // for images smaller than the container
 
 			// Containers large enough to use the aspect ratio settings
-			@include container-width-up('narrower') {
-				// aspect ratio is applied to this element using a data attribute, see common.scss
-				// Set height to smaller of 65vh or proportional width (helps with handling images shorter than the available space)
-				// Calc is the reverse of the aspect ratio to get the height from the width
-				&[data-aspect-ratio="cinematic"] {
-					height: min(65vh, calc(100vw * 21 / 9));
-				}
-
-				&[data-aspect-ratio="cinemascope"] {
-					height: min(65vh, calc(100vw * 1 / 2.35));
-				}
-
-				&[data-aspect-ratio="cinematic"] {
-					height: min(65vh, calc(100vw * 9 / 21));
-				}
-
-				&[data-aspect-ratio="wide"] {
-					height: min(65vh, calc(100vw * 16 / 9));
-				}
-
-				&[data-aspect-ratio="standard"] {
-					height: min(65vh, calc(100vw * 3 / 4));
-				}
-
-				&[data-aspect-ratio="classic"] {
-					height: min(65vh, calc(100vw * 3 / 2));
-				}
-
-				&[data-aspect-ratio="classic_portrait"] {
-					height: min(65vh, calc(100vw * 2 / 3));
-				}
-
-				&[data-aspect-ratio="portrait"] {
-					height: min(65vh, calc(100vw * 4 / 3));
-				}
-
-				&[data-aspect-ratio="tall"] {
-					height: min(65vh, calc(100vw * 16 / 9));
-				}
-
-				&[data-aspect-ratio="square"] {
-					height: min(65vh, 100vw);
-				}
+			@include container-width-up($aspectRatioBreakpoint) {
+				width: 100%;
+				height: auto;
 			}
 
 			&__inner {
@@ -78,7 +41,7 @@
 				object-fit: cover;
 
 				// Containers large enough to use the aspect ratio settings
-				@include container-width-up('narrower') {
+				@include container-width-up($aspectRatioBreakpoint) {
 					overflow: visible;
 					max-width: none !important;
 					width: fit-content;
@@ -95,7 +58,7 @@
 					object-position: var(--focal-point-x) var(--focal-point-y);
 
 					// Containers large enough to use the aspect ratio settings
-					@include container-width-up('narrower') {
+					@include container-width-up($aspectRatioBreakpoint) {
 						object-fit: none;
 						object-position: unset;
 						width: calc(100% + abs(var(--offset-x, 0)));
@@ -115,7 +78,7 @@
 		width: 100%;
 		margin-block-start: -10dvh;
 
-		@include container-width-up('narrower') {
+		@include container-width-up($aspectRatioBreakpoint) {
 			margin-block-start: 0;
 			height: 100%;
 			position: absolute;
@@ -127,7 +90,7 @@
 		}
 
 		&__container {
-			@include container-width-up('narrower') {
+			@include container-width-up($aspectRatioBreakpoint) {
 				height: 100%;
 			}
 		}
@@ -156,8 +119,9 @@
 				background: var(--theme-color-inverse);
 			}
 
-			@include container-width-down('narrower') {
-				max-width: unset !important;
+			@media (max-width: #{map-get($widths, 'narrower') - 1px}) {
+				max-width: 75cqw !important;
+				margin-inline: auto;
 			}
 		}
 	}

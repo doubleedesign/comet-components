@@ -164,6 +164,18 @@
       <excludeFolder url="file://$MODULE_DIR$/tests/phpunit-report" />
       <excludeFolder url="file://$MODULE_DIR$/tests/unit/.phpunit.cache" />
       <excludeFolder url="file://$MODULE_DIR$/tests/unit/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/carbonphp" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doctrine" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/doubleedesign" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/ezyang" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/feimosi" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/illuminate" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/nesbot" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/openpsa" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/psr" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/voku" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

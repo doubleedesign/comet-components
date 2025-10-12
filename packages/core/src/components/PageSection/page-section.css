@@ -3,10 +3,10 @@ body > footer,
 body > section,
 body > article,
 body > div {
-  padding-block: var(--spacing-md);
+  padding-block: var(--spacing-lg);
   padding-inline: 0;
 }
-@media (min-width: 940px) {
+@media (min-width: 768px) {
   body > header,
   body > footer,
   body > section,
@@ -29,10 +29,10 @@ body > main > header,
 body > main > footer,
 body > main > article,
 body > main > div {
-  padding-block: var(--spacing-md);
+  padding-block: var(--spacing-lg);
   padding-inline: 0;
 }
-@media (min-width: 940px) {
+@media (min-width: 768px) {
   body > main > section,
   body > main > header,
   body > main > footer,

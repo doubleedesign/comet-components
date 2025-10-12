@@ -21,7 +21,13 @@
 
 	--button-border-radius: 0;
 
-	--typescale: #{$typeScale};
+	--base-font-size: var(--font-size-sm);
+	--typescale: 1.25;
+
+	@include media-breakpoint-up('contained') {
+		--base-font-size: 1rem;
+		--typescale: 1.33;
+	}
 }
 
 
@@ -36,34 +42,39 @@ body {
 	padding: 0;
 	font-family: var(--font-family-body), sans-serif;
 	line-height: 1.4;
+	font-size: var(--base-font-size);
 }
 
 @each $heading, $i in ('h3': 1, 'h2': 2, 'h1': 3) {
 	#{$heading} {
 		// Can't use SASS pow() with vanilla CSS variables, so this is a workaround for that
 		@if $i == 1 {
-			font-size: calc($baseFontSize * var(--typescale));
+			font-size: calc(var(--base-font-size) * var(--typescale));
 		} @else if $i == 2 {
-			font-size: calc($baseFontSize * var(--typescale) * var(--typescale));
+			font-size: calc(var(--base-font-size) * var(--typescale) * var(--typescale));
 		} @else if $i == 3 {
-			font-size: calc($baseFontSize * var(--typescale) * var(--typescale) * var(--typescale));
+			font-size: calc(var(--base-font-size) * var(--typescale) * var(--typescale) * var(--typescale));
 		}
 		line-height: 1.2;
 
 		&.is-style-accent {
 			@if $i == 1 {
-				font-size: calc(($baseFontSize * 1.25) * var(--typescale));
+				font-size: calc((var(--base-font-size) * 1.25) * var(--typescale));
 			} @else if $i == 2 {
-				font-size: calc(($baseFontSize * 1.25) * var(--typescale) * var(--typescale));
+				font-size: calc((var(--base-font-size)* 1.25) * var(--typescale) * var(--typescale));
 			} @else if $i == 3 {
-				font-size: calc(($baseFontSize * 1.25) * var(--typescale) * var(--typescale) * var(--typescale));
+				font-size: calc((var(--base-font-size) * 1.25) * var(--typescale) * var(--typescale) * var(--typescale));
 			}
 		}
 	}
 }
 
 h1 {
-	margin-block: var(--spacing-lg);
+	margin-block: var(--spacing-md);
+
+	@include container-width-up('narrow') {
+		margin-block: var(--spacing-lg);
+	}
 
 	&:first-child {
 		margin-block-start: 0;
@@ -131,7 +142,7 @@ p:empty {
 .is-style-lead,
 .lead {
 	font-weight: 600;
-	font-size: $baseFontSize * 1.125;
+	font-size: calc(var(--base-font-size) * 1.125);
 	color: var(--theme-color);
 
 	a {
