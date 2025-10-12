@@ -143,6 +143,62 @@ class Utils {
     }
 
     /**
+     * Recursively flatten an associative array, but keep nested indexed arrays intact
+     * Note: This does not allow duplicate keys; only the first instance will be used
+     *
+     * @param  array  $array
+     *
+     * @return array
+     */
+    public static function array_flat_associative(array $array): array {
+        // If the array is empty or not associative, bail early
+        if (empty($array) || array_is_list($array)) return $array;
+
+        return array_reduce(array_keys($array), function($carry, $key) use ($array) {
+            // If the key is already present, skip to avoid overwriting with later values
+            if (array_key_exists($key, $carry)) {
+                return $carry;
+            }
+
+            $item = $array[$key];
+            if (is_array($item) && !array_is_list($item)) {
+                $flattened = self::array_flat_associative($item);
+
+                return array_merge($carry, $flattened);
+            }
+
+            // Keep the key-value pair as-is
+            $carry[$key] = $item;
+
+            return $carry;
+        }, []);
+    }
+
+    /**
+     * Convert an indexed array of associative arrays or objects to an associative array using a specified key from the nested array value
+     * Note: This does not allow duplicate keys; only the first instance will be used
+     *
+     * @param  array  $array  The input indexed array of associative arrays
+     * @param  string  $column  The key/column in the nested arrays to use as the associative array key; if absent the item will be omitted
+     *
+     * @return array
+     */
+    public static function array_indexed_to_associative(array $array, string $column): array {
+        return array_reduce($array, function($carry, $item) use ($column) {
+            if (is_array($item) && array_key_exists($column, $item)) {
+                // If the key is already present, skip to avoid overwriting with later values
+                if (array_key_exists($item[$column], $carry)) {
+                    return $carry;
+                }
+
+                $carry[$item[$column]] = $item;
+            }
+
+            return $carry;
+        }, []);
+    }
+
+    /**
      * Pick key-value pairs from an associative array based on keys
      *
      * @param  $array
@@ -150,7 +206,7 @@ class Utils {
      *
      * @return array
      */
-    public static function array_pick($array, $keys) {
+    public static function array_pick($array, $keys): array {
         return array_intersect_key($array, array_flip($keys));
     }
 
