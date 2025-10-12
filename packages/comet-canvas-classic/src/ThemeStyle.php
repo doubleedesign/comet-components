@@ -12,8 +12,6 @@ class ThemeStyle {
         add_action('init', [$this, 'set_component_defaults'], 10);
 
         add_filter('breadcrumbs_filter_list', [$this, 'add_blog_page_to_category_breadcrumbs']);
-
-        add_theme_support('post-thumbnails', ['post']);
     }
 
     public function enqueue_theme_stylesheets(): void {
