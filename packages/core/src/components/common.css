@@ -125,14 +125,20 @@ p:empty {
   display: none;
 }
 
-.is-style-lead {
+.is-style-lead,
+.lead {
   font-weight: 600;
   font-size: 1.125rem;
+  color: var(--theme-color);
 }
-.is-style-lead a {
+.is-style-lead a,
+.lead a {
   color: inherit;
 }
-.is-style-lead a:hover, .is-style-lead a:focus, .is-style-lead a:active {
+.is-style-lead a:hover, .is-style-lead a:focus, .is-style-lead a:active,
+.lead a:hover,
+.lead a:focus,
+.lead a:active {
   color: color-mix(in hsl, currentColor, black 20%);
 }
 
