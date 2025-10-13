@@ -56,7 +56,7 @@ class BannerV2 extends UIComponent {
             new Container(
                 [
                     'tagName'     => 'div',
-                    'context'     => 'banner-v2__content',
+                    'context'     => 'banner-v2',
                     'size'        => $this->containerWidth,
                     'hAlign'      => $this->hAlign,
                     'vAlign'      => $this->vAlign,
@@ -64,11 +64,11 @@ class BannerV2 extends UIComponent {
                 ],
                 [new Group(
                     [
-                        'context'    => 'banner-v2',
-                        'shortName'  => 'content__inner',
+                        'context'    => 'banner-v2__container',
+                        'shortName'  => 'inner',
                         'colorTheme' => $this->colorTheme,
                         ...((isset($this->contentMaxWidth) && $this->contentMaxWidth < 100)
-                            ? ['style' => ['max-width' => $this->contentMaxWidth . '%']]
+                            ? ['data-max-width' => $this->contentMaxWidth . '%']
                             : []
                         ),
                     ],

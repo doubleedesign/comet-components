@@ -26,7 +26,6 @@ $aspectRatioBreakpoint: 'narrow'; // Breakpoint at which to start using the aspe
 		&__frame {
 			overflow: hidden;
 			container-type: size;
-			//min-width: 100%; // for images smaller than the container
 
 			// Containers large enough to use the aspect ratio settings
 			@include container-width-up($aspectRatioBreakpoint) {
@@ -59,7 +58,6 @@ $aspectRatioBreakpoint: 'narrow'; // Breakpoint at which to start using the aspe
 
 					// Containers large enough to use the aspect ratio settings
 					@include container-width-up($aspectRatioBreakpoint) {
-						object-fit: none;
 						object-position: unset;
 						width: calc(100% + abs(var(--offset-x, 0)));
 						min-height: 100cqh;
@@ -74,9 +72,101 @@ $aspectRatioBreakpoint: 'narrow'; // Breakpoint at which to start using the aspe
 		}
 	}
 
-	&__content {
+	&__container {
 		width: 100%;
 		margin-block-start: -10dvh;
+
+		@include media-breakpoint-up('narrower') {
+			margin-block-start: -20dvh;
+
+			// Ensure content elements align with elements below that use standard gutters, e.g., Columns
+			// Note: We only expect there to be one child element and for explicitly supported sizes to be used; for custom sizes, CSS will need to be customised in that projec
+			&:has(> [data-max-width]) {
+				display: grid;
+				grid-template-columns: repeat(12, 1fr);
+				gap: var(--spacing-lg);
+			}
+
+			> [data-max-width] {
+				max-width: 100% !important; // fill the whole grid cell
+			}
+
+			> [data-max-width="25%"] {
+				grid-column: span 3;
+			}
+
+			> [data-max-width="33%"] {
+				grid-column: span 4;
+			}
+
+			> [data-max-width="50%"] {
+				grid-column: span 6;
+			}
+
+			> [data-max-width="66%"] {
+				grid-column: span 8;
+			}
+
+			> [data-max-width="75%"] {
+				grid-column: span 9;
+			}
+
+			> [data-max-width="100%"] {
+				grid-column: span 12;
+			}
+
+			&[data-halign="center"] {
+				> [data-max-width="25%"] {
+					grid-column: 5 / span 3;
+				}
+
+				> [data-max-width="33%"] {
+					grid-column: 5 / span 4;
+				}
+
+				> [data-max-width="50%"] {
+					grid-column: 4 / span 6;
+				}
+
+				> [data-max-width="66%"] {
+					grid-column: 3 / span 8;
+				}
+
+				> [data-max-width="75%"] {
+					grid-column: 2 / span 9;
+				}
+
+				> [data-max-width="100%"] {
+					grid-column: 1 / span 12;
+				}
+			}
+
+			&[data-halign="end"] {
+				> [data-max-width="25%"] {
+					grid-column: span 3 / -1;
+				}
+
+				> [data-max-width="33%"] {
+					grid-column: span 4 / -1;
+				}
+
+				> [data-max-width="50%"] {
+					grid-column: span 6 / -1;
+				}
+
+				> [data-max-width="66%"] {
+					grid-column: span 8 / -1;
+				}
+
+				> [data-max-width="75%"] {
+					grid-column: span 9 / -1;
+				}
+
+				> [data-max-width="100%"] {
+					grid-column: span 12 / -1;
+				}
+			}
+		}
 
 		@include container-width-up($aspectRatioBreakpoint) {
 			margin-block-start: 0;
@@ -87,12 +177,6 @@ $aspectRatioBreakpoint: 'narrow'; // Breakpoint at which to start using the aspe
 			left: 0;
 			right: 0;
 			z-index: 100;
-		}
-
-		&__container {
-			@include container-width-up($aspectRatioBreakpoint) {
-				height: 100%;
-			}
 		}
 
 		&__inner {
@@ -119,7 +203,7 @@ $aspectRatioBreakpoint: 'narrow'; // Breakpoint at which to start using the aspe
 				background: var(--theme-color-inverse);
 			}
 
-			@media (max-width: #{map-get($widths, 'narrower') - 1px}) {
+			@container (max-width: #{map-get($widths, 'narrower') - 1px}) {
 				max-width: 75cqw !important;
 				margin-inline: auto;
 			}

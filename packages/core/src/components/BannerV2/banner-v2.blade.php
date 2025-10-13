@@ -6,7 +6,5 @@
 		</div>
 	</div>
 </div>
-<div class="{{ $bemPrefix }}__content">
-	@include('components._blade-partials.children')
-</div>
+@include('components._blade-partials.children')
 @closetag($tag)
