@@ -74,7 +74,7 @@ function init$1() {
 window.addEventListener('load', function() {
 	if(!document.querySelector('.gallery')) return;
 
-	window.baguetteBox.run('.gallery');
+	window.baguetteBox.run('figure.gallery');
 });
 
 const Vue$1 = await VueLoader;

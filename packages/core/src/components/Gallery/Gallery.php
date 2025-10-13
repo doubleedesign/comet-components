@@ -8,7 +8,7 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.0
  * @description Display a grid of images with optional captions, with a range of layout options.
  */
-#[AllowedTags([Tag::FIGURE, Tag::DIV])]
+#[AllowedTags([Tag::FIGURE])]
 #[DefaultTag(Tag::FIGURE)]
 class Gallery extends UIComponent {
     /**
