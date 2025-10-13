@@ -331,11 +331,13 @@
 				.site-header__menu__sub-menu__item {
 					margin: 0;
 					background: transparent;
+					padding-block: 0;
+					padding-inline: var(--spacing-xxs);
 
 					&__link {
 						background: transparent;
 						color: inherit;
-						padding-block: var(--spacing-xs);
+						padding-block: var(--spacing-xxs);
 						padding-inline: 0;
 					}
 				}

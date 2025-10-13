@@ -264,11 +264,13 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
 .site-header__menu__sub-menu--responsive .site-header__menu__sub-menu__item {
   margin: 0;
   background: transparent;
+  padding-block: 0;
+  padding-inline: var(--spacing-xxs);
 }
 .site-header__menu__sub-menu--responsive .site-header__menu__sub-menu__item__link {
   background: transparent;
   color: inherit;
-  padding-block: var(--spacing-xs);
+  padding-block: var(--spacing-xxs);
   padding-inline: 0;
 }
 
