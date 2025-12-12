@@ -191,7 +191,7 @@ class SiteHeader extends UIComponent {
                 'responsiveComponentsStart' => $this->get_prerendered_html($this->responsiveComponentsBeforeMenu),
                 'responsiveComponentsEnd'   => $this->get_prerendered_html($this->responsiveComponentsAfterMenu),
                 'responsiveMenuData'        => json_encode($this->menuData),
-                'menuComponentHtml'         => $this->get_prerendered_html([$this->menuComponent])
+                'menuComponentHtml'         => isset($this->menuComponent) ? $this->get_prerendered_html([$this->menuComponent]) : ''
             ])->render();
         }
     }

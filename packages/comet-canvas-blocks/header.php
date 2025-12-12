@@ -2,7 +2,7 @@
 use Doubleedesign\Comet\Core\{Config, SiteHeader, Group, Menu};
 use Doubleedesign\CometCanvas\NavMenus;
 
-$globalBackground = Config::getInstance()->get('global_background')
+$globalBackground = Config::getInstance()->get('global_background')->value;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> lang="en">
@@ -37,5 +37,4 @@ $headerComponent->render();
 
 <!--<a class="skip-link screen-reader-text" href="#primary">-->
 <?php // esc_html_e('Skip to content', 'comet');?><!--</a>-->
-<?php /* TODO: Is layout-block needed here? */ ?>
 <main class="site-content">

@@ -37,7 +37,7 @@ abstract class ImageComponent extends Renderable {
         $this->title = $attributes['title'] ?? null;
         $this->classes = $attributes['classes'] ?? [];
         parent::__construct($attributes, $bladeFile);
-        $this->init_bem_structure($bladeFile, @$attributes['context'], $attributes['shortName'] ?? 'image');
+        $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? 'image');
     }
 
     protected function get_html_attributes(): array {
