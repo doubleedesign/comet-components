@@ -23,7 +23,7 @@ class BlockRegistry extends JavaScriptImplementation {
 		add_filter('allowed_block_types_all', [$this, 'set_allowed_blocks'], 15, 2);
 
 		// Register common custom attributes
-		add_action('init', [$this, 'register_custom_attributes'], 5);
+		//add_action('init', [$this, 'register_custom_attributes'], 5);
 
 		// Styles for core blocks
 		add_action('init', [$this, 'register_core_block_styles'], 10);

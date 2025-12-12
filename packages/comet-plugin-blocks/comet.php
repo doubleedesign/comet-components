@@ -9,10 +9,10 @@
  *
  * Author:              Double-E Design
  * Author URI:          https://www.doubleedesign.com.au
- * Version:             0.2.0
+ * Version:             0.3.0
  * Requires at least:   6.7.0
  * Requires PHP:        8.2.23
- * Requires plugins:    advanced-custom-fields-pro, block-supports-extended, gutenberg
+ * Requires plugins:    advanced-custom-fields-pro
  * Text Domain:         comet
  *
  * @package Comet
