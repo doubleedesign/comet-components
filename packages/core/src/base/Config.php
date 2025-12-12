@@ -15,7 +15,7 @@ class Config {
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
-            define('COMET_VERSION', '0.2.0');
+            define('COMET_VERSION', '0.3.0');
         }
 
         if (self::$instance === null) {
@@ -39,6 +39,10 @@ class Config {
      * @return self
      */
     public static function getInstance(): self {
+		if(self::$instance === null) {
+			self::init();
+		}
+
         return self::$instance;
     }
 
