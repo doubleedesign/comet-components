@@ -101,7 +101,7 @@
       <option name="workingDir" value="$ProjectFileDir$/packages/core" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="false">
+    <TaskOptions isEnabled="true">
       <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -116,7 +116,7 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="sass" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Blocks plugin" />
+      <option name="scopeName" value="WP plugin blocks" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
@@ -179,6 +179,26 @@
       <option name="scopeName" value="Focal point picker util" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$ProjectFileDir$/packages/core/src/plugins/FocalPointPicker" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="-c" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="jsx" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Rollup - Blocks plugin" />
+      <option name="output" value="$FileDir$/$FileNameWithoutExtension$.dist.js" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$ProjectFileDir$/node_modules/.bin/rollup" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="WP plugin blocks" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$/packages/comet-plugin-blocks" />
       <envs />
     </TaskOptions>
   </component>
