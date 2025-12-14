@@ -812,36 +812,40 @@ body[data-global-background=white] {
   padding: 0;
 }
 
+html {
+  font-size: var(--base-font-size);
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: var(--font-family-body), sans-serif;
   line-height: 1.4;
-  font-size: var(--base-font-size);
 }
 
-h3 {
-  font-size: calc(var(--base-font-size) * var(--typescale));
+h1, h2, h3 {
   line-height: 1.2;
-}
-h3.is-style-accent {
-  font-size: calc(var(--base-font-size) * 1.25 * var(--typescale));
-}
-
-h2 {
-  font-size: calc(var(--base-font-size) * var(--typescale) * var(--typescale));
-  line-height: 1.2;
-}
-h2.is-style-accent {
-  font-size: calc(var(--base-font-size) * 1.25 * var(--typescale) * var(--typescale));
 }
 
 h1 {
-  font-size: calc(var(--base-font-size) * var(--typescale) * var(--typescale) * var(--typescale));
-  line-height: 1.2;
+  font-size: calc(1rem * var(--typescale) * var(--typescale) * var(--typescale));
 }
 h1.is-style-accent {
-  font-size: calc(var(--base-font-size) * 1.25 * var(--typescale) * var(--typescale) * var(--typescale));
+  font-size: calc(1.25rem * var(--typescale) * var(--typescale) * var(--typescale));
+}
+
+h2 {
+  font-size: calc(1rem * var(--typescale) * var(--typescale));
+}
+h2.is-style-accent {
+  font-size: calc(1.25rem * var(--typescale) * var(--typescale));
+}
+
+h3 {
+  font-size: calc(1rem * var(--typescale));
+}
+h3.is-style-accent {
+  font-size: calc(1.25rem * var(--typescale));
 }
 
 h1 {
