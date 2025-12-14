@@ -8,6 +8,7 @@
 	margin-block: var(--spacing-md);
 
 	@each $colorName, $value in $colors {
+		&[data-color-theme="#{$colorName}"],
 		&--#{$colorName} {
 			border: 1px solid var(--color-#{$colorName});
 			border-left-width: var(--spacing-xxs);
