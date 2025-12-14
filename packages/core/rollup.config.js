@@ -19,7 +19,7 @@ export default {
 					const shortPath = source.split('vendor')[1];
 
 					return {
-						id: path.resolve(`../../../${shortPath}`),
+						id: path.resolve(`../vendor/${shortPath}`),
 						external: true // ES import in the dist.js file instead of copying its contents in
 					};
 				}
