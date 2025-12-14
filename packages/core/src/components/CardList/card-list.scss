@@ -24,7 +24,7 @@
 	}
 
 	&[data-max-per-row="4"] {
-		@include container-width-up('large') {
+		@include container-width-up('narrower') {
 			grid-template-columns: repeat(4, 1fr);
 		}
 	}

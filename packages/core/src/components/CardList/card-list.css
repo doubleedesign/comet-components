@@ -19,7 +19,7 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@container (min-width: ) {
+@container (min-width: 768px) {
   .card-list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list] {
     grid-template-columns: repeat(4, 1fr);
   }
