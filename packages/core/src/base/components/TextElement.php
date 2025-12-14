@@ -23,7 +23,7 @@ abstract class TextElement extends Renderable {
      *
      * @return array<string, string>
      */
-    public function get_inline_styles(): array {
+    protected function get_inline_styles(): array {
         return array_merge(
             parent::get_inline_styles(),
             $this->textAlign ? ['text-align' => $this->textAlign->value] : [],
