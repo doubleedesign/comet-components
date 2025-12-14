@@ -56,7 +56,7 @@ export const vueSfcLoaderOptions = {
 
 export const BASE_PATH = (function () {
 	// NOTE: If we are loading from an implementation, the <script> tag for dist.js needs to have the data-base-path attribute set to
-	// the path to the Core package, e.g./wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core
+	// the path to the Core package, e.g./wp-content/plugins/comet-plugin-blocks/vendor/doubleedesign/comet-components-core
 	// The below finds it there.
 	const scripts = document.getElementsByTagName("script");
 	for (let i = 0; i < scripts.length; i++) {

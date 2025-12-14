@@ -167,21 +167,21 @@
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.18.0",
-            "version_normalized": "4.18.0.0",
+            "version": "v4.19.0",
+            "version_normalized": "4.19.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "cb56001e54359df7ae76dc522d08845dc741621b"
+                "reference": "b287d2a16aceffbf6e0295559b39662612b77fcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/cb56001e54359df7ae76dc522d08845dc741621b",
-                "reference": "cb56001e54359df7ae76dc522d08845dc741621b",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/b287d2a16aceffbf6e0295559b39662612b77fcf",
+                "reference": "b287d2a16aceffbf6e0295559b39662612b77fcf",
                 "shasum": ""
             },
             "require": {
-                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
+                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
             },
             "require-dev": {
                 "cerdic/css-tidy": "^1.7 || ^2.0",
@@ -193,7 +193,7 @@
                 "ext-iconv": "Converts text to and from non-UTF-8 encodings",
                 "ext-tidy": "Used for pretty-printing HTML"
             },
-            "time": "2024-11-01T03:51:45+00:00",
+            "time": "2025-10-17T16:34:55+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -225,7 +225,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.18.0"
+                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.19.0"
             },
             "install-path": "../ezyang/htmlpurifier"
         },
@@ -1013,22 +1013,22 @@
         },
         {
             "name": "openpsa/ranger",
-            "version": "v0.5.8.1",
-            "version_normalized": "0.5.8.1",
+            "version": "v0.5.9",
+            "version_normalized": "0.5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flack/ranger.git",
-                "reference": "6896106f1a5e74a672beb0fadc41615c8ff6d1bb"
+                "reference": "10d8e7ba64f4f9df434dc8f7a9d021a435f344fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flack/ranger/zipball/6896106f1a5e74a672beb0fadc41615c8ff6d1bb",
-                "reference": "6896106f1a5e74a672beb0fadc41615c8ff6d1bb",
+                "url": "https://api.github.com/repos/flack/ranger/zipball/10d8e7ba64f4f9df434dc8f7a9d021a435f344fc",
+                "reference": "10d8e7ba64f4f9df434dc8f7a9d021a435f344fc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0",
-                "symfony/intl": "~2.6|~3.4|~4.0|~5.0|~6.0|~7.0"
+                "symfony/intl": "~2.6|~3.4|~4.0|~5.0|~6.0|~7.0|~8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": ">=6.5"
@@ -1036,7 +1036,7 @@
             "suggest": {
                 "ext-intl": "Needed for usage with other locales than 'en'"
             },
-            "time": "2024-03-05T15:44:35+00:00",
+            "time": "2025-11-30T10:43:49+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1062,7 +1062,7 @@
             ],
             "support": {
                 "issues": "https://github.com/flack/ranger/issues",
-                "source": "https://github.com/flack/ranger/tree/v0.5.8.1"
+                "source": "https://github.com/flack/ranger/tree/v0.5.9"
             },
             "install-path": "../openpsa/ranger"
         },
@@ -1299,17 +1299,17 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v6.4.24",
-            "version_normalized": "6.4.24.0",
+            "version": "v6.4.27",
+            "version_normalized": "6.4.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "73089124388c8510efb8d2d1689285d285937b08"
+                "reference": "a1b6aa435d2fba50793b994a839c32b6064f063b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/73089124388c8510efb8d2d1689285d285937b08",
-                "reference": "73089124388c8510efb8d2d1689285d285937b08",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/a1b6aa435d2fba50793b994a839c32b6064f063b",
+                "reference": "a1b6aa435d2fba50793b994a839c32b6064f063b",
                 "shasum": ""
             },
             "require": {
@@ -1318,7 +1318,7 @@
             "require-dev": {
                 "symfony/filesystem": "^6.0|^7.0"
             },
-            "time": "2025-07-15T12:02:45+00:00",
+            "time": "2025-10-15T18:32:00+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1346,7 +1346,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v6.4.24"
+                "source": "https://github.com/symfony/finder/tree/v6.4.27"
             },
             "funding": [
                 {
@@ -1370,31 +1370,30 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v7.3.4",
-            "version_normalized": "7.3.4.0",
+            "version": "v8.0.1",
+            "version_normalized": "8.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "e6db84864655885d9dac676a9d7dde0d904fda54"
+                "reference": "f9eca217ae8f2be0b3ad80723d6a3b518b90cd66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/e6db84864655885d9dac676a9d7dde0d904fda54",
-                "reference": "e6db84864655885d9dac676a9d7dde0d904fda54",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/f9eca217ae8f2be0b3ad80723d6a3b518b90cd66",
+                "reference": "f9eca217ae8f2be0b3ad80723d6a3b518b90cd66",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/deprecation-contracts": "^2.5|^3"
+                "php": ">=8.4"
             },
             "conflict": {
-                "symfony/string": "<7.1"
+                "symfony/string": "<7.4"
             },
             "require-dev": {
-                "symfony/filesystem": "^6.4|^7.0",
-                "symfony/var-exporter": "^6.4|^7.0"
+                "symfony/filesystem": "^7.4|^8.0",
+                "symfony/var-exporter": "^7.4|^8.0"
             },
-            "time": "2025-09-08T14:11:30+00:00",
+            "time": "2025-12-01T09:13:36+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1439,7 +1438,7 @@
                 "localization"
             ],
             "support": {
-                "source": "https://github.com/symfony/intl/tree/v7.3.4"
+                "source": "https://github.com/symfony/intl/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -1638,17 +1637,17 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v6.4.26",
-            "version_normalized": "6.4.26.0",
+            "version": "v6.4.30",
+            "version_normalized": "6.4.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "c8559fe25c7ee7aa9d28f228903a46db008156a4"
+                "reference": "d1fdeefd0707d15eb150c04e8837bf0b15ebea39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/c8559fe25c7ee7aa9d28f228903a46db008156a4",
-                "reference": "c8559fe25c7ee7aa9d28f228903a46db008156a4",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/d1fdeefd0707d15eb150c04e8837bf0b15ebea39",
+                "reference": "d1fdeefd0707d15eb150c04e8837bf0b15ebea39",
                 "shasum": ""
             },
             "require": {
@@ -1685,7 +1684,7 @@
                 "symfony/service-contracts": "^2.5|^3",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
             },
-            "time": "2025-09-05T18:17:25+00:00",
+            "time": "2025-11-24T13:57:00+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1716,7 +1715,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.4.26"
+                "source": "https://github.com/symfony/translation/tree/v6.4.30"
             },
             "funding": [
                 {
@@ -1740,23 +1739,23 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v3.6.0",
-            "version_normalized": "3.6.0.0",
+            "version": "v3.6.1",
+            "version_normalized": "3.6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d"
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
-                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/65a8bc82080447fae78373aa10f8d13b38338977",
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1"
             },
-            "time": "2024-09-27T08:32:26+00:00",
+            "time": "2025-07-15T13:41:35+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1801,7 +1800,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.0"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.1"
             },
             "funding": [
                 {
@@ -1810,6 +1809,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {

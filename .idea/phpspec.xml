@@ -17,6 +17,9 @@
       <PhpSpecSuiteConfiguration>
         <option name="myPath" value="$PROJECT_DIR$/packages/comet-canvas-classic" />
       </PhpSpecSuiteConfiguration>
+      <PhpSpecSuiteConfiguration>
+        <option name="myPath" value="$PROJECT_DIR$/packages/comet-calendar" />
+      </PhpSpecSuiteConfiguration>
     </suites>
   </component>
 </project>

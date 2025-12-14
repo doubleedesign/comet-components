@@ -196,7 +196,7 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="$ProjectFileDir$/node_modules/.bin/rollup" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="WP plugin blocks" />
+      <option name="scopeName" value="Blocks plugin" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$ProjectFileDir$/packages/comet-plugin-blocks" />
       <envs />

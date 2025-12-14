@@ -15,7 +15,6 @@ abstract class PanelGroupComponent extends UIComponent {
      * @description Panel data transformed for use by the relevant Vue component.
      */
     private array $panels = [];
-    protected bool $withContainer = true;
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
