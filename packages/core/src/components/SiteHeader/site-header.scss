@@ -177,11 +177,12 @@
 					&[target="_blank"] {
 						display: flex;
 						align-items: center;
+						align-content: center;
 						justify-content: space-between;
 						flex-wrap: nowrap;
 
 						&:after {
-							content: '\f061';
+							content: '\f08e';
 							font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
 							padding-inline-start: var(--spacing-xs);
 						}

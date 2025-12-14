@@ -4264,11 +4264,12 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
 .site-header__menu__list__item__link[target=_blank] {
   display: flex;
   align-items: center;
+  align-content: center;
   justify-content: space-between;
   flex-wrap: nowrap;
 }
 .site-header__menu__list__item__link[target=_blank]:after {
-  content: "\f061";
+  content: "\f08e";
   font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
   padding-inline-start: var(--spacing-xs);
 }
