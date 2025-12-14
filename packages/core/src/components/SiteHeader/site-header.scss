@@ -170,7 +170,8 @@
 					flex-grow: 1;
 
 					&:hover, &:focus, &:active,
-					&[aria-current="page"] {
+					&[aria-current="page"],
+					[data-current-parent="true"] & {
 						text-decoration-color: currentColor;
 					}
 
@@ -190,6 +191,7 @@
 				}
 
 				// Parent item when submenu containing current page is present
+				&[data-current-parent="true"],
 				&:has([aria-current="page"]) {
 					> a {
 						text-decoration-color: currentColor;

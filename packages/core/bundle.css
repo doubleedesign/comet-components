@@ -1896,7 +1896,7 @@ article > .container, article > [class$=__container] {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@container (min-width: ) {
+@container (min-width: 768px) {
   .card-list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list] {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -4262,7 +4262,7 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
   transition: all 0.2s ease-in-out;
   flex-grow: 1;
 }
-.site-header__menu__list__item__link:hover, .site-header__menu__list__item__link:focus, .site-header__menu__list__item__link:active, .site-header__menu__list__item__link[aria-current=page] {
+.site-header__menu__list__item__link:hover, .site-header__menu__list__item__link:focus, .site-header__menu__list__item__link:active, .site-header__menu__list__item__link[aria-current=page], [data-current-parent=true] .site-header__menu__list__item__link {
   text-decoration-color: currentColor;
 }
 .site-header__menu__list__item__link[target=_blank] {
@@ -4277,7 +4277,7 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
   font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
   padding-inline-start: var(--spacing-xs);
 }
-.site-header__menu__list__item:has([aria-current=page]) > a {
+.site-header__menu__list__item[data-current-parent=true] > a, .site-header__menu__list__item:has([aria-current=page]) > a {
   text-decoration-color: currentColor;
   color: var(--color-secondary);
 }
