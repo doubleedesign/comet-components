@@ -3,7 +3,6 @@ namespace Doubleedesign\CometCanvas;
 use Doubleedesign\Comet\Core\Config;
 
 class ThemeStyle {
-    protected string $embedded_css = '';
 
     public function __construct() {
         add_action('wp_head', [$this, 'add_css_variables_to_head'], 25);

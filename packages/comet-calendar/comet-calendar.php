@@ -7,7 +7,7 @@
  * Version:             0.0.3
  * Requires at least:   6.7.0
  * Requires PHP:        8.2.23
- * Requires plugins:    comet-plugin, advanced-custom-fields-pro, block-supports-extended
+ * Requires plugins:    advanced-custom-fields-pro, comet-plugin-blocks
  * Text Domain:         comet
  *
  * @package Comet
@@ -17,14 +17,7 @@ const COMET_CALENDAR_PLUGIN_PATH = '/wp-content/plugins/comet-calendar/';
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Doubleedesign\Comet\WordPress\Calendar\{
-    Events,
-    Fields,
-    TemplateHandler,
-    Admin,
-    BlockEditorConfig,
-    Blocks
-};
+use Doubleedesign\Comet\WordPress\Calendar\{Admin, BlockEditorConfig, Blocks, Events, Fields, TemplateHandler};
 
 /**
  * Create activation and deactivation hooks and functions, so we can do things

@@ -39,9 +39,9 @@ class Config {
      * @return self
      */
     public static function getInstance(): self {
-		if(self::$instance === null) {
-			self::init();
-		}
+        if (self::$instance === null) {
+            self::init();
+        }
 
         return self::$instance;
     }
