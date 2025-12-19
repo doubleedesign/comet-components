@@ -5,7 +5,9 @@ on:
     branches:
       - master
     paths:
-      - 'packages/comet-canvas/**'
+      - 'packages/comet-canvas-blocks/**'
+  workflow_dispatch:
+    
 
 jobs:
   split:
@@ -19,7 +21,7 @@ jobs:
 
       - name: Split Repository
         run: |
-          git subtree split --prefix=packages/comet-canvas -b split-branch
+          git subtree split --prefix=packages/comet-canvas-blocks -b split-branch
 
       - name: Clone split branch to temp directory
         run: |
@@ -37,4 +39,4 @@ jobs:
           branch: master
           force: true
           directory: /tmp/split-repo
-          repository: doubleedesign/comet-canvas
+          repository: doubleedesign/comet-canvas-blocks

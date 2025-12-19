@@ -5,7 +5,8 @@ on:
     branches:
       - master
     paths:
-      - 'packages/comet-plugin/**'
+      - 'packages/comet-plugin-blocks/**'
+  workflow_dispatch:
 
 jobs:
   split:
@@ -19,7 +20,7 @@ jobs:
 
       - name: Split Repository
         run: |
-          git subtree split --prefix=packages/comet-plugin -b split-branch
+          git subtree split --prefix=packages/comet-plugin-blocks -b split-branch
 
       - name: Clone split branch to temp directory
         run: |
@@ -37,4 +38,4 @@ jobs:
           branch: master
           force: true
           directory: /tmp/split-repo
-          repository: doubleedesign/comet-plugin
+          repository: doubleedesign/comet-plugin-blocks
