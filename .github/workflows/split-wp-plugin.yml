@@ -31,6 +31,20 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
 
+      - name: Create tag in split repo
+        if: steps.get_version.outputs.version != 'null' && steps.get_version.outputs.version != ''
+        run: |
+          cd /tmp/split-repo
+          # Check if tag already exists
+          if ! git ls-remote --tags https://github.com/doubleedesign/comet-plugin-blocks.git | grep -q "refs/tags/v${{ steps.get_version.outputs.version }}"; then
+            git tag -a "v${{ steps.get_version.outputs.version }}" -m "Release version ${{ steps.get_version.outputs.version }}"
+            echo "tag_created=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tag v${{ steps.get_version.outputs.version }} already exists in target repository"
+            echo "tag_created=false" >> $GITHUB_OUTPUT
+          fi
+        id: create_tag
+
       - name: Push to target repository
         uses: ad-m/github-push-action@master
         with:
@@ -39,3 +53,4 @@ jobs:
           force: true
           directory: /tmp/split-repo
           repository: doubleedesign/comet-plugin-blocks
+          tags: true
