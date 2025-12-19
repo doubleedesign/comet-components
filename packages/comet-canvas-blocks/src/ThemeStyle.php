@@ -95,12 +95,16 @@ class ThemeStyle {
     }
 
     public function set_global_background(): void {
-        $color = apply_filters('comet_canvas_global_background', 'white');
-        Config::getInstance()->set_global_background($color);
+		if(is_plugin_active('comet-plugin-blocks/comet.php')) {
+			$color = apply_filters('comet_canvas_global_background', 'white');
+			Config::getInstance()->set_global_background($color);
+		}
     }
 
     public function set_icon_prefix(): void {
-        $prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
-        Config::getInstance()->set_icon_prefix($prefix);
+	    if(is_plugin_active('comet-plugin-blocks/comet.php')) {
+            $prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
+            Config::getInstance()->set_icon_prefix($prefix);
+	    }
     }
 }
