@@ -29,7 +29,7 @@ class Link extends Renderable {
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, 'components.Link.link');
         $this->content = $content;
-        $this->init_bem_structure('components.Link.link', @$attributes['context'], @$attributes['shortName']);
+        $this->init_bem_structure('components.Link.link', $attributes['context'] ?? null, $attributes['shortName'] ?? null);
 
         if (!isset($attributes['icon']) && $this->get_context() === 'link-group') {
             if (isset($attributes['target']) && $attributes['target'] === '_blank') {

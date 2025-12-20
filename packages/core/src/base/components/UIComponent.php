@@ -21,7 +21,7 @@ abstract class UIComponent extends Renderable {
      */
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $bladeFile);
-        $this->init_bem_structure($bladeFile, @$attributes['context'], @$attributes['shortName']);
+        $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? null);
         $this->innerComponents = $innerComponents;
     }
 

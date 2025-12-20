@@ -6,12 +6,6 @@
 	"icon": "calendar-alt",
 	"description": "Display a list of upcoming events.",
 	"category": "content",
-	"parent": [
-		"comet/container",
-		"core/column",
-		"core/group",
-		"core/block"
-	],
 	"acf": {
 		"mode": "preview",
 		"renderTemplate": "render.php"

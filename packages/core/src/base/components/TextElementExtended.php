@@ -9,7 +9,7 @@ abstract class TextElementExtended extends TextElement {
 
     public function __construct(array $attributes, string $content, string $bladeFile) {
         parent::__construct($attributes, $content, $bladeFile);
-        $this->init_bem_structure($bladeFile, @$attributes['context'], @$attributes['shortName']);
+        $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? null);
         $this->set_text_color_from_attrs($attributes);
     }
 

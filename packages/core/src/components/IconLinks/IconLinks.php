@@ -24,7 +24,7 @@ class IconLinks extends Renderable {
 
     public function __construct(array $attributes, array $links) {
         parent::__construct($attributes, 'components.IconLinks.icon-links');
-        $this->init_bem_structure('components.IconLinks.icon-links', @$attributes['context'], @$attributes['shortName']);
+        $this->init_bem_structure('components.IconLinks.icon-links', $attributes['context'] ?? null, $attributes['shortName'] ?? null);
         $this->set_layout_alignment_from_attrs($attributes, Alignment::CENTER);
         $this->set_orientation_from_attrs($attributes, Orientation::HORIZONTAL);
         $this->links = $links;

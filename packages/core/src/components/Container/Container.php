@@ -25,7 +25,7 @@ class Container extends WrappedLayoutComponent {
         $this->set_size_from_attrs($attributes);
         $this->set_orientation_from_attrs($attributes, null);
         $this->gradient = $attributes['gradient'] ?? null;
-        $this->set_is_nested(@$attributes['isNested'] ?? false);
+        $this->set_is_nested($attributes['isNested'] ?? false);
     }
 
     /**
