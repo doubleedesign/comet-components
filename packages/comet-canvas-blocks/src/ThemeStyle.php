@@ -12,6 +12,7 @@ class ThemeStyle {
         // Set defaults for components as per Config class in the core package
         add_action('init', [$this, 'set_global_background'], 10);
         add_action('init', [$this, 'set_icon_prefix'], 10);
+        add_action('init', [$this, 'set_component_defaults'], 10);
 
         if (is_admin()) {
             // using enqueue_block_assets to ensure this runs in the pattern editor iframe (as opposed to enqueue_block_editor_assets)
@@ -31,6 +32,10 @@ class ThemeStyle {
         if (isset($colours)) {
             foreach ($colours as $colourData) {
                 $css .= '--color-' . $colourData['slug'] . ': ' . $colourData['color'] . ";\n";
+
+                $hex = colority()->fromHex($colourData['color']);
+                $readable = $hex->getBestForegroundColor();
+                $css .= '--readable-color-' . $colourData['slug'] . ': ' . $readable->getValueColor() . ";\n";
             }
         }
 
@@ -95,16 +100,28 @@ class ThemeStyle {
     }
 
     public function set_global_background(): void {
-		if(is_plugin_active('comet-plugin-blocks/comet.php')) {
-			$color = apply_filters('comet_canvas_global_background', 'white');
-			Config::getInstance()->set_global_background($color);
-		}
+        if (is_plugin_active('comet-plugin-blocks/comet.php')) {
+            $color = apply_filters('comet_canvas_global_background', 'white');
+            Config::getInstance()->set_global_background($color);
+        }
     }
 
     public function set_icon_prefix(): void {
-	    if(is_plugin_active('comet-plugin-blocks/comet.php')) {
+        if (is_plugin_active('comet-plugin-blocks/comet.php')) {
             $prefix = apply_filters('comet_canvas_default_icon_prefix', 'fa-solid');
             Config::getInstance()->set_icon_prefix($prefix);
-	    }
+        }
+    }
+
+    public function set_component_defaults(): void {
+        $defaults = apply_filters('comet_canvas_component_defaults', []);
+
+        if (class_exists('Doubleedesign\Comet\Core\Config')) {
+            foreach ($defaults as $componentName => $settings) {
+                $defaults = Config::getInstance()->get_component_defaults($componentName);
+                $defaults[$componentName] = array_merge($existing[$componentName] ?? [], $settings);
+                Config::getInstance()->set_component_defaults($componentName, $defaults[$componentName]);
+            }
+        }
     }
 }
