@@ -1,6 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use InvalidArgumentException, Exception;
+use Exception;
+use InvalidArgumentException;
 
 /**
  * Singleton class to manage global configuration settings for Comet components.
@@ -10,7 +11,12 @@ class Config {
     private ThemeColor $global_background = ThemeColor::WHITE;
     private string $icon_prefix = 'fa-solid';
     private array $blade_component_paths = [];
-    private array $component_defaults = [];
+    private array $component_defaults = [
+        'PageHeader' => [
+            'size'       => 'contained',
+            'colorTheme' => 'primary'
+        ]
+    ];
     private array $theme_colours = [];
 
     public static function init(): void {
