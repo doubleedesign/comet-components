@@ -4,4 +4,8 @@
   --base-font-size: 1rem;
 }
 
+body.wp-autoresize.mce-content-body {
+  padding: 1rem !important;
+}
+
 /*# sourceMappingURL=tinymce.css.map */

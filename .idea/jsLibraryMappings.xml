@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Comet Vue components, Playwright}" />
-    <includedPredefinedLibrary name="Node.js Core" />
+    <file url="file://$PROJECT_DIR$/packages/comet-plugin-blocks" libraries="{comet-components/packages/comet-plugin-blocks/node_modules}" />
+    <file url="file://$PROJECT_DIR$/packages/core" libraries="{comet-components/packages/core/node_modules}" />
+    <file url="PROJECT" libraries="{@types/tinymce, Comet Vue components, Playwright, comet-components/packages/comet-plugin-blocks/node_modules, comet-components/packages/core/node_modules}" />
   </component>
 </project>
