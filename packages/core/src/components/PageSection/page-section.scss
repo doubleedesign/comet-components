@@ -1,7 +1,9 @@
 @use '../mixins' as *;
 @use '../variables' as *;
 
-body {
+// Using .body class allows us to apply this root context style to things other than the page body,
+// for example CMS editor contexts where the "body" of the content we want to target is many levels down the DOM.
+.body {
 	> header,
 	> footer,
 	> section,
@@ -23,13 +25,17 @@ body {
 
 // Adjacent section overrides to not double up on padding when backgrounds are the same
 @each $name, $color in $colors {
-	body > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"],
-	body > main > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"] {
+	.body > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"],
+	.body > main > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"] {
 		padding-block-start: 0;
 	}
 }
 
-body > :not([data-background]):not(hr) + :not([data-background]),
-body > main > :not([data-background]):not(hr) + :not([data-background]) {
+.body > :not([data-background]):not(hr) + :not([data-background]),
+.body > main > :not([data-background]):not(hr) + :not([data-background]) {
 	padding-block-start: 0;
+}
+
+body {
+	@extend .body;
 }

@@ -1,107 +1,142 @@
-body > header,
+.body > header, body > header,
+.body > footer,
 body > footer,
+.body > section,
 body > section,
+.body > article,
 body > article,
+.body > div,
 body > div {
   padding-block: var(--spacing-lg);
   padding-inline: 0;
 }
 @media (min-width: 768px) {
-  body > header,
+  .body > header, body > header,
+  .body > footer,
   body > footer,
+  .body > section,
   body > section,
+  .body > article,
   body > article,
+  .body > div,
   body > div {
     padding-block: var(--spacing-xl);
   }
 }
 @media (min-width: 1440px) {
-  body > header,
+  .body > header, body > header,
+  .body > footer,
   body > footer,
+  .body > section,
   body > section,
+  .body > article,
   body > article,
+  .body > div,
   body > div {
     padding-block: var(--spacing-xxl);
   }
 }
-body > main > section,
+.body > main > section, body > main > section,
+.body > main > header,
 body > main > header,
+.body > main > footer,
 body > main > footer,
+.body > main > article,
 body > main > article,
+.body > main > div,
 body > main > div {
   padding-block: var(--spacing-lg);
   padding-inline: 0;
 }
 @media (min-width: 768px) {
-  body > main > section,
+  .body > main > section, body > main > section,
+  .body > main > header,
   body > main > header,
+  .body > main > footer,
   body > main > footer,
+  .body > main > article,
   body > main > article,
+  .body > main > div,
   body > main > div {
     padding-block: var(--spacing-xl);
   }
 }
 @media (min-width: 1440px) {
-  body > main > section,
+  .body > main > section, body > main > section,
+  .body > main > header,
   body > main > header,
+  .body > main > footer,
   body > main > footer,
+  .body > main > article,
   body > main > article,
+  .body > main > div,
   body > main > div {
     padding-block: var(--spacing-xxl);
   }
 }
 
-body > [data-background=primary]:not(hr) + [data-background=primary],
+.body > [data-background=primary]:not(hr) + [data-background=primary], body > [data-background=primary]:not(hr) + [data-background=primary],
+.body > main > [data-background=primary]:not(hr) + [data-background=primary],
 body > main > [data-background=primary]:not(hr) + [data-background=primary] {
   padding-block-start: 0;
 }
 
-body > [data-background=secondary]:not(hr) + [data-background=secondary],
+.body > [data-background=secondary]:not(hr) + [data-background=secondary], body > [data-background=secondary]:not(hr) + [data-background=secondary],
+.body > main > [data-background=secondary]:not(hr) + [data-background=secondary],
 body > main > [data-background=secondary]:not(hr) + [data-background=secondary] {
   padding-block-start: 0;
 }
 
-body > [data-background=accent]:not(hr) + [data-background=accent],
+.body > [data-background=accent]:not(hr) + [data-background=accent], body > [data-background=accent]:not(hr) + [data-background=accent],
+.body > main > [data-background=accent]:not(hr) + [data-background=accent],
 body > main > [data-background=accent]:not(hr) + [data-background=accent] {
   padding-block-start: 0;
 }
 
-body > [data-background=info]:not(hr) + [data-background=info],
+.body > [data-background=info]:not(hr) + [data-background=info], body > [data-background=info]:not(hr) + [data-background=info],
+.body > main > [data-background=info]:not(hr) + [data-background=info],
 body > main > [data-background=info]:not(hr) + [data-background=info] {
   padding-block-start: 0;
 }
 
-body > [data-background=warning]:not(hr) + [data-background=warning],
+.body > [data-background=warning]:not(hr) + [data-background=warning], body > [data-background=warning]:not(hr) + [data-background=warning],
+.body > main > [data-background=warning]:not(hr) + [data-background=warning],
 body > main > [data-background=warning]:not(hr) + [data-background=warning] {
   padding-block-start: 0;
 }
 
-body > [data-background=success]:not(hr) + [data-background=success],
+.body > [data-background=success]:not(hr) + [data-background=success], body > [data-background=success]:not(hr) + [data-background=success],
+.body > main > [data-background=success]:not(hr) + [data-background=success],
 body > main > [data-background=success]:not(hr) + [data-background=success] {
   padding-block-start: 0;
 }
 
-body > [data-background=error]:not(hr) + [data-background=error],
+.body > [data-background=error]:not(hr) + [data-background=error], body > [data-background=error]:not(hr) + [data-background=error],
+.body > main > [data-background=error]:not(hr) + [data-background=error],
 body > main > [data-background=error]:not(hr) + [data-background=error] {
   padding-block-start: 0;
 }
 
-body > [data-background=light]:not(hr) + [data-background=light],
+.body > [data-background=light]:not(hr) + [data-background=light], body > [data-background=light]:not(hr) + [data-background=light],
+.body > main > [data-background=light]:not(hr) + [data-background=light],
 body > main > [data-background=light]:not(hr) + [data-background=light] {
   padding-block-start: 0;
 }
 
-body > [data-background=dark]:not(hr) + [data-background=dark],
+.body > [data-background=dark]:not(hr) + [data-background=dark], body > [data-background=dark]:not(hr) + [data-background=dark],
+.body > main > [data-background=dark]:not(hr) + [data-background=dark],
 body > main > [data-background=dark]:not(hr) + [data-background=dark] {
   padding-block-start: 0;
 }
 
-body > [data-background=white]:not(hr) + [data-background=white],
+.body > [data-background=white]:not(hr) + [data-background=white], body > [data-background=white]:not(hr) + [data-background=white],
+.body > main > [data-background=white]:not(hr) + [data-background=white],
 body > main > [data-background=white]:not(hr) + [data-background=white] {
   padding-block-start: 0;
 }
 
-body > :not([data-background]):not(hr) + :not([data-background]),
+.body > :not([data-background]):not(hr) + :not([data-background]), body > :not([data-background]):not(hr) + :not([data-background]),
+.body > main > :not([data-background]):not(hr) + :not([data-background]),
 body > main > :not([data-background]):not(hr) + :not([data-background]) {
   padding-block-start: 0;
 }
