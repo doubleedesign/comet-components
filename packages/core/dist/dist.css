@@ -913,7 +913,7 @@ p:empty {
 
 .is-style-lead,
 .lead {
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
   font-size: calc(1rem * var(--typescale));
   line-height: 1.2;
   color: var(--theme-color);
@@ -927,6 +927,15 @@ p:empty {
 .lead a:focus,
 .lead a:active {
   color: color-mix(in hsl, currentColor, black 20%);
+}
+
+blockquote {
+  text-align: center;
+  padding: var(--spacing-md);
+  margin-block: var(--spacing-lg);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.125rem;
+  color: var(--theme-color);
 }
 
 form input[type=text],
