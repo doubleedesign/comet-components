@@ -145,7 +145,7 @@ p:empty {
 .is-style-lead,
 .lead {
   font-weight: 600;
-  font-size: calc(var(--base-font-size) * var(--typescale));
+  font-size: calc(1rem * var(--typescale));
   line-height: 1.2;
   color: var(--theme-color);
 }
