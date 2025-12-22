@@ -121,7 +121,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -141,7 +141,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="--color --source-map $FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -161,7 +161,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="-c" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -181,7 +181,7 @@
       <option name="workingDir" value="$ProjectFileDir$/packages/core/src/plugins/FocalPointPicker" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="-c" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -199,6 +199,26 @@
       <option name="scopeName" value="Blocks plugin" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$ProjectFileDir$/packages/comet-plugin-blocks" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="scss" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="SCSS - WP Theme Blocks" />
+      <option name="output" value="$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="sass" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="WP theme blocks" />
+      <option name="trackOnlyRoot" value="true" />
+      <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
   </component>
