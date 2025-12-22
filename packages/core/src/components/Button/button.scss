@@ -33,9 +33,10 @@
 	}
 
 	@each $name, $color in $colors {
-		&[data-color-theme="#{$name}"] {
+		&[data-color-theme="#{$name}"],
+		[data-color-theme="#{$name}"] & {
 
-			// .is-style-outline is here to account for what the WP block editor does.
+			// .is-style-outline is here to account for what the WP block editor does with the core button block.
 			&:not(.is-style-outline):not([data-style="outline"]) {
 				background-color: var(--color-#{$name});
 				border: 1px solid var(--color-#{$name});

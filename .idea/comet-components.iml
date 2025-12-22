@@ -161,6 +161,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/psr" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/symfony" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/voku" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/src/tinymce/dist" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />

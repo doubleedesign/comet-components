@@ -17,6 +17,7 @@ class Button extends Renderable {
     /**
      * @var ?bool $isOutline
      * @description Whether to use outline style instead of solid/filled
+     * TODO: This might be better handled as a style modifier so we can handle more styles (though what would they be?)
      */
     protected ?bool $isOutline = false;
 
