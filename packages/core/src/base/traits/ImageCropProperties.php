@@ -27,11 +27,11 @@ trait ImageCropProperties {
     protected ?array $offset = ['x' => 0, 'y' => 0];
 
     protected function set_aspect_ratio_from_attrs(array $attributes, AspectRatio $default): void {
-        $this->aspectRatio = AspectRatio::tryFrom($attributes['aspectRatio'] ?? '') ?? $default;
+        $this->aspectRatio = AspectRatio::tryFrom($attributes['aspectRatio'] ?? $attributes['aspect_ratio'] ?? '') ?? $default;
     }
 
     protected function set_focal_point_from_attrs(array $attributes): void {
-        $field = $attributes['focalPoint'] ?? null;
+        $field = $attributes['focalPoint'] ?? $attributes['focal_point'] ?? null;
         if (!$field) {
             return;
         }
@@ -45,7 +45,7 @@ trait ImageCropProperties {
     }
 
     protected function set_image_offset_from_attrs(array $attributes): void {
-        $field = $attributes['offset'] ?? $attributes['imageOffset'] ?? null;
+        $field = $attributes['offset'] ?? $attributes['imageOffset'] ?? $attributes['image_offset'] ?? null;
         if (!$field) {
             return;
         }

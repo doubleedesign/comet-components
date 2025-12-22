@@ -81,7 +81,7 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
             )
         );
         if (count($orphanedAttrs) > 0) {
-            trigger_error('WrappedLayoutComponent: The following attributes were not recognised and will be ignored: ' . join(', ', $orphanedAttrs), E_USER_WARNING);
+            // trigger_error('WrappedLayoutComponent: The following attributes were not recognised and will be ignored: ' . join(', ', $orphanedAttrs), E_USER_WARNING);
         }
 
         // If this is not already a Container, wrap its contents in one

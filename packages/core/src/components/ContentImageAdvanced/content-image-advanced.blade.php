@@ -6,7 +6,7 @@
 </div>
 @if ($caption)
 	@if ($tag === 'figure')
-		<figcaption class="${{ $bemPrefix }}__caption">{{ $caption }}</figcaption>
+		<figcaption class="{{ $bemPrefix }}__caption">{{ $caption }}</figcaption>
 	@else
 		<div class="{{ $bemPrefix }}__caption">{{ $caption }}</div>
 	@endif

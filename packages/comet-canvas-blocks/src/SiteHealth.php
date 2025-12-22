@@ -15,13 +15,13 @@ class SiteHealth {
 
         if ($theme->get('TextDomain') === 'comet' || $parent_theme->get('TextDomain') === 'comet') {
             $required = [
-                // 'advanced-custom-fields-pro/acf.php' => 'Advanced Custom Fields Pro',
-                'doublee-breadcrumbs/breadcrumbs.php'        => 'Double-E Breadcrumbs',
-                'comet-plugin-blocks/comet.php'              => 'Comet Components (Blocks)',
+                'advanced-custom-fields-pro/acf.php'  => 'Advanced Custom Fields Pro',
+                'doublee-breadcrumbs/breadcrumbs.php' => 'Double-E Breadcrumbs',
+                'comet-plugin-blocks/comet.php'       => 'Comet Components (Blocks)',
             ];
             $recommended = [
-                // 'tinymce-advanced/tinymce-advanced.php' => 'Advanced Editor Tools',
-                'doublee-base-plugin/doublee.php' => 'Double-E Design Base Plugin',
+                'doublee-base-plugin/doublee.php'    => 'Double-E Design Base Plugin',
+                'acf-advanced-image-field/index.php' => 'ACF Advanced Image Field'
             ];
         }
         else {
