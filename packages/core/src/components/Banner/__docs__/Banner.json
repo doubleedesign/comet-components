@@ -19,7 +19,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ]
         },
         "classes": {
@@ -117,7 +118,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ],
             "default": "dark"
         },

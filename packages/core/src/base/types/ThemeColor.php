@@ -13,4 +13,5 @@ enum ThemeColor: string {
     case LIGHT = 'light';
     case DARK = 'dark';
     case WHITE = 'white';
+    case BLACK = 'black';
 }

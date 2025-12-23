@@ -1,15 +1,15 @@
-.call-to-action {
-  padding-inline: var(--spacing-lg);
+.call-to-action__content {
+  padding: var(--spacing-lg);
   text-align: center;
 }
 @container (min-width: 600px) {
-  .call-to-action {
+  .call-to-action__content {
     text-align: revert;
   }
 }
 @container (min-width: 940px) {
-  .call-to-action {
-    padding-inline: var(--spacing-xl);
+  .call-to-action__content {
+    padding: var(--spacing-xl);
   }
 }
 

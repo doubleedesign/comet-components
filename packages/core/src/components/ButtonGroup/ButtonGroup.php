@@ -11,8 +11,15 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class ButtonGroup extends UIComponent {
+    use ColorTheme;
     use LayoutAlignment;
     use LayoutOrientation;
+
+    /**
+     * @var ?ThemeColor $colorTheme
+     * @description Colour keyword for the default fill or outline colour of the buttons within the ButtonGroup.
+     */
+    protected ?ThemeColor $colorTheme;
 
     /**
      * @var array<Button>
@@ -24,6 +31,7 @@ class ButtonGroup extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.ButtonGroup.button-group');
         $this->set_orientation_from_attrs($attributes, Orientation::HORIZONTAL);
         $this->set_layout_alignment_from_attrs($attributes, Alignment::MATCH_PARENT);
+        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
     }
 
     protected function get_html_attributes(): array {
@@ -39,6 +47,10 @@ class ButtonGroup extends UIComponent {
 
         if (isset($this->vAlign)) {
             $attributes['data-valign'] = $this->vAlign->value;
+        }
+
+        if (isset($this->colorTheme)) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
         return $attributes;

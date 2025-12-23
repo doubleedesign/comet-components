@@ -4,7 +4,8 @@ namespace Doubleedesign\Comet\Core;
 trait ColorTheme {
     /**
      * @var ?ThemeColor $colorTheme
-     * @description Colour keyword for the fill or outline colour
+     * @description Colour keyword for theming purposes.
+     * May be used for headings, buttons, accents, and other UI elements according to the component implementation.
      */
     protected ?ThemeColor $colorTheme;
 

@@ -15,7 +15,7 @@
         },
         "colorTheme": {
             "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
             "supported": [
                 "primary",
                 "secondary",
@@ -26,7 +26,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ],
             "default": "primary"
         },
@@ -45,7 +46,7 @@
         },
         "isOutline": {
             "type": "bool",
-            "description": "Whether to use outline style instead of solid/filled",
+            "description": "Whether to use outline style instead of solid/filled TODO: This might be better handled as a style modifier so we can handle more styles (though what would they be?)",
             "default": "false"
         },
         "shortName": {

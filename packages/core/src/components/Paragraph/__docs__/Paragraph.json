@@ -12,9 +12,7 @@
             "supported": [
                 "is-style-lead"
             ],
-            "default": [
-                "paragraph"
-            ]
+            "default": []
         },
         "context": {
             "type": "string",
@@ -68,7 +66,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ]
         }
     },

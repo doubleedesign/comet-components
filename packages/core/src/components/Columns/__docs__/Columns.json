@@ -1,7 +1,7 @@
 {
     "name": "Columns",
     "description": "Organise content visually with a column-based layout.",
-    "extends": "LayoutComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
@@ -9,6 +9,11 @@
         "allowStacking": {
             "type": "bool",
             "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Defaults to true behaviour but does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
+        },
+        "ariaAttrs": {
+            "type": "array",
+            "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+            "required": true
         },
         "backgroundColor": {
             "type": "ThemeColor",
@@ -23,7 +28,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ]
         },
         "classes": {
@@ -36,6 +42,11 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+        },
+        "dataAttrs": {
+            "type": "array",
+            "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
         },
         "hAlign": {
             "type": "Alignment",
@@ -76,7 +87,7 @@
                 "div",
                 "section"
             ],
-            "default": "div"
+            "default": "section"
         },
         "testId": {
             "type": "string",
@@ -93,6 +104,12 @@
                 "match-parent"
             ],
             "default": "match-parent"
+        },
+        "withContainer": {
+            "type": "bool",
+            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {

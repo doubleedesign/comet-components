@@ -20,7 +20,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ]
         },
         "beforeComponents": {
@@ -38,7 +39,7 @@
         },
         "colorTheme": {
             "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
             "supported": [
                 "primary",
                 "secondary",
@@ -49,7 +50,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ]
         },
         "context": {
@@ -118,11 +120,6 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
-        },
-        "withContainer": {
-            "type": "bool",
-            "required": true,
-            "default": "true"
         }
     },
     "innerComponents": {

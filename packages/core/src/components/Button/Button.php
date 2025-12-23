@@ -54,6 +54,10 @@ class Button extends Renderable {
         return $attrs;
     }
 
+    public function get_content(): string {
+        return $this->content;
+    }
+
     public function render(): void {
         $blade = BladeService::getInstance();
 

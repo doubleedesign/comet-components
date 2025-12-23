@@ -937,6 +937,15 @@ blockquote {
   font-size: 1.125rem;
   color: var(--theme-color);
 }
+blockquote:last-child {
+  margin-block-end: 0;
+}
+blockquote:only-child {
+  padding-block: 0;
+}
+blockquote > p {
+  padding-block: var(--spacing-sm);
+}
 
 form input[type=text],
 form input[type=email],
@@ -1828,18 +1837,18 @@ article > .container, article > [class$=__container] {
   padding-block-end: 0;
 }
 
-.call-to-action {
-  padding-inline: var(--spacing-lg);
+.call-to-action__content {
+  padding: var(--spacing-lg);
   text-align: center;
 }
 @container (min-width: 600px) {
-  .call-to-action {
+  .call-to-action__content {
     text-align: revert;
   }
 }
 @container (min-width: 940px) {
-  .call-to-action {
-    padding-inline: var(--spacing-xl);
+  .call-to-action__content {
+    padding: var(--spacing-xl);
   }
 }
 
@@ -4289,6 +4298,7 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
   .site-header__menu__list {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
   }
 }
 .site-header__menu--responsive .site-header__menu__list {
@@ -4317,7 +4327,7 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
   justify-content: space-between;
   flex-wrap: nowrap;
 }
-.site-header__menu__list__item__link[target=_blank]:after {
+.site-header__menu__list__item__button[target=_blank]:not(:has(i)):after {
   content: "\f08e";
   font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
   padding-inline-start: var(--spacing-xs);
@@ -4334,9 +4344,12 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
 .site-header__responsive .site-header__menu__list__item:hover, .site-header__responsive .site-header__menu__list__item:focus-within {
   background: var(--color-light);
 }
-.site-header__responsive .site-header__menu__list__item:has(button) {
+.site-header__responsive .site-header__menu__list__item:has(.button) {
   padding-inline-end: 0;
   padding-block: 0;
+}
+.site-header__responsive .site-header__menu__list__item:has(.button):hover {
+  background: transparent;
 }
 .site-header__responsive .site-header__menu__list__item button {
   padding: var(--spacing-xs);
@@ -4411,13 +4424,6 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
-}
-.site-header__menu__sub-menu__item__link[target=_blank]:after {
-  content: "\f08e";
-  font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
-  display: inline-block;
-  padding-inline-start: var(--spacing-xs);
-  font-size: 0.85em;
 }
 .site-header__menu__sub-menu--responsive {
   position: relative;

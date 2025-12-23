@@ -13,6 +13,24 @@
                 "button-group"
             ]
         },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ],
+            "default": "primary"
+        },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
@@ -83,6 +101,7 @@
         "required": true
     },
     "traits": [
+        "ColorTheme",
         "LayoutAlignment",
         "LayoutOrientation",
         "BlockElementModifier"

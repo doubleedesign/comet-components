@@ -60,6 +60,7 @@
 		"ezyang/htmlpurifier": "^4.18",
 		"feimosi/baguettebox.js": "^1.12.1",
 		"ext-intl": "*",
-		"openpsa/ranger": "^0.5.8"
+		"openpsa/ranger": "^0.5.8",
+		"tomloprod/colority": "^1.4"
 	}
 }

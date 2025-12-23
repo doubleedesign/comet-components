@@ -24,7 +24,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ],
             "default": "primary"
         },

@@ -14,22 +14,25 @@ class CallToAction extends WrappedLayoutComponent {
     use ColorTheme;
 
     /**
+     * @var ?ThemeColor $innerBackground;
+     * @description Background colour of the inner content.
+     */
+    protected ?ThemeColor $innerBackground;
+
+    /**
      * @param  array  $attributes
      * @param  array<Heading|Paragraph|ButtonGroup>  $innerComponents
      */
     public function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.CallToAction.call-to-action');
-        $this->set_color_theme_from_attrs($attributes);
+        $content = new Group([
+            'context'         => 'call-to-action',
+            'shortName'       => 'content',
+            'backgroundColor' => $attributes['innerBackground'] ?? null,
+            'colorTheme'      => $attributes['colorTheme'] ?? null,
+        ], $innerComponents);
+
+        unset($attributes['colorTheme']);
+
+        parent::__construct($attributes, [$content], 'components.CallToAction.call-to-action');
     }
-
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if ($this->colorTheme) {
-            $attributes['data-color-theme'] = $this->colorTheme->value;
-        }
-
-        return $attributes;
-    }
-
 }

@@ -19,14 +19,15 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ]
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "responsivepanels__responsive-panel__content"
+                "responsive-panel__content"
             ]
         },
         "context": {

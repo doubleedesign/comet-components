@@ -19,7 +19,8 @@
                 "info",
                 "light",
                 "dark",
-                "white"
+                "white",
+                "black"
             ]
         },
         "classes": {
@@ -35,7 +36,7 @@
         },
         "colorTheme": {
             "type": "ThemeColor",
-            "description": "Colour keyword for the fill or outline colour",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
             "supported": [
                 "primary",
                 "secondary",
@@ -46,12 +47,19 @@
                 "info",
                 "light",
                 "dark",
-                "white"
-            ]
+                "white",
+                "black"
+            ],
+            "default": "fn($key"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+        },
+        "dataAttrs": {
+            "type": "array",
+            "description": "Allow for data-* attributes to be passed down to the group explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
         },
         "id": {
             "type": "string",

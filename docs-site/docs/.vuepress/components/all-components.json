@@ -105,7 +105,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -116,7 +116,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "primary"
             },
@@ -247,7 +248,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -350,7 +352,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -422,7 +425,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -432,7 +436,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -443,7 +447,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "primary"
             },
@@ -498,11 +503,6 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "withContainer": {
-                "type": "bool",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -726,7 +726,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             }
         },
@@ -802,6 +803,11 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -815,7 +821,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -826,6 +833,11 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -922,7 +934,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "beforeComponents": {
@@ -940,7 +953,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -951,7 +964,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "context": {
@@ -1020,11 +1034,6 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "withContainer": {
-                "type": "bool",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -1064,7 +1073,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -1144,7 +1154,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -1242,7 +1253,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "dark"
             },
@@ -1327,13 +1339,12 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "banner-v2",
-                    "page-section"
+                    "banner-v2"
                 ]
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -1344,7 +1355,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "cinematic"
             },
@@ -1542,7 +1554,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -1553,7 +1565,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "primary"
             },
@@ -1572,7 +1585,7 @@
             },
             "isOutline": {
                 "type": "bool",
-                "description": "Whether to use outline style instead of solid/filled",
+                "description": "Whether to use outline style instead of solid/filled TODO: This might be better handled as a style modifier so we can handle more styles (though what would they be?)",
                 "default": "false"
             },
             "shortName": {
@@ -1623,6 +1636,24 @@
                 "default": [
                     "button-group"
                 ]
+            },
+            "colorTheme": {
+                "type": "ThemeColor",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ],
+                "default": "primary"
             },
             "context": {
                 "type": "string",
@@ -1694,6 +1725,7 @@
             "required": true
         },
         "traits": [
+            "ColorTheme",
             "LayoutAlignment",
             "LayoutOrientation",
             "BlockElementModifier"
@@ -1716,7 +1748,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -1727,7 +1759,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "info"
             },
@@ -1790,6 +1823,11 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -1803,7 +1841,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -1815,7 +1854,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -1826,12 +1865,18 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -1952,7 +1997,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "bodyText": {
@@ -1975,7 +2021,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -1986,9 +2032,10 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
-                "default": "white"
+                "default": "standard"
             },
             "context": {
                 "type": "string",
@@ -2060,7 +2107,8 @@
                 "supported": [
                     "div",
                     "article",
-                    "footer"
+                    "footer",
+                    "a"
                 ],
                 "default": "div"
             },
@@ -2089,6 +2137,140 @@
         ]
     },
     {
+        "name": "CardList",
+        "description": null,
+        "extends": "LayoutComponent",
+        "abstract": false,
+        "isInner": false,
+        "belongsInside": "LayoutComponent",
+        "attributes": {
+            "backgroundColor": {
+                "type": "ThemeColor",
+                "description": "Background colour keyword",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ]
+            },
+            "classes": {
+                "type": "array<string>",
+                "description": "CSS classes",
+                "default": [
+                    "card-list"
+                ]
+            },
+            "colorTheme": {
+                "type": "ThemeColor",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ]
+            },
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "gridLayout": {
+                "type": "bool",
+                "description": "Whether to use a grid layout for the cards.",
+                "required": true,
+                "default": "true"
+            },
+            "hAlign": {
+                "type": "Alignment",
+                "description": "Horizontal alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "id": {
+                "type": "string",
+                "description": "Unique identifier"
+            },
+            "isNested": {
+                "type": "bool",
+                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+                "required": true,
+                "default": false
+            },
+            "maxPerRow": {
+                "type": "int",
+                "description": "The maximum number of cards to display per row in grid layout. If not set, will be derived from the number of cards and their divisibility by 4, 3, or 2."
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "required": true,
+                "default": "card-list"
+            },
+            "style": {
+                "type": "array",
+                "description": "Inline styles"
+            },
+            "tagName": {
+                "type": "Tag",
+                "description": "The HTML tag to use for this component",
+                "supported": [
+                    "div"
+                ],
+                "default": "div"
+            },
+            "testId": {
+                "type": "string",
+                "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "vAlign": {
+                "type": "Alignment",
+                "description": "Vertical alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            }
+        },
+        "innerComponents": {
+            "type": "array<Card>",
+            "description": "Cards to display in the list.",
+            "required": true,
+            "default": []
+        },
+        "traits": [
+            "ColorTheme",
+            "BackgroundColor",
+            "LayoutAlignment",
+            "NestedState",
+            "BlockElementModifier"
+        ]
+    },
+    {
         "name": "Column",
         "description": null,
         "extends": "LayoutComponent",
@@ -2109,7 +2291,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -2202,7 +2385,7 @@
     {
         "name": "Columns",
         "description": "Organise content visually with a column-based layout.",
-        "extends": "LayoutComponent",
+        "extends": "WrappedLayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
@@ -2210,6 +2393,11 @@
             "allowStacking": {
                 "type": "bool",
                 "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Defaults to true behaviour but does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
+            },
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
             },
             "backgroundColor": {
                 "type": "ThemeColor",
@@ -2224,7 +2412,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -2237,6 +2426,11 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -2277,7 +2471,7 @@
                     "div",
                     "section"
                 ],
-                "default": "div"
+                "default": "section"
             },
             "testId": {
                 "type": "string",
@@ -2294,6 +2488,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -2316,6 +2516,11 @@
         "isInner": false,
         "belongsInside": null,
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -2329,7 +2534,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -2342,6 +2548,11 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "gradient": {
                 "type": "string",
@@ -2696,6 +2907,11 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -2709,7 +2925,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -2721,7 +2938,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -2732,13 +2949,19 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "default to div tag unless specified otherwise in the attributes\n        if ($this->get_is_nested("
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -2909,7 +3132,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -2920,7 +3143,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "date": {
@@ -2992,7 +3216,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -3003,7 +3227,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "endDate": {
@@ -3285,7 +3510,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -3296,7 +3521,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "null"
             },
@@ -3384,7 +3610,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -3395,7 +3621,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "primary"
             },
@@ -3543,7 +3770,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -3559,7 +3787,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -3570,12 +3798,19 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
-                ]
+                    "white",
+                    "black"
+                ],
+                "default": "fn($key"
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the group explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "id": {
                 "type": "string",
@@ -3640,9 +3875,7 @@
                     "is-style-accent",
                     "is-style-small"
                 ],
-                "default": [
-                    "heading"
-                ]
+                "default": []
             },
             "context": {
                 "type": "string",
@@ -3706,7 +3939,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             }
         },
@@ -3832,7 +4066,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -3843,7 +4077,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "primary"
             },
@@ -4168,7 +4403,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -4179,7 +4414,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "info"
             },
@@ -4526,6 +4762,11 @@
         "isInner": false,
         "belongsInside": null,
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -4539,7 +4780,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "breadcrumbs": {
@@ -4556,7 +4798,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -4567,13 +4809,19 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "$this->breadcrumbs"
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -4679,7 +4927,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -4691,7 +4940,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -4702,7 +4951,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "id": {
@@ -4762,9 +5012,7 @@
                 "supported": [
                     "is-style-lead"
                 ],
-                "default": [
-                    "paragraph"
-                ]
+                "default": []
             },
             "context": {
                 "type": "string",
@@ -4818,7 +5066,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             }
         },
@@ -4850,7 +5099,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -4861,7 +5110,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "$this->validate_link_attributes($link"
             },
@@ -4940,7 +5190,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "citation": {
@@ -4950,13 +5201,11 @@
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
-                "default": [
-                    "pullquote"
-                ]
+                "default": []
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -4967,7 +5216,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "context": {
@@ -5022,7 +5272,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             }
         },
@@ -5060,14 +5311,15 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "responsivepanels__responsive-panel__content"
+                    "responsive-panel__content"
                 ]
             },
             "context": {
@@ -5142,7 +5394,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "breakpoint": {
@@ -5159,7 +5412,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -5170,7 +5423,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "context": {
@@ -5239,11 +5493,6 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "withContainer": {
-                "type": "bool",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -5278,7 +5527,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -5289,7 +5538,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "primary"
             },
@@ -5361,7 +5611,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ],
                 "default": "primary"
             },
@@ -5396,6 +5647,11 @@
         "isInner": false,
         "belongsInside": null,
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -5409,7 +5665,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -5422,6 +5679,11 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -5519,7 +5781,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "breakpoint": {
@@ -5693,7 +5956,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -5709,7 +5973,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -5720,7 +5984,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "context": {
@@ -5972,7 +6237,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -6066,7 +6332,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -6164,7 +6431,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -6245,7 +6513,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "classes": {
@@ -6257,7 +6526,7 @@
             },
             "colorTheme": {
                 "type": "ThemeColor",
-                "description": "Colour keyword for the fill or outline colour",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
                 "supported": [
                     "primary",
                     "secondary",
@@ -6268,7 +6537,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "context": {
@@ -6328,11 +6598,6 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "withContainer": {
-                "type": "bool",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -6357,6 +6622,11 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -6370,7 +6640,8 @@
                     "info",
                     "light",
                     "dark",
-                    "white"
+                    "white",
+                    "black"
                 ]
             },
             "beforeComponents": {
@@ -6387,6 +6658,11 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
