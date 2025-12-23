@@ -1,10 +1,11 @@
 <?php
 namespace Doubleedesign\Comet\Core;
+use Illuminate\{Events\Dispatcher, Filesystem\Filesystem};
 use Illuminate\View\{Factory as ViewFactory, FileViewFinder};
-use Illuminate\View\Engines\{CompilerEngine, EngineResolver};
 use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\{Filesystem\Filesystem, Events\Dispatcher};
-use RuntimeException, InvalidArgumentException;
+use Illuminate\View\Engines\{CompilerEngine, EngineResolver};
+use InvalidArgumentException;
+use RuntimeException;
 
 class BladeService {
     private static ?ViewFactory $blade = null;
@@ -106,17 +107,11 @@ class BladeService {
         }
 
         // Allow for directory paths to be set in the config
+        // e.g., setting /wp-content/themes/YOUR_THEME
+        // would mean    /wp-content/themes/YOUR_THEME/components/Button/button.blade.php would override the button component template
         $componentPaths = Config::getInstance()->get('blade_component_paths');
 
-        // If we are in WordPress with the block editor, allow overriding from the theme
-        if (class_exists('WP_Block')) {
-            $wpThemeOverridePath = get_stylesheet_directory() . DIRECTORY_SEPARATOR;
-            $wpParentThemeOverridePath = get_template_directory() . DIRECTORY_SEPARATOR;
-
-            return new FileViewFinder($filesystem, [$wpThemeOverridePath, $wpParentThemeOverridePath, $templatePath, ...$componentPaths]);
-        }
-
-        return new FileViewFinder($filesystem, [$templatePath, ...$componentPaths]);
+        return new FileViewFinder($filesystem, [...$componentPaths, $templatePath]);
     }
 
     /**
