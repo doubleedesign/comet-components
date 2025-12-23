@@ -1,6 +1,7 @@
 <?php
 namespace Doubleedesign\CometCanvas;
-use Doubleedesign\Comet\Core\Config;
+use Doubleedesign\Comet\Core\{ColorUtils, Config, ThemeColor};
+use Exception;
 
 class ThemeStyle {
 
@@ -10,6 +11,7 @@ class ThemeStyle {
         add_action('admin_head', [$this, 'add_css_variables_to_head'], 25);
 
         // Set defaults for components as per Config class in the core package
+        add_action('init', [$this, 'set_colours'], 5);
         add_action('init', [$this, 'set_global_background'], 10);
         add_action('init', [$this, 'set_icon_prefix'], 10);
         add_action('init', [$this, 'set_component_defaults'], 10);
@@ -33,9 +35,14 @@ class ThemeStyle {
             foreach ($colours as $colourData) {
                 $css .= '--color-' . $colourData['slug'] . ': ' . $colourData['color'] . ";\n";
 
-                $hex = colority()->fromHex($colourData['color']);
-                $readable = $hex->getBestForegroundColor();
-                $css .= '--readable-color-' . $colourData['slug'] . ': ' . $readable->getValueColor() . ";\n";
+                try {
+                    $readable_name = ColorUtils::get_readable_colour(ThemeColor::tryFrom($colourData['slug']))->value;
+                    $readable_hex = ColorUtils::get_theme_value_for_colour_name($readable_name);
+                    $css .= '--readable-color-' . $colourData['slug'] . ': ' . $readable_hex . ";\n";
+                }
+                catch (Exception $e) {
+                    dump($e->getMessage());
+                }
             }
         }
 
@@ -96,6 +103,20 @@ class ThemeStyle {
             else {
                 wp_enqueue_style($slug, $child, $deps, $theme->get('Version'));
             }
+        }
+    }
+
+    public function set_colours(): void {
+        $theme_json = \WP_Theme_JSON_Resolver::get_theme_data();
+        $defaults = array_reduce($theme_json->get_data()['settings']['color']['palette'], function($acc, $item) {
+            $acc[$item['slug']] = $item['color'];
+
+            return $acc;
+        }, []);
+        $colours = apply_filters('comet_canvas_theme_colours', $defaults);
+
+        if (class_exists('Doubleedesign\Comet\Core\Config')) {
+            Config::getInstance()->set_theme_colours($colours);
         }
     }
 
