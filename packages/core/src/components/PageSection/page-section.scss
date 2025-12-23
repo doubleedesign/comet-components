@@ -29,6 +29,10 @@
 	.body > main > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"] {
 		padding-block-start: 0;
 	}
+
+	.body > :not([data-background]) + > :not([data-background]) {
+		padding-block-start: 0;
+	}
 }
 
 .body > :not([data-background]):not(hr) + :not([data-background]),
