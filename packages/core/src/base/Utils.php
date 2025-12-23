@@ -62,7 +62,9 @@ class Utils {
     }
 
     /**
-     * Sanitise content string using HTMLPurifier
+     * Sanitise content string using HTMLPurifier.
+     * This is quite restrictive and should be used only on content that hasn't already been processed (e.g., by a CMS)
+     * or requires further strict cleanup after that.
      *
      * @param  string  $content  The input content to be sanitised
      * @param  ?array<Tag>  $allowedTags
@@ -71,19 +73,14 @@ class Utils {
      */
     public static function sanitise_content(string $content, ?array $allowedTags = null): string {
         $config = HTMLPurifier_Config::createDefault();
-        $purifier = new HTMLPurifier($config);
-
-        if (!$allowedTags) {
-            return $purifier->purify($content);
+        if ($allowedTags) {
+            $config->set('HTML.AllowedElements', array_map(fn($tag) => $tag->value, $allowedTags));
         }
 
-        // HTML Purifier does have an option to pass allowed tags to it,
-        // but in that case we'd also have to pass all their attributes, which may be overkill
-        $allowedTagsAsTags = array_map(fn($tag) => "<$tag->value>", $allowedTags);
-        $updatedContent = strip_tags($content, $allowedTagsAsTags);
+        $purifier = new HTMLPurifier($config);
 
         // Strip empty paragraphs (including those with only whitespace or &nbsp;)
-        $updatedContent = preg_replace('/<p>(\s|&nbsp;)*<\/p>/', '', $updatedContent);
+        $updatedContent = preg_replace('/<p>(\s|&nbsp;)*<\/p>/', '', $content);
 
         return $purifier->purify($updatedContent);
     }
