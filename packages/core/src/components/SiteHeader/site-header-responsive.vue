@@ -122,6 +122,7 @@ export default {
                                :class="[...Object.values(item.link_attributes?.classes)].join(' ')"
                                :aria-current="item.link_attributes['aria-current'] ?? null"
                                :target="item.link_attributes['target'] ?? null"
+                               :data-color-theme="item.link_attributes['data-color-theme'] ?? null"
                             >
                                 {{ item.title }}
                             </a>

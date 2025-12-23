@@ -55,16 +55,30 @@ class Menu extends UIComponent {
                     'shortName'       => 'item'
                 ],
                 [
-                    new Link(
-                        array_merge(
-                            $item['link_attributes'] ?? [],
-                            ['context' => $level > 1 && $context
-                                ? "{$context}__item"
-                                : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
-                            ]
-                        ),
-                        $item['title']
-                    )
+                    $item['link_attributes']['target'] === '_blank'
+                        ? new Button(
+                            array_merge(
+                                $item['link_attributes'] ?? [],
+                                [
+                                    'colorTheme' => 'primary',
+                                    'classes'    => ['button'],
+                                    'context'    => $level > 1 && $context
+                                    ? "{$context}__item"
+                                    : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
+                                ],
+                            ),
+                            $item['title']
+                        )
+                        : new Link(
+                            array_merge(
+                                $item['link_attributes'] ?? [],
+                                ['context' => $level > 1 && $context
+                                    ? "{$context}__item"
+                                    : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
+                                ],
+                            ),
+                            $item['title']
+                        )
                 ]
             );
 
@@ -102,7 +116,7 @@ class Menu extends UIComponent {
         $transformed = array_map(function(MenuListItem $item) {
             // TODO: Replace with array_find in PHP 8.4
             /** @var Link $link */
-            $link = array_filter($item->innerComponents, fn($component) => $component instanceof Link)[0];
+            $link = array_filter($item->innerComponents, fn($component) => $component instanceof Link || $component instanceof Button)[0];
             /** @var array<MenuList> $children */
             $children = array_values(array_filter($item->innerComponents, fn($component) => $component instanceof MenuList));
             if (!$link && !$children) {

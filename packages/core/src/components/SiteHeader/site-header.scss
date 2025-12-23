@@ -150,6 +150,7 @@
 			@container (min-width: 600px) {
 				display: flex;
 				justify-content: flex-end;
+				align-items: center;
 			}
 
 			.site-header__menu--responsive & {
@@ -181,11 +182,18 @@
 						align-content: center;
 						justify-content: space-between;
 						flex-wrap: nowrap;
+					}
+				}
 
-						&:after {
-							content: '\f08e';
-							font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
-							padding-inline-start: var(--spacing-xs);
+				&__button {
+					&[target="_blank"] {
+						// TODO: Make this not a hack and consistent across both "mobile" and large viewport
+						&:not(:has(i)) {
+							&:after {
+								content: '\f08e';
+								font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
+								padding-inline-start: var(--spacing-xs);
+							}
 						}
 					}
 				}
@@ -208,9 +216,13 @@
 						background: var(--color-light);
 					}
 
-					&:has(button) {
+					&:has(.button) {
 						padding-inline-end: 0;
 						padding-block: 0;
+
+						&:hover {
+							background: transparent;
+						}
 					}
 
 					button {
@@ -304,14 +316,6 @@
 						align-items: center;
 						justify-content: space-between;
 						flex-wrap: nowrap;
-
-						&:after {
-							content: '\f08e';
-							font-family: var(--fa-style-family-classic), "Font Awesome 6 Pro Solid";
-							display: inline-block;
-							padding-inline-start: var(--spacing-xs);
-							font-size: 0.85em;
-						}
 					}
 				}
 			}
