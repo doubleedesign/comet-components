@@ -17,7 +17,10 @@ class Config {
             'colorTheme' => 'primary'
         ]
     ];
-    private array $theme_colours = [];
+    private array $theme_colours = [
+        'white' => '#FFFFFF',
+        'black' => '#000000',
+    ];
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
@@ -29,7 +32,7 @@ class Config {
         }
     }
 
-    private function get_config() {
+    private function get_config(): array {
         return [
             'global_background'     => $this->global_background,
             'icon_prefix'           => $this->icon_prefix,
@@ -53,7 +56,9 @@ class Config {
     }
 
     // Prevent cloning and unserialization
-    private function __clone() {}
+    public function __clone() {
+        throw new Exception("Comet Components core config: Cannot clone singleton");
+    }
     public function __wakeup() {
         throw new Exception("Comet Components core config: Cannot unserialize singleton");
     }
@@ -94,25 +99,39 @@ class Config {
     }
 
     public function set_theme_colours(array $colours): void {
-        $this->theme_colours = $colours;
+        $this->theme_colours = array_merge($this->theme_colours, $colours);
     }
 
-    public function set_icon_prefix($prefix) {
+    public function set_icon_prefix($prefix): void {
         $this->icon_prefix = $prefix;
+    }
+
+    public function get_icon_prefix(): string {
+        return $this->icon_prefix;
     }
 
     public function get_component_defaults(string $component): array {
         $defaults = $this->get('component_defaults');
+        $componentName = Utils::pascal_case($component);
 
-        return $defaults[$component] ?? [];
+        return $defaults[$componentName] ?? [];
     }
 
     public function set_component_defaults(string $component, array $settings): void {
-        $defaults = $this->get('component_defaults', []);
+        $defaults = $this->get('component_defaults');
         $defaults[$component] = $settings;
         $this->component_defaults = $defaults;
     }
 
+    /**
+     * Option to specify directories containing "components" folders with Blade component templates to override the ones provided by Comet.
+     * The structure of that directory should mirror that of the Comet core package's components directory so the templates can be found automatically.
+     * Do not include "components" in the path.
+     *
+     * @param  array  $paths
+     *
+     * @return void
+     */
     public function set_blade_component_paths(array $paths): void {
         $this->blade_component_paths = array_unique(array_merge($this->blade_component_paths, $paths));
     }
