@@ -31,7 +31,8 @@ In addition, there are some filters to modify attributes for nested components i
 
 These filters are applied in the `render.php` file for the block, so if a filter isn't listed here you can check that file to see if I've forgotten to document one - or add it. They are also intentionally all prefixed with `comet_blocks_` for easy searching.
 
-| Filter                                     | Parameters       | Usage                                                                                               |
-|--------------------------------------------|------------------|-----------------------------------------------------------------------------------------------------|
-| `comet_blocks_cta_heading_classes`         | `array $classes` | Add CSS class(es) to the heading in the call-to-action block, e.g., `['is-style-accent']`.          |
-| `comet_blocks_cta_button_group_attributes` | `array $attrs`   | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`. |
+| Filter                                     | Parameters         | Usage                                                                                                                                  |
+|--------------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `comet_blocks_cta_heading_classes`         | `array $classes`   | Add CSS class(es) to the heading in the call-to-action block, e.g., `['is-style-accent']`.                                             |
+| `comet_blocks_cta_button_group_attributes` | `array $attrs`     | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`.                                    |
+| `comet_blocks_child_pages_card_as_link`    | 	  `bool $as_link` | Set whether the cards in the Child Pages block render as links. Default is `false`, which renders them with a "Read more" button link. |
