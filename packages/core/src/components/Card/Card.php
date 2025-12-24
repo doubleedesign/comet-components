@@ -110,6 +110,12 @@ class Card extends UIComponent {
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;
         }
+        if ($this->cardAsLink) {
+            $attributes['href'] = $this->link['href'] ?? '#';
+            if (isset($this->link['target'])) {
+                $attributes['target'] = $this->link['target'];
+            }
+        }
 
         return $attributes;
     }

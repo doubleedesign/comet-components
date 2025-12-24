@@ -2,6 +2,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 }
 @container (min-width: 500px) {
   .card:has([class*=image])[data-layout-orientation=horizontal], [class$=__card]:has([class*=image])[data-layout-orientation=horizontal] {

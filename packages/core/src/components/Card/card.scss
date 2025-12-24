@@ -7,6 +7,7 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	text-decoration: none;
 
 	@container (min-width: 500px) {
 		&:has(#{class-contains('image')}) {
