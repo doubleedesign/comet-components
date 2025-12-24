@@ -1929,33 +1929,37 @@ article > .container, article > [class$=__container] {
   margin-block-end: 0;
 }
 
-.card-list, [class$=__card-list] {
+.card-list__list, [class$=__card-list__list] {
+  width: 100%;
   display: grid;
   gap: var(--spacing-md);
   container-type: inline-size;
   grid-template-columns: 1fr;
 }
 @container (min-width: 940px) {
-  .card-list, [class$=__card-list] {
+  .card-list__list, [class$=__card-list__list] {
     gap: var(--spacing-lg);
   }
 }
 @container (min-width: 600px) {
-  .card-list[data-max-per-row="2"], [data-max-per-row="2"][class$=__card-list], .card-list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list] {
-    grid-template-columns: repeat(2, 1fr);
+  .card-list__list[data-max-per-row="2"], [data-max-per-row="2"][class$=__card-list__list], .card-list__list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list__list] {
+    grid-template-columns: repeat(auto-fit, 50%);
+    justify-content: inherit;
   }
 }
 @container (min-width: 600px) {
-  .card-list[data-max-per-row="3"], [data-max-per-row="3"][class$=__card-list] {
-    grid-template-columns: repeat(3, 1fr);
+  .card-list__list[data-max-per-row="3"], [data-max-per-row="3"][class$=__card-list__list] {
+    grid-template-columns: repeat(auto-fit, 33%);
+    justify-content: inherit;
   }
 }
 @container (min-width: 768px) {
-  .card-list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list] {
-    grid-template-columns: repeat(4, 1fr);
+  .card-list__list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list__list] {
+    grid-template-columns: repeat(auto-fit, 25%);
+    justify-content: inherit;
   }
 }
-.card-list__item, [class$=__card-list__item] {
+.card-list__list__item, [class$=__card-list__list__item] {
   container-type: inline-size;
 }
 

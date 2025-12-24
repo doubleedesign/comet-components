@@ -1,7 +1,8 @@
 @use '../mixins' as *;
 @use '../bem-mixin' as *;
 
-@include bem-block('card-list', ('item')) {
+@include bem-block('card-list__list', ('item')) {
+	width: 100%;
 	display: grid;
 	gap: var(--spacing-md);
 	container-type: inline-size;
@@ -13,19 +14,22 @@
 
 	&[data-max-per-row="2"], &[data-max-per-row="4"] {
 		@include container-width-up('small') {
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(auto-fit, 50%);
+			justify-content: inherit;
 		}
 	}
 
 	&[data-max-per-row="3"] {
 		@include container-width-up('small') {
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(auto-fit, 33%);
+			justify-content: inherit;
 		}
 	}
 
 	&[data-max-per-row="4"] {
 		@include container-width-up('narrower') {
-			grid-template-columns: repeat(4, 1fr);
+			grid-template-columns: repeat(auto-fit, 25%);
+			justify-content: inherit;
 		}
 	}
 

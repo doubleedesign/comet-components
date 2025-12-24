@@ -1,10 +1,16 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
-#[AllowedTags([Tag::DIV])]
-#[DefaultTag(Tag::DIV)]
-class CardList extends LayoutComponent {
+#[AllowedTags([Tag::DIV, Tag::SECTION])]
+#[DefaultTag(Tag::SECTION)]
+class CardList extends WrappedLayoutComponent {
     use ColorTheme;
+
+    /**
+     * @var ?string $heading
+     * @description Optional heading for the card list.
+     */
+    protected ?string $heading;
 
     /**
      * @var array<Card> $innerComponents
@@ -25,40 +31,31 @@ class CardList extends LayoutComponent {
     protected ?int $maxPerRow = null;
 
     public function __construct(array $attributes, array $innerComponents) {
-        // Add a wrapper to each Card so that it can use container queries based on that
-        $updatedInnerComponents = array_map(function($component) {
-            return new Group(
-                [
-                    'context'    => 'card-list',
-                    'shortName'  => 'item',
-                ],
-                [$component]
-            );
-        }, $innerComponents);
-
-        parent::__construct($attributes, $updatedInnerComponents, 'components.CardList.card-list');
-        $this->set_color_theme_from_attrs($attributes);
+        $headingComponent = $attributes['heading'] ? new Heading([], $attributes['heading']) : null;
         $this->gridLayout = $attributes['gridLayout'] ?? $this->gridLayout;
         $this->maxPerRow = $attributes['maxPerRow'] ?? $this->maxPerRow;
-    }
 
-    protected function get_html_attributes(): array {
-        $attributes = array_merge(
-            parent::get_html_attributes(),
-            array(
-                'role'             => 'group'
-            )
+        // Add a wrapper to each Card so that it can use container queries based on that
+        $updatedInnerComponents = array_map(function($component) {
+            return new Group(['context'    => 'card-list__list', 'shortName'  => 'item'], [$component]);
+        }, $innerComponents);
+
+        // And a wrapper around the whole group to separate it from the heading
+        $wrappedCards = new Group(
+            [
+                'shortName'        => 'card-list',
+                'role'             => 'group',
+                'data-max-per-row' => $this->get_col_count(),
+                'colorTheme'       => $attributes['colorTheme'] ?? null,
+            ],
+            $updatedInnerComponents
+        )->set_bem_element('list');
+
+        parent::__construct(
+            $attributes,
+            $headingComponent ? [$headingComponent, $wrappedCards] : $wrappedCards,
+            'components.CardList.card-list'
         );
-
-        if ($this->gridLayout) {
-            $attributes['data-max-per-row'] = $this->get_col_count();
-        }
-
-        if ($this->colorTheme) {
-            $attributes['data-color-theme'] = $this->colorTheme->value;
-        }
-
-        return $attributes;
     }
 
     private function get_col_count(): int {
