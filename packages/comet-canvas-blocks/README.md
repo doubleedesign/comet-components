@@ -2,6 +2,9 @@
 
 WordPress parent theme to support the intended implementation of Comet Components [Comet Components](https://cometcomponents.io) in WordPress (for the block editor).
 
+> [!IMPORTANT]  
+> This theme **must** be used with the [Comet Blocks plugin](https://github.com/doubleedesign/comet-plugin-blocks). The theme itself is kept intentionally minimal, with most functionality provided by the plugin for ease of development and maintenance.
+
 If you're reading this from GitHub, you're seeing the mirror of the [Comet Components Canvas package](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-canvas) that is here for the purposes of publishing to Packagist and installing via Composer.
 
 Development of this project belongs in the main Comet Components monorepo.
@@ -17,15 +20,35 @@ The Comet Blocks plugin and Comet Canvas parent theme are configured to look for
 | `style.scss`   | Required file for WordPress to recognize the theme. Should contain theme metadata and all CSS styles for the theme that are not already present in the parent theme and plugins. Should import `common.scss`. |
 | `tinymce.scss` | Styles to be loaded only in TinyMCE. Should not need to import `common.scss` as that should already be loaded.                                                                                                |
 
+### Third-party hosted fonts
+
+To ensure theme fonts loaded from Typekit, Google Fonts, Font Awesome, etc load everywhere they should, you can:
+
+#### For CSS files:
+
+- Import them in your child theme's `common.scss` (recommended as this is already set up to be loaded everywhere needed), ensuring that `common.scss` is imported into `style.scss` and `tinymce.scss`
+- Enqueue them in the child theme's `functions.php` file on the following action hooks:
+    - `wp_enqueue_scripts` for the front-end, using the `wp_enqueue_style` function
+    - `enqueue_block_assets` with an admin check (to ensure no duplicate front-end loading) for the block editor
+    - `admin_enqueue_scripts` for core TinyMCE, using the `add_editor_style` function
+    - `tiny_mce_before_init` for ACF TinyMCE, by adding a CSS `@import` rule to the `content_css` field
+
+#### For JavaScript files:
+
+- Enqueue them in the child theme's `functions.php` file on the following action hooks:
+    - `wp_enqueue_scripts` for the front-end, using the `wp_enqueue_script` function
+    - `enqueue_block_assets` with an admin check (to ensure no duplicate front-end loading) for the block editor
+
 ### Setting component defaults
 
 There are filters available for child themes to access Comet Components' global configuration, including the default values of various component attributes.
 
-| Filter                             | Parameters        | Usage                                                                                                                              |
-|------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `comet_canvas_component_defaults`  | `array $defaults` | Allows setting of various default values per-component, such as colour theme and container size.                                   |
-| `comet_canvas_global_background`   | `string $color`   | Allows setting a global background colour for the site. Default is `white`. Valid values must be drawn from the `ThemeColor` type. |
-| `comet_canvas_default_icon_prefix` | `string $prefix`  | Allows setting a default icon prefix for all Icon components. Default is `fa-solid`.                                               |
+| Filter                             | Parameters        | Usage                                                                                                                                                                              |
+|------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `comet_canvas_component_defaults`  | `array $defaults` | Allows setting of various default values per-component, such as colour theme and container size.                                                                                   |
+| `comet_canvas_global_background`   | `string $color`   | Allows setting a global background colour for the site. Default is `white`. Valid values must be drawn from the `ThemeColor` type.                                                 |
+| `comet_canvas_default_icon_prefix` | `string $prefix`  | Allows setting a default icon prefix for all Icon components. Default is `fa-solid`.                                                                                               |
+| `comet_canvas_theme_colours`       | `array $colours`  | An alternative or supplementary method of setting theme colours. This filter runs _after_ `theme.json` is used to find the colour palette, so if you use both the filter will win. |
 
 In addition, there are some filters to modify attributes for nested components in the provided blocks. This is to ensure consistency across the theme rather than having backend controls for every possible attribute in every individual use case.
 
@@ -36,3 +59,28 @@ These filters are applied in the `render.php` file for the block, so if a filter
 | `comet_blocks_cta_heading_classes`         | `array $classes`   | Add CSS class(es) to the heading in the call-to-action block, e.g., `['is-style-accent']`.                                             |
 | `comet_blocks_cta_button_group_attributes` | `array $attrs`     | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`.                                    |
 | `comet_blocks_child_pages_card_as_link`    | 	  `bool $as_link` | Set whether the cards in the Child Pages block render as links. Default is `false`, which renders them with a "Read more" button link. |
+
+### Troubleshooting
+
+#### Blocks not rendering in an iframe in the editor / styles leaking into block previews from WordPress core admin styles
+
+**All** blocks must use `apiVersion: 3` for any blocks to render in an iframe in the editor. If blocks are not rendered in an iframe, WordPress core admin styles may affect the preview appearance due to CSS leakage. If the editor is not loading blocks in an iframe and styles like `.wp-core-ui` are affecting the appearance of blocks, check all `block.json` files in the Comet plugin and theme, client plugin and theme, and third-party plugins that add blocks to ensure they are using
+`apiVersion: 3`.
+
+You can override this setting for third-party blocks in `block-registry.js` or an equivalent file in the client plugin. For example:
+
+```javascript
+// Use new API version for third-party blocks so that all blocks can use the new iframe-based editor experience
+wp.hooks.addFilter('blocks.registerBlockType', 'comet/use-new-block-api', (settings, name) => {
+	if (name.startsWith('ninja-forms')) {
+		return {
+			...settings,
+			apiVersion: 3,
+		};
+	}
+
+	return settings;
+});
+```
+
+
