@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-use Doubleedesign\CometCanvas\{ThemeStyle, NavMenus, SiteHealth, WpAdmin, BlockEditorConfig};
+
+use Doubleedesign\CometCanvas\{NavMenus, SiteHealth};
 
 add_action('plugins_loaded', function() {
     if (!class_exists('Doubleedesign\Comet\Core\Config')) {
@@ -11,5 +12,3 @@ add_action('plugins_loaded', function() {
 new ThemeStyle();
 new NavMenus();
 new SiteHealth();
-new WpAdmin();
-new BlockEditorConfig();

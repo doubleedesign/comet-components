@@ -1,34 +1,16 @@
 <?php
 namespace Doubleedesign\CometCanvas\Classic;
-use Doubleedesign\Comet\Core\Config;
 use JetBrains\PhpStorm\NoReturn;
 
 class AdminUI {
 
     public function __construct() {
-        add_action('admin_head', [$this, 'add_colour_css_variables_to_admin'], 1);
         add_action('admin_init', [$this, 'disable_customiser']);
         add_action('login_enqueue_scripts', [$this, 'login_logo']);
         add_action('admin_menu', [$this, 'remove_metaboxes']);
         add_action('add_meta_boxes', [$this, 'remove_metaboxes'], 99);
         add_action('init', [$this, 'register_theme_support'], 5);
         add_action('admin_notices', [$this, 'required_plugin_notification'], 10);
-    }
-
-    /**
-     * Add CSS variables for the colour palette to the admin area
-     * so they can be used in ACF fields etc
-     */
-    public function add_colour_css_variables_to_admin(): void {
-        $colours = Config::getInstance()->get_theme_colours();
-
-        if (!empty($colours)) {
-            echo '<style>:root {';
-            foreach ($colours as $value => $label) {
-                echo '--color-' . strtolower($label) . ': #' . $value . ';';
-            }
-            echo '} </style>';
-        }
     }
 
     /**
