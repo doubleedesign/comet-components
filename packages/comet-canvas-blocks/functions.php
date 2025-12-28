@@ -9,6 +9,5 @@ add_action('plugins_loaded', function() {
     }
 }, 1);
 
-new ThemeStyle();
 new NavMenus();
 new SiteHealth();
