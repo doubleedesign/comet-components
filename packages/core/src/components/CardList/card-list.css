@@ -11,8 +11,8 @@
   }
 }
 @container (min-width: 600px) {
-  .card-list__list[data-max-per-row="2"], [data-max-per-row="2"][class$=__card-list__list], .card-list__list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list__list] {
-    grid-template-columns: repeat(auto-fit, 50%);
+  .card-list__list[data-max-per-row="2"]:has(:nth-child(2)), [data-max-per-row="2"][class$=__card-list__list]:has(:nth-child(2)), .card-list__list[data-max-per-row="4"]:has(:nth-child(2)), [data-max-per-row="4"][class$=__card-list__list]:has(:nth-child(2)) {
+    grid-template-columns: repeat(2, 1fr);
     justify-content: inherit;
   }
 }
@@ -21,11 +21,17 @@
     grid-template-columns: repeat(auto-fit, 33%);
     justify-content: inherit;
   }
+  .card-list__list[data-max-per-row="3"]:has(:nth-child(3)), [data-max-per-row="3"][class$=__card-list__list]:has(:nth-child(3)) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 @container (min-width: 768px) {
   .card-list__list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list__list] {
     grid-template-columns: repeat(auto-fit, 25%);
     justify-content: inherit;
+  }
+  .card-list__list[data-max-per-row="4"]:has(:nth-child(4)), [data-max-per-row="4"][class$=__card-list__list]:has(:nth-child(4)) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 .card-list__list__item, [class$=__card-list__list__item] {

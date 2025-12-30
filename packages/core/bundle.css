@@ -1942,8 +1942,8 @@ article > .container, article > [class$=__container] {
   }
 }
 @container (min-width: 600px) {
-  .card-list__list[data-max-per-row="2"], [data-max-per-row="2"][class$=__card-list__list], .card-list__list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list__list] {
-    grid-template-columns: repeat(auto-fit, 50%);
+  .card-list__list[data-max-per-row="2"]:has(:nth-child(2)), [data-max-per-row="2"][class$=__card-list__list]:has(:nth-child(2)), .card-list__list[data-max-per-row="4"]:has(:nth-child(2)), [data-max-per-row="4"][class$=__card-list__list]:has(:nth-child(2)) {
+    grid-template-columns: repeat(2, 1fr);
     justify-content: inherit;
   }
 }
@@ -1952,11 +1952,17 @@ article > .container, article > [class$=__container] {
     grid-template-columns: repeat(auto-fit, 33%);
     justify-content: inherit;
   }
+  .card-list__list[data-max-per-row="3"]:has(:nth-child(3)), [data-max-per-row="3"][class$=__card-list__list]:has(:nth-child(3)) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 @container (min-width: 768px) {
   .card-list__list[data-max-per-row="4"], [data-max-per-row="4"][class$=__card-list__list] {
     grid-template-columns: repeat(auto-fit, 25%);
     justify-content: inherit;
+  }
+  .card-list__list[data-max-per-row="4"]:has(:nth-child(4)), [data-max-per-row="4"][class$=__card-list__list]:has(:nth-child(4)) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 .card-list__list__item, [class$=__card-list__list__item] {
@@ -3020,6 +3026,10 @@ article > .container, article > [class$=__container] {
 }
 [data-color-theme=white] .file-group__file__icon {
   color: var(--color-white);
+}
+.file-group__file__content:has(> :only-child) {
+  display: flex;
+  align-items: center;
 }
 .file-group__file__content__title {
   font-weight: var(--font-weight-semibold);
@@ -4390,6 +4400,16 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
 .site-header__menu__list__item:hover .site-header__menu__sub-menu, .site-header__menu__list__item:focus-within .site-header__menu__sub-menu {
   opacity: 1;
   height: auto;
+}
+.site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a {
+  text-decoration-color: transparent !important;
+  color: inherit !important;
+}
+.site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:after {
+  opacity: 0;
+}
+.site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:hover, .site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:focus, .site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:active {
+  color: var(--color-secondary) !important;
 }
 .site-header__menu__sub-menu {
   margin-top: 0;
