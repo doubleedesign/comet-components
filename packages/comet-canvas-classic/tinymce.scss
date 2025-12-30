@@ -1,0 +1,9 @@
+.mce-content-body {
+	padding: 1rem;
+	box-sizing: border-box;
+	--base-font-size: 1rem;
+}
+
+body.wp-autoresize.mce-content-body {
+	padding: 1rem !important;
+}
