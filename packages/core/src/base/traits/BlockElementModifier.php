@@ -73,10 +73,14 @@ trait BlockElementModifier {
 
         // Where the element matches the block, remove repetition
         // e.g., menu-list -> menu-list-item becomes menu-list -> item
-        $compareTo = preg_split('/(-|__)/', $this->implicit_context);
-        $componentParts = explode('-', $element);
-        $endDiff = Utils::array_diff_end($componentParts, $compareTo);
-        $element = join('-', $endDiff);
+        // skipping single-word elements so we don't break cases like file-group -> file
+        $words_in_element = preg_split('/(-|__)/', $element);
+        if (count($words_in_element) > 1) {
+            $compareTo = preg_split('/(-|__)/', $this->implicit_context);
+            $componentParts = explode('-', $element);
+            $endDiff = Utils::array_diff_end($componentParts, $compareTo);
+            $element = join('-', $endDiff);
+        }
 
         // Handle where a kebab-cased element matches the end of a block after the above transformation
         // e.g., Menu -> SubMenu -> SubMenuItem would be menu__sub-menu -> sub-menu-item, but we want just item for the element

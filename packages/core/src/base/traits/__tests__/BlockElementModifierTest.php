@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\{BlockElementModifier};
 
 /**
@@ -119,7 +120,7 @@ describe('Component is the block (top-level)', function() {
 
 describe('Component is the element (nested)', function() {
 
-    test('default result', function() {
+    test('default result (two-word component)', function() {
         $component = create_component_with_bem_trait('components.Card.CardBody.card-body');
 
         expect($component->get_bem_structure())->toMatchArray([
@@ -128,6 +129,17 @@ describe('Component is the element (nested)', function() {
             'modifier' => null
         ])
             ->and($component->get_bem_classes())->toMatchArray(['card__body']);
+    });
+
+    test('default result (two-word parent)', function() {
+        $component = create_component_with_bem_trait('components.FileGroup.File.file');
+
+        expect($component->get_bem_structure())->toMatchArray([
+            'block'    => 'file-group',
+            'element'  => 'file',
+            'modifier' => null
+        ])
+            ->and($component->get_bem_classes())->toMatchArray(['file-group__file']);
     });
 
     test('with explicit context', function() {

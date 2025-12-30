@@ -78,7 +78,7 @@ trait ContextHierarchy {
 
         // First-level child -> return the parent component name
         if (count($this->hierarchy) == 2) {
-            $this->implicit_context = strtolower($this->hierarchy[0]);
+            $this->implicit_context = Utils::kebab_case($this->hierarchy[0]);
             $this->context = $this->implicit_context;
 
             return $this;
@@ -102,9 +102,9 @@ trait ContextHierarchy {
             $end = join('-', $end);
 
             return array_merge($carry, [$end]);
-        }, [strtolower($hierarchy[0])]);
+        }, [Utils::kebab_case($hierarchy[0])]);
 
-        $this->implicit_context = join('__', array_map('strtolower', $simplified));
+        $this->implicit_context = join('__', array_map(fn($item) => Utils::kebab_case($item), $simplified));
         $this->context = $this->implicit_context;
 
         return $this;
