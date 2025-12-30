@@ -14,6 +14,7 @@ For guidance on implementing Comet Components in your own plugins and themes, se
 [[toc]]
 
 ## Prerequisites
+
 - [Composer](https://getcomposer.org/) installed on your machine
 - Local WordPress installation to use for testing
 - [Local dev setup](../development-core/setup.md) for the Comet Components project as a whole
@@ -21,7 +22,8 @@ For guidance on implementing Comet Components in your own plugins and themes, se
 - Sufficient permissions to create symlinks.
 
 :::warning
-Make sure any [PhpStorm file watchers](../local-dev-deep-dives/tooling-guides/phpstorm.md#file-watchers) you have for your WordPress site are scoped to your own plugin and theme. If you leave them scoped to the entire project, they'll try to compile the various Comet packages' assets, which you don't need it to do _and_ won't work because of file path differences.
+Make sure any [PhpStorm file watchers](../local-dev-deep-dives/tooling-guides/phpstorm.md#file-watchers) you have for your WordPress site are scoped to your own plugin and theme. If you leave them scoped to the entire project, they'll try to compile the various Comet packages' assets, which you don't need it to do
+_and_ won't work because of file path differences.
 :::
 
 ## Setup
@@ -34,7 +36,8 @@ To use your local copy of Comet Components packages in your dev site instead of 
    npm run refresh:all:dev
    ```
 
-   The `:dev` version of the refresh script uses `composer.local.json` where available, which should be configured to symlink local package usages (e.g., the `comet-plugin` package's installation of `comet-components-core`).
+   The `:dev` version of the refresh script uses `composer.local.json` where available, which should be configured to symlink local package usages (e.g., the
+   `comet-plugin` package's installation of `comet-components-core`).
 
 2. In your WordPress site, add a modified version of the the [suggested Composer configuration](../installation/wordpress.md) that symlinks to your local copy of the theme and plugins, like the below.
 
@@ -56,7 +59,6 @@ To use your local copy of Comet Components packages in your dev site instead of 
            "php": "^8.2",
            "doubleedesign/comet-calendar": "dev-master",
            "doubleedesign/comet-plugin": "dev-master",
-           "doubleedesign/comet-table-block": "dev-main",
            "doubleedesign/comet-canvas": "dev-master",
            "wpackagist-plugin/gutenberg": "^19.8.0",
            "composer/installers": "^2.0",
@@ -88,20 +90,14 @@ To use your local copy of Comet Components packages in your dev site instead of 
             "type": "path",
             "url": "../../../../PhpStormProjects/comet-components/packages/comet-calendar",
             "options": {
-                "symlink": true
-			  
-          {
-            "type": "path",
-            "url": "../../../../PhpStormProjects/comet-table-block",
-            "options": {
-                "symlink": true
-			  
+                "symlink": true	  
+           },	  
            {
             "type": "path",
             "url": "../../../../PhpStormProjects/comet-components/packages/comet-canvas",
             "options": {
                 "symlink": true
-			  
+            },
            {
                "type": "vcs",
                "url": "https://github.com/doubleedesign/doublee-base-plugin"
@@ -125,7 +121,6 @@ To use your local copy of Comet Components packages in your dev site instead of 
                    "type:wordpress-plugin",
                    "doubleedesign/comet-calendar",
                    "doubleedesign/comet-plugin",
-                   "doubleedesign/comet-table-block",
                    "doubleedesign/doublee-base-plugin",
                    "doubleedesign/doublee-breadcrumbs",
                    "humanmade/block-supports-extended",
@@ -144,18 +139,21 @@ To use your local copy of Comet Components packages in your dev site instead of 
 Alternatively, you can use a PowerShell script in your project root such as the below. First delete the existing directories, update the paths in the script, and then run it to create symlinks to the dev packages.
 
 :::details PowerShell script to create symlinks from the dev packages to a WordPress installation
+
 ```powershell
 # Check if running as administrator
-function Test-Admin {
-	$currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-	return $currentUser.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+function Test-Admin
+{
+    $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    return $currentUser.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
 # If not running as admin, restart the script with elevation
-if (-not (Test-Admin)) {
-	Write-Host "Requesting administrative privileges..." -ForegroundColor Yellow
-	Start-Process powershell.exe -ArgumentList "-NoExit -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
-	exit
+if (-not (Test-Admin))
+{
+    Write-Host "Requesting administrative privileges..." -ForegroundColor Yellow
+    Start-Process powershell.exe -ArgumentList "-NoExit -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
 }
 
 $PROJECT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -166,91 +164,106 @@ $USER_DIR = "C:\Users\$CURRENT_USER"
 # This assumes we're in a site in C:/USERNAME/LocalSites, and other repos are in C:/USERNAME/PHPStormProjects
 # Remove the paths to any plugins you're not using
 $symlinks = @(
-	@{ destination = "$PROJECT_DIR\app\public\wp-content\plugins\comet-plugin"; source = "$USER_DIR\PHPStormProjects\comet-components\packages\comet-plugin" }
-	@{ destination = "$PROJECT_DIR\app\public\wp-content\plugins\comet-calendar"; source = "$USER_DIR\PHPStormProjects\comet-components\packages\comet-calendar" },
-	@{ destination = "$PROJECT_DIR\app\public\wp-content\themes\comet-canvas"; source = "$USER_DIR\PHPStormProjects\comet-components\packages\comet-canvas" },
-	@{ destination = "$PROJECT_DIR\app\public\wp-content\plugins\comet-table-block"; source = "$USER_DIR\PHPStormProjects\comet-table-block" }
+    @{ destination = "$PROJECT_DIR\app\public\wp-content\plugins\comet-plugin"; source = "$USER_DIR\PHPStormProjects\comet-components\packages\comet-plugin" }
+    @{ destination = "$PROJECT_DIR\app\public\wp-content\plugins\comet-calendar"; source = "$USER_DIR\PHPStormProjects\comet-components\packages\comet-calendar" },
+    @{ destination = "$PROJECT_DIR\app\public\wp-content\themes\comet-canvas"; source = "$USER_DIR\PHPStormProjects\comet-components\packages\comet-canvas" }
 )
 
 # Function to create directories if they don't exist
-function Ensure-DirectoryExists {
-	param (
-		[string]$directoryPath
-	)
-	if (-not (Test-Path $directoryPath)) {
-		New-Item -ItemType Directory -Path $directoryPath -Force | Out-Null
-		Write-Host "Created directory: $directoryPath"
-	}
+function Ensure-DirectoryExists
+{
+    param (
+        [string]$directoryPath
+    )
+    if (-not (Test-Path $directoryPath))
+    {
+        New-Item -ItemType Directory -Path $directoryPath -Force | Out-Null
+        Write-Host "Created directory: $directoryPath"
+    }
 }
 
 # Function to create symbolic links for both files and directories
-function Create-Symlink {
-	param (
-		[string]$realPath,
-		[string]$symlinkPath
-	)
+function Create-Symlink
+{
+    param (
+        [string]$realPath,
+        [string]$symlinkPath
+    )
 
-	# Ensure the real path exists
-	Ensure-DirectoryExists -directoryPath $realPath
-	$resolvedRealPath = Resolve-Path -Path $realPath
+    # Ensure the real path exists
+    Ensure-DirectoryExists -directoryPath $realPath
+    $resolvedRealPath = Resolve-Path -Path $realPath
 
-	# Ensure the parent directory of the symlink exists
-	$symlinkDir = Split-Path -Parent $symlinkPath
-	Ensure-DirectoryExists -directoryPath $symlinkDir
+    # Ensure the parent directory of the symlink exists
+    $symlinkDir = Split-Path -Parent $symlinkPath
+    Ensure-DirectoryExists -directoryPath $symlinkDir
 
-	# Create the symlink
-	if (!(Test-Path $symlinkPath)) {
-		Write-Host "Creating directory symlink: $symlinkPath -> $resolvedRealPath"
-		New-Item -ItemType SymbolicLink -Path $symlinkPath -Target $resolvedRealPath | Out-Null
-	}
-	else {
-		$item = Get-Item $symlinkPath -Force
-		if ($item.LinkType -eq "SymbolicLink") {
-			Write-Host "Symlink already exists: $symlinkPath"
-		}
-		else {
-			Write-Host "Warning: Path exists but is not a symlink: $symlinkPath. Deleting folder and symlinking to $resolvedRealPath"
-			Remove-Item -Path $symlinkPath -Recurse
-			New-Item -ItemType SymbolicLink -Path $symlinkPath -Target $resolvedRealPath | Out-Null
-		}
-	}
+    # Create the symlink
+    if (!(Test-Path $symlinkPath))
+    {
+        Write-Host "Creating directory symlink: $symlinkPath -> $resolvedRealPath"
+        New-Item -ItemType SymbolicLink -Path $symlinkPath -Target $resolvedRealPath | Out-Null
+    }
+    else
+    {
+        $item = Get-Item $symlinkPath -Force
+        if ($item.LinkType -eq "SymbolicLink")
+        {
+            Write-Host "Symlink already exists: $symlinkPath"
+        }
+        else
+        {
+            Write-Host "Warning: Path exists but is not a symlink: $symlinkPath. Deleting folder and symlinking to $resolvedRealPath"
+            Remove-Item -Path $symlinkPath -Recurse
+            New-Item -ItemType SymbolicLink -Path $symlinkPath -Target $resolvedRealPath | Out-Null
+        }
+    }
 
-	# Confirm symlink creation
-	if (Test-Path $symlinkPath) {
-		$item = Get-Item $symlinkPath -Force
-		if ($item.LinkType -eq "SymbolicLink") {
-			Write-Host "Verified symlink: $symlinkPath -> $( $item.Target )"
-		}
-	}
+    # Confirm symlink creation
+    if (Test-Path $symlinkPath)
+    {
+        $item = Get-Item $symlinkPath -Force
+        if ($item.LinkType -eq "SymbolicLink")
+        {
+            Write-Host "Verified symlink: $symlinkPath -> $( $item.Target )"
+        }
+    }
 }
 
 # Function to safely delete a symlink
-function Remove-Symlink {
-	param (
-		[string]$symlinkPath
-	)
+function Remove-Symlink
+{
+    param (
+        [string]$symlinkPath
+    )
 
-	if (Test-Path $symlinkPath) {
-		$item = Get-Item $symlinkPath -Force
-		if ($item.LinkType -eq "SymbolicLink") {
-			Remove-Item -Path $symlinkPath -Recurse
-			Write-Host "Deleted symlink: $symlinkPath"
-		}
-		else {
-			Write-Host "Warning: Path exists but is not a symlink, skipping deletion: $symlinkPath"
-		}
-	}
-	else {
-		Write-Host "Path does not exist: $symlinkPath"
-	}
+    if (Test-Path $symlinkPath)
+    {
+        $item = Get-Item $symlinkPath -Force
+        if ($item.LinkType -eq "SymbolicLink")
+        {
+            Remove-Item -Path $symlinkPath -Recurse
+            Write-Host "Deleted symlink: $symlinkPath"
+        }
+        else
+        {
+            Write-Host "Warning: Path exists but is not a symlink, skipping deletion: $symlinkPath"
+        }
+    }
+    else
+    {
+        Write-Host "Path does not exist: $symlinkPath"
+    }
 }
 
 # Iterate over each pair of real and symlink directories/files
-foreach ($link in $symlinks) {
-	# Safely remove existing symlink if it exists
-	Remove-Symlink -symlinkPath $link.destination
-	# Create/re-create the symlink
-	Create-Symlink -realPath $link.source -symlinkPath $link.destination
+foreach ($link in $symlinks)
+{
+    # Safely remove existing symlink if it exists
+    Remove-Symlink -symlinkPath $link.destination
+    # Create/re-create the symlink
+    Create-Symlink -realPath $link.source -symlinkPath $link.destination
 }
 ```
+
 :::
