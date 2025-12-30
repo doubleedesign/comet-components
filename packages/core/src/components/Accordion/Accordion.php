@@ -45,7 +45,7 @@ class Accordion extends PanelGroupComponent {
         // Add intro and wrappers
         $this->wrappedComponent = new WrappedPanelGroup(
             array_merge($attributes, [
-                'shortName' => $this->get_shortname()
+                'shortName' => $this->get_shortname() === 'accordion' ? 'accordion-wrapper' : $this->get_shortname(),
             ]),
             $this->beforeComponents,
             $this
