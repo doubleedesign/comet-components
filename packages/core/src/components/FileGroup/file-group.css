@@ -111,6 +111,10 @@
 [data-color-theme=white] .file-group__file__icon {
   color: var(--color-white);
 }
+.file-group__file__content:has(> :only-child) {
+  display: flex;
+  align-items: center;
+}
 .file-group__file__content__title {
   font-weight: var(--font-weight-semibold);
   display: block;

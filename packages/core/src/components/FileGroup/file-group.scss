@@ -1,7 +1,6 @@
 @use '../variables' as *;
 
 .file-group {
-
 	&__file {
 		display: flex;
 		flex-wrap: nowrap;
@@ -35,6 +34,11 @@
 		}
 
 		&__content {
+
+			&:has(> :only-child) {
+				display: flex;
+				align-items: center;
+			}
 
 			&__title {
 				font-weight: var(--font-weight-semibold);

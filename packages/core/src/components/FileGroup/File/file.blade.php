@@ -9,13 +9,15 @@
 		@if ($description)
 			<span class="{{ $bem_prefix }}__content__description">{{ $description }}</span>
 		@endif
-		<span class="{{ $bem_prefix }}__meta">
-			@if ($size)
-				<span class="{{ $bem_prefix }}__content__meta__size">{{ $size }}</span>
-			@endif
-			@if ($uploadDate)
-				<span class="{{ $bem_prefix }}__content__meta__date">{{ $uploadDate }}</span>
-			@endif
-		</span>
+		@if($size || $uploadDate)
+			<span class="{{ $bem_prefix }}__meta">
+				@if ($size)
+					<span class="{{ $bem_prefix }}__content__meta__size">{{ $size }}</span>
+				@endif
+				@if ($uploadDate)
+					<span class="{{ $bem_prefix }}__content__meta__date">{{ $uploadDate }}</span>
+				@endif
+			</span>
+		@endif
 	</span>
 </a>

@@ -8,10 +8,16 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.0
  * @description Display a list of downloadable file links with details about them.
  */
-#[AllowedTags([Tag::DIV])]
-#[DefaultTag(Tag::DIV)]
-class FileGroup extends UIComponent {
+#[AllowedTags([Tag::DIV, Tag::SECTION])]
+#[DefaultTag(Tag::SECTION)]
+class FileGroup extends WrappedLayoutComponent {
     use ColorTheme;
+
+    /**
+     * @var ?string $heading
+     * @description Optional heading for the section.
+     */
+    protected ?string $heading;
 
     /**
      * @param  array  $attributes
@@ -19,13 +25,16 @@ class FileGroup extends UIComponent {
      */
     public function __construct(array $attributes, array $files) {
         $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
-        $innerComponents = array_map(function($file) {
+        if (!isset($attributes['shortName'])) {
+            $attributes['shortName'] = 'files';
+        }
+
+        $fileComponents = array_map(function($file) {
             if ($file instanceof File) {
                 return $file;
             }
 
             return new File([
-                'context'     => 'file-group',
                 'url'         => $file['url'],
                 'title'       => $file['title'],
                 'description' => $file['description'],
@@ -36,23 +45,20 @@ class FileGroup extends UIComponent {
             ]);
         }, $files);
 
-        parent::__construct($attributes, $innerComponents, 'components.FileGroup.file-group');
-    }
+        $updatedInnerComponents = [];
+        if ($attributes['heading']) {
+            $this->heading = $attributes['heading'];
+            array_push($updatedInnerComponents, new Heading([], $this->heading));
+        }
+        array_push($updatedInnerComponents, new Group(
+            [
+                'colorTheme' => $this->colorTheme->value,
+                'shortName'  => 'file-group',
+                'role'       => 'group'
+            ],
+            $fileComponents
+        ));
 
-    protected function get_html_attributes(): array {
-        return array_merge(
-            parent::get_html_attributes(),
-            ['data-color-theme' => $this->colorTheme->value]
-        );
-    }
-
-    public function render(): void {
-        $blade = BladeService::getInstance();
-
-        echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes(),
-            'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
-        ])->render();
+        parent::__construct($attributes, $updatedInnerComponents, 'components.FileGroup.file-group');
     }
 }
