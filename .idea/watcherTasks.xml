@@ -121,7 +121,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="false">
+    <TaskOptions isEnabled="true">
       <option name="arguments" value="$FileName$:$FileNameWithoutExtension$.css" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -136,7 +136,7 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="sass" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="ACF plugin" />
+      <option name="scopeName" value="WP plugin ACF" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />
       <envs />

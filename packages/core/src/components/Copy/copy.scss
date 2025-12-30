@@ -2,4 +2,7 @@
 	&__container {
 		display: block;
 	}
+
+	// Warning: If the Copy component is given context and shortName values, it will not have the .copy class.
+	// CSS here should be very minimal, as most typography belongs in common.scss
 }
