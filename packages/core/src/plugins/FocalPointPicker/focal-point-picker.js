@@ -1,6 +1,6 @@
 import * as Vue from 'vue';
 import { loadModule } from '../vue-wrapper/src/vue3-sfc-loader.esm.js';
-import { BASE_PATH, vueSfcLoaderOptions } from '../vue-wrapper/src';
+import { BASE_PATH, getVueSfcLoaderOptions } from '../vue-wrapper/src';
 import Vueform from '@vueform/vueform';
 import vueformConfig from './vueform.config';
 
@@ -19,8 +19,8 @@ export function init() {
 							moduleCache: {
 								vue: Vue
 							},
-							getFile: vueSfcLoaderOptions.getFile,
-							addStyle: vueSfcLoaderOptions.addStyle,
+							getFile: getVueSfcLoaderOptions().getFile,
+							addStyle: getVueSfcLoaderOptions().addStyle,
 							async handleModule(type, getContentData, path, options) {
 								if (type === ".vue") {
 									await options.addStyle(path);

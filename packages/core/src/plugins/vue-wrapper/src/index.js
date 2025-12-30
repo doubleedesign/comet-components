@@ -1,7 +1,14 @@
 import VueLoader from './vue-loader.js';
+
 const Vue = await VueLoader;
 
-export const vueSfcLoaderOptions = {
+/**
+ * Get Vue SFC Loader options.
+ * Optionally pass a targetDocument to ensure styles are added to the correct document context (e.g., when loading in an iframe).
+ * @param {{targetDocument: Document}} options
+ * @returns {import('vue3-sfc-loader').VueSfcLoaderOptions}
+ */
+export const getVueSfcLoaderOptions = ({targetDocument} = {targetDocument: document}) => ({
 	moduleCache: {vue: Vue},
 	pathResolve({refPath, relPath}, options) {
 		// Fix import relative path resolution
@@ -40,11 +47,11 @@ export const vueSfcLoaderOptions = {
 		const dom = new DOMParser().parseFromString(await res.text(), "text/html");
 		const css = Array.from(dom.head.children).find((element) => element.tagName === "STYLE");
 		if (css?.textContent) {
-			const style = document.createElement("style");
+			const style = targetDocument.createElement("style");
 			style.setAttribute("data-vue-component", fileUrl.split("/").pop());
 			style.type = "text/css";
 			style.textContent = css.textContent;
-			document.body.appendChild(style);
+			targetDocument.body.appendChild(style);
 		}
 	},
 	async handleModule(type, getContentData, path, options) {
@@ -52,7 +59,7 @@ export const vueSfcLoaderOptions = {
 			await options.addStyle(path);
 		}
 	}
-};
+});
 
 export const BASE_PATH = (function () {
 	// NOTE: If we are loading from an implementation, the <script> tag for dist.js needs to have the data-base-path attribute set to
@@ -79,5 +86,5 @@ export const BASE_PATH = (function () {
 	}
 
 	// Otherwise, assume vendor directory path
-	return "/vendor/doubleedesign/comet-components-core/packages/core/";
+	return "/vendor/doubleedesign/comet-components-core/";
 })();
