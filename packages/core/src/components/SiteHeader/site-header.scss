@@ -274,6 +274,22 @@
 					}
 				}
 			}
+
+			// If there is a top-level aria-current=page AND a top-level data-current-parent="true", only highlight the aria-current=page item
+			&:has(&__item > [aria-current="page"]):has([data-current-parent="true"]) {
+				[data-current-parent="true"] > a {
+					text-decoration-color: transparent !important;
+					color: inherit !important;
+
+					&:after {
+						opacity: 0;
+					}
+
+					&:hover, &:focus, &:active {
+						color: var(--color-secondary) !important;
+					}
+				}
+			}
 		}
 
 		// Submenu

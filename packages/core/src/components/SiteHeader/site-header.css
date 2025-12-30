@@ -206,6 +206,16 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
   opacity: 1;
   height: auto;
 }
+.site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a {
+  text-decoration-color: transparent !important;
+  color: inherit !important;
+}
+.site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:after {
+  opacity: 0;
+}
+.site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:hover, .site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:focus, .site-header__menu__list:has(.site-header__menu__list__item > [aria-current=page]):has([data-current-parent=true]) [data-current-parent=true] > a:active {
+  color: var(--color-secondary) !important;
+}
 .site-header__menu__sub-menu {
   margin-top: 0;
   position: absolute;
