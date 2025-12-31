@@ -4094,75 +4094,41 @@ article > .container, article > [class$=__container] {
 
 .separator {
   border: 0;
-  margin: var(--spacing-lg) 0;
   height: 2px;
+  margin: var(--spacing-lg) auto;
+  padding-inline: var(--spacing-md);
+  position: relative;
 }
-.separator[data-color-theme=primary] {
-  background-color: var(--color-primary);
+section + .separator, .separator + section {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
-.separator[data-color-theme=secondary] {
-  background-color: var(--color-secondary);
+.separator:before {
+  content: "";
+  height: 2px;
+  background: var(--theme-color);
+  position: absolute;
+  left: var(--spacing-md);
+  right: var(--spacing-md);
+  top: 0;
 }
-.separator[data-color-theme=accent] {
-  background-color: var(--color-accent);
+.separator[data-size=fullwidth] {
+  max-width: 100vw;
 }
-.separator[data-color-theme=info] {
-  background-color: var(--color-info);
+.separator[data-size=wide] {
+  max-width: var(--width-wide);
 }
-.separator[data-color-theme=warning] {
-  background-color: var(--color-warning);
+.separator[data-size=narrow] {
+  max-width: var(--width-narrow);
 }
-.separator[data-color-theme=success] {
-  background-color: var(--color-success);
-}
-.separator[data-color-theme=error] {
-  background-color: var(--color-error);
-}
-.separator[data-color-theme=light] {
-  background-color: var(--color-light);
-}
-.separator[data-color-theme=dark] {
-  background-color: var(--color-dark);
-}
-.separator[data-color-theme=white] {
-  background-color: var(--color-white);
-}
-.separator--dots {
+.separator[data-style=dots] {
   background-color: transparent !important;
   text-align: center;
   height: 2rem;
 }
-.separator--dots[data-color-theme=primary]:before {
-  color: var(--color-primary);
-}
-.separator--dots[data-color-theme=secondary]:before {
-  color: var(--color-secondary);
-}
-.separator--dots[data-color-theme=accent]:before {
-  color: var(--color-accent);
-}
-.separator--dots[data-color-theme=info]:before {
-  color: var(--color-info);
-}
-.separator--dots[data-color-theme=warning]:before {
-  color: var(--color-warning);
-}
-.separator--dots[data-color-theme=success]:before {
-  color: var(--color-success);
-}
-.separator--dots[data-color-theme=error]:before {
-  color: var(--color-error);
-}
-.separator--dots[data-color-theme=light]:before {
-  color: var(--color-light);
-}
-.separator--dots[data-color-theme=dark]:before {
-  color: var(--color-dark);
-}
-.separator--dots[data-color-theme=white]:before {
-  color: var(--color-white);
-}
-.separator--dots:before {
+.separator[data-style=dots]:before {
+  background: 0;
+  color: var(--theme-color);
   content: "······";
   font-size: 2rem;
   letter-spacing: 2rem;

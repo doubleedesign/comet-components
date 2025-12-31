@@ -3,7 +3,8 @@
 WordPress parent theme to support the intended implementation of Comet Components [Comet Components](https://cometcomponents.io) in WordPress (for the block editor).
 
 > [!IMPORTANT]  
-> This theme **must** be used with the [Comet Blocks plugin](https://github.com/doubleedesign/comet-plugin-blocks). The theme itself is kept intentionally minimal, with most functionality provided by the plugin for ease of development and maintenance.
+> This theme **must
+** be used with the [Comet Blocks plugin](https://github.com/doubleedesign/comet-plugin-blocks). The theme itself is kept intentionally minimal, with most functionality provided by the plugin for ease of development and maintenance.
 
 If you're reading this from GitHub, you're seeing the mirror of the [Comet Components Canvas package](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-canvas) that is here for the purposes of publishing to Packagist and installing via Composer.
 
@@ -26,7 +27,8 @@ To ensure theme fonts loaded from Typekit, Google Fonts, Font Awesome, etc load 
 
 #### For CSS files:
 
-- Import them in your child theme's `common.scss` (recommended as this is already set up to be loaded everywhere needed), ensuring that `common.scss` is imported into `style.scss` and `tinymce.scss`
+- Import them in your child theme's `common.scss` (recommended as this is already set up to be loaded everywhere needed), ensuring that
+  `common.scss` is imported into `style.scss` and `tinymce.scss`
 - Enqueue them in the child theme's `functions.php` file on the following action hooks:
     - `wp_enqueue_scripts` for the front-end, using the `wp_enqueue_style` function
     - `enqueue_block_assets` with an admin check (to ensure no duplicate front-end loading) for the block editor
@@ -50,9 +52,9 @@ There are filters available for child themes to access Comet Components' global 
 | `comet_canvas_default_icon_prefix` | `string $prefix`  | Allows setting a default icon prefix for all Icon components. Default is `fa-solid`.                                                                                               |
 | `comet_canvas_theme_colours`       | `array $colours`  | An alternative or supplementary method of setting theme colours. This filter runs _after_ `theme.json` is used to find the colour palette, so if you use both the filter will win. |
 
-In addition, there are some filters to modify attributes for nested components in the provided blocks. This is to ensure consistency across the theme rather than having backend controls for every possible attribute in every individual use case.
-
-These filters are applied in the `render.php` file for the block, so if a filter isn't listed here you can check that file to see if I've forgotten to document one - or add it. They are also intentionally all prefixed with `comet_blocks_` for easy searching.
+In addition, there are some filters to modify attributes for nested components in the provided blocks. This is to ensure consistency across the theme rather than having backend controls for every possible attribute in every individual use case. These filters are applied in the
+`render.php` file for the block, so if a filter isn't listed here you can check that file to see if I've forgotten to document one - or add it. They are also intentionally all prefixed with
+`comet_blocks_` for easy searching.
 
 | Filter                                     | Parameters         | Usage                                                                                                                                  |
 |--------------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------|
@@ -60,11 +62,22 @@ These filters are applied in the `render.php` file for the block, so if a filter
 | `comet_blocks_cta_button_group_attributes` | `array $attrs`     | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`.                                    |
 | `comet_blocks_child_pages_card_as_link`    | 	  `bool $as_link` | Set whether the cards in the Child Pages block render as links. Default is `false`, which renders them with a "Read more" button link. |
 
+### Modifying block field options
+
+There are also some filters available to add or modify options for the ACF fields for some components:
+
+| Filter                          | Parameters      | Usage                                                                                           |
+|---------------------------------|-----------------|-------------------------------------------------------------------------------------------------|
+| `comet_blocks_separator_styles` | `array $styles` | Add style options for the Separator block. This is an associative array in key => label format. |
+
 ### Troubleshooting
 
 #### Blocks not rendering in an iframe in the editor / styles leaking into block previews from WordPress core admin styles
 
-**All** blocks must use `apiVersion: 3` for any blocks to render in an iframe in the editor. If blocks are not rendered in an iframe, WordPress core admin styles may affect the preview appearance due to CSS leakage. If the editor is not loading blocks in an iframe and styles like `.wp-core-ui` are affecting the appearance of blocks, check all `block.json` files in the Comet plugin and theme, client plugin and theme, and third-party plugins that add blocks to ensure they are using
+**All** blocks must use
+`apiVersion: 3` for any blocks to render in an iframe in the editor. If blocks are not rendered in an iframe, WordPress core admin styles may affect the preview appearance due to CSS leakage. If the editor is not loading blocks in an iframe and styles like
+`.wp-core-ui` are affecting the appearance of blocks, check all
+`block.json` files in the Comet plugin and theme, client plugin and theme, and third-party plugins that add blocks to ensure they are using
 `apiVersion: 3`.
 
 You can override this setting for third-party blocks in `block-registry.js` or an equivalent file in the client plugin. For example:

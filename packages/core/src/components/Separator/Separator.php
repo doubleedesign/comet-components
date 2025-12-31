@@ -11,38 +11,55 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::HR])]
 #[DefaultTag(Tag::HR)]
 class Separator extends Renderable {
+    use BlockElementModifier;
+    use ColorTheme;
+    use LayoutContainerSize;
+    use NestedState;
+    protected string $lineStyle = '';
+
     /**
      * @var ThemeColor $color
      */
     protected ThemeColor $color = ThemeColor::PRIMARY;
 
     public function __construct(array $attributes) {
-        $classes = $attributes['classes'] ?? [];
-        if (isset($attributes['className'])) {
-            $classes[] = str_replace('is-style-', 'separator--', $attributes['className']);
-        }
-
-        parent::__construct(
-            array_merge($attributes, ['classes' => $classes]),
-            'components.Separator.separator'
-        );
-
-        $this->color = ThemeColor::tryFrom($attributes['color'] ?? '') ?? ThemeColor::tryFrom($attributes['backgroundColor'] ?? '') ?? $this->color;
+        parent::__construct($attributes, 'components.Separator.separator');
+        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
+        $this->set_size_from_attrs($attributes, ContainerSize::DEFAULT);
+        $this->set_is_nested($attributes['isNested'] ?? false);
+        $this->init_bem_structure($this->bladeFile);
+        $this->lineStyle = $attributes['style'] ?? '';
     }
 
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-        $attributes['data-color-theme'] = $this->color->value;
+        if (!$this->isNested && isset($this->size)) {
+            $attributes['data-size'] = $this->size->value;
+        }
+
+        if ($this->lineStyle) {
+            $attributes['data-style'] = $this->lineStyle;
+        }
 
         return $attributes;
+    }
+
+    protected function get_inline_styles(): array {
+        $styles = parent::get_inline_styles();
+
+        if ($this->colorTheme) {
+            $styles['--theme-color'] = "var(--color-{$this->colorTheme->value})";
+        }
+
+        return $styles;
     }
 
     public function render(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => implode(' ', $this->get_filtered_classes()),
+            'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
         ])->render();
     }
