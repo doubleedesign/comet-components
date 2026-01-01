@@ -32,12 +32,12 @@ class CardList extends WrappedLayoutComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         $headingComponent = $attributes['heading'] ? new Heading([], $attributes['heading']) : null;
-        $this->gridLayout = $attributes['gridLayout'] ?? $this->gridLayout;
+        $this->gridLayout = $attributes['gridLayout'] ?? $this->gridLayout; // TODO: Do we need this? Don't seem to be using it
         $this->maxPerRow = $attributes['maxPerRow'] ?? $this->maxPerRow;
 
         // Add a wrapper to each Card so that it can use container queries based on that
         $updatedInnerComponents = array_map(function($component) {
-            return new Group(['context'    => 'card-list__list', 'shortName'  => 'item'], [$component]);
+            return new Group(['context' => 'card-list__list', 'shortName'  => 'item'], [$component]);
         }, $innerComponents);
 
         // And a wrapper around the whole group to separate it from the heading
@@ -53,7 +53,7 @@ class CardList extends WrappedLayoutComponent {
 
         parent::__construct(
             $attributes,
-            $headingComponent ? [$headingComponent, $wrappedCards] : $wrappedCards,
+            $headingComponent ? [$headingComponent, $wrappedCards] : [$wrappedCards],
             'components.CardList.card-list'
         );
     }
