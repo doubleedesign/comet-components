@@ -185,7 +185,7 @@
       <option name="arguments" value="-c" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
-      <option name="exitCodeBehavior" value="ALWAYS" />
+      <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="jsx" />
       <option name="immediateSync" value="true" />
       <option name="name" value="Rollup - Blocks plugin" />
