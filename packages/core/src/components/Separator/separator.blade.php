@@ -1,1 +1,2 @@
-<hr @class($classes) @attributes($attributes)>
+<hr @class($classes) @attributes($attributes)/>
+

@@ -42,3 +42,11 @@
 .page-header[data-background="white"] + .page-section[data-background="white"]:has(.page-with-sidebar) {
 	padding-block-start: var(--spacing-md);
 }
+
+.separator-wrapper {
+	display: contents;
+
+	> hr {
+		margin-block: 0;
+	}
+}

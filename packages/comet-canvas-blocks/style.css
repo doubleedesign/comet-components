@@ -30,4 +30,11 @@
   padding-block-start: var(--spacing-md);
 }
 
+.separator-wrapper {
+  display: contents;
+}
+.separator-wrapper > hr {
+  margin-block: 0;
+}
+
 /*# sourceMappingURL=style.css.map */
