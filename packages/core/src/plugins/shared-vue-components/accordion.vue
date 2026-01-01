@@ -24,24 +24,26 @@ export default {
 				return {
 					summary: {
 						...panel.summary,
-						classes: panel?.summary?.classes?.map((className: string) => className.replace('responsive-panel', 'accordion__panel')) ?? [],
+						classes: panel?.summary?.classes?.map((className: string) => {
+							return className.replace('responsive-panels', 'accordion');
+						}) ?? [],
 						title: {
 							...panel.summary.title,
 							classes: panel?.summary?.title?.classes?.map((className: string) => {
-								return className.replace('responsive-panel', 'accordion__panel');
+								return className.replace('responsive-panels', 'accordion');
 							}) ?? []
 						},
 						subtitle: {
 							...panel?.summary?.subtitle,
 							classes: panel?.summary?.subtitle?.classes?.map((className: string) => {
-								return className.replace('responsive-panel', 'accordion__panel');
+								return className.replace('responsive-panels', 'accordion');
 							}) ?? []
 						},
 					},
 					content: {
 						...panel.content,
 						classes: panel?.content?.classes?.map((className: string) => {
-							return className.replace('responsive-panel', 'accordion__panel');
+							return className.replace('responsive-panels', 'accordion');
 						}) ?? []
 					}
 				};
@@ -200,7 +202,7 @@ export default {
     .accordion__panel {
         display: contents; /* allows open attribute to be ignored and contents to animate with CSS transitions */
 
-        .accordion__panel__title {
+        summary {
             cursor: pointer;
             transition: all 0.2s linear;
             padding: var(--spacing-sm);
@@ -214,7 +216,7 @@ export default {
 
             /* Subtitle is optional, so handle differently if it's there */
 
-            &:has(.accordion__panel__title__subtitle) {
+            &:has([class$="__subtitle"]) {
                 display: grid;
                 width: 100%;
                 grid-template-columns: 1fr auto;
@@ -227,13 +229,13 @@ export default {
                 color: var(--theme-color-inverse);
             }
 
-            .accordion__panel__title__main {
+            [class$="__title__main"] {
                 grid-column: 1;
                 grid-row: 1;
                 font-weight: var(--font-weight-semibold);
             }
 
-            .accordion__panel__title__subtitle {
+            [class$="__title__subtitle"] {
                 grid-column: 1;
                 grid-row: 2;
             }

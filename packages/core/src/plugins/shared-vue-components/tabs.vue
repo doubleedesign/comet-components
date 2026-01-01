@@ -27,15 +27,21 @@ export default {
 				return ({
 					wrapper: {
 						...panel.summary,
-						classes: panel.summary.classes.map((className: string) => className.replace('responsive-panel', 'tabs__tab-list__item')),
+						classes: panel.summary.classes.map((className: string) => {
+							return className.replace('responsive-panels__panel', 'tabs__tab-list__item');
+						})
 					},
 					title: {
 						...panel.summary.title,
-						classes: panel.summary.title.classes.map((className: string) => className.replace('responsive-panel', 'tabs__tab-list__item')),
+						classes: panel.summary.title.classes.map((className: string) => {
+							return className.replace('responsive-panels__panel', 'tabs__tab-list__item');
+						}),
 					},
 					subtitle: {
 						...panel?.summary?.subtitle,
-						classes: panel?.summary?.subtitle?.classes.map((className: string) => className.replace('responsive-panel', 'tabs__tab-list__item')),
+						classes: panel?.summary?.subtitle?.classes.map((className: string) => {
+							return className.replace('responsive-panels__panel', 'tabs__tab-list__item');
+						}),
 					}
 				});
 			}) : this.panels.map((panel: PanelItem) => ({
@@ -48,7 +54,11 @@ export default {
 			})),
 			contents: this.panels.map((panel: PanelItem) => ({
 				...panel.content,
-				classes: panel.content.classes.map((className: string) => className.replace('responsive-panel__content', 'tabs__content__tab-panel')),
+				classes: panel.content.classes.map((className: string) => {
+					return className
+						.replace('responsive-panels', 'tabs__content')
+						.replace('panel__content', 'panel');
+				}),
 			})),
 			// Get the colour theme to pass down in more specific ways
 			colorTheme: this.$attrs['data-color-theme'] || 'primary',
@@ -169,13 +179,6 @@ export default {
             display: block;
             margin-block: 0;
 
-            .tabs__tab-list__item__title {
-                .tabs__tab-list__item__title__main,
-                .tabs__tab-list__item__title__subtitle {
-                    display: block;
-                }
-            }
-
             [role="tab"] {
                 text-align: match-parent;
                 cursor: pointer;
@@ -192,6 +195,10 @@ export default {
                 &[aria-selected="true"],
                 &:hover, &:focus, &:active {
                     background: rgb(255 255 255 / 0.25);
+                }
+
+                > span, > small {
+                    display: block;
                 }
             }
         }
