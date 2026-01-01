@@ -96,4 +96,9 @@ wp.hooks.addFilter('blocks.registerBlockType', 'comet/use-new-block-api', (setti
 });
 ```
 
+#### Warning: The tag <accordion> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.
+
+This error occurs in the block editor with the Comet Components that use VueJS (so not just `<accordion>`), when `SCRIPT_DEBUG` is enabled in
+`wp-config.php`. The workaround (until I can find a better solution) is to set `SCRIPT_DEBUG` to `false` when you don't actively need to debug something else.
+ 
 
