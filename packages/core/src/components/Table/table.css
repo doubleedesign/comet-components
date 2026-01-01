@@ -10,6 +10,9 @@
 .table:first-child, [class$=__table]:first-child {
   margin-block-start: 0;
 }
+.table:last-child, [class$=__table]:last-child {
+  margin-block-end: 0;
+}
 .table th, [class$=__table] th, .table td, [class$=__table] td {
   text-align: start;
   padding: var(--spacing-xs);
@@ -31,6 +34,9 @@
 }
 .table__header {
   border-bottom: 3px solid color-mix(in srgb, var(--color-light) 80%, black);
+}
+.table__body__row th[scope=row] {
+  width: 25%;
 }
 
 /*# sourceMappingURL=table.css.map */

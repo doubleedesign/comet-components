@@ -8,6 +8,7 @@
 	position: relative;
 
 	// If this is between two <section>s, remove vertical margin
+	// TODO: Tweak this so there's spacing if it's something like a call-to-action
 	section + &,
 	& + section {
 		margin-block-start: 0;
