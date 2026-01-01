@@ -199,11 +199,27 @@ form {
 		font-family: var(--font-family-body);
 	}
 
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="number"],
+	select {
+		min-height: 2.5rem;
+		display: flex;
+		align-items: center;
+		align-content: center;
+	}
+
 	input[type="submit"],
 	input[type="button"] {
-		font-family: var(--font-family-body);
-		font-size: 1rem;
 	}
+}
+
+.inline-message {
+	color: var(--theme-color);
 }
 
 // See packages/core/src/base/types/AspectRatio for what these should be

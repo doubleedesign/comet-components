@@ -191,10 +191,21 @@ form textarea {
   padding: var(--spacing-xs) var(--spacing-sm);
   font-family: var(--font-family-body);
 }
-form input[type=submit],
-form input[type=button] {
-  font-family: var(--font-family-body);
-  font-size: 1rem;
+form input[type=text],
+form input[type=email],
+form input[type=password],
+form input[type=search],
+form input[type=tel],
+form input[type=url],
+form input[type=number],
+form select {
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.inline-message {
+  color: var(--theme-color);
 }
 
 [data-aspect-ratio=square] {
