@@ -1,11 +1,16 @@
 {
     "name": "CardList",
     "description": null,
-    "extends": "LayoutComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "ariaAttrs": {
+            "type": "array",
+            "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+            "required": true
+        },
         "backgroundColor": {
             "type": "ThemeColor",
             "description": "Background colour keyword",
@@ -51,11 +56,10 @@
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
-        "gridLayout": {
-            "type": "bool",
-            "description": "Whether to use a grid layout for the cards.",
-            "required": true,
-            "default": "true"
+        "dataAttrs": {
+            "type": "array",
+            "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
         },
         "hAlign": {
             "type": "Alignment",
@@ -69,6 +73,10 @@
             ],
             "default": "match-parent"
         },
+        "heading": {
+            "type": "string",
+            "description": "Optional heading for the card list."
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier"
@@ -79,9 +87,21 @@
             "required": true,
             "default": false
         },
+        "layout": {
+            "type": "GroupLayout",
+            "description": "Layout style for grouping elements together.",
+            "required": true,
+            "supported": [
+                "list",
+                "grid"
+            ],
+            "default": "list"
+        },
         "maxPerRow": {
             "type": "int",
-            "description": "The maximum number of cards to display per row in grid layout. If not set, will be derived from the number of cards and their divisibility by 4, 3, or 2."
+            "description": "Maximum number of items to display per row in grid layouts.",
+            "required": true,
+            "default": 3
         },
         "shortName": {
             "type": "string",
@@ -97,9 +117,10 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "section"
             ],
-            "default": "div"
+            "default": "section"
         },
         "testId": {
             "type": "string",
@@ -116,6 +137,12 @@
                 "match-parent"
             ],
             "default": "match-parent"
+        },
+        "withContainer": {
+            "type": "bool",
+            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {
@@ -126,6 +153,7 @@
     },
     "traits": [
         "ColorTheme",
+        "GroupLayoutType",
         "BackgroundColor",
         "LayoutAlignment",
         "NestedState",

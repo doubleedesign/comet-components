@@ -18,13 +18,17 @@ class Breadcrumbs extends UIComponent {
      */
     public function __construct(array $attributes, array $breadcrumbs) {
         $listItems = array_map(function($breadcrumb) {
-            $linkAttributes = ['href' => trim($breadcrumb['url'] !== '') ? $breadcrumb['url'] : '#'];
+            $linkAttributes = [];
             if (isset($breadcrumb['current']) && $breadcrumb['current']) {
                 $linkAttributes['aria-current'] = 'page';
             }
 
             ob_start();
-            $link = new Link($linkAttributes, $breadcrumb['title']);
+            $link = new Link([
+                ...$linkAttributes,
+                'label'      => $breadcrumb['title'],
+                'url'        => $breadcrumb['url'] ?? '#',
+            ]);
             $link->render();
             $linkHtml = ob_get_clean();
 

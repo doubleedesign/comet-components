@@ -24,7 +24,6 @@
 
 		&[data-background],
 		[data-background] &,
-		.page-section &,
 		.site-header & {
 			max-width: calc(100vw - var(--spacing-md) * 2);
 		}
@@ -49,6 +48,15 @@
 		.page-section &,
 		.site-header & {
 			max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
+		}
+	}
+
+	&[data-halign] {
+		> h2:first-child {
+			width: 100%;
+			flex-basis: 100%;
+			display: flex;
+			justify-content: inherit;
 		}
 	}
 

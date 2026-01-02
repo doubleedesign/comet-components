@@ -62,10 +62,21 @@ class Card extends UIComponent {
         $this->aboveContentComponents = $aboveContentComponents ?? null;
         $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
         $this->set_is_nested($attributes['isNested'] ?? true);
+        $this->set_color_theme_from_attrs($attributes);
+        $this->set_background_color_from_attrs($attributes);
+        $this->set_orientation_from_attrs($attributes);
 
         $innerComponents = $this->aboveContentComponents ?? [];
         if (!empty($this->heading)) {
-            array_push($innerComponents, new Heading(['level' => 3], $this->heading));
+            $iconPrefix = Config::getInstance()->get_icon_prefix();
+            $preferHorizontal = $this->orientation && $this->orientation === Orientation::HORIZONTAL;
+            array_push($innerComponents, new Heading([
+                'level'   => 3,
+                'classes' => [$preferHorizontal ? 'is-style-small' : '']
+            ],
+                // TODO: Make this icon properly configurable - different icon, different library etc. Maybe a centralised set of icons in the config?
+                $this->heading . ($this->cardAsLink ? "<i class='$iconPrefix fa-arrow-right'></i>" : '')
+            ));
         }
         if (!empty($this->bodyText)) {
             array_push($innerComponents, new Paragraph([], $this->bodyText));
@@ -81,9 +92,6 @@ class Card extends UIComponent {
 
         parent::__construct($attributes, $innerComponents, 'components.Card.card');
 
-        $this->set_color_theme_from_attrs($attributes);
-        $this->set_background_color_from_attrs($attributes);
-        $this->set_orientation_from_attrs($attributes);
         // Optional advanced image configuration
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);
         $this->set_focal_point_from_attrs($attributes);
@@ -105,7 +113,7 @@ class Card extends UIComponent {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
         if (isset($this->orientation) && !$this->orientation->isDefault()) {
-            $attributes['data-layout-orientation'] = $this->orientation->value;
+            $attributes['data-orientation'] = $this->orientation->value;
         }
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;

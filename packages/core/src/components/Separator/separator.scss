@@ -7,12 +7,9 @@
 	padding-inline: var(--spacing-md); // same as a container
 	position: relative;
 
-	// If this is between two <section>s, remove vertical margin
-	// TODO: Tweak this so there's spacing if it's something like a call-to-action
 	section + &,
 	& + section {
-		margin-block-start: 0;
-		margin-block-end: 0;
+		margin-block: 0;
 	}
 
 	&:before {
@@ -40,7 +37,7 @@
 	&[data-style="dots"] {
 		background-color: transparent !important;
 		text-align: center;
-		height: 2rem;
+		height: 1.75rem;
 
 		&:before {
 			background: 0;
@@ -48,6 +45,7 @@
 			content: "······";
 			font-size: 2rem;
 			letter-spacing: 2rem;
+			line-height: 1;
 		}
 	}
 }

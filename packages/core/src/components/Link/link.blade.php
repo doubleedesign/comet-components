@@ -2,5 +2,5 @@
 	@if ($icon)
 		<i class="{{ $iconPrefix }} {{ $icon }}"></i>
 	@endif
-	<span>{!! $content !!}</span>
+	@include('components.Link.partials.link-text')
 </a>

@@ -17,6 +17,9 @@
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
+        "description": {
+            "type": "string"
+        },
         "icon": {
             "type": "string",
             "description": "Icon class name"
@@ -29,6 +32,9 @@
         "id": {
             "type": "string",
             "description": "Unique identifier"
+        },
+        "label": {
+            "type": "string"
         },
         "shortName": {
             "type": "string",
@@ -48,15 +54,16 @@
             ],
             "default": "a"
         },
+        "target": {
+            "type": "string"
+        },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
+        },
+        "url": {
+            "type": "string"
         }
-    },
-    "content": {
-        "type": "string",
-        "description": "Plain text or basic HTML",
-        "required": true
     },
     "traits": [
         "BlockElementModifier",

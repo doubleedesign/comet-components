@@ -77,17 +77,53 @@
 	flex-direction: column;
 }
 
-.layout-block {
-	// Allow the alignment inheritance to cascade down to children if the parent of this element has this set
-	&:not([data-halign]) {
-		justify-content: inherit;
+// Default group layout behaviour
+[data-group-layout="grid"] {
+	width: 100%;
+	display: grid;
+	gap: var(--spacing-md);
+	container-type: inline-size;
+	grid-template-columns: 1fr;
+
+	&[data-max-per-row="2"], &[data-max-per-row="4"] {
+		@include container-width-up('small') {
+			// Only go to 2 columns if there are 2 or more items
+			&:has(:nth-child(2)) {
+				grid-template-columns: repeat(2, 1fr);
+				justify-content: inherit;
+			}
+		}
 	}
 
-	&:not([data-valign]) {
-		align-items: inherit;
+	&[data-max-per-row="3"] {
+		@include container-width-up('small') {
+			// Centre items if there is fewer than 3
+			grid-template-columns: repeat(auto-fit, 33%);
+			justify-content: inherit;
+
+			// Ensure 3+ lays out as 3 columns
+			&:has(:nth-child(3)) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+	}
+
+	&[data-max-per-row="4"] {
+		@include container-width-up('narrower') {
+			// Centre items if there is fewer than 4
+			grid-template-columns: repeat(auto-fit, 25%);
+			justify-content: inherit;
+
+			// Ensure 4+ lays out as 4 columns
+			&:has(:nth-child(4)) {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
 	}
 }
 
+
+// Basic theme styling for elements with a color theme attribute specified
 @each $name, $color in $colors {
 	[data-color-theme="#{$name}"] {
 		// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
@@ -98,6 +134,7 @@
 
 // Basic theme styling for elements with a text colour attribute specified
 // This should be used sparingly - use the color theme setting as much as is practical
+// I am intending to deprecate this.
 @each $name, $color in $colors {
 	[data-text-color="#{$name}"] {
 		color: var(--color-#{$name});
@@ -112,10 +149,6 @@
 	}
 
 	[data-color-theme="#{$name}"] {
-		h1, h2, h3, h4 {
-			color: var(--color-#{$name});
-		}
-
 		[data-background=#{$name}] & {
 			color: inherit;
 		}
@@ -124,10 +157,6 @@
 	[data-background="#{$name}"] {
 		background-color: var(--color-#{$name});
 		color: var(--readable-color-#{$name});
-
-		&.layout-block:not(.page-section) {
-			@include nested-padding();
-		}
 	}
 
 	// 50/50 gradient backgrounds

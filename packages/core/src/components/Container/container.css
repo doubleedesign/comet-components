@@ -18,7 +18,7 @@ article > .container, article > [class$=__container] {
 .container[data-size=fullwidth], [data-size=fullwidth][class$=__container] {
   max-width: 100vw;
 }
-.container[data-size=fullwidth][data-background], [data-size=fullwidth][data-background][class$=__container], [data-background] .container[data-size=fullwidth], [data-background] [data-size=fullwidth][class$=__container], .page-section .container[data-size=fullwidth], .page-section [data-size=fullwidth][class$=__container], .site-header .container[data-size=fullwidth], .site-header [data-size=fullwidth][class$=__container] {
+.container[data-size=fullwidth][data-background], [data-size=fullwidth][data-background][class$=__container], [data-background] .container[data-size=fullwidth], [data-background] [data-size=fullwidth][class$=__container], .site-header .container[data-size=fullwidth], .site-header [data-size=fullwidth][class$=__container] {
   max-width: calc(100vw - var(--spacing-md) * 2);
 }
 .container[data-size=wide], [data-size=wide][class$=__container] {
@@ -32,6 +32,12 @@ article > .container, article > [class$=__container] {
 }
 .container[data-size=narrow][data-background], [data-size=narrow][data-background][class$=__container], [data-background] .container[data-size=narrow], [data-background] [data-size=narrow][class$=__container], .page-section .container[data-size=narrow], .page-section [data-size=narrow][class$=__container], .site-header .container[data-size=narrow], .site-header [data-size=narrow][class$=__container] {
   max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
+}
+.container[data-halign] > h2:first-child, [data-halign][class$=__container] > h2:first-child {
+  width: 100%;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: inherit;
 }
 .container [data-background=primary] + [data-background*=gradient-primary], [class$=__container] [data-background=primary] + [data-background*=gradient-primary] {
   padding-block-start: 0;

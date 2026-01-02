@@ -124,7 +124,7 @@ export default {
                                :target="item.link_attributes['target'] ?? null"
                                :data-color-theme="item.link_attributes['data-color-theme'] ?? null"
                             >
-                                {{ item.title }}
+                                <span v-html="item.title"></span>
                             </a>
                             <button v-if="item.children.length > 0"
                                     class="site-header__menu__list__item__toggle"
@@ -152,7 +152,7 @@ export default {
                                        :aria-current="child.link_attributes['aria-current'] ?? null"
                                        :tabindex="submenus?.[item.id]?.open ? '0' : '-1'"
                                     >
-                                        {{ child.title }}
+                                        <span v-html="child.title"></span>
                                     </a>
                                 </li>
                             </ul>

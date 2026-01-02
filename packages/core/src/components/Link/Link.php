@@ -19,17 +19,18 @@ class Link extends Renderable {
      * @description Icon class name; for link-group context default value is 'fa-link', or 'fa-arrow-up-right-from-square' if target is '_blank'
      */
     protected ?string $icon;
+    protected ?string $label;
+    protected ?string $description;
+    protected ?string $url;
+    protected ?string $target;
 
-    /**
-     * @var string $content
-     * @description Plain text or basic HTML
-     */
-    protected string $content;
-
-    public function __construct(array $attributes, string $content) {
+    public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.Link.link');
-        $this->content = $content;
         $this->init_bem_structure('components.Link.link', $attributes['context'] ?? null, $attributes['shortName'] ?? null);
+        $this->label = $attributes['label'] ?? $attributes['title'] ?? null;
+        $this->description = $attributes['description'] ?? null;
+        $this->url = $attributes['url'] ?? $attributes['href'] ?? '#';
+        $this->target = $attributes['target'] ?? null;
 
         if (!isset($attributes['icon']) && $this->get_context() === 'link-group') {
             if (isset($attributes['target']) && $attributes['target'] === '_blank') {
@@ -43,18 +44,39 @@ class Link extends Renderable {
     }
 
     public function get_content(): string {
-        return $this->content;
+        $blade = BladeService::getInstance();
+
+        return $blade->make('components.Link.partials.link-text', [
+            'label'       => $this->label,
+            'description' => $this->description,
+            'bem_prefix'  => $this->get_bem_prefix()
+        ])->render();
+    }
+
+    protected function get_html_attributes(): array {
+        $attributes = array_merge(
+            parent::get_html_attributes(),
+            ['href' => $this->url]
+        );
+
+        if ($this->target) {
+            $attributes['target'] = $this->target;
+        }
+
+        return $attributes;
     }
 
     public function render(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes(),
-            'attributes' => $this->get_html_attributes(),
-            'iconPrefix' => $this->iconPrefix ?? null,
-            'icon'       => $this->icon ?? null,
-            'content'    => $this->content
+            'classes'     => $this->get_filtered_classes(),
+            'attributes'  => $this->get_html_attributes(),
+            'iconPrefix'  => $this->iconPrefix ?? null,
+            'icon'        => $this->icon ?? null,
+            'label'       => $this->label,
+            'description' => $this->description,
+            'bem_prefix'  => $this->get_bem_prefix()
         ])->render();
     }
 }

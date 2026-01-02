@@ -69,16 +69,14 @@ class Menu extends UIComponent {
                             ),
                             $item['title']
                         )
-                        : new Link(
-                            array_merge(
-                                $item['link_attributes'] ?? [],
-                                ['context' => $level > 1 && $context
-                                    ? "{$context}__item"
-                                    : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
-                                ],
-                            ),
-                            $item['title']
-                        )
+                        : new Link([
+                            ...$item['link_attributes'],
+                            'label' => $item['title'],
+                            ...(['context' => $level > 1 && $context
+                                ? "{$context}__item"
+                                : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
+                            ])
+                        ])
                 ]
             );
 

@@ -9,7 +9,9 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": []
+            "default": [
+                "separator"
+            ]
         },
         "color": {
             "type": "ThemeColor",
@@ -29,9 +31,61 @@
             ],
             "default": "primary"
         },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ],
+            "default": "primary"
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier"
+        },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+            "required": true,
+            "default": false
+        },
+        "lineStyle": {
+            "type": "string",
+            "required": true,
+            "default": ""
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "required": true,
+            "default": "separator"
+        },
+        "size": {
+            "type": "ContainerSize",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+            "supported": [
+                "default",
+                "wide",
+                "fullwidth",
+                "narrow",
+                "narrower",
+                "small"
+            ],
+            "default": "default"
         },
         "style": {
             "type": "array",
@@ -50,5 +104,10 @@
             "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
-    "traits": []
+    "traits": [
+        "BlockElementModifier",
+        "ColorTheme",
+        "LayoutContainerSize",
+        "NestedState"
+    ]
 }

@@ -58,6 +58,10 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
+h1, h2, h3, h4 {
+  color: var(--theme-color);
+}
+
 h1 {
   font-size: calc(1rem * var(--typescale) * var(--typescale) * var(--typescale));
 }
@@ -260,65 +264,6 @@ form select {
 
 [class*=container][data-size=narrow] .breakout {
   max-width: var(--width-narrow);
-}
-
-.divider {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  margin-block-start: var(--spacing-lg);
-  padding-block: var(--spacing-lg);
-  margin-inline: auto;
-  border: 0;
-}
-.divider[data-color-theme=primary] {
-  border-top: 1px solid var(--color-primary);
-  color: var(--color-primary);
-}
-.divider[data-color-theme=secondary] {
-  border-top: 1px solid var(--color-secondary);
-  color: var(--color-secondary);
-}
-.divider[data-color-theme=accent] {
-  border-top: 1px solid var(--color-accent);
-  color: var(--color-accent);
-}
-.divider[data-color-theme=info] {
-  border-top: 1px solid var(--color-info);
-  color: var(--color-info);
-}
-.divider[data-color-theme=warning] {
-  border-top: 1px solid var(--color-warning);
-  color: var(--color-warning);
-}
-.divider[data-color-theme=success] {
-  border-top: 1px solid var(--color-success);
-  color: var(--color-success);
-}
-.divider[data-color-theme=error] {
-  border-top: 1px solid var(--color-error);
-  color: var(--color-error);
-}
-.divider[data-color-theme=light] {
-  border-top: 1px solid var(--color-light);
-  color: var(--color-light);
-}
-.divider[data-color-theme=dark] {
-  border-top: 1px solid var(--color-dark);
-  color: var(--color-dark);
-}
-.divider[data-color-theme=white] {
-  border-top: 1px solid var(--color-white);
-  color: var(--color-white);
-}
-.divider[data-size=fullwidth] {
-  max-width: calc(100vw - var(--spacing-md) * 2);
-}
-.divider[data-size=wide] {
-  max-width: calc(var(--width-wide) - var(--spacing-md) * 2);
-}
-.divider[data-size=narrow] {
-  max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
 }
 
 /*# sourceMappingURL=common.css.map */

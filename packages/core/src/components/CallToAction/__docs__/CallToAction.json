@@ -77,6 +77,23 @@
             "type": "string",
             "description": "Unique identifier"
         },
+        "innerBackground": {
+            "type": "ThemeColor",
+            "description": "Background colour of the inner content.",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ]
+        },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",

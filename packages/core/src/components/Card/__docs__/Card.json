@@ -77,7 +77,7 @@
                 "white",
                 "black"
             ],
-            "default": "standard"
+            "default": "new heading([\n                'level'   => 3,\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\n            ],\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
         },
         "context": {
             "type": "string",
@@ -131,7 +131,14 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "standard"
+            "default": "new heading([\n                'level'   => 3,\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\n            ],\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+        "originalImageOrientation": {
+            "type": "Orientation",
+            "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.",
+            "supported": [
+                "horizontal",
+                "vertical"
+            ]
         },
         "shortName": {
             "type": "string",

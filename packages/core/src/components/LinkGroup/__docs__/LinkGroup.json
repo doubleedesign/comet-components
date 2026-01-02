@@ -1,16 +1,38 @@
 {
     "name": "LinkGroup",
     "description": "Render a group of Link components with a common color theme.",
-    "extends": "UIComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "ariaAttrs": {
+            "type": "array",
+            "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+            "required": true
+        },
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ]
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "link-group"
+                "links"
             ]
         },
         "colorTheme": {
@@ -35,6 +57,23 @@
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
+        "dataAttrs": {
+            "type": "array",
+            "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
         "heading": {
             "type": "string"
         },
@@ -42,11 +81,33 @@
             "type": "string",
             "description": "Unique identifier"
         },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+            "required": true,
+            "default": false
+        },
+        "layout": {
+            "type": "GroupLayout",
+            "description": "Layout style for grouping elements together.",
+            "required": true,
+            "supported": [
+                "list",
+                "grid"
+            ],
+            "default": "list"
+        },
+        "maxPerRow": {
+            "type": "int",
+            "description": "Maximum number of items to display per row in grid layouts.",
+            "required": true,
+            "default": 3
+        },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "link-group"
+            "default": "links"
         },
         "style": {
             "type": "array",
@@ -56,13 +117,32 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "section"
             ],
-            "default": "div"
+            "default": "section"
         },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "withContainer": {
+            "type": "bool",
+            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {
@@ -72,6 +152,10 @@
     },
     "traits": [
         "ColorTheme",
+        "GroupLayoutType",
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
         "BlockElementModifier"
     ]
 }

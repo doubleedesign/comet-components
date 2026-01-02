@@ -4,8 +4,11 @@
   flex-direction: column;
   text-decoration: none;
 }
-@container (min-width: 500px) {
-  .card:has([class*=image])[data-layout-orientation=horizontal], [class$=__card]:has([class*=image])[data-layout-orientation=horizontal] {
+.card:is(a):hover, [class$=__card]:is(a):hover, .card:is(a):focus, [class$=__card]:is(a):focus, .card:is(a):active, [class$=__card]:is(a):active {
+  color: var(--theme-color, inherit);
+}
+@container (min-width: 400px) {
+  .card:has([class*=image])[data-orientation=horizontal], [class$=__card]:has([class*=image])[data-orientation=horizontal] {
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
@@ -41,6 +44,9 @@
     padding: var(--spacing-lg);
   }
 }
+.card__content h3, [class$=__card__content] h3 {
+  margin-block-end: 0;
+}
 .card__content h3 > span:first-child, [class$=__card__content] h3 > span:first-child {
   display: block;
   font-size: var(--font-size-sm);
@@ -49,15 +55,23 @@
   font-family: var(--font-family-body);
   margin-block-end: var(--spacing-xxs);
 }
-.card__content .is-style-small, [class$=__card__content] .is-style-small {
-  margin-block-end: 0;
+.card__content h3:has(i), [class$=__card__content] h3:has(i), .card__content h3:has(svg), [class$=__card__content] h3:has(svg) {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
 }
 .card__content p, [class$=__card__content] p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+[data-orientation=horizontal] .card__content p, [data-orientation=horizontal] [class$=__card__content] p {
+  font-size: var(--font-size-sm);
+  margin-block-start: var(--spacing-xxs);
 }
 .card__content .button, [class$=__card__content] .button {
   margin-block-start: auto;

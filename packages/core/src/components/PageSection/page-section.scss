@@ -25,8 +25,8 @@
 
 // Adjacent section overrides to not double up on padding when backgrounds are the same
 @each $name, $color in $colors {
-	.body > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"],
-	.body > main > [data-background="#{$name}"]:not(hr) + [data-background="#{$name}"] {
+	.body > [data-background="#{$name}"]:not(hr):not(span) + [data-background="#{$name}"],
+	.body > main > [data-background="#{$name}"]:not(hr):not(span) + [data-background="#{$name}"] {
 		padding-block-start: 0;
 	}
 
@@ -35,8 +35,8 @@
 	}
 }
 
-.body > :not([data-background]):not(hr) + :not([data-background]),
-.body > main > :not([data-background]):not(hr) + :not([data-background]) {
+.body > :not([data-background]):not(hr):not(span) + :not([data-background]),
+.body > main > :not([data-background]):not(hr):not(span) + :not([data-background]) {
 	padding-block-start: 0;
 }
 

@@ -27,13 +27,13 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "responsive-panel__content"
+                "responsive-panels__panel__content"
             ]
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "responsivepanels"
+            "default": "responsive-panels"
         },
         "id": {
             "type": "string",

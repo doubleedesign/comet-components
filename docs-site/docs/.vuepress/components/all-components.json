@@ -45,10 +45,6 @@
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
-                "supported": [
-                    "is-style-rounded",
-                    "breakout"
-                ],
                 "default": []
             },
             "context": {
@@ -67,6 +63,10 @@
             "style": {
                 "type": "array",
                 "description": "Inline styles"
+            },
+            "styleName": {
+                "type": "string",
+                "description": "Visual style variation."
             },
             "tagName": {
                 "type": "Tag",
@@ -182,10 +182,6 @@
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
-                "supported": [
-                    "is-style-rounded",
-                    "breakout"
-                ],
                 "default": []
             },
             "context": {
@@ -204,6 +200,10 @@
             "style": {
                 "type": "array",
                 "description": "Inline styles"
+            },
+            "styleName": {
+                "type": "string",
+                "description": "Visual style variation."
             },
             "tagName": {
                 "type": "Tag",
@@ -593,6 +593,7 @@
                     "li",
                     "button",
                     "summary",
+                    "blockquote",
                     "span",
                     "em",
                     "strong",
@@ -678,6 +679,7 @@
                     "li",
                     "button",
                     "summary",
+                    "blockquote",
                     "span",
                     "em",
                     "strong",
@@ -1420,6 +1422,14 @@
                     "y": 0
                 }
             },
+            "originalImageOrientation": {
+                "type": "Orientation",
+                "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.",
+                "supported": [
+                    "horizontal",
+                    "vertical"
+                ]
+            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
@@ -1894,6 +1904,23 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
+            "innerBackground": {
+                "type": "ThemeColor",
+                "description": "Background colour of the inner content.",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ]
+            },
             "isNested": {
                 "type": "bool",
                 "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
@@ -2035,7 +2062,7 @@
                     "white",
                     "black"
                 ],
-                "default": "standard"
+                "default": "new heading([\r\n                'level'   => 3,\r\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\r\n            ],\r\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\r\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
             },
             "context": {
                 "type": "string",
@@ -2089,7 +2116,15 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "standard"
+                "default": "new heading([\r\n                'level'   => 3,\r\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\r\n            ],\r\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\r\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+            },
+            "originalImageOrientation": {
+                "type": "Orientation",
+                "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.",
+                "supported": [
+                    "horizontal",
+                    "vertical"
+                ]
             },
             "shortName": {
                 "type": "string",
@@ -2139,11 +2174,16 @@
     {
         "name": "CardList",
         "description": null,
-        "extends": "LayoutComponent",
+        "extends": "WrappedLayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
             "backgroundColor": {
                 "type": "ThemeColor",
                 "description": "Background colour keyword",
@@ -2189,11 +2229,10 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
-            "gridLayout": {
-                "type": "bool",
-                "description": "Whether to use a grid layout for the cards.",
-                "required": true,
-                "default": "true"
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -2207,6 +2246,10 @@
                 ],
                 "default": "match-parent"
             },
+            "heading": {
+                "type": "string",
+                "description": "Optional heading for the card list."
+            },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
@@ -2217,9 +2260,21 @@
                 "required": true,
                 "default": false
             },
+            "layout": {
+                "type": "GroupLayout",
+                "description": "Layout style for grouping elements together.",
+                "required": true,
+                "supported": [
+                    "list",
+                    "grid"
+                ],
+                "default": "list"
+            },
             "maxPerRow": {
                 "type": "int",
-                "description": "The maximum number of cards to display per row in grid layout. If not set, will be derived from the number of cards and their divisibility by 4, 3, or 2."
+                "description": "Maximum number of items to display per row in grid layouts.",
+                "required": true,
+                "default": 3
             },
             "shortName": {
                 "type": "string",
@@ -2235,9 +2290,10 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
-                    "div"
+                    "div",
+                    "section"
                 ],
-                "default": "div"
+                "default": "section"
             },
             "testId": {
                 "type": "string",
@@ -2254,6 +2310,12 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -2264,6 +2326,7 @@
         },
         "traits": [
             "ColorTheme",
+            "GroupLayoutType",
             "BackgroundColor",
             "LayoutAlignment",
             "NestedState",
@@ -2707,10 +2770,6 @@
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
-                "supported": [
-                    "is-style-rounded",
-                    "breakout"
-                ],
                 "default": [
                     "image",
                     "image--advanced"
@@ -2740,6 +2799,14 @@
                     "y": 0
                 }
             },
+            "originalImageOrientation": {
+                "type": "Orientation",
+                "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.",
+                "supported": [
+                    "horizontal",
+                    "vertical"
+                ]
+            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
@@ -2754,6 +2821,10 @@
             "style": {
                 "type": "array",
                 "description": "Inline styles"
+            },
+            "styleName": {
+                "type": "string",
+                "description": "Visual style variation."
             },
             "tagName": {
                 "type": "Tag",
@@ -2824,10 +2895,6 @@
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
-                "supported": [
-                    "is-style-rounded",
-                    "breakout"
-                ],
                 "default": [
                     "image",
                     "image--basic"
@@ -2872,6 +2939,10 @@
             "style": {
                 "type": "array",
                 "description": "Inline styles"
+            },
+            "styleName": {
+                "type": "string",
+                "description": "Visual style variation."
             },
             "tagName": {
                 "type": "Tag",
@@ -3059,10 +3130,6 @@
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
-                "supported": [
-                    "is-style-rounded",
-                    "breakout"
-                ],
                 "default": [
                     "image"
                 ]
@@ -3095,6 +3162,10 @@
             "style": {
                 "type": "array",
                 "description": "Inline styles"
+            },
+            "styleName": {
+                "type": "string",
+                "description": "Visual style variation."
             },
             "tagName": {
                 "type": "Tag",
@@ -3505,7 +3576,7 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "filegroup__file"
+                    "file-group__file"
                 ]
             },
             "colorTheme": {
@@ -3529,7 +3600,7 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-                "default": "filegroup"
+                "default": "file-group"
             },
             "description": {
                 "type": "string"
@@ -3596,16 +3667,38 @@
     {
         "name": "FileGroup",
         "description": "Display a list of downloadable file links with details about them.",
-        "extends": "UIComponent",
+        "extends": "WrappedLayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
+            "backgroundColor": {
+                "type": "ThemeColor",
+                "description": "Background colour keyword",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ]
+            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "file-group"
+                    "files"
                 ]
             },
             "colorTheme": {
@@ -3630,15 +3723,42 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
+            },
+            "hAlign": {
+                "type": "Alignment",
+                "description": "Horizontal alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "heading": {
+                "type": "string",
+                "description": "Optional heading for the section."
+            },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "isNested": {
+                "type": "bool",
+                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+                "required": true,
+                "default": false
             },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
-                "default": "file-group"
+                "default": "files"
             },
             "style": {
                 "type": "array",
@@ -3648,13 +3768,32 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
-                    "div"
+                    "div",
+                    "section"
                 ],
-                "default": "div"
+                "default": "section"
             },
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "vAlign": {
+                "type": "Alignment",
+                "description": "Vertical alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -3664,6 +3803,9 @@
         },
         "traits": [
             "ColorTheme",
+            "BackgroundColor",
+            "LayoutAlignment",
+            "NestedState",
             "BlockElementModifier"
         ]
     },
@@ -4340,6 +4482,9 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
+            "description": {
+                "type": "string"
+            },
             "icon": {
                 "type": "string",
                 "description": "Icon class name"
@@ -4352,6 +4497,9 @@
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "label": {
+                "type": "string"
             },
             "shortName": {
                 "type": "string",
@@ -4371,15 +4519,16 @@
                 ],
                 "default": "a"
             },
+            "target": {
+                "type": "string"
+            },
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "url": {
+                "type": "string"
             }
-        },
-        "content": {
-            "type": "string",
-            "description": "Plain text or basic HTML",
-            "required": true
         },
         "traits": [
             "BlockElementModifier",
@@ -4389,16 +4538,38 @@
     {
         "name": "LinkGroup",
         "description": "Render a group of Link components with a common color theme.",
-        "extends": "UIComponent",
+        "extends": "WrappedLayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
+            "backgroundColor": {
+                "type": "ThemeColor",
+                "description": "Background colour keyword",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ]
+            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "link-group"
+                    "links"
                 ]
             },
             "colorTheme": {
@@ -4423,6 +4594,23 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
+            },
+            "hAlign": {
+                "type": "Alignment",
+                "description": "Horizontal alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
             "heading": {
                 "type": "string"
             },
@@ -4430,11 +4618,33 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
+            "isNested": {
+                "type": "bool",
+                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+                "required": true,
+                "default": false
+            },
+            "layout": {
+                "type": "GroupLayout",
+                "description": "Layout style for grouping elements together.",
+                "required": true,
+                "supported": [
+                    "list",
+                    "grid"
+                ],
+                "default": "list"
+            },
+            "maxPerRow": {
+                "type": "int",
+                "description": "Maximum number of items to display per row in grid layouts.",
+                "required": true,
+                "default": 3
+            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
-                "default": "link-group"
+                "default": "links"
             },
             "style": {
                 "type": "array",
@@ -4444,13 +4654,32 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
-                    "div"
+                    "div",
+                    "section"
                 ],
-                "default": "div"
+                "default": "section"
             },
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "vAlign": {
+                "type": "Alignment",
+                "description": "Vertical alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -4460,6 +4689,10 @@
         },
         "traits": [
             "ColorTheme",
+            "GroupLayoutType",
+            "BackgroundColor",
+            "LayoutAlignment",
+            "NestedState",
             "BlockElementModifier"
         ]
     },
@@ -5319,13 +5552,13 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "responsive-panel__content"
+                    "responsive-panels__panel__content"
                 ]
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-                "default": "responsivepanels"
+                "default": "responsive-panels"
             },
             "id": {
                 "type": "string",
@@ -5596,7 +5829,9 @@
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
-                "default": []
+                "default": [
+                    "separator"
+                ]
             },
             "color": {
                 "type": "ThemeColor",
@@ -5616,9 +5851,61 @@
                 ],
                 "default": "primary"
             },
+            "colorTheme": {
+                "type": "ThemeColor",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ],
+                "default": "primary"
+            },
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "isNested": {
+                "type": "bool",
+                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+                "required": true,
+                "default": false
+            },
+            "lineStyle": {
+                "type": "string",
+                "required": true,
+                "default": ""
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "required": true,
+                "default": "separator"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+                "supported": [
+                    "default",
+                    "wide",
+                    "fullwidth",
+                    "narrow",
+                    "narrower",
+                    "small"
+                ],
+                "default": "default"
             },
             "style": {
                 "type": "array",
@@ -5637,7 +5924,12 @@
                 "description": "Optionally add a data-testid attribute for automated tests"
             }
         },
-        "traits": []
+        "traits": [
+            "BlockElementModifier",
+            "ColorTheme",
+            "LayoutContainerSize",
+            "NestedState"
+        ]
     },
     {
         "name": "SiteFooter",

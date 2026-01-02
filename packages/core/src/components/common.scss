@@ -52,6 +52,10 @@ h1, h2, h3 {
 	line-height: 1.2;
 }
 
+h1, h2, h3, h4 {
+	color: var(--theme-color);
+}
+
 // Can't use SASS pow() with vanilla CSS variables, so this is a workaround for that
 h1 {
 	font-size: calc(1rem * var(--typescale) * var(--typescale) * var(--typescale));
@@ -260,33 +264,4 @@ form {
 // (so this only works in things like columns, not directly in containers, unless you unset container-type on the container)
 .breakout {
 	@include breakout();
-}
-
-.divider {
-	display: flex;
-	justify-content: center;
-	position: relative;
-	margin-block-start: var(--spacing-lg);
-	padding-block: var(--spacing-lg);
-	margin-inline: auto;
-	border: 0;
-
-	@each $color in map-keys($colors) {
-		&[data-color-theme="#{$color}"] {
-			border-top: 1px solid var(--color-#{$color});
-			color: var(--color-#{$color});
-		}
-	}
-
-	&[data-size="fullwidth"] {
-		max-width: calc(100vw - var(--spacing-md) * 2);
-	}
-
-	&[data-size="wide"] {
-		max-width: calc(var(--width-wide) - var(--spacing-md) * 2);
-	}
-
-	&[data-size="narrow"] {
-		max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
-	}
 }

@@ -10,7 +10,7 @@
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "filegroup__file"
+                "file-group__file"
             ]
         },
         "colorTheme": {
@@ -34,7 +34,7 @@
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-            "default": "filegroup"
+            "default": "file-group"
         },
         "description": {
             "type": "string"

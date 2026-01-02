@@ -1,6 +1,7 @@
 @use '../variables' as *;
 
 .link-group {
+	width: 100%;
 
 	&__link {
 		display: flex;
@@ -11,6 +12,7 @@
 		padding: var(--spacing-sm);
 		transition: background 0.2s linear;
 		font-size: 1rem;
+		// justify-content: inherit; // TODO: Fix this when centered with icon + description
 
 		@each $name, $color in $colors {
 			[data-color-theme=#{$name}] &,
@@ -36,7 +38,7 @@
 
 		&__content {
 
-			&__title {
+			&__label {
 				font-weight: var(--font-weight-bold);
 				font-size: 1.125rem;
 				display: block;
@@ -49,18 +51,7 @@
 			}
 
 			&__description {
-			}
-
-			&__meta {
-				margin-block-start: var(--spacing-xxs);
-				display: flex;
-				gap: var(--spacing-sm);
-				justify-content: flex-end;
-
-				&__size,
-				&__date {
-					font-size: var(--font-size-sm);
-				}
+				display: block;
 			}
 		}
 	}

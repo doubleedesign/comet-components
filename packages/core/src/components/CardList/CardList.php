@@ -5,6 +5,7 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::SECTION)]
 class CardList extends WrappedLayoutComponent {
     use ColorTheme;
+    use GroupLayoutType;
 
     /**
      * @var ?string $heading
@@ -18,36 +19,30 @@ class CardList extends WrappedLayoutComponent {
      */
     protected array $innerComponents = [];
 
-    /**
-     * @var bool $gridLayout
-     * @description Whether to use a grid layout for the cards.
-     */
-    protected bool $gridLayout = true;
-
-    /**
-     * @var ?int $maxPerRow
-     * @description The maximum number of cards to display per row in grid layout. If not set, will be derived from the number of cards and their divisibility by 4, 3, or 2.
-     */
-    protected ?int $maxPerRow = null;
-
     public function __construct(array $attributes, array $innerComponents) {
         $headingComponent = $attributes['heading'] ? new Heading([], $attributes['heading']) : null;
-        $this->gridLayout = $attributes['gridLayout'] ?? $this->gridLayout; // TODO: Do we need this? Don't seem to be using it
-        $this->maxPerRow = $attributes['maxPerRow'] ?? $this->maxPerRow;
+        $this->set_group_layout_from_attrs($attributes, GroupLayout::GRID);
 
         // Add a wrapper to each Card so that it can use container queries based on that
         $updatedInnerComponents = array_map(function($component) {
             return new Group(['context' => 'card-list__list', 'shortName'  => 'item'], [$component]);
         }, $innerComponents);
 
+        $groupAttrs = [
+            'colorTheme'                   => $this->colorTheme->value ?? 'primary',
+            'shortName'                    => 'card-list',
+            'role'                         => 'group',
+            'data-group-layout'            => $this->layout->value
+        ];
+
+        // TODO: This is repetitive, e.g. LinkGroup also does this (it just has a different default)
+        if ($this->layout === GroupLayout::GRID) {
+            $groupAttrs['data-max-per-row'] = $this->maxPerRow;
+        }
+
         // And a wrapper around the whole group to separate it from the heading
         $wrappedCards = new Group(
-            [
-                'shortName'        => 'card-list',
-                'role'             => 'group',
-                'data-max-per-row' => $this->get_col_count(),
-                'colorTheme'       => $attributes['colorTheme'] ?? null,
-            ],
+            $groupAttrs,
             $updatedInnerComponents
         )->set_bem_element('list');
 

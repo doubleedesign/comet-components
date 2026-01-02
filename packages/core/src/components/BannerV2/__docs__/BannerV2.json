@@ -106,6 +106,14 @@
                 "y": 0
             }
         },
+        "originalImageOrientation": {
+            "type": "Orientation",
+            "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.",
+            "supported": [
+                "horizontal",
+                "vertical"
+            ]
+        },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
