@@ -5,6 +5,9 @@
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ColorControls/ColorControls.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContainerSize/ContainerSize.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/CustomControlsWrapper/CustomControlsWrapper.dist.js" />
+        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/FieldTooltip/FieldTooltip.dist.js" />
+        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/GroupLayout/GroupLayout.dist.js" />
+        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/HorizontalAlignment/HorizontalAlignment.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/LayoutControls/LayoutControls.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/VerticalAlignment/VerticalAlignment.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/core/dist/dist.js" />
@@ -14,6 +17,9 @@
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ColorControls/ColorControls.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContainerSize/ContainerSize.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/CustomControlsWrapper/CustomControlsWrapper.dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/FieldTooltip/FieldTooltip.dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/GroupLayout/GroupLayout.dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/HorizontalAlignment/HorizontalAlignment.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/LayoutControls/LayoutControls.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/VerticalAlignment/VerticalAlignment.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/core/dist/dist.js" />
