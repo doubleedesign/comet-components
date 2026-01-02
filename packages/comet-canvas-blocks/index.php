@@ -4,15 +4,7 @@ use Doubleedesign\Comet\Core\PageHeader;
 get_header();
 
 if (!is_front_page()) {
-    if (class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
-        $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
-        $pageHeader = new PageHeader(['size' => 'default'], get_the_title(), $breadcrumbs);
-    }
-    else {
-        $pageHeader = new PageHeader(['size' => 'default'], get_the_title());
-    }
-
-    $pageHeader->render();
+	get_template_part('template-parts/page-header');
 }
 
 if (is_page()) {

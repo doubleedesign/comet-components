@@ -33,7 +33,7 @@
 .separator-wrapper {
   display: contents;
 }
-.separator-wrapper > hr {
+section + .separator-wrapper hr, .separator-wrapper + section hr {
   margin-block: 0;
 }
 

@@ -46,7 +46,10 @@
 .separator-wrapper {
 	display: contents;
 
-	> hr {
-		margin-block: 0;
+	section + &,
+	& + section {
+		hr {
+			margin-block: 0;
+		}
 	}
 }

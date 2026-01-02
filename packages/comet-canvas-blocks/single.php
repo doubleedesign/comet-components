@@ -3,16 +3,7 @@ use Doubleedesign\Comet\Core\{Container, ContentImageBasic, PageHeader};
 use Doubleedesign\Comet\WordPress\PreprocessedHTML;
 
 get_header();
-
-if (class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
-    $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
-    $pageHeader = new PageHeader(['size' => 'default'], get_the_title(), $breadcrumbs);
-}
-else {
-    $pageHeader = new PageHeader(['size' => 'default'], get_the_title());
-}
-
-$pageHeader->render();
+get_template_part('template-parts/page-header');
 
 // The filter that makes the flexible content render for the_content doesn't apply to get_the_content,
 // and that doesn't have any filters, so output buffering is the workaround for now.
