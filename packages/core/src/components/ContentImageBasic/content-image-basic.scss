@@ -30,10 +30,13 @@
 		max-width: 100%;
 	}
 
-	&.is-style-rounded {
-		img {
-			border-radius: 100%;
-		}
+	&[data-style="rounded"] img {
+		border-radius: 100%;
+	}
+
+	&[data-style="polaroid"] img {
+		border: 0.75rem solid white;
+		box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
 	}
 
 	&[data-behaviour="cover"] {

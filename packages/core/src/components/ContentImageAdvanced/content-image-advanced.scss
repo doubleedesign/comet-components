@@ -1,14 +1,25 @@
 // See common.scss for base .image styles
 .image--advanced {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	height: fit-content;
 	overflow: hidden;
+
+	&:has([data-style="rounded"]) {
+		border-radius: 100%;
+	}
+
+	&:has([data-style="polaroid"]) {
+		border: 0.75rem solid white;
+		box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
+	}
 
 	&__image {
 		overflow: hidden;
 		min-width: 100%; // for images smaller than the container
 		container-type: size;
+		transform: translateX(0);
 		// aspect ratio is applied to this element using a data attribute, see common.scss
 
 		&__inner {
@@ -24,14 +35,31 @@
 			top: var(--offset-y, 0);
 
 			img {
-				width: calc(100% - var(--offset-x, 0));
-				height: calc(100% - var(--offset-y, 0));
-				min-height: 100cqh;
 				object-fit: cover;
+				// If no original orientation is set, we assume it was square
+				:not([data-original-orientation]) & {
+					width: 100%;
+					height: 100%;
+				}
+
+				[data-original-orientation="horizontal"] & {
+					height: 100cqh;
+					width: auto;
+				}
+
+				[data-original-orientation="vertical"] & {
+					width: calc(100% - var(--offset-x, 0));
+					height: calc(100cqh - var(--offset-y, 0));
+				}
 			}
 		}
 	}
 
 	&__caption {
+		font-size: var(--font-size-sm);
+		display: block;
+		text-align: center;
+		margin-block-start: var(--spacing-xxs);
+		opacity: 0.8;
 	}
 }

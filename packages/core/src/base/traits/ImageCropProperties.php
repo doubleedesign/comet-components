@@ -15,6 +15,12 @@ trait ImageCropProperties {
     protected ?AspectRatio $aspectRatio = null;
 
     /**
+     * @var ?Orientation $originalImageOrientation
+     * @description The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.
+     */
+    protected ?Orientation $originalImageOrientation = null;
+
+    /**
      * @var array{x: int, y:int}|null $focalPoint
      * @description The focal point of the image to use when cropping - x and y values between 0 and 100
      */
@@ -28,6 +34,13 @@ trait ImageCropProperties {
 
     protected function set_aspect_ratio_from_attrs(array $attributes, AspectRatio $default): void {
         $this->aspectRatio = AspectRatio::tryFrom($attributes['aspectRatio'] ?? $attributes['aspect_ratio'] ?? '') ?? $default;
+    }
+
+    protected function set_original_image_orientation_from_attrs(array $attributes): void {
+        $orientation = $attributes['originalImageOrientation'] ?? $attributes['original_image_orientation'] ?? null;
+        if ($orientation) {
+            $this->originalImageOrientation = Orientation::tryFrom($orientation);
+        }
     }
 
     protected function set_focal_point_from_attrs(array $attributes): void {
@@ -50,14 +63,11 @@ trait ImageCropProperties {
             return;
         }
 
-        // TODO This needs some more work either here or in the SCSS (ContentImageAdvanced, BannerV2, others?) to ensure that no blank space is left.
-        // Setting width in SCSS to account for it is one way that works in some scenarios, but not all, especially when aspect ratio cropping comes into play.
-        if (isset($field['x']) && isset($field['y']) && is_array($field)) {
-            $this->offset = [
-                'x' => max(-200, min(100, (int)$field['x'])),
-                'y' => max(-200, min(100, (int)$field['y'])),
-            ];
-        }
+        // For now we trust that the editing context will provide reasonable values.
+        $this->offset = [
+            'x' => (int)$field['x'],
+            'y' => (int)$field['y'],
+        ];
     }
 
     /**

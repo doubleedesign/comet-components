@@ -13,11 +13,12 @@ abstract class ImageComponent extends Renderable {
     protected string $src;
 
     /**
-     * @var array<string> $classes
-     * @description CSS classes
-     * @supported-values is-style-rounded, breakout
+     * @var string|null $style
+     * @description Visual style variation.
+     *
+     * @supported-values: 'rounded', 'polaroid'
      */
-    protected ?array $classes = [];
+    protected ?string $styleName = null;
 
     /**
      * @var string $alt
@@ -36,6 +37,7 @@ abstract class ImageComponent extends Renderable {
         $this->alt = $attributes['alt'] ?? '';
         $this->title = $attributes['title'] ?? null;
         $this->classes = $attributes['classes'] ?? [];
+        $this->styleName = $attributes['styleName'] ?? null;
         parent::__construct($attributes, $bladeFile);
         $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? 'image');
     }
@@ -46,7 +48,8 @@ abstract class ImageComponent extends Renderable {
             [
                 'src'   => $this->src,
                 'alt'   => $this->alt,
-                'title' => $this->title
+                'title' => $this->title,
+                ...($this->styleName ? ['data-style' => $this->styleName] : [])
             ]
         );
     }

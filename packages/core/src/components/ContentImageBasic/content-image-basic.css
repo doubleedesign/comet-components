@@ -25,9 +25,14 @@
   display: block;
   max-width: 100%;
 }
-.image--basic.is-style-rounded img,
-[class*=image--basic].is-style-rounded img {
+.image--basic[data-style=rounded] img,
+[class*=image--basic][data-style=rounded] img {
   border-radius: 100%;
+}
+.image--basic[data-style=polaroid] img,
+[class*=image--basic][data-style=polaroid] img {
+  border: 0.75rem solid white;
+  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
 }
 .image--basic[data-behaviour=cover] img,
 [class*=image--basic][data-behaviour=cover] img {

@@ -21,12 +21,13 @@ class ContentImageAdvanced extends ContentImageComponent {
         $this->set_focal_point_from_attrs($attributes);
         $this->set_image_offset_from_attrs($attributes);
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);
+        $this->set_original_image_orientation_from_attrs($attributes);
     }
 
     public function get_outer_wrapper_html_attributes(): array {
         return [
             ...parent::get_outer_wrapper_html_attributes(),
-            'style' => $this->get_local_css_properties()
+            'style' => $this->get_local_css_properties(),
         ];
     }
 
@@ -34,13 +35,14 @@ class ContentImageAdvanced extends ContentImageComponent {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'tag'         => $this->tagName->value,
-            'classes'     => $this->get_filtered_classes(),
-            'outerAttrs'  => $this->get_outer_wrapper_html_attributes(),
-            'attributes'  => $this->get_html_attributes(), // Attributes for the image itself
-            'bemPrefix'   => $this->get_bem_structure()['modifier'] ? "{$this->get_bem_prefix()}--{$this->get_bem_structure()['modifier']}" : $this->get_bem_prefix(),
-            'aspectRatio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
-            'caption'     => $this->caption ?? null
+            'tag'                      => $this->tagName->value,
+            'classes'                  => $this->get_filtered_classes(),
+            'outerAttrs'               => $this->get_outer_wrapper_html_attributes(),
+            'attributes'               => $this->get_html_attributes(), // Attributes for the image itself
+            'bemPrefix'                => $this->get_bem_structure()['modifier'] ? "{$this->get_bem_prefix()}--{$this->get_bem_structure()['modifier']}" : $this->get_bem_prefix(),
+            'aspectRatio'              => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,
+            'originalImageOrientation' => $this->originalImageOrientation ? strtolower($this->originalImageOrientation->name) : null,
+            'caption'                  => $this->caption ?? null
         ])->render();
     }
 }
