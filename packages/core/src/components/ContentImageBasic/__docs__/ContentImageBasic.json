@@ -44,10 +44,6 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "supported": [
-                "is-style-rounded",
-                "breakout"
-            ],
             "default": [
                 "image",
                 "image--basic"
@@ -92,6 +88,10 @@
         "style": {
             "type": "array",
             "description": "Inline styles"
+        },
+        "styleName": {
+            "type": "string",
+            "description": "Visual style variation."
         },
         "tagName": {
             "type": "Tag",
