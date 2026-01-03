@@ -96,6 +96,18 @@ wp.hooks.addFilter('blocks.registerBlockType', 'comet/use-new-block-api', (setti
 });
 ```
 
+#### Comet or theme styles loaded into the editor affecting the WP admin/editor UI in undesired way
+
+Selector conflicts can happen between the Comet or theme styles and WordPress core admin/editor styles due to Comet having deliberately global styles (like variables on `:root` and styles on `body`) and simple class names (like `.button` and `.card`). I have not been able to find a way to ensure these stylesheets load only for the blocks (in the iframe) and nothing else.
+
+Normal CSS specificity rules apply here of course, but Comet core styles (and theme styles intended for the front-end) should NOT be directly modified to be more specific in ways that refer to the WP admin/editor, or introduce extra layers of prerequisites for styles to work by targeting assumed parent elements and the like.
+
+There are two main ways to deal with this:
+
+1. Wrap theme common styles in a [CSS layer](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer). This ensures that when there is a direct property conflict, styles that are not on a layer (i.e., the WP core admin styles in this case) have precedence. (Comet's `global.css` and `common.css` are already in layers.)
+2. Override styles in an admin-specific stylesheet for your theme or plugin. This can be enqueued on the `admin_enqueue_scripts` action hook. This is the less-preferred option because it requires more maintenance and is less future-proof, but is sometimes the most practical option. It is often necessary when the Comet/theme styles explicitly apply a property but the WP core styles do not (because it uses the default); in these cases it is usually best to use property values like `initial`,
+   `unset`, or `revert` to reset the property rather than overriding it with a specific value (except for fonts, where `inherit` may be more appropriate).
+
 #### Warning: The tag <accordion> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.
 
 This error occurs in the block editor with the Comet Components that use VueJS (so not just `<accordion>`), when `SCRIPT_DEBUG` is enabled in

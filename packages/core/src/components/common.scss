@@ -1,6 +1,7 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
+@layer comet-components-common {
 :root {
 	--font-family-body: sans-serif;
 	--font-family-accent: sans-serif;
@@ -30,238 +31,238 @@
 	}
 }
 
-
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-html {
-	font-size: var(--base-font-size);
-}
-
-body {
-	margin: 0;
-	padding: 0;
-	font-family: var(--font-family-body), sans-serif;
-	line-height: 1.4;
-}
-
-h1, h2, h3 {
-	line-height: 1.2;
-}
-
-h1, h2, h3, h4 {
-	color: var(--theme-color);
-}
-
-// Can't use SASS pow() with vanilla CSS variables, so this is a workaround for that
-h1 {
-	font-size: calc(1rem * var(--typescale) * var(--typescale) * var(--typescale));
-
-	&.is-style-accent {
-		font-size: calc((1rem * 1.25) * var(--typescale) * var(--typescale) * var(--typescale));
-	}
-}
-
-h2 {
-	font-size: calc(1rem * var(--typescale) * var(--typescale));
-
-	&.is-style-accent {
-		font-size: calc((1rem * 1.25) * var(--typescale) * var(--typescale));
-	}
-}
-
-h3 {
-	font-size: calc(1rem * var(--typescale));
-
-	&.is-style-accent {
-		font-size: calc((1rem * 1.25) * var(--typescale));
-	}
-}
-
-h1 {
-	margin-block: var(--spacing-md);
-
-	@include container-width-up('narrow') {
-		margin-block: var(--spacing-lg);
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
 	}
 
-	&:first-child {
-		margin-block-start: 0;
+	html {
+		font-size: var(--base-font-size);
 	}
-}
 
-h2, h3 {
-	margin-block: var(--spacing-md);
-
-	&:first-child {
-		margin-block-start: 0;
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: var(--font-family-body), sans-serif;
+		line-height: 1.4;
 	}
-}
 
-.separator + h2 {
-	margin-block-start: 0;
-}
+	h1, h2, h3 {
+		line-height: 1.2;
+	}
 
-p, ul, ol {
-	margin-block: var(--spacing-sm);
+	h1, h2, h3, h4 {
+		color: var(--theme-color);
+	}
 
-	&:first-child {
+	// Can't use SASS pow() with vanilla CSS variables, so this is a workaround for that
+	h1 {
+		font-size: calc(1rem * var(--typescale) * var(--typescale) * var(--typescale));
+
+		&.is-style-accent {
+			font-size: calc((1rem * 1.25) * var(--typescale) * var(--typescale) * var(--typescale));
+		}
+	}
+
+	h2 {
+		font-size: calc(1rem * var(--typescale) * var(--typescale));
+
+		&.is-style-accent {
+			font-size: calc((1rem * 1.25) * var(--typescale) * var(--typescale));
+		}
+	}
+
+	h3 {
+		font-size: calc(1rem * var(--typescale));
+
+		&.is-style-accent {
+			font-size: calc((1rem * 1.25) * var(--typescale));
+		}
+	}
+
+	h1 {
+		margin-block: var(--spacing-md);
+
+		@include container-width-up('narrow') {
+			margin-block: var(--spacing-lg);
+		}
+
+		&:first-child {
+			margin-block-start: 0;
+		}
+	}
+
+	h2, h3 {
+		margin-block: var(--spacing-md);
+
+		&:first-child {
+			margin-block-start: 0;
+		}
+	}
+
+	.separator + h2 {
 		margin-block-start: 0;
 	}
 
-	&:last-child {
-		margin-block-end: 0;
+	p, ul, ol {
+		margin-block: var(--spacing-sm);
+
+		&:first-child {
+			margin-block-start: 0;
+		}
+
+		&:last-child {
+			margin-block-end: 0;
+		}
 	}
-}
 
-ul, ol {
-	margin-inline-start: var(--spacing-md);
+	ul, ol {
+		margin-inline-start: var(--spacing-md);
 
-	li {
-		margin-block-end: var(--spacing-xxs);
+		li {
+			margin-block-end: var(--spacing-xxs);
+		}
 	}
-}
-
-a {
-	transition: all 0.2s ease-in-out;
-	color: inherit;
-
-	&:hover, &:focus, &:active {
-		color: var(--color-secondary);
-	}
-}
-
-.is-style-accent {
-	font-family: var(--font-family-accent);
-	font-weight: normal;
-	line-height: 1;
-}
-
-h1, h2, h3 {
-	&.is-style-small {
-		font-size: 1rem;
-		text-transform: uppercase;
-	}
-}
-
-p:empty {
-	display: none;
-}
-
-.is-style-lead,
-.lead {
-	font-weight: var(--font-weight-bold);
-	font-size: calc(1rem * var(--typescale));
-	line-height: 1.2;
-	color: var(--theme-color);
 
 	a {
+		transition: all 0.2s ease-in-out;
 		color: inherit;
 
 		&:hover, &:focus, &:active {
-			color: color-mix(in hsl, currentColor, black 20%);
+			color: var(--color-secondary);
 		}
 	}
-}
 
-blockquote {
-	text-align: center;
-	padding: var(--spacing-md);
-	margin-block: var(--spacing-lg);
-	font-weight: var(--font-weight-semibold);
-	font-size: 1.125rem;
-	color: var(--theme-color);
-
-	&:last-child {
-		margin-block-end: 0;
+	.is-style-accent {
+		font-family: var(--font-family-accent);
+		font-weight: normal;
+		line-height: 1;
 	}
 
-	&:only-child {
-		padding-block: 0;
+	h1, h2, h3 {
+		&.is-style-small {
+			font-size: 1rem;
+			text-transform: uppercase;
+		}
 	}
 
-	> p {
-		padding-block: var(--spacing-sm);
-	}
-}
-
-form {
-	input[type="text"],
-	input[type="email"],
-	input[type="password"],
-	input[type="search"],
-	input[type="tel"],
-	input[type="url"],
-	input[type="number"],
-	select,
-	textarea {
-		font-size: 1rem;
-		padding: var(--spacing-xs) var(--spacing-sm);
-		font-family: var(--font-family-body);
+	p:empty {
+		display: none;
 	}
 
-	input[type="text"],
-	input[type="email"],
-	input[type="password"],
-	input[type="search"],
-	input[type="tel"],
-	input[type="url"],
-	input[type="number"],
-	select {
-		min-height: 2.5rem;
-		display: flex;
-		align-items: center;
-		align-content: center;
+	.is-style-lead,
+	.lead {
+		font-weight: var(--font-weight-bold);
+		font-size: calc(1rem * var(--typescale));
+		line-height: 1.2;
+		color: var(--theme-color);
+
+		a {
+			color: inherit;
+
+			&:hover, &:focus, &:active {
+				color: color-mix(in hsl, currentColor, black 20%);
+			}
+		}
 	}
 
-	input[type="submit"],
-	input[type="button"] {
+	blockquote {
+		text-align: center;
+		padding: var(--spacing-md);
+		margin-block: var(--spacing-lg);
+		font-weight: var(--font-weight-semibold);
+		font-size: 1.125rem;
+		color: var(--theme-color);
+
+		&:last-child {
+			margin-block-end: 0;
+		}
+
+		&:only-child {
+			padding-block: 0;
+		}
+
+		> p {
+			padding-block: var(--spacing-sm);
+		}
 	}
-}
 
-.inline-message {
-	color: var(--theme-color);
-}
+	form {
+		input[type="text"],
+		input[type="email"],
+		input[type="password"],
+		input[type="search"],
+		input[type="tel"],
+		input[type="url"],
+		input[type="number"],
+		select,
+		textarea {
+			font-size: 1rem;
+			padding: var(--spacing-xs) var(--spacing-sm);
+			font-family: var(--font-family-body);
+		}
 
-// See packages/core/src/base/types/AspectRatio for what these should be
-[data-aspect-ratio="square"] {
-	aspect-ratio: 1/1;
-}
+		input[type="text"],
+		input[type="email"],
+		input[type="password"],
+		input[type="search"],
+		input[type="tel"],
+		input[type="url"],
+		input[type="number"],
+		select {
+			min-height: 2.5rem;
+			display: flex;
+			align-items: center;
+			align-content: center;
+		}
 
-[data-aspect-ratio="standard"] {
-	aspect-ratio: 4/3;
-}
+		input[type="submit"],
+		input[type="button"] {
+		}
+	}
 
-[data-aspect-ratio="portrait"] {
-	aspect-ratio: 3/4;
-}
+	.inline-message {
+		color: var(--theme-color);
+	}
 
-[data-aspect-ratio="wide"] {
-	aspect-ratio: 16/9;
-}
+	// See packages/core/src/base/types/AspectRatio for what these should be
+	[data-aspect-ratio="square"] {
+		aspect-ratio: 1/1;
+	}
 
-[data-aspect-ratio="classic"] {
-	aspect-ratio: 3/2;
-}
+	[data-aspect-ratio="standard"] {
+		aspect-ratio: 4/3;
+	}
 
-[data-aspect-ratio="classic_portrait"] {
-	aspect-ratio: 2/3;
-}
+	[data-aspect-ratio="portrait"] {
+		aspect-ratio: 3/4;
+	}
 
-[data-aspect-ratio="cinematic"] {
-	aspect-ratio: 21/9;
-}
+	[data-aspect-ratio="wide"] {
+		aspect-ratio: 16/9;
+	}
 
-[data-aspect-ratio="cinemascope"] {
-	aspect-ratio: 2.35/1;
-}
+	[data-aspect-ratio="classic"] {
+		aspect-ratio: 3/2;
+	}
 
-// Allow an item to "break out" of its parent width to take up the full container width when inside something else with a narrower width
-// (assuming it's also inside a container, defined by container-type: inline-size)
-// (so this only works in things like columns, not directly in containers, unless you unset container-type on the container)
-.breakout {
-	@include breakout();
+	[data-aspect-ratio="classic_portrait"] {
+		aspect-ratio: 2/3;
+	}
+
+	[data-aspect-ratio="cinematic"] {
+		aspect-ratio: 21/9;
+	}
+
+	[data-aspect-ratio="cinemascope"] {
+		aspect-ratio: 2.35/1;
+	}
+
+	// Allow an item to "break out" of its parent width to take up the full container width when inside something else with a narrower width
+	// (assuming it's also inside a container, defined by container-type: inline-size)
+	// (so this only works in things like columns, not directly in containers, unless you unset container-type on the container)
+	.breakout {
+		@include breakout();
+	}
 }

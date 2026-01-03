@@ -5,164 +5,164 @@
  * Global CSS that gets used in standalone packages as well as entirely Comet-based projects.
  * Use common.scss for styles that should not be packaged with standalone components.
  */
+@layer comet-components-global {
+	:root {
+		--width-wide: #{map-get($widths, 'wide')};
+		--width-contained: #{map-get($widths, 'contained')};
+		--width-narrow: #{map-get($widths, 'narrow')};
+		--width-small: #{map-get($widths, 'small')};
 
-:root {
-	--width-wide: #{map-get($widths, 'wide')};
-	--width-contained: #{map-get($widths, 'contained')};
-	--width-narrow: #{map-get($widths, 'narrow')};
-	--width-small: #{map-get($widths, 'small')};
+		--spacing-xxs: 0.25rem;
+		/* Augmented fourth scale - 1.414 */
+		--spacing-xs: 0.5rem;
+		--spacing-sm: 0.707rem;
+		--spacing-md: 1rem;
+		--spacing-lg: 1.414rem;
+		--spacing-xl: 2rem;
+		--spacing-xxl: 2.827rem;
+	}
 
-	--spacing-xxs: 0.25rem;
-	/* Augmented fourth scale - 1.414 */
-	--spacing-xs: 0.5rem;
-	--spacing-sm: 0.707rem;
-	--spacing-md: 1rem;
-	--spacing-lg: 1.414rem;
-	--spacing-xl: 2rem;
-	--spacing-xxl: 2.827rem;
-}
+	[data-valign],
+	[data-halign] {
+		display: flex;
+		flex-wrap: wrap;
+	}
 
+	// Default alignments. Note that components can override with their own stuff that they do with these values,
+	// for example orientation for Tabs is about where the tablist is.
+	[data-valign="start"] {
+		align-items: flex-start;
+	}
 
-[data-valign],
-[data-halign] {
-	display: flex;
-	flex-wrap: wrap;
-}
+	[data-valign="center"] {
+		align-items: center;
+	}
 
-// Default alignments. Note that components can override with their own stuff that they do with these values,
-// for example orientation for Tabs is about where the tablist is.
-[data-valign="start"] {
-	align-items: flex-start;
-}
+	[data-valign="end"] {
+		align-items: flex-end;
+	}
 
-[data-valign="center"] {
-	align-items: center;
-}
+	[data-valign="match-parent"] {
+		align-items: inherit;
+	}
 
-[data-valign="end"] {
-	align-items: flex-end;
-}
+	[data-halign="start"] {
+		justify-content: flex-start;
+	}
 
-[data-valign="match-parent"] {
-	align-items: inherit;
-}
+	[data-halign="center"] {
+		justify-content: center;
+	}
 
-[data-halign="start"] {
-	justify-content: flex-start;
-}
+	[data-halign="end"] {
+		justify-content: flex-end;
+	}
 
-[data-halign="center"] {
-	justify-content: center;
-}
+	[data-halign="justify"] {
+		justify-content: space-between;
+	}
 
-[data-halign="end"] {
-	justify-content: flex-end;
-}
+	[data-halign="match-parent"] {
+		justify-content: inherit;
+	}
 
-[data-halign="justify"] {
-	justify-content: space-between;
-}
+	[data-orientation="horizontal"] {
+		display: flex;
+		flex-direction: row;
+	}
 
-[data-halign="match-parent"] {
-	justify-content: inherit;
-}
+	[data-orientation="vertical"] {
+		display: flex;
+		flex-direction: column;
+	}
 
-[data-orientation="horizontal"] {
-	display: flex;
-	flex-direction: row;
-}
+	// Default group layout behaviour
+	[data-group-layout="grid"] {
+		width: 100%;
+		display: grid;
+		gap: var(--spacing-md);
+		container-type: inline-size;
+		grid-template-columns: 1fr;
 
-[data-orientation="vertical"] {
-	display: flex;
-	flex-direction: column;
-}
+		&[data-max-per-row="2"], &[data-max-per-row="4"] {
+			@include container-width-up('small') {
+				// Only go to 2 columns if there are 2 or more items
+				&:has(:nth-child(2)) {
+					grid-template-columns: repeat(2, 1fr);
+					justify-content: inherit;
+				}
+			}
+		}
 
-// Default group layout behaviour
-[data-group-layout="grid"] {
-	width: 100%;
-	display: grid;
-	gap: var(--spacing-md);
-	container-type: inline-size;
-	grid-template-columns: 1fr;
-
-	&[data-max-per-row="2"], &[data-max-per-row="4"] {
-		@include container-width-up('small') {
-			// Only go to 2 columns if there are 2 or more items
-			&:has(:nth-child(2)) {
-				grid-template-columns: repeat(2, 1fr);
+		&[data-max-per-row="3"] {
+			@include container-width-up('small') {
+				// Centre items if there is fewer than 3
+				grid-template-columns: repeat(auto-fit, 33%);
 				justify-content: inherit;
+
+				// Ensure 3+ lays out as 3 columns
+				&:has(:nth-child(3)) {
+					grid-template-columns: repeat(3, 1fr);
+				}
+			}
+		}
+
+		&[data-max-per-row="4"] {
+			@include container-width-up('narrower') {
+				// Centre items if there is fewer than 4
+				grid-template-columns: repeat(auto-fit, 25%);
+				justify-content: inherit;
+
+				// Ensure 4+ lays out as 4 columns
+				&:has(:nth-child(4)) {
+					grid-template-columns: repeat(4, 1fr);
+				}
 			}
 		}
 	}
 
-	&[data-max-per-row="3"] {
-		@include container-width-up('small') {
-			// Centre items if there is fewer than 3
-			grid-template-columns: repeat(auto-fit, 33%);
-			justify-content: inherit;
 
-			// Ensure 3+ lays out as 3 columns
-			&:has(:nth-child(3)) {
-				grid-template-columns: repeat(3, 1fr);
+	// Basic theme styling for elements with a color theme attribute specified
+	@each $name, $color in $colors {
+		[data-color-theme="#{$name}"] {
+			// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
+			--theme-color: var(--color-#{$name});
+			--theme-color-inverse: var(--readable-color-#{$name});
+		}
+	}
+
+	// Basic theme styling for elements with a text colour attribute specified
+	// This should be used sparingly - use the color theme setting as much as is practical
+	// I am intending to deprecate this.
+	@each $name, $color in $colors {
+		[data-text-color="#{$name}"] {
+			color: var(--color-#{$name});
+		}
+	}
+
+	// Basic theme styling for elements with a background colour attribute specified
+	@each $name, $color in $colors {
+		body[data-global-background="#{$name}"] {
+			background-color: var(--color-#{$name});
+			color: var(--readable-color-#{$name});
+		}
+
+		[data-color-theme="#{$name}"] {
+			[data-background=#{$name}] & {
+				color: inherit;
 			}
 		}
-	}
 
-	&[data-max-per-row="4"] {
-		@include container-width-up('narrower') {
-			// Centre items if there is fewer than 4
-			grid-template-columns: repeat(auto-fit, 25%);
-			justify-content: inherit;
+		[data-background="#{$name}"] {
+			background-color: var(--color-#{$name});
+			color: var(--readable-color-#{$name});
+		}
 
-			// Ensure 4+ lays out as 4 columns
-			&:has(:nth-child(4)) {
-				grid-template-columns: repeat(4, 1fr);
+		// 50/50 gradient backgrounds
+		@each $name2, $color2 in $colors {
+			[data-background="gradient-#{$name}-#{$name2}"] {
+				background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
 			}
-		}
-	}
-}
-
-
-// Basic theme styling for elements with a color theme attribute specified
-@each $name, $color in $colors {
-	[data-color-theme="#{$name}"] {
-		// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
-		--theme-color: var(--color-#{$name});
-		--theme-color-inverse: var(--readable-color-#{$name});
-	}
-}
-
-// Basic theme styling for elements with a text colour attribute specified
-// This should be used sparingly - use the color theme setting as much as is practical
-// I am intending to deprecate this.
-@each $name, $color in $colors {
-	[data-text-color="#{$name}"] {
-		color: var(--color-#{$name});
-	}
-}
-
-// Basic theme styling for elements with a background colour attribute specified
-@each $name, $color in $colors {
-	body[data-global-background="#{$name}"] {
-		background-color: var(--color-#{$name});
-		color: var(--readable-color-#{$name});
-	}
-
-	[data-color-theme="#{$name}"] {
-		[data-background=#{$name}] & {
-			color: inherit;
-		}
-	}
-
-	[data-background="#{$name}"] {
-		background-color: var(--color-#{$name});
-		color: var(--readable-color-#{$name});
-	}
-
-	// 50/50 gradient backgrounds
-	@each $name2, $color2 in $colors {
-		[data-background="gradient-#{$name}-#{$name2}"] {
-			background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
 		}
 	}
 }
