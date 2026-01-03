@@ -11,7 +11,10 @@ class Config {
     private ThemeColor $global_background = ThemeColor::WHITE;
     private string $icon_prefix = 'fa-solid';
     private array $blade_component_paths = [];
-    private array $component_defaults = [];
+    private array $component_defaults = [
+        'call-to-action' => ['colorTheme' => 'white', 'innerBackground' => 'primary', 'backgroundColor' => 'white'],
+        'page-header'    => ['colorTheme' => 'primary']
+    ];
     private array $theme_colours = [
         'white' => '#FFFFFF',
         'black' => '#000000',
@@ -162,14 +165,14 @@ class Config {
 
     public function get_component_defaults(string $component): array {
         $defaults = $this->get('component_defaults');
-        $componentName = Utils::pascal_case($component);
+        $componentName = Utils::kebab_case($component);
 
         return $defaults[$componentName] ?? [];
     }
 
     public function set_component_defaults(string $component, array $settings): void {
         $defaults = $this->get('component_defaults');
-        $componentName = Utils::pascal_case($component);
+        $componentName = Utils::kebab_case($component);
         $defaults[$componentName] = $settings;
         $this->component_defaults = $defaults;
     }

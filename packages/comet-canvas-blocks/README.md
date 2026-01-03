@@ -45,22 +45,25 @@ To ensure theme fonts loaded from Typekit, Google Fonts, Font Awesome, etc load 
 
 There are filters available for child themes to access Comet Components' global configuration, including the default values of various component attributes.
 
-| Filter                             | Parameters        | Usage                                                                                                                                                                              |
-|------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `comet_canvas_component_defaults`  | `array $defaults` | Allows setting of various default values per-component, such as colour theme and container size.                                                                                   |
-| `comet_canvas_global_background`   | `string $color`   | Allows setting a global background colour for the site. Default is `white`. Valid values must be drawn from the `ThemeColor` type.                                                 |
-| `comet_canvas_default_icon_prefix` | `string $prefix`  | Allows setting a default icon prefix for all Icon components. Default is `fa-solid`.                                                                                               |
-| `comet_canvas_theme_colours`       | `array $colours`  | An alternative or supplementary method of setting theme colours. This filter runs _after_ `theme.json` is used to find the colour palette, so if you use both the filter will win. |
+| Filter                                  | Parameters        | Usage                                                                                                                                                                                                                                                          |
+|-----------------------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `comet_canvas_component_defaults`       | `array $defaults` | Allows setting of various default values per-component, such as colour theme and container size.                                                                                                                                                               |
+| `comet_canvas_global_background`        | `string $color`   | Allows setting a global background colour for the site. Default is `white`. Valid values must be drawn from the `ThemeColor` type.                                                                                                                             |
+| `comet_canvas_default_icon_prefix`      | `string $prefix`  | Allows setting a default icon prefix for all Icon components. Default is `fa-solid`.                                                                                                                                                                           |
+| `comet_canvas_theme_colours`            | `array $colours`  | An alternative or supplementary method of setting theme colours. This filter runs _after_ `theme.json` is used to find the colour palette, so if you use both the filter will win.                                                                             |
+| `comet_canvas_theme_colour_pairs_maybe` | `array $pairs`    | Allows setting of accessible colour pairs (foreground/background) for use in components that support them, such as Buttons and Banners. Contains some common defaults. **Note:** If a given pair does not have sufficient contrast, it will not be registered. |
 
 In addition, there are some filters to modify attributes for nested components in the provided blocks. This is to ensure consistency across the theme rather than having backend controls for every possible attribute in every individual use case. These filters are applied in the
 `render.php` file for the block, so if a filter isn't listed here you can check that file to see if I've forgotten to document one - or add it. They are also intentionally all prefixed with
 `comet_blocks_` for easy searching.
 
-| Filter                                     | Parameters         | Usage                                                                                                                                  |
-|--------------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| `comet_blocks_cta_heading_classes`         | `array $classes`   | Add CSS class(es) to the heading in the call-to-action block, e.g., `['is-style-accent']`.                                             |
-| `comet_blocks_cta_button_group_attributes` | `array $attrs`     | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`.                                    |
-| `comet_blocks_child_pages_card_as_link`    | 	  `bool $as_link` | Set whether the cards in the Child Pages block render as links. Default is `false`, which renders them with a "Read more" button link. |
+| Filter                                        | Parameters         | Usage                                                                                                                                  |
+|-----------------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `comet_blocks_cta_heading_classes`            | `array $classes`   | Add CSS class(es) to the heading in the call-to-action block, e.g., `['is-style-accent']`.                                             |
+| `comet_blocks_cta_button_group_attributes`    | `array $attrs`     | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`.                                    |
+| `comet_blocks_child_pages_card_as_link`       | 	  `bool $as_link` | Set whether the cards in the Child Pages block render as links. Default is `false`, which renders them with a "Read more" button link. |
+| `comet_blocks_banner_heading_classes`         | `array $classes`   | Add CSS class(es) to the heading in the Banner block, e.g., `['is-style-accent']`.                                                     |
+| `comet_blocks_banner_button_group_attributes` | `array $attrs`     | Modify the attributes of the Button Group in the Banner block, e.g., `['halign' => 'center']`.                                         |
 
 ### Modifying block field options
 
