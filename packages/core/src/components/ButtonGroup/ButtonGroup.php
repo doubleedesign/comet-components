@@ -41,11 +41,11 @@ class ButtonGroup extends UIComponent {
             $attributes['data-orientation'] = $this->orientation->value;
         }
 
-        if (isset($this->hAlign)) {
+        if (isset($this->hAlign) && $this->hAlign !== Alignment::MATCH_PARENT) {
             $attributes['data-halign'] = $this->hAlign->value;
         }
 
-        if (isset($this->vAlign)) {
+        if (isset($this->vAlign) && $this->vAlign !== Alignment::MATCH_PARENT) {
             $attributes['data-valign'] = $this->vAlign->value;
         }
 

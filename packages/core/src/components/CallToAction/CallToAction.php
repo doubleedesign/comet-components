@@ -21,7 +21,7 @@ class CallToAction extends WrappedLayoutComponent {
 
     /**
      * @param  array  $attributes
-     * @param  array<Heading|Paragraph|ButtonGroup>  $innerComponents
+     * @param  array<Heading|Paragraph|ButtonGroup|PreprocessedHTML>  $innerComponents
      */
     public function __construct(array $attributes, array $innerComponents) {
         $this->innerBackground = ThemeColor::tryFrom($attributes['innerBackground'] ?? '') ?? null;
@@ -33,7 +33,7 @@ class CallToAction extends WrappedLayoutComponent {
             'colorTheme'      => $attributes['colorTheme'] ?? null,
         ], $innerComponents);
 
-        unset($attributes['colorTheme']);
+        unset($attributes['colorTheme']); // don't pass colorTheme to parent, it has already been applied above
 
         parent::__construct($attributes, [$content], 'components.CallToAction.call-to-action');
     }
