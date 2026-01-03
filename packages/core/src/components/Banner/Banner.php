@@ -10,159 +10,82 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class Banner extends LayoutComponent {
+class Banner extends WrappedLayoutComponent {
+    use BackgroundColor;
+    use ColorTheme;
     use LayoutAlignment;
 
     /**
-     * @var ContainerSize $containerSize
-     * @description The size of the container for the content
-     */
-    protected ContainerSize $containerSize = ContainerSize::DEFAULT;
-
-    /**
      * @var int $contentMaxWidth
-     * @description The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)
+     * @description The maximum width of the content area as a percentage of the container
      */
     protected int $contentMaxWidth = 50;
 
     /**
-     * @var string $imageUrl
-     * @description The URL of the image to display in the banner
+     * @var string $backgroundType
+     * @supported-values 'overlay', 'content'
      */
-    protected string $imageUrl;
-
-    /**
-     * @var string $imageAlt
-     * @description The alt text for the image
-     */
-    protected string $imageAlt;
-
-    /**
-     * @var ThemeColor $overlayColor
-     * @description The color of the overlay on top of the image
-     */
-    protected ThemeColor $overlayColor = ThemeColor::DARK;
+    protected string $backgroundType = 'content';
 
     /**
      * @var int $overlayOpacity
      * @description The opacity of the overlay on top of the image (set to 0 to disable the overlay)
      */
-    protected int $overlayOpacity = 0;
+    protected int $backgroundOpacity = 0;
 
     /**
-     * @var bool $isParallax
-     * @description Whether the banner should have a fixed background (also known as a parallax effect)
+     * @var array $imageProps
+     * @description The properties of the background image, as per the fields of the CoverImage component
      */
-    protected bool $isParallax = false;
+    protected array $imageProps = [];
 
     /**
-     * @var int $minHeight
-     * @description The minimum height of the banner (in px)
-     */
-    protected int $minHeight = 600;
-
-    /**
-     * @var int $maxHeight
-     * @description The maximum height of the banner (in vh)
-     */
-    protected int $maxHeight = 100;
-
-    /**
-     * @var array<Heading|Paragraph|ButtonGroup> $innerComponents
+     * @var array<Heading|Paragraph|ButtonGroup|ListComponent|Copy|PreprocessedHTML> $innerComponents
      */
     protected array $innerComponents;
 
     public function __construct(array $attributes, array $innerComponents) {
-        $this->imageUrl = $attributes['imageUrl'] ?? '';
-        $this->imageAlt = $attributes['imageAlt'] ?? '';
-        $this->overlayColor = isset($attributes['overlayColor']) ? ThemeColor::tryFrom($attributes['overlayColor']) : $this->overlayColor;
-        $this->overlayOpacity = $attributes['overlayOpacity'] ?? $this->overlayOpacity;
-        $this->isParallax = $attributes['isParallax'] ?? $this->isParallax;
-        $this->minHeight = $attributes['minHeight'] ?? $this->minHeight;
-        $this->maxHeight = $attributes['maxHeight'] ?? $this->maxHeight;
+        $this->backgroundType = $attributes['backgroundType'] ?? $this->backgroundType;
+        $this->backgroundOpacity = $attributes['backgroundOpacity'] ?? $this->backgroundOpacity;
+        $this->withContainer = false; // do not have the parent component wrap in a container, as we need to handle that separately in this case
+        $this->imageProps = $attributes['imageProps'] ?? $this->imageProps;
 
-        parent::__construct($attributes, $innerComponents, 'components.Banner.banner');
-        $this->set_layout_alignment_from_attrs($attributes);
-        $this->transform_inner_components();
-    }
-
-    private function transform_inner_components(): void {
-        $rawInnerComponents = $this->innerComponents;
-
-        $this->innerComponents = [
-            new CoverImage(
-                [
-                    'src'        => $this->imageUrl,
-                    'alt'        => $this->imageAlt ?? '',
-                    'context'    => 'banner',
-                    'isParallax' => $this->isParallax,
-                ]
-            ),
-            new Container(
-                array_merge(
-                    $this->get_container_attributes(),
-                    [
-                        'size'        => $this->containerSize->value,
-                        'isNested'    => true,
-                        'tagName'     => 'div',
-                        'context'     => 'banner',
-                        'hAlign'      => $this->hAlign->value,
-                        'vAlign'      => $this->vAlign->value,
-                    ]
-                ),
-                [new Group(
-                    [
-                        'backgroundColor' => $this->backgroundColor ?? null,
-                        'context'         => 'banner__container',
-                        'shortName'       => 'inner',
-                        'style'           => [
-                            'max-width' => $this->contentMaxWidth . '%'
-                        ]
+        $updatedInnerComponents = array(
+            new CoverImage([
+                ...$this->imageProps,
+                'context' => 'banner'
+            ]),
+            new Container([
+                ...Utils::array_pick($attributes, ['size', 'hAlign', 'vAlign']),
+                'context'  => 'banner',
+                'tagName'  => Tag::DIV->value,
+                'isNested' => true
+            ],
+                array(
+                    new Group([
+                        'colorTheme' => $attributes['colorTheme'] ?? 'primary',
+                        ...($this->backgroundType === 'content' ? ['backgroundColor' => $attributes['backgroundColor'] ?? null] : []),
+                        'context'   => 'banner',
+                        'shortName' => 'content',
+                        'style'     => ['max-width' => $this->contentMaxWidth . '%']
                     ],
-                    $rawInnerComponents)
-                ]
-            ),
-            new Group(
-                [
-                    'context'         => 'banner',
-                    'shortName'       => 'overlay',
-                    'backgroundColor' => $this->overlayColor->value ?? null,
-                    'style'           => [
-                        'opacity' => $this->overlayOpacity / 100
-                    ]
-                ],
-                []
-            )
-        ];
-    }
+                        $innerComponents
+                    )
+                ))
+        );
 
-    private function get_container_attributes(): array {
-        $attrs = $this->get_html_attributes();
-
-        return array_filter($attrs, function($key) {
-            return $key !== 'data-background' && $key !== 'style';
-        }, ARRAY_FILTER_USE_KEY);
-    }
-
-    public function get_inline_styles_string(): string {
-        $styles['min-height'] = $this->minHeight . 'px';
-        $styles['max-height'] = $this->maxHeight . 'dvh';
-
-        $result = '';
-        foreach ($styles as $key => $value) {
-            $result .= $key . ':' . $value . ';';
+        if ($this->backgroundType === 'overlay' && $attributes['backgroundColor'] && $attributes['backgroundColor'] !== 'transparent') {
+            $attributes['style'] = array(
+                '--overlay-opacity' => $this->backgroundOpacity / 100
+            );
         }
 
-        return $result;
-    }
+        // Don't pass attributes to the wrapper(s) that have already been applied to inner components
+        unset($attributes['colorTheme']);
+        if ($this->backgroundType === 'content') {
+            unset($attributes['backgroundColor']);
+        }
 
-    public function render(): void {
-        $blade = BladeService::getInstance();
-
-        echo $blade->make($this->bladeFile, [
-            'attributes' => ['style' => $this->get_inline_styles_string()],
-            'classes'    => $this->get_filtered_classes(),
-            'children'   => $this->innerComponents
-        ])->render();
+        parent::__construct($attributes, $updatedInnerComponents, 'components.Banner.banner');
     }
 }

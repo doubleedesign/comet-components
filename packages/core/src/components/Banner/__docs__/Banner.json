@@ -1,11 +1,16 @@
 {
     "name": "Banner",
     "description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content. Supports parallax effect, minHeight and maxHeight.",
-    "extends": "LayoutComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "ariaAttrs": {
+            "type": "array",
+            "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+            "required": true
+        },
         "backgroundColor": {
             "type": "ThemeColor",
             "description": "Background colour keyword",
@@ -23,6 +28,21 @@
                 "black"
             ]
         },
+        "backgroundOpacity": {
+            "type": "int",
+            "description": "The opacity of the overlay on top of the image (set to 0 to disable the overlay)",
+            "required": true,
+            "default": 0
+        },
+        "backgroundType": {
+            "type": "string",
+            "required": true,
+            "supported": [
+                "'overlay'",
+                "'content'"
+            ],
+            "default": "content"
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
@@ -30,29 +50,37 @@
                 "banner"
             ]
         },
-        "containerSize": {
-            "type": "ContainerSize",
-            "description": "The size of the container for the content",
-            "required": true,
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
             "supported": [
-                "default",
-                "wide",
-                "fullwidth",
-                "narrow",
-                "narrower",
-                "small"
-            ],
-            "default": "default"
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ]
         },
         "contentMaxWidth": {
             "type": "int",
-            "description": "The maximum width of the content area as a percentage of the container (may be overridden to full width for small viewports/containers)",
+            "description": "The maximum width of the content area as a percentage of the container",
             "required": true,
             "default": 50
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+        },
+        "dataAttrs": {
+            "type": "array",
+            "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
         },
         "hAlign": {
             "type": "Alignment",
@@ -70,64 +98,17 @@
             "type": "string",
             "description": "Unique identifier"
         },
-        "imageAlt": {
-            "type": "string",
-            "description": "The alt text for the image",
-            "required": true
-        },
-        "imageUrl": {
-            "type": "string",
-            "description": "The URL of the image to display in the banner",
-            "required": true
+        "imageProps": {
+            "type": "array",
+            "description": "The properties of the background image, as per the fields of the CoverImage component",
+            "required": true,
+            "default": []
         },
         "isNested": {
             "type": "bool",
             "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
             "required": true,
             "default": false
-        },
-        "isParallax": {
-            "type": "bool",
-            "description": "Whether the banner should have a fixed background (also known as a parallax effect)",
-            "required": true,
-            "default": "false"
-        },
-        "maxHeight": {
-            "type": "int",
-            "description": "The maximum height of the banner (in vh)",
-            "required": true,
-            "default": 100
-        },
-        "minHeight": {
-            "type": "int",
-            "description": "The minimum height of the banner (in px)",
-            "required": true,
-            "default": 600
-        },
-        "overlayColor": {
-            "type": "ThemeColor",
-            "description": "The color of the overlay on top of the image",
-            "required": true,
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ],
-            "default": "dark"
-        },
-        "overlayOpacity": {
-            "type": "int",
-            "description": "The opacity of the overlay on top of the image (set to 0 to disable the overlay)",
-            "required": true,
-            "default": 0
         },
         "shortName": {
             "type": "string",
@@ -162,14 +143,22 @@
                 "match-parent"
             ],
             "default": "match-parent"
+        },
+        "withContainer": {
+            "type": "bool",
+            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {
-        "type": "array<Heading|Paragraph|ButtonGroup>",
+        "type": "array<Heading|Paragraph|ButtonGroup|ListComponent|Copy|PreprocessedHTML>",
         "description": "Inner components to be rendered within this component",
         "required": true
     },
     "traits": [
+        "BackgroundColor",
+        "ColorTheme",
         "LayoutAlignment",
         "BackgroundColor",
         "LayoutAlignment",

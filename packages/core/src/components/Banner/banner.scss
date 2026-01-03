@@ -1,68 +1,81 @@
+@use '../mixins' as *;
+@use '../variables' as *;
+
 .banner {
 	width: 100%;
 	position: relative;
 	overflow: hidden;
 	padding: 0;
-	height: 600px; // min-height will override this, but setting this as height ensures 100% height on the image actually works
+	container-type: inline-size;
 
-	@media (min-height: 600px) {
-		height: 100dvh; // allow plenty of space for the min-height and max-height that may be added inline to work
+	&[data-background] {
+		background-color: transparent;
+
+		&:after {
+			content: '';
+			position: absolute;
+			inset: 0 0 0 0;
+			z-index: 1;
+			opacity: var(--overlay-opacity, 1);
+		}
+
+		@each $colorName, $value in $colors {
+			&[data-background="#{$colorName}"] {
+				&:after {
+					background-color: var(--color-#{$colorName});
+				}
+			}
+		}
 	}
 
-	&__image {
+	&__cover-image {
+		position: relative;
 		height: 100%;
 		width: 100%;
-		position: relative;
+		max-height: 100dvh;
 
-		.image {
-			display: contents;
+		@include container-width-down('narrow') {
+			height: 75dvh;
 		}
 
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+		@include container-width-down('small') {
+			height: 100dvh;
 		}
-
-		// Parallax version
-		&[data-parallax="true"] {
-			clip-path: inset(0 0 0 0);
-
-			.image {
-				position: static;
-				height: 100%;
-			}
-
-			img {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100vw;
-				height: 100vh;
-				object-fit: cover;
-				object-position: center bottom;
-				z-index: 1;
-			}
-		}
-	}
-
-	&__container,
-	&__overlay {
-		position: absolute;
-		inset: 0 0 0 0;
 	}
 
 	&__container {
+		position: absolute;
+		inset: 0 0 0 0;
 		z-index: 100;
 		display: flex;
+	}
 
-		&__inner {
-			position: relative;
-			z-index: 200;
+	&__content {
+		position: relative;
+		z-index: 200;
+		padding: var(--spacing-lg);
+		text-align: center;
+		justify-content: center;
 
-			@container (max-width:768px) {
-				max-width: 100% !important;
+		.button-group {
+			justify-content: center;
+		}
+
+		@include container-width-up('small') {
+			text-align: revert;
+			justify-content: initial;
+
+			.button-group {
+				justify-content: initial;
 			}
+		}
+
+		@include container-width-up('narrow') {
+			padding: var(--spacing-xl);
+		}
+
+		@include container-width-down('narrow') {
+			max-width: 100% !important;
 		}
 	}
 }
