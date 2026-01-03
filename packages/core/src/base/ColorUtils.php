@@ -1,8 +1,9 @@
 <?php
 
 namespace Doubleedesign\Comet\Core;
-
+use Exception;
 use Tomloprod\Colority\Colors\Color;
+use TypeError;
 
 class ColorUtils {
 
@@ -66,6 +67,41 @@ class ColorUtils {
         $readableName = self::get_theme_colour_name_from_value($readableHex);
 
         return ThemeColor::tryFrom($readableName) ?? ThemeColor::BLACK;
+    }
+
+    public static function validate_pair(ThemeColor|string $foreground, ThemeColor|string $background, float $threshold = 3): bool {
+        try {
+            if (is_string($foreground)) {
+                $foreground = ThemeColor::tryFrom($foreground);
+            }
+            if (is_string($background)) {
+                $background = ThemeColor::tryFrom($background);
+            }
+
+            if ($foreground === null || $background === null) {
+                throw new TypeError('Invalid ThemeColor value provided.');
+            }
+            if (self::get_theme_value_for_colour_name($foreground->value) === null || self::get_theme_value_for_colour_name($background->value) === null) {
+                throw new TypeError('ThemeColor value not found in theme configuration.');
+            }
+
+            $foregroundHex = self::get_theme_value_for_colour_name($foreground->value);
+            $backgroundHex = self::get_theme_value_for_colour_name($background->value);
+
+            if ($foregroundHex === null || $backgroundHex === null) {
+                return false;
+            }
+
+            $foregroundColor = colority()->fromHex($foregroundHex);
+            $backgroundColor = colority()->fromHex($backgroundHex);
+
+            return self::has_sufficient_contrast($backgroundColor, $foregroundColor, $threshold);
+        }
+        catch (Exception|TypeError $e) {
+            error_log($e->getMessage());
+
+            return false;
+        }
     }
 
     /**

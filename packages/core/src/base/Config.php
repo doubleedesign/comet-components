@@ -16,6 +16,7 @@ class Config {
         'white' => '#FFFFFF',
         'black' => '#000000',
     ];
+    private array $theme_colour_pairs = [];
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
@@ -33,7 +34,8 @@ class Config {
             'icon_prefix'           => $this->icon_prefix,
             'blade_component_paths' => $this->blade_component_paths,
             'component_defaults'    => $this->component_defaults,
-            'theme_colours'         => $this->theme_colours
+            'theme_colours'         => $this->theme_colours,
+            'theme_colour_pairs'    => $this->theme_colour_pairs,
         ];
     }
 
@@ -89,12 +91,65 @@ class Config {
         }
     }
 
-    public function get_theme_colours(): array {
-        return $this->get('theme_colours');
-    }
-
+    /**
+     * Set global theme colours from the provided array and generate base set of pairs with contrast validation
+     *
+     * @param  array  $colours  - colorName:hexValue pairs
+     *
+     * @return void
+     */
     public function set_theme_colours(array $colours): void {
         $this->theme_colours = array_merge($this->theme_colours, $colours);
+    }
+
+    public function clear_theme_colour_pairs(): void {
+        $this->theme_colour_pairs = [];
+    }
+
+    /**
+     * @param  array  $pairs  - array of arrays with two values, the first being the desired foreground and the second being the background
+     *
+     * @return void
+     */
+    public function maybe_add_theme_colour_pairs(array $pairs): void {
+        // If one pair was passed as a flat array, convert it to a nested array
+        if (count($pairs) === 2 && is_string($pairs[0]) && is_string($pairs[1])) {
+            $pairs = [[$pairs[0], $pairs[1]]];
+        }
+
+        foreach ($pairs as $pair) {
+            $this->maybe_add_theme_colour_pair($pair[0], $pair[1]);
+        }
+    }
+
+    private function maybe_add_theme_colour_pair(string $foreground, string $background, ?float $threshold = 3): void {
+        // Check if the pair already exists
+        $exists = array_find($this->theme_colour_pairs, function($pair) use ($background, $foreground) {
+            return $pair['background'] === $background && $pair['foreground'] === $foreground;
+        });
+        if ($exists !== null) {
+            error_log("Comet Components core config: Colour pair foreground '$foreground' and background '$background' already exists so has not been registered again.");
+
+            return;
+        }
+
+        // Check if there is sufficient contrast
+        $valid = ColorUtils::validate_pair($foreground, $background, $threshold);
+        if ($valid) {
+            $this->theme_colour_pairs[] = ['foreground' => $foreground, 'background' => $background];
+        }
+        else {
+            $message = "Comet Components core config: Colour pair foreground '$foreground' and background '$background' does not meet contrast threshold of $threshold:1 so has not been registered.";
+            error_log($message);
+        }
+    }
+
+    public function get_theme_colours(): array {
+        return $this->theme_colours;
+    }
+
+    public function get_theme_colour_pairs(): array {
+        return $this->theme_colour_pairs;
     }
 
     public function set_icon_prefix($prefix): void {
@@ -114,7 +169,7 @@ class Config {
 
     public function set_component_defaults(string $component, array $settings): void {
         $defaults = $this->get('component_defaults');
-		$componentName = Utils::pascal_case($component);
+        $componentName = Utils::pascal_case($component);
         $defaults[$componentName] = $settings;
         $this->component_defaults = $defaults;
     }

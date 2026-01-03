@@ -1,8 +1,11 @@
 <?php
+
 use Doubleedesign\Comet\Core\{ColorUtils, Config, ThemeColor};
+use function Spies\{expect_spy, get_spy_for, match_pattern};
 
 describe('ColorUtils', function() {
     beforeEach(function() {
+
         Config::getInstance()->set_theme_colours([
             'primary'   => '#4B0082', // indigo
             'secondary' => '#FF69B4', // hot pink
@@ -96,7 +99,35 @@ describe('ColorUtils', function() {
 
             $readable = ColorUtils::get_readable_colour(ThemeColor::PRIMARY);
 
-            expect($readable)->toEqual(ThemeColor::BLACK);
+            expect($readable)->toEqual(ThemeColor::WHITE);
+        });
+    });
+
+    describe('colour pair validation', function() {
+        it('returns true when the contrast is sufficient', function() {
+            $isValid = ColorUtils::validate_pair(ThemeColor::WHITE, ThemeColor::BLACK, 3);
+            expect($isValid)->toBeTrue();
+        });
+
+        it('returns false when the contrast is insufficient', function() {
+            $isValid = ColorUtils::validate_pair(ThemeColor::DARK, ThemeColor::BLACK, 3);
+            expect($isValid)->toBeFalse();
+        });
+
+        it('catches the error and returns false if a colour has a valid name but missing from the config', function() {
+            $logSpy = get_spy_for('error_log');
+            $isValid = ColorUtils::validate_pair(ThemeColor::INFO, ThemeColor::BLACK, 3);
+
+            expect_spy($logSpy)->to_have_been_called->with(match_pattern('/ThemeColor value not found in theme configuration/'))->verify();
+            expect($isValid)->toBeFalse();
+        });
+
+        it('catches the error and returns false if an invalid colour is provided', function() {
+            $logSpy = get_spy_for('error_log');
+            $isValid = ColorUtils::validate_pair(ThemeColor::WHITE, 'invalid-color', 3);
+
+            expect_spy($logSpy)->to_have_been_called()->with(match_pattern('/Invalid ThemeColor value provided/'))->verify();
+            expect($isValid)->toBeFalse();
         });
     });
 });
