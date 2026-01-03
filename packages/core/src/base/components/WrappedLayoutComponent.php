@@ -48,7 +48,7 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
         $this->ariaAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'aria-') || $key === 'role', ARRAY_FILTER_USE_KEY);
         $this->dataAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'data-'), ARRAY_FILTER_USE_KEY);
         $this->wrapperAttrs = array_merge(
-            Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme']),
+            Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme', 'style']),
             $this->ariaAttrs
         );
 
