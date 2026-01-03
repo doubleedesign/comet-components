@@ -4,6 +4,7 @@
   width: 100%;
   height: fit-content;
   overflow: hidden;
+  margin: 0;
 }
 .image--advanced:has([data-style=rounded]) {
   border-radius: 100%;
@@ -15,12 +16,10 @@
 .image--advanced__image {
   overflow: hidden;
   min-width: 100%;
-  container-type: size;
   transform: translateX(0);
 }
 .image--advanced__image__inner {
   min-width: 100%;
-  min-height: 100cqh;
   overflow: visible;
   max-width: none !important;
   width: fit-content;

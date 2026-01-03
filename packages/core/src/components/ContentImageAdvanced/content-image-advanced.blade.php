@@ -1,8 +1,5 @@
 @opentag($tag) @class($classes) @attributes($outerAttrs)>
-<div class="{{ $bemPrefix }}__image"
-     data-aspect-ratio="{{ $aspectRatio }}"
-     @if($originalImageOrientation) data-original-orientation="{{ $originalImageOrientation }}" @endif
->
+<div class="{{ $bemPrefix }}__image" @attributes($innerAttrs)>
 	<div class="{{ $bemPrefix }}__image__inner">
 		<img @attributes($attributes)>
 	</div>
