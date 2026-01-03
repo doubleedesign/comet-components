@@ -56,7 +56,7 @@
       </indentOptions>
     </codeStyleSettings>
     <codeStyleSettings language="Markdown">
-      <option name="RIGHT_MARGIN" value="160" />
+      <option name="RIGHT_MARGIN" value="500" />
       <option name="SOFT_MARGINS" value="140" />
     </codeStyleSettings>
     <codeStyleSettings language="PHP">

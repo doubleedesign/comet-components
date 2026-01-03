@@ -2,8 +2,11 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/BackgroundOpacity/BackgroundOpacity.dist.js" />
+        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/BackgroundType/BackgroundType.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ColorControls/ColorControls.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContainerSize/ContainerSize.dist.js" />
+        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContentMaxWidth/ContentMaxWidth.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/CustomControlsWrapper/CustomControlsWrapper.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/FieldTooltip/FieldTooltip.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/GroupLayout/GroupLayout.dist.js" />
@@ -14,8 +17,11 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/BackgroundOpacity/BackgroundOpacity.dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/BackgroundType/BackgroundType.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ColorControls/ColorControls.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContainerSize/ContainerSize.dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContentMaxWidth/ContentMaxWidth.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/CustomControlsWrapper/CustomControlsWrapper.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/FieldTooltip/FieldTooltip.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/GroupLayout/GroupLayout.dist.js" />

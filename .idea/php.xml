@@ -81,7 +81,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/phluent/phluent" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
@@ -202,9 +201,10 @@
       <path value="$PROJECT_DIR$/vendor/sirbrillig/spies" />
       <path value="$PROJECT_DIR$/packages/core/vendor/tomloprod/colority" />
       <path value="$PROJECT_DIR$/packages/core/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.4">
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.3">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
   <component name="PhpRuntimeConfiguration">
