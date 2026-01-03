@@ -24,10 +24,12 @@ class CallToAction extends WrappedLayoutComponent {
      * @param  array<Heading|Paragraph|ButtonGroup>  $innerComponents
      */
     public function __construct(array $attributes, array $innerComponents) {
+        $this->innerBackground = ThemeColor::tryFrom($attributes['innerBackground'] ?? '') ?? null;
+
         $content = new Group([
             'context'         => 'call-to-action',
             'shortName'       => 'content',
-            'backgroundColor' => $attributes['innerBackground'] ?? null,
+            'backgroundColor' => $this->innerBackground ?? null,
             'colorTheme'      => $attributes['colorTheme'] ?? null,
         ], $innerComponents);
 
