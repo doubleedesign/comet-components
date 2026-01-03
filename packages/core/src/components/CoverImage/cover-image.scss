@@ -1,3 +1,34 @@
-.cover-image {
+@use '../mixins' as *;
+@use '../bem-mixin' as *;
+@use '../bem-class-selectors' as *;
 
+@include bem-block('cover-image', ('image')) {
+	&:has([data-parallax="true"]) {
+		clip-path: inset(0 0 0 0);
+	}
+
+	&__image {
+		height: 100%;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-position: var(--focal-point-x) var(--focal-point-y);
+			object-fit: cover;
+		}
+
+		&[data-parallax="true"] {
+			position: static;
+			height: 100%;
+
+			img {
+				position: fixed;
+				top: 0;
+				left: 0;
+				object-fit: cover;
+				object-position: center bottom;
+			}
+		}
+
+	}
 }

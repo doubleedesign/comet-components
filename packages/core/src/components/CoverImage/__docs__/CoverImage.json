@@ -1,75 +1,92 @@
 {
-    "name": "CoverImage",
-    "description": "*/",
-    "extends": "ImageComponent",
-    "abstract": false,
-    "isInner": false,
-    "belongsInside": "LayoutComponent",
-    "attributes": {
-        "alt": {
-            "type": "string",
-            "description": "Alternative text",
-            "required": true,
-            "default": ""
-        },
-        "classes": {
-            "type": "array<string>",
-            "description": "CSS classes",
-            "default": [
-                "image"
-            ]
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "isParallax": {
-            "type": "bool",
-            "description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
-            "required": true,
-            "default": "false"
-        },
-        "shortName": {
-            "type": "string",
-            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-            "required": true,
-            "default": "image"
-        },
-        "src": {
-            "type": "string",
-            "description": "Image source URL",
-            "required": true
-        },
-        "style": {
-            "type": "array",
-            "description": "Inline styles"
-        },
-        "styleName": {
-            "type": "string",
-            "description": "Visual style variation."
-        },
-        "tagName": {
-            "type": "Tag",
-            "description": "The HTML tag to use for this component",
-            "supported": [
-                "div"
-            ],
-            "default": "div"
-        },
-        "testId": {
-            "type": "string",
-            "description": "Optionally add a data-testid attribute for automated tests"
-        },
-        "title": {
-            "type": "string",
-            "description": "Optional image title (appears on hover)"
-        }
-    },
-    "traits": [
-        "BlockElementModifier"
-    ]
+	"name": "CoverImage",
+	"description": "*/",
+	"extends": "Renderable",
+	"abstract": false,
+	"isInner": false,
+	"belongsInside": "LayoutComponent",
+	"attributes": {
+		"alt": {
+			"type": "string",
+			"description": "Alternative text",
+			"required": true,
+			"default": ""
+		},
+		"aspectRatio": {
+			"type": "AspectRatio",
+			"description": "Crop image to the given aspect ratio by default",
+			"supported": [
+				"4:3",
+				"3:4",
+				"1:1",
+				"16:9",
+				"9:16",
+				"3:2",
+				"2:3",
+				"21:9",
+				"2.35:1"
+			]
+		},
+		"classes": {
+			"type": "array<string>",
+			"description": "CSS classes",
+			"default": [
+				"cover-image"
+			]
+		},
+		"context": {
+			"type": "string",
+			"description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+		},
+		"focalPoint": {
+			"type": "array{x:",
+			"description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
+			"default": {
+				"x": 50,
+				"y": 50
+			}
+		},
+		"id": {
+			"type": "string",
+			"description": "Unique identifier"
+		},
+		"isParallax": {
+			"type": "bool",
+			"description": "In relevant contexts, whether the image should be used to achieve a parallax effect (requires CSS to actually execute)",
+			"required": true,
+			"default": "false"
+		},
+		"shortName": {
+			"type": "string",
+			"description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+			"required": true,
+			"default": "cover-image"
+		},
+		"src": {
+			"type": "string",
+			"description": "Image source URL",
+			"required": true,
+			"default": ""
+		},
+		"style": {
+			"type": "array",
+			"description": "Inline styles"
+		},
+		"tagName": {
+			"type": "Tag",
+			"description": "The HTML tag to use for this component",
+			"supported": [
+				"div"
+			],
+			"default": "div"
+		},
+		"testId": {
+			"type": "string",
+			"description": "Optionally add a data-testid attribute for automated tests"
+		}
+	},
+	"traits": [
+		"BlockElementModifier",
+		"ImageCropProperties"
+	]
 }

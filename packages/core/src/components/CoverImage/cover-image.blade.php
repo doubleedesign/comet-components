@@ -1,5 +1,5 @@
-@opentag($tag) @if ($classes)
-	@class($classes)
-@endif @attributes($wrapperAttributes)>
-<img @attributes($attributes) />
+@opentag($tag) @class($classes) @attributes($attributes)>
+<div class="{{ $bemPrefix }}__image">
+	<img @attributes($imageAttrs) />
+</div>
 @closetag($tag)

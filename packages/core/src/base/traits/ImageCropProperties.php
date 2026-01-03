@@ -10,13 +10,13 @@ namespace Doubleedesign\Comet\Core;
 trait ImageCropProperties {
     /**
      * @var AspectRatio|null $aspectRatio
-     * @description Crop banner image to the given aspect ratio
+     * @description Crop image to the given aspect ratio by default
      */
     protected ?AspectRatio $aspectRatio = null;
 
     /**
      * @var ?Orientation $originalImageOrientation
-     * @description The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.
+     * @description The original orientation of the image; can be used as a data attribute to tweak CSS for cropping
      */
     protected ?Orientation $originalImageOrientation = null;
 
@@ -74,16 +74,18 @@ trait ImageCropProperties {
      * Build a string to be used in the style attribute
      * for local CSS properties that can be used to control image cropping
      *
+     * @param  array  $include  List of properties to include in the output; default is all
+     *
      * @return string
      */
-    public function get_local_css_properties(): string {
+    public function get_local_css_properties(array $include = ['focalPoint', 'offset']): string {
         $properties = [];
 
-        if ($this->focalPoint) {
+        if ($this->focalPoint && in_array('focalPoint', $include)) {
             $properties['--focal-point-x'] = $this->focalPoint['x'] . '%';
             $properties['--focal-point-y'] = $this->focalPoint['y'] . '%';
         }
-        if ($this->offset) {
+        if ($this->offset && in_array('offset', $include)) {
             $properties['--offset-x'] = $this->offset['x'] . '%';
             $properties['--offset-y'] = $this->offset['y'] . '%';
         }
