@@ -50,20 +50,6 @@ abstract class Renderable {
         $this->bladeFile = $bladeFile;
         $this->testId = $attributes['testId'] ?? null;
 
-        // FIXME If we are in WordPress, allow overriding Blade template from the theme
-        //        if (class_exists('WP_Block') && function_exists('get_template_directory') && function_exists('get_stylesheet_directory')) {
-        //            $themeBladeFile = get_stylesheet_directory() . "/components/{$this->shortName}.blade.php";
-        //            if (file_exists($themeBladeFile)) {
-        //                $this->bladeFile = "components.{$this->shortName}";
-        //            }
-        //            else {
-        //                $parentThemeBladeFile = get_template_directory() . "/components/{$this->shortName}.blade.php";
-        //                if (file_exists($parentThemeBladeFile)) {
-        //                    $this->bladeFile = str_replace('/', '\\', $parentThemeBladeFile);
-        //                }
-        //            }
-        //        }
-
         // If a CSS and/or JS file is in the directory, add it/them to the asset loader if it's available
         if (class_exists('Doubleedesign\Comet\Core\Assets')) {
             // TODO: Make this opt-in somehow, so it's not being run when not used (e.g., in WordPress where the bundles are used)
