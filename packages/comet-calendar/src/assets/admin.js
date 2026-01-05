@@ -1,3 +1,5 @@
+/* global acf */
+
 document.addEventListener('DOMContentLoaded', function () {
 	// Target the admin post list for Events only
 	if(document.body.classList.contains('post-type-event') && document.body.classList.contains('edit-php')) {
@@ -22,24 +24,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Handle Quick Add form submissions
 		// Its default submission causes a white screen, so we need some custom processing
-		if(quickAddForm) {
-			quickAddForm.addEventListener('submit', function (event) {
+		if (quickAddForm) {
+			document.addEventListener('submit', function (event) {
+				// Only intercept our specific form
+				if (event.target !== quickAddForm && !quickAddForm.contains(event.target)) {
+					return;
+				}
 				event.preventDefault();
+				event.stopImmediatePropagation();
 				event.stopPropagation();
 
-				const formAction = this.getAttribute('action');
-				const formData = new FormData(this);
+				dim_quick_add_form();
+
+				const formAction = quickAddForm.getAttribute('action');
+				const formData = new FormData(quickAddForm);
 				// Custom flag to identify the request for custom additional processing in PHP
 				formData.append('custom_acf_quick_add_form', 'true');
 
 				fetch(formAction, {
 					method: 'POST',
 					body: formData,
+					cache: 'no-store',
+					credentials: 'same-origin',
 					headers: {
 						'X-Requested-With': 'XMLHttpRequest',
-						'Accept': 'application/json',
-						cache: 'no-store',
-						credentials: 'same-origin'
+						'Accept': 'application/json'
 					}
 				})
 					.then(response => {
@@ -53,6 +62,13 @@ document.addEventListener('DOMContentLoaded', function () {
 							const postId = response.data.post_id;
 							const url = new URL(window.location.href);
 							url.searchParams.set('added', postId);
+
+							// Stop the "unsaved changes" browser warning before redirecting
+							window.onbeforeunload = null;
+							if (typeof acf !== 'undefined' && acf.unload) {
+								acf.unload.stopListening();
+							}
+
 							window.location.href = url.toString();
 						}
 						else {
@@ -62,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					.catch(error => {
 						console.error(error);
 					});
-			});
+			}, true);
 
 			// Clear validation messages on reset
 			quickAddForm.addEventListener('reset', function () {
