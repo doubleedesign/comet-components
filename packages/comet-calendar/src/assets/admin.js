@@ -2,16 +2,16 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 	// Target the admin post list for Events only
-	if(document.body.classList.contains('post-type-event') && document.body.classList.contains('edit-php')) {
+	if (document.body.classList.contains('post-type-event') && document.body.classList.contains('edit-php')) {
 
 		// Handle expand/collapse of the Quick Add form
 		const quickAddBox = document.querySelector('.admin-quick-add');
 		const quickAddToggle = quickAddBox.querySelector('.postbox-header button');
 		const quickAddForm = quickAddBox.querySelector('.acf-form');
-		if(quickAddToggle && quickAddForm) {
-			quickAddToggle.addEventListener('click', function() {
+		if (quickAddToggle && quickAddForm) {
+			quickAddToggle.addEventListener('click', function () {
 				const isExpanded = quickAddToggle.getAttribute('aria-expanded') === 'true';
-				if(isExpanded) {
+				if (isExpanded) {
 					quickAddToggle.setAttribute('aria-expanded', 'false');
 					quickAddForm.setAttribute('aria-hidden', 'true');
 				}
@@ -141,11 +141,11 @@ document.addEventListener('DOMContentLoaded', function () {
 				fetch(formAction, {
 					method: 'POST',
 					body: formData,
+					cache: 'no-store',
+					credentials: 'same-origin',
 					headers: {
 						'X-Requested-With': 'XMLHttpRequest',
 						'Accept': 'application/json',
-						cache: 'no-store',
-						credentials: 'same-origin'
 					}
 				})
 					.then(response => {
@@ -163,32 +163,32 @@ document.addEventListener('DOMContentLoaded', function () {
 						return handle_maybe_json_response(response);
 					})
 					.then(response => {
-						if(response?.data?.fields && response?.data?.post_id) {
+						if (response?.data?.fields && response?.data?.post_id) {
 							Object.entries(response.data.fields).forEach(([key, value]) => {
 								const text = document.querySelector(`.acf-field-value[data-field-key="${key}"][data-post-id="${response.data.post_id}"]`);
-								if(text) {
+								if (text) {
 									// Link field
-									if(response.data.fields['field_680b0560ee067'] &&
-										Object.keys(response.data.fields['field_680b0560ee067']).includes('url') &&
+									if (response.data.fields['field__event__link'] &&
+										Object.keys(response.data.fields['field__event__link']).includes('url') &&
 										Object.keys(value).includes('title')) {
 										text.innerHTML = `<a href="${value.url}" target="_blank">${value.title}</a>`;
 									}
-									if(typeof value === 'string') {
+									if (typeof value === 'string') {
 										text.innerHTML = format_data(value);
 									}
-									if(typeof value === 'object') {
+									if (typeof value === 'object') {
 										// Probably a date range field
-										if(Object.values(value).length === 2) {
+										if (Object.values(value).length === 2) {
 											text.innerHTML = Object.values(value)
 												.map(val => format_data(val))
 												.join(' - ');
 										}
 										else {
 											text.innerHTML = Object.values(value).map(val => {
-												if(typeof val === 'string') {
+												if (typeof val === 'string') {
 													return format_data(val);
 												}
-												if(typeof val === 'object') {
+												if (typeof val === 'object') {
 													return Object.values(val).map(v => format_data(v))
 														.filter(v => v !== null)
 														.join('<br>');
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						console.error(error);
 					});
 
-				unvalidate_form(quickAddForm);
+				unvalidate_quick_add_form();
 			});
 
 			form.addEventListener('reset', function (event) {
@@ -222,13 +222,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function format_data(value) {
-	if(typeof value === 'string' && value === '') return null;
+	if (typeof value === 'string' && value === '') return null;
 
-	if(typeof value === 'object') {
+	if (typeof value === 'object') {
 		return Object.values(value).map(val => format_data(val)).join('<br>');
 	}
 
-	if(typeof value === 'string') {
+	if (typeof value === 'string') {
 		const year = value.substring(0, 4);
 		const month = value.substring(4, 6);
 		const day = value.substring(6, 8);
@@ -277,19 +277,20 @@ function handle_maybe_json_response(response) {
  */
 function dim_quick_add_form() {
 	const form = document.querySelector('.admin-quick-add .acf-form');
-	if(!form) return;
+	if (!form) return;
 
 	form.style.opacity = 0.25;
 	form.style['pointer-events'] = 'none';
 
 	const button = form.querySelector('.acf-form-submit');
-	if(button) {
+	if (button) {
 		button.style.display = 'none';
 	}
 }
+
 function unvalidate_quick_add_form() {
 	const form = document.querySelector('.admin-quick-add .acf-form');
-	if(!form) return;
+	if (!form) return;
 
 	form.classList.remove('is-validating');
 	form.classList.remove('is-invalid');
