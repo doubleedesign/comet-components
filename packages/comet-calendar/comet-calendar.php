@@ -4,7 +4,7 @@
  * Description: Centrally manage event information and display it using Comet Components.
  * Author:              Double-E Design
  * Author URI:          https://www.doubleedesign.com.au
- * Version:             0.0.3
+ * Version:             0.5.0
  * Requires at least:   6.7.0
  * Requires PHP:        8.2.23
  * Requires plugins:    advanced-custom-fields-pro, comet-plugin-blocks
@@ -12,12 +12,19 @@
  *
  * @package Comet
  */
-const COMET_CALENDAR_VERSION = '0.0.3';
+const COMET_CALENDAR_VERSION = '0.5.0';
 const COMET_CALENDAR_PLUGIN_PATH = '/wp-content/plugins/comet-calendar/';
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Doubleedesign\Comet\WordPress\Calendar\{Admin, BlockEditorConfig, Blocks, Events, Fields, TemplateHandler};
+use Doubleedesign\Comet\WordPress\Calendar\{Admin,
+    BlockEditorConfig,
+    Blocks,
+    Events,
+    Fields,
+    QuickAdd,
+    QuickEdit,
+    TemplateHandler};
 
 /**
  * Create activation and deactivation hooks and functions, so we can do things
@@ -41,5 +48,7 @@ new Fields();
 new Events();
 new TemplateHandler();
 new Admin();
+new QuickAdd();
+new QuickEdit();
 new BlockEditorConfig();
 new Blocks();

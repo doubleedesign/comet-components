@@ -4,6 +4,7 @@
 
 .post-type-event {
 	/** Hide the default date filter because that's the post date, not the event date, which is unintuitive */
+
 	.actions:not(.bulkactions) {
 		#filter-by-date, label[for="filter-by-date"] {
 			display: none;
@@ -20,6 +21,7 @@
 
 	.inline-edit-wrapper {
 		/* Hide the date field in quick edit on events because it's the post date not the event date, so is potentially confusing */
+
 		.inline-edit-date {
 			display: none;
 
@@ -71,13 +73,20 @@ td .acf-field-value {
 
 /** ACF forms added to the admin rows */
 .admin-column-acf-form {
-	display: none; /* showing is handled by JS and should set to display:flex */
 	width: 100%;
 	flex-wrap: wrap;
 	justify-content: flex-end;
 	gap: 0.25rem;
 	position: relative;
 	padding-block-end: 0.5rem;
+
+	&:has(form[aria-hidden]) {
+		display: none;
+	}
+
+	&:has(form:not([aria-hidden="true"])) {
+		display: flex;
+	}
 
 	&.admin-column-acf-form--loading {
 		pointer-events: none;
@@ -211,6 +220,11 @@ td .acf-field-value {
 				display: none;
 			}
 
+			> fieldset {
+				display: contents;
+			}
+
+			> fieldset > .acf-field,
 			> .acf-field {
 				width: 100%;
 				flex-basis: 100%;
