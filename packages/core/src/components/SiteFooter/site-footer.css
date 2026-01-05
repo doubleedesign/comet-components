@@ -16,12 +16,39 @@
 .site-footer a {
   color: inherit;
 }
+.site-footer__menu {
+  width: 100%;
+}
 .site-footer__menu__list {
   display: block;
+  text-align: center;
+  margin-inline: 0;
+}
+@container (min-width: 600px) {
+  .site-footer__menu__list {
+    text-align: unset;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-lg);
+  }
+}
+@container (min-width: 940px) {
+  .site-footer__menu__list {
+    gap: var(--spacing-xl);
+  }
 }
 .site-footer__menu__list__item {
   display: block;
   margin-block-end: var(--spacing-sm);
+}
+.site-footer__menu__sub-menu {
+  display: none;
+}
+@container (min-width: 600px) {
+  .site-footer__menu__sub-menu {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=site-footer.css.map */

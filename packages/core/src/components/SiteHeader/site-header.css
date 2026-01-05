@@ -232,13 +232,14 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
 }
 .site-header__menu__sub-menu__item {
   display: block;
+  margin-block: 0;
 }
 .site-header__menu__sub-menu__item__link {
   display: block;
   padding: var(--spacing-xxs) var(--spacing-sm);
   font-weight: var(--font-weight-light);
   white-space: nowrap;
-  font-size: 1rem;
+  font-size: var(--font-size-sm);
   color: inherit;
   text-decoration: underline;
   text-decoration-color: transparent;
