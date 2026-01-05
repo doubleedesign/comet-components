@@ -1,6 +1,6 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "comet/upcoming-events",
 	"title": "Upcoming Events",
 	"icon": "calendar-alt",
@@ -8,7 +8,9 @@
 	"category": "content",
 	"acf": {
 		"mode": "preview",
-		"renderTemplate": "render.php"
+		"renderTemplate": "render.php",
+		"blockVersion": 3,
+		"hideFieldsInSidebar": true
 	},
 	"editorStyle": [
 		"comet-event-list-style",
