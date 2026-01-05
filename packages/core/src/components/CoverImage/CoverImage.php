@@ -47,7 +47,7 @@ class CoverImage extends Renderable {
     protected function get_html_attributes(): array {
         return array(
             ...parent::get_html_attributes(),
-            'data-aspect-ratio' => $this->aspectRatio->value ?? null,
+            'data-aspect-ratio' => strtolower($this->aspectRatio->name),
             'data-parallax'     => $this->isParallax ? 'true' : 'false',
             'style'             => $this->get_local_css_properties(['focalPoint']),
         );

@@ -33,7 +33,7 @@ class ContentImageAdvanced extends ContentImageComponent {
 
     public function get_inner_wrapper_html_attributes(): array {
         $attrs = [
-            'data-aspect-ratio' => $this->aspectRatio->value ?? null,
+            'data-aspect-ratio' => strtolower($this->aspectRatio->name) ?? null,
         ];
 
         if (isset($this->originalImageOrientation)) {
