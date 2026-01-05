@@ -30,16 +30,28 @@
 
 	&__cover-image {
 		position: relative;
-		height: 100%;
 		width: 100%;
+		height: 100dvh;
+		min-height: 40rem;
 		max-height: 100dvh;
+		container-type: size;
+		backdrop-filter: blur(1rem); // when the viewport is large enough that the inner content hits its max-width, blur the container's background
 
-		@include container-width-down('narrow') {
+		@include container-width-up('small') {
 			height: 75dvh;
 		}
 
-		@include container-width-down('small') {
-			height: 100dvh;
+		@include container-width-up('narrow') {
+			height: fit-content;
+		}
+
+		&__image {
+			max-width: 120rem;
+			margin-inline: auto;
+
+			@container (min-width: 120rem) {
+				@include blur-inline-edges();
+			}
 		}
 	}
 

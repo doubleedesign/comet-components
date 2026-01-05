@@ -38,6 +38,10 @@
 	padding: var(--spacing-md);
 }
 
+@mixin blur-inline-edges() {
+	mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 20%, black 80%, black 90%, transparent 100%);
+}
+
 @mixin breakout() {
 	// use the width of the closest container
 	width: 100cqw;

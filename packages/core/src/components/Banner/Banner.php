@@ -49,6 +49,10 @@ class Banner extends WrappedLayoutComponent {
         $this->backgroundOpacity = $attributes['backgroundOpacity'] ?? $this->backgroundOpacity;
         $this->withContainer = false; // do not have the parent component wrap in a container, as we need to handle that separately in this case
         $this->imageProps = $attributes['imageProps'] ?? $this->imageProps;
+        $attributes['style'] = array(
+            ...$attributes['style'] ?? [],
+            'background-image' => $this->imageProps['src'] ? "url({$this->imageProps['src']})" : ''
+        );
 
         $updatedInnerComponents = array(
             new CoverImage([
@@ -75,9 +79,7 @@ class Banner extends WrappedLayoutComponent {
         );
 
         if ($this->backgroundType === 'overlay' && $attributes['backgroundColor'] && $attributes['backgroundColor'] !== 'transparent') {
-            $attributes['style'] = array(
-                '--overlay-opacity' => $this->backgroundOpacity / 100
-            );
+            $attributes['style'][] = ['--overlay-opacity' => $this->backgroundOpacity / 100];
         }
 
         // Don't pass attributes to the wrapper(s) that have already been applied to inner components
