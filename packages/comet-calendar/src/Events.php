@@ -28,6 +28,7 @@ class Events {
 
 		// Misc
 		add_action('add_meta_boxes', [$this, 'remove_yoast_metabox'], 100);
+        add_filter('doublee_enable_page_behaviour_options_for_post_types', fn($post_types) => ['event', ...$post_types]);
 	}
 
 	/**
@@ -167,20 +168,21 @@ class Events {
 			}
 		}
 
-		return $query;
-	}
+        return $query;
+    }
 
+    /**
+     * Add an ACF form at the top of the Events list in the admin
+     * Note: This requires some JS to aid handling or we get a white screen on save, see admin.js
+     *
+     * @param  $views
+     *
+     * @return mixed
+     */
+    public function display_quick_add_form($views): mixed {
 
-	/**
-	 * Add an ACF form at the top of the Events list in the admin
-	 * Note: This requires some JS to aid handling or we get a white screen on save, see admin.js
-	 * @param $views
-	 * @return mixed
-	 */
-	function display_quick_add_form($views): mixed {
-
-		// Copy as much of the HTML structure/classes etc. from ACF post meta boxes so we get the same styling
-		$headerHtml = <<<HTML
+        // Copy as much of the HTML structure/classes etc. from ACF post meta boxes so we get the same styling
+        $headerHtml = <<<HTML
 		<div class="postbox-header">
 			<h2>Quick Add</h2>
 			<button type="button" class="handlediv" aria-expanded="true">
@@ -203,12 +205,21 @@ class Events {
 				'post_status' => 'publish'
 			),
 			'form'              => true,
-			'form_attributes'   => array(
-				'method' => 'post',
-			),
-			'ajax'              => true, // Note: ACF's AJAX doesn't fully work in this context, see form submission functions below and admin.js for custom handling
-			'html_after_fields' => '<button class="button cancel" type="reset">Cancel</button>',
-			'submit_value'      => 'Add event',
+            'form_attributes'   => array(
+                'method' => 'post',
+            ),
+            'fields'            => array(
+                'field__event__type',
+                'field__event__date--single',
+                'field__event__date--range',
+                'field__event__date--multiple',
+                'field__event__date--multiple-extended',
+                'field__event__location',
+                'field__event__link'
+            ),
+            'ajax'              => true, // Note: ACF's AJAX doesn't fully work in this context, see form submission functions below and admin.js for custom handling
+            'html_after_fields' => '<button class="button cancel" type="reset">Cancel</button>',
+            'submit_value'      => 'Add event',
 			'return'            => '',
 		));
 		echo '</div>';
