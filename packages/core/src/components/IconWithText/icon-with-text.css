@@ -1,20 +1,20 @@
-.icon-with-text {
+.icon-with-text, [class$=__icon-with-text], [class*=icon-with-text--] {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   gap: var(--spacing-sm);
   padding-block: var(--spacing-xs);
 }
-.icon-with-text__icon {
+.icon-with-text__icon, [class$=__icon-with-text__icon] {
   width: 2rem;
   min-width: 2rem;
   flex-basis: 2rem;
   overflow-x: hidden;
 }
-.icon-with-text__icon i, .icon-with-text__icon svg {
+.icon-with-text__icon i, [class$=__icon-with-text__icon] i, .icon-with-text__icon svg, [class$=__icon-with-text__icon] svg {
   font-size: 2rem;
 }
-[data-color-theme=primary] .icon-with-text__icon {
+.icon-with-text__content, [class$=__icon-with-text__content] {
   color: var(--color-primary);
 }
 [data-color-theme=secondary] .icon-with-text__icon {
@@ -48,14 +48,14 @@
   flex-grow: 1;
   flex-basis: auto;
 }
-.icon-with-text__content p {
-  color: var(--color-primary);
+.icon-with-text__content p, [class$=__icon-with-text__content] p {
+  color: var(--color-dark);
   line-height: 1.2;
 }
-.icon-with-text__content p span {
+.icon-with-text__content p span, [class$=__icon-with-text__content] p span {
   display: block;
 }
-.icon-with-text__content p span:first-child {
+.icon-with-text__content p span:first-child, [class$=__icon-with-text__content] p span:first-child {
   font-size: var(--font-size-sm);
   color: color-mix(in srgb, var(--color-dark) 80%, white);
 }

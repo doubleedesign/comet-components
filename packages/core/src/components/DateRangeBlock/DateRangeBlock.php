@@ -1,6 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use DateTime, IntlDateFormatter;
+use DateTime;
+use IntlDateFormatter;
 use OpenPsa\Ranger\Ranger;
 
 /**
@@ -28,6 +29,7 @@ class DateRangeBlock extends DateComponent {
 
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.DateRangeBlock.date-range-block');
+        $this->set_bem_modifier('range');
         $this->startDate = isset($attributes['startDate']) ? $this->convert_date($attributes['startDate']) : null;
         $this->endDate = isset($attributes['endDate']) ? $this->convert_date($attributes['endDate']) : null;
         $this->ranger = new Ranger($this->locale);
@@ -151,12 +153,14 @@ class DateRangeBlock extends DateComponent {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes(),
-            'attributes' => $this->get_html_attributes(),
-            'days'       => $this->showDay ? $this->get_day_range() : null,
-            'dates'      => $this->get_date_range(),
-            'month'      => $this->get_month_range(),
-            'year'       => $this->showYear ? $this->get_year_range() : null,
+            'classes'              => $this->get_filtered_classes(),
+            'attributes'           => $this->get_html_attributes(),
+            'days'                 => $this->showDay ? $this->get_day_range() : null,
+            'dates'                => $this->get_date_range(),
+            'month'                => $this->get_month_range(),
+            'year'                 => $this->showYear ? $this->get_year_range() : null,
+            'bemPrefix'            => $this->get_bem_prefix(),
+            'accessibleDateString' => $this->get_accessible_date_string()
         ])->render();
     }
 }

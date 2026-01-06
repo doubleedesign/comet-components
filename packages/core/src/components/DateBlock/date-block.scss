@@ -1,7 +1,8 @@
 @use '../functions' as *;
 @use '../variables' as *;
+@use '../bem-mixin' as *;
 
-.date-block {
+@include bem-block('date', ('day', 'day-number', 'month', 'year')) {
 	min-width: 3rem;
 	max-width: 5rem;
 	display: flex;
@@ -9,17 +10,11 @@
 	justify-content: center;
 	gap: var(--spacing-xxs);
 	flex-direction: column;
-	padding-block: var(--spacing-xs);
-
-	@each $name, $color in $colors {
-		&[data-color-theme="#{$name}"] {
-			background: var(--color-#{$name});
-			color: var(--readable-color-#{$name});
-		}
-	}
+	background: var(--theme-color);
+	color: var(--theme-color-inverse);
 
 	&__day,
-	&__date,
+	&__day-number,
 	&__month,
 	&__year {
 		display: block;
@@ -29,12 +24,11 @@
 	}
 
 	&__day {
-		font-size: 0.8rem;
+		font-size: var(--font-size-sm);
 	}
 
-	&__date {
+	&__day-number {
 		font-weight: var(--font-weight-bold);
-		// FIXME
-		//font-size: $baseFontSize * pow($typeScale, 1.5);
+		font-size: calc(1rem * calc(var(--typescale) * var(--typescale)));
 	}
 }

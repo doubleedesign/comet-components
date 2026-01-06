@@ -1,4 +1,4 @@
-.icon-links, [class$=__icon-links] {
+.icon-links, [class$=__icon-links], [class*=icon-links--] {
   display: flex;
   gap: var(--spacing-sm);
   padding: 0 var(--spacing-sm);

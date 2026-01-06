@@ -1,17 +1,17 @@
 <time @class($classes) @attributes($attributes)>
 	@if ($days !== null)
-		<span class="date-range-block__days">
+		<span class="{{$bemPrefix}}__days">
 			{{ $days }}
 		</span>
 	@endif
-	<span class="date-range-block__dates">
+	<span class="{{$bemPrefix}}__day-number">
 		{{ $dates }}
 	</span>
-	<span class="date-range-block__month">
+	<span class="{{$bemPrefix}}__month">
 		{{ $month }}
 	</span>
 	@if ($year !== null)
-		<span class="date-range-block__year">
+		<span class="{{$bemPrefix}}__year">
 			{{ $year }}
 		</span>
 	@endif

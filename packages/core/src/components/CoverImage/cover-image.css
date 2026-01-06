@@ -1,4 +1,4 @@
-.cover-image:has([data-parallax=true]), [class$=__cover-image]:has([data-parallax=true]) {
+.cover-image:has([data-parallax=true]), [class$=__cover-image]:has([data-parallax=true]), [class*=cover-image--]:has([data-parallax=true]) {
   clip-path: inset(0 0 0 0);
 }
 .cover-image__image, [class$=__cover-image__image] {

@@ -1,4 +1,4 @@
-.date-block, .date-range-block {
+.date, .date--range, [class$=__date], [class*=date--] {
   min-width: 3rem;
   max-width: 5rem;
   display: flex;
@@ -6,59 +6,21 @@
   justify-content: center;
   gap: var(--spacing-xxs);
   flex-direction: column;
-  padding-block: var(--spacing-xs);
+  background: var(--theme-color);
+  color: var(--theme-color-inverse);
 }
-.date-block[data-color-theme=primary], [data-color-theme=primary].date-range-block {
-  background: var(--color-primary);
-  color: var(--readable-color-primary);
-}
-.date-block[data-color-theme=secondary], [data-color-theme=secondary].date-range-block {
-  background: var(--color-secondary);
-  color: var(--readable-color-secondary);
-}
-.date-block[data-color-theme=accent], [data-color-theme=accent].date-range-block {
-  background: var(--color-accent);
-  color: var(--readable-color-accent);
-}
-.date-block[data-color-theme=info], [data-color-theme=info].date-range-block {
-  background: var(--color-info);
-  color: var(--readable-color-info);
-}
-.date-block[data-color-theme=warning], [data-color-theme=warning].date-range-block {
-  background: var(--color-warning);
-  color: var(--readable-color-warning);
-}
-.date-block[data-color-theme=success], [data-color-theme=success].date-range-block {
-  background: var(--color-success);
-  color: var(--readable-color-success);
-}
-.date-block[data-color-theme=error], [data-color-theme=error].date-range-block {
-  background: var(--color-error);
-  color: var(--readable-color-error);
-}
-.date-block[data-color-theme=light], [data-color-theme=light].date-range-block {
-  background: var(--color-light);
-  color: var(--readable-color-light);
-}
-.date-block[data-color-theme=dark], [data-color-theme=dark].date-range-block {
-  background: var(--color-dark);
-  color: var(--readable-color-dark);
-}
-.date-block[data-color-theme=white], [data-color-theme=white].date-range-block {
-  background: var(--color-white);
-  color: var(--readable-color-white);
-}
-.date-block__day, .date-range-block__days, .date-block__date, .date-range-block__dates, .date-block__month, .date-range-block__month, .date-block__year, .date-range-block__year {
+.date__day, .date--range__days, [class$=__date__day], .date__day-number, .date--range__day-number, [class$=__date__day-number], .date__month, .date--range__month, [class$=__date__month], .date__year, .date--range__year, [class$=__date__year] {
   display: block;
   text-align: center;
   line-height: 1;
   font-weight: var(--font-weight-light);
 }
-.date-block__day, .date-range-block__days {
-  font-size: 0.8rem;
+.date__day, .date--range__days, [class$=__date__day] {
+  font-size: var(--font-size-sm);
 }
-.date-block__date, .date-range-block__dates {
+.date__day-number, .date--range__day-number, [class$=__date__day-number] {
   font-weight: var(--font-weight-bold);
+  font-size: calc(1rem * var(--typescale) * var(--typescale));
 }
 
 /*# sourceMappingURL=date-range-block.css.map */

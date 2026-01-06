@@ -1,4 +1,4 @@
-.link-group {
+.link-group, [class$=__link-group], [class*=link-group--] {
   width: 100%;
 }
 .link-group__link {

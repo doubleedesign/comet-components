@@ -9,7 +9,9 @@
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
-            "default": []
+            "default": [
+                "date"
+            ]
         },
         "colorTheme": {
             "type": "ThemeColor",
@@ -27,6 +29,10 @@
                 "white",
                 "black"
             ]
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
         "date": {
             "type": "DateTime",
@@ -46,7 +52,7 @@
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "date-block"
+            "default": "date"
         },
         "showDay": {
             "type": "bool",
@@ -78,7 +84,7 @@
         }
     },
     "traits": [
-        "ColorTheme",
-        "ShortName"
+        "BlockElementModifier",
+        "ColorTheme"
     ]
 }

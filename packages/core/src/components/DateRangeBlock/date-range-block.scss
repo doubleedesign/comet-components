@@ -2,24 +2,22 @@
 @use '../functions' as *;
 @use '../variables' as *;
 
-
-.date-range-block {
-	@extend .date-block;
+.date--range {
+	@extend .date;
 
 	&__days {
-		@extend .date-block__day;
+		@extend .date__day;
 	}
 
-	&__dates {
-		//font-size: $baseFontSize * pow($typeScale, 1.25); // FIXME
-		@extend .date-block__date;
+	&__day-number {
+		@extend .date__day-number;
 	}
 
 	&__month {
-		@extend .date-block__month;
+		@extend .date__month;
 	}
 
 	&__year {
-		@extend .date-block__year;
+		@extend .date__year;
 	}
 }

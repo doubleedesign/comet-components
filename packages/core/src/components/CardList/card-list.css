@@ -1,5 +1,5 @@
 @container (min-width: 940px) {
-  .card-list__list, [class$=__card-list__list] {
+  .card-list__list, [class$=__card-list__list], [class*=card-list__list--] {
     gap: var(--spacing-lg);
   }
 }

@@ -1,17 +1,17 @@
 <time @class($classes) @attributes($attributes)>
 	@if ($showDay)
-		<span class="date-block__day">
+		<span class="{{$bemPrefix}}__day">
 			{{ $date->format('D') }}
 		</span>
 	@endif
-	<span class="date-block__date">
+	<span class="{{$bemPrefix}}__day-number">
 		{{ $date->format('d') }}
 	</span>
-	<span class="date-block__month">
+	<span class="{{$bemPrefix}}__month">
 		{{ $date->format('M') }}
 	</span>
 	@if ($showYear)
-		<span class="date-block__year">
+		<span class="{{$bemPrefix}}__year">
 			{{ $date->format('Y') }}
 		</span>
 	@endif

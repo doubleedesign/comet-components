@@ -1,6 +1,7 @@
 <?php
 namespace Doubleedesign\Comet\Core;
-use DateTime, IntlDateFormatter;
+use DateTime;
+use IntlDateFormatter;
 
 /**
  * DateBlock component
@@ -96,6 +97,7 @@ class DateBlock extends DateComponent {
             'date'       => $this->date,
             'showDay'    => $this->showDay,
             'showYear'   => $this->showYear,
+            'bemPrefix'  => $this->get_bem_prefix()
         ])->render();
     }
 }

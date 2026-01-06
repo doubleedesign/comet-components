@@ -1,4 +1,4 @@
-.image--advanced {
+.image--advanced, [class$=__image--advanced], [class*=image--advanced--] {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -6,19 +6,34 @@
   overflow: hidden;
   margin: 0;
 }
-.image--advanced:has([data-style=rounded]) {
+.image--advanced:has([data-style=rounded]), [class$=__image--advanced]:has([data-style=rounded]), [class*=image--advanced--]:has([data-style=rounded]) {
   border-radius: 100%;
 }
-.image--advanced:has([data-style=polaroid]) {
+.image--advanced:has([data-style=polaroid]), [class$=__image--advanced]:has([data-style=polaroid]), [class*=image--advanced--]:has([data-style=polaroid]) {
   border: 0.75rem solid white;
   box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
 }
-.image--advanced__image {
+.image--advanced__image, [class$=__image--advanced__image] {
   overflow: hidden;
   min-width: 100%;
   transform: translateX(0);
 }
-.image--advanced__image__inner {
+.image--advanced__image:not([data-original-orientation]) img, [class$=__image--advanced__image]:not([data-original-orientation]) img {
+  width: 100%;
+  height: 100%;
+}
+.image--advanced__image[data-original-orientation=horizontal], [data-original-orientation=horizontal][class$=__image--advanced__image] {
+  container-type: size;
+}
+.image--advanced__image[data-original-orientation=horizontal] img, [data-original-orientation=horizontal][class$=__image--advanced__image] img {
+  height: 100cqh;
+  width: auto;
+}
+.image--advanced__image[data-original-orientation=vertical] img, [data-original-orientation=vertical][class$=__image--advanced__image] img {
+  width: calc(100% - var(--offset-x, 0));
+  height: calc(100cqh - var(--offset-y, 0));
+}
+.image--advanced__image__inner, [class$=__image--advanced__image__inner] {
   min-width: 100%;
   overflow: visible;
   max-width: none !important;
@@ -29,22 +44,10 @@
   left: var(--offset-x, 0);
   top: var(--offset-y, 0);
 }
-.image--advanced__image__inner img {
+.image--advanced__image__inner img, [class$=__image--advanced__image__inner] img {
   object-fit: cover;
 }
-:not([data-original-orientation]) .image--advanced__image__inner img {
-  width: 100%;
-  height: 100%;
-}
-[data-original-orientation=horizontal] .image--advanced__image__inner img {
-  height: 100cqh;
-  width: auto;
-}
-[data-original-orientation=vertical] .image--advanced__image__inner img {
-  width: calc(100% - var(--offset-x, 0));
-  height: calc(100cqh - var(--offset-y, 0));
-}
-.image--advanced__caption {
+.image--advanced__caption, [class$=__image--advanced__caption] {
   font-size: var(--font-size-sm);
   display: block;
   text-align: center;
