@@ -1,33 +1,107 @@
 {
     "name": "EventList",
     "description": "*/",
-    "extends": "UIComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "ariaAttrs": {
+            "type": "array",
+            "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+            "required": true
+        },
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ]
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "event-list"
+                "events"
             ]
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ],
+            "default": "'context'                      => 'events',\n            'shortname'                    => 'list',\n            'colortheme'                   => $this->colortheme->value ?? 'primary',\n            'data-group-layout'            => $this->layout->value\n        ];\n\n        // todo: this is repetitive, cardlist and linkgroup also do this (one just has a different default"
         },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
+        "dataAttrs": {
+            "type": "array",
+            "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
         "heading": {
             "type": "string",
-            "description": "The heading for the list."
+            "description": "The heading for the event list."
         },
         "id": {
             "type": "string",
             "description": "Unique identifier"
         },
-        "maxItemsPerRow": {
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+            "required": true,
+            "default": false
+        },
+        "layout": {
+            "type": "GroupLayout",
+            "description": "Layout style for grouping elements together.",
+            "required": true,
+            "supported": [
+                "list",
+                "grid",
+                "inline"
+            ],
+            "default": "list"
+        },
+        "maxPerRow": {
             "type": "int",
-            "description": "The maximum number of items to display per row, when the viewport is wide enough to accommodate.",
+            "description": "Maximum number of items to display per row in grid layouts.",
             "required": true,
             "default": 3
         },
@@ -35,7 +109,7 @@
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "event-list"
+            "default": "events"
         },
         "style": {
             "type": "array",
@@ -45,14 +119,35 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "ul",
-                "ol"
+                "div",
+                "section"
             ],
-            "default": "ul"
+            "default": "section"
         },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "viewAllUrl": {
+            "type": "string"
+        },
+        "withContainer": {
+            "type": "bool",
+            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {
@@ -61,6 +156,11 @@
         "required": true
     },
     "traits": [
+        "ColorTheme",
+        "GroupLayoutType",
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
         "BlockElementModifier"
     ]
 }

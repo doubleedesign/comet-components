@@ -8,12 +8,15 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.0
  * @description
  */
-#[AllowedTags([Tag::UL, Tag::OL])]
-#[DefaultTag(Tag::UL)]
-class EventList extends UIComponent {
+#[AllowedTags([Tag::DIV, Tag::SECTION])]
+#[DefaultTag(Tag::SECTION)]
+class EventList extends WrappedLayoutComponent {
+    use ColorTheme;
+    use GroupLayoutType;
+
     /**
      * @var ?string $heading
-     * @description The heading for the list.
+     * @description The heading for the event list.
      */
     protected ?string $heading;
 
@@ -24,41 +27,51 @@ class EventList extends UIComponent {
     protected array $innerComponents;
 
     /**
-     * @var int $maxItemsPerRow
-     * @description The maximum number of items to display per row, when the viewport is wide enough to accommodate.
+     * Link to a page to view all events; include only if this is not already the "all events" context.
+     *
+     * @var string|null
      */
-    protected int $maxItemsPerRow = 3;
+    protected ?string $viewAllUrl;
 
     public function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.EventList.event-list');
-        $this->heading = $attributes['heading'] ?? null;
-        $this->maxItemsPerRow = $attributes['maxItemsPerRow'] ?? $this->maxItemsPerRow;
+        $attributes['shortName'] = $attributes['shortName'] ?? 'events';
+        $this->bladeFile = $bladeFile ?? 'components.EventList.event-list';
+        $this->set_group_layout_from_attrs($attributes, GroupLayout::GRID);
+        $this->set_color_theme_from_attrs($attributes);
+        $this->viewAllUrl = $attributes['viewAllUrl'] ?? null;
 
-        // Automatically add event-list context to the cards if they don't already have their own context set
-        // Modify components in place rather than copying because it's more performant
-        array_walk($innerComponents, function($card) {
+        $groupAttrs = [
+            'tagName'                      => 'ul',
+            'context'                      => 'events',
+            'shortName'                    => 'list',
+            'colorTheme'                   => $this->colorTheme->value ?? 'primary',
+            'data-group-layout'            => $this->layout->value
+        ];
+
+        // TODO: This is repetitive, CardList and LinkGroup also do this (one just has a different default)
+        if ($this->layout === GroupLayout::GRID) {
+            $groupAttrs['data-max-per-row'] = $this->maxPerRow;
+        }
+
+        $wrappedCards = (new Group($groupAttrs, $innerComponents));
+
+        $headingComponent = $attributes['heading'] ? new Heading(['context' => 'events'], $attributes['heading']) : null;
+        $linkComponent = $this->viewAllUrl ? new Button(['classes' => ['button--view-all'], 'href' => $this->viewAllUrl], 'View all') : null; // TODO: Make the label configurable
+
+        // Call constructor so BEM context gets initialised
+        parent::__construct(
+            $attributes,
+            array_filter([$headingComponent, $wrappedCards, $linkComponent]),
+            'components.EventList.event-list'
+        );
+
+        // ...then apply it to the cards
+        $wrappedCards->innerComponents = array_map(function($card) use ($wrappedCards) {
             if ($card instanceof EventCard && !$card->get_context()) {
-                $card->update_context('events__list');
+                $card->update_context($wrappedCards->get_bem_prefix());
             }
-        });
-    }
 
-    protected function get_html_attributes(): array {
-        return array_merge(parent::get_html_attributes(), [
-            'data-max-per-row' => $this->maxItemsPerRow,
-        ]);
-    }
-
-    public function render(): void {
-        $blade = BladeService::getInstance();
-        $headingComponent = isset($this->heading) ? new Heading(['context' => 'events', 'level' => 2], $this->heading) : null;
-
-        echo $blade->make($this->bladeFile, [
-            'heading'    => $headingComponent,
-            'tag'        => $this->tagName->value,
-            'classes'    => $this->get_filtered_classes(),
-            'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents
-        ])->render();
+            return $card;
+        }, $wrappedCards->innerComponents);
     }
 }

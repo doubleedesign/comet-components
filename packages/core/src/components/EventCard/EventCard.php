@@ -45,68 +45,87 @@ class EventCard extends UIComponent {
         $this->dateComponent = $attributes['dateComponent'] ?? null;
         $this->name = $attributes['name'] ?? 'Untitled Event';
         $this->detailUrl = $attributes['detailUrl'] ?? null;
-        $this->externalLink = $attributes['externalLink'] ?? null;
+        $this->externalLink = is_array($attributes['externalLink']) ? $attributes['externalLink'] : null;
         $this->location = $attributes['location'] ?? null;
+        parent::__construct($attributes, [], 'components.EventCard.event-card'); // call before transforming inner components so BEM context is available
 
         $transformedInnerComponents = [];
         $links = [];
         if ($this->location) {
-            array_push($transformedInnerComponents, new Group(['shortName' => 'location'], [
-                new IconWithText(['icon' => 'fa-map-location-dot', 'colorTheme' => 'secondary'], [new Paragraph([], $this->location)])
-            ]));
+            array_push($transformedInnerComponents,
+                new IconWithText([
+                    // TODO: Make icon and colorTheme configurable
+                    'icon'       => 'fa-map-location-dot',
+                    'colorTheme' => 'secondary',
+                    'aria-label' => 'Location'
+                ], [new Paragraph([], $this->location)])
+            );
         }
         if ($this->detailUrl) {
             array_push($links, new Link([
                 'href'       => $this->detailUrl,
                 'iconPrefix' => 'fa-light',
-                'icon'       => 'fa-arrow-right'
-            ], 'Read more')
-            );
+                'icon'       => 'fa-arrow-right',
+                'label'      => 'More info'
+            ]));
         }
         if ($this->externalLink) {
             array_push($links, new Link([
+                'label'      => $this->externalLink['title'] ?? 'Read more',
                 'href'       => $this->externalLink['url'],
                 'target'     => $this->externalLink['target'] ?? null,
                 'iconPrefix' => 'fa-regular',
                 'icon'       => 'fa-arrow-up-right-from-square'
-            ], $this->externalLink['title'] ?? 'Read more')
-            );
+            ]));
         }
         if (!empty($links)) {
-            array_push($transformedInnerComponents, new Group(['shortName' => 'links'], $links));
+            array_push($transformedInnerComponents,
+                new LinkGroup(
+                    ['isNested' => true, 'context' => $this->get_bem_prefix(), 'layout' => GroupLayout::INLINE],
+                    $links
+                )
+            );
         }
 
-        $newInnerComponents = $this->dateComponent ? [
-            $this->dateComponent,
-            new Group(['shortName' => 'content'], [
-                new Heading(['level' => 3], $this->name),
-                new Group(['shortName' => 'content__inner'], $transformedInnerComponents),
-            ])
-        ] : [];
+        $content = new Group(
+            ['context' => $this->get_bem_prefix(), 'shortName' => 'content'],
+            array(
+                new Heading(['context' => "{$this->get_bem_prefix()}__content", 'level' => 3], $this->name),
+                ...$transformedInnerComponents
+            )
+        );
 
-        parent::__construct($attributes, $newInnerComponents, 'components.EventCard.event-card');
+        $this->dateComponent?->update_context($this->get_bem_prefix());
 
+        $this->innerComponents = $this->dateComponent ? [$this->dateComponent, $content] : [$content];
     }
 
-    private function apply_context_to_inner_components($components, $append = ''): void {
-        array_walk($components, function($component) use ($append) {
-            if ($component instanceof Group || $component instanceof Heading) {
-                $component->update_context("{$this->get_context()}__{$this->get_shortname()}{$append}");
-            }
-            if ($component instanceof Group && $component->innerComponents) {
-                $this->apply_context_to_inner_components($component->innerComponents, "__{$component->get_shortname()}");
-            }
-        });
+    /**
+     * When the context gets updated from a parent component, apply the new context to inner components
+     *
+     * @param  string  $context
+     * @param  bool|null  $clear_previous  Whether to clear previous context parts. Default is null (false).
+     *
+     * @return static
+     */
+    public function update_context(string $context, ?bool $clear_previous = false): static {
+        parent::update_context($context, $clear_previous);
+
+        // Apply updated context to inner components
+        foreach ($this->innerComponents as $component) {
+            $component->update_context($this->get_bem_prefix());
+        }
+
+        return $this;
     }
 
     public function render(): void {
         $blade = BladeService::getInstance();
 
-        // The context isn't available in the constructor if it was updated by the parent EventList, so we need to make some adjustments here
+        // The context isn't available in the constructor if it was updated by the parent EventList (if it happens to be in one),
+        // so we need to make some adjustments here
         if ($this->get_context() === 'events__list') {
             $this->tagName = Tag::LI;
-            $this->set_shortname('card');
-            $this->apply_context_to_inner_components($this->innerComponents);
         }
 
         echo $blade->make($this->bladeFile, [
