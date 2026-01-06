@@ -1,15 +1,24 @@
 <?php
-use Doubleedesign\Comet\Core\Config;
-use Doubleedesign\Comet\Core\PageHeader;
+
+use Doubleedesign\Comet\Core\{Config, PageHeader};
 
 $attributes = Config::getInstance()->get_component_defaults('page-header');
+$queried_object = get_queried_object();
+$title = get_the_title();
+
+if (is_home() && !is_front_page()) {
+    $title = get_the_title(get_option('page_for_posts', true));
+}
+if (is_archive()) {
+    $title = $queried_object->label ?? get_the_archive_title();
+}
 
 if (class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
-	$breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
-	$pageHeader = new PageHeader($attributes, get_the_title(), $breadcrumbs);
+    $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
+    $pageHeader = new PageHeader($attributes, $title, $breadcrumbs);
 }
 else {
-	$pageHeader = new PageHeader($attributes, get_the_title());
+    $pageHeader = new PageHeader($attributes, $title);
 }
 
 $pageHeader->render();
