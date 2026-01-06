@@ -64,27 +64,27 @@
     container-type: inline-size;
     grid-template-columns: 1fr;
   }
+  [data-group-layout=grid][data-max-per-row] {
+    justify-content: inherit;
+  }
   @container (min-width: 600px) {
-    [data-group-layout=grid][data-max-per-row="2"]:has(:nth-child(2)), [data-group-layout=grid][data-max-per-row="4"]:has(:nth-child(2)) {
+    [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)) {
       grid-template-columns: repeat(2, 1fr);
-      justify-content: inherit;
     }
   }
   @container (min-width: 600px) {
     [data-group-layout=grid][data-max-per-row="3"] {
       grid-template-columns: repeat(auto-fit, 33%);
-      justify-content: inherit;
     }
-    [data-group-layout=grid][data-max-per-row="3"]:has(:nth-child(3)) {
+    [data-group-layout=grid][data-max-per-row="3"]:has(> :nth-child(3)) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
   @container (min-width: 768px) {
     [data-group-layout=grid][data-max-per-row="4"] {
       grid-template-columns: repeat(auto-fit, 25%);
-      justify-content: inherit;
     }
-    [data-group-layout=grid][data-max-per-row="4"]:has(:nth-child(4)) {
+    [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(4)) {
       grid-template-columns: repeat(4, 1fr);
     }
   }

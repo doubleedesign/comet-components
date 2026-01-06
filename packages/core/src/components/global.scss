@@ -84,24 +84,26 @@
 		container-type: inline-size;
 		grid-template-columns: 1fr;
 
-		&[data-max-per-row="2"], &[data-max-per-row="4"] {
+		&[data-max-per-row] {
+			// Align according to parent's hAlign if applicable,
+			// if the items don't take up the full space (e.g., 3 items sized for 4 per row)
+			justify-content: inherit;
+		}
+
+		&[data-max-per-row="2"] {
 			@include container-width-up('small') {
 				// Only go to 2 columns if there are 2 or more items
-				&:has(:nth-child(2)) {
+				&:has(> :nth-child(2)) {
 					grid-template-columns: repeat(2, 1fr);
-					justify-content: inherit;
 				}
 			}
 		}
 
 		&[data-max-per-row="3"] {
 			@include container-width-up('small') {
-				// Centre items if there is fewer than 3
 				grid-template-columns: repeat(auto-fit, 33%);
-				justify-content: inherit;
 
-				// Ensure 3+ lays out as 3 columns
-				&:has(:nth-child(3)) {
+				&:has(> :nth-child(3)) {
 					grid-template-columns: repeat(3, 1fr);
 				}
 			}
@@ -109,12 +111,9 @@
 
 		&[data-max-per-row="4"] {
 			@include container-width-up('narrower') {
-				// Centre items if there is fewer than 4
 				grid-template-columns: repeat(auto-fit, 25%);
-				justify-content: inherit;
 
-				// Ensure 4+ lays out as 4 columns
-				&:has(:nth-child(4)) {
+				&:has(> :nth-child(4)) {
 					grid-template-columns: repeat(4, 1fr);
 				}
 			}
