@@ -53,18 +53,8 @@ class Gallery extends UIComponent {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-        $attributes['data-max-columns'] = $this->columns;
-
-        // Provide attributes to be used for layout CSS in smaller containers/viewports
-        // to easily allow for things like 6 items = 3 columns, but 4 items = 2 columns until the space is large enough for 4
-        if ($this->columns > 1) {
-            if (count($this->innerComponents) % 2 === 0) {
-                $attributes['data-interim-columns'] = 2;
-            }
-            else if (count($this->innerComponents) % 3 === 0) {
-                $attributes['data-interim-columns'] = 3;
-            }
-        }
+        $attributes['data-group-layout'] = 'grid';
+        $attributes['data-max-per-row'] = $this->columns;
 
         return $attributes;
     }
