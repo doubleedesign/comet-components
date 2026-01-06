@@ -9,23 +9,9 @@
 .site-content {
   padding-block: 0;
   position: relative;
-}
-
-.page-with-sidebar {
   container-type: inline-size;
 }
-@container (min-width: 768px) {
-  .page-with-sidebar__columns {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
-}
-.page-with-sidebar__columns__column:is(main) {
-  grid-column: span 3;
-}
-.page-with-sidebar__columns__column:is(main) > .column__inner > .group:not(:first-child) {
-  padding-block: var(--spacing-md);
-}
+
 .page-header[data-background=white] + .page-section[data-background=white]:has(.page-with-sidebar) {
   padding-block-start: var(--spacing-md);
 }
