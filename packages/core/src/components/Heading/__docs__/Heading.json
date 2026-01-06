@@ -32,7 +32,7 @@
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "heading"
+            "default": ""
         },
         "style": {
             "type": "array",

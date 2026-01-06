@@ -25,6 +25,8 @@ class Heading extends TextElementExtended {
     protected ?int $level = 2;
 
     public function __construct(array $attributes, string $content) {
+        $bladeFile = 'components.Heading.heading';
+
         $proposedTag = Tag::H2;
         // Convert level to tag format for validation
         if (isset($attributes['level']) && is_numeric($attributes['level'])) {
@@ -34,7 +36,6 @@ class Heading extends TextElementExtended {
         // Set the validated tagName
         $attributes['tagName'] = strtolower($proposedTag->value);
 
-        $bladeFile = 'components.Heading.heading';
         parent::__construct($attributes, $content, $bladeFile);
     }
 }

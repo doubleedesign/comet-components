@@ -9,8 +9,10 @@ abstract class TextElementExtended extends TextElement {
 
     public function __construct(array $attributes, string $content, string $bladeFile) {
         parent::__construct($attributes, $content, $bladeFile);
+        // Only set BEM classnames if context or shortName is provided
+        if (isset($attributes['context']) || isset($attributes['shortName'])) {
         $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? null);
-        $this->set_text_color_from_attrs($attributes);
+        }
     }
 
     public function get_filtered_classes(): array {
