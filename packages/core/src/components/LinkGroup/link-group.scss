@@ -1,6 +1,6 @@
 @use '../variables' as *;
 
-.link-group {
+@include bem-block('link-group', ('link')) {
 	width: 100%;
 
 	&__link {
@@ -40,13 +40,11 @@
 
 			&__label {
 				font-weight: var(--font-weight-bold);
-				font-size: 1.125rem;
 				display: block;
+			color: var(--theme-color);
 
-				@each $name, $color in $colors {
-					[data-color-theme=#{$name}] & {
-						color: var(--color-#{$name});
-					}
+			[data-group-layout="inline"] & {
+				font-weight: var(--font-weight-normal);
 				}
 			}
 

@@ -44,3 +44,12 @@
 @function darken($colorName, $amount) {
 	@return color-mix(in srgb, var(--color-#{$colorName}) (100% - $amount), black);
 }
+
+@function lighten-theme-color($amount) {
+	@return color-mix(in srgb, var(--theme-color) (100% - $amount), white);
+}
+
+@function darken-theme-color($amount) {
+	@return color-mix(in srgb, var(--theme-color) (100% - $amount), black);
+}
+

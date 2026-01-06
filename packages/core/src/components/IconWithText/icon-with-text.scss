@@ -14,22 +14,17 @@
 		min-width: 2rem;
 		flex-basis: 2rem;
 		overflow-x: hidden;
+		color: var(--theme-color);
 
 		i, svg {
 			font-size: 2rem;
-		}
-
-		@each $name, $color in $colors {
-			[data-color-theme=#{$name}] & {
-				color: var(--color-#{$name});
-			}
 		}
 	}
 
 	&__content {
 		flex-grow: 1;
 		flex-basis: auto;
-		
+
 		p {
 			color: var(--color-dark);
 			line-height: 1.2;

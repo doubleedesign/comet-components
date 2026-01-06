@@ -10,147 +10,60 @@
   padding: var(--spacing-sm);
   transition: background 0.2s linear;
   font-size: 1rem;
+  background: color-mix(in srgb, var(--theme-color) 10%, white);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  grid-column-gap: var(--spacing-sm);
 }
-[data-color-theme=primary] .link-group__link, .link-group__link[data-color-theme=primary] {
-  background: color-mix(in srgb, var(--color-primary) 10%, white);
+.link-group__link:hover, [class$=__link-group__link]:hover, .link-group__link:focus, [class$=__link-group__link]:focus, .link-group__link:active, [class$=__link-group__link]:active {
+  background: color-mix(in srgb, var(--theme-color) 20%, white);
+  color: var(--theme-color);
 }
-[data-color-theme=primary] .link-group__link:hover, [data-color-theme=primary] .link-group__link:focus, [data-color-theme=primary] .link-group__link:active, .link-group__link[data-color-theme=primary]:hover, .link-group__link[data-color-theme=primary]:focus, .link-group__link[data-color-theme=primary]:active {
-  background: color-mix(in srgb, var(--color-primary) 20%, white);
-  color: var(--color-primary);
+[data-group-layout=grid] .link-group__link, [data-group-layout=grid] [class$=__link-group__link] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-[data-color-theme=secondary] .link-group__link, .link-group__link[data-color-theme=secondary] {
-  background: color-mix(in srgb, var(--color-secondary) 10%, white);
+[data-group-layout=inline] .link-group__link, [data-group-layout=inline] [class$=__link-group__link] {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: var(--spacing-xxs);
+  padding: 0;
+  background: transparent;
+  color: var(--theme-color);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.2s ease-in-out;
+  font-size: var(--font-size-sm);
+  margin-block: 0;
 }
-[data-color-theme=secondary] .link-group__link:hover, [data-color-theme=secondary] .link-group__link:focus, [data-color-theme=secondary] .link-group__link:active, .link-group__link[data-color-theme=secondary]:hover, .link-group__link[data-color-theme=secondary]:focus, .link-group__link[data-color-theme=secondary]:active {
-  background: color-mix(in srgb, var(--color-secondary) 20%, white);
-  color: var(--color-secondary);
-}
-[data-color-theme=accent] .link-group__link, .link-group__link[data-color-theme=accent] {
-  background: color-mix(in srgb, var(--color-accent) 10%, white);
-}
-[data-color-theme=accent] .link-group__link:hover, [data-color-theme=accent] .link-group__link:focus, [data-color-theme=accent] .link-group__link:active, .link-group__link[data-color-theme=accent]:hover, .link-group__link[data-color-theme=accent]:focus, .link-group__link[data-color-theme=accent]:active {
-  background: color-mix(in srgb, var(--color-accent) 20%, white);
-  color: var(--color-accent);
-}
-[data-color-theme=info] .link-group__link, .link-group__link[data-color-theme=info] {
-  background: color-mix(in srgb, var(--color-info) 10%, white);
-}
-[data-color-theme=info] .link-group__link:hover, [data-color-theme=info] .link-group__link:focus, [data-color-theme=info] .link-group__link:active, .link-group__link[data-color-theme=info]:hover, .link-group__link[data-color-theme=info]:focus, .link-group__link[data-color-theme=info]:active {
-  background: color-mix(in srgb, var(--color-info) 20%, white);
-  color: var(--color-info);
-}
-[data-color-theme=warning] .link-group__link, .link-group__link[data-color-theme=warning] {
-  background: color-mix(in srgb, var(--color-warning) 10%, white);
-}
-[data-color-theme=warning] .link-group__link:hover, [data-color-theme=warning] .link-group__link:focus, [data-color-theme=warning] .link-group__link:active, .link-group__link[data-color-theme=warning]:hover, .link-group__link[data-color-theme=warning]:focus, .link-group__link[data-color-theme=warning]:active {
-  background: color-mix(in srgb, var(--color-warning) 20%, white);
-  color: var(--color-warning);
-}
-[data-color-theme=success] .link-group__link, .link-group__link[data-color-theme=success] {
-  background: color-mix(in srgb, var(--color-success) 10%, white);
-}
-[data-color-theme=success] .link-group__link:hover, [data-color-theme=success] .link-group__link:focus, [data-color-theme=success] .link-group__link:active, .link-group__link[data-color-theme=success]:hover, .link-group__link[data-color-theme=success]:focus, .link-group__link[data-color-theme=success]:active {
-  background: color-mix(in srgb, var(--color-success) 20%, white);
-  color: var(--color-success);
-}
-[data-color-theme=error] .link-group__link, .link-group__link[data-color-theme=error] {
-  background: color-mix(in srgb, var(--color-error) 10%, white);
-}
-[data-color-theme=error] .link-group__link:hover, [data-color-theme=error] .link-group__link:focus, [data-color-theme=error] .link-group__link:active, .link-group__link[data-color-theme=error]:hover, .link-group__link[data-color-theme=error]:focus, .link-group__link[data-color-theme=error]:active {
-  background: color-mix(in srgb, var(--color-error) 20%, white);
-  color: var(--color-error);
-}
-[data-color-theme=light] .link-group__link, .link-group__link[data-color-theme=light] {
-  background: color-mix(in srgb, var(--color-light) 10%, white);
-}
-[data-color-theme=light] .link-group__link:hover, [data-color-theme=light] .link-group__link:focus, [data-color-theme=light] .link-group__link:active, .link-group__link[data-color-theme=light]:hover, .link-group__link[data-color-theme=light]:focus, .link-group__link[data-color-theme=light]:active {
-  background: color-mix(in srgb, var(--color-light) 20%, white);
-  color: var(--color-light);
-}
-[data-color-theme=dark] .link-group__link, .link-group__link[data-color-theme=dark] {
-  background: color-mix(in srgb, var(--color-dark) 10%, white);
-}
-[data-color-theme=dark] .link-group__link:hover, [data-color-theme=dark] .link-group__link:focus, [data-color-theme=dark] .link-group__link:active, .link-group__link[data-color-theme=dark]:hover, .link-group__link[data-color-theme=dark]:focus, .link-group__link[data-color-theme=dark]:active {
-  background: color-mix(in srgb, var(--color-dark) 20%, white);
-  color: var(--color-dark);
-}
-[data-color-theme=white] .link-group__link, .link-group__link[data-color-theme=white] {
-  background: color-mix(in srgb, var(--color-white) 10%, white);
-}
-[data-color-theme=white] .link-group__link:hover, [data-color-theme=white] .link-group__link:focus, [data-color-theme=white] .link-group__link:active, .link-group__link[data-color-theme=white]:hover, .link-group__link[data-color-theme=white]:focus, .link-group__link[data-color-theme=white]:active {
-  background: color-mix(in srgb, var(--color-white) 20%, white);
-  color: var(--color-white);
+[data-group-layout=inline] .link-group__link:hover, [data-group-layout=inline] [class$=__link-group__link]:hover, [data-group-layout=inline] .link-group__link:focus, [data-group-layout=inline] [class$=__link-group__link]:focus, [data-group-layout=inline] .link-group__link:active, [data-group-layout=inline] [class$=__link-group__link]:active {
+  color: color-mix(in srgb, var(--theme-color) 90%, black);
+  text-decoration-color: currentColor;
 }
 .link-group__link__icon {
-  font-size: 2rem;
+  font-size: 1.25rem;
+  color: var(--theme-color);
+  grid-row: span 2;
 }
-[data-color-theme=primary] .link-group__link__icon {
-  color: var(--color-primary);
+[data-group-layout=inline] .link-group__link__icon {
+  font-size: 1em;
 }
-[data-color-theme=secondary] .link-group__link__icon {
-  color: var(--color-secondary);
+.link-group__link__label, .link-group__link__description {
+  display: block;
 }
-[data-color-theme=accent] .link-group__link__icon {
-  color: var(--color-accent);
-}
-[data-color-theme=info] .link-group__link__icon {
-  color: var(--color-info);
-}
-[data-color-theme=warning] .link-group__link__icon {
-  color: var(--color-warning);
-}
-[data-color-theme=success] .link-group__link__icon {
-  color: var(--color-success);
-}
-[data-color-theme=error] .link-group__link__icon {
-  color: var(--color-error);
-}
-[data-color-theme=light] .link-group__link__icon {
-  color: var(--color-light);
-}
-[data-color-theme=dark] .link-group__link__icon {
-  color: var(--color-dark);
-}
-[data-color-theme=white] .link-group__link__icon {
-  color: var(--color-white);
-}
-.link-group__link__content__label {
+.link-group__link__label {
   font-weight: var(--font-weight-bold);
-  font-size: 1.125rem;
   display: block;
+  color: var(--theme-color);
 }
-[data-color-theme=primary] .link-group__link__content__label {
-  color: var(--color-primary);
+[data-group-layout=inline] .link-group__link__label {
+  font-weight: var(--font-weight-normal);
 }
-[data-color-theme=secondary] .link-group__link__content__label {
-  color: var(--color-secondary);
-}
-[data-color-theme=accent] .link-group__link__content__label {
-  color: var(--color-accent);
-}
-[data-color-theme=info] .link-group__link__content__label {
-  color: var(--color-info);
-}
-[data-color-theme=warning] .link-group__link__content__label {
-  color: var(--color-warning);
-}
-[data-color-theme=success] .link-group__link__content__label {
-  color: var(--color-success);
-}
-[data-color-theme=error] .link-group__link__content__label {
-  color: var(--color-error);
-}
-[data-color-theme=light] .link-group__link__content__label {
-  color: var(--color-light);
-}
-[data-color-theme=dark] .link-group__link__content__label {
-  color: var(--color-dark);
-}
-[data-color-theme=white] .link-group__link__content__label {
-  color: var(--color-white);
-}
-.link-group__link__content__description {
+.link-group__link__description {
   display: block;
+  font-size: var(--font-size-sm);
 }
 
 /*# sourceMappingURL=link-group.css.map */
