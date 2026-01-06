@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit587c85fae325cc4799a46f189dfa77f8
 {
     public static $prefixLengthsPsr4 = array (
-        'D' =>
+        'D' => 
         array (
             'Doubleedesign\\Comet\\WordPress\\Calendar\\' => 39,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Doubleedesign\\Comet\\WordPress\\Calendar\\' =>
+        'Doubleedesign\\Comet\\WordPress\\Calendar\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

@@ -17,5 +17,7 @@
 			"Doubleedesign\\Comet\\WordPress\\Calendar\\": "src/"
 		}
 	},
-	"require": {}
+	"require": {
+		"php": ">=8.4"
+	}
 }

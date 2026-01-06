@@ -22,6 +22,7 @@ return array(
     'Doubleedesign\\Comet\\Core\\Column' => $baseDir . '/src/components/Columns/Column/Column.php',
     'Doubleedesign\\Comet\\Core\\Columns' => $baseDir . '/src/components/Columns/Columns.php',
     'Doubleedesign\\Comet\\Core\\Container' => $baseDir . '/src/components/Container/Container.php',
+    'Doubleedesign\\Comet\\Core\\ContainerWithNesting' => $baseDir . '/src/components/ContainerWithNesting/ContainerWithNesting.php',
     'Doubleedesign\\Comet\\Core\\ContentImageAdvanced' => $baseDir . '/src/components/ContentImageAdvanced/ContentImageAdvanced.php',
     'Doubleedesign\\Comet\\Core\\ContentImageBasic' => $baseDir . '/src/components/ContentImageBasic/ContentImageBasic.php',
     'Doubleedesign\\Comet\\Core\\Copy' => $baseDir . '/src/components/Copy/Copy.php',

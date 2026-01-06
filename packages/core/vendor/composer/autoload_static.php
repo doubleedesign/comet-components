@@ -205,6 +205,7 @@ class ComposerStaticInit59b5a0704970cd243ce61dc9bd5c89ff
         'Doubleedesign\\Comet\\Core\\Column' => __DIR__ . '/../..' . '/src/components/Columns/Column/Column.php',
         'Doubleedesign\\Comet\\Core\\Columns' => __DIR__ . '/../..' . '/src/components/Columns/Columns.php',
         'Doubleedesign\\Comet\\Core\\Container' => __DIR__ . '/../..' . '/src/components/Container/Container.php',
+        'Doubleedesign\\Comet\\Core\\ContainerWithNesting' => __DIR__ . '/../..' . '/src/components/ContainerWithNesting/ContainerWithNesting.php',
         'Doubleedesign\\Comet\\Core\\ContentImageAdvanced' => __DIR__ . '/../..' . '/src/components/ContentImageAdvanced/ContentImageAdvanced.php',
         'Doubleedesign\\Comet\\Core\\ContentImageBasic' => __DIR__ . '/../..' . '/src/components/ContentImageBasic/ContentImageBasic.php',
         'Doubleedesign\\Comet\\Core\\Copy' => __DIR__ . '/../..' . '/src/components/Copy/Copy.php',
