@@ -6,8 +6,8 @@ use Exception;
 #[AllowedTags([Tag::TIME])]
 #[DefaultTag(Tag::TIME)]
 abstract class DateComponent extends Renderable {
+    use BlockElementModifier;
     use ColorTheme;
-    use ShortName;
 
     /**
      * @var string
@@ -29,7 +29,7 @@ abstract class DateComponent extends Renderable {
 
     public function __construct(array $attributes, string $bladeFile) {
         parent::__construct($attributes, $bladeFile);
-        $this->set_shortname($attributes['shortname'] ?? null); // TODO: Pass shortname down to the blade templates so they can be overridden properly
+        $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? 'date');
         $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
         $this->locale = $attributes['locale'] ?? $this->locale;
         $this->showDay = $attributes['showDay'] ?? $this->showDay;
