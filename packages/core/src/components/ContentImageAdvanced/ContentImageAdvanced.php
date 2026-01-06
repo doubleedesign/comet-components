@@ -27,7 +27,7 @@ class ContentImageAdvanced extends ContentImageComponent {
     public function get_outer_wrapper_html_attributes(): array {
         return [
             ...parent::get_outer_wrapper_html_attributes(),
-            'style' => $this->get_local_css_properties(),
+            'style' => $this->get_local_css_properties() . '; ' . parent::get_html_attributes()['style'] ?? '',
         ];
     }
 
@@ -37,10 +37,18 @@ class ContentImageAdvanced extends ContentImageComponent {
         ];
 
         if (isset($this->originalImageOrientation)) {
-            $attrs['data-original-image-orientation'] = $this->originalImageOrientation->value;
+            $attrs['data-original-orientation'] = $this->originalImageOrientation->value;
         }
 
         return $attrs;
+    }
+
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
+
+        unset($attributes['style']); // Remove style attribute as it's handled in the wrapper
+
+        return $attributes;
     }
 
     public function render(): void {
