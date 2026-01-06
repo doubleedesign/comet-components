@@ -30,7 +30,7 @@ trait LayoutAlignment {
             $this->hAlign = $attributes['hAlign'];
         }
         else {
-            $hAlign = $attributes['hAlign'] ?? $attributes['justifyContent'] ?? $attributes['layout']['justifyContent'] ?? null;
+            $hAlign = $attributes['hAlign'] ?? $attributes['justifyContent'] ?? null;
             $this->hAlign = isset($hAlign) ? Alignment::fromString($hAlign) : $defaultHorizontal;
         }
 
@@ -38,7 +38,7 @@ trait LayoutAlignment {
             $this->vAlign = $attributes['vAlign'];
         }
         else {
-            $vAlign = $attributes['vAlign'] ?? $attributes['alignItems'] ?? $attributes['layout']['alignItems'] ?? $attributes['verticalAlignment'] ?? null;
+            $vAlign = $attributes['vAlign'] ?? $attributes['verticalAlignment'] ?? $attributes['alignItems'] ?? null;
             $this->vAlign = isset($vAlign) ? Alignment::fromString($vAlign) : $defaultVertical;
         }
     }

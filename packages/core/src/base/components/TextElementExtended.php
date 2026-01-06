@@ -11,7 +11,7 @@ abstract class TextElementExtended extends TextElement {
         parent::__construct($attributes, $content, $bladeFile);
         // Only set BEM classnames if context or shortName is provided
         if (isset($attributes['context']) || isset($attributes['shortName'])) {
-        $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? null);
+            $this->init_bem_structure($bladeFile, $attributes['context'] ?? null, $attributes['shortName'] ?? null);
         }
     }
 
@@ -23,20 +23,4 @@ abstract class TextElementExtended extends TextElement {
             return $class !== array_reverse(explode('.', $this->bladeFile))[0];
         });
     }
-
-    /**
-     * TODO: Deprecate this. It should usually be decided by the container's colour theme, or custom CSS.
-     *
-     * @return array|string[]
-     */
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
-
-        if (isset($this->textColor)) {
-            $attributes['data-text-color'] = $this->textColor->value;
-        }
-
-        return $attributes;
-    }
-
 }
