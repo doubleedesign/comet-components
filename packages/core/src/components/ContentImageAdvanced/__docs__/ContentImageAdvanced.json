@@ -24,7 +24,7 @@
         },
         "aspectRatio": {
             "type": "AspectRatio",
-            "description": "Crop banner image to the given aspect ratio",
+            "description": "Crop image to the given aspect ratio by default",
             "supported": [
                 "4:3",
                 "3:4",
@@ -75,7 +75,7 @@
         },
         "originalImageOrientation": {
             "type": "Orientation",
-            "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.",
+            "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping",
             "supported": [
                 "horizontal",
                 "vertical"

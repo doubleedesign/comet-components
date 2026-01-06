@@ -79,8 +79,8 @@
             "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
             "supported": [
                 "default",
-                "wide",
                 "fullwidth",
+                "wide",
                 "narrow",
                 "narrower",
                 "small"

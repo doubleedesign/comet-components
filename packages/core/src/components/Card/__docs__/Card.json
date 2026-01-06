@@ -13,7 +13,7 @@
         },
         "aspectRatio": {
             "type": "AspectRatio",
-            "description": "Crop banner image to the given aspect ratio",
+            "description": "Crop image to the given aspect ratio by default",
             "supported": [
                 "4:3",
                 "3:4",
@@ -77,7 +77,7 @@
                 "white",
                 "black"
             ],
-            "default": "new heading([\n                'level'   => 3,\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\n            ],\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+            "default": "new heading([\r\n                'level'   => 3,\r\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\r\n            ],\r\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\r\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
         },
         "context": {
             "type": "string",
@@ -131,10 +131,11 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "new heading([\n                'level'   => 3,\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\n            ],\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+            "default": "Orientation::VERTICAL"
+        },
         "originalImageOrientation": {
             "type": "Orientation",
-            "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping.",
+            "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping",
             "supported": [
                 "horizontal",
                 "vertical"

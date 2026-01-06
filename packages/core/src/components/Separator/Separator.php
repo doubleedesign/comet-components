@@ -28,7 +28,7 @@ class Separator extends Renderable {
         $this->set_size_from_attrs($attributes, ContainerSize::DEFAULT);
         $this->set_is_nested($attributes['isNested'] ?? false);
         $this->init_bem_structure($this->bladeFile);
-        $this->lineStyle = $attributes['style'] ?? '';
+        $this->lineStyle = isset($attributes['lineStyle']) ? $attributes['lineStyle'] : (is_string($attributes['style']) ? $attributes['style'] : '');
     }
 
     protected function get_html_attributes(): array {

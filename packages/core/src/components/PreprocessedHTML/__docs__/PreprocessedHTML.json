@@ -1,0 +1,14 @@
+{
+    "name": "PreprocessedHTML",
+    "description": null,
+    "extends": null,
+    "abstract": false,
+    "isInner": false,
+    "belongsInside": "LayoutComponent",
+    "attributes": [],
+    "content": {
+        "type": "string",
+        "required": true
+    },
+    "traits": []
+}

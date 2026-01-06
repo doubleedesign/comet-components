@@ -15,9 +15,9 @@ class ContentImageAdvanced extends ContentImageComponent {
     use ImageCropProperties;
 
     // Note: To simplify the layout calculations, this component does not support wrapping the image in a link.
-    public function __construct(array $attributes, string $bladeFile = 'components.ContentImageAdvanced.content-image-advanced') {
+    public function __construct(array $attributes) {
         $this->set_bem_modifier('advanced');
-        parent::__construct($attributes, $bladeFile);
+        parent::__construct($attributes, 'components.ContentImageAdvanced.content-image-advanced');
         $this->set_focal_point_from_attrs($attributes);
         $this->set_image_offset_from_attrs($attributes);
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);

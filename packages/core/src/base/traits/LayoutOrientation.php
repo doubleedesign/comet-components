@@ -5,6 +5,7 @@ trait LayoutOrientation {
     /**
      * @var Orientation|null $orientation
      * @description Orientation of the component content, if applicable
+     * @default-value Orientation::VERTICAL
      */
     protected ?Orientation $orientation = Orientation::VERTICAL;
 
