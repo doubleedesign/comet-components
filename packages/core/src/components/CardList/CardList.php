@@ -41,37 +41,12 @@ class CardList extends WrappedLayoutComponent {
         }
 
         // And a wrapper around the whole group to separate it from the heading
-        $wrappedCards = new Group(
-            $groupAttrs,
-            $updatedInnerComponents
-        )->set_bem_element('list');
+        $wrappedCards = (new Group($groupAttrs, $updatedInnerComponents))->set_bem_element('list');
 
         parent::__construct(
             $attributes,
             $headingComponent ? [$headingComponent, $wrappedCards] : [$wrappedCards],
             'components.CardList.card-list'
         );
-    }
-
-    private function get_col_count(): int {
-        if (isset($this->maxPerRow) && $this->maxPerRow > 0) {
-            return $this->maxPerRow;
-        }
-
-        $qty = count($this->innerComponents);
-
-        if ($qty % 4 === 0) {
-            return 4;
-        }
-
-        if ($qty % 3 === 0) {
-            return 3;
-        }
-
-        if ($qty % 2 === 0) {
-            return 2;
-        }
-
-        return 1;
     }
 }

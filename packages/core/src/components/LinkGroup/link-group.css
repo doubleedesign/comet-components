@@ -1,10 +1,12 @@
 .link-group, [class$=__link-group], [class*=link-group--] {
   width: 100%;
 }
-.link-group__link {
+.link-group[data-group-layout=inline], [data-group-layout=inline][class$=__link-group], [data-group-layout=inline][class*=link-group--] {
   display: flex;
-  flex-wrap: nowrap;
-  gap: var(--spacing-sm);
+  flex-direction: row;
+  gap: var(--spacing-md);
+}
+.link-group__link, [class$=__link-group__link] {
   margin-block-end: var(--spacing-sm);
   text-decoration: none;
   padding: var(--spacing-sm);

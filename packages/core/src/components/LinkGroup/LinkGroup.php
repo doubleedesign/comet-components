@@ -24,50 +24,43 @@ class LinkGroup extends WrappedLayoutComponent {
      * @param array<Link|array<string,string> $links - Either an array of Link objects or an array of associative arrays corresponding to Link fields
      */
     public function __construct(array $attributes, array $links) {
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
+        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
         $this->set_group_layout_from_attrs($attributes, GroupLayout::LIST);
+        $this->heading = $attributes['heading'] ?? null;
 
         if (!isset($attributes['shortName'])) {
             $attributes['shortName'] = 'links';
         }
 
-        $updatedInnerComponents = [];
-        if ($attributes['heading']) {
-            $this->heading = $attributes['heading'];
-            array_push($updatedInnerComponents, new Heading([], $this->heading));
-        }
-
-        $linkComponents = array_map(function($link) {
-            if ($link instanceof Link) {
-                return $link;
-            }
-
-            return new Link([
-                'context'       => $attributes['context'] ?? 'link-group',
-                'label'         => $link['label'] ?? $link['title'] ?? '',
-                'description'   => $link['description'] ?? null,
-                'url'		         => $link['url'] ?? $link['href'] ?? '#',
-                'target'        => $link['target'] ?? null,
-            ]);
-        }, $links);
-
         $groupAttrs = [
-            'colorTheme'                   => $this->colorTheme->value,
-            'shortName'                    => $attributes['context'] ?? 'link-group',
+            'colorTheme'                   => $this->colorTheme->value ?? null, // only include if set explicitly
+            'shortName'                    => 'link-group',
             'role'                         => 'group',
-            'data-group-layout'            => $this->layout->value
+            'data-group-layout'            => $this->layout !== GroupLayout::LIST ? $this->layout->value : null, // only include if not the default
         ];
-
-        // TODO: This is repetitive, e.g. CardList also does this (it just has a different default)
+        // FIXME: This is repetitive, e.g. CardList also does this (it just has a different default)
         if ($this->layout === GroupLayout::GRID) {
             $groupAttrs['data-max-per-row'] = $this->maxPerRow;
         }
 
-        array_push($updatedInnerComponents, new Group(
-            $groupAttrs,
-            $linkComponents
-        ));
+        $innerContent = new Group($groupAttrs, []);
+        $innerContent->innerComponents = array_map(function($link) use ($innerContent, $attributes) {
+            if ($link instanceof Link) {
+                $link->update_context($innerContent->get_bem_prefix());
 
+                return $link;
+            }
+
+            return new Link([
+                'context'       => $innerContent->get_bem_prefix(),
+                'label'         => $link['label'] ?? $link['title'] ?? '',
+                'description'   => $link['description'] ?? null,
+                'url'           => $link['url'] ?? $link['href'] ?? '#',
+                'target'        => $link['target'] ?? null,
+            ]);
+        }, $links);
+
+        $updatedInnerComponents = $this->heading ? [new Heading([], $this->heading), $innerContent] : [$innerContent];
         parent::__construct($attributes, $updatedInnerComponents, 'components.LinkGroup.link-group');
     }
 }

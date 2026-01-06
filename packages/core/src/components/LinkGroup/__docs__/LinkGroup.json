@@ -51,7 +51,7 @@
                 "white",
                 "black"
             ],
-            "default": "info"
+            "default": "primary"
         },
         "context": {
             "type": "string",
@@ -93,7 +93,8 @@
             "required": true,
             "supported": [
                 "list",
-                "grid"
+                "grid",
+                "inline"
             ],
             "default": "list"
         },

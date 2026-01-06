@@ -1,56 +1,88 @@
 @use '../variables' as *;
+@use '../bem-mixin' as *;
+@use '../functions' as *;
 
 @include bem-block('link-group', ('link')) {
 	width: 100%;
 
-	&__link {
+	&[data-group-layout="inline"] {
 		display: flex;
-		flex-wrap: nowrap;
-		gap: var(--spacing-sm);
+		flex-direction: row;
+		gap: var(--spacing-md);
+	}
+
+	&__link {
 		margin-block-end: var(--spacing-sm);
 		text-decoration: none;
 		padding: var(--spacing-sm);
 		transition: background 0.2s linear;
 		font-size: 1rem;
-		// justify-content: inherit; // TODO: Fix this when centered with icon + description
+		background: lighten-theme-color(90%);
+		// Default layout - icon on left, text on right
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto auto;
+		grid-column-gap: var(--spacing-sm);
 
-		@each $name, $color in $colors {
-			[data-color-theme=#{$name}] &,
-			&[data-color-theme=#{$name}] {
-				background: color-mix(in srgb, var(--color-#{$name}) 10%, white);
 
-				&:hover, &:focus, &:active {
-					background: color-mix(in srgb, var(--color-#{$name}) 20%, white);
-					color: var(--color-#{$name});
-				}
+		&:hover, &:focus, &:active {
+			background: lighten-theme-color(80%);
+			color: var(--theme-color);
+		}
+
+		[data-group-layout="grid"] & {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		[data-group-layout="inline"] & {
+			display: inline-flex;
+			flex-direction: row-reverse;
+			gap: var(--spacing-xxs);
+			padding: 0;
+			background: transparent;
+			color: var(--theme-color);
+			text-decoration: underline;
+			text-decoration-color: transparent;
+			transition: all 0.2s ease-in-out;
+			font-size: var(--font-size-sm);
+			margin-block: 0;
+
+			&:hover, &:focus, &:active {
+				color: darken-theme-color(10%);
+				text-decoration-color: currentColor;
 			}
 		}
 
 		&__icon {
-			font-size: 2rem;
+			font-size: 1.25rem;
+			color: var(--theme-color);
+			grid-row: span 2;
 
-			@each $name, $color in $colors {
-				[data-color-theme=#{$name}] & {
-					color: var(--color-#{$name});
-				}
+			[data-group-layout="inline"] & {
+				font-size: 1em;
 			}
 		}
 
-		&__content {
+		&__label,
+		&__description {
+			display: block;
+		}
 
-			&__label {
-				font-weight: var(--font-weight-bold);
-				display: block;
+		&__label {
+			font-weight: var(--font-weight-bold);
+			display: block;
 			color: var(--theme-color);
 
 			[data-group-layout="inline"] & {
 				font-weight: var(--font-weight-normal);
-				}
 			}
+		}
 
-			&__description {
-				display: block;
-			}
+		&__description {
+			display: block;
+			font-size: var(--font-size-sm);
 		}
 	}
 }

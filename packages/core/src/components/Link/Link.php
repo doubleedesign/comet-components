@@ -43,13 +43,16 @@ class Link extends Renderable {
         $this->set_icon_from_attrs($attributes);
     }
 
+    // Utility function to get just the link text.
+    // Used by components with customised link rendering, such as Menu.
+    // TODO: Maybe Menu is too tightly coupled to this and should not use this component.
     public function get_content(): string {
         $blade = BladeService::getInstance();
 
         return $blade->make('components.Link.partials.link-text', [
             'label'       => $this->label,
             'description' => $this->description,
-            'bem_prefix'  => $this->get_bem_prefix()
+            'bemPrefix'   => $this->get_bem_prefix()
         ])->render();
     }
 
@@ -76,7 +79,7 @@ class Link extends Renderable {
             'icon'        => $this->icon ?? null,
             'label'       => $this->label,
             'description' => $this->description,
-            'bem_prefix'  => $this->get_bem_prefix()
+            'bemPrefix'   => $this->get_bem_prefix() ?? ''
         ])->render();
     }
 }

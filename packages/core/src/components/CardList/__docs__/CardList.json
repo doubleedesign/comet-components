@@ -93,7 +93,8 @@
             "required": true,
             "supported": [
                 "list",
-                "grid"
+                "grid",
+                "inline"
             ],
             "default": "list"
         },
