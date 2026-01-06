@@ -1,0 +1,8 @@
+.container [class$=__container] {
+  margin-inline: auto;
+}
+.container [class$=__container][data-size] {
+  margin-inline: unset;
+}
+
+/*# sourceMappingURL=container-with-nesting.css.map */

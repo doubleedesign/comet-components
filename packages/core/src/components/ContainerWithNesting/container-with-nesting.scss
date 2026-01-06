@@ -1,0 +1,12 @@
+@use '../bem-class-selectors' as *;
+
+.container {
+
+	#{class-ends-with('__container')} {
+		margin-inline: auto;
+		
+		&[data-size] {
+			margin-inline: unset;
+		}
+	}
+}

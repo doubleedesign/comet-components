@@ -88,6 +88,11 @@ class Container extends WrappedLayoutComponent {
             else if (isset($this->gradient)) {
                 $attributes['data-background'] = 'gradient-' . $this->gradient;
             }
+
+            if ($this->tagName === Tag::DIV) {
+                // TODO: intended for when the real content is in a <section> or has a role or something else making it a landmark inside; probably needs better handling so it's not over-applied
+                $attributes['role'] = 'presentation';
+            }
         }
 
         $explicitDataAttrs = array_filter(parent::get_html_attributes(), fn($key) => str_starts_with($key, 'data-'), ARRAY_FILTER_USE_KEY);
