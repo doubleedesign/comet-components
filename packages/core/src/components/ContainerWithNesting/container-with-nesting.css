@@ -4,5 +4,8 @@
 .container [class$=__container][data-size] {
   margin-inline: unset;
 }
+.container [class$=__container] [class$=__container] {
+  padding-inline: 0;
+}
 
 /*# sourceMappingURL=container-with-nesting.css.map */

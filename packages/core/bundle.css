@@ -1088,6 +1088,9 @@ article > .container, article > [class$=__container], article > [class*=containe
 .container [class$=__container][data-size] {
   margin-inline: unset;
 }
+.container [class$=__container] [class$=__container] {
+  padding-inline: 0;
+}
 
 .button {
   display: inline-block;
