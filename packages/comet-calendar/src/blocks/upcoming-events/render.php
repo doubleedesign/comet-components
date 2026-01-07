@@ -3,10 +3,10 @@
 /** @var array $block */
 
 use Doubleedesign\Comet\Core\{EventCard, EventList};
-use Doubleedesign\Comet\WordPress\Calendar\{Events};
+use Doubleedesign\Comet\WordPress\Calendar\{TemplateHandler};
 
 // $inEditorContext = isset($block['mode']) && $block['mode'] === 'preview';
-$events = Events::get_upcoming_event_ids($block['itemCount'] ?? 3);
+$events = TemplateHandler::get_upcoming_event_ids($block['itemCount'] ?? 3);
 
 $cards = array_map(function($eventId) use ($block) {
     if (get_post_meta('sort_date', $eventId, true) !== '') { // Skip events without dates
@@ -14,7 +14,7 @@ $cards = array_map(function($eventId) use ($block) {
         $detailUrl = get_option('options_enable_event_detail_pages') ? get_the_permalink($eventId) : null;
         $location = get_field('location', $eventId);
         $externalLink = get_field('external_link', $eventId);
-        $dateComponent = Events::get_date_block($eventId, $block['colorTheme'] ?? 'primary');
+        $dateComponent = TemplateHandler::get_date_block($eventId, $block['colorTheme'] ?? 'primary');
 
         return new EventCard([
             'dateComponent' => $dateComponent,

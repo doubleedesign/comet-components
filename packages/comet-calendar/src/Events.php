@@ -2,8 +2,11 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 namespace Doubleedesign\Comet\WordPress\Calendar;
 use DateTime;
-use Doubleedesign\Comet\Core\{DateBlock, DateRangeBlock};
 
+/**
+ * Class to register and manage the data for the Events custom post type
+ * (Display templates are handled in the TemplateHandler class)
+ */
 class Events {
 
     public function __construct() {
@@ -218,74 +221,6 @@ class Events {
         };
 
         update_post_meta($post_id, 'sort_date', $date);
-    }
-
-    /**
-     * Utility function to get the IDs of the next X upcoming events
-     *
-     * @param  $qty
-     *
-     * @return array
-     */
-    public static function get_upcoming_event_ids($qty): array {
-        $today = current_time('Y-m-d');
-        $args = array(
-            'post_type'      => 'event',
-            'posts_per_page' => $qty,
-            'meta_key'       => 'sort_date',
-            'orderby'        => 'meta_value',
-            'order'          => 'ASC',
-            'meta_query'     => array(
-                array(
-                    'key'     => 'sort_date',
-                    'value'   => $today,
-                    'compare' => '>=',
-                    'type'    => 'DATE'
-                )
-            )
-        );
-
-        $query = new \WP_Query($args);
-
-        return wp_list_pluck($query->posts, 'ID');
-    }
-
-    public static function get_date_block(int $event_id, ?string $colorTheme = null): DateBlock|DateRangeBlock|null {
-        $type = get_field('type', $event_id);
-        $dateComponent = null;
-        $sortDate = get_post_meta($event_id, 'sort_date', true);
-        // is the sort date in the past? If so, show the year. For upcoming dates, don't show the year
-        $isUpcoming = $sortDate && $sortDate >= (new DateTime())->format('Ymd');
-        switch ($type) {
-            case 'single':
-                $rawDate = get_post_meta($event_id, 'single_date', true);
-                $formattedDate = (new DateTime($rawDate))->format('Y-m-d');
-                $dateComponent = new DateBlock([
-                    'date'       => $formattedDate,
-                    'showDay'    => $isUpcoming,
-                    'showYear'   => !$isUpcoming,
-                    'colorTheme' => $colorTheme ?? ($isUpcoming ? 'secondary' : 'dark')
-                ]);
-                break;
-            case 'range':
-                $rawStartDate = get_post_meta($event_id, 'range_start_date', true);
-                $rawEndDate = get_post_meta($event_id, 'range_end_date', true);
-                $startDate = (new DateTime($rawStartDate))->format('Y-m-d');
-                $endDate = (new DateTime($rawEndDate))->format('Y-m-d');
-                $dateComponent = new DateRangeBlock([
-                    'showDay'    => $isUpcoming,
-                    'showYear'   => !$isUpcoming,
-                    'startDate'  => $startDate,
-                    'endDate'    => $endDate,
-                    'colorTheme' => $colorTheme ?? ($isUpcoming ? 'secondary' : 'dark')
-                ]);
-                break;
-                // FIXME: Handle multi and multi_extended types
-            default:
-                break;
-        }
-
-        return $dateComponent;
     }
 
 }
