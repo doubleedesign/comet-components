@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	const quickAddBox = document.querySelector('.admin-quick-add');
+	if (!quickAddBox) {
+		return;
+	}
+
 	const quickAddToggle = quickAddBox.querySelector('.postbox-header button');
 	const quickAddForm = quickAddBox.querySelector('#acf-form-quick-add');
 

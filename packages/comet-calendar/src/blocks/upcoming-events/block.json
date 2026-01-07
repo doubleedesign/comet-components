@@ -6,6 +6,7 @@
 	"icon": "calendar-alt",
 	"description": "Display a list of upcoming events.",
 	"category": "content",
+	"textdomain": "comet",
 	"acf": {
 		"mode": "preview",
 		"renderTemplate": "render.php",
@@ -13,16 +14,39 @@
 		"hideFieldsInSidebar": true
 	},
 	"editorStyle": [
-		"comet-event-list-style",
-		"comet-event-card-style",
-		"comet-date-block-style",
-		"comet-date-range-block-style"
+		"comet-event-list",
+		"comet-event-card",
+		"comet-date-block",
+		"comet-date-range-block",
+		"comet-icon-with-text",
+		"comet-link-group"
 	],
 	"keywords": [
 		"events",
 		"calendar"
 	],
-	"textdomain": "comet",
+	"attributes": {
+		"size": {
+			"type": "string",
+			"default": "contained"
+		},
+		"colorTheme": {
+			"type": "string",
+			"default": "primary"
+		},
+		"maxPerRow": {
+			"type": "number",
+			"default": 3
+		},
+		"itemCount": {
+			"type": "number",
+			"default": 3
+		},
+		"hAlign": {
+			"type": "string",
+			"default": "start"
+		}
+	},
 	"supports": {
 		"mode": true,
 		"jsx": true,
@@ -31,15 +55,6 @@
 		"ariaLabel": false,
 		"align": false,
 		"html": false,
-		"multiple": false,
-		"color": {
-			"gradients": true,
-			"theme": true,
-			"text": false,
-			"background": false,
-			"__experimentalDefaultControls": {
-				"theme": true
-			}
-		}
+		"multiple": false
 	}
 }

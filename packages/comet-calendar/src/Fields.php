@@ -140,13 +140,13 @@ class Fields {
                     "layout"    => "table",
                     "sub_fields"=> [
                         [
-                            "key"           => "field__event__date--single__date",
-                            "label"         => "Date",
-                            "name"          => "date",
-                            "type"          => "date_picker",
-                            "display_format"=> "F j, Y",
-                            "return_format" => "F j, Y",
-                            "first_day"     => 1
+                            "key"            => "field__event__date--single__date",
+                            "label"          => "Date",
+                            "name"           => "date",
+                            "type"           => "date_picker",
+                            "display_format" => "d/m/Y",
+                            "return_format"  => "F j, Y",
+                            "first_day"      => 1
                         ],
                         [
                             "key"           => "field__event__date--single__start-time",
@@ -183,20 +183,20 @@ class Fields {
                     "layout"    => "table",
                     "sub_fields"=> [
                         [
-                            "key"           => "field__event__date--range__start-date",
-                            "label"         => "Start date",
-                            "name"          => "start_date",
-                            "type"          => "date_picker",
-                            "display_format"=> "F j, Y",
-                            "return_format" => "F j, Y",
-                            "first_day"     => 1
+                            "key"            => "field__event__date--range__start-date",
+                            "label"          => "Start date",
+                            "name"           => "start_date",
+                            "type"           => "date_picker",
+                            "display_format" => "d/m/Y",
+                            "return_format"  => "F j, Y",
+                            "first_day"      => 1
                         ],
                         [
                             "key"              => "field__event__date--range__end-date",
                             "label"            => "End date",
                             "name"             => "end_date",
                             "type"             => "date_picker",
-                            "display_format"   => "F j, Y",
+                            "display_format"   => "d/m/Y",
                             "return_format"    => "F j, Y",
                             "first_day"        => 1
                         ]
@@ -288,7 +288,7 @@ class Fields {
                             "label"          => "Date",
                             "name"           => "date",
                             "type"           => "date_picker",
-                            "display_format" => "F j, Y",
+                            "display_format" => "d/m/Y",
                             "return_format"  => "F j, Y",
                             "first_day"      => 1,
                             "parent_repeater"=> "field__event__date--multiple_extended",

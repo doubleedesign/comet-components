@@ -275,11 +275,12 @@ class Events {
                 $dateComponent = new DateRangeBlock([
                     'showDay'    => $isUpcoming,
                     'showYear'   => !$isUpcoming,
-                    'start_date' => $startDate,
-                    'end_date'   => $endDate,
+                    'startDate'  => $startDate,
+                    'endDate'    => $endDate,
                     'colorTheme' => $colorTheme ?? ($isUpcoming ? 'secondary' : 'dark')
                 ]);
                 break;
+                // FIXME: Handle multi and multi_extended types
             default:
                 break;
         }
