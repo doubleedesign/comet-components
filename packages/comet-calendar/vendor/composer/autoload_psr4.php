@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Doubleedesign\\Comet\\WordPress\\Calendar\\Tests\\' => array($baseDir . '/tests'),
     'Doubleedesign\\Comet\\WordPress\\Calendar\\' => array($baseDir . '/src'),
 );

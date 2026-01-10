@@ -36,12 +36,12 @@
 	},
 	"require-dev": {
 		"antecedent/patchwork": "^2.2.1",
-		"phluent/phluent": "^0.5.3",
-		"symfony/var-dumper": "^7.2",
-		"pestphp/pest": "^4.1.0",
+		"symfony/var-dumper": "^7.4",
+		"pestphp/pest": "^4.3",
 		"mockery/mockery": "^1.6",
 		"laravel/pint": "^1.22",
-		"sirbrillig/spies": "^1.10"
+		"sirbrillig/spies": "^1.10",
+		"brain/monkey": "^2.6"
 	},
 	"config": {
 		"preferred-install": "source",
