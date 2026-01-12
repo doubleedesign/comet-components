@@ -50,5 +50,21 @@
     display: block;
   }
 }
+.site-footer__credits {
+  margin-block-start: var(--spacing-xl);
+  width: 100%;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: inherit;
+  gap: var(--spacing-xs);
+  opacity: 0.8;
+}
+.site-footer__credits a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+}
+.site-footer__credits a:hover, .site-footer__credits a:focus, .site-footer__credits a:active {
+  text-decoration-color: currentColor;
+}
 
 /*# sourceMappingURL=site-footer.css.map */

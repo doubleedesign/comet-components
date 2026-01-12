@@ -56,4 +56,23 @@
 
 	&__icon-links {
 	}
+
+	&__credits {
+		margin-block-start: var(--spacing-xl);
+		width: 100%;
+		flex-basis: 100%;
+		display: flex;
+		justify-content: inherit;
+		gap: var(--spacing-xs);
+		opacity: 0.8;
+
+		a {
+			text-decoration: underline;
+			text-decoration-color: transparent;
+
+			&:hover, &:focus, &:active {
+				text-decoration-color: currentColor;
+			}
+		}
+	}
 }

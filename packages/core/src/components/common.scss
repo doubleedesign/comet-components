@@ -2,34 +2,35 @@
 @use 'mixins' as *;
 
 @layer comet-components-common {
-:root {
-	--font-family-body: sans-serif;
-	--font-family-accent: sans-serif;
+	:root {
+		--font-family-body: sans-serif;
+		--font-family-accent: sans-serif;
 
-	@each $name, $values in $colors {
-		--color-#{$name}: #{map-get($colors, '#{$name}')};
+		@each $name, $values in $colors {
+			--color-#{$name}: #{map-get($colors, '#{$name}')};
+		}
+		@each $name in map-keys($colors) {
+			--readable-color-#{$name}: #{if(map-get($hslColors, #{$name}-l) > 60, black, white)};
+		}
+
+		--font-size-sm: 0.875rem;
+		--font-size-xs: 0.75rem;
+
+		--font-weight-light: 300;
+		--font-weight-regular: 400;
+		--font-weight-semibold: 600;
+		--font-weight-bold: 700;
+
+		--button-border-radius: 0;
+
+		--base-font-size: var(--font-size-sm);
+		--typescale: 1.25;
+
+		@include media-breakpoint-up('contained') {
+			--base-font-size: 1rem;
+			--typescale: 1.33;
+		}
 	}
-	@each $name in map-keys($colors) {
-		--readable-color-#{$name}: #{if(map-get($hslColors, #{$name}-l) > 60, black, white)};
-	}
-
-	--font-size-sm: 0.875rem;
-
-	--font-weight-light: 300;
-	--font-weight-regular: 400;
-	--font-weight-semibold: 600;
-	--font-weight-bold: 700;
-
-	--button-border-radius: 0;
-
-	--base-font-size: var(--font-size-sm);
-	--typescale: 1.25;
-
-	@include media-breakpoint-up('contained') {
-		--base-font-size: 1rem;
-		--typescale: 1.33;
-	}
-}
 
 	* {
 		box-sizing: border-box;
@@ -132,6 +133,10 @@
 		&:hover, &:focus, &:active {
 			color: var(--color-secondary);
 		}
+	}
+
+	small {
+		font-size: var(--font-size-xs);
 	}
 
 	.is-style-accent {

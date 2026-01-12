@@ -20,10 +20,14 @@
             <directory>../../packages/core/src/*/__tests__</directory>
             <directory>../../packages/core/src/**/__tests__</directory>
         </testsuite>
+        <testsuite name="WordPress" bootstrap="../../packages/comet-calendar/tests/Pest.php">
+            <directory>../../packages/comet-calendar/tests</directory>
+        </testsuite>
     </testsuites>
     <source>
         <include>
             <directory suffix=".php">../../packages/core/src</directory>
+            <directory suffix=".php">../../packages/calendar/src</directory>
         </include>
         <exclude>
             <directory>vendor</directory>

@@ -13,7 +13,8 @@ class Config {
     private array $blade_component_paths = [];
     private array $component_defaults = [
         'call-to-action' => ['colorTheme' => 'white', 'innerBackground' => 'primary', 'backgroundColor' => 'white'],
-        'page-header'    => ['colorTheme' => 'primary']
+        'page-header'    => ['colorTheme' => 'primary'],
+        'site-footer'    => ['backgroundColor' => 'dark', 'hAlign' => 'center']
     ];
     private array $theme_colours = [
         'white' => '#FFFFFF',
@@ -173,8 +174,8 @@ class Config {
     public function set_component_defaults(string $component, array $settings): void {
         $defaults = $this->get('component_defaults');
         $componentName = Utils::kebab_case($component);
-        $defaults[$componentName] = $settings;
-        $this->component_defaults = $defaults;
+  
+        $this->component_defaults[$componentName] = array_merge($defaults[$componentName] ?? [], $settings);
     }
 
     /**
