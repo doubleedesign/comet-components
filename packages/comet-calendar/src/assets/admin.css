@@ -244,8 +244,7 @@ td .acf-field-value {
 
 				&[data-name="single"],
 				&[data-name="range"],
-				&[data-name="multi"],
-				&[data-name="multi_extended"] {
+				&[data-name="multi"] {
 
 					> .acf-label {
 						visibility: hidden;
@@ -268,6 +267,14 @@ td .acf-field-value {
 					border: 0;
 				}
 			}
+		}
+	}
+}
+
+.acf-ui-datepicker {
+	.ui-timepicker-div {
+		.ui_tpicker_second {
+			display: none;
 		}
 	}
 }

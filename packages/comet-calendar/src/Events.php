@@ -215,8 +215,7 @@ class Events {
         $date = match ($current_date_type) {
             'single'         => get_post_meta($post_id, 'single_date', true),
             'range'          => get_post_meta($post_id, 'range_start_date', true),
-            'multi'          => get_post_meta($post_id, 'multi_dates_0_date', true),
-            'multi_extended' => get_post_meta($post_id, 'multi_extended_0_date', true),
+            'multi'          => get_post_meta($post_id, 'multi_0_date', true),
             default          => '',
         };
 

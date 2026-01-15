@@ -82,7 +82,6 @@ class QuickAdd {
                 'field__event__date--single',
                 'field__event__date--range',
                 'field__event__date--multiple',
-                'field__event__date--multiple-extended',
                 'field__event__location',
                 'field__event__link'
             ),

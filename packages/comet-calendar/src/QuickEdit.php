@@ -85,11 +85,6 @@ class QuickEdit {
                     $output = $date_data['start_date'] . ' - ' . $date_data['end_date'];
                     break;
                 case 'multi':
-                    foreach ($date_data['dates'] as $date) {
-                        $output .= $date['date'] . '<br>';
-                    }
-                    break;
-                case 'multi_extended':
                     foreach ($date_data as $date) {
                         $output .= $date['date'] . '<br>';
                     }
@@ -101,7 +96,7 @@ class QuickEdit {
 			HTML;
 
             $form_id = 'acf-form-event-date-' . $post_id;
-            $this->display_wrapped_acf_form($form_id, $post_id, ['type', 'single', 'range', 'multi', 'multi_extended']);
+            $this->display_wrapped_acf_form($form_id, $post_id, ['type', 'single', 'range', 'multi']);
         }
 
         if ($column_name === 'location') {

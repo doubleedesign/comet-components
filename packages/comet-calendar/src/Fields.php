@@ -11,19 +11,22 @@ class Fields {
 
     public function register_options_fields(): void {
         acf_add_local_field_group(array(
-            "key"   => "group_6806310ca3e03",
+            "key"   => "group__comet-calendar--settings",
             "title" => "Calendar Settings",
             "fields"=> [
                 [
-                    "key"          => "field_6806310d41619",
+                    "key"          => "field__comet-calendar__enable-detail-pages",
                     "label"        => "Enable event detail pages",
                     "name"         => "enable_event_detail_pages",
-                    "type"         => "true_false",
+                    "type"         => "select",
+                    'choices'      => [
+                        'always'      => 'Always',
+                        'upcoming'    => 'Only for upcoming events',
+                        'past_year'   => 'Only for events in the past year',
+                        'current_year'=> 'Only for events in the current year',
+                        'never'       => 'Never'
+                    ],
                     "instructions" => "If disabled, event detail URLs will redirect to the Events page, where a simple list of events is shown. Items in event lists will not link to the detail page. This setting is site-wide, so it affects the Upcoming Events block as well as the Events/Calendar page.",
-                    "default_value"=> true,
-                    "ui_on_text"   => "",
-                    "ui_off_text"  => "",
-                    "ui"           => true
                 ]
             ],
             "location"=> [
@@ -49,11 +52,11 @@ class Fields {
     public function register_archive_fields(): void {
         acf_add_local_field_group(
             array(
-                "key"   => "group_680d74d84020b",
+                "key"   => "group__comet-calendar--archive-settings",
                 "title" => "Calendar Page",
                 "fields"=> [
                     [
-                        "key"          => "field_680d74d8d3a0c",
+                        "key"          => "field__comet-calendar__archive-title",
                         "label"        => "Page title",
                         "name"         => "events_page_title",
                         "type"         => "text",
@@ -62,18 +65,20 @@ class Fields {
                         "maxlength"    => 50
                     ],
                     [
-                        "key"          => "field_680d7510d43da",
+                        "key"          => "field__comet-calendar__archive-past-events",
                         "label"        => "Show past events",
                         "name"         => "show_past_events",
-                        "type"         => "true_false",
                         "instructions" => "Whether to show the \"Past events\" section on the page. Note: This will not stop direct links to past events from working if \"Enable event detail pages\" is on. To completely hide an event from public view without deleting it form the admin, make it a draft, private, or manually add a redirect in its settings.",
-                        "default_value"=> true,
-                        "ui_on_text"   => "",
-                        "ui_off_text"  => "",
-                        "ui"           => true
+                        "type"         => "select",
+                        'choices'      => [
+                            'always'      => 'Always',
+                            'past_year'   => 'Only events in the past year',
+                            'current_year'=> 'Only events in the current year',
+                            'never'       => 'Never'
+                        ],
                     ],
                     [
-                        "key"          => "field_680da53bfa93b",
+                        "key"          => "field__comet-calendar__archive-events-per-row",
                         "label"        => "Events per row",
                         "name"         => "events_per_row",
                         "type"         => "number",
@@ -117,8 +122,7 @@ class Fields {
                     "choices"=> [
                         "single"        => "Single date",
                         "range"         => "Date range",
-                        "multi"         => "Multiple dates, same time",
-                        "multi_extended"=> "Multiple dates, different times"
+                        "multi"         => "Multiple dates",
                     ],
                     "default_value"=> false,
                     "return_format"=> "value"
@@ -153,16 +157,16 @@ class Fields {
                             "label"         => "Start time",
                             "name"          => "start_time",
                             "type"          => "time_picker",
-                            "display_format"=> "g=>i a",
-                            "return_format" => "g=>i a"
+                            "display_format"=> "g:i a",
+                            "return_format" => "H:i"
                         ],
                         [
                             "key"           => "field__event__date--single__end-time",
                             "label"         => "End time",
                             "name"          => "end_time",
                             "type"          => "time_picker",
-                            "display_format"=> "g=>i a",
-                            "return_format" => "g=>i a"
+                            "display_format"=> "g:i a",
+                            "return_format" => "H:i"
                         ]
                     ]
                 ],
@@ -206,7 +210,7 @@ class Fields {
                     "key"              => "field__event__date--multiple",
                     "label"            => "Multiple dates",
                     "name"             => "multi",
-                    "type"             => "group",
+                    "type"             => "repeater",
                     "conditional_logic"=> [
                         [
                             [
@@ -216,106 +220,43 @@ class Fields {
                             ]
                         ]
                     ],
-                    "layout"    => "table",
-                    "sub_fields"=> [
-                        [
-                            "key"          => "field__event__date--multiple__dates",
-                            "label"        => "Dates",
-                            "name"         => "dates",
-                            "type"         => "repeater",
-                            "layout"       => "table",
-                            "pagination"   => 0,
-                            "min"          => 0,
-                            "max"          => 0,
-                            "collapsed"    => "",
-                            "button_label" => "Add date",
-                            "rows_per_page"=> 20,
-                            "sub_fields"   => [
-                                [
-                                    "key"            => "field__event__date--multiple__date",
-                                    "label"          => "Date",
-                                    "name"           => "date",
-                                    "type"           => "date_picker",
-                                    "display_format" => "F j, Y",
-                                    "return_format"  => "F j, Y",
-                                    "first_day"      => 1,
-                                    "parent_repeater"=> "field__event__date--multiple__dates"
-                                ],
-                            ]
-                        ],
-                        [
-                            "key"            => "field__event__date--multiple__start-time",
-                            "label"          => "Start time",
-                            "name"           => "start_time",
-                            "type"           => "time_picker",
-                            "display_format" => "g=>i a",
-                            "return_format"  => "g=>i a",
-                        ],
-                        [
-                            "key"            => "field__event__date--multiple__end-time",
-                            "label"          => "End time",
-                            "name"           => "end_time",
-                            "type"           => "time_picker",
-                            "display_format" => "g=>i a",
-                            "return_format"  => "g=>i a",
-                        ]
-                    ]
-                ],
-                [
-                    "key"              => "field__event__date--multiple-extended",
-                    "label"            => "Multiple dates and times",
-                    "name"             => "multi_extended",
-                    "type"             => "repeater",
-                    "conditional_logic"=> [
-                        [
-                            [
-                                "field"   => "field__event__type",
-                                "operator"=> "==",
-                                "value"   => "multi_extended"
-                            ]
-                        ]
-                    ],
                     "layout"       => "table",
-                    "pagination"   => 0,
-                    "min"          => 0,
-                    "max"          => 0,
-                    "collapsed"    => "",
                     "button_label" => "Add date",
                     "rows_per_page"=> 20,
                     "sub_fields"   => [
                         [
-                            "key"            => "field__event__date--multiple_extended__date",
+                            "key"            => "field__event__date--multiple__date--date",
                             "label"          => "Date",
                             "name"           => "date",
                             "type"           => "date_picker",
                             "display_format" => "d/m/Y",
                             "return_format"  => "F j, Y",
                             "first_day"      => 1,
-                            "parent_repeater"=> "field__event__date--multiple_extended",
+                            "parent_repeater"=> "field__event__date--multiple",
                             "wrapper"        => [
                                 "width"=> "33"
                             ]
                         ],
                         [
-                            "key"            => "field__event__date--multiple_extended__date__start-time",
+                            "key"            => "field__event__date--multiple__date--start-time",
                             "label"          => "Start time",
                             "name"           => "start_time",
                             "type"           => "time_picker",
-                            "display_format" => "g=>i a",
-                            "return_format"  => "g=>i a",
-                            "parent_repeater"=> "field__event__date--multiple__dates",
+                            "display_format" => "g:i a",
+                            "return_format"  => "H:i",
+                            "parent_repeater"=> "field__event__date--multiple",
                             "wrapper"        => [
                                 "width"=> "33"
                             ]
                         ],
                         [
-                            "key"            => "field__event__date--multiple_extended__date__end-time",
+                            "key"            => "field__event__date--multiple__date--end-time",
                             "label"          => "End time",
                             "name"           => "end_time",
                             "type"           => "time_picker",
-                            "display_format" => "g=>i a",
-                            "return_format"  => "g=>i a",
-                            "parent_repeater"=> "field__event__date--multiple__dates",
+                            "display_format" => "g:i a",
+                            "return_format"  => "H:i",
+                            "parent_repeater"=> "field__event__date--multiple",
                             "wrapper"        => [
                                 "width"=> "33"
                             ]
@@ -335,7 +276,26 @@ class Fields {
                     "type"         => "link",
                     "instructions" => "Link to ticketing or other external website if applicable",
                     "return_format"=> "array"
-                ]
+                ],
+                [
+                    "key"          => "field__event__additional-links",
+                    "label"        => "Additional links",
+                    "name"         => "additional_links",
+                    "instructions" => "Note: By default, these links only show on single event detail pages, if enabled. Themes may override this behaviour with custom templates.",
+                    "type"         => "repeater",
+                    "layout"       => "table",
+                    "button_label" => "Add link",
+                    "sub_fields"   => [
+                        [
+                            "key"            => "field__event__additional-links__link",
+                            "label"          => "Link",
+                            "name"           => "link",
+                            "type"           => "link",
+                            "return_format"  => "array",
+                            "parent_repeater"=> "field__event__additional-links"
+                        ]
+                    ]
+                ],
             ],
             "location"=> [
                 [
