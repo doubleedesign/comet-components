@@ -1,5 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\{SiteFooter, Menu, IconLinks};
+
+use Doubleedesign\Comet\Core\{Config, IconLinks, Menu, SiteFooter};
 use Doubleedesign\CometCanvas\NavMenus;
 
 ?>
@@ -9,15 +10,17 @@ use Doubleedesign\CometCanvas\NavMenus;
 $menuItems = NavMenus::get_simplified_nav_menu_items_by_location('footer');
 $menuComponent = new Menu(['context' => 'site-footer'], $menuItems);
 $socials = get_field('social_media_links', 'options');
-if($socials) {
-	$iconLinksComponent = new IconLinks([
-		'aria-label' => 'Social media links',
-		'context'    => 'site-footer',
-	], $socials);
-	$footerComponent = new SiteFooter(['backgroundColor' => 'dark'], [$iconLinksComponent, $menuComponent]);
+$attributes = Config::getInstance()->get_component_defaults('site-footer') ?? [];
+
+if ($socials) {
+    $iconLinksComponent = new IconLinks([
+        'aria-label' => 'Social media links',
+        'context'    => 'site-footer',
+    ], $socials);
+    $footerComponent = new SiteFooter($attributes, [$iconLinksComponent, $menuComponent]);
 }
 else {
-	$footerComponent = new SiteFooter(['backgroundColor' => 'dark'], [$menuComponent]);
+    $footerComponent = new SiteFooter($attributes, [$menuComponent]);
 }
 
 $footerComponent->render();
