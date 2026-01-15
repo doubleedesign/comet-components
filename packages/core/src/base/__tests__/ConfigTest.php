@@ -24,21 +24,21 @@ describe('Config', function() {
             $instance = Config::getInstance();
             $defaults = $instance->get_component_defaults('CallToAction');
 
-            expect($defaults)->toEqual(['colorTheme' => 'secondary']);
+            expect($defaults)->toMatchArray(['colorTheme' => 'secondary']);
         });
 
         it('returns component defaults from kebab-case name', function() {
             $instance = Config::getInstance();
             $defaults = $instance->get_component_defaults('call-to-action');
 
-            expect($defaults)->toEqual(['colorTheme' => 'secondary']);
+            expect($defaults)->toMatchArray(['colorTheme' => 'secondary']);
         });
 
         it('returns component defaults from snake_case name', function() {
             $instance = Config::getInstance();
             $defaults = $instance->get_component_defaults('call_to_action');
 
-            expect($defaults)->toEqual(['colorTheme' => 'secondary']);
+            expect($defaults)->toMatchArray(['colorTheme' => 'secondary']);
         });
 
         it('returns an empty array if component defaults are not set', function() {
@@ -46,6 +46,30 @@ describe('Config', function() {
             $defaults = $instance->get_component_defaults('UnknownComponent');
 
             expect($defaults)->toEqual([]);
+        });
+
+        it('overwrites an existing component default without clearing others', function() {
+            $instance = Config::getInstance();
+            $instance->set_component_defaults('CallToAction', [
+                'colorTheme'      => 'primary',
+                'backgroundColor' => 'dark'
+            ]);
+            $defaults = $instance->get_component_defaults('call-to-action');
+
+            expect($defaults)->toMatchArray([
+                'colorTheme'      => 'primary',
+                'backgroundColor' => 'dark'
+            ]);
+
+            $instance->set_component_defaults('call-to-action', [
+                'colorTheme' => 'info'
+            ]);
+            $defaults = $instance->get_component_defaults('CallToAction');
+
+            expect($defaults)->toMatchArray([
+                'colorTheme'      => 'info',
+                'backgroundColor' => 'dark'
+            ]);
         });
 
     });
