@@ -33,6 +33,9 @@ article > .container, article > [class$=__container], article > [class*=containe
 .container[data-size=narrow][data-background], [data-size=narrow][data-background][class$=__container], [data-size=narrow][data-background][class*=container--], [data-background] .container[data-size=narrow], [data-background] [data-size=narrow][class$=__container], [data-background] [data-size=narrow][class*=container--], .page-section .container[data-size=narrow], .page-section [data-size=narrow][class$=__container], .page-section [data-size=narrow][class*=container--], .site-header .container[data-size=narrow], .site-header [data-size=narrow][class$=__container], .site-header [data-size=narrow][class*=container--] {
   max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
 }
+.container:has(> .breakout), [class$=__container]:has(> .breakout), [class*=container--]:has(> .breakout) {
+  container-type: unset;
+}
 .container[data-halign] > h2:first-child, [data-halign][class$=__container] > h2:first-child, [data-halign][class*=container--] > h2:first-child {
   width: 100%;
   flex-basis: 100%;

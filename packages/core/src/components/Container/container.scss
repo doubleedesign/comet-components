@@ -51,6 +51,10 @@
 		}
 	}
 
+	&:has( > .breakout) {
+		container-type: unset;
+	}
+
 	&[data-halign] {
 		> h2:first-child {
 			width: 100%;

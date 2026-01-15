@@ -20,7 +20,7 @@ class CardList extends WrappedLayoutComponent {
     protected array $innerComponents = [];
 
     public function __construct(array $attributes, array $innerComponents) {
-        $headingComponent = $attributes['heading'] ? new Heading([], $attributes['heading']) : null;
+        $headingComponent = isset($attributes['heading']) ? new Heading([], $attributes['heading']) : null;
         $this->set_group_layout_from_attrs($attributes, GroupLayout::GRID);
 
         // Add a wrapper to each Card so that it can use container queries based on that
@@ -48,5 +48,19 @@ class CardList extends WrappedLayoutComponent {
             $headingComponent ? [$headingComponent, $wrappedCards] : [$wrappedCards],
             'components.CardList.card-list'
         );
+
+        if ($this->get_is_nested()) {
+            $this->tagName = Tag::DIV;
+        }
+    }
+
+    public function get_filtered_classes(): array {
+        $classes = parent::get_filtered_classes();
+
+        // Always include card-list after any custom context/shortName classes,
+        // so we don't end up with .card-list__list with no parent .card-list,
+        // and so that styling applies correctly to all card lists regardless of their contextual name
+        // FIXME: It's not actually applying to the outer wrapper, but adding get_filtered_classes() to render_with_wrapper causes duplication
+        return array_unique(array_merge($classes, ['card-list']));
     }
 }

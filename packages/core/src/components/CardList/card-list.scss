@@ -2,11 +2,8 @@
 @use '../bem-mixin' as *;
 
 @include bem-block('card-list__list', ('item')) {
+	gap: var(--spacing-lg);
 	// This now gets most of its styling from the data-group-layout attribute, see global.scss
-
-	@include container-width-up('narrow') {
-		gap: var(--spacing-lg);
-	}
 
 	&__item {
 		container-type: inline-size;

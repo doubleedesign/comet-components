@@ -21,6 +21,9 @@
   opacity: 1;
   text-decoration-color: currentColor;
 }
+.breadcrumbs__list__item a[href="#"] {
+  pointer-events: none;
+}
 .breadcrumbs__list__item::after {
   content: "/";
   padding-inline-start: var(--spacing-xs);

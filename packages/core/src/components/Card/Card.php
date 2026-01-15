@@ -71,8 +71,7 @@ class Card extends UIComponent {
             $iconPrefix = Config::getInstance()->get_icon_prefix();
             $preferHorizontal = $this->orientation && $this->orientation === Orientation::HORIZONTAL;
             array_push($innerComponents, new Heading([
-                'level'   => 3,
-                'classes' => [$preferHorizontal ? 'is-style-small' : '']
+                'level'   => 3
             ],
                 // TODO: Make this icon properly configurable - different icon, different library etc. Maybe a centralised set of icons in the config?
                 $this->heading . ($this->cardAsLink ? "<i class='$iconPrefix fa-arrow-right'></i>" : '')
@@ -150,7 +149,7 @@ class Card extends UIComponent {
             'classes'           => $this->get_filtered_classes(),
             'attributes'        => $this->get_html_attributes(),
             'imageWrapperAttrs' => $this->get_image_wrapper_attributes(),
-            'image'             => $this->image['src'] ? $this->image : null,
+            'image'             => !empty($this->image['src']) ? $this->image : null,
             'children'          => $this->innerComponents
         ])->render();
     }

@@ -28,7 +28,7 @@ class Breadcrumbs extends UIComponent {
                 ...$linkAttributes,
                 'context'    => 'breadcrumbs__list__item',
                 'label'      => $breadcrumb['title'],
-                'url'        => $breadcrumb['url'] ?? '#',
+                'url'        => !empty($breadcrumb['url']) ? $breadcrumb['url'] : '#',
             ]);
             $link->render();
             $linkHtml = ob_get_clean();

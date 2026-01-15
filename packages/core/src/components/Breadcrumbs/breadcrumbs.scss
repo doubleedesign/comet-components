@@ -24,6 +24,10 @@
 					opacity: 1;
 					text-decoration-color: currentColor;
 				}
+
+				&[href="#"] {
+					pointer-events: none;
+				}
 			}
 
 			&::after {

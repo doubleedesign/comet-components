@@ -76,7 +76,12 @@
 		flex-direction: column;
 	}
 
-	// Default group layout behaviour
+	[data-group-layout="list"] {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
 	[data-group-layout="grid"] {
 		width: 100%;
 		display: grid;

@@ -19,13 +19,14 @@ This guide is written for Windows users. MacOS and Linux users will need to slig
 [[toc]]
 
 ## Prerequisites
+
 - [Chocolatey](https://chocolatey.org/) package manager installed on your machine
 - [Git](https://git-scm.com/) installed on your machine (`choco install git` and/or your GUI of choice)
 - Sufficient privileges to do the following on your machine:
-	- install software
-	- add entries to the hosts file
-	- install certificates
-	- add certificates to the trusted root store.
+    - install software
+    - add entries to the hosts file
+    - install certificates
+    - add certificates to the trusted root store.
 
 ## Clone the repo
 
@@ -55,6 +56,7 @@ choco install laravel-herd
 
 :::details Do I really need to pay for Pro?
 No, but without Pro you won't have built-in Xdebug, the Dumps feature, or database services.
+
 - Xdebug is required for generating unit test coverage reports
 - Dumps is a great debugging tool which is referenced in this documentation
 - Database services are required if you want to use Herd to develop websites with WordPress or any other database-driven CMS.
@@ -65,6 +67,7 @@ No, but without Pro you won't have built-in Xdebug, the Dumps feature, or databa
 ```powershell::no-line-numbers
 Get-Command php
 ```
+
 The output should list the source as `C:\Users\<your-username>\.config\herd\bin\php84\php.exe` or similar according to the global PHP version you have set in Herd.
 
 :::details What if my PHP source is not Herd?
@@ -84,6 +87,7 @@ The output should list the source as `C:\Users\<your-username>\.config\herd\bin\
 ```powershell::no-line-numbers
 Get-Command node
 ```
+
 The output should list the source as `C:\Program Files\nodejs\node.exe` and the version should match the installed version listed in Herd.
 
 If you install alternative versions in Herd, change the active version with:
@@ -120,6 +124,14 @@ HTTPS is the standard in production environments and some tools and applications
 choco install sass
 ```
 
+## Install Laravel Pint globally
+
+1. Run the following command to install Pint globally via Composer:
+
+```powershell::no-line-numbers
+composer global require laravel/pint
+```
+
 ## Install project dependencies
 
 The project contains multiple sub-packages, and uses both [Composer](https://getcomposer.org/) and [NPM](https://www.npmjs.com/) to manage different types of dependencies.
@@ -149,6 +161,7 @@ Some of the underling scripts are PowerShell scripts, which have not been tested
 ```powershell::no-line-numbers
 choco install jetbrainstoolbox
 ```
+
 ```powershell::no-line-numbers
 choco install phpstorm
 ```
@@ -158,15 +171,18 @@ No, you don't have to use PhpStorm, but all IDE-specific information in these do
 :::
 
 ### Plugins
+
 Open PhpStorm and go to `File > Settings > Plugins`.
 
 :::details Plugins to install and enable
 Install and activate the following plugins and any dependencies they have:
+
 - [Test Automation](https://plugins.jetbrains.com/plugin/20175-test-automation)
 - [PHP Annotations](https://plugins.jetbrains.com/plugin/7320-php-annotations)
 - [PowerShell](https://plugins.jetbrains.com/plugin/10249-powershell)
 
 In `File > Settings > Plugins`, ensure the following bundled plugins are enabled:
+
 - PHP
 - PHP Architecture
 - JavaScript and TypeScript
@@ -206,6 +222,7 @@ If you installed via the Windows Store this should be:
 ```:no-line-numbers
 C:\Users\<your-username>\AppData\Local\Microsoft\WindowsApps\pwsh.exe
 ```
+
 :::
 
 :::tip Tip: Terminal colours
@@ -219,6 +236,7 @@ If you tick `Use new terminal`, the prompt and output will look different to a s
 
 :::details Do I have to use PowerShell?
 No, but you may need to adapt some commands and scripts for your shell of choice.
+
 - CMD? Amateur hour - just use PowerShell, it comes with Windows.
 - WSL? Hardcore, I like it. Instructions for almost all steps using WSL are available in the [Local setup deep dives](../local-dev-deep-dives/setup.md) section. (But be warned: A lot of them just route commands through PowerShell anyway, as integration of all tooling such as the IDE, PHP, Xdebug, Node, and Playwright is easier if you use the native Windows instances of things installed by Herd.)
   :::
@@ -226,7 +244,9 @@ No, but you may need to adapt some commands and scripts for your shell of choice
 ![Terminal settings for PowerShell](/phpstorm-terminal-powershell.png)
 
 ### Node
+
 Enable Node.js support in `File > Settings > Languages & Frameworks > Node.js`:
+
 - In the `Node interpreter` dropdown, ensure `C:\Program Files\nodejs\node.exe` is selected.
 - Tick `Coding assistance for Node.js`.
 
@@ -254,15 +274,18 @@ File watcher configurations for Sass, Rollup, and Blade template formatting are 
 PhpStorm will probably prompt you to set up a file watcher when you open a `.scss` file for the first time, but you can also find or create the configuration in `File > Settings > Tools > File Watchers`.
 
 To automatically compile individual SCSS files in the core package into CSS files in the same location (for example, `./src/components/global.scss` to `./src/components/global.css`), follow these steps:
+
 1. Go to `File > Settings > Tools > File Watchers`.
 2. Click the `Add (+ plus sign)` button and select `SCSS`.
 3. In the `File Type` dropdown, select `SCSS style sheet`.
 4. Uncheck `Track only root files`.
 5. In the `Scope` dropdown, select `Core package`.
 6. In the `Program` field, enter the path to the Sass executable that you installed in step 3:
+
 ```
 C:\ProgramData\chocolatey\bin\sass
 ```
+
 7. In the `Arguments` field, enter `--color --source-map $FileName$:$FileNameWithoutExtension$.css`.
 8. In the `Output paths` field, enter `$FileNameWithoutExtension$.css:$FileNameWithoutExtension$.css.map`.
 9. In the `Working directory` field, enter `$FileDir$`.
@@ -289,6 +312,7 @@ You can set up PhpStorm to automatically run Rollup when you save a JavaScript f
 ```
 $ProjectFileDir$\packages\core\node_modules\.bin\rollup
 ```
+
 (Note: `$ProjectFileDir$` is a real variable that resolves to the project root directory, you don't need to manually replace that with your actual path.)
 
 6. In the `Arguments` field, enter `-c` to use the configuration file in the project root.
@@ -309,10 +333,11 @@ A combination of tools and configurations are provided to ensure consistent code
 [Laravel Pint](https://laravel.com/docs/12.x/pint) is a code style fixer for PHP built on top of [PHP CS Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer), which is used to ensure consistent code formatting and standards adherence across the project. It is installed as a project dependency and configuration is defined `./pint.json`.
 
 To configure PhpStorm to show Pint warnings and automatic fixes, follow these steps:
+
 1. Go to `File > Settings > PHP > Quality Tools > Laravel Pint`
 2. Toggle the switch to enable Pint
 3. Fill in the path to the `pint.json` file in the root of the project
-4. Next to the "Configuration: System PHP" dropdown, click the three dots and fill in the path to the Pint executable (`pint.bat`) in the dialog that appears.
+4. Next to the "Configuration: System PHP" dropdown, click the three dots and fill in the path to your global Pint executable (`pint.bat`) in the dialog that appears (something like `C:\Users\<your-username>\AppData\Roaming\Composer\vendor\bin\pint.bat`).
 5. Click OK to save the executable path and close that pop-up, and Apply to save the Pint settings without closing the settings window.
 6. Go to `PHP > Quality Tools` and select "Laravel Pint" as the external formatter. This will ensure that the Pint configuration is used for formatting and linting in the IDE, including formatting on save.
 7. Go to `File > Settings > Editor > Inspections` and ensure the "Laravel Pint validation" inspection is enabled.
@@ -324,15 +349,18 @@ To configure PhpStorm to show Pint warnings and automatic fixes, follow these st
 [Blade Formatter](https://github.com/shufo/blade-formatter) is a third-party tool installed as a core package dependency, with configuration defined in the `./packages/core/.bladeformatterrc.json` file.
 
 To configure PhpStorm to automatically format Blade templates on save, follow these steps:
+
 1. Go to `File > Settings > Tools > File Watchers`.
 2. Click the `Add (+ plus sign)` button and select `Custom`.
 3. In the `File Type` dropdown, select `Blade`.
 4. For the `Scope`, select `Core Package`.
 5. In the `Program` field, enter `powershell.exe`.
 6. In the `Arguments` field, enter:
+
 ```powershell:no-line-numbers
 "$ProjectFileDir$\packages\core\node_modules\.bin\blade-formatter.ps1" --write "$FilePath$"
 ```
+
 **Note:** `$ProjectFileDir$` is a variable that PhpStorm will replace with the real path when it runs the watcher. You not replace this manually with your actual path.
 
 7. In the `Output paths to refresh` field, enter `$FileName$`.
@@ -348,6 +376,7 @@ To configure PhpStorm to automatically format Blade templates on save, follow th
 [ESLint](https://eslint.org/) is installed as a project dependency and configuration for linting and formatting JavaScript and TypeScript code is defined in `./eslint.config.js`.
 
 To configure PhpStorm to run ESLint on save and fix issues automatically where possible, follow these steps:
+
 1. Go to `File > Settings > Languages & Frameworks > JavaScript > Code Quality Tools > ESLint`.
 2. Select `Automatic ESLint configuration`.
 3. Tick `Run eslint --fix on save`.
@@ -362,6 +391,7 @@ Locate the PHP configuration file (as per the PHP interpreter settings above) an
 herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-open.php
 herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-close.php
 ```
+
 This is to wrap test pages with the required opening and closing HTML.
 
 :::warning
@@ -414,11 +444,13 @@ Get-Command openssl
 ```
 
 If it isn't, you can install it with [Chocolatey](https://community.chocolatey.org/packages/OpenSSL) (from a PowerShell instance with admin privileges):
+
 ```powershell:no-line-numbers
 choco install openssl
 ```
 
 Then back in your main terminal from the project root, run the convenience script that will:
+
 - add an entry to the hosts file to enable Storybook to use the domain `storybook.comet-components.test`
 - generate a self-signed cert for Storybook and add it to the trusted root store in Windows
 - ensure the Herd project certificate is also in the trusted root store in Windows
@@ -428,6 +460,7 @@ Then back in your main terminal from the project root, run the convenience scrip
 ```
 
 The script will provide feedback about its success or failure, but you can also check manually in the Certificate Manager.
+
 1. Access the Certificate Manager via the Start menu (search for "Certificate" and choose "Manage user certificates") or via the Run dialog (Windows + R) -> `certmgr.msc`
 2. In the left pane, expand `Trusted Root Certification Authorities` and select `Certificates`
 3. Look for the following two certificates:
@@ -442,9 +475,11 @@ The script will provide feedback about its success or failure, but you can also 
 Ensure that the Herd project site loads as secure by navigating to a test component URL, such as https://comet-components.test/packages/core/src/components/Container/__tests__/container.php.
 
 Next, you can run Storybook locally with:
+
 ```powershell::no-line-numbers
 npm run storybook
 ```
+
 Use the "network" URL to access it: https://storybook.comet-components.test:6006/ and ensure that your browser sees the connection as secure.
 
 :::details Cross-origin (CORS) errors
@@ -470,4 +505,5 @@ RewriteEngine On
 RewriteCond %{REQUEST_METHOD} OPTIONS
 RewriteRule ^(.*)$ $1 [R=200,L]
 ```
+
 :::
