@@ -57,13 +57,29 @@ In addition, there are some filters to modify attributes for nested components i
 `render.php` file for the block, so if a filter isn't listed here you can check that file to see if I've forgotten to document one - or add it. They are also intentionally all prefixed with
 `comet_blocks_` for easy searching.
 
-| Filter                                        | Parameters         | Usage                                                                                                                                  |
-|-----------------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| `comet_blocks_cta_heading_classes`            | `array $classes`   | Add CSS class(es) to the heading in the call-to-action block, e.g., `['is-style-accent']`.                                             |
-| `comet_blocks_cta_button_group_attributes`    | `array $attrs`     | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`.                                    |
-| `comet_blocks_child_pages_card_as_link`       | 	  `bool $as_link` | Set whether the cards in the Child Pages block render as links. Default is `false`, which renders them with a "Read more" button link. |
-| `comet_blocks_banner_heading_classes`         | `array $classes`   | Add CSS class(es) to the heading in the Banner block, e.g., `['is-style-accent']`.                                                     |
-| `comet_blocks_banner_button_group_attributes` | `array $attrs`     | Modify the attributes of the Button Group in the Banner block, e.g., `['halign' => 'center']`.                                         |
+> [!NOTE]  
+> The term "related content blocks" refers to the various blocks that display card lists of content from around the site, such as Related pages, Child pages, Latest Posts, and Featured Posts.
+
+| Filter                                                                 | Parameters          | Usage                                                                                                                                                                                                              |
+|------------------------------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `comet_blocks_cta_heading_classes`                                     | `array $classes`    | Add CSS class(es) to the heading in the call-to-action block, e.g., `['is-style-accent']`.                                                                                                                         |
+| `comet_blocks_cta_button_group_attributes`                             | `array $attrs`      | Modify the attributes of the Button Group in the call-to-action block, e.g., `['halign' => 'end']`.                                                                                                                |
+| `comet_blocks_related_content_card_list_card_as_link`                  | 	  `bool $as_link`  | Set whether the cards in the various related content blocks render as links. Default is `false`, which renders them with a "Read more" button link.                                                                |
+| `comet_blocks_banner_heading_classes`                                  | `array $classes`    | Add CSS class(es) to the heading in the Banner block, e.g., `['is-style-accent']`.                                                                                                                                 |
+| `comet_blocks_banner_button_group_attributes`                          | `array $attrs`      | Modify the attributes of the Button Group in the Banner block, e.g., `['halign' => 'center']`.                                                                                                                     |
+| `comet_blocks_related_content_max_per_row`                             | `int $max_per_row`  | Set the maximum number of cards per row in the dynamic content blocks (Related pages, child pages, latest posts, featured posts, etc) when they are displayed in grid format.                                      |                                               |
+| `comet_blocks_related_content_card_list_behaviour_when_fewer_than_max` | `string $behaviour` | Set the behaviour of the related content blocks  when there are fewer items than the maximum per row in grid format. Options are `default` (keep the width of the cards as though the max is there), and `expand`. |
+
+### Modifying WordPress template options
+
+Thirdly, there are some filters available to modify options for the WordPress templates provided by Comet Canvas. These will take priority over component defaults where applicable.
+
+| Filter                                          | Parameters            | Usage                                                                                                                                    |
+|-------------------------------------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `comet_canvas_post_category_list_card_layout`   | `string $card_layout` | Set the card layout in the blog template when displaying categories instead of posts. Default is `list`. Other option is `grid`.         |
+| `comet_canvas_post_category_list_cards_per_row` | `int $cards_per_row`  | Set the number of cards per row in the blog template when displaying categories instead of posts, and using `grid` layout. Default is 3. |
+| `comet_canvas_post_category_list_card_layout`   | `string $card_layout` | Set the card layout in the blog template when displaying the list of posts. Default is `list`. Other option is `grid`.                   |
+| `comet_canvas_posts_loop_cards_per_row`         | `int $cards_per_row`  | Set the number of cards per row in the blog template when displaying the list of posts, and using `grid` layout. Default is 3.           |
 
 ### Modifying block field options
 
