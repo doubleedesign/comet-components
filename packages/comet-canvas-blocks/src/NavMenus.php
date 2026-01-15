@@ -89,60 +89,26 @@ class NavMenus {
 			$locations = get_nav_menu_locations();
 			$object = wp_get_nav_menu_object($locations[$location]);
 
-			return wp_get_nav_menu_items($object->name);
-		}
+            return wp_get_nav_menu_items($object->name);
+        }
+    }
 
-		/**
-		 * Add classes to menu <li> tags
-		 * @param $classes
-		 * @param $item
-		 * @param $args
-		 * @param $depth
-		 *
-		 * @return array
-		 * @noinspection PhpUnusedParameterInspection
-		 */
-		function menu_item_classes($classes, $item, $args, $depth): array {
-			if($args->theme_location == 'header-menu') {
-				$classes[] = 'nav-item';
+    /**
+     * Get nav menu items by location
+     *
+     * @param  $location  string menu location name
+     * @param  array  $args  args to pass to WordPress function wp_get_nav_menu_items
+     *
+     * @return array
+     */
+    public static function get_nav_menu_items_by_location(string $location, array $args = []): array {
+        $locations = get_nav_menu_locations();
+        $page_for_posts = get_option('page_for_posts');
 
-				if(in_array('menu-item-has-children', $classes)) {
-					$classes[] = 'has-sub';
-					$classes[] = 'toggle-hover';
-				}
-			}
-
-			if($args->theme_location == 'footer-menu') {
-				if($depth == 0 && $args->depth > 1) {
-					$classes[] = 'menu-item--top-level col-xs-12 col-sm-6 col-xl-3';
-				}
-				else {
-					if($args->depth == 1) {
-						$classes[] = 'col-xs-12';
-					}
-				}
-			}
-
-			return $classes;
-		}
-	}
-
-
-	/**
-	 * Get nav menu items by location
-	 * @param $location string menu location name
-	 * @param array $args args to pass to WordPress function wp_get_nav_menu_items
-	 *
-	 * @return array
-	 */
-	static function get_nav_menu_items_by_location(string $location, array $args = []): array {
-		$locations = get_nav_menu_locations();
-		$page_for_posts = get_option('page_for_posts');
-
-		if(isset($locations[$location])) {
-			$object = wp_get_nav_menu_object($locations[$location]);
-			$items = wp_get_nav_menu_items($object->name, $args);
-			$current = get_queried_object();
+        if (isset($locations[$location])) {
+            $object = wp_get_nav_menu_object($locations[$location]);
+            $items = wp_get_nav_menu_items($object->name, $args);
+            $current = get_queried_object();
 			$default_category_id = get_option('default_category');
 
 			// $current = the currently viewed page/post/archive/other object
