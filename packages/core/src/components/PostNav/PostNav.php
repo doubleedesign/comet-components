@@ -37,16 +37,16 @@ class PostNav extends UIComponent {
                     if ($index === 0 && !isset($linkAttrs['icon'])) {
                         $linkAttrs['icon'] = 'fa-arrow-left';
                         $linkAttrs['classes'] = ["post-nav__link--prev"];
-                        $content = "<span>Previous {$this->entityName}</span>" . $content;
+                        $linkAttrs['label'] = "<span>Previous {$this->entityName}</span>" . $content;
                     }
                     if ($index === 1 && !isset($linkAttrs['icon'])) {
                         $linkAttrs['icon'] = 'fa-arrow-right';
                         $linkAttrs['classes'] = ["post-nav__link--next"];
-                        $content = "<span>Next {$this->entityName}</span>" . $content;
+                        $linkAttrs['label'] = "<span>Next {$this->entityName}</span>" . $content;
                     }
                 }
 
-                array_push($innerComponents, new Link($linkAttrs, $content));
+                array_push($innerComponents, new Link($linkAttrs));
             }
         }
 
