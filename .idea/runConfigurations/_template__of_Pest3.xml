@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="true" type="PestRunConfigurationType">
-    <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/">
+    <CommandLine workingDirectory="$PROJECT_DIR$/packages/">
       <envs>
         <env name="APP_ENV" value="development" />
       </envs>

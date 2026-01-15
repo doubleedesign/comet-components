@@ -14,7 +14,8 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Doubleedesign\\Comet\\WordPress\\Calendar\\": "src/"
+			"Doubleedesign\\Comet\\WordPress\\Calendar\\": "src/",
+			"Doubleedesign\\Comet\\WordPress\\Calendar\\Tests\\": "tests/"
 		}
 	},
 	"require": {
