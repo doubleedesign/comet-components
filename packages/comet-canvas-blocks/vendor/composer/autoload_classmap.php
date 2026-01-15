@@ -10,4 +10,5 @@ return array(
     'Doubleedesign\\CometCanvas\\NavMenus' => $baseDir . '/src/NavMenus.php',
     'Doubleedesign\\CometCanvas\\SectionMenuBuilder' => $baseDir . '/src/SectionMenuBuilder.php',
     'Doubleedesign\\CometCanvas\\SiteHealth' => $baseDir . '/src/SiteHealth.php',
+    'Doubleedesign\\CometCanvas\\TemplateParts' => $baseDir . '/src/TemplateParts.php',
 );

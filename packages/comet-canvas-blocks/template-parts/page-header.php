@@ -13,6 +13,10 @@ if (is_archive()) {
     $title = $queried_object->label ?? get_the_archive_title();
 }
 
+if (is_single()) {
+    $attributes['id'] = 'page-header--post-' . get_the_ID();
+}
+
 if (class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
     $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
     $pageHeader = new PageHeader($attributes, $title, $breadcrumbs);

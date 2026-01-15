@@ -6,6 +6,7 @@
  * Version:         0.5.0
  * Text Domain:     comet
  */
+@use 'common';
 
 .site-content {
 	padding-block: 0;
@@ -27,3 +28,31 @@
 		}
 	}
 }
+
+.category {
+	&__columns {
+		display: flex !important;
+		flex-direction: column;
+
+		@container (min-width: 940px) {
+			flex-direction: row;
+		}
+
+		&__column {
+			&--intro {
+				@container (min-width: 940px) {
+					width: 35%;
+					flex-basis: 35%;
+				}
+			}
+
+			&--posts {
+				@container (min-width: 940px) {
+					width: 65%;
+					flex-basis: 65%;
+				}
+			}
+		}
+	}
+}
+

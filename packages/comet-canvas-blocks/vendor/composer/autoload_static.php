@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInite0f45452dbd314f3d53d0cf8e99b7624
 {
     public static $prefixLengthsPsr4 = array (
-        'D' => 
+        'D' =>
         array (
             'Doubleedesign\\CometCanvas\\' => 26,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Doubleedesign\\CometCanvas\\' => 
+        'Doubleedesign\\CometCanvas\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -25,6 +25,7 @@ class ComposerStaticInite0f45452dbd314f3d53d0cf8e99b7624
         'Doubleedesign\\CometCanvas\\NavMenus' => __DIR__ . '/../..' . '/src/NavMenus.php',
         'Doubleedesign\\CometCanvas\\SectionMenuBuilder' => __DIR__ . '/../..' . '/src/SectionMenuBuilder.php',
         'Doubleedesign\\CometCanvas\\SiteHealth' => __DIR__ . '/../..' . '/src/SiteHealth.php',
+        'Doubleedesign\\CometCanvas\\TemplateParts' => __DIR__ . '/../..' . '/src/TemplateParts.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
