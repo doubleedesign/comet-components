@@ -17,4 +17,7 @@ abstract class WpTestCase extends TestCase {
         Mockery::close();
         Spies\finish_spying();
     }
+
+    abstract public function is_wp_test_case(): string;
+
 }

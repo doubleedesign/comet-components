@@ -13,7 +13,7 @@ class Events {
         add_action('init', [$this, 'create_event_cpt'], 15);
         add_action('init', [$this, 'register_custom_permalink_placeholder'], 15);
         add_filter('post_type_link', [$this, 'populate_custom_permalink'], 10, 2);
-        add_action('pre_get_posts', [$this, 'customise_event_archive']);
+        add_action('pre_get_posts', [$this, 'clear_date_from_single_event_query'], 20);
 
         add_filter('manage_event_posts_columns', [$this, 'add_admin_list_columns'], 20);
         add_filter('manage_event_posts_custom_column', [$this, 'populate_admin_list_columns'], 30, 2);
@@ -65,7 +65,7 @@ class Events {
             'filter_items_list'     => __('Filter items list', 'comet'),
         );
         $rewrite = array(
-            'slug'       => $slug . '/%year%', // Placeholder handled by populate_custom_permalink_rewrite
+            'slug'       => $slug . '/%year%', // Placeholder handled by populate_custom_permalink
             'with_front' => true,
             'pages'      => true,
             'feeds'      => true,
@@ -102,45 +102,40 @@ class Events {
 
     public function populate_custom_permalink($post_link, $post) {
         if (is_object($post) && $post->post_type == 'event') {
-            $event_date = get_post_meta($post->ID, 'start_date', true);
-            $post_date = get_the_date('d-m-Y', $post);
-            $date = new DateTime($event_date ? $event_date : $post_date);
+            $event_date = get_post_meta($post->ID, 'sort_date', true);
+            if (empty($event_date)) {
+                return $post_link;
+            }
+
+            $date = new DateTime($event_date);
             $year = $date->format('Y');
 
-            return str_replace(array('%year%'), $year, $post_link);
+            return str_replace('%year%', $year, $post_link);
         }
 
         return $post_link;
     }
 
     /**
-     * Alter the default query for the CPT archive to only show past events
-     * (Upcoming to be handled in the template with its own query, allowing past events to use WP default pagination)
+     * The date in the post URL causes the global query to use that year as the post date year when finding the post,
+     * causing a 404 for the single post view for any event not in the current year.
+     * This method modifies the query to fix it by removing the year from the query, so it uses only the slug and post type to find it.
      *
-     * @param  $query
+     * @param  $query  - the current WP_Query instance
      *
-     * @return mixed
+     * @return object
      */
-    public function customise_event_archive($query): mixed {
-        if (is_post_type_archive('event') && isset($query->query['post_type']) && $query->query['post_type'] === 'event') {
-            if ($query->is_main_query() && !is_admin()) {
-                $query->set('meta_key', 'sort_date');
-                $query->set('order', 'DESC');
-                $query->set('meta_type', 'DATE');
-                $query->set('orderby', 'meta_value');
-
-                $query->set('meta_query', array(
-                    'relation' => 'OR',
-                    array(
-                        // Filter out upcoming events
-                        'key'     => 'sort_date',
-                        'value'   => current_time('Y-m-d'),
-                        'compare' => '<',
-                        'type'    => 'DATE',
-                    ),
-                ));
-            }
+    public function clear_date_from_single_event_query($query): object {
+        if (is_admin() || !$query->is_single() || !$query->is_main_query()) {
+            return $query;
         }
+        if ($query->query['post_type'] !== 'event') {
+            return $query;
+        }
+
+        \Symfony\Component\VarDumper\VarDumper::dump($query);
+
+        $query->set('year', '');
 
         return $query;
     }
