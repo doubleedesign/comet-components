@@ -15,7 +15,7 @@ $globalBackground = Config::getInstance()->get('global_background')->value;
 		// and to avoid showing content before animations kick in (if they are present)
 		// This is done here in case anything goes wrong with other JS files
 		// - so the content will always become visible even if animation JS breaks for example
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			setTimeout(function () {
 				document.body.style.opacity = "1";
 			}, 100);
@@ -35,40 +35,40 @@ $logoId = get_option('options_logo');
 $logoUrl = wp_get_attachment_image_url($logoId, 'full');
 
 $showContactDetails = apply_filters('comet_canvas_show_contact_details_in_header', false);
-if ($showContactDetails) {
-    ob_start();
-    get_template_part('template-parts/contact-details');
-    $contactBlockHtml = ob_get_clean();
-    $contactBlock = new PreprocessedHTML([], $contactBlockHtml);
+if($showContactDetails) {
+	ob_start();
+	get_template_part('template-parts/contact-details');
+	$contactBlockHtml = ob_get_clean();
+	$contactBlock = new PreprocessedHTML([], $contactBlockHtml);
 }
 
-if ($showContactDetails) {
-    $headerComponent = new SiteHeader(
-        [
-            'logoUrl'              => $logoUrl,
-            'size'                 => 'contained',
-            'breakpoint'           => '1024px',
-            'responsiveStyle'      => 'overlay',
-            'icon'                 => 'fa-bars',
-            'submenuIcon'          => 'fa-plus'
-        ],
-        [
-            new Group(['context' => 'site-header', 'shortName' => 'contact'], [$contactBlock]),
-            new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
-        ]
-    );
+if($showContactDetails) {
+	$headerComponent = new SiteHeader(
+		[
+			'logoUrl'         => $logoUrl,
+			'size'            => 'contained',
+			'breakpoint'      => '1024px',
+			'responsiveStyle' => 'overlay',
+			'icon'            => 'fa-bars',
+			'submenuIcon'     => 'fa-plus'
+		],
+		[
+			new Group(['context' => 'site-header', 'shortName' => 'contact'], [$contactBlock]),
+			new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
+		]
+	);
 }
 else {
-    $headerComponent = new SiteHeader(
-        [
-            'logoUrl'         => $logoUrl,
-            'size'            => 'wide',
-            'breakpoint'      => '860px',
-            'responsiveStyle' => 'default',
-            'submenuIcon'     => 'fa-caret-down'
-        ],
-        [new Group(['context' => 'responsive'], [$menuComponent])]
-    );
+	$headerComponent = new SiteHeader(
+		[
+			'logoUrl'         => $logoUrl,
+			'size'            => 'wide',
+			'breakpoint'      => '860px',
+			'responsiveStyle' => 'default',
+			'submenuIcon'     => 'fa-caret-down'
+		],
+		[new Group(['context' => 'responsive'], [$menuComponent])]
+	);
 }
 
 $headerComponent->render();

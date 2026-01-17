@@ -18,7 +18,7 @@ if (is_single()) {
 }
 
 if (class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
-    $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
+    $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_breadcrumbs();
     $pageHeader = new PageHeader($attributes, $title, $breadcrumbs);
 }
 else {
