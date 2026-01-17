@@ -1,28 +1,74 @@
 <?php
 namespace Doubleedesign\Comet\WordPress\Calendar;
+use DateTime;
+use Doubleedesign\Comet\Core\{DateBlock, DateRangeBlock};
 
 class TemplateHandler {
 
-	public function __construct() {
-		add_filter('template_include', [$this, 'event_archive_template']);
-	}
+    public function __construct() {
+        add_filter('template_include', [$this, 'event_archive_template']);
+        add_filter('template_include', [$this, 'event_single_template']);
+        add_filter('template_redirect', [$this, 'maybe_redirect_single_event'], 20);
+    }
 
-	function event_archive_template($template) {
-		if(!is_post_type_archive('event')) return $template;
+    public function event_archive_template($template) {
+        if (!is_post_type_archive('event')) return $template;
 
-		$theme_template = locate_template('archive-event.php');
-		if($theme_template) {
-			return $theme_template;
-		}
-		else {
-			$plugin_template = plugin_dir_path(__FILE__) . 'templates/archive-event.php';
-			if(file_exists($plugin_template)) {
-				return $plugin_template;
-			}
-		}
+        $theme_template = locate_template('archive-event.php');
+        if ($theme_template) {
+            return $theme_template;
+        }
+        else {
+            $plugin_template = plugin_dir_path(__FILE__) . 'templates/archive-event.php';
+            if (file_exists($plugin_template)) {
+                return $plugin_template;
+            }
+        }
 
-		// Return the default template if override conditions aren't met
+        // Return the default template if override conditions aren't met
         return $template;
+    }
+
+    public function event_single_template($template) {
+        if (!is_singular('event')) return $template;
+
+        $theme_template = locate_template('single-event.php');
+        if ($theme_template) {
+            return $theme_template;
+        }
+        else {
+            $plugin_template = plugin_dir_path(__FILE__) . 'templates/single-event.php';
+            if (file_exists($plugin_template)) {
+                return $plugin_template;
+            }
+        }
+
+        // Return the default template if override conditions aren't met
+        return $template;
+    }
+
+    public function maybe_redirect_single_event(): void {
+        if (!is_singular('event')) return;
+        if (get_option('enable_event_detail_pages') == null) return;
+
+        //        $event_detail_setting = get_option('enable_event_detail_pages');
+        //        if ($event_detail_setting === 'always') {
+        //            return;
+        //        }
+        //
+        //        if ($event_detail_setting === 'never') {
+        //            wp_redirect(get_post_type_archive_link('event'));
+        //            exit;
+        //        }
+        //
+        //        if ($event_detail_setting === 'past_year') {
+        //
+        //        }
+        //
+        //        if ($event_detail_setting === 'current_year') {
+        //
+        //        }
+
     }
 
     /**
@@ -85,7 +131,7 @@ class TemplateHandler {
                     'colorTheme' => $colorTheme ?? ($isUpcoming ? 'secondary' : 'dark')
                 ]);
                 break;
-                // FIXME: Handle multi and multi_extended types
+                // FIXME: Handle multi-date type
             default:
                 break;
         }

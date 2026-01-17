@@ -6,7 +6,7 @@
  */
 
 use Doubleedesign\Comet\Core\{EventCard, EventList, Separator};
-use Doubleedesign\Comet\WordPress\Calendar\Events;
+use Doubleedesign\Comet\WordPress\Calendar\{TemplateHandler};
 
 get_header();
 get_template_part('template-parts/page-header');
@@ -14,14 +14,14 @@ get_template_part('template-parts/page-header');
 /** ===================================================================================================
  * Upcoming events
  * ================================================================================================= */
-$events = Doubleedesign\Comet\WordPress\Calendar\Events::get_upcoming_event_ids(100);
+$events = TemplateHandler::get_upcoming_event_ids(100);
 $cards = array_map(function($eventId) {
     if (get_post_meta('sort_date', $eventId, true) !== '') { // Skip events without dates
         $title = get_the_title($eventId);
         $detailUrl = get_option('options_enable_event_detail_pages') ? get_the_permalink($eventId) : null;
         $location = get_field('location', $eventId);
         $externalLink = get_field('external_link', $eventId);
-        $dateComponent = Events::get_date_block($eventId);
+        $dateComponent = TemplateHandler::get_date_block($eventId);
 
         return new EventCard([
             'dateComponent' => $dateComponent,
@@ -69,7 +69,7 @@ if (have_posts()) {
             $detailUrl = get_option('options_enable_event_detail_pages') ? get_the_permalink() : null;
             $location = get_field('location');
             $externalLink = get_field('external_link');
-            $dateComponent = Events::get_date_block(get_the_ID());
+            $dateComponent = TemplateHandler::get_date_block(get_the_ID());
 
             array_push($cards, new EventCard([
                 'dateComponent' => $dateComponent,
@@ -81,11 +81,6 @@ if (have_posts()) {
         }
     }
 
-    // FIXME implement pagination
-    //    ob_start();
-    //    the_posts_pagination();
-    //    $pagination = ob_get_clean();
-
     $component = new EventList([
         'heading'    => 'Past Events',
         'size'       => 'contained',
@@ -93,6 +88,8 @@ if (have_posts()) {
         'colorTheme' => 'dark'
     ], $cards);
     $component->render();
+
+    // TODO: Implement pagination
 }
 
 get_footer();
