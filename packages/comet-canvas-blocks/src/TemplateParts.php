@@ -126,10 +126,21 @@ class TemplateParts {
             }
         }
 
-        $cardLayout = Config::getInstance()->get_component_defaults('card-list')['layout'] ?? 'list';
-        $cardLayout = apply_filters('comet_canvas_posts_loop_card_layout', $cardLayout);
-        $cardsPerRow = Config::getInstance()->get_component_defaults('card-list')['maxPerRow'] ?? 3;
-        $cardsPerRow = apply_filters('comet_canvas_posts_loop_cards_per_row', $cardsPerRow);
+        if (isset($attributes['layout'])) {
+            $cardLayout = $attributes['layout'];
+        }
+        else {
+            $cardLayout = Config::getInstance()->get_component_defaults('card-list')['layout'] ?? 'list';
+            $cardLayout = apply_filters('comet_canvas_posts_loop_card_layout', $cardLayout);
+        }
+
+        if (isset($attributes['cardsPerRow'])) {
+            $cardsPerRow = $attributes['maxPerRow'];
+        }
+        else {
+            $cardsPerRow = Config::getInstance()->get_component_defaults('card-list')['maxPerRow'] ?? 3;
+            $cardsPerRow = apply_filters('comet_canvas_posts_loop_cards_per_row', $cardsPerRow);
+        }
 
         return new CardList(
             [
