@@ -1,5 +1,3 @@
-@opentag($tag) @if ($classes)
-	@class($classes)
-@endif @attributes($attributes)>
+@opentag($tag) @class($classes) @attributes($attributes)>
 <span>{!! $content !!}</span>
 @closetag($tag)
