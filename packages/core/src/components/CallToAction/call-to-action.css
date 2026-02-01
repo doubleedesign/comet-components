@@ -1,10 +1,20 @@
 .call-to-action__content {
+  width: 100%;
   padding: var(--spacing-lg);
   text-align: center;
 }
 @container (min-width: 600px) {
   .call-to-action__content {
     text-align: revert;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  [data-halign=center] .call-to-action__content {
+    align-items: center;
+  }
+  [data-halign=end] .call-to-action__content {
+    align-items: center;
   }
 }
 @container (min-width: 940px) {

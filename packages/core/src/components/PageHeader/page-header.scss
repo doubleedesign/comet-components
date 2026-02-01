@@ -1,6 +1,11 @@
 @use '../mixins' as *;
 
 .page-header {
+
+	@container (min-width: 1024px) {
+		padding-top: 0;
+	}
+
 	.breadcrumbs {
 		width: 100%;
 		flex-basis: 100%;

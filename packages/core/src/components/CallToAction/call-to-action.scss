@@ -3,15 +3,30 @@
 .call-to-action {
 
 	&__content {
+		width: 100%;
 		padding: var(--spacing-lg);
 		text-align: center;
 
 		@include container-width-up('small') {
 			text-align: revert;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+
+			[data-halign="center"] & {
+				align-items: center;
+			}
+
+			[data-halign="end"] & {
+				align-items: center;
+			}
 		}
 
 		@include container-width-up('narrow') {
 			padding: var(--spacing-xl);
+		}
+
+		h2, .button-group {
 		}
 	}
 }

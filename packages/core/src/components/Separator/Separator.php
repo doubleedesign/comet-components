@@ -52,6 +52,8 @@ class Separator extends Renderable {
             $styles['--theme-color'] = "var(--color-{$this->colorTheme->value})";
         }
 
+        $styles['max-width'] = $this->size ? "var(--width-{$this->size->value})" : 'var(--width-contained)';
+
         return $styles;
     }
 

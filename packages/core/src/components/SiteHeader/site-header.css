@@ -166,7 +166,6 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
 }
 .site-header__responsive .site-header__menu__list__item:has(.button) {
   padding-inline-end: 0;
-  padding-block: 0;
 }
 .site-header__responsive .site-header__menu__list__item:has(.button):hover {
   background: transparent;

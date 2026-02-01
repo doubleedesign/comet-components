@@ -1,3 +1,8 @@
+@container (min-width: 1024px) {
+  .page-header {
+    padding-top: 0;
+  }
+}
 .page-header .breadcrumbs {
   width: 100%;
   flex-basis: 100%;
