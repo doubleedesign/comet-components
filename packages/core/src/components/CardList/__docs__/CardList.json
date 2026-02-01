@@ -98,6 +98,10 @@
             ],
             "default": "list"
         },
+        "link": {
+            "type": "array",
+            "description": "Optional link to display as a call-to-action, such as \"View all\". Placement of the link is determined by the horizontal alignment setting."
+        },
         "maxPerRow": {
             "type": "int",
             "description": "Maximum number of items to display per row in grid layouts.",
