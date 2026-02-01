@@ -6,7 +6,7 @@
   container-type: inline-size;
 }
 .banner[data-background] {
-  background-color: transparent;
+  background-color: var(--background-color);
 }
 .banner[data-background]:after {
   content: "";
@@ -14,36 +14,6 @@
   inset: 0 0 0 0;
   z-index: 1;
   opacity: var(--overlay-opacity, 1);
-}
-.banner[data-background][data-background=primary]:after {
-  background-color: var(--color-primary);
-}
-.banner[data-background][data-background=secondary]:after {
-  background-color: var(--color-secondary);
-}
-.banner[data-background][data-background=accent]:after {
-  background-color: var(--color-accent);
-}
-.banner[data-background][data-background=info]:after {
-  background-color: var(--color-info);
-}
-.banner[data-background][data-background=warning]:after {
-  background-color: var(--color-warning);
-}
-.banner[data-background][data-background=success]:after {
-  background-color: var(--color-success);
-}
-.banner[data-background][data-background=error]:after {
-  background-color: var(--color-error);
-}
-.banner[data-background][data-background=light]:after {
-  background-color: var(--color-light);
-}
-.banner[data-background][data-background=dark]:after {
-  background-color: var(--color-dark);
-}
-.banner[data-background][data-background=white]:after {
-  background-color: var(--color-white);
 }
 .banner__cover-image {
   position: relative;
@@ -79,6 +49,11 @@
   z-index: 100;
   display: flex;
 }
+@container (max-width: 768px) {
+  .banner__container {
+    justify-content: center !important;
+  }
+}
 .banner__content {
   position: relative;
   z-index: 200;
@@ -86,16 +61,14 @@
   text-align: center;
   justify-content: center;
 }
-.banner__content .button-group {
-  justify-content: center;
+@container (max-width: 600px) {
+  .banner__content .button-group {
+    justify-content: center;
+  }
 }
 @container (min-width: 600px) {
   .banner__content {
     text-align: revert;
-    justify-content: initial;
-  }
-  .banner__content .button-group {
-    justify-content: initial;
   }
 }
 @container (min-width: 940px) {
@@ -103,9 +76,9 @@
     padding: var(--spacing-xl);
   }
 }
-@container (max-width: 940px) {
+@container (max-width: 768px) {
   .banner__content {
-    max-width: 100% !important;
+    max-width: 75cqw !important;
   }
 }
 

@@ -9,7 +9,7 @@
 	container-type: inline-size;
 
 	&[data-background] {
-		background-color: transparent;
+		background-color: var(--background-color);
 
 		&:after {
 			content: '';
@@ -17,14 +17,6 @@
 			inset: 0 0 0 0;
 			z-index: 1;
 			opacity: var(--overlay-opacity, 1);
-		}
-
-		@each $colorName, $value in $colors {
-			&[data-background="#{$colorName}"] {
-				&:after {
-					background-color: var(--color-#{$colorName});
-				}
-			}
 		}
 	}
 
@@ -60,6 +52,10 @@
 		inset: 0 0 0 0;
 		z-index: 100;
 		display: flex;
+
+		@include container-width-down('narrower') {
+			justify-content: center !important;
+		}
 	}
 
 	&__content {
@@ -70,24 +66,21 @@
 		justify-content: center;
 
 		.button-group {
-			justify-content: center;
+			@include container-width-down('small') {
+				justify-content: center;
+			}
 		}
 
 		@include container-width-up('small') {
 			text-align: revert;
-			justify-content: initial;
-
-			.button-group {
-				justify-content: initial;
-			}
 		}
 
 		@include container-width-up('narrow') {
 			padding: var(--spacing-xl);
 		}
 
-		@include container-width-down('narrow') {
-			max-width: 100% !important;
+		@include container-width-down('narrower') {
+			max-width: 75cqw !important;
 		}
 	}
 }
