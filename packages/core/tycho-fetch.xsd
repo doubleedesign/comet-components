@@ -271,21 +271,22 @@
 	</xs:element>
 	<xs:element name="CardList">
 		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="shortName" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="link" type="array"/>
 <xs:attribute name="maxPerRow" type="xs:int"/>
-<xs:attribute name="shortName" type="xs:string"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>
 <xs:attribute name="layout" type="GroupLayout"/>
 <xs:attribute name="heading" type="xs:string"/>
-<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="dataAttrs" type="array"/>
 <xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="vAlign" type="Alignment"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="isNested" type="xs:boolean"/>
 <xs:attribute name="withContainer" type="xs:boolean"/>
 <xs:attribute name="ariaAttrs" type="array"/>
@@ -626,13 +627,21 @@
 			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="imageCrop" type="xs:boolean"/>
+<xs:attribute name="maxPerRow" type="xs:int"/>
 <xs:attribute name="shortName" type="xs:string"/>
+<xs:attribute name="backgroundColor" type="ThemeColor"/>
+<xs:attribute name="lightbox" type="xs:boolean"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="imageCrop" type="xs:boolean"/>
+<xs:attribute name="dataAttrs" type="array"/>
+<xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="columns" type="xs:int"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="caption" type="xs:complexType"/>
+<xs:attribute name="vAlign" type="Alignment"/>
+<xs:attribute name="isNested" type="xs:boolean"/>
+<xs:attribute name="withContainer" type="xs:boolean"/>
+<xs:attribute name="ariaAttrs" type="array"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Group">

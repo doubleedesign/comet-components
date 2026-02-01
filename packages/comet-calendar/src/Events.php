@@ -129,6 +129,10 @@ class Events {
         if (is_admin() || !$query->is_single() || !$query->is_main_query()) {
             return $query;
         }
+        if (!isset($query->query['post_type'])) {
+            return $query;
+        }
+
         if ($query->query['post_type'] !== 'event') {
             return $query;
         }

@@ -89,10 +89,10 @@ function init$1(targetDocument = document) {
 	}
 }
 
-window.addEventListener('load', function() {
-	if(!document.querySelector('.gallery')) return;
+window.addEventListener('load', function () {
+	if (!document.querySelector('[data-lightbox="true"]')) return;
 
-	window.baguetteBox.run('figure.gallery');
+	window.baguetteBox.run('[data-lightbox="true"]');
 });
 
 const Vue$1 = await VueLoader;
