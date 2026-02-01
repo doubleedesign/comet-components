@@ -2,7 +2,7 @@
 
 namespace Doubleedesign\Comet\Core;
 
-#[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV, Tag::ARTICLE, Tag::FOOTER])]
+#[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV, Tag::ARTICLE, Tag::FOOTER, Tag::FIGURE])]
 #[DefaultTag(Tag::SECTION)]
 abstract class WrappedLayoutComponent extends LayoutComponent {
     /**
@@ -89,8 +89,8 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
         if (!$this instanceof Container && $this->withContainer) {
             $this->innerComponents = array(
                 new Container([
-                    'isNested' => true,
-                    'context'  => $this->get_shortname(),
+                    'isNested'  => true,
+                    'context'   => $this->get_shortname(),
                     ...$this->containerAttrs
                 ], $this->innerComponents)
             );
@@ -128,6 +128,7 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
 
         $withWrapper = new PageSection([
             'shortName'       => $this->get_shortname(),
+            'classes'         => ($this instanceof Container) ? [] : $this->get_filtered_classes(), // needed for CardList, possibly other things that escape my memory right now
             'tagName'         => $this->wrapperTag->value,
             ...$this->wrapperAttrs
         ], [$inner]);

@@ -10,7 +10,7 @@ namespace Doubleedesign\Comet\Core;
  *              Intended for automatic use as the wrapper for Container components
  *              and as the parent for components that are not intended to be nested, such as those extending WrappedLayoutComponent.
  */
-#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE])]
+#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE, Tag::FIGURE])]
 #[DefaultTag(Tag::SECTION)]
 class PageSection extends Renderable {
     use BackgroundColor;
