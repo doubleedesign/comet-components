@@ -25,15 +25,25 @@ class ContentImageAdvanced extends ContentImageComponent {
     }
 
     public function get_outer_wrapper_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
+
+        if (isset($attributes['style'])) {
+            return [
+                ...$attributes,
+                'style' => $this->get_local_css_properties() . '; ' . $attributes['style']
+            ];
+        }
+
         return [
-            ...parent::get_outer_wrapper_html_attributes(),
-            'style' => $this->get_local_css_properties() . '; ' . parent::get_html_attributes()['style'] ?? '',
+            ...$attributes,
+            'style'      => $this->get_local_css_properties(),
         ];
     }
 
     public function get_inner_wrapper_html_attributes(): array {
         $attrs = [
             'data-aspect-ratio' => strtolower($this->aspectRatio->name) ?? null,
+            'data-style'        => $this->styleName ?? null,
         ];
 
         if (isset($this->originalImageOrientation)) {

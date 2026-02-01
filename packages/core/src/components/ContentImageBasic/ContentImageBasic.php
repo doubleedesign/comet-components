@@ -75,6 +75,7 @@ class ContentImageBasic extends ContentImageComponent {
 
     public function get_inner_wrapper_html_attributes(): array {
         return [
+            'data-style'        => $this->styleName ?? null,
             // TODO: Can having both of these set AND width and height cause problems?
             'data-behaviour'    => $this->scale ?? null,
             'data-aspect-ratio' => isset($this->aspectRatio) ? strtolower($this->aspectRatio->name) : null,

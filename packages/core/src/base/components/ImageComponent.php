@@ -49,7 +49,6 @@ abstract class ImageComponent extends Renderable {
                 'src'   => $this->src,
                 'alt'   => $this->alt,
                 'title' => $this->title,
-                ...($this->styleName ? ['data-style' => $this->styleName] : [])
             ]
         );
     }
