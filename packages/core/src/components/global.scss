@@ -95,31 +95,53 @@
 			justify-content: inherit;
 		}
 
-		&[data-max-per-row="2"] {
-			@include container-width-up('small') {
-				// Only go to 2 columns if there are 2 or more items
-				&:has(> :nth-child(2)) {
-					grid-template-columns: repeat(2, 1fr);
+		&[data-max-per-row="2"], &[data-max-per-row="4"] {
+			// Only go to 2 columns if there are 2 or more items
+			&:has(> :nth-child(2)) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
+		&[data-max-per-row="4"] {
+			@include container-width-up('narrower') {
+				grid-template-columns: repeat(auto-fit, 25%); // this ensures alignment works correctly when there's fewer
+
+				// Only go to 4 column grid if there are actually 4 or more items
+				&:has(> :nth-child(4)) {
+					grid-template-columns: repeat(4, 1fr);
 				}
 			}
 		}
 
-		&[data-max-per-row="3"] {
+		&[data-max-per-row="3"], &[data-max-per-row="5"], &[data-max-per-row="6"] {
 			@include container-width-up('small') {
-				grid-template-columns: repeat(auto-fit, 33%);
+				grid-template-columns: repeat(auto-fit, 33%); // this ensures alignment works correctly when there's fewer
 
+				// Only go to 4 column grid if there are actually 3 or more items
 				&:has(> :nth-child(3)) {
 					grid-template-columns: repeat(3, 1fr);
 				}
 			}
 		}
 
-		&[data-max-per-row="4"] {
+		&[data-max-per-row="5"] {
 			@include container-width-up('narrower') {
-				grid-template-columns: repeat(auto-fit, 25%);
+				grid-template-columns: repeat(auto-fit, 20%); // this ensures alignment works correctly when there's fewer
 
-				&:has(> :nth-child(4)) {
-					grid-template-columns: repeat(4, 1fr);
+				// Only go to 5 column grid if there are actually 5 or more items
+				&:has(> :nth-child(5)) {
+					grid-template-columns: repeat(5, 1fr);
+				}
+			}
+		}
+
+		&[data-max-per-row="6"] {
+			@include container-width-up('narrower') {
+				grid-template-columns: repeat(auto-fit, 16.66%); // this ensures alignment works correctly when there's fewer
+
+				// Only go to 6 column grid if there are actually 6 or more items
+				&:has(> :nth-child(6)) {
+					grid-template-columns: repeat(6, 1fr);
 				}
 			}
 		}
@@ -132,6 +154,10 @@
 			// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
 			--theme-color: var(--color-#{$name});
 			--theme-color-inverse: var(--readable-color-#{$name});
+		}
+		[data-background="#{$name}"] {
+			--background-color: var(--color-#{$name});
+			background: var(--background-color);
 		}
 	}
 
@@ -158,7 +184,6 @@
 		}
 
 		[data-background="#{$name}"] {
-			background-color: var(--color-#{$name});
 			color: var(--readable-color-#{$name});
 		}
 

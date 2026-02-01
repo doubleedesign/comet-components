@@ -8,15 +8,15 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.1
  * @description Display a grid of images with optional captions, with a range of layout options.
  */
-#[AllowedTags([Tag::FIGURE, Tag::DIV])]
-#[DefaultTag(Tag::FIGURE)]
-class Gallery extends UIComponent {
+#[AllowedTags([Tag::SECTION, Tag::FIGURE, Tag::DIV])]
+#[DefaultTag(Tag::SECTION)]
+class Gallery extends WrappedLayoutComponent {
     /**
-     * @var int $columns
-     * @description The number of columns to use for the layout (may be overridden to fewer in small containers/viewports)
+     * @var int $maxPerRow
+     * @description The preferred number of columns to use for the layout (may be overridden to fewer in small containers/viewports)
      * @supported-values 1, 2, 3, 4, 5, 6, 7, 8
      */
-    protected int $columns = 3;
+    protected int $maxPerRow = 3;
 
     /**
      * @var string|null $caption
@@ -31,6 +31,12 @@ class Gallery extends UIComponent {
     protected bool $imageCrop = true;
 
     /**
+     * @var bool $lightbox
+     * @description Whether to enable lightbox functionality for the images in the gallery; note that for this to work the images must have a href attribute with the URL to the image file set
+     */
+    protected bool $lightbox = false;
+
+    /**
      * @var array<ContentImageBasic> $innerComponents
      * @description The image components to display in the gallery
      */
@@ -38,35 +44,59 @@ class Gallery extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         $this->imageCrop = $attributes['imageCrop'] ?? $this->imageCrop;
-        $innerComponentsWithContext = array_map(function(ContentImageBasic $component) use ($attributes) {
+        $this->maxPerRow = $attributes['maxPerRow'] ?? $attributes['columns'] ?? $this->maxPerRow;
+        $this->caption = (isset($attributes['caption']) && !empty(trim($attributes['caption']))) ? trim($attributes['caption']) : null;
+        $this->lightbox = $attributes['lightbox'] ?? $this->lightbox;
+        $attributes['tagName'] = isset($attributes['tagName']) ? $this->shuffle_tags($attributes)['outer']->value : $this->tagName->value;
+
+        $updatedInnerComponents = array_map(function(ContentImageBasic $component) use ($attributes) {
             $component->update_context('gallery');
             $component->set_behaviour($this->imageCrop ? 'cover' : 'contain');
 
             return $component;
         }, $innerComponents);
 
-        parent::__construct($attributes, $innerComponentsWithContext, 'components.Gallery.gallery');
-        $this->columns = $attributes['columns'] ?? $this->columns;
-        $this->caption = (isset($attributes['caption']) && !empty(trim($attributes['caption']))) ? trim($attributes['caption']) : null;
+        $innerTagName = $this->shuffle_tags($attributes)['inner'];
+        $groupAttrs = [
+            'tagName'           => $innerTagName->value,
+            'shortName'         => 'images',
+            'data-group-layout' => 'grid',
+            'data-max-per-row'  => $attributes['maxPerRow'] ?? $attributes,
+            'data-lightbox'     => $this->lightbox ? 'true' : null,
+            'role'              => $innerTagName === Tag::FIGURE ? null : 'group',
+        ];
+
+        $wrappedImages = new Group($groupAttrs, $updatedInnerComponents);
+
+        parent::__construct($attributes, [$wrappedImages], 'components.Gallery.gallery');
+
+        // Update inner group with context after BEM structure is initialised in the parent constructor
+        $wrappedImages->update_context($this->get_bem_prefix());
+
+        // Add caption after parent constructor runs so we have access to the correct BEM context
+        if (!empty($this->caption)) {
+            $captionClass = $this->get_bem_prefix() . '__caption';
+            $captionTag = $this->tagName === Tag::FIGURE ? 'figcaption' : 'p';
+            $wrappedImages->innerComponents[] = new PreprocessedHTML(
+                [],
+                "<{$captionTag} class=\"{$captionClass}\">" . $this->caption . "</{$captionTag}>"
+            );
+        }
     }
 
-    protected function get_html_attributes(): array {
-        $attributes = parent::get_html_attributes();
+    protected function shuffle_tags($attributes): array {
+        $original = $attributes['tagName'] ?? Tag::SECTION;
 
-        $attributes['data-group-layout'] = 'grid';
-        $attributes['data-max-per-row'] = $this->columns;
+        if ($original === 'figure') {
+            return [
+                'outer' => isset($attributes['isNested']) && $attributes['isNested'] ? Tag::DIV : Tag::SECTION,
+                'inner' => Tag::FIGURE
+            ];
+        }
 
-        return $attributes;
-    }
-
-    public function render(): void {
-        $blade = BladeService::getInstance();
-
-        echo $blade->make($this->bladeFile, [
-            'classes'    => $this->get_filtered_classes(),
-            'attributes' => $this->get_html_attributes(),
-            'children'   => $this->innerComponents,
-            'caption'    => $this->caption
-        ])->render();
+        return [
+            'outer' => is_string($original) ? Tag::tryFrom($original) : $original,
+            'inner' => Tag::DIV
+        ];
     }
 }

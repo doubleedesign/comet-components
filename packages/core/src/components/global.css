@@ -72,18 +72,8 @@
   [data-group-layout=grid][data-max-per-row] {
     justify-content: inherit;
   }
-  @container (min-width: 600px) {
-    [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @container (min-width: 600px) {
-    [data-group-layout=grid][data-max-per-row="3"] {
-      grid-template-columns: repeat(auto-fit, 33%);
-    }
-    [data-group-layout=grid][data-max-per-row="3"]:has(> :nth-child(3)) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)), [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(2)) {
+    grid-template-columns: repeat(2, 1fr);
   }
   @container (min-width: 768px) {
     [data-group-layout=grid][data-max-per-row="4"] {
@@ -93,45 +83,109 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
+  @container (min-width: 600px) {
+    [data-group-layout=grid][data-max-per-row="3"], [data-group-layout=grid][data-max-per-row="5"], [data-group-layout=grid][data-max-per-row="6"] {
+      grid-template-columns: repeat(auto-fit, 33%);
+    }
+    [data-group-layout=grid][data-max-per-row="3"]:has(> :nth-child(3)), [data-group-layout=grid][data-max-per-row="5"]:has(> :nth-child(3)), [data-group-layout=grid][data-max-per-row="6"]:has(> :nth-child(3)) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @container (min-width: 768px) {
+    [data-group-layout=grid][data-max-per-row="5"] {
+      grid-template-columns: repeat(auto-fit, 20%);
+    }
+    [data-group-layout=grid][data-max-per-row="5"]:has(> :nth-child(5)) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  @container (min-width: 768px) {
+    [data-group-layout=grid][data-max-per-row="6"] {
+      grid-template-columns: repeat(auto-fit, 16.66%);
+    }
+    [data-group-layout=grid][data-max-per-row="6"]:has(> :nth-child(6)) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
   [data-color-theme=primary] {
     --theme-color: var(--color-primary);
     --theme-color-inverse: var(--readable-color-primary);
+  }
+  [data-background=primary] {
+    --background-color: var(--color-primary);
+    background: var(--background-color);
   }
   [data-color-theme=secondary] {
     --theme-color: var(--color-secondary);
     --theme-color-inverse: var(--readable-color-secondary);
   }
+  [data-background=secondary] {
+    --background-color: var(--color-secondary);
+    background: var(--background-color);
+  }
   [data-color-theme=accent] {
     --theme-color: var(--color-accent);
     --theme-color-inverse: var(--readable-color-accent);
+  }
+  [data-background=accent] {
+    --background-color: var(--color-accent);
+    background: var(--background-color);
   }
   [data-color-theme=info] {
     --theme-color: var(--color-info);
     --theme-color-inverse: var(--readable-color-info);
   }
+  [data-background=info] {
+    --background-color: var(--color-info);
+    background: var(--background-color);
+  }
   [data-color-theme=warning] {
     --theme-color: var(--color-warning);
     --theme-color-inverse: var(--readable-color-warning);
+  }
+  [data-background=warning] {
+    --background-color: var(--color-warning);
+    background: var(--background-color);
   }
   [data-color-theme=success] {
     --theme-color: var(--color-success);
     --theme-color-inverse: var(--readable-color-success);
   }
+  [data-background=success] {
+    --background-color: var(--color-success);
+    background: var(--background-color);
+  }
   [data-color-theme=error] {
     --theme-color: var(--color-error);
     --theme-color-inverse: var(--readable-color-error);
+  }
+  [data-background=error] {
+    --background-color: var(--color-error);
+    background: var(--background-color);
   }
   [data-color-theme=light] {
     --theme-color: var(--color-light);
     --theme-color-inverse: var(--readable-color-light);
   }
+  [data-background=light] {
+    --background-color: var(--color-light);
+    background: var(--background-color);
+  }
   [data-color-theme=dark] {
     --theme-color: var(--color-dark);
     --theme-color-inverse: var(--readable-color-dark);
   }
+  [data-background=dark] {
+    --background-color: var(--color-dark);
+    background: var(--background-color);
+  }
   [data-color-theme=white] {
     --theme-color: var(--color-white);
     --theme-color-inverse: var(--readable-color-white);
+  }
+  [data-background=white] {
+    --background-color: var(--color-white);
+    background: var(--background-color);
   }
   [data-text-color=primary] {
     color: var(--color-primary);
@@ -171,7 +225,6 @@
     color: inherit;
   }
   [data-background=primary] {
-    background-color: var(--color-primary);
     color: var(--readable-color-primary);
   }
   [data-background=gradient-primary-primary] {
@@ -212,7 +265,6 @@
     color: inherit;
   }
   [data-background=secondary] {
-    background-color: var(--color-secondary);
     color: var(--readable-color-secondary);
   }
   [data-background=gradient-secondary-primary] {
@@ -253,7 +305,6 @@
     color: inherit;
   }
   [data-background=accent] {
-    background-color: var(--color-accent);
     color: var(--readable-color-accent);
   }
   [data-background=gradient-accent-primary] {
@@ -294,7 +345,6 @@
     color: inherit;
   }
   [data-background=info] {
-    background-color: var(--color-info);
     color: var(--readable-color-info);
   }
   [data-background=gradient-info-primary] {
@@ -335,7 +385,6 @@
     color: inherit;
   }
   [data-background=warning] {
-    background-color: var(--color-warning);
     color: var(--readable-color-warning);
   }
   [data-background=gradient-warning-primary] {
@@ -376,7 +425,6 @@
     color: inherit;
   }
   [data-background=success] {
-    background-color: var(--color-success);
     color: var(--readable-color-success);
   }
   [data-background=gradient-success-primary] {
@@ -417,7 +465,6 @@
     color: inherit;
   }
   [data-background=error] {
-    background-color: var(--color-error);
     color: var(--readable-color-error);
   }
   [data-background=gradient-error-primary] {
@@ -458,7 +505,6 @@
     color: inherit;
   }
   [data-background=light] {
-    background-color: var(--color-light);
     color: var(--readable-color-light);
   }
   [data-background=gradient-light-primary] {
@@ -499,7 +545,6 @@
     color: inherit;
   }
   [data-background=dark] {
-    background-color: var(--color-dark);
     color: var(--readable-color-dark);
   }
   [data-background=gradient-dark-primary] {
@@ -540,7 +585,6 @@
     color: inherit;
   }
   [data-background=white] {
-    background-color: var(--color-white);
     color: var(--readable-color-white);
   }
   [data-background=gradient-white-primary] {

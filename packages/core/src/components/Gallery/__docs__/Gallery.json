@@ -1,11 +1,33 @@
 {
     "name": "Gallery",
     "description": "Display a grid of images with optional captions, with a range of layout options.",
-    "extends": "UIComponent",
+    "extends": "WrappedLayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "ariaAttrs": {
+            "type": "array",
+            "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+            "required": true
+        },
+        "backgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour keyword",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ]
+        },
         "caption": {
             "type": "string",
             "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>"
@@ -17,9 +39,52 @@
                 "gallery"
             ]
         },
-        "columns": {
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+        },
+        "dataAttrs": {
+            "type": "array",
+            "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "imageCrop": {
+            "type": "bool",
+            "description": "Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)",
+            "required": true,
+            "default": "true"
+        },
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+            "required": true,
+            "default": false
+        },
+        "lightbox": {
+            "type": "bool",
+            "description": "Whether to enable lightbox functionality for the images in the gallery; note that for this to work the images must have a href attribute with the URL to the image file set",
+            "required": true,
+            "default": "false"
+        },
+        "maxPerRow": {
             "type": "int",
-            "description": "The number of columns to use for the layout (may be overridden to fewer in small containers/viewports)",
+            "description": "The preferred number of columns to use for the layout (may be overridden to fewer in small containers/viewports)",
             "required": true,
             "supported": [
                 "1",
@@ -32,20 +97,6 @@
                 "8"
             ],
             "default": 3
-        },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-        },
-        "id": {
-            "type": "string",
-            "description": "Unique identifier"
-        },
-        "imageCrop": {
-            "type": "bool",
-            "description": "Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)",
-            "required": true,
-            "default": "true"
         },
         "shortName": {
             "type": "string",
@@ -61,14 +112,33 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
+                "section",
                 "figure",
                 "div"
             ],
-            "default": "figure"
+            "default": "section"
         },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "withContainer": {
+            "type": "bool",
+            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+            "required": true,
+            "default": "true"
         }
     },
     "innerComponents": {
@@ -77,6 +147,9 @@
         "required": true
     },
     "traits": [
+        "BackgroundColor",
+        "LayoutAlignment",
+        "NestedState",
         "BlockElementModifier"
     ]
 }
