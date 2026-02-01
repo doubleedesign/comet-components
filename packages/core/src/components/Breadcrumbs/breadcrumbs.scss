@@ -13,7 +13,7 @@
 			display: flex;
 			font-size: 0.9rem;
 
-			a {
+			&__link {
 				color: inherit;
 				display: block;
 				opacity: 0.75;
@@ -22,6 +22,7 @@
 
 				&:hover, &:focus, &:active {
 					opacity: 1;
+					color: var(--theme-color);
 					text-decoration-color: currentColor;
 				}
 
@@ -34,6 +35,15 @@
 				content: '/';
 				padding-inline-start: var(--spacing-xs);
 				opacity: 0.4;
+			}
+
+
+			&:has([aria-current="page"]) {
+				opacity: 0;
+
+				&:after {
+					content: none;
+				}
 			}
 		}
 	}
