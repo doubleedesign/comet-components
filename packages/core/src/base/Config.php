@@ -24,7 +24,7 @@ class Config {
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
-            define('COMET_VERSION', '0.5.0');
+            define('COMET_VERSION', '0.6.0');
         }
 
         if (self::$instance === null) {
@@ -174,7 +174,7 @@ class Config {
     public function set_component_defaults(string $component, array $settings): void {
         $defaults = $this->get('component_defaults');
         $componentName = Utils::kebab_case($component);
-  
+
         $this->component_defaults[$componentName] = array_merge($defaults[$componentName] ?? [], $settings);
     }
 

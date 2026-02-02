@@ -2,7 +2,7 @@
 	"name": "doubleedesign/comet-components",
 	"description": "Monorepo for the development of Comet Components",
 	"type": "project",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"authors": [
 		{
 			"name": "Leesa Ward",
