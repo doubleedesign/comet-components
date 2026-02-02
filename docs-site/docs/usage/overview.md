@@ -6,10 +6,7 @@ position: 0
 # Usage overview
 
 :::important
-This section, including the Theming and Extending pages, details how to use Comet Components in your own code. If you're looking for information on using the WordPress plugins and parent starter themes, see:
-- [WordPress installation and setup - Block Editor](../installation/wordpress-blocks.md)
-- [WordPress installation and setup - Classic Editor + ACF](../installation/wordpress-classic.md)
-  :::
+This section, including the Theming and Extending pages, details how to use Comet Components in your own code. If you're looking for information on using the WordPress plugins and parent starter themes, see [WordPress installation and setup](../installation/wordpress-blocks.md).
 
 Specifications and interactive demos of many components can be found in the [Storybook](https://stroybook.cometcomponents.io).
 
@@ -66,9 +63,11 @@ When using this syntax, vanilla `var_dump` and `print_r` may not work as expecte
 The core package is configured to support the Symfony VarDumper, which also has the benefit of sending the debugging output to Laravel Herd's Dumps feature if you run your project in that environment.
 
 To use:
+
 ```php
 \Symfony\Component\VarDumper\VarDumper::dump($thing_you_want_to_dump);
 ```
+
 :::
 
 The below example renders the same output as the above object syntax:

@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
-        'name' => 'doubleedesign/comet-canvas',
-        'pretty_version' => '0.2.0',
-        'version' => '0.2.0.0',
+        'name' => 'doubleedesign/comet-canvas-blocks',
+        'pretty_version' => '0.7.0',
+        'version' => '0.7.0.0',
         'reference' => null,
         'type' => 'wordpress-theme',
         'install_path' => __DIR__ . '/../../',
@@ -10,9 +10,9 @@
         'dev' => true,
     ),
     'versions' => array(
-        'doubleedesign/comet-canvas' => array(
-            'pretty_version' => '0.2.0',
-            'version' => '0.2.0.0',
+        'doubleedesign/comet-canvas-blocks' => array(
+            'pretty_version' => '0.7.0',
+            'version' => '0.7.0.0',
             'reference' => null,
             'type' => 'wordpress-theme',
             'install_path' => __DIR__ . '/../../',

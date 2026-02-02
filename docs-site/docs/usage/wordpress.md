@@ -5,10 +5,10 @@ position: 3
 
 # Using Comet Components in WordPress
 
-Comet Components is designed to be used with the WordPress block editor (also known as Gutenberg), with a subset of core blocks as well as a range of blocks provided by the Comet Library.
+Comet Components is designed to be used with the WordPress block editor (also known as Gutenberg), with a subset of core blocks as well as a range of blocks provided by the Comet core library.
 
 :::important
-The Comet Components plugin **disables** core blocks that are not explicitly supported by the Comet library. It also imposes some limitations on "parent/child" block relationships to help ensure consistent layouts that follow expected and tested patterns.
+The Comet Components plugin **disables** core blocks that are not explicitly supported by the Comet library. It also imposes limitations on "parent/child" block relationships to help ensure consistent layouts that follow expected and tested patterns.
 
 If you want to start using Comet Components on an existing site, it is highly recommended to take a backup first and test thoroughly on a local copy of your site, as there is a good chance you will need to replace some existing blocks with Comet equivalents or alternatives, and/or create replacements in your plugin or theme using Comet Components.
 :::
@@ -19,7 +19,14 @@ See the [installation instructions](../installation/wordpress.md) for details on
 
 ## Usage
 
-Activate the Comet Components plugin and all of its required plugins (which should also be installed if you followed the instructions linked above). Then go forth and create content in the editor!
+1. Activate the Comet Components plugin and all of its required plugins (which should also be installed if you followed the instructions linked above.
+2. Create a child theme of Comet Canvas and activate it.
+
+:::tip
+Much of the core configuration as well as template customisation is available via filter hooks.
+
+Please see the [Comet Canvas README](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-canvas-blocks#readme) for more information.
+:::
 
 ## Customisation
 

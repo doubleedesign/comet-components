@@ -477,7 +477,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "vertical"
+                "default": "Orientation::VERTICAL"
             },
             "size": {
                 "type": "ContainerSize",
@@ -879,7 +879,8 @@
                     "main",
                     "div",
                     "article",
-                    "footer"
+                    "footer",
+                    "figure"
                 ],
                 "default": "section"
             },
@@ -1004,7 +1005,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "vertical"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",
@@ -1308,184 +1309,6 @@
         ]
     },
     {
-        "name": "BannerV2",
-        "description": "A \"hero\" banner with an image background and a container for inner content. Supports setting the aspect ratio and crop position (focal point and/or offsets) for the image.",
-        "extends": "UIComponent",
-        "abstract": false,
-        "isInner": false,
-        "belongsInside": "LayoutComponent",
-        "attributes": {
-            "aspectRatio": {
-                "type": "AspectRatio",
-                "description": "Crop image to the given aspect ratio by default",
-                "supported": [
-                    "4:3",
-                    "3:4",
-                    "1:1",
-                    "16:9",
-                    "9:16",
-                    "3:2",
-                    "2:3",
-                    "21:9",
-                    "2.35:1"
-                ]
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": [
-                    "banner-v2"
-                ]
-            },
-            "colorTheme": {
-                "type": "ThemeColor",
-                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ],
-                "default": "cinematic"
-            },
-            "containerWidth": {
-                "type": "ContainerSize",
-                "description": "The max width of the inner content container",
-                "required": true,
-                "supported": [
-                    "default",
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small"
-                ],
-                "default": "default"
-            },
-            "contentMaxWidth": {
-                "type": "int",
-                "description": "The max width of the content inside the inner container, as a percentage",
-                "default": 100
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "focalPoint": {
-                "type": "array{x:",
-                "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
-                "default": {
-                    "x": 50,
-                    "y": 50
-                }
-            },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "image": {
-                "type": "array{src:string,",
-                "required": true,
-                "default": []
-            },
-            "offset": {
-                "type": "array{x:",
-                "description": "The percentage offsets of the image to use when cropping",
-                "default": {
-                    "x": 0,
-                    "y": 0
-                }
-            },
-            "originalImageOrientation": {
-                "type": "Orientation",
-                "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping",
-                "supported": [
-                    "horizontal",
-                    "vertical"
-                ]
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "banner-v2"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "div",
-                    "section"
-                ],
-                "default": "section"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "width": {
-                "type": "ContainerSize",
-                "description": "The max width of the banner overall",
-                "required": true,
-                "supported": [
-                    "default",
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small"
-                ],
-                "default": "fullwidth"
-            }
-        },
-        "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "ColorTheme",
-            "ImageCropProperties",
-            "LayoutAlignment",
-            "BlockElementModifier"
-        ]
-    },
-    {
         "name": "Breadcrumbs",
         "description": "Render a breadcrumb navigation list.",
         "extends": "UIComponent",
@@ -1570,8 +1393,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -1685,7 +1507,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "horizontal"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",
@@ -2055,7 +1877,7 @@
                     "white",
                     "black"
                 ],
-                "default": "new heading([\r\n                'level'   => 3,\r\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\r\n            ],\r\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\r\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+                "default": "new heading([\n                'level'   => 3\n            ],\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
             },
             "context": {
                 "type": "string",
@@ -2109,7 +1931,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "new heading([\r\n                'level'   => 3,\r\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\r\n            ],\r\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\r\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+                "default": "Orientation::VERTICAL"
             },
             "originalImageOrientation": {
                 "type": "Orientation",
@@ -2263,6 +2085,10 @@
                     "inline"
                 ],
                 "default": "list"
+            },
+            "link": {
+                "type": "array",
+                "description": "Optional link to display as a call-to-action, such as \"View all\". Placement of the link is determined by the horizontal alignment setting."
             },
             "maxPerRow": {
                 "type": "int",
@@ -2644,7 +2470,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "null"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",
@@ -2809,7 +2635,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "vertical"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",
@@ -3752,7 +3578,7 @@
                     "white",
                     "black"
                 ],
-                "default": "'context'                      => 'events',\n            'shortname'                    => 'list',\n            'colortheme'                   => $this->colortheme->value ?? 'primary',\n            'data-group-layout'            => $this->layout->value\n        ];\n\n        // todo: this is repetitive, cardlist and linkgroup also do this (one just has a different default"
+                "default": "'context'                      => 'events',\r\n            'shortname'                    => 'list',\r\n            'colortheme'                   => $this->colortheme->value ?? 'primary',\r\n            'data-group-layout'            => $this->layout->value\r\n        ];\r\n\r\n        // todo: this is repetitive, cardlist and linkgroup also do this (one just has a different default"
             },
             "context": {
                 "type": "string",
@@ -4113,11 +3939,33 @@
     {
         "name": "Gallery",
         "description": "Display a grid of images with optional captions, with a range of layout options.",
-        "extends": "UIComponent",
+        "extends": "WrappedLayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "ariaAttrs": {
+                "type": "array",
+                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
+                "required": true
+            },
+            "backgroundColor": {
+                "type": "ThemeColor",
+                "description": "Background colour keyword",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ]
+            },
             "caption": {
                 "type": "string",
                 "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>"
@@ -4129,9 +3977,52 @@
                     "gallery"
                 ]
             },
-            "columns": {
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "dataAttrs": {
+                "type": "array",
+                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
+            },
+            "hAlign": {
+                "type": "Alignment",
+                "description": "Horizontal alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "id": {
+                "type": "string",
+                "description": "Unique identifier"
+            },
+            "imageCrop": {
+                "type": "bool",
+                "description": "Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)",
+                "required": true,
+                "default": "true"
+            },
+            "isNested": {
+                "type": "bool",
+                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+                "required": true,
+                "default": false
+            },
+            "lightbox": {
+                "type": "bool",
+                "description": "Whether to enable lightbox functionality for the images in the gallery; note that for this to work the images must have a href attribute with the URL to the image file set",
+                "required": true,
+                "default": "false"
+            },
+            "maxPerRow": {
                 "type": "int",
-                "description": "The number of columns to use for the layout (may be overridden to fewer in small containers/viewports)",
+                "description": "The preferred number of columns to use for the layout (may be overridden to fewer in small containers/viewports)",
                 "required": true,
                 "supported": [
                     "1",
@@ -4144,20 +4035,6 @@
                     "8"
                 ],
                 "default": 3
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "imageCrop": {
-                "type": "bool",
-                "description": "Whether to crop images to fill their grid cells (true) or contain them within their grid cells (false)",
-                "required": true,
-                "default": "true"
             },
             "shortName": {
                 "type": "string",
@@ -4173,14 +4050,33 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
+                    "section",
                     "figure",
                     "div"
                 ],
-                "default": "figure"
+                "default": "section"
             },
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "vAlign": {
+                "type": "Alignment",
+                "description": "Vertical alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "withContainer": {
+                "type": "bool",
+                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
+                "required": true,
+                "default": "true"
             }
         },
         "innerComponents": {
@@ -4189,6 +4085,9 @@
             "required": true
         },
         "traits": [
+            "BackgroundColor",
+            "LayoutAlignment",
+            "NestedState",
             "BlockElementModifier"
         ]
     },
@@ -4451,7 +4350,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "horizontal"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",
@@ -4891,7 +4790,7 @@
                     "white",
                     "black"
                 ],
-                "default": "list"
+                "default": "primary"
             },
             "context": {
                 "type": "string",
@@ -5515,7 +5414,8 @@
                     "header",
                     "footer",
                     "main",
-                    "article"
+                    "article",
+                    "figure"
                 ],
                 "default": "section"
             },
@@ -6008,7 +5908,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "vertical"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",
@@ -6290,9 +6190,17 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
+            "copyright": {
+                "type": "array{siteName:",
+                "required": true
+            },
             "dataAttrs": {
                 "type": "array",
                 "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+                "required": true
+            },
+            "devCredit": {
+                "type": "array{authorName:",
                 "required": true
             },
             "hAlign": {
@@ -6635,7 +6543,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "vertical"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",
@@ -7172,7 +7080,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "vertical"
+                "default": "Orientation::VERTICAL"
             },
             "shortName": {
                 "type": "string",

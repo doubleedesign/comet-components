@@ -147,28 +147,6 @@
 <xs:attribute name="ariaAttrs" type="array"/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="BannerV2">
-		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="originalImageOrientation" type="Orientation"/>
-<xs:attribute name="shortName" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="offset" type="array{x:"/>
-<xs:attribute name="hAlign" type="Alignment"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="focalPoint" type="FocalPoint"/>
-<xs:attribute name="contentMaxWidth" type="xs:int"/>
-<xs:attribute name="containerWidth" type="ContainerSize"/>
-<xs:attribute name="colorTheme" type="ThemeColor"/>
-<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="image" type="array{src:string,"/>
-<xs:attribute name="width" type="ContainerSize"/>
-<xs:attribute name="aspectRatio" type="AspectRatio"/>
-		</xs:complexType>
-	</xs:element>
 	<xs:element name="Breadcrumbs">
 		<xs:complexType>
 			<xs:attribute name="tagName" type="xs:string"/>
@@ -984,6 +962,8 @@
 <xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="dataAttrs" type="array"/>
+<xs:attribute name="devCredit" type="array{authorName:"/>
+<xs:attribute name="copyright" type="array{siteName:"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="backgroundColor" type="ThemeColor"/>

@@ -51,7 +51,7 @@ export default defineUserConfig({
 				text: 'Introduction',
 				link: '/intro.html',
 			},
-			...generateSidebar({ excludeFolders: ['About'] }),
+			...generateSidebar({excludeFolders: ['About']}),
 			{
 				text: 'Troubleshooting',
 				link: '/troubleshooting.html',
@@ -96,25 +96,24 @@ export default defineUserConfig({
 	base: '/docs/',
 
 	head: [
-		['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/docs/comet.png' }],
+		['link', {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/docs/comet.png'}],
 	],
 });
 
 // Generate structured sidebar items
-function generateSidebar({ excludeFolders }) {
+function generateSidebar({excludeFolders}) {
 	const preferredOrder = [
 		'Installation',
 		'Usage',
 		'Development (Core)',
-		'Development (WordPress Classic)',
-		'Development (WordPress Blocks)',
+		'Development (WordPress)',
 		'Development (Statamic)',
 		'New Implementations',
 		'Technical Deep Dives',
 		'Local Dev Deep Dives',
 	];
 	const items = [];
-	const files = fs.readdirSync(docsDir, { withFileTypes: true });
+	const files = fs.readdirSync(docsDir, {withFileTypes: true});
 
 	files.forEach((file) => {
 		if (file.isDirectory() && file.name !== '.vuepress') {
@@ -127,20 +126,13 @@ function generateSidebar({ excludeFolders }) {
 			// Hackily manually name the items for certain folders
 			if (folderName === 'development-core') {
 				sectionTitle = 'Development (Core)';
-			}
-			else if (folderName === 'development-new') {
+			} else if (folderName === 'development-new') {
 				sectionTitle = 'New Implementations';
-			}
-			else if (folderName === 'development-wp-blocks') {
-				sectionTitle = 'Development (WordPress Blocks)';
-			}
-			else if (folderName === 'development-wp-classic') {
-				sectionTitle = 'Development (WordPress Classic)';
-			}
-			else if (folderName === 'development-statamic') {
+			} else if (folderName === 'development-wp') {
+				sectionTitle = 'Development (WordPress)';
+			} else if (folderName === 'development-statamic') {
 				sectionTitle = 'Development (Statamic)';
-			}
-			else {
+			} else {
 				// Try to extract title from README if it exists
 				sectionTitle = Case.title(folderName).replace('Js', 'JS').replace('Php', 'PHP');
 				if (hasReadme) {
@@ -196,7 +188,7 @@ function getSectionChildren(folderName) {
 	const children = [];
 
 	// Get all items in the directory
-	const items = fs.readdirSync(folderPath, { withFileTypes: true });
+	const items = fs.readdirSync(folderPath, {withFileTypes: true});
 
 	// Process files first
 	const filesWithMetadata = items
@@ -250,7 +242,7 @@ function getSectionChildren(folderName) {
 			const subfolderItems = [];
 
 			// Get markdown files in the subfolder
-			const subfolderFilesWithMetadata = fs.readdirSync(subfolderPath, { withFileTypes: true })
+			const subfolderFilesWithMetadata = fs.readdirSync(subfolderPath, {withFileTypes: true})
 				.filter((subItem) => subItem.isFile() && subItem.name.endsWith('.md'))
 				.map((subFile) => {
 					const name = subFile.name.replace('.md', '');
@@ -346,8 +338,7 @@ function extractTitleFromMarkdown(filePath) {
 		}
 
 		return null;
-	}
-	catch (error) {
+	} catch (error) {
 		console.error(`Error reading file ${filePath}:`, error);
 
 		return null;
@@ -366,8 +357,7 @@ function extractPagePositionFromMarkdown(filePath) {
 		}
 
 		return null;
-	}
-	catch (error) {
+	} catch (error) {
 		console.error(`Error reading file ${filePath}:`, error);
 
 		return null;

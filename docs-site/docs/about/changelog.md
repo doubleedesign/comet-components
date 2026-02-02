@@ -2,11 +2,109 @@
 
 :::info
 For fun and gratitude, Comet's releases are named after albums that can somehow be associated with a person, event, or even an offhand comment that influenced either the contents of the release itself, or the author's career as a developer.
+
+...Except when I do multiple minor releases close together and forget to properly document them.
 :::
 
 [[toc]]
 
 ## Current version
+
+### 0.7.0 Wrecking Ball (2 February 2026)
+
+- Remove WordPress theme and plugin for ACF Flexible Modules; gotta Gutenberg from now on
+- Remove BannerV2 component as it's no longer used.
+
+If I had progressed to versions > 0 yet, this would be a whole-number upgrade. I don't want to release v1 until I have a lot more tests in place.
+
+---
+
+## Release History
+
+### 0.6.0 (2 February 2026)
+
+#### General breaking changes
+
+- Updated minimum PHP version to 8.4
+
+#### Core library
+
+- Wrap global and common CSS in a @layer and document why
+- Add colour pair functionality to core config
+- Feat(LinkGroup, CardList): Add layout options (list, grid, inline)
+- Feat(ContainerWithNesting): Add basic nested container functionality
+- Refactor(Gallery): Use common max-per-row attributes
+- Refactor(EventList,EventCard): Improvements and fixes for event display
+- Fix(ContentImageAdvanced,ImageComponent): Fixes and improvements for handling cropping
+- Fix(ContentImageAdvanced): Handle inline styles in the right place; fix data attribute name
+- Fix(Breadcrumbs): Add BEM to links
+- Remove some no-longer-used WP affordances
+- Various markup, layout, and styling tweaks to core components.
+
+#### WordPress
+
+- New WP Blocks: Separator, Related Pages, CoverImage, new version of Banner block, Image, Featured Posts, Latest Posts, Gallery, Contact Details
+- New attribute controls: item count, max per row, layout order, GalleryControls
+- Override block.json defaults with site-level component defaults if available
+- Option to put shared content in a nested container to allow per-instance size changes
+- Add capabilities for rendering third-party blocks wrapped in Comet components
+- Render placeholder in editor if block is empty
+- Deprecate WP PreprocessedHTML components and create one in Core in its place
+- Implement features introduced in my other plugins for CPT Indexes and TinyMCE enhancements
+- Move ACF field definitions into PHP for the calendar plugin
+- Update Upcoming Events block with new attribute and field approach; update event archive
+- Set up for unit testing the calendar plugin
+- Various refactoring of the Calendar plugin
+- Add minimal theme.json to the block parent theme because without it the editor loads unwanted core styles
+- Add blog templates to the block theme
+- Fix: Stop loading theme fonts into non-content admin areas when in the block editor
+- Various admin/editor fixes and styling tweaks.
+
+### 0.5.0 (30 December 2025)
+
+- Fix(WP Blocks): Automatically open the editing overlay when a new block is added
+- Move a lot of TinyMCE custom stuff into a separate plugin
+- Bring classic and blocks TinyMCE config more into line.
+
+### 0.4.0 (28 December 2025)
+
+- WP Blocks implementation overhaul:
+    - Disable block patterns
+    - Upgrade to ACF Blocks v3 + iframed block editor experience
+    - Disable all core blocks in favour of fully custom ACF-driven blocks
+    - Move ThemeStyle class into the plugin
+    - Hide some irrelevant editor options
+    - Fix: Properly refresh block previews that use Vue components
+    - Feat: Basic blog post template
+- Refactor(Core styles): Put global and common styles on a CSS layer to ensure themes can easily override
+- Feat(Core): Create and test colour utils; other colour management tweaks
+- Fix(Config): Importing of BaguetteBox when compiling with Rollup
+- Fix(BladeService): Loading of Blade template overrides
+- Various markup, layout, and styling tweaks to core blocks
+- Add some more unit tests for core Utils
+- Bunch of tweaks and improvements to TinyMCE use in WordPress implementations.
+
+### 0.3.0 (13 December 2025)
+
+- New components: CardList
+- Refactor: Rename comet-plugin and comet-canvas to *-blocks
+- Refactor(Core SCSS): Add and implement functions for partial class selectors for BEM purposes
+- Refactor(Core): Fix inconsistent method privacy
+- Refactor(Core): Streamline and centralise setting of context + BEM classes
+- Fix(Gallery): Fix layout when captions are present; tweak styling of lightbox plugin
+- Fix(BannerV2): Simplification of HTML and fixes to image rendering
+- Refactor(Columns, Table): Default to stacking behaviour in small containers/viewports without specifying in the HTML
+- WP ACF modules/Classic Editor plugin/theme:
+    - Add vertical alignment option for copy-image module
+    - Create child pages module and improve featured and latest post modules for consistency between all three
+    - Generate excerpts from ACF WYSIWYG fields in modules
+    - Allow formats (e.g., lead paragraph) to be used in minimal WYSIWYG fields
+    - Correctly pass down ACF module name as container shortName
+    - Update category archive markup
+    - Single post HTML fixes
+- Docs: Remove "inherited" from JSON docs (it was confusing/misleading)
+- Various markup, layout, and styling tweaks to core components
+- Various dev config fixes.
 
 ### 0.2.0 Such Pretty Forks in the Road (18 September 2025)
 
@@ -15,14 +113,6 @@ For fun and gratitude, Comet's releases are named after albums that can somehow 
 - Addition of Card component
 - Addition of PostNav component
 - Addition of BannerV2 component and removal of some unused options in original Banner component
-
-:::details Such Pretty Forks in the Road - the story
-In my humble opinion, Alanis Morissette's best album; tracks from which were stuck in my head while working on this release, and feeling appropriate due to the sense of impending forks in my own road that I was feeling at the time.
-:::
-
----
-
-## Release History
 
 ### 0.1.1
 
@@ -34,20 +124,9 @@ Minor update that adds some fixes to the `ResponsivePanels` and `FileGroup` comp
 - Scripts for generating/updating standalone packages
 - Updates to `Config` and `BladeService` to support specifying where to find Blade templates (necessary for standalone packages to work).
 
-:::details Rocket Man - the story
-This update arose solely from wanting to use a small number of Comet Components in a WordPress plugin that I was a) trying to keep generic and b) was initially going into an existing client site, so I didn't want to bloat the plugin with the entire core library and its dependencies. It was not planned far ahead of time so I hadn't put any thought into the song/album.
-
-As part of this work, I needed to think of a name for the foundational package. I tried to think of something space themed to go with "Comet", which led me to rocket takeoffs - hence "launchpad". Which put _Rocket Man_ in my head, because that's how my brain works!
-
-:::
-
 ### 0.0.2 London Calling (10 April 2025)
-This second alpha release is focused on completion and refinement of the initial set of Vue-enhanced components, notably completion of `ResponsivePanels` and refactoring of `Accordion` and `Tabs` to use the same Vue components, ensuring consistency and removing Bootstrap from the project dependencies.
 
-:::details London Calling - the story
-This release is named for where I met [Derek Mwanza](https://www.creativeconnections.co.uk/) and he told me about using Vue selectively in his WordPress sites. (Amusingly, this was at a React conference!). While we didn't get a chance to dig into the specifics of
-_how_ he does this, I was fascinated by the idea and quickly investigated it further when I next had a project that could benefit from it. This mere seed of an idea has been instrumental in solving some pain points in responsive markup and client-side interactivity for me, and hence in the direction of Comet Components.
-:::
+This second alpha release is focused on completion and refinement of the initial set of Vue-enhanced components, notably completion of `ResponsivePanels` and refactoring of `Accordion` and `Tabs` to use the same Vue components, ensuring consistency and removing Bootstrap from the project dependencies.
 
 ### 0.0.1 Fearless (6 April 2025)
 
@@ -61,39 +140,3 @@ A "soft release" of the "incomplete alpha" version of Comet Components, marked f
 - Enhancement of the SiteHeader component using Vue.js
 - Some unit and integration tests
 - Almost-complete documentation website.
-
-:::details Fearless - the story
-[Double-E Design](https://www.doubleedesign.com.au) turned 15 in October 2024, but unlike for its 10th "birthday" (where I did a little photo shoot and splashed "10 years of design and code" all over my website and socials) I didn't do anything to mark it. While it was (and is) still very much an active business, it had taken a backseat to the full-time job at [Atlassian](https://www.atlassian.com/) and on top of the time constraints of juggling both, I didn't feel like I'd earned the right to public self-congratulations for it.
-
-The following month, I had the pleasure of presenting a talk on reusable components at [WordCamp Sydney](https://sydney.wordcamp.org/2024/), where I got many ideas both from feedback on my talk and from some of the other talks. This was also where, by complete chance and with incredibly serendipitous timing, I reconnected with [Murray Chapman](https://www.muzkore.com/), one of my favourite teachers from my long educational journey; the one I credit with teaching me to code - you guessed it - 15 years prior.
-
-So while I solemnly swear I am not a Swiftie, when I was trying to come up with a name related to the number 15, I was also reminded of fellow WordCamp speaker [Sandra Lopez](https://www.sandzstudio.com.au/) saying her advice to people new to the industry is to "be a little fearless" which I vibed with so much that this release pretty much couldn't be named anything else! (For the uninitiated: Taylor Swift's album _Fearless_ contains a song called _Fifteen_).
-:::
-
----
-
-## Roadmap
-
-### 0.2.0 Dreamers Are Waiting
-The first beta release of Comet Components, which is expected to include:
-- completion of most essential features/improvements/enhancements and documentation marked as TODO
-- publishing of the Storybook
-- extensive automated test coverage.
-
-:::details Dreamers Are Waiting - the story
-Early in my career and studies, I was a [Western Chances](https://westernchances.org.au/) scholarship recipient, and at a workshop they ran I met a young woman by the name of [Sarah Bell](https://mantacreative.agency/) (now Duck) who was working for them at the time. We did a little "introduce yourself and what you got your scholarship for" exercise and when I said I got mine for multimedia, Sarah's eyes lit up and so began an unofficial mentorship that very much shaped my early career.
-
-Sarah was one of the people who encouraged me to start [my business](https://www.doubleedesign.com.au), referred me for my first teaching job (delivering 1-2 day short courses on Adobe software and WordPress), and encouraged me to get my Cert IV so I could side-hustle teach at TAFE (and I totally name-dropped her in an interview 5 years later). Importantly, she was proof that these things were achievable because she was doing them herself. Possibly my first exposure to a "portfolio career" person, her influence and guidance were instrumental in shaping my early career.
-
-This release gets its name from Crowded House, a band Sarah and I both love, and...something about being a dreamer fits in there somewhere!
-:::
-
-### 0.2.0 For Those About To Rock, We Salute You
-
-~~This is the pencilling-in of the development of an integration for [SilverStripe CMS](https://www.silverstripe.org/) and [Elemental](https://github.com/silverstripe/silverstripe-elemental). The version number may change as this release may be pushed back to prioritise completion of the WordPress integration as that's already in use.~~ Plans for SilverStripe CMS have been shelved (for now) in favour of Statamic.
-
-:::details For Those About To Rock, We Salute You - the story
-The year was 2010, and I was studying my Diploma of IT (Web Development) alongside three new friends known as "the boys from TAFE" (I was one of only two women in my class). My brother hooked me up with a real project to build for one of my final assessment tasks - the first database driven CMS site I ever built myself, for which I used SilverStripe.
-
-According to my belatedly-populated Setlist.fm profile, I only attended two concerts in 2010 (that I remember, anyway) - Taylor Swift and AC/DC. I attended the latter with my brother, whose cricket club that first SilverStripe site was for. From their discography, I selected _For Those About To Rock, We Salute You_ as a nostalgic nod to that group of us at TAFE who were just starting to rock in the tech world.
-:::

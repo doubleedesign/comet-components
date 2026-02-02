@@ -1,11 +1,15 @@
 ---
-title: WordPress - Block Editor
+title: WordPress
 position: 3
 ---
 
-# Setup for WordPress - Block Editor (Gutenberg)
+# Setup for WordPress
 
 [[toc]]
+
+:::tip
+My [WordPress Canvas](https://github.com/doubleedesign/wordpress-canvas) project provides a good starting point for setting up a WordPress site for developing and testing Comet Components and other Double-E Design plugins can be used as a template for new client projects. It already contains all of the configuration listed below.
+:::
 
 ## Prerequisites
 
@@ -45,62 +49,63 @@ The Comet Calendar provides custom post types, taxonomies, templates, and blocks
 
 ## Installation
 
-The easiest way to install the Comet Components plugin and its dependencies is to use [Composer](https://getcomposer.org/) with the below
-`composer.json` configuration.
+The easiest way to install the Comet Components plugin and its dependencies is to use [Composer](https://getcomposer.org/) with the below `composer.json` configuration.
+
+:::important
+This configuration installs the current dev versions of Comet Components and other Double-E Design plugins. It is highly recommended that you update this to the current version used when your site goes live, so if there are breaking changes before you next work on it your project is "pinned" to the known working versions. This enables you to selectively update the plugins at your convenience and find the source of any breaking changes more easily than if you install all the latest versions at once.
+:::
 
 1. Add this file in your project root (the same level as the `wp-content` directory), or update your existing `composer.json` if you have one:
 
    ```json
    {
-	   "name": "your-project-name",
-	   "description": "Custom WordPress site",
-	   "type": "project",
-	   "private": true,
-	   "minimum-stability": "dev",
-	   "prefer-stable": true,
-	   "require": {
-		   "php": "^8.3",
-		   "doubleedesign/comet-calendar": "dev-master",
-		   "doubleedesign/comet-plugin-blocks": "dev-master",
-		   "doubleedesign/comet-canvas-blocks": "dev-master",
-		   "composer/installers": "^2.0",
-		   "doubleedesign/doublee-base-plugin": "dev-master",
-		   "doubleedesign/doublee-breadcrumbs": "dev-main",
-           "doubleedesign/doublee-tinymce": "dev-main",
-           "doubleedesign/acf-advanced-image-field": "dev-main"
-	   },
-	   "config": {
-		   "allow-plugins": {
-			   "composer/installers": true
-		   },
-		   "preferred-install": {
-			   "doubleedesign/comet-components-core": "dist"
-		   }
-	   },
-	   "repositories": [
-		   {
-			   "type": "vcs",
-			   "url": "https://github.com/doubleedesign/baguetteBox.js"
-		   }
-	   ],
-	   "extra": {
-		   "installer-paths": {
-			   "wp-content/plugins/{$name}/": [
-				   "type:wordpress-plugin",
-				   "doubleedesign/comet-calendar",
-				   "doubleedesign/comet-plugin-blocks",
-				   "doubleedesign/doublee-base-plugin",
-				   "doubleedesign/doublee-breadcrumbs",
-				   "doubleedesign/doublee-tinymce",
-                   "doubleedesign/acf-advanced-image-field"
-			   ],
-			   "wp-content/themes/{$name}/": [
-				   "type:wordpress-theme",
-				   "doubleedesign/comet-canvas-blocks"
-			   ]
-		   },
-		   "resolve-dependencies": false
-	   }
+    "name": "your-name/your-project",
+    "description": "Website for My Client",
+    "type": "project",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.4",
+        "composer/installers": "^2.0",
+        "doubleedesign/comet-canvas-blocks": "dev-master",
+        "doubleedesign/comet-plugin-blocks": "dev-master",
+        "doubleedesign/comet-calendar": "dev-master",
+        "doubleedesign/doublee-breadcrumbs": "dev-main",
+        "doubleedesign/doublee-base-plugin": "dev-master",
+        "doubleedesign/acf-advanced-image-field": "dev-master",
+        "doubleedesign/doublee-tinymce": "dev-master",
+        "doubleedesign/doublee-ninja-markup": "dev-master",
+        "ext-dom": "*",
+        "ext-libxml": "*"
+    },
+    "require-dev": {
+        "doubleedesign/doublee-local-dev": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/doubleedesign/doublee-local-dev.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/doubleedesign/baguetteBox.js"
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "wp-content/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "wp-content/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        },
+        "optimize-autoloader": true
+    }
    }
    ```
 
@@ -120,7 +125,7 @@ The easiest way to install the Comet Components plugin and its dependencies is t
    composer dump-autoload -o
    ```
 
-4. The theme, and Calendar plugin are configured to look for the core library and its dependencies in the main (`comet-plugin`) plugin's
+4. The theme, and Calendar plugin are configured to look for the core library and its dependencies in the main (`comet-plugin-blocks`) plugin's
    `vendor` directory. To install the dependencies, `cd` to the `comet-plugin-blocks` directory and run:
 
    ```powershell:no-line-numbers
@@ -156,9 +161,9 @@ function Run-Composer
 
 # Directories to run composer commands in
 $directories = @(
-    "wp-content/plugins/comet-plugin",
+    "wp-content/plugins/comet-plugin-blocks",
     "wp-content/plugins/comet-calendar",
-    "wp-content/themes/comet-canvas"
+    "wp-content/themes/comet-canvas-blocks"
 )
 
 # Save root directory

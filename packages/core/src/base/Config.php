@@ -24,7 +24,7 @@ class Config {
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
-            define('COMET_VERSION', '0.6.0');
+            define('COMET_VERSION', '0.7.0');
         }
 
         if (self::$instance === null) {
