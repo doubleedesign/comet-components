@@ -102,8 +102,7 @@ export default {
             aria-haspopup="true"
             :aria-expanded="responsiveMenuOpen"
     >
-        <i v-if="responsiveMenuOpen" :class="toggleButtonIconPrefix + ' fa-close'"></i>
-        <i v-else :class="toggleButtonIconPrefix + ' ' + toggleButtonIconClass"></i>
+        <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
     </button>
     <div v-if="isBelowBreakpoint" class="site-header__responsive__content" :data-open="responsiveMenuOpen">
         <Transition>
