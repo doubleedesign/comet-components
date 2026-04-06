@@ -54,6 +54,8 @@ There are filters available for child themes to access Comet Components' global 
 | `comet_canvas_theme_colour_pairs_maybe`       | `array $pairs`    | Allows setting of accessible colour pairs (foreground/background) for use in components that support them, such as Buttons and Banners. Contains some common defaults. **Note:** If a given pair does not have sufficient contrast, it will not be registered. |
 | `comet_blocks_enable_shared_content_wrapping` | `bool $enable`    | Set whether the Shared Content block should have sizing options and have a wrapper to support that. If `false`, they will render as-is and not be wrapped together or have per-usage sizing options. Default is `false`.                                       |
 
+A range of filters can also be found in the parent theme's template files such as `header.php` and `footer.php` to allow common modifications without needing to override the whole template in the child theme.
+
 In addition, there are some filters to modify attributes for nested components in the provided blocks. This is to ensure consistency across the theme rather than having backend controls for every possible attribute in every individual use case. These filters are applied in the
 `render.php` file for the block, so if a filter isn't listed here you can check that file to see if I've forgotten to document one - or add it. They are also intentionally all prefixed with
 `comet_blocks_` for easy searching.

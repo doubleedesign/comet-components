@@ -1,5 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\{Config, Group, Menu, PreprocessedHTML, SiteHeader};
+
+use Doubleedesign\Comet\Core\{Config, ContainerSize, Group, Menu, PreprocessedHTML, SiteHeader};
 use Doubleedesign\CometCanvas\NavMenus;
 
 $globalBackground = Config::getInstance()->get('global_background')->value;
@@ -35,41 +36,34 @@ $logoId = get_option('options_logo');
 $logoUrl = wp_get_attachment_image_url($logoId, 'full');
 
 $showContactDetails = apply_filters('comet_canvas_show_contact_details_in_header', false);
-if($showContactDetails) {
-	ob_start();
-	get_template_part('template-parts/contact-details');
-	$contactBlockHtml = ob_get_clean();
-	$contactBlock = new PreprocessedHTML([], $contactBlockHtml);
+if ($showContactDetails) {
+    ob_start();
+    get_template_part('template-parts/contact-details');
+    $contactBlockHtml = ob_get_clean();
+    $contactBlock = new PreprocessedHTML([], $contactBlockHtml);
 }
 
-if($showContactDetails) {
-	$headerComponent = new SiteHeader(
-		[
-			'logoUrl'         => $logoUrl,
-			'size'            => 'contained',
-			'breakpoint'      => '1024px',
-			'responsiveStyle' => 'overlay',
-			'icon'            => 'fa-bars',
-			'submenuIcon'     => 'fa-plus'
-		],
-		[
-			new Group(['context' => 'site-header', 'shortName' => 'contact'], [$contactBlock]),
-			new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
-		]
-	);
+if ($showContactDetails) {
+    $content = [
+        new Group(['context' => 'site-header', 'shortName' => 'contact'], [$contactBlock]),
+        new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
+    ];
 }
 else {
-	$headerComponent = new SiteHeader(
-		[
-			'logoUrl'         => $logoUrl,
-			'size'            => 'wide',
-			'breakpoint'      => '860px',
-			'responsiveStyle' => 'default',
-			'submenuIcon'     => 'fa-caret-down'
-		],
-		[new Group(['context' => 'responsive'], [$menuComponent])]
-	);
+    $content = [new Group(['context' => 'responsive'], [$menuComponent])];
 }
+
+$headerComponent = new SiteHeader(
+    [
+        'logoUrl'         => $logoUrl,
+        'size'            => apply_filters('comet_canvas_header_size', ContainerSize::DEFAULT),
+        'breakpoint'      => apply_filters('comet_canvas_header_breakpoint', '1024px'),
+        'responsiveStyle' => apply_filters('comet_canvas_header_responsive_style', 'overlay'),
+        'icon'            => apply_filters('comet_canvas_header_icon', 'fa-bars'),
+        'submenuIcon'     => apply_filters('comet_canvas_header_submenu_icon', 'fa-plus')
+    ],
+    $content
+);
 
 $headerComponent->render();
 ?>
