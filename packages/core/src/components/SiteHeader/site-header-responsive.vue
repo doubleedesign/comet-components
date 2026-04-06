@@ -41,19 +41,13 @@ export default {
 
 		// Store heights of all menu-list elements after DOM is fully rendered
 		this.$nextTick(() => {
-			// Ensure the DOM is fully rendered before measuring
-			setTimeout(() => {
-				this.setSubmenuHeights();
-			}, 0);
+			this.setSubmenuHeights();
 		});
 	},
 	computed: {},
 	methods: {
 		toggleMenu() {
 			this.responsiveMenuOpen = !this.responsiveMenuOpen;
-			if (this.responsiveMenuOpen) {
-				this.setSubmenuHeights();
-			}
 		},
 		toggleSubmenu(itemId) {
 			this.submenus[itemId] = {
@@ -105,7 +99,7 @@ export default {
         <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
     </button>
     <div v-if="isBelowBreakpoint" class="site-header__responsive__content" :data-open="responsiveMenuOpen">
-        <Transition>
+        <Transition @after-enter="setSubmenuHeights">
             <div v-if="responsiveMenuOpen">
                 <div v-if="responsiveStartHtml"
                      class="site-header__responsive__start"
