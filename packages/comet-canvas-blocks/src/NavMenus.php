@@ -19,10 +19,12 @@ class NavMenus {
      * @return void
      */
     public function register_menus(): void {
-        register_nav_menus(array(
-            'primary' => 'Primary menu',
-            'footer'  => 'Footer menu'
-        ));
+		$menus = apply_filters('comet_canvas_nav_menus',array(
+			'primary' => 'Primary menu',
+			'footer'  => 'Footer menu'
+		));
+
+        register_nav_menus($menus);
     }
 
     /**
