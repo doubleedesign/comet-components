@@ -1,12 +1,15 @@
 <?php
 namespace Doubleedesign\CometCanvas;
 
+use Doubleedesign\Comet\Core\ThemeColor;
+
 class NavMenus {
 
     public function __construct() {
         add_action('init', [$this, 'register_menus'], 20);
         add_filter('nav_menu_link_attributes', [$this, 'menu_link_classes'], 10, 4);
         add_filter('nav_menu_submenu_css_class', [$this, 'menu_submenu_classes'], 10, 2);
+        add_action('acf/include_fields', [$this, 'add_extra_nav_item_fields']);
         add_action('rest_api_init', [$this, 'make_menus_available_in_rest']);
     }
 
@@ -54,6 +57,51 @@ class NavMenus {
         }
 
         return $classes;
+    }
+
+    public function add_extra_nav_item_fields() {
+        if (!function_exists('acf_add_local_field_group')) {
+            return;
+        }
+
+        acf_add_local_field_group(array(
+            'key'                   => 'group_nav_item_options',
+            'title'                 => 'Nav item options',
+            'fields'                => array(
+                array(
+                    'key'               => 'field_nav_item_as_button',
+                    'label'             => 'Style as button',
+                    'name'              => 'style_as_button',
+                    'type'              => 'select',
+                    'choices'           => array(
+                        'null'      => 'No',
+                        ...array_reduce(ThemeColor::cases(), function($acc, $color) {
+                            $acc[$color->value] = ucfirst($color->value);
+
+                            return $acc;
+                        }, [])
+                    ),
+                    'default_value'     => 'null',
+                    'return_format'     => 'value',
+                ),
+            ),
+            'location'              => array(
+                array(
+                    array(
+                        'param'    => 'nav_menu_item',
+                        'operator' => '==',
+                        'value'    => 'all',
+                    ),
+                ),
+            ),
+            'menu_order'            => 0,
+            'position'              => 'normal',
+            'style'                 => 'default',
+            'label_placement'       => 'top',
+            'instruction_placement' => 'label',
+            'active'                => true,
+            'show_in_rest'          => 1
+        ));
     }
 
     /**
@@ -160,6 +208,11 @@ class NavMenus {
     public static function get_simplified_nav_menu_items_by_location(string $location) {
         $items = self::get_nav_menu_items_by_location($location);
         $result = array_reduce($items, function($acc, $item) {
+            $button_style = get_post_meta($item->ID, 'style_as_button', true);
+            if ($button_style === 'null') {
+                $button_style = null;
+            }
+
             // menu_item_parent is the corresponding nav_menu_item ID, not the post/taxonomy object ID
             if ($item->menu_item_parent > 0) {
                 $acc[$item->menu_item_parent]['children'][] = [
@@ -170,12 +223,13 @@ class NavMenus {
                     'classes'         => array_filter($item->classes, fn($class) => !empty($class)),
                     'isCurrentParent' => $item->is_current_parent,
                     'link_attributes' => [
-                        'href'         => $item->url,
-                        'target'       => $item->target,
-                        'title'        => $item->attr_title,
-                        'rel'          => $item->xfn,
-                        'classes'      => [],
-                        'aria-current' => $item->is_current ? 'page' : null
+                        'href'             => $item->url,
+                        'target'           => $item->target,
+                        'title'            => $item->attr_title,
+                        'rel'              => $item->xfn,
+                        'classes'          => $button_style ? ['button'] : [],
+                        'aria-current'     => $item->is_current ? 'page' : null,
+                        'data-color-theme' => $button_style ?? null
                     ]
                 ];
 
@@ -190,12 +244,13 @@ class NavMenus {
                 'classes'         => array_filter($item->classes, fn($class) => !empty($class)),
                 'isCurrentParent' => $item->is_current_parent,
                 'link_attributes' => [
-                    'href'         => $item->url,
-                    'target'       => $item->target,
-                    'title'        => $item->attr_title,
-                    'rel'          => $item->xfn,
-                    'classes'      => [],
-                    'aria-current' => $item->is_current ? 'page' : null
+                    'href'             => $item->url,
+                    'target'           => $item->target,
+                    'title'            => $item->attr_title,
+                    'rel'              => $item->xfn,
+                    'classes'          => $button_style ? ['button'] : [],
+                    'aria-current'     => $item->is_current ? 'page' : null,
+                    'data-color-theme' => $button_style ?? null
                 ],
                 'children'        => []
             ];
