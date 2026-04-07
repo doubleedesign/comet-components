@@ -198,8 +198,15 @@ body.admin-bar .site-header__responsive--overlay .site-header__responsive__conte
   transition: transform 0.3s ease;
   transform-origin: center center;
 }
+.site-header__menu__list__item__toggle i.fa-plus, .site-header__menu__list__item__toggle svg.fa-plus {
+  transform: translateY(-2px);
+  transform-origin: center center;
+}
 .site-header__menu__list__item__toggle[aria-expanded=true] i, .site-header__menu__list__item__toggle[aria-expanded=true] svg {
   transform: rotate(180deg);
+}
+.site-header__menu__list__item__toggle[aria-expanded=true] i.fa-plus, .site-header__menu__list__item__toggle[aria-expanded=true] svg.fa-plus {
+  transform: rotate(45deg) translateY(-2px);
 }
 .site-header__menu__list__item:hover .site-header__menu__sub-menu, .site-header__menu__list__item:focus-within .site-header__menu__sub-menu {
   opacity: 1;

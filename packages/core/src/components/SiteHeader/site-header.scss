@@ -258,11 +258,20 @@
 					i, svg {
 						transition: transform 0.3s ease;
 						transform-origin: center center;
+
+						&.fa-plus {
+							transform: translateY(-2px);
+							transform-origin: center center;
+						}
 					}
 
 					&[aria-expanded="true"] {
 						i, svg {
 							transform: rotate(180deg);
+
+							&.fa-plus {
+								transform: rotate(45deg) translateY(-2px);
+							}
 						}
 					}
 				}
