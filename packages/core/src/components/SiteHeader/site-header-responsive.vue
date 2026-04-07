@@ -96,6 +96,7 @@ export default {
             aria-haspopup="true"
             :aria-expanded="responsiveMenuOpen"
     >
+        <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
         <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
     </button>
     <div v-if="isBelowBreakpoint" class="site-header__responsive__content" :data-open="responsiveMenuOpen">
