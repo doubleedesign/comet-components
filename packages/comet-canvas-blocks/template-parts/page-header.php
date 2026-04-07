@@ -21,7 +21,7 @@ if (is_single()) {
 $title = apply_filters('comet_canvas_page_header_title', $title);
 
 if (class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
-    $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_breadcrumbs();
+    $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();
     $pageHeader = new PageHeader($attributes, $title, $breadcrumbs);
 }
 else {

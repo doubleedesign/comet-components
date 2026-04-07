@@ -13,5 +13,8 @@
   width: 100%;
   flex-basis: 100%;
 }
+.page-header__container[data-halign=center] {
+  text-align: center;
+}
 
 /*# sourceMappingURL=page-header.css.map */

@@ -17,4 +17,10 @@
 		width: 100%;
 		flex-basis: 100%;
 	}
+
+	&__container {
+		&[data-halign="center"] {
+			text-align: center;
+		}
+	}
 }

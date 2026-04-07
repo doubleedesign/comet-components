@@ -1,10 +1,12 @@
 @use '../variables' as *;
 
 .breadcrumbs {
+	display: contents;
+
 	&__list {
 		display: flex;
 		align-items: center;
-		justify-content: flex-start;
+		justify-content: inherit;
 		gap: var(--spacing-xs);
 		margin-block: var(--spacing-md);
 		margin-inline: 0;
@@ -39,7 +41,7 @@
 
 
 			&:has([aria-current="page"]) {
-				opacity: 0;
+				opacity: 0.65;
 
 				&:after {
 					content: none;
