@@ -107,6 +107,69 @@
       <path value="$PROJECT_DIR$/vendor/symfony/string" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/packages/comet-calendar/vendor/composer" />
+      <path value="$PROJECT_DIR$/packages/comet-canvas-blocks/vendor/composer" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/composer" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/composer" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/support" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/filesystem" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/events" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/tomloprod/colority" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/contracts" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/feimosi/baguettebox.js" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/pipeline" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/conditionable" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/openpsa/ranger" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/bus" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/collections" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/macroable" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/view" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/container" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/tomloprod/colority" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/view" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/bus" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/openpsa/ranger" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/contracts" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/events" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/collections" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/feimosi/baguettebox.js" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/pipeline" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/support" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/conditionable" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/container" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/filesystem" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/macroable" />
+      <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/doubleedesign/comet-components-core" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4">
@@ -217,6 +280,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/core/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/autoload.php" />
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/packages/comet-calendar/vendor/autoload.php" paratest_path="$PROJECT_DIR$/vendor/bin/paratest_for_phpstorm" />
     </phpunit_settings>
   </component>

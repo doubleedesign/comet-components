@@ -8,8 +8,6 @@
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ColorControls/ColorControls.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContainerSize/ContainerSize.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContentMaxWidth/ContentMaxWidth.dist.js" />
-        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContentOrder/ContentOrder.dist.js" />
-        <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ContentOrder/LayoutOrder.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/CustomControlsWrapper/CustomControlsWrapper.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/FieldTooltip/FieldTooltip.dist.js" />
         <item url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/GalleryControls/GalleryControls.dist.js" />
@@ -39,12 +37,12 @@
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/HtmlTag/HtmlTag.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/ItemCount/ItemCount.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/LayoutControls/LayoutControls.dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/LayoutOrder/ContentOrder.dist.js" />
+      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/LayoutOrder/LayoutOrder.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/MaxPerRow/MaxPerRow.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/NegativeMargins/NegativeMargins.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/VerticalAlignment/VerticalAlignment.dist.js" />
       <root url="file://$PROJECT_DIR$/packages/core/dist/dist.js" />
-      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/LayoutOrder/LayoutOrder.dist.js" />
-      <root url="file://$PROJECT_DIR$/packages/comet-plugin-blocks/src/editor/LayoutOrder/ContentOrder.dist.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

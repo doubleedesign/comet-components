@@ -10,11 +10,19 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/base/attributes" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/core/src/services" isTestSource="false" packagePrefix="Doubleedesign\Comet\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-calendar/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\Calendar\" />
-      <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas-classic/src" isTestSource="false" packagePrefix="Doubleedesign\CometCanvas\Classic\" />
-      <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\Classic\" />
       <sourceFolder url="file://$MODULE_DIR$/tests/common" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/tests/unit" isTestSource="false" packagePrefix="Doubleedesign\Comet\TestUtils\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/comet-calendar/tests" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\Calendar\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas-blocks/src" isTestSource="false" packagePrefix="Doubleedesign\CometCanvas\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/src" isTestSource="false" packagePrefix="Doubleedesign\Comet\WordPress\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-calendar/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-canvas-classic/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/comet-plugin/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/core/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/antecedent/patchwork" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/dist/comet-components-wp/vendor/doubleedesign" />
@@ -153,6 +161,9 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/voku" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/src/tinymce/dist" />
       <excludeFolder url="file://$MODULE_DIR$/packages/core/vendor/tomloprod/colority" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/feimosi/baguettebox.js" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/tomloprod/colority" />
     </content>
     <content url="file://$MODULE_DIR$/dist/comet-components-wp" />
     <content url="file://$MODULE_DIR$/packages/core/build" />
