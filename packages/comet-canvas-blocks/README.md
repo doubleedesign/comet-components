@@ -56,6 +56,9 @@ There are filters available for child themes to access Comet Components' global 
 
 A range of filters can also be found in the parent theme's template files such as `header.php` and `footer.php` to allow common modifications without needing to override the whole template in the child theme.
 
+> [!TIP]
+> If you are using Double-E Design's [WordPress Canvas](https://github.com/doubleedesign/wordpress-canvas) template repo, you can see a full list of the available hooks in the `.phpstorm.meta.php` file in your project root, and ensure it is up-to-date by running the PowerShell script `./update-phpstorm.meta.ps1`. This file also enables autocomplete for the hook names in PhpStorm.
+
 In addition, there are some filters to modify attributes for nested components in the provided blocks. This is to ensure consistency across the theme rather than having backend controls for every possible attribute in every individual use case. These filters are applied in the
 `render.php` file for the block, so if a filter isn't listed here you can check that file to see if I've forgotten to document one - or add it. They are also intentionally all prefixed with
 `comet_blocks_` for easy searching.

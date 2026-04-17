@@ -60,7 +60,7 @@ export default {
 		},
 		setSubmenuHeights() {
 			setTimeout(() => {
-				const submenus = document.querySelectorAll('[class*="__sub-menu--responsive"]');
+				const submenus = document.querySelectorAll('[class*="__sub-menu"]');
 				submenus.forEach((menuList, index) => {
 					try {
 						const height = menuList.scrollHeight;
@@ -102,17 +102,19 @@ export default {
         <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
         <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
     </button>
-    <component v-if="isBelowBreakpoint"  v-html="belowBreakpointHtml"></component>
+    <component v-if="isBelowBreakpoint" v-html="belowBreakpointHtml"></component>
 
     <!-- Content in overlay mode (usually mobile/small viewports, unless always using overlay) -->
-    <div v-if="isBelowBreakpoint" :class="[`site-header__responsive__content--${responsiveStyle}`]" :data-open="responsiveMenuOpen" :data-background="overlayBackground">
+    <div v-if="isBelowBreakpoint"
+         class="site-header__responsive__content"
+         :data-style="responsiveStyle"
+         :data-open="responsiveMenuOpen"
+         :data-background="overlayBackground"
+    >
         <Transition @after-enter="setSubmenuHeights">
             <div v-if="responsiveMenuOpen">
-                <div v-if="responsiveStartHtml"
-                     class="site-header__responsive__start"
-                     v-html="responsiveStartHtml"
-                ></div>
-                <nav class="site-header__menu--responsive">
+                <component v-if="responsiveStartHtml" v-html="responsiveStartHtml"></component>
+                <nav class="site-header__menu">
                     <ul class="site-header__menu__list">
                         <li v-for="item in menuItems"
                             :key="item.id"
@@ -137,7 +139,7 @@ export default {
                                 <i :class="toggleButtonIconPrefix + ' ' + submenuToggleIconClass"></i>
                             </button>
                             <ul v-if="item.children.length > 0"
-                                class="site-header__menu__sub-menu site-header__menu__sub-menu--responsive"
+                                class="site-header__menu__sub-menu"
                                 :data-open="submenus?.[item.id]?.open"
                                 :aria-hidden="submenus?.[item.id]?.open ? 'false' : 'true'"
                                 :style="{ height: submenus?.[item.id]?.open ? submenus?.[item.id]?.height + 'px' : '0' }"
@@ -159,15 +161,15 @@ export default {
                         </li>
                     </ul>
                 </nav>
-                <div v-if="responsiveEndHtml" class="site-header__responsive__end" v-html="responsiveEndHtml"></div>
+                <component v-if="responsiveEndHtml" v-html="responsiveEndHtml"></component>
             </div>
         </Transition>
     </div>
     <!-- Content in non-overlay mode (usually desktop/larger viewports, unless always using overlay) -->
     <template v-else>
-        <div v-if="responsiveStartHtml" class="site-header__responsive__start" v-html="responsiveStartHtml"></div>
-        <div v-if="menuHtml" class="site-header__responsive__menu" v-html="menuHtml"></div>
-        <div v-if="responsiveEndHtml" class="site-header__responsive__end" v-html="responsiveEndHtml"></div>
+        <component v-if="responsiveStartHtml" v-html="responsiveStartHtml"></component>
+        <component v-if="menuHtml" v-html="menuHtml"></component>
+        <component v-if="responsiveEndHtml" v-html="responsiveEndHtml"></component>
     </template>
 
 </template>

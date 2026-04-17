@@ -114,6 +114,7 @@
   [data-background=primary] {
     --background-color: var(--color-primary);
     background: var(--background-color);
+    color: var(--readable-color-primary);
   }
   [data-color-theme=secondary] {
     --theme-color: var(--color-secondary);
@@ -122,6 +123,7 @@
   [data-background=secondary] {
     --background-color: var(--color-secondary);
     background: var(--background-color);
+    color: var(--readable-color-secondary);
   }
   [data-color-theme=accent] {
     --theme-color: var(--color-accent);
@@ -130,6 +132,7 @@
   [data-background=accent] {
     --background-color: var(--color-accent);
     background: var(--background-color);
+    color: var(--readable-color-accent);
   }
   [data-color-theme=info] {
     --theme-color: var(--color-info);
@@ -138,6 +141,7 @@
   [data-background=info] {
     --background-color: var(--color-info);
     background: var(--background-color);
+    color: var(--readable-color-info);
   }
   [data-color-theme=warning] {
     --theme-color: var(--color-warning);
@@ -146,6 +150,7 @@
   [data-background=warning] {
     --background-color: var(--color-warning);
     background: var(--background-color);
+    color: var(--readable-color-warning);
   }
   [data-color-theme=success] {
     --theme-color: var(--color-success);
@@ -154,6 +159,7 @@
   [data-background=success] {
     --background-color: var(--color-success);
     background: var(--background-color);
+    color: var(--readable-color-success);
   }
   [data-color-theme=error] {
     --theme-color: var(--color-error);
@@ -162,6 +168,7 @@
   [data-background=error] {
     --background-color: var(--color-error);
     background: var(--background-color);
+    color: var(--readable-color-error);
   }
   [data-color-theme=light] {
     --theme-color: var(--color-light);
@@ -170,6 +177,7 @@
   [data-background=light] {
     --background-color: var(--color-light);
     background: var(--background-color);
+    color: var(--readable-color-light);
   }
   [data-color-theme=dark] {
     --theme-color: var(--color-dark);
@@ -178,6 +186,7 @@
   [data-background=dark] {
     --background-color: var(--color-dark);
     background: var(--background-color);
+    color: var(--readable-color-dark);
   }
   [data-color-theme=white] {
     --theme-color: var(--color-white);
@@ -186,6 +195,7 @@
   [data-background=white] {
     --background-color: var(--color-white);
     background: var(--background-color);
+    color: var(--readable-color-white);
   }
   [data-text-color=primary] {
     color: var(--color-primary);

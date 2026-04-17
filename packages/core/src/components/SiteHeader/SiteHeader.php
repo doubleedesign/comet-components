@@ -108,7 +108,7 @@ class SiteHeader extends UIComponent {
         // Find the group with 'below-breakpoint' context if there is one, save it to a variable and remove it from the inner components
         // This can be used to have content shown in both the header and the overlay,
         // but prevent duplication of that content when the viewport is above the breakpoint (i.e., always there, no overlay)
-        $belowBreakpointGroupIndex = 0;
+        $belowBreakpointGroupIndex = null;
         $belowBreakpointInnerComponents = [];
         foreach ($this->innerComponents as $index => $component) {
             if ($component instanceof Group && $component->get_context() === 'below-breakpoint') {
@@ -116,19 +116,24 @@ class SiteHeader extends UIComponent {
                 $belowBreakpointGroupIndex = $index;
             }
         }
-        unset($this->innerComponents[$belowBreakpointGroupIndex]);
+        if ($belowBreakpointGroupIndex) {
+            unset($this->innerComponents[$belowBreakpointGroupIndex]);
+        }
 
         // Find the group with responsive context if there is one
         // note: This only checks the top level and will ignore Groups inside other components
         // if there are multiple menu components, only the first one will be treated as the main menu,
         // any others will be rendered in-place (allows for things like user account links that don't need special treatment)
-        $responsiveGroupIndex = 0;
+        $responsiveGroupIndex = null;
         $responsiveInnerComponents = [];
-        foreach ($innerComponents as $index => $component) {
+        foreach ($this->innerComponents as $index => $component) {
             if ($component instanceof Group && $component->get_context() === 'responsive') {
                 $responsiveInnerComponents = $component->innerComponents;
                 $responsiveGroupIndex = $index;
             }
+        }
+        if ($responsiveGroupIndex) {
+            unset($this->innerComponents[$responsiveGroupIndex]);
         }
 
         // Things that should always be rendered before the responsive group in the HTML (anything that does not have context of 'responsive' or 'below-breakpoint')

@@ -1,5 +1,6 @@
 @use 'variables' as *;
 @use 'mixins' as *;
+@use 'functions' as func;
 
 /**
  * Global CSS that gets used in standalone packages as well as entirely Comet-based projects.
@@ -158,6 +159,7 @@
 		[data-background="#{$name}"] {
 			--background-color: var(--color-#{$name});
 			background: var(--background-color);
+			color: var(--readable-color-#{$name});
 		}
 	}
 

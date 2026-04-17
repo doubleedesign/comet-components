@@ -102,6 +102,12 @@ Vue$1.createApp({
 		SiteHeaderResponsive: Vue$1.defineAsyncComponent(() => {
 			return loadModule(`${BASE_PATH}/src/components/SiteHeader/site-header-responsive.vue`, getVueSfcLoaderOptions());
 		}),
+	},
+	compilerOptions: {
+		isCustomElement: (tag) => {
+			console.log(tag);
+			return tag === 'component';
+		},
 	}
 }).mount('[data-vue-component="site-header__responsive"]');
 

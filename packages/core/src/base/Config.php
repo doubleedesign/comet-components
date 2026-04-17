@@ -12,6 +12,7 @@ class Config {
     private string $icon_prefix = 'fa-solid';
     private array $blade_component_paths = [];
     private array $component_defaults = [
+        'site-header'    => ['breakpoint' => '1024px'],
         'call-to-action' => ['colorTheme' => 'white', 'innerBackground' => 'primary', 'backgroundColor' => 'white'],
         'page-header'    => ['colorTheme' => 'primary'],
         'site-footer'    => ['backgroundColor' => 'dark', 'hAlign' => 'center']
@@ -132,7 +133,7 @@ class Config {
             return $pair['background'] === $background && $pair['foreground'] === $foreground;
         });
         if ($exists !== null) {
-            //error_log("Comet Components core config: Colour pair foreground '$foreground' and background '$background' already exists so has not been registered again.");
+            // error_log("Comet Components core config: Colour pair foreground '$foreground' and background '$background' already exists so has not been registered again.");
 
             return;
         }
@@ -144,7 +145,7 @@ class Config {
         }
         else {
             $message = "Comet Components core config: Colour pair foreground '$foreground' and background '$background' does not meet contrast threshold of $threshold:1 so has not been registered.";
-            //error_log($message);
+            // error_log($message);
         }
     }
 
