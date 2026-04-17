@@ -53,19 +53,8 @@ else {
     $content = [new Group(['context' => 'responsive'], [$menuComponent])];
 }
 
-$headerComponent = new SiteHeader(
-    [
-        'logoUrl'                => $logoUrl,
-        'size'                   => apply_filters('comet_canvas_header_size', ContainerSize::DEFAULT),
-        'backgroundColor'        => apply_filters('comet_canvas_header_background_color', null),
-        'overlayBackgroundColor' => apply_filters('comet_canvas_header_overlay_background_color', null),
-        'breakpoint'             => apply_filters('comet_canvas_header_breakpoint', '1024px'),
-        'responsiveStyle'        => apply_filters('comet_canvas_header_responsive_style', 'overlay'),
-        'icon'                   => apply_filters('comet_canvas_header_icon', 'fa-bars'),
-        'submenuIcon'            => apply_filters('comet_canvas_header_submenu_icon', 'fa-plus')
-    ],
-    $content
-);
+$attributes = Config::getInstance()->get_component_defaults('site-header') ?? [];
+$headerComponent = new SiteHeader(['logoUrl' => $logoUrl, ...$attributes], $content);
 
 $headerComponent->render();
 ?>
