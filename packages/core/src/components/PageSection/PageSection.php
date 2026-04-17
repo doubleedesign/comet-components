@@ -32,10 +32,10 @@ class PageSection extends Renderable {
     }
 
     public function get_filtered_classes(): array {
-        return array_merge(
+        return array_unique(array_merge(
             parent::get_filtered_classes(),
             [$this->get_shortname()]
-        );
+        ));
     }
 
     protected function get_html_attributes(): array {
