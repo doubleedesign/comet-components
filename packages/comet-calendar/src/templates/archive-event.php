@@ -15,37 +15,39 @@ get_template_part('template-parts/page-header');
  * Upcoming events
  * ================================================================================================= */
 $events = TemplateHandler::get_upcoming_event_ids(100);
-$cards = array_map(function($eventId) {
-    if (get_post_meta('sort_date', $eventId, true) !== '') { // Skip events without dates
-        $title = get_the_title($eventId);
-        $detailUrl = get_option('options_enable_event_detail_pages') ? get_the_permalink($eventId) : null;
-        $location = get_field('location', $eventId);
-        $externalLink = get_field('external_link', $eventId);
-        $dateComponent = TemplateHandler::get_date_block($eventId);
+if($events) {
+	$cards = array_map(function($eventId) {
+		if(get_post_meta('sort_date', $eventId, true) !== '') { // Skip events without dates
+			$title = get_the_title($eventId);
+			$detailUrl = get_option('options_enable_event_detail_pages') ? get_the_permalink($eventId) : null;
+			$location = get_field('location', $eventId);
+			$externalLink = get_field('external_link', $eventId);
+			$dateComponent = TemplateHandler::get_date_block($eventId);
 
-        return new EventCard([
-            'dateComponent' => $dateComponent,
-            'name'          => $title,
-            'detailUrl'     => $detailUrl,
-            'externalLink'  => $externalLink,
-            'location'      => $location
-        ]);
-    }
+			return new EventCard([
+				'dateComponent' => $dateComponent,
+				'name'          => $title,
+				'detailUrl'     => $detailUrl,
+				'externalLink'  => $externalLink,
+				'location'      => $location
+			]);
+		}
 
-    return null;
-}, $events);
+		return null;
+	}, $events);
 
-$filtered_cards = array_filter($cards, function($card) {
-    return $card !== null;
-});
+	$filtered_cards = array_filter($cards, function($card) {
+		return $card !== null;
+	});
 
-$component = new EventList([
-    'heading'        => 'Upcoming Events',
-    'size'           => 'wide',
-    'colorTheme'     => 'secondary',
-    'maxPerRow'      => 3
-], $filtered_cards);
-$component->render();
+	$component = new EventList([
+		'heading'    => 'Upcoming Events',
+		'size'       => 'wide',
+		'colorTheme' => 'secondary',
+		'maxPerRow'  => 3
+	], $filtered_cards);
+	$component->render();
+}
 
 /** ===================================================================================================
  * Separator
