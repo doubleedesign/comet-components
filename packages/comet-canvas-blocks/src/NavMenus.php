@@ -1,8 +1,6 @@
 <?php
 namespace Doubleedesign\CometCanvas;
 
-use Doubleedesign\Comet\Core\ThemeColor;
-
 class NavMenus {
 
     public function __construct() {
@@ -61,10 +59,14 @@ class NavMenus {
         return $classes;
     }
 
-    public function add_extra_nav_item_fields() {
+    public function add_extra_nav_item_fields(): void {
         if (!function_exists('acf_add_local_field_group')) {
             return;
         }
+
+		if(!class_exists(\Doubleedesign\Comet\Core\ThemeColor::class)) {
+			return;
+		}
 
         acf_add_local_field_group(array(
             'key'                   => 'group_nav_item_options',
@@ -77,7 +79,7 @@ class NavMenus {
                     'type'              => 'select',
                     'choices'           => array(
                         'null'      => 'No',
-                        ...array_reduce(ThemeColor::cases(), function($acc, $color) {
+                        ...array_reduce(\Doubleedesign\Comet\Core\ThemeColor::cases(), function($acc, $color) {
                             $acc[$color->value] = ucfirst($color->value);
 
                             return $acc;
