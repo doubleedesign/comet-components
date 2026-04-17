@@ -79,8 +79,6 @@ body:has(.site-header__responsive__content[data-open=true]) {
   right: 0;
   bottom: 0;
   transition: all 0.3s ease-in-out;
-  background: var(--color-primary);
-  color: var(--readable-color-primary);
   z-index: -100;
   opacity: 0;
   visibility: hidden;

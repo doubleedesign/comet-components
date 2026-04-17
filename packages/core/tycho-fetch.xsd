@@ -980,6 +980,7 @@
 <xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="logoUrl" type="xs:string"/>
 <xs:attribute name="responsiveStyle" type="xs:string"/>
+<xs:attribute name="overlayBackgroundColor" type="ThemeColor"/>
 <xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="icon" type="xs:string"/>

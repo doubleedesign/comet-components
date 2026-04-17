@@ -9,6 +9,7 @@ export default {
 		submenuToggleIconClass: String,
 		menuData: String, // JSON encoded string of the menu array, so Vue can parse and render it
 		menuHtml: String, // prerendered menu HTML for when we don't need Vue to do anything with it
+        overlayBackground: String, // background color name for the overlay
 		responsiveStartHtml: String, // prerendered HTML to appear before the responsive menu
 		responsiveEndHtml: String, // prerendered HTML to appear after the responsive menu
 	},
@@ -99,7 +100,7 @@ export default {
         <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
         <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
     </button>
-    <div v-if="isBelowBreakpoint" class="site-header__responsive__content" :data-open="responsiveMenuOpen">
+    <div v-if="isBelowBreakpoint" class="site-header__responsive__content" :data-open="responsiveMenuOpen" :data-background="overlayBackground">
         <Transition @after-enter="setSubmenuHeights">
             <div v-if="responsiveMenuOpen">
                 <div v-if="responsiveStartHtml"

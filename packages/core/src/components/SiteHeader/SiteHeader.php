@@ -62,6 +62,12 @@ class SiteHeader extends UIComponent {
     protected ?string $responsiveStyle = 'default';
 
     /**
+     * @var ThemeColor|null $overlayBackgroundColor
+     * @description Background colour of the overlay when responsiveStyle is set to 'overlay'
+     */
+    protected ?ThemeColor $overlayBackgroundColor = ThemeColor::PRIMARY;
+
+    /**
      * Groups that the inner components are processed into to enable responsive behaviour while respecting the rendering order that was passed in
      */
     private array $persistentComponentsStart;
@@ -79,6 +85,8 @@ class SiteHeader extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.SiteHeader.site-header');
 
         $this->set_size_from_attrs($attributes);
+        $this->set_background_color_from_attrs($attributes);
+        $this->set_overlay_background_color_from_attrs($attributes);
         $this->set_icon_from_attrs($attributes);
         $this->breakpoint = $attributes['breakpoint'] ?? $this->breakpoint;
         $this->responsiveStyle = $attributes['responsiveStyle'] ?? $this->responsiveStyle;
@@ -136,6 +144,17 @@ class SiteHeader extends UIComponent {
         $this->responsiveComponentsAfterMenu = array_slice($responsiveInnerComponents, $mainMenuIndex + 1);
     }
 
+    protected function set_overlay_background_color_from_attrs(array $attributes): void {
+        if (isset($attributes['overlayBackgroundColor'])) {
+            if ($attributes['overlayBackgroundColor'] instanceof ThemeColor) {
+                $this->overlayBackgroundColor = $attributes['overlayBackgroundColor'];
+            }
+            else {
+                $this->overlayBackgroundColor = ThemeColor::tryFrom($attributes['overlayBackgroundColor']) ?? $this->overlayBackgroundColor;
+            }
+        }
+    }
+
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
@@ -183,6 +202,7 @@ class SiteHeader extends UIComponent {
                 'attributes'                => $this->get_html_attributes(),
                 'breakpoint'                => $this->breakpoint,
                 'responsiveStyle'           => $this->responsiveStyle,
+                'overlayBackgroundColor'    => $this->overlayBackgroundColor->value,
                 'toggleButtonIconPrefix'    => $this->iconPrefix,
                 'toggleButtonIconClass'     => $this->icon,
                 'submenuToggleIconClass'    => $this->submenuIcon,

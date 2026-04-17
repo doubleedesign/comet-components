@@ -11,9 +11,16 @@
 				@endif
 			@endforeach
 			<div data-vue-component="site-header__responsive" class="site-header__responsive site-header__responsive--{{ $responsiveStyle }}">
-				<site-header-responsive breakpoint="{{ $breakpoint }}" menu-data="{{ $responsiveMenuData }}" toggle-button-icon-prefix="{{ $toggleButtonIconPrefix }}"
-					toggle-button-icon-class="{{ $toggleButtonIconClass }}" menu-html="{{ $menuComponentHtml }}" submenu-toggle-icon-class="{{ $submenuToggleIconClass }}"
-					responsive-start-html="{{ $responsiveComponentsStart }}" responsive-end-html="{{ $responsiveComponentsEnd }}">
+				<site-header-responsive breakpoint="{{ $breakpoint }}"
+				                        menu-data="{{ $responsiveMenuData }}"
+				                        toggle-button-icon-prefix="{{ $toggleButtonIconPrefix }}"
+				                        overlay-background="{{ $overlayBackgroundColor }}"
+										toggle-button-icon-class="{{ $toggleButtonIconClass }}"
+										menu-html="{{ $menuComponentHtml }}"
+										submenu-toggle-icon-class="{{ $submenuToggleIconClass }}"
+										responsive-start-html="{{ $responsiveComponentsStart }}"
+										responsive-end-html="{{ $responsiveComponentsEnd }}"
+				>
 				</site-header-responsive>
 			</div>
 			@foreach ($persistentComponentsEnd as $child)

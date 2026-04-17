@@ -55,6 +55,24 @@
             "type": "string",
             "description": "The URL of the site logo image"
         },
+        "overlayBackgroundColor": {
+            "type": "ThemeColor",
+            "description": "Background colour of the overlay when responsiveStyle is set to 'overlay'",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ],
+            "default": "primary"
+        },
         "responsiveStyle": {
             "type": "string",
             "description": "The layout style of the responsive menu",
