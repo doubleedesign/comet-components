@@ -4,12 +4,14 @@ export default {
 	inheritAttrs: false,
 	props: {
 		breakpoint: String,
+        responsiveStyle: String, // "default" or "overlay" - the $responsiveStyle PHP value, applicable when below the breakpoint
 		toggleButtonIconPrefix: String,
 		toggleButtonIconClass: String,
 		submenuToggleIconClass: String,
 		menuData: String, // JSON encoded string of the menu array, so Vue can parse and render it
 		menuHtml: String, // prerendered menu HTML for when we don't need Vue to do anything with it
         overlayBackground: String, // background color name for the overlay
+        belowBreakpointHtml: String, // prerendered HTML to appear before the overlay, but only when below the breakpoint (e.g. mobile-specific content)
 		responsiveStartHtml: String, // prerendered HTML to appear before the responsive menu
 		responsiveEndHtml: String, // prerendered HTML to appear after the responsive menu
 	},
@@ -100,7 +102,10 @@ export default {
         <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
         <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
     </button>
-    <div v-if="isBelowBreakpoint" class="site-header__responsive__content" :data-open="responsiveMenuOpen" :data-background="overlayBackground">
+    <component v-if="isBelowBreakpoint"  v-html="belowBreakpointHtml"></component>
+
+    <!-- Content in overlay mode (usually mobile/small viewports, unless always using overlay) -->
+    <div v-if="isBelowBreakpoint" :class="[`site-header__responsive__content--${responsiveStyle}`]" :data-open="responsiveMenuOpen" :data-background="overlayBackground">
         <Transition @after-enter="setSubmenuHeights">
             <div v-if="responsiveMenuOpen">
                 <div v-if="responsiveStartHtml"
@@ -158,6 +163,7 @@ export default {
             </div>
         </Transition>
     </div>
+    <!-- Content in non-overlay mode (usually desktop/larger viewports, unless always using overlay) -->
     <template v-else>
         <div v-if="responsiveStartHtml" class="site-header__responsive__start" v-html="responsiveStartHtml"></div>
         <div v-if="menuHtml" class="site-header__responsive__menu" v-html="menuHtml"></div>

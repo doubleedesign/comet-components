@@ -10,14 +10,16 @@
 					{{ $child->render() }}
 				@endif
 			@endforeach
-			<div data-vue-component="site-header__responsive" class="site-header__responsive site-header__responsive--{{ $responsiveStyle }}">
+			<div data-vue-component="site-header__responsive" class="site-header__responsive">
 				<site-header-responsive breakpoint="{{ $breakpoint }}"
+				                        responsive-style="{{ $responsiveStyle }}"
 				                        menu-data="{{ $responsiveMenuData }}"
 				                        toggle-button-icon-prefix="{{ $toggleButtonIconPrefix }}"
 				                        overlay-background="{{ $overlayBackgroundColor }}"
 										toggle-button-icon-class="{{ $toggleButtonIconClass }}"
 										menu-html="{{ $menuComponentHtml }}"
 										submenu-toggle-icon-class="{{ $submenuToggleIconClass }}"
+				                        below-breakpoint-html="{{ $belowBreakpointComponents }}"
 										responsive-start-html="{{ $responsiveComponentsStart }}"
 										responsive-end-html="{{ $responsiveComponentsEnd }}"
 				>

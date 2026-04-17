@@ -75,7 +75,7 @@
         },
         "responsiveStyle": {
             "type": "string",
-            "description": "The layout style of the responsive menu",
+            "description": "The layout style of the responsive menu when below the breakpoint",
             "supported": [
                 "default",
                 "overlay"

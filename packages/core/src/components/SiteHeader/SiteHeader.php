@@ -56,7 +56,7 @@ class SiteHeader extends UIComponent {
 
     /**
      * @var string|null $style
-     * @description The layout style of the responsive menu
+     * @description The layout style of the responsive menu when below the breakpoint
      * @supported-values default, overlay
      */
     protected ?string $responsiveStyle = 'default';
@@ -68,9 +68,11 @@ class SiteHeader extends UIComponent {
     protected ?ThemeColor $overlayBackgroundColor = ThemeColor::PRIMARY;
 
     /**
-     * Groups that the inner components are processed into to enable responsive behaviour while respecting the rendering order that was passed in
+     * Groups that the inner components are processed into to enable responsive behaviour and prevent unwanted DOM duplication
+     * while respecting the rendering order that was passed in
      */
     private array $persistentComponentsStart;
+    private array $belowBreakpointComponents;
     private array $responsiveComponentsBeforeMenu;
     private array $responsiveComponentsAfterMenu;
     private array $persistentComponentsEnd;
@@ -92,6 +94,7 @@ class SiteHeader extends UIComponent {
         $this->responsiveStyle = $attributes['responsiveStyle'] ?? $this->responsiveStyle;
         $this->submenuIcon = $attributes['submenuIcon'] ?? $this->submenuIcon;
         $this->logoUrl = $attributes['logoUrl'] ?? null;
+
         $logo = isset($attributes['logoUrl'])
             ? new ContentImageBasic([
                 'src'     => $this->logoUrl,
@@ -100,15 +103,20 @@ class SiteHeader extends UIComponent {
                 'classes' => ['site-header__logo']
             ])
             : null;
-        $this->innerComponents = array_merge([$logo], Utils::array_flat(array_map(function($component) {
-            // Unwrap the Group that's used only to define the responsive content
-            if ($component instanceof Group) {
-                return $component->innerComponents;
+        $this->innerComponents = [$logo, ...$innerComponents];
+
+        // Find the group with 'below-breakpoint' context if there is one, save it to a variable and remove it from the inner components
+        // This can be used to have content shown in both the header and the overlay,
+        // but prevent duplication of that content when the viewport is above the breakpoint (i.e., always there, no overlay)
+        $belowBreakpointGroupIndex = 0;
+        $belowBreakpointInnerComponents = [];
+        foreach ($this->innerComponents as $index => $component) {
+            if ($component instanceof Group && $component->get_context() === 'below-breakpoint') {
+                $belowBreakpointInnerComponents = $component->innerComponents;
+                $belowBreakpointGroupIndex = $index;
             }
-            else {
-                return $component;
-            }
-        }, $innerComponents)));
+        }
+        unset($this->innerComponents[$belowBreakpointGroupIndex]);
 
         // Find the group with responsive context if there is one
         // note: This only checks the top level and will ignore Groups inside other components
@@ -123,10 +131,13 @@ class SiteHeader extends UIComponent {
             }
         }
 
-        // Things that should be rendered before the responsive group in the HTML
-        $this->persistentComponentsStart = [$logo, ...array_slice($innerComponents, 0, $responsiveGroupIndex)];
-        // Things that should be rendered after the responsive group in the HTML
-        $this->persistentComponentsEnd = [...array_slice($innerComponents, $responsiveGroupIndex + 1)];
+        // Things that should always be rendered before the responsive group in the HTML (anything that does not have context of 'responsive' or 'below-breakpoint')
+        $this->persistentComponentsStart = array_slice($this->innerComponents, 0, $responsiveGroupIndex);
+        // Things that should always be rendered after the responsive group in the HTML
+        $this->persistentComponentsEnd = array_slice($this->innerComponents, $responsiveGroupIndex + 1);
+
+        // Things that should be rendered before the responsive group but only when the viewport is below the breakpoint
+        $this->belowBreakpointComponents = $belowBreakpointInnerComponents;
 
         // Within the responsive group, find the first menu component,
         // handle the things before and after it, and handle transforming it into data for the Vue component
@@ -139,7 +150,6 @@ class SiteHeader extends UIComponent {
                 break;
             }
         }
-
         $this->responsiveComponentsBeforeMenu = array_slice($responsiveInnerComponents, 0, $mainMenuIndex);
         $this->responsiveComponentsAfterMenu = array_slice($responsiveInnerComponents, $mainMenuIndex + 1);
     }
@@ -197,21 +207,22 @@ class SiteHeader extends UIComponent {
         }
         else {
             echo $blade->make($this->bladeFile, [
-                'containerAttributes'       => $this->get_inner_container_html_attributes(),
-                'classes'                   => $this->get_filtered_classes(),
-                'attributes'                => $this->get_html_attributes(),
-                'breakpoint'                => $this->breakpoint,
-                'responsiveStyle'           => $this->responsiveStyle,
-                'overlayBackgroundColor'    => $this->overlayBackgroundColor->value,
-                'toggleButtonIconPrefix'    => $this->iconPrefix,
-                'toggleButtonIconClass'     => $this->icon,
-                'submenuToggleIconClass'    => $this->submenuIcon,
-                'persistentComponentsStart' => $this->persistentComponentsStart,
-                'persistentComponentsEnd'   => $this->persistentComponentsEnd,
-                'responsiveComponentsStart' => $this->get_prerendered_html($this->responsiveComponentsBeforeMenu),
-                'responsiveComponentsEnd'   => $this->get_prerendered_html($this->responsiveComponentsAfterMenu),
-                'responsiveMenuData'        => json_encode($this->menuData),
-                'menuComponentHtml'         => isset($this->menuComponent) ? $this->get_prerendered_html([$this->menuComponent]) : ''
+                'containerAttributes'         => $this->get_inner_container_html_attributes(),
+                'classes'                     => $this->get_filtered_classes(),
+                'attributes'                  => $this->get_html_attributes(),
+                'breakpoint'                  => $this->breakpoint,
+                'responsiveStyle'             => $this->responsiveStyle,
+                'overlayBackgroundColor'      => $this->overlayBackgroundColor->value,
+                'toggleButtonIconPrefix'      => $this->iconPrefix,
+                'toggleButtonIconClass'       => $this->icon,
+                'submenuToggleIconClass'      => $this->submenuIcon,
+                'persistentComponentsStart'   => $this->persistentComponentsStart,
+                'persistentComponentsEnd'     => $this->persistentComponentsEnd,
+                'belowBreakpointComponents'   => $this->get_prerendered_html($this->belowBreakpointComponents),
+                'responsiveComponentsStart'   => $this->get_prerendered_html($this->responsiveComponentsBeforeMenu),
+                'responsiveComponentsEnd'     => $this->get_prerendered_html($this->responsiveComponentsAfterMenu),
+                'responsiveMenuData'          => json_encode($this->menuData),
+                'menuComponentHtml'           => isset($this->menuComponent) ? $this->get_prerendered_html([$this->menuComponent]) : ''
             ])->render();
         }
     }

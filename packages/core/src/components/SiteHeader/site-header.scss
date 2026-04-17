@@ -71,10 +71,8 @@
 					overflow: hidden;
 				}
 			}
-		}
 
-		&--default {
-			.site-header__responsive__content {
+			&--default {
 				height: 0;
 				max-height: 0;
 				min-height: 0;
@@ -90,10 +88,8 @@
 					height: auto; // to allow for the submenus to alter the height when opened/closed
 				}
 			}
-		}
 
-		&--overlay {
-			.site-header__responsive__content {
+			&--overlay {
 				position: fixed;
 				top: 0;
 				left: 0;

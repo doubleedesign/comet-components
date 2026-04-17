@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\{Config, ContainerSize, Group, Menu, PreprocessedHTML, SiteHeader};
+use Doubleedesign\Comet\Core\{Config, Group, Menu, PreprocessedHTML, SiteHeader};
 use Doubleedesign\CometCanvas\NavMenus;
 
 $globalBackground = Config::getInstance()->get('global_background')->value;
@@ -41,16 +41,19 @@ if ($showContactDetails) {
     get_template_part('template-parts/contact-details');
     $contactBlockHtml = ob_get_clean();
     $contactBlock = new PreprocessedHTML([], $contactBlockHtml);
+    $contactBlock = new Group(['context' => 'site-header', 'shortName' => 'contact'], [$contactBlock]);
 }
 
 if ($showContactDetails) {
     $content = [
-        new Group(['context' => 'site-header', 'shortName' => 'contact'], [$contactBlock]),
+        new Group(['context' => 'below-breakpoint'], [$contactBlock]),
         new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
     ];
 }
 else {
-    $content = [new Group(['context' => 'responsive'], [$menuComponent])];
+    $content = [
+        new Group(['context' => 'responsive'], [$menuComponent])
+    ];
 }
 
 $attributes = Config::getInstance()->get_component_defaults('site-header') ?? [];
