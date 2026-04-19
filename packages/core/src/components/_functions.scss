@@ -45,11 +45,32 @@
 	@return color-mix(in srgb, var(--color-#{$colorName}) (100% - $amount), black);
 }
 
+// Other custom theme colour functions
 @function lighten-theme-color($amount) {
 	@return color-mix(in srgb, var(--theme-color) (100% - $amount), white);
 }
 
 @function darken-theme-color($amount) {
 	@return color-mix(in srgb, var(--theme-color) (100% - $amount), black);
+}
+
+@function lighten-background-color($amount) {
+	@return color-mix(in srgb, var(--background-color) (100% - $amount), white);
+}
+
+@function darken-background-color($amount) {
+	@return color-mix(in srgb, var(--background-color) (100% - $amount), black);
+}
+
+@function transparentize-color($colorName, $amount) {
+	@return rgb(from var(--color-#{$colorName}) r g b / $amount);
+}
+
+@function transparentize-theme-color($amount) {
+	@return rgb(from var(--theme-color) r g b / $amount);
+}
+
+@function transparentize-background-color($amount) {
+	@return rgb(from var(--background-color) r g b / $amount);
 }
 

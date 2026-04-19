@@ -107,95 +107,105 @@
       grid-template-columns: repeat(6, 1fr);
     }
   }
+  [data-background=primary] {
+    --background-color: var(--color-primary);
+    --theme-color: var(--readable-color-primary);
+    background: var(--background-color);
+    color: var(--theme-color);
+  }
   [data-color-theme=primary] {
     --theme-color: var(--color-primary);
     --theme-color-inverse: var(--readable-color-primary);
   }
-  [data-background=primary] {
-    --background-color: var(--color-primary);
+  [data-background=secondary] {
+    --background-color: var(--color-secondary);
+    --theme-color: var(--readable-color-secondary);
     background: var(--background-color);
-    color: var(--readable-color-primary);
+    color: var(--theme-color);
   }
   [data-color-theme=secondary] {
     --theme-color: var(--color-secondary);
     --theme-color-inverse: var(--readable-color-secondary);
   }
-  [data-background=secondary] {
-    --background-color: var(--color-secondary);
+  [data-background=accent] {
+    --background-color: var(--color-accent);
+    --theme-color: var(--readable-color-accent);
     background: var(--background-color);
-    color: var(--readable-color-secondary);
+    color: var(--theme-color);
   }
   [data-color-theme=accent] {
     --theme-color: var(--color-accent);
     --theme-color-inverse: var(--readable-color-accent);
   }
-  [data-background=accent] {
-    --background-color: var(--color-accent);
+  [data-background=info] {
+    --background-color: var(--color-info);
+    --theme-color: var(--readable-color-info);
     background: var(--background-color);
-    color: var(--readable-color-accent);
+    color: var(--theme-color);
   }
   [data-color-theme=info] {
     --theme-color: var(--color-info);
     --theme-color-inverse: var(--readable-color-info);
   }
-  [data-background=info] {
-    --background-color: var(--color-info);
+  [data-background=warning] {
+    --background-color: var(--color-warning);
+    --theme-color: var(--readable-color-warning);
     background: var(--background-color);
-    color: var(--readable-color-info);
+    color: var(--theme-color);
   }
   [data-color-theme=warning] {
     --theme-color: var(--color-warning);
     --theme-color-inverse: var(--readable-color-warning);
   }
-  [data-background=warning] {
-    --background-color: var(--color-warning);
+  [data-background=success] {
+    --background-color: var(--color-success);
+    --theme-color: var(--readable-color-success);
     background: var(--background-color);
-    color: var(--readable-color-warning);
+    color: var(--theme-color);
   }
   [data-color-theme=success] {
     --theme-color: var(--color-success);
     --theme-color-inverse: var(--readable-color-success);
   }
-  [data-background=success] {
-    --background-color: var(--color-success);
+  [data-background=error] {
+    --background-color: var(--color-error);
+    --theme-color: var(--readable-color-error);
     background: var(--background-color);
-    color: var(--readable-color-success);
+    color: var(--theme-color);
   }
   [data-color-theme=error] {
     --theme-color: var(--color-error);
     --theme-color-inverse: var(--readable-color-error);
   }
-  [data-background=error] {
-    --background-color: var(--color-error);
+  [data-background=light] {
+    --background-color: var(--color-light);
+    --theme-color: var(--readable-color-light);
     background: var(--background-color);
-    color: var(--readable-color-error);
+    color: var(--theme-color);
   }
   [data-color-theme=light] {
     --theme-color: var(--color-light);
     --theme-color-inverse: var(--readable-color-light);
   }
-  [data-background=light] {
-    --background-color: var(--color-light);
+  [data-background=dark] {
+    --background-color: var(--color-dark);
+    --theme-color: var(--readable-color-dark);
     background: var(--background-color);
-    color: var(--readable-color-light);
+    color: var(--theme-color);
   }
   [data-color-theme=dark] {
     --theme-color: var(--color-dark);
     --theme-color-inverse: var(--readable-color-dark);
   }
-  [data-background=dark] {
-    --background-color: var(--color-dark);
+  [data-background=white] {
+    --background-color: var(--color-white);
+    --theme-color: var(--readable-color-white);
     background: var(--background-color);
-    color: var(--readable-color-dark);
+    color: var(--theme-color);
   }
   [data-color-theme=white] {
     --theme-color: var(--color-white);
     --theme-color-inverse: var(--readable-color-white);
-  }
-  [data-background=white] {
-    --background-color: var(--color-white);
-    background: var(--background-color);
-    color: var(--readable-color-white);
   }
   [data-text-color=primary] {
     color: var(--color-primary);

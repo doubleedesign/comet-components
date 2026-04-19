@@ -149,17 +149,17 @@
 	}
 
 
-	// Basic theme styling for elements with a color theme attribute specified
+	// Basic theme styling for elements with a color theme and/or background attribute specified
 	@each $name, $color in $colors {
-		[data-color-theme="#{$name}"] {
-			// Set a high-level local variable that can be accessed by Vue components, to simplify using vanilla CSS in SFCs
-			--theme-color: var(--color-#{$name});
-			--theme-color-inverse: var(--readable-color-#{$name});
-		}
 		[data-background="#{$name}"] {
 			--background-color: var(--color-#{$name});
+			--theme-color: var(--readable-color-#{$name});
 			background: var(--background-color);
-			color: var(--readable-color-#{$name});
+			color: var(--theme-color);
+		}
+		[data-color-theme="#{$name}"] {
+			--theme-color: var(--color-#{$name});
+			--theme-color-inverse: var(--readable-color-#{$name});
 		}
 	}
 
