@@ -38,6 +38,7 @@ $logoUrl = wp_get_attachment_image_url($logoId, 'full');
 
 $showContactDetails = apply_filters('comet_canvas_show_contact_details_in_header', false);
 $overlayMode = $attributes['responsiveStyle'] === 'overlay';
+$offCanvasMode = $attributes['responsiveStyle'] === 'off-canvas';
 if ($showContactDetails) {
     ob_start();
     get_template_part('template-parts/contact-details');
@@ -50,6 +51,11 @@ if ($showContactDetails) {
     if ($overlayMode) {
         $content = [
             new Group(['context' => 'below-breakpoint'], [$contactBlock]),
+            new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
+        ];
+    }
+    else if ($offCanvasMode) {
+        $content = [
             new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
         ];
     }

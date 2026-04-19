@@ -57,7 +57,7 @@ class SiteHeader extends UIComponent {
     /**
      * @var string|null $style
      * @description The layout style of the responsive menu when below the breakpoint
-     * @supported-values default, overlay
+     * @supported-values default, overlay, off-canvas
      */
     protected ?string $responsiveStyle = 'default';
 

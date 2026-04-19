@@ -97,6 +97,7 @@ export default {
             aria-label="Toggle menu"
             title="Toggle menu"
             aria-haspopup="true"
+            :data-menu-style="responsiveStyle"
             :aria-expanded="responsiveMenuOpen"
     >
         <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
@@ -112,7 +113,7 @@ export default {
          :data-background="overlayBackground"
     >
         <Transition @after-enter="setSubmenuHeights">
-            <div v-if="responsiveMenuOpen">
+            <div class="site-header__responsive__content__wrapper" v-if="responsiveMenuOpen">
                 <component v-if="responsiveStartHtml" v-html="responsiveStartHtml"></component>
                 <nav class="site-header__menu">
                     <ul class="site-header__menu__list">
@@ -175,13 +176,28 @@ export default {
 </template>
 
 <style lang="css">
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 0.3s ease;
+.site-header__responsive__content[data-style="default"],
+.site-header__responsive__content[data-style="overlay"] {
+    .v-enter-active,
+    .v-leave-active {
+        transition: opacity 0.3s ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+        opacity: 0;
+    }
 }
 
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
+.site-header__responsive__content[data-style="off-canvas"] {
+    .v-enter-active,
+    .v-leave-active {
+        transition: transform 0.3s ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+        transform: translateX(-100%);
+    }
 }
 </style>
