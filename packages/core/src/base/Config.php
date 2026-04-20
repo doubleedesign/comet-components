@@ -13,9 +13,9 @@ class Config {
     private array $blade_component_paths = [];
     private array $component_defaults = [
         'site-header'    => ['breakpoint' => '1024px'],
-        'call-to-action' => ['colorTheme' => 'white', 'innerBackground' => 'primary', 'backgroundColor' => 'white'],
-        'page-header'    => ['colorTheme' => 'primary'],
-        'site-footer'    => ['backgroundColor' => 'dark', 'hAlign' => 'center']
+        'call-to-action' => ['colorTheme' => ThemeColor::WHITE, 'innerBackground' => ThemeColor::PRIMARY, 'backgroundColor' => ThemeColor::WHITE],
+        'page-header'    => ['colorTheme' => ThemeColor::PRIMARY],
+        'site-footer'    => ['backgroundColor' => ThemeColor::DARK, 'hAlign' => Alignment::CENTER],
         'menu'           => ['colorTheme' => ThemeColor::PRIMARY],
     ];
     private array $theme_colours = [
