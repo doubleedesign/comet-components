@@ -110,6 +110,7 @@
   [data-background=primary] {
     --background-color: var(--color-primary);
     --theme-color: var(--readable-color-primary);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -120,6 +121,7 @@
   [data-background=secondary] {
     --background-color: var(--color-secondary);
     --theme-color: var(--readable-color-secondary);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -130,6 +132,7 @@
   [data-background=accent] {
     --background-color: var(--color-accent);
     --theme-color: var(--readable-color-accent);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -140,6 +143,7 @@
   [data-background=info] {
     --background-color: var(--color-info);
     --theme-color: var(--readable-color-info);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -150,6 +154,7 @@
   [data-background=warning] {
     --background-color: var(--color-warning);
     --theme-color: var(--readable-color-warning);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -160,6 +165,7 @@
   [data-background=success] {
     --background-color: var(--color-success);
     --theme-color: var(--readable-color-success);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -170,6 +176,7 @@
   [data-background=error] {
     --background-color: var(--color-error);
     --theme-color: var(--readable-color-error);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -180,6 +187,7 @@
   [data-background=light] {
     --background-color: var(--color-light);
     --theme-color: var(--readable-color-light);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -190,6 +198,7 @@
   [data-background=dark] {
     --background-color: var(--color-dark);
     --theme-color: var(--readable-color-dark);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }
@@ -200,6 +209,7 @@
   [data-background=white] {
     --background-color: var(--color-white);
     --theme-color: var(--readable-color-white);
+    --active-color: var(--color-secondary);
     background: var(--background-color);
     color: var(--theme-color);
   }

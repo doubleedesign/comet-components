@@ -22,6 +22,7 @@
 		[data-color-theme="#{$name}"] & {
 			--theme-color: var(--color-#{$name});
 			--theme-color-inverse: var(--readable-color-#{$name});
+			color: var(--theme-color-inverse);
 		}
 
 		// Use background colour of parent as button colour on white backgrounds
@@ -34,8 +35,8 @@
 	}
 
 	&:hover, &:focus, &:active {
-		background-color: darken(var(--theme-color), 10%);
-		border-color: darken(var(--theme-color), 10%);
+		background-color: darken-theme-color(10%);
+		border-color: darken-theme-color(10%);
 		color: var(--theme-color-inverse);
 	}
 

@@ -154,6 +154,7 @@
 		[data-background="#{$name}"] {
 			--background-color: var(--color-#{$name});
 			--theme-color: var(--readable-color-#{$name});
+			--active-color: var(--color-secondary); // can be contextually changed where this default doesn't suit
 			background: var(--background-color);
 			color: var(--theme-color);
 		}
