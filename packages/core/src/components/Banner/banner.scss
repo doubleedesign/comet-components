@@ -53,6 +53,10 @@
 		z-index: 100;
 		display: flex;
 
+		&:not([data-valign]) {
+			align-items: flex-start; // handle the default top alignment (container will not have data-valign)
+		}
+
 		@include container-width-down('narrower') {
 			justify-content: center !important;
 		}

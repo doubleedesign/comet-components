@@ -49,6 +49,9 @@
   z-index: 100;
   display: flex;
 }
+.banner__container:not([data-valign]) {
+  align-items: flex-start;
+}
 @container (max-width: 768px) {
   .banner__container {
     justify-content: center !important;
