@@ -8,12 +8,12 @@ abstract class WpIntegrationTestCase extends WpTestCase {
 
         // Include prerequisite WP global functions and classes for our particular integration tests to work
         // (in addition to those loaded in the parent class and Pest.php)
-        require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/post.php';
-        require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/taxonomy.php';
-        require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/meta.php';
-        require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/class-wp-list-util.php';
-        require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/class-wp-tax-query.php';
-        require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/class-wp-meta-query.php';
+        require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/post.php';
+        require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/taxonomy.php';
+        require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/meta.php';
+        require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/class-wp-list-util.php';
+        require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/class-wp-tax-query.php';
+        require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/class-wp-meta-query.php';
     }
 
     public function is_wp_test_case(): string {

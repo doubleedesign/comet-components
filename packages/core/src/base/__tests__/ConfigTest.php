@@ -15,7 +15,7 @@ describe('Config', function() {
     describe('component defaults', function() {
         beforeEach(function() {
             $instance = Config::getInstance();
-            $instance->set_component_defaults('CallToAction', [
+            $instance->set_component_defaults('call-to-action', [
                 'colorTheme' => 'secondary'
             ]);
         });
@@ -50,7 +50,7 @@ describe('Config', function() {
 
         it('overwrites an existing component default without clearing others', function() {
             $instance = Config::getInstance();
-            $instance->set_component_defaults('CallToAction', [
+            $instance->set_component_defaults('call-to-action', [
                 'colorTheme'      => 'primary',
                 'backgroundColor' => 'dark'
             ]);

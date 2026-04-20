@@ -13,11 +13,11 @@ use function Patchwork\relay;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 define('WP_DEBUG', false);
-define('ABSPATH', __DIR__ . '/../../../../vanilla-playground/app/');
+define('ABSPATH', __DIR__ . '/../../../../wordpress-canvas/app/');
 define('WPINC', 'wp-includes');
 
 // Include the WP_Query class so it can be mocked in unit tests and actually used in integration tests
-require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/class-wp-query.php';
+require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/class-wp-query.php';
 
 pest()->extend(WpUnitTestCase::class)->in('Unit');
 pest()->extend(WpIntegrationTestCase::class)->in('Integration');
