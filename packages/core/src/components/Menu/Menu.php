@@ -11,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::NAV])]
 #[DefaultTag(Tag::NAV)]
 class Menu extends UIComponent {
+    use ColorTheme;
     private array $rawMenuData;
 
     /**
@@ -30,6 +31,7 @@ class Menu extends UIComponent {
      */
     public function __construct(array $attributes, array $menuItems) {
         $this->rawMenuData = $menuItems;
+        $this->set_color_theme_from_attrs($attributes);
 
         parent::__construct($attributes, [], 'components.Menu.menu');
         $this->innerComponents = [
@@ -135,6 +137,25 @@ class Menu extends UIComponent {
         }, $list);
 
         return $transformed;
+    }
+
+    /**
+     * Get the color theme for this menu, if set, to pass to JavaScript
+     *
+     * @return ThemeColor|null
+     */
+    public function get_color_theme(): ?ThemeColor {
+        return $this->colorTheme;
+    }
+
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
+
+        if ($this->colorTheme) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
+
+        return $attributes;
     }
 
     public function render(): void {

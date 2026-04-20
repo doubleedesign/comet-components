@@ -9,6 +9,7 @@ export default {
 		toggleButtonIconClass: String,
 		submenuToggleIconClass: String,
 		menuData: String, // JSON encoded string of the menu array, so Vue can parse and render it
+        menuColorTheme: String,
 		menuHtml: String, // prerendered menu HTML for when we don't need Vue to do anything with it
         overlayBackground: String, // background color name for the overlay
         belowBreakpointHtml: String, // prerendered HTML to appear before the overlay, but only when below the breakpoint (e.g. mobile-specific content)
@@ -105,7 +106,7 @@ export default {
     </button>
     <component v-if="isBelowBreakpoint" v-html="belowBreakpointHtml"></component>
 
-    <!-- Content in overlay mode (usually mobile/small viewports, unless always using overlay) -->
+    <!-- Content in overlay or off-canvas mode (usually mobile/small viewports, unless always using overlay) -->
     <div v-if="isBelowBreakpoint"
          class="site-header__responsive__content"
          :data-style="responsiveStyle"
@@ -115,7 +116,7 @@ export default {
         <Transition @after-enter="setSubmenuHeights">
             <div class="site-header__responsive__content__wrapper" v-if="responsiveMenuOpen">
                 <component v-if="responsiveStartHtml" v-html="responsiveStartHtml"></component>
-                <nav class="site-header__menu">
+                <nav class="site-header__menu" :data-color-theme="menuColorTheme">
                     <ul class="site-header__menu__list">
                         <li v-for="item in menuItems"
                             :key="item.id"
@@ -166,7 +167,7 @@ export default {
             </div>
         </Transition>
     </div>
-    <!-- Content in non-overlay mode (usually desktop/larger viewports, unless always using overlay) -->
+    <!-- Content in non-overlay/non-off-canvas mode (usually desktop/larger viewports, unless always using overlay/off-canvas) -->
     <template v-else>
         <component v-if="responsiveStartHtml" v-html="responsiveStartHtml"></component>
         <component v-if="menuHtml" v-html="menuHtml"></component>

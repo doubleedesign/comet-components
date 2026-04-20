@@ -30,15 +30,18 @@ $globalBackground = Config::getInstance()->get('global_background')->value;
 <?php wp_body_open(); ?>
 
 <?php
-$attributes = Config::getInstance()->get_component_defaults('site-header') ?? [];
-$menuItems = NavMenus::get_simplified_nav_menu_items_by_location('primary');
-$menuComponent = new Menu(['context' => 'site-header'], $menuItems);
+$header_attributes = Config::getInstance()->get_component_defaults('site-header') ?? [];
+$menu_attributes = Config::getInstance()->get_component_defaults('menu') ?? [];
+
 $logoId = get_option('options_logo');
 $logoUrl = wp_get_attachment_image_url($logoId, 'full');
 
+$menuItems = NavMenus::get_simplified_nav_menu_items_by_location('primary');
+$menuComponent = new Menu([...$menu_attributes, 'context' => 'site-header'], $menuItems);
+
 $showContactDetails = apply_filters('comet_canvas_show_contact_details_in_header', false);
-$overlayMode = $attributes['responsiveStyle'] === 'overlay';
-$offCanvasMode = $attributes['responsiveStyle'] === 'off-canvas';
+$overlayMode = $header_attributes['responsiveStyle'] === 'overlay';
+$offCanvasMode = $header_attributes['responsiveStyle'] === 'off-canvas';
 if ($showContactDetails) {
     ob_start();
     get_template_part('template-parts/contact-details');
@@ -72,7 +75,7 @@ else {
     ];
 }
 
-$headerComponent = new SiteHeader(['logoUrl' => $logoUrl, ...$attributes], $content);
+$headerComponent = new SiteHeader(['logoUrl' => $logoUrl, ...$header_attributes], $content);
 
 $headerComponent->render();
 ?>

@@ -78,6 +78,7 @@ class SiteHeader extends UIComponent {
     private array $persistentComponentsEnd;
     private array $menuData = [];
     private Menu $menuComponent;
+    private ThemeColor $menuColorTheme;
 
     public function __construct(array $attributes, array $innerComponents) {
         if (!isset($attributes['icon'])) {
@@ -151,6 +152,7 @@ class SiteHeader extends UIComponent {
             if ($innerComponent instanceof Menu) {
                 $mainMenuIndex = $index;
                 $this->menuComponent = $innerComponent;
+                $this->menuColorTheme = $innerComponent->get_color_theme();
                 $this->menuData = $innerComponent->get_raw_menu_data(null);
                 break;
             }
@@ -227,6 +229,7 @@ class SiteHeader extends UIComponent {
                 'responsiveComponentsStart'   => $this->get_prerendered_html($this->responsiveComponentsBeforeMenu),
                 'responsiveComponentsEnd'     => $this->get_prerendered_html($this->responsiveComponentsAfterMenu),
                 'responsiveMenuData'          => json_encode($this->menuData),
+                'menuColorTheme'              => isset($this->menuColorTheme) ? $this->menuColorTheme->value : null,
                 'menuComponentHtml'           => isset($this->menuComponent) ? $this->get_prerendered_html([$this->menuComponent]) : ''
             ])->render();
         }

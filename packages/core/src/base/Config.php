@@ -16,6 +16,7 @@ class Config {
         'call-to-action' => ['colorTheme' => 'white', 'innerBackground' => 'primary', 'backgroundColor' => 'white'],
         'page-header'    => ['colorTheme' => 'primary'],
         'site-footer'    => ['backgroundColor' => 'dark', 'hAlign' => 'center']
+        'menu'           => ['colorTheme' => ThemeColor::PRIMARY],
     ];
     private array $theme_colours = [
         'white' => '#FFFFFF',
