@@ -16,30 +16,32 @@ trait LayoutAlignment {
 
     /**
      * @param  array  $attributes
-     * @param  Alignment  $defaultHorizontal
-     * @param  Alignment  $defaultVertical
+     * @param  Alignment|null  $defaultHorizontal
+     * @param  Alignment|null  $defaultVertical
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
-    protected function set_layout_alignment_from_attrs(array $attributes, Alignment $defaultHorizontal = Alignment::MATCH_PARENT, Alignment $defaultVertical = Alignment::MATCH_PARENT): void {
-        // hAlign and vAlign are the preferred attributes,
-        // but in WordPress in the block editor they are different; some blocks have $attributes['theSetting']
-        // and some have $attributes['layout']['theSetting'] so we need to account for both
-        // Also different blocks have different attributes for vertical alignment that we need to handle.
-
-        if (isset($attributes['hAlign']) && $attributes['hAlign'] instanceof Alignment) {
-            $this->hAlign = $attributes['hAlign'];
-        }
-        else {
-            $hAlign = $attributes['hAlign'] ?? $attributes['justifyContent'] ?? null;
-            $this->hAlign = isset($hAlign) ? Alignment::fromString($hAlign) : $defaultHorizontal;
+    protected function set_layout_alignment_from_attrs(array $attributes, ?Alignment $defaultHorizontal = null, ?Alignment $defaultVertical = null): void {
+        if (isset($attributes['hAlign'])) {
+            $this->hAlign = $this->get_from_string_or_alignment($attributes['hAlign'])
+                ?? $this->get_from_string_or_alignment($defaultHorizontal)
+                ?? $this->hAlign;
         }
 
-        if (isset($attributes['vAlign']) && $attributes['vAlign'] instanceof Alignment) {
-            $this->vAlign = $attributes['vAlign'];
+        if (isset($attributes['vAlign'])) {
+            $this->vAlign = $this->get_from_string_or_alignment($attributes['vAlign'])
+                ?? $this->get_from_string_or_alignment($defaultVertical)
+                ?? $this->vAlign;
         }
-        else {
-            $vAlign = $attributes['vAlign'] ?? $attributes['verticalAlignment'] ?? $attributes['alignItems'] ?? null;
-            $this->vAlign = isset($vAlign) ? Alignment::fromString($vAlign) : $defaultVertical;
+    }
+
+    private function get_from_string_or_alignment($value): ?Alignment {
+        if ($value instanceof Alignment) {
+            return $value;
         }
+        else if (is_string($value)) {
+            return Alignment::tryFrom($value);
+        }
+
+        return null;
     }
 }

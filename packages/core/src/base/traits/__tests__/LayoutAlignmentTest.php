@@ -10,7 +10,7 @@ use Doubleedesign\Comet\Core\{Alignment, LayoutAlignment};
  *
  * @return object
  */
-function create_component_With_layout_alignment(array $attributes): object {
+function create_component_with_layout_alignment(array $attributes): object {
     return new class($attributes) {
         use LayoutAlignment;
 
@@ -29,43 +29,25 @@ function create_component_With_layout_alignment(array $attributes): object {
 }
 
 test('sets valid horizontal value', function() {
-    $component = create_component_With_layout_alignment(['justifyContent' => 'center']);
-
-    expect($component->get_hAlign())->toBe(Alignment::CENTER);
-});
-
-test('sets valid horizontal value from wp layout', function() {
-    $component = create_component_With_layout_alignment(['layout' => ['justifyContent' => 'center']]);
+    $component = create_component_with_layout_alignment(['hAlign' => 'center']);
 
     expect($component->get_hAlign())->toBe(Alignment::CENTER);
 });
 
 test('sets valid vertical value', function() {
-    $component = create_component_With_layout_alignment(['alignItems' => 'center']);
+    $component = create_component_with_layout_alignment(['vAlign' => 'center']);
 
     expect($component->get_vAlign())->toBe(Alignment::CENTER);
 });
 
-test('sets valid vertical value from wp layout', function() {
-    $component = create_component_With_layout_alignment(['layout' => ['alignItems' => 'center']]);
+test('uses fallback horizontal value when an invalid value is provided', function() {
+    $component = create_component_with_layout_alignment(['hAlign' => 'invalid']);
 
-    expect($component->get_vAlign())->toBe(Alignment::CENTER);
+    expect($component->get_hAlign())->toBe(Alignment::MATCH_PARENT);
 });
 
-test('sets valid vertical value from wp', function() {
-    $component = create_component_With_layout_alignment(['verticalAlignment' => 'center']);
+test('uses fallback vertical value  when an invalid value is provided', function() {
+    $component = create_component_with_layout_alignment(['vAlign' => 'invalid']);
 
-    expect($component->get_vAlign())->toBe(Alignment::CENTER);
-});
-
-test('sets null horizontal value', function() {
-    $component = create_component_With_layout_alignment(['hAlign' => 'invalid']);
-
-    expect($component->get_hAlign())->toBeNull();
-});
-
-test('sets null vertical value', function() {
-    $component = create_component_With_layout_alignment(['vAlign' => 'invalid']);
-
-    expect($component->get_vAlign())->toBeNull();
+    expect($component->get_vAlign())->toBe(Alignment::MATCH_PARENT);
 });
