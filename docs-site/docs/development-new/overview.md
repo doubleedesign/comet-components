@@ -114,7 +114,7 @@ Assets::get_instance()->render_component_stylesheet_html();
 Assets::get_instance()->render_component_script_html();
 ```
 
-Examples of this in action for testing pages can be found in `./test/browser/wrapper-open.php` and `./test/browser/wrapper-close.php`.
+Examples of this in action for testing pages can be found in `./tests/browser/wrapper-open.php` and `./tests/browser/wrapper-close.php`.
 
 :::warning
 Remember, PHP reads your page top-to-bottom. This means that you can't load component assets in the

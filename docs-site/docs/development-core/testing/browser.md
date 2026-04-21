@@ -21,8 +21,8 @@ More details on installing and configuring Herd can be found on the [PHP](../too
 php.ini directory`. Add the below lines, filling in your own username and updating the project path as needed:
 
 ```ini
-herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-open.php
-auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-close.php
+herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PhpStormProjects/comet-components/tests/browser/wrapper-open.php
+auto_append_file = C:/Users/YOUR_USERNAME/PhpStormProjects/comet-components/tests/browser/wrapper-close.php
 ```
 
 :::warning

@@ -396,8 +396,8 @@ To configure PhpStorm to run ESLint on save and fix issues automatically where p
 Locate the PHP configuration file (as per the PHP interpreter settings above) and add the following lines to it (updated with your username):
 
 ```ini
-herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-open.php
-herd_auto_append_file = C:/Users/YOUR_USERNAME/PHPStormProjects/comet-components/test/browser/wrapper-close.php
+herd_auto_prepend_file = C:/Users/YOUR_USERNAME/PhpStormProjects/comet-components/tests/browser/wrapper-open.php
+herd_auto_append_file = C:/Users/YOUR_USERNAME/PhpStormProjects/comet-components/tests/browser/wrapper-close.php
 ```
 
 This is to wrap test pages with the required opening and closing HTML.
@@ -496,8 +496,8 @@ The project is configured to allow Storybook to request the test pages from the 
 If using Apache, add this to `.htaccess` in the project root, updating the server paths and domain as needed:
 
 ```htaccess
-php_value auto_prepend_file "/home/YOUR_USERNAME/public_html/test/browser/wrapper-open.php"
-php_value auto_append_file "/home/YOUR_USERNAME/public_html/test/browser/wrapper-close.php"
+php_value auto_prepend_file "/home/YOUR_USERNAME/public_html/tests/browser/wrapper-open.php"
+php_value auto_append_file "/home/YOUR_USERNAME/public_html/tests/browser/wrapper-close.php"
 
 # Enable CORS for storybook subdomain
 <IfModule mod_headers.c>
