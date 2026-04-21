@@ -20,6 +20,9 @@ class Config {
         'button-group'   => ['colorTheme' => ThemeColor::PRIMARY, 'orientation' => Orientation::HORIZONTAL],
         'button' 	       => ['colorTheme' => ThemeColor::PRIMARY],
         'icon-links'     => ['orientation' => Orientation::HORIZONTAL],
+        'card-list'      => ['layout' => GroupLayout::GRID],
+        'event-list'     => ['layout' => GroupLayout::GRID],
+        'link-group'     => ['layout' => GroupLayout::LIST],
     ];
     private array $theme_colours = [
         'white' => '#FFFFFF',
