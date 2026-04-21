@@ -31,7 +31,7 @@ Enum used to specify valid values for alignment properties.
 Converts a string to the corresponding enum case.
 
 ::: details Supported input mappings
-
+		
 | Input        | Result               |
 |--------------|----------------------|
 | `'start'`    | `self::START`        |
@@ -72,21 +72,58 @@ Enum used to specify valid values for aspect ratio properties.
 
 ::: details Supported values
 
-| Case                          | Value             |
-|-------------------------------|-------------------|
-| <code>STANDARD</code>         | <code>4:3</code>  |
-| <code>PORTRAIT</code>         | <code>3:4</code>  |
-| <code>SQUARE</code>           | <code>1:1</code>  |
-| <code>WIDE</code>             | <code>16:9</code> |
-| <code>TALL</code>             | <code>9:16</code> |
-| <code>CLASSIC</code>          | <code>3:2</code>  |
-| <code>CLASSIC_PORTRAIT</code> | <code>2:3</code>  |
+| Case                          | Value               |
+|-------------------------------|---------------------|
+| <code>STANDARD</code>         | <code>4:3</code>    |
+| <code>PORTRAIT</code>         | <code>3:4</code>    |
+| <code>SQUARE</code>           | <code>1:1</code>    |
+| <code>WIDE</code>             | <code>16:9</code>   |
+| <code>TALL</code>             | <code>9:16</code>   |
+| <code>CLASSIC</code>          | <code>3:2</code>    |
+| <code>CLASSIC_PORTRAIT</code> | <code>2:3</code>    |
+| <code>CINEMATIC</code>        | <code>21:9</code>   |
+| <code>CINEMASCOPE</code>      | <code>2.35:1</code> |
 
 :::
 ### Methods
 <dl>
-<dt><code>tryFrom(string $value): ?self</code></dt>
-<dd>Built-in PHP enum method that converts a string to the corresponding enum case, or returns null if the string is not a valid value.</dd>
+<dt><code>fromString(string $value)</code></dt>
+<dd>
+Converts a string to the corresponding enum case.
+
+::: details Supported input mappings
+		
+| Input                  | Result                   |
+|------------------------|--------------------------|
+| `'4:3'`                | `self::STANDARD`         |
+| ` '4/3'`               | `self::STANDARD`         |
+| ` 'standard' `         | `self::STANDARD`         |
+| `'3:4'`                | `self::PORTRAIT`         |
+| ` '3/4'`               | `self::PORTRAIT`         |
+| ` 'portrait' `         | `self::PORTRAIT`         |
+| `'1:1'`                | `self::SQUARE`           |
+| ` '1/1'`               | `self::SQUARE`           |
+| ` 'square' `           | `self::SQUARE`           |
+| `'16:9'`               | `self::WIDE`             |
+| ` '16/9'`              | `self::WIDE`             |
+| ` 'wide' `             | `self::WIDE`             |
+| `'9:16'`               | `self::TALL`             |
+| ` '9/16'`              | `self::TALL`             |
+| ` 'tall' `             | `self::TALL`             |
+| `'3:2'`                | `self::CLASSIC`          |
+| ` '3/2'`               | `self::CLASSIC`          |
+| ` 'classic' `          | `self::CLASSIC`          |
+| `'2:3'`                | `self::CLASSIC_PORTRAIT` |
+| ` '2/3'`               | `self::CLASSIC_PORTRAIT` |
+| ` 'classic_portrait' ` | `self::CLASSIC_PORTRAIT` |
+| `'2.35:1'`             | `self::CINEMASCOPE`      |
+| ` '2.35/1'`            | `self::CINEMASCOPE`      |
+| ` '2.35'`              | `self::CINEMASCOPE`      |
+| ` 'cinemascope' `      | `self::CINEMASCOPE`      |
+| `default `             | `null`                   |
+
+:::
+</dd>
 </dl>
 </div>
 
@@ -101,10 +138,6 @@ $value = $result->value; // returns '4:3'
 :::
 ::: note Method usage
 
-```php
-use Doubleedesign\Comet\Core\AspectRatio;
-$result = AspectRatio::tryFrom('4:3');
-```
 :::
 </div>
 </div>
@@ -119,8 +152,8 @@ Enum used to specify valid values for container size properties.
 
 | Case                   | Value                  |
 |------------------------|------------------------|
-| <code>WIDE</code>      | <code>wide</code>      |
 | <code>FULLWIDTH</code> | <code>fullwidth</code> |
+| <code>WIDE</code>      | <code>wide</code>      |
 | <code>NARROW</code>    | <code>narrow</code>    |
 | <code>NARROWER</code>  | <code>narrower</code>  |
 | <code>SMALL</code>     | <code>small</code>     |
@@ -139,16 +172,65 @@ Enum used to specify valid values for container size properties.
 ::: note Basic usage
 ```php
 use Doubleedesign\Comet\Core\ContainerSize;
-$result = ContainerSize::WIDE;
-$value = $result->value; // returns 'wide'
+$result = ContainerSize::FULLWIDTH;
+$value = $result->value; // returns 'fullwidth'
 ```
 :::
 ::: note Method usage
 
 ```php
 use Doubleedesign\Comet\Core\ContainerSize;
-$result = ContainerSize::tryFrom('wide');
+$result = ContainerSize::tryFrom('fullwidth');
 ```
+:::
+</div>
+</div>
+<div class="data-type-doc">
+<div>
+
+## GroupLayout
+
+Enum used to specify valid values for group layout properties.
+
+::: details Supported values
+
+| Case                | Value               |
+|---------------------|---------------------|
+| <code>LIST</code>   | <code>list</code>   |
+| <code>GRID</code>   | <code>grid</code>   |
+| <code>INLINE</code> | <code>inline</code> |
+
+:::
+### Methods
+<dl>
+<dt><code>fromString(string $value)</code></dt>
+<dd>
+Converts a string to the corresponding enum case.
+
+::: details Supported input mappings
+		
+| Input       | Result         |
+|-------------|----------------|
+| `'grid'   ` | `self::GRID`   |
+| `'inline' ` | `self::INLINE` |
+| `default  ` | `self::LIST`   |
+
+:::
+</dd>
+</dl>
+</div>
+
+<div>
+
+::: note Basic usage
+```php
+use Doubleedesign\Comet\Core\GroupLayout;
+$result = GroupLayout::LIST;
+$value = $result->value; // returns 'list'
+```
+:::
+::: note Method usage
+
 :::
 </div>
 </div>
@@ -240,8 +322,7 @@ Enum used to specify valid values for tag properties.
 | DFN        | dfn        | Global attributes                                                                                                                                                                                                                                                                                                                                                                                                         |
 | DFN        | dfn        |                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | DIALOG     | dialog     | `open`, `aria-modal`                                                                                                                                                                                                                                                                                                                                                                                                      |
-| DIV        | div        | Global attributes                                                                                                                                                                                                                                                                                                                                                                                                         |
-| DIV        | div        |                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| DIV        | div        | `role`                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | DL         | dl         | Global attributes                                                                                                                                                                                                                                                                                                                                                                                                         |
 | DL         | dl         |                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | DT         | dt         | Global attributes                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -421,6 +502,7 @@ Enum used to specify valid values for theme color properties.
 | <code>LIGHT</code>     | <code>light</code>     |
 | <code>DARK</code>      | <code>dark</code>      |
 | <code>WHITE</code>     | <code>white</code>     |
+| <code>BLACK</code>     | <code>black</code>     |
 
 :::
 ### Methods

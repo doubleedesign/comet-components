@@ -204,31 +204,20 @@ class AbstractClassDocGenerator {
             'abstract'  => [],
             'component' => [],
         ];
-        $directories = $this->get_all_component_directories();
-        $componentDefs = array_map(function($dir) {
-            return $dir . '\\' . basename($dir) . '.json';
-        }, $directories);
-        $abstractDefs = $this->get_abstract_def_files();
+        $all_components_file = file_get_contents('' . dirname(__DIR__, 1) . '\docs-site\docs\.vuepress\components\all-components.json');
+		$components = json_decode($all_components_file, true);
 
-        foreach ($abstractDefs as $jsonDef) {
-            if (!file_exists($jsonDef)) {
-                continue;
-            }
-            $json = json_decode(file_get_contents($jsonDef), true);
-            if (isset($json['extends']) && $json['extends'] === $componentName) {
-                array_push($children['abstract'], $json['name']);
-            }
-        }
-
-        foreach ($componentDefs as $jsonDef) {
-            if (!file_exists($jsonDef)) {
-                continue;
-            }
-            $json = json_decode(file_get_contents($jsonDef), true);
-            if (isset($json['extends']) && $json['extends'] === $componentName) {
-                array_push($children['component'], $json['name']);
-            }
-        }
+		// Filter the components to find those that extend the given component
+        foreach ($components as $component) {
+			if (isset($component['extends']) && $component['extends'] === $componentName) {
+				if($component['abstract']) {
+					array_push($children['abstract'], $component['name']);
+				}
+				else {
+					array_push($children['component'], $component['name']);
+				}
+			}
+	    }
 
         return $children;
     }

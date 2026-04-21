@@ -22,10 +22,10 @@ This provides a central location for validation logic and documentation, reducin
 
 <dt>Method</dt>
 <dd>
-	<code>set_background_color_from_attrs</code> 
+	<code>set_background_color</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
-<p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
+<p>Retrieves the relevant properties from the component $attributes array or component defaults, validates them, and assigns them to the corresponding component instance field.</p>
 </dd>
 <dt>Method</dt>
 <dd>
@@ -36,7 +36,7 @@ This provides a central location for validation logic and documentation, reducin
 </dd>
 <dt>Method</dt>
 <dd>
-	<code>set_background_color</code> 
+	<code>update_background_color</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
 <p>Allows the background colour of a component to be set based on contextual factors not available at instantiation.</p>
@@ -74,7 +74,7 @@ class MyComponent {
 	
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
-		$this->set_background_color_from_attrs($attributes);
+		$this->set_background_color($attributes);
 	}
 }
 ```
@@ -114,21 +114,21 @@ class MyComponent {
 <dt>Method</dt>
 <dd>
 	<code>set_bem_block</code> 
-	<strong>Returns:</strong> <code>void</code>
+	<strong>Returns:</strong> <code>static</code>
 	
 <p></p>
 </dd>
 <dt>Method</dt>
 <dd>
 	<code>set_bem_element</code> 
-	<strong>Returns:</strong> <code>void</code>
+	<strong>Returns:</strong> <code>static</code>
 	
 <p></p>
 </dd>
 <dt>Method</dt>
 <dd>
 	<code>set_bem_modifier</code> 
-	<strong>Returns:</strong> <code>void</code>
+	<strong>Returns:</strong> <code>static</code>
 	
 <p></p>
 </dd>
@@ -184,7 +184,7 @@ class MyComponent {
 <dt>Method</dt>
 <dd>
 	<code>update_context</code> 
-	<strong>Returns:</strong> <code>void</code>
+	<strong>Returns:</strong> <code>static</code>
 	
 <p></p>
 </dd>
@@ -241,12 +241,12 @@ class MyComponent {
 	<code>colorTheme</code> 
 	<strong>Type:</strong> <code>ThemeColor</code>
 	
-<p>Colour keyword for the fill or outline colour</p>
+<p>Colour keyword for theming purposes.</p>
 </dd>
 
 <dt>Method</dt>
 <dd>
-	<code>set_color_theme_from_attrs</code> 
+	<code>set_color_theme</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
@@ -263,7 +263,7 @@ class MyComponent {
 	
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
-		$this->set_color_theme_from_attrs($attributes);
+		$this->set_color_theme($attributes);
 	}
 }
 ```
@@ -310,7 +310,7 @@ class MyComponent {
 <dt>Method</dt>
 <dd>
 	<code>update_context</code> 
-	<strong>Returns:</strong> <code>void</code>
+	<strong>Returns:</strong> <code>static</code>
 	
 <p></p>
 </dd>
@@ -327,6 +327,55 @@ class MyComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
 		$this->get_context($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+
+## GroupLayoutType
+
+<dl>
+
+<dt>Property</dt>
+<dd>
+	<code>layout</code> 
+	<strong>Type:</strong> <code>GroupLayout</code>
+	
+<p>Layout style for grouping elements together.</p>
+</dd>
+<dt>Property</dt>
+<dd>
+	<code>maxPerRow</code> 
+	<strong>Type:</strong> <code>int</code>
+	
+<p>Maximum number of items to display per row in grid layouts.</p>
+</dd>
+
+<dt>Method</dt>
+<dd>
+	<code>set_group_layout</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use GroupLayoutType;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->set_group_layout($attributes);
 	}
 }
 ```
@@ -395,7 +444,14 @@ class MyComponent {
 	<code>aspectRatio</code> 
 	<strong>Type:</strong> <code>AspectRatio</code>
 	
-<p>Crop banner image to the given aspect ratio</p>
+<p>Crop image to the given aspect ratio by default</p>
+</dd>
+<dt>Property</dt>
+<dd>
+	<code>originalImageOrientation</code> 
+	<strong>Type:</strong> <code>Orientation</code>
+	
+<p>The original orientation of the image; can be used as a data attribute to tweak CSS for cropping</p>
 </dd>
 <dt>Property</dt>
 <dd>
@@ -415,6 +471,13 @@ class MyComponent {
 <dt>Method</dt>
 <dd>
 	<code>set_aspect_ratio_from_attrs</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_original_image_orientation_from_attrs</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
 <p></p>
@@ -484,7 +547,7 @@ class MyComponent {
 
 <dt>Method</dt>
 <dd>
-	<code>set_layout_alignment_from_attrs</code> 
+	<code>set_layout_alignment</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
@@ -501,7 +564,7 @@ class MyComponent {
 	
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
-		$this->set_layout_alignment_from_attrs($attributes);
+		$this->set_layout_alignment($attributes);
 	}
 }
 ```
@@ -526,7 +589,7 @@ class MyComponent {
 
 <dt>Method</dt>
 <dd>
-	<code>set_size_from_attrs</code> 
+	<code>set_size</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
@@ -543,7 +606,7 @@ class MyComponent {
 	
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
-		$this->set_size_from_attrs($attributes);
+		$this->set_size($attributes);
 	}
 }
 ```
@@ -568,7 +631,7 @@ class MyComponent {
 
 <dt>Method</dt>
 <dd>
-	<code>set_orientation_from_attrs</code> 
+	<code>set_orientation</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
@@ -585,7 +648,7 @@ class MyComponent {
 	
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
-		$this->set_orientation_from_attrs($attributes);
+		$this->set_orientation($attributes);
 	}
 }
 ```
@@ -719,48 +782,6 @@ class MyComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
 		$this->set_text_align_from_attrs($attributes);
-	}
-}
-```
-:::
-</div>
-<div class="trait-class-doc">
-
-<div>
-
-
-## TextColor
-
-<dl>
-
-<dt>Property</dt>
-<dd>
-	<code>textColor</code> 
-	<strong>Type:</strong> <code>ThemeColor</code>
-	
-<p></p>
-</dd>
-
-<dt>Method</dt>
-<dd>
-	<code>set_text_color_from_attrs</code> 
-	<strong>Returns:</strong> <code>void</code>
-	
-<p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
-</dd>
-</dl>
-
-</div>
-
-::: note Example usage
-```php:no-line-numbers
-namespace Doubleedesign\Comet\Core;
-class MyComponent {
-	use TextColor;
-	
-	function __construct(array $attributes, array $innerComponents) {
-		parent::__construct($attributes, $innerComponents);
-		$this->set_text_color_from_attrs($attributes);
 	}
 }
 ```
