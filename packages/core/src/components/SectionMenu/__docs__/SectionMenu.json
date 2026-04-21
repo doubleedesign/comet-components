@@ -70,6 +70,7 @@
     },
     "traits": [
         "ColorTheme",
+        "ColorTheme",
         "BlockElementModifier"
     ]
 }

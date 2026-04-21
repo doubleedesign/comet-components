@@ -26,7 +26,8 @@
                 "dark",
                 "white",
                 "black"
-            ]
+            ],
+            "default": "dark"
         },
         "classes": {
             "type": "array<string>",
@@ -54,7 +55,7 @@
                 "justify",
                 "match-parent"
             ],
-            "default": "match-parent"
+            "default": "center"
         },
         "id": {
             "type": "string",

@@ -49,8 +49,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "fn($key"
+            ]
         },
         "context": {
             "type": "string",

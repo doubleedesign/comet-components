@@ -70,7 +70,8 @@
                 "header",
                 "footer",
                 "main",
-                "article"
+                "article",
+                "figure"
             ],
             "default": "section"
         },

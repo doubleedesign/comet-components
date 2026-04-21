@@ -56,7 +56,7 @@
                 "white",
                 "black"
             ],
-            "default": "$this->breadcrumbs"
+            "default": "primary"
         },
         "context": {
             "type": "string",

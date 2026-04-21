@@ -26,7 +26,8 @@
                 "dark",
                 "white",
                 "black"
-            ]
+            ],
+            "default": "white"
         },
         "classes": {
             "type": "array<string>",
@@ -50,7 +51,8 @@
                 "dark",
                 "white",
                 "black"
-            ]
+            ],
+            "default": "white"
         },
         "context": {
             "type": "string",

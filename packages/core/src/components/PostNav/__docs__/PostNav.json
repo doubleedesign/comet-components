@@ -28,8 +28,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "$this->validate_link_attributes($link"
+            ]
         },
         "context": {
             "type": "string",

@@ -76,8 +76,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "new heading([\r\n                'level'   => 3,\r\n                'classes' => [$preferhorizontal ? 'is-style-small' : '']\r\n            ],\r\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\r\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+            ]
         },
         "context": {
             "type": "string",
@@ -131,7 +130,7 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "Orientation::VERTICAL"
+            "default": "vertical"
         },
         "originalImageOrientation": {
             "type": "Orientation",

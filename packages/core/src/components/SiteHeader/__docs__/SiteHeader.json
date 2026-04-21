@@ -100,7 +100,7 @@
                 "narrower",
                 "small"
             ],
-            "default": "'alt'     => 'site logo',\n                'href'    => '/',\n                'classes' => ['site-header__logo']\n            ]"
+            "default": "default"
         },
         "style": {
             "type": "array",

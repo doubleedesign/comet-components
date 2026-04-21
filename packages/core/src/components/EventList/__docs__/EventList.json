@@ -50,8 +50,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "'context'                      => 'events',\n            'shortname'                    => 'list',\n            'colortheme'                   => $this->colortheme->value ?? 'primary',\n            'data-group-layout'            => $this->layout->value\n        ];\n\n        // todo: this is repetitive, cardlist and linkgroup also do this (one just has a different default"
+            ]
         },
         "context": {
             "type": "string",

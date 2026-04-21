@@ -96,7 +96,7 @@
                 "narrower",
                 "small"
             ],
-            "default": "null"
+            "default": "default"
         },
         "style": {
             "type": "array",

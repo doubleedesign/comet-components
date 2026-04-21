@@ -420,19 +420,34 @@ class ComponentClassesToJsonDefinitions {
         $methodName = $propertyToMethodMap[$propertyName] ?? "set_{$propertyName}_from_attrs";
 
         // Look for calls to the setter method with a default parameter
-        $pattern = '/\$this->' . preg_quote($methodName, '/') . '\s*\(\s*\$[^,]+\s*,\s*([^)]+)\)/i';
-
+        $pattern = '/\$this->' . preg_quote($methodName, '/') . '\s*\(\s*\$\w+\s*,\s*([A-Za-z0-9_\\\\:\'\"]+)\s*\)/i';
         if (preg_match($pattern, $constructorCode, $matches)) {
             $defaultValue = trim($matches[1]);
 
             // Extract just the enum value if it's in the form EnumClass::VALUE
-            if (strpos($defaultValue, '::') !== false) {
+            if (str_contains($defaultValue, '::')) {
                 $parts = explode('::', $defaultValue);
 
-                return trim($parts[1]);
+                return trim(strtolower($parts[1]));
             }
 
             return $defaultValue;
+        }
+
+        // If there is no default parameter, look in the component defaults in the Config
+        $componentDefaults = Config::getInstance()->get_component_defaults($class->getShortName());
+        if ($componentDefaults && isset($componentDefaults[$propertyName])) {
+            if (in_array(gettype($componentDefaults[$propertyName]), ['string', 'integer', 'float', 'double', 'boolean'])) {
+                return (string)$componentDefaults[$propertyName];
+            }
+
+            try {
+                // Probably an enum at this point
+                return $componentDefaults[$propertyName]->value;
+            }
+            catch (Exception $e) {
+                return null;
+            }
         }
 
         return null;
@@ -450,13 +465,8 @@ class ComponentClassesToJsonDefinitions {
         $required = !$property->getType()->allowsNull();
         $type = $property->getType();
         $description = null;
-        $defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null;
+        $defaultValue = $property->hasDefaultValue() ? $property->getDefaultValue() : null; // for enums, this comes from the enum itself
         $supportedValues = null;
-        $content_type = $this->currentClass->hasProperty('innerComponents') ? 'array' : 'string';
-        if ($this->currentClass == 'Doubleedesign\Comet\Core\Table') {
-            $content_type = 'array';
-        }
-
         $result = $this->processPropertyType($type);
 
         // Handle default boolean values
@@ -473,6 +483,7 @@ class ComponentClassesToJsonDefinitions {
             'colorTheme', 'backgroundColor', 'hAlign', 'vAlign', 'size', 'orientation', 'textAlign', 'textColor'
         ];
 
+		// Override the default value if the component has a different default set than the enum default
         if (in_array($propertyName, $knownTraitProperties) || str_contains($propertyName, 'Theme')) {
             $customDefault = $this->extractDefaultFromConstructor($this->currentClass, $propertyName);
             if ($customDefault !== null) {
@@ -555,8 +566,8 @@ class ComponentClassesToJsonDefinitions {
             $supportedValues = array_map('trim', explode(',', $matches[1]));
         }
         // Get default values from docblock if not already set
-        if (!isset($result['default']) && $docComment && preg_match('/@default-value\s+(.+)/', $docComment, $matches)) {
-            $defaultValue = trim($matches[1]);
+        if (!isset($defaultValue) && $docComment && preg_match('/@default-value\s+(.+)/', $docComment, $matches)) {
+           $defaultValue = trim($matches[1]);
         }
         // Use type from docblock if specified, to use declared types like array<string>
         if ($docComment && preg_match('/@var\s+(\S+)/', $docComment, $matches)) {
@@ -745,7 +756,7 @@ try {
     $instance = new ComponentClassesToJsonDefinitions();
     if (isset($argv[1]) && ($argv[1] === '--component' || $argv[1] === 'component') && isset($argv[2])) {
         $instance->runSingle($argv[2]);
-        shell_exec('php generate-xml.php');
+        shell_exec('php scripts/generate-xml.php');
     }
     else if (isset($argv[1]) && ($argv[1] === '--base' || $argv[1] === 'base') && isset($argv[2])) {
         $instance->runSingleBase($argv[2]);

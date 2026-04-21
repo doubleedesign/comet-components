@@ -477,7 +477,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "vertical"
             },
             "size": {
                 "type": "ContainerSize",
@@ -1005,7 +1005,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "vertical"
             },
             "shortName": {
                 "type": "string",
@@ -1393,7 +1393,8 @@
                     "dark",
                     "white",
                     "black"
-                ]
+                ],
+                "default": "primary"
             },
             "context": {
                 "type": "string",
@@ -1507,7 +1508,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "horizontal"
             },
             "shortName": {
                 "type": "string",
@@ -1668,7 +1669,8 @@
                     "dark",
                     "white",
                     "black"
-                ]
+                ],
+                "default": "white"
             },
             "classes": {
                 "type": "array<string>",
@@ -1692,7 +1694,8 @@
                     "dark",
                     "white",
                     "black"
-                ]
+                ],
+                "default": "white"
             },
             "context": {
                 "type": "string",
@@ -1876,8 +1879,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "new heading([\n                'level'   => 3\n            ],\n                // todo: make this icon properly configurable - different icon, different library etc. maybe a centralised set of icons in the config?\n                $this->heading . ($this->cardaslink ? \"<i class='$iconprefix fa-arrow-right'></i>\" : ''"
+                ]
             },
             "context": {
                 "type": "string",
@@ -1931,7 +1933,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "vertical"
             },
             "originalImageOrientation": {
                 "type": "Orientation",
@@ -2470,7 +2472,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "null"
             },
             "shortName": {
                 "type": "string",
@@ -2489,7 +2491,7 @@
                     "narrower",
                     "small"
                 ],
-                "default": "null"
+                "default": "default"
             },
             "style": {
                 "type": "array",
@@ -2635,7 +2637,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "vertical"
             },
             "shortName": {
                 "type": "string",
@@ -3003,8 +3005,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "default to div tag unless specified otherwise in the attributes\n        if ($this->get_is_nested("
+                ]
             },
             "context": {
                 "type": "string",
@@ -3577,8 +3578,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "'context'                      => 'events',\r\n            'shortname'                    => 'list',\r\n            'colortheme'                   => $this->colortheme->value ?? 'primary',\r\n            'data-group-layout'            => $this->layout->value\r\n        ];\r\n\r\n        // todo: this is repetitive, cardlist and linkgroup also do this (one just has a different default"
+                ]
             },
             "context": {
                 "type": "string",
@@ -4142,8 +4142,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "fn($key"
+                ]
             },
             "context": {
                 "type": "string",
@@ -4350,7 +4349,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "horizontal"
             },
             "shortName": {
                 "type": "string",
@@ -5033,6 +5032,24 @@
                     "menu"
                 ]
             },
+            "colorTheme": {
+                "type": "ThemeColor",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ],
+                "default": "primary"
+            },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
@@ -5070,6 +5087,7 @@
             "required": true
         },
         "traits": [
+            "ColorTheme",
             "BlockElementModifier"
         ]
     },
@@ -5248,7 +5266,7 @@
                     "white",
                     "black"
                 ],
-                "default": "$this->breadcrumbs"
+                "default": "primary"
             },
             "context": {
                 "type": "string",
@@ -5549,8 +5567,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "$this->validate_link_attributes($link"
+                ]
             },
             "context": {
                 "type": "string",
@@ -5908,7 +5925,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "vertical"
             },
             "shortName": {
                 "type": "string",
@@ -6032,6 +6049,7 @@
             "required": true
         },
         "traits": [
+            "ColorTheme",
             "ColorTheme",
             "BlockElementModifier"
         ]
@@ -6177,7 +6195,8 @@
                     "dark",
                     "white",
                     "black"
-                ]
+                ],
+                "default": "dark"
             },
             "classes": {
                 "type": "array<string>",
@@ -6213,7 +6232,7 @@
                     "justify",
                     "match-parent"
                 ],
-                "default": "match-parent"
+                "default": "center"
             },
             "id": {
                 "type": "string",
@@ -6335,12 +6354,31 @@
                 "type": "string",
                 "description": "The URL of the site logo image"
             },
+            "overlayBackgroundColor": {
+                "type": "ThemeColor",
+                "description": "Background colour of the overlay when responsiveStyle is set to 'overlay'",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ],
+                "default": "primary"
+            },
             "responsiveStyle": {
                 "type": "string",
-                "description": "The layout style of the responsive menu",
+                "description": "The layout style of the responsive menu when below the breakpoint",
                 "supported": [
                     "default",
-                    "overlay"
+                    "overlay",
+                    "off-canvas"
                 ],
                 "default": "default"
             },
@@ -6361,7 +6399,7 @@
                     "narrower",
                     "small"
                 ],
-                "default": "'alt'     => 'site logo',\n                'href'    => '/',\n                'classes' => ['site-header__logo']\n            ]"
+                "default": "default"
             },
             "style": {
                 "type": "array",
@@ -6543,7 +6581,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "vertical"
             },
             "shortName": {
                 "type": "string",
@@ -7080,7 +7118,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "Orientation::VERTICAL"
+                "default": "vertical"
             },
             "shortName": {
                 "type": "string",

@@ -972,14 +972,14 @@
 	</xs:element>
 	<xs:element name="SiteHeader">
 		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="style" type="InlineStyle"/>
+			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="submenuIcon" type="xs:string"/>
-<xs:attribute name="shortName" type="xs:string"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
-<xs:attribute name="logoUrl" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="responsiveStyle" type="xs:string"/>
+<xs:attribute name="shortName" type="xs:string"/>
+<xs:attribute name="logoUrl" type="xs:string"/>
 <xs:attribute name="overlayBackgroundColor" type="ThemeColor"/>
 <xs:attribute name="iconPrefix" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>

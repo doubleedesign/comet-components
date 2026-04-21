@@ -50,8 +50,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "default to div tag unless specified otherwise in the attributes\n        if ($this->get_is_nested("
+            ]
         },
         "context": {
             "type": "string",
