@@ -36,7 +36,7 @@ class EventList extends WrappedLayoutComponent {
     public function __construct(array $attributes, array $innerComponents) {
         $attributes['shortName'] = $attributes['shortName'] ?? 'events';
         $this->bladeFile = $bladeFile ?? 'components.EventList.event-list';
-        $this->set_group_layout_from_attrs($attributes, GroupLayout::GRID);
+        $this->set_group_layout_from_attrs($attributes);
         $this->set_color_theme_from_attrs($attributes);
         $this->viewAllUrl = $attributes['viewAllUrl'] ?? null;
 

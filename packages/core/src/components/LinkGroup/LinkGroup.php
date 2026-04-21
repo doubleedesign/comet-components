@@ -25,7 +25,7 @@ class LinkGroup extends WrappedLayoutComponent {
      */
     public function __construct(array $attributes, array $links) {
         $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
-        $this->set_group_layout_from_attrs($attributes, GroupLayout::LIST);
+        $this->set_group_layout_from_attrs($attributes);
         $this->heading = $attributes['heading'] ?? null;
 
         if (!isset($attributes['shortName'])) {
