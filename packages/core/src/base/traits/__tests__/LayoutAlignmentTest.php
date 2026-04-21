@@ -1,6 +1,6 @@
 <?php
-
-use Doubleedesign\Comet\Core\{Alignment, LayoutAlignment};
+use Doubleedesign\Comet\Core\{Alignment, LayoutAlignment, Config};
+use function Patchwork\{redefine, restoreAll};
 
 /**
  * Function to create a generic component class that uses the trait
@@ -28,16 +28,49 @@ function create_component_with_layout_alignment(array $attributes): object {
     };
 }
 
-test('sets valid horizontal value', function() {
+beforeEach(function() {
+    Config::init();
+});
+
+afterEach(function() {
+    restoreAll();
+});
+
+test('sets valid horizontal value from attributes', function() {
     $component = create_component_with_layout_alignment(['hAlign' => 'center']);
 
     expect($component->get_hAlign())->toBe(Alignment::CENTER);
 });
 
-test('sets valid vertical value', function() {
+test('sets valid vertical value from attributes', function() {
     $component = create_component_with_layout_alignment(['vAlign' => 'center']);
 
     expect($component->get_vAlign())->toBe(Alignment::CENTER);
+});
+
+test('sets halign from component defaults if no attribute is provided', function() {
+    redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['hAlign' => Alignment::CENTER]);
+
+    $component = create_component_with_layout_alignment([]);
+
+    expect($component->get_hAlign())->toBe(Alignment::CENTER);
+});
+
+test('sets valign from component defaults if no attribute is provided', function() {
+    redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['vAlign' => Alignment::CENTER]);
+
+    $component = create_component_with_layout_alignment([]);
+
+    expect($component->get_vAlign())->toBe(Alignment::CENTER);
+});
+
+test('ignores component defaults if a valid attribute value is provided', function() {
+    redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['hAlign' => Alignment::CENTER, 'vAlign' => Alignment::CENTER]);
+
+    $component = create_component_with_layout_alignment(['hAlign' => 'start', 'vAlign' => 'start']);
+
+    expect($component->get_hAlign())->toBe(Alignment::START)
+        ->and($component->get_vAlign())->toBe(Alignment::START);
 });
 
 test('uses fallback horizontal value when an invalid value is provided', function() {
