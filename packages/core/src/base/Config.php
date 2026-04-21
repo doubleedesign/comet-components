@@ -23,10 +23,11 @@ class Config {
         'black' => '#000000',
     ];
     private array $theme_colour_pairs = [];
+    private array $theme_colour_pair_overrides = [];
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
-            define('COMET_VERSION', '0.7.0');
+            define('COMET_VERSION', '0.8.0');
         }
 
         if (self::$instance === null) {
@@ -114,17 +115,23 @@ class Config {
 
     /**
      * @param  array  $pairs  - array of arrays with two values, the first being the desired foreground and the second being the background
+     *                        - optional third value of a contrast threshold override
      *
      * @return void
      */
     public function maybe_add_theme_colour_pairs(array $pairs): void {
         // If one pair was passed as a flat array, convert it to a nested array
         if (count($pairs) === 2 && is_string($pairs[0]) && is_string($pairs[1])) {
-            $pairs = [[$pairs[0], $pairs[1]]];
+            $pairs = array([$pairs[0], $pairs[1], $pairs[2] ?? null]);
         }
 
         foreach ($pairs as $pair) {
-            $this->maybe_add_theme_colour_pair($pair[0], $pair[1]);
+            if (isset($pair[2])) {
+                $this->maybe_add_theme_colour_pair($pair[0], $pair[1], $pair[2]);
+            }
+            else {
+                $this->maybe_add_theme_colour_pair($pair[0], $pair[1]);
+            }
         }
     }
 
@@ -156,6 +163,21 @@ class Config {
 
     public function get_theme_colour_pairs(): array {
         return $this->theme_colour_pairs;
+    }
+
+    /**
+     * Option to override available colour pairs on a per-component basis
+     *
+     * @param  array<string, array{foreground: string, background: string}>  $overrides  - array of componentName => colour pair entries
+     *
+     * @return void
+     */
+    public function set_colour_pair_overrides(array $overrides): void {
+        $this->theme_colour_pair_overrides = array_merge($this->theme_colour_pair_overrides, $overrides);
+    }
+
+    public function get_theme_colour_pair_overrides(): array {
+        return $this->theme_colour_pair_overrides;
     }
 
     public function set_icon_prefix($prefix): void {
