@@ -217,36 +217,6 @@
     --theme-color: var(--color-white);
     --theme-color-inverse: var(--readable-color-white);
   }
-  [data-text-color=primary] {
-    color: var(--color-primary);
-  }
-  [data-text-color=secondary] {
-    color: var(--color-secondary);
-  }
-  [data-text-color=accent] {
-    color: var(--color-accent);
-  }
-  [data-text-color=info] {
-    color: var(--color-info);
-  }
-  [data-text-color=warning] {
-    color: var(--color-warning);
-  }
-  [data-text-color=success] {
-    color: var(--color-success);
-  }
-  [data-text-color=error] {
-    color: var(--color-error);
-  }
-  [data-text-color=light] {
-    color: var(--color-light);
-  }
-  [data-text-color=dark] {
-    color: var(--color-dark);
-  }
-  [data-text-color=white] {
-    color: var(--color-white);
-  }
   body[data-global-background=primary] {
     background-color: var(--color-primary);
     color: var(--readable-color-primary);

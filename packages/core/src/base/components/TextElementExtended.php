@@ -5,7 +5,6 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::SPAN)]
 abstract class TextElementExtended extends TextElement {
     use BlockElementModifier;
-    use TextColor;
 
     public function __construct(array $attributes, string $content, string $bladeFile) {
         parent::__construct($attributes, $content, $bladeFile);

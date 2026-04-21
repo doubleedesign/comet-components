@@ -164,15 +164,6 @@
 		}
 	}
 
-	// Basic theme styling for elements with a text colour attribute specified
-	// This should be used sparingly - use the color theme setting as much as is practical
-	// I am intending to deprecate this.
-	@each $name, $color in $colors {
-		[data-text-color="#{$name}"] {
-			color: var(--color-#{$name});
-		}
-	}
-
 	// Basic theme styling for elements with a background colour attribute specified
 	@each $name, $color in $colors {
 		body[data-global-background="#{$name}"] {
