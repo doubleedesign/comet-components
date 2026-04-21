@@ -14,25 +14,45 @@ trait BackgroundColor {
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
     protected function set_background_color_from_attrs(array $attributes, ?ThemeColor $fallback = null): void {
-        if (!isset($attributes['backgroundColor']) && isset($fallback)) {
-            $attributes['backgroundColor'] = $fallback->value;
+        // Set from passed-in attributes if set
+        if (isset($attributes['backgroundColor'])) {
+            $this->backgroundColor = $this->get_from_string_or_theme_color($attributes['backgroundColor']);
         }
-        // Only set a background color if this is nested OR the background color is different from the global background
+
+        // If no passed-in attribute (or applying it failed), check component defaults
+        if (!$this->backgroundColor) {
+            $class = static::class;
+            $classShortname = Utils::kebab_case(substr($class, strrpos($class, '\\') + 1));
+            $defaults = Config::getInstance()->get_component_defaults($classShortname);
+            if (isset($defaults['backgroundColor'])) {
+                $this->backgroundColor = $this->get_from_string_or_theme_color($defaults['backgroundColor']);
+            }
+        }
+
+        // If still null, use the passed-in fallback if there is one
+        if (!isset($this->backgroundColor) && isset($fallback)) {
+            $this->backgroundColor = $this->get_from_string_or_theme_color($fallback);
+        }
+
+        // Only keep the set background color if this is nested OR the background color is different from the global background
         // So we don't set background attributes on top-level components when not needed
         $globalBackground = Config::getInstance()->get_global_background();
-        $isSameAsGlobal = isset($attributes['backgroundColor']) && $attributes['backgroundColor'] === $globalBackground;
+        $isSameAsGlobal = isset($this->backgroundColor) && $this->backgroundColor === $globalBackground;
         $isNested = (isset($this->isNested) && $this->isNested) || (isset($attributes['isNested']) && $attributes['isNested']);
-
         if ((!$isNested && $isSameAsGlobal) || !isset($attributes['backgroundColor'])) {
-            return;
+            $this->backgroundColor = null;
+        }
+    }
+
+    private function get_from_string_or_theme_color($value): ?ThemeColor {
+        if ($value instanceof ThemeColor) {
+            return $value;
+        }
+        else if (is_string($value)) {
+            return ThemeColor::tryFrom($value);
         }
 
-        if ($attributes['backgroundColor'] instanceof ThemeColor) {
-            $this->backgroundColor = $attributes['backgroundColor'];
-        }
-        else {
-            $this->backgroundColor = ThemeColor::tryFrom($attributes['backgroundColor']) ?? null;
-        }
+        return null;
     }
 
     /**

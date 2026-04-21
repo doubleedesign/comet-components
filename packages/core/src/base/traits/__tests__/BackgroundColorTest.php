@@ -168,7 +168,7 @@ describe('Set background colour based on inner components', function() {
         $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
 
         $parent = create_component_with_inner_components(
-            [], // No background
+            ['backgroundColor' => 'primary'],
             [$child1, $child2, $child3]
         );
 
