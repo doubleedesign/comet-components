@@ -1,18 +1,18 @@
 <?php return array(
     'root' => array(
         'name' => 'doubleedesign/comet-canvas-blocks',
-        'pretty_version' => '0.7.0',
-        'version' => '0.7.0.0',
+        'pretty_version' => '0.8.0',
+        'version' => '0.8.0.0',
         'reference' => null,
         'type' => 'wordpress-theme',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'doubleedesign/comet-canvas-blocks' => array(
-            'pretty_version' => '0.7.0',
-            'version' => '0.7.0.0',
+            'pretty_version' => '0.8.0',
+            'version' => '0.8.0.0',
             'reference' => null,
             'type' => 'wordpress-theme',
             'install_path' => __DIR__ . '/../../',
