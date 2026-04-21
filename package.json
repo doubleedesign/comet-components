@@ -1,6 +1,6 @@
 {
 	"name": "comet-components",
-	"version": "0.7.0",
+	"version": "0.8.0",
 	"description": "",
 	"author": "Leesa Ward",
 	"type": "module",
@@ -8,6 +8,7 @@
 		"storybook": "npx kill-port 6006 && storybook dev --debug -p 6006 --https --ssl-cert .cert/cert.pem --ssl-key .cert/key.pem --host storybook.comet-components.test",
 		"build-storybook": "storybook build",
 		"docs": "cd docs-site && pnpm run docs:dev",
+		"docs:build": "cd docs-site && pnpm run docs:build",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
 		"generate:docs": "php scripts/generate-docs.php",
 		"generate:stories": "php scripts/generate-stories.php",
