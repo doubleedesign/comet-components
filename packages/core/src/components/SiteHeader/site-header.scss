@@ -22,7 +22,6 @@
 
 		img {
 			width: 100%;
-			max-width: 11rem;
 		}
 	}
 
@@ -61,6 +60,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-xl);
+
+		// Container names based on whether the small-viewport menu is present or not allows us to query "above or below breakpoint"
+		// without needing to code in the actual breakpoint (because it can vary and we can't do media/container queries with a CSS var)
+		// because the Vue component takes care of whether or not the element with "data-style" (the small-viewport menu) is rendered in the DOM or not based on the breakpoint
+		container-name: header-responsive-expanded;
+		&:has([data-style]) { // Has the small-viewport menu
+			container-name: header-responsive-compact;
+		}
 
 		&:has([data-style="off-canvas"]) {
 			position: absolute;
@@ -232,7 +239,7 @@
 		[data-style="overlay"] &,
 		[data-style="off-canvas"] & {
 			container-type: initial;
-			container-name: header-menu-condensed;
+			container-name: header-menu-compact;
 			flex-grow: 0;
 		}
 

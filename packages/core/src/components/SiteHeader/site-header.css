@@ -19,7 +19,6 @@
 }
 .site-header__logo img {
   width: 100%;
-  max-width: 11rem;
 }
 .site-header__contact {
   margin-inline-start: auto;
@@ -48,6 +47,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  container-name: header-responsive-expanded;
+}
+.site-header__responsive:has([data-style]) {
+  container-name: header-responsive-compact;
 }
 .site-header__responsive:has([data-style=off-canvas]) {
   position: absolute;
@@ -188,7 +191,7 @@ body:has(.site-header__responsive__content[data-style=off-canvas][data-open=true
 }
 [data-style=overlay] .site-header__menu, [data-style=off-canvas] .site-header__menu {
   container-type: initial;
-  container-name: header-menu-condensed;
+  container-name: header-menu-compact;
   flex-grow: 0;
 }
 [data-style=off-canvas] .site-header__menu {
