@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/html-vite';
+import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
 	'stories': [
@@ -12,6 +13,12 @@ const config: StorybookConfig = {
 	'framework': {
 		'name': '@storybook/html-vite',
 		'options': {}
+	},
+	core: {
+		allowedHosts: ['storybook.comet-components.test'],
+	},
+	viteFinal(config) {
+		return mergeConfig(config, { server: { allowedHosts: true } });
 	}
 };
 export default config;
