@@ -24,7 +24,7 @@ class FileGroup extends WrappedLayoutComponent {
      * @param array<File|array<string,string> $files - Either an array of File objects or an array of associative arrays corresponding to File fields
      */
     public function __construct(array $attributes, array $files) {
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
+        $this->set_color_theme($attributes);
         if (!isset($attributes['shortName'])) {
             $attributes['shortName'] = 'files';
         }

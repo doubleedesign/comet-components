@@ -30,10 +30,10 @@ class Group extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Group.group');
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_color_theme($attributes);
         /* Allow groups without a specified background to be transparent rather than defaulting to the fallback */
         if (isset($attributes['backgroundColor'])) {
-            $this->set_background_color_from_attrs($attributes);
+            $this->set_background_color($attributes);
             $this->simplify_all_background_colors();
         }
 

@@ -1568,7 +1568,8 @@
                     "dark",
                     "white",
                     "black"
-                ]
+                ],
+                "default": "info"
             },
             "context": {
                 "type": "string",
@@ -2065,7 +2066,8 @@
                     "list",
                     "grid",
                     "inline"
-                ]
+                ],
+                "default": "list"
             },
             "link": {
                 "type": "array",
@@ -3602,7 +3604,8 @@
                     "list",
                     "grid",
                     "inline"
-                ]
+                ],
+                "default": "list"
             },
             "maxPerRow": {
                 "type": "int",
@@ -3820,7 +3823,8 @@
                     "dark",
                     "white",
                     "black"
-                ]
+                ],
+                "default": "primary"
             },
             "context": {
                 "type": "string",
@@ -4790,7 +4794,8 @@
                     "list",
                     "grid",
                     "inline"
-                ]
+                ],
+                "default": "list"
             },
             "maxPerRow": {
                 "type": "int",
@@ -5971,7 +5976,6 @@
         },
         "traits": [
             "ColorTheme",
-            "ColorTheme",
             "BlockElementModifier"
         ]
     },
@@ -6023,7 +6027,8 @@
                     "dark",
                     "white",
                     "black"
-                ]
+                ],
+                "default": "primary"
             },
             "context": {
                 "type": "string",

@@ -20,7 +20,7 @@ class PostNav extends UIComponent {
 
     public function __construct(array $attributes) {
         $this->entityName = $attributes['entityName'] ?? $this->entityName;
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_color_theme($attributes);
 
         $innerComponents = [];
         if (isset($attributes['links']) && is_array($attributes['links'])) {

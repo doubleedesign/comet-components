@@ -26,8 +26,8 @@ class CardList extends WrappedLayoutComponent {
     protected array $innerComponents = [];
 
     public function __construct(array $attributes, array $innerComponents) {
-        $this->set_group_layout_from_attrs($attributes);
-        $this->set_layout_alignment_from_attrs($attributes, Alignment::START);
+        $this->set_group_layout($attributes);
+        $this->set_layout_alignment($attributes, Alignment::START);
         $headingComponent = isset($attributes['heading']) ? new Heading([], $attributes['heading']) : null;
         $linkComponent = isset($attributes['link']) ? new Button($attributes['link'], $attributes['link']['title'] ?? 'View more') : null;
 

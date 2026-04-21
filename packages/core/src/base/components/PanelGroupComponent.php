@@ -19,11 +19,11 @@ abstract class PanelGroupComponent extends UIComponent {
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->prepare_inner_components_for_vue($innerComponents);
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
-        $this->set_background_color_from_attrs($attributes);
-        $this->set_orientation_from_attrs($attributes);
+        $this->set_color_theme($attributes, ThemeColor::PRIMARY);
+        $this->set_background_color($attributes);
+        $this->set_orientation($attributes);
         $this->set_is_nested($attributes['isNested'] ?? false);
-        $this->set_size_from_attrs($attributes);
+        $this->set_size($attributes);
     }
 
     private function prepare_inner_components_for_vue($rawInnerComponents): void {

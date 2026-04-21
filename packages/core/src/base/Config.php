@@ -12,17 +12,20 @@ class Config {
     private string $icon_prefix = 'fa-solid';
     private array $blade_component_paths = [];
     private array $component_defaults = [
-        'site-header'    => ['breakpoint' => '1024px'],
-        'call-to-action' => ['colorTheme' => ThemeColor::WHITE, 'innerBackground' => ThemeColor::PRIMARY, 'backgroundColor' => ThemeColor::WHITE],
-        'page-header'    => ['colorTheme' => ThemeColor::PRIMARY],
-        'site-footer'    => ['backgroundColor' => ThemeColor::DARK, 'hAlign' => Alignment::CENTER],
-        'menu'           => ['colorTheme' => ThemeColor::PRIMARY],
-        'button-group'   => ['colorTheme' => ThemeColor::PRIMARY, 'orientation' => Orientation::HORIZONTAL],
-        'button' 	       => ['colorTheme' => ThemeColor::PRIMARY],
-        'icon-links'     => ['orientation' => Orientation::HORIZONTAL],
-        'card-list'      => ['layout' => GroupLayout::GRID],
-        'event-list'     => ['layout' => GroupLayout::GRID],
-        'link-group'     => ['layout' => GroupLayout::LIST],
+        'site-header'            => ['breakpoint' => '1024px'],
+        'call-to-action'         => ['colorTheme' => ThemeColor::WHITE, 'innerBackground' => ThemeColor::PRIMARY, 'backgroundColor' => ThemeColor::WHITE],
+        'page-header'            => ['colorTheme' => ThemeColor::PRIMARY],
+        'site-footer'            => ['backgroundColor' => ThemeColor::DARK, 'hAlign' => Alignment::CENTER],
+        'menu'                   => ['colorTheme' => ThemeColor::PRIMARY],
+        'button-group'           => ['colorTheme' => ThemeColor::PRIMARY, 'orientation' => Orientation::HORIZONTAL],
+        'button' 	               => ['colorTheme' => ThemeColor::PRIMARY],
+        'icon-links'             => ['orientation' => Orientation::HORIZONTAL],
+        'card-list'              => ['layout' => GroupLayout::GRID],
+        'event-list'             => ['layout' => GroupLayout::GRID],
+        'link-group'             => ['layout' => GroupLayout::LIST],
+        'callout'                => ['colorTheme' => ThemeColor::INFO],
+        'separator'              => ['colorTheme' => ThemeColor::PRIMARY],
+        'file-group'             => ['colorTheme' => ThemeColor::PRIMARY]
     ];
     private array $theme_colours = [
         'white' => '#FFFFFF',

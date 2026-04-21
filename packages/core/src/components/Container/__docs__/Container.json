@@ -77,7 +77,7 @@
                 "horizontal",
                 "vertical"
             ],
-            "default": "null"
+            "default": "vertical"
         },
         "shortName": {
             "type": "string",

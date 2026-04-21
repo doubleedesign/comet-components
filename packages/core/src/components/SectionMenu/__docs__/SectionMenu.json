@@ -28,8 +28,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "primary"
+            ]
         },
         "context": {
             "type": "string",
@@ -69,7 +68,6 @@
         "required": true
     },
     "traits": [
-        "ColorTheme",
         "ColorTheme",
         "BlockElementModifier"
     ]

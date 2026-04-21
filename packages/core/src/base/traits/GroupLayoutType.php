@@ -6,7 +6,7 @@ trait GroupLayoutType {
      * @var GroupLayout $layout
      * @description Layout style for grouping elements together.
      */
-    protected GroupLayout $layout;
+    protected GroupLayout $layout = GroupLayout::LIST;
 
     /**
      * @var int $maxPerRow

@@ -26,7 +26,7 @@ class PageHeader extends WrappedLayoutComponent {
     protected array $breadcrumbs;
 
     public function __construct(array $attributes, string $content, array $breadcrumbs = []) {
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_color_theme($attributes);
         $this->breadcrumbs = $breadcrumbs;
         $this->innerComponents = !empty($breadcrumbs) ? [new Breadcrumbs([], $this->breadcrumbs)] : [];
 

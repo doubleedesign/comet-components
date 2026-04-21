@@ -14,7 +14,7 @@ function create_component_with_bg_color(array $attributes): object {
         use BackgroundColor;
 
         public function __construct(array $attributes) {
-            $this->set_background_color_from_attrs($attributes);
+            $this->set_background_color($attributes);
         }
 
         public function get_background_color() {
@@ -37,7 +37,7 @@ function create_component_with_inner_components(array $attributes = [], array $i
         public array $innerComponents = [];
 
         public function __construct(array $attributes, array $innerComponents = []) {
-            $this->set_background_color_from_attrs($attributes);
+            $this->set_background_color($attributes);
             $this->innerComponents = $innerComponents;
         }
     };
@@ -50,14 +50,14 @@ describe('Set background color from attributes', function() {
     test('sets valid value', function() use ($spy) {
         $component = create_component_with_bg_color(['backgroundColor' => 'secondary']);
 
-        $spy->shouldReceive('set_background_color_from_attrs');
+        $spy->shouldReceive('set_background_color');
         expect($component->get_background_color())->toBe(ThemeColor::SECONDARY);
     });
 
     test('sets null when invalid', function() use ($spy) {
         $component = create_component_with_bg_color(['backgroundColor' => '#FFF']);
 
-        $spy->shouldReceive('set_background_color_from_attrs');
+        $spy->shouldReceive('set_background_color');
         expect($component->get_background_color())->toBeNull();
     });
 });

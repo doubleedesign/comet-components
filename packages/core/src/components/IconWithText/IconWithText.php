@@ -18,7 +18,7 @@ class IconWithText extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.IconWithText.icon-with-text');
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
+        $this->set_color_theme($attributes, ThemeColor::PRIMARY);
         $this->set_icon_from_attrs([
             'iconPrefix' => $attributes['iconPrefix'] ?? 'fa-duotone fa-solid',
             ...$attributes

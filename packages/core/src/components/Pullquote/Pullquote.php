@@ -22,9 +22,9 @@ class Pullquote extends TextElementExtended {
 
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, $content, 'components.Pullquote.pullquote');
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_color_theme($attributes);
         $this->citation = $attributes['citation'] ?? null;
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_color_theme($attributes);
     }
 
     protected function get_html_attributes(): array {

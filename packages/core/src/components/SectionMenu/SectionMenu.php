@@ -11,7 +11,6 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::NAV])]
 #[DefaultTag(Tag::NAV)]
 class SectionMenu extends Menu {
-    use ColorTheme;
 
     /**
      * @param  array  $attributes
@@ -32,17 +31,8 @@ class SectionMenu extends Menu {
             array_merge($attributes, ['context' => 'section-navigation']),
             $menuItems
         );
-
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
         // We don't expect this to have a wrapper with 'section-menu' class - this *is* the wrapper,
         // so we don't want section-menu__menu as would be the default
         $this->set_bem_block('section-navigation');
-    }
-
-    protected function get_html_attributes(): array {
-        return array_merge(
-            parent::get_html_attributes(),
-            ['data-color-theme' => $this->colorTheme->value]
-        );
     }
 }

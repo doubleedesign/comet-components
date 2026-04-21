@@ -64,22 +64,6 @@
                 "justify",
                 "match-parent"
             ]
-        },
-        "textColor": {
-            "type": "ThemeColor",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ]
         }
     },
     "content": {
@@ -89,7 +73,6 @@
     },
     "traits": [
         "BlockElementModifier",
-        "TextColor",
         "TextAlign"
     ]
 }

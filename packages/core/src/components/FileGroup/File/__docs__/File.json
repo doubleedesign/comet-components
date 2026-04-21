@@ -28,8 +28,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "null"
+            ]
         },
         "context": {
             "type": "string",

@@ -26,8 +26,8 @@ class PageSection extends Renderable {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, 'components.PageSection.page-section');
         $this->set_shortname($attributes['shortName'] ?? 'page-section');
-        $this->set_background_color_from_attrs($attributes);
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_background_color($attributes);
+        $this->set_color_theme($attributes);
         $this->innerComponents = $innerComponents;
     }
 
