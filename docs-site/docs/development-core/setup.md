@@ -132,6 +132,14 @@ choco install sass
 composer global require laravel/pint
 ```
 
+## Install JavaScript package manager
+
+Comet Components uses [PNPM](https://pnpm.io/) as the JavaScript/Node package manager. Install it globally with:
+
+```powershell::no-line-numbers
+npm install -g pnpm
+```
+
 ## Install project dependencies
 
 The project contains multiple sub-packages, and uses both [Composer](https://getcomposer.org/) and [NPM](https://www.npmjs.com/) to manage different types of dependencies.
@@ -139,7 +147,7 @@ The project contains multiple sub-packages, and uses both [Composer](https://get
 A convenience script is provided to install all dependencies in the project root and all `packages`. You can run it from the project root (`comet-components` directory) with:
 
 ```powershell::no-line-numbers
-npm run refresh:all:dev
+pnpm run refresh:all:dev
 ```
 
 This version uses `composer.local.json` if it exists, to symlink the core package to its usages in the other packages.
@@ -147,7 +155,7 @@ This version uses `composer.local.json` if it exists, to symlink the core packag
 For a standard install, use:
 
 ```powershell::no-line-numbers
-npm run refresh:all
+pnpm run refresh:all
 ```
 
 :::warning
@@ -477,7 +485,7 @@ Ensure that the Herd project site loads as secure by navigating to a test compon
 Next, you can run Storybook locally with:
 
 ```powershell::no-line-numbers
-npm run storybook
+pnpm run storybook
 ```
 
 Use the "network" URL to access it: https://storybook.comet-components.test:6006/ and ensure that your browser sees the connection as secure.

@@ -12,12 +12,12 @@ Run these from the root of the project.
 
 | Command                          | Description                                                                                                                                                              |
 |----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `npm run refresh:composer`       | Refresh Composer dependencies and autoloading for the root and all packages  <Badge type="warning" text="Requires PowerShell"/>                                          |
-| `npm run refresh:npm`            | Run `npm install` in the root and all packages, and `rollup` in packages that use it  <Badge type="warning" text="Requires PowerShell"/>                                 |
-| `npm run refresh:all`            | Install/update Composer and NPM dependencies in the root and all packages <Badge type="warning" text="Requires PowerShell"/>                                             |
-| `npm run refresh:autoload`       | Run `composer dump-autoload -o` for the root and all packages (skip updating dependencies)  <Badge type="warning" text="Requires PowerShell"/>                           |
-| `npm run refresh:composer:dev`   | Refresh Composer dependencies and autoloading for the root and all packages, using `composer.local.json` if available <Badge type="warning" text="Requires PowerShell"/> |
-| `npm run refresh:npmpackages`    | Run `npm install` and `rollup` in the packages only (skips installing/updating root dev deps like Storybook)  <Badge type="warning" text="Requires PowerShell"/>         |
+| `pnpm run refresh:composer`      | Refresh Composer dependencies and autoloading for the root and all packages  <Badge type="warning" text="Requires PowerShell"/>                                          |
+| `pnpm run refresh:npm`           | Run `npm install` in the root and all packages, and `rollup` in packages that use it  <Badge type="warning" text="Requires PowerShell"/>                                 |
+| `pnpm run refresh:all`           | Install/update Composer and NPM dependencies in the root and all packages <Badge type="warning" text="Requires PowerShell"/>                                             |
+| `pnpm run refresh:autoload`      | Run `composer dump-autoload -o` for the root and all packages (skip updating dependencies)  <Badge type="warning" text="Requires PowerShell"/>                           |
+| `pnpm run refresh:composer:dev`  | Refresh Composer dependencies and autoloading for the root and all packages, using `composer.local.json` if available <Badge type="warning" text="Requires PowerShell"/> |
+| `pnpm run refresh:npmpackages`   | Run `npm install` and `rollup` in the packages only (skips installing/updating root dev deps like Storybook)  <Badge type="warning" text="Requires PowerShell"/>         |
 | `php ./scripts/healthcheck.php`  | Check for expected files                                                                                                                                                 |
 | `php ./scripts/generate-xml.php` | Regenerate the XML schema for Tycho Template syntax.                                                                                                                     |
 
@@ -39,7 +39,7 @@ first if you want to run these for a package.
 
 | Command                      | Description                                                                                                          |
 |------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| `npm run build`              | Bundle Core package component JS and its dependencies into a single file using Rollup                                |
+| `pnpm run build`             | Bundle Core package component JS and its dependencies into a single file using Rollup                                |
 | `sass input.scss:output.css` | Compile a CSS file (or the global file) using Sass (replace `input.scss` and `output.css` with the actual filenames) |
 
 ## New component creation
@@ -51,7 +51,7 @@ The JSON definition and story generators require PHP 8.4+.
 Generate a new component (example):
 
 ```bash
-npm run generate component -- --name=gallery --type=simple
+pnpm run generate component -- --name=gallery --type=simple
 ```
 
 Once you have added fields and docblock comments to a component, generate the JSON definition file and [Tycho Template syntax](../usage/overview.md#tycho-template-syntax) XML definition file (example):
@@ -94,6 +94,6 @@ php scripts/generate-trait-docs.php
 
 ## Testing
 
-| Command             | Description                                         |
-|---------------------|-----------------------------------------------------|
-| `npm run storybook` | Run Storybook for component demos and documentation |
+| Command              | Description                                         |
+|----------------------|-----------------------------------------------------|
+| `pnpm run storybook` | Run Storybook for component demos and documentation |

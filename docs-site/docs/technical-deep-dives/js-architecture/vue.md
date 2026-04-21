@@ -93,7 +93,7 @@ Vue.createApp({
 
 
 :::note
-If you don't have a [file watcher](../../local-dev-deep-dives/tooling-guides/phpstorm.md#file-watchers) or other automatic way for Rollup to run configured, you will need to run `npm run build` from the core package directory manually to update the `dist.js` file with your new script - and do so again whenever you change it.
+If you don't have a [file watcher](../../local-dev-deep-dives/tooling-guides/phpstorm.md#file-watchers) or other automatic way for Rollup to run configured, you will need to run `pnpm run build` from the core package directory manually to update the `dist.js` file with your new script - and do so again whenever you change it.
 :::
 
 6. In your component's PHP `render()` method, add the props you want to pass to the Vue component. For example:

@@ -47,7 +47,7 @@ https://comet-components.test/packages/core/src/components/Columns/__tests__/pag
 Run the following command in the project root directory to start a basic PHP web server:
 
 ```bash
-php ./test/browser/start.php
+php ./tests/browser/start.php
 ```
 
 This will start a PHP web server on port 6001. For maximum compatibility with default local dev configurations and path resolution workarounds, it is recommended to:

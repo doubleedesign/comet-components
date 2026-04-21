@@ -7,17 +7,17 @@
 	"scripts": {
 		"storybook": "npx kill-port 6006 && storybook dev --debug -p 6006 --https --ssl-cert .cert/cert.pem --ssl-key .cert/key.pem --host storybook.comet-components.test",
 		"build-storybook": "storybook build",
-		"docs": "cd docs-site && npm run docs:dev",
+		"docs": "cd docs-site && pnpm run docs:dev",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
 		"generate:docs": "php scripts/generate-docs.php",
 		"generate:stories": "php scripts/generate-stories.php",
 		"refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
-		"refresh:composer:dev": "npm run refresh:composer -- -local",
-		"refresh:autoload": "npm run refresh:composer -- -autoload",
+		"refresh:composer:dev": "pnpm run refresh:composer -- -local",
+		"refresh:autoload": "pnpm run refresh:composer -- -autoload",
 		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
-		"refresh:npmpackages": "npm run refresh:npm -- -packagesOnly",
-		"refresh:all": "npm run refresh:composer && npm run refresh:npm",
-		"refresh:all:dev": "npm run refresh:composer:dev && npm run refresh:npm",
+		"refresh:npmpackages": "pnpm run refresh:npm -- -packagesOnly",
+		"refresh:all": "pnpm run refresh:composer && pnpm run refresh:npm",
+		"refresh:all:dev": "pnpm run refresh:composer:dev && pnpm run refresh:npm",
 		"test:storybook": "playwright test -c .storybook/playwright.config.ts"
 	},
 	"devDependencies": {

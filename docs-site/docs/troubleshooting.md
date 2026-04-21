@@ -52,7 +52,7 @@ Settings > Languages & Frameworks > Node.js
 :::
 
 :::details Where is my PHP configuration (php.ini) file?
-:warning: **Note:** The browser dev/testing envrionment run with `npm run test:server` uses its own, separate config file. Similarly if you are developing a WordPress site using Local by Flywheel, your site will use the config set by Local.
+:warning: **Note:** The browser dev/testing envrionment run with `pnpm run test:server` uses its own, separate config file. Similarly if you are developing a WordPress site using Local by Flywheel, your site will use the config set by Local.
 
 The below commands will show the configuration for your command line and/or IDE instance of PHP.
 ::: tabs#shell
@@ -160,10 +160,10 @@ Below is an example of the test run output and the coverage tool window.
 Is the script loaded either independently, or as part of the `dist.js` bundle? If not, either:
 
 - Add a script tag (or in WordPress, `wp_enqueue_script`) to load it, remembering that you may need to put the `type="module"` attribute on the script tag
-- Add the script to `rollup.index.js` and run `npm run build`
+- Add the script to `rollup.index.js` and run `pnpm run build`
 - If the script is to be included in the bundle, ensure the import path remapping in `rollup.config.js` will resolve any imports in the file correctly.
 
-If the script is listed in `rollup.index.js` and the import path transformation seems correct, try running `npm run build` - maybe the file watcher didn't auto-compile it when expected.
+If the script is listed in `rollup.index.js` and the import path transformation seems correct, try running `pnpm run build` - maybe the file watcher didn't auto-compile it when expected.
 :::
 
 ::: details Sass not recompiling when an imported file changes
@@ -219,5 +219,5 @@ Restart the Storybook server. This issue is particularly common with `main.ts` a
 ## Documentation site changes
 
 :::details Error '"SEARCH_INDEX" is not exported' when running the build step
-This error occurs when you try to build the docs site while the dev version is running. Stop the dev version and run `npm run docs:build` from the `docs-site` directory again.
+This error occurs when you try to build the docs site while the dev version is running. Stop the dev version and run `pnpm run docs:build` from the `docs-site` directory again.
 :::

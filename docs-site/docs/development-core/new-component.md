@@ -15,11 +15,11 @@ Note: If using PowerShell **or** WSL with Node aliased to PowerShell, do not use
 ::: tabs#shell
 @tab WSL (Bash)
 ```bash:no-line-numbers
-npm run generate component -- --name=YourThing --type=simple
+pnpm run generate component -- --name=YourThing --type=simple
 ```
 @tab PowerShell
 ```powershell:no-line-numbers
-npm run generate component -- --name YourThing --type simple
+pnpm run generate component -- --name YourThing --type simple
 ```
 :::
 
@@ -56,7 +56,7 @@ sass editor.scss:editor.css
 If you add a custom front-end JavaScript file, add it to `rollup.index.js` in the Core package and run Rollup to update the bundle. (You can set up a [file watcher](./tooling/phpstorm.md) for this too.)
 
 ```bash:no-line-numbers
-npm run build
+pnpm run build
 ```
 
 ## Generate documentation
@@ -95,7 +95,7 @@ php scripts/generate-json-defs.php --component Example
 
 ## View in Storybook
 
-Ensure your [local web server](testing/browser.md) is running, and optionally launch Storybook (`npm run storybook` from the project root) to view the new component in the browser.
+Ensure your [local web server](testing/browser.md) is running, and optionally launch Storybook (`pnpm run storybook` from the project root) to view the new component in the browser.
 
 ## Further reading
 

@@ -37,28 +37,28 @@ Windows-specific setup options and instructions are listed in the [Windows setup
 ::: tabs#shell
 @tab WSL (Bash)
 ```bash:no-line-numbers
-npm run refresh:all:dev
+pnpm run refresh:all:dev
 ```
 @tab PowerShell
 ```powershell:no-line-numbers
-npm run refresh:all:dev
+pnpm run refresh:all:dev
 ```
 :::
 
 See the [CLI command quick reference](../development-core/cli-commands.md) for more options if you are returning to an already set up copy of the project and don't need to do a full refresh.
 
-3. Run the [local web server](../development-core/testing/browser.md) and Storybook (`npm run storybook` from the project root) to see what you're working with!
+3. Run the [local web server](../development-core/testing/browser.md) and Storybook (`pnpm run storybook` from the project root) to see what you're working with!
 
 4. Optionally, run these docs locally in dev mode:
 
 ::: tabs#shell
 @tab WSL (Bash)
 ```bash:no-line-numbers
-npm run docs
+pnpm run docs
 ```
 @tab PowerShell
 ```powershell:no-line-numbers
-npm run docs
+pnpm run docs
 ```
 :::
 

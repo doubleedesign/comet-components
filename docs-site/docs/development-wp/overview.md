@@ -36,7 +36,7 @@ To use your local copy of Comet Components packages in your dev site instead of 
 1. In the `comet-components` project directory, refresh all dependencies with:
 
    ```bash
-   npm run refresh:all:dev
+   pnpm run refresh:all:dev
    ```
 
    The `:dev` version of the refresh script uses `composer.local.json` where available, which should be configured to symlink local package usages (e.g., the
