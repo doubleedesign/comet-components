@@ -29,9 +29,9 @@ class ButtonGroup extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.ButtonGroup.button-group');
-        $this->set_orientation_from_attrs($attributes, Orientation::HORIZONTAL);
-        $this->set_layout_alignment_from_attrs($attributes, Alignment::MATCH_PARENT);
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
+        $this->set_orientation_from_attrs($attributes);
+        $this->set_layout_alignment_from_attrs($attributes);
+        $this->set_color_theme_from_attrs($attributes);
     }
 
     protected function get_html_attributes(): array {

@@ -23,7 +23,7 @@ class Container extends WrappedLayoutComponent {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Container.container');
         $this->set_size_from_attrs($attributes);
-        $this->set_orientation_from_attrs($attributes, null);
+        $this->set_orientation_from_attrs($attributes);
         $this->gradient = $attributes['gradient'] ?? null;
         $this->set_is_nested($attributes['isNested'] ?? false);
     }

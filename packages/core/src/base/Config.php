@@ -17,6 +17,9 @@ class Config {
         'page-header'    => ['colorTheme' => ThemeColor::PRIMARY],
         'site-footer'    => ['backgroundColor' => ThemeColor::DARK, 'hAlign' => Alignment::CENTER],
         'menu'           => ['colorTheme' => ThemeColor::PRIMARY],
+        'button-group'   => ['colorTheme' => ThemeColor::PRIMARY, 'orientation' => Orientation::HORIZONTAL],
+        'button' 	       => ['colorTheme' => ThemeColor::PRIMARY],
+        'icon-links'     => ['orientation' => Orientation::HORIZONTAL],
     ];
     private array $theme_colours = [
         'white' => '#FFFFFF',
