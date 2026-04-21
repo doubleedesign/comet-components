@@ -36,7 +36,7 @@ class Button extends Renderable {
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, 'components.Button.button');
         $this->init_bem_structure('components.Button.button', $attributes['context'] ?? null, $attributes['shortName'] ?? null);
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_color_theme($attributes);
         $this->isOutline = $attributes['isOutline'] ?? false;
         $this->content = $content;
     }

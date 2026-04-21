@@ -32,7 +32,7 @@ class Columns extends WrappedLayoutComponent {
         $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
         $this->set_is_nested($attributes['isNested'] ?? false);
         $this->withContainer = $attributes['withContainer'] ?? !$this->get_is_nested() ?? $this->withContainer;
-        $this->set_layout_alignment_from_attrs($attributes);
+        $this->set_layout_alignment($attributes);
 
         // For nested instances, default to div tag unless specified otherwise in the attributes
         if ($this->get_is_nested() && !isset($attributes['tagName'])) {

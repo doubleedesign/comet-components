@@ -15,7 +15,7 @@ function create_component_with_color_theme(array $attributes): object {
         use ColorTheme;
 
         public function __construct(array $attributes) {
-            $this->set_color_theme_from_attrs($attributes);
+            $this->set_color_theme($attributes);
         }
 
         public function get_color_theme() {

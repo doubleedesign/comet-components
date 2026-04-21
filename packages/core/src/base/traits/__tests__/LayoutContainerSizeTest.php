@@ -16,7 +16,7 @@ function create_component_with_layout_container_size(array $attributes): object 
         use LayoutContainerSize;
 
         public function __construct(array $attributes) {
-            $this->set_size_from_attrs($attributes);
+            $this->set_size($attributes);
         }
 
         public function get_size() {

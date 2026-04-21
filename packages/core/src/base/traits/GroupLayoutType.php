@@ -19,7 +19,7 @@ trait GroupLayoutType {
      * @param  ?GroupLayout  $fallback
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
-    protected function set_group_layout_from_attrs(array $attributes, ?GroupLayout $fallback = GroupLayout::LIST): void {
+    protected function set_group_layout(array $attributes, ?GroupLayout $fallback = GroupLayout::LIST): void {
         $this->maxPerRow = isset($attributes['maxPerRow']) ? (int)$attributes['maxPerRow'] : $this->maxPerRow;
 
         // Set layout from passed-in attributes if set

@@ -118,8 +118,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -453,8 +452,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -719,22 +717,6 @@
                     "justify",
                     "match-parent"
                 ]
-            },
-            "textColor": {
-                "type": "ThemeColor",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
             }
         },
         "content": {
@@ -744,7 +726,6 @@
         },
         "traits": [
             "BlockElementModifier",
-            "TextColor",
             "TextAlign"
         ]
     },
@@ -1587,8 +1568,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "info"
+                ]
             },
             "context": {
                 "type": "string",
@@ -2085,8 +2065,7 @@
                     "list",
                     "grid",
                     "inline"
-                ],
-                "default": "list"
+                ]
             },
             "link": {
                 "type": "array",
@@ -2472,7 +2451,7 @@
                     "horizontal",
                     "vertical"
                 ],
-                "default": "null"
+                "default": "vertical"
             },
             "shortName": {
                 "type": "string",
@@ -3623,8 +3602,7 @@
                     "list",
                     "grid",
                     "inline"
-                ],
-                "default": "list"
+                ]
             },
             "maxPerRow": {
                 "type": "int",
@@ -3721,8 +3699,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "null"
+                ]
             },
             "context": {
                 "type": "string",
@@ -3843,8 +3820,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -4269,22 +4245,6 @@
                     "justify",
                     "match-parent"
                 ]
-            },
-            "textColor": {
-                "type": "ThemeColor",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
             }
         },
         "content": {
@@ -4294,7 +4254,6 @@
         },
         "traits": [
             "BlockElementModifier",
-            "TextColor",
             "TextAlign"
         ]
     },
@@ -4422,8 +4381,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -4788,8 +4746,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -4833,8 +4790,7 @@
                     "list",
                     "grid",
                     "inline"
-                ],
-                "default": "list"
+                ]
             },
             "maxPerRow": {
                 "type": "int",
@@ -5508,22 +5464,6 @@
                     "justify",
                     "match-parent"
                 ]
-            },
-            "textColor": {
-                "type": "ThemeColor",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
             }
         },
         "content": {
@@ -5533,7 +5473,6 @@
         },
         "traits": [
             "BlockElementModifier",
-            "TextColor",
             "TextAlign"
         ]
     },
@@ -5727,22 +5666,6 @@
                     "justify",
                     "match-parent"
                 ]
-            },
-            "textColor": {
-                "type": "ThemeColor",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
             }
         },
         "content": {
@@ -5754,7 +5677,6 @@
             "BackgroundColor",
             "ColorTheme",
             "BlockElementModifier",
-            "TextColor",
             "TextAlign"
         ]
     },
@@ -6008,8 +5930,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -6102,8 +6023,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",

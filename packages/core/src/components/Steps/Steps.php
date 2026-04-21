@@ -34,8 +34,8 @@ class Steps extends LayoutComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Steps.steps');
-        $this->set_orientation_from_attrs($attributes);
-        $this->set_color_theme_from_attrs($attributes);
+        $this->set_orientation($attributes);
+        $this->set_color_theme($attributes);
         if ($this->orientation === Orientation::HORIZONTAL) {
             $this->maxPerRow = isset($attributes['maxPerRow']) ? intval($attributes['maxPerRow']) : 3;
         }

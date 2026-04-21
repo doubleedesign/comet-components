@@ -24,8 +24,8 @@ class Separator extends Renderable {
 
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.Separator.separator');
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::PRIMARY);
-        $this->set_size_from_attrs($attributes, ContainerSize::DEFAULT);
+        $this->set_color_theme($attributes, ThemeColor::PRIMARY);
+        $this->set_size($attributes);
         $this->set_is_nested($attributes['isNested'] ?? false);
         $this->init_bem_structure($this->bladeFile);
         $this->lineStyle = isset($attributes['lineStyle']) ? $attributes['lineStyle'] : (is_string($attributes['style']) ? $attributes['style'] : '');

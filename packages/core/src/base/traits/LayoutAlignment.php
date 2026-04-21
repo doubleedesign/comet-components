@@ -20,7 +20,7 @@ trait LayoutAlignment {
      * @param  Alignment|null  $defaultVertical
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
-    protected function set_layout_alignment_from_attrs(array $attributes, ?Alignment $defaultHorizontal = null, ?Alignment $defaultVertical = null): void {
+    protected function set_layout_alignment(array $attributes, ?Alignment $defaultHorizontal = null, ?Alignment $defaultVertical = null): void {
         $this->hAlign = $this->get_from_string_or_alignment($attributes['hAlign'])
             ?? $this->get_component_defaults()['hAlign']
             ?? $this->get_from_string_or_alignment($defaultHorizontal)

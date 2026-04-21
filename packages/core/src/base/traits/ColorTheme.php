@@ -14,7 +14,7 @@ trait ColorTheme {
      * @param  ?ThemeColor  $default
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
-    protected function set_color_theme_from_attrs(array $attributes, ?ThemeColor $default = null): void {
+    protected function set_color_theme(array $attributes, ?ThemeColor $default = null): void {
         // Allow for elements to not have a colour theme set and instead inherit from their parent (assuming CSS is set up for that)
         if (isset($attributes['colorTheme']) && ($attributes['colorTheme'] === 'inherit')) {
             $this->colorTheme = null;

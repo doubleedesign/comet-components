@@ -14,7 +14,7 @@ trait LayoutOrientation {
      * @param  Orientation|null  $default
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
-    protected function set_orientation_from_attrs(array $attributes, ?Orientation $default = Orientation::VERTICAL): void {
+    protected function set_orientation(array $attributes, ?Orientation $default = Orientation::VERTICAL): void {
         // Set from passed-in attributes if set
         if (isset($attributes['orientation'])) {
             $this->orientation = $this->get_from_string_or_orientation($attributes['orientation']);

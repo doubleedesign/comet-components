@@ -27,7 +27,7 @@ class Callout extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Callout.callout');
-        $this->set_color_theme_from_attrs($attributes, ThemeColor::INFO);
+        $this->set_color_theme($attributes);
 
         if (!isset($attributes['icon'])) {
             $attributes['icon'] = match ($this->colorTheme->value) {

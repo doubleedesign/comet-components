@@ -639,8 +639,7 @@
 	</xs:element>
 	<xs:element name="Heading">
 		<xs:complexType>
-			<xs:attribute name="textColor" type="ThemeColor"/>
-<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="textAlign" type="Alignment"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
@@ -800,12 +799,13 @@
 	</xs:element>
 	<xs:element name="Menu">
 		<xs:complexType>
-			<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="shortName" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
 	</xs:element>
@@ -844,7 +844,6 @@
 	<xs:element name="Paragraph">
 		<xs:complexType>
 			<xs:attribute name="textAlign" type="Alignment"/>
-<xs:attribute name="textColor" type="ThemeColor"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="style" type="InlineStyle"/>
@@ -875,8 +874,7 @@
 	</xs:element>
 	<xs:element name="Pullquote">
 		<xs:complexType>
-			<xs:attribute name="textColor" type="ThemeColor"/>
-<xs:attribute name="testId" type="xs:string"/>
+			<xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="textAlign" type="Alignment"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>

@@ -87,8 +87,8 @@ class SiteHeader extends UIComponent {
 
         parent::__construct($attributes, $innerComponents, 'components.SiteHeader.site-header');
 
-        $this->set_size_from_attrs($attributes);
-        $this->set_background_color_from_attrs($attributes);
+        $this->set_size($attributes);
+        $this->set_background_color($attributes);
         $this->set_overlay_background_color_from_attrs($attributes);
         $this->set_icon_from_attrs($attributes);
         $this->breakpoint = $attributes['breakpoint'] ?? $this->breakpoint;

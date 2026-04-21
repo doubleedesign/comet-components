@@ -11,9 +11,9 @@ trait BackgroundColor {
     /**
      * @param  array  $attributes
      * @param  ThemeColor|null  $fallback
-     * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
+     * @description Retrieves the relevant properties from the component $attributes array or component defaults, validates them, and assigns them to the corresponding component instance field.
      */
-    protected function set_background_color_from_attrs(array $attributes, ?ThemeColor $fallback = null): void {
+    protected function set_background_color(array $attributes, ?ThemeColor $fallback = null): void {
         // Set from passed-in attributes if set
         if (isset($attributes['backgroundColor'])) {
             $this->backgroundColor = $this->get_from_string_or_theme_color($attributes['backgroundColor']);
@@ -70,7 +70,7 @@ trait BackgroundColor {
      *
      * @return void
      */
-    public function set_background_color(ThemeColor|string|null $backgroundColor): void {
+    public function update_background_color(ThemeColor|string|null $backgroundColor): void {
         if ($backgroundColor instanceof ThemeColor) {
             $this->backgroundColor = $backgroundColor;
         }
@@ -84,7 +84,7 @@ trait BackgroundColor {
 
     /**
      * @description Clean up duplication of background colours between this and its inner components simplify HTML and CSS. Runs either remove_redundant_background_colors() or set_background_color_based_on_children() as appropriate.
-     * NOTE: This must be run after the constructor and after set_background_color_from_attrs() to ensure the backgrounds and innerComponents are available
+     * NOTE: This must be run after the constructor and after update_background_color() to ensure the backgrounds and innerComponents are available
      *
      * @return void
      */
@@ -124,9 +124,9 @@ trait BackgroundColor {
 
         if (count($childrenWithSameBackground) > 0) {
             $updatedInnerComponents = array_map(function($child) {
-                if (method_exists($child, 'set_background_color') && method_exists($child, 'get_background_color')) {
+                if (method_exists($child, 'update_background_color') && method_exists($child, 'get_background_color')) {
                     if ($child->get_background_color() === $this->backgroundColor) {
-                        $child->set_background_color(null);
+                        $child->update_background_color(null);
                     }
                 }
 
@@ -171,8 +171,8 @@ trait BackgroundColor {
         if (count($childBackgrounds) === 1) {
             $this->backgroundColor = $childBackgrounds[0];
             $updatedInnerComponents = array_map(function($child) {
-                if (method_exists($child, 'set_background_color')) {
-                    $child->set_background_color(null);
+                if (method_exists($child, 'update_background_color')) {
+                    $child->update_background_color(null);
                 }
 
                 return $child;

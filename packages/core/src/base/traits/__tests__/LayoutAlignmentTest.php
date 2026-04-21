@@ -15,7 +15,7 @@ function create_component_with_layout_alignment(array $attributes): object {
         use LayoutAlignment;
 
         public function __construct(array $attributes) {
-            $this->set_layout_alignment_from_attrs($attributes);
+            $this->set_layout_alignment($attributes);
         }
 
         public function get_hAlign() {
