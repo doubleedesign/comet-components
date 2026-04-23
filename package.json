@@ -12,10 +12,10 @@
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
 		"generate:docs": "php scripts/generate-docs.php",
 		"generate:stories": "php scripts/generate-stories.php",
-		"refresh:composer": "powershell.exe -File scripts/refresh-composer.ps1",
-		"refresh:composer:dev": "pnpm run refresh:composer -- -local",
-		"refresh:autoload": "pnpm run refresh:composer -- -autoload",
-		"refresh:npm": "powershell.exe -File scripts/refresh-npm.ps1",
+		"refresh:composer": "pwsh.exe -File scripts/refresh-composer.ps1",
+		"refresh:composer:dev": "pnpm run refresh:composer -local",
+		"refresh:autoload": "pnpm run refresh:composer -autoload",
+		"refresh:npm": "pwsh.exe -File scripts/refresh-npm.ps1",
 		"refresh:npmpackages": "pnpm run refresh:npm -- -packagesOnly",
 		"refresh:all": "pnpm run refresh:composer && pnpm run refresh:npm",
 		"refresh:all:dev": "pnpm run refresh:composer:dev && pnpm run refresh:npm",
@@ -76,6 +76,6 @@
 		"docs-site"
 	],
 	"dependencies": {
-		"vue": "^3.5.32"
+		"vue": "^3.5.33"
 	}
 }

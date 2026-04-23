@@ -2,7 +2,7 @@
 	"name": "doubleedesign/comet-components",
 	"description": "Monorepo for the development of Comet Components",
 	"type": "project",
-	"version": "0.6.0",
+	"version": "0.8.0",
 	"authors": [
 		{
 			"name": "Leesa Ward",
@@ -35,11 +35,11 @@
 		"ext-intl": "*"
 	},
 	"require-dev": {
-		"antecedent/patchwork": "^2.2.1",
+		"antecedent/patchwork": "^2.2.3",
 		"symfony/var-dumper": "^7.4",
-		"pestphp/pest": "^4.3",
+		"pestphp/pest": "^4.6",
 		"mockery/mockery": "^1.6",
-		"sirbrillig/spies": "^1.10",
+		"sirbrillig/spies": "^1.10.2",
 		"brain/monkey": "^2.6"
 	},
 	"config": {
