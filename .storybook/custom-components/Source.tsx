@@ -2,7 +2,7 @@ import React from 'react';
 import type { FunctionComponent } from 'react';
 import type { SupportedLanguage } from 'storybook/internal/components';
 import type { ModuleExport } from 'storybook/internal/types';
-import { ignoreSsrWarning, styled } from 'storybook/internal/theming';
+import { ignoreSsrWarning, styled } from 'storybook/theming';
 import { DocsCodePanel } from './DocsCode.tsx';
 
 

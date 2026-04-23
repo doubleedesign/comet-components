@@ -5,7 +5,7 @@ import type { ClipboardEvent, FC, ReactElement, ReactNode, Context } from 'react
 import React, { Children, useCallback, useState, createContext } from 'react';
 import { ActionBar, Zoom, type ActionItem, Loader } from 'storybook/internal/components';
 import type { ModuleExport } from 'storybook/internal/types';
-import { styled, Theme } from 'storybook/internal/theming';
+import { styled, Theme } from 'storybook/theming';
 import { darken } from 'polished';
 import { Toolbar } from './Toolbar.tsx';
 import { Source, type SourceProps } from '../../custom-components/Source.tsx'; // this is my custom one

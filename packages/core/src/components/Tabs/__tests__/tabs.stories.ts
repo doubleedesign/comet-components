@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
 import { Orientation, ORIENTATION_OPTIONS, ThemeColor, THEME_COLORS } from '../../../../test/storybook-helpers.ts';
-import { within, expect, waitFor } from '@storybook/test';
+import { within, expect, waitFor } from 'storybook/test';
 
 type TabsProps = {
 	tagName: 'div';

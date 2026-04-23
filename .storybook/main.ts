@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 import type { StorybookConfig } from '@storybook/html-vite';
 import { mergeConfig } from 'vite';
 
@@ -7,8 +9,8 @@ const config: StorybookConfig = {
 		'../packages/core/src/components/**/*.docs.@(mdx)',
 	],
 	'addons': [
-		'@storybook/addon-docs',
-		'./addons/code-tabs/preset.ts'
+		getAbsolutePath('@storybook/addon-docs'),
+		//getAbsolutePath('./addons/code-tabs/preset.ts')
 	],
 	'framework': {
 		'name': '@storybook/html-vite',
@@ -22,3 +24,7 @@ const config: StorybookConfig = {
 	}
 };
 export default config;
+
+function getAbsolutePath(value: string): any {
+	return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
+}
