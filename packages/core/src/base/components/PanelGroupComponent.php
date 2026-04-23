@@ -20,7 +20,7 @@ abstract class PanelGroupComponent extends UIComponent {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->prepare_inner_components_for_vue($innerComponents);
         $this->set_color_theme($attributes, ThemeColor::PRIMARY);
-        $this->set_background_color($attributes);
+        $this->set_background_colors($attributes);
         $this->set_orientation($attributes);
         $this->set_is_nested($attributes['isNested'] ?? false);
         $this->set_size($attributes);

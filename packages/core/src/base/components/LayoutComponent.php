@@ -11,7 +11,7 @@ abstract class LayoutComponent extends UIComponent {
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->set_layout_alignment($attributes);
-        $this->set_background_color($attributes);
+        $this->set_background_colors($attributes);
         $this->set_is_nested(isset($attributes['isNested']) && (bool)$attributes['isNested']);
 
         if (isset($this->backgroundColor)) {
