@@ -1,5 +1,17 @@
 <?php
-use Doubleedesign\Comet\Core\{BackgroundColor, ThemeColor};
+
+use Doubleedesign\Comet\Core\{BackgroundCollection, Config, BackgroundColor, ThemeColor, ThemeGradient};
+use function Patchwork\{redefine, relay, restoreAll};
+use function Spies\{make_spy, match_array, expect_spy};
+
+beforeEach(function() {
+    Config::init();
+    Config::getInstance()->set_global_background(ThemeColor::WHITE);
+});
+
+afterEach(function() {
+    restoreAll();
+});
 
 /**
  * Function to create a generic component class that uses the trait
@@ -14,11 +26,7 @@ function create_component_with_bg_color(array $attributes): object {
         use BackgroundColor;
 
         public function __construct(array $attributes) {
-            $this->set_background_color($attributes);
-        }
-
-        public function get_background_color() {
-            return $this->backgroundColor;
+            $this->set_background_colors($attributes);
         }
     };
 }
@@ -37,36 +45,99 @@ function create_component_with_inner_components(array $attributes = [], array $i
         public array $innerComponents = [];
 
         public function __construct(array $attributes, array $innerComponents = []) {
-            $this->set_background_color($attributes);
+            $this->set_background_colors($attributes);
             $this->innerComponents = $innerComponents;
         }
     };
 }
 
-describe('Set background color from attributes', function() {
-    $spy = Mockery::spy(BackgroundColor::class);
-    $spy->shouldAllowMockingProtectedMethods();
+// Ensure backwards compatibility with the old attribute name is maintained
+dataset('all valid attribute names', [['backgroundColor'], ['backgroundColors']]);
 
-    test('sets valid value', function() use ($spy) {
-        $component = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+dataset('all valid attribute types (single colour)', [
+    'ThemeColor object'                 => ThemeColor::PRIMARY,
+    'ThemeColor string'                 => 'primary',
+    'Array with single object'          => [ThemeColor::PRIMARY],
+    'Array with single string'          => ['primary'],
+]);
 
-        $spy->shouldReceive('set_background_color');
-        expect($component->get_background_color())->toBe(ThemeColor::SECONDARY);
-    });
+dataset('all valid attribute types (single gradient)', [
+    'ThemeGradient object'              => new ThemeGradient('dark', 'light'),
+    'ThemeGradient string'              => 'dark-light',
+    'Array with single object'          => [new ThemeGradient('dark', 'light')],
+    'Array with single string'          => ['dark-light'],
+]);
 
-    test('sets null when invalid', function() use ($spy) {
-        $component = create_component_with_bg_color(['backgroundColor' => '#FFF']);
+describe('Set value from attributes', function() {
+    it('sets a valid single colour', function(string $attributeName, $value) {
+        $component = create_component_with_bg_color([$attributeName => $value]);
 
-        $spy->shouldReceive('set_background_color');
-        expect($component->get_background_color())->toBeNull();
-    });
+        expect($component->get_background_color())->toEqual(ThemeColor::PRIMARY)
+            ->and($component->get_background_colors()->outer)->toEqual(ThemeColor::PRIMARY);
+    })->with('all valid attribute names')
+        ->with('all valid attribute types (single colour)');
+
+    it('sets a valid single gradient', function(string $attributeName, $value) {
+        $component = create_component_with_bg_color([$attributeName => $value]);
+
+        expect($component->get_background_color())->toEqual(new ThemeGradient('dark', 'light'))
+            ->and($component->get_background_colors()->outer)->toEqual(new ThemeGradient('dark', 'light'));
+    })->with('all valid attribute names')
+        ->with('all valid attribute types (single gradient)');
+
+    it('sets a valid colour pair', function() {
+        $spy = make_spy();
+        redefine('Doubleedesign\Comet\Core\BackgroundCollection::transform_to_collection', function($value) use ($spy) {
+            $spy($value);
+            return relay();
+        });
+
+        $component = create_component_with_bg_color(['backgroundColors' => ['light', 'dark']]);
+
+        expect_spy($spy)->to_have_been_called->with(match_array(['light', 'dark']))->verify();
+        expect($component->get_background_colors())->toBeInstanceOf(BackgroundCollection::class);
+    })->with('all valid attribute names');
 });
 
-describe('Remove redundant background colours from direct inner components', function() {
-    $spy = Mockery::spy(BackgroundColor::class);
-    $spy->shouldAllowMockingProtectedMethods();
+describe('Set value from component defaults', function() {
+    it('sets a valid single colour', function(string $attributeName, $value) {
+        redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => [$attributeName => $value]);
 
-    test('it removes background when all backgrounds match the component', function() use ($spy) {
+        $component = create_component_with_bg_color([]);
+
+        expect($component->get_background_color())->toEqual(ThemeColor::PRIMARY);
+        expect($component->get_background_colors()->outer)->toEqual(ThemeColor::PRIMARY);
+    })->with('all valid attribute names')
+        ->with('all valid attribute types (single colour)');
+
+    it('sets a valid single gradient', function(string $attributeName, $value) {
+        redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => [$attributeName => $value]);
+
+        $component = create_component_with_bg_color([]);
+
+        expect($component->get_background_color())->toEqual(new ThemeGradient('dark', 'light'));
+        expect($component->get_background_colors()->outer)->toEqual(new ThemeGradient('dark', 'light'));
+    })->with('all valid attribute names')
+        ->with('all valid attribute types (single gradient)');
+
+    it('sets a valid colour pair', function(string $attributeName) {
+	    redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['backgroundColors' => ['light', 'dark']]);
+        $spy = make_spy();
+        redefine('Doubleedesign\Comet\Core\BackgroundCollection::transform_to_collection', function($value) use ($spy) {
+            $spy($value);
+            return relay();
+        });
+
+        $component = create_component_with_bg_color(['backgroundColors' => ['light', 'dark']]);
+
+        expect_spy($spy)->to_have_been_called->with(match_array(['light', 'dark']))->verify();
+        expect($component->get_background_colors())->toBeInstanceOf(BackgroundCollection::class);
+    })->with('all valid attribute names');
+});
+
+ describe('Remove redundant background colours from direct inner components', function() {
+
+    test('it removes background when all backgrounds match the component', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
@@ -78,14 +149,13 @@ describe('Remove redundant background colours from direct inner components', fun
 
         $parent->simplify_all_background_colors();
 
-        $spy->shouldReceive('remove_redundant_background_colors');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY);
+        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY);
         foreach ($parent->innerComponents as $child) {
-            expect($child->get_background_color())->toBeNull();
+            expect($child->get_background_colors())->toBeNull();
         }
     });
 
-    test('it removes only the same background when inner components are mixed', function() use ($spy) {
+    test('it removes only the same background when inner components are mixed', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
@@ -97,14 +167,13 @@ describe('Remove redundant background colours from direct inner components', fun
 
         $parent->simplify_all_background_colors();
 
-        $spy->shouldReceive('remove_redundant_background_colors');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_color())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[2]->get_background_color())->toBe(ThemeColor::ACCENT);
+        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_colors())->toBeNull()
+            ->and($parent->innerComponents[1]->get_background_colors())->toBe(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[2]->get_background_colors())->toBe(ThemeColor::ACCENT);
     });
 
-    test('it does nothing if there is only one inner component', function() use ($spy) {
+    test('it does nothing if there is only one inner component', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
 
         $parent = create_component_with_inner_components(
@@ -114,17 +183,13 @@ describe('Remove redundant background colours from direct inner components', fun
 
         $parent->simplify_all_background_colors();
 
-        $spy->shouldNotHaveReceived('remove_redundant_background_colors');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY);
+        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_colors())->toBe(ThemeColor::PRIMARY);
     });
-});
+ });
 
-describe('Set background colour based on inner components', function() {
-    $spy = Mockery::spy(BackgroundColor::class);
-    $spy->shouldAllowMockingProtectedMethods();
-
-    test('it sets a background when all inner components have the same background', function() use ($spy) {
+ describe('Set background colour based on inner components', function() {
+    test('it sets a background when all inner components have the same background', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
@@ -136,14 +201,13 @@ describe('Set background colour based on inner components', function() {
 
         $parent->simplify_all_background_colors();
 
-        $spy->shouldReceive('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[2]->get_background_color())->toBeNull();
+        expect($parent->get_background_colors())->toBe(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[0]->get_background_colors())->toBeNull()
+            ->and($parent->innerComponents[1]->get_background_colors())->toBeNull()
+            ->and($parent->innerComponents[2]->get_background_colors())->toBeNull();
     });
 
-    test('it does nothing when children have different backgrounds', function() use ($spy) {
+    test('it does nothing when children have different backgrounds', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
@@ -155,14 +219,13 @@ describe('Set background colour based on inner components', function() {
 
         $parent->simplify_all_background_colors();
 
-        $spy->shouldReceive('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[1]->get_background_color())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[2]->get_background_color())->toBe(ThemeColor::ACCENT);
+        expect($parent->get_background_colors())->toBeNull()
+            ->and($parent->innerComponents[0]->get_background_colors())->toBe(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[1]->get_background_colors())->toBe(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[2]->get_background_colors())->toBe(ThemeColor::ACCENT);
     });
 
-    test('it sets a background when the inner components have a mix of the same and no backgrounds set', function() use ($spy) {
+    test('it sets a background when the inner components have a mix of the same and no backgrounds set', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color([]); // Null background
         $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
@@ -174,14 +237,13 @@ describe('Set background colour based on inner components', function() {
 
         $parent->simplify_all_background_colors();
 
-        $spy->shouldReceive('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[2]->get_background_color())->toBeNull();
+        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_colors())->toBeNull()
+            ->and($parent->innerComponents[1]->get_background_colors())->toBeNull()
+            ->and($parent->innerComponents[2]->get_background_colors())->toBeNull();
     });
 
-    test('it does nothing if there is only one inner component', function() use ($spy) {
+    test('it does nothing if there is only one inner component', function() {
         $child = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $parent = create_component_with_inner_components(
             [], // No background
@@ -190,8 +252,7 @@ describe('Set background colour based on inner components', function() {
 
         $parent->simplify_all_background_colors();
 
-        $spy->shouldNotHaveReceived('set_background_color_based_on_inner_components');
-        expect($parent->get_background_color())->toBeNull()
-            ->and($parent->innerComponents[0]->get_background_color())->toBe(ThemeColor::PRIMARY);
+        expect($parent->get_background_colors())->toBeNull()
+            ->and($parent->innerComponents[0]->get_background_colors())->toBe(ThemeColor::PRIMARY);
     });
-});
+ });
