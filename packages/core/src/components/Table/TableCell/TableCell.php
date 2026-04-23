@@ -22,7 +22,7 @@ class TableCell extends TextElement {
         );
         $this->innerComponents = gettype($content) === 'string' ? [] : [$content];
         $this->set_text_align_from_attrs($attributes);
-        $this->set_background_color($attributes);
+        $this->set_background_colors($attributes);
         $this->verticalAlign = $attributes['verticalAlign'] ?? null;
     }
 

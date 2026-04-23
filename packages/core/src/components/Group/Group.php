@@ -33,7 +33,7 @@ class Group extends UIComponent {
         $this->set_color_theme($attributes);
         /* Allow groups without a specified background to be transparent rather than defaulting to the fallback */
         if (isset($attributes['backgroundColor'])) {
-            $this->set_background_color($attributes);
+            $this->set_background_colors($attributes);
             $this->simplify_all_background_colors();
         }
 
