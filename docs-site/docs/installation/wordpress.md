@@ -200,8 +200,8 @@ The above Composer configuration installs the below:
 
 :::details Comet essentials
 
-- [Comet Components plugin](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-plugin)
-- [Comet Canvas theme](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-canvas)
+- [Comet Components plugin](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-plugin-blocks)
+- [Comet Canvas theme](https://github.com/doubleedesign/comet-components/tree/master/packages/comet-canvas-blocks)
 
 :::
 

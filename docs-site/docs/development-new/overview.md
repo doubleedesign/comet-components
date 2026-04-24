@@ -89,8 +89,8 @@ An example of the result in WordPress is:
 
 <script id="comet-components-js"
 		type="module"
-		src="http://vanilla-playground.local/wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core/dist/dist.js"
-		data-base-path="/wp-content/plugins/comet-plugin/vendor/doubleedesign/comet-components-core"
+		src="http://wordpress-canvas.test/wp-content/plugins/comet-plugin-blocks/vendor/doubleedesign/comet-components-core/dist/dist.js"
+		data-base-path="/wp-content/plugins/comet-plugin-blocks/vendor/doubleedesign/comet-components-core"
 >
 </script>
 

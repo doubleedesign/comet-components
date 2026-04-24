@@ -21,11 +21,11 @@ abstract class WpIntegrationTestCase extends WpTestCase {
     }
 
     protected function init_database_connection(): void {
-        require_once __DIR__ . '/../../../../vanilla-playground/app/wp-includes/class-wpdb.php';
+        require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/class-wpdb.php';
         global $wpdb;
         $dbUser = 'root';
         $dbPassword = '';
-        $dbName = 'vanilla_dev';
+        $dbName = 'test_dev';
         $dbHost = 'localhost:3309';
         $wpdb = new \wpdb($dbUser, $dbPassword, $dbName, $dbHost);
     }

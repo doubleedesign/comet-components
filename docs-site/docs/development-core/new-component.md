@@ -32,7 +32,7 @@ Add the SCSS file to `blocks.scss` or `template-parts.scss` (depending on what i
 ::: tabs#shell
 @tab WSL (Bash)
 ```bash:no-line-numbers
-cd packages/comet-plugin/src
+cd packages/comet-plugin-blocks/src
 ```
 ```bash:no-line-numbers
 sass bundle.scss:bundle.css
@@ -43,7 +43,7 @@ sass editor.scss:editor.css
 ```
 @tab PowerShell
 ```powershell:no-line-numbers
-cd packages/comet-plugin/src
+cd packages/comet-plugin-blocks/src
 ```
 ```powershell:no-line-numbers
 sass bundle.css:bundle.css
