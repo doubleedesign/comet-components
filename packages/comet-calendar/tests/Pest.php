@@ -19,8 +19,11 @@ define('WPINC', 'wp-includes');
 // Include the WP_Query class so it can be mocked in unit tests and actually used in integration tests
 require_once __DIR__ . '/../../../../wordpress-canvas/app/wp-includes/class-wp-query.php';
 
-pest()->extend(WpUnitTestCase::class)->in('Unit');
-pest()->extend(WpIntegrationTestCase::class)->in('Integration');
+// Scope by __DIR__ so it correctly finds the files within this package
+$unit = __DIR__ . '/Unit';
+$integration = __DIR__ . '/Integration';
+pest()->extend(WpUnitTestCase::class)->in($unit);
+pest()->extend(WpIntegrationTestCase::class)->in($integration);
 
 uses()->beforeEach(function() {
     when('plugin_dir_path')->justReturn('/');
@@ -84,7 +87,7 @@ uses()->beforeEach(function() {
 
     when('__')->returnArg(1);
 
-})->in('Unit', 'Integration');
+})->in($unit, $integration);
 
 uses()->beforeEach(function() {
     when('get_current_user_id')->justReturn(1);
@@ -130,4 +133,4 @@ uses()->beforeEach(function() {
         return $parsed_args;
     });
 
-})->in('Integration');
+})->in($integration);

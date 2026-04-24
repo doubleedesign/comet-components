@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.3/phpunit.xsd"
-         bootstrap="bootstrap.php"
+         bootstrap="tests/unit/bootstrap.php"
          colors="true"
          displayDetailsOnTestsThatTriggerDeprecations="true"
          displayDetailsOnTestsThatTriggerErrors="true"
@@ -17,22 +17,22 @@
     </php>
     <testsuites>
         <testsuite name="Core">
-            <directory>../../packages/core/src/*/__tests__</directory>
-            <directory>../../packages/core/src/**/__tests__</directory>
+            <directory>packages/core/src/*/__tests__</directory>
+            <directory>packages/core/src/**/__tests__</directory>
         </testsuite>
-        <testsuite name="WordPress" bootstrap="../../packages/comet-calendar/tests/Pest.php">
-            <directory>../../packages/comet-calendar/tests</directory>
+        <testsuite name="WordPress">
+            <directory>packages/comet-calendar/tests</directory>
         </testsuite>
     </testsuites>
     <source>
         <include>
-            <directory suffix=".php">../../packages/core/src</directory>
-            <directory suffix=".php">../../packages/calendar/src</directory>
+            <directory suffix=".php">packages/core/src</directory>
+            <directory suffix=".php">packages/comet-calendar/src</directory>
         </include>
         <exclude>
             <directory>vendor</directory>
-            <directory suffix="Test.php">../../packages/core/src</directory>
-            <directory suffix="blade.php">../../packages/core/src</directory>
+            <directory suffix="Test.php">packages/core/src</directory>
+            <directory suffix="blade.php">packages/core/src</directory>
         </exclude>
     </source>
 </phpunit>

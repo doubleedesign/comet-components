@@ -4,6 +4,10 @@ use Doubleedesign\Comet\WordPress\Calendar\Calendar;
 use function Spies\{any, expect_spy, mock_object, stub_function};
 
 it('uses the correct test case class', function() {
+    if (!method_exists($this, 'is_wp_test_case')) {
+        exit(1);
+    }
+
     expect($this->is_wp_test_case())->toEqual('unit');
 });
 

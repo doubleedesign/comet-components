@@ -1,11 +1,11 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All core package unit tests" type="PestRunConfigurationType">
-    <CommandLine workingDirectory="$PROJECT_DIR$/packages/core/">
+    <CommandLine workingDirectory="$PROJECT_DIR$/packages/">
       <envs>
         <env name="APP_ENV" value="development" />
       </envs>
     </CommandLine>
-    <PestRunner configuration_file="$PROJECT_DIR$/tests/unit/phpunit.xml" method="" scope="ConfigurationFile" />
+    <PestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" method="" scope="ConfigurationFile" options="--testsuite Core" />
     <method v="2" />
   </configuration>
 </component>

@@ -164,6 +164,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/feimosi/baguettebox.js" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/tomloprod/colority" />
+      <excludeFolder url="file://$MODULE_DIR$/.phpunit.cache" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/tomloprod" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/feimosi" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-blocks/vendor/tomloprod" />

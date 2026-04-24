@@ -13,6 +13,7 @@ packages/**/vendor/**/
 packages/core/cache
 docs-site/docs/.vuepress/.cache
 docs-site/docs/.vuepress/.temp
+tests/unit/.phpunit.result.cache
 
 # Playwright
 /test-results/
