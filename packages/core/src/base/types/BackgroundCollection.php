@@ -11,6 +11,9 @@ class BackgroundCollection {
     }
 
     private static function validate_outer($color): ThemeColor|ThemeGradient|null {
+		if($color === null) {
+			return null;
+		}
         if ($color instanceof ThemeColor || $color instanceof ThemeGradient) {
             return $color;
         }
@@ -19,6 +22,9 @@ class BackgroundCollection {
     }
 
     private static function validate_inner($color): ?ThemeColor {
+		if($color === null) {
+			return null;
+		}
         if ($color instanceof ThemeColor) {
             return $color;
         }
