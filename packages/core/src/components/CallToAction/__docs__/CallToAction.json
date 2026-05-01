@@ -11,23 +11,9 @@
             "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
             "required": true
         },
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ],
-            "default": "white"
+        "backgroundColors": {
+            "type": "BackgroundCollection",
+            "description": "Key -> value pairs of background placement and colour keywords"
         },
         "classes": {
             "type": "array<string>",
@@ -78,23 +64,6 @@
         "id": {
             "type": "string",
             "description": "Unique identifier"
-        },
-        "innerBackground": {
-            "type": "ThemeColor",
-            "description": "Background colour of the inner content.",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ]
         },
         "isNested": {
             "type": "bool",
@@ -151,6 +120,7 @@
         "required": true
     },
     "traits": [
+        "BackgroundColor",
         "ColorTheme",
         "BackgroundColor",
         "LayoutAlignment",

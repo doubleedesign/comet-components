@@ -27,12 +27,16 @@ class Config {
         'separator'              => ['colorTheme' => ThemeColor::PRIMARY],
         'file-group'             => ['colorTheme' => ThemeColor::PRIMARY]
     ];
+
+    // Key-value pairs where the key should match valid ThemeColor names
     private array $theme_colours = [
         'white' => '#FFFFFF',
         'black' => '#000000',
     ];
     private array $theme_colour_pairs = [];
     private array $theme_colour_pair_overrides = [];
+
+	private array $theme_gradients = [];
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
@@ -118,6 +122,10 @@ class Config {
         $this->theme_colours = array_merge($this->theme_colours, $colours);
     }
 
+    public function set_theme_gradients(array $gradients): void {
+        $this->theme_gradients = array_merge($this->theme_gradients, $gradients);
+    }
+
     public function clear_theme_colour_pairs(): void {
         $this->theme_colour_pairs = [];
     }
@@ -172,6 +180,10 @@ class Config {
 
     public function get_theme_colour_pairs(): array {
         return $this->theme_colour_pairs;
+    }
+
+    public function get_theme_gradients(): array {
+        return $this->theme_gradients;
     }
 
     /**

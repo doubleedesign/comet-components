@@ -1,18 +1,14 @@
 /* global wp */
 import { addFilter } from '@wordpress/hooks';
-import { InspectorControls, InspectorAdvancedControls } from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
-import { LayoutControls } from '../LayoutControls/LayoutControls.jsx';
-import { ColorControls } from '../ColorControls/ColorControls.jsx';
 import { PanelBody, SelectControl } from '@wordpress/components';
 import { useMemo } from '@wordpress/element';
-import { BackgroundType } from '../BackgroundType/BackgroundType.jsx';
-import { BackgroundOpacity } from '../BackgroundOpacity/BackgroundOpacity.jsx';
-import { HtmlTag } from '../HtmlTag/HtmlTag.jsx';
+import { CometBlockControls } from '@doubleedesign/comet-gutenberg-controls';
 
 /**
  * Note: This file needs to be compiled (Rollup is configured for this)
- * and loaded into the editor via the enqueue_block_editor_assets PHP hook
+ * and the compiled *dist.js loaded into the editor via the enqueue_block_editor_assets PHP hook
  */
 wp.domReady(() => {
 	addFilter(
@@ -25,7 +21,7 @@ wp.domReady(() => {
 					return NinjaFormsControls;
 				}
 
-				return CometBlockEdit;
+				return CometBlockControls;
 			}, [props?.name]);
 
 			return (
@@ -36,37 +32,6 @@ wp.domReady(() => {
 		});
 });
 
-
-/**
- * Render BlockEdit component with controls for custom attributes
- * @param BlockEdit The original BlockEdit component
- * @param {Object} props The block edit props
- * @returns {JSX.Element}
- * @constructor
- */
-function CometBlockEdit({ BlockEdit, ...props }) {
-	return (
-		<>
-			<div className="comet-plugin-blocks-custom-controls">
-				<InspectorControls>
-					<LayoutControls {...props} />
-					{Object.keys(props?.attributes).some(attr => ['colorTheme', 'backgroundColor', 'backgroundOpacity', 'backgroundType'].includes(attr)) && (
-						<PanelBody title="Colours" initialOpen={true}
-							className={`comet-color-controls comet-color-controls--${props.name.split('/')[1]}`}>
-							<ColorControls {...props} />
-							<BackgroundOpacity {...props}/>
-							<BackgroundType {...props} />
-						</PanelBody>
-					)}
-				</InspectorControls>
-				<InspectorAdvancedControls>
-					<HtmlTag {...props} />
-				</InspectorAdvancedControls>
-			</div>
-			<BlockEdit {...props} />
-		</>
-	);
-}
 
 /**
  * Recreate the Ninja Form selector dropdown control so that it is wrapped in the same components as our custom controls,

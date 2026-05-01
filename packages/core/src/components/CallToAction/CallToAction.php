@@ -11,25 +11,20 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ASIDE])]
 #[DefaultTag(Tag::SECTION)]
 class CallToAction extends WrappedLayoutComponent {
+    use BackgroundColor;
     use ColorTheme;
-
-    /**
-     * @var ?ThemeColor $innerBackground;
-     * @description Background colour of the inner content.
-     */
-    protected ?ThemeColor $innerBackground;
 
     /**
      * @param  array  $attributes
      * @param  array<Heading|Paragraph|ButtonGroup|PreprocessedHTML>  $innerComponents
      */
     public function __construct(array $attributes, array $innerComponents) {
-        $this->innerBackground = ThemeColor::tryFrom($attributes['innerBackground'] ?? '') ?? null;
+        $this->set_background_colors($attributes);
 
         $content = new Group([
             'context'         => 'call-to-action',
             'shortName'       => 'content',
-            'backgroundColor' => $this->innerBackground ?? null,
+            'backgroundColor' => $this->get_background_colors()->inner ?? null,
             'colorTheme'      => $attributes['colorTheme'] ?? null,
         ], $innerComponents);
 

@@ -17,12 +17,11 @@ export default [
 				return `${name}.dist.js`;
 			},
 			sourcemap: true,
-			preserveModules: true,
 		},
 		external: [
 			/^@wordpress\/.+$/,
 			'react',
-			'react-dom'
+			'react-dom',
 		],
 		plugins: [
 			wordpressGlobals(),
