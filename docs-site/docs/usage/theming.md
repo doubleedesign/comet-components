@@ -78,7 +78,7 @@ Many design tokens are set as CSS variables in Comet's stylesheets, allowing you
 `:root` selector in [global.css](https://github.com/doubleedesign/comet-components/blob/master/packages/core/src/components/global.css) and in the list below.
 
 :::important
-For WordPress usage, some tokens should be set in your theme's `theme.json` so that they take effect in the editor as well.
+For WordPress usage, some tokens should be set in your theme's `tokens.css` file so that they take effect in the editor as well.
 :::
 
 :::details General usage
@@ -88,7 +88,7 @@ Set colours, fonts, spacing, font weights, and container widths by overriding Co
   :::
 
 :::details In WordPress
-- Set colours and gradients in your theme's `theme.json` file. WordPress will automatically pick up on these for use in the editor, and the Comet Canvas theme will inject them as CSS variables in the relevant places (overriding the Comet default ones).
+- Set colours and gradients in your theme's `tokens.css` file. WordPress will automatically pick up on these for use in the editor, overriding the Comet default ones.
 - Set fonts and other CSS variables as per the general usage instructions above.
   :::
 

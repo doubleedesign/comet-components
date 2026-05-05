@@ -16,10 +16,14 @@ The Comet Blocks plugin and Comet Canvas parent theme are configured to look for
 
 | File           | Purpose                                                                                                                                                                                                       |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `theme.json`   | Should contain the colour palette definition. Will be used to dynamically load colours as CSS variables in the front-end, block editor, and TinyMCE.                                                          |
+| `tokens.css`   | Should contain the colour palette definition CSS variables, and any overrides to gradient variables.                                                                                                          |
 | `common.scss`  | Common typography and other styles that should be used on the front-end, in the block editor, and in TinyMCE, should go in this one file.                                                                     |
 | `style.scss`   | Required file for WordPress to recognize the theme. Should contain theme metadata and all CSS styles for the theme that are not already present in the parent theme and plugins. Should import `common.scss`. |
 | `tinymce.scss` | Styles to be loaded only in TinyMCE. Should not need to import `common.scss` as that should already be loaded.                                                                                                |
+
+>[!NOTE]
+> The minimal `theme.json` file in the Comet Canvas theme is there just to enable certain block editor features that look for it. It is not used by Comet Components for any styling. Please use the CSS files to set values for your theme's styling, and the PHP filters for customising what is available in the editor. 
+> I have deliberately chosen not to use `theme.json` for theme configuration because it was overcomplicating things to have both that, CSS variables loaded into the editor, and PHP filters to allow more fine-tuning and validation (such as accessibility checks for colour combinations). In previous versions I was processing `theme.json` to inject CSS variables in multiple places, and given the benefits of the PHP filters, it's just simpler to...not use `theme.json`.
 
 ### Third-party hosted fonts
 
@@ -50,7 +54,7 @@ There are filters available for child themes to access Comet Components' global 
 | `comet_canvas_component_defaults`             | `array $defaults` | Allows setting of various default values per-component, such as colour theme and container size.                                                                                                                                                               |
 | `comet_canvas_global_background`              | `string $color`   | Allows setting a global background colour for the site. Default is `white`. Valid values must be drawn from the `ThemeColor` type.                                                                                                                             |
 | `comet_canvas_default_icon_prefix`            | `string $prefix`  | Allows setting a default icon prefix for all Icon components. Default is `fa-solid`.                                                                                                                                                                           |
-| `comet_canvas_theme_colours`                  | `array $colours`  | An alternative or supplementary method of setting theme colours. This filter runs _after_ `theme.json` is used to find the colour palette, so if you use both the filter will win.                                                                             |
+| `comet_canvas_theme_colours`                  | `array $colours`  | Use to customise which theme colours are available for block colour attributes by default.                                                                                                                                                                     |
 | `comet_canvas_theme_colour_pairs_maybe`       | `array $pairs`    | Allows setting of accessible colour pairs (foreground/background) for use in components that support them, such as Buttons and Banners. Contains some common defaults. **Note:** If a given pair does not have sufficient contrast, it will not be registered. |
 | `comet_blocks_enable_shared_content_wrapping` | `bool $enable`    | Set whether the Shared Content block should have sizing options and have a wrapper to support that. If `false`, they will render as-is and not be wrapped together or have per-usage sizing options. Default is `false`.                                       |
 

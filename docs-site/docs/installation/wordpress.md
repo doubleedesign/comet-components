@@ -36,7 +36,7 @@ The Comet Canvas theme is designed to be used as a parent theme and provides:
 - Common navigation menu configuration
 - Implementations of Comet's `SiteHeader`, `PageHeader`, and `SiteFooter` components (with relevant inner components like `Menu` and
   `Breadcrumbs`) in the relevant files as per the WordPress template hierarchy
-- Injection of theme colours from `theme.json` as embedded CSS variables in the `<head>`
+- Injection of theme CSS from the child theme's `tokens.css` and `common.css` in the relevant places (e.g., block editor controls, block editor iframe, TinyMCE)
 - Enqueueing of theme `style.css` files in the block editor and front-end
 - Site Health checks for required and recommended plugins.
 

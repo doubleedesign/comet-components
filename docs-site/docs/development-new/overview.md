@@ -142,6 +142,4 @@ If you are intending to use web fonts loaded from Google Fonts, Adobe Fonts or s
 
 ## Theming support
 
-Implementations need a way for their usages to apply their own CSS. At a minimum, this is the ability to have a custom stylesheet that would contain CSS variables that match what Comet expects, but many implementations will have more complex requirements.
-
-For example, in the WordPress implementation this is achieved through loading theme stylesheets and some custom code in the Comet Canvas parent theme to load `theme.json` variables as thes CSS variables that Comet Components expects. If your CMS also has a particular way that design tokens are set, you will need a way to get that to integrate with Comet.
+Implementations need a way for their usages to apply their own CSS. At a minimum, this is the ability to have a custom stylesheet that would contain CSS variables that match what Comet expects, but some implementations will have more complex requirements.
