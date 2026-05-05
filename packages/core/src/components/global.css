@@ -227,36 +227,6 @@
   [data-background=primary] {
     color: var(--readable-color-primary);
   }
-  [data-background=gradient-primary-primary] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-primary-secondary] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-primary-accent] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-primary-info] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-primary-warning] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-primary-success] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-primary-error] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-primary-light] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-primary-dark] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-primary-white] {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-white) 50%, var(--color-white) 100%);
-  }
   body[data-global-background=secondary] {
     background-color: var(--color-secondary);
     color: var(--readable-color-secondary);
@@ -266,36 +236,6 @@
   }
   [data-background=secondary] {
     color: var(--readable-color-secondary);
-  }
-  [data-background=gradient-secondary-primary] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-secondary-secondary] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-secondary-accent] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-secondary-info] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-secondary-warning] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-secondary-success] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-secondary-error] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-secondary-light] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-secondary-dark] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-secondary-white] {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-white) 50%, var(--color-white) 100%);
   }
   body[data-global-background=accent] {
     background-color: var(--color-accent);
@@ -307,36 +247,6 @@
   [data-background=accent] {
     color: var(--readable-color-accent);
   }
-  [data-background=gradient-accent-primary] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-accent-secondary] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-accent-accent] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-accent-info] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-accent-warning] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-accent-success] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-accent-error] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-accent-light] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-accent-dark] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-accent-white] {
-    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-white) 50%, var(--color-white) 100%);
-  }
   body[data-global-background=info] {
     background-color: var(--color-info);
     color: var(--readable-color-info);
@@ -346,36 +256,6 @@
   }
   [data-background=info] {
     color: var(--readable-color-info);
-  }
-  [data-background=gradient-info-primary] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-info-secondary] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-info-accent] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-info-info] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-info-warning] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-info-success] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-info-error] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-info-light] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-info-dark] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-info-white] {
-    background: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-white) 50%, var(--color-white) 100%);
   }
   body[data-global-background=warning] {
     background-color: var(--color-warning);
@@ -387,36 +267,6 @@
   [data-background=warning] {
     color: var(--readable-color-warning);
   }
-  [data-background=gradient-warning-primary] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-warning-secondary] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-warning-accent] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-warning-info] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-warning-warning] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-warning-success] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-warning-error] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-warning-light] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-warning-dark] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-warning-white] {
-    background: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-white) 50%, var(--color-white) 100%);
-  }
   body[data-global-background=success] {
     background-color: var(--color-success);
     color: var(--readable-color-success);
@@ -426,36 +276,6 @@
   }
   [data-background=success] {
     color: var(--readable-color-success);
-  }
-  [data-background=gradient-success-primary] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-success-secondary] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-success-accent] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-success-info] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-success-warning] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-success-success] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-success-error] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-success-light] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-success-dark] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-success-white] {
-    background: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-white) 50%, var(--color-white) 100%);
   }
   body[data-global-background=error] {
     background-color: var(--color-error);
@@ -467,36 +287,6 @@
   [data-background=error] {
     color: var(--readable-color-error);
   }
-  [data-background=gradient-error-primary] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-error-secondary] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-error-accent] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-error-info] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-error-warning] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-error-success] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-error-error] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-error-light] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-error-dark] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-error-white] {
-    background: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-white) 50%, var(--color-white) 100%);
-  }
   body[data-global-background=light] {
     background-color: var(--color-light);
     color: var(--readable-color-light);
@@ -506,36 +296,6 @@
   }
   [data-background=light] {
     color: var(--readable-color-light);
-  }
-  [data-background=gradient-light-primary] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-light-secondary] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-light-accent] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-light-info] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-light-warning] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-light-success] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-light-error] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-light-light] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-light-dark] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-light-white] {
-    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-white) 50%, var(--color-white) 100%);
   }
   body[data-global-background=dark] {
     background-color: var(--color-dark);
@@ -547,36 +307,6 @@
   [data-background=dark] {
     color: var(--readable-color-dark);
   }
-  [data-background=gradient-dark-primary] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
-  }
-  [data-background=gradient-dark-secondary] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
-  }
-  [data-background=gradient-dark-accent] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
-  }
-  [data-background=gradient-dark-info] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-info) 50%, var(--color-info) 100%);
-  }
-  [data-background=gradient-dark-warning] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
-  }
-  [data-background=gradient-dark-success] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-success) 50%, var(--color-success) 100%);
-  }
-  [data-background=gradient-dark-error] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-error) 50%, var(--color-error) 100%);
-  }
-  [data-background=gradient-dark-light] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-light) 50%, var(--color-light) 100%);
-  }
-  [data-background=gradient-dark-dark] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-  }
-  [data-background=gradient-dark-white] {
-    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-white) 50%, var(--color-white) 100%);
-  }
   body[data-global-background=white] {
     background-color: var(--color-white);
     color: var(--readable-color-white);
@@ -587,35 +317,275 @@
   [data-background=white] {
     color: var(--readable-color-white);
   }
-  [data-background=gradient-white-primary] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
+  [data-background=primary-secondary] {
+    background: var(--gradient-primary-secondary);
   }
-  [data-background=gradient-white-secondary] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
+  [data-background=primary-accent] {
+    background: var(--gradient-primary-accent);
   }
-  [data-background=gradient-white-accent] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
+  [data-background=primary-info] {
+    background: var(--gradient-primary-info);
   }
-  [data-background=gradient-white-info] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-info) 50%, var(--color-info) 100%);
+  [data-background=primary-warning] {
+    background: var(--gradient-primary-warning);
   }
-  [data-background=gradient-white-warning] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-warning) 50%, var(--color-warning) 100%);
+  [data-background=primary-success] {
+    background: var(--gradient-primary-success);
   }
-  [data-background=gradient-white-success] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-success) 50%, var(--color-success) 100%);
+  [data-background=primary-error] {
+    background: var(--gradient-primary-error);
   }
-  [data-background=gradient-white-error] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-error) 50%, var(--color-error) 100%);
+  [data-background=primary-light] {
+    background: var(--gradient-primary-light);
   }
-  [data-background=gradient-white-light] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-light) 50%, var(--color-light) 100%);
+  [data-background=primary-dark] {
+    background: var(--gradient-primary-dark);
   }
-  [data-background=gradient-white-dark] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+  [data-background=primary-white] {
+    background: var(--gradient-primary-white);
   }
-  [data-background=gradient-white-white] {
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-white) 50%, var(--color-white) 100%);
+  [data-background=secondary-primary] {
+    background: var(--gradient-secondary-primary);
+  }
+  [data-background=secondary-accent] {
+    background: var(--gradient-secondary-accent);
+  }
+  [data-background=secondary-info] {
+    background: var(--gradient-secondary-info);
+  }
+  [data-background=secondary-warning] {
+    background: var(--gradient-secondary-warning);
+  }
+  [data-background=secondary-success] {
+    background: var(--gradient-secondary-success);
+  }
+  [data-background=secondary-error] {
+    background: var(--gradient-secondary-error);
+  }
+  [data-background=secondary-light] {
+    background: var(--gradient-secondary-light);
+  }
+  [data-background=secondary-dark] {
+    background: var(--gradient-secondary-dark);
+  }
+  [data-background=secondary-white] {
+    background: var(--gradient-secondary-white);
+  }
+  [data-background=accent-primary] {
+    background: var(--gradient-accent-primary);
+  }
+  [data-background=accent-secondary] {
+    background: var(--gradient-accent-secondary);
+  }
+  [data-background=accent-info] {
+    background: var(--gradient-accent-info);
+  }
+  [data-background=accent-warning] {
+    background: var(--gradient-accent-warning);
+  }
+  [data-background=accent-success] {
+    background: var(--gradient-accent-success);
+  }
+  [data-background=accent-error] {
+    background: var(--gradient-accent-error);
+  }
+  [data-background=accent-light] {
+    background: var(--gradient-accent-light);
+  }
+  [data-background=accent-dark] {
+    background: var(--gradient-accent-dark);
+  }
+  [data-background=accent-white] {
+    background: var(--gradient-accent-white);
+  }
+  [data-background=info-primary] {
+    background: var(--gradient-info-primary);
+  }
+  [data-background=info-secondary] {
+    background: var(--gradient-info-secondary);
+  }
+  [data-background=info-accent] {
+    background: var(--gradient-info-accent);
+  }
+  [data-background=info-warning] {
+    background: var(--gradient-info-warning);
+  }
+  [data-background=info-success] {
+    background: var(--gradient-info-success);
+  }
+  [data-background=info-error] {
+    background: var(--gradient-info-error);
+  }
+  [data-background=info-light] {
+    background: var(--gradient-info-light);
+  }
+  [data-background=info-dark] {
+    background: var(--gradient-info-dark);
+  }
+  [data-background=info-white] {
+    background: var(--gradient-info-white);
+  }
+  [data-background=warning-primary] {
+    background: var(--gradient-warning-primary);
+  }
+  [data-background=warning-secondary] {
+    background: var(--gradient-warning-secondary);
+  }
+  [data-background=warning-accent] {
+    background: var(--gradient-warning-accent);
+  }
+  [data-background=warning-info] {
+    background: var(--gradient-warning-info);
+  }
+  [data-background=warning-success] {
+    background: var(--gradient-warning-success);
+  }
+  [data-background=warning-error] {
+    background: var(--gradient-warning-error);
+  }
+  [data-background=warning-light] {
+    background: var(--gradient-warning-light);
+  }
+  [data-background=warning-dark] {
+    background: var(--gradient-warning-dark);
+  }
+  [data-background=warning-white] {
+    background: var(--gradient-warning-white);
+  }
+  [data-background=success-primary] {
+    background: var(--gradient-success-primary);
+  }
+  [data-background=success-secondary] {
+    background: var(--gradient-success-secondary);
+  }
+  [data-background=success-accent] {
+    background: var(--gradient-success-accent);
+  }
+  [data-background=success-info] {
+    background: var(--gradient-success-info);
+  }
+  [data-background=success-warning] {
+    background: var(--gradient-success-warning);
+  }
+  [data-background=success-error] {
+    background: var(--gradient-success-error);
+  }
+  [data-background=success-light] {
+    background: var(--gradient-success-light);
+  }
+  [data-background=success-dark] {
+    background: var(--gradient-success-dark);
+  }
+  [data-background=success-white] {
+    background: var(--gradient-success-white);
+  }
+  [data-background=error-primary] {
+    background: var(--gradient-error-primary);
+  }
+  [data-background=error-secondary] {
+    background: var(--gradient-error-secondary);
+  }
+  [data-background=error-accent] {
+    background: var(--gradient-error-accent);
+  }
+  [data-background=error-info] {
+    background: var(--gradient-error-info);
+  }
+  [data-background=error-warning] {
+    background: var(--gradient-error-warning);
+  }
+  [data-background=error-success] {
+    background: var(--gradient-error-success);
+  }
+  [data-background=error-light] {
+    background: var(--gradient-error-light);
+  }
+  [data-background=error-dark] {
+    background: var(--gradient-error-dark);
+  }
+  [data-background=error-white] {
+    background: var(--gradient-error-white);
+  }
+  [data-background=light-primary] {
+    background: var(--gradient-light-primary);
+  }
+  [data-background=light-secondary] {
+    background: var(--gradient-light-secondary);
+  }
+  [data-background=light-accent] {
+    background: var(--gradient-light-accent);
+  }
+  [data-background=light-info] {
+    background: var(--gradient-light-info);
+  }
+  [data-background=light-warning] {
+    background: var(--gradient-light-warning);
+  }
+  [data-background=light-success] {
+    background: var(--gradient-light-success);
+  }
+  [data-background=light-error] {
+    background: var(--gradient-light-error);
+  }
+  [data-background=light-dark] {
+    background: var(--gradient-light-dark);
+  }
+  [data-background=light-white] {
+    background: var(--gradient-light-white);
+  }
+  [data-background=dark-primary] {
+    background: var(--gradient-dark-primary);
+  }
+  [data-background=dark-secondary] {
+    background: var(--gradient-dark-secondary);
+  }
+  [data-background=dark-accent] {
+    background: var(--gradient-dark-accent);
+  }
+  [data-background=dark-info] {
+    background: var(--gradient-dark-info);
+  }
+  [data-background=dark-warning] {
+    background: var(--gradient-dark-warning);
+  }
+  [data-background=dark-success] {
+    background: var(--gradient-dark-success);
+  }
+  [data-background=dark-error] {
+    background: var(--gradient-dark-error);
+  }
+  [data-background=dark-light] {
+    background: var(--gradient-dark-light);
+  }
+  [data-background=dark-white] {
+    background: var(--gradient-dark-white);
+  }
+  [data-background=white-primary] {
+    background: var(--gradient-white-primary);
+  }
+  [data-background=white-secondary] {
+    background: var(--gradient-white-secondary);
+  }
+  [data-background=white-accent] {
+    background: var(--gradient-white-accent);
+  }
+  [data-background=white-info] {
+    background: var(--gradient-white-info);
+  }
+  [data-background=white-warning] {
+    background: var(--gradient-white-warning);
+  }
+  [data-background=white-success] {
+    background: var(--gradient-white-success);
+  }
+  [data-background=white-error] {
+    background: var(--gradient-white-error);
+  }
+  [data-background=white-light] {
+    background: var(--gradient-white-light);
+  }
+  [data-background=white-dark] {
+    background: var(--gradient-white-dark);
   }
 }
 

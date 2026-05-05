@@ -28,7 +28,11 @@ class CallToAction extends WrappedLayoutComponent {
             'colorTheme'      => $attributes['colorTheme'] ?? null,
         ], $innerComponents);
 
-        unset($attributes['colorTheme']); // don't pass colorTheme to parent, it has already been applied above
+        // don't pass colorTheme to parent, it has already been applied to the inner group
+        unset($attributes['colorTheme']);
+        // only pass the outer background color to parent
+        $attributes['backgroundColor'] = $this->get_background_colors()->outer ?? null;
+        unset($attributes['backgroundColors']);
 
         parent::__construct($attributes, [$content], 'components.CallToAction.call-to-action');
     }

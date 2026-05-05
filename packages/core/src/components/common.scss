@@ -8,9 +8,13 @@
 
 		@each $name, $values in $colors {
 			--color-#{$name}: #{map-get($colors, '#{$name}')};
-		}
-		@each $name in map-keys($colors) {
 			--readable-color-#{$name}: #{if(map-get($hslColors, #{$name}-l) > 60, black, white)};
+
+			@each $name2, $color2 in $colors {
+				@if ($name != $name2) {
+					--gradient-#{$name}-#{$name2}: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
+				}
+			}
 		}
 
 		--font-size-sm: 0.875rem;

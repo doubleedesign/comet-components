@@ -13,7 +13,7 @@ class Config {
     private array $blade_component_paths = [];
     private array $component_defaults = [
         'site-header'            => ['breakpoint' => '1024px'],
-        'call-to-action'         => ['colorTheme' => ThemeColor::WHITE, 'innerBackground' => ThemeColor::PRIMARY, 'backgroundColor' => ThemeColor::WHITE],
+        'call-to-action'         => ['colorTheme' => ThemeColor::WHITE, 'backgroundColors' => [ThemeColor::WHITE, ThemeColor::PRIMARY]],
         'page-header'            => ['colorTheme' => ThemeColor::PRIMARY],
         'site-footer'            => ['backgroundColor' => ThemeColor::DARK, 'hAlign' => Alignment::CENTER],
         'menu'                   => ['colorTheme' => ThemeColor::PRIMARY],
@@ -35,8 +35,7 @@ class Config {
     ];
     private array $theme_colour_pairs = [];
     private array $theme_colour_pair_overrides = [];
-
-	private array $theme_gradients = [];
+    private array $theme_gradients = [];
 
     public static function init(): void {
         if (!defined('COMET_VERSION')) {
@@ -183,7 +182,13 @@ class Config {
     }
 
     public function get_theme_gradients(): array {
-        return $this->theme_gradients;
+        return array_reduce($this->theme_gradients, function($acc, $gradient) {
+            if ($gradient instanceof ThemeGradient) {
+                $acc["{$gradient->__toString()}"] = "var(--gradient-{$gradient->__toString()})";
+            }
+
+            return $acc;
+        }, []);
     }
 
     /**

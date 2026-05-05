@@ -13,9 +13,12 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE, Tag::FIGURE])]
 #[DefaultTag(Tag::SECTION)]
 class PageSection extends Renderable {
-    use BackgroundColor;
     use ColorTheme;
     use ShortName;
+
+    // This should only ever have a single background colour,
+    // which has probably been pre-validated by the parent component using the BackgroundColor trait
+    private ThemeColor|ThemeGradient|null $backgroundColor = null;
 
     /**
      * @var array<Renderable> $innerComponents
@@ -26,9 +29,25 @@ class PageSection extends Renderable {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, 'components.PageSection.page-section');
         $this->set_shortname($attributes['shortName'] ?? 'page-section');
-        $this->set_background_colors($attributes);
+        $this->set_background_color($attributes);
         $this->set_color_theme($attributes);
         $this->innerComponents = $innerComponents;
+    }
+
+    private function set_background_color(array $attributes): void {
+        if (!isset($attributes['backgroundColor'])) {
+            return;
+        }
+
+        if ($attributes['backgroundColor'] instanceof ThemeColor || $attributes['backgroundColor'] instanceof ThemeGradient) {
+            $this->backgroundColor = $attributes['backgroundColor'];
+
+            return;
+        }
+
+        $this->backgroundColor = ThemeColor::tryFrom($attributes['backgroundColor'])
+            ?? ThemeGradient::tryFrom($attributes['backgroundColor'])
+            ?? null;
     }
 
     public function get_filtered_classes(): array {

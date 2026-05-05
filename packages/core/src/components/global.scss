@@ -180,11 +180,15 @@
 		[data-background="#{$name}"] {
 			color: var(--readable-color-#{$name});
 		}
+	}
 
-		// 50/50 gradient backgrounds
-		@each $name2, $color2 in $colors {
-			[data-background="gradient-#{$name}-#{$name2}"] {
-				background: linear-gradient(180deg, var(--color-#{$name}) 0%, var(--color-#{$name}) 50%, var(--color-#{$name2}) 50%, var(--color-#{$name2}) 100%);
+	// Default 50/50 gradients
+	@each $color in map-keys($colors) {
+		@each $color2 in map-keys($colors) {
+			@if ($color != $color2) {
+				[data-background="#{$color}-#{$color2}"] {
+					background: var(--gradient-#{$color}-#{$color2});
+				}
 			}
 		}
 	}
