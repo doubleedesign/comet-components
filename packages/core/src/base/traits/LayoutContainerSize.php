@@ -14,9 +14,9 @@ trait LayoutContainerSize {
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
     public function set_size(array $attributes): void {
-        $this->size = $this->get_from_string_or_container_size($attributes['size'])
-            ?? $this->get_component_default()
-            ?? $this->size;
+        $this->size = isset($attributes['size'])
+            ? $this->get_from_string_or_container_size($attributes['size'])
+            : ($this->get_component_default() ?? $this->size);
     }
 
     private function get_component_default(): ?ContainerSize {
