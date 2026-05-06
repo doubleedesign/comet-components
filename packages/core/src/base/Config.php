@@ -122,7 +122,16 @@ class Config {
     }
 
     public function set_theme_gradients(array $gradients): void {
-        $this->theme_gradients = array_merge($this->theme_gradients, $gradients);
+        $validated_gradients = array_map(function($gradient) {
+            if ($gradient instanceof ThemeGradient) {
+                return $gradient;
+            }
+
+            return ThemeGradient::tryFrom($gradient) ?? null;
+        }, $gradients);
+        $validated_gradients = array_filter($validated_gradients); // Remove any null values from failed validations
+
+        $this->theme_gradients = array_merge($this->theme_gradients, $validated_gradients);
     }
 
     public function clear_theme_colour_pairs(): void {

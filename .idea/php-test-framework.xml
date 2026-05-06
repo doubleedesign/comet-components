@@ -23,7 +23,7 @@
       <tool tool_name="Pest">
         <cache>
           <versions>
-            <info id="Local\vendor/pestphp/pest/bin/pest" version="4.6.3" />
+            <info id="Local\vendor/pestphp/pest/bin/pest" version="4.4.4" />
           </versions>
         </cache>
       </tool>
