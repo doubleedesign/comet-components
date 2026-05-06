@@ -222,6 +222,10 @@ class Config {
     public function get_icon_prefix(): string {
         return $this->icon_prefix;
     }
+    
+    public function get_all_component_defaults(): array {
+        return $this->component_defaults;
+    }
 
     public function get_component_defaults(string $component): array {
         $defaults = $this->get('component_defaults');
