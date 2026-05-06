@@ -39,8 +39,8 @@
 		"symfony/var-dumper": "^7.4",
 		"pestphp/pest": "4.4.6",
 		"mockery/mockery": "^1.6",
-		"sirbrillig/spies": "^1.10.2",
-		"brain/monkey": "^2.6"
+		"sirbrillig/spies": "^1.11.0",
+		"brain/monkey": "^2.7.0"
 	},
 	"config": {
 		"preferred-install": "source",

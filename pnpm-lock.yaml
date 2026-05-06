@@ -149,6 +149,10 @@ importers:
         version: 10.4.0(eslint@9.39.4(jiti@1.21.7))
 
   packages/comet-plugin-blocks:
+    dependencies:
+      '@doubleedesign/comet-gutenberg-controls':
+        specifier: file:../../../../WebStormProjects/comet-gutenberg-controls
+        version: file:../../WebStormProjects/comet-gutenberg-controls
     devDependencies:
       '@babel/plugin-syntax-dynamic-import':
         specifier: ^7.8.3
@@ -1014,6 +1018,9 @@ packages:
 
   '@date-fns/utc@2.1.1':
     resolution: {integrity: sha512-SlJDfG6RPeEX8wEVv6ZB3kak4MmbtyiI2qX/5zuKdordbrhB/iaJ58GVMZgJ6P1sJaM1gMgENFYYeg1JWrCFrA==}
+
+  '@doubleedesign/comet-gutenberg-controls@file:../../WebStormProjects/comet-gutenberg-controls':
+    resolution: {directory: ../../WebStormProjects/comet-gutenberg-controls, type: directory}
 
   '@emotion/babel-plugin@11.13.5':
     resolution: {integrity: sha512-pxHCpT2ex+0q+HH91/zsdHkw/lXd468DIN2zvfvLtPKLLMo6gQj7oLObq8PhkrxOZb/gGCq03S3Z7PDhS8pduQ==}
@@ -7619,6 +7626,8 @@ snapshots:
 
   '@date-fns/utc@2.1.1': {}
 
+  '@doubleedesign/comet-gutenberg-controls@file:../../WebStormProjects/comet-gutenberg-controls': {}
+
   '@emotion/babel-plugin@11.13.5':
     dependencies:
       '@babel/helper-module-imports': 7.28.6
@@ -9051,7 +9060,7 @@ snapshots:
 
   '@vue-macros/common@3.1.2(vue@3.5.33(typescript@5.9.3))':
     dependencies:
-      '@vue/compiler-sfc': 3.5.32
+      '@vue/compiler-sfc': 3.5.33
       ast-kit: 2.2.0
       local-pkg: 1.1.2
       magic-string-ast: 1.0.3
