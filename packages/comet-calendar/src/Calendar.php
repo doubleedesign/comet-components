@@ -42,7 +42,7 @@ class Calendar {
      * @return mixed
      */
     public function customise_default_event_archive($query): object {
-        if (is_admin() || !$this->is_events_query($query)) {
+        if (is_admin() || !$this->is_events_query($query) || !$query->is_main_query()) {
             return $query;
         }
 
