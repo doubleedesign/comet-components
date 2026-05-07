@@ -1,0 +1,10 @@
+@use 'variables' as *;
+
+@layer comet-components-common {
+	:root {
+		@each $name, $values in $colors {
+			--color-#{$name}: #{map-get($colors, '#{$name}')};
+		}
+	}
+}
+

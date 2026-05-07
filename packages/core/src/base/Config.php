@@ -8,9 +8,11 @@ use InvalidArgumentException;
  */
 class Config {
     private static ?self $instance = null;
+    private static ColorUtils $colourUtils;
     private ThemeColor $global_background = ThemeColor::WHITE;
     private string $icon_prefix = 'fa-solid';
     private array $blade_component_paths = [];
+    private string $path_to_colours_css = __DIR__ . '/../components/colours.css';
     private array $component_defaults = [
         'site-header'            => ['breakpoint' => '1024px'],
         'call-to-action'         => ['colorTheme' => ThemeColor::WHITE, 'backgroundColors' => [ThemeColor::WHITE, ThemeColor::PRIMARY]],
@@ -45,6 +47,8 @@ class Config {
         if (self::$instance === null) {
             self::$instance = new self();
         }
+
+        self::$colourUtils = new ColorUtils();
     }
 
     private function get_config(): array {
@@ -111,6 +115,25 @@ class Config {
     }
 
     /**
+     * @param  string  $path
+     *
+     * @return void
+     * @throws InvalidArgumentException
+     */
+    public function set_path_to_colours_css(string $path): void {
+        if (file_exists($path)) {
+            $this->path_to_colours_css = $path;
+        }
+        else {
+            throw new InvalidArgumentException("Comet Components core config: Provided path to colours CSS file '$path' does not exist.");
+        }
+    }
+
+    public function get_path_to_colours_css(): string {
+        return $this->path_to_colours_css;
+    }
+
+    /**
      * Set global theme colours from the provided array and generate base set of pairs with contrast validation
      *
      * @param  array  $colours  - colorName:hexValue pairs
@@ -151,11 +174,12 @@ class Config {
         }
 
         foreach ($pairs as $pair) {
-            if (isset($pair[2])) {
-                $this->maybe_add_theme_colour_pair($pair[0], $pair[1], $pair[2]);
+            list($foreground, $background, $contrast_ratio) = $pair + [2 => null];
+            if (isset($contrast_ratio) && is_numeric($contrast_ratio)) {
+                $this->maybe_add_theme_colour_pair($foreground, $background, (float)$contrast_ratio);
             }
             else {
-                $this->maybe_add_theme_colour_pair($pair[0], $pair[1]);
+                $this->maybe_add_theme_colour_pair($foreground, $background);
             }
         }
     }
@@ -166,19 +190,19 @@ class Config {
             return $pair['background'] === $background && $pair['foreground'] === $foreground;
         });
         if ($exists !== null) {
-            // error_log("Comet Components core config: Colour pair foreground '$foreground' and background '$background' already exists so has not been registered again.");
+            // dump("Comet Components core config: Colour pair foreground '$foreground' and background '$background' already exists so has not been registered again.");
 
             return;
         }
 
         // Check if there is sufficient contrast
-        $valid = ColorUtils::validate_pair($foreground, $background, $threshold);
+        $valid = self::$colourUtils->validate_pair($foreground, $background, $threshold);
         if ($valid) {
             $this->theme_colour_pairs[] = ['foreground' => $foreground, 'background' => $background];
         }
         else {
             $message = "Comet Components core config: Colour pair foreground '$foreground' and background '$background' does not meet contrast threshold of $threshold:1 so has not been registered.";
-            // error_log($message);
+            // dump($message);
         }
     }
 
@@ -222,7 +246,7 @@ class Config {
     public function get_icon_prefix(): string {
         return $this->icon_prefix;
     }
-    
+
     public function get_all_component_defaults(): array {
         return $this->component_defaults;
     }

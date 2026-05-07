@@ -591,10 +591,23 @@
 }
 @layer comet-components-common {
   :root {
+    --color-primary: #845ec2;
+    --color-secondary: #00c9a7;
+    --color-accent: #ba3caf;
+    --color-info: #00d2fc;
+    --color-warning: #f9c971;
+    --color-success: #00c9a7;
+    --color-error: #d23e3e;
+    --color-light: #F0F0F2;
+    --color-dark: #4b4453;
+    --color-white: #ffffff;
+  }
+}
+@layer comet-components-common {
+  :root {
     --font-family-body: sans-serif;
     --font-family-accent: sans-serif;
-    --color-primary: #845ec2;
-    --readable-color-primary: white;
+    --readable-color-primary: contrast-color(var(--color-primary));
     --gradient-primary-secondary: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-primary-accent: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
     --gradient-primary-info: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-info) 50%, var(--color-info) 100%);
@@ -604,8 +617,7 @@
     --gradient-primary-light: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-primary-dark: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-primary-white: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-secondary: #00c9a7;
-    --readable-color-secondary: white;
+    --readable-color-secondary: contrast-color(var(--color-secondary));
     --gradient-secondary-primary: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-secondary-accent: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
     --gradient-secondary-info: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-info) 50%, var(--color-info) 100%);
@@ -615,8 +627,7 @@
     --gradient-secondary-light: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-secondary-dark: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-secondary-white: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-accent: #ba3caf;
-    --readable-color-accent: white;
+    --readable-color-accent: contrast-color(var(--color-accent));
     --gradient-accent-primary: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-accent-secondary: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-accent-info: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-info) 50%, var(--color-info) 100%);
@@ -626,8 +637,7 @@
     --gradient-accent-light: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-accent-dark: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-accent-white: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-info: #00d2fc;
-    --readable-color-info: white;
+    --readable-color-info: contrast-color(var(--color-info));
     --gradient-info-primary: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-info-secondary: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-info-accent: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
@@ -637,8 +647,7 @@
     --gradient-info-light: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-info-dark: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-info-white: linear-gradient(180deg, var(--color-info) 0%, var(--color-info) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-warning: #f9c971;
-    --readable-color-warning: black;
+    --readable-color-warning: contrast-color(var(--color-warning));
     --gradient-warning-primary: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-warning-secondary: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-warning-accent: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
@@ -648,8 +657,7 @@
     --gradient-warning-light: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-warning-dark: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-warning-white: linear-gradient(180deg, var(--color-warning) 0%, var(--color-warning) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-success: #00c9a7;
-    --readable-color-success: white;
+    --readable-color-success: contrast-color(var(--color-success));
     --gradient-success-primary: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-success-secondary: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-success-accent: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
@@ -659,8 +667,7 @@
     --gradient-success-light: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-success-dark: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-success-white: linear-gradient(180deg, var(--color-success) 0%, var(--color-success) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-error: #d23e3e;
-    --readable-color-error: white;
+    --readable-color-error: contrast-color(var(--color-error));
     --gradient-error-primary: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-error-secondary: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-error-accent: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
@@ -670,8 +677,7 @@
     --gradient-error-light: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-error-dark: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-error-white: linear-gradient(180deg, var(--color-error) 0%, var(--color-error) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-light: #F0F0F2;
-    --readable-color-light: black;
+    --readable-color-light: contrast-color(var(--color-light));
     --gradient-light-primary: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-light-secondary: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-light-accent: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
@@ -681,8 +687,7 @@
     --gradient-light-error: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-error) 50%, var(--color-error) 100%);
     --gradient-light-dark: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
     --gradient-light-white: linear-gradient(180deg, var(--color-light) 0%, var(--color-light) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-dark: #4b4453;
-    --readable-color-dark: white;
+    --readable-color-dark: contrast-color(var(--color-dark));
     --gradient-dark-primary: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-dark-secondary: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-dark-accent: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
@@ -692,8 +697,7 @@
     --gradient-dark-error: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-error) 50%, var(--color-error) 100%);
     --gradient-dark-light: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-dark-white: linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-white) 50%, var(--color-white) 100%);
-    --color-white: #ffffff;
-    --readable-color-white: black;
+    --readable-color-white: contrast-color(var(--color-white));
     --gradient-white-primary: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-primary) 50%, var(--color-primary) 100%);
     --gradient-white-secondary: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-secondary) 50%, var(--color-secondary) 100%);
     --gradient-white-accent: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-accent) 50%, var(--color-accent) 100%);
@@ -764,9 +768,9 @@
     h1 {
       margin-block: var(--spacing-lg);
     }
-  }
-  h1:first-child {
-    margin-block-start: 0;
+    h1:first-child {
+      margin-block-start: 0;
+    }
   }
   h2, h3 {
     margin-block: var(--spacing-md);
@@ -877,46 +881,46 @@
   .inline-message {
     color: var(--theme-color);
   }
-  [data-aspect-ratio=square] {
+  .inline-message [data-aspect-ratio=square] {
     aspect-ratio: 1/1;
   }
-  [data-aspect-ratio=standard] {
+  .inline-message [data-aspect-ratio=standard] {
     aspect-ratio: 4/3;
   }
-  [data-aspect-ratio=portrait] {
+  .inline-message [data-aspect-ratio=portrait] {
     aspect-ratio: 3/4;
   }
-  [data-aspect-ratio=wide] {
+  .inline-message [data-aspect-ratio=wide] {
     aspect-ratio: 16/9;
   }
-  [data-aspect-ratio=classic] {
+  .inline-message [data-aspect-ratio=classic] {
     aspect-ratio: 3/2;
   }
-  [data-aspect-ratio=classic_portrait] {
+  .inline-message [data-aspect-ratio=classic_portrait] {
     aspect-ratio: 2/3;
   }
-  [data-aspect-ratio=cinematic] {
+  .inline-message [data-aspect-ratio=cinematic] {
     aspect-ratio: 21/9;
   }
-  [data-aspect-ratio=cinemascope] {
+  .inline-message [data-aspect-ratio=cinemascope] {
     aspect-ratio: 2.35/1;
   }
-  .breakout {
+  .inline-message .breakout {
     width: 100cqw;
     position: relative;
     z-index: 300;
     padding-inline: var(--spacing-md);
   }
-  [class*=container] .breakout {
+  [class*=container] .inline-message .breakout {
     max-width: var(--width-contained);
   }
-  [class*=container][data-size=fullwidth] .breakout {
+  [class*=container][data-size=fullwidth] .inline-message .breakout {
     max-width: 100vw;
   }
-  [class*=container][data-size=wide] .breakout {
+  [class*=container][data-size=wide] .inline-message .breakout {
     max-width: var(--width-wide);
   }
-  [class*=container][data-size=narrow] .breakout {
+  [class*=container][data-size=narrow] .inline-message .breakout {
     max-width: var(--width-narrow);
   }
 }

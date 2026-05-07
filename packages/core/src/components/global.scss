@@ -160,6 +160,7 @@
 		}
 		[data-color-theme="#{$name}"] {
 			--theme-color: var(--color-#{$name});
+			// This can contextually be set to something different if there is sufficient contrast (manually checked)
 			--theme-color-inverse: var(--readable-color-#{$name});
 		}
 	}

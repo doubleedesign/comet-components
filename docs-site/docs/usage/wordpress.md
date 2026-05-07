@@ -100,12 +100,10 @@ add_filter('comet_canvas_colour_pair_overrides', function ($overrides) {
 
 The values of all relevant design tokens that Comet Component uses (such as colours and gradients) are defined as CSS variables. There should be no need to hard-code colour values anywhere else for your base theming, because Comet is configured to use `var(--*)` values everywhere.
 
-The WordPress plugin is configured to load a file called `common.css` from your theme into the block editor (both preview and controls) and TinyMCE (for [ACF](https://www.advancedcustomfields.com) WYSIWYG fields and post types using the Classic Editor). Comet Components provides defaults, so you can use its stylesheets as a guide for all available tokens.
-
-An example of setting colour values:
+The WordPress plugin is configured to load and process a file called `colours.css` for validating your theme colours. This should be a minimal file that only defines those values, like so:
 
 ```css
-/* common.css */
+/* colours.scss */
 :root {
     --color-primary: #502595;
     --color-secondary: #845ec2;
@@ -119,11 +117,27 @@ An example of setting colour values:
     --color-white: #ffffff;
 }
 ```
+:::tip
+Comet Components supports [named colours](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/named-color) and colours in hex, RGB, HSL, and OKLCH formats.
+:::
+
+
+The `colours.css` file should also be compiled into your theme's `common.css` file (or the values need to be copied into there if not using Sass).
+
+The WordPress plugin is configured to load `common.css` from your theme into the block editor (both preview and controls) and TinyMCE (for [ACF](https://www.advancedcustomfields.com) WYSIWYG fields and post types using the Classic Editor). Comet Components provides defaults, so you can use its stylesheets as a guide for all available tokens.
+
+
+```scss
+/* common.scss */
+@use 'colours' as *;
+
+// ... the rest of your design tokens and common styles
+```
 
 The default gradients are 50/50 of pairs of these colours vertically. They will automatically adopt your colours as they use the `--color-*` values, not hardcoded colour values. However, you can override these of you want different gradients. For example, to make the `dark-light` gradient a 45% smooth transition, you would add:
 
 ```css
-/* common.css */
+/* common.scss */
 :root {
     /* ... your other colour tokens here **/
     --gradient-dark-light: linear-gradient(45deg,rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 100%)
@@ -131,7 +145,7 @@ The default gradients are 50/50 of pairs of these colours vertically. They will 
 ```
 
 ::: important
-The Comet plugin does not load the `common.css` file on the front-end automatically. You can either compile it into your core `style.css` file using Sass or similar, or enqueue it separately in your theme's `functions.php`.
+The Comet plugin does not load the `common.css` file on the front-end automatically. You can either compile it into your core `style.css` file using Sass, or enqueue it separately in your theme's `functions.php`.
 :::
 
 ## Customisation

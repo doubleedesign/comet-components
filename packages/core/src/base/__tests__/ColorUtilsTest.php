@@ -1,47 +1,103 @@
 <?php
 
 use Doubleedesign\Comet\Core\{ColorUtils, ThemeColor};
-use function Spies\{expect_spy, get_spy_for, match_pattern};
+use function Spies\{stub_function, expect_spy, get_spy_for, match_pattern};
+
+beforeEach(function() {
+    // Mock a range of colour types
+    stub_function('file_get_contents')->when_called->will_return(
+        <<<CSS
+		:root {
+			--color-primary: #4B0082;
+			--color-secondary: rgb(30, 75, 222);
+			--color-accent: hsl(51, 100%, 50%);
+			--color-info: lch(65% 45 240);
+			--color-warning: lab(75% 17.50 65);
+			--color-dark: oklch(0.25 0 275);
+			--color-light: ghostwhite;
+			--color-invalidName: #8a1010;
+		}
+		CSS
+    );
+});
 
 describe('ColorUtils', function() {
 
-    describe('theme value to colour name', function() {
-        it('matches a valid colour name to its theme config value', function() {
-            $primary = ColorUtils::get_theme_value_for_colour_name('primary');
-            expect($primary)->toEqual('#4B0082');
+    describe('parsing values from CSS', function() {
+        it('saves valid colours (by name) from the CSS file and ignores invalid ones', function() {
+            $instance = new ColorUtils();
+            $values = $instance->get_theme_colour_values();
 
-            $accent = ColorUtils::get_theme_value_for_colour_name('accent');
-            expect($accent)->toEqual('#FFD700');
+            expect(array_keys($values))->toContain('secondary')
+                ->and(array_keys($values))->toContain('accent')
+                ->and($values)->not->toContain('invalidName');
+        });
+    });
+
+    describe('theme value to colour name', function() {
+        it('matches a valid colour name to its theme config value (hex)', function() {
+            $instance = new ColorUtils();
+            $colour = $instance->get_theme_value_for_colour_name('primary');
+            expect($colour)->toEqual('#4B0082');
+        });
+
+        it('matches a valid colour name to its theme config value (RGB)', function() {
+            $instance = new ColorUtils();
+            $colour = $instance->get_theme_value_for_colour_name('secondary');
+            expect($colour)->toEqual('rgb(30, 75, 222)');
+        });
+
+        it('matches a valid colour name to its theme config value (HSL)', function() {
+            $instance = new ColorUtils();
+            $colour = $instance->get_theme_value_for_colour_name('accent');
+            expect($colour)->toEqual('hsl(51, 100%, 50%)');
+        });
+
+        it('matches a valid colour name to its theme config value (OKLCH)', function() {
+            $instance = new ColorUtils();
+            $colour = $instance->get_theme_value_for_colour_name('dark');
+            expect($colour)->toEqual('oklch(0.25 0 275)');
+        });
+
+        it('matches a valid colour name to its theme config value (named colour)', function() {
+            $instance = new ColorUtils();
+            $colour = $instance->get_theme_value_for_colour_name('light');
+            expect($colour)->toEqual('ghostwhite');
         });
 
         it('returns null for an invalid colour name', function() {
-            $invalid = ColorUtils::get_theme_value_for_colour_name('invalid-color');
+            $instance = new ColorUtils();
+            $invalid = $instance->get_theme_value_for_colour_name('invalid-color');
             expect($invalid)->toBeNull();
         });
     });
 
     describe('colour pair validation', function() {
         it('returns true when the contrast is sufficient', function() {
-            $isValid = ColorUtils::validate_pair(ThemeColor::WHITE, ThemeColor::BLACK, 3);
+            $instance = new ColorUtils();
+            $isValid = $instance->validate_pair(ThemeColor::WHITE, ThemeColor::BLACK, 3);
             expect($isValid)->toBeTrue();
         });
 
         it('returns false when the contrast is insufficient', function() {
-            $isValid = ColorUtils::validate_pair(ThemeColor::DARK, ThemeColor::BLACK, 3);
+            $instance = new ColorUtils();
+            $isValid = $instance->validate_pair(ThemeColor::DARK, ThemeColor::BLACK, 3);
             expect($isValid)->toBeFalse();
         });
 
         it('catches the error and returns false if a colour has a valid name but missing from the config', function() {
+            $instance = new ColorUtils();
             $logSpy = get_spy_for('error_log');
-            $isValid = ColorUtils::validate_pair(ThemeColor::INFO, ThemeColor::BLACK, 3);
+            $isValid = $instance->validate_pair(ThemeColor::INFO, ThemeColor::BLACK, 3);
 
             expect_spy($logSpy)->to_have_been_called->with(match_pattern('/ThemeColor value not found in theme configuration/'))->verify();
             expect($isValid)->toBeFalse();
         });
 
         it('catches the error and returns false if an invalid colour is provided', function() {
+            $instance = new ColorUtils();
             $logSpy = get_spy_for('error_log');
-            $isValid = ColorUtils::validate_pair(ThemeColor::WHITE, 'invalid-color', 3);
+            $isValid = $instance->validate_pair(ThemeColor::WHITE, 'invalid-color', 3);
 
             expect_spy($logSpy)->to_have_been_called()->with(match_pattern('/Invalid ThemeColor value provided/'))->verify();
             expect($isValid)->toBeFalse();
