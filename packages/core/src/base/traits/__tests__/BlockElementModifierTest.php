@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\{BlockElementModifier};
+use Doubleedesign\Comet\Core\BlockElementModifier;
 
 /**
  * Function to create a generic component class that uses the trait

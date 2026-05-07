@@ -65,8 +65,8 @@ trait ImageCropProperties {
 
         // For now we trust that the editing context will provide reasonable values.
         $this->offset = [
-            'x' => (int)$field['x'],
-            'y' => (int)$field['y'],
+            'x' => isset($field['x']) ? (int)$field['x'] : 0,
+            'y' => isset($field['y']) ? (int)$field['y'] : 0
         ];
     }
 

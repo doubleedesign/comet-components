@@ -60,11 +60,11 @@ abstract class Renderable {
             // TODO: Make this opt-in somehow, so it's not being run when not used (e.g., in WordPress where the bundles are used)
             // TODO: Also make this work with custom Blade file paths
             $componentRootDir = dirname(__DIR__, 2);
-            $thisComponentPathFromBladeFile = str_replace('.', '/', $this->bladeFile);
-            $cssFile = $componentRootDir . '/' . $thisComponentPathFromBladeFile . '.css';
-            $cssFile = str_replace('\\', '/', $cssFile);
-            $jsFile = $componentRootDir . '/' . $thisComponentPathFromBladeFile . '.js';
-            $jsFile = str_replace('\\', '/', $jsFile);
+            $thisComponentPathFromBladeFile = str_replace('.', DIRECTORY_SEPARATOR, $this->bladeFile);
+            $cssFile = $componentRootDir . DIRECTORY_SEPARATOR . $thisComponentPathFromBladeFile . '.css';
+            $cssFile = str_replace('\\', DIRECTORY_SEPARATOR, $cssFile);
+            $jsFile = $componentRootDir . DIRECTORY_SEPARATOR . $thisComponentPathFromBladeFile . '.js';
+            $jsFile = str_replace('\\', DIRECTORY_SEPARATOR, $jsFile);
             if (file_exists($cssFile)) {
                 Assets::get_instance()->add_stylesheet($cssFile);
             }

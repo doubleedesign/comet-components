@@ -40,8 +40,8 @@ $menuItems = NavMenus::get_simplified_nav_menu_items_by_location('primary');
 $menuComponent = new Menu([...$menu_attributes, 'context' => 'site-header'], $menuItems);
 
 $showContactDetails = apply_filters('comet_canvas_show_contact_details_in_header', false);
-$overlayMode = $header_attributes['responsiveStyle'] === 'overlay';
-$offCanvasMode = $header_attributes['responsiveStyle'] === 'off-canvas';
+$overlayMode = isset($header_attributes['responsiveStyle']) && $header_attributes['responsiveStyle'] === 'overlay';
+$offCanvasMode = isset($header_attributes['responsiveStyle']) && $header_attributes['responsiveStyle'] === 'off-canvas';
 if ($showContactDetails) {
     ob_start();
     get_template_part('template-parts/contact-details');

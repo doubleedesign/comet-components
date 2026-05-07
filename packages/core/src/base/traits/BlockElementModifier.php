@@ -10,6 +10,7 @@ use Exception;
 trait BlockElementModifier {
     use ContextHierarchy;
     use ShortName;
+
     private ?string $explicit_context = null;
     private string $block = '';
     private ?string $element = null;
@@ -154,6 +155,6 @@ trait BlockElementModifier {
     }
 
     public function get_bem_prefix(): string {
-        return $this->get_bem_classes()[0];
+        return $this->get_bem_classes()[0] ?? '';
     }
 }
