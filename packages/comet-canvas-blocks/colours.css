@@ -1,0 +1,16 @@
+@layer comet-components-common {
+  :root {
+    --color-primary: #845ec2;
+    --color-secondary: #00c9a7;
+    --color-accent: #ba3caf;
+    --color-info: #00d2fc;
+    --color-warning: #f9c971;
+    --color-success: #00c9a7;
+    --color-error: #d23e3e;
+    --color-light: #F0F0F2;
+    --color-dark: #4b4453;
+    --color-white: #ffffff;
+  }
+}
+
+/*# sourceMappingURL=colours.css.map */

@@ -1,0 +1,24 @@
+$colors: (
+		'primary': #845ec2,
+		'secondary': #00c9a7,
+		'accent': #ba3caf,
+		'info': #00d2fc,
+		'warning': #f9c971,
+		'success': #00c9a7,
+		'error': #d23e3e,
+		'light': #F0F0F2,
+		'dark': #4b4453,
+		'white': #ffffff
+);
+
+// This file is just here for the Core config to load the compiled colours.css
+// if this theme is being used directly, which is expected to only be when testing.
+// Child themes should have their own colours.css that the Config will load.
+@layer comet-components-common {
+	:root {
+		@each $name, $values in $colors {
+			--color-#{$name}: #{map-get($colors, '#{$name}')};
+		}
+	}
+}
+
