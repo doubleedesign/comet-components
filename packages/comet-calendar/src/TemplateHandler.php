@@ -102,7 +102,7 @@ class TemplateHandler {
     }
 
     public static function get_date_block(int $event_id, ?string $colorTheme = null): DateBlock|DateRangeBlock|null {
-        $type = get_field('type', $event_id);
+        $type = get_post_meta($event_id, 'type', true);
         $dateComponent = null;
         $sortDate = get_post_meta($event_id, 'sort_date', true);
         // is the sort date in the past? If so, show the year. For upcoming dates, don't show the year

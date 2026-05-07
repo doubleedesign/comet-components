@@ -137,8 +137,6 @@ class Events {
             return $query;
         }
 
-        \Symfony\Component\VarDumper\VarDumper::dump($query);
-
         $query->set('year', '');
 
         return $query;
