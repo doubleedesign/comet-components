@@ -168,8 +168,6 @@ function useComponentSpecs(componentName: string) {
 	const fetchCss = useCallback(async () => {
 		try {
 			if (window.location.hostname.startsWith('storybook.comet-components.test')) {
-				console.log('testing fetch from local');
-
 				return await fetch(`https://comet-components.test/packages/core/src/components/${componentName}/${kebabCase(componentName)}.css`, {
 					method: 'GET',
 					mode: 'cors',

@@ -44,11 +44,24 @@ function useRenderableSpecs() {
 	const [error, setError] = useState<Error | null>(null);
 
 	const fetchJsonDef = useCallback(async () => {
-		if(window.location.hostname.startsWith('storybook.comet-components.test')) {
-			return await fetch('https://comet-components.test/packages/core/src/base/components/__docs__/Renderable.json');
-		}
+		const url = window.location.hostname.startsWith('storybook.comet-components.test')
+			? 'https://comet-components.test/packages/core/src/base/components/__docs__/Renderable.json'
+			: 'https://cometcomponents.io/packages/core/src/base/components/__docs__/Renderable.json';
 
-		return await fetch('https://cometcomponents.io/packages/core/src/base/components/__docs__/Renderable.json');
+		try {
+			return await fetch(url, {
+				method: 'GET',
+				mode: 'cors',
+				cache: 'no-cache',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+		}
+		catch (error) {
+			console.error('Fetch error:', error);
+			throw error;
+		}
 	}, []);
 
 	useEffect(() => {

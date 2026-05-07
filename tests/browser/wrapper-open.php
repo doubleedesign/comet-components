@@ -1,8 +1,4 @@
 <?php
-if (isset($_SERVER['HTTP_ORIGIN']) && str_contains($_SERVER['HTTP_ORIGIN'], '.test')) {
-    require_once 'cors.php';
-}
-
 // If the request has not come from a browser (e.g., it has come from a unit test or CLI command), bail early
 if (!isset($_SERVER['HTTP_USER_AGENT'])) {
     return;
@@ -11,7 +7,7 @@ if (!isset($_SERVER['HTTP_USER_AGENT'])) {
 // Skip all this if this is not Comet Components
 // Useful for local development where php.ini applies to multiple sites
 if (!in_array($_SERVER['HTTP_HOST'], ['comet-components.test', 'cometcomponents.io', 'storybook.comet-components.test', 'storybook.cometcomponents.io'])) {
-    return;
+	return;
 }
 
 use Doubleedesign\Comet\Core\{Assets, Config};
@@ -19,6 +15,10 @@ use Doubleedesign\Comet\Core\{Assets, Config};
 // Autoload dependencies using Composer
 require_once __DIR__ . '/../../packages/core/vendor/autoload.php';
 require_once __DIR__ . '/../common/mocks.php';
+// Enable dump() locally (assumes VarDumper is installed globally via Composer)
+if (getenv('APPDATA') !== null) {
+    require_once getenv('APPDATA') . '/Composer/vendor/autoload.php';
+}
 
 // Initialise and set global config
 Config::init();

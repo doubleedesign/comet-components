@@ -514,4 +514,19 @@ RewriteCond %{REQUEST_METHOD} OPTIONS
 RewriteRule ^(.*)$ $1 [R=200,L]
 ```
 
+If using Nginx, add this to the SSL-ed `server` block site-level config (usually found in 'C:/Users/YOUR_USERNAME/.config/herd/config/valet/Nginx/comet-components.test.conf' if using Herd):
+
+```nginx
+add_header Access-Control-Allow-Origin *;
+add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS";
+add_header Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With";
+```
+**Note:** This needs to be somewhere _above_ this location block:
+
+```nginx
+location / {
+    rewrite ^ "C:/Program Files/Herd/resources/app.asar.unpacked/resources/valet/server.php" last;
+}
+```
+
 :::
