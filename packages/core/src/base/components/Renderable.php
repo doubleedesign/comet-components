@@ -3,8 +3,6 @@ namespace Doubleedesign\Comet\Core;
 use ReflectionClass;
 
 abstract class Renderable {
-    use ContextHierarchy;
-
     /**
      * @var array<string, string|int|array|null> $rawAttributes
      * @description Raw attributes passed to the component constructor as key-value pairs
@@ -40,6 +38,13 @@ abstract class Renderable {
      * @description Optionally add a data-testid attribute for automated tests
      */
     protected ?string $testId;
+
+    /**
+     * The dot-delimited path to the Blade template file
+     *
+     * @var string
+     */
+    protected string $bladeFile = '';
 
     public function __construct(array $attributes, string $bladeFile) {
         $this->rawAttributes = $attributes;
