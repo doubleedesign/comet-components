@@ -27,6 +27,10 @@
     margin-block-end: 0;
   }
 }
+#wpadminbar + .site-header {
+  margin-top: 32px;
+}
+
 .site-content {
   padding-block: 0;
   position: relative;

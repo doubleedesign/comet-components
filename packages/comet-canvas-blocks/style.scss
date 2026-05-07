@@ -8,6 +8,10 @@
  */
 @use 'common';
 
+#wpadminbar + .site-header {
+	margin-top: 32px;
+}
+
 .site-content {
 	padding-block: 0;
 	position: relative;
