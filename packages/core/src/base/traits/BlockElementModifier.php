@@ -36,7 +36,7 @@ trait BlockElementModifier {
 
         $this->set_shortname($override_shortname);
 
-        $final_context = $this->get_context(); // gets it from the Context trait
+        $final_context = $this->get_context(); // gets it from the ContextHierarchy trait
 
         // Determine how many levels deep we are for multi-level elements
         if (!empty($final_context) && str_contains($final_context, '__')) {

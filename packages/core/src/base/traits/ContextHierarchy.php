@@ -120,7 +120,7 @@ trait ContextHierarchy {
      */
     protected function with_explicit_context(?string $explicit_context): static {
         if (empty($this->hierarchy)) {
-            throw new Exception('Context hierarchy not prepared. Ensure init_from_blade_file() has been called first.');
+            throw new Exception('Initial context hierarchy not prepared. Ensure init_from_blade_file() has been called first.');
         }
 
         // If no explicit context was given, do nothing
@@ -149,18 +149,22 @@ trait ContextHierarchy {
         }
 
         $this->explicit_context = $explicit_context;
-        $this->context = $explicit_context . '__' . $this->implicit_context;
+        if (!str_ends_with($explicit_context, $this->implicit_context)) {
+            $this->context = $explicit_context . '__' . $this->implicit_context;
+        }
+        else {
+            $this->context = $explicit_context;
+        }
 
         return $this;
     }
 
-    public function update_context(string $context, ?bool $clear_previous = false): static {
-        if ($clear_previous) {
-            $this->context = $context;
-        }
-        else {
-            /** @noinspection PhpUnhandledExceptionInspection */
-            $this->with_explicit_context($context)->and_bem($this->shortName);
+    public function update_context(string $context): static {
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $this->with_explicit_context($context)->and_bem($this->shortName);
+
+        if (method_exists($this, 'maybe_pass_down_context_to_inner_components')) {
+            $this->maybe_pass_down_context_to_inner_components();
         }
 
         // Allow for method chaining like update_context(...)->and_bem(...)

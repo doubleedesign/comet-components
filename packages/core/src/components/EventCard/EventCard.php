@@ -100,25 +100,6 @@ class EventCard extends UIComponent {
         $this->innerComponents = $this->dateComponent ? [$this->dateComponent, $content] : [$content];
     }
 
-    /**
-     * When the context gets updated from a parent component, apply the new context to inner components
-     *
-     * @param  string  $context
-     * @param  bool|null  $clear_previous  Whether to clear previous context parts. Default is null (false).
-     *
-     * @return static
-     */
-    public function update_context(string $context, ?bool $clear_previous = false): static {
-        parent::update_context($context, $clear_previous);
-
-        // Apply updated context to inner components
-        foreach ($this->innerComponents as $component) {
-            $component->update_context($this->get_bem_prefix());
-        }
-
-        return $this;
-    }
-
     public function render(): void {
         $blade = BladeService::getInstance();
 

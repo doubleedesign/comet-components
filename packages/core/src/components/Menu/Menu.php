@@ -32,29 +32,24 @@ class Menu extends UIComponent {
     public function __construct(array $attributes, array $menuItems) {
         $this->rawMenuData = $menuItems;
         $this->set_color_theme($attributes);
+        $innerComponents = [new MenuList($attributes, $this->array_to_items($menuItems, 1))];
 
-        parent::__construct($attributes, [], 'components.Menu.menu');
-        $this->innerComponents = [
-            new MenuList($attributes, $this->array_to_items($menuItems, 1, $this->get_context()))
-        ];
+        parent::__construct($attributes, $innerComponents, 'components.Menu.menu');
     }
 
     /**
      * @param  array  $items
      * @param  int  $level
-     * @param  string|null  $context
      *
      * @return array<MenuListItem>
      */
-    private function array_to_items(array $items, int $level, ?string $context = ''): array {
-        return array_map(function($item) use ($level, $context) {
+    private function array_to_items(array $items, int $level): array {
+        return array_map(function($item) use ($level) {
             $itemObject = new MenuListItem(
                 [
                     'id'              => $item['id'] ?? null,
                     'classes'         => $item['classes'] ?? '',
                     'isCurrentParent' => $item['isCurrentParent'] ?? 'false',
-                    'context'         => $context,
-                    'shortName'       => 'item'
                 ],
                 [
                     $item['link_attributes']['target'] === '_blank'
@@ -64,9 +59,6 @@ class Menu extends UIComponent {
                                 [
                                     'colorTheme' => 'primary',
                                     'classes'    => ['button'],
-                                    'context'    => $level > 1 && $context
-                                    ? "{$context}__item"
-                                    : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
                                 ],
                             ),
                             $item['title']
@@ -74,24 +66,15 @@ class Menu extends UIComponent {
                         : new Link([
                             ...$item['link_attributes'],
                             'label' => $item['title'],
-                            ...(['context' => $level > 1 && $context
-                                ? "{$context}__item"
-                                : ($context ? "{$context}__menu__list__item" : 'menu-list__item')
-                            ])
                         ])
                 ]
             );
 
-            if ($level > 1) {
-                $itemObject->set_bem_block($context);
-                $itemObject->update_context($context, true);
-            }
-
             // Handle nested lists
             if (!empty($item['children'])) {
                 $itemObject->innerComponents[] = new MenuList(
-                    ['context' => $context, 'shortName' => 'sub-menu'],
-                    $this->array_to_items($item['children'], $level + 1, "{$context}__menu__sub-menu")
+                    ['shortName' => 'sub-menu'],
+                    $this->array_to_items($item['children'], $level + 1)
                 );
             }
 
@@ -113,10 +96,10 @@ class Menu extends UIComponent {
             return [];
         }
 
-        $transformed = array_map(function(MenuListItem $item) {
-            // TODO: Replace with array_find in PHP 8.4
+        return array_map(function(MenuListItem $item) {
             /** @var Link $link */
-            $link = array_filter($item->innerComponents, fn($component) => $component instanceof Link || $component instanceof Button)[0];
+            $link = array_find($item->innerComponents, fn($component) => $component instanceof Link || $component instanceof Button);
+
             /** @var array<MenuList> $children */
             $children = array_values(array_filter($item->innerComponents, fn($component) => $component instanceof MenuList));
             if (!$link && !$children) {
@@ -133,10 +116,9 @@ class Menu extends UIComponent {
                 'title'           => $link->get_content(),
                 'classes'         => $item->get_filtered_classes(),
                 'link_attributes' => $linkAttrs,
-                'children'        => !empty($children) ? $this->get_raw_menu_data($children) : []];
+                'children'        => !empty($children) ? $this->get_raw_menu_data($children) : []
+            ];
         }, $list);
-
-        return $transformed;
     }
 
     /**

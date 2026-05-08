@@ -49,11 +49,13 @@ class Columns extends WrappedLayoutComponent {
         $wrappedCols = new Group([
             'shortName'  => 'columns',
             'data-count' => $this->qty,
+            'context'    => $attributes['shortName'] ?? 'columns',
             ...($this->allowStacking !== null ? ['data-allow-layout-stacking' => $this->allowStacking ? 'true' : 'false'] : []),
             ...($this->hAlign && !$this->hAlign->isDefault() ? ['data-halign' => $this->hAlign->value] : []),
             ...($this->vAlign && !$this->vAlign->isDefault() ? ['data-valign' => $this->vAlign->value] : [])
         ], $updatedInnerComponents);
         $updatedInnerComponents = $this->withContainer ? [$wrappedCols] : $updatedInnerComponents;
+
         // For the outer wrapper if applicable, add "wrapper" to the class name if no shortName is set
         // so it can be targeted in CSS without affecting nested instances
         // Note: This must be done *after* the inner group is created so it doesn't inherit this as context
@@ -63,15 +65,6 @@ class Columns extends WrappedLayoutComponent {
 
         // Finally, create the component with all the transformed stuff
         parent::__construct($attributes, $updatedInnerComponents, 'components.Columns.columns');
-
-        // ...and then update things that need data that is set by the parent constructor
-        $wrappedCols->update_context($this->get_bem_prefix());
-        array_walk($wrappedCols->innerComponents, function(&$column) {
-            // If inner Column components do not have their own context explicitly set, add it from this component
-            if ($column->get_context() === 'columns') {
-                $column->update_context($this->get_bem_prefix());
-            }
-        });
     }
 
     /**

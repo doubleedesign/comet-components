@@ -47,56 +47,38 @@ class Gallery extends WrappedLayoutComponent {
         $this->maxPerRow = $attributes['maxPerRow'] ?? $attributes['columns'] ?? $this->maxPerRow;
         $this->caption = (isset($attributes['caption']) && !empty(trim($attributes['caption']))) ? trim($attributes['caption']) : null;
         $this->lightbox = $attributes['lightbox'] ?? $this->lightbox;
-        $attributes['tagName'] = isset($attributes['tagName']) ? $this->shuffle_tags($attributes)['outer']->value : $this->tagName->value;
 
         $updatedInnerComponents = array_map(function(ContentImageBasic $component) use ($attributes) {
-            $component->update_context('gallery');
             $component->set_behaviour($this->imageCrop ? 'cover' : 'contain');
 
             return $component;
         }, $innerComponents);
 
-        $innerTagName = $this->shuffle_tags($attributes)['inner'];
         $groupAttrs = [
-            'tagName'           => $innerTagName->value,
+            'tagName'           => (isset($attributes['tagName']) && $attributes['tagName'] !== 'figure') ? $attributes['tagName'] : 'div',
             'shortName'         => 'images',
             'data-group-layout' => 'grid',
             'data-max-per-row'  => $attributes['maxPerRow'] ?? $attributes,
             'data-lightbox'     => $this->lightbox ? 'true' : null,
-            'role'              => $innerTagName === Tag::FIGURE ? null : 'group',
+            'role'              => 'group'
         ];
 
         $wrappedImages = new Group($groupAttrs, $updatedInnerComponents);
 
-        parent::__construct($attributes, [$wrappedImages], 'components.Gallery.gallery');
-
-        // Update inner group with context after BEM structure is initialised in the parent constructor
-        $wrappedImages->update_context($this->get_bem_prefix());
+        parent::__construct(
+            $attributes,
+            [$wrappedImages],
+            'components.Gallery.gallery'
+        );
 
         // Add caption after parent constructor runs so we have access to the correct BEM context
         if (!empty($this->caption)) {
             $captionClass = $this->get_bem_prefix() . '__caption';
-            $captionTag = $this->tagName === Tag::FIGURE ? 'figcaption' : 'p';
+            $captionTag = (isset($attributes['tagName']) && $attributes['tagName'] === 'figure') ? 'figcaption' : 'p';
             $wrappedImages->innerComponents[] = new PreprocessedHTML(
                 [],
                 "<{$captionTag} class=\"{$captionClass}\">" . $this->caption . "</{$captionTag}>"
             );
         }
-    }
-
-    protected function shuffle_tags($attributes): array {
-        $original = $attributes['tagName'] ?? Tag::SECTION;
-
-        if ($original === 'figure') {
-            return [
-                'outer' => isset($attributes['isNested']) && $attributes['isNested'] ? Tag::DIV : Tag::SECTION,
-                'inner' => Tag::FIGURE
-            ];
-        }
-
-        return [
-            'outer' => is_string($original) ? Tag::tryFrom($original) : $original,
-            'inner' => Tag::DIV
-        ];
     }
 }

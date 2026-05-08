@@ -26,7 +26,6 @@ class Breadcrumbs extends UIComponent {
             ob_start();
             $link = new Link([
                 ...$linkAttributes,
-                'context'    => 'breadcrumbs__list__item',
                 'label'      => $breadcrumb['title'],
                 'url'        => !empty($breadcrumb['url']) ? $breadcrumb['url'] : '#',
             ]);
@@ -34,12 +33,12 @@ class Breadcrumbs extends UIComponent {
             $linkHtml = ob_get_clean();
 
             return new ListItem(
-                ['context' => 'breadcrumbs'],
+                [],
                 $linkHtml
             );
         }, $breadcrumbs);
 
-        $innerComponents = [new ListComponent(['ordered' => true, 'context' => 'breadcrumbs'], $listItems)];
+        $innerComponents = [new ListComponent(['ordered' => true], $listItems)];
 
         parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
     }

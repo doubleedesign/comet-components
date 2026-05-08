@@ -8,14 +8,13 @@ use Doubleedesign\CometCanvas\NavMenus;
 
 <?php
 $menuItems = NavMenus::get_simplified_nav_menu_items_by_location('footer');
-$menuComponent = new Menu(['context' => 'site-footer'], $menuItems);
+$menuComponent = new Menu([], $menuItems);
 $socials = function_exists('get_field') ? (get_field('social_media_links', 'options') ?? []) : [];
 $attributes = Config::getInstance()->get_component_defaults('site-footer') ?? [];
 
 if ($socials) {
     $iconLinksComponent = new IconLinks([
         'aria-label' => 'Social media links',
-        'context'    => 'site-footer',
     ], $socials);
     $footerComponent = new SiteFooter($attributes, [$iconLinksComponent, $menuComponent]);
 }

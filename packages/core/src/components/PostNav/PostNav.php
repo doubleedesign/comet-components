@@ -27,7 +27,7 @@ class PostNav extends UIComponent {
             foreach ($attributes['links'] as $index => $link) {
                 array_push($this->links, $this->validate_link_attributes($link));
                 $linkAttrs = array_merge(
-                    ['context' => 'post-nav'],
+                    [],
                     array_filter($link, fn($k) => !in_array($k, ['content', 'icon', 'context']))
                 );
 

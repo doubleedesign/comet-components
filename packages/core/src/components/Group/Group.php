@@ -8,7 +8,7 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.0
  * @description Group components together for layout or structure purposes.
  */
-#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE, Tag::ASIDE, Tag::UL, Tag::OL])]
+#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE, Tag::ASIDE, Tag::UL, Tag::OL, Tag::FIGURE])]
 #[DefaultTag(Tag::DIV)]
 class Group extends UIComponent {
     use BackgroundColor;
