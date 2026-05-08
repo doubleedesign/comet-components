@@ -59,10 +59,10 @@ describe('ColorUtils', function() {
             expect($colour)->toEqual('oklch(0.25 0 275)');
         });
 
-        it('matches a valid colour name to its theme config value (named colour)', function() {
+        it('matches a valid named colour to its hex value', function() {
             $instance = new ColorUtils();
             $colour = $instance->get_theme_value_for_colour_name('light');
-            expect($colour)->toEqual('ghostwhite');
+            expect($colour)->toEqual('#F8F8FF');
         });
 
         it('returns null for an invalid colour name', function() {
@@ -73,9 +73,27 @@ describe('ColorUtils', function() {
     });
 
     describe('colour pair validation', function() {
-        it('returns true when the contrast is sufficient', function() {
+        it('returns true when the contrast is sufficient (pre-set hex colours)', function() {
             $instance = new ColorUtils();
             $isValid = $instance->validate_pair(ThemeColor::WHITE, ThemeColor::BLACK, 3);
+            expect($isValid)->toBeTrue();
+        });
+
+        it('returns true when the contrast is sufficient (hex + hex)', function() {
+            $instance = new ColorUtils();
+            $isValid = $instance->validate_pair(ThemeColor::PRIMARY, ThemeColor::WHITE, 3);
+            expect($isValid)->toBeTrue();
+        });
+
+        it('returns true when the contrast is sufficient (RGB + named colour)', function() {
+            $instance = new ColorUtils();
+            $isValid = $instance->validate_pair(ThemeColor::SECONDARY, ThemeColor::LIGHT, 3);
+            expect($isValid)->toBeTrue();
+        });
+
+        it('returns true when the contrast is sufficient (RGB + hex)', function() {
+            $instance = new ColorUtils();
+            $isValid = $instance->validate_pair(ThemeColor::SECONDARY, ThemeColor::WHITE, 3);
             expect($isValid)->toBeTrue();
         });
 

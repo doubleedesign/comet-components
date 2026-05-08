@@ -185,6 +185,12 @@ class ColorUtils {
                 list($var, $value) = explode(':', $line, 2);
                 $name = str_replace('--color-', '', trim($var));
                 $value = trim(str_replace(';', '', $value));
+
+                // Store named colours as their hex values for easier processing with Colority
+                if ($this->value_is_named_colour($value)) {
+                    $value = $this->namedColours[strtolower($value)];
+                }
+
                 if ($this->value_is_colour($name, $value)) {
                     $acc[trim($name)] = $value;
                 }
@@ -201,18 +207,23 @@ class ColorUtils {
     }
 
     private function value_is_colour(string $name, string $value): bool {
+        // Is the name a valid ThemeColor name?
         $colorNames = array_column(ThemeColor::cases(), 'value');
         if (!in_array($name, $colorNames)) {
             return false;
         }
 
         // Is the value a HTML colour keyword?
-        if (array_key_exists(strtolower($value), $this->namedColours)) {
+        if ($this->value_is_named_colour($value)) {
             return true;
         }
 
         // Note: At the time of writing, Colority supports hex, RGB, HSL, and OKLCH
         return colority()->parse($value) !== null;
+    }
+
+    private function value_is_named_colour(string $value): bool {
+        return array_key_exists(strtolower($value), $this->namedColours);
     }
 
     public function get_theme_value_for_colour_name(string $color): ?string {
@@ -244,8 +255,8 @@ class ColorUtils {
                 return false;
             }
 
-            $foregroundColor = colority()->fromHex($foregroundValue);
-            $backgroundColor = colority()->fromHex($backgroundValue);
+            $foregroundColor = colority()->parse($foregroundValue);
+            $backgroundColor = colority()->parse($backgroundValue);
 
             return self::has_sufficient_contrast($backgroundColor, $foregroundColor, $threshold);
         }

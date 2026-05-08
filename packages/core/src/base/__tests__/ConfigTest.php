@@ -1,7 +1,26 @@
 <?php
 
 use Doubleedesign\Comet\Core\{Config, ThemeColor};
-use function Spies\{expect_spy, get_spy_for, match_pattern};
+use function Spies\{stub_function, expect_spy, get_spy_for, match_pattern};
+
+beforeEach(function() {
+    // Mock a range of colour types
+    // and values that we know will/won't meet contrast thresholds to test the colour pair functionality
+    stub_function('file_get_contents')->when_called->will_return(
+        <<<CSS
+		:root {
+			--color-primary: #4B0082;
+			--color-secondary: rgb(30, 75, 222);
+			--color-accent: hsl(51, 100%, 50%);
+			--color-info: lch(65% 45 240);
+			--color-warning: lab(75% 17.50 65);
+			--color-dark: oklch(0.25 0 275);
+			--color-light: ghostwhite;
+			--color-invalidName: #8a1010;
+		}
+		CSS
+    );
+});
 
 describe('Config', function() {
 
@@ -80,36 +99,47 @@ describe('Config', function() {
             $default = $instance->get_theme_colours();
             expect($default)->toHaveKey('black', '#000000');
 
-            $instance->set_theme_colours([
-                'black'     => '#111111',
-            ]);
+            stub_function('file_get_contents')->when_called->will_return(
+                <<<CSS
+				:root {
+					--color-black: #111111;
+				}
+				CSS
+            );
+            $instance->set_theme_colours(
+                ['black' => 'var(--color-black)']
+            );
+
             $colours = $instance->get_theme_colours();
 
-            expect($colours)->toHaveKey('black', '#111111')
+            expect($colours)->toHaveKey('black', 'var(--color-black)')
                 ->and($colours)->not->toHaveKey('black', '#000000');
         });
 
         it('adds a colour pair if it has sufficient contrast', function() {
             $instance = Config::getInstance();
+			$instance->clear_theme_colour_pairs();
             $instance->set_theme_colours([
-                'primary'   => '#222222',
-                'accent'    => '#FFD700' // gold
+                'secondary' => 'var(--color-secondary)',
+                'light'     => 'var(--color-light)'
             ]);
 
-            $instance->maybe_add_theme_colour_pairs([ThemeColor::ACCENT->value, ThemeColor::PRIMARY->value]);
+            $instance->maybe_add_theme_colour_pairs([ThemeColor::SECONDARY->value, ThemeColor::LIGHT->value]);
 
             $pairs = $instance->get_theme_colour_pairs();
-            expect($pairs)->toContain(['foreground' => 'accent', 'background' => 'primary']);
+            expect($pairs)->toContain(['foreground' => 'secondary', 'background' => 'light']);
         });
 
         it('adds multiple colour pairs if all have sufficient contrast', function() {
             $instance = Config::getInstance();
-            $instance->clear_theme_colour_pairs();
-            $instance->set_theme_colours([
-                'primary'   => '#222222',
-                'accent'    => '#FFFFFF',
-                'secondary' => '#111111',
-            ]);
+	        $instance->clear_theme_colour_pairs();
+	        $instance->set_theme_colours([
+		        'primary'   => 'var(--color-primary)',
+		        'secondary' => 'var(--color-secondary)',
+		        'accent'    => 'var(--color-accent)',
+		        'info'      => 'var(--color-info)',
+		        'dark'      => 'var(--color-dark)'
+	        ]);
 
             $instance->maybe_add_theme_colour_pairs([
                 [ThemeColor::ACCENT->value, ThemeColor::PRIMARY->value],
@@ -124,12 +154,11 @@ describe('Config', function() {
         it('adds only the valid pairs if some have sufficient contrast and others do not', function() {
             $logSpy = get_spy_for('error_log');
             $instance = Config::getInstance();
-            $instance->clear_theme_colour_pairs();
+	        $instance->clear_theme_colour_pairs();
             $instance->set_theme_colours([
-                'primary'   => '#222222',
-                'accent'    => '#FFFFFF',
-                'info'      => '#FFFF00', // yellow
-                'dark'      => '#111111'
+                'accent' => 'var(--color-accent)',
+                'info'   => 'var(--color-info)',
+                'dark'   => 'var(--color-dark)'
             ]);
 
             $instance->maybe_add_theme_colour_pairs([
@@ -146,23 +175,26 @@ describe('Config', function() {
 
         it('appends a colour pair to the existing config', function() {
             $instance = Config::getInstance();
-            $instance->clear_theme_colour_pairs();
+	        $instance->clear_theme_colour_pairs();
             $instance->set_theme_colours([
-                'primary'   => '#222222',
-                'accent'    => '#FFFFFF',
-                'secondary' => '#111111',
+                'primary'   => 'var(--color-primary)',
+                'secondary' => 'var(--color-secondary)',
+                'accent'    => 'var(--color-accent)',
+                'info'      => 'var(--color-info)',
+                'dark'      => 'var(--color-dark)',
+                'light'     => 'var(--color-light)'
             ]);
 
-            $instance->maybe_add_theme_colour_pairs([ThemeColor::ACCENT->value, ThemeColor::PRIMARY->value]);
+            $instance->maybe_add_theme_colour_pairs([ThemeColor::LIGHT->value, ThemeColor::PRIMARY->value]);
             $pairs = $instance->get_theme_colour_pairs();
-            expect($pairs)->toContain(['foreground' => 'accent', 'background' => 'primary']);
+            expect($pairs)->toContain(['foreground' => 'light', 'background' => 'primary']);
 
             // Add another pair
-            $instance->maybe_add_theme_colour_pairs([ThemeColor::ACCENT->value, ThemeColor::SECONDARY->value]);
+            $instance->maybe_add_theme_colour_pairs([ThemeColor::ACCENT->value, ThemeColor::DARK->value]);
             $pairs = $instance->get_theme_colour_pairs();
             expect($pairs)->toBe([
-                ['foreground' => 'accent', 'background' => 'primary'],
-                ['foreground' => 'accent', 'background' => 'secondary']
+                ['foreground' => 'light', 'background' => 'primary'],
+                ['foreground' => 'accent', 'background' => 'dark']
             ]);
 
         });
@@ -170,10 +202,13 @@ describe('Config', function() {
         it('does not re-add a colour pair that is already in the config', function() {
             $logSpy = get_spy_for('error_log');
             $instance = Config::getInstance();
-            $instance->clear_theme_colour_pairs();
+	        $instance->clear_theme_colour_pairs();
             $instance->set_theme_colours([
-                'primary'   => '#222222',
-                'accent'    => '#FFFFFF'
+                'primary'   => 'var(--color-primary)',
+                'secondary' => 'var(--color-secondary)',
+                'accent'    => 'var(--color-accent)',
+                'info'      => 'var(--color-info)',
+                'dark'      => 'var(--color-dark)'
             ]);
 
             $instance->maybe_add_theme_colour_pairs([ThemeColor::ACCENT->value, ThemeColor::PRIMARY->value]);
@@ -190,17 +225,12 @@ describe('Config', function() {
         it('logs a warning and does not add a colour pair if they have insufficient contrast', function() {
             $logSpy = get_spy_for('error_log');
             $instance = Config::getInstance();
-            $instance->clear_theme_colour_pairs();
-            $instance->set_theme_colours([
-                'info'      => '#FFFF00', // yellow
-                'dark'      => '#111111'
-            ]);
 
             $instance->maybe_add_theme_colour_pairs([ThemeColor::INFO->value, ThemeColor::DARK->value]);
 
             $pairs = $instance->get_theme_colour_pairs();
 
-            // expect_spy($logSpy)->to_have_been_called->with(match_pattern("/does not meet contrast threshold of 3:1 so has not been registered/"));
+            expect_spy($logSpy)->to_have_been_called->with(match_pattern("/does not meet contrast threshold of 3:1 so has not been registered/"));
             expect($pairs)->not->toContain(['background' => 'dark', 'foreground' => 'info']);
         });
     });
