@@ -89,6 +89,7 @@ describe('Set value from attributes', function() {
         $spy = make_spy();
         redefine('Doubleedesign\Comet\Core\BackgroundCollection::transform_to_collection', function($value) use ($spy) {
             $spy($value);
+
             return relay();
         });
 
@@ -121,10 +122,11 @@ describe('Set value from component defaults', function() {
         ->with('all valid attribute types (single gradient)');
 
     it('sets a valid colour pair', function(string $attributeName) {
-	    redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['backgroundColors' => ['light', 'dark']]);
+        redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['backgroundColors' => ['light', 'dark']]);
         $spy = make_spy();
         redefine('Doubleedesign\Comet\Core\BackgroundCollection::transform_to_collection', function($value) use ($spy) {
             $spy($value);
+
             return relay();
         });
 
@@ -135,9 +137,9 @@ describe('Set value from component defaults', function() {
     })->with('all valid attribute names');
 });
 
- describe('Remove redundant background colours from direct inner components', function() {
+describe('Remove redundant background colours from direct inner components', function() {
 
-    test('it removes background when all backgrounds match the component', function() {
+    it('removes inner backgrounds when all backgrounds match the component', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
@@ -149,13 +151,13 @@ describe('Set value from component defaults', function() {
 
         $parent->simplify_all_background_colors();
 
-        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY);
+        expect($parent->get_background_colors()->outer)->toEqual(ThemeColor::PRIMARY);
         foreach ($parent->innerComponents as $child) {
-            expect($child->get_background_colors())->toBeNull();
+            expect($child->get_background_color())->toBeNull();
         }
     });
 
-    test('it removes only the same background when inner components are mixed', function() {
+    it('removes only the same background from inner components when they are mixed', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
@@ -167,13 +169,13 @@ describe('Set value from component defaults', function() {
 
         $parent->simplify_all_background_colors();
 
-        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_colors())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_colors())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[2]->get_background_colors())->toBe(ThemeColor::ACCENT);
+        expect($parent->get_background_colors()->outer)->toEqual(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
+            ->and($parent->innerComponents[1]->get_background_color())->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[2]->get_background_color())->toEqual(ThemeColor::ACCENT);
     });
 
-    test('it does nothing if there is only one inner component', function() {
+    it('does nothing if there is only one inner component', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
 
         $parent = create_component_with_inner_components(
@@ -183,13 +185,13 @@ describe('Set value from component defaults', function() {
 
         $parent->simplify_all_background_colors();
 
-        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_colors())->toBe(ThemeColor::PRIMARY);
+        expect($parent->get_background_color())->toEqual(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_color())->toEqual(ThemeColor::PRIMARY);
     });
- });
+});
 
- describe('Set background colour based on inner components', function() {
-    test('it sets a background when all inner components have the same background', function() {
+describe('Set background colour based on inner components', function() {
+    it('sets a background when all inner components have the same background and the parent does not have one set', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
@@ -201,13 +203,50 @@ describe('Set value from component defaults', function() {
 
         $parent->simplify_all_background_colors();
 
-        expect($parent->get_background_colors())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[0]->get_background_colors())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_colors())->toBeNull()
-            ->and($parent->innerComponents[2]->get_background_colors())->toBeNull();
+        expect($parent->get_background_colors()->outer)->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
+            ->and($parent->innerComponents[1]->get_background_color())->toBeNull()
+            ->and($parent->innerComponents[2]->get_background_color())->toBeNull();
     });
 
-    test('it does nothing when children have different backgrounds', function() {
+    it('does not set a background when the parent already has an outer background set', function() {
+        $child1 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+        $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+        $child3 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+
+        $parent = create_component_with_inner_components(
+            ['backgroundColor' => 'primary'],
+            [$child1, $child2, $child3]
+        );
+
+        $parent->simplify_all_background_colors();
+
+        expect($parent->get_background_colors()->outer)->toEqual(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_color())->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[1]->get_background_color())->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[2]->get_background_color())->toEqual(ThemeColor::SECONDARY);
+    });
+
+    it("does not set a background when the children's background matches the parent's outer background but not inner background", function() {
+        $child1 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+        $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+        $child3 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
+
+        $parent = create_component_with_inner_components(
+            ['backgroundColors' => ['secondary', 'primary']],
+            [$child1, $child2, $child3]
+        );
+
+        $parent->simplify_all_background_colors();
+
+        expect($parent->get_background_colors()->outer)->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->get_background_colors()->inner)->toEqual(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_color())->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[1]->get_background_color())->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[2]->get_background_color())->toEqual(ThemeColor::SECONDARY);
+    });
+
+    it('does nothing when children have different backgrounds', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color(['backgroundColor' => 'secondary']);
         $child3 = create_component_with_bg_color(['backgroundColor' => 'accent']);
@@ -219,31 +258,32 @@ describe('Set value from component defaults', function() {
 
         $parent->simplify_all_background_colors();
 
-        expect($parent->get_background_colors())->toBeNull()
-            ->and($parent->innerComponents[0]->get_background_colors())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[1]->get_background_colors())->toBe(ThemeColor::SECONDARY)
-            ->and($parent->innerComponents[2]->get_background_colors())->toBe(ThemeColor::ACCENT);
+        expect($parent->get_background_colors()->outer)->toBeNull()
+            ->and($parent->get_background_colors()->inner)->toBeNull()
+            ->and($parent->innerComponents[0]->get_background_color())->toEqual(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[1]->get_background_color())->toEqual(ThemeColor::SECONDARY)
+            ->and($parent->innerComponents[2]->get_background_color())->toEqual(ThemeColor::ACCENT);
     });
 
-    test('it sets a background when the inner components have a mix of the same and no backgrounds set', function() {
+    it('sets a background when the inner components have a mix of the same and no backgrounds set', function() {
         $child1 = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $child2 = create_component_with_bg_color([]); // Null background
         $child3 = create_component_with_bg_color(['backgroundColor' => 'primary']);
 
         $parent = create_component_with_inner_components(
-            ['backgroundColor' => 'primary'],
+            [],
             [$child1, $child2, $child3]
         );
 
         $parent->simplify_all_background_colors();
 
-        expect($parent->get_background_colors())->toBe(ThemeColor::PRIMARY)
-            ->and($parent->innerComponents[0]->get_background_colors())->toBeNull()
-            ->and($parent->innerComponents[1]->get_background_colors())->toBeNull()
-            ->and($parent->innerComponents[2]->get_background_colors())->toBeNull();
+        expect($parent->get_background_colors()->outer)->toBe(ThemeColor::PRIMARY)
+            ->and($parent->innerComponents[0]->get_background_color())->toBeNull()
+            ->and($parent->innerComponents[1]->get_background_color())->toBeNull()
+            ->and($parent->innerComponents[2]->get_background_color())->toBeNull();
     });
 
-    test('it does nothing if there is only one inner component', function() {
+    it('does nothing if there is only one inner component', function() {
         $child = create_component_with_bg_color(['backgroundColor' => 'primary']);
         $parent = create_component_with_inner_components(
             [], // No background
@@ -253,6 +293,6 @@ describe('Set value from component defaults', function() {
         $parent->simplify_all_background_colors();
 
         expect($parent->get_background_colors())->toBeNull()
-            ->and($parent->innerComponents[0]->get_background_colors())->toBe(ThemeColor::PRIMARY);
+            ->and($parent->innerComponents[0]->get_background_color())->toEqual(ThemeColor::PRIMARY);
     });
- });
+});

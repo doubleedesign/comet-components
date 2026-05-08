@@ -87,7 +87,7 @@ trait BackgroundColor {
     public function simplify_all_background_colors(): void {
         // If all backgrounds set on direct children of this component are the same as this component's background,
         // remove the background from those children
-        if (isset($this->backgroundColors->outer) && isset($this->innerComponents)) {
+        if ($this->get_background_color() !== null && isset($this->innerComponents)) {
             $this->remove_redundant_background_colors();
         }
 
@@ -111,8 +111,10 @@ trait BackgroundColor {
         }
 
         $childrenWithSameBackground = array_filter($this->innerComponents, function($child) {
-            if (method_exists($child, 'get_background_colors')) {
-                return $child->get_background_colors() === $this->backgroundColor;
+            if (method_exists($child, 'get_background_color')) {
+                if ($child->get_background_color() !== null) {
+                    return $child->get_background_color() === $this->get_background_colors()->inner || $child->get_background_color() === $this->get_background_colors()->outer;
+                }
             }
 
             return false;
@@ -120,8 +122,9 @@ trait BackgroundColor {
 
         if (count($childrenWithSameBackground) > 0) {
             $updatedInnerComponents = array_map(function($child) {
-                if (method_exists($child, 'update_background_color') && method_exists($child, 'get_background_colors')) {
-                    if ($child->get_background_colors() === $this->backgroundColor) {
+                if (method_exists($child, 'update_background_color') && method_exists($child, 'get_background_color')) {
+                    $backgroundToUse = $this->backgroundColors->inner ?? $this->backgroundColors->outer;
+                    if ($child->get_background_color() === $backgroundToUse) {
                         $child->update_background_color(null);
                     }
                 }
@@ -141,7 +144,7 @@ trait BackgroundColor {
      */
     protected function set_background_colors_based_on_inner_components(): void {
         // No need to set the background if it's already set
-        if ($this->backgroundColor) {
+        if ($this->backgroundColors->outer || $this->backgroundColors->inner) {
             return;
         }
 
@@ -154,9 +157,12 @@ trait BackgroundColor {
         // But do not filter out null values, because that would set the background of a parent when it shouldn't
         // just because *some* children don't have an explicit background
         $childBackgrounds = array_reduce($this->innerComponents, function($carry, $child) {
-            if (method_exists($child, 'get_background_colors')) {
-                if (!in_array($child->get_background_colors(), $carry)) {
-                    $carry[] = $child->get_background_colors();
+            if (method_exists($child, 'get_background_color')) {
+                if ($child->get_background_color() === null) {
+                    return $carry;
+                }
+                if (!in_array($child->get_background_color(), $carry)) {
+                    $carry[] = $child->get_background_color();
                 }
             }
 
@@ -165,7 +171,7 @@ trait BackgroundColor {
 
         // If there is one colour left standing, set it as this component's background and remove it from the children
         if (count($childBackgrounds) === 1) {
-            $this->backgroundColor = $childBackgrounds[0];
+            $this->update_background_color($childBackgrounds[0]);
             $updatedInnerComponents = array_map(function($child) {
                 if (method_exists($child, 'update_background_color')) {
                     $child->update_background_color(null);

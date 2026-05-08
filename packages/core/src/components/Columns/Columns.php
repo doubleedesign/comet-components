@@ -36,7 +36,7 @@ class Columns extends WrappedLayoutComponent {
 
         // For nested instances, default to div tag unless specified otherwise in the attributes
         if ($this->get_is_nested() && !isset($attributes['tagName'])) {
-            $this->set_tag('div');
+            $attributes['tagName'] = Tag::DIV->value;
         }
 
         // If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
@@ -54,6 +54,12 @@ class Columns extends WrappedLayoutComponent {
             ...($this->vAlign && !$this->vAlign->isDefault() ? ['data-valign' => $this->vAlign->value] : [])
         ], $updatedInnerComponents);
         $updatedInnerComponents = $this->withContainer ? [$wrappedCols] : $updatedInnerComponents;
+        // For the outer wrapper if applicable, add "wrapper" to the class name if no shortName is set
+        // so it can be targeted in CSS without affecting nested instances
+        // Note: This must be done *after* the inner group is created so it doesn't inherit this as context
+        if (!$this->get_is_nested() && !isset($attributes['shortName'])) {
+            $attributes['shortName'] = 'columns-wrapper';
+        }
 
         // Finally, create the component with all the transformed stuff
         parent::__construct($attributes, $updatedInnerComponents, 'components.Columns.columns');

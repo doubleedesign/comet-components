@@ -26,6 +26,9 @@ class MenuListItem extends UIComponent {
         if ($generate_if_empty && empty($this->id)) {
             $this->id = 'menu-item-' . uniqid();
         }
+        if (is_numeric($this->id)) {
+            $this->id = 'menu-item-' . $this->id;
+        }
 
         return $this->id;
     }

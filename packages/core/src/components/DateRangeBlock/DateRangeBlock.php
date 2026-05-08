@@ -54,6 +54,11 @@ class DateRangeBlock extends DateComponent {
             if (!$this->showYear) {
                 $default = $this->ranger->format($this->startDate, $this->endDate);
 
+                // Remove commas if both dates are in the same month
+                if ($sameMonth) {
+					$default = str_replace(',', '', $default);
+				}
+
                 // Remove years from the string
                 return preg_replace('/\s\d{4}/', '', $default);
             }

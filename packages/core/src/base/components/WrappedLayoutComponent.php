@@ -51,20 +51,10 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
             Utils::array_pick($attributes, ['id', 'backgroundColor', 'colorTheme', 'style']),
             $this->ariaAttrs
         );
-
-        // FIXME Try not to have this condition here, Columns should somehow look after this itself
-        if ($this instanceof Columns) {
-            $this->containerAttrs = array_merge(
-                Utils::array_pick($attributes, ['size', 'orientation']),
-                $this->dataAttrs
-            );
-        }
-        else {
-            $this->containerAttrs = array_merge(
-                Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']),
-                $this->dataAttrs
-            );
-        }
+        $this->containerAttrs = array_merge(
+            Utils::array_pick($attributes, ['hAlign', 'vAlign', 'size', 'orientation']),
+            $this->dataAttrs
+        );
 
         // Initially set withContainer to whatever is in the attributes
         $this->withContainer = $attributes['withContainer'] ?? $this->withContainer;
@@ -125,6 +115,11 @@ abstract class WrappedLayoutComponent extends LayoutComponent {
         $inner = $this;
         $inner->set_is_nested(true); // Prevent infinite loop
         $inner->isWrapped = true; // Passed down to Blade templates to handle avoiding double-ups
+
+        $globalBackground = Config::getInstance()->get_global_background();
+        if (isset($this->wrapperAttrs['backgroundColor']) && $this->wrapperAttrs['backgroundColor'] === $globalBackground) {
+            unset($this->wrapperAttrs['backgroundColor']);
+        }
 
         $withWrapper = new PageSection([
             'shortName'       => $this->get_shortname(),

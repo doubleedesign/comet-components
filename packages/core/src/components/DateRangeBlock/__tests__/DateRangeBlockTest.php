@@ -55,7 +55,7 @@ describe('DateRangeBlock', function() {
         $dateRangeBlock = new DateRangeBlock(['startDate' => $startDate, 'endDate' => $endDate, 'showYear' => false, 'showDay' => true]);
 
         $formattedDate = $dateRangeBlock->get_accessible_date_string();
-        expect($formattedDate)->toBe('Friday 13 June - Tuesday 15 July');
+        expect($formattedDate)->toBe('Friday, 13 June - Tuesday, 15 July');
     });
 
     test('Date and month in same month, with year', function() {
@@ -91,6 +91,6 @@ describe('DateRangeBlock', function() {
         $dateRangeBlock = new DateRangeBlock(['startDate' => $startDate, 'endDate' => $endDate, 'showYear' => true, 'showDay' => true]);
 
         $formattedDate = $dateRangeBlock->get_accessible_date_string();
-        expect($formattedDate)->toBe('Friday 13 June 2025 - Sunday 2 August 2026');
+        expect($formattedDate)->toBe('Friday, 13 June 2025 - Sunday, 2 August 2026');
     });
 });

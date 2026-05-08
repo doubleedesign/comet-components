@@ -21,20 +21,24 @@ trait LayoutAlignment {
      * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
      */
     protected function set_layout_alignment(array $attributes, ?Alignment $defaultHorizontal = null, ?Alignment $defaultVertical = null): void {
-		if(isset($attributes['hAlign'])) {
-			$this->hAlign = $this->get_from_string_or_alignment($attributes['hAlign'])
-				?? $this->get_component_defaults()['hAlign']
-				?? $this->get_from_string_or_alignment($defaultHorizontal)
-				?? $this->hAlign;
+		if(!isset($attributes['hAlign'])) {
+			$attributes['hAlign'] = null;
+		}
+		if(!isset($attributes['vAlign'])) {
+			$attributes['vAlign'] = null;
 		}
 
+        $this->hAlign = $this->get_from_string_or_alignment($attributes['hAlign'])
+            ?? $this->get_component_defaults()['hAlign']
+            ?? $this->get_from_string_or_alignment($defaultHorizontal)
+            ?? $this->hAlign;
 
-	    if(isset($attributes['vAlign'])) {
-		    $this->vAlign = $this->get_from_string_or_alignment($attributes['vAlign'])
-			    ?? $this->get_component_defaults()['vAlign']
-			    ?? $this->get_from_string_or_alignment($defaultVertical)
-			    ?? $this->vAlign;
-	    }
+
+        $this->vAlign = $this->get_from_string_or_alignment($attributes['vAlign'])
+            ?? $this->get_component_defaults()['vAlign']
+            ?? $this->get_from_string_or_alignment($defaultVertical)
+            ?? $this->vAlign;
+
     }
 
     private function get_component_defaults(): array {

@@ -54,19 +54,19 @@ test('it uses component default if an attribute is not provided', function() {
 });
 
 test('ignores component default if a valid attribute value is provided', function() {
-	redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['size' => 'narrow']);
+    redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['size' => 'narrow']);
 
-	$component = create_component_with_layout_container_size(['size' => 'wide']);
+    $component = create_component_with_layout_container_size(['size' => 'wide']);
 
-	expect($component->get_size())->toBe(ContainerSize::WIDE);
+    expect($component->get_size())->toBe(ContainerSize::WIDE);
 });
 
 test('uses component default if the provided attribute is invalid', function() {
-	redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['size' => 'narrow']);
+    redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => ['size' => 'narrow']);
 
-	$component = create_component_with_layout_container_size(['size' => 'invalid']);
+    $component = create_component_with_layout_container_size(['size' => 'invalid']);
 
-	expect($component->get_size())->toBe(ContainerSize::NARROW);
+    expect($component->get_size())->toBe(ContainerSize::NARROW);
 });
 
 test('ignores invalid attribute values and falls back to trait default if there is no component default', function() {
@@ -74,4 +74,3 @@ test('ignores invalid attribute values and falls back to trait default if there 
 
     expect($component->get_size())->toBe(ContainerSize::DEFAULT);
 });
-

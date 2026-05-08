@@ -14,14 +14,12 @@ abstract class LayoutComponent extends UIComponent {
         $this->set_background_colors($attributes);
         $this->set_is_nested(isset($attributes['isNested']) && (bool)$attributes['isNested']);
 
-        if (isset($this->backgroundColor)) {
-            if (!$this->exclude_from_background_simplification()) {
-                if ($this instanceof Container && $this->isNested) {
-                    $this->remove_redundant_background_colors();
-                }
-                else {
-                    $this->simplify_all_background_colors();
-                }
+        if ($this->get_background_color() !== null) {
+            if ($this instanceof Container && $this->get_is_nested()) {
+                $this->remove_redundant_background_colors();
+            }
+            else {
+                $this->simplify_all_background_colors();
             }
         }
     }
@@ -40,24 +38,11 @@ abstract class LayoutComponent extends UIComponent {
             }
         }
 
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-        else if (isset($this->gradient)) {
-            $attributes['data-background'] = 'gradient-' . $this->gradient;
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->get_background_color()->value;
         }
 
         return $attributes;
-    }
-
-    private function exclude_from_background_simplification(): bool {
-        foreach ($this->innerComponents as $component) {
-            if ($component instanceof CallToAction && $component->isNested === true) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

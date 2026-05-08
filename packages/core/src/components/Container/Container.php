@@ -76,8 +76,7 @@ class Container extends WrappedLayoutComponent {
             $attributes['data-valign'] = $this->vAlign->value;
         }
 
-        // we don't check against a default here we only want orientation added to the HTML if explicitly set
-        if (isset($this->orientation)) {
+        if (isset($this->orientation) && !$this->orientation->isDefault()) {
             $attributes['data-orientation'] = $this->orientation->value;
         }
 

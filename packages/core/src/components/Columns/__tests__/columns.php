@@ -3,7 +3,7 @@ use Doubleedesign\Comet\Core\{Columns, Column, Paragraph};
 
 $innerComponents = $_REQUEST['innerComponents'] ?? null;
 // Attribute keys from component JSON definition
-$attributeKeys = ['allowStacking', 'backgroundColor', 'hAlign', 'tagName', 'testId', 'vAlign'];
+$attributeKeys = ['isNested', 'shortName', 'allowStacking', 'backgroundColor', 'hAlign', 'tagName', 'testId', 'vAlign'];
 // Filter the request query vars to only those matching the above
 $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
 // Filter out any attributes that are empty or false

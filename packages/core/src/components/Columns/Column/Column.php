@@ -15,7 +15,7 @@ class Column extends LayoutComponent {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Columns.Column.column');
         $this->width = $attributes['width'] ?? null;
-        $this->tagName = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::DIV;
+        $this->tagName = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::DIV;;
     }
 
     public function get_width() {
@@ -36,7 +36,7 @@ class Column extends LayoutComponent {
         return $classes;
     }
 
-    public function get_inline_styles(): array {
+    protected function get_inline_styles(): array {
         $styles = parent::get_inline_styles();
 
         if (isset($this->width)) {
