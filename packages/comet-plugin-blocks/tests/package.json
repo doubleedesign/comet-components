@@ -1,0 +1,32 @@
+{
+	"name": "@doubleedesign/comet-plugin-blocks-integration-tests",
+	"version": "1.0.0",
+	"author": "Leesa Ward",
+	"private": true,
+	"scripts": {
+		"dev": "rmdir /s node_modules\\.vite && npx vite",
+		"server": "php -S localhost:7000 -t render"
+	},
+	"packageManager": "pnpm@10.12.1",
+	"devDependencies": {
+		"@doubleedesign/comet-gutenberg-controls": "file:../../../../../WebStormProjects/comet-gutenberg-controls",
+		"@types/wordpress__block-editor": "^15.0.6",
+		"@types/wordpress__blocks": "^15.17.0",
+		"@types/wordpress__components": "^23.8.0",
+		"@vitejs/plugin-react": "^6.0.1",
+		"@wordpress/block-editor": "^15.18.0",
+		"@wordpress/blocks": "^15.18.0",
+		"@wordpress/components": "^30.9.0",
+		"@wordpress/data": "^10.45.0",
+		"@wordpress/element": "^6.45.0",
+		"@wordpress/hooks": "^4.36.0",
+		"dashicons": "^0.0.2",
+		"vite": "^8.0.11"
+	},
+	"pnpm": {
+		"overrides": {
+			"react": "18.3.1",
+			"react-dom": "18.3.1"
+		}
+	}
+}

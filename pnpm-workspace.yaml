@@ -1,3 +1,4 @@
 packages:
   - packages/*
   - docs-site
+  - packages/comet-plugin-blocks/tests

@@ -6,8 +6,11 @@ if (!isset($_SERVER['HTTP_USER_AGENT'])) {
 
 // Skip all this if this is not Comet Components
 // Useful for local development where php.ini applies to multiple sites
-if (!in_array($_SERVER['HTTP_HOST'], ['comet-components.test', 'cometcomponents.io', 'storybook.comet-components.test', 'storybook.cometcomponents.io'])) {
-	return;
+if (!in_array(
+    $_SERVER['HTTP_HOST'],
+    ['comet-components.test', 'cometcomponents.io', 'storybook.comet-components.test', 'storybook.cometcomponents.io', 'localhost:7000'])
+) {
+    return;
 }
 
 use Doubleedesign\Comet\Core\{Assets, Config};
