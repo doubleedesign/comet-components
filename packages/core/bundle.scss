@@ -43,10 +43,7 @@
 	@include meta.load-css("./src/components/PostNav/post-nav.scss");
 	@include meta.load-css("./src/components/Pullquote/pullquote.scss");
 	@include meta.load-css("./src/components/ResponsivePanels/responsive-panels.scss");
-	@include meta.load-css("./src/components/SectionMenu/section-menu.scss");
 	@include meta.load-css("./src/components/Separator/separator.scss");
 	@include meta.load-css("./src/components/SiteFooter/site-footer.scss");
 	@include meta.load-css("./src/components/SiteHeader/site-header.scss");
-	@include meta.load-css("./src/components/Steps/steps.scss");
-	@include meta.load-css("./src/components/Table/table.scss");
 }

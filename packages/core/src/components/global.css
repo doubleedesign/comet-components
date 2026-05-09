@@ -114,7 +114,7 @@
     and/or within components where appropriate using the --theme-color variable set here
   ------------------------------------------------------------------ */
   [data-background] {
-    background-color: var(--background-color);
+    background: var(--background-color);
     --theme-color: contrast-color(var(--background-color));
     color: var(--theme-color);
   }
