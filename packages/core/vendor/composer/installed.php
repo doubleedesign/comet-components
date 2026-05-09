@@ -1,13 +1,13 @@
 <?php return array(
     'root' => array(
         'name' => 'doubleedesign/comet-components-core',
-        'pretty_version' => '0.7.0',
-        'version' => '0.7.0.0',
+        'pretty_version' => '0.8.0',
+        'version' => '0.8.0.0',
         'reference' => null,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'carbonphp/carbon-doctrine-types' => array(
@@ -29,8 +29,8 @@
             'dev_requirement' => false,
         ),
         'doubleedesign/comet-components-core' => array(
-            'pretty_version' => '0.7.0',
-            'version' => '0.7.0.0',
+            'pretty_version' => '0.8.0',
+            'version' => '0.8.0.0',
             'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',

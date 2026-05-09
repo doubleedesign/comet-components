@@ -40,6 +40,7 @@ wp.domReady(() => {
  * @param {Object} props The block edit props
  *
  * FIXME: This currently gets stuck on the loading spinner when rendering the form.
+ * FIXME: This needs colour and size (container width) controls.
  */
 function NinjaFormsControls(props) {
 	const { name, attributes, setAttributes } = props;
@@ -56,8 +57,6 @@ function NinjaFormsControls(props) {
 		<>
 			<div className="comet-plugin-blocks-custom-controls">
 				<InspectorControls>
-					<LayoutControls {...props} />
-					<ColorControls {...props} />
 					<PanelBody title="Content" initialOpen={true}>
 						<SelectControl
 							label="Form"

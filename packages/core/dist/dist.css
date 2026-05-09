@@ -2496,7 +2496,7 @@
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }
-  .date, .date--range, [class$=__date], [class*=date--] {
+  .date, [class$=__date], [class*=date--] {
     min-width: 3rem;
     max-width: 5rem;
     display: flex;
@@ -2507,16 +2507,16 @@
     background: var(--theme-color);
     color: var(--theme-color-inverse);
   }
-  .date__day, .date--range__days, [class$=__date__day], .date__day-number, .date--range__day-number, [class$=__date__day-number], .date__month, .date--range__month, [class$=__date__month], .date__year, .date--range__year, [class$=__date__year] {
+  .date__day, [class$=__date__day], .date__day-number, [class$=__date__day-number], .date__month, [class$=__date__month], .date__year, [class$=__date__year] {
     display: block;
     text-align: center;
     line-height: 1;
     font-weight: var(--font-weight-light);
   }
-  .date__day, .date--range__days, [class$=__date__day] {
+  .date__day, [class$=__date__day] {
     font-size: var(--font-size-sm);
   }
-  .date__day-number, .date--range__day-number, [class$=__date__day-number] {
+  .date__day-number, [class$=__date__day-number] {
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }

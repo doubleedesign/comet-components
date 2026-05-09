@@ -3,8 +3,8 @@
   <component name="PHPUnit">
     <option name="directories">
       <list>
+        <option value="C:\Users\leesa\PhpStormProjects\comet-components\tests" />
         <option value="$PROJECT_DIR$/packages/comet-calendar/tests" />
-        <option value="$PROJECT_DIR$/tests" />
       </list>
     </option>
   </component>
