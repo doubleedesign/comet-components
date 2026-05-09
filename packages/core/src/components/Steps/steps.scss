@@ -83,13 +83,10 @@
 			position: relative;
 			z-index: 10;
 
-			@each $name, $color in $colors {
-				[data-color-theme=#{$name}] & {
-
-					&::before {
-						background-color: var(--color-#{$name});
-						color: var(--readable-color-#{$name});
-					}
+			[data-color-theme] & {
+				&::before {
+					background-color: var(--theme-color);
+					color: contrast-color(var(--theme-color));
 				}
 			}
 

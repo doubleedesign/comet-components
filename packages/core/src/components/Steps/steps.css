@@ -70,45 +70,9 @@
   position: relative;
   z-index: 10;
 }
-[data-color-theme=primary] .steps__step__inner::before {
-  background-color: var(--color-primary);
-  color: var(--readable-color-primary);
-}
-[data-color-theme=secondary] .steps__step__inner::before {
-  background-color: var(--color-secondary);
-  color: var(--readable-color-secondary);
-}
-[data-color-theme=accent] .steps__step__inner::before {
-  background-color: var(--color-accent);
-  color: var(--readable-color-accent);
-}
-[data-color-theme=info] .steps__step__inner::before {
-  background-color: var(--color-info);
-  color: var(--readable-color-info);
-}
-[data-color-theme=warning] .steps__step__inner::before {
-  background-color: var(--color-warning);
-  color: var(--readable-color-warning);
-}
-[data-color-theme=success] .steps__step__inner::before {
-  background-color: var(--color-success);
-  color: var(--readable-color-success);
-}
-[data-color-theme=error] .steps__step__inner::before {
-  background-color: var(--color-error);
-  color: var(--readable-color-error);
-}
-[data-color-theme=light] .steps__step__inner::before {
-  background-color: var(--color-light);
-  color: var(--readable-color-light);
-}
-[data-color-theme=dark] .steps__step__inner::before {
-  background-color: var(--color-dark);
-  color: var(--readable-color-dark);
-}
-[data-color-theme=white] .steps__step__inner::before {
-  background-color: var(--color-white);
-  color: var(--readable-color-white);
+[data-color-theme] .steps__step__inner::before {
+  background-color: var(--theme-color);
+  color: contrast-color(var(--theme-color));
 }
 .steps--numbered .steps__step__inner {
   counter-increment: step-counter;

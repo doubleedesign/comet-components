@@ -148,47 +148,51 @@
 		}
 	}
 
+	/*-------------------------------------------------------------------
+	  Colour theming defaults
+	  Note: Application of text colours for the data-color-theme attribute is not handled here
+	  - it is expected to be applied to particular common elements (e.g., lead paragraph)
+	  and/or within components where appropriate using the --theme-color variable set here
+	------------------------------------------------------------------ */
+	[data-background] {
+		background-color: var(--background-color);
+		--theme-color: contrast-color(var(--background-color));
+		color: var(--theme-color);
+	}
 
-	// Basic theme styling for elements with a color theme and/or background attribute specified
-	@each $name, $color in $colors {
-		[data-background="#{$name}"] {
-			--background-color: var(--color-#{$name});
-			--theme-color: var(--readable-color-#{$name});
-			--active-color: var(--color-secondary); // can be contextually changed where this default doesn't suit
-			background: var(--background-color);
-			color: var(--theme-color);
+	[data-color-theme] {
+		// This can be contextually changed to do things like yellow on a navy background instead of white, while keeping this sensible default
+		--theme-color-inverse: contrast-color(var(--theme-color));
+	}
+
+	$colorNames: map-keys($colors);
+	@each $colorName in $colorNames {
+		body[data-global-background="#{$colorName}"] {
+			background-color: var(--color-#{$colorName});
+			--theme-color: contrast-color(var(--color-#{$colorName}));
 		}
-		[data-color-theme="#{$name}"] {
-			--theme-color: var(--color-#{$name});
-			// This can contextually be set to something different if there is sufficient contrast (manually checked)
-			--theme-color-inverse: var(--readable-color-#{$name});
+
+		[data-background="#{$colorName}"] {
+			--background-color: var(--color-#{$colorName});
+			--active-color: var(--color-secondary); // can be contextually changed where this default doesn't suit
 		}
 	}
 
-	// Basic theme styling for elements with a background colour attribute specified
-	@each $name, $color in $colors {
-		body[data-global-background="#{$name}"] {
-			background-color: var(--color-#{$name});
-			color: var(--readable-color-#{$name});
-		}
-
-		[data-color-theme="#{$name}"] {
-			[data-background=#{$name}] & {
-				color: inherit;
-			}
-		}
-
-		[data-background="#{$name}"] {
-			color: var(--readable-color-#{$name});
+	// Separate loop for color theme to ensure it takes precedence in the cascade
+	// (e.g., so data-background="white" isn't further down in the CSS than data-color-theme="primary",
+	// causing an element with both attributes to end up with the wrong text color)
+	@each $colorName in $colorNames {
+		[data-color-theme="#{$colorName}"] {
+			--theme-color: var(--color-#{$colorName});
 		}
 	}
 
 	// Default 50/50 gradients
-	@each $color in map-keys($colors) {
-		@each $color2 in map-keys($colors) {
-			@if ($color != $color2) {
-				[data-background="#{$color}-#{$color2}"] {
-					background: var(--gradient-#{$color}-#{$color2});
+	@each $colorName in $colorNames {
+		@each $colorName2 in $colorNames {
+			@if ($colorName != $colorName2) {
+				[data-background="#{$colorName}-#{$colorName2}"] {
+					--background-color: var(--gradient-#{$colorName}-#{$colorName2});
 				}
 			}
 		}
