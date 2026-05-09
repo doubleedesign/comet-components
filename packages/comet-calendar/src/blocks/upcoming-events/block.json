@@ -34,6 +34,10 @@
 			"type": "string",
 			"default": "primary"
 		},
+		"layout": {
+			"type": "string",
+			"default": "grid"
+		},
 		"maxPerRow": {
 			"type": "number",
 			"default": 3
