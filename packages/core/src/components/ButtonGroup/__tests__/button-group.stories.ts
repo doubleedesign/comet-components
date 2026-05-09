@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { Alignment, ALIGNMENT_OPTIONS, Orientation, ORIENTATION_OPTIONS } from '../../../../test/storybook-helpers.ts';
+import { Alignment, ALIGNMENT_OPTIONS, Orientation, ORIENTATION_OPTIONS, ThemeColor, THEME_COLORS} from '../../../../test/storybook-helpers.ts';
 
 type ButtonGroupProps = {
 	tagName: 'div';
@@ -8,6 +8,7 @@ type ButtonGroupProps = {
 	hAlign: Alignment;
 	vAlign: Alignment;
 	classes?: string[];
+	colorTheme?: ThemeColor;
 }
 
 const meta = {
@@ -19,7 +20,7 @@ const meta = {
 		orientation: "horizontal",
 		hAlign: "start",
 		vAlign: "start",
-
+		colorTheme: "primary"
 	},
 	argTypes: {
 		tagName: {
@@ -36,6 +37,21 @@ const meta = {
 			options: [
 				"div"
 			]
+		},
+		colorTheme: {
+			description: "Colour keyword for the default fill or outline colour of the buttons in the group",
+			control: {
+				type: "select"
+			},
+			table: {
+				defaultValue: {
+					summary: "primary"
+				},
+				type: {
+					summary: "ThemeColor"
+				}
+			},
+			options: THEME_COLORS
 		},
 		orientation: {
 			description: "Orientation of the component content, if applicable",

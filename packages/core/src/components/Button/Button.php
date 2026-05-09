@@ -54,6 +54,15 @@ class Button extends Renderable {
         return $attrs;
     }
 
+	public function get_filtered_classes(): array {
+		return array_unique(
+			array_merge(
+				[$this->get_shortname()],
+				$this->get_bem_classes(),
+				$this->classes
+			)
+		);
+	}
     public function get_content(): string {
         return $this->content;
     }
