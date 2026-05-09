@@ -26,8 +26,7 @@
                 "dark",
                 "white",
                 "black"
-            ],
-            "default": "primary"
+            ]
         },
         "context": {
             "type": "string",

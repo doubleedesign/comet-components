@@ -15,28 +15,15 @@
             "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
             "required": true
         },
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ]
+        "backgroundColors": {
+            "type": "BackgroundCollection",
+            "description": "Key -> value pairs of background placement and colour keywords"
         },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
-                "columns"
+                "columns-wrapper"
             ]
         },
         "context": {
@@ -74,7 +61,7 @@
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
-            "default": "columns"
+            "default": "columns-wrapper"
         },
         "style": {
             "type": "array",

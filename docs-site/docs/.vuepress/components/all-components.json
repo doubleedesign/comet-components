@@ -238,22 +238,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -342,22 +329,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -415,22 +389,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -534,10 +495,6 @@
                 "description": "CSS classes",
                 "default": []
             },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
@@ -556,9 +513,7 @@
                 "description": "Optionally add a data-testid attribute for automated tests"
             }
         },
-        "traits": [
-            "ContextHierarchy"
-        ]
+        "traits": []
     },
     {
         "name": "TextElement",
@@ -795,22 +750,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -909,22 +851,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "beforeComponents": {
                 "type": "array<Renderable>",
@@ -1048,22 +977,9 @@
         "isInner": true,
         "belongsInside": "Accordion",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -1134,22 +1050,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "backgroundOpacity": {
                 "type": "int",
@@ -1374,8 +1277,7 @@
                     "dark",
                     "white",
                     "black"
-                ],
-                "default": "primary"
+                ]
             },
             "context": {
                 "type": "string",
@@ -1635,23 +1537,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ],
-                "default": "white"
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -1702,23 +1590,6 @@
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
-            },
-            "innerBackground": {
-                "type": "ThemeColor",
-                "description": "Background colour of the inner content.",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
             },
             "isNested": {
                 "type": "bool",
@@ -1775,6 +1646,7 @@
             "required": true
         },
         "traits": [
+            "BackgroundColor",
             "ColorTheme",
             "BackgroundColor",
             "LayoutAlignment",
@@ -1810,22 +1682,9 @@
                     "2.35:1"
                 ]
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "bodyText": {
                 "type": "string",
@@ -1982,22 +1841,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -2144,22 +1990,9 @@
         "isInner": true,
         "belongsInside": "Columns",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -2265,28 +2098,15 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "columns"
+                    "columns-wrapper"
                 ]
             },
             "context": {
@@ -2324,7 +2144,7 @@
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
-                "default": "columns"
+                "default": "columns-wrapper"
             },
             "style": {
                 "type": "array",
@@ -2387,22 +2207,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -2540,22 +2347,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -2947,22 +2741,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -3520,22 +3301,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -3784,22 +3552,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -3929,22 +3684,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "caption": {
                 "type": "string",
@@ -4079,22 +3821,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -4162,7 +3891,8 @@
                     "article",
                     "aside",
                     "ul",
-                    "ol"
+                    "ol",
+                    "figure"
                 ],
                 "default": "div"
             },
@@ -4711,22 +4441,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -5182,22 +4899,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "breadcrumbs": {
                 "type": "array",
@@ -5329,23 +5033,6 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
-            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
@@ -5409,7 +5096,6 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
             "ColorTheme",
             "ShortName"
         ]
@@ -5589,22 +5275,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "citation": {
                 "type": "string",
@@ -5693,22 +5366,9 @@
         "isInner": true,
         "belongsInside": "ResponsivePanels",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -5776,22 +5436,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "breakpoint": {
                 "type": "string",
@@ -5902,80 +5549,6 @@
             "LayoutContainerSize",
             "LayoutOrientation",
             "NestedState",
-            "BlockElementModifier"
-        ]
-    },
-    {
-        "name": "SectionMenu",
-        "description": "Render a menu for the current section of your site, such as in the sidebar.",
-        "extends": "Menu",
-        "abstract": false,
-        "isInner": false,
-        "belongsInside": "LayoutComponent",
-        "attributes": {
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": [
-                    "section-navigation__menu"
-                ]
-            },
-            "colorTheme": {
-                "type": "ThemeColor",
-                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-                "default": "section-navigation"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "menu"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "nav"
-                ],
-                "default": "nav"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            }
-        },
-        "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "ColorTheme",
             "BlockElementModifier"
         ]
     },
@@ -6105,23 +5678,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ],
-                "default": "dark"
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -6230,22 +5789,9 @@
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "breakpoint": {
                 "type": "string",
@@ -6361,537 +5907,6 @@
         ]
     },
     {
-        "name": "Step",
-        "description": null,
-        "extends": "UIComponent",
-        "abstract": false,
-        "isInner": true,
-        "belongsInside": "Steps",
-        "attributes": {
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": [
-                    "steps__step"
-                ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-                "default": "steps"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "step"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "li"
-                ],
-                "default": "li"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            }
-        },
-        "innerComponents": {
-            "type": "array<Heading|Paragraph|ListComponent|ImageComponent|ButtonGroup>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "BlockElementModifier"
-        ]
-    },
-    {
-        "name": "Steps",
-        "description": "Feature a series of steps in a horizontal or vertical orientation.",
-        "extends": "LayoutComponent",
-        "abstract": false,
-        "isInner": false,
-        "belongsInside": "LayoutComponent",
-        "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "supported": [
-                    "is-style-numbered",
-                    "is-style-simple"
-                ],
-                "default": [
-                    "steps"
-                ]
-            },
-            "colorTheme": {
-                "type": "ThemeColor",
-                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
-            "maxPerRow": {
-                "type": "int",
-                "description": "The maximum number of steps to display per row when orientation is horizontal"
-            },
-            "orientation": {
-                "type": "Orientation",
-                "description": "Orientation of the component content, if applicable",
-                "supported": [
-                    "horizontal",
-                    "vertical"
-                ],
-                "default": "vertical"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "steps"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "ol"
-                ],
-                "default": "ol"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            }
-        },
-        "innerComponents": {
-            "type": "array<Step>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "ColorTheme",
-            "LayoutOrientation",
-            "BackgroundColor",
-            "LayoutAlignment",
-            "NestedState",
-            "BlockElementModifier"
-        ]
-    },
-    {
-        "name": "Table",
-        "description": "Display tabular data with support for responsive stacking, sticky headers and footers, row headers, and merged cells.",
-        "extends": "Renderable",
-        "abstract": false,
-        "isInner": false,
-        "belongsInside": "LayoutComponent",
-        "attributes": {
-            "allowStacking": {
-                "type": "bool",
-                "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
-            },
-            "caption": {
-                "type": "TableCaption|array",
-                "description": "Caption object, or content and attributes corresponding to a Caption object"
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": [
-                    "table"
-                ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "table"
-            },
-            "sticky": {
-                "type": "string",
-                "description": "Make the header \"sticky\" when the table is large enough to scroll vertically, or make the first column \"sticky\" when the table is large enough to scroll horizontally; designed for use with <thead> or the first cells all being <th scope=\"row\"> elements",
-                "supported": [
-                    "header",
-                    "first-column"
-                ]
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "table"
-                ],
-                "default": "table"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            }
-        },
-        "traits": [
-            "BlockElementModifier"
-        ]
-    },
-    {
-        "name": "TableCaption",
-        "description": null,
-        "extends": "TextElement",
-        "abstract": false,
-        "isInner": true,
-        "belongsInside": "Table",
-        "attributes": {
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": []
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "position": {
-                "type": "string",
-                "description": "Position of the caption relative to the table",
-                "required": true,
-                "supported": [
-                    "top",
-                    "bottom"
-                ],
-                "default": "bottom"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": ""
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "caption"
-                ],
-                "default": "caption"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "textAlign": {
-                "type": "Alignment",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ]
-            }
-        },
-        "content": {
-            "type": "string",
-            "description": "Plain text or basic HTML",
-            "required": true
-        },
-        "traits": [
-            "BlockElementModifier",
-            "TextAlign"
-        ]
-    },
-    {
-        "name": "TableCell",
-        "description": null,
-        "extends": "TextElement",
-        "abstract": false,
-        "isInner": true,
-        "belongsInside": "Table",
-        "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": []
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": ""
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "td"
-                ],
-                "default": "td"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "textAlign": {
-                "type": "Alignment",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ]
-            },
-            "verticalAlign": {
-                "type": "string",
-                "description": "Vertical alignment of the cell content",
-                "supported": [
-                    "top",
-                    "middle",
-                    "bottom"
-                ]
-            }
-        },
-        "content": {
-            "type": "string",
-            "description": "Plain text or basic HTML",
-            "required": true
-        },
-        "innerComponents": {
-            "type": "array",
-            "required": true
-        },
-        "traits": [
-            "BackgroundColor",
-            "BlockElementModifier",
-            "TextAlign"
-        ]
-    },
-    {
-        "name": "TableHeaderCell",
-        "description": null,
-        "extends": "TableCell",
-        "abstract": false,
-        "isInner": true,
-        "belongsInside": "Table",
-        "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": []
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": ""
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "th"
-                ],
-                "default": "th"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "textAlign": {
-                "type": "Alignment",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ]
-            },
-            "verticalAlign": {
-                "type": "string",
-                "description": "Vertical alignment of the cell content",
-                "supported": [
-                    "top",
-                    "middle",
-                    "bottom"
-                ]
-            },
-            "width": {
-                "type": "string",
-                "description": "Fixed width of the cell, including units"
-            }
-        },
-        "content": {
-            "type": "string",
-            "description": "Plain text or basic HTML",
-            "required": true
-        },
-        "innerComponents": {
-            "type": "array",
-            "required": true
-        },
-        "traits": [
-            "BackgroundColor",
-            "BlockElementModifier",
-            "TextAlign"
-        ]
-    },
-    {
         "name": "TabPanel",
         "description": null,
         "extends": "PanelComponent",
@@ -6899,22 +5914,9 @@
         "isInner": true,
         "belongsInside": "Tabs",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -6981,22 +5983,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "classes": {
                 "type": "array<string>",
@@ -7108,22 +6097,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColor": {
-                "type": "ThemeColor",
-                "description": "Background colour keyword",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ]
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
             },
             "beforeComponents": {
                 "type": "array<Renderable>",

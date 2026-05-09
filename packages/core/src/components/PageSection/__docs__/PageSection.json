@@ -6,23 +6,6 @@
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ]
-        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
@@ -86,7 +69,6 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
         "ColorTheme",
         "ShortName"
     ]

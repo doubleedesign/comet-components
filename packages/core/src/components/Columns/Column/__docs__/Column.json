@@ -6,22 +6,9 @@
     "isInner": true,
     "belongsInside": "Columns",
     "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ]
+        "backgroundColors": {
+            "type": "BackgroundCollection",
+            "description": "Key -> value pairs of background placement and colour keywords"
         },
         "classes": {
             "type": "array<string>",

@@ -11,23 +11,9 @@
             "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
             "required": true
         },
-        "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "Background colour keyword",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ],
-            "default": "dark"
+        "backgroundColors": {
+            "type": "BackgroundCollection",
+            "description": "Key -> value pairs of background placement and colour keywords"
         },
         "classes": {
             "type": "array<string>",
@@ -40,9 +26,17 @@
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
+        "copyright": {
+            "type": "array{siteName:",
+            "required": true
+        },
         "dataAttrs": {
             "type": "array",
             "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
+            "required": true
+        },
+        "devCredit": {
+            "type": "array{authorName:",
             "required": true
         },
         "hAlign": {

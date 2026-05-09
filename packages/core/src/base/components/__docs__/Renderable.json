@@ -11,10 +11,6 @@
             "description": "CSS classes",
             "default": []
         },
-        "context": {
-            "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-        },
         "id": {
             "type": "string",
             "description": "Unique identifier"
@@ -33,7 +29,5 @@
             "description": "Optionally add a data-testid attribute for automated tests"
         }
     },
-    "traits": [
-        "ContextHierarchy"
-    ]
+    "traits": []
 }
