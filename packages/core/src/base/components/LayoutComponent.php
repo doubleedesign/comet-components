@@ -6,6 +6,7 @@ namespace Doubleedesign\Comet\Core;
 abstract class LayoutComponent extends UIComponent {
     use BackgroundColor;
     use LayoutAlignment;
+    use LayoutContainerSize;
     use NestedState;
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
@@ -13,6 +14,7 @@ abstract class LayoutComponent extends UIComponent {
         $this->set_layout_alignment($attributes);
         $this->set_background_colors($attributes);
         $this->set_is_nested(isset($attributes['isNested']) && (bool)$attributes['isNested']);
+        $this->set_size($attributes);
 
         if ($this->get_background_color() !== null) {
             if ($this instanceof Container && $this->get_is_nested()) {
@@ -27,15 +29,16 @@ abstract class LayoutComponent extends UIComponent {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-        // Have container take care of where to put alignments itself
-        if (!$this instanceof Container) {
-            if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
-                $attributes['data-halign'] = $this->hAlign->value;
-            }
+        if (isset($this->size)) {
+            $attributes['data-size'] = $this->size->value;
+        }
 
-            if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
-                $attributes['data-valign'] = $this->vAlign->value;
-            }
+        if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
+            $attributes['data-halign'] = $this->hAlign->value;
+        }
+
+        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
+            $attributes['data-valign'] = $this->vAlign->value;
         }
 
         if ($this->get_background_color() !== null) {

@@ -11,5 +11,5 @@ enum ContainerSize: string {
     case NARROW = 'narrow';
     case NARROWER = 'narrower';
     case SMALL = 'small';
-    case DEFAULT = 'default'; // also called "contained" in places like CMS back-end UI
+    case DEFAULT = 'contained';
 }

@@ -7,6 +7,7 @@
     --width-wide: 1440px;
     --width-contained: 1140px;
     --width-narrow: 940px;
+    --width-narrower: 768px;
     --width-small: 600px;
     --spacing-xxs: 0.25rem;
     /* Augmented fourth scale - 1.414 */
@@ -16,6 +17,35 @@
     --spacing-lg: 1.414rem;
     --spacing-xl: 2rem;
     --spacing-xxl: 2.827rem;
+  }
+  [data-size] {
+    width: 100%;
+    container-name: layout-section;
+    container-type: inline-size;
+    padding-inline: calc((100cqw - var(--container-max-width)) / 2);
+    box-sizing: border-box;
+  }
+  [data-size] > * {
+    width: 100%;
+  }
+  [data-size=wide] {
+    --container-max-width: 1440px;
+  }
+  [data-size=contained] {
+    --container-max-width: 1140px;
+  }
+  [data-size=narrow] {
+    --container-max-width: 940px;
+  }
+  [data-size=narrower] {
+    --container-max-width: 768px;
+  }
+  [data-size=small] {
+    --container-max-width: 600px;
+  }
+  [data-size=full] {
+    --container-max-width: 100%;
+    border-inline: var(--spacing-md) solid transparent;
   }
   [data-valign],
   [data-halign] {
@@ -75,7 +105,7 @@
   [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)), [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(2)) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @container (min-width: 768px) {
+  @container (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="4"] {
       grid-template-columns: repeat(auto-fit, 25%);
     }
@@ -83,7 +113,7 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
-  @container (min-width: 600px) {
+  @container (min-width: var(--width-small)) {
     [data-group-layout=grid][data-max-per-row="3"], [data-group-layout=grid][data-max-per-row="5"], [data-group-layout=grid][data-max-per-row="6"] {
       grid-template-columns: repeat(auto-fit, 33%);
     }
@@ -91,7 +121,7 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  @container (min-width: 768px) {
+  @container (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="5"] {
       grid-template-columns: repeat(auto-fit, 20%);
     }
@@ -99,7 +129,7 @@
       grid-template-columns: repeat(5, 1fr);
     }
   }
-  @container (min-width: 768px) {
+  @container (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="6"] {
       grid-template-columns: repeat(auto-fit, 16.66%);
     }

@@ -3,69 +3,60 @@
 @use '../bem-mixin' as *;
 @use '../bem-class-selectors' as *;
 
-@mixin stack-columns-until($breakpoint) {
-	@container (max-width: #{map-get($widths, $breakpoint)} - 1px) {
-		flex-wrap: wrap;
-
-		.column,
-		#{class-ends-with('__column')} {
-			grid-column: 1 / -1;
-			width: 100% !important;
-			flex-basis: 100% !important;
-			min-width: 100%;
-		}
-	}
-}
-
 @mixin column-layout() {
 	// Default/auto layout
 	display: grid;
-	grid-gap: var(--spacing-lg);
+	grid-gap: var(--spacing-md);
 
 	@include container-width-up('narrow') {
-		grid-gap: var(--spacing-xl);
+		grid-gap: var(--spacing-lg);
 	}
 
 	&[data-count="2"], &[data-count="4"], &[data-count="6"] {
-		&:not([data-allow-layout-stacking="false"]) {
-			grid-template-columns: repeat(1, 1fr);
-			@include stack-columns-until('narrower');
+		grid-template-columns: repeat(1, 1fr);
 
-			@include container-width-up('narrower') {
-				grid-template-columns: repeat(2, 1fr);
-			}
+		@include container-width-up('narrower') {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		&[data-allow-layout-stacking="false"] {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
 	&[data-count="4"] {
-		&:not([data-allow-layout-stacking="false"]) {
-			@include container-width-up('narrower') {
-				grid-template-columns: repeat(4, 1fr);
-			}
+		@include container-width-up('narrower') {
+			grid-template-columns: repeat(4, 1fr);
+		}
+		&[data-allow-layout-stacking="false"] {
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
 	&[data-count="3"], &[data-count="6"] {
-		&:not([data-allow-layout-stacking="false"]) {
-			@include container-width-up('narrow') {
-				grid-template-columns: repeat(3, 1fr);
-			}
+		@include container-width-up('narrow') {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		&[data-allow-layout-stacking="false"] {
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 
 	&[data-count="5"] {
-		&:not([data-allow-layout-stacking="false"]) {
-			@include container-width-up('narrow') {
-				grid-template-columns: repeat(5, 1fr);
-			}
+		@include container-width-up('narrow') {
+			grid-template-columns: repeat(5, 1fr);
+		}
+		&[data-allow-layout-stacking="false"] {
+			grid-template-columns: repeat(5, 1fr);
 		}
 	}
 
 	&[data-count="6"] {
-		&:not([data-allow-layout-stacking="false"]) {
-			@include container-width-up('narrow') {
-				grid-template-columns: repeat(5, 1fr);
-			}
+		@include container-width-up('narrow') {
+			grid-template-columns: repeat(6, 1fr);
+		}
+		&[data-allow-layout-stacking="false"] {
+			grid-template-columns: repeat(6, 1fr);
 		}
 	}
 
@@ -81,16 +72,9 @@
 	}
 }
 
-@include bem-block('columns', ('container', 'column')) {
-
-	&__container {
-		display: grid;
-		@include column-layout();
-	}
-
-	&:not(:has(#{class-contains('__container')})) {
-		@include column-layout();
-	}
+@include bem-block('columns', ('column')) {
+	@include column-layout();
+	@include section-padding();
 
 	// If this element has at least one child with a different background colour set, all children should have padding so they align
 	@each $color, $value in $colors {

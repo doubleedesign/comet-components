@@ -16,8 +16,8 @@ if (!in_array(
 use Doubleedesign\Comet\Core\{Assets, Config};
 
 // Autoload dependencies using Composer
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../packages/core/vendor/autoload.php';
-require_once __DIR__ . '/../common/mocks.php';
 // Enable dump() locally (assumes VarDumper is installed globally via Composer)
 if (getenv('APPDATA') !== null) {
     require_once getenv('APPDATA') . '/Composer/vendor/autoload.php';

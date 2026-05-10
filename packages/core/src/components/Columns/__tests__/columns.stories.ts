@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { Alignment, ALIGNMENT_OPTIONS, ThemeColor, THEME_COLORS } from '../../../../test/storybook-helpers.ts';
+import { Alignment, ALIGNMENT_OPTIONS, ThemeColor, THEME_COLORS, ContainerSize, CONTAINER_SIZES } from '../../../../test/storybook-helpers.ts';
 
 type ColumnsProps = {
 	tagName: 'div' | 'section';
@@ -8,11 +8,17 @@ type ColumnsProps = {
 	hAlign: Alignment;
 	vAlign: Alignment;
 	backgroundColor: '' | 'none' | ThemeColor;
+	size: ContainerSize,
 	classes?: string[];
 	innerComponents?: Array<{
 		attributes: any[];
 		content: string;
 	}>;
+}
+
+type ColumnsStoryProps = ColumnsProps & {
+	count: number;
+	innerBackgrounds: boolean;
 }
 
 const meta = {
@@ -25,7 +31,9 @@ const meta = {
 		hAlign: "start",
 		vAlign: "start",
 		backgroundColor: "",
-
+		size: 'contained',
+		count: 3,
+		innerBackgrounds: false
 	},
 	argTypes: {
 		tagName: {
@@ -45,6 +53,21 @@ const meta = {
 				"div",
 				"section"
 			]
+		},
+		size: {
+			description: "Keyword specifying the relative width of the container for the inner content",
+			control: {
+				type: "select"
+			},
+			table: {
+				defaultValue: {
+					summary: "contained"
+				},
+				type: {
+					summary: "ContainerSize"
+				}
+			},
+			options: CONTAINER_SIZES
 		},
 		allowStacking: {
 			description: "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
@@ -110,35 +133,25 @@ const meta = {
 			control: false,
 			table: {
 				defaultValue: {
-					summary: "layout-block columns"
+					summary: "columns"
 				},
 				type: {
 					summary: "array<string>"
 				}
 			}
 		},
-
+		count: {
+			description: 'How many columns to show in this demo; they will be semi-randomly assigned basic content of varying lengths.',
+		},
+		innerBackgrounds: {
+			description: 'Inner columns will be semi-randomly assigned background colours (or lack thereof).'
+		}
 	},
-} satisfies Meta<ColumnsProps>;
+} satisfies Meta<ColumnsStoryProps>;
 
 export default meta;
-type Story = StoryObj<ColumnsProps>;
+type Story = StoryObj<ColumnsStoryProps>;
 
 export const Playground: Story = {
 	tags: []
-};
-
-export const TwoEqualColumns: Story = {
-	args: {
-		innerComponents: [
-			{
-				attributes: [],
-				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris."
-			},
-			{
-				attributes: [],
-				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris."
-			}
-		]
-	}
 };

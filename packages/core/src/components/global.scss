@@ -11,6 +11,7 @@
 		--width-wide: #{map-get($widths, 'wide')};
 		--width-contained: #{map-get($widths, 'contained')};
 		--width-narrow: #{map-get($widths, 'narrow')};
+		--width-narrower: #{map-get($widths, 'narrower')};
 		--width-small: #{map-get($widths, 'small')};
 
 		--spacing-xxs: 0.25rem;
@@ -21,6 +22,29 @@
 		--spacing-lg: 1.414rem;
 		--spacing-xl: 2rem;
 		--spacing-xxl: 2.827rem;
+	}
+
+	[data-size] {
+		width: 100%;
+		container-name: layout-section;
+		container-type: inline-size;
+		padding-inline: calc((100cqw - var(--container-max-width)) / 2);
+		box-sizing: border-box;
+
+		> * {
+			width: 100%;
+		}
+	}
+
+	@each $name, $size in $widths {
+		[data-size="#{$name}"] {
+			--container-max-width: #{$size};
+		}
+	}
+
+	[data-size="full"] {
+		--container-max-width: 100%;
+		border-inline: var(--spacing-md) solid transparent;
 	}
 
 	[data-valign],

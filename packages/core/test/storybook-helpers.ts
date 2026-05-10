@@ -28,7 +28,7 @@ export const ALIGNMENT_OPTIONS = [
 export type Alignment = (typeof ALIGNMENT_OPTIONS)[number];
 
 export const CONTAINER_SIZES = [
-	"default",
+	"contained",
 	"wide",
 	"fullwidth",
 	"narrow",

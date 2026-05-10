@@ -10,7 +10,7 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class Columns extends WrappedLayoutComponent {
+class Columns extends LayoutComponent {
     private int $qty;
 
     /**
@@ -31,7 +31,6 @@ class Columns extends WrappedLayoutComponent {
         $this->qty = count($innerComponents);
         $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
         $this->set_is_nested($attributes['isNested'] ?? false);
-        $this->withContainer = $attributes['withContainer'] ?? !$this->get_is_nested() ?? $this->withContainer;
         $this->set_layout_alignment($attributes);
 
         // For nested instances, default to div tag unless specified otherwise in the attributes
@@ -44,24 +43,6 @@ class Columns extends WrappedLayoutComponent {
         $updatedInnerComponents = count(array_unique($columnWidths)) === 1
             ? array_map(fn($column) => $column->set_width(null) ?: $column, $innerComponents)
             : $innerComponents;
-
-        // If the component will have a container added, also wrap the columns in a group so the container queries work properly
-        $wrappedCols = new Group([
-            'shortName'  => 'columns',
-            'data-count' => $this->qty,
-            'context'    => $attributes['shortName'] ?? 'columns',
-            ...($this->allowStacking !== null ? ['data-allow-layout-stacking' => $this->allowStacking ? 'true' : 'false'] : []),
-            ...($this->hAlign && !$this->hAlign->isDefault() ? ['data-halign' => $this->hAlign->value] : []),
-            ...($this->vAlign && !$this->vAlign->isDefault() ? ['data-valign' => $this->vAlign->value] : [])
-        ], $updatedInnerComponents);
-        $updatedInnerComponents = $this->withContainer ? [$wrappedCols] : $updatedInnerComponents;
-
-        // For the outer wrapper if applicable, add "wrapper" to the class name if no shortName is set
-        // so it can be targeted in CSS without affecting nested instances
-        // Note: This must be done *after* the inner group is created so it doesn't inherit this as context
-        if (!$this->get_is_nested() && !isset($attributes['shortName'])) {
-            $attributes['shortName'] = 'columns-wrapper';
-        }
 
         // Finally, create the component with all the transformed stuff
         parent::__construct($attributes, $updatedInnerComponents, 'components.Columns.columns');
