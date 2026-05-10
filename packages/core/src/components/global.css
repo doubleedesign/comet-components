@@ -148,6 +148,10 @@
     --theme-color: contrast-color(var(--background-color));
     color: var(--theme-color);
   }
+  [data-background] > [data-background],
+  [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+    padding: var(--spacing-md);
+  }
   [data-color-theme] {
     --theme-color-inverse: contrast-color(var(--theme-color));
   }
@@ -159,6 +163,9 @@
     --background-color: var(--color-primary);
     --active-color: var(--color-secondary);
   }
+  [data-background=primary] > [data-background=primary] {
+    padding: 0;
+  }
   body[data-global-background=secondary] {
     background-color: var(--color-secondary);
     --theme-color: contrast-color(var(--color-secondary));
@@ -166,6 +173,9 @@
   [data-background=secondary] {
     --background-color: var(--color-secondary);
     --active-color: var(--color-secondary);
+  }
+  [data-background=secondary] > [data-background=secondary] {
+    padding: 0;
   }
   body[data-global-background=accent] {
     background-color: var(--color-accent);
@@ -175,6 +185,9 @@
     --background-color: var(--color-accent);
     --active-color: var(--color-secondary);
   }
+  [data-background=accent] > [data-background=accent] {
+    padding: 0;
+  }
   body[data-global-background=info] {
     background-color: var(--color-info);
     --theme-color: contrast-color(var(--color-info));
@@ -182,6 +195,9 @@
   [data-background=info] {
     --background-color: var(--color-info);
     --active-color: var(--color-secondary);
+  }
+  [data-background=info] > [data-background=info] {
+    padding: 0;
   }
   body[data-global-background=warning] {
     background-color: var(--color-warning);
@@ -191,6 +207,9 @@
     --background-color: var(--color-warning);
     --active-color: var(--color-secondary);
   }
+  [data-background=warning] > [data-background=warning] {
+    padding: 0;
+  }
   body[data-global-background=success] {
     background-color: var(--color-success);
     --theme-color: contrast-color(var(--color-success));
@@ -198,6 +217,9 @@
   [data-background=success] {
     --background-color: var(--color-success);
     --active-color: var(--color-secondary);
+  }
+  [data-background=success] > [data-background=success] {
+    padding: 0;
   }
   body[data-global-background=error] {
     background-color: var(--color-error);
@@ -207,6 +229,9 @@
     --background-color: var(--color-error);
     --active-color: var(--color-secondary);
   }
+  [data-background=error] > [data-background=error] {
+    padding: 0;
+  }
   body[data-global-background=light] {
     background-color: var(--color-light);
     --theme-color: contrast-color(var(--color-light));
@@ -214,6 +239,9 @@
   [data-background=light] {
     --background-color: var(--color-light);
     --active-color: var(--color-secondary);
+  }
+  [data-background=light] > [data-background=light] {
+    padding: 0;
   }
   body[data-global-background=dark] {
     background-color: var(--color-dark);
@@ -223,6 +251,9 @@
     --background-color: var(--color-dark);
     --active-color: var(--color-secondary);
   }
+  [data-background=dark] > [data-background=dark] {
+    padding: 0;
+  }
   body[data-global-background=white] {
     background-color: var(--color-white);
     --theme-color: contrast-color(var(--color-white));
@@ -230,6 +261,9 @@
   [data-background=white] {
     --background-color: var(--color-white);
     --active-color: var(--color-secondary);
+  }
+  [data-background=white] > [data-background=white] {
+    padding: 0;
   }
   [data-color-theme=primary] {
     --theme-color: var(--color-primary);

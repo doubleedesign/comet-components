@@ -11,7 +11,7 @@ type PageHeaderProps = {
 
 const meta = {
 	title: 'UI/PageHeader',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['wordpress-theme', 'autodocs'],
 	...createStoryBase('PageHeader'),
 	args: {
 		tagName: "header",

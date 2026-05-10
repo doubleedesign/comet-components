@@ -12,7 +12,7 @@
   display: block;
   max-width: 8rem;
 }
-@container (min-width: 940px) {
+@container (min-width: var(--width-narrow)) {
   .site-header__logo {
     max-width: 11rem;
   }

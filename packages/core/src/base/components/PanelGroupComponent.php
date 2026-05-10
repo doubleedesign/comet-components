@@ -6,9 +6,7 @@ namespace Doubleedesign\Comet\Core;
 abstract class PanelGroupComponent extends UIComponent {
     use BackgroundColor;
     use ColorTheme;
-    use LayoutContainerSize;
     use LayoutOrientation;
-    use NestedState;
 
     /**
      * @var array<PanelComponent> $panels
@@ -20,10 +18,16 @@ abstract class PanelGroupComponent extends UIComponent {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->prepare_inner_components_for_vue($innerComponents);
         $this->set_color_theme($attributes, ThemeColor::PRIMARY);
-        $this->set_background_colors($attributes);
         $this->set_orientation($attributes);
-        $this->set_is_nested($attributes['isNested'] ?? false);
-        $this->set_size($attributes);
+        $this->set_background_colors($attributes);
+
+        list($outer, $inner) = [$this->get_background_colors()?->outer, $this->get_background_colors()?->inner];
+        if ($outer instanceof ThemeGradient && !isset($inner)) {
+            $this->set_background_colors([
+                $outer,
+                ThemeColor::WHITE
+            ]);
+        }
     }
 
     private function prepare_inner_components_for_vue($rawInnerComponents): void {
@@ -52,6 +56,10 @@ abstract class PanelGroupComponent extends UIComponent {
 
         if (isset($this->colorTheme)) {
             $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
+
+        if (isset($this->get_background_colors()?->inner)) {
+            $attributes['data-background'] = $this->get_background_colors()->inner->value;
         }
 
         return $attributes;

@@ -66,16 +66,16 @@
         },
         "size": {
             "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
             "supported": [
-                "default",
                 "fullwidth",
                 "wide",
                 "narrow",
                 "narrower",
-                "small"
+                "small",
+                "contained"
             ],
-            "default": "default"
+            "default": "contained"
         },
         "style": {
             "type": "array",
@@ -85,7 +85,8 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "section"
             ],
             "default": "div"
         },
@@ -100,11 +101,11 @@
         "required": true
     },
     "traits": [
+        "LayoutContainerSize",
+        "NestedState",
         "BackgroundColor",
         "ColorTheme",
-        "LayoutContainerSize",
         "LayoutOrientation",
-        "NestedState",
         "BlockElementModifier"
     ]
 }

@@ -11,6 +11,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class Columns extends LayoutComponent {
+	use NestedState;
+
     private int $qty;
 
     /**
@@ -32,11 +34,6 @@ class Columns extends LayoutComponent {
         $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
         $this->set_is_nested($attributes['isNested'] ?? false);
         $this->set_layout_alignment($attributes);
-
-        // For nested instances, default to div tag unless specified otherwise in the attributes
-        if ($this->get_is_nested() && !isset($attributes['tagName'])) {
-            $attributes['tagName'] = Tag::DIV->value;
-        }
 
         // If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
         $columnWidths = array_map(fn($column) => $column->get_width(), $innerComponents);

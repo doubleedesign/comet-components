@@ -1,17 +1,19 @@
-.breadcrumbs {
+.breadcrumbs, [class$=__breadcrumbs], [class*=breadcrumbs--] {
   display: contents;
 }
-.breadcrumbs__list {
+.breadcrumbs__list, [class$=__breadcrumbs__list] {
   display: flex;
   align-items: center;
   justify-content: inherit;
   gap: var(--spacing-xs);
   margin-block: var(--spacing-md);
   margin-inline: 0;
+  padding: 0;
+  list-style: none;
 }
 .breadcrumbs__list__item {
   display: flex;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
 }
 .breadcrumbs__list__item__link {
   color: inherit;

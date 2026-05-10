@@ -267,11 +267,18 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": "false"
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -317,7 +324,7 @@
         "traits": [
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -423,12 +430,6 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": "false"
-            },
             "orientation": {
                 "type": "Orientation",
                 "description": "Orientation of the component content, if applicable",
@@ -437,19 +438,6 @@
                     "vertical"
                 ],
                 "default": "vertical"
-            },
-            "size": {
-                "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
-                "supported": [
-                    "default",
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small"
-                ],
-                "default": "default"
             },
             "style": {
                 "type": "array",
@@ -476,9 +464,7 @@
         "traits": [
             "BackgroundColor",
             "ColorTheme",
-            "LayoutContainerSize",
             "LayoutOrientation",
-            "NestedState",
             "BlockElementModifier"
         ]
     },
@@ -784,11 +770,18 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": "false"
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -822,12 +815,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -838,7 +825,7 @@
         "traits": [
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -925,16 +912,16 @@
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
-                    "default",
                     "fullwidth",
                     "wide",
                     "narrow",
                     "narrower",
-                    "small"
+                    "small",
+                    "contained"
                 ],
-                "default": "default"
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -944,7 +931,8 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
-                    "div"
+                    "div",
+                    "section"
                 ],
                 "default": "div"
             },
@@ -960,12 +948,11 @@
         },
         "traits": [
             "Icon",
+            "LayoutContainerSize",
             "NestedState",
             "BackgroundColor",
             "ColorTheme",
-            "LayoutContainerSize",
             "LayoutOrientation",
-            "NestedState",
             "BlockElementModifier"
         ]
     },
@@ -1130,17 +1117,24 @@
                 "required": true,
                 "default": []
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "banner"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -1169,12 +1163,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -1188,7 +1176,7 @@
             "LayoutAlignment",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -1527,16 +1515,11 @@
     {
         "name": "CallToAction",
         "description": "Highlight important information and prompt the user to take action.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -1570,11 +1553,6 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
-            },
             "hAlign": {
                 "type": "Alignment",
                 "description": "Horizontal alignment, if applicable",
@@ -1591,17 +1569,24 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "call-to-action"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -1632,12 +1617,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -1646,11 +1625,10 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
             "ColorTheme",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -1831,16 +1809,11 @@
     {
         "name": "CardList",
         "description": null,
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -1872,11 +1845,6 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -1931,6 +1899,19 @@
                 "required": true,
                 "default": "card-list"
             },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
+            },
             "style": {
                 "type": "array",
                 "description": "Inline styles"
@@ -1959,12 +1940,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -1976,9 +1951,10 @@
         "traits": [
             "ColorTheme",
             "GroupLayoutType",
+            "NestedState",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -2022,17 +1998,24 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "column"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -2077,14 +2060,14 @@
         "traits": [
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
     {
         "name": "Columns",
         "description": "Organise content visually with a column-based layout.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
@@ -2092,11 +2075,6 @@
             "allowStacking": {
                 "type": "bool",
                 "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Defaults to true behaviour but does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
-            },
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
             },
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -2106,17 +2084,12 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "columns-wrapper"
+                    "columns"
                 ]
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -2144,7 +2117,20 @@
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
-                "default": "columns-wrapper"
+                "default": "columns"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -2174,12 +2160,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -2188,25 +2168,21 @@
             "required": true
         },
         "traits": [
+            "NestedState",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
     {
         "name": "Container",
         "description": "Create a section with semantic meaning that controls the maximum width of its contents.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -2221,15 +2197,6 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
-            },
-            "gradient": {
-                "type": "string",
-                "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)"
             },
             "hAlign": {
                 "type": "Alignment",
@@ -2246,12 +2213,6 @@
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
-            },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
             },
             "orientation": {
                 "type": "Orientation",
@@ -2270,16 +2231,16 @@
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
-                    "default",
                     "fullwidth",
                     "wide",
                     "narrow",
                     "narrower",
-                    "small"
+                    "small",
+                    "contained"
                 ],
-                "default": "default"
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -2312,12 +2273,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -2330,7 +2285,7 @@
             "LayoutOrientation",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -2342,11 +2297,6 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -2355,21 +2305,12 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "container container"
+                    "container"
                 ]
             },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
-            },
-            "gradient": {
-                "type": "string",
-                "description": "Name of a gradient to use for the background (requires accompanying CSS to be defined)"
             },
             "hAlign": {
                 "type": "Alignment",
@@ -2391,19 +2332,13 @@
                 "type": "ContainerSize|mixed",
                 "description": "The size of the inner container that the base container will wrap; should always be the same or smaller than the outer container size",
                 "supported": [
-                    "default",
                     "fullwidth",
                     "wide",
                     "narrow",
                     "narrower",
-                    "small"
+                    "small",
+                    "contained"
                 ]
-            },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": true
             },
             "orientation": {
                 "type": "Orientation",
@@ -2422,16 +2357,16 @@
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
-                    "default",
                     "fullwidth",
                     "wide",
                     "narrow",
                     "narrower",
-                    "small"
+                    "small",
+                    "contained"
                 ],
-                "default": "default"
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -2460,12 +2395,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -2478,7 +2407,7 @@
             "LayoutOrientation",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -2731,20 +2660,11 @@
     {
         "name": "Copy",
         "description": null,
-        "extends": "WrappedLayoutComponent",
+        "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
-            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
@@ -2773,23 +2693,6 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
-            },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
@@ -2805,6 +2708,19 @@
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "copy"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -2824,35 +2740,16 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
+            "type": "array<PreprocessedHTML|Heading|ButtonGroup|ImageComponent>",
+            "description": "Inner column components",
             "required": true
         },
         "traits": [
             "ColorTheme",
-            "BackgroundColor",
-            "LayoutAlignment",
+            "LayoutContainerSize",
             "NestedState",
             "BlockElementModifier"
         ]
@@ -3291,16 +3188,11 @@
     {
         "name": "EventList",
         "description": "*/",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -3332,11 +3224,6 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -3387,6 +3274,19 @@
                 "required": true,
                 "default": "events"
             },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
+            },
             "style": {
                 "type": "array",
                 "description": "Inline styles"
@@ -3418,12 +3318,6 @@
             },
             "viewAllUrl": {
                 "type": "string"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -3434,9 +3328,10 @@
         "traits": [
             "ColorTheme",
             "GroupLayoutType",
+            "NestedState",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -3536,22 +3431,18 @@
         "traits": [
             "BlockElementModifier",
             "ColorTheme",
-            "Icon"
+            "Icon",
+            "ShortName"
         ]
     },
     {
         "name": "FileGroup",
         "description": "Display a list of downloadable file links with details about them.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -3560,7 +3451,7 @@
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "files"
+                    "file-group"
                 ]
             },
             "colorTheme": {
@@ -3584,11 +3475,6 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -3620,7 +3506,20 @@
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
-                "default": "files"
+                "default": "file-group"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -3650,12 +3549,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -3665,25 +3558,21 @@
         },
         "traits": [
             "ColorTheme",
+            "NestedState",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
     {
         "name": "Gallery",
         "description": "Display a grid of images with optional captions, with a range of layout options.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -3702,11 +3591,6 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -3764,6 +3648,19 @@
                 "required": true,
                 "default": "gallery"
             },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
+            },
             "style": {
                 "type": "array",
                 "description": "Inline styles"
@@ -3793,12 +3690,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -3807,9 +3698,10 @@
             "required": true
         },
         "traits": [
+            "NestedState",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -4431,16 +4323,11 @@
     {
         "name": "LinkGroup",
         "description": "Render a group of Link components with a common color theme.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -4472,11 +4359,6 @@
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
             },
             "hAlign": {
                 "type": "Alignment",
@@ -4526,6 +4408,19 @@
                 "required": true,
                 "default": "links"
             },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
+            },
             "style": {
                 "type": "array",
                 "description": "Inline styles"
@@ -4554,12 +4449,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -4570,9 +4459,10 @@
         "traits": [
             "ColorTheme",
             "GroupLayoutType",
+            "NestedState",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -4889,16 +4779,11 @@
     {
         "name": "PageHeader",
         "description": "Render a page header with the page title and optional breadcrumb navigation.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -4937,11 +4822,6 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
-            },
             "hAlign": {
                 "type": "Alignment",
                 "description": "Horizontal alignment, if applicable",
@@ -4958,17 +4838,24 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "page-header"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -4999,12 +4886,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "content": {
@@ -5021,18 +4902,22 @@
             "ColorTheme",
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
     {
         "name": "PageSection",
         "description": "A basic full-width section to separate content areas, with optional background color or gradient. Intended for automatic use as the wrapper for Container components and as the parent for components that are not intended to be nested, such as those extending WrappedLayoutComponent.",
-        "extends": "Renderable",
+        "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "backgroundColors": {
+                "type": "BackgroundCollection",
+                "description": "Key -> value pairs of background placement and colour keywords"
+            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
@@ -5057,6 +4942,10 @@
                     "black"
                 ]
             },
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
@@ -5066,6 +4955,19 @@
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "page-section"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -5096,8 +4998,10 @@
             "required": true
         },
         "traits": [
+            "BackgroundColor",
             "ColorTheme",
-            "ShortName"
+            "LayoutContainerSize",
+            "BlockElementModifier"
         ]
     },
     {
@@ -5486,12 +5390,6 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
             "orientation": {
                 "type": "Orientation",
                 "description": "Orientation of the component content, if applicable",
@@ -5506,19 +5404,6 @@
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "responsive-panels"
-            },
-            "size": {
-                "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
-                "supported": [
-                    "default",
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small"
-                ],
-                "default": "default"
             },
             "style": {
                 "type": "array",
@@ -5546,9 +5431,7 @@
             "Icon",
             "BackgroundColor",
             "ColorTheme",
-            "LayoutContainerSize",
             "LayoutOrientation",
-            "NestedState",
             "BlockElementModifier"
         ]
     },
@@ -5630,16 +5513,16 @@
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
-                    "default",
                     "fullwidth",
                     "wide",
                     "narrow",
                     "narrower",
-                    "small"
+                    "small",
+                    "contained"
                 ],
-                "default": "default"
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -5668,16 +5551,11 @@
     {
         "name": "SiteFooter",
         "description": "Render a footer with inner components such as a Menu.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColors": {
                 "type": "BackgroundCollection",
                 "description": "Key -> value pairs of background placement and colour keywords"
@@ -5695,11 +5573,6 @@
             },
             "copyright": {
                 "type": "array{siteName:",
-                "required": true
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
                 "required": true
             },
             "devCredit": {
@@ -5722,17 +5595,24 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
             "shortName": {
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
                 "default": "site-footer"
+            },
+            "size": {
+                "type": "ContainerSize",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "supported": [
+                    "fullwidth",
+                    "wide",
+                    "narrow",
+                    "narrower",
+                    "small",
+                    "contained"
+                ],
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -5761,12 +5641,6 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
             }
         },
         "innerComponents": {
@@ -5777,7 +5651,7 @@
         "traits": [
             "BackgroundColor",
             "LayoutAlignment",
-            "NestedState",
+            "LayoutContainerSize",
             "BlockElementModifier"
         ]
     },
@@ -5861,16 +5735,16 @@
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
-                    "default",
                     "fullwidth",
                     "wide",
                     "narrow",
                     "narrower",
-                    "small"
+                    "small",
+                    "contained"
                 ],
-                "default": "default"
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -6042,16 +5916,16 @@
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
-                    "default",
                     "fullwidth",
                     "wide",
                     "narrow",
                     "narrower",
-                    "small"
+                    "small",
+                    "contained"
                 ],
-                "default": "default"
+                "default": "contained"
             },
             "style": {
                 "type": "array",
@@ -6061,7 +5935,8 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
-                    "div"
+                    "div",
+                    "section"
                 ],
                 "default": "div"
             },
@@ -6076,124 +5951,11 @@
             "required": true
         },
         "traits": [
+            "LayoutContainerSize",
+            "NestedState",
             "BackgroundColor",
             "ColorTheme",
-            "LayoutContainerSize",
             "LayoutOrientation",
-            "NestedState",
-            "BlockElementModifier"
-        ]
-    },
-    {
-        "name": "WrappedPanelGroup",
-        "description": null,
-        "extends": "WrappedLayoutComponent",
-        "abstract": false,
-        "isInner": false,
-        "belongsInside": "LayoutComponent",
-        "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
-            },
-            "beforeComponents": {
-                "type": "array<Renderable>",
-                "description": "Components to render before the main component (e.g. heading, intro text).",
-                "required": true,
-                "default": []
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "Not used - this component renders its children directly",
-                "default": []
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
-            },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "wrapped-panel-group"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "div",
-                    "section"
-                ],
-                "default": "section"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "withContainer": {
-                "type": "bool",
-                "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-                "required": true,
-                "default": "true"
-            }
-        },
-        "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "BackgroundColor",
-            "LayoutAlignment",
-            "NestedState",
             "BlockElementModifier"
         ]
     }

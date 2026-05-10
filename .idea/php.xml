@@ -170,6 +170,8 @@
       <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/filesystem" />
       <path value="$PROJECT_DIR$/packages/core/vendor/illuminate/macroable" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/doubleedesign/comet-components-core" />
+      <path value="$PROJECT_DIR$/packages/core/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4">

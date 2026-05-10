@@ -13,7 +13,8 @@ trait BackgroundColor {
      * @description Retrieves the relevant properties from the component $attributes array or component defaults, validates them, and assigns them to the corresponding component instance field.
      */
     protected function set_background_colors(array $attributes): void {
-        // Backwards compatibility: Allow for 'backgroundColor', but prefer newer backgroundColors
+        // Backwards compatibility and components that we only ever expect to have a single background colour:
+        // Allow for 'backgroundColor', but prefer newer backgroundColors for those that use multiple
         $maybeAttr = $attributes['backgroundColors'] ?? $attributes['backgroundColor'] ?? null;
         if ($maybeAttr !== null) {
             $this->backgroundColors = $this->transform_to_collection($maybeAttr);
@@ -69,7 +70,10 @@ trait BackgroundColor {
     }
 
     /**
-     * @description Allows the background colour of a component to be set based on contextual factors not available at instantiation.
+     * @description Allows the background colour of a component to be set
+     * based on contextual factors not available at instantiation.
+     * This is generally expected to be used to update children,
+     * so it is not expected that gradients will be set here.
      * @param  string|null|ThemeColor  $backgroundColors
      *
      * @return void

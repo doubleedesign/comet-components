@@ -12,7 +12,7 @@ type HeadingProps = {
 
 const meta = {
 	title: 'Text/Heading',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('Heading'),
 	args: {
 		level: 2,

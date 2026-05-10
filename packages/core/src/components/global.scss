@@ -182,11 +182,18 @@
 		background: var(--background-color);
 		--theme-color: contrast-color(var(--background-color));
 		color: var(--theme-color);
+
+		> [data-background],
+		> [data-vue-component]:has(>[data-background]) > [data-background] {
+			@include nested-padding();
+		}
 	}
 
 	[data-color-theme] {
 		// This can be contextually changed to do things like yellow on a navy background instead of white, while keeping this sensible default
 		--theme-color-inverse: contrast-color(var(--theme-color));
+		// Note: color: var(--theme-color) is not set here because we probably don't want *everything* to be that colour.
+		// It should be applied selectively to things like headings and component-specific elements as appropriate.
 	}
 
 	$colorNames: map-keys($colors);
@@ -199,6 +206,11 @@
 		[data-background="#{$colorName}"] {
 			--background-color: var(--color-#{$colorName});
 			--active-color: var(--color-secondary); // can be contextually changed where this default doesn't suit
+		}
+
+		// If a parent and direct child have the same background, remove the nested padding
+		[data-background="#{$colorName}"] > [data-background="#{$colorName}"] {
+			padding: 0;
 		}
 	}
 

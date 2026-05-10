@@ -10,7 +10,9 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::SECTION, Tag::FIGURE, Tag::DIV])]
 #[DefaultTag(Tag::SECTION)]
-class Gallery extends WrappedLayoutComponent {
+class Gallery extends LayoutComponent {
+    use NestedState;
+
     /**
      * @var int $maxPerRow
      * @description The preferred number of columns to use for the layout (may be overridden to fewer in small containers/viewports)
@@ -70,6 +72,9 @@ class Gallery extends WrappedLayoutComponent {
             [$wrappedImages],
             'components.Gallery.gallery'
         );
+
+        // TODO: Check if tagName needs more handling for nested/not nested states
+        $this->set_is_nested($attributes['isNested'] ?? false);
 
         // Add caption after parent constructor runs so we have access to the correct BEM context
         if (!empty($this->caption)) {

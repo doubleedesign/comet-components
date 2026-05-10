@@ -10,88 +10,25 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::SECTION, Tag::MAIN, Tag::DIV, Tag::ARTICLE, Tag::FOOTER])]
 #[DefaultTag(Tag::SECTION)]
-class Container extends WrappedLayoutComponent {
+class Container extends LayoutComponent {
     use LayoutContainerSize;
     use LayoutOrientation;
-
-    /**
-     * @var string|null $gradient
-     * @description Name of a gradient to use for the background (requires accompanying CSS to be defined)
-     */
-    protected ?string $gradient; // TODO: Not limited by a trait because implementations could have all kinds of gradients they handle themselves
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Container.container');
         $this->set_size($attributes);
         $this->set_orientation($attributes);
-        $this->gradient = $attributes['gradient'] ?? null;
-        $this->set_is_nested($attributes['isNested'] ?? false);
-    }
-
-    /**
-     * Nested state can be updated from outside (notably in the render methods of WrappedLayoutComponent)
-     * so we need to make the relevant updates when that happens, not just in the constructor
-     *
-     * @param  bool  $isNested
-     *
-     * @return void
-     */
-    public function set_is_nested(?bool $isNested): void {
-        parent::set_is_nested($isNested);
-        if ($this->get_is_nested()) {
-            // The wrapping PageSection takes the tagName given,
-            // so we override the Container's tag so we don't get stuff like section -> section
-            $this->set_tag('div');
-            // The block should already be set by the context trait, so we add container here so this becomes theContext__container
-            $this->set_bem_element('container');
-        }
-        else {
-            // If rendering without a wrapper, we want just the block (as set in the trait), not theBlock__container
-            // (we manually add 'container' class in get_filtered_classes so we get "theBlock container")
-            $this->set_bem_element(null);
-        }
-    }
-
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        if (!$this->get_is_nested()) {
-            array_push($classes, 'container');
-        }
-
-        return array_unique($classes);
     }
 
     protected function get_html_attributes(): array {
-        $attributes = [];
-        if (isset($this->size) && $this->size !== ContainerSize::DEFAULT) {
-            $attributes['data-size'] = $this->size->value;
-        }
-
-        if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
-            $attributes['data-halign'] = $this->hAlign->value;
-        }
-
-        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
-            $attributes['data-valign'] = $this->vAlign->value;
-        }
+        $attributes = parent::get_html_attributes();
 
         if (isset($this->orientation) && !$this->orientation->isDefault()) {
             $attributes['data-orientation'] = $this->orientation->value;
         }
 
-        if ($this->get_is_nested()) {
-            if (isset($this->backgroundColor)) {
-                $attributes['data-background'] = $this->backgroundColor->value;
-            }
-            else if (isset($this->gradient)) {
-                $attributes['data-background'] = 'gradient-' . $this->gradient;
-            }
-
-            if ($this->tagName === Tag::DIV) {
-                // TODO: intended for when the real content is in a <section> or has a role or something else making it a landmark inside; probably needs better handling so it's not over-applied
-                $attributes['role'] = 'presentation';
-            }
+        if ($this->tagName === Tag::DIV) {
+            $attributes['role'] = 'presentation';
         }
 
         $explicitDataAttrs = array_filter(parent::get_html_attributes(), fn($key) => str_starts_with($key, 'data-'), ARRAY_FILTER_USE_KEY);

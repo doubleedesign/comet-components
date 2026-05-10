@@ -10,8 +10,8 @@ type GroupProps = {
 }
 
 const meta = {
-	title: 'Structure/Group',
-	tags: ['wordpress-block', 'autodocs'],
+	title: 'Layout/Group',
+	tags: ['autodocs'],
 	...createStoryBase('Group'),
 	args: {
 		backgroundColor: "",
@@ -44,7 +44,7 @@ const meta = {
 			],
 			table: {
 				defaultValue: {
-					summary: "layout-block group"
+					summary: "group"
 				},
 				type: {
 					summary: "string"

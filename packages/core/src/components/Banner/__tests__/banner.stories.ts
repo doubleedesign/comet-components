@@ -246,7 +246,7 @@ const meta = {
 			control: false,
 			table: {
 				defaultValue: {
-					summary: "layout-block banner"
+					summary: "banner"
 				},
 				type: {
 					summary: "array<string>"

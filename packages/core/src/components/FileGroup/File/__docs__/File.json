@@ -94,6 +94,7 @@
     "traits": [
         "BlockElementModifier",
         "ColorTheme",
-        "Icon"
+        "Icon",
+        "ShortName"
     ]
 }

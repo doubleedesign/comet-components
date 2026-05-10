@@ -10,7 +10,7 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::FOOTER])]
 #[DefaultTag(Tag::FOOTER)]
-class SiteFooter extends WrappedLayoutComponent {
+class SiteFooter extends LayoutComponent {
     /**
      * @var array{siteName: string, startYear: int, endYear: int} $copyright Name of the site/organisation/content owner and the years to display in the copyright notice.
      */

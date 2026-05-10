@@ -4,16 +4,31 @@ namespace Doubleedesign\Comet\Core;
 trait LayoutContainerSize {
     /**
      * @var ?ContainerSize $size
-     * @description Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.
+     * @description Keyword specifying the relative width of the container for the inner content
+     *              if the component is not nested inside another layout component.
+     *              Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.
      * @default-value ContainerSize::DEFAULT
      */
     protected ?ContainerSize $size = ContainerSize::DEFAULT;
 
     /**
      * @param  array  $attributes
-     * @description Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.
+     * @description Retrieves the relevant properties from the component $attributes array,
+     *              validates them, and assigns the size value if the conditions are met to use it.
      */
     public function set_size(array $attributes): void {
+        if (method_exists($this, 'get_is_nested') && $this->get_is_nested()) {
+            $this->size = null;
+
+            return;
+        }
+
+        if (isset($attributes['isNested']) && $attributes['isNested'] === true) {
+            $this->size = null;
+
+            return;
+        }
+
         $this->size = $this->get_from_string_or_container_size($attributes['size'] ?? '')
             ?? $this->get_from_string_or_container_size($this->get_component_default())
             ?? $this->size;

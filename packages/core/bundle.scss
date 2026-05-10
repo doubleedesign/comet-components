@@ -7,11 +7,9 @@
 @use 'sass:meta';
 @layer comet-components {
 	@include meta.load-css("./src/components/PageSection/page-section.scss");
-	@include meta.load-css("./src/components/PageSection/page-section.scss");
 	@include meta.load-css("./src/components/Container/container.scss");
 	@include meta.load-css("./src/components/ContainerWithNesting/container-with-nesting.scss");
 	@include meta.load-css("./src/components/Button/button.scss");
-	@include meta.load-css("./src/components/Accordion/accordion.scss");
 	@include meta.load-css("./src/components/Banner/banner.scss");
 	@include meta.load-css("./src/components/Breadcrumbs/breadcrumbs.scss");
 	@include meta.load-css("./src/components/ButtonGroup/button-group.scss");

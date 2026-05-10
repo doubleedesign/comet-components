@@ -7,22 +7,15 @@ abstract class LayoutComponent extends UIComponent {
     use BackgroundColor;
     use LayoutAlignment;
     use LayoutContainerSize;
-    use NestedState;
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->set_layout_alignment($attributes);
         $this->set_background_colors($attributes);
-        $this->set_is_nested(isset($attributes['isNested']) && (bool)$attributes['isNested']);
         $this->set_size($attributes);
 
         if ($this->get_background_color() !== null) {
-            if ($this instanceof Container && $this->get_is_nested()) {
-                $this->remove_redundant_background_colors();
-            }
-            else {
-                $this->simplify_all_background_colors();
-            }
+            $this->simplify_all_background_colors();
         }
     }
 

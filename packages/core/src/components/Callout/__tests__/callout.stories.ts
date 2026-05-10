@@ -12,7 +12,7 @@ type CalloutProps = {
 
 const meta = {
 	title: 'UI/Callout',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('Callout'),
 	args: {
 		tagName: "div",

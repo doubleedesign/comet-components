@@ -12,7 +12,7 @@ type ButtonProps = {
 
 const meta = {
 	title: 'Text/Button',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('Button'),
 	args: {
 		tagName: "a",

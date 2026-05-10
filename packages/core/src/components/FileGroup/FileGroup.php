@@ -10,8 +10,9 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class FileGroup extends WrappedLayoutComponent {
+class FileGroup extends LayoutComponent {
     use ColorTheme;
+    use NestedState;
 
     /**
      * @var ?string $heading
@@ -25,9 +26,7 @@ class FileGroup extends WrappedLayoutComponent {
      */
     public function __construct(array $attributes, array $files) {
         $this->set_color_theme($attributes);
-        if (!isset($attributes['shortName'])) {
-            $attributes['shortName'] = 'files';
-        }
+        $this->set_is_nested($attributes['isNested'] ?? null);
 
         $fileComponents = array_map(function($file) {
             if ($file instanceof File) {
@@ -52,8 +51,7 @@ class FileGroup extends WrappedLayoutComponent {
         }
         array_push($updatedInnerComponents, new Group(
             [
-                'colorTheme' => $this->colorTheme->value,
-                'shortName'  => 'file-group',
+                'shortName'  => 'list',
                 'role'       => 'group'
             ],
             $fileComponents

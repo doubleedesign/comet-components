@@ -81,7 +81,7 @@ const meta = {
 			control: false,
 			table: {
 				defaultValue: {
-					summary: "layout-block site-header"
+					summary: "site-header"
 				},
 				type: {
 					summary: "array<string>"

@@ -10,7 +10,7 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::HEADER, Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::HEADER)]
-class PageHeader extends WrappedLayoutComponent {
+class PageHeader extends LayoutComponent {
     use ColorTheme;
 
     /**

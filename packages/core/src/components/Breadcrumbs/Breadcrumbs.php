@@ -41,6 +41,7 @@ class Breadcrumbs extends UIComponent {
         $innerComponents = [new ListComponent(['ordered' => true], $listItems)];
 
         parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
+        $this->maybe_pass_down_context_to_inner_components();
     }
 
     public function render(): void {

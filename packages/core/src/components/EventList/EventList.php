@@ -10,9 +10,10 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class EventList extends WrappedLayoutComponent {
+class EventList extends LayoutComponent {
     use ColorTheme;
     use GroupLayoutType;
+    use NestedState;
 
     /**
      * @var ?string $heading
@@ -37,6 +38,7 @@ class EventList extends WrappedLayoutComponent {
         $attributes['shortName'] = $attributes['shortName'] ?? 'events';
         $this->bladeFile = $bladeFile ?? 'components.EventList.event-list';
         $this->set_group_layout($attributes);
+        $this->set_is_nested($attributes['isNested'] ?? false);
         $this->set_color_theme($attributes);
         $this->viewAllUrl = $attributes['viewAllUrl'] ?? null;
 

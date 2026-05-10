@@ -1,16 +1,11 @@
 {
     "name": "SiteFooter",
     "description": "Render a footer with inner components such as a Menu.",
-    "extends": "WrappedLayoutComponent",
+    "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": null,
     "attributes": {
-        "ariaAttrs": {
-            "type": "array",
-            "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-            "required": true
-        },
         "backgroundColors": {
             "type": "BackgroundCollection",
             "description": "Key -> value pairs of background placement and colour keywords"
@@ -28,11 +23,6 @@
         },
         "copyright": {
             "type": "array{siteName:",
-            "required": true
-        },
-        "dataAttrs": {
-            "type": "array",
-            "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
             "required": true
         },
         "devCredit": {
@@ -55,17 +45,24 @@
             "type": "string",
             "description": "Unique identifier"
         },
-        "isNested": {
-            "type": "bool",
-            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-            "required": true,
-            "default": false
-        },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
             "default": "site-footer"
+        },
+        "size": {
+            "type": "ContainerSize",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+            "supported": [
+                "fullwidth",
+                "wide",
+                "narrow",
+                "narrower",
+                "small",
+                "contained"
+            ],
+            "default": "contained"
         },
         "style": {
             "type": "array",
@@ -94,12 +91,6 @@
                 "match-parent"
             ],
             "default": "match-parent"
-        },
-        "withContainer": {
-            "type": "bool",
-            "description": "Whether to wrap the inner components in a Container. Defaults to true if the component is not nested. Will be ignored if the component is already a Container or is nested.",
-            "required": true,
-            "default": "true"
         }
     },
     "innerComponents": {
@@ -110,7 +101,7 @@
     "traits": [
         "BackgroundColor",
         "LayoutAlignment",
-        "NestedState",
+        "LayoutContainerSize",
         "BlockElementModifier"
     ]
 }

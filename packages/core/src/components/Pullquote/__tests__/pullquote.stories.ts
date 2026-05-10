@@ -13,7 +13,7 @@ type PullquoteProps = {
 
 const meta = {
 	title: 'Text/Pullquote',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('Pullquote'),
 	args: {
 		tagName: "blockquote",

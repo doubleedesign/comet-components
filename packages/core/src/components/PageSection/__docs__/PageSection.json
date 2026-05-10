@@ -1,11 +1,15 @@
 {
     "name": "PageSection",
     "description": "A basic full-width section to separate content areas, with optional background color or gradient. Intended for automatic use as the wrapper for Container components and as the parent for components that are not intended to be nested, such as those extending WrappedLayoutComponent.",
-    "extends": "Renderable",
+    "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
+        "backgroundColors": {
+            "type": "BackgroundCollection",
+            "description": "Key -> value pairs of background placement and colour keywords"
+        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
@@ -30,6 +34,10 @@
                 "black"
             ]
         },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier"
@@ -39,6 +47,19 @@
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
             "default": "page-section"
+        },
+        "size": {
+            "type": "ContainerSize",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+            "supported": [
+                "fullwidth",
+                "wide",
+                "narrow",
+                "narrower",
+                "small",
+                "contained"
+            ],
+            "default": "contained"
         },
         "style": {
             "type": "array",
@@ -69,7 +90,9 @@
         "required": true
     },
     "traits": [
+        "BackgroundColor",
         "ColorTheme",
-        "ShortName"
+        "LayoutContainerSize",
+        "BlockElementModifier"
     ]
 }

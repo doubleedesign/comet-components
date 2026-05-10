@@ -11,7 +11,7 @@ type ParagraphProps = {
 
 const meta = {
 	title: 'Text/Paragraph',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('Paragraph'),
 	args: {
 		tagName: "p",

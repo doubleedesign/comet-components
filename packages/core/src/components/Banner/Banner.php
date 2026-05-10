@@ -47,7 +47,6 @@ class Banner extends WrappedLayoutComponent {
     public function __construct(array $attributes, array $innerComponents) {
         $this->backgroundType = $attributes['backgroundType'] ?? $this->backgroundType;
         $this->backgroundOpacity = $attributes['backgroundOpacity'] ?? $this->backgroundOpacity;
-        $this->withContainer = false; // do not have the parent component wrap in a container, as we need to handle that separately in this case
         $this->imageProps = $attributes['imageProps'] ?? $this->imageProps;
         $attributes['style'] = array(
             ...$attributes['style'] ?? [],

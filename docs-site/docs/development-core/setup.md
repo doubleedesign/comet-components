@@ -491,7 +491,6 @@ pnpm run storybook
 Use the "network" URL to access it: https://storybook.comet-components.test:6006/ and ensure that your browser sees the connection as secure.
 
 :::details Cross-origin (CORS) errors
-The project is configured to allow Storybook to request the test pages from the local development site in `./browser/test/wrapper-open.php`, which you should have configured `php.ini` to use as the `herd_auto_prepend_file` in step 7 above. If you still have CORS problems, you can try the below server configurations, or alternatively browser extensions that disable CORS (for local development).
 
 If using Apache, add this to `.htaccess` in the project root, updating the server paths and domain as needed:
 

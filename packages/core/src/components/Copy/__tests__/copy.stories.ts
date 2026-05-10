@@ -13,7 +13,7 @@ type CopyProps = {
 
 const meta = {
 	title: 'Text/Copy',
-	tags: ['autodocs'],
+	tags: ['wordpress-block', 'autodocs'],
 	...createStoryBase('Copy'),
 } satisfies Meta<CopyProps>;
 

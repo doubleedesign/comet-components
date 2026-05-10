@@ -9,7 +9,7 @@ type DetailsProps = {
 
 const meta = {
 	title: 'Text/Details',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('Details'),
 	argTypes: {
 		tagName: {

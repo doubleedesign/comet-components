@@ -1,1 +1,1 @@
-@include('components._blade-partials.children')
+@include('components._blade-partials.basic')

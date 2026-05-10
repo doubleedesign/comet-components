@@ -8,7 +8,6 @@ body > article,
 .body > div,
 body > div {
   padding-block: var(--spacing-lg);
-  padding-inline: 0;
 }
 @media (min-width: 768px) {
   .body > header, body > header,
@@ -46,7 +45,6 @@ body > main > article,
 .body > main > div,
 body > main > div {
   padding-block: var(--spacing-lg);
-  padding-inline: 0;
 }
 @media (min-width: 768px) {
   .body > main > section, body > main > section,

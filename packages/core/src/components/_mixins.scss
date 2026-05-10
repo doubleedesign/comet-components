@@ -3,13 +3,13 @@
 @forward './bem-class-selectors';
 
 @mixin container-width-up($widthName) {
-	@container (min-width: #{map-get($widths, $widthName)}) {
+	@container (min-width: var(--width-#{$widthName})) {
 		@content;
 	}
 }
 
 @mixin container-width-down($widthName) {
-	@container (max-width: #{map-get($widths, $widthName)}) {
+	@container (max-width: var(--width-#{$widthName})) {
 		@content;
 	}
 }
@@ -22,7 +22,6 @@
 
 @mixin section-padding() {
 	padding-block: var(--spacing-lg);
-	padding-inline: 0;
 
 	@include media-breakpoint-up('narrower') {
 		padding-block: var(--spacing-xl);

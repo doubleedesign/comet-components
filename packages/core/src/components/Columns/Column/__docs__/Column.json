@@ -38,17 +38,24 @@
             "type": "string",
             "description": "Unique identifier"
         },
-        "isNested": {
-            "type": "bool",
-            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-            "required": true,
-            "default": false
-        },
         "shortName": {
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
             "required": true,
             "default": "column"
+        },
+        "size": {
+            "type": "ContainerSize",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+            "supported": [
+                "fullwidth",
+                "wide",
+                "narrow",
+                "narrower",
+                "small",
+                "contained"
+            ],
+            "default": "contained"
         },
         "style": {
             "type": "array",
@@ -93,7 +100,7 @@
     "traits": [
         "BackgroundColor",
         "LayoutAlignment",
-        "NestedState",
+        "LayoutContainerSize",
         "BlockElementModifier"
     ]
 }

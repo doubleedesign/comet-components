@@ -24,12 +24,12 @@
   container-type: size;
   backdrop-filter: blur(1rem);
 }
-@container (min-width: 600px) {
+@container (min-width: var(--width-small)) {
   .banner__cover-image {
     height: 75dvh;
   }
 }
-@container (min-width: 940px) {
+@container (min-width: var(--width-narrow)) {
   .banner__cover-image {
     height: fit-content;
   }
@@ -52,7 +52,7 @@
 .banner__container:not([data-valign]) {
   align-items: flex-start;
 }
-@container (max-width: 768px) {
+@container (max-width: var(--width-narrower)) {
   .banner__container {
     justify-content: center !important;
   }
@@ -64,22 +64,22 @@
   text-align: center;
   justify-content: center;
 }
-@container (max-width: 600px) {
+@container (max-width: var(--width-small)) {
   .banner__content .button-group {
     justify-content: center;
   }
 }
-@container (min-width: 600px) {
+@container (min-width: var(--width-small)) {
   .banner__content {
     text-align: revert;
   }
 }
-@container (min-width: 940px) {
+@container (min-width: var(--width-narrow)) {
   .banner__content {
     padding: var(--spacing-xl);
   }
 }
-@container (max-width: 768px) {
+@container (max-width: var(--width-narrower)) {
   .banner__content {
     max-width: 75cqw !important;
   }

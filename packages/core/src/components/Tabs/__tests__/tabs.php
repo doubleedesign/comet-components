@@ -1,8 +1,9 @@
 <?php
-use Doubleedesign\Comet\Core\{Tabs, TabPanel, Heading, Paragraph};
+
+use Doubleedesign\Comet\Core\{Heading, Paragraph, TabPanel, Tabs};
 
 // Attribute keys from component JSON definition
-$attributeKeys = ['classes', 'colorTheme', 'orientation', 'tagName', 'testId'];
+$attributeKeys = ['size', 'classes', 'backgroundColor', 'colorTheme', 'orientation', 'tagName', 'testId'];
 // Filter the request query vars to only those matching the above
 $attributes = array_filter($_REQUEST, fn($key) => in_array($key, $attributeKeys), ARRAY_FILTER_USE_KEY);
 

@@ -7,6 +7,7 @@ class File extends Renderable {
     use BlockElementModifier;
     use ColorTheme;
     use Icon;
+    use ShortName;
     protected string $url;
     protected ?string $title;
     protected ?string $description;
@@ -28,6 +29,7 @@ class File extends Renderable {
 
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.FileGroup.File.file');
+        $this->set_shortname($attributes['shortName'] ?? 'file');
         $this->init_bem_structure('components.FileGroup.File.file');
         $this->set_color_theme($attributes, null);
         $this->set_icon_from_attrs($attributes);
@@ -51,6 +53,8 @@ class File extends Renderable {
             };
         }
         $this->set_icon_from_attrs($attributes);
+
+        error_log(print_r($this->get_bem_structure(), true));
     }
 
     protected function get_html_attributes(): array {

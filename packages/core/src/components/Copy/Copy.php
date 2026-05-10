@@ -3,16 +3,25 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ASIDE, Tag::ARTICLE])]
 #[DefaultTag(Tag::SECTION)]
-class Copy extends WrappedLayoutComponent {
+class Copy extends UIComponent {
     use ColorTheme;
+    use LayoutContainerSize;
+    use NestedState;
+
+    /**
+     * @var array<PreprocessedHTML|Heading|ButtonGroup|ImageComponent> $innerComponents
+     * @description Inner column components
+     */
+    protected array $innerComponents;
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Copy.copy');
         $this->set_color_theme($attributes);
+        $this->set_is_nested($attributes['isNested'] ?? null);
+        $this->set_size($attributes);
 
-        // For nested instances, default to div tag unless specified otherwise in the attributes
         if ($this->get_is_nested() && !isset($attributes['tagName'])) {
-            $this->set_tag('div');
+            $this->tagName = Tag::DIV;
         }
     }
 
@@ -24,5 +33,16 @@ class Copy extends WrappedLayoutComponent {
         }
 
         return $attributes;
+    }
+
+    public function render(): void {
+        $blade = BladeService::getInstance();
+
+        echo $blade->make($this->bladeFile, [
+            'tag'        => $this->tagName->value,
+            'classes'    => $this->get_filtered_classes(),
+            'attributes' => $this->get_html_attributes(),
+            'children'   => $this->innerComponents
+        ])->render();
     }
 }

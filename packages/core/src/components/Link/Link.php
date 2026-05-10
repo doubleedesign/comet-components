@@ -45,7 +45,6 @@ class Link extends Renderable {
 
     // Utility function to get just the link text.
     // Used by components with customised link rendering, such as Menu.
-    // TODO: Maybe Menu is too tightly coupled to this and should not use this component.
     public function get_content(): string {
         $blade = BladeService::getInstance();
 

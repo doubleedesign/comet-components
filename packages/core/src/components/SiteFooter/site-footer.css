@@ -1,7 +1,7 @@
 .site-footer {
   padding-block: var(--spacing-lg);
 }
-@container (min-width: 940px) {
+@container (min-width: var(--width-narrow)) {
   .site-footer {
     padding-block: var(--spacing-xl);
   }
@@ -24,7 +24,7 @@
   text-align: center;
   margin-inline: 0;
 }
-@container (min-width: 600px) {
+@container (min-width: var(--width-small)) {
   .site-footer__menu__list {
     text-align: unset;
     display: flex;
@@ -33,7 +33,7 @@
     gap: var(--spacing-lg);
   }
 }
-@container (min-width: 940px) {
+@container (min-width: var(--width-narrow)) {
   .site-footer__menu__list {
     gap: var(--spacing-xl);
   }
@@ -45,7 +45,7 @@
 .site-footer__menu__sub-menu {
   display: none;
 }
-@container (min-width: 600px) {
+@container (min-width: var(--width-small)) {
   .site-footer__menu__sub-menu {
     display: block;
   }

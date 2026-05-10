@@ -10,9 +10,10 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class LinkGroup extends WrappedLayoutComponent {
+class LinkGroup extends LayoutComponent {
     use ColorTheme;
     use GroupLayoutType;
+    use NestedState;
 
     /**
      * @var string|null $heading Optional heading text for the link group section
@@ -26,6 +27,7 @@ class LinkGroup extends WrappedLayoutComponent {
     public function __construct(array $attributes, array $links) {
         $this->set_color_theme($attributes, ThemeColor::PRIMARY);
         $this->set_group_layout($attributes);
+        $this->set_is_nested($attributes['isNested'] ?? false);
         $this->heading = $attributes['heading'] ?? null;
 
         if (!isset($attributes['shortName'])) {

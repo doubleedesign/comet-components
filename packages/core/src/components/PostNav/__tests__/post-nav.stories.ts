@@ -13,7 +13,7 @@ type PostNavProps = {
 
 const meta = {
 	title: 'Layout/PostNav',
-	tags: ['autodocs'],
+	tags: ['wordpress-theme', 'autodocs'],
 	...createStoryBase('PostNav'),
 } satisfies Meta<PostNavProps>;
 

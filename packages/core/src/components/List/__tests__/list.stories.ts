@@ -9,7 +9,7 @@ type ListProps = {
 
 const meta = {
 	title: 'Text/List',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('ListComponent'),
 	args: {
 		ordered: false

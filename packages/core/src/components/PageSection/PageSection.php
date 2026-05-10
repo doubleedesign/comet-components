@@ -12,9 +12,10 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE, Tag::FIGURE])]
 #[DefaultTag(Tag::SECTION)]
-class PageSection extends Renderable {
+class PageSection extends UIComponent {
+    use BackgroundColor;
     use ColorTheme;
-    use ShortName;
+    use LayoutContainerSize;
 
     // This should only ever have a single background colour,
     // which has probably been pre-validated by the parent component using the BackgroundColor trait
@@ -27,27 +28,12 @@ class PageSection extends Renderable {
     protected array $innerComponents;
 
     public function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, 'components.PageSection.page-section');
+        parent::__construct($attributes, $innerComponents, 'components.PageSection.page-section');
         $this->set_shortname($attributes['shortName'] ?? 'page-section');
-        $this->set_background_color($attributes);
+        $this->set_size($attributes);
+        $this->set_background_colors($attributes);
         $this->set_color_theme($attributes);
         $this->innerComponents = $innerComponents;
-    }
-
-    private function set_background_color(array $attributes): void {
-        if (!isset($attributes['backgroundColor'])) {
-            return;
-        }
-
-        if ($attributes['backgroundColor'] instanceof ThemeColor || $attributes['backgroundColor'] instanceof ThemeGradient) {
-            $this->backgroundColor = $attributes['backgroundColor'];
-
-            return;
-        }
-
-        $this->backgroundColor = ThemeColor::tryFrom($attributes['backgroundColor'])
-            ?? ThemeGradient::tryFrom($attributes['backgroundColor'])
-            ?? null;
     }
 
     public function get_filtered_classes(): array {
@@ -60,15 +46,16 @@ class PageSection extends Renderable {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
+        if (isset($this->size)) {
+            $attributes['data-size'] = $this->size->value;
+        }
+
         if ($this->colorTheme) {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
         if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->backgroundColor->value;
-        }
-        else if (isset($this->gradient)) {
-            $attributes['data-background'] = 'gradient-' . $this->gradient;
+            $attributes['data-background'] = $this->get_background_colors()->outer->value;
         }
 
         return $attributes;

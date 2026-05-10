@@ -3,9 +3,10 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class CardList extends WrappedLayoutComponent {
+class CardList extends LayoutComponent {
     use ColorTheme;
     use GroupLayoutType;
+    use NestedState;
 
     /**
      * @var ?string $heading
@@ -28,6 +29,7 @@ class CardList extends WrappedLayoutComponent {
     public function __construct(array $attributes, array $innerComponents) {
         $this->set_group_layout($attributes);
         $this->set_layout_alignment($attributes, Alignment::START);
+        $this->set_is_nested($attributes['isNested'] ?? false);
         $headingComponent = isset($attributes['heading']) ? new Heading([], $attributes['heading']) : null;
         $linkComponent = isset($attributes['link']) ? new Button($attributes['link'], $attributes['link']['title'] ?? 'View more') : null;
 

@@ -76,7 +76,7 @@ The below examples compare the default WordPress output to that of the same bloc
 
 ```html
 <!-- Comet Components -->
-<div class="layout-block group" data-background="primary">
+<div class="group" data-background="primary">
 	<p>Group content</p>
 </div>
 ```
@@ -122,7 +122,7 @@ The below examples compare the default WordPress output to that of the same bloc
 ```
 ```html
 <!-- Comet Components -->
-<div class="layout-block columns" data-allow-layout-stacking="true" data-count="2">
+<div class="columns" data-allow-layout-stacking="true" data-count="2" data-size="wide">
 	<div class="column columns__column" data-valign="center">
 		<div class="column__inner">
 			<p>Column 1</p>

@@ -13,7 +13,7 @@ type ButtonGroupProps = {
 
 const meta = {
 	title: 'Text/ButtonGroup',
-	tags: ['wordpress-block', 'autodocs'],
+	tags: ['autodocs'],
 	...createStoryBase('ButtonGroup'),
 	args: {
 		tagName: "div",
