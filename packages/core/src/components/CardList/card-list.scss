@@ -2,13 +2,9 @@
 @use '../bem-mixin' as *;
 @use '../bem-class-selectors' as *;
 
-@include bem-block('card-list', ('header', 'footer')) {
-	#{class-ends-with('__container')} {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-lg);
-	}
+// See also: data-group-layout, data-halign attributes in global.scss
 
+.card-list {
 	&__header,
 	&__footer {
 		display: flex;
@@ -30,10 +26,19 @@
 	}
 }
 
-@include bem-block('card-list__list', ('item')) {
-	gap: var(--spacing-lg);
-	// This now gets most of its styling from the data-group-layout attribute, see global.scss
+#{class-ends-with('__header')} {
+	&:has(+ #{class-ends-with('__card-list')}) {
+		@extend .card-list__header;
+	}
+}
 
+#{class-ends-with('__card-list')} {
+	+ #{class-ends-with('__footer')} {
+		@extend .card-list__footer;
+	}
+}
+
+@include bem-block('card-list', ('item')) {
 	&__item {
 		container-type: inline-size;
 	}

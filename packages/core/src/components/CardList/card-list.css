@@ -1,23 +1,15 @@
-.card-list [class$=__container], [class$=__card-list] [class$=__container], [class*=card-list--] [class$=__container] {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-.card-list__header, [class$=__card-list__header], .card-list__footer, [class$=__card-list__footer] {
+.card-list__header, [class$=__header]:has(+ [class$=__card-list]), .card-list__footer, [class$=__card-list] + [class$=__footer] {
   display: flex;
   justify-content: inherit;
 }
-.card-list__header:has(:nth-child(2)), [class$=__card-list__header]:has(:nth-child(2)) {
+.card-list__header:has(:nth-child(2)), [class$=__header]:has(:nth-child(2)):has(+ [class$=__card-list]) {
   justify-content: space-between;
   align-items: center;
 }
-.card-list__header h2, [class$=__card-list__header] h2 {
+.card-list__header h2, [class$=__header]:has(+ [class$=__card-list]) h2 {
   margin: 0;
 }
-.card-list__list, [class$=__card-list__list], [class*=card-list__list--] {
-  gap: var(--spacing-lg);
-}
-.card-list__list__item, [class$=__card-list__list__item] {
+.card-list__item, [class$=__card-list__item] {
   container-type: inline-size;
 }
 
