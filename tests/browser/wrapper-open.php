@@ -35,7 +35,7 @@ $globalBackground = Config::getInstance()->get_global_background();
 	<?php Assets::get_instance()->render_global_stylesheet_html(); ?>
 	<?php Assets::get_instance()->render_global_script_html(); ?>
 	<link href="https://use.typekit.net/svp5arr.css"/>
-	<script src="https://kit.fontawesome.com/dcb22fbf87.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/b92552f954.js" crossorigin="anonymous"></script>
 	<style>
 		#browser-test-content {
 			container-type: inline-size;

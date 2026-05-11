@@ -40,42 +40,25 @@ $menuItems = NavMenus::get_simplified_nav_menu_items_by_location('primary');
 $menuComponent = new Menu([...$menu_attributes], $menuItems);
 
 $showContactDetails = apply_filters('comet_canvas_show_contact_details_in_header', false);
+$showContactDetailsInOverlay = apply_filters('comet_canvas_show_contact_details_in_header_menu_overlay', false);
 $overlayMode = isset($header_attributes['responsiveStyle']) && $header_attributes['responsiveStyle'] === 'overlay';
 $offCanvasMode = isset($header_attributes['responsiveStyle']) && $header_attributes['responsiveStyle'] === 'off-canvas';
-if ($showContactDetails) {
-    ob_start();
-    get_template_part('template-parts/contact-details');
-    $contactBlockHtml = ob_get_clean();
-    $contactBlock = new PreprocessedHTML([], $contactBlockHtml);
-    $contactBlock = new Group(['context' => 'site-header', 'shortName' => 'contact'], [$contactBlock]);
-}
+$basicMode = !$overlayMode && !$offCanvasMode;
 
-if ($showContactDetails) {
-    if ($overlayMode) {
-        $content = [
-            new Group(['context' => 'below-breakpoint'], [$contactBlock]),
-            new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
-        ];
-    }
-    else if ($offCanvasMode) {
-        $content = [
-            new Group(['context' => 'responsive'], [$contactBlock, $menuComponent])
-        ];
-    }
-    else {
-        $content = [
-            new Group(['context' => 'below-breakpoint'], [$contactBlock]),
-            new Group(['context' => 'responsive'], [$menuComponent])
-        ];
-    }
-}
-else {
-    $content = [
-        new Group(['context' => 'responsive'], [$menuComponent])
-    ];
-}
+ob_start();
+get_template_part('template-parts/contact-details');
+$contactBlockHtml = ob_get_clean();
+$contactBlock = new PreprocessedHTML([], $contactBlockHtml);
+$contactBlock = new Group(['shortName' => 'contact'], [$contactBlock]);
 
-$headerComponent = new SiteHeader(['logoUrl' => $logoUrl, ...$header_attributes], $content);
+$headerComponent = new SiteHeader(
+    ['logoUrl' => $logoUrl, ...$header_attributes],
+    [
+        'menuComponent'  => $menuComponent,
+        'alwaysShow'     => $showContactDetails ? [$contactBlock] : [],
+        'showInOverlays' => $showContactDetailsInOverlay ? [$contactBlock] : []
+    ]
+);
 
 $headerComponent->render();
 ?>

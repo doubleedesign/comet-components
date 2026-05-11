@@ -30,6 +30,7 @@
 		container-name: layout-section;
 		container-type: inline-size;
 		padding-inline: calc((100cqw - var(--container-max-width)) / 2);
+		border-inline: var(--spacing-md) solid transparent; // make sure content doesn't hit the edges on small viewports or when full-width
 		box-sizing: border-box;
 
 		> * {
@@ -45,7 +46,10 @@
 
 	[data-size="full"] {
 		--container-max-width: 100%;
-		border-inline: var(--spacing-md) solid transparent;
+	}
+
+	header, section, main {
+		@include section-padding();
 	}
 
 	[data-valign],

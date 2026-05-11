@@ -23,6 +23,7 @@
     container-name: layout-section;
     container-type: inline-size;
     padding-inline: calc((100cqw - var(--container-max-width)) / 2);
+    border-inline: var(--spacing-md) solid transparent;
     box-sizing: border-box;
   }
   [data-size] > * {
@@ -45,7 +46,19 @@
   }
   [data-size=full] {
     --container-max-width: 100%;
-    border-inline: var(--spacing-md) solid transparent;
+  }
+  header, section, main {
+    padding-block: var(--spacing-lg);
+  }
+  @media (min-width: 768px) {
+    header, section, main {
+      padding-block: var(--spacing-xl);
+    }
+  }
+  @media (min-width: 1440px) {
+    header, section, main {
+      padding-block: var(--spacing-xxl);
+    }
   }
   [data-valign],
   [data-halign] {

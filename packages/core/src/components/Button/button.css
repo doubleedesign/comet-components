@@ -16,7 +16,7 @@
 .button:hover, [class$=__button]:hover, [class*=button--]:hover, .button:focus, [class$=__button]:focus, [class*=button--]:focus, .button:active, [class$=__button]:active, [class*=button--]:active {
   background-color: color-mix(in srgb, var(--theme-color) 90%, black);
   border-color: color-mix(in srgb, var(--theme-color) 90%, black);
-  color: var(--theme-color-inverse);
+  color: var(--theme-color-inverse, contrast-color(var(--theme-color)));
 }
 .button[data-style=outline], [data-style=outline][class$=__button], [data-style=outline][class*=button--] {
   color: var(--theme-color);

@@ -21,7 +21,7 @@
 	&:hover, &:focus, &:active {
 		background-color: darken-theme-color(10%);
 		border-color: darken-theme-color(10%);
-		color: var(--theme-color-inverse);
+		color: var(--theme-color-inverse, contrast-color(var(--theme-color)));
 	}
 
 	&[data-style="outline"] {

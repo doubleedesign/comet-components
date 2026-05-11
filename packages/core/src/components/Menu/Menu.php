@@ -52,12 +52,11 @@ class Menu extends UIComponent {
                     'isCurrentParent' => $item['isCurrentParent'] ?? 'false',
                 ],
                 [
-                    $item['link_attributes']['target'] === '_blank'
+                    isset($item['link_attributes']['target']) && $item['link_attributes']['target'] === '_blank'
                         ? new Button(
                             array_merge(
                                 $item['link_attributes'] ?? [],
                                 [
-                                    'colorTheme' => 'primary',
                                     'classes'    => ['button'],
                                 ],
                             ),
@@ -72,10 +71,12 @@ class Menu extends UIComponent {
 
             // Handle nested lists
             if (!empty($item['children'])) {
-                $itemObject->innerComponents[] = new MenuList(
-                    ['shortName' => 'sub-menu'],
-                    $this->array_to_items($item['children'], $level + 1)
-                );
+				$submenu = new MenuList(
+					['shortName' => 'sub-menu'],
+					$this->array_to_items($item['children'], $level + 1)
+				);
+
+                $itemObject->innerComponents[] = $submenu;
             }
 
             return $itemObject;

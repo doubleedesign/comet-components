@@ -82,6 +82,21 @@ class ContentImageBasic extends ContentImageComponent {
         ];
     }
 
+    public function get_filtered_classes(): array {
+        $classes = parent::get_filtered_classes();
+
+        // Keep basic "image" classes if there is also context passed down / custom shortname
+        if ($this->get_context()) {
+            array_push($classes, 'image');
+            $modifier = $this->get_bem_structure()['modifier'];
+            if ($modifier) {
+                array_push($classes, "image--{$modifier}");
+            }
+        }
+
+        return array_unique($classes);
+    }
+
     public function render(): void {
         $blade = BladeService::getInstance();
 

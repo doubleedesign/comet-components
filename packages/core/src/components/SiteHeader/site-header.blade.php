@@ -1,36 +1,22 @@
-@if ($breakpoint === null)
-	<header @class($classes) @attributes($attributes)>
-		@include('components._blade-partials.children')
-	</header>
-@else
-	<header @class($classes) @attributes($attributes)>
-		<div class="site-header__container" @attributes($containerAttributes)>
-			@foreach ($persistentComponentsStart as $child)
-				@if (method_exists($child, 'render'))
-					{{ $child->render() }}
-				@endif
-			@endforeach
-			<div data-vue-component="site-header__responsive" class="site-header__responsive">
-				<site-header-responsive breakpoint="{{ $breakpoint }}"
-				                        responsive-style="{{ $responsiveStyle }}"
-				                        menu-data="{{ $responsiveMenuData }}"
-				                        menu-color-theme="{{ $menuColorTheme }}"
-				                        toggle-button-icon-prefix="{{ $toggleButtonIconPrefix }}"
-				                        overlay-background="{{ $overlayBackgroundColor }}"
-										toggle-button-icon-class="{{ $toggleButtonIconClass }}"
-										menu-html="{{ $menuComponentHtml }}"
-										submenu-toggle-icon-class="{{ $submenuToggleIconClass }}"
-				                        below-breakpoint-html="{{ $belowBreakpointComponents }}"
-										responsive-start-html="{{ $responsiveComponentsStart }}"
-										responsive-end-html="{{ $responsiveComponentsEnd }}"
-				>
-				</site-header-responsive>
-			</div>
-			@foreach ($persistentComponentsEnd as $child)
-				@if (method_exists($child, 'render'))
-					{{ $child->render() }}
-				@endif
-			@endforeach
+<header @class($classes) @attributes($attributes)>
+	{{-- Always-shown components, which should include the logo--}}
+	{{-- This should also include the menu if always in desktop mode or responsiveMode=basic --}}
+	@include('components._blade-partials.children')
+	{{-- Non-basic responsive mode - Vue used for responsive rendering of the menu and optional extras --}}
+	@if($breakpoint !== null)
+		<div data-vue-component="site-header__responsive">
+			<site-header-responsive breakpoint="{{ $breakpoint }}"
+			                        responsive-style="{{ $responsiveStyle }}"
+			                        menu-data="{{ $responsiveMenuData }}"
+			                        menu-color-theme="{{ $menuColorTheme }}"
+			                        toggle-button-icon-prefix="{{ $toggleButtonIconPrefix }}"
+			                        overlay-background="{{ $overlayBackgroundColor }}"
+									toggle-button-icon-class="{{ $toggleButtonIconClass }}"
+									menu-html="{{ $menuComponentHtml }}"
+									submenu-toggle-icon-class="{{ $submenuToggleIconClass }}"
+			                        extra-content-html="{{ $extraContentHtml }}"
+			>
+			</site-header-responsive>
 		</div>
-	</header>
-@endif
+	@endif
+</header>

@@ -1,7 +1,7 @@
 {
     "name": "SiteHeader",
     "description": "Render a site header with a logo, responsive menu, and optional additional components.",
-    "extends": "UIComponent",
+    "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": null,
@@ -12,7 +12,7 @@
         },
         "breakpoint": {
             "type": "string",
-            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style"
+            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style Note: \"Desktop\" style will still have a responsive layout, but submenus won't have the preferred behaviour on small viewports"
         },
         "classes": {
             "type": "array<string>",
@@ -21,9 +21,26 @@
                 "site-header"
             ]
         },
+        "componentGroups": {
+            "type": "array",
+            "description": "The inner components other than the logo, provided in groups based on when and where they should be shown. Valid keys are: 'menuComponent', 'alwaysShow', 'showInOverlays'",
+            "required": true
+        },
         "context": {
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+        },
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
         },
         "icon": {
             "type": "string",
@@ -58,17 +75,17 @@
                 "white",
                 "black"
             ],
-            "default": "primary"
+            "default": "dark"
         },
         "responsiveStyle": {
             "type": "string",
             "description": "The layout style of the responsive menu when below the breakpoint",
             "supported": [
-                "default",
+                "basic",
                 "overlay",
                 "off-canvas"
             ],
-            "default": "default"
+            "default": "overlay"
         },
         "shortName": {
             "type": "string",
@@ -109,16 +126,30 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
         }
     },
     "innerComponents": {
         "type": "array<Renderable>",
-        "description": "The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context \"responsive\" (note: only one responsive group is supported)",
+        "description": "Inner components to be rendered within this component",
         "required": true
     },
     "traits": [
         "BackgroundColor",
         "Icon",
+        "LayoutContainerSize",
+        "LayoutAlignment",
         "LayoutContainerSize",
         "BlockElementModifier"
     ]

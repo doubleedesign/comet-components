@@ -11,3 +11,4 @@ Vue.createApp({
 		}),
 	}
 }).mount('[data-vue-component="site-header__responsive"]');
+

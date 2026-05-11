@@ -35,9 +35,26 @@ class MenuListItem extends UIComponent {
 
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
-        $attributes['data-current-parent'] = $this->isCurrentParent ? 'true' : null;
+
+		if($this->isCurrentParent === 'true') {
+			$attributes['data-current-parent'] = "true";
+		}
 
         return $attributes;
+    }
+
+    public function get_filtered_classes(): array {
+        $classes = parent::get_filtered_classes();
+
+        // Hack for overly verbose BEM class names in sub-menus
+	    // TODO: Need to somehow fix it in the inner links too
+	    return array_map(function($class) use (&$classes) {
+	        if (str_ends_with($class, 'menu__list__item__menu__sub-menu__menu__list__item')) {
+	            return str_replace('menu__list__item__menu__sub-menu__menu__list', 'menu__list__sub-menu', $class);
+	        }
+
+	        return $class;
+	    }, $classes);
     }
 
     public function render(): void {

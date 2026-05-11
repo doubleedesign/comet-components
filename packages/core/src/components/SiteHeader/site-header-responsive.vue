@@ -4,17 +4,14 @@ export default {
 	inheritAttrs: false,
 	props: {
 		breakpoint: String,
-        responsiveStyle: String, // "default" or "overlay" - the $responsiveStyle PHP value, applicable when below the breakpoint
+		responsiveStyle: String, // "default" or "overlay" - the $responsiveStyle PHP value, applicable when below the breakpoint
 		toggleButtonIconPrefix: String,
 		toggleButtonIconClass: String,
 		submenuToggleIconClass: String,
 		menuData: String, // JSON encoded string of the menu array, so Vue can parse and render it
-        menuColorTheme: String,
-		menuHtml: String, // prerendered menu HTML for when we don't need Vue to do anything with it
-        overlayBackground: String, // background color name for the overlay
-        belowBreakpointHtml: String, // prerendered HTML to appear before the overlay, but only when below the breakpoint (e.g. mobile-specific content)
-		responsiveStartHtml: String, // prerendered HTML to appear before the responsive menu
-		responsiveEndHtml: String, // prerendered HTML to appear after the responsive menu
+		menuHtml: String, // pre-prepared menu HTML for when we don't need Vue to do anything with it
+		overlayBackground: String, // background color name for the overlay
+		extraContentHtml: String // pre-prepared HTML of other components to render after the menu
 	},
 	data() {
 		return {
@@ -93,7 +90,7 @@ export default {
 
 <template>
     <button @click="toggleMenu"
-            class="site-header__responsive__menu-toggle"
+            class="site-header__menu-toggle"
             v-if="isBelowBreakpoint"
             aria-label="Toggle menu"
             title="Toggle menu"
@@ -104,81 +101,75 @@ export default {
         <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
         <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
     </button>
-    <component v-if="isBelowBreakpoint" v-html="belowBreakpointHtml"></component>
-
     <!-- Content in overlay or off-canvas mode (usually mobile/small viewports, unless always using overlay) -->
     <div v-if="isBelowBreakpoint"
-         class="site-header__responsive__content"
+         class="site-header__responsive-content-wrapper"
          :data-style="responsiveStyle"
          :data-open="responsiveMenuOpen"
          :data-background="overlayBackground"
     >
         <Transition @after-enter="setSubmenuHeights">
-            <div class="site-header__responsive__content__wrapper" v-if="responsiveMenuOpen">
-                <component v-if="responsiveStartHtml" v-html="responsiveStartHtml"></component>
-                <nav class="site-header__menu" :data-color-theme="menuColorTheme">
-                    <ul class="site-header__menu__list">
-                        <li v-for="item in menuItems"
-                            :key="item.id"
-                            :class="[...Object.values(item?.classes)].join(' ')"
-                        >
-                            <a :href="item.link_attributes.href"
-                               :class="[...Object.values(item.link_attributes?.classes)].join(' ')"
-                               :aria-current="item.link_attributes['aria-current'] ?? null"
-                               :target="item.link_attributes['target'] ?? null"
-                               :data-color-theme="item.link_attributes['data-color-theme'] ?? null"
+            <div class="site-header__responsive-content-wrapper__inner" v-if="responsiveMenuOpen" >
+                <nav class="site-header__menu">
+                        <ul class="site-header__menu__list">
+                            <li v-for="item in menuItems"
+                                :key="item.id"
+                                :class="[...Object.values(item?.classes)].join(' ')"
                             >
-                                <span v-html="item.title"></span>
-                            </a>
-                            <button v-if="item.children.length > 0"
-                                    class="site-header__menu__list__item__toggle"
-                                    aria-label="Toggle submenu"
-                                    @click="toggleSubmenu(item.id)"
-                                    :aria-controls="`submenu-${item.id}`"
-                                    :aria-haspopup="true"
-                                    :aria-expanded="submenus[item.id]?.open ?? 'false'"
-                            >
-                                <i :class="toggleButtonIconPrefix + ' ' + submenuToggleIconClass"></i>
-                            </button>
-                            <ul v-if="item.children.length > 0"
-                                class="site-header__menu__sub-menu"
-                                :data-open="submenus?.[item.id]?.open"
-                                :aria-hidden="submenus?.[item.id]?.open ? 'false' : 'true'"
-                                :style="{ height: submenus?.[item.id]?.open ? submenus?.[item.id]?.height + 'px' : '0' }"
-                                :id="`submenu-${item.id}`"
-                            >
-                                <li v-for="child in item.children"
-                                    :key="child.id"
-                                    :class="[...Object.values(child?.classes)].join(' ')"
+                                <a :href="item.link_attributes.href"
+                                   :class="[...Object.values(item.link_attributes?.classes)].join(' ')"
+                                   :aria-current="item.link_attributes['aria-current'] ?? null"
+                                   :target="item.link_attributes['target'] ?? null"
+                                   :data-color-theme="item.link_attributes['data-color-theme'] ?? null"
                                 >
-                                    <a :href="child.link_attributes.href"
-                                       :class="[...Object.values(child.link_attributes?.classes)].join(' ')"
-                                       :aria-current="child.link_attributes['aria-current'] ?? null"
-                                       :tabindex="submenus?.[item.id]?.open ? '0' : '-1'"
+                                    <span v-html="item.title"></span>
+                                </a>
+                                <button v-if="item.children.length > 0"
+                                        class="site-header__menu__list__item__toggle"
+                                        aria-label="Toggle submenu"
+                                        @click="toggleSubmenu(item.id)"
+                                        :aria-controls="`submenu-${item.id}`"
+                                        :aria-haspopup="true"
+                                        :aria-expanded="submenus[item.id]?.open ?? 'false'"
+                                >
+                                    <i :class="toggleButtonIconPrefix + ' ' + submenuToggleIconClass"></i>
+                                </button>
+                                <ul v-if="item.children.length > 0"
+                                    class="site-header__menu__sub-menu"
+                                    :data-open="submenus?.[item.id]?.open"
+                                    :aria-hidden="submenus?.[item.id]?.open ? 'false' : 'true'"
+                                    :style="{ height: submenus?.[item.id]?.open ? submenus?.[item.id]?.height + 'px' : '0' }"
+                                    :id="`submenu-${item.id}`"
+                                >
+                                    <li v-for="child in item.children"
+                                        :key="child.id"
+                                        :class="[...Object.values(child?.classes)].join(' ')"
                                     >
-                                        <span v-html="child.title"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <component v-if="responsiveEndHtml" v-html="responsiveEndHtml"></component>
+                                        <a :href="child.link_attributes.href"
+                                           :class="[...Object.values(child.link_attributes?.classes)].join(' ')"
+                                           :aria-current="child.link_attributes['aria-current'] ?? null"
+                                           :tabindex="submenus?.[item.id]?.open ? '0' : '-1'"
+                                        >
+                                            <span v-html="child.title"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                <div class="site-header__overlay-content" v-if="extraContentHtml" v-html="extraContentHtml"></div>
             </div>
         </Transition>
+
     </div>
     <!-- Content in non-overlay/non-off-canvas mode (usually desktop/larger viewports, unless always using overlay/off-canvas) -->
     <template v-else>
-        <component v-if="responsiveStartHtml" v-html="responsiveStartHtml"></component>
         <component v-if="menuHtml" v-html="menuHtml"></component>
-        <component v-if="responsiveEndHtml" v-html="responsiveEndHtml"></component>
     </template>
-
 </template>
 
 <style lang="css">
-.site-header__responsive__content[data-style="default"],
-.site-header__responsive__content[data-style="overlay"] {
+.site-header__responsive-content-wrapper[data-style="overlay"] {
     .v-enter-active,
     .v-leave-active {
         transition: opacity 0.3s ease;
@@ -190,7 +181,7 @@ export default {
     }
 }
 
-.site-header__responsive__content[data-style="off-canvas"] {
+.site-header__responsive-content-wrapper[data-style="off-canvas"] {
     .v-enter-active,
     .v-leave-active {
         transition: transform 0.3s ease;

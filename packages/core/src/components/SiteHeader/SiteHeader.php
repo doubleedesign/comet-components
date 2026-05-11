@@ -10,22 +10,17 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::HEADER])]
 #[DefaultTag(Tag::HEADER)]
-class SiteHeader extends UIComponent {
+class SiteHeader extends LayoutComponent {
     use BackgroundColor;
     use Icon;
     use LayoutContainerSize;
 
     /**
-     * @var ?ContainerSize $size
-     * @description Keyword specifying the relative width of the container for the inner content
-     * @default-value default
-     */
-    protected ?ContainerSize $size = ContainerSize::DEFAULT;
-
-    /**
      * @var ?string $breakpoint
      * @description Viewport breakpoint (in pixels or rem) at which to switch from the "mobile" style menu to "desktop" style menu;
      *              use 0 to always use the "mobile" style or null to always use the "desktop" style
+     *              Note: "Desktop" style will still have a responsive layout, but submenus won't have the preferred behaviour on small viewports
+     *              e.g., phones - they'll appear on hover like on desktop, not in accordion style that responds better to touch interactions.
      */
     protected ?string $breakpoint = null;
 
@@ -34,12 +29,6 @@ class SiteHeader extends UIComponent {
      * @description The URL of the site logo image
      */
     protected ?string $logoUrl = null;
-
-    /**
-     * @var array<Renderable> $innerComponents
-     * @description The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context "responsive" (note: only one responsive group is supported)
-     */
-    protected array $innerComponents;
 
     /**
      * @var ?string $icon
@@ -51,114 +40,80 @@ class SiteHeader extends UIComponent {
     /**
      * @var string|null $submenuIcon
      * @description Icon class name for the submenu toggle button in responsive mode
+     * @default-value fa-chevron-down
      */
     protected ?string $submenuIcon = 'fa-chevron-down';
 
     /**
      * @var string|null $style
      * @description The layout style of the responsive menu when below the breakpoint
-     * @supported-values default, overlay, off-canvas
+     * @supported-values basic, overlay, off-canvas
      */
-    protected ?string $responsiveStyle = 'default';
+    protected ?string $responsiveStyle = 'overlay';
 
     /**
      * @var ThemeColor|null $overlayBackgroundColor
      * @description Background colour of the overlay when responsiveStyle is set to 'overlay'
+     * @default-value ThemeColor::PRIMARY
      */
-    protected ?ThemeColor $overlayBackgroundColor = ThemeColor::PRIMARY;
+    protected ?ThemeColor $overlayBackgroundColor = ThemeColor::DARK;
+    private array $menuData = [];
+    private ?Menu $menuComponent;
+    private array $alwaysShowComponents = [];
+    private array $showInOverlaysComponents = [];
 
     /**
-     * Groups that the inner components are processed into to enable responsive behaviour and prevent unwanted DOM duplication
-     * while respecting the rendering order that was passed in
+     * @var array $componentGroups
+     * @description The inner components other than the logo, provided in groups based on when and where they should be shown.
+     *              Valid keys are: 'menuComponent', 'alwaysShow', 'showInOverlays'
      */
-    private array $persistentComponentsStart;
-    private array $belowBreakpointComponents;
-    private array $responsiveComponentsBeforeMenu;
-    private array $responsiveComponentsAfterMenu;
-    private array $persistentComponentsEnd;
-    private array $menuData = [];
-    private Menu $menuComponent;
-    private ThemeColor $menuColorTheme;
+    protected array $componentGroups;
 
-    public function __construct(array $attributes, array $innerComponents) {
-        if (!isset($attributes['icon'])) {
-            $attributes['icon'] = 'fa-bars';
-        }
-
-        parent::__construct($attributes, $innerComponents, 'components.SiteHeader.site-header');
-
+    public function __construct(array $attributes, array $componentGroups) {
+        parent::__construct($attributes, [], 'components.SiteHeader.site-header');
         $this->set_size($attributes);
-        $this->set_background_colors($attributes);
+        $this->set_background_color($attributes);
         $this->set_overlay_background_color_from_attrs($attributes);
-        $this->set_icon_from_attrs($attributes);
+        $this->set_icon_from_attrs($attributes, 'fa-bars');
         $this->breakpoint = $attributes['breakpoint'] ?? $this->breakpoint;
         $this->responsiveStyle = $attributes['responsiveStyle'] ?? $this->responsiveStyle;
         $this->submenuIcon = $attributes['submenuIcon'] ?? $this->submenuIcon;
         $this->logoUrl = $attributes['logoUrl'] ?? null;
 
-        $logo = isset($attributes['logoUrl'])
+        $logo = isset($this->logoUrl)
             ? new ContentImageBasic([
-                'src'     => $this->logoUrl,
-                'alt'     => 'Site logo',
-                'href'    => '/',
-                'classes' => ['site-header__logo']
+                'context'   => $this->get_shortname(),
+                'shortName' => 'logo',
+                'src'       => $this->logoUrl,
+                'alt'       => 'Site logo',
+                'href'      => '/',
             ])
             : null;
-        $this->innerComponents = [$logo, ...$innerComponents];
 
-        // Find the group with 'below-breakpoint' context if there is one, save it to a variable and remove it from the inner components
-        // This can be used to have content shown in both the header and the overlay,
-        // but prevent duplication of that content when the viewport is above the breakpoint (i.e., always there, no overlay)
-        $belowBreakpointGroupIndex = null;
-        $belowBreakpointInnerComponents = [];
-        foreach ($this->innerComponents as $index => $component) {
-            if ($component instanceof Group && $component->get_context() === 'below-breakpoint') {
-                $belowBreakpointInnerComponents = $component->innerComponents;
-                $belowBreakpointGroupIndex = $index;
-            }
-        }
-        if ($belowBreakpointGroupIndex) {
-            unset($this->innerComponents[$belowBreakpointGroupIndex]);
-        }
+        $wrappedAlwaysShow = (isset($componentGroups['alwaysShow']) && !empty($componentGroups['alwaysShow'])) ? new Group(
+            [
+                'context'   => $this->get_bem_prefix(),
+                'shortName' => 'top'
+            ],
+            $componentGroups['alwaysShow']
+        ) : null;
 
-        // Find the group with responsive context if there is one
-        // note: This only checks the top level and will ignore Groups inside other components
-        // if there are multiple menu components, only the first one will be treated as the main menu,
-        // any others will be rendered in-place (allows for things like user account links that don't need special treatment)
-        $responsiveGroupIndex = null;
-        $responsiveInnerComponents = [];
-        foreach ($this->innerComponents as $index => $component) {
-            if ($component instanceof Group && $component->get_context() === 'responsive') {
-                $responsiveInnerComponents = $component->innerComponents;
-                $responsiveGroupIndex = $index;
-            }
-        }
-        if ($responsiveGroupIndex) {
-            unset($this->innerComponents[$responsiveGroupIndex]);
+        $this->alwaysShowComponents = isset($logo) ? [$logo] : [];
+        $this->alwaysShowComponents = isset($wrappedAlwaysShow) ? array_merge([$wrappedAlwaysShow], $this->alwaysShowComponents) : $this->alwaysShowComponents;
+        $this->menuComponent = $componentGroups['menuComponent'] ?? null;
+        $this->showInOverlaysComponents = $componentGroups['showInOverlays'] ?? [];
+
+        if (isset($this->menuComponent)) {
+            $this->menuComponent->update_context($this->get_bem_prefix());
+            $this->menuData = $this->menuComponent->get_raw_menu_data(null);
         }
 
-        // Things that should always be rendered before the responsive group in the HTML (anything that does not have context of 'responsive' or 'below-breakpoint')
-        $this->persistentComponentsStart = array_slice($this->innerComponents, 0, $responsiveGroupIndex);
-        // Things that should always be rendered after the responsive group in the HTML
-        $this->persistentComponentsEnd = array_slice($this->innerComponents, $responsiveGroupIndex + 1);
-
-        // Things that should be rendered before the responsive group but only when the viewport is below the breakpoint
-        $this->belowBreakpointComponents = $belowBreakpointInnerComponents;
-
-        // Within the responsive group, find the first menu component,
-        // handle the things before and after it, and handle transforming it into data for the Vue component
-        $mainMenuIndex = 0;
-        foreach ($responsiveInnerComponents as $index => $innerComponent) {
-            if ($innerComponent instanceof Menu) {
-                $mainMenuIndex = $index;
-                $this->menuComponent = $innerComponent;
-                $this->menuColorTheme = $innerComponent->get_color_theme();
-                $this->menuData = $innerComponent->get_raw_menu_data(null);
-                break;
-            }
-        }
-        $this->responsiveComponentsBeforeMenu = array_slice($responsiveInnerComponents, 0, $mainMenuIndex);
-        $this->responsiveComponentsAfterMenu = array_slice($responsiveInnerComponents, $mainMenuIndex + 1);
+        // Save the final group configuration to this instance
+        $this->componentGroups = [
+            'menuComponent'  => $this->menuComponent,
+            'alwaysShow'     => $this->alwaysShowComponents,
+            'showInOverlays' => $this->showInOverlaysComponents
+        ];
     }
 
     protected function set_overlay_background_color_from_attrs(array $attributes): void {
@@ -175,6 +130,10 @@ class SiteHeader extends UIComponent {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
+        if (isset($this->size)) {
+            $attributes['data-size'] = $this->size->value;
+        }
+
         if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->backgroundColor->value;
         }
@@ -182,20 +141,20 @@ class SiteHeader extends UIComponent {
         return $attributes;
     }
 
-    protected function get_inner_container_html_attributes(): array {
-        $attributes = [];
+    protected function get_inline_styles(): array {
+        $styles = parent::get_inline_styles();
 
-        if (isset($this->size)) {
-            return ['data-size' => $this->size->value];
-        }
+        $styles['--breakpoint'] = $this->breakpoint ?? 'none';
 
-        return $attributes;
+        return $styles;
     }
 
     protected function get_prerendered_html(array $components): string {
         ob_start();
         foreach ($components as $component) {
-            $component->render();
+			if($component !== null) {
+				$component->render();
+			}
         }
 
         return ob_get_clean() ?? '';
@@ -204,17 +163,19 @@ class SiteHeader extends UIComponent {
     public function render(): void {
         $blade = BladeService::getInstance();
 
-        if ($this->breakpoint === null) {
+        // Always "desktop" / basic mode - no Vue for responsive rendering and touch-friendly menu behaviour
+        // TODO: Should probably fix the "touch-friendly" part using media queries and maybe some basic JS - would only really affect menus with submenus
+        if ($this->breakpoint === null || $this->responsiveStyle === 'basic') {
             echo $blade->make($this->bladeFile, [
                 'breakpoint' => null,
                 'classes'    => $this->get_filtered_classes(),
                 'attributes' => $this->get_html_attributes(),
-                'children'   => [new Container(['size' => $this->size->value, 'isNested' => true, 'context' => $this->get_shortname()], $this->innerComponents)]
+                'children'   => isset($this->menuComponent) ? array_merge($this->alwaysShowComponents, [$this->menuComponent]) : $this->alwaysShowComponents
             ])->render();
         }
         else {
             echo $blade->make($this->bladeFile, [
-                'containerAttributes'         => $this->get_inner_container_html_attributes(),
+                'children'                    => $this->alwaysShowComponents,
                 'classes'                     => $this->get_filtered_classes(),
                 'attributes'                  => $this->get_html_attributes(),
                 'breakpoint'                  => $this->breakpoint,
@@ -223,14 +184,12 @@ class SiteHeader extends UIComponent {
                 'toggleButtonIconPrefix'      => $this->iconPrefix,
                 'toggleButtonIconClass'       => $this->icon,
                 'submenuToggleIconClass'      => $this->submenuIcon,
-                'persistentComponentsStart'   => $this->persistentComponentsStart,
-                'persistentComponentsEnd'     => $this->persistentComponentsEnd,
-                'belowBreakpointComponents'   => $this->get_prerendered_html($this->belowBreakpointComponents),
-                'responsiveComponentsStart'   => $this->get_prerendered_html($this->responsiveComponentsBeforeMenu),
-                'responsiveComponentsEnd'     => $this->get_prerendered_html($this->responsiveComponentsAfterMenu),
+                // Menu data For Vue to transform in below-breakpoint mode
                 'responsiveMenuData'          => json_encode($this->menuData),
-                'menuColorTheme'              => isset($this->menuColorTheme) ? $this->menuColorTheme->value : null,
-                'menuComponentHtml'           => isset($this->menuComponent) ? $this->get_prerendered_html([$this->menuComponent]) : ''
+                // Default menu HTML for when we don't need Vue to do anything except render it
+                // (This allows rendering in the DOM only when required, preventing duplicate menus in the HTML)
+                'menuComponentHtml'              => isset($this->menuComponent) ? $this->get_prerendered_html([$this->menuComponent]) : '',
+                'extraContentHtml'               => $this->get_prerendered_html($this->showInOverlaysComponents)
             ])->render();
         }
     }

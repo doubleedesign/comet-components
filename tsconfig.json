@@ -3,7 +3,7 @@
 		"baseUrl": "./",
 		"module": "esnext",
 		"target": "esnext",
-		"moduleResolution": "node",
+		"moduleResolution": "nodenext",
 		"lib": [
 			"ESNext",
 			"DOM", // required to make Jetbrains colour console.log as a global, not a module
