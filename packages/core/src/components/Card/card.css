@@ -27,7 +27,7 @@
   object-position: var(--focal-point-x, 50%) var(--focal-point-y, 50%);
 }
 .card__content, [class$=__card__content] {
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -9,8 +9,18 @@
 .card-list__header h2, [class$=__header]:has(+ [class$=__card-list]) h2 {
   margin: 0;
 }
+:has(.card-list, [class$=__card-list], [class*=card-list--]),
+:has([class$=__card-list]) {
+  gap: var(--spacing-lg);
+}
+
 .card-list__item, [class$=__card-list__item] {
   container-type: inline-size;
+}
+@container (min-width: var(--width-narrow)) {
+  .card-list__item, [class$=__card-list__item] {
+    padding: var(--spacing-sm);
+  }
 }
 
 /*# sourceMappingURL=card-list.css.map */

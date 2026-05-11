@@ -26,6 +26,11 @@
 	}
 }
 
+:has(.card-list),
+:has(#{class-ends-with('__card-list')}) {
+	gap: var(--spacing-lg);
+}
+
 #{class-ends-with('__header')} {
 	&:has(+ #{class-ends-with('__card-list')}) {
 		@extend .card-list__header;
@@ -41,5 +46,9 @@
 @include bem-block('card-list', ('item')) {
 	&__item {
 		container-type: inline-size;
+
+		@include container-width-up(narrow) {
+			padding: var(--spacing-sm);
+		}
 	}
 }

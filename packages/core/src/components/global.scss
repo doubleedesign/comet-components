@@ -217,6 +217,33 @@
 		[data-background="#{$colorName}"] > [data-background="#{$colorName}"] {
 			padding: 0;
 		}
+
+		// Remove the next sibling's background if it is the same colour as this component's background (or likewise for bottom/top of gradient)
+		[data-background="#{$colorName}"] + [data-background="#{$colorName}"],
+		// orif data-background ends with $colourName + sibling's data-background starts with $colourName
+		[data-background$="#{$colorName}"] + [data-background^="#{$colorName}"] {
+			padding-block-start: 0;
+		}
+
+		// If presumably top-level elements do not have a background explicitly set, treat them as though they have the global background
+		// FIXME this isn't working with "starts with" i.e., gradients
+		@container body style(--global-background: $colorName) {
+			main > * {
+				&:not([data-background]) + [data-background="#{$colorName}"],
+				&:not([data-background]) + [data-background^="#{$colorName}"] {
+					padding-block-start: 0;
+				}
+			}
+		}
+	}
+
+	// If presumably top-level elements do not have a background explicitly set, collapse padding
+	body > header,
+	main > *,
+	body > footer {
+		&:not([data-background]) + :not([data-background]) {
+			padding-block-start: 0;
+		}
 	}
 
 	// Separate loop for color theme to ensure it takes precedence in the cascade

@@ -46,7 +46,7 @@ class Group extends UIComponent {
         if (isset($this->colorTheme)) {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
-        if (isset($this->backgroundColors)) {
+        if (isset($this->backgroundColor)) {
             $attributes['data-background'] = $this->get_background_color()->value;
         }
         else if (isset($this->gradient)) {

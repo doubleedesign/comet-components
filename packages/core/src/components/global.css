@@ -179,6 +179,15 @@
   [data-background=primary] > [data-background=primary] {
     padding: 0;
   }
+  [data-background=primary] + [data-background=primary],
+  [data-background$=primary] + [data-background^=primary] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=primary], main > *:not([data-background]) + [data-background^=primary] {
+      padding-block-start: 0;
+    }
+  }
   body[data-global-background=secondary] {
     background-color: var(--color-secondary);
     --theme-color: contrast-color(var(--color-secondary));
@@ -189,6 +198,15 @@
   }
   [data-background=secondary] > [data-background=secondary] {
     padding: 0;
+  }
+  [data-background=secondary] + [data-background=secondary],
+  [data-background$=secondary] + [data-background^=secondary] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=secondary], main > *:not([data-background]) + [data-background^=secondary] {
+      padding-block-start: 0;
+    }
   }
   body[data-global-background=accent] {
     background-color: var(--color-accent);
@@ -201,6 +219,15 @@
   [data-background=accent] > [data-background=accent] {
     padding: 0;
   }
+  [data-background=accent] + [data-background=accent],
+  [data-background$=accent] + [data-background^=accent] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=accent], main > *:not([data-background]) + [data-background^=accent] {
+      padding-block-start: 0;
+    }
+  }
   body[data-global-background=info] {
     background-color: var(--color-info);
     --theme-color: contrast-color(var(--color-info));
@@ -211,6 +238,15 @@
   }
   [data-background=info] > [data-background=info] {
     padding: 0;
+  }
+  [data-background=info] + [data-background=info],
+  [data-background$=info] + [data-background^=info] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=info], main > *:not([data-background]) + [data-background^=info] {
+      padding-block-start: 0;
+    }
   }
   body[data-global-background=warning] {
     background-color: var(--color-warning);
@@ -223,6 +259,15 @@
   [data-background=warning] > [data-background=warning] {
     padding: 0;
   }
+  [data-background=warning] + [data-background=warning],
+  [data-background$=warning] + [data-background^=warning] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=warning], main > *:not([data-background]) + [data-background^=warning] {
+      padding-block-start: 0;
+    }
+  }
   body[data-global-background=success] {
     background-color: var(--color-success);
     --theme-color: contrast-color(var(--color-success));
@@ -233,6 +278,15 @@
   }
   [data-background=success] > [data-background=success] {
     padding: 0;
+  }
+  [data-background=success] + [data-background=success],
+  [data-background$=success] + [data-background^=success] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=success], main > *:not([data-background]) + [data-background^=success] {
+      padding-block-start: 0;
+    }
   }
   body[data-global-background=error] {
     background-color: var(--color-error);
@@ -245,6 +299,15 @@
   [data-background=error] > [data-background=error] {
     padding: 0;
   }
+  [data-background=error] + [data-background=error],
+  [data-background$=error] + [data-background^=error] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=error], main > *:not([data-background]) + [data-background^=error] {
+      padding-block-start: 0;
+    }
+  }
   body[data-global-background=light] {
     background-color: var(--color-light);
     --theme-color: contrast-color(var(--color-light));
@@ -255,6 +318,15 @@
   }
   [data-background=light] > [data-background=light] {
     padding: 0;
+  }
+  [data-background=light] + [data-background=light],
+  [data-background$=light] + [data-background^=light] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=light], main > *:not([data-background]) + [data-background^=light] {
+      padding-block-start: 0;
+    }
   }
   body[data-global-background=dark] {
     background-color: var(--color-dark);
@@ -267,6 +339,15 @@
   [data-background=dark] > [data-background=dark] {
     padding: 0;
   }
+  [data-background=dark] + [data-background=dark],
+  [data-background$=dark] + [data-background^=dark] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=dark], main > *:not([data-background]) + [data-background^=dark] {
+      padding-block-start: 0;
+    }
+  }
   body[data-global-background=white] {
     background-color: var(--color-white);
     --theme-color: contrast-color(var(--color-white));
@@ -277,6 +358,20 @@
   }
   [data-background=white] > [data-background=white] {
     padding: 0;
+  }
+  [data-background=white] + [data-background=white],
+  [data-background$=white] + [data-background^=white] {
+    padding-block-start: 0;
+  }
+  @container body style(--global-background: $colorName) {
+    main > *:not([data-background]) + [data-background=white], main > *:not([data-background]) + [data-background^=white] {
+      padding-block-start: 0;
+    }
+  }
+  body > header:not([data-background]) + :not([data-background]),
+  main > *:not([data-background]) + :not([data-background]),
+  body > footer:not([data-background]) + :not([data-background]) {
+    padding-block-start: 0;
   }
   [data-color-theme=primary] {
     --theme-color: var(--color-primary);

@@ -26,7 +26,10 @@ $globalBackground = Config::getInstance()->get('global_background')->value;
 </head>
 
 <?php // Opacity 0 on initial load so we don't get a flash of content before the animations, if present?>
-<body <?php body_class('frontend'); ?> data-global-background="<?php echo $globalBackground; ?>" style="opacity:0">
+<body <?php body_class('frontend'); ?>
+		data-global-background="<?php echo $globalBackground; ?>"
+		style="opacity:0; container-type: inline-size; container-name: body; --global-background: <?php echo $globalBackground; ?>;"
+>
 <?php wp_body_open(); ?>
 
 <?php

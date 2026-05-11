@@ -38,7 +38,9 @@ $globalBackground = Config::getInstance()->get_global_background();
 	<script src="https://kit.fontawesome.com/b92552f954.js" crossorigin="anonymous"></script>
 	<style>
 		#browser-test-content {
+			container-name: body;
 			container-type: inline-size;
+			--global-background: <?php echo $globalBackground; ?>;
 		}
 	</style>
 </head>
