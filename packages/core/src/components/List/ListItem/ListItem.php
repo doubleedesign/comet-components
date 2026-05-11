@@ -6,9 +6,16 @@ namespace Doubleedesign\Comet\Core;
 class ListItem extends UIComponent {
     protected ?string $content;
 
-    public function __construct(array $attributes, string $content, array $nestedLists = []) {
+    /**
+     * @var array<ListComponent|Link|ImageComponent> $innerComponents
+     * @description Inner components to be rendered within this component after any plain text $content,
+     *              such as nested lists or content components such as links and images.
+     */
+    protected array $innerComponents;
+
+    public function __construct(array $attributes, string $content, array $innerComponents = []) {
         $this->content = $content;
-        parent::__construct($attributes, $nestedLists, 'components.List.ListItem.list-item');
+        parent::__construct($attributes, $innerComponents, 'components.List.ListItem.list-item');
     }
 
     public function render(): void {
