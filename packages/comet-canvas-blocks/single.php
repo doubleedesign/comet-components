@@ -52,4 +52,6 @@ $component = new PageSection([
 
 $component->render();
 
+get_template_part('template-parts/blog-page-blocks');
+
 get_footer();
