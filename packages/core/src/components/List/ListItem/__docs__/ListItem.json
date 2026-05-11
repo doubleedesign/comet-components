@@ -49,8 +49,8 @@
         "type": "string"
     },
     "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
+        "type": "array<ListComponent|Link|ImageComponent>",
+        "description": "Inner components to be rendered within this component after any plain text $content, such as nested lists or content components such as links and images.",
         "required": true
     },
     "traits": [
