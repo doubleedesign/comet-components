@@ -24,7 +24,7 @@ class CallToAction extends LayoutComponent {
         $content = new Group([
             'context'         => 'call-to-action',
             'shortName'       => 'content',
-            'backgroundColor' => $this->get_background_colors()->inner ?? null,
+            'backgroundColor' => $this->get_background_colors()->inner->value ?? null,
             'colorTheme'      => $attributes['colorTheme'] ?? null,
         ], $innerComponents);
 
@@ -36,4 +36,18 @@ class CallToAction extends LayoutComponent {
 
         parent::__construct($attributes, [$content], 'components.CallToAction.call-to-action');
     }
+
+	protected function get_html_attributes(): array {
+		$attributes = parent::get_html_attributes();
+
+		if($this->get_background_colors()->outer !== null) {
+			$attributes['data-background'] = $this->get_background_colors()->outer;
+		}
+
+		if(isset($this->colorTheme)) {
+			$attributes['data-color-theme'] = $this->colorTheme;
+		}
+
+		return $attributes;
+	}
 }
