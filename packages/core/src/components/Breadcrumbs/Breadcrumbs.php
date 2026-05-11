@@ -23,25 +23,22 @@ class Breadcrumbs extends UIComponent {
                 $linkAttributes['aria-current'] = 'page';
             }
 
-            ob_start();
             $link = new Link([
                 ...$linkAttributes,
                 'label'      => $breadcrumb['title'],
                 'url'        => !empty($breadcrumb['url']) ? $breadcrumb['url'] : '#',
             ]);
-            $link->render();
-            $linkHtml = ob_get_clean();
 
             return new ListItem(
                 [],
-                $linkHtml
+                '',
+                [$link]
             );
         }, $breadcrumbs);
 
         $innerComponents = [new ListComponent(['ordered' => true], $listItems)];
 
         parent::__construct($attributes, $innerComponents, 'components.Breadcrumbs.breadcrumbs');
-        $this->maybe_pass_down_context_to_inner_components();
     }
 
     public function render(): void {
