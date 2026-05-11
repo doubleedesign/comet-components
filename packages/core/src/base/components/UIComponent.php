@@ -59,22 +59,14 @@ abstract class UIComponent extends Renderable {
      * @return void
      */
     protected function maybe_pass_down_context_to_inner_components(): void {
-        if (empty($this->innerComponents)) return;
-        if ($this instanceof Columns) return;
-        if ($this instanceof WrappedPanelGroup) return;
-        if ($this instanceof PanelGroupComponent) return;
-        if (!method_exists($this, 'get_context')) return;
+        if (!$this->should_propagate_context($this)) return;
 
         $context_to_use = $this->get_default_context_for_inner_components();
-        if ($context_to_use === null) {
-            return;
-        }
 
         array_walk($this->innerComponents, function($component) use ($context_to_use) {
-            if ($component === null) return;
-            if (!$component instanceof Renderable) return;
-            if (!method_exists($component, 'update_context')) return;
-            if (!$this->should_update_context($component)) return;
+	        if ($component === null) return;
+	        if (!$component instanceof Renderable) return;
+            if (!$this->should_inherit_context($component)) return;
 
             try {
                 $component->update_context($context_to_use);
@@ -91,10 +83,20 @@ abstract class UIComponent extends Renderable {
         });
     }
 
-    private function should_update_context(Renderable $component): bool {
+    private function should_propagate_context(Renderable $component): bool {
+        if (!method_exists($component, 'get_context')) return false;
+        if (empty($component->innerComponents)) return false;
         if ($component instanceof Columns) return false;
-        if ($component instanceof WrappedPanelGroup) return false;
         if ($component instanceof PanelGroupComponent) return false;
+		if($this->get_default_context_for_inner_components() === null) return false;
+
+        return true;
+    }
+
+    private function should_inherit_context(Renderable $component): bool {
+        if ($component instanceof Columns) return false;
+        if ($component instanceof PanelGroupComponent) return false;
+        if ($component instanceof Breadcrumbs) return false;
         if (!method_exists($component, 'update_context')) return false;
         if (!method_exists($component, 'get_shortname')) return false;
         if (!method_exists($component, 'get_context')) return false;
