@@ -238,10 +238,6 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
-            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
@@ -322,7 +318,6 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -336,9 +331,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -462,7 +457,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
+            "BackgroundColorMulti",
             "ColorTheme",
             "LayoutOrientation",
             "BlockElementModifier"
@@ -736,10 +731,6 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
-            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
@@ -823,7 +814,6 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -950,7 +940,7 @@
             "Icon",
             "LayoutContainerSize",
             "NestedState",
-            "BackgroundColor",
+            "BackgroundColorMulti",
             "ColorTheme",
             "LayoutOrientation",
             "BlockElementModifier"
@@ -964,9 +954,9 @@
         "isInner": true,
         "belongsInside": "Accordion",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -1037,9 +1027,9 @@
                 "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
                 "required": true
             },
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "backgroundOpacity": {
                 "type": "int",
@@ -1174,7 +1164,6 @@
             "BackgroundColor",
             "ColorTheme",
             "LayoutAlignment",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -1625,8 +1614,8 @@
             "required": true
         },
         "traits": [
+            "BackgroundColorMulti",
             "ColorTheme",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -1660,9 +1649,9 @@
                     "2.35:1"
                 ]
             },
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "bodyText": {
                 "type": "string",
@@ -1814,9 +1803,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -1949,10 +1938,10 @@
             "default": []
         },
         "traits": [
+            "BackgroundColor",
             "ColorTheme",
             "GroupLayoutType",
             "NestedState",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -1966,9 +1955,9 @@
         "isInner": true,
         "belongsInside": "Columns",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -2076,9 +2065,9 @@
                 "type": "bool",
                 "description": "Option to explicitly specify whether adapt the layout by stacking columns when the viewport or container is narrow. Defaults to true behaviour but does not put the attribute in the HTML unless explicitly set. You generally do not want to set this if your theme will handle it on a case-by-case basis with custom CSS."
             },
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -2168,8 +2157,8 @@
             "required": true
         },
         "traits": [
-            "NestedState",
             "BackgroundColor",
+            "NestedState",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -2183,10 +2172,6 @@
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
-            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
@@ -2283,7 +2268,6 @@
         "traits": [
             "LayoutContainerSize",
             "LayoutOrientation",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -2297,10 +2281,6 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
-            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
@@ -2405,7 +2385,6 @@
         "traits": [
             "LayoutContainerSize",
             "LayoutOrientation",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -3188,14 +3167,14 @@
     {
         "name": "EventList",
         "description": "*/",
-        "extends": "LayoutComponent",
+        "extends": "CardList",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -3239,7 +3218,7 @@
             },
             "heading": {
                 "type": "string",
-                "description": "The heading for the event list."
+                "description": "Optional heading for the card list."
             },
             "id": {
                 "type": "string",
@@ -3261,6 +3240,10 @@
                     "inline"
                 ],
                 "default": "list"
+            },
+            "link": {
+                "type": "array",
+                "description": "Optional link to display as a call-to-action, such as \"View all\". Placement of the link is determined by the horizontal alignment setting."
             },
             "maxPerRow": {
                 "type": "int",
@@ -3315,21 +3298,19 @@
                     "match-parent"
                 ],
                 "default": "match-parent"
-            },
-            "viewAllUrl": {
-                "type": "string"
             }
         },
         "innerComponents": {
-            "type": "array<EventCard>",
-            "description": "Event cards to display.",
-            "required": true
+            "type": "array<Card>",
+            "description": "Cards to display in the list.",
+            "required": true,
+            "default": []
         },
         "traits": [
+            "BackgroundColor",
             "ColorTheme",
             "GroupLayoutType",
             "NestedState",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -3443,15 +3424,15 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "file-group"
+                    "files"
                 ]
             },
             "colorTheme": {
@@ -3506,7 +3487,7 @@
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
-                "default": "file-group"
+                "default": "files"
             },
             "size": {
                 "type": "ContainerSize",
@@ -3557,9 +3538,9 @@
             "required": true
         },
         "traits": [
+            "BackgroundColor",
             "ColorTheme",
             "NestedState",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -3573,9 +3554,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "caption": {
                 "type": "string",
@@ -3698,8 +3679,8 @@
             "required": true
         },
         "traits": [
-            "NestedState",
             "BackgroundColor",
+            "NestedState",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -3713,9 +3694,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -4328,9 +4309,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -4457,10 +4438,10 @@
             "required": true
         },
         "traits": [
+            "BackgroundColor",
             "ColorTheme",
             "GroupLayoutType",
             "NestedState",
-            "BackgroundColor",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -4577,8 +4558,8 @@
             "type": "string"
         },
         "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
+            "type": "array<ListComponent|Link|ImageComponent>",
+            "description": "Inner components to be rendered within this component after any plain text $content, such as nested lists or content components such as links and images.",
             "required": true
         },
         "traits": [
@@ -4784,9 +4765,9 @@
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "breadcrumbs": {
                 "type": "array",
@@ -4899,8 +4880,8 @@
             "required": true
         },
         "traits": [
-            "ColorTheme",
             "BackgroundColor",
+            "ColorTheme",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -4914,9 +4895,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -5179,9 +5160,9 @@
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "citation": {
                 "type": "string",
@@ -5270,9 +5251,9 @@
         "isInner": true,
         "belongsInside": "ResponsivePanels",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -5429,7 +5410,7 @@
         },
         "traits": [
             "Icon",
-            "BackgroundColor",
+            "BackgroundColorMulti",
             "ColorTheme",
             "LayoutOrientation",
             "BlockElementModifier"
@@ -5556,9 +5537,10 @@
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component.",
+                "default": "dark"
             },
             "classes": {
                 "type": "array<string>",
@@ -5658,18 +5640,18 @@
     {
         "name": "SiteHeader",
         "description": "Render a site header with a logo, responsive menu, and optional additional components.",
-        "extends": "UIComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": null,
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "breakpoint": {
                 "type": "string",
-                "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style"
+                "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style Note: \"Desktop\" style will still have a responsive layout, but submenus won't have the preferred behaviour on small viewports"
             },
             "classes": {
                 "type": "array<string>",
@@ -5678,9 +5660,26 @@
                     "site-header"
                 ]
             },
+            "componentGroups": {
+                "type": "array",
+                "description": "The inner components other than the logo, provided in groups based on when and where they should be shown. Valid keys are: 'menuComponent', 'alwaysShow', 'showInOverlays'",
+                "required": true
+            },
             "context": {
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            },
+            "hAlign": {
+                "type": "Alignment",
+                "description": "Horizontal alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
             },
             "icon": {
                 "type": "string",
@@ -5715,17 +5714,17 @@
                     "white",
                     "black"
                 ],
-                "default": "primary"
+                "default": "dark"
             },
             "responsiveStyle": {
                 "type": "string",
                 "description": "The layout style of the responsive menu when below the breakpoint",
                 "supported": [
-                    "default",
+                    "basic",
                     "overlay",
                     "off-canvas"
                 ],
-                "default": "default"
+                "default": "overlay"
             },
             "shortName": {
                 "type": "string",
@@ -5766,16 +5765,30 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "vAlign": {
+                "type": "Alignment",
+                "description": "Vertical alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
             }
         },
         "innerComponents": {
             "type": "array<Renderable>",
-            "description": "The inner components other than the logo; to define which are part of the responsive menu, wrap them in a Group with the context \"responsive\" (note: only one responsive group is supported)",
+            "description": "Inner components to be rendered within this component",
             "required": true
         },
         "traits": [
             "BackgroundColor",
             "Icon",
+            "LayoutContainerSize",
+            "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
         ]
@@ -5788,9 +5801,9 @@
         "isInner": true,
         "belongsInside": "Tabs",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
             },
             "classes": {
                 "type": "array<string>",
@@ -5953,7 +5966,7 @@
         "traits": [
             "LayoutContainerSize",
             "NestedState",
-            "BackgroundColor",
+            "BackgroundColorMulti",
             "ColorTheme",
             "LayoutOrientation",
             "BlockElementModifier"

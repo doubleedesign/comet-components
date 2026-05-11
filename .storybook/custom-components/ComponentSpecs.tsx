@@ -100,14 +100,6 @@ export function ComponentSpecs({ componentName }) {
 						</th>
 						<td>
 							<p>{belongsInside}</p>
-							{(cssInfo?.containerQueries && componentName !== 'Banner') && (
-								<p>
-									{/* eslint-disable-next-line max-len */}
-									<strong>Note: </strong>This component's default CSS utilises <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries" target="_blank">container queries</a>.
-									It should be placed inside a suitable containment context to achieve the expected layout behaviour.
-									By default, the <code>Container</code> component provides this.
-								</p>
-							)}
 						</td>
 					</tr>
 					{(specs?.innerComponents || specs?.content) &&<tr>

@@ -9,7 +9,7 @@ export function CommonAttributes() {
 	const { specs, loading, error } = useRenderableSpecs();
 
 	const specsToShow = specs?.attributes ? Object.entries(specs?.attributes).filter(([name]) => {
-		return !['classes', 'tagName'].includes(name);
+		return !['tagName'].includes(name);
 	}) : [];
 
 	return specs ? (

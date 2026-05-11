@@ -1,250 +1,74 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { Alignment } from "../../../../test/storybook-helpers.ts";
 
-type SiteHeaderProps = {
-	backgroundColor: '' | 'none' | 'primary' | 'secondary' | 'accent' | 'error' | 'success' | 'warning' | 'info' | 'light' | 'dark' | 'white';
-	breakpoint: string;
-	hAlign: Alignment;
-	icon: string;
-	iconPrefix: string;
-	logoUrl: string;
-	responsiveStyle: 'default' | 'overlay';
-	size: 'default' | 'wide' | 'fullwidth' | 'narrow' | 'narrower' | 'small';
-	submenuIcon: string;
-	tagName: 'header';
-	vAlign: Alignment;
-	classes?: string[];
-}
+const storyBase = await createStoryBase('SiteHeader');
 
 const meta = {
 	title: 'Layout/SiteHeader',
 	tags: ['vue', 'wordpress-theme', 'autodocs'],
-	...createStoryBase('SiteHeader'),
+	...storyBase,
 	args: {
-		backgroundColor: "",
+		...storyBase.args,
 		breakpoint: "768px",
-		hAlign: "start",
-		icon: "fa-bars",
-		iconPrefix: "fa-solid",
-		logoUrl: "",
-		responsiveStyle: "default",
-		size: "default",
-		submenuIcon: "fa-chevron-down",
-		tagName: "header",
-		vAlign: "start"
+		overlayBackgroundColor: 'primary',
+		size: 'contained',
 	},
-	argTypes: {
-		backgroundColor: {
-			description: "Background colour keyword",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "ThemeColor"
-				}
-			},
-			options: [
-				"none",
-				"primary",
-				"secondary",
-				"accent",
-				"error",
-				"success",
-				"warning",
-				"info",
-				"light",
-				"dark",
-				"white"
-			]
-		},
-		breakpoint: {
-			description: "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu. Use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style",
-			control: {
-				type: "text"
-			},
-			table: {
-				defaultValue: {
-					summary: "null"
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		},
-		classes: {
-			description: "CSS classes",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "site-header"
-				},
-				type: {
-					summary: "array<string>"
-				}
-			}
-		},
-		hAlign: {
-			description: "",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "start"
-				},
-				type: {
-					summary: "Alignment"
-				}
-			},
-			options: [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
-		},
-		icon: {
-			description: "Icon class name; for the responsive menu toggle button",
-			control: {
-				type: "text"
-			},
-			table: {
-				defaultValue: {
-					summary: "fa-bars"
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		},
-		iconPrefix: {
-			description: "Icon prefix class name",
-			control: {
-				type: "text"
-			},
-			table: {
-				defaultValue: {
-					summary: "fa-solid"
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		},
-		logoUrl: {
-			description: "The URL of the site logo image",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		},
-		responsiveStyle: {
-			description: "The layout style of the responsive menu",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "default"
-				},
-				type: {
-					summary: "string"
-				}
-			},
-			options: [
-				"default",
-				"overlay"
-			]
-		},
-		size: {
-			description: "Keyword specifying the relative width of the container for the inner content",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "default"
-				},
-				type: {
-					summary: "ContainerSize"
-				}
-			},
-			options: [
-				"default",
-				"wide",
-				"fullwidth",
-				"narrow",
-				"narrower",
-				"small"
-			]
-		},
-		submenuIcon: {
-			description: "Icon class name for the submenu toggle button in responsive mode",
-			control: {
-				type: "text"
-			},
-			table: {
-				defaultValue: {
-					summary: "fa-chevron-down"
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		},
-		tagName: {
-			description: "The HTML tag to use for this component",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "header"
-				},
-				type: {
-					summary: "Tag"
-				}
-			},
-			options: [
-				"header"
-			]
-		},
-		vAlign: {
-			description: "",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "start"
-				},
-				type: {
-					summary: "Alignment"
-				}
-			},
-			options: [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
+	parameters: {
+		...(storyBase.parameters || {}),
+		controls: {
+			exclude: ['context']
 		}
-	},
-} satisfies Meta<SiteHeaderProps>;
+	}
+} satisfies Meta<any>;
 
 export default meta;
-type Story = StoryObj<SiteHeaderProps>;
+type Story = StoryObj<any>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };
+
+export const BasicStyle: Story = {
+	name: 'Responsive style: Basic',
+	args: {
+		responsiveStyle: 'basic',
+		breakpoint: null,
+	},
+	argTypes: {
+		responsiveStyle: {
+			// @ts-expect-error TS2339: Property responsiveStyle does not exist on type {}
+			...meta?.argTypes?.responsiveStyle,
+			control: { disable: true }
+		}
+	}
+}
+
+export const OverlayStyle: Story = {
+	name: 'Below breakpoint mode: Overlay',
+	args: {
+		responsiveStyle: 'overlay',
+		breakpoint: 0
+	},
+	argTypes: {
+		responsiveStyle: {
+			// @ts-expect-error TS2339: Property responsiveStyle does not exist on type {}
+			...meta?.argTypes?.responsiveStyle,
+			control: { disable: true }
+		}
+	}
+}
+
+export const OffCanvasStyle: Story = {
+	name: 'Below breakpoint mode: Off-canvas',
+	args: {
+		responsiveStyle: 'off-canvas',
+		breakpoint: 0
+	},
+	argTypes: {
+		responsiveStyle: {
+			// @ts-expect-error TS2339: Property responsiveStyle does not exist on type {}
+			...meta?.argTypes?.responsiveStyle,
+			control: { disable: true }
+		}
+	}
+}
