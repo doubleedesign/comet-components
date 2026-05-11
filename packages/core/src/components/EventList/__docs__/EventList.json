@@ -1,7 +1,7 @@
 {
     "name": "EventList",
     "description": "*/",
-    "extends": "LayoutComponent",
+    "extends": "CardList",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
@@ -52,7 +52,7 @@
         },
         "heading": {
             "type": "string",
-            "description": "The heading for the event list."
+            "description": "Optional heading for the card list."
         },
         "id": {
             "type": "string",
@@ -74,6 +74,10 @@
                 "inline"
             ],
             "default": "list"
+        },
+        "link": {
+            "type": "array",
+            "description": "Optional link to display as a call-to-action, such as \"View all\". Placement of the link is determined by the horizontal alignment setting."
         },
         "maxPerRow": {
             "type": "int",
@@ -128,15 +132,13 @@
                 "match-parent"
             ],
             "default": "match-parent"
-        },
-        "viewAllUrl": {
-            "type": "string"
         }
     },
     "innerComponents": {
-        "type": "array<EventCard>",
-        "description": "Event cards to display.",
-        "required": true
+        "type": "array<Card>",
+        "description": "Cards to display in the list.",
+        "required": true,
+        "default": []
     },
     "traits": [
         "ColorTheme",
