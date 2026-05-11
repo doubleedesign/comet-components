@@ -27,6 +27,16 @@ class FileGroup extends LayoutComponent {
     public function __construct(array $attributes, array $files) {
         $this->set_color_theme($attributes);
         $this->set_is_nested($attributes['isNested'] ?? null);
+        $this->heading = $attributes['heading'] ?? null;
+
+        if (!isset($attributes['shortName'])) {
+            $attributes['shortName'] = 'files';
+        }
+
+        $groupAttrs = [
+            'shortName'  => 'file-group',
+            'role'       => 'group',
+        ];
 
         $fileComponents = array_map(function($file) {
             if ($file instanceof File) {
@@ -43,20 +53,20 @@ class FileGroup extends LayoutComponent {
                 'colorTheme'  => $file['colorTheme'] ?? null // selectively enables per-file color theme styling
             ]);
         }, $files);
+        $innerContent = new Group($groupAttrs, $fileComponents);
 
-        $updatedInnerComponents = [];
-        if ($attributes['heading']) {
-            $this->heading = $attributes['heading'];
-            array_push($updatedInnerComponents, new Heading([], $this->heading));
-        }
-        array_push($updatedInnerComponents, new Group(
-            [
-                'shortName'  => 'list',
-                'role'       => 'group'
-            ],
-            $fileComponents
-        ));
+        $updatedInnerComponents = $this->heading ? [new Heading([], $this->heading), $innerContent] : [$innerContent];
 
         parent::__construct($attributes, $updatedInnerComponents, 'components.FileGroup.file-group');
+    }
+
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
+
+        if ($this->colorTheme) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
+
+        return $attributes;
     }
 }

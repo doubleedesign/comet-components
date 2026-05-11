@@ -1,7 +1,6 @@
 .columns, [class$=__columns], [class*=columns--] {
   display: grid;
   grid-gap: var(--spacing-md);
-  padding-block: var(--spacing-lg);
 }
 @container (min-width: var(--width-narrow)) {
   .columns, [class$=__columns], [class*=columns--] {
@@ -60,6 +59,9 @@
   .columns:has(> [class*="--has-own-width"]), [class$=__columns]:has(> [class*="--has-own-width"]), [class*=columns--]:has(> [class*="--has-own-width"]) {
     gap: var(--spacing-lg);
   }
+}
+.columns, [class$=__columns], [class*=columns--] {
+  padding-block: var(--spacing-lg);
 }
 @media (min-width: 768px) {
   .columns, [class$=__columns], [class*=columns--] {

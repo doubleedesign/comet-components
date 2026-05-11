@@ -35,34 +35,40 @@ class LinkGroup extends LayoutComponent {
         }
 
         $groupAttrs = [
-            'colorTheme'                   => $this->colorTheme->value ?? null, // only include if set explicitly
             'shortName'                    => 'link-group',
             'role'                         => 'group',
             'data-group-layout'            => $this->layout !== GroupLayout::LIST ? $this->layout->value : null, // only include if not the default
         ];
-        // FIXME: This is repetitive, e.g. CardList also does this (it just has a different default)
         if ($this->layout === GroupLayout::GRID) {
             $groupAttrs['data-max-per-row'] = $this->maxPerRow;
         }
 
-        $innerContent = new Group($groupAttrs, []);
-        $innerContent->innerComponents = array_map(function($link) use ($innerContent, $attributes) {
+        $links = array_map(function($link) use ($attributes) {
             if ($link instanceof Link) {
-                $link->update_context($innerContent->get_bem_prefix());
-
                 return $link;
             }
 
             return new Link([
-                'context'       => $innerContent->get_bem_prefix(),
                 'label'         => $link['label'] ?? $link['title'] ?? '',
                 'description'   => $link['description'] ?? null,
                 'url'           => $link['url'] ?? $link['href'] ?? '#',
                 'target'        => $link['target'] ?? null,
             ]);
         }, $links);
+        $innerContent = new Group($groupAttrs, $links);
 
         $updatedInnerComponents = $this->heading ? [new Heading([], $this->heading), $innerContent] : [$innerContent];
+
         parent::__construct($attributes, $updatedInnerComponents, 'components.LinkGroup.link-group');
+    }
+
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
+
+        if ($this->colorTheme) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
+
+        return $attributes;
     }
 }
