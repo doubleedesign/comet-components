@@ -11,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::HEADER, Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::HEADER)]
 class PageHeader extends LayoutComponent {
+	use BackgroundColor;
     use ColorTheme;
 
     /**
@@ -45,6 +46,10 @@ class PageHeader extends LayoutComponent {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
-        return $attributes;
+	    if ($this->get_background_color() !== null) {
+		    $attributes['data-background'] = $this->get_background_color()->value;
+	    }
+
+	    return $attributes;
     }
 }

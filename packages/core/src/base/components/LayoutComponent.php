@@ -4,18 +4,18 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::MAIN, Tag::HEADER, Tag::FOOTER, Tag::ASIDE, Tag::NAV, Tag::ARTICLE])]
 #[DefaultTag(Tag::DIV)]
 abstract class LayoutComponent extends UIComponent {
-    use BackgroundColor;
     use LayoutAlignment;
     use LayoutContainerSize;
 
     public function __construct(array $attributes, array $innerComponents, string $bladeFile) {
         parent::__construct($attributes, $innerComponents, $bladeFile);
         $this->set_layout_alignment($attributes);
-        $this->set_background_colors($attributes);
         $this->set_size($attributes);
 
-        if ($this->get_background_color() !== null) {
-            $this->simplify_all_background_colors();
+        if (method_exists($this, 'get_background_color') && method_exists($this, 'simplify_all_background_colors')) {
+            if ($this->get_background_color() !== null) {
+                $this->simplify_all_background_colors();
+            }
         }
     }
 
@@ -32,10 +32,6 @@ abstract class LayoutComponent extends UIComponent {
 
         if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
             $attributes['data-valign'] = $this->vAlign->value;
-        }
-
-        if ($this->get_background_color() !== null) {
-            $attributes['data-background'] = $this->get_background_color()->value;
         }
 
         return $attributes;

@@ -11,9 +11,9 @@
             "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
             "required": true
         },
-        "backgroundColors": {
-            "type": "BackgroundCollection",
-            "description": "Key -> value pairs of background placement and colour keywords"
+        "backgroundColor": {
+            "type": "ThemeColor|ThemeGradient",
+            "description": "The single background colour of the component."
         },
         "backgroundOpacity": {
             "type": "int",
@@ -148,7 +148,6 @@
         "BackgroundColor",
         "ColorTheme",
         "LayoutAlignment",
-        "BackgroundColor",
         "LayoutAlignment",
         "LayoutContainerSize",
         "BlockElementModifier"

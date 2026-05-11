@@ -4,7 +4,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 abstract class PanelGroupComponent extends UIComponent {
-    use BackgroundColor;
+    use BackgroundColorMulti;
     use ColorTheme;
     use LayoutOrientation;
 

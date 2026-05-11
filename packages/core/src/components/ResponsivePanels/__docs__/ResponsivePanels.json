@@ -96,7 +96,7 @@
     },
     "traits": [
         "Icon",
-        "BackgroundColor",
+        "BackgroundColorMulti",
         "ColorTheme",
         "LayoutOrientation",
         "BlockElementModifier"

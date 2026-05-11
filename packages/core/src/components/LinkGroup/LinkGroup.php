@@ -11,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class LinkGroup extends LayoutComponent {
+	use BackgroundColor;
     use ColorTheme;
     use GroupLayoutType;
     use NestedState;
@@ -69,6 +70,10 @@ class LinkGroup extends LayoutComponent {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
-        return $attributes;
+	    if ($this->get_background_color() !== null) {
+		    $attributes['data-background'] = $this->get_background_color()->value;
+	    }
+
+	    return $attributes;
     }
 }

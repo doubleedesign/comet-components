@@ -11,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::SECTION, Tag::FIGURE, Tag::DIV])]
 #[DefaultTag(Tag::SECTION)]
 class Gallery extends LayoutComponent {
+	use BackgroundColor;
     use NestedState;
 
     /**
@@ -86,4 +87,15 @@ class Gallery extends LayoutComponent {
             );
         }
     }
+
+	protected function get_html_attributes(): array {
+		$attributes = parent::get_html_attributes();
+
+		if ($this->get_background_color() !== null) {
+			$attributes['data-background'] = $this->get_background_color()->value;
+		}
+
+
+		return $attributes;
+	}
 }

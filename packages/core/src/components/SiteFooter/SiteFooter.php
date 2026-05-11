@@ -11,6 +11,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::FOOTER])]
 #[DefaultTag(Tag::FOOTER)]
 class SiteFooter extends LayoutComponent {
+	use BackgroundColor;
+
     /**
      * @var array{siteName: string, startYear: int, endYear: int} $copyright Name of the site/organisation/content owner and the years to display in the copyright notice.
      */
@@ -47,4 +49,15 @@ class SiteFooter extends LayoutComponent {
 
         parent::__construct($attributes, [...$innerComponents, $creditNotice], 'components.SiteFooter.site-footer');
     }
+
+	protected function get_html_attributes(): array {
+		$attributes = parent::get_html_attributes();
+
+		if ($this->get_background_color() !== null) {
+			$attributes['data-background'] = $this->get_background_color()->value;
+		}
+
+
+		return $attributes;
+	}
 }

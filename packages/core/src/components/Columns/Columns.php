@@ -11,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class Columns extends LayoutComponent {
+	use BackgroundColor;
 	use NestedState;
 
     private int $qty;
@@ -69,6 +70,10 @@ class Columns extends LayoutComponent {
             $attributes['data-allow-layout-stacking'] = $this->allowStacking ? 'true' : 'false';
         }
 
-        return $attributes;
+	    if ($this->get_background_color() !== null) {
+		    $attributes['data-background'] = $this->get_background_color()->value;
+	    }
+
+	    return $attributes;
     }
 }

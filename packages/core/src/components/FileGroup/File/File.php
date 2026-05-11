@@ -53,8 +53,6 @@ class File extends Renderable {
             };
         }
         $this->set_icon_from_attrs($attributes);
-
-        error_log(print_r($this->get_bem_structure(), true));
     }
 
     protected function get_html_attributes(): array {

@@ -6,10 +6,6 @@
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
-        "backgroundColors": {
-            "type": "BackgroundCollection",
-            "description": "Key -> value pairs of background placement and colour keywords"
-        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
@@ -90,7 +86,6 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
         "LayoutAlignment",
         "LayoutContainerSize",
         "BlockElementModifier"

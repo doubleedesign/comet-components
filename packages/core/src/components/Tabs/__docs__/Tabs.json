@@ -103,7 +103,7 @@
     "traits": [
         "LayoutContainerSize",
         "NestedState",
-        "BackgroundColor",
+        "BackgroundColorMulti",
         "ColorTheme",
         "LayoutOrientation",
         "BlockElementModifier"

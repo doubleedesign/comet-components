@@ -6,9 +6,9 @@
     "isInner": false,
     "belongsInside": null,
     "attributes": {
-        "backgroundColors": {
-            "type": "BackgroundCollection",
-            "description": "Key -> value pairs of background placement and colour keywords"
+        "backgroundColor": {
+            "type": "ThemeColor|ThemeGradient",
+            "description": "The single background colour of the component."
         },
         "breakpoint": {
             "type": "string",

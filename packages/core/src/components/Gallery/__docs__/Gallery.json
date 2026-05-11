@@ -6,9 +6,9 @@
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
-        "backgroundColors": {
-            "type": "BackgroundCollection",
-            "description": "Key -> value pairs of background placement and colour keywords"
+        "backgroundColor": {
+            "type": "ThemeColor|ThemeGradient",
+            "description": "The single background colour of the component."
         },
         "caption": {
             "type": "string",
@@ -131,8 +131,8 @@
         "required": true
     },
     "traits": [
-        "NestedState",
         "BackgroundColor",
+        "NestedState",
         "LayoutAlignment",
         "LayoutContainerSize",
         "BlockElementModifier"

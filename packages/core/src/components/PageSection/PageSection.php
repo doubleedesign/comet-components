@@ -17,10 +17,6 @@ class PageSection extends UIComponent {
     use ColorTheme;
     use LayoutContainerSize;
 
-    // This should only ever have a single background colour,
-    // which has probably been pre-validated by the parent component using the BackgroundColor trait
-    private ThemeColor|ThemeGradient|null $backgroundColor = null;
-
     /**
      * @var array<Renderable> $innerComponents
      * @description Inner components to be rendered within this component
@@ -31,7 +27,7 @@ class PageSection extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.PageSection.page-section');
         $this->set_shortname($attributes['shortName'] ?? 'page-section');
         $this->set_size($attributes);
-        $this->set_background_colors($attributes);
+        $this->set_background_color($attributes);
         $this->set_color_theme($attributes);
         $this->innerComponents = $innerComponents;
     }

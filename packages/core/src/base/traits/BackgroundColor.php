@@ -3,56 +3,58 @@ namespace Doubleedesign\Comet\Core;
 
 trait BackgroundColor {
     /**
-     * @var BackgroundCollection|null $backgroundColors
-     * @description Key -> value pairs of background placement and colour keywords
+     * @var ThemeColor|ThemeGradient|null $backgroundColor
+     * @description The single background colour of the component.
      */
-    protected ?BackgroundCollection $backgroundColors = null;
+    protected ThemeColor|ThemeGradient|null $backgroundColor = null;
 
     /**
      * @param  array  $attributes
+     * @param  ThemeColor|null  $fallback
      * @description Retrieves the relevant properties from the component $attributes array or component defaults, validates them, and assigns them to the corresponding component instance field.
+     *
+     * @return void
      */
-    protected function set_background_colors(array $attributes): void {
-        // Backwards compatibility and components that we only ever expect to have a single background colour:
-        // Allow for 'backgroundColor', but prefer newer backgroundColors for those that use multiple
-        $maybeAttr = $attributes['backgroundColors'] ?? $attributes['backgroundColor'] ?? null;
-        if ($maybeAttr !== null) {
-            $this->backgroundColors = $this->transform_to_collection($maybeAttr);
+    protected function set_background_color(array $attributes, ?ThemeColor $fallback = null): void {
+        // Set from passed-in attributes if set
+        if (isset($attributes['backgroundColor'])) {
+            $this->backgroundColor = $this->get_from_string_or_theme_color($attributes['backgroundColor']);
         }
+
         // If no passed-in attribute (or applying it failed), check component defaults
-        else {
+        if (!$this->backgroundColor) {
             $class = static::class;
             $classShortname = Utils::kebab_case(substr($class, strrpos($class, '\\') + 1));
             $defaults = Config::getInstance()->get_component_defaults($classShortname);
-            if (isset($defaults['backgroundColors']) || isset($defaults['backgroundColor'])) {
-                $this->backgroundColors = $this->transform_to_collection($defaults['backgroundColors'] ?? $defaults['backgroundColor']);
+            if (isset($defaults['backgroundColor'])) {
+                $this->backgroundColor = $this->get_from_string_or_theme_color($defaults['backgroundColor']);
             }
         }
 
-        // If the outer background is the same as the global background and this component is not nested,
-        // remove it so we don't set background attributes on top-level components when not needed
+        // If still null, use the passed-in fallback if there is one
+        if (!isset($this->backgroundColor) && isset($fallback)) {
+            $this->backgroundColor = $this->get_from_string_or_theme_color($fallback);
+        }
+
+        // Only keep the set background color if this is nested OR the background color is different from the global background
+        // So we don't set background attributes on top-level components when not needed
+        $globalBackground = Config::getInstance()->get_global_background();
+        $isSameAsGlobal = isset($this->backgroundColor) && $this->backgroundColor === $globalBackground;
         $isNested = (isset($this->isNested) && $this->isNested) || (isset($attributes['isNested']) && $attributes['isNested']);
-        if (!$isNested) {
-            $globalBackground = Config::getInstance()->get_global_background();
-            $isSameAsGlobal = isset($this->backgroundColor->outer) && $this->backgroundColor->outer === $globalBackground;
-            if ($isSameAsGlobal) {
-                $this->backgroundColors = new BackgroundCollection(null, $this->backgroundColors->inner);
-            }
+        if ((!$isNested && $isSameAsGlobal) || !isset($attributes['backgroundColor'])) {
+            $this->backgroundColor = null;
         }
     }
 
-    private function transform_to_collection($value): ?BackgroundCollection {
-        // This was extracted out into the collection class for isolated testing and troubleshooting
-        return BackgroundCollection::transform_to_collection($value);
-    }
+    private function get_from_string_or_theme_color($value): ThemeColor|ThemeGradient|null {
+        if ($value instanceof ThemeColor) {
+            return $value;
+        }
+        if ($value instanceof ThemeGradient) {
+            return $value;
+        }
 
-    /**
-     * @description Get the background colours of the component.
-     *
-     * @return ?BackgroundCollection;
-     */
-    public function get_background_colors(): ?BackgroundCollection {
-        return $this->backgroundColors;
+        return ThemeColor::tryFrom($value) ?? ThemeGradient::tryFrom($value) ?? null;
     }
 
     /**
@@ -62,11 +64,7 @@ trait BackgroundColor {
      * @return ThemeColor|ThemeGradient|null
      */
     public function get_background_color(): ThemeColor|ThemeGradient|null {
-        if (isset($this->backgroundColors->outer) && isset($this->backgroundColors->inner)) {
-            error_log("Warning:" . static::class . " has both outer and inner background colors set, but you called get_background_colour(), which returns the outer colour only. If this was not intentional, you might want get_background_colours().");
-        }
-
-        return $this->backgroundColors->outer ?? $this->backgroundColors->inner ?? null;
+        return $this->backgroundColor;
     }
 
     /**
@@ -79,7 +77,7 @@ trait BackgroundColor {
      * @return void
      */
     public function update_background_color(ThemeColor|string|null $backgroundColors): void {
-        $this->backgroundColors = $this->transform_to_collection($backgroundColors);
+        $this->backgroundColor = $this->get_from_string_or_theme_color($backgroundColors);
     }
 
     /**
@@ -97,7 +95,7 @@ trait BackgroundColor {
 
         // If this component does not have a background set but its children all have the same background and/or no background,
         // remove the backgrounds from the children and apply that singular set background to this component
-        if (!$this->backgroundColors && isset($this->innerComponents)) {
+        if (!$this->backgroundColor && isset($this->innerComponents)) {
             $this->set_background_colors_based_on_inner_components();
         }
     }
@@ -117,7 +115,7 @@ trait BackgroundColor {
         $childrenWithSameBackground = array_filter($this->innerComponents, function($child) {
             if (method_exists($child, 'get_background_color')) {
                 if ($child->get_background_color() !== null) {
-                    return $child->get_background_color() === $this->get_background_colors()->inner || $child->get_background_color() === $this->get_background_colors()->outer;
+                    return $child->get_background_color() === $this->backgroundColor;
                 }
             }
 
@@ -126,10 +124,16 @@ trait BackgroundColor {
 
         if (count($childrenWithSameBackground) > 0) {
             $updatedInnerComponents = array_map(function($child) {
-                if (method_exists($child, 'update_background_color') && method_exists($child, 'get_background_color')) {
-                    $backgroundToUse = $this->backgroundColors->inner ?? $this->backgroundColors->outer;
-                    if ($child->get_background_color() === $backgroundToUse) {
-                        $child->update_background_color(null);
+                if (method_exists($child, 'get_background_color')) {
+                    if (method_exists($child, 'update_background_color')) {
+                        if ($child->get_background_color() === $this->backgroundColor) {
+                            $child->update_background_color(null);
+                        }
+                    }
+                    else if (method_exists($child, 'update_background_colors')) {
+                        if ($child->get_background_color() === $this->backgroundColor) {
+                            $child->update_background_colors(new BackgroundCollection(null, null));
+                        }
                     }
                 }
 
@@ -148,7 +152,7 @@ trait BackgroundColor {
      */
     protected function set_background_colors_based_on_inner_components(): void {
         // No need to set the background if it's already set
-        if ($this->backgroundColors->outer || $this->backgroundColors->inner) {
+        if ($this->backgroundColor) {
             return;
         }
 

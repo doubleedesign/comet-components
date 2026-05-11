@@ -63,7 +63,7 @@ class Card extends UIComponent {
         $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
         $this->set_is_nested($attributes['isNested'] ?? true);
         $this->set_color_theme($attributes);
-        $this->set_background_colors($attributes);
+        $this->set_background_color($attributes);
         $this->set_orientation($attributes);
 
         $innerComponents = $this->aboveContentComponents ?? [];

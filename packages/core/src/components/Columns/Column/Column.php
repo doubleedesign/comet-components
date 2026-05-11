@@ -4,6 +4,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::MAIN, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
 class Column extends LayoutComponent {
+	use BackgroundColor;
+
     /**
      * @var ?string $width
      * @description Optionally set the width of the column, if you absolutely must do it explicitly instead of in your own CSS
@@ -46,6 +48,17 @@ class Column extends LayoutComponent {
 
         return $styles;
     }
+
+	protected function get_html_attributes(): array {
+		$attributes = parent::get_html_attributes();
+
+		if ($this->get_background_color() !== null) {
+			$attributes['data-background'] = $this->get_background_color()->value;
+		}
+
+
+		return $attributes;
+	}
 
     public function render(): void {
         $blade = BladeService::getInstance();

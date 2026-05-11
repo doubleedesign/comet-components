@@ -26,9 +26,9 @@
                 "2.35:1"
             ]
         },
-        "backgroundColors": {
-            "type": "BackgroundCollection",
-            "description": "Key -> value pairs of background placement and colour keywords"
+        "backgroundColor": {
+            "type": "ThemeColor|ThemeGradient",
+            "description": "The single background colour of the component."
         },
         "bodyText": {
             "type": "string",
