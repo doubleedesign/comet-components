@@ -1,17 +1,22 @@
 .site-footer {
   padding-block: var(--spacing-lg);
 }
-@container (min-width: var(--width-narrow)) {
+@media (min-width: 768px) {
   .site-footer {
     padding-block: var(--spacing-xl);
   }
 }
-.site-footer__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-md);
+@media (min-width: 1440px) {
+  .site-footer {
+    padding-block: var(--spacing-xxl);
+  }
+}
+.site-footer {
+  padding-block-end: var(--spacing-lg);
+}
+.site-footer ul {
+  margin: 0;
+  padding: 0;
 }
 .site-footer a {
   color: inherit;

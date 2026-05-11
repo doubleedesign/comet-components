@@ -24,6 +24,7 @@ class SiteFooter extends LayoutComponent {
     protected array $devCredit;
 
     public function __construct(array $attributes, array $innerComponents) {
+		$this->set_background_color($attributes);
         $this->copyright = $attributes['copyright'] ?? [];
         $this->devCredit = $attributes['devCredit'] ?? [];
 

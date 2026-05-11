@@ -1,18 +1,12 @@
 @use '../mixins' as *;
 
 .site-footer {
-	padding-block: var(--spacing-lg);
+	@include section-padding();
+	padding-block-end: var(--spacing-lg);
 
-	@include container-width-up('narrow') {
-		padding-block: var(--spacing-xl);
-	}
-
-	&__container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: var(--spacing-md);
+	ul {
+		margin: 0;
+		padding: 0;
 	}
 
 	a {
