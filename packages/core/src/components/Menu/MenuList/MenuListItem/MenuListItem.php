@@ -12,7 +12,7 @@ class MenuListItem extends UIComponent {
      */
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Menu.MenuList.MenuListItem.menu-list-item');
-        $this->isCurrentParent = $attributes['isCurrentParent'] ?? false;
+        $this->isCurrentParent = isset($attributes['isCurrentParent']) ? filter_var($attributes['isCurrentParent'], FILTER_VALIDATE_BOOLEAN) : false;
     }
 
     /**
@@ -36,9 +36,9 @@ class MenuListItem extends UIComponent {
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
-		if($this->isCurrentParent === 'true') {
-			$attributes['data-current-parent'] = "true";
-		}
+        if ($this->isCurrentParent) {
+            $attributes['data-current-parent'] = "true";
+        }
 
         return $attributes;
     }
@@ -47,14 +47,14 @@ class MenuListItem extends UIComponent {
         $classes = parent::get_filtered_classes();
 
         // Hack for overly verbose BEM class names in sub-menus
-	    // TODO: Need to somehow fix it in the inner links too
-	    return array_map(function($class) use (&$classes) {
-	        if (str_ends_with($class, 'menu__list__item__menu__sub-menu__menu__list__item')) {
-	            return str_replace('menu__list__item__menu__sub-menu__menu__list', 'menu__list__sub-menu', $class);
-	        }
+        // TODO: Need to somehow fix it in the inner links too
+        return array_map(function($class) use (&$classes) {
+            if (str_ends_with($class, 'menu__list__item__menu__sub-menu__menu__list__item')) {
+                return str_replace('menu__list__item__menu__sub-menu__menu__list', 'menu__list__sub-menu', $class);
+            }
 
-	        return $class;
-	    }, $classes);
+            return $class;
+        }, $classes);
     }
 
     public function render(): void {
