@@ -1,5 +1,4 @@
 .column, [class$=__column], [class*=column--] {
-  min-width: 0;
   display: flex;
   flex-direction: column;
 }

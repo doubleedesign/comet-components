@@ -35,20 +35,6 @@ class Columns extends LayoutComponent {
         $this->set_layout_alignment($attributes);
         $this->set_background_color($attributes);
 
-        // If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
-        $columnWidths = array_map(function($column) {
-            if (!$column instanceof Column) return 0;
-
-            return $column->get_width();
-        }, $innerComponents);
-        if (count(array_unique($columnWidths)) === 1) {
-            array_walk($innerComponents, function(&$column) {
-                if (!$column instanceof Column) return;
-
-                $column->set_width(null);
-            });
-        }
-
         // If this component has its own shortname, wrap the content so we still get the appropriate class names for column styling automatically
         $this->shouldBeWrapped = isset($attributes['shortName']) && $attributes['shortName'] !== 'columns';
         if ($this->shouldBeWrapped) {

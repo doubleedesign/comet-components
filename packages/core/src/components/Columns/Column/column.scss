@@ -1,7 +1,6 @@
 @use '../../bem-mixin' as *;
 
 @include bem-block('column') {
-	min-width: 0; // prevents overflowing content from widening the column in grid layouts
 	display: flex;
 	flex-direction: column;
 }

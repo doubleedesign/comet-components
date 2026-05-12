@@ -10,7 +10,7 @@
 .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
   grid-template-columns: repeat(1, 1fr);
 }
-@container (min-width: var(--width-narrower)) {
+@container (min-width: var(--width-small)) {
   .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -26,12 +26,12 @@
 .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--] {
   grid-template-columns: repeat(4, 1fr);
 }
-@container (min-width: var(--width-narrow)) {
-  .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+@container (min-width: var(--width-small)) {
+  .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-.columns[data-count="3"][data-allow-layout-stacking=false], [data-count="3"][data-allow-layout-stacking=false][class$=__columns], [data-count="3"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
+.columns[data-count="3"][data-allow-layout-stacking=false], [data-count="3"][data-allow-layout-stacking=false][class$=__columns], [data-count="3"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="5"][data-allow-layout-stacking=false], [data-count="5"][data-allow-layout-stacking=false][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
   grid-template-columns: repeat(3, 1fr);
 }
 @container (min-width: var(--width-narrow)) {
@@ -49,16 +49,6 @@
 }
 .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
   grid-template-columns: repeat(6, 1fr);
-}
-.columns:has(> [class*="--has-own-width"]), [class$=__columns]:has(> [class*="--has-own-width"]), [class*=columns--]:has(> [class*="--has-own-width"]) {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: var(--spacing-md);
-}
-@container (min-width: var(--width-narrow)) {
-  .columns:has(> [class*="--has-own-width"]), [class$=__columns]:has(> [class*="--has-own-width"]), [class*=columns--]:has(> [class*="--has-own-width"]) {
-    gap: var(--spacing-lg);
-  }
 }
 .columns > [class$=__columns], [class$=__columns] > [class$=__columns], [class*=columns--] > [class$=__columns] {
   padding-block: 0;
