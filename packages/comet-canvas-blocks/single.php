@@ -10,7 +10,7 @@ $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
 if ($image_url) {
     $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
     $image_caption = get_the_post_thumbnail_caption();
-    $image = new ContentImageBasic([
+    $image = new Group(['shortName' => 'image'], [new ContentImageBasic([
         'src'             => $image_url,
         'alt'             => $image_alt,
         'caption'         => $image_caption,
@@ -18,7 +18,7 @@ if ($image_url) {
         'scale'           => 'cover',
         'classes'         => apply_filters('comet_canvas_blog_post_featured_image_classes', []),
         'styleName'       => apply_filters('comet_canvas_blog_post_featured_image_style', ''),
-    ]);
+    ])]);
 }
 
 $content = new Copy([

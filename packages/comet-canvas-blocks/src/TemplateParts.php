@@ -37,7 +37,7 @@ class TemplateParts {
         $author_data = $user_query->get_results()[0]->data;
 
         return new Card([
-            'classes'    => ['author-bio'],
+            'id'    => 'author-bio',
             'heading'    => "<span>About the author</span>" . $author_data->display_name,
             'bodyText'   => get_user_meta($author_id, 'description', true),
             'colorTheme' => 'primary',
@@ -144,7 +144,8 @@ class TemplateParts {
 
         return new CardList(
             [
-                'size'      => 'default',
+				'shortName' => 'posts',
+                'size'      => apply_filters('comet_canvas_posts_loop_card_list_container_size', 'contained'),
                 'maxPerRow' => $cardsPerRow,
                 'layout'    => $cardLayout,
                 ...$attributes
