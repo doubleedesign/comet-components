@@ -7,21 +7,8 @@
     "belongsInside": "Tabs",
     "attributes": {
         "backgroundColor": {
-            "type": "ThemeColor",
-            "description": "The single background colour of the component.",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
-            ]
+            "type": "ThemeColor|ThemeGradient",
+            "description": "The single background colour of the component."
         },
         "classes": {
             "type": "array<string>",

@@ -1948,112 +1948,6 @@
         ]
     },
     {
-        "name": "Column",
-        "description": null,
-        "extends": "LayoutComponent",
-        "abstract": false,
-        "isInner": true,
-        "belongsInside": "Columns",
-        "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor|ThemeGradient",
-                "description": "The single background colour of the component."
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": [
-                    "columns__column"
-                ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
-                "default": "columns"
-            },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "column"
-            },
-            "size": {
-                "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
-                "supported": [
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small",
-                    "contained"
-                ],
-                "default": "contained"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "div",
-                    "main",
-                    "aside"
-                ],
-                "default": "div"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "width": {
-                "type": "string",
-                "description": "Optionally set the width of the column, if you absolutely must do it explicitly instead of in your own CSS (ideally this should not be set in HTML, but things like the WP block editor kind of make it necessary to handle this use case). Note: This may be overridden to stack columns on small viewports."
-            }
-        },
-        "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "BackgroundColor",
-            "LayoutAlignment",
-            "LayoutContainerSize",
-            "BlockElementModifier"
-        ]
-    },
-    {
         "name": "Columns",
         "description": "Organise content visually with a column-based layout.",
         "extends": "LayoutComponent",
@@ -2095,12 +1989,6 @@
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
-            },
-            "isNested": {
-                "type": "bool",
-                "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
-                "required": true,
-                "default": false
             },
             "shortName": {
                 "type": "string",
@@ -2158,7 +2046,6 @@
         },
         "traits": [
             "BackgroundColor",
-            "NestedState",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -4880,8 +4767,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -4889,38 +4775,17 @@
     },
     {
         "name": "PageSection",
-        "description": "A basic full-width section to separate content areas, with optional background color or gradient. Intended for automatic use as the wrapper for Container components and as the parent for components that are not intended to be nested, such as those extending WrappedLayoutComponent.",
+        "description": "A basic full-width section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc.",
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColor": {
-                "type": "ThemeColor|ThemeGradient",
-                "description": "The single background colour of the component."
-            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
                     "page-section"
-                ]
-            },
-            "colorTheme": {
-                "type": "ThemeColor",
-                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
                 ]
             },
             "context": {
@@ -4979,8 +4844,6 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
             "LayoutContainerSize",
             "BlockElementModifier"
         ]
