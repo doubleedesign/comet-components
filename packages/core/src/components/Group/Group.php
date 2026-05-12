@@ -11,8 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE, Tag::ASIDE, Tag::UL, Tag::OL, Tag::FIGURE])]
 #[DefaultTag(Tag::DIV)]
 class Group extends UIComponent {
-    use BackgroundColor;
-    use ColorTheme;
+    use ColorPair;
     use NestedState;
 
     /**
@@ -30,10 +29,8 @@ class Group extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Group.group');
-        $this->set_color_theme($attributes);
-        /* Allow groups without a specified background to be transparent rather than defaulting to the fallback */
-        if (isset($attributes['backgroundColor']) || isset($attributes['backgroundColors'])) {
-            $this->set_background_color($attributes);
+        $this->set_color_pair($attributes);
+        if ($this->get_background_color() !== null) {
             $this->simplify_all_background_colors();
         }
 

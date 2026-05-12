@@ -11,8 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::HEADER, Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::HEADER)]
 class PageHeader extends LayoutComponent {
-	use BackgroundColor;
-    use ColorTheme;
+    use ColorPair;
 
     /**
      * @var string $title
@@ -27,16 +26,16 @@ class PageHeader extends LayoutComponent {
     protected array $breadcrumbs;
 
     public function __construct(array $attributes, string $content, array $breadcrumbs = []) {
-        $this->set_color_theme($attributes);
+        $this->set_color_pair($attributes);
         $this->breadcrumbs = $breadcrumbs;
-        $this->innerComponents = !empty($breadcrumbs) ? [new Breadcrumbs([], $this->breadcrumbs)] : [];
 
-        $this->innerComponents = array_merge(
-            $this->innerComponents,
-            [new Heading(['level' => 1], $content)]
-        );
+        $innerComponents = [];
+        if (!empty($this->breadcrumbs)) {
+            array_push($innerComponents, new Breadcrumbs([], $this->breadcrumbs));
+        }
+        array_push($innerComponents, new Heading(['level' => 1], $content));
 
-        parent::__construct($attributes, $this->innerComponents, 'components.PageHeader.page-header');
+        parent::__construct($attributes, $innerComponents, 'components.PageHeader.page-header');
     }
 
     protected function get_html_attributes(): array {
@@ -46,10 +45,10 @@ class PageHeader extends LayoutComponent {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
-	    if ($this->get_background_color() !== null) {
-		    $attributes['data-background'] = $this->get_background_color()->value;
-	    }
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->get_background_color()->value;
+        }
 
-	    return $attributes;
+        return $attributes;
     }
 }

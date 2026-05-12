@@ -11,8 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class LinkGroup extends LayoutComponent {
-	use BackgroundColor;
-    use ColorTheme;
+	use ColorPair;
     use GroupLayoutType;
     use NestedState;
 
@@ -26,7 +25,7 @@ class LinkGroup extends LayoutComponent {
      * @param array<Link|array<string,string> $links - Either an array of Link objects or an array of associative arrays corresponding to Link fields
      */
     public function __construct(array $attributes, array $links) {
-        $this->set_color_theme($attributes, ThemeColor::PRIMARY);
+        $this->set_color_pair($attributes);
         $this->set_group_layout($attributes);
         $this->set_is_nested($attributes['isNested'] ?? false);
         $this->heading = $attributes['heading'] ?? null;

@@ -121,8 +121,7 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
-        "ColorTheme",
+        "ColorPair",
         "LayoutAlignment",
         "LayoutContainerSize",
         "BlockElementModifier"

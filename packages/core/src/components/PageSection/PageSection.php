@@ -5,16 +5,12 @@ namespace Doubleedesign\Comet\Core;
  * PageSection component
  *
  * @package Doubleedesign\Comet\Core
- * @version 1.0.0
- * @description A basic full-width section to separate content areas, with optional background color or gradient.
- *              Intended for automatic use as the wrapper for Container components
- *              and as the parent for components that are not intended to be nested, such as those extending WrappedLayoutComponent.
+ * @version 1.1.0
+ * @description A basic full-width section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc.
  */
 #[AllowedTags([Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE, Tag::FIGURE])]
 #[DefaultTag(Tag::SECTION)]
 class PageSection extends UIComponent {
-    use BackgroundColor;
-    use ColorTheme;
     use LayoutContainerSize;
 
     /**
@@ -25,11 +21,13 @@ class PageSection extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.PageSection.page-section');
-        $this->set_shortname($attributes['shortName'] ?? 'page-section');
         $this->set_size($attributes);
-        $this->set_background_color($attributes);
-        $this->set_color_theme($attributes);
-        $this->innerComponents = $innerComponents;
+
+        array_walk($this->innerComponents, function(&$component) {
+            if (method_exists($component, 'set_is_nested')) {
+                $component->set_is_nested(true);
+            }
+        });
     }
 
     public function get_filtered_classes(): array {
@@ -44,14 +42,6 @@ class PageSection extends UIComponent {
 
         if (isset($this->size)) {
             $attributes['data-size'] = $this->size->value;
-        }
-
-        if ($this->colorTheme) {
-            $attributes['data-color-theme'] = $this->colorTheme->value;
-        }
-
-        if (isset($this->backgroundColor)) {
-            $attributes['data-background'] = $this->get_background_colors()->outer->value;
         }
 
         return $attributes;

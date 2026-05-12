@@ -11,8 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::ARTICLE, Tag::FOOTER, Tag::A])]
 #[DefaultTag(Tag::DIV)]
 class Card extends UIComponent {
-    use BackgroundColor;
-    use ColorTheme;
+    use ColorPair;
     use ImageCropProperties;
     use LayoutOrientation;
     use NestedState;
@@ -62,8 +61,7 @@ class Card extends UIComponent {
         $this->aboveContentComponents = $aboveContentComponents ?? null;
         $this->withWrapper = $attributes['withWrapper'] ?? $this->withWrapper;
         $this->set_is_nested($attributes['isNested'] ?? true);
-        $this->set_color_theme($attributes);
-        $this->set_background_color($attributes);
+        $this->set_color_pair($attributes);
         $this->set_orientation($attributes);
 
         $innerComponents = $this->aboveContentComponents ?? [];

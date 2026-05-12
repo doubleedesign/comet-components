@@ -141,8 +141,7 @@
         "default": []
     },
     "traits": [
-        "BackgroundColor",
-        "ColorTheme",
+        "ColorPair",
         "GroupLayoutType",
         "NestedState",
         "LayoutAlignment",

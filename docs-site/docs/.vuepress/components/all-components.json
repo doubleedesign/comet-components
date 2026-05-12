@@ -1161,8 +1161,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "LayoutAlignment",
             "LayoutAlignment",
             "LayoutContainerSize",
@@ -1787,8 +1786,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "ImageCropProperties",
             "LayoutOrientation",
             "NestedState",
@@ -1938,8 +1936,7 @@
             "default": []
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "GroupLayoutType",
             "NestedState",
             "LayoutAlignment",
@@ -3194,8 +3191,7 @@
             "default": []
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "GroupLayoutType",
             "NestedState",
             "LayoutAlignment",
@@ -3425,8 +3421,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "NestedState",
             "LayoutAlignment",
             "LayoutContainerSize",
@@ -3667,8 +3662,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "NestedState",
             "BlockElementModifier"
         ]
@@ -4325,8 +4319,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "GroupLayoutType",
             "NestedState",
             "LayoutAlignment",
@@ -5100,8 +5093,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColor",
-            "ColorTheme",
+            "ColorPair",
             "BlockElementModifier",
             "TextAlign"
         ]

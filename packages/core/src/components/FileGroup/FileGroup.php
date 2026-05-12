@@ -11,8 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class FileGroup extends LayoutComponent {
-	use BackgroundColor;
-    use ColorTheme;
+	use ColorPair;
     use NestedState;
 
     /**
@@ -26,7 +25,7 @@ class FileGroup extends LayoutComponent {
      * @param array<File|array<string,string> $files - Either an array of File objects or an array of associative arrays corresponding to File fields
      */
     public function __construct(array $attributes, array $files) {
-        $this->set_color_theme($attributes);
+        $this->set_color_pair($attributes);
         $this->set_is_nested($attributes['isNested'] ?? null);
         $this->heading = $attributes['heading'] ?? null;
 

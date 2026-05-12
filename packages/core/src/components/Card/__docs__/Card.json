@@ -164,8 +164,7 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
-        "ColorTheme",
+        "ColorPair",
         "ImageCropProperties",
         "LayoutOrientation",
         "NestedState",

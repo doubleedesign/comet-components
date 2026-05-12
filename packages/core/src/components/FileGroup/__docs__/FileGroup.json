@@ -120,8 +120,7 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
-        "ColorTheme",
+        "ColorPair",
         "NestedState",
         "LayoutAlignment",
         "LayoutContainerSize",

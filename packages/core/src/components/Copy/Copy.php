@@ -32,9 +32,9 @@ class Copy extends UIComponent {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
-		if(isset($this->size) && !$this->get_is_nested()) {
-			$attributes['data-size'] = $this->size->value;
-		}
+        if (isset($this->size) && !$this->get_is_nested()) {
+            $attributes['data-size'] = $this->size->value;
+        }
 
         return $attributes;
     }

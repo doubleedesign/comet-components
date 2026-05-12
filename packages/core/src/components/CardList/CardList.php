@@ -4,8 +4,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class CardList extends LayoutComponent {
-    use BackgroundColor;
-    use ColorTheme;
+    use ColorPair;
     use GroupLayoutType;
     use NestedState;
 
@@ -31,8 +30,7 @@ class CardList extends LayoutComponent {
         $this->set_group_layout($attributes);
         $this->set_layout_alignment($attributes, Alignment::START);
         $this->set_is_nested($attributes['isNested'] ?? false);
-        $this->set_color_theme($attributes);
-		$this->set_background_color($attributes);
+        $this->set_color_pair($attributes);
         $headingComponent = isset($attributes['heading']) ? new Heading([], $attributes['heading']) : null;
         $linkComponent = isset($attributes['link']) ? new Button($attributes['link'], $attributes['link']['title'] ?? 'View more') : null;
 

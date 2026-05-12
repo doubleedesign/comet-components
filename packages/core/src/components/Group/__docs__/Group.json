@@ -92,8 +92,7 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
-        "ColorTheme",
+        "ColorPair",
         "NestedState",
         "BlockElementModifier"
     ]

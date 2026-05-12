@@ -1,37 +1,16 @@
 {
     "name": "PageSection",
-    "description": "A basic full-width section to separate content areas, with optional background color or gradient. Intended for automatic use as the wrapper for Container components and as the parent for components that are not intended to be nested, such as those extending WrappedLayoutComponent.",
+    "description": "A basic full-width section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc.",
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": "LayoutComponent",
     "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor|ThemeGradient",
-            "description": "The single background colour of the component."
-        },
         "classes": {
             "type": "array<string>",
             "description": "CSS classes",
             "default": [
                 "page-section"
-            ]
-        },
-        "colorTheme": {
-            "type": "ThemeColor",
-            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
-            "supported": [
-                "primary",
-                "secondary",
-                "accent",
-                "error",
-                "success",
-                "warning",
-                "info",
-                "light",
-                "dark",
-                "white",
-                "black"
             ]
         },
         "context": {
@@ -90,8 +69,6 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
-        "ColorTheme",
         "LayoutContainerSize",
         "BlockElementModifier"
     ]
