@@ -223,6 +223,12 @@ class Config {
         }, []);
     }
 
+    public function get_colours_filtered_against_background_contrast(): array {
+        return array_filter(self::get_theme_colours(), function($colour) {
+            return self::$colourUtils->validate_pair($colour, self::get_global_background());
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
     /**
      * Option to override available colour pairs on a per-component basis
      *
