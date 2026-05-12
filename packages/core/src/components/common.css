@@ -289,46 +289,46 @@
   .inline-message {
     color: var(--theme-color);
   }
-  .inline-message [data-aspect-ratio=square] {
+  [data-aspect-ratio=square] {
     aspect-ratio: 1/1;
   }
-  .inline-message [data-aspect-ratio=standard] {
+  [data-aspect-ratio=standard] {
     aspect-ratio: 4/3;
   }
-  .inline-message [data-aspect-ratio=portrait] {
+  [data-aspect-ratio=portrait] {
     aspect-ratio: 3/4;
   }
-  .inline-message [data-aspect-ratio=wide] {
+  [data-aspect-ratio=wide] {
     aspect-ratio: 16/9;
   }
-  .inline-message [data-aspect-ratio=classic] {
+  [data-aspect-ratio=classic] {
     aspect-ratio: 3/2;
   }
-  .inline-message [data-aspect-ratio=classic_portrait] {
+  [data-aspect-ratio=classic_portrait] {
     aspect-ratio: 2/3;
   }
-  .inline-message [data-aspect-ratio=cinematic] {
+  [data-aspect-ratio=cinematic] {
     aspect-ratio: 21/9;
   }
-  .inline-message [data-aspect-ratio=cinemascope] {
+  [data-aspect-ratio=cinemascope] {
     aspect-ratio: 2.35/1;
   }
-  .inline-message .breakout {
+  .breakout {
     width: 100cqw;
     position: relative;
     z-index: 300;
     padding-inline: var(--spacing-md);
   }
-  [class*=container] .inline-message .breakout {
+  [class*=container] .breakout {
     max-width: var(--width-contained);
   }
-  [class*=container][data-size=fullwidth] .inline-message .breakout {
+  [class*=container][data-size=fullwidth] .breakout {
     max-width: 100vw;
   }
-  [class*=container][data-size=wide] .inline-message .breakout {
+  [class*=container][data-size=wide] .breakout {
     max-width: var(--width-wide);
   }
-  [class*=container][data-size=narrow] .inline-message .breakout {
+  [class*=container][data-size=narrow] .breakout {
     max-width: var(--width-narrow);
   }
 }

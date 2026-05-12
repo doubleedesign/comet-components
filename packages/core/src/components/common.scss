@@ -234,46 +234,46 @@
 
 	.inline-message {
 		color: var(--theme-color);
+	}
 
-		// See packages/core/src/base/types/AspectRatio for what these should be
-		[data-aspect-ratio="square"] {
-			aspect-ratio: 1/1;
-		}
+	// See packages/core/src/base/types/AspectRatio for what these should be
+	[data-aspect-ratio="square"] {
+		aspect-ratio: 1/1;
+	}
 
-		[data-aspect-ratio="standard"] {
-			aspect-ratio: 4/3;
-		}
+	[data-aspect-ratio="standard"] {
+		aspect-ratio: 4/3;
+	}
 
-		[data-aspect-ratio="portrait"] {
-			aspect-ratio: 3/4;
-		}
+	[data-aspect-ratio="portrait"] {
+		aspect-ratio: 3/4;
+	}
 
-		[data-aspect-ratio="wide"] {
-			aspect-ratio: 16/9;
-		}
+	[data-aspect-ratio="wide"] {
+		aspect-ratio: 16/9;
+	}
 
-		[data-aspect-ratio="classic"] {
-			aspect-ratio: 3/2;
-		}
+	[data-aspect-ratio="classic"] {
+		aspect-ratio: 3/2;
+	}
 
-		[data-aspect-ratio="classic_portrait"] {
-			aspect-ratio: 2/3;
-		}
+	[data-aspect-ratio="classic_portrait"] {
+		aspect-ratio: 2/3;
+	}
 
-		[data-aspect-ratio="cinematic"] {
-			aspect-ratio: 21/9;
-		}
+	[data-aspect-ratio="cinematic"] {
+		aspect-ratio: 21/9;
+	}
 
-		[data-aspect-ratio="cinemascope"] {
-			aspect-ratio: 2.35/1;
-		}
+	[data-aspect-ratio="cinemascope"] {
+		aspect-ratio: 2.35/1;
+	}
 
-		// Allow an item to "break out" of its parent width to take up the full container width when inside something else with a narrower width
-		// (assuming it's also inside a container, defined by container-type: inline-size)
-		// (so this only works in things like columns, not directly in containers, unless you unset container-type on the container)
-		.breakout {
-			@include breakout();
-		}
+	// Allow an item to "break out" of its parent width to take up the full container width when inside something else with a narrower width
+	// (assuming it's also inside a container, defined by container-type: inline-size)
+	// (so this only works in things like columns, not directly in containers, unless you unset container-type on the container)
+	.breakout {
+		@include breakout();
 	}
 }
 

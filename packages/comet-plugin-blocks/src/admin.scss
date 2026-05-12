@@ -31,7 +31,6 @@ body :where(.editor-styles-wrapper) {
 }
 
 .editor-styles-wrapper {
-	@extend .body;
 
 	@each $colorName in ['primary', 'secondary', 'accent', 'info', 'warning', 'success', 'error', 'light', 'dark', 'white'] {
 		&:has(.page-header[data-background="#{$colorName}"]) {
@@ -45,7 +44,6 @@ body :where(.editor-styles-wrapper) {
 }
 
 .is-root-container {
-	@extend .body;
 	padding-block: 0 !important;
 }
 
