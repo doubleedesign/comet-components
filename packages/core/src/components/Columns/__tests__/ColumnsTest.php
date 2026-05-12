@@ -185,4 +185,92 @@ describe('Columns', function() {
             ->and($columns[0]->hasAttribute('data-background'))->toBeFalse()
             ->and($columns[1]->hasAttribute('data-background'))->toBeTrue();
     });
+
+    it('adds the layout stacking attribute if it is explicitly set to false', function() {
+        ob_start();
+        $component = new Columns(['allowStacking' => false], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $columns = PestUtils::getElementsByClassName($dom, 'columns')[0];
+
+        expect($columns->hasAttribute('data-allow-layout-stacking'))->toBeTrue()
+            ->and($columns->getAttribute('data-allow-layout-stacking'))->toEqual('false');
+    });
+
+    it('adds the layout stacking attribute if it is explicitly set to false and the component has a shortName set', function() {
+        ob_start();
+        $component = new Columns(['allowStacking' => false, 'shortName' => 'copy-image'], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $wrapper = PestUtils::getElementsByClassName($dom, 'copy-image')[0];
+        $columns = PestUtils::getElementsByClassName($dom, 'copy-image__columns')[0];
+
+        expect($wrapper->hasAttribute('data-allow-layout-stacking'))->toBeFalse()
+            ->and($columns->hasAttribute('data-allow-layout-stacking'))->toBeTrue()
+            ->and($columns->getAttribute('data-allow-layout-stacking'))->toEqual('false');
+    });
+
+    it('does not add the layout stacking attribute if it is not explicitly set', function() {
+        ob_start();
+        $component = new Columns([], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $columns = PestUtils::getElementsByClassName($dom, 'columns')[0];
+
+        expect($columns->hasAttribute('data-allow-layout-stacking'))->toBeFalse();
+    });
+
+    it('does not add the layout stacking attribute if it is not explicitly set and the component has a shortName set', function() {
+        ob_start();
+        $component = new Columns(['shortName' => 'copy-image'], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $wrapper = PestUtils::getElementsByClassName($dom, 'copy-image')[0];
+        $columns = PestUtils::getElementsByClassName($dom, 'copy-image__columns')[0];
+
+        expect($wrapper->hasAttribute('data-allow-layout-stacking'))->toBeFalse()
+            ->and($columns->hasAttribute('data-allow-layout-stacking'))->toBeFalse();
+    });
+
+    it('does not add the layout stacking attribute if it is explicitly set to true', function() {
+        ob_start();
+        $component = new Columns(['allowStacking' => true], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $columns = PestUtils::getElementsByClassName($dom, 'columns')[0];
+
+        expect($columns->hasAttribute('data-allow-layout-stacking'))->toBeFalse();
+    });
+
+    it('does not add the layout stacking attribute if it is explicitly set to true and the component has an explicit shortName', function() {
+        ob_start();
+        $component = new Columns(['shortName' => 'copy-image', 'allowStacking' => true], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $wrapper = PestUtils::getElementsByClassName($dom, 'copy-image')[0];
+        $columns = PestUtils::getElementsByClassName($dom, 'copy-image__columns')[0];
+
+        expect($wrapper->hasAttribute('data-allow-layout-stacking'))->toBeFalse()
+            ->and($columns->hasAttribute('data-allow-layout-stacking'))->toBeFalse();
+    });
 });

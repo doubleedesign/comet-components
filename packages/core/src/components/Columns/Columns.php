@@ -12,7 +12,6 @@ namespace Doubleedesign\Comet\Core;
 #[DefaultTag(Tag::SECTION)]
 class Columns extends LayoutComponent {
     use BackgroundColor;
-
     private int $qty;
 
     /**
@@ -32,9 +31,9 @@ class Columns extends LayoutComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         $this->qty = count($innerComponents);
-        $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
+        $this->allowStacking = $attributes['allowStacking'] ?? null;
         $this->set_layout_alignment($attributes);
-		$this->set_background_color($attributes);
+        $this->set_background_color($attributes);
 
         // If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
         $columnWidths = array_map(function($column) {
@@ -53,14 +52,15 @@ class Columns extends LayoutComponent {
         // If this component has its own shortname, wrap the content so we still get the appropriate class names for column styling automatically
         $this->shouldBeWrapped = isset($attributes['shortName']) && $attributes['shortName'] !== 'columns';
         if ($this->shouldBeWrapped) {
-            $wrappedInnerComponents = [new Group(array(
+            $innerAttrs = array(
                 ...Utils::array_pick($attributes, ['vAlign', 'hAlign']),
                 'shortName'                  => 'columns',
-                'data-allow-layout-stacking' => $this->allowStacking ? 'true' : 'false',
                 'data-count'                 => $this->qty
-            ),
-                $innerComponents
-            )];
+            );
+            if ($this->allowStacking !== null && $this->allowStacking !== true && $this->allowStacking !== 'true') {
+                $innerAttrs['data-allow-layout-stacking'] = 'false';
+            }
+            $wrappedInnerComponents = [new Group($innerAttrs, $innerComponents)];
         }
 
         // Finally, create the component with all the transformed stuff
@@ -81,8 +81,8 @@ class Columns extends LayoutComponent {
                 $attributes['data-valign'] = $this->vAlign->value;
             }
 
-            if ($this->allowStacking !== null) {
-                $attributes['data-allow-layout-stacking'] = $this->allowStacking ? 'true' : 'false';
+            if ($this->allowStacking !== null && $this->allowStacking !== true && $this->allowStacking !== 'true') {
+                $attributes['data-allow-layout-stacking'] = 'false';
             }
         }
 
