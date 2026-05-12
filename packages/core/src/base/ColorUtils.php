@@ -191,8 +191,13 @@ class ColorUtils {
                     $value = $this->namedColours[strtolower($value)];
                 }
 
+                // If this is a three-character hex, expand it to six characters for easier processing back and forth
+                if (preg_match('/^#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])$/', $value, $matches)) {
+                    $value = '#' . $matches[1] . $matches[1] . $matches[2] . $matches[2] . $matches[3] . $matches[3];
+                }
+
                 if ($this->value_is_colour($name, $value)) {
-                    $acc[trim($name)] = $value;
+                    $acc[trim($name)] = strtolower($value);
                 }
             }
 
@@ -232,6 +237,13 @@ class ColorUtils {
         return $palette[$color] ?? null;
     }
 
+    public function get_theme_name_for_colour_value(string $value): ?string {
+        $palette = $this->get_theme_colour_values();
+        $flipped = array_flip($palette);
+
+        return $flipped[strtolower($value)] ?? null;
+    }
+
     public function validate_pair(ThemeColor|string $foreground, ThemeColor|string $background, float $threshold = 3): bool {
         try {
             if (is_string($foreground)) {
@@ -264,6 +276,38 @@ class ColorUtils {
             error_log($e->getMessage());
 
             return false;
+        }
+    }
+
+    public function get_best_foreground_color(ThemeColor|string $background): ?ThemeColor {
+        if (is_string($background)) {
+            $background = ThemeColor::tryFrom($background);
+        }
+
+        $backgroundValue = self::get_theme_value_for_colour_name($background->value);
+        if ($backgroundValue === null) {
+            return null;
+        }
+
+        try {
+            $backgroundColor = colority()->parse($backgroundValue);
+            $result = $backgroundColor->getBestForegroundColor();
+
+            $name = self::get_theme_name_for_colour_value(
+                $result->getValueColor()
+                ?? $result->toRgb()->getValueColor()
+                ?? $result->toHsl()->getValueColor()
+                ?? $result->toOklch()->getValueColor()
+            );
+
+            if ($name === null) {
+                return null;
+            }
+
+            return ThemeColor::tryFrom($name);
+        }
+        catch (Exception $e) {
+            return null;
         }
     }
 

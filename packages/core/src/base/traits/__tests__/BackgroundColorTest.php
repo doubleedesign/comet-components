@@ -1,7 +1,7 @@
 <?php
 
 use Doubleedesign\Comet\Core\{Config, BackgroundColor, ThemeColor};
-use function Patchwork\{restoreAll};
+use function Patchwork\restoreAll;
 
 beforeEach(function() {
     Config::init();
@@ -61,6 +61,18 @@ describe('Set value from attributes', function() {
         $component = create_component_with_bg_color(['backgroundColor' => 'primary']);
 
         expect($component->get_background_color())->toEqual(ThemeColor::PRIMARY);
+    });
+
+    it('does not set the background colour if it is the same as the global background and the component is not nested', function() {
+        $component = create_component_with_bg_color(['backgroundColor' => 'white']);
+
+        expect($component->get_background_color())->toBeNull();
+    });
+
+    it('sets the background colour if it is the same as the global background but the component is nested', function() {
+        $component = create_component_with_bg_color(['backgroundColor' => 'white', 'isNested' => true]);
+
+        expect($component->get_background_color())->toEqual(ThemeColor::WHITE);
     });
 });
 

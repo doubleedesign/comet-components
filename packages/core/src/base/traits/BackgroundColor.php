@@ -39,7 +39,7 @@ trait BackgroundColor {
         // Only keep the set background color if this is nested OR the background color is different from the global background
         // So we don't set background attributes on top-level components when not needed
         $globalBackground = Config::getInstance()->get_global_background();
-        $isSameAsGlobal = isset($this->backgroundColor) && $this->backgroundColor === $globalBackground;
+        $isSameAsGlobal = isset($this->backgroundColor) && $this->backgroundColor->value === $globalBackground;
         $isNested = (isset($this->isNested) && $this->isNested) || (isset($attributes['isNested']) && $attributes['isNested']);
         if ((!$isNested && $isSameAsGlobal) || !isset($attributes['backgroundColor'])) {
             $this->backgroundColor = null;

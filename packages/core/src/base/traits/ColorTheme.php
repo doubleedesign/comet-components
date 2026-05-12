@@ -41,6 +41,10 @@ trait ColorTheme {
         $this->colorTheme = $this->colorTheme ?? $default;
     }
 
+    public function get_color_theme(): ?ThemeColor {
+        return $this->colorTheme;
+    }
+
     private function get_from_string_or_themecolor($value): ?ThemeColor {
         if ($value instanceof ThemeColor) {
             return $value;
