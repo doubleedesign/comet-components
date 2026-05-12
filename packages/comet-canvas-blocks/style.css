@@ -70,4 +70,10 @@ section + .separator-wrapper hr, .separator-wrapper + section hr {
   }
 }
 
+.post-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
 /*# sourceMappingURL=style.css.map */

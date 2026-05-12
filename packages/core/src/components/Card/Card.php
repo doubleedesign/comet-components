@@ -140,7 +140,7 @@ class Card extends UIComponent {
         return $attributes;
     }
 
-    public function render(): void {
+	public function render(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [
