@@ -3,7 +3,7 @@ use Doubleedesign\Comet\Core\{Columns, Column};
 use Doubleedesign\Comet\TestUtils\PestUtils;
 
 describe('Columns', function() {
-    it('adds "wrapper" to the outer section class name if no shortName is set', function() {
+    it('does not add an extra wrapper if no shortName is set', function() {
         ob_start();
         $component = new Columns([], [new Column([], [])]);
         $component->render();
@@ -11,14 +11,16 @@ describe('Columns', function() {
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $section = $dom->getElementsByTagName('section')->item(0);
-        $innerDiv = $dom->getElementsByTagName('div')->item(1);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
 
-        expect($section->getAttribute('class'))->toEqual('columns-wrapper')
-            ->and($innerDiv->getAttribute('class'))->toEqual('columns');
+        expect($hierarchy)->toEqual([
+            'section.columns',
+            'div.columns__column'
+        ]);
     });
 
-    it('does not modify the outer section class name if a shortName is set', function() {
+    it('adds a wrapper if a shortName is provided', function() {
         ob_start();
         $component = new Columns(['shortName' => 'custom'], [new Column([], [])]);
         $component->render();
@@ -26,77 +28,34 @@ describe('Columns', function() {
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $section = $dom->getElementsByTagName('section')->item(0);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
 
-        expect($section->getAttribute('class'))->toEqual('custom');
+        expect($hierarchy)->toEqual([
+            'section.custom',
+            'div.custom__columns',
+            'div.custom__columns__column'
+        ]);
     });
 
-	it('has the expected default HTML and BEM structure', function() {
-		ob_start();
-		$component = new Columns([], [new Column([], [])]);
-		$component->render();
-		$output = ob_get_clean();
-
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$body = $dom->getElementsByTagName('body')->item(0);
-		$hierarchy = PestUtils::getHtmlHierarchy($body);
-
-		expect($hierarchy)->toEqual([
-			'section.columns-wrapper',
-			'div.columns-wrapper__container',
-			'div.columns',
-			'div.columns__column'
-		]);
-	});
-
-    it('renders as a div without a container, not a section, when nested', function() {
+    it('has the expected HTML and BEM structure when no context or shortName is provided', function() {
         ob_start();
-        $component = new Columns(['isNested' => true], [new Column([], [])]);
+        $component = new Columns([], [new Column([], [])]);
         $component->render();
         $output = ob_get_clean();
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $section = $dom->getElementsByTagName('section')->item(0);
-        $div = $dom->getElementsByTagName('div')->item(0);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
 
-        expect($section)->toBeNull()
-            ->and($div)->not()->toBeNull()
-            ->and($div->getAttribute('class'))->toEqual('columns');
+        expect($hierarchy)->toEqual([
+            'section.columns',
+            'div.columns__column'
+        ]);
     });
 
-	it('has the expected HTML and BEM structure when nested', function() {
-		ob_start();
-		$component = new Columns(['isNested' => true], [new Column([], [])]);
-		$component->render();
-		$output = ob_get_clean();
-
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$body = $dom->getElementsByTagName('body')->item(0);
-		$hierarchy = PestUtils::getHtmlHierarchy($body);
-
-		expect($hierarchy)->toEqual([
-			'div.columns',
-			'div.columns__column'
-		]);
-	});
-
-    it('does not modify the class name if the component is nested', function() {
-        ob_start();
-        $component = new Columns(['isNested' => true], [new Column([], [])]);
-        $component->render();
-        $output = ob_get_clean();
-
-        $dom = new DOMDocument();
-        @$dom->loadHTML($output);
-        $div = $dom->getElementsByTagName('div')->item(0);
-
-        expect($div->getAttribute('class'))->toEqual('columns');
-    });
-
-    it('prefixes the inner div class name in BEM style if a shortName is provided', function() {
+    it('has the expected HTML and BEM structure when a shortName', function() {
         ob_start();
         $component = new Columns(['shortName' => 'custom'], [new Column([], [])]);
         $component->render();
@@ -104,32 +63,85 @@ describe('Columns', function() {
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $innerDiv = $dom->getElementsByTagName('div')->item(1);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
 
-        expect($innerDiv->getAttribute('class'))->toEqual('custom__columns');
+        expect($hierarchy)->toEqual([
+            'section.custom',
+            'div.custom__columns',
+            'div.custom__columns__column'
+        ]);
     });
 
-	it('has the expected HTML and BEM structure when a shortName is provided', function() {
-		ob_start();
-		$component = new Columns(['shortName' => 'copy-image'], [new Column([], [])]);
-		$component->render();
-		$output = ob_get_clean();
+    it('has the expected HTML and BEM structure when context is provided', function() {
+        ob_start();
+        $component = new Columns(['context' => 'post-content'], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
 
-		$dom = new DOMDocument();
-		@$dom->loadHTML($output);
-		$body = $dom->getElementsByTagName('body')->item(0);
-		$hierarchy = PestUtils::getHtmlHierarchy($body);
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
 
-		expect($hierarchy)->toEqual([
-			'section.copy-image',
-			'div.copy-image__container',
-			'div.copy-image__columns',
-			'div.copy-image__column'
-		]);
-	});
+        expect($hierarchy)->toEqual([
+            'section.post-content__columns',
+            'div.post-content__columns__column'
+        ]);
+    });
 
-	// FIXME this isn't passing but leaving it for now because I'm planning related changes
-	// and having doubled-up backgrounds won't break anything here
+    it('has the expected HTML and BEM structure when both context and shortName are provided', function() {
+        ob_start();
+        $component = new Columns(['context' => 'post-content', 'shortName' => 'custom'], [new Column([], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
+
+        expect($hierarchy)->toEqual([
+            'section.post-content__custom',
+            'div.post-content__custom__columns',
+            'div.post-content__custom__columns__column'
+        ]);
+    });
+
+    it('has the expected HTML and BEM structure if a column has its own shortName', function() {
+        ob_start();
+        $component = new Columns([], [new Column(['shortName' => 'sidebar'], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
+
+        expect($hierarchy)->toEqual([
+            'section.columns',
+            'div.columns__column columns__column--sidebar'
+        ]);
+    });
+
+    it('has the expected HTML and BEM structure if a column has its own context', function() {
+        ob_start();
+        $component = new Columns([], [new Column(['context' => 'post-content'], [])]);
+        $component->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $body = $dom->getElementsByTagName('body')->item(0);
+        $hierarchy = PestUtils::getHtmlHierarchy($body);
+
+        expect($hierarchy)->toEqual([
+            'section.columns',
+            'div.post-content__columns__column'
+        ]);
+    });
+
     test("Inner columns' background colour is ignored when they are all the same as the parent Columns", function() {
         ob_start();
         $component = new Columns(
@@ -144,15 +156,15 @@ describe('Columns', function() {
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $wrapper = $dom->getElementsByTagName('section')->item(0);
-        $columns = PestUtils::getElementsByClassName($wrapper, 'columns__column');
+        $wrapper = PestUtils::getElementsByClassName($dom, 'columns')[0];
+        $columns = PestUtils::getElementsByClassName($dom, 'columns__column');
 
         expect($wrapper->hasAttribute('data-background'))->toBeTrue()
             ->and($columns[0]->hasAttribute('data-background'))->toBeFalse()
             ->and($columns[1]->hasAttribute('data-background'))->toBeFalse();
     });
 
-    test("Inner columns' background colour is not ignored when one is different", function() {
+    test("Inner column background colour is not ignored when one is different", function() {
         ob_start();
         $component = new Columns(
             ['backgroundColor' => 'light'],
@@ -166,11 +178,11 @@ describe('Columns', function() {
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $wrapper = $dom->getElementsByTagName('section')->item(0);
-        $columns = PestUtils::getElementsByClassName($wrapper, 'columns__column');
+        $wrapper = PestUtils::getElementsByClassName($dom, 'columns')[0];
+        $columns = PestUtils::getElementsByClassName($dom, 'columns__column');
 
         expect($wrapper->hasAttribute('data-background'))->toBeTrue()
-            ->and($columns[0]->hasAttribute('data-background'))->toBeTrue()
+            ->and($columns[0]->hasAttribute('data-background'))->toBeFalse()
             ->and($columns[1]->hasAttribute('data-background'))->toBeTrue();
     });
 });

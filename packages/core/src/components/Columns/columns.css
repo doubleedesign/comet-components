@@ -60,593 +60,583 @@
     gap: var(--spacing-lg);
   }
 }
-.columns, [class$=__columns], [class*=columns--] {
-  padding-block: var(--spacing-lg);
-}
-@media (min-width: 768px) {
-  .columns, [class$=__columns], [class*=columns--] {
-    padding-block: var(--spacing-xl);
-  }
-}
-@media (min-width: 1440px) {
-  .columns, [class$=__columns], [class*=columns--] {
-    padding-block: var(--spacing-xxl);
-  }
+.columns > [class$=__columns], [class$=__columns] > [class$=__columns], [class*=columns--] > [class$=__columns] {
+  padding-block: 0;
 }
 .columns[data-background=primary]:has(> [data-background=secondary]) .columns__column, .columns[data-background=primary]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=secondary]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=secondary]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=accent]) .columns__column, .columns[data-background=primary]:has(> [data-background=accent]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=accent]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=accent]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=info]) .columns__column, .columns[data-background=primary]:has(> [data-background=info]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=info]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=info]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=warning]) .columns__column, .columns[data-background=primary]:has(> [data-background=warning]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=warning]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=warning]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=success]) .columns__column, .columns[data-background=primary]:has(> [data-background=success]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=success]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=success]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=error]) .columns__column, .columns[data-background=primary]:has(> [data-background=error]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=error]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=error]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=light]) .columns__column, .columns[data-background=primary]:has(> [data-background=light]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=light]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=light]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=dark]) .columns__column, .columns[data-background=primary]:has(> [data-background=dark]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=dark]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=dark]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary]:has(> [data-background=white]) .columns__column, .columns[data-background=primary]:has(> [data-background=white]) [class$=__columns__column], [data-background=primary][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=primary][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=primary][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=primary][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=primary]:has(> [data-background=white]) [class$=__column],
-[data-background=primary][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=primary][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=primary]:has(> [data-background=white]) [class*=__column],
+[data-background=primary][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=primary][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=primary] + .columns[data-background=primary], [data-background=primary][class$=__columns] + .columns[data-background=primary], .columns[data-background=primary] + [data-background=primary][class$=__columns], [data-background=primary][class$=__columns] + [data-background=primary][class$=__columns], [data-background=primary][class*=columns--] + .columns[data-background=primary], [data-background=primary][class*=columns--] + [data-background=primary][class$=__columns], .columns[data-background=primary] + [data-background=primary][class*=columns--], [data-background=primary][class$=__columns] + [data-background=primary][class*=columns--], [data-background=primary][class*=columns--] + [data-background=primary][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=secondary]:has(> [data-background=primary]) .columns__column, .columns[data-background=secondary]:has(> [data-background=primary]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=primary]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=primary]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=accent]) .columns__column, .columns[data-background=secondary]:has(> [data-background=accent]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=accent]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=accent]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=info]) .columns__column, .columns[data-background=secondary]:has(> [data-background=info]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=info]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=info]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=warning]) .columns__column, .columns[data-background=secondary]:has(> [data-background=warning]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=warning]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=warning]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=success]) .columns__column, .columns[data-background=secondary]:has(> [data-background=success]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=success]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=success]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=error]) .columns__column, .columns[data-background=secondary]:has(> [data-background=error]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=error]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=error]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=light]) .columns__column, .columns[data-background=secondary]:has(> [data-background=light]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=light]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=light]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=dark]) .columns__column, .columns[data-background=secondary]:has(> [data-background=dark]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=dark]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=dark]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary]:has(> [data-background=white]) .columns__column, .columns[data-background=secondary]:has(> [data-background=white]) [class$=__columns__column], [data-background=secondary][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=secondary][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=secondary][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=secondary][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=secondary]:has(> [data-background=white]) [class$=__column],
-[data-background=secondary][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=secondary][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=secondary]:has(> [data-background=white]) [class*=__column],
+[data-background=secondary][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=secondary][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=secondary] + .columns[data-background=secondary], [data-background=secondary][class$=__columns] + .columns[data-background=secondary], .columns[data-background=secondary] + [data-background=secondary][class$=__columns], [data-background=secondary][class$=__columns] + [data-background=secondary][class$=__columns], [data-background=secondary][class*=columns--] + .columns[data-background=secondary], [data-background=secondary][class*=columns--] + [data-background=secondary][class$=__columns], .columns[data-background=secondary] + [data-background=secondary][class*=columns--], [data-background=secondary][class$=__columns] + [data-background=secondary][class*=columns--], [data-background=secondary][class*=columns--] + [data-background=secondary][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=accent]:has(> [data-background=primary]) .columns__column, .columns[data-background=accent]:has(> [data-background=primary]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=primary]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=primary]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=secondary]) .columns__column, .columns[data-background=accent]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=secondary]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=secondary]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=info]) .columns__column, .columns[data-background=accent]:has(> [data-background=info]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=info]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=info]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=warning]) .columns__column, .columns[data-background=accent]:has(> [data-background=warning]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=warning]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=warning]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=success]) .columns__column, .columns[data-background=accent]:has(> [data-background=success]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=success]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=success]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=error]) .columns__column, .columns[data-background=accent]:has(> [data-background=error]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=error]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=error]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=light]) .columns__column, .columns[data-background=accent]:has(> [data-background=light]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=light]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=light]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=dark]) .columns__column, .columns[data-background=accent]:has(> [data-background=dark]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=dark]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=dark]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent]:has(> [data-background=white]) .columns__column, .columns[data-background=accent]:has(> [data-background=white]) [class$=__columns__column], [data-background=accent][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=accent][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=accent][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=accent][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=accent]:has(> [data-background=white]) [class$=__column],
-[data-background=accent][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=accent][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=accent]:has(> [data-background=white]) [class*=__column],
+[data-background=accent][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=accent][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=accent] + .columns[data-background=accent], [data-background=accent][class$=__columns] + .columns[data-background=accent], .columns[data-background=accent] + [data-background=accent][class$=__columns], [data-background=accent][class$=__columns] + [data-background=accent][class$=__columns], [data-background=accent][class*=columns--] + .columns[data-background=accent], [data-background=accent][class*=columns--] + [data-background=accent][class$=__columns], .columns[data-background=accent] + [data-background=accent][class*=columns--], [data-background=accent][class$=__columns] + [data-background=accent][class*=columns--], [data-background=accent][class*=columns--] + [data-background=accent][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=info]:has(> [data-background=primary]) .columns__column, .columns[data-background=info]:has(> [data-background=primary]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=primary]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=primary]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=secondary]) .columns__column, .columns[data-background=info]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=secondary]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=secondary]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=accent]) .columns__column, .columns[data-background=info]:has(> [data-background=accent]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=accent]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=accent]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=warning]) .columns__column, .columns[data-background=info]:has(> [data-background=warning]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=warning]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=warning]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=success]) .columns__column, .columns[data-background=info]:has(> [data-background=success]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=success]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=success]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=error]) .columns__column, .columns[data-background=info]:has(> [data-background=error]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=error]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=error]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=light]) .columns__column, .columns[data-background=info]:has(> [data-background=light]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=light]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=light]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=dark]) .columns__column, .columns[data-background=info]:has(> [data-background=dark]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=dark]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=dark]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info]:has(> [data-background=white]) .columns__column, .columns[data-background=info]:has(> [data-background=white]) [class$=__columns__column], [data-background=info][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=info][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=info][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=info][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=info]:has(> [data-background=white]) [class$=__column],
-[data-background=info][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=info][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=info]:has(> [data-background=white]) [class*=__column],
+[data-background=info][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=info][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=info] + .columns[data-background=info], [data-background=info][class$=__columns] + .columns[data-background=info], .columns[data-background=info] + [data-background=info][class$=__columns], [data-background=info][class$=__columns] + [data-background=info][class$=__columns], [data-background=info][class*=columns--] + .columns[data-background=info], [data-background=info][class*=columns--] + [data-background=info][class$=__columns], .columns[data-background=info] + [data-background=info][class*=columns--], [data-background=info][class$=__columns] + [data-background=info][class*=columns--], [data-background=info][class*=columns--] + [data-background=info][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=warning]:has(> [data-background=primary]) .columns__column, .columns[data-background=warning]:has(> [data-background=primary]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=primary]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=primary]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=secondary]) .columns__column, .columns[data-background=warning]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=secondary]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=secondary]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=accent]) .columns__column, .columns[data-background=warning]:has(> [data-background=accent]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=accent]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=accent]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=info]) .columns__column, .columns[data-background=warning]:has(> [data-background=info]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=info]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=info]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=success]) .columns__column, .columns[data-background=warning]:has(> [data-background=success]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=success]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=success]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=error]) .columns__column, .columns[data-background=warning]:has(> [data-background=error]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=error]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=error]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=light]) .columns__column, .columns[data-background=warning]:has(> [data-background=light]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=light]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=light]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=dark]) .columns__column, .columns[data-background=warning]:has(> [data-background=dark]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=dark]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=dark]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning]:has(> [data-background=white]) .columns__column, .columns[data-background=warning]:has(> [data-background=white]) [class$=__columns__column], [data-background=warning][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=warning][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=warning][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=warning][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=warning]:has(> [data-background=white]) [class$=__column],
-[data-background=warning][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=warning][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=warning]:has(> [data-background=white]) [class*=__column],
+[data-background=warning][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=warning][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=warning] + .columns[data-background=warning], [data-background=warning][class$=__columns] + .columns[data-background=warning], .columns[data-background=warning] + [data-background=warning][class$=__columns], [data-background=warning][class$=__columns] + [data-background=warning][class$=__columns], [data-background=warning][class*=columns--] + .columns[data-background=warning], [data-background=warning][class*=columns--] + [data-background=warning][class$=__columns], .columns[data-background=warning] + [data-background=warning][class*=columns--], [data-background=warning][class$=__columns] + [data-background=warning][class*=columns--], [data-background=warning][class*=columns--] + [data-background=warning][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=success]:has(> [data-background=primary]) .columns__column, .columns[data-background=success]:has(> [data-background=primary]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=primary]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=primary]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=secondary]) .columns__column, .columns[data-background=success]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=secondary]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=secondary]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=accent]) .columns__column, .columns[data-background=success]:has(> [data-background=accent]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=accent]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=accent]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=info]) .columns__column, .columns[data-background=success]:has(> [data-background=info]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=info]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=info]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=warning]) .columns__column, .columns[data-background=success]:has(> [data-background=warning]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=warning]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=warning]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=error]) .columns__column, .columns[data-background=success]:has(> [data-background=error]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=error]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=error]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=light]) .columns__column, .columns[data-background=success]:has(> [data-background=light]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=light]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=light]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=dark]) .columns__column, .columns[data-background=success]:has(> [data-background=dark]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=dark]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=dark]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success]:has(> [data-background=white]) .columns__column, .columns[data-background=success]:has(> [data-background=white]) [class$=__columns__column], [data-background=success][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=success][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=success][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=success][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=success]:has(> [data-background=white]) [class$=__column],
-[data-background=success][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=success][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=success]:has(> [data-background=white]) [class*=__column],
+[data-background=success][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=success][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=success] + .columns[data-background=success], [data-background=success][class$=__columns] + .columns[data-background=success], .columns[data-background=success] + [data-background=success][class$=__columns], [data-background=success][class$=__columns] + [data-background=success][class$=__columns], [data-background=success][class*=columns--] + .columns[data-background=success], [data-background=success][class*=columns--] + [data-background=success][class$=__columns], .columns[data-background=success] + [data-background=success][class*=columns--], [data-background=success][class$=__columns] + [data-background=success][class*=columns--], [data-background=success][class*=columns--] + [data-background=success][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=error]:has(> [data-background=primary]) .columns__column, .columns[data-background=error]:has(> [data-background=primary]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=primary]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=primary]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=secondary]) .columns__column, .columns[data-background=error]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=secondary]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=secondary]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=accent]) .columns__column, .columns[data-background=error]:has(> [data-background=accent]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=accent]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=accent]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=info]) .columns__column, .columns[data-background=error]:has(> [data-background=info]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=info]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=info]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=warning]) .columns__column, .columns[data-background=error]:has(> [data-background=warning]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=warning]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=warning]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=success]) .columns__column, .columns[data-background=error]:has(> [data-background=success]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=success]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=success]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=light]) .columns__column, .columns[data-background=error]:has(> [data-background=light]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=light]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=light]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=dark]) .columns__column, .columns[data-background=error]:has(> [data-background=dark]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=dark]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=dark]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error]:has(> [data-background=white]) .columns__column, .columns[data-background=error]:has(> [data-background=white]) [class$=__columns__column], [data-background=error][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=error][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=error][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=error][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=error]:has(> [data-background=white]) [class$=__column],
-[data-background=error][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=error][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=error]:has(> [data-background=white]) [class*=__column],
+[data-background=error][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=error][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=error] + .columns[data-background=error], [data-background=error][class$=__columns] + .columns[data-background=error], .columns[data-background=error] + [data-background=error][class$=__columns], [data-background=error][class$=__columns] + [data-background=error][class$=__columns], [data-background=error][class*=columns--] + .columns[data-background=error], [data-background=error][class*=columns--] + [data-background=error][class$=__columns], .columns[data-background=error] + [data-background=error][class*=columns--], [data-background=error][class$=__columns] + [data-background=error][class*=columns--], [data-background=error][class*=columns--] + [data-background=error][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=light]:has(> [data-background=primary]) .columns__column, .columns[data-background=light]:has(> [data-background=primary]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=primary]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=primary]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=secondary]) .columns__column, .columns[data-background=light]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=secondary]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=secondary]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=accent]) .columns__column, .columns[data-background=light]:has(> [data-background=accent]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=accent]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=accent]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=info]) .columns__column, .columns[data-background=light]:has(> [data-background=info]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=info]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=info]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=warning]) .columns__column, .columns[data-background=light]:has(> [data-background=warning]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=warning]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=warning]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=success]) .columns__column, .columns[data-background=light]:has(> [data-background=success]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=success]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=success]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=error]) .columns__column, .columns[data-background=light]:has(> [data-background=error]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=error]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=error]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=dark]) .columns__column, .columns[data-background=light]:has(> [data-background=dark]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=dark]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=dark]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light]:has(> [data-background=white]) .columns__column, .columns[data-background=light]:has(> [data-background=white]) [class$=__columns__column], [data-background=light][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=light][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=light][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=light][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=light]:has(> [data-background=white]) [class$=__column],
-[data-background=light][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=light][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=light]:has(> [data-background=white]) [class*=__column],
+[data-background=light][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=light][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=light] + .columns[data-background=light], [data-background=light][class$=__columns] + .columns[data-background=light], .columns[data-background=light] + [data-background=light][class$=__columns], [data-background=light][class$=__columns] + [data-background=light][class$=__columns], [data-background=light][class*=columns--] + .columns[data-background=light], [data-background=light][class*=columns--] + [data-background=light][class$=__columns], .columns[data-background=light] + [data-background=light][class*=columns--], [data-background=light][class$=__columns] + [data-background=light][class*=columns--], [data-background=light][class*=columns--] + [data-background=light][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=dark]:has(> [data-background=primary]) .columns__column, .columns[data-background=dark]:has(> [data-background=primary]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=primary]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=primary]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=secondary]) .columns__column, .columns[data-background=dark]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=secondary]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=secondary]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=accent]) .columns__column, .columns[data-background=dark]:has(> [data-background=accent]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=accent]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=accent]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=info]) .columns__column, .columns[data-background=dark]:has(> [data-background=info]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=info]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=info]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=warning]) .columns__column, .columns[data-background=dark]:has(> [data-background=warning]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=warning]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=warning]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=success]) .columns__column, .columns[data-background=dark]:has(> [data-background=success]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=success]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=success]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=error]) .columns__column, .columns[data-background=dark]:has(> [data-background=error]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=error]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=error]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=light]) .columns__column, .columns[data-background=dark]:has(> [data-background=light]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=light]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=light]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark]:has(> [data-background=white]) .columns__column, .columns[data-background=dark]:has(> [data-background=white]) [class$=__columns__column], [data-background=dark][class$=__columns]:has(> [data-background=white]) .columns__column, [data-background=dark][class$=__columns]:has(> [data-background=white]) [class$=__columns__column], [data-background=dark][class*=columns--]:has(> [data-background=white]) .columns__column, [data-background=dark][class*=columns--]:has(> [data-background=white]) [class$=__columns__column],
-.columns[data-background=dark]:has(> [data-background=white]) [class$=__column],
-[data-background=dark][class$=__columns]:has(> [data-background=white]) [class$=__column],
-[data-background=dark][class*=columns--]:has(> [data-background=white]) [class$=__column] {
+.columns[data-background=dark]:has(> [data-background=white]) [class*=__column],
+[data-background=dark][class$=__columns]:has(> [data-background=white]) [class*=__column],
+[data-background=dark][class*=columns--]:has(> [data-background=white]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=dark] + .columns[data-background=dark], [data-background=dark][class$=__columns] + .columns[data-background=dark], .columns[data-background=dark] + [data-background=dark][class$=__columns], [data-background=dark][class$=__columns] + [data-background=dark][class$=__columns], [data-background=dark][class*=columns--] + .columns[data-background=dark], [data-background=dark][class*=columns--] + [data-background=dark][class$=__columns], .columns[data-background=dark] + [data-background=dark][class*=columns--], [data-background=dark][class$=__columns] + [data-background=dark][class*=columns--], [data-background=dark][class*=columns--] + [data-background=dark][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns[data-background=white]:has(> [data-background=primary]) .columns__column, .columns[data-background=white]:has(> [data-background=primary]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=primary]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=primary]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=primary]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=primary]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=primary]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=primary]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=primary]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=primary]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=primary]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=primary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=secondary]) .columns__column, .columns[data-background=white]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=secondary]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=secondary]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=secondary]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=secondary]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=secondary]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=secondary]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=secondary]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=secondary]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=secondary]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=secondary]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=accent]) .columns__column, .columns[data-background=white]:has(> [data-background=accent]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=accent]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=accent]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=accent]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=accent]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=accent]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=accent]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=accent]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=accent]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=accent]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=accent]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=info]) .columns__column, .columns[data-background=white]:has(> [data-background=info]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=info]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=info]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=info]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=info]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=info]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=info]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=info]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=info]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=info]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=info]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=warning]) .columns__column, .columns[data-background=white]:has(> [data-background=warning]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=warning]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=warning]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=warning]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=warning]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=warning]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=warning]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=warning]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=warning]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=warning]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=warning]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=success]) .columns__column, .columns[data-background=white]:has(> [data-background=success]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=success]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=success]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=success]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=success]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=success]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=success]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=success]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=success]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=success]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=success]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=error]) .columns__column, .columns[data-background=white]:has(> [data-background=error]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=error]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=error]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=error]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=error]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=error]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=error]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=error]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=error]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=error]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=error]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=light]) .columns__column, .columns[data-background=white]:has(> [data-background=light]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=light]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=light]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=light]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=light]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=light]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=light]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=light]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=light]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=light]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=light]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white]:has(> [data-background=dark]) .columns__column, .columns[data-background=white]:has(> [data-background=dark]) [class$=__columns__column], [data-background=white][class$=__columns]:has(> [data-background=dark]) .columns__column, [data-background=white][class$=__columns]:has(> [data-background=dark]) [class$=__columns__column], [data-background=white][class*=columns--]:has(> [data-background=dark]) .columns__column, [data-background=white][class*=columns--]:has(> [data-background=dark]) [class$=__columns__column],
-.columns[data-background=white]:has(> [data-background=dark]) [class$=__column],
-[data-background=white][class$=__columns]:has(> [data-background=dark]) [class$=__column],
-[data-background=white][class*=columns--]:has(> [data-background=dark]) [class$=__column] {
+.columns[data-background=white]:has(> [data-background=dark]) [class*=__column],
+[data-background=white][class$=__columns]:has(> [data-background=dark]) [class*=__column],
+[data-background=white][class*=columns--]:has(> [data-background=dark]) [class*=__column] {
   padding: var(--spacing-md);
 }
 .columns[data-background=white] + .columns[data-background=white], [data-background=white][class$=__columns] + .columns[data-background=white], .columns[data-background=white] + [data-background=white][class$=__columns], [data-background=white][class$=__columns] + [data-background=white][class$=__columns], [data-background=white][class*=columns--] + .columns[data-background=white], [data-background=white][class*=columns--] + [data-background=white][class$=__columns], .columns[data-background=white] + [data-background=white][class*=columns--], [data-background=white][class$=__columns] + [data-background=white][class*=columns--], [data-background=white][class*=columns--] + [data-background=white][class*=columns--] {
   margin-block-start: calc(var(--spacing-md) * -2);
 }
 .columns:not([data-background]):has(> [data-background]) .columns__column, .columns:not([data-background]):has(> [data-background]) [class$=__columns__column], [class$=__columns]:not([data-background]):has(> [data-background]) .columns__column, [class$=__columns]:not([data-background]):has(> [data-background]) [class$=__columns__column], [class*=columns--]:not([data-background]):has(> [data-background]) .columns__column, [class*=columns--]:not([data-background]):has(> [data-background]) [class$=__columns__column],
-.columns:not([data-background]):has(> [data-background]) [class$=__column],
-[class$=__columns]:not([data-background]):has(> [data-background]) [class$=__column],
-[class*=columns--]:not([data-background]):has(> [data-background]) [class$=__column] {
+.columns:not([data-background]):has(> [data-background]) [class*=__column],
+[class$=__columns]:not([data-background]):has(> [data-background]) [class*=__column],
+[class*=columns--]:not([data-background]):has(> [data-background]) [class*=__column] {
   padding: var(--spacing-md);
 }
 

@@ -74,7 +74,11 @@
 
 @include bem-block('columns', ('column')) {
 	@include column-layout();
-	@include section-padding();
+
+	// Nested .columns (happens when the component has its own shortname which goes on the top-level <section> which also has data-size, which adds section padding)
+	> #{class-ends-with('__columns')} {
+		padding-block: 0;
+	}
 
 	// If this element has at least one child with a different background colour set, all children should have padding so they align
 	@each $color, $value in $colors {
@@ -84,7 +88,7 @@
 				@if $color != $color2 {
 					&:has(> [data-background="#{$color2}"]) {
 						.columns__column,
-						#{class-ends-with('__column')} {
+						#{class-contains('__column')} {
 							@include nested-padding();
 						}
 					}
@@ -103,7 +107,7 @@
 	&:not([data-background]) {
 		&:has(> [data-background]) {
 			.columns__column,
-			#{class-ends-with('__column')} {
+			#{class-contains('__column')} {
 				@include nested-padding();
 			}
 		}

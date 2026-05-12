@@ -86,7 +86,6 @@ abstract class UIComponent extends Renderable {
     private function should_propagate_context(Renderable $component): bool {
         if (!method_exists($component, 'get_context')) return false;
         if (empty($component->innerComponents)) return false;
-        if ($component instanceof Columns) return false;
         if ($component instanceof PanelGroupComponent) return false;
 		if($this->get_default_context_for_inner_components() === null) return false;
 

@@ -3,8 +3,9 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV, Tag::MAIN, Tag::ASIDE])]
 #[DefaultTag(Tag::DIV)]
-class Column extends LayoutComponent {
-	use BackgroundColor;
+class Column extends UIComponent {
+    use BackgroundColor;
+    use LayoutAlignment;
 
     /**
      * @var ?string $width
@@ -16,15 +17,21 @@ class Column extends LayoutComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Columns.Column.column');
+        $this->set_layout_alignment($attributes);
+        $this->set_background_color($attributes);
         $this->width = $attributes['width'] ?? null;
-        $this->tagName = isset($attributes['tagName']) ? Tag::tryFrom($attributes['tagName']) : Tag::DIV;
+
+		if($this->get_shortname() !== 'column') {
+			$this->set_bem_element('column');
+			$this->set_bem_modifier($this->get_shortname());
+		}
     }
 
     public function get_width() {
         return $this->width;
     }
 
-    public function set_width(?string $width) {
+    public function set_width(?string $width): void {
         $this->width = $width;
     }
 
@@ -49,16 +56,15 @@ class Column extends LayoutComponent {
         return $styles;
     }
 
-	protected function get_html_attributes(): array {
-		$attributes = parent::get_html_attributes();
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
 
-		if ($this->get_background_color() !== null) {
-			$attributes['data-background'] = $this->get_background_color()->value;
-		}
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->get_background_color()->value;
+        }
 
-
-		return $attributes;
-	}
+        return $attributes;
+    }
 
     public function render(): void {
         $blade = BladeService::getInstance();

@@ -11,8 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class Columns extends LayoutComponent {
-	use BackgroundColor;
-	use NestedState;
+    use BackgroundColor;
 
     private int $qty;
 
@@ -29,51 +28,79 @@ class Columns extends LayoutComponent {
      * @description Inner column components
      */
     protected array $innerComponents;
+    private bool $shouldBeWrapped = false;
 
     public function __construct(array $attributes, array $innerComponents) {
         $this->qty = count($innerComponents);
         $this->allowStacking = $attributes['allowStacking'] ?? $attributes['isStackedOnMobile'] ?? null;
-        $this->set_is_nested($attributes['isNested'] ?? false);
         $this->set_layout_alignment($attributes);
+		$this->set_background_color($attributes);
 
         // If all column widths are the same, remove them so unnecessary inline styles are not included in the final HTML
-        $columnWidths = array_map(fn($column) => $column->get_width(), $innerComponents);
-        $updatedInnerComponents = count(array_unique($columnWidths)) === 1
-            ? array_map(fn($column) => $column->set_width(null) ?: $column, $innerComponents)
-            : $innerComponents;
+        $columnWidths = array_map(function($column) {
+            if (!$column instanceof Column) return 0;
+
+            return $column->get_width();
+        }, $innerComponents);
+        if (count(array_unique($columnWidths)) === 1) {
+            array_walk($innerComponents, function(&$column) {
+                if (!$column instanceof Column) return;
+
+                $column->set_width(null);
+            });
+        }
+
+        // If this component has its own shortname, wrap the content so we still get the appropriate class names for column styling automatically
+        $this->shouldBeWrapped = isset($attributes['shortName']) && $attributes['shortName'] !== 'columns';
+        if ($this->shouldBeWrapped) {
+            $wrappedInnerComponents = [new Group(array(
+                ...Utils::array_pick($attributes, ['vAlign', 'hAlign']),
+                'shortName'                  => 'columns',
+                'data-allow-layout-stacking' => $this->allowStacking ? 'true' : 'false',
+                'data-count'                 => $this->qty
+            ),
+                $innerComponents
+            )];
+        }
 
         // Finally, create the component with all the transformed stuff
-        parent::__construct($attributes, $updatedInnerComponents, 'components.Columns.columns');
+        parent::__construct($attributes, $wrappedInnerComponents ?? $innerComponents, 'components.Columns.columns');
     }
 
-    /**
-     * Get HTML attributes for the component
-     * Note: In this case, this only applies when the component is nested, as when not nested the attributes are applied to the wrapper.
-     *       We can't use this method to get them for that because the parent constructor needs to be called after the Group is created in order to include it,
-     *       and we can't update them after the fact because Group doesn't actually support alignment properties - the HTML attributes are added explicitly (which isn't the best, but will do for now)
-     *
-     * @return array<string, string> Array of HTML attributes
-     */
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
-        $attributes['data-count'] = $this->qty;
 
-        if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
-            $attributes['data-halign'] = $this->hAlign->value;
+        if (!$this->shouldBeWrapped) {
+            $attributes['data-count'] = $this->qty;
+
+            if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
+                $attributes['data-halign'] = $this->hAlign->value;
+            }
+
+            if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
+                $attributes['data-valign'] = $this->vAlign->value;
+            }
+
+            if ($this->allowStacking !== null) {
+                $attributes['data-allow-layout-stacking'] = $this->allowStacking ? 'true' : 'false';
+            }
         }
 
-        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
-            $attributes['data-valign'] = $this->vAlign->value;
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->get_background_color()->value;
         }
 
-        if ($this->allowStacking !== null) {
-            $attributes['data-allow-layout-stacking'] = $this->allowStacking ? 'true' : 'false';
-        }
+        return $attributes;
+    }
 
-	    if ($this->get_background_color() !== null) {
-		    $attributes['data-background'] = $this->get_background_color()->value;
-	    }
+    public function render(): void {
+        $blade = BladeService::getInstance();
 
-	    return $attributes;
+        echo $blade->make($this->bladeFile, [
+            'tag'        => $this->tagName->value,
+            'classes'    => $this->get_filtered_classes(),
+            'attributes' => $this->get_html_attributes(),
+            'children'   => $this->innerComponents
+        ])->render();
     }
 }
