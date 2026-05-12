@@ -51,36 +51,42 @@ class Menu extends UIComponent {
                     'classes'         => $item['classes'] ?? '',
                     'isCurrentParent' => $item['isCurrentParent'] ?? 'false',
                 ],
-                [
-                    isset($item['link_attributes']['target']) && $item['link_attributes']['target'] === '_blank'
-                        ? new Button(
-                            array_merge(
-                                $item['link_attributes'] ?? [],
-                                [
-                                    'classes'    => ['button'],
-                                ],
-                            ),
-                            $item['title']
-                        )
-                        : new Link([
-                            ...$item['link_attributes'],
-                            'label' => $item['title'],
-                        ])
-                ]
+                [$this->get_item_content_component($item)]
             );
 
             // Handle nested lists
             if (!empty($item['children'])) {
-				$submenu = new MenuList(
-					['shortName' => 'sub-menu'],
-					$this->array_to_items($item['children'], $level + 1)
-				);
+                $submenu = new MenuList(
+                    ['shortName' => 'sub-menu'],
+                    $this->array_to_items($item['children'], $level + 1)
+                );
 
                 $itemObject->innerComponents[] = $submenu;
             }
 
             return $itemObject;
         }, $items);
+    }
+
+    private function get_item_content_component($item): Button|Link {
+        if (isset($item['link_attributes']['target']) && $item['link_attributes']['target'] === '_blank') {
+            return new Button(
+                array_merge(
+                    $item['link_attributes'] ?? [],
+                    ['classes'    => ['button']],
+                ),
+                $item['title']
+            );
+        }
+
+        if (isset($item['link_attributes']['classes']) && in_array('button', $item['link_attributes']['classes'])) {
+            return new Button(
+                $item['link_attributes'],
+                $item['title']
+            );
+        }
+
+        return new Link(array_merge($item['link_attributes'], ['label' => $item['title']]));
     }
 
     /**

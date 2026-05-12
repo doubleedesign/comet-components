@@ -40,7 +40,7 @@ $logoId = get_option('options_logo');
 $logoUrl = wp_get_attachment_image_url($logoId, 'full');
 
 $menuItems = NavMenus::get_simplified_nav_menu_items_by_location('primary');
-$menuComponent = new Menu([...$menu_attributes], $menuItems);
+$menuComponent = new Menu($menu_attributes, $menuItems);
 
 $showContactDetails = apply_filters('comet_canvas_show_contact_details_in_header', false);
 $showContactDetailsInOverlay = apply_filters('comet_canvas_show_contact_details_in_header_menu_overlay', false);
