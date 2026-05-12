@@ -12,7 +12,18 @@ trait ColorPair {
         $this->set_background_color($attributes);
         $this->set_color_theme($attributes);
 
-        $backgroundToCheck = $this->backgroundColor ?? Config::getInstance()->get_global_background();
+        $backgroundToCheck = $this->backgroundColor ?? ThemeColor::tryFrom(Config::getInstance()->get_global_background());
+
+        // If the pair is already in the global config as a validated pair, then skip further processing
+        if ($this->get_color_theme() !== null && $backgroundToCheck !== null) {
+            $theme_pairs = Config::getInstance()->get_theme_colour_pairs();
+            $matched_pair = array_find($theme_pairs, function($pair) use ($backgroundToCheck) {
+                return $this->get_color_theme()->value === $pair['foreground'] && $backgroundToCheck->value === $pair['background'];
+            });
+            if ($matched_pair) {
+                return;
+            }
+        }
 
         if ($backgroundToCheck !== null && $this->colorTheme !== null) {
             $valid = $colorUtils->validate_pair($this->colorTheme, $backgroundToCheck, $contrastThreshold);

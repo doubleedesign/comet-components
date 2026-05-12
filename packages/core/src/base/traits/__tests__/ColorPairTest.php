@@ -1,5 +1,6 @@
 <?php
-use Doubleedesign\Comet\Core\{ColorUtils, Config, ColorPair, ThemeColor};
+
+use Doubleedesign\Comet\Core\{ColorPair, ColorUtils, Config, ThemeColor};
 use function Patchwork\restoreAll;
 use function Spies\mock_object_of;
 
@@ -9,6 +10,7 @@ beforeEach(function() {
 });
 
 afterEach(function() {
+    Config::getInstance()->clear_theme_colour_pairs();
     restoreAll();
 });
 
@@ -31,6 +33,34 @@ function create_component_with_color_pair(array $attributes): object {
 }
 
 describe('ColorPair trait', function() {
+
+    it('sets both colours if the pair already exists in the global config', function() {
+        $colorSpy = mock_object_of(ColorUtils::class);
+        $colorSpy->spy_on_method('validate_pair')->will_return(true);
+        Config::getInstance()->maybe_add_theme_colour_pairs(array(
+            ['white', 'light', 1]
+        ));
+
+        $colorSpy->spy_on_method('validate_pair')->will_return(false); // Should be ignored because the pair is in the global config
+        $component = create_component_with_color_pair(['colorTheme' => 'white', 'backgroundColor' => 'light']);
+
+        expect($component->get_background_color())->toEqual(ThemeColor::LIGHT)
+            ->and($component->get_color_theme())->toEqual(ThemeColor::WHITE);
+    });
+
+    it('sets the colorTheme if the background matches the global one and the pair already exists in the global config', function() {
+        $colorSpy = mock_object_of(ColorUtils::class);
+        $colorSpy->spy_on_method('validate_pair')->will_return(true);
+        Config::getInstance()->maybe_add_theme_colour_pairs(array(
+            ['light', 'white', 1]
+        ));
+
+        $colorSpy->spy_on_method('validate_pair')->will_return(false); // Should be ignored because the pair is in the global config
+        $component = create_component_with_color_pair(['colorTheme' => 'light', 'backgroundColor' => 'white']);
+
+        expect($component->get_background_color())->toBeNull()
+            ->and($component->get_color_theme())->toEqual(ThemeColor::LIGHT);
+    });
 
     it('sets both colours if they have sufficient contrast', function() {
         $colorSpy = mock_object_of(ColorUtils::class);
