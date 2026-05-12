@@ -8,7 +8,6 @@
 			<site-header-responsive breakpoint="{{ $breakpoint }}"
 			                        responsive-style="{{ $responsiveStyle }}"
 			                        menu-data="{{ $responsiveMenuData }}"
-			                        menu-color-theme="{{ $menuColorTheme }}"
 			                        toggle-button-icon-prefix="{{ $toggleButtonIconPrefix }}"
 			                        overlay-background="{{ $overlayBackgroundColor }}"
 									toggle-button-icon-class="{{ $toggleButtonIconClass }}"
