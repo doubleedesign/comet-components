@@ -23,6 +23,7 @@ function create_component_with_bem_trait(string $bladeFile, ?string $context = n
     };
 }
 
+
 describe('Component is the block (top-level)', function() {
     test('default result', function() {
         $component = create_component_with_bem_trait('components.Accordion.accordion');
@@ -331,5 +332,27 @@ describe('Component is the element (deeply nested)', function() {
                 ->and($component->get_bem_classes())->toMatchArray(['site-header__menu__sub-menu__item']);
 
         });
+    });
+});
+
+describe('Context updates after construction', function() {
+    test('Basic component', function() {
+        $component = create_component_with_bem_trait('components.Menu.menu');
+
+        expect($component->get_bem_classes())->toMatchArray(['menu']);
+
+        $component->update_context('site-header');
+
+        expect($component->get_bem_classes())->toMatchArray(['site-header__menu']);
+    });
+
+    test('Basic nested component with shortname', function() {
+        $component = create_component_with_bem_trait('components.Menu.MenuList.menu-list', null, 'sub-menu');
+
+        expect($component->get_bem_classes())->toMatchArray(['menu__sub-menu']);
+
+        $component->update_context('site-header');
+
+        expect($component->get_bem_classes())->toMatchArray(['site-header__menu__sub-menu']);
     });
 });

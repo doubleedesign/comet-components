@@ -64,8 +64,9 @@ abstract class UIComponent extends Renderable {
         $context_to_use = $this->get_default_context_for_inner_components();
 
         array_walk($this->innerComponents, function($component) use ($context_to_use) {
-	        if ($component === null) return;
-	        if (!$component instanceof Renderable) return;
+            if ($component === null) return;
+            if (!$component instanceof Renderable) return;
+            if (!method_exists($component, 'update_context')) return;
             if (!$this->should_inherit_context($component)) return;
 
             try {
@@ -83,17 +84,32 @@ abstract class UIComponent extends Renderable {
         });
     }
 
+    /**
+     * Determine whether this component should pass down context to its inner components,
+     * if they support it.
+     *
+     * @param  Renderable  $component
+     *
+     * @return bool
+     */
     private function should_propagate_context(Renderable $component): bool {
         if (!method_exists($component, 'get_context')) return false;
         if (empty($component->innerComponents)) return false;
         if ($component instanceof PanelGroupComponent) return false;
-		if($this->get_default_context_for_inner_components() === null) return false;
+        if ($this->get_default_context_for_inner_components() === null) return false;
 
         return true;
     }
 
+    /**
+     * Determine whether a given component should automatically inherit context from its parent.
+     * Note: This does not affect context and shortNames explicitly provided to the component.
+     *
+     * @param  Renderable  $component
+     *
+     * @return bool
+     */
     private function should_inherit_context(Renderable $component): bool {
-        if ($component instanceof Columns) return false;
         if ($component instanceof PanelGroupComponent) return false;
         if ($component instanceof Breadcrumbs) return false;
         if (!method_exists($component, 'update_context')) return false;
@@ -111,13 +127,6 @@ abstract class UIComponent extends Renderable {
     }
 
     private function get_default_context_for_inner_components(): ?string {
-        $context = $this->get_context();
-
-        // For containers, we don't want to pass down __container, just the context of the container itself
-        if ($this instanceof Container && $context !== null) {
-            return $context;
-        }
-
         if (method_exists($this, 'get_element_class') && $this->get_element_class() !== null) {
             return $this->get_element_class();
         }

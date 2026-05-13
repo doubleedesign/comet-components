@@ -12,18 +12,6 @@ class MenuList extends UIComponent {
         parent::__construct($attributes, $menuItems, 'components.Menu.MenuList.menu-list');
     }
 
-    public function get_filtered_classes(): array {
-        $classes = parent::get_filtered_classes();
-
-        // Hack for overly verbose BEM class names in sub-menus
-	    return array_map(function($class) use (&$classes) {
-	        if (str_ends_with($class, 'menu__list__item__menu__sub-menu')) {
-	            return str_replace('menu__list__item__menu', 'menu__list', $class);
-	        }
-
-	        return $class;
-	    }, $classes);
-    }
 
     public function render(): void {
         $blade = BladeService::getInstance();
