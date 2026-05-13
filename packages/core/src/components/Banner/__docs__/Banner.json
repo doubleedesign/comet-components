@@ -145,8 +145,7 @@
         "required": true
     },
     "traits": [
-        "BackgroundColor",
-        "ColorTheme",
+        "ColorPair",
         "LayoutAlignment",
         "LayoutAlignment",
         "LayoutContainerSize",

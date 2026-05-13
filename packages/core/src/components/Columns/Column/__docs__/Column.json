@@ -73,10 +73,6 @@
                 "match-parent"
             ],
             "default": "match-parent"
-        },
-        "width": {
-            "type": "string",
-            "description": "Optionally set the width of the column, if you absolutely must do it explicitly instead of in your own CSS (ideally this should not be set in HTML, but things like the WP block editor kind of make it necessary to handle this use case). Note: This may be overridden to stack columns on small viewports."
         }
     },
     "innerComponents": {

@@ -11,7 +11,6 @@ class Column extends UIComponent {
         parent::__construct($attributes, $innerComponents, 'components.Columns.Column.column');
         $this->set_layout_alignment($attributes);
         $this->set_background_color($attributes);
-        $this->width = $attributes['width'] ?? null;
 
         if ($this->get_shortname() !== 'column') {
             $this->set_bem_element('column');

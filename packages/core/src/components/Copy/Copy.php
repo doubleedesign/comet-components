@@ -6,7 +6,9 @@ namespace Doubleedesign\Comet\Core;
 class Copy extends UIComponent {
     use ColorTheme;
     use LayoutContainerSize;
-    use NestedState;
+    use NestedState {
+		set_is_nested as private trait_set_is_nested;
+    }
 
     /**
      * @var array<PreprocessedHTML|Heading|ButtonGroup|ImageComponent> $innerComponents
@@ -19,8 +21,11 @@ class Copy extends UIComponent {
         $this->set_color_theme($attributes);
         $this->set_is_nested($attributes['isNested'] ?? null);
         $this->set_size($attributes);
+    }
 
-        if ($this->get_is_nested() && !isset($attributes['tagName'])) {
+    public function set_is_nested($isNested): void {
+        $this->trait_set_is_nested($isNested);
+        if ($this->get_is_nested()) {
             $this->tagName = Tag::DIV;
         }
     }

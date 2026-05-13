@@ -7,7 +7,9 @@ $address = array_intersect_key($fields, array_flip(['address', 'suburb', 'state'
 $other_fields = array_diff_key($fields, array_flip(['address', 'suburb', 'state', 'postcode']));
 
 // Format address as single line
-$address = $address['address'] . ', ' . implode(' ', array_slice($address, 1));
+if(isset($address['address'])) {
+	$address = $address['address'] . ', ' . implode(' ', array_slice($address, 1));
+}
 // Sort other fields so phone comes before email
 ksort($other_fields);
 $other_fields = array_reverse($other_fields);

@@ -37,17 +37,17 @@ class CallToAction extends LayoutComponent {
         parent::__construct($attributes, [$content], 'components.CallToAction.call-to-action');
     }
 
-	protected function get_html_attributes(): array {
-		$attributes = parent::get_html_attributes();
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
 
-		if($this->get_background_colors()->outer !== null) {
-			$attributes['data-background'] = $this->get_background_colors()->outer;
-		}
+        if ($this->get_background_colors()->outer !== null) {
+            $attributes['data-background'] = $this->get_background_colors()->outer;
+        }
 
-		if(isset($this->colorTheme)) {
-			$attributes['data-color-theme'] = $this->colorTheme;
-		}
+        if (isset($this->colorTheme)) {
+            $attributes['data-color-theme'] = $this->colorTheme;
+        }
 
-		return $attributes;
-	}
+        return $attributes;
+    }
 }
