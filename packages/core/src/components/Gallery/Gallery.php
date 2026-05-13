@@ -11,7 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::SECTION, Tag::FIGURE, Tag::DIV])]
 #[DefaultTag(Tag::SECTION)]
 class Gallery extends LayoutComponent {
-	use BackgroundColor;
+    use BackgroundColor;
     use NestedState;
 
     /**
@@ -58,7 +58,7 @@ class Gallery extends LayoutComponent {
         }, $innerComponents);
 
         $groupAttrs = [
-            'tagName'           => (isset($attributes['tagName']) && $attributes['tagName'] !== 'figure') ? $attributes['tagName'] : 'div',
+            'tagName'           => 'div',
             'shortName'         => 'images',
             'data-group-layout' => 'grid',
             'data-max-per-row'  => $attributes['maxPerRow'] ?? $attributes,
@@ -68,14 +68,15 @@ class Gallery extends LayoutComponent {
 
         $wrappedImages = new Group($groupAttrs, $updatedInnerComponents);
 
+        // TODO: Check if tagName needs more handling for nested/not nested states
+        $this->set_is_nested($attributes['isNested'] ?? false);
+        $this->set_background_color($attributes);
+
         parent::__construct(
             $attributes,
             [$wrappedImages],
             'components.Gallery.gallery'
         );
-
-        // TODO: Check if tagName needs more handling for nested/not nested states
-        $this->set_is_nested($attributes['isNested'] ?? false);
 
         // Add caption after parent constructor runs so we have access to the correct BEM context
         if (!empty($this->caption)) {
@@ -88,14 +89,13 @@ class Gallery extends LayoutComponent {
         }
     }
 
-	protected function get_html_attributes(): array {
-		$attributes = parent::get_html_attributes();
+    protected function get_html_attributes(): array {
+        $attributes = parent::get_html_attributes();
 
-		if ($this->get_background_color() !== null) {
-			$attributes['data-background'] = $this->get_background_color()->value;
-		}
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->get_background_color()->value;
+        }
 
-
-		return $attributes;
-	}
+        return $attributes;
+    }
 }

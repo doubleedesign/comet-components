@@ -2752,6 +2752,17 @@
     display: grid;
     grid-gap: var(--spacing-md);
     margin-block: var(--spacing-md);
+    padding-block: var(--spacing-lg);
+  }
+  @media (min-width: 768px) {
+    .gallery {
+      padding-block: var(--spacing-xl);
+    }
+  }
+  @media (min-width: 1440px) {
+    .gallery {
+      padding-block: var(--spacing-xxl);
+    }
   }
   .gallery__image {
     margin: 0;

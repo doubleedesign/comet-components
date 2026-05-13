@@ -5,6 +5,13 @@
 	display: grid;
 	grid-gap: var(--spacing-md);
 	margin-block: var(--spacing-md);
+	@include section-padding();
+
+	&__images {
+
+
+
+	}
 
 	&__image {
 		margin: 0;

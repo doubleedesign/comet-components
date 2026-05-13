@@ -47,4 +47,28 @@ abstract class ContentImageComponent extends ImageComponent {
             return $value !== null && $value !== 'false';
         });
     }
+
+	/**
+	 * Get the classes for the figure element wrapping both the image and the caption (if there is one)
+	 * @return array|string[]
+	 */
+	protected function get_wrapper_classes(): array {
+		if ($this->get_context()) {
+			return [$this->get_context() . '__image'];
+		}
+
+		return [];
+	}
+
+	/**
+	 * Get the classes for the figcaption element (if there is one)
+	 * @return array|string[]
+	 */
+	protected function get_caption_classes(): array {
+		if ($this->get_context()) {
+			return [$this->get_context() . '__image__caption'];
+		}
+
+		return [];
+	}
 }

@@ -1,11 +1,11 @@
 @if ($caption)
-	<figure @class($classes) @attributes($outerAttrs)>
+	<figure @class($wrapperClasses) @attributes($outerAttrs)>
 		@if ($href)
 			<a @attributes($innerAttrs) href="{{ $href }}" @if ($caption) data-caption="{{ $caption }}" @endif>
 				<img src="{{ $src }}" @attributes($attributes)>
 			</a>
 		@else
-			<div @attributes($innerAttrs)>
+			<div @class($classes) @attributes($innerAttrs)>
 				<img src="{{ $src }}" @attributes($attributes)>
 			</div>
 		@endif

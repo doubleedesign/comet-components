@@ -22,9 +22,8 @@ describe('Gallery', function() {
 
         expect($hierarchy)->toEqual([
             'section.gallery',
-            'div.gallery__container',
             'div.gallery__images',
-            'div.gallery__images__image images__image--basic',
+            'div.gallery__images__image gallery__images__image--basic image image--basic',
         ]);
     });
 
@@ -44,10 +43,9 @@ describe('Gallery', function() {
         $hierarchy = PestUtils::getHtmlHierarchy($wrapper);
 
         expect($hierarchy)->toEqual([
-            'section.gallery',
-            'div.gallery__container',
-            'figure.gallery__images',
-            'div.gallery__images__image images__image--basic',
+            'figure.gallery',
+            'div.gallery__images',
+	        'div.gallery__images__image gallery__images__image--basic image image--basic',
         ]);
     });
 
@@ -68,9 +66,8 @@ describe('Gallery', function() {
 
         expect($hierarchy)->toEqual([
             'section.gallery',
-            'div.gallery__container',
             'div.gallery__images',
-            'div.gallery__images__image images__image--basic',
+	        'div.gallery__images__image gallery__images__image--basic image image--basic',
         ]);
     });
 
@@ -91,9 +88,8 @@ describe('Gallery', function() {
 
         expect($hierarchy)->toEqual([
             'div.gallery',
-            'div.gallery__container',
             'div.gallery__images',
-            'div.gallery__images__image images__image--basic',
+	        'div.gallery__images__image gallery__images__image--basic image image--basic',
         ]);
     });
 });
