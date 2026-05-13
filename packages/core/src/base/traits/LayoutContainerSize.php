@@ -12,11 +12,17 @@ trait LayoutContainerSize {
     protected ?ContainerSize $size = ContainerSize::DEFAULT;
 
     /**
-     * @param  array  $attributes
+     * @param  array|null  $attributes
      * @description Retrieves the relevant properties from the component $attributes array,
      *              validates them, and assigns the size value if the conditions are met to use it.
      */
-    public function set_size(array $attributes): void {
+    public function set_size(?array $attributes): void {
+        if ($attributes === null) {
+            $this->size = null;
+
+            return;
+        }
+
         if (method_exists($this, 'get_is_nested') && $this->get_is_nested()) {
             $this->size = null;
 
