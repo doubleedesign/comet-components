@@ -64,16 +64,6 @@
 <xs:enumeration value="inline"/>
 	</xs:restriction>
 </xs:simpleType>
-<xs:simpleType name="ContainerSize|mixed">
-	<xs:restriction base="xs:string">
-		<xs:enumeration value="fullwidth"/>
-<xs:enumeration value="wide"/>
-<xs:enumeration value="narrow"/>
-<xs:enumeration value="narrower"/>
-<xs:enumeration value="small"/>
-<xs:enumeration value="contained"/>
-	</xs:restriction>
-</xs:simpleType>
 	<xs:simpleType name="StringArray">
 		<xs:list itemType="xs:string"/>
 	</xs:simpleType>
@@ -280,7 +270,6 @@
 	<xs:element name="Column">
 		<xs:complexType>
 			<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="width" type="xs:string"/>
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="shortName" type="xs:string"/>
@@ -311,30 +300,11 @@
 	<xs:element name="Container">
 		<xs:complexType>
 			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="vAlign" type="Alignment"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="shortName" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
-<xs:attribute name="orientation" type="Orientation"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="hAlign" type="Alignment"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="ContainerWithNesting">
-		<xs:complexType>
-			<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="size" type="ContainerSize"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="orientation" type="Orientation"/>
 <xs:attribute name="shortName" type="xs:string"/>
-<xs:attribute name="innerSize" type="ContainerSize|mixed"/>
 <xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
@@ -798,8 +768,8 @@
 <xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="shortName" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="backgroundColor" type="ThemeColor|ThemeGradient"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Paragraph">

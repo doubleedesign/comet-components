@@ -1945,6 +1945,94 @@
         ]
     },
     {
+        "name": "Column",
+        "description": null,
+        "extends": "UIComponent",
+        "abstract": false,
+        "isInner": true,
+        "belongsInside": "Columns",
+        "attributes": {
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
+            },
+            "classes": {
+                "type": "array<string>",
+                "description": "CSS classes",
+                "default": [
+                    "columns__column"
+                ]
+            },
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "default": "columns"
+            },
+            "hAlign": {
+                "type": "Alignment",
+                "description": "Horizontal alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            },
+            "id": {
+                "type": "string",
+                "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "required": true,
+                "default": "column"
+            },
+            "style": {
+                "type": "array",
+                "description": "Inline styles"
+            },
+            "tagName": {
+                "type": "Tag",
+                "description": "The HTML tag to use for this component",
+                "supported": [
+                    "div",
+                    "main",
+                    "aside"
+                ],
+                "default": "div"
+            },
+            "testId": {
+                "type": "string",
+                "description": "Optionally add a data-testid attribute for automated tests"
+            },
+            "vAlign": {
+                "type": "Alignment",
+                "description": "Vertical alignment, if applicable",
+                "supported": [
+                    "start",
+                    "end",
+                    "center",
+                    "justify",
+                    "match-parent"
+                ],
+                "default": "match-parent"
+            }
+        },
+        "innerComponents": {
+            "type": "array<Renderable>",
+            "description": "Inner components to be rendered within this component",
+            "required": true
+        },
+        "traits": [
+            "BackgroundColor",
+            "LayoutAlignment",
+            "BlockElementModifier"
+        ]
+    },
+    {
         "name": "Columns",
         "description": "Organise content visually with a column-based layout.",
         "extends": "LayoutComponent",
@@ -2050,8 +2138,8 @@
     },
     {
         "name": "Container",
-        "description": "Create a section with semantic meaning that controls the maximum width of its contents.",
-        "extends": "LayoutComponent",
+        "description": "A basic page section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc. Should generally have a shortName specified so the purpose of the grouping is clear.",
+        "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
         "belongsInside": null,
@@ -2067,30 +2155,9 @@
                 "type": "string",
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
-            },
-            "orientation": {
-                "type": "Orientation",
-                "description": "Orientation of the component content, if applicable",
-                "supported": [
-                    "horizontal",
-                    "vertical"
-                ],
-                "default": "vertical"
             },
             "shortName": {
                 "type": "string",
@@ -2130,18 +2197,6 @@
             "testId": {
                 "type": "string",
                 "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
             }
         },
         "innerComponents": {
@@ -2150,126 +2205,6 @@
             "required": true
         },
         "traits": [
-            "LayoutContainerSize",
-            "LayoutOrientation",
-            "LayoutAlignment",
-            "LayoutContainerSize",
-            "BlockElementModifier"
-        ]
-    },
-    {
-        "name": "ContainerWithNesting",
-        "description": null,
-        "extends": "Container",
-        "abstract": false,
-        "isInner": false,
-        "belongsInside": "LayoutComponent",
-        "attributes": {
-            "classes": {
-                "type": "array<string>",
-                "description": "CSS classes",
-                "default": [
-                    "container"
-                ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "innerSize": {
-                "type": "ContainerSize|mixed",
-                "description": "The size of the inner container that the base container will wrap; should always be the same or smaller than the outer container size",
-                "supported": [
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small",
-                    "contained"
-                ]
-            },
-            "orientation": {
-                "type": "Orientation",
-                "description": "Orientation of the component content, if applicable",
-                "supported": [
-                    "horizontal",
-                    "vertical"
-                ],
-                "default": "vertical"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
-                "required": true,
-                "default": "container"
-            },
-            "size": {
-                "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
-                "supported": [
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small",
-                    "contained"
-                ],
-                "default": "contained"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "div"
-                ],
-                "default": "div"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            }
-        },
-        "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "LayoutContainerSize",
-            "LayoutOrientation",
-            "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
         ]
@@ -3647,7 +3582,9 @@
                     "aside",
                     "ul",
                     "ol",
-                    "figure"
+                    "figure",
+                    "header",
+                    "footer"
                 ],
                 "default": "div"
             },
@@ -4768,22 +4705,22 @@
     },
     {
         "name": "PageSection",
-        "description": "A basic full-width section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc.",
-        "extends": "UIComponent",
+        "description": "A basic page element to group nested content that can have its semantics, own sizes and alignments within the bounds of this wrapper's size. This component is intended for layout purposes only, not intended to semantically group content. Unlike Container, it does not enforce nested state upon its inner components, and unlike UIComponent and its children it does not have or propagate context.",
+        "extends": "Renderable",
         "abstract": false,
         "isInner": false,
         "belongsInside": "LayoutComponent",
         "attributes": {
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
+            },
             "classes": {
                 "type": "array<string>",
                 "description": "CSS classes",
                 "default": [
-                    "page-section"
+                    ""
                 ]
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
             },
             "id": {
                 "type": "string",
@@ -4793,7 +4730,7 @@
                 "type": "string",
                 "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
                 "required": true,
-                "default": "page-section"
+                "default": ""
             },
             "size": {
                 "type": "ContainerSize",
@@ -4816,15 +4753,9 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
-                    "div",
-                    "section",
-                    "header",
-                    "footer",
-                    "main",
-                    "article",
-                    "figure"
+                    "div"
                 ],
-                "default": "section"
+                "default": "div"
             },
             "testId": {
                 "type": "string",
@@ -4837,8 +4768,9 @@
             "required": true
         },
         "traits": [
+            "BackgroundColor",
             "LayoutContainerSize",
-            "BlockElementModifier"
+            "ShortName"
         ]
     },
     {

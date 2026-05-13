@@ -6,12 +6,16 @@ namespace Doubleedesign\Comet\Core;
  *
  * @package Doubleedesign\Comet\Core
  * @version 1.1.0
- * @description A basic full-width section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc.
+ * @description A basic page element to group nested content that can have its semantics, own sizes and alignments within the bounds of this wrapper's size.
+ *              This component is intended for layout purposes only, not intended to semantically group content.
+ *              Unlike Container, it does not enforce nested state upon its inner components, and unlike UIComponent and its children it does not have or propagate context.
  */
-#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::HEADER, Tag::FOOTER, Tag::MAIN, Tag::ARTICLE, Tag::FIGURE])]
-#[DefaultTag(Tag::SECTION)]
-class PageSection extends UIComponent {
+#[AllowedTags([Tag::DIV])]
+#[DefaultTag(Tag::DIV)]
+class PageSection extends Renderable {
+    use BackgroundColor;
     use LayoutContainerSize;
+    use ShortName;
 
     /**
      * @var array<Renderable> $innerComponents
@@ -20,14 +24,11 @@ class PageSection extends UIComponent {
     protected array $innerComponents;
 
     public function __construct(array $attributes, array $innerComponents) {
-        parent::__construct($attributes, $innerComponents, 'components.PageSection.page-section');
+        parent::__construct($attributes, 'components.PageSection.page-section');
+        $this->innerComponents = $innerComponents;
         $this->set_size($attributes);
-
-        array_walk($this->innerComponents, function(&$component) {
-            if (method_exists($component, 'set_is_nested')) {
-                $component->set_is_nested(true);
-            }
-        });
+        $this->set_background_color($attributes);
+        $this->simplify_all_background_colors();
     }
 
     public function get_filtered_classes(): array {

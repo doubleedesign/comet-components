@@ -1,7 +1,7 @@
 {
     "name": "Container",
-    "description": "Create a section with semantic meaning that controls the maximum width of its contents.",
-    "extends": "LayoutComponent",
+    "description": "A basic page section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc. Should generally have a shortName specified so the purpose of the grouping is clear.",
+    "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
     "belongsInside": null,
@@ -17,30 +17,9 @@
             "type": "string",
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
         },
-        "hAlign": {
-            "type": "Alignment",
-            "description": "Horizontal alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent"
-        },
         "id": {
             "type": "string",
             "description": "Unique identifier"
-        },
-        "orientation": {
-            "type": "Orientation",
-            "description": "Orientation of the component content, if applicable",
-            "supported": [
-                "horizontal",
-                "vertical"
-            ],
-            "default": "vertical"
         },
         "shortName": {
             "type": "string",
@@ -80,18 +59,6 @@
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
-        },
-        "vAlign": {
-            "type": "Alignment",
-            "description": "Vertical alignment, if applicable",
-            "supported": [
-                "start",
-                "end",
-                "center",
-                "justify",
-                "match-parent"
-            ],
-            "default": "match-parent"
         }
     },
     "innerComponents": {
@@ -100,9 +67,6 @@
         "required": true
     },
     "traits": [
-        "LayoutContainerSize",
-        "LayoutOrientation",
-        "LayoutAlignment",
         "LayoutContainerSize",
         "BlockElementModifier"
     ]
