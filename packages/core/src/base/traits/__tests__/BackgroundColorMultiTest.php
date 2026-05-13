@@ -21,7 +21,7 @@ afterEach(function() {
  *
  * @return object
  */
-function create_component_with_bg_color(array $attributes): object {
+function create_component_with_bg_colors(array $attributes): object {
     return new class($attributes) {
         use BackgroundColorMulti;
 
@@ -50,7 +50,7 @@ dataset('all valid attribute types (single gradient)', [
 
 describe('Set value from attributes', function() {
     it('sets a valid single colour', function(string $attributeName, $value) {
-        $component = create_component_with_bg_color([$attributeName => $value]);
+        $component = create_component_with_bg_colors([$attributeName => $value]);
 
         expect($component->get_background_color())->toEqual(ThemeColor::PRIMARY)
             ->and($component->get_background_colors()->outer)->toEqual(ThemeColor::PRIMARY);
@@ -65,7 +65,7 @@ describe('Set value from attributes', function() {
             return relay();
         });
 
-        $component = create_component_with_bg_color(['backgroundColors' => ['light', 'dark']]);
+        $component = create_component_with_bg_colors(['backgroundColors' => ['light', 'dark']]);
 
         expect_spy($spy)->to_have_been_called->with(match_array(['light', 'dark']))->verify();
         expect($component->get_background_colors())->toBeInstanceOf(BackgroundCollection::class);
@@ -76,7 +76,7 @@ describe('Set value from component defaults', function() {
     it('sets a valid single colour', function(string $attributeName, $value) {
         redefine('Doubleedesign\Comet\Core\Config::get_component_defaults', fn() => [$attributeName => $value]);
 
-        $component = create_component_with_bg_color([]);
+        $component = create_component_with_bg_colors([]);
 
         expect($component->get_background_color())->toEqual(ThemeColor::PRIMARY);
         expect($component->get_background_colors()->outer)->toEqual(ThemeColor::PRIMARY);
@@ -92,7 +92,7 @@ describe('Set value from component defaults', function() {
             return relay();
         });
 
-        $component = create_component_with_bg_color(['backgroundColors' => ['light', 'dark']]);
+        $component = create_component_with_bg_colors(['backgroundColors' => ['light', 'dark']]);
 
         expect_spy($spy)->to_have_been_called->with(match_array(['light', 'dark']))->verify();
         expect($component->get_background_colors())->toBeInstanceOf(BackgroundCollection::class);

@@ -1,7 +1,7 @@
 <?php
 
 use Doubleedesign\Comet\Core\{ColorUtils, ThemeColor};
-use function Spies\{stub_function, expect_spy, get_spy_for, match_pattern};
+use function Spies\{stub_function, expect_spy, get_spy_for, match_pattern, finish_spying};
 
 beforeEach(function() {
     // Mock a range of colour types
@@ -21,6 +21,10 @@ beforeEach(function() {
     );
 });
 
+afterEach(function() {
+	finish_spying();
+});
+
 describe('ColorUtils', function() {
 
     describe('parsing values from CSS', function() {
@@ -38,7 +42,7 @@ describe('ColorUtils', function() {
         it('matches a valid colour name to its theme config value (hex)', function() {
             $instance = new ColorUtils();
             $colour = $instance->get_theme_value_for_colour_name('primary');
-            expect($colour)->toEqual('#4B0082');
+            expect($colour)->toEqual('#4b0082');
         });
 
         it('matches a valid colour name to its theme config value (RGB)', function() {
@@ -62,7 +66,7 @@ describe('ColorUtils', function() {
         it('matches a valid named colour to its hex value', function() {
             $instance = new ColorUtils();
             $colour = $instance->get_theme_value_for_colour_name('light');
-            expect($colour)->toEqual('#F8F8FF');
+            expect($colour)->toEqual('#f8f8ff');
         });
 
         it('returns null for an invalid colour name', function() {

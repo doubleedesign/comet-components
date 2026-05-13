@@ -1,7 +1,7 @@
 <?php
 
 use Doubleedesign\Comet\Core\{Config, ThemeColor};
-use function Spies\{stub_function, expect_spy, get_spy_for, match_pattern};
+use function Spies\{stub_function, expect_spy, get_spy_for, match_pattern, finish_spying};
 
 beforeEach(function() {
     // Mock a range of colour types
@@ -20,6 +20,10 @@ beforeEach(function() {
 		}
 		CSS
     );
+});
+
+afterEach(function() {
+	finish_spying();
 });
 
 describe('Config', function() {
