@@ -10,7 +10,6 @@ use Exception;
 trait BlockElementModifier {
     use ContextHierarchy;
     use ShortName;
-
     private ?string $explicit_context = null;
     private string $block = '';
     private ?string $element = null;
@@ -57,14 +56,24 @@ trait BlockElementModifier {
         }
     }
 
-    // TODO: If this is set from outside, do we then need to update the element?
-    public function set_bem_block(string $block): static {
+    public function update_context(string $context): static {
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $this->with_explicit_context($context)->and_bem($this->shortName);
+
+        if (method_exists($this, 'maybe_pass_down_context_to_inner_components')) {
+            $this->maybe_pass_down_context_to_inner_components();
+        }
+
+        // Allow for method chaining like update_context(...)->and_bem(...)
+        return $this;
+    }
+
+    private function set_bem_block(string $block): static {
         $this->block = $block;
 
         return $this;
     }
 
-    // TODO: If this is set from outside, how to handle context? Do we need to?
     public function set_bem_element(?string $element): static {
         if ($this->implicit_context === null) {
             $this->element = $element;

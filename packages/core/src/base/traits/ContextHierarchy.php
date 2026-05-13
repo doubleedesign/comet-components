@@ -150,24 +150,13 @@ trait ContextHierarchy {
 
         $this->explicit_context = $explicit_context;
         if (!str_ends_with($explicit_context, $this->implicit_context)) {
+			\Symfony\Component\VarDumper\VarDumper::dump("$explicit_context, $this->implicit_context");
             $this->context = $explicit_context . '__' . $this->implicit_context;
         }
         else {
             $this->context = $explicit_context;
         }
 
-        return $this;
-    }
-
-    public function update_context(string $context): static {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $this->with_explicit_context($context)->and_bem($this->shortName);
-
-        if (method_exists($this, 'maybe_pass_down_context_to_inner_components')) {
-            $this->maybe_pass_down_context_to_inner_components();
-        }
-
-        // Allow for method chaining like update_context(...)->and_bem(...)
         return $this;
     }
 
