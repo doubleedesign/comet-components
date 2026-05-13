@@ -1011,149 +1011,6 @@
   }
 }
 @layer comet-components {
-  .container, [class$=__container], [class*=container--] {
-    margin: 0 auto;
-    container-type: inline-size;
-    width: 100%;
-    padding-inline: var(--spacing-md);
-    max-width: var(--width-contained);
-  }
-  article > .container, article > [class$=__container], article > [class*=container--] {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
-  @media (min-width: 940px) {
-    article > .container, article > [class$=__container], article > [class*=container--] {
-      gap: var(--spacing-lg);
-    }
-  }
-  .container[data-size=fullwidth], [data-size=fullwidth][class$=__container], [data-size=fullwidth][class*=container--] {
-    max-width: 100vw;
-  }
-  .container[data-size=fullwidth][data-background], [data-size=fullwidth][data-background][class$=__container], [data-size=fullwidth][data-background][class*=container--], [data-background] .container[data-size=fullwidth], [data-background] [data-size=fullwidth][class$=__container], [data-background] [data-size=fullwidth][class*=container--], .site-header .container[data-size=fullwidth], .site-header [data-size=fullwidth][class$=__container], .site-header [data-size=fullwidth][class*=container--] {
-    max-width: calc(100vw - var(--spacing-md) * 2);
-  }
-  .container[data-size=wide], [data-size=wide][class$=__container], [data-size=wide][class*=container--] {
-    max-width: var(--width-wide);
-  }
-  .container[data-size=wide][data-background], [data-size=wide][data-background][class$=__container], [data-size=wide][data-background][class*=container--], [data-background] .container[data-size=wide], [data-background] [data-size=wide][class$=__container], [data-background] [data-size=wide][class*=container--], .page-section .container[data-size=wide], .page-section [data-size=wide][class$=__container], .page-section [data-size=wide][class*=container--], .site-header .container[data-size=wide], .site-header [data-size=wide][class$=__container], .site-header [data-size=wide][class*=container--] {
-    max-width: calc(var(--width-wide) - var(--spacing-md) * 2);
-  }
-  .container[data-size=narrow], [data-size=narrow][class$=__container], [data-size=narrow][class*=container--] {
-    max-width: var(--width-narrow);
-  }
-  .container[data-size=narrow][data-background], [data-size=narrow][data-background][class$=__container], [data-size=narrow][data-background][class*=container--], [data-background] .container[data-size=narrow], [data-background] [data-size=narrow][class$=__container], [data-background] [data-size=narrow][class*=container--], .page-section .container[data-size=narrow], .page-section [data-size=narrow][class$=__container], .page-section [data-size=narrow][class*=container--], .site-header .container[data-size=narrow], .site-header [data-size=narrow][class$=__container], .site-header [data-size=narrow][class*=container--] {
-    max-width: calc(var(--width-narrow) - var(--spacing-md) * 2);
-  }
-  .container:has(> .breakout), [class$=__container]:has(> .breakout), [class*=container--]:has(> .breakout) {
-    container-type: unset;
-  }
-  .container[data-halign] > h2:first-child, [data-halign][class$=__container] > h2:first-child, [data-halign][class*=container--] > h2:first-child {
-    width: 100%;
-    flex-basis: 100%;
-    display: flex;
-    justify-content: inherit;
-  }
-  .container [data-background=primary] + [data-background*=gradient-primary], [class$=__container] [data-background=primary] + [data-background*=gradient-primary], [class*=container--] [data-background=primary] + [data-background*=gradient-primary] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-primary] + [data-background=primary], [class$=__container] [data-background*=gradient-][data-background*=-primary] + [data-background=primary], [class*=container--] [data-background*=gradient-][data-background*=-primary] + [data-background=primary] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-primary] + [data-background*=gradient-primary], [class$=__container] [data-background*=gradient-primary] + [data-background*=gradient-primary], [class*=container--] [data-background*=gradient-primary] + [data-background*=gradient-primary] {
-    padding-block-start: 0;
-  }
-  .container [data-background=secondary] + [data-background*=gradient-secondary], [class$=__container] [data-background=secondary] + [data-background*=gradient-secondary], [class*=container--] [data-background=secondary] + [data-background*=gradient-secondary] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-secondary] + [data-background=secondary], [class$=__container] [data-background*=gradient-][data-background*=-secondary] + [data-background=secondary], [class*=container--] [data-background*=gradient-][data-background*=-secondary] + [data-background=secondary] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-secondary] + [data-background*=gradient-secondary], [class$=__container] [data-background*=gradient-secondary] + [data-background*=gradient-secondary], [class*=container--] [data-background*=gradient-secondary] + [data-background*=gradient-secondary] {
-    padding-block-start: 0;
-  }
-  .container [data-background=accent] + [data-background*=gradient-accent], [class$=__container] [data-background=accent] + [data-background*=gradient-accent], [class*=container--] [data-background=accent] + [data-background*=gradient-accent] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-accent] + [data-background=accent], [class$=__container] [data-background*=gradient-][data-background*=-accent] + [data-background=accent], [class*=container--] [data-background*=gradient-][data-background*=-accent] + [data-background=accent] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-accent] + [data-background*=gradient-accent], [class$=__container] [data-background*=gradient-accent] + [data-background*=gradient-accent], [class*=container--] [data-background*=gradient-accent] + [data-background*=gradient-accent] {
-    padding-block-start: 0;
-  }
-  .container [data-background=info] + [data-background*=gradient-info], [class$=__container] [data-background=info] + [data-background*=gradient-info], [class*=container--] [data-background=info] + [data-background*=gradient-info] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-info] + [data-background=info], [class$=__container] [data-background*=gradient-][data-background*=-info] + [data-background=info], [class*=container--] [data-background*=gradient-][data-background*=-info] + [data-background=info] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-info] + [data-background*=gradient-info], [class$=__container] [data-background*=gradient-info] + [data-background*=gradient-info], [class*=container--] [data-background*=gradient-info] + [data-background*=gradient-info] {
-    padding-block-start: 0;
-  }
-  .container [data-background=warning] + [data-background*=gradient-warning], [class$=__container] [data-background=warning] + [data-background*=gradient-warning], [class*=container--] [data-background=warning] + [data-background*=gradient-warning] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-warning] + [data-background=warning], [class$=__container] [data-background*=gradient-][data-background*=-warning] + [data-background=warning], [class*=container--] [data-background*=gradient-][data-background*=-warning] + [data-background=warning] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-warning] + [data-background*=gradient-warning], [class$=__container] [data-background*=gradient-warning] + [data-background*=gradient-warning], [class*=container--] [data-background*=gradient-warning] + [data-background*=gradient-warning] {
-    padding-block-start: 0;
-  }
-  .container [data-background=success] + [data-background*=gradient-success], [class$=__container] [data-background=success] + [data-background*=gradient-success], [class*=container--] [data-background=success] + [data-background*=gradient-success] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-success] + [data-background=success], [class$=__container] [data-background*=gradient-][data-background*=-success] + [data-background=success], [class*=container--] [data-background*=gradient-][data-background*=-success] + [data-background=success] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-success] + [data-background*=gradient-success], [class$=__container] [data-background*=gradient-success] + [data-background*=gradient-success], [class*=container--] [data-background*=gradient-success] + [data-background*=gradient-success] {
-    padding-block-start: 0;
-  }
-  .container [data-background=error] + [data-background*=gradient-error], [class$=__container] [data-background=error] + [data-background*=gradient-error], [class*=container--] [data-background=error] + [data-background*=gradient-error] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-error] + [data-background=error], [class$=__container] [data-background*=gradient-][data-background*=-error] + [data-background=error], [class*=container--] [data-background*=gradient-][data-background*=-error] + [data-background=error] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-error] + [data-background*=gradient-error], [class$=__container] [data-background*=gradient-error] + [data-background*=gradient-error], [class*=container--] [data-background*=gradient-error] + [data-background*=gradient-error] {
-    padding-block-start: 0;
-  }
-  .container [data-background=light] + [data-background*=gradient-light], [class$=__container] [data-background=light] + [data-background*=gradient-light], [class*=container--] [data-background=light] + [data-background*=gradient-light] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-light] + [data-background=light], [class$=__container] [data-background*=gradient-][data-background*=-light] + [data-background=light], [class*=container--] [data-background*=gradient-][data-background*=-light] + [data-background=light] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-light] + [data-background*=gradient-light], [class$=__container] [data-background*=gradient-light] + [data-background*=gradient-light], [class*=container--] [data-background*=gradient-light] + [data-background*=gradient-light] {
-    padding-block-start: 0;
-  }
-  .container [data-background=dark] + [data-background*=gradient-dark], [class$=__container] [data-background=dark] + [data-background*=gradient-dark], [class*=container--] [data-background=dark] + [data-background*=gradient-dark] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-dark] + [data-background=dark], [class$=__container] [data-background*=gradient-][data-background*=-dark] + [data-background=dark], [class*=container--] [data-background*=gradient-][data-background*=-dark] + [data-background=dark] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-dark] + [data-background*=gradient-dark], [class$=__container] [data-background*=gradient-dark] + [data-background*=gradient-dark], [class*=container--] [data-background*=gradient-dark] + [data-background*=gradient-dark] {
-    padding-block-start: 0;
-  }
-  .container [data-background=white] + [data-background*=gradient-white], [class$=__container] [data-background=white] + [data-background*=gradient-white], [class*=container--] [data-background=white] + [data-background*=gradient-white] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-][data-background*=-white] + [data-background=white], [class$=__container] [data-background*=gradient-][data-background*=-white] + [data-background=white], [class*=container--] [data-background*=gradient-][data-background*=-white] + [data-background=white] {
-    padding-block-start: 0;
-  }
-  .container [data-background*=gradient-white] + [data-background*=gradient-white], [class$=__container] [data-background*=gradient-white] + [data-background*=gradient-white], [class*=container--] [data-background*=gradient-white] + [data-background*=gradient-white] {
-    padding-block-start: 0;
-  }
-  .container [class$=__container] {
-    margin-inline: auto;
-  }
-  .container [class$=__container][data-size] {
-    margin-inline: unset;
-  }
-  .container [class$=__container] [class$=__container] {
-    padding-inline: 0;
-  }
   .button, [class$=__button], [class*=button--] {
     display: inline-block;
     font-family: var(--font-family-body);
@@ -2325,7 +2182,7 @@
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }
-  .date, .date--range, [class$=__date], [class*=date--] {
+  .date, [class$=__date], [class*=date--] {
     min-width: 3rem;
     max-width: 5rem;
     display: flex;
@@ -2336,16 +2193,16 @@
     background: var(--theme-color);
     color: var(--theme-color-inverse);
   }
-  .date__day, .date--range__days, [class$=__date__day], .date__day-number, .date--range__day-number, [class$=__date__day-number], .date__month, .date--range__month, [class$=__date__month], .date__year, .date--range__year, [class$=__date__year] {
+  .date__day, [class$=__date__day], .date__day-number, [class$=__date__day-number], .date__month, [class$=__date__month], .date__year, [class$=__date__year] {
     display: block;
     text-align: center;
     line-height: 1;
     font-weight: var(--font-weight-light);
   }
-  .date__day, .date--range__days, [class$=__date__day] {
+  .date__day, [class$=__date__day] {
     font-size: var(--font-size-sm);
   }
-  .date__day-number, .date--range__day-number, [class$=__date__day-number] {
+  .date__day-number, [class$=__date__day-number] {
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }
@@ -2752,6 +2609,17 @@
     display: grid;
     grid-gap: var(--spacing-md);
     margin-block: var(--spacing-md);
+    padding-block: var(--spacing-lg);
+  }
+  @media (min-width: 768px) {
+    .gallery {
+      padding-block: var(--spacing-xl);
+    }
+  }
+  @media (min-width: 1440px) {
+    .gallery {
+      padding-block: var(--spacing-xxl);
+    }
   }
   .gallery__image {
     margin: 0;
@@ -3180,6 +3048,7 @@
   }
   .site-footer {
     padding-block: var(--spacing-lg);
+    padding-block-end: var(--spacing-lg);
   }
   @media (min-width: 768px) {
     .site-footer {
@@ -3190,9 +3059,6 @@
     .site-footer {
       padding-block: var(--spacing-xxl);
     }
-  }
-  .site-footer {
-    padding-block-end: var(--spacing-lg);
   }
   .site-footer ul {
     margin: 0;
@@ -3337,6 +3203,7 @@
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
+      row-gap: var(--spacing-lg);
     }
     @media (min-width: 768px) {
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -3347,9 +3214,6 @@
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
-    }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
-      row-gap: var(--spacing-lg);
     }
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
@@ -3373,6 +3237,7 @@
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
+      row-gap: var(--spacing-lg);
     }
     @media (min-width: 768px) {
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -3383,9 +3248,6 @@
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
-    }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
-      row-gap: var(--spacing-lg);
     }
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
@@ -3478,6 +3340,7 @@
     flex-direction: row;
     justify-content: center;
     padding-block: var(--spacing-lg);
+    padding-block-end: 0;
   }
   @media (min-width: 768px) {
     .site-header__top {
@@ -3488,9 +3351,6 @@
     .site-header__top {
       padding-block: var(--spacing-xxl);
     }
-  }
-  .site-header__top {
-    padding-block-end: 0;
   }
   .site-header__top:empty {
     display: none;
