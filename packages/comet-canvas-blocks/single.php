@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\{PageSection, ContentImageBasic, Copy, Group, PreprocessedHTML};
+use Doubleedesign\Comet\Core\{Container, ContentImageBasic, Copy, Group, PreprocessedHTML};
 use Doubleedesign\CometCanvas\TemplateParts;
 
 get_header();
@@ -10,15 +10,15 @@ $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
 if ($image_url) {
     $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
     $image_caption = get_the_post_thumbnail_caption();
-    $image = new Group(['shortName' => 'image'], [new ContentImageBasic([
-        'src'             => $image_url,
-        'alt'             => $image_alt,
-        'caption'         => $image_caption,
-        'aspectRatio'     => 'cinemascope',
-        'scale'           => 'cover',
-        'classes'         => apply_filters('comet_canvas_blog_post_featured_image_classes', []),
-        'styleName'       => apply_filters('comet_canvas_blog_post_featured_image_style', ''),
-    ])]);
+	$image = new ContentImageBasic([
+		'src'         => $image_url,
+		'alt'         => $image_alt,
+		'caption'     => $image_caption,
+		'aspectRatio' => 'cinemascope',
+		'scale'       => 'cover',
+		'classes'     => apply_filters('comet_canvas_blog_post_featured_image_classes', []),
+		'styleName'   => apply_filters('comet_canvas_blog_post_featured_image_style', ''),
+	]);
 }
 
 $content = new Copy([
@@ -38,7 +38,7 @@ $footer = new Group([
     ...($include_post_nav ? [TemplateParts::get_post_nav()] : []),
 ]);
 
-$component = new PageSection([
+$component = new Container([
     'tagName'         => 'article',
     'shortName'       => 'post-content',
     'size'            => apply_filters('comet_canvas_single_post_width', 'contained'),
