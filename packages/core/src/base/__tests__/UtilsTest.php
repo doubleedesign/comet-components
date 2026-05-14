@@ -1,4 +1,5 @@
 <?php
+
 use Doubleedesign\Comet\Core\Utils;
 
 describe('kebab_case', function() {
@@ -135,3 +136,149 @@ describe('array_diff_end', function() {
         expect($result)->toEqual([]);
     });
 });
+
+describe('array_unique_sequential', function() {
+
+    it('returns an empty input array as-is', function() {
+        $input = [];
+        $result = Utils::array_unique_sequential($input);
+
+        expect($result)->toEqual([]);
+    });
+
+    it('de-duplicates adjacent duplicates', function() {
+        $result = Utils::array_unique_sequential(['menu', 'menu', 'list', 'item']);
+
+        expect($result)->toEqual(['menu', 'list', 'item']);
+    });
+
+    it('de-duplicates adjacent duplicates while leaving later instances of the same phrase in place', function() {
+        $result = Utils::array_unique_sequential(['menu', 'menu', 'list', 'item', 'menu']);
+
+        expect($result)->toEqual(['menu', 'list', 'item', 'menu']);
+    });
+
+    it('does not remove non-adjacent duplicates', function() {
+        $result = Utils::array_unique_sequential(['menu', 'list', 'menu', 'item']);
+
+        expect($result)->toEqual(['menu', 'list', 'menu', 'item']);
+    });
+
+    it('ignores a partial match', function() {
+        $result = Utils::array_unique_sequential(['menu', 'list', 'sub-menu', 'list', 'item']);
+
+        expect($result)->toEqual(['menu', 'list', 'sub-menu', 'list', 'item']);
+    });
+
+    it('de-duplicates an array of arrays', function() {
+        $input = [['menu', 'list'], ['menu', 'list'], ['item']];
+        $result = Utils::array_unique_sequential($input);
+
+        expect($result)->toEqual([['menu', 'list'], ['item']]);
+    });
+
+    it('ignores arrays where the duplicates are not in the same order', function() {
+        $input = [['menu', 'list'], ['list', 'menu'], ['item']];
+        $result = Utils::array_unique_sequential($input);
+
+        expect($result)->toEqual([['menu', 'list'], ['list', 'menu'], ['item']]);
+    });
+
+    it('does not remove non-adjacent duplicate arrays', function() {
+        $input = [['menu', 'list'], ['item'], ['menu', 'list']];
+        $result = Utils::array_unique_sequential($input);
+
+        expect($result)->toEqual([['menu', 'list'], ['item'], ['menu', 'list']]);
+    });
+});
+
+describe('array_unique_sequential_chunks', function() {
+
+    it('returns an empty input array as-is', function() {
+        $input = [];
+        $result = Utils::array_unique_sequential_chunks($input);
+
+        expect($result)->toEqual([]);
+    });
+
+    it('de-duplicates adjacent sequences from the beginning of the array', function($input, $expected) {
+        $result = Utils::array_unique_sequential_chunks($input);
+
+        expect($result)->toEqual($expected);
+    })
+        ->with('pair duplicates')
+        ->with('triplet duplicates');
+
+    it('de-duplicates a sequence from the first item', function($input, $expected) {
+        $result = Utils::array_unique_sequential_chunks($input);
+
+        expect($result)->toEqual($expected);
+    })
+        ->with('pair duplicates (offset 1)')
+        ->with('triplet duplicates (offset 1)');
+
+    it('does not remove duplicates that are not adjacent', function($input, $expected) {
+        $result = Utils::array_unique_sequential_chunks($input);
+
+        expect($result)->toEqual($expected);
+    })
+        ->with('non-adjacent duplicates');
+});
+
+// These datasets are in the format of [input array, expected output array]
+dataset('pair duplicates', [
+    array(
+        ['menu', 'list', 'menu', 'list', 'item'],
+        ['menu', 'list', 'item']
+    ),
+    array(
+        ['menu', 'list', 'menu', 'list', 'menu', 'list', 'item'],
+        ['menu', 'list', 'item']
+    ),
+    array(
+        ['section', 'group', 'section', 'group', 'item'],
+        ['section', 'group', 'item']
+    ),
+    array(
+        ['featured', 'group', 'section', 'group', 'item'],
+        ['featured', 'group', 'section', 'group', 'item']
+    ),
+]);
+
+dataset('pair duplicates (offset 1)', [
+    array(
+        ['site-header', 'menu', 'list', 'menu', 'list', 'item'],
+        ['site-header', 'menu', 'list', 'item']
+    ),
+    array(
+        ['featured', 'section', 'group', 'section', 'group', 'item'],
+        ['featured', 'section', 'group', 'item']
+    ),
+]);
+
+dataset('triplet duplicates', [
+    array(['menu', 'list', 'item', 'menu', 'list', 'item'], ['menu', 'list', 'item']),
+]);
+
+dataset('triplet duplicates (offset 1)', [
+    array(
+		['site-header', 'menu', 'list', 'item', 'menu', 'list', 'item'],
+	    ['site-header', 'menu', 'list', 'item']
+    ),
+	array(
+		['featured', 'section', 'group', 'columns', 'section', 'group', 'columns', 'column'],
+	    ['featured', 'section', 'group', 'columns', 'column']
+	),
+]);
+
+dataset('non-adjacent duplicates', [
+    array(['menu', 'list', 'item', 'sub', 'menu', 'menu', 'list', 'item'], ['menu', 'list', 'item', 'sub', 'menu', 'list', 'item']),
+    array(['menu', 'list', 'item', 'sub-menu', 'list', 'item'], ['menu', 'list', 'item', 'sub-menu', 'list', 'item']),
+    array(['site-header', 'menu', 'list', 'item', 'sub-menu', 'list', 'item'], ['site-header', 'menu', 'list', 'item', 'sub-menu', 'list', 'item']),
+]);
+
+dataset('no duplicates', [
+    ['menu', 'list', 'item'],
+    ['site-header', 'menu', 'list', 'item'],
+    ['site-header', 'menu', 'sub-menu']
+]);

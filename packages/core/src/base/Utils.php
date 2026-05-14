@@ -208,6 +208,62 @@ class Utils {
     }
 
     /**
+     * Determine if an array of strings has groups of identical sequential values of a given size, and eliminate the duplicates.
+     *
+     * @param  array  $array
+     * @param  int  $offset  Position in the array to start chunking from; used for recursion
+     *                       to detect sequences at positions like [1,2] which would be missed when chunking from 0
+     *
+     * @return array
+     */
+    public static function array_unique_sequential_chunks(array $array, int $offset = 0): array {
+        if (empty($array)) {
+            return [];
+        }
+
+		$items_before_offset = array_slice($array, 0, $offset);
+		$array_after_offset = array_slice($array, $offset);
+
+        // First, remove any duplicate adjacent single words
+        $result = self::array_unique_sequential($array_after_offset);
+
+        // First, eliminate any chunks of 3 sequential duplicates
+        $chunks = array_chunk($result, 3);
+        $uniqueChunks = self::array_unique_sequential($chunks);
+        if (count($uniqueChunks) < count($chunks)) {
+            $result = self::array_flat($uniqueChunks);
+        }
+
+        // Then chunks of 2
+        $chunks = array_chunk($result, 2);
+        $uniqueChunks = self::array_unique_sequential($chunks);
+        if (count($uniqueChunks) < count($chunks)) {
+            $result = self::array_flat($uniqueChunks);
+        }
+
+        // Then do the same thing offset by 1 to catch duplicates in positions like [1,2] instead of [0,1] (common for BEM strings with explicit context prepended)
+        if ($offset === 0) {
+            $result = self::array_unique_sequential_chunks($result, 1);
+        }
+
+        return array_merge($items_before_offset, $result);
+    }
+
+    public static function array_unique_sequential($array): array {
+        $result = [];
+        $previous = null;
+
+        foreach ($array as $item) {
+            if ($item !== $previous) {
+                $result[] = $item;
+                $previous = $item;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Deep merging of a multidimensional array where one is a partial variation of the other
      *
      * @param  array  $original
