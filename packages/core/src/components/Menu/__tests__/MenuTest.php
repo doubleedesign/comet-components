@@ -147,7 +147,7 @@ describe('Menu', function() {
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $body = $dom->getElementsByTagName('ul')->item(1);
+        $body = $dom->getElementsByTagName('ul')->item(0);
         $hierarchy = PestUtils::getHtmlHierarchy($body, 3);
 
         expect($hierarchy)->toEqual([

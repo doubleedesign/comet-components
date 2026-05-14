@@ -4,15 +4,13 @@ namespace Doubleedesign\Comet\Core;
 use Exception;
 
 /**
- * Trait to manage component context and shortName.
+ * Trait to manage component context and shortname.
  * Used within the BlockElementModifier trait for BEM naming,
  * but can also be used by components not implementing BEM that require context/shortname awareness and overriding ability.
- *
- * TODO: This and BlockElementModifier are very tightly coupled.
- *       The separation is largely for dev readability/understanding (as well as not having BEM stuff in classes that won't use it),
- *       but given they call each other's methods it's probably a code smell that should be tidied up.
  */
 trait ContextHierarchy {
+    use ShortName;
+
     /**
      * @var ?string $context
      * @description The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).
@@ -114,11 +112,12 @@ trait ContextHierarchy {
      * Account for explicitly set context when determining the final context to use.
      *
      * @param  string|null  $explicit_context
+     * @param  bool|null  $isNested
      *
      * @return ContextHierarchy
      * @throws Exception
      */
-    protected function with_explicit_context(?string $explicit_context): static {
+    protected function with_explicit_context(?string $explicit_context, ?bool $isNested = false): static {
         if (empty($this->hierarchy)) {
             throw new Exception('Initial context hierarchy not prepared. Ensure init_from_blade_file() has been called first.');
         }
@@ -142,22 +141,34 @@ trait ContextHierarchy {
 
         // If this is a top-level component or has no implicit context for some other reason, return the explicitly provided context as-is
         if ($this->implicit_context === null) {
-            $this->explicit_context = $explicit_context;
             $this->context = $explicit_context;
 
             return $this;
         }
 
         $this->explicit_context = $explicit_context;
-        if (!str_ends_with($explicit_context, $this->implicit_context)) {
-			\Symfony\Component\VarDumper\VarDumper::dump("$explicit_context, $this->implicit_context");
-            $this->context = $explicit_context . '__' . $this->implicit_context;
-        }
-        else {
-            $this->context = $explicit_context;
+
+        if (!str_ends_with($this->explicit_context, $this->implicit_context) && !$isNested) {
+            $this->context = $this->collapse_repeated_segments($explicit_context . '__' . $this->implicit_context);
+
+            return $this;
         }
 
+        $this->context = $explicit_context;
+
         return $this;
+    }
+
+    private function collapse_repeated_segments($string): string {
+        $flattened = str_replace('-', '__', $string);
+        $pieces = explode('__', $flattened);
+
+        $collapsed = Utils::array_unique_sequential_chunks($pieces);
+
+        return join('__', $collapsed);
+    }
+    private function is_string_kebab_case_multi_word($string): bool {
+        return str_contains($string, '-');
     }
 
     private function prepare_hierarchy(string $bladeFile): void {

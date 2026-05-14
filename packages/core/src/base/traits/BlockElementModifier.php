@@ -2,14 +2,8 @@
 namespace Doubleedesign\Comet\Core;
 use Exception;
 
-/**
- *  TODO: This and ContextHierarchy are very tightly coupled.
- *        The separation is largely for dev readability/understanding (as well as not having BEM stuff in classes that won't use it),
- *        but given they call each other's methods it's probably a code smell that should be tidied up.
- */
 trait BlockElementModifier {
     use ContextHierarchy;
-    use ShortName;
     private ?string $explicit_context = null;
     private string $block = '';
     private ?string $element = null;
@@ -28,36 +22,54 @@ trait BlockElementModifier {
     /**
      * @throws Exception
      */
-    protected function and_bem(?string $override_shortname): void {
+    protected function and_bem(?string $shortname): void {
         if (empty($this->bladeFile)) {
             throw new Exception('Blade file not set. Ensure init_context() has been called first, or call init_bem_structure() instead.');
         }
 
-        $this->set_shortname($override_shortname);
-
-        $final_context = $this->get_context(); // gets it from the ContextHierarchy trait
+        $this->set_shortname($shortname);
+        $context = $this->get_context(); // gets it from the ContextHierarchy trait
 
         // Determine how many levels deep we are for multi-level elements
-        if (!empty($final_context) && str_contains($final_context, '__')) {
-            $this->levelsDeep = count(explode('__', $final_context));
+        if (!empty($context) && str_contains($context, '__')) {
+            $this->levelsDeep = count(explode('__', $context)) - 1;
         }
 
         // If no context, this is probably a top-level component, so it is the block
-        if (empty($final_context)) {
+        if (empty($context)) {
             $this->set_bem_block($this->get_shortname());
+
+            return;
         }
+
         // If context and shortname are the same, do not double up for block and element
-        elseif ($final_context === $this->get_shortname()) {
-            $this->set_bem_block($final_context);
+        if ($context === $this->get_shortname()) {
+            $this->set_bem_block($context);
+
+            return;
         }
-        else {
-            $this->set_bem_block($final_context);
-            $this->set_bem_element($this->get_shortname());
-        }
+
+        $this->set_bem_block($context);
+        $this->set_bem_element($this->get_shortname());
     }
 
+    /**
+     * @param  string  $context
+     *
+     * @return $this
+     * @throws Exception - if base context has not been initialised yet
+     */
     public function update_context(string $context): static {
-        /** @noinspection PhpUnhandledExceptionInspection */
+        // Implicit context (and the resulting block) based on Blade template hierarchy will have stripped repetition,
+        // so we need to reset it to what it would have been pre-simplifying
+        // to ensure it is correct for building BEM classes with the new explicit context
+        if (count($this->hierarchy) > 1) {
+            $original_parent = array_reverse($this->hierarchy)[1];
+            $this->implicit_context = Utils::kebab_case($original_parent);
+            $this->context = $this->implicit_context;
+            $this->block = $this->implicit_context;
+        }
+
         $this->with_explicit_context($context)->and_bem($this->shortName);
 
         if (method_exists($this, 'maybe_pass_down_context_to_inner_components')) {
@@ -81,31 +93,40 @@ trait BlockElementModifier {
             return $this;
         }
 
-        // Where the element matches the block, remove repetition
+        $words_in_element = preg_split('/(-|__)/', $element);
+        if (count($words_in_element) === 1) {
+            $this->element = $element;
+
+            return $this;
+        }
+
+        $context_to_use = $this->explicit_context ? $this->get_context() : $this->implicit_context;
+        // If the end of any explicit context provided matches the original (implicit) context,
+        // use the latter so that repetition between the end of the block and the start of the element is removed the same either way
+        if (str_ends_with($context_to_use, $this->implicit_context)) {
+            $context_to_use = $this->implicit_context;
+        }
+
+        // Where the element matches the end of the relevant piece of context, remove repetition
         // e.g., menu-list -> menu-list-item becomes menu-list -> item
         // skipping single-word elements so we don't break cases like file-group -> file
-        $words_in_element = preg_split('/(-|__)/', $element);
         if (count($words_in_element) > 1) {
-            $compareTo = preg_split('/(-|__)/', $this->implicit_context);
+            $compareTo = preg_split('/(-|__)/', $context_to_use);
             $componentParts = explode('-', $element);
             $endDiff = Utils::array_diff_end($componentParts, $compareTo);
             $element = join('-', $endDiff);
-        }
+            $this->element = $element;
 
-        // Handle where a kebab-cased element matches the end of a block after the above transformation
-        // e.g., Menu -> SubMenu -> SubMenuItem would be menu__sub-menu -> sub-menu-item, but we want just item for the element
-        if ($this->levelsDeep > 1) {
+            // If the end of the element still matches the start of the block, collapse repetition there too
             $blockParts = explode('__', $this->block);
             $blockEnd = end($blockParts);
-            $blockEndParts = explode('-', $blockEnd);
-            $itemParts = explode('-', $element);
-            if (count($blockEndParts) > 1 && count($itemParts) > 1) {
-                $endDiff = Utils::array_diff_end($itemParts, $blockEndParts);
-                $element = join('-', $endDiff);
+            if (str_starts_with($element, $blockEnd)) {
+                $trimmedElement = str_replace("{$blockEnd}-", '', $element);
+                if (!empty($trimmedElement)) {
+                    $this->element = $trimmedElement;
+                }
             }
         }
-
-        $this->element = $element;
 
         return $this;
     }

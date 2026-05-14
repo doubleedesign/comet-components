@@ -131,6 +131,10 @@ abstract class UIComponent extends Renderable {
             return $this->get_element_class();
         }
 
+        if (method_exists($this, 'get_block_class') && $this->get_block_class() !== null) {
+            return $this->get_block_class();
+        }
+
         if (method_exists($this, 'get_shortname') && $this->get_shortname() !== null) {
             return $this->get_shortname();
         }

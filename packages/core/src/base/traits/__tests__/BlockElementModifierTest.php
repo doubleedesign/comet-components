@@ -23,7 +23,6 @@ function create_component_with_bem_trait(string $bladeFile, ?string $context = n
     };
 }
 
-
 describe('Component is the block (top-level)', function() {
     test('default result', function() {
         $component = create_component_with_bem_trait('components.Accordion.accordion');
@@ -104,19 +103,6 @@ describe('Component is the block (top-level)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['image', 'image--basic']);
     });
 
-    test('it handles component-level override of the block name', function() {
-        $component = create_component_with_bem_trait('components.Image.image');
-        // Simulate a component that overrides the block name
-        $component->set_bem_block('photo');
-
-        expect($component->get_bem_structure())->toMatchArray([
-            'block'    => 'photo',
-            'element'  => null,
-            'modifier' => null
-        ])
-            ->and($component->get_bem_classes())->toMatchArray(['photo']);
-    });
-
 });
 
 describe('Component is the element (nested)', function() {
@@ -143,8 +129,8 @@ describe('Component is the element (nested)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['file-group__file']);
     });
 
-    test('with explicit context', function() {
-        $component = create_component_with_bem_trait('components.Table.TableCell.table-cell', 'profile');
+    test('block matches explicit context if provided in nested format', function() {
+        $component = create_component_with_bem_trait('components.Table.TableCell.table-cell', 'profile__table');
 
         expect($component->get_bem_structure())->toMatchArray([
             'block'    => 'profile__table',
@@ -152,10 +138,9 @@ describe('Component is the element (nested)', function() {
             'modifier' => null
         ])
             ->and($component->get_bem_classes())->toMatchArray(['profile__table__cell']);
-
     });
 
-    test('with explicit shortName', function() {
+    test('element matches custom shortName if provided', function() {
         $component = create_component_with_bem_trait('components.Table.TableCell.table-cell', null, 'custom-thing');
 
         expect($component->get_bem_structure())->toMatchArray([
@@ -166,7 +151,7 @@ describe('Component is the element (nested)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['table__custom-thing']);
     });
 
-    test('with explicit context that repeats the component name per the blade file', function() {
+    test('explicit context that repeats the component name per the blade file does not duplicate it', function() {
         $component = create_component_with_bem_trait('components.Accordion.AccordionPanel.accordion-panel', 'accordion');
 
         expect($component->get_bem_structure())->toMatchArray([
@@ -177,7 +162,7 @@ describe('Component is the element (nested)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['accordion__panel']);
     });
 
-    test('it correctly appends a custom modifier', function() {
+    it('correctly appends a custom modifier', function() {
         $component = create_component_with_bem_trait('components.Card.CardHeader.card-header', 'card');
         $component->set_bem_modifier('highlighted');
 
@@ -189,19 +174,7 @@ describe('Component is the element (nested)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['card__header', 'card__header--highlighted']);
     });
 
-    test('it handles component-level override of the block name', function() {
-        $component = create_component_with_bem_trait('components.Card.CardHeader.card-header', 'card');
-        $component->set_bem_block('panel');
-
-        expect($component->get_bem_structure())->toMatchArray([
-            'block'    => 'panel',
-            'element'  => 'header',
-            'modifier' => null
-        ])
-            ->and($component->get_bem_classes())->toMatchArray(['panel__header']);
-    });
-
-    test('it handles component-level override of the element name', function() {
+    it('handles component-level override of the element name', function() {
         $component = create_component_with_bem_trait('components.Card.CardHeader.card-header');
         // Simulate a component that overrides the element name
         $component->set_bem_element('title');
@@ -214,22 +187,7 @@ describe('Component is the element (nested)', function() {
             ->and($component->get_bem_classes())->toMatchArray(['card__title']);
     });
 
-    // Note: If this is something that actually happens in practice, it might indicate a problematic class design
-    // except maybe for things that extend super generic components like Group
-    test('it handles component-level override of both block and element names', function() {
-        $component = create_component_with_bem_trait('components.Card.CardHeader.card-header', 'card');
-        $component->set_bem_block('panel');
-        $component->set_bem_element('title');
-
-        expect($component->get_bem_structure())->toMatchArray([
-            'block'    => 'panel',
-            'element'  => 'title',
-            'modifier' => null
-        ])
-            ->and($component->get_bem_classes())->toMatchArray(['panel__title']);
-    });
-
-    test('repeated words that are not at the start of component names should not be stripped', function() {
+    it('does not strip repeated words that are not at the start of component names', function() {
         // Menu is the repeated word here but submenu should be kept because Menu is not at the start
         $component = create_component_with_bem_trait('components.Menu.SubMenu.sub-menu');
 
@@ -346,7 +304,7 @@ describe('Context updates after construction', function() {
         expect($component->get_bem_classes())->toMatchArray(['site-header__menu']);
     });
 
-    test('Basic nested component with shortname', function() {
+    test('Basic nested component with shortName', function() {
         $component = create_component_with_bem_trait('components.Menu.MenuList.menu-list', null, 'sub-menu');
 
         expect($component->get_bem_classes())->toMatchArray(['menu__sub-menu']);

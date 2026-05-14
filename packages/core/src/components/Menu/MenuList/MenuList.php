@@ -12,6 +12,18 @@ class MenuList extends UIComponent {
         parent::__construct($attributes, $menuItems, 'components.Menu.MenuList.menu-list');
     }
 
+    public function update_context($context): static {
+        if ($this->get_shortname() === 'sub-menu') {
+            $conciseContext = str_replace('__list__item', '', $context);
+            parent::update_context($conciseContext);
+
+            return $this;
+        }
+
+        parent::update_context($context);
+
+        return $this;
+    }
 
     public function render(): void {
         $blade = BladeService::getInstance();

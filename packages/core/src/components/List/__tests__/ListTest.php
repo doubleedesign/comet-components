@@ -71,10 +71,26 @@ describe('List component', function() {
         ]);
     });
 
+    it('appends "-list" to a shortname that does not already end with "list"', function() {
+        $list = new ListComponent(['shortName' => 'membership'], [new ListItem([], 'Item 1'), new ListItem([], 'Item 2')]);
+
+        expect($list->get_bem_classes())->toEqual(['membership-list']);
+
+        ob_start();
+        $list->render();
+        $output = ob_get_clean();
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($output);
+        $list = $dom->getElementsByTagName('ul')->item(0);
+
+        expect($list->getAttribute('class'))->toEqual('membership-list');
+    });
+
     it('has the expected BEM class structure when shortName is specified but no context', function() {
         $list = new ListComponent(['shortName' => 'memberships'], [new ListItem([], 'Item 1'), new ListItem([], 'Item 2')]);
 
-        expect($list->get_bem_classes())->toEqual(['memberships']);
+        expect($list->get_bem_classes())->toEqual(['memberships-list']);
 
         ob_start();
         $list->render();
@@ -86,15 +102,15 @@ describe('List component', function() {
         $hierarchy = PestUtils::getHtmlHierarchy($body);
 
         expect($hierarchy)->toEqual([
-            'ul.memberships',
-            'li.memberships__item'
+            'ul.memberships-list',
+            'li.memberships-list__item'
         ]);
     });
 
     it('has the expected BEM class structure when context AND shortName are specified', function() {
         $list = new ListComponent(['context' => 'site-footer', 'shortName' => 'memberships'], [new ListItem([], 'Item 1'), new ListItem([], 'Item 2')]);
 
-        expect($list->get_bem_classes())->toEqual(['site-footer__memberships']);
+        expect($list->get_bem_classes())->toEqual(['site-footer__memberships-list']);
 
         ob_start();
         $list->render();
@@ -106,8 +122,8 @@ describe('List component', function() {
         $hierarchy = PestUtils::getHtmlHierarchy($body);
 
         expect($hierarchy)->toEqual([
-            'ul.site-footer__memberships',
-            'li.site-footer__memberships__item'
+            'ul.site-footer__memberships-list',
+            'li.site-footer__memberships-list__item'
         ]);
     });
 });
