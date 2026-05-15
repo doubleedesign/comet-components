@@ -1,32 +1,41 @@
 @use '../mixins' as *;
 
 .call-to-action {
+	width: 100%;
+	padding: var(--spacing-lg);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 
-	&__content {
-		width: 100%;
-		padding: var(--spacing-lg);
+	&[data-halign="center"] {
+		align-items: center;
 		text-align: center;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
+	}
 
-		[data-halign="center"] & {
-			align-items: center;
-		}
+	&[data-halign="end"] {
+		align-items: flex-end;
+		text-align: end;
+	}
 
-		[data-halign="end"] & {
-			align-items: flex-end;
-		}
+	@include container-width-up('small') {
+		text-align: revert;
+	}
 
-		@include container-width-up('small') {
-			text-align: revert;
-		}
+	@include container-width-up('narrow') {
+		padding: var(--spacing-xl);
+	}
 
-		@include container-width-up('narrow') {
-			padding: var(--spacing-xl);
-		}
+	h2 {
+		margin: 0;
+	}
 
-		h2, .button-group {
-		}
+	#{class-ends-with('button-group')} {
+		margin-block-start: var(--spacing-lg);
+	}
+
+	p {
+		font-size: 1.125em;
+		text-wrap: balance;
 	}
 }

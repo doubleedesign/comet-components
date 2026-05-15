@@ -40,6 +40,10 @@ trait LayoutContainerSize {
             ?? $this->size;
     }
 
+	public function get_size(): ?ContainerSize {
+		return $this->size;
+	}
+
     private function get_component_default(): ?ContainerSize {
         $class = static::class;
         $classShortname = Utils::kebab_case(substr($class, strrpos($class, '\\') + 1));

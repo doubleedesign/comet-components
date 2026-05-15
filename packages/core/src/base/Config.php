@@ -15,7 +15,7 @@ class Config {
     private string $path_to_colours_css = __DIR__ . '/../components/colours.css';
     private array $component_defaults = [
         'site-header'            => ['breakpoint' => '1024px'],
-        'call-to-action'         => ['colorTheme' => ThemeColor::WHITE, 'backgroundColors' => [ThemeColor::WHITE, ThemeColor::PRIMARY]],
+        'call-to-action'         => ['colorTheme' => ThemeColor::WHITE, 'backgroundColor' => ThemeColor::PRIMARY],
         'page-header'            => ['colorTheme' => ThemeColor::PRIMARY],
         'site-footer'            => ['backgroundColor' => ThemeColor::DARK, 'hAlign' => Alignment::CENTER],
         'menu'                   => ['colorTheme' => ThemeColor::PRIMARY],
