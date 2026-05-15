@@ -6,6 +6,7 @@
     font-style: normal;
     display: flex;
     flex-wrap: wrap;
+    justify-content: inherit;
     column-gap: var(--spacing-md);
     row-gap: var(--spacing-xs);
     font-size: var(--font-size-sm, 0.9rem);

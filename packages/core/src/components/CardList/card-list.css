@@ -1,17 +1,13 @@
-.card-list__header, [class$=__header]:has(+ [class$=__card-list]), .card-list__footer, [class$=__card-list] + [class$=__footer] {
+.card-list__header, [class$=__header]:has(+ [class$=__card-list]), [class$=__card-list__header], .card-list__footer, [class$=__card-list] + [class$=__footer], [class$=__card-list__footer] {
   display: flex;
   justify-content: inherit;
 }
-.card-list__header:has(:nth-child(2)), [class$=__header]:has(:nth-child(2)):has(+ [class$=__card-list]) {
+.card-list__header:has(:nth-child(2)), [class$=__header]:has(:nth-child(2)):has(+ [class$=__card-list]), [class$=__card-list__header]:has(:nth-child(2)) {
   justify-content: space-between;
   align-items: center;
 }
-.card-list__header h2, [class$=__header]:has(+ [class$=__card-list]) h2 {
+.card-list__header h2, [class$=__header]:has(+ [class$=__card-list]) h2, [class$=__card-list__header] h2 {
   margin: 0;
-}
-:has(.card-list, [class$=__card-list], [class*=card-list--]),
-:has([class$=__card-list]) {
-  gap: var(--spacing-lg);
 }
 
 .card-list__item, [class$=__card-list__item] {
@@ -21,6 +17,11 @@
   .card-list__item, [class$=__card-list__item] {
     padding: var(--spacing-sm);
   }
+}
+
+:has(.card-list, [class*=card-list--], [class$=__card-list]),
+:has([class$=__card-list]) {
+  gap: var(--spacing-lg);
 }
 
 /*# sourceMappingURL=card-list.css.map */

@@ -48,4 +48,12 @@
   object-fit: contain;
 }
 
+figure[class$=__image]:has(figcaption) {
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+figure[class$=__image]:has(figcaption)[data-orientation=vertical] {
+  text-align: center;
+}
+
 /*# sourceMappingURL=content-image-basic.css.map */

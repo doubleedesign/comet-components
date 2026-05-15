@@ -56,6 +56,15 @@
 			padding: var(--spacing-lg);
 		}
 
+		h2 {
+			margin: 0;
+			font-size: var(--font-size-xs);
+
+			& + h3 {
+				margin-block-start: 0;
+			}
+		}
+
 		h3 {
 			margin-block-end: var(--spacing-sm);
 

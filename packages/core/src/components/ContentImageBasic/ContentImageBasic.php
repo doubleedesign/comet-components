@@ -11,6 +11,8 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::FIGURE, Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
 class ContentImageBasic extends ContentImageComponent {
+    use LayoutOrientation;
+
     /**
      * @var string|null $scale
      * @description How to handle how the image fits the available space
@@ -41,6 +43,7 @@ class ContentImageBasic extends ContentImageComponent {
 
     public function __construct(array $attributes) {
         $this->set_bem_modifier('basic');
+        $this->set_orientation($attributes);
         parent::__construct($attributes, 'components.ContentImageBasic.content-image-basic');
         $this->scale = $attributes['scale'] ?? 'contain';
         $this->height = $attributes['height'] ?? null;
@@ -71,6 +74,16 @@ class ContentImageBasic extends ContentImageComponent {
         }
 
         return $styles;
+    }
+
+    public function get_outer_wrapper_html_attributes(): array {
+        $attributes = parent::get_outer_wrapper_html_attributes();
+
+        if (isset($this->orientation) && isset($this->caption)) {
+            $attributes['data-orientation'] = $this->orientation->value;
+        }
+
+        return $attributes;
     }
 
     public function get_inner_wrapper_html_attributes(): array {

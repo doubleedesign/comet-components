@@ -1,6 +1,5 @@
 @use '../bem-class-selectors' as *;
 
-// See common.scss for base .image styles
 .image--basic,
 #{class-contains('image--basic')} {
 	&:not(.gallery &) {
@@ -53,6 +52,17 @@
 			width: 100%;
 			height: auto;
 			object-fit: contain;
+		}
+	}
+}
+
+figure#{class-ends-with('__image')} {
+	&:has(figcaption) {
+		gap: var(--spacing-sm);
+		align-items: center;
+
+		&[data-orientation="vertical"] {
+			text-align: center;
 		}
 	}
 }

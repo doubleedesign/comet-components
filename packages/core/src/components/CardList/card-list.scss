@@ -4,7 +4,7 @@
 
 // See also: data-group-layout, data-halign attributes in global.scss
 
-.card-list {
+@include bem-block('card-list', ('header', 'footer')) {
 	&__header,
 	&__footer {
 		display: flex;
@@ -21,8 +21,15 @@
 			margin: 0;
 		}
 	}
+}
 
-	&__footer {
+@include bem-block('card-list', ('item')) {
+	&__item {
+		container-type: inline-size;
+
+		@include container-width-up(narrow) {
+			padding: var(--spacing-sm);
+		}
 	}
 }
 
@@ -40,15 +47,5 @@
 #{class-ends-with('__card-list')} {
 	+ #{class-ends-with('__footer')} {
 		@extend .card-list__footer;
-	}
-}
-
-@include bem-block('card-list', ('item')) {
-	&__item {
-		container-type: inline-size;
-
-		@include container-width-up(narrow) {
-			padding: var(--spacing-sm);
-		}
 	}
 }

@@ -286,6 +286,9 @@
     align-items: center;
     align-content: center;
   }
+  figure figcaption {
+    font-size: var(--font-size-sm);
+  }
   .inline-message {
     color: var(--theme-color);
   }

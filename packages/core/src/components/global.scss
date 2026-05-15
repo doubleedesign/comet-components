@@ -187,7 +187,7 @@
 	[data-background] {
 		background: var(--background-color);
 		--theme-color: contrast-color(var(--background-color));
-		color: var(--theme-color);
+		color: contrast-color(var(--background-color));
 
 		> [data-background],
 		> [data-vue-component]:has(>[data-background]) > [data-background] {

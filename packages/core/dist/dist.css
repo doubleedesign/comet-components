@@ -161,7 +161,7 @@
   [data-background] {
     background: var(--background-color);
     --theme-color: contrast-color(var(--background-color));
-    color: var(--theme-color);
+    color: contrast-color(var(--background-color));
   }
   [data-background] > [data-background],
   [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
@@ -964,6 +964,9 @@
     align-items: center;
     align-content: center;
   }
+  figure figcaption {
+    font-size: var(--font-size-sm);
+  }
   .inline-message {
     color: var(--theme-color);
   }
@@ -1191,7 +1194,7 @@
   .button-group:last-child {
     padding-block-end: 0;
   }
-  .call-to-action__content {
+  .call-to-action {
     width: 100%;
     padding: var(--spacing-lg);
     text-align: center;
@@ -1199,21 +1202,33 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  [data-halign=center] .call-to-action__content {
+  .call-to-action[data-halign=center] {
     align-items: center;
+    text-align: center;
   }
-  [data-halign=end] .call-to-action__content {
+  .call-to-action[data-halign=end] {
     align-items: flex-end;
+    text-align: end;
   }
   @container layout-section (min-width: var(--width-small)) {
-    .call-to-action__content {
+    .call-to-action {
       text-align: revert;
     }
   }
   @container layout-section (min-width: var(--width-narrow)) {
-    .call-to-action__content {
+    .call-to-action {
       padding: var(--spacing-xl);
     }
+  }
+  .call-to-action h2 {
+    margin: 0;
+  }
+  .call-to-action [class$=button-group] {
+    margin-block-start: var(--spacing-lg);
+  }
+  .call-to-action p {
+    font-size: 1.125em;
+    text-wrap: balance;
   }
   .callout {
     padding: var(--spacing-md);
@@ -1291,20 +1306,16 @@
   .callout__content h2 {
     margin-block-end: 0;
   }
-  .card-list__header, [class$=__header]:has(+ [class$=__card-list]), .card-list__footer, [class$=__card-list] + [class$=__footer] {
+  .card-list__header, [class$=__header]:has(+ [class$=__card-list]), [class$=__card-list__header], .card-list__footer, [class$=__card-list] + [class$=__footer], [class$=__card-list__footer] {
     display: flex;
     justify-content: inherit;
   }
-  .card-list__header:has(:nth-child(2)), [class$=__header]:has(:nth-child(2)):has(+ [class$=__card-list]) {
+  .card-list__header:has(:nth-child(2)), [class$=__header]:has(:nth-child(2)):has(+ [class$=__card-list]), [class$=__card-list__header]:has(:nth-child(2)) {
     justify-content: space-between;
     align-items: center;
   }
-  .card-list__header h2, [class$=__header]:has(+ [class$=__card-list]) h2 {
+  .card-list__header h2, [class$=__header]:has(+ [class$=__card-list]) h2, [class$=__card-list__header] h2 {
     margin: 0;
-  }
-  :has(.card-list, [class$=__card-list], [class*=card-list--]),
-  :has([class$=__card-list]) {
-    gap: var(--spacing-lg);
   }
   .card-list__item, [class$=__card-list__item] {
     container-type: inline-size;
@@ -1313,6 +1324,10 @@
     .card-list__item, [class$=__card-list__item] {
       padding: var(--spacing-sm);
     }
+  }
+  :has(.card-list, [class*=card-list--], [class$=__card-list]),
+  :has([class$=__card-list]) {
+    gap: var(--spacing-lg);
   }
   .card, [class$=__card], [class*=card--] {
     height: 100%;
@@ -1359,6 +1374,13 @@
     .card__content, [class$=__card__content] {
       padding: var(--spacing-lg);
     }
+  }
+  .card__content h2, [class$=__card__content] h2 {
+    margin: 0;
+    font-size: var(--font-size-xs);
+  }
+  .card__content h2 + h3, [class$=__card__content] h2 + h3 {
+    margin-block-start: 0;
   }
   .card__content h3, [class$=__card__content] h3 {
     margin-block-end: var(--spacing-sm);
@@ -2131,6 +2153,13 @@
     width: 100%;
     height: auto;
     object-fit: contain;
+  }
+  figure[class$=__image]:has(figcaption) {
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+  figure[class$=__image]:has(figcaption)[data-orientation=vertical] {
+    text-align: center;
   }
   .copy__container {
     display: block;
