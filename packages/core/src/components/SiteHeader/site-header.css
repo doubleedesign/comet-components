@@ -84,6 +84,7 @@
     grid-template-columns: var(--logo-max-width) 1fr;
     grid-template-rows: auto auto;
     padding-block: var(--spacing-lg);
+    row-gap: var(--spacing-lg);
   }
   @media (min-width: 768px) {
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -94,9 +95,6 @@
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xxl);
     }
-  }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
-    row-gap: var(--spacing-lg);
   }
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
     grid-column: 1;
@@ -120,6 +118,7 @@
     grid-template-columns: var(--logo-max-width) 1fr;
     grid-template-rows: auto auto;
     padding-block: var(--spacing-lg);
+    row-gap: var(--spacing-lg);
   }
   @media (min-width: 768px) {
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -130,9 +129,6 @@
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xxl);
     }
-  }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
-    row-gap: var(--spacing-lg);
   }
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
     grid-column: 1;
@@ -225,6 +221,7 @@
   flex-direction: row;
   justify-content: center;
   padding-block: var(--spacing-lg);
+  padding-block-end: 0;
 }
 @media (min-width: 768px) {
   .site-header__top {
@@ -235,9 +232,6 @@
   .site-header__top {
     padding-block: var(--spacing-xxl);
   }
-}
-.site-header__top {
-  padding-block-end: 0;
 }
 .site-header__top:empty {
   display: none;

@@ -1,5 +1,6 @@
 .site-footer {
   padding-block: var(--spacing-lg);
+  padding-block-end: var(--spacing-lg);
 }
 @media (min-width: 768px) {
   .site-footer {
@@ -10,9 +11,6 @@
   .site-footer {
     padding-block: var(--spacing-xxl);
   }
-}
-.site-footer {
-  padding-block-end: var(--spacing-lg);
 }
 .site-footer ul {
   margin: 0;

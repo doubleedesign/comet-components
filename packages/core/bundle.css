@@ -2211,7 +2211,7 @@
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }
-  .date, .date--range, [class$=__date], [class*=date--] {
+  .date, [class$=__date], [class*=date--] {
     min-width: 3rem;
     max-width: 5rem;
     display: flex;
@@ -2222,16 +2222,16 @@
     background: var(--theme-color);
     color: var(--theme-color-inverse);
   }
-  .date__day, .date--range__days, [class$=__date__day], .date__day-number, .date--range__day-number, [class$=__date__day-number], .date__month, .date--range__month, [class$=__date__month], .date__year, .date--range__year, [class$=__date__year] {
+  .date__day, [class$=__date__day], .date__day-number, [class$=__date__day-number], .date__month, [class$=__date__month], .date__year, [class$=__date__year] {
     display: block;
     text-align: center;
     line-height: 1;
     font-weight: var(--font-weight-light);
   }
-  .date__day, .date--range__days, [class$=__date__day] {
+  .date__day, [class$=__date__day] {
     font-size: var(--font-size-sm);
   }
-  .date__day-number, .date--range__day-number, [class$=__date__day-number] {
+  .date__day-number, [class$=__date__day-number] {
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }
@@ -3077,6 +3077,7 @@
   }
   .site-footer {
     padding-block: var(--spacing-lg);
+    padding-block-end: var(--spacing-lg);
   }
   @media (min-width: 768px) {
     .site-footer {
@@ -3087,9 +3088,6 @@
     .site-footer {
       padding-block: var(--spacing-xxl);
     }
-  }
-  .site-footer {
-    padding-block-end: var(--spacing-lg);
   }
   .site-footer ul {
     margin: 0;
@@ -3234,6 +3232,7 @@
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
+      row-gap: var(--spacing-lg);
     }
     @media (min-width: 768px) {
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -3244,9 +3243,6 @@
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
-    }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
-      row-gap: var(--spacing-lg);
     }
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
@@ -3270,6 +3266,7 @@
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
+      row-gap: var(--spacing-lg);
     }
     @media (min-width: 768px) {
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -3280,9 +3277,6 @@
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
-    }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
-      row-gap: var(--spacing-lg);
     }
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
@@ -3375,6 +3369,7 @@
     flex-direction: row;
     justify-content: center;
     padding-block: var(--spacing-lg);
+    padding-block-end: 0;
   }
   @media (min-width: 768px) {
     .site-header__top {
@@ -3385,9 +3380,6 @@
     .site-header__top {
       padding-block: var(--spacing-xxl);
     }
-  }
-  .site-header__top {
-    padding-block-end: 0;
   }
   .site-header__top:empty {
     display: none;

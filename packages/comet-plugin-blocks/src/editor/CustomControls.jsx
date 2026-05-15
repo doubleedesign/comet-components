@@ -15,7 +15,6 @@ wp.domReady(() => {
 		'editor.BlockEdit',
 		'comet-plugin-blocks/custom-controls',
 		(BlockEdit) => (props) => {
-
 			const BlockEditComponent = useMemo(() => {
 				if (props?.name === 'ninja-forms/form') {
 					return NinjaFormsControls;
