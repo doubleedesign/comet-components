@@ -1,6 +1,8 @@
 <?php
 namespace Doubleedesign\Comet\Core;
 
+// TODO: A WordPress block needs to be created for this, with it allowing children and the controls for the children automatically updating the available sizes according to the size set there for the PageSection.
+
 /**
  * PageSection component
  *
@@ -9,6 +11,7 @@ namespace Doubleedesign\Comet\Core;
  * @description A basic page element to group nested content that can have its semantics, own sizes and alignments within the bounds of this wrapper's size.
  *              This component is intended for layout purposes only, not intended to semantically group content.
  *              Unlike Container, it does not enforce nested state upon its inner components, and unlike UIComponent and its children it does not have or propagate context.
+ *
  */
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
@@ -29,6 +32,12 @@ class PageSection extends Renderable {
         $this->set_size($attributes);
         $this->set_background_color($attributes);
         $this->simplify_all_background_colors();
+
+        array_walk($this->innerComponents, function(&$component) {
+            if ($component->get_size() === $this->size) {
+                $component->set_size(null);
+            }
+        });
     }
 
     public function get_filtered_classes(): array {
@@ -43,6 +52,10 @@ class PageSection extends Renderable {
 
         if (isset($this->size)) {
             $attributes['data-size'] = $this->size->value;
+        }
+
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->backgroundColor->value;
         }
 
         return $attributes;
