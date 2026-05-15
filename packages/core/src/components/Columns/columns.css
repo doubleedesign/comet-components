@@ -2,7 +2,7 @@
   display: grid;
   grid-gap: var(--spacing-md);
 }
-@container (min-width: var(--width-narrow)) {
+@container layout-section (min-width: var(--width-narrow)) {
   .columns, [class$=__columns], [class*=columns--] {
     grid-gap: var(--spacing-lg);
   }
@@ -10,7 +10,7 @@
 .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
   grid-template-columns: repeat(1, 1fr);
 }
-@container (min-width: var(--width-small)) {
+@container layout-section (min-width: var(--width-small)) {
   .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -18,7 +18,7 @@
 .columns[data-count="2"][data-allow-layout-stacking=false], [data-count="2"][data-allow-layout-stacking=false][class$=__columns], [data-count="2"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
   grid-template-columns: repeat(2, 1fr);
 }
-@container (min-width: var(--width-narrower)) {
+@container layout-section (min-width: var(--width-narrower)) {
   .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -26,7 +26,7 @@
 .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--] {
   grid-template-columns: repeat(4, 1fr);
 }
-@container (min-width: var(--width-small)) {
+@container layout-section (min-width: var(--width-small)) {
   .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -34,7 +34,7 @@
 .columns[data-count="3"][data-allow-layout-stacking=false], [data-count="3"][data-allow-layout-stacking=false][class$=__columns], [data-count="3"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="5"][data-allow-layout-stacking=false], [data-count="5"][data-allow-layout-stacking=false][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
   grid-template-columns: repeat(3, 1fr);
 }
-@container (min-width: var(--width-narrow)) {
+@container layout-section (min-width: var(--width-narrow)) {
   .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--] {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -42,7 +42,7 @@
 .columns[data-count="5"][data-allow-layout-stacking=false], [data-count="5"][data-allow-layout-stacking=false][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][class*=columns--] {
   grid-template-columns: repeat(5, 1fr);
 }
-@container (min-width: var(--width-narrow)) {
+@container layout-section (min-width: var(--width-narrow)) {
   .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
     grid-template-columns: repeat(6, 1fr);
   }

@@ -12,12 +12,12 @@
 [data-halign=end] .call-to-action__content {
   align-items: flex-end;
 }
-@container (min-width: var(--width-small)) {
+@container layout-section (min-width: var(--width-small)) {
   .call-to-action__content {
     text-align: revert;
   }
 }
-@container (min-width: var(--width-narrow)) {
+@container layout-section (min-width: var(--width-narrow)) {
   .call-to-action__content {
     padding: var(--spacing-xl);
   }

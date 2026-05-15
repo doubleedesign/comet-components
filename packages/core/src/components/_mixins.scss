@@ -2,14 +2,14 @@
 @forward './bem-mixin';
 @forward './bem-class-selectors';
 
-@mixin container-width-up($widthName) {
-	@container (min-width: var(--width-#{$widthName})) {
+@mixin container-width-up($widthName, $containerName: 'layout-section') {
+	@container #{$containerName} (min-width: var(--width-#{$widthName})) {
 		@content;
 	}
 }
 
-@mixin container-width-down($widthName) {
-	@container (max-width: var(--width-#{$widthName})) {
+@mixin container-width-down($widthName, $containerName: 'layout-section') {
+	@container  #{$containerName} (max-width: var(--width-#{$widthName})) {
 		@content;
 	}
 }

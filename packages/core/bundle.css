@@ -120,7 +120,7 @@
   [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)), [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(2)) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @container (min-width: var(--width-narrower)) {
+  @container layout-section (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="4"] {
       grid-template-columns: repeat(auto-fit, 25%);
     }
@@ -128,7 +128,7 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     [data-group-layout=grid][data-max-per-row="3"], [data-group-layout=grid][data-max-per-row="5"], [data-group-layout=grid][data-max-per-row="6"] {
       grid-template-columns: repeat(auto-fit, 33%);
     }
@@ -136,7 +136,7 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  @container (min-width: var(--width-narrower)) {
+  @container layout-section (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="5"] {
       grid-template-columns: repeat(auto-fit, 20%);
     }
@@ -144,7 +144,7 @@
       grid-template-columns: repeat(5, 1fr);
     }
   }
-  @container (min-width: var(--width-narrower)) {
+  @container layout-section (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="6"] {
       grid-template-columns: repeat(auto-fit, 16.66%);
     }
@@ -849,7 +849,7 @@
   h1 {
     margin-block: var(--spacing-md);
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     h1 {
       margin-block: var(--spacing-lg);
     }
@@ -1080,12 +1080,12 @@
     container-type: size;
     backdrop-filter: blur(1rem);
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     .banner__cover-image {
       height: 75dvh;
     }
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .banner__cover-image {
       height: fit-content;
     }
@@ -1108,7 +1108,7 @@
   .banner__container:not([data-valign]) {
     align-items: flex-start;
   }
-  @container (max-width: var(--width-narrower)) {
+  @container layout-section (max-width: var(--width-narrower)) {
     .banner__container {
       justify-content: center !important;
     }
@@ -1120,22 +1120,22 @@
     text-align: center;
     justify-content: center;
   }
-  @container (max-width: var(--width-small)) {
+  @container layout-section (max-width: var(--width-small)) {
     .banner__content .button-group {
       justify-content: center;
     }
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     .banner__content {
       text-align: revert;
     }
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .banner__content {
       padding: var(--spacing-xl);
     }
   }
-  @container (max-width: var(--width-narrower)) {
+  @container layout-section (max-width: var(--width-narrower)) {
     .banner__content {
       max-width: 75cqw !important;
     }
@@ -1205,12 +1205,12 @@
   [data-halign=end] .call-to-action__content {
     align-items: flex-end;
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     .call-to-action__content {
       text-align: revert;
     }
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .call-to-action__content {
       padding: var(--spacing-xl);
     }
@@ -1309,7 +1309,7 @@
   .card-list__item, [class$=__card-list__item] {
     container-type: inline-size;
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .card-list__item, [class$=__card-list__item] {
       padding: var(--spacing-sm);
     }
@@ -1400,7 +1400,7 @@
     display: grid;
     grid-gap: var(--spacing-md);
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .columns, [class$=__columns], [class*=columns--] {
       grid-gap: var(--spacing-lg);
     }
@@ -1408,7 +1408,7 @@
   .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
     grid-template-columns: repeat(1, 1fr);
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -1416,7 +1416,7 @@
   .columns[data-count="2"][data-allow-layout-stacking=false], [data-count="2"][data-allow-layout-stacking=false][class$=__columns], [data-count="2"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(2, 1fr);
   }
-  @container (min-width: var(--width-narrower)) {
+  @container layout-section (min-width: var(--width-narrower)) {
     .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -1424,7 +1424,7 @@
   .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(4, 1fr);
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -1432,7 +1432,7 @@
   .columns[data-count="3"][data-allow-layout-stacking=false], [data-count="3"][data-allow-layout-stacking=false][class$=__columns], [data-count="3"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="5"][data-allow-layout-stacking=false], [data-count="5"][data-allow-layout-stacking=false][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(3, 1fr);
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--] {
       grid-template-columns: repeat(5, 1fr);
     }
@@ -1440,7 +1440,7 @@
   .columns[data-count="5"][data-allow-layout-stacking=false], [data-count="5"][data-allow-layout-stacking=false][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(5, 1fr);
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
       grid-template-columns: repeat(6, 1fr);
     }
@@ -2182,7 +2182,7 @@
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }
-  .date, [class$=__date], [class*=date--] {
+  .date, .date--range, [class$=__date], [class*=date--] {
     min-width: 3rem;
     max-width: 5rem;
     display: flex;
@@ -2193,16 +2193,16 @@
     background: var(--theme-color);
     color: var(--theme-color-inverse);
   }
-  .date__day, [class$=__date__day], .date__day-number, [class$=__date__day-number], .date__month, [class$=__date__month], .date__year, [class$=__date__year] {
+  .date__day, .date--range__days, [class$=__date__day], .date__day-number, .date--range__day-number, [class$=__date__day-number], .date__month, .date--range__month, [class$=__date__month], .date__year, .date--range__year, [class$=__date__year] {
     display: block;
     text-align: center;
     line-height: 1;
     font-weight: var(--font-weight-light);
   }
-  .date__day, [class$=__date__day] {
+  .date__day, .date--range__days, [class$=__date__day] {
     font-size: var(--font-size-sm);
   }
-  .date__day-number, [class$=__date__day-number] {
+  .date__day-number, .date--range__day-number, [class$=__date__day-number] {
     font-weight: var(--font-weight-bold);
     font-size: calc(1rem * var(--typescale) * var(--typescale));
   }
@@ -2729,7 +2729,7 @@
   .image-and-text__image, .image-and-text__content {
     display: flex;
   }
-  @container (max-width: var(--width-narrower)) {
+  @container layout-section (max-width: var(--width-narrower)) {
     .image-and-text__image__inner {
       max-width: 100% !important;
       flex-basis: 100% !important;
@@ -2742,7 +2742,7 @@
     position: relative;
     z-index: 200;
   }
-  @container (max-width: var(--width-narrower)) {
+  @container layout-section (max-width: var(--width-narrower)) {
     .image-and-text__content__inner {
       max-width: 100% !important;
       flex-basis: 100% !important;
@@ -2751,7 +2751,7 @@
   .image-and-text__content:nth-of-type(1) {
     margin-block-end: var(--overlay-amount);
   }
-  @container (min-width: var(--width-narrower)) {
+  @container layout-section (min-width: var(--width-narrower)) {
     .image-and-text__content:nth-of-type(2) {
       margin-block-start: var(--overlay-amount);
     }
@@ -3048,7 +3048,6 @@
   }
   .site-footer {
     padding-block: var(--spacing-lg);
-    padding-block-end: var(--spacing-lg);
   }
   @media (min-width: 768px) {
     .site-footer {
@@ -3059,6 +3058,9 @@
     .site-footer {
       padding-block: var(--spacing-xxl);
     }
+  }
+  .site-footer {
+    padding-block-end: var(--spacing-lg);
   }
   .site-footer ul {
     margin: 0;
@@ -3075,7 +3077,7 @@
     text-align: center;
     margin-inline: 0;
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     .site-footer__menu__list {
       text-align: unset;
       display: flex;
@@ -3084,7 +3086,7 @@
       gap: var(--spacing-lg);
     }
   }
-  @container (min-width: var(--width-narrow)) {
+  @container layout-section (min-width: var(--width-narrow)) {
     .site-footer__menu__list {
       gap: var(--spacing-xl);
     }
@@ -3096,7 +3098,7 @@
   .site-footer__menu__sub-menu {
     display: none;
   }
-  @container (min-width: var(--width-small)) {
+  @container layout-section (min-width: var(--width-small)) {
     .site-footer__menu__sub-menu {
       display: block;
     }
@@ -3203,7 +3205,6 @@
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
-      row-gap: var(--spacing-lg);
     }
     @media (min-width: 768px) {
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -3214,6 +3215,9 @@
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
+    }
+    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      row-gap: var(--spacing-lg);
     }
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
@@ -3237,7 +3241,6 @@
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
-      row-gap: var(--spacing-lg);
     }
     @media (min-width: 768px) {
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
@@ -3248,6 +3251,9 @@
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
+    }
+    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      row-gap: var(--spacing-lg);
     }
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
@@ -3340,7 +3346,6 @@
     flex-direction: row;
     justify-content: center;
     padding-block: var(--spacing-lg);
-    padding-block-end: 0;
   }
   @media (min-width: 768px) {
     .site-header__top {
@@ -3351,6 +3356,9 @@
     .site-header__top {
       padding-block: var(--spacing-xxl);
     }
+  }
+  .site-header__top {
+    padding-block-end: 0;
   }
   .site-header__top:empty {
     display: none;

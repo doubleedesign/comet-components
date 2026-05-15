@@ -17,7 +17,7 @@
 .card-list__item, [class$=__card-list__item] {
   container-type: inline-size;
 }
-@container (min-width: var(--width-narrow)) {
+@container layout-section (min-width: var(--width-narrow)) {
   .card-list__item, [class$=__card-list__item] {
     padding: var(--spacing-sm);
   }
