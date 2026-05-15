@@ -112,12 +112,11 @@ trait ContextHierarchy {
      * Account for explicitly set context when determining the final context to use.
      *
      * @param  string|null  $explicit_context
-     * @param  bool|null  $isNested
      *
      * @return ContextHierarchy
      * @throws Exception
      */
-    protected function with_explicit_context(?string $explicit_context, ?bool $isNested = false): static {
+    protected function with_explicit_context(?string $explicit_context): static {
         if (empty($this->hierarchy)) {
             throw new Exception('Initial context hierarchy not prepared. Ensure init_from_blade_file() has been called first.');
         }
@@ -146,14 +145,20 @@ trait ContextHierarchy {
             return $this;
         }
 
-        $this->explicit_context = $explicit_context;
+        // if kebab-cased end of the explicit context matches bem__cased implicit context, do not double up
+        $kebab_cased_implicit_context = Utils::kebab_case($this->implicit_context);
+        if (str_ends_with($explicit_context, $kebab_cased_implicit_context)) {
+            $this->implicit_context = $kebab_cased_implicit_context;
+        }
 
-        if (!str_ends_with($this->explicit_context, $this->implicit_context) && !$isNested) {
-            $this->context = $this->collapse_repeated_segments($explicit_context . '__' . $this->implicit_context);
+        if (!str_ends_with($explicit_context, $this->implicit_context)) {
+            $this->explicit_context = $explicit_context;
+            $this->context = $explicit_context . '__' . $this->implicit_context;
 
             return $this;
         }
 
+        $this->explicit_context = $explicit_context;
         $this->context = $explicit_context;
 
         return $this;
@@ -167,6 +172,7 @@ trait ContextHierarchy {
 
         return join('__', $collapsed);
     }
+
     private function is_string_kebab_case_multi_word($string): bool {
         return str_contains($string, '-');
     }

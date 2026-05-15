@@ -132,14 +132,14 @@ describe('Menu', function() {
 
         expect($hierarchy)->toEqual([
             'nav.main-nav',
-            'ul.main-nav__list',
-            'li.main-nav__list__item',
-            'a.main-nav__list__item__link'
+            'ul.main-nav__menu-list',
+            'li.main-nav__menu-list__item',
+            'a.main-nav__menu-list__item__link'
         ]);
     });
 
     it('has the expected BEM class structure when a shortName is specified (submenu)', function() {
-        $menu = new Menu(['shortName' => 'main-nav'], $this->menuItems);
+        $menu = new Menu(['shortName' => 'main-nav'], $this->menuItemsWithSubmenu);
 
         ob_start();
         $menu->render();
@@ -147,14 +147,22 @@ describe('Menu', function() {
 
         $dom = new DOMDocument();
         @$dom->loadHTML($output);
-        $body = $dom->getElementsByTagName('ul')->item(0);
+        $body = $dom->getElementsByTagName('nav')->item(0);
         $hierarchy = PestUtils::getHtmlHierarchy($body, 3);
-
         expect($hierarchy)->toEqual([
-            'ul.menu__sub-menu',
-            'li.menu__sub-menu__item',
-            'a.menu__sub-menu__item__link'
+            'nav.main-nav',
+            'ul.main-nav__menu-list',
+            'li.main-nav__menu-list__item',
         ]);
+
+        $submenu = $dom->getElementsByTagName('ul')->item(1);
+        $submenuHierarchy = PestUtils::getHtmlHierarchy($submenu, 3);
+        expect($submenuHierarchy)->toEqual([
+            'ul.main-nav__menu__sub-menu',
+            'li.main-nav__menu__sub-menu__item',
+            'a.main-nav__menu__sub-menu__item__link'
+        ]);
+
     });
 
     it('has the expected BEM class structure when both context and shortName are specified (top level)', function() {
@@ -171,9 +179,9 @@ describe('Menu', function() {
 
         expect($hierarchy)->toEqual([
             'nav.site-header__nav',
-            'ul.site-header__nav__list',
-            'li.site-header__nav__list__item',
-            'a.site-header__nav__list__item__link'
+            'ul.site-header__nav__menu-list',
+            'li.site-header__nav__menu-list__item',
+            'a.site-header__nav__menu-list__item__link'
         ]);
     });
 
@@ -190,9 +198,9 @@ describe('Menu', function() {
         $hierarchy = PestUtils::getHtmlHierarchy($body, 3);
 
         expect($hierarchy)->toEqual([
-            'ul.site-header__nav__sub-menu',
-            'li.site-header__nav__sub-menu__item',
-            'a.site-header__nav__sub-menu__item__link'
+            'ul.site-header__nav__menu__sub-menu',
+            'li.site-header__nav__menu__sub-menu__item',
+            'a.site-header__nav__menu__sub-menu__item__link'
         ]);
     });
 });

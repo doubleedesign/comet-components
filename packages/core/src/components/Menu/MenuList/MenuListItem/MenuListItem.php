@@ -15,6 +15,14 @@ class MenuListItem extends UIComponent {
         $this->isCurrentParent = isset($attributes['isCurrentParent']) ? filter_var($attributes['isCurrentParent'], FILTER_VALIDATE_BOOLEAN) : false;
     }
 
+	public function update_context(?string $context, ?Renderable $parent = null): static {
+		if(str_ends_with($context, 'sub-menu')) {
+			$this->set_shortname('item');
+		}
+
+		return parent::update_context($context, $parent);
+	}
+
     /**
      * Get the ID of the menu item, generating one if it's empty and requested (e.g., for IDs and aria attributes for submenus and their triggers)
      *

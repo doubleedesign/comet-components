@@ -32,7 +32,7 @@ class Menu extends UIComponent {
     public function __construct(array $attributes, array $menuItems) {
         $this->rawMenuData = $menuItems;
         $this->set_color_theme($attributes);
-        $innerComponents = [new MenuList($attributes, $this->array_to_items($menuItems, 1))];
+        $innerComponents = [new MenuList([], $this->array_to_items($menuItems, 1))];
 
         parent::__construct($attributes, $innerComponents, 'components.Menu.menu');
     }

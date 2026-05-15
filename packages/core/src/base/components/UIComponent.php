@@ -70,7 +70,7 @@ abstract class UIComponent extends Renderable {
             if (!$this->should_inherit_context($component)) return;
 
             try {
-                $component->update_context($context_to_use);
+                $component->update_context($context_to_use, $this);
             }
             catch (Exception $e) {
                 $classname = get_class($component);
@@ -127,6 +127,14 @@ abstract class UIComponent extends Renderable {
     }
 
     private function get_default_context_for_inner_components(): ?string {
+        if ($this->get_shortname() !== $this->default_shortName) {
+            if ($this->get_context() !== null) {
+                return $this->get_context() . '__' . $this->get_shortname();
+            }
+
+            return $this->get_shortname();
+        }
+
         if (method_exists($this, 'get_element_class') && $this->get_element_class() !== null) {
             return $this->get_element_class();
         }

@@ -313,4 +313,34 @@ describe('Context updates after construction', function() {
 
         expect($component->get_bem_classes())->toMatchArray(['site-header__menu__sub-menu']);
     });
+
+    test('Deeply nested explicit context that does not match the existing chain gets prepended as-is', function() {
+        $component = create_component_with_bem_trait('components.Menu.SubMenu.SubMenuItem.sub-menu-item');
+
+        expect($component->get_bem_classes())->toMatchArray(['menu__sub-menu__item']);
+
+        $component->update_context('new-context__block__group');
+
+        expect($component->get_bem_classes())->toMatchArray(['new-context__block__group__menu__sub-menu__item']);
+    });
+
+    it('ignores nested explicit context that would introduce repetition', function() {
+        $component = create_component_with_bem_trait('components.Menu.SubMenu.SubMenuItem.sub-menu-item');
+
+        expect($component->get_bem_classes())->toMatchArray(['menu__sub-menu__item']);
+
+        $component->update_context('menu__sub-menu');
+
+        expect($component->get_bem_classes())->toMatchArray(['menu__sub-menu__item']);
+    });
+
+    it('deduplicates partial repetition and keeps the non-repeated segment', function() {
+        $component = create_component_with_bem_trait('components.Menu.SubMenu.SubMenuItem.sub-menu-item');
+
+        expect($component->get_bem_classes())->toMatchArray(['menu__sub-menu__item']);
+
+        $component->update_context('site-header__menu__sub-menu');
+
+        expect($component->get_bem_classes())->toMatchArray(['site-header__menu__sub-menu__item']);
+    });
 });

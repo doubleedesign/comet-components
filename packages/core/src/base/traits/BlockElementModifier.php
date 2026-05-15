@@ -55,23 +55,39 @@ trait BlockElementModifier {
 
     /**
      * @param  string  $context
+     * @param  Renderable|null  $parent  - the parent component if relevant
      *
      * @return $this
      * @throws Exception - if base context has not been initialised yet
      */
-    public function update_context(string $context): static {
-        // Implicit context (and the resulting block) based on Blade template hierarchy will have stripped repetition,
-        // so we need to reset it to what it would have been pre-simplifying
-        // to ensure it is correct for building BEM classes with the new explicit context
-        if (count($this->hierarchy) > 1) {
-            $original_parent = array_reverse($this->hierarchy)[1];
-            $this->implicit_context = Utils::kebab_case($original_parent);
-            $this->context = $this->implicit_context;
-            $this->block = $this->implicit_context;
+    public function update_context(string $context, ?Renderable $parent = null): static {
+        if (isset($parent) && $parent instanceof UIComponent && $context === $parent->get_context() . '__' . $parent->get_shortname()) {
+            $this->explicit_context = $context;
+            $this->context = $context;
+            $this->set_bem_block($this->get_context());
+            $this->set_bem_element($this->get_shortname());
+
+            if (method_exists($this, 'maybe_pass_down_context_to_inner_components')) {
+                $this->maybe_pass_down_context_to_inner_components();
+            }
+
+            return $this;
         }
 
-        $this->with_explicit_context($context)->and_bem($this->shortName);
+        if (!isset($this->explicit_context) && isset($parent) && method_exists($parent, 'get_shortname') && $context === $parent->get_shortname()) {
+            $this->explicit_context = $parent->get_shortname();
+            $this->context = $parent->get_shortname();
+            $this->set_bem_block($this->explicit_context);
+            $this->set_bem_element($this->get_shortname());
 
+            if (method_exists($this, 'maybe_pass_down_context_to_inner_components')) {
+                $this->maybe_pass_down_context_to_inner_components();
+            }
+
+            return $this;
+        }
+
+        $this->with_explicit_context($context)->and_bem($this->get_shortname());
         if (method_exists($this, 'maybe_pass_down_context_to_inner_components')) {
             $this->maybe_pass_down_context_to_inner_components();
         }
