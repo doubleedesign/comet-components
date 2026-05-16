@@ -50,6 +50,12 @@ class Utils {
         return str_replace(' ', '', ucwords($value));
     }
 
+	public static function title_case(string $value): string {
+		$value = str_replace(['-', '_'], ' ', $value);
+
+		return ucwords($value);
+	}
+
     public static function camel_case(string $value): string {
         return lcfirst(self::Pascal_case($value));
     }

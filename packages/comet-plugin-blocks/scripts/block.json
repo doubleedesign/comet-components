@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "comet",
+	"name": "comet/block-template",
+	"title": "Block Template",
+	"icon": "",
+	"description": "",
+	"category": "design",
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "render.php",
+		"blockVersion": 3,
+		"hideFieldsInSidebar": true
+	},
+	"allowedBlocks": [
+	],
+	"editorStyle": [
+	],
+	"keywords": [
+	],
+	"usesContext": {
+	},
+	"attributes": {
+	},
+	"supports": {
+		"mode": true,
+		"jsx": true,
+		"innerBlocks": false,
+		"anchor": true,
+		"align": false
+	}
+}
