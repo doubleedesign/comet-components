@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'packages/comet-calendar/**'
+  workflow_dispatch:
 
 jobs:
   split:
@@ -16,6 +17,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Install git-filter-repo
+        run: |
+          curl -Lo /usr/local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo
+          chmod +x /usr/local/bin/git-filter-repo
 
       - name: Split Repository
         run: |
@@ -29,6 +35,34 @@ jobs:
           git pull $GITHUB_WORKSPACE split-branch
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
+
+      - name: Remove excluded paths from history
+        run: |
+          cd /tmp/split-repo
+          git filter-repo --force \
+            --path tests --invert-paths \
+            --path-regex '\.scss$' --invert-paths \
+            --path-regex '\.scss.map$' --invert-paths
+
+      - name: Get version from composer.json
+        id: get_version
+        run: |
+          VERSION=$(jq -r '.version' /tmp/split-repo/composer.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create tag in split repo
+        if: steps.get_version.outputs.version != 'null' && steps.get_version.outputs.version != ''
+        run: |
+          cd /tmp/split-repo
+          # Check if tag already exists
+          if ! git ls-remote --tags https://github.com/doubleedesign/comet-plugin-blocks.git | grep -q "refs/tags/v${{ steps.get_version.outputs.version }}"; then
+            git tag -a "v${{ steps.get_version.outputs.version }}" -m "Release version ${{ steps.get_version.outputs.version }}"
+            echo "tag_created=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tag v${{ steps.get_version.outputs.version }} already exists in target repository"
+            echo "tag_created=false" >> $GITHUB_OUTPUT
+          fi
+        id: create_tag
 
       - name: Push to target repository
         uses: ad-m/github-push-action@master

@@ -18,6 +18,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install git-filter-repo
+        run: |
+          curl -Lo /usr/local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo
+          chmod +x /usr/local/bin/git-filter-repo
+
       - name: Split Repository
         run: |
           git subtree split --prefix=packages/comet-plugin-blocks -b split-branch
@@ -30,6 +35,29 @@ jobs:
           git pull $GITHUB_WORKSPACE split-branch
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
+
+      - name: Remove excluded paths from history
+        run: |
+          cd /tmp/split-repo
+          git filter-repo --force \
+            --path-regex '\.jsx$' --invert-paths \
+            --path tests --invert-paths \
+            --path scripts --invert-paths \
+            --path eslint.config.js --invert-paths \
+            --path package.json --invert-paths \
+            --path composer.local.json --invert-paths \
+            --path composer.local.lock --invert-paths \
+            --path rollup.config.js --invert-paths \
+            --path src/editor/_virtual --invert-paths \
+            --path src/editor/_core-styles --invert-paths \
+            --path-regex '\.scss$' --invert-paths \
+            --path-regex '\.scss.map$' --invert-paths
+
+      - name: Get version from composer.json
+        id: get_version
+        run: |
+          VERSION=$(jq -r '.version' /tmp/split-repo/composer.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Create tag in split repo
         if: steps.get_version.outputs.version != 'null' && steps.get_version.outputs.version != ''
