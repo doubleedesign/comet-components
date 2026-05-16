@@ -273,7 +273,9 @@ class ColorUtils {
             return self::has_sufficient_contrast($backgroundColor, $foregroundColor, $threshold);
         }
         catch (Exception|TypeError $e) {
-            error_log($e->getMessage());
+			if(defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local') {
+				error_log($e->getMessage());
+			}
 
             return false;
         }
