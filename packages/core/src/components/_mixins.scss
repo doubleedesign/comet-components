@@ -32,6 +32,18 @@
 	}
 }
 
+@mixin section-margin() {
+	margin-block: var(--spacing-lg);
+
+	@include media-breakpoint-up('narrower') {
+		margin-block: var(--spacing-xl);
+	}
+
+	@include media-breakpoint-up('wide') {
+		margin-block: var(--spacing-xxl);
+	}
+}
+
 // See global.css for overrides to ensure no double padding when backgrounds are the same
 @mixin nested-padding() {
 	padding: var(--spacing-md);

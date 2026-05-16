@@ -57,6 +57,12 @@ html :where(.wp-block) {
 	a {
 		pointer-events: none !important; // prevent links being clickable in the editor because they then navigate away in the iframe
 	}
+
+	&.is-selected {
+		.acf-innerblocks-container {
+			outline: 1px solid var(--wp-admin-theme-color, #007cba);
+		}
+	}
 }
 
 .comet-block-edit-wrapper {

@@ -1,6 +1,26 @@
 .column, [class$=__column], [class*=column--] {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.column[data-valign=start], [data-valign=start][class$=__column], [data-valign=start][class*=column--] {
+  justify-content: flex-start;
+}
+.column[data-valign=center], [data-valign=center][class$=__column], [data-valign=center][class*=column--] {
+  justify-content: center;
+}
+.column[data-valign=end], [data-valign=end][class$=__column], [data-valign=end][class*=column--] {
+  justify-content: flex-end;
+}
+.column[data-halign=start], [data-halign=start][class$=__column], [data-halign=start][class*=column--] {
+  align-items: flex-start;
+}
+.column[data-halign=center], [data-halign=center][class$=__column], [data-halign=center][class*=column--] {
+  align-items: center;
+}
+.column[data-halign=end], [data-halign=end][class$=__column], [data-halign=end][class*=column--] {
+  align-items: flex-end;
 }
 
 /*# sourceMappingURL=column.css.map */

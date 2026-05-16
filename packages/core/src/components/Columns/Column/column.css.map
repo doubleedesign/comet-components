@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../_bem-mixin.scss","column.scss"],"names":[],"mappings":"AAcC;ECXA;EACA","file":"column.css"}
+{"version":3,"sourceRoot":"","sources":["../../_bem-mixin.scss","column.scss"],"names":[],"mappings":"AAcC;ECXA;EACA;EACA;EACA;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAGD;EACC;;AAGD;EACC;;AAGD;EACC","file":"column.css"}

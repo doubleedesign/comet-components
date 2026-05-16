@@ -3,4 +3,30 @@
 @include bem-block('column') {
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+
+	&[data-valign="start"] {
+		justify-content: flex-start;
+	}
+
+	&[data-valign="center"] {
+		justify-content: center;
+	}
+
+	&[data-valign="end"] {
+		justify-content: flex-end;
+	}
+
+	&[data-halign="start"] {
+		align-items: flex-start;
+	}
+
+	&[data-halign="center"] {
+		align-items: center;
+	}
+
+	&[data-halign="end"] {
+		align-items: flex-end;
+	}
 }

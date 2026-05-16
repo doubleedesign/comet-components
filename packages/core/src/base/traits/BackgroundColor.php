@@ -38,13 +38,13 @@ trait BackgroundColor {
 
         // Only keep the set background color if this is nested OR the background color is different from the global background
         // So we don't set background attributes on top-level components when not needed
-	    // TODO: This needs to be fixed to account for PageSections having different backgrounds without enforcing nested state on their inner components
-//        $globalBackground = Config::getInstance()->get_global_background();
-//        $isSameAsGlobal = isset($this->backgroundColor) && $this->backgroundColor->value === $globalBackground;
-//        $isNested = (isset($this->isNested) && $this->isNested) || (isset($attributes['isNested']) && $attributes['isNested']);
-//        if ((!$isNested && $isSameAsGlobal) || !isset($attributes['backgroundColor'])) {
-//            $this->backgroundColor = null;
-//        }
+        // TODO: This needs to be fixed to account for PageSections having different backgrounds without enforcing nested state on their inner components
+        //        $globalBackground = Config::getInstance()->get_global_background();
+        //        $isSameAsGlobal = isset($this->backgroundColor) && $this->backgroundColor->value === $globalBackground;
+        //        $isNested = (isset($this->isNested) && $this->isNested) || (isset($attributes['isNested']) && $attributes['isNested']);
+        //        if ((!$isNested && $isSameAsGlobal) || !isset($attributes['backgroundColor'])) {
+        //            $this->backgroundColor = null;
+        //        }
     }
 
     private function get_from_string_or_theme_color($value): ThemeColor|ThemeGradient|null {
@@ -53,6 +53,9 @@ trait BackgroundColor {
         }
         if ($value instanceof ThemeGradient) {
             return $value;
+        }
+        if ($value === null) {
+            return null;
         }
 
         return ThemeColor::tryFrom($value) ?? ThemeGradient::tryFrom($value) ?? null;

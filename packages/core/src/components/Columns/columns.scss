@@ -3,6 +3,26 @@
 @use '../bem-mixin' as *;
 @use '../bem-class-selectors' as *;
 
+@mixin grid-template-columns($columns, $spacing) {
+	grid-template-columns: repeat($columns, calc((100% - (var(--spacing-#{$spacing}) * (#{$columns} - 1))) / #{$columns}));
+
+	&[data-halign] {
+		grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - (var(--spacing-#{$spacing}) * (#{$columns} - 1))) / #{$columns})));
+	}
+}
+
+@mixin grid-columns($columns, $unstackBreakpoint) {
+	@include grid-template-columns($columns, 'md');
+
+	@include container-width-up($unstackBreakpoint) {
+		@include grid-template-columns($columns, 'lg');
+	}
+
+	&[data-allow-layout-stacking="false"] {
+		@include grid-template-columns($columns, 'lg');
+	}
+}
+
 @mixin column-layout() {
 	// Default/auto layout
 	display: grid;
@@ -13,56 +33,33 @@
 	}
 
 	&[data-count="2"], &[data-count="4"], &[data-count="6"] {
-		grid-template-columns: repeat(1, 1fr);
-
-		@include container-width-up('small') {
-			grid-template-columns: repeat(2, 1fr);
-		}
-
-		&[data-allow-layout-stacking="false"] {
-			grid-template-columns: repeat(2, 1fr);
-		}
+		@include grid-columns(2, 'small');
 	}
 
 	&[data-count="4"] {
-		@include container-width-up('narrower') {
-			grid-template-columns: repeat(4, 1fr);
-		}
-		&[data-allow-layout-stacking="false"] {
-			grid-template-columns: repeat(4, 1fr);
-		}
+		@include grid-columns(4, 'narrower');
 	}
 
 	&[data-count="3"], &[data-count="5"], &[data-count="6"] {
-		@include container-width-up('small') {
-			grid-template-columns: repeat(3, 1fr);
-		}
-		&[data-allow-layout-stacking="false"] {
-			grid-template-columns: repeat(3, 1fr);
-		}
+		@include grid-columns(3, 'small');
 	}
 
 	&[data-count="5"] {
-		@include container-width-up('narrow') {
-			grid-template-columns: repeat(5, 1fr);
-		}
-		&[data-allow-layout-stacking="false"] {
-			grid-template-columns: repeat(5, 1fr);
-		}
+		@include grid-columns(5, 'narrow');
 	}
 
 	&[data-count="6"] {
-		@include container-width-up('narrow') {
-			grid-template-columns: repeat(6, 1fr);
-		}
-		&[data-allow-layout-stacking="false"] {
-			grid-template-columns: repeat(6, 1fr);
-		}
+		@include grid-columns(6, 'narrow');
 	}
 }
 
 @include bem-block('columns', ('column')) {
 	@include column-layout();
+
+	// When inside a PageSection
+	div[data-size] > & {
+		@include section-margin();
+	}
 
 	// Nested .columns (happens when the component has its own shortname which goes on the top-level <section> which also has data-size, which adds section padding)
 	> #{class-ends-with('__columns')} {

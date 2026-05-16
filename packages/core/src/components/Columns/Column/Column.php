@@ -36,6 +36,14 @@ class Column extends UIComponent {
             $attributes['data-background'] = $this->get_background_color()->value;
         }
 
+		if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
+		    $attributes['data-halign'] = $this->hAlign->value;
+	    }
+
+        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
+            $attributes['data-valign'] = $this->vAlign->value;
+        }
+
         return $attributes;
     }
 
