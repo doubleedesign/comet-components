@@ -20,18 +20,6 @@
 	}
 }
 
-@mixin section-padding() {
-	padding-block: var(--spacing-lg);
-
-	@include media-breakpoint-up('narrower') {
-		padding-block: var(--spacing-xl);
-	}
-
-	@include media-breakpoint-up('wide') {
-		padding-block: var(--spacing-xxl);
-	}
-}
-
 @mixin section-margin() {
 	margin-block: var(--spacing-lg);
 
@@ -44,7 +32,33 @@
 	}
 }
 
-// See global.css for overrides to ensure no double padding when backgrounds are the same
+// Mixin for standard padding between sections
+@mixin section-padding() {
+	padding-block: var(--spacing-lg);
+
+	@include media-breakpoint-up('narrower') {
+		padding-block: var(--spacing-xl);
+	}
+
+	@include media-breakpoint-up('wide') {
+		padding-block: var(--spacing-xxl);
+	}
+}
+
+// Mixin to add equal padding on the sides of a section in select cases
+@mixin section-padding-inline() {
+	padding-inline: var(--spacing-md);
+
+	@include media-breakpoint-up('narrower') {
+		padding-inline: var(--spacing-lg);
+	}
+
+	@include media-breakpoint-up('wide') {
+		padding-inline: var(--spacing-xl);
+	}
+}
+
+// Small padding for nested elements like groups and columns
 @mixin nested-padding() {
 	padding: var(--spacing-md);
 }

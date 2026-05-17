@@ -165,7 +165,35 @@
   }
   [data-background] > [data-background],
   [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
-    padding: var(--spacing-md);
+    padding-block: var(--spacing-lg);
+  }
+  @media (min-width: 768px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-block: var(--spacing-xl);
+    }
+  }
+  @media (min-width: 1440px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-block: var(--spacing-xxl);
+    }
+  }
+  [data-background] > [data-background],
+  [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+    padding-inline: var(--spacing-md);
+  }
+  @media (min-width: 768px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-inline: var(--spacing-lg);
+    }
+  }
+  @media (min-width: 1440px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-inline: var(--spacing-xl);
+    }
   }
   [data-color-theme] {
     --theme-color-inverse: contrast-color(var(--theme-color));

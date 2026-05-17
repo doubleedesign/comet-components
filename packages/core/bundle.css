@@ -165,7 +165,35 @@
   }
   [data-background] > [data-background],
   [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
-    padding: var(--spacing-md);
+    padding-block: var(--spacing-lg);
+  }
+  @media (min-width: 768px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-block: var(--spacing-xl);
+    }
+  }
+  @media (min-width: 1440px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-block: var(--spacing-xxl);
+    }
+  }
+  [data-background] > [data-background],
+  [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+    padding-inline: var(--spacing-md);
+  }
+  @media (min-width: 768px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-inline: var(--spacing-lg);
+    }
+  }
+  @media (min-width: 1440px) {
+    [data-background] > [data-background],
+    [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+      padding-inline: var(--spacing-xl);
+    }
   }
   [data-color-theme] {
     --theme-color-inverse: contrast-color(var(--theme-color));
@@ -1468,24 +1496,24 @@
     grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
   }
   .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
-    grid-template-columns: repeat(2, calc((100% - var(--spacing-md) * (2 - 1)) / 2));
+    grid-template-columns: repeat(4, calc((100% - var(--spacing-md) * (4 - 1)) / 4));
   }
   .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--] {
-    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-md) * (2 - 1)) / 2)));
+    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-md) * (4 - 1)) / 4)));
   }
   @container layout-section (min-width: var(--width-narrower)) {
     .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
-      grid-template-columns: repeat(2, calc((100% - var(--spacing-lg) * (2 - 1)) / 2));
+      grid-template-columns: repeat(4, calc((100% - var(--spacing-lg) * (4 - 1)) / 4));
     }
     .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--] {
-      grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
+      grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (4 - 1)) / 4)));
     }
   }
   .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--] {
-    grid-template-columns: repeat(2, calc((100% - var(--spacing-lg) * (2 - 1)) / 2));
+    grid-template-columns: repeat(4, calc((100% - var(--spacing-lg) * (4 - 1)) / 4));
   }
   .columns[data-count="4"][data-allow-layout-stacking=false][data-halign], [data-count="4"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
-    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
+    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (4 - 1)) / 4)));
   }
   .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
     grid-template-columns: repeat(3, calc((100% - var(--spacing-md) * (3 - 1)) / 3));

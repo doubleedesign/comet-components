@@ -191,7 +191,8 @@
 
 		> [data-background],
 		> [data-vue-component]:has(>[data-background]) > [data-background] {
-			@include nested-padding();
+			@include section-padding();
+			@include section-padding-inline();
 		}
 	}
 
