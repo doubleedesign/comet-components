@@ -2,7 +2,7 @@
 	<figure @class($wrapperClasses) @attributes($outerAttrs)>
 		@if ($href)
 			<a @attributes($innerAttrs) href="{{ $href }}" @if ($caption) data-caption="{{ $caption }}" @endif>
-				<img src="{{ $src }}" @attributes($attributes)>
+				<img @attributes($attributes)>
 			</a>
 		@else
 			<div @class($classes) @attributes($innerAttrs)>
@@ -14,11 +14,11 @@
 @else
 	@if ($href)
 		<a href="{{ $href }}" @class($classes) @attributes([...$outerAttrs, ...$innerAttrs]) @if ($caption) data-caption="{{ $caption }}" @endif>
-			<img src="{{ $src }}" @attributes($attributes)>
+			<img @attributes($attributes)>
 		</a>
 	@else
 		<div @class($classes) @attributes([...$outerAttrs, ...$innerAttrs])>
-			<img src="{{ $src }}" @attributes($attributes)>
+			<img @attributes($attributes)>
 		</div>
 	@endif
 @endif
