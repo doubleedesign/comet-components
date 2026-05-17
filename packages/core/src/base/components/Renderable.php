@@ -74,7 +74,7 @@ abstract class Renderable {
         }
     }
 
-    protected function set_tag(?string $tagName): void {
+    protected function set_tag(string|Tag|null $tagName): void {
         $reflection = new ReflectionClass($this);
 
         // Get allowed tags and default tag from attributes
@@ -85,7 +85,14 @@ abstract class Renderable {
         $defaultTag = $defaultTagAttr ? $defaultTagAttr->newInstance()->tag : Tag::DIV;
 
         // Try to use provided tag, fall back to default
-        $requestedTag = $tagName ? Tag::tryFrom($tagName) : $defaultTag;
+	    if($tagName instanceof Tag) {
+		    $requestedTag = $tagName;
+	    } else if (is_string($tagName)) {
+		    $requestedTag = $tagName ? Tag::tryFrom($tagName) : $defaultTag;
+	    }
+		else {
+			$requestedTag = $defaultTag;
+		}
 
         // Validate against allowed tags if specified
         if ($allowedTags && !in_array($requestedTag, $allowedTags)) {
