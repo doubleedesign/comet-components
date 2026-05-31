@@ -14,7 +14,7 @@ if ($image_url) {
 		'src'         => $image_url,
 		'alt'         => $image_alt,
 		'caption'     => $image_caption,
-		'aspectRatio' => 'cinemascope',
+		'aspectRatio' => apply_filters('comet_canvas_single_post_image_aspect_ratio', 'cinemascope'),
 		'scale'       => 'cover',
 		'classes'     => apply_filters('comet_canvas_blog_post_featured_image_classes', []),
 		'styleName'   => apply_filters('comet_canvas_blog_post_featured_image_style', ''),
