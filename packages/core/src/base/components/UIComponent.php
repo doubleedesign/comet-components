@@ -97,6 +97,7 @@ abstract class UIComponent extends Renderable {
         if (empty($component->innerComponents)) return false;
         if ($component instanceof PanelGroupComponent) return false;
         if ($this->get_default_context_for_inner_components() === null) return false;
+        if (str_ends_with($this->get_shortname(), '-wrapper')) return false;
 
         return true;
     }

@@ -12,7 +12,7 @@ namespace Doubleedesign\Comet\Core;
  *              This component is intended for layout purposes only, not intended to semantically group content.
  *              Unlike Container, it does not enforce nested state upon its inner components, and unlike UIComponent and its children it does not have or propagate context.
  */
-#[AllowedTags([Tag::DIV, Tag::SECTION])]
+#[AllowedTags([Tag::DIV, Tag::SECTION, Tag::ARTICLE])]
 #[DefaultTag(Tag::DIV)]
 class PageSection extends Renderable {
     use BackgroundColor;
@@ -35,10 +35,10 @@ class PageSection extends Renderable {
 
         array_walk($this->innerComponents, function(&$component) {
             // Only keep size attribute on inner components that are different from the size of this wrapper
-            if ($component->get_size() === $this->size) {
+            if (method_exists($component, 'get_size') && $component->get_size() === $this->size) {
                 $component->set_size(null);
             }
-            // If this is a section, make the inner components divs so we don't get sections within sections uninentionally
+            // If this is a section/article/other semantic element, make the inner components divs so we don't get sections within sections uninentionally
             if ($this->tagName !== Tag::DIV) {
                 $component->set_tag(Tag::DIV);
             }
