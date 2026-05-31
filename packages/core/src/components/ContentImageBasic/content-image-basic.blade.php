@@ -9,7 +9,7 @@
 				<img src="{{ $src }}" @attributes($attributes)>
 			</div>
 		@endif
-		<figcaption @class($captionClasses)>{{ $caption }}</figcaption>
+		<figcaption @class($captionClasses)>{!! $caption !!}</figcaption>
 	</figure>
 @else
 	@if ($href)

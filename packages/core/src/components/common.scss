@@ -6,6 +6,7 @@
 	:root {
 		--font-family-body: sans-serif;
 		--font-family-accent: sans-serif;
+		//--column-unstack-breakpoint: small; // This doesn't work for container queries in all browsers yet but I hope one day it will
 
 		// Note: Basic --color-* vars are set in colours.scss, which is intentionally minimal so it can be read by various other parts of the codebase
 		@each $name, $values in $colors {

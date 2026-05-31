@@ -18,8 +18,9 @@
 		}
 	}
 
-	[data-order="row-reverse"] {
+	&[data-order="row-reverse"] {
 		.copy-image__columns {
+			// TODO: Replace this with --column-unstack-breakpoint when supported in all browsers
 			@include container-width-up('small') {
 				// Flex layout
 				flex-direction: row-reverse;
@@ -32,24 +33,19 @@
 		}
 	}
 
+	&[data-size="wide"] {
+		#{class-ends-with("__column--image")} {
+			@include unpad-edges();
+		}
+	}
+
 	.page-section & {
-		@include container-width-up('small') {
+		@include container-width-up(var(--column-unstack-breakpoint)) {
 			padding-block-start: 0;
 			padding-inline: 0;
 
 			#{class-ends-with("__column--copy")} {
 				@include section-padding-inline();
-			}
-		}
-	}
-
-	[data-size="wide"] & {
-		#{class-ends-with("__column--image")} {
-			@include unpad-edges();
-
-			@media (min-width: 1540px) {
-				@include nested-padding();
-				padding-block: 0;
 			}
 		}
 	}

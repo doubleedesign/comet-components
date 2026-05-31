@@ -205,7 +205,6 @@
   [data-background] > [data-background],
   [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
     padding-block: var(--spacing-lg);
-    padding-inline: var(--spacing-md);
   }
   @media (min-width: 768px) {
     [data-background] > [data-background],
@@ -218,6 +217,10 @@
     [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
       padding-block: var(--spacing-xxl);
     }
+  }
+  [data-background] > [data-background],
+  [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+    padding-inline: var(--spacing-md);
   }
   @media (min-width: 768px) {
     [data-background] > [data-background],

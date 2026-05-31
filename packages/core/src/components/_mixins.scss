@@ -3,13 +3,6 @@
 @forward './bem-class-selectors';
 
 @mixin container-width-up($widthName, $containerName: 'layout-section') {
-	// Pixel value fallback for browsers that don't support container queries with var(--width*)
-	//@each $widthName, $widthValue in $widths {
-	//	@container #{$containerName} (min-width: #{$widthValue}) {
-	//		@content;
-	//	}
-	//}
-
 	// Workaround for browsers that don't support the var-based min-width
 	@container #{$containerName} (min-width: #{map-get($widths, $widthName)}) {
 		@content;
@@ -22,6 +15,12 @@
 }
 
 @mixin container-width-down($widthName, $containerName: 'layout-section') {
+	// Workaround for browsers that don't support the var-based min-width
+	@container #{$containerName} (max-width: #{map-get($widths, $widthName)}) {
+		@content;
+	}
+	// End workaround
+
 	@container  #{$containerName} (max-width: var(--width-#{$widthName})) {
 		@content;
 	}

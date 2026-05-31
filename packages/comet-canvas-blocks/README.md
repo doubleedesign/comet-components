@@ -14,12 +14,12 @@ Development of this project belongs in the main Comet Components monorepo.
 
 The Comet Blocks plugin and Comet Canvas parent theme are configured to look for styling files in child themes and load them into the editor as follows:
 
-| File           | Purpose                                                                                                                                                                                                       |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `tokens.css`   | Should contain the colour palette definition CSS variables, and any overrides to gradient variables.                                                                                                          |
-| `common.scss`  | Common typography and other styles that should be used on the front-end, in the block editor, and in TinyMCE, should go in this one file.                                                                     |
-| `style.scss`   | Required file for WordPress to recognize the theme. Should contain theme metadata and all CSS styles for the theme that are not already present in the parent theme and plugins. Should import `common.scss`. |
-| `tinymce.scss` | Styles to be loaded only in TinyMCE. Should not need to import `common.scss` as that should already be loaded.                                                                                                |
+| File           | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `colours.css`  | Should contain the colour palette definition CSS variables, and any overrides to gradient variables.                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `common.scss`  | Common typography and other styles that should be used on the front-end, in the block editor, and in TinyMCE, should go in this one file.                                                                                                                                                                                                                                                                                                                                                                              |
+| `style.scss`   | Required file for WordPress to recognize the theme. Should contain theme metadata, and contain (or import) all CSS styles for the theme that are not already present in the parent theme, plugins, and the theme's common.css. Should import `common.scss`.                                                                                                                                                                                                                                                            |
+| `tinymce.scss` | Styles to be loaded only in TinyMCE. Should not need to import `common.scss` as that should already be loaded, and should not import `style.scss` as that can contain a lot of stuff that we don't need in TinyMCE. Can import partials for theme-specific overrides for things available in the TinyMCE context such as the buttons and callouts provided by the Double-E TinyMCE plugin. May need to import externally-hosted fonts (e.g., Typekit, Google Fonts) even if they're already imported in `common.scss`. |
 
 >[!NOTE]
 > The minimal `theme.json` file in the Comet Canvas theme is there just to enable certain block editor features that look for it. It is not used by Comet Components for any styling. Please use the CSS files to set values for your theme's styling, and the PHP filters for customising what is available in the editor. 
@@ -33,17 +33,16 @@ To ensure theme fonts loaded from Typekit, Google Fonts, Font Awesome, etc load 
 
 - Import them in your child theme's `common.scss` (recommended as this is already set up to be loaded everywhere needed), ensuring that
   `common.scss` is imported into `style.scss` and `tinymce.scss`
-- Enqueue them in the child theme's `functions.php` file on the following action hooks:
-	- `wp_enqueue_scripts` for the front-end, using the `wp_enqueue_style` function
-	- `enqueue_block_assets` with an admin check (to ensure no duplicate front-end loading) for the block editor
-	- `admin_enqueue_scripts` for core TinyMCE, using the `add_editor_style` function
-	- `tiny_mce_before_init` for ACF TinyMCE, by adding a CSS `@import` rule to the `content_css` field
+- Enqueue them in the child theme's `functions.php` file on the following hooks:
+    - `wp_enqueue_scripts` action hook for the front-end, using the `wp_enqueue_style` function
+    - `enqueue_block_assets` action hook with an admin check (to ensure no duplicate front-end loading) for the block editor
+    - `editor_stylesheets` filter hook for TinyMCE.
 
 #### For JavaScript files:
 
 - Enqueue them in the child theme's `functions.php` file on the following action hooks:
 	- `wp_enqueue_scripts` for the front-end, using the `wp_enqueue_script` function
-	- `enqueue_block_assets` with an admin check (to ensure no duplicate front-end loading) for the block editor
+	- `enqueue_block_assets` with an admin check (to ensure no duplicate front-end loading) for the block editor; if this doesn't work for your particular script try `enqueue_block_editor_assets`.
 
 ### Setting component defaults
 

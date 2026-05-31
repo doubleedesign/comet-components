@@ -21,12 +21,20 @@
 	}
 }
 
-@mixin column-layout() {
-	// Default/auto layout
-	display: grid;
+@mixin stack-columns($override: false) {display: grid;
 	grid-gap: var(--spacing-md);
 	grid-template-columns: 1fr;
 	width: 100%;
+
+
+	@if $override {
+		grid-template-columns: 1fr !important;
+	}
+}
+
+@mixin column-layout() {
+	// Default/auto layout
+	@include stack-columns();
 
 	@include container-width-up('narrow') {
 		grid-gap: var(--spacing-lg);
@@ -51,6 +59,11 @@
 	&[data-count="6"] {
 		@include grid-columns(6, 'narrow');
 	}
+
+	// TODO: Implement this when var for container query breakpoints is supported in all browsers
+	//@container layout-section (max-width: var(--column-unstack-breakpoint)) {
+	//	@include stack-columns(true);
+	//}
 }
 
 @include bem-block('columns', ('column')) {

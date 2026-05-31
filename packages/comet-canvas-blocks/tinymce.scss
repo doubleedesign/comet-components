@@ -1,7 +1,16 @@
+html {
+	--base-font-size: 1rem;
+}
+
 .mce-content-body {
+	margin: 0 !important;
 	padding: 1rem;
 	box-sizing: border-box;
-	--base-font-size: 1rem;
+	font-size: var(--base-font-size);
+
+	@each $property in (font-family, line-height, color, background, background-color) {
+		#{$property}: revert-layer !important;
+	}
 }
 
 body.wp-autoresize.mce-content-body {

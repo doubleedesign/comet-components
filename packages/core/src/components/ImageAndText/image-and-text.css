@@ -5,6 +5,12 @@
 .image-and-text__image, .image-and-text__content {
   display: flex;
 }
+@container layout-section (max-width: 768px) {
+  .image-and-text__image__inner {
+    max-width: 100% !important;
+    flex-basis: 100% !important;
+  }
+}
 @container layout-section (max-width: var(--width-narrower)) {
   .image-and-text__image__inner {
     max-width: 100% !important;
@@ -17,6 +23,12 @@
 .image-and-text__content {
   position: relative;
   z-index: 200;
+}
+@container layout-section (max-width: 768px) {
+  .image-and-text__content__inner {
+    max-width: 100% !important;
+    flex-basis: 100% !important;
+  }
 }
 @container layout-section (max-width: var(--width-narrower)) {
   .image-and-text__content__inner {

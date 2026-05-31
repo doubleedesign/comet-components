@@ -17,6 +17,7 @@
 	padding-block: 0;
 	position: relative;
 	container-type: inline-size;
+	container-name: layout-section;
 }
 
 .page-header[data-background="white"] + .page-section[data-background="white"]:has(.page-with-sidebar) {

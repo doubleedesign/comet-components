@@ -36,6 +36,7 @@
   padding-block: 0;
   position: relative;
   container-type: inline-size;
+  container-name: layout-section;
 }
 
 .page-header[data-background=white] + .page-section[data-background=white]:has(.page-with-sidebar) {
@@ -73,9 +74,6 @@ section + .separator-wrapper hr, .separator-wrapper + section hr {
 
 .post-content {
   padding-block: var(--spacing-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
 }
 @media (min-width: 768px) {
   .post-content {
@@ -86,6 +84,11 @@ section + .separator-wrapper hr, .separator-wrapper + section hr {
   .post-content {
     padding-block: var(--spacing-xxl);
   }
+}
+.post-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
 }
 
 /*# sourceMappingURL=style.css.map */

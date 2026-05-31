@@ -46,6 +46,7 @@
 }
 .image--advanced__image__inner img, [class$=__image--advanced__image__inner] img {
   object-fit: cover;
+  min-width: 100%;
 }
 .image--advanced__caption, [class$=__image--advanced__caption] {
   font-size: var(--font-size-sm);
