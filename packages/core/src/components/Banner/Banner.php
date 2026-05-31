@@ -10,7 +10,7 @@ namespace Doubleedesign\Comet\Core;
  */
 #[AllowedTags([Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
-class Banner extends WrappedLayoutComponent {
+class Banner extends LayoutComponent {
     use ColorPair;
     use LayoutAlignment;
 

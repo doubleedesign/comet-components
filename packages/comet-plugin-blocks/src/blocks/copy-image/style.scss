@@ -1,7 +1,26 @@
+@use '../../../vendor/doubleedesign/comet-components-core/src/components/bem-class-selectors' as *;
+@use '../../../vendor/doubleedesign/comet-components-core/src/components/mixins' as *;
+
 .copy-image {
+
+	&__columns {
+		// Workaround for browsers that don't support the var-based container queries
+		@media (max-width: 600px) {
+			#{class-ends-with("__column--image")} {
+				order: -1;
+			}
+		}
+
+		@include container-width-down('small') {
+			#{class-ends-with("__column--image")} {
+				order: -1;
+			}
+		}
+	}
+
 	[data-order="row-reverse"] {
 		.copy-image__columns {
-			@container (min-width: 600px) {
+			@include container-width-up('small') {
 				// Flex layout
 				flex-direction: row-reverse;
 
@@ -9,6 +28,28 @@
 				div:first-child {
 					order: 2;
 				}
+			}
+		}
+	}
+
+	.page-section & {
+		@include container-width-up('small') {
+			padding-block-start: 0;
+			padding-inline: 0;
+
+			#{class-ends-with("__column--copy")} {
+				@include section-padding-inline();
+			}
+		}
+	}
+
+	[data-size="wide"] & {
+		#{class-ends-with("__column--image")} {
+			@include unpad-edges();
+
+			@media (min-width: 1540px) {
+				@include nested-padding();
+				padding-block: 0;
 			}
 		}
 	}

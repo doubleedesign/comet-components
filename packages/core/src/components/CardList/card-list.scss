@@ -15,6 +15,8 @@
 		&:has(:nth-child(2)) {
 			justify-content: space-between;
 			align-items: center;
+			margin-block-end: var(--spacing-md);
+			padding-inline: var(--spacing-sm);
 		}
 
 		h2 {
@@ -28,7 +30,7 @@
 		container-type: inline-size;
 
 		@include container-width-up(narrow) {
-			padding: var(--spacing-sm);
+			padding: var(--spacing-xs);
 		}
 	}
 }

@@ -9,6 +9,11 @@
 		}
 	}
 
+	// Workaround for browsers that don't support the above variable-based container queries
+	@include media-breakpoint-up('narrow') {
+		@content;
+	}
+
 	@container site-header (min-width: var(--breakpoint)) {
 		@content;
 	}
@@ -135,17 +140,18 @@
 		padding: var(--spacing-sm);
 		margin-left: auto;
 		transition: color 0.2s ease-in-out;
-		position: fixed;
+		position: absolute;
 		top: var(--spacing-sm);
 		right: 0;
 		z-index: 9999;
 
 		&[data-menu-style="off-canvas"] {
 			margin-left: 0;
+			--active-color: white;
 		}
 
 		&:hover, &:focus, &:active {
-			color: var(--active-color);
+			color: var(--color-primary);
 		}
 
 		&[aria-expanded="true"] {

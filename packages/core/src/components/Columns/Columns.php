@@ -42,7 +42,6 @@ class Columns extends LayoutComponent {
      * @description Inner column components
      */
     protected array $innerComponents;
-    private bool $shouldBeWrapped = false;
 
     public function __construct(array $attributes, array $innerComponents) {
         // Allow qty to be explicitly specified so consumers can do things like 2 columns in a three-column layout that would leave 1/3 space
@@ -52,21 +51,22 @@ class Columns extends LayoutComponent {
         $this->set_layout_alignment($attributes);
         $this->set_background_color($attributes);
 
-        // If this component has its own shortname, wrap the content so we still get the appropriate class names for column styling automatically
-        $this->shouldBeWrapped = isset($attributes['shortName']) && $attributes['shortName'] !== 'columns';
-        if ($this->shouldBeWrapped) {
-            $innerAttrs = array(
-                'shortName'                  => 'columns',
-                ...$this->get_columns_html_attributes()
-            );
-            if ($this->allowStacking !== null && $this->allowStacking !== true && $this->allowStacking !== 'true') {
-                $innerAttrs['data-allow-layout-stacking'] = 'false';
-            }
-            $wrappedInnerComponents = [new Group($innerAttrs, $innerComponents)];
+        // Wrap the content so we still get the appropriate class names for column styling automatically if it has its own shortname,
+        // and so container queries work properly - the wrapper is the container
+        $attributes['shortName'] = isset($attributes['shortName'])
+            ? ($attributes['shortName'] !== 'columns') ? $attributes['shortName'] : 'columns-wrapper'
+            : 'columns-wrapper';
+        $innerAttrs = array(
+            'shortName'                  => 'columns',
+            ...$this->get_columns_html_attributes()
+        );
+        if ($this->allowStacking !== null && $this->allowStacking !== true && $this->allowStacking !== 'true') {
+            $innerAttrs['data-allow-layout-stacking'] = 'false';
         }
+        $wrappedInnerComponents = new Group($innerAttrs, $innerComponents);
 
         // Finally, create the component with all the transformed stuff
-        parent::__construct($attributes, $wrappedInnerComponents ?? $innerComponents, 'components.Columns.columns');
+        parent::__construct($attributes, [$wrappedInnerComponents], 'components.Columns.columns');
     }
 
     private function get_columns_html_attributes(): array {
@@ -104,10 +104,6 @@ class Columns extends LayoutComponent {
 
         if ($this->get_background_color() !== null) {
             $attributes['data-background'] = $this->get_background_color()->value;
-        }
-
-        if (!$this->shouldBeWrapped) {
-            $attributes = array_merge($attributes, $this->get_columns_html_attributes());
         }
 
         return $attributes;

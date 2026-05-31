@@ -22,5 +22,8 @@
 .column[data-halign=end], [data-halign=end][class$=__column], [data-halign=end][class*=column--] {
   align-items: flex-end;
 }
+.column .copy, [class$=__column] .copy, [class*=column--] .copy {
+  padding-block: 0;
+}
 
 /*# sourceMappingURL=column.css.map */

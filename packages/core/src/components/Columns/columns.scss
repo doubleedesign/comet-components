@@ -12,8 +12,6 @@
 }
 
 @mixin grid-columns($columns, $unstackBreakpoint) {
-	@include grid-template-columns($columns, 'md');
-
 	@include container-width-up($unstackBreakpoint) {
 		@include grid-template-columns($columns, 'lg');
 	}
@@ -27,6 +25,8 @@
 	// Default/auto layout
 	display: grid;
 	grid-gap: var(--spacing-md);
+	grid-template-columns: 1fr;
+	width: 100%;
 
 	@include container-width-up('narrow') {
 		grid-gap: var(--spacing-lg);

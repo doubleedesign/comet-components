@@ -6,6 +6,26 @@
   flex-direction: column;
   align-items: flex-start;
 }
+@container layout-section (min-width: 600px) {
+  .call-to-action {
+    text-align: revert;
+  }
+}
+@container layout-section (min-width: var(--width-small)) {
+  .call-to-action {
+    text-align: revert;
+  }
+}
+@container layout-section (min-width: 940px) {
+  .call-to-action {
+    padding: var(--spacing-xl);
+  }
+}
+@container layout-section (min-width: var(--width-narrow)) {
+  .call-to-action {
+    padding: var(--spacing-xl);
+  }
+}
 .call-to-action[data-halign=center] {
   align-items: center;
   text-align: center;
@@ -13,16 +33,6 @@
 .call-to-action[data-halign=end] {
   align-items: flex-end;
   text-align: end;
-}
-@container layout-section (min-width: var(--width-small)) {
-  .call-to-action {
-    text-align: revert;
-  }
-}
-@container layout-section (min-width: var(--width-narrow)) {
-  .call-to-action {
-    padding: var(--spacing-xl);
-  }
 }
 .call-to-action h2 {
   margin: 0;

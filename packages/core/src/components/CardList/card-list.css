@@ -5,6 +5,8 @@
 .card-list__header:has(:nth-child(2)), [class$=__header]:has(:nth-child(2)):has(+ [class$=__card-list]), [class$=__card-list__header]:has(:nth-child(2)) {
   justify-content: space-between;
   align-items: center;
+  margin-block-end: var(--spacing-md);
+  padding-inline: var(--spacing-sm);
 }
 .card-list__header h2, [class$=__header]:has(+ [class$=__card-list]) h2, [class$=__card-list__header] h2 {
   margin: 0;
@@ -13,9 +15,14 @@
 .card-list__item, [class$=__card-list__item] {
   container-type: inline-size;
 }
+@container layout-section (min-width: 940px) {
+  .card-list__item, [class$=__card-list__item] {
+    padding: var(--spacing-xs);
+  }
+}
 @container layout-section (min-width: var(--width-narrow)) {
   .card-list__item, [class$=__card-list__item] {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs);
   }
 }
 

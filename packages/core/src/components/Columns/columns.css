@@ -1,17 +1,26 @@
 .columns, [class$=__columns], [class*=columns--] {
   display: grid;
   grid-gap: var(--spacing-md);
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+@container layout-section (min-width: 940px) {
+  .columns, [class$=__columns], [class*=columns--] {
+    grid-gap: var(--spacing-lg);
+  }
 }
 @container layout-section (min-width: var(--width-narrow)) {
   .columns, [class$=__columns], [class*=columns--] {
     grid-gap: var(--spacing-lg);
   }
 }
-.columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
-  grid-template-columns: repeat(2, calc((100% - var(--spacing-md) * (2 - 1)) / 2));
-}
-.columns[data-count="2"][data-halign], [data-count="2"][data-halign][class$=__columns], [data-count="2"][data-halign][class*=columns--], .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
-  grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-md) * (2 - 1)) / 2)));
+@container layout-section (min-width: 600px) {
+  .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    grid-template-columns: repeat(2, calc((100% - var(--spacing-lg) * (2 - 1)) / 2));
+  }
+  .columns[data-count="2"][data-halign], [data-count="2"][data-halign][class$=__columns], [data-count="2"][data-halign][class*=columns--], .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
+  }
 }
 @container layout-section (min-width: var(--width-small)) {
   .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
@@ -27,11 +36,13 @@
 .columns[data-count="2"][data-allow-layout-stacking=false][data-halign], [data-count="2"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="2"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="4"][data-allow-layout-stacking=false][data-halign], [data-count="4"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false][data-halign], [data-count="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
   grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
 }
-.columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
-  grid-template-columns: repeat(4, calc((100% - var(--spacing-md) * (4 - 1)) / 4));
-}
-.columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--] {
-  grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-md) * (4 - 1)) / 4)));
+@container layout-section (min-width: 768px) {
+  .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
+    grid-template-columns: repeat(4, calc((100% - var(--spacing-lg) * (4 - 1)) / 4));
+  }
+  .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--] {
+    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (4 - 1)) / 4)));
+  }
 }
 @container layout-section (min-width: var(--width-narrower)) {
   .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
@@ -47,11 +58,13 @@
 .columns[data-count="4"][data-allow-layout-stacking=false][data-halign], [data-count="4"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
   grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (4 - 1)) / 4)));
 }
-.columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
-  grid-template-columns: repeat(3, calc((100% - var(--spacing-md) * (3 - 1)) / 3));
-}
-.columns[data-count="3"][data-halign], [data-count="3"][data-halign][class$=__columns], [data-count="3"][data-halign][class*=columns--], .columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
-  grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-md) * (3 - 1)) / 3)));
+@container layout-section (min-width: 600px) {
+  .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    grid-template-columns: repeat(3, calc((100% - var(--spacing-lg) * (3 - 1)) / 3));
+  }
+  .columns[data-count="3"][data-halign], [data-count="3"][data-halign][class$=__columns], [data-count="3"][data-halign][class*=columns--], .columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (3 - 1)) / 3)));
+  }
 }
 @container layout-section (min-width: var(--width-small)) {
   .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
@@ -67,11 +80,13 @@
 .columns[data-count="3"][data-allow-layout-stacking=false][data-halign], [data-count="3"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="3"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="5"][data-allow-layout-stacking=false][data-halign], [data-count="5"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false][data-halign], [data-count="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
   grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (3 - 1)) / 3)));
 }
-.columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--] {
-  grid-template-columns: repeat(5, calc((100% - var(--spacing-md) * (5 - 1)) / 5));
-}
-.columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--] {
-  grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-md) * (5 - 1)) / 5)));
+@container layout-section (min-width: 940px) {
+  .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--] {
+    grid-template-columns: repeat(5, calc((100% - var(--spacing-lg) * (5 - 1)) / 5));
+  }
+  .columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--] {
+    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (5 - 1)) / 5)));
+  }
 }
 @container layout-section (min-width: var(--width-narrow)) {
   .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--] {
@@ -87,11 +102,13 @@
 .columns[data-count="5"][data-allow-layout-stacking=false][data-halign], [data-count="5"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
   grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (5 - 1)) / 5)));
 }
-.columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
-  grid-template-columns: repeat(6, calc((100% - var(--spacing-md) * (6 - 1)) / 6));
-}
-.columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
-  grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-md) * (6 - 1)) / 6)));
+@container layout-section (min-width: 940px) {
+  .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    grid-template-columns: repeat(6, calc((100% - var(--spacing-lg) * (6 - 1)) / 6));
+  }
+  .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (6 - 1)) / 6)));
+  }
 }
 @container layout-section (min-width: var(--width-narrow)) {
   .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {

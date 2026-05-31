@@ -1,5 +1,5 @@
-.copy__container {
-  display: block;
+.copy:is(div), [class$=__copy]:is(div), [class*=copy--]:is(div) {
+  padding-block: var(--spacing-xl);
 }
 
 /*# sourceMappingURL=copy.css.map */

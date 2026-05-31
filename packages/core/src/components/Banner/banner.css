@@ -24,9 +24,19 @@
   container-type: size;
   backdrop-filter: blur(1rem);
 }
+@container layout-section (min-width: 600px) {
+  .banner__cover-image {
+    height: 75dvh;
+  }
+}
 @container layout-section (min-width: var(--width-small)) {
   .banner__cover-image {
     height: 75dvh;
+  }
+}
+@container layout-section (min-width: 940px) {
+  .banner__cover-image {
+    height: fit-content;
   }
 }
 @container layout-section (min-width: var(--width-narrow)) {
@@ -69,9 +79,19 @@
     justify-content: center;
   }
 }
+@container layout-section (min-width: 600px) {
+  .banner__content {
+    text-align: revert;
+  }
+}
 @container layout-section (min-width: var(--width-small)) {
   .banner__content {
     text-align: revert;
+  }
+}
+@container layout-section (min-width: 940px) {
+  .banner__content {
+    padding: var(--spacing-xl);
   }
 }
 @container layout-section (min-width: var(--width-narrow)) {

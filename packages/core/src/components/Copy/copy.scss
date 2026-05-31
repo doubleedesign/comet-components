@@ -1,8 +1,9 @@
-.copy {
-	&__container {
-		display: block;
-	}
+@use '../bem-mixin' as *;
 
-	// Warning: If the Copy component is given context and shortName values, it will not have the .copy class.
-	// CSS here should be very minimal, as most typography belongs in common.scss
+@include bem-block('copy') {
+
+	// Probably nested
+	&:is(div) {
+		padding-block: var(--spacing-xl);
+	}
 }

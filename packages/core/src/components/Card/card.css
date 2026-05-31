@@ -7,7 +7,7 @@
 .card:is(a):hover, [class$=__card]:is(a):hover, [class*=card--]:is(a):hover, .card:is(a):focus, [class$=__card]:is(a):focus, [class*=card--]:is(a):focus, .card:is(a):active, [class$=__card]:is(a):active, [class*=card--]:is(a):active {
   color: var(--theme-color, inherit);
 }
-@container (min-width: 400px) {
+@container (min-width: 340px) {
   .card:has([class*=image])[data-orientation=horizontal], [class$=__card]:has([class*=image])[data-orientation=horizontal], [class*=card--]:has([class*=image])[data-orientation=horizontal] {
     display: grid;
     grid-template-columns: 1fr 2fr;

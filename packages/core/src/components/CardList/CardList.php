@@ -35,7 +35,9 @@ class CardList extends LayoutComponent {
         $linkComponent = isset($attributes['link']) ? new Button($attributes['link'], $attributes['link']['title'] ?? 'View more') : null;
 
         // Add a wrapper to each Card so that it can use container queries based on that
-        $updatedInnerComponents = array_map(fn($component) => new Group(['shortName' => 'item'], [$component]), $innerComponents);
+        $updatedInnerComponents = array_map(function($component) {
+            return new Group(['shortName' => 'item'], [$component]);
+        }, $innerComponents);
 
         // And a wrapper around the whole card group to separate it from the header and footer
         $groupAttrs = $this->get_inner_group_attributes();
@@ -86,14 +88,14 @@ class CardList extends LayoutComponent {
         return $attributes;
     }
 
-	public function render(): void {
-		$blade = BladeService::getInstance();
+    public function render(): void {
+        $blade = BladeService::getInstance();
 
-		echo $blade->make($this->bladeFile, [
-			'tag'        => $this->tagName->value,
-			'classes'    => $this->get_filtered_classes(),
-			'attributes' => $this->get_html_attributes(),
-			'children'   => $this->innerComponents
-		])->render();
-	}
+        echo $blade->make($this->bladeFile, [
+            'tag'        => $this->tagName->value,
+            'classes'    => $this->get_filtered_classes(),
+            'attributes' => $this->get_html_attributes(),
+            'children'   => $this->innerComponents
+        ])->render();
+    }
 }

@@ -6,6 +6,7 @@
  * Version:         0.8.0
  * Text Domain:     comet
  */
+@use '../core/src/components/mixins' as *;
 @use 'common';
 
 #wpadminbar + .site-header {
@@ -61,6 +62,7 @@
 }
 
 .post-content {
+	@include section-padding();
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-xl);

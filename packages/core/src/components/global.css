@@ -20,6 +20,7 @@
   }
   [data-size] {
     width: 100%;
+    display: block;
     container-name: layout-section;
     container-type: inline-size;
     padding-inline: calc((100cqw - var(--container-max-width)) / 2);
@@ -30,19 +31,19 @@
     width: 100%;
   }
   [data-size=wide] {
-    --container-max-width: 1440px;
+    --container-max-width: var(--width-wide);
   }
   [data-size=contained] {
-    --container-max-width: 1140px;
+    --container-max-width: var(--width-contained);
   }
   [data-size=narrow] {
-    --container-max-width: 940px;
+    --container-max-width: var(--width-narrow);
   }
   [data-size=narrower] {
-    --container-max-width: 768px;
+    --container-max-width: var(--width-narrower);
   }
   [data-size=small] {
-    --container-max-width: 600px;
+    --container-max-width: var(--width-small);
   }
   [data-size=full] {
     --container-max-width: 100%;
@@ -116,8 +117,23 @@
   [data-group-layout=grid][data-max-per-row] {
     justify-content: inherit;
   }
-  [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)), [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(2)) {
-    grid-template-columns: repeat(2, 1fr);
+  @container layout-section (min-width: 600px) {
+    [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)), [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(2)) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @container layout-section (min-width: var(--width-small)) {
+    [data-group-layout=grid][data-max-per-row="2"]:has(> :nth-child(2)), [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(2)) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @container layout-section (min-width: 768px) {
+    [data-group-layout=grid][data-max-per-row="4"] {
+      grid-template-columns: repeat(auto-fit, 25%);
+    }
+    [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(4)) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
   @container layout-section (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="4"] {
@@ -125,6 +141,14 @@
     }
     [data-group-layout=grid][data-max-per-row="4"]:has(> :nth-child(4)) {
       grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @container layout-section (min-width: 600px) {
+    [data-group-layout=grid][data-max-per-row="3"], [data-group-layout=grid][data-max-per-row="5"], [data-group-layout=grid][data-max-per-row="6"] {
+      grid-template-columns: repeat(auto-fit, 33%);
+    }
+    [data-group-layout=grid][data-max-per-row="3"]:has(> :nth-child(3)), [data-group-layout=grid][data-max-per-row="5"]:has(> :nth-child(3)), [data-group-layout=grid][data-max-per-row="6"]:has(> :nth-child(3)) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   @container layout-section (min-width: var(--width-small)) {
@@ -135,12 +159,28 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
+  @container layout-section (min-width: 768px) {
+    [data-group-layout=grid][data-max-per-row="5"] {
+      grid-template-columns: repeat(auto-fit, 20%);
+    }
+    [data-group-layout=grid][data-max-per-row="5"]:has(> :nth-child(5)) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
   @container layout-section (min-width: var(--width-narrower)) {
     [data-group-layout=grid][data-max-per-row="5"] {
       grid-template-columns: repeat(auto-fit, 20%);
     }
     [data-group-layout=grid][data-max-per-row="5"]:has(> :nth-child(5)) {
       grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  @container layout-section (min-width: 768px) {
+    [data-group-layout=grid][data-max-per-row="6"] {
+      grid-template-columns: repeat(auto-fit, 16.66%);
+    }
+    [data-group-layout=grid][data-max-per-row="6"]:has(> :nth-child(6)) {
+      grid-template-columns: repeat(6, 1fr);
     }
   }
   @container layout-section (min-width: var(--width-narrower)) {
@@ -165,6 +205,7 @@
   [data-background] > [data-background],
   [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
     padding-block: var(--spacing-lg);
+    padding-inline: var(--spacing-md);
   }
   @media (min-width: 768px) {
     [data-background] > [data-background],
@@ -177,10 +218,6 @@
     [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
       padding-block: var(--spacing-xxl);
     }
-  }
-  [data-background] > [data-background],
-  [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
-    padding-inline: var(--spacing-md);
   }
   @media (min-width: 768px) {
     [data-background] > [data-background],

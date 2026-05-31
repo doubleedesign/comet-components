@@ -8,6 +8,14 @@
 	flex-direction: column;
 	align-items: flex-start;
 
+	@include container-width-up('small') {
+		text-align: revert;
+	}
+
+	@include container-width-up('narrow') {
+		padding: var(--spacing-xl);
+	}
+
 	&[data-halign="center"] {
 		align-items: center;
 		text-align: center;
@@ -16,14 +24,6 @@
 	&[data-halign="end"] {
 		align-items: flex-end;
 		text-align: end;
-	}
-
-	@include container-width-up('small') {
-		text-align: revert;
-	}
-
-	@include container-width-up('narrow') {
-		padding: var(--spacing-xl);
 	}
 
 	h2 {

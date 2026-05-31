@@ -72,9 +72,20 @@ section + .separator-wrapper hr, .separator-wrapper + section hr {
 }
 
 .post-content {
+  padding-block: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+}
+@media (min-width: 768px) {
+  .post-content {
+    padding-block: var(--spacing-xl);
+  }
+}
+@media (min-width: 1440px) {
+  .post-content {
+    padding-block: var(--spacing-xxl);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
