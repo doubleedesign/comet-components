@@ -16,7 +16,7 @@ The Comet Blocks plugin and Comet Canvas parent theme are configured to look for
 
 | File           | Purpose                                                                                                                                                                                                       |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `tokens.css`   | Should contain the colour palette definition CSS variables, and any overrides to gradient variables.                                                                                                          |
+| `colours.css`  | Should contain the colour palette definition CSS variables, and any overrides to gradient variables.                                                                                                          |
 | `common.scss`  | Common typography and other styles that should be used on the front-end, in the block editor, and in TinyMCE, should go in this one file.                                                                     |
 | `style.scss`   | Required file for WordPress to recognize the theme. Should contain theme metadata and all CSS styles for the theme that are not already present in the parent theme and plugins. Should import `common.scss`. |
 | `tinymce.scss` | Styles to be loaded only in TinyMCE. Should not need to import `common.scss` as that should already be loaded.                                                                                                |
