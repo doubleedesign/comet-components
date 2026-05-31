@@ -36,6 +36,14 @@ class TemplateParts {
         $user_query = new WP_User_Query(['include' => [$author_id]]);
         $author_data = $user_query->get_results()[0]->data;
 
+        $show_image = apply_filters('comet_canvas_show_avatar_in_author_bio', false);
+        if ($show_image) {
+            $author_image = [
+                'src' => get_avatar_url($author_id, ['display_name' => $author_data->display_name]),
+                'alt' => 'Profile photo of ' . $author_data->display_name
+            ];
+        }
+
         return new Card([
             'id'         => 'author-bio',
             'heading'    => "<span>About the author</span>" . $author_data->display_name,
@@ -45,7 +53,8 @@ class TemplateParts {
                 'href'      => $author_data->user_url ?: get_author_posts_url($author_id),
                 'content'   => 'More about ' . get_user_meta($author_id, 'first_name', true) ?? $author_data->display_name ?? 'the author',
                 'isOutline' => true
-            ]
+            ],
+            ...(($show_image && isset($author_image['src'])) ? ['image' => $author_image] : [])
         ]);
     }
 
@@ -191,7 +200,7 @@ class TemplateParts {
 
         return new CardList(
             [
-				'shortName' => 'categories',
+                'shortName' => 'categories',
                 'maxPerRow' => $cardsPerRow,
                 'layout'    => $cardLayout,
             ],
