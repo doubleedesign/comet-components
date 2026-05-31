@@ -1,7 +1,17 @@
+html {
+  --base-font-size: 1rem;
+}
+
 .mce-content-body {
+  margin: 0 !important;
   padding: 1rem;
   box-sizing: border-box;
-  --base-font-size: 1rem;
+  font-size: var(--base-font-size);
+  font-family: revert-layer !important;
+  line-height: revert-layer !important;
+  color: revert-layer !important;
+  background: revert-layer !important;
+  background-color: revert-layer !important;
 }
 
 body.wp-autoresize.mce-content-body {
