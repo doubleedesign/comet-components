@@ -13,7 +13,7 @@ if ($image_url) {
 	$image = new ContentImageBasic([
 		'src'         => $image_url,
 		'alt'         => $image_alt,
-		'caption'     => $image_caption,
+		'caption'     => apply_filters('comet_canvas_single_post_featured_image_caption', true) ? $image_caption : null,
 		'aspectRatio' => apply_filters('comet_canvas_single_post_image_aspect_ratio', 'cinemascope'),
 		'scale'       => 'cover',
 		'classes'     => apply_filters('comet_canvas_blog_post_featured_image_classes', []),

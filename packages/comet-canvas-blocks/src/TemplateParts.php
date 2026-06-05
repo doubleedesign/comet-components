@@ -30,6 +30,20 @@ class TemplateParts {
         return apply_filters('comet_canvas_classic_contact_details_fields', $expected);
     }
 
+	public static function get_post_meta(): string {
+		$queried_object = get_queried_object();
+		$date = get_the_date('', $queried_object);
+		$category = get_the_category($queried_object->ID)[0] ?? null;
+
+		$meta = "Published on $date";
+		if ($category) {
+			$category_link = get_category_link($category->term_id);
+			$meta .= " in <a href='$category_link'>{$category->name}</a>.";
+		}
+
+		return apply_filters('comet_canvas_blog_post_meta', $meta);
+	}
+
     public static function get_author_card(): Card {
         $queried_object = get_queried_object();
         $author_id = $queried_object->post_author;
