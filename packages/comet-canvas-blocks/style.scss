@@ -7,6 +7,7 @@
  * Text Domain:     comet
  */
 @use '../core/src/components/mixins' as *;
+@use 'colours';
 @use 'common';
 
 #wpadminbar + .site-header {

@@ -1,14 +1,14 @@
-@layer comet-components-common {
+@layer comet-canvas {
   :root {
-    --color-primary: #845ec2;
-    --color-secondary: #00c9a7;
-    --color-accent: #ba3caf;
-    --color-info: #00d2fc;
+    --color-primary: #657a85;
+    --color-secondary: #bdc9cf;
+    --color-accent: #3f2c3e;
+    --color-info: #657a85;
     --color-warning: #f9c971;
-    --color-success: #00c9a7;
-    --color-error: #d23e3e;
-    --color-light: #F0F0F2;
-    --color-dark: #4b4453;
+    --color-success: #005351;
+    --color-error: #842934;
+    --color-light: #f0fbff;
+    --color-dark: #2a3439;
     --color-white: #ffffff;
   }
 }

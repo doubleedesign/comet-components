@@ -3090,56 +3090,60 @@
   .page-header__container[data-halign=center] {
     text-align: center;
   }
-  .post-nav {
+  .post-nav, [class$=__post-nav], [class*=post-nav--] {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
   }
   @container (min-width: 800px) {
-    .post-nav {
+    .post-nav, [class$=__post-nav], [class*=post-nav--] {
       grid-template-columns: repeat(10, 1fr);
     }
   }
-  .post-nav:not(:first-child) {
+  .post-nav:not(:first-child), [class$=__post-nav]:not(:first-child), [class*=post-nav--]:not(:first-child) {
     margin-block-start: var(--spacing-md);
   }
-  .post-nav__link {
-    text-decoration: underline;
-    text-decoration-color: transparent;
+  .post-nav__link, [class$=__post-nav__link] {
+    text-decoration: none;
     color: var(--theme-color);
     transition: all 0.3s ease;
   }
+  .post-nav__link:hover, [class$=__post-nav__link]:hover, .post-nav__link:focus, [class$=__post-nav__link]:focus, .post-nav__link:active, [class$=__post-nav__link]:active {
+    color: currentColor;
+  }
+  .post-nav__link:hover [class$=__label], [class$=__post-nav__link]:hover [class$=__label], .post-nav__link:focus [class$=__label], [class$=__post-nav__link]:focus [class$=__label], .post-nav__link:active [class$=__label], [class$=__post-nav__link]:active [class$=__label] {
+    text-decoration-color: currentColor;
+    color: currentColor;
+  }
   @container (min-width: 800px) {
-    .post-nav__link {
+    .post-nav__link, [class$=__post-nav__link] {
       grid-column: span 3;
     }
   }
-  .post-nav__link:hover, .post-nav__link:focus, .post-nav__link:active {
-    text-decoration-color: currentColor;
+  .post-nav__link__label, [class$=__post-nav__link__label] {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: all 0.2s ease;
   }
-  .post-nav__link > span > span {
+  .post-nav__link__label > span, [class$=__post-nav__link__label] > span {
     display: block;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
   }
-  .post-nav__link > i, .post-nav__link > svg {
+  .post-nav__link__icon, [class$=__post-nav__link__icon] {
     transition: all 0.2s ease;
   }
-  .post-nav__link--prev:hover > i, .post-nav__link--prev:hover > svg, .post-nav__link--prev:focus > i, .post-nav__link--prev:focus > svg, .post-nav__link--prev:active > i, .post-nav__link--prev:active > svg {
+  .post-nav__link[data-action=previous]:hover [class$=__icon], [data-action=previous][class$=__post-nav__link]:hover [class$=__icon], .post-nav__link[data-action=previous]:focus [class$=__icon], [data-action=previous][class$=__post-nav__link]:focus [class$=__icon], .post-nav__link[data-action=previous]:active [class$=__icon], [data-action=previous][class$=__post-nav__link]:active [class$=__icon] {
     transform: translateX(-0.5rem);
   }
-  .post-nav__link--next {
+  .post-nav__link[data-action=next], [data-action=next][class$=__post-nav__link] {
     text-align: end;
+    grid-column: -1;
   }
-  .post-nav__link--next:hover > i, .post-nav__link--next:hover > svg, .post-nav__link--next:focus > i, .post-nav__link--next:focus > svg, .post-nav__link--next:active > i, .post-nav__link--next:active > svg {
+  .post-nav__link[data-action=next]:hover [class$=__icon], [data-action=next][class$=__post-nav__link]:hover [class$=__icon], .post-nav__link[data-action=next]:focus [class$=__icon], [data-action=next][class$=__post-nav__link]:focus [class$=__icon], .post-nav__link[data-action=next]:active [class$=__icon], [data-action=next][class$=__post-nav__link]:active [class$=__icon] {
     transform: translateX(0.5rem);
-  }
-  @container (min-width: 800px) {
-    .post-nav__link--next {
-      grid-column: span 3/-1;
-    }
   }
   .pullquote {
     text-align: center;
