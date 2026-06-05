@@ -1,4 +1,7 @@
-.post-nav {
+@use '../bem-mixin' as *;
+@use '../bem-class-selectors' as *;
+
+@include bem-block('post-nav', ('link', 'link__label', 'link__icon')) {
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -13,51 +16,58 @@
 	}
 
 	&__link {
-		text-decoration: underline;
-		text-decoration-color: transparent;
+		text-decoration: none;
 		color: var(--theme-color);
 		transition: all 0.3s ease;
+
+		&:hover, &:focus, &:active {
+			color: currentColor;
+
+			#{class-ends-with('__label')} {
+				text-decoration-color: currentColor;
+				color: currentColor;
+			}
+		}
 
 		@container (min-width: 800px) {
 			grid-column: span 3;
 		}
 
-		&:hover, &:focus, &:active {
-			text-decoration-color: currentColor;
+		&__label {
+			text-decoration: underline;
+			text-decoration-color: transparent;
+			transition: all 0.2s ease;
+
+			> span {
+				display: block;
+				font-size: var(--font-size-xs);
+				font-weight: var(--font-weight-semibold);
+				text-transform: uppercase;
+			}
 		}
 
-		> span > span {
-			display: block;
-			font-size: var(--font-size-xs);
-			font-weight: var(--font-weight-semibold);
-			text-transform: uppercase;
-		}
-
-		> i, > svg {
+		&__icon {
 			transition: all 0.2s ease;
 		}
 
-		&--prev {
+		&[data-action="previous"] {
 			&:hover, &:focus, &:active {
-				> i, > svg {
+				#{class-ends-with('__icon')} {
 					transform: translateX(-0.5rem);
 				}
 			}
 		}
 
-		// Should always be in the last column
-		&--next {
+		&[data-action="next"] {
 			text-align: end;
+			grid-column: -1; // Should always be in the last column
 
 			&:hover, &:focus, &:active {
-				> i, > svg {
+				#{class-ends-with('__icon')} {
 					transform: translateX(0.5rem);
 				}
-			}
-
-			@container (min-width: 800px) {
-				grid-column: span 3 / -1;
 			}
 		}
 	}
 }
+

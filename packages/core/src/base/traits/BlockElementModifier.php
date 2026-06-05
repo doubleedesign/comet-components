@@ -147,6 +147,8 @@ trait BlockElementModifier {
         return $this;
     }
 
+    // Note: Modifiers should be used sparingly because they mess up styling that relies on "class ends with" logic that is looking for *__block__element,
+    // which is a cornerstone of Comet's contextual class naming and concise SCSS approach that supports it.
     public function set_bem_modifier(?string $modifier): static {
         $this->modifier = $modifier;
 

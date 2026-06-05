@@ -11,6 +11,8 @@ class PostNav extends UIComponent {
      * @description Links to include. Intended to be 1 or 2 only (previous and next).
      */
     protected array $links = [];
+    protected string $prevIconClass = 'fa-arrow-left';
+    protected string $nextIconClass = 'fa-arrow-right';
 
     /**
      * @var string $entityName
@@ -20,6 +22,8 @@ class PostNav extends UIComponent {
 
     public function __construct(array $attributes) {
         $this->entityName = $attributes['entityName'] ?? $this->entityName;
+        $this->prevIconClass = $attributes['prevIconClass'] ?? $this->prevIconClass;
+        $this->nextIconClass = $attributes['nextIconClass'] ?? $this->nextIconClass;
         $this->set_color_theme($attributes);
 
         $innerComponents = [];
@@ -35,13 +39,13 @@ class PostNav extends UIComponent {
 
                 if (count($attributes['links']) <= 2) {
                     if ($index === 0 && !isset($linkAttrs['icon'])) {
-                        $linkAttrs['icon'] = 'fa-arrow-left';
-                        $linkAttrs['classes'] = ["post-nav__link--prev"];
+                        $linkAttrs['icon'] = $this->prevIconClass;
+                        $linkAttrs['data-action'] = "previous";
                         $linkAttrs['label'] = "<span>Previous {$this->entityName}</span>" . $content;
                     }
                     if ($index === 1 && !isset($linkAttrs['icon'])) {
-                        $linkAttrs['icon'] = 'fa-arrow-right';
-                        $linkAttrs['classes'] = ["post-nav__link--next"];
+                        $linkAttrs['icon'] = $this->nextIconClass;
+                        $linkAttrs['data-action'] = "next";
                         $linkAttrs['label'] = "<span>Next {$this->entityName}</span>" . $content;
                     }
                 }
