@@ -30,14 +30,6 @@ html :where(.wp-block) {
 	}
 }
 
-.components-menu-item__button[href*="site-editor.php"] {
-	display: none !important;
-}
-
-.components-circular-option-picker__option-group.comet-color-controls {
-	flex-direction: row !important;
-}
-
 .block-list-appender {
 	margin: 0 auto;
 
@@ -50,7 +42,6 @@ html :where(.wp-block) {
 		justify-content: center;
 		border: 1px solid #3c434a;
 	}
-
 }
 
 .block-editor-block-list__block {
