@@ -45,6 +45,7 @@ jobs:
             --path scripts --invert-paths \
             --path eslint.config.js --invert-paths \
             --path package.json --invert-paths \
+            --path composer.lock --invert-paths \
             --path composer.local.json --invert-paths \
             --path composer.local.lock --invert-paths \
             --path rollup.config.js --invert-paths \

@@ -1,0 +1,9 @@
+// Handle editor layout of blocks that have inner blocks.
+// HTML that mostly matches their front-end output is added in BlockRenderer.php,
+// but there are still some extra wrappers in the editor that can cause different layout behaviour.
+// Here is where we fix that.
+
+.acf-innerblocks-container {
+	display: contents;
+}
+
