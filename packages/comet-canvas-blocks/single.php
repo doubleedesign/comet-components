@@ -21,11 +21,20 @@ if ($image_url) {
 	]);
 }
 
+$meta = new Copy([
+	'isNested'           => true,
+	'shortName'          => 'meta',
+	'aria-label'         => 'Article details',
+], [new PreprocessedHTML([], TemplateParts::get_post_meta())]);
+
 $content = new Copy([
-    'colorTheme'         => 'primary',
-    'isNested'           => true,
-    'shortName'          => 'body'
-], [new PreprocessedHTML([], wpautop(get_the_content()))]);
+	'colorTheme'         => 'primary',
+	'isNested'           => true,
+	'shortName'          => 'body'
+], [
+	new PreprocessedHTML([], wpautop(get_the_content())),
+	$meta,
+]);
 
 $include_author_card = apply_filters('comet_canvas_blog_post_include_author_card', false);
 $include_post_nav = apply_filters('comet_canvas_blog_post_include_post_nav', true);
