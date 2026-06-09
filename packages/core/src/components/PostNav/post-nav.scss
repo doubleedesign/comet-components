@@ -1,4 +1,5 @@
 @use '../bem-mixin' as *;
+@use '../mixins' as *;
 @use '../bem-class-selectors' as *;
 
 @include bem-block('post-nav', ('link', 'link__label', 'link__icon')) {
@@ -16,28 +17,14 @@
 	}
 
 	&__link {
-		text-decoration: none;
 		color: var(--theme-color);
-		transition: all 0.3s ease;
-
-		&:hover, &:focus, &:active {
-			color: currentColor;
-
-			#{class-ends-with('__label')} {
-				text-decoration-color: currentColor;
-				color: currentColor;
-			}
-		}
+		@include link-underline-on-hover();
 
 		@container (min-width: 800px) {
 			grid-column: span 3;
 		}
 
 		&__label {
-			text-decoration: underline;
-			text-decoration-color: transparent;
-			transition: all 0.2s ease;
-
 			> span {
 				display: block;
 				font-size: var(--font-size-xs);

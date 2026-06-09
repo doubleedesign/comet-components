@@ -881,6 +881,20 @@
   * {
     box-sizing: border-box;
   }
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0ms;
+    }
+  }
   html {
     font-size: var(--base-font-size);
   }
@@ -958,12 +972,48 @@
   ul li, ol li {
     margin-block-end: var(--spacing-xxs);
   }
-  a {
-    transition: all 0.2s ease-in-out;
+  a:not(.button),
+  a:not([class$=__button]) {
     color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
   }
-  a:hover, a:focus, a:active {
-    color: var(--color-secondary);
+  a:not(.button):hover, a:not(.button):focus, a:not(.button):active,
+  a:not([class$=__button]):hover,
+  a:not([class$=__button]):focus,
+  a:not([class$=__button]):active {
+    text-decoration-color: currentColor;
+  }
+  a:not(.button):has(> span),
+  a:not([class$=__button]):has(> span) {
+    text-decoration: none;
+  }
+  a:not(.button):has(> span) > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  a:not(.button):has(> span):hover > span:not(:has(svg)):not(:has(i)), a:not(.button):has(> span):focus > span:not(:has(svg)):not(:has(i)), a:not(.button):has(> span):active > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span):hover > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span):focus > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
+  }
+  a:not(.button),
+  a:not([class$=__button]) {
+    text-decoration-color: currentColor;
+  }
+  a:not(.button):hover, a:not(.button):focus, a:not(.button):active,
+  a:not([class$=__button]):hover,
+  a:not([class$=__button]):focus,
+  a:not([class$=__button]):active {
+    color: var(--theme-color);
   }
   small {
     font-size: var(--font-size-xs);
@@ -1078,14 +1128,33 @@
     padding: var(--spacing-sm) var(--spacing-lg);
     appearance: none;
     cursor: pointer;
-    transition: all 0.3s;
-    text-decoration: underline;
-    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
     border-radius: var(--button-border-radius);
     text-align: center;
     color: contrast-color(var(--theme-color));
     background-color: var(--theme-color);
     border: 1px solid var(--theme-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  .button:is(a):hover, [class$=__button]:is(a):hover, [class*=button--]:is(a):hover, .button:is(a):focus, [class$=__button]:is(a):focus, [class*=button--]:is(a):focus, .button:is(a):active, [class$=__button]:is(a):active, [class*=button--]:is(a):active, .button:is(button):hover, [class$=__button]:is(button):hover, [class*=button--]:is(button):hover, .button:is(button):focus, [class$=__button]:is(button):focus, [class*=button--]:is(button):focus, .button:is(button):active, [class$=__button]:is(button):active, [class*=button--]:is(button):active {
+    text-decoration-color: currentColor;
+  }
+  .button:is(a):has(> span), [class$=__button]:is(a):has(> span), [class*=button--]:is(a):has(> span), .button:is(button):has(> span), [class$=__button]:is(button):has(> span), [class*=button--]:is(button):has(> span) {
+    text-decoration: none;
+  }
+  .button:is(a):has(> span) > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(a):has(> span) > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(a):has(> span) > span:not(:has(svg)):not(:has(i)), .button:is(button):has(> span) > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(button):has(> span) > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(button):has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  .button:is(a):has(> span):hover > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(a):has(> span):hover > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(a):has(> span):hover > span:not(:has(svg)):not(:has(i)), .button:is(a):has(> span):focus > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(a):has(> span):focus > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(a):has(> span):focus > span:not(:has(svg)):not(:has(i)), .button:is(a):has(> span):active > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(a):has(> span):active > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(a):has(> span):active > span:not(:has(svg)):not(:has(i)), .button:is(button):has(> span):hover > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(button):has(> span):hover > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(button):has(> span):hover > span:not(:has(svg)):not(:has(i)), .button:is(button):has(> span):focus > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(button):has(> span):focus > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(button):has(> span):focus > span:not(:has(svg)):not(:has(i)), .button:is(button):has(> span):active > span:not(:has(svg)):not(:has(i)), [class$=__button]:is(button):has(> span):active > span:not(:has(svg)):not(:has(i)), [class*=button--]:is(button):has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
   }
   .button:is(a):hover, [class$=__button]:is(a):hover, [class*=button--]:is(a):hover, .button:is(a):focus, [class$=__button]:is(a):focus, [class*=button--]:is(a):focus, .button:is(a):active, [class$=__button]:is(a):active, [class*=button--]:is(a):active, .button:is(button):hover, [class$=__button]:is(button):hover, [class*=button--]:is(button):hover, .button:is(button):focus, [class$=__button]:is(button):focus, [class*=button--]:is(button):focus, .button:is(button):active, [class$=__button]:is(button):active, [class*=button--]:is(button):active {
     background-color: color-mix(in srgb, var(--theme-color) 90%, black);
@@ -1095,14 +1164,6 @@
   .button:is(a)[data-style=outline], [class$=__button]:is(a)[data-style=outline], [class*=button--]:is(a)[data-style=outline], .button:is(button)[data-style=outline], [class$=__button]:is(button)[data-style=outline], [class*=button--]:is(button)[data-style=outline] {
     color: var(--theme-color);
     background-color: transparent;
-  }
-  .button:is(a) > span, [class$=__button]:is(a) > span, [class*=button--]:is(a) > span, .button:is(button) > span, [class$=__button]:is(button) > span, [class*=button--]:is(button) > span {
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    transition: text-decoration-color 0.3s, color 0.3s;
-  }
-  .button:is(a):hover > span, [class$=__button]:is(a):hover > span, [class*=button--]:is(a):hover > span, .button:is(a):focus > span, [class$=__button]:is(a):focus > span, [class*=button--]:is(a):focus > span, .button:is(a):active > span, [class$=__button]:is(a):active > span, [class*=button--]:is(a):active > span, .button:is(button):hover > span, [class$=__button]:is(button):hover > span, [class*=button--]:is(button):hover > span, .button:is(button):focus > span, [class$=__button]:is(button):focus > span, [class*=button--]:is(button):focus > span, .button:is(button):active > span, [class$=__button]:is(button):active > span, [class*=button--]:is(button):active > span {
-    text-decoration-color: currentColor;
   }
   .button:is(a):has(i, svg), [class$=__button]:is(a):has(i, svg), [class*=button--]:is(a):has(i, svg), .button:is(button):has(i, svg), [class$=__button]:is(button):has(i, svg), [class*=button--]:is(button):has(i, svg) {
     display: inline-flex;
@@ -1258,7 +1319,26 @@
     display: block;
     opacity: 0.75;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
     text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  .breadcrumbs__list__item__link:hover, .breadcrumbs__list__item__link:focus, .breadcrumbs__list__item__link:active {
+    text-decoration-color: currentColor;
+  }
+  .breadcrumbs__list__item__link:has(> span) {
+    text-decoration: none;
+  }
+  .breadcrumbs__list__item__link:has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  .breadcrumbs__list__item__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), .breadcrumbs__list__item__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), .breadcrumbs__list__item__link:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
   }
   .breadcrumbs__list__item__link:hover, .breadcrumbs__list__item__link:focus, .breadcrumbs__list__item__link:active {
     opacity: 1;
@@ -3041,11 +3121,29 @@
     padding: 0;
     background: transparent;
     color: var(--theme-color);
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    transition: all 0.2s ease-in-out;
     font-size: var(--font-size-sm);
     margin-block: 0;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  [data-group-layout=inline] .links__link-group__link:hover, [data-group-layout=inline] .links__link-group__link:focus, [data-group-layout=inline] .links__link-group__link:active {
+    text-decoration-color: currentColor;
+  }
+  [data-group-layout=inline] .links__link-group__link:has(> span) {
+    text-decoration: none;
+  }
+  [data-group-layout=inline] .links__link-group__link:has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  [data-group-layout=inline] .links__link-group__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), [data-group-layout=inline] .links__link-group__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), [data-group-layout=inline] .links__link-group__link:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
   }
   [data-group-layout=inline] .links__link-group__link:hover, [data-group-layout=inline] .links__link-group__link:focus, [data-group-layout=inline] .links__link-group__link:active {
     color: color-mix(in srgb, var(--theme-color) 90%, black);
@@ -3105,26 +3203,33 @@
     margin-block-start: var(--spacing-md);
   }
   .post-nav__link, [class$=__post-nav__link] {
-    text-decoration: none;
     color: var(--theme-color);
-    transition: all 0.3s ease;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
   }
   .post-nav__link:hover, [class$=__post-nav__link]:hover, .post-nav__link:focus, [class$=__post-nav__link]:focus, .post-nav__link:active, [class$=__post-nav__link]:active {
-    color: currentColor;
-  }
-  .post-nav__link:hover [class$=__label], [class$=__post-nav__link]:hover [class$=__label], .post-nav__link:focus [class$=__label], [class$=__post-nav__link]:focus [class$=__label], .post-nav__link:active [class$=__label], [class$=__post-nav__link]:active [class$=__label] {
     text-decoration-color: currentColor;
-    color: currentColor;
+  }
+  .post-nav__link:has(> span), [class$=__post-nav__link]:has(> span) {
+    text-decoration: none;
+  }
+  .post-nav__link:has(> span) > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  .post-nav__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span):hover > span:not(:has(svg)):not(:has(i)), .post-nav__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span):focus > span:not(:has(svg)):not(:has(i)), .post-nav__link:has(> span):active > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
   }
   @container (min-width: 800px) {
     .post-nav__link, [class$=__post-nav__link] {
       grid-column: span 3;
     }
-  }
-  .post-nav__link__label, [class$=__post-nav__link__label] {
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    transition: all 0.2s ease;
   }
   .post-nav__link__label > span, [class$=__post-nav__link__label] > span {
     display: block;
@@ -3386,9 +3491,25 @@
   }
   .site-footer__credits a {
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
     text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
   }
   .site-footer__credits a:hover, .site-footer__credits a:focus, .site-footer__credits a:active {
+    text-decoration-color: currentColor;
+  }
+  .site-footer__credits a:has(> span) {
+    text-decoration: none;
+  }
+  .site-footer__credits a:has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  .site-footer__credits a:has(> span):hover > span:not(:has(svg)):not(:has(i)), .site-footer__credits a:has(> span):focus > span:not(:has(svg)):not(:has(i)), .site-footer__credits a:has(> span):active > span:not(:has(svg)):not(:has(i)) {
     text-decoration-color: currentColor;
   }
   .site-header {
@@ -3817,12 +3938,32 @@
   }
   .site-header__menu__list__item__link {
     display: block;
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    transition: all 0.2s ease-in-out;
     flex-grow: 1;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  .site-header__menu__list__item__link:hover, .site-header__menu__list__item__link:focus, .site-header__menu__list__item__link:active {
+    text-decoration-color: currentColor;
+  }
+  .site-header__menu__list__item__link:has(> span) {
+    text-decoration: none;
+  }
+  .site-header__menu__list__item__link:has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  .site-header__menu__list__item__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), .site-header__menu__list__item__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), .site-header__menu__list__item__link:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
   }
   .site-header__menu__list__item__link:hover, .site-header__menu__list__item__link:focus, .site-header__menu__list__item__link:active, .site-header__menu__list__item__link[aria-current=page], [data-current-parent=true] .site-header__menu__list__item__link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-decoration-color: currentColor;
   }
   .site-header__menu__list__item__link[target=_blank] {
@@ -3909,13 +4050,30 @@
     white-space: nowrap;
     font-size: var(--font-size-sm);
     color: inherit;
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    transition: all 0.2s ease-in-out;
     flex-grow: 1;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
   }
   .site-header__menu [class$=__sub-menu] li a:hover, .site-header__menu [class$=__sub-menu] li a:focus, .site-header__menu [class$=__sub-menu] li a:active {
     text-decoration-color: currentColor;
+  }
+  .site-header__menu [class$=__sub-menu] li a:has(> span) {
+    text-decoration: none;
+  }
+  .site-header__menu [class$=__sub-menu] li a:has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  .site-header__menu [class$=__sub-menu] li a:has(> span):hover > span:not(:has(svg)):not(:has(i)), .site-header__menu [class$=__sub-menu] li a:has(> span):focus > span:not(:has(svg)):not(:has(i)), .site-header__menu [class$=__sub-menu] li a:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
+  }
+  .site-header__menu [class$=__sub-menu] li a:hover, .site-header__menu [class$=__sub-menu] li a:focus, .site-header__menu [class$=__sub-menu] li a:active {
     color: inherit;
   }
   .site-header__menu [class$=__sub-menu] li a[target=_blank] {

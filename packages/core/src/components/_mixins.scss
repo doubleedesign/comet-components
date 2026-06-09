@@ -103,3 +103,34 @@
 	text-overflow: ellipsis;
 }
 
+@mixin active-link() {
+	text-decoration: underline;
+	text-decoration-thickness: 1px; // Edge default is thicker which looks weird with lighter fonts
+	text-decoration-color: currentColor;
+}
+
+@mixin link-underline-on-hover() {
+	@include active-link();
+	text-decoration-color: transparent;
+	transition: all 0.3s ease-in-out;
+
+	&:hover, &:focus, &:active {
+		text-decoration-color: currentColor;
+	}
+
+	&:has(> span) {
+		text-decoration: none;
+
+		> span:not(:has(svg)):not(:has(i)) {
+			@include active-link();
+			transition: all 0.3s ease;
+			text-decoration-color: transparent;
+		}
+
+		&:hover, &:focus, &:active {
+			> span:not(:has(svg)):not(:has(i)) {
+				text-decoration-color: currentColor;
+			}
+		}
+	}
+}

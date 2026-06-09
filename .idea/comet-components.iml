@@ -134,7 +134,6 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/psr" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/symfony" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin-acf/vendor/voku" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/comet-canvas-blocks/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/bin" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/carbonphp" />
       <excludeFolder url="file://$MODULE_DIR$/packages/comet-plugin/vendor/doctrine" />

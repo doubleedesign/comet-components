@@ -85,9 +85,25 @@
 }
 .site-footer__credits a {
   text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
   text-decoration-color: transparent;
+  transition: all 0.3s ease-in-out;
 }
 .site-footer__credits a:hover, .site-footer__credits a:focus, .site-footer__credits a:active {
+  text-decoration-color: currentColor;
+}
+.site-footer__credits a:has(> span) {
+  text-decoration: none;
+}
+.site-footer__credits a:has(> span) > span:not(:has(svg)):not(:has(i)) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  transition: all 0.3s ease;
+  text-decoration-color: transparent;
+}
+.site-footer__credits a:has(> span):hover > span:not(:has(svg)):not(:has(i)), .site-footer__credits a:has(> span):focus > span:not(:has(svg)):not(:has(i)), .site-footer__credits a:has(> span):active > span:not(:has(svg)):not(:has(i)) {
   text-decoration-color: currentColor;
 }
 

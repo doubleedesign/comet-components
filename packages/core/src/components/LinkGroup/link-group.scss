@@ -1,6 +1,7 @@
 @use '../variables' as *;
 @use '../bem-mixin' as *;
 @use '../functions' as *;
+@use '../mixins' as *;
 
 @include bem-block('links', ('link-group')) {
 
@@ -45,11 +46,9 @@
 				padding: 0;
 				background: transparent;
 				color: var(--theme-color);
-				text-decoration: underline;
-				text-decoration-color: transparent;
-				transition: all 0.2s ease-in-out;
 				font-size: var(--font-size-sm);
 				margin-block: 0;
+				@include link-underline-on-hover();
 
 				&:hover, &:focus, &:active {
 					color: darken-theme-color(10%);

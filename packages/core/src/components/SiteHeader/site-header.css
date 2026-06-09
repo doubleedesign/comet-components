@@ -424,12 +424,32 @@
 }
 .site-header__menu__list__item__link {
   display: block;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: all 0.2s ease-in-out;
   flex-grow: 1;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  text-decoration-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.site-header__menu__list__item__link:hover, .site-header__menu__list__item__link:focus, .site-header__menu__list__item__link:active {
+  text-decoration-color: currentColor;
+}
+.site-header__menu__list__item__link:has(> span) {
+  text-decoration: none;
+}
+.site-header__menu__list__item__link:has(> span) > span:not(:has(svg)):not(:has(i)) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  transition: all 0.3s ease;
+  text-decoration-color: transparent;
+}
+.site-header__menu__list__item__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), .site-header__menu__list__item__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), .site-header__menu__list__item__link:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+  text-decoration-color: currentColor;
 }
 .site-header__menu__list__item__link:hover, .site-header__menu__list__item__link:focus, .site-header__menu__list__item__link:active, .site-header__menu__list__item__link[aria-current=page], [data-current-parent=true] .site-header__menu__list__item__link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
   text-decoration-color: currentColor;
 }
 .site-header__menu__list__item__link[target=_blank] {
@@ -516,13 +536,30 @@
   white-space: nowrap;
   font-size: var(--font-size-sm);
   color: inherit;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: all 0.2s ease-in-out;
   flex-grow: 1;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  text-decoration-color: transparent;
+  transition: all 0.3s ease-in-out;
 }
 .site-header__menu [class$=__sub-menu] li a:hover, .site-header__menu [class$=__sub-menu] li a:focus, .site-header__menu [class$=__sub-menu] li a:active {
   text-decoration-color: currentColor;
+}
+.site-header__menu [class$=__sub-menu] li a:has(> span) {
+  text-decoration: none;
+}
+.site-header__menu [class$=__sub-menu] li a:has(> span) > span:not(:has(svg)):not(:has(i)) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  transition: all 0.3s ease;
+  text-decoration-color: transparent;
+}
+.site-header__menu [class$=__sub-menu] li a:has(> span):hover > span:not(:has(svg)):not(:has(i)), .site-header__menu [class$=__sub-menu] li a:has(> span):focus > span:not(:has(svg)):not(:has(i)), .site-header__menu [class$=__sub-menu] li a:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+  text-decoration-color: currentColor;
+}
+.site-header__menu [class$=__sub-menu] li a:hover, .site-header__menu [class$=__sub-menu] li a:focus, .site-header__menu [class$=__sub-menu] li a:active {
   color: inherit;
 }
 .site-header__menu [class$=__sub-menu] li a[target=_blank] {

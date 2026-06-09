@@ -1,108 +1,17 @@
-/**
- * Theme Name:      Comet Canvas (Block Editor Edition)
- * Description:     A blank-ish foundation (canvas) for Double-E Design's custom themes, designed for use with the Comet Components Blocks plugin and to be built upon by individual client themes.
- * Author:          Double-E Design
- * Author URI:      https://www.doubleedesign.com.au
- * Version:         0.8.0
- * Text Domain:     comet
- */
-@layer comet-canvas {
-  :root {
-    --color-primary: #657a85;
-    --color-secondary: #bdc9cf;
-    --color-accent: #3f2c3e;
-    --color-info: #657a85;
-    --color-warning: #f9c971;
-    --color-success: #005351;
-    --color-error: #842934;
-    --color-light: #f0fbff;
-    --color-dark: #2a3439;
-    --color-white: #ffffff;
-  }
-}
-@layer comet-components-common {
-  body {
-    font-family: var(--font-family-body), sans-serif;
-  }
-  .contact-details {
-    font-style: normal;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: inherit;
-    column-gap: var(--spacing-md);
-    row-gap: var(--spacing-xs);
-    font-size: var(--font-size-sm, 0.9rem);
-  }
-  .contact-details__address {
-    display: block;
-    width: 100%;
-    flex-basis: 100%;
-  }
-  .card__content h2.is-style-small {
-    margin-block-end: 0;
-  }
-}
-#wpadminbar + .site-header {
-  margin-top: 32px;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 9 | @use '../core/src/components/mixins' as *;
+ *   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   style.scss 9:1  root stylesheet */
 
-.site-content {
-  padding-block: 0;
-  position: relative;
-  container-type: inline-size;
-  container-name: layout-section;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 9 \2502  @use '../core/src/components/mixins' as *;\d\a   \2502  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   style.scss 9:1  root stylesheet";
 }
-
-.page-header[data-background=white] + .page-section[data-background=white]:has(.page-with-sidebar) {
-  padding-block-start: var(--spacing-md);
-}
-
-.separator-wrapper {
-  display: contents;
-}
-section + .separator-wrapper hr, .separator-wrapper + section hr {
-  margin-block: 0;
-}
-
-.category__columns {
-  display: flex !important;
-  flex-direction: column;
-}
-@container (min-width: 940px) {
-  .category__columns {
-    flex-direction: row;
-  }
-}
-@container (min-width: 940px) {
-  .category__columns__column--intro {
-    width: 35%;
-    flex-basis: 35%;
-  }
-}
-@container (min-width: 940px) {
-  .category__columns__column--posts {
-    width: 65%;
-    flex-basis: 65%;
-  }
-}
-
-.post-content {
-  padding-block: var(--spacing-lg);
-}
-@media (min-width: 768px) {
-  .post-content {
-    padding-block: var(--spacing-xl);
-  }
-}
-@media (min-width: 1440px) {
-  .post-content {
-    padding-block: var(--spacing-xxl);
-  }
-}
-.post-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
-/*# sourceMappingURL=style.css.map */

@@ -34,11 +34,29 @@
   padding: 0;
   background: transparent;
   color: var(--theme-color);
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: all 0.2s ease-in-out;
   font-size: var(--font-size-sm);
   margin-block: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  text-decoration-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+[data-group-layout=inline] .links__link-group__link:hover, [data-group-layout=inline] .links__link-group__link:focus, [data-group-layout=inline] .links__link-group__link:active {
+  text-decoration-color: currentColor;
+}
+[data-group-layout=inline] .links__link-group__link:has(> span) {
+  text-decoration: none;
+}
+[data-group-layout=inline] .links__link-group__link:has(> span) > span:not(:has(svg)):not(:has(i)) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  transition: all 0.3s ease;
+  text-decoration-color: transparent;
+}
+[data-group-layout=inline] .links__link-group__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), [data-group-layout=inline] .links__link-group__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), [data-group-layout=inline] .links__link-group__link:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+  text-decoration-color: currentColor;
 }
 [data-group-layout=inline] .links__link-group__link:hover, [data-group-layout=inline] .links__link-group__link:focus, [data-group-layout=inline] .links__link-group__link:active {
   color: color-mix(in srgb, var(--theme-color) 90%, black);

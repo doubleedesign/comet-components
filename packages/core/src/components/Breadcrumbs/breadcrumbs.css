@@ -20,7 +20,26 @@
   display: block;
   opacity: 0.75;
   text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
   text-decoration-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.breadcrumbs__list__item__link:hover, .breadcrumbs__list__item__link:focus, .breadcrumbs__list__item__link:active {
+  text-decoration-color: currentColor;
+}
+.breadcrumbs__list__item__link:has(> span) {
+  text-decoration: none;
+}
+.breadcrumbs__list__item__link:has(> span) > span:not(:has(svg)):not(:has(i)) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  transition: all 0.3s ease;
+  text-decoration-color: transparent;
+}
+.breadcrumbs__list__item__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), .breadcrumbs__list__item__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), .breadcrumbs__list__item__link:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+  text-decoration-color: currentColor;
 }
 .breadcrumbs__list__item__link:hover, .breadcrumbs__list__item__link:focus, .breadcrumbs__list__item__link:active {
   opacity: 1;

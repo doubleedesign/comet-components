@@ -1,7 +1,6 @@
 @use '../bem-mixin' as *;
 
 @include bem-block('copy') {
-
 	// Probably nested
 	&:is(div) {
 		padding-block: var(--spacing-xl);

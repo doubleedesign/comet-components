@@ -229,15 +229,13 @@
 
 				&__link {
 					display: block;
-					text-decoration: underline;
-					text-decoration-color: transparent;
-					transition: all 0.2s ease-in-out;
 					flex-grow: 1;
+					@include link-underline-on-hover();
 
 					&:hover, &:focus, &:active,
 					&[aria-current="page"],
 					[data-current-parent="true"] & {
-						text-decoration-color: currentColor;
+						@include active-link();
 					}
 
 					&[target="_blank"] {
@@ -362,13 +360,10 @@
 					white-space: nowrap;
 					font-size: var(--font-size-sm);
 					color: inherit;
-					text-decoration: underline;
-					text-decoration-color: transparent;
-					transition: all 0.2s ease-in-out;
 					flex-grow: 1;
+					@include link-underline-on-hover();
 
 					&:hover, &:focus, &:active {
-						text-decoration-color: currentColor;
 						color: inherit;
 					}
 

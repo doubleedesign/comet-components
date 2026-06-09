@@ -108,7 +108,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/packages/comet-calendar/vendor/composer" />
-      <path value="$PROJECT_DIR$/packages/comet-canvas-blocks/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/core/vendor/composer" />
       <path value="$PROJECT_DIR$/packages/comet-plugin-blocks/vendor/illuminate/support" />

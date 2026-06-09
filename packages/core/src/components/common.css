@@ -135,6 +135,20 @@
   * {
     box-sizing: border-box;
   }
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0ms;
+    }
+  }
   html {
     font-size: var(--base-font-size);
   }
@@ -212,12 +226,48 @@
   ul li, ol li {
     margin-block-end: var(--spacing-xxs);
   }
-  a {
-    transition: all 0.2s ease-in-out;
+  a:not(.button),
+  a:not([class$=__button]) {
     color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
   }
-  a:hover, a:focus, a:active {
-    color: var(--color-secondary);
+  a:not(.button):hover, a:not(.button):focus, a:not(.button):active,
+  a:not([class$=__button]):hover,
+  a:not([class$=__button]):focus,
+  a:not([class$=__button]):active {
+    text-decoration-color: currentColor;
+  }
+  a:not(.button):has(> span),
+  a:not([class$=__button]):has(> span) {
+    text-decoration: none;
+  }
+  a:not(.button):has(> span) > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span) > span:not(:has(svg)):not(:has(i)) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    transition: all 0.3s ease;
+    text-decoration-color: transparent;
+  }
+  a:not(.button):has(> span):hover > span:not(:has(svg)):not(:has(i)), a:not(.button):has(> span):focus > span:not(:has(svg)):not(:has(i)), a:not(.button):has(> span):active > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span):hover > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span):focus > span:not(:has(svg)):not(:has(i)),
+  a:not([class$=__button]):has(> span):active > span:not(:has(svg)):not(:has(i)) {
+    text-decoration-color: currentColor;
+  }
+  a:not(.button),
+  a:not([class$=__button]) {
+    text-decoration-color: currentColor;
+  }
+  a:not(.button):hover, a:not(.button):focus, a:not(.button):active,
+  a:not([class$=__button]):hover,
+  a:not([class$=__button]):focus,
+  a:not([class$=__button]):active {
+    color: var(--theme-color);
   }
   small {
     font-size: var(--font-size-xs);

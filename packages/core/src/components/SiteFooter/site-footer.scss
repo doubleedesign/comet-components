@@ -61,12 +61,7 @@
 		opacity: 0.8;
 
 		a {
-			text-decoration: underline;
-			text-decoration-color: transparent;
-
-			&:hover, &:focus, &:active {
-				text-decoration-color: currentColor;
-			}
+			@include link-underline-on-hover();
 		}
 	}
 }

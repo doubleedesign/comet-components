@@ -1,5 +1,6 @@
 @use 'variables' as *;
 @use 'mixins' as *;
+@use 'bem-mixin' as *;
 @use 'colours' as *;
 
 @layer comet-components-common {
@@ -42,6 +43,21 @@
 	* {
 		box-sizing: border-box;
 	}
+
+	@view-transition {
+		navigation: auto;
+	}
+
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation-duration: 500ms;
+		animation-timing-function: ease-in-out;
+
+		@media (prefers-reduced-motion: reduce) {
+			animation-duration: 0ms;
+		}
+	}
+
 
 	html {
 		font-size: var(--base-font-size);
@@ -132,12 +148,14 @@
 		}
 	}
 
-	a {
-		transition: all 0.2s ease-in-out;
+	a:not(.button),
+	a:not(#{class-ends-with('__button')}) {
 		color: inherit;
+		@include link-underline-on-hover();
+		text-decoration-color: currentColor;
 
 		&:hover, &:focus, &:active {
-			color: var(--color-secondary);
+			color: var(--theme-color);
 		}
 	}
 

@@ -13,26 +13,33 @@
   margin-block-start: var(--spacing-md);
 }
 .post-nav__link, [class$=__post-nav__link] {
-  text-decoration: none;
   color: var(--theme-color);
-  transition: all 0.3s ease;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  text-decoration-color: transparent;
+  transition: all 0.3s ease-in-out;
 }
 .post-nav__link:hover, [class$=__post-nav__link]:hover, .post-nav__link:focus, [class$=__post-nav__link]:focus, .post-nav__link:active, [class$=__post-nav__link]:active {
-  color: currentColor;
-}
-.post-nav__link:hover [class$=__label], [class$=__post-nav__link]:hover [class$=__label], .post-nav__link:focus [class$=__label], [class$=__post-nav__link]:focus [class$=__label], .post-nav__link:active [class$=__label], [class$=__post-nav__link]:active [class$=__label] {
   text-decoration-color: currentColor;
-  color: currentColor;
+}
+.post-nav__link:has(> span), [class$=__post-nav__link]:has(> span) {
+  text-decoration: none;
+}
+.post-nav__link:has(> span) > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span) > span:not(:has(svg)):not(:has(i)) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  transition: all 0.3s ease;
+  text-decoration-color: transparent;
+}
+.post-nav__link:has(> span):hover > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span):hover > span:not(:has(svg)):not(:has(i)), .post-nav__link:has(> span):focus > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span):focus > span:not(:has(svg)):not(:has(i)), .post-nav__link:has(> span):active > span:not(:has(svg)):not(:has(i)), [class$=__post-nav__link]:has(> span):active > span:not(:has(svg)):not(:has(i)) {
+  text-decoration-color: currentColor;
 }
 @container (min-width: 800px) {
   .post-nav__link, [class$=__post-nav__link] {
     grid-column: span 3;
   }
-}
-.post-nav__link__label, [class$=__post-nav__link__label] {
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: all 0.2s ease;
 }
 .post-nav__link__label > span, [class$=__post-nav__link__label] > span {
   display: block;
