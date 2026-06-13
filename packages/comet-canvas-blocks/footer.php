@@ -15,6 +15,7 @@ $attributes = Config::getInstance()->get_component_defaults('site-footer') ?? []
 if ($socials) {
     $iconLinksComponent = new IconLinks([
         'aria-label' => 'Social media links',
+		'orientation' => 'horizontal',
     ], $socials);
     $footerComponent = new SiteFooter($attributes, [$iconLinksComponent, $menuComponent]);
 }
