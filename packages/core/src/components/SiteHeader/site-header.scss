@@ -36,6 +36,7 @@
 	container-name: site-header;
 	// --breakpoint var should be set when the SiteHeader class is instantiated
 	--logo-max-width: 14rem;
+	--theme-color: contrast-color(var(--background-color));
 	--active-color: var(--theme-color-inverse, contrast-color(var(--background-color)));
 
 	@include is-expanded {
