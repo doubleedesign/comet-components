@@ -1,4 +1,7 @@
 <?php
+if(!class_exists('Doubleedesign\Comet\Core\Config')) {
+	wp_die('Cannot load the page because a required plugin is not active.');
+}
 
 use Doubleedesign\Comet\Core\{Config, Group, Menu, PreprocessedHTML, SiteHeader};
 use Doubleedesign\CometCanvas\NavMenus;
