@@ -3518,6 +3518,7 @@
     padding-block-start: 0;
     container-name: site-header;
     --logo-max-width: 14rem;
+    --theme-color: contrast-color(var(--background-color));
     --active-color: var(--theme-color-inverse, contrast-color(var(--background-color)));
   }
   @container site-header style(--breakpoint:none) {
