@@ -167,7 +167,8 @@ class TemplateParts {
 
         return new CardList(
             [
-                'shortName' => 'posts',
+				'isNested' => true,
+                'context' => 'posts',
                 'maxPerRow' => $cardsPerRow,
                 'layout'    => $cardLayout,
                 ...$attributes
