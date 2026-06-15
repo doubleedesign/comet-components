@@ -27,12 +27,17 @@ $meta = new Copy([
 	'aria-label'         => 'Article details',
 ], [new PreprocessedHTML([], TemplateParts::get_post_meta())]);
 
+ob_start();
+do_action('comet_canvas_single_post_after_content');
+$after_content = ob_get_clean();
+
 $content = new Copy([
 	'colorTheme'         => 'primary',
 	'isNested'           => true,
 	'shortName'          => 'body'
 ], [
 	new PreprocessedHTML([], wpautop(get_the_content())),
+	new PreprocessedHTML([], $after_content ?? ''),
 	$meta,
 ]);
 
