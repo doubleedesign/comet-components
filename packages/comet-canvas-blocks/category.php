@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\{Container, Copy, PreprocessedHTML};
+use Doubleedesign\Comet\Core\{Columns, Column, PageSection, PreprocessedHTML};
 use Doubleedesign\CometCanvas\TemplateParts;
 
 get_header();
@@ -13,20 +13,32 @@ if (empty($description)) {
 }
 
 if (!empty($description)) {
-    $intro = (new Copy(
-        ['shortName' => 'intro'],
-        [new PreprocessedHTML([], wpautop($description))]
-    ));
+    $intro = new PreprocessedHTML([], wpautop($description));
 }
-$posts = TemplateParts::get_posts_loop_cards(['shortName' => 'posts']);
+$posts = TemplateParts::get_posts_loop_cards(['shortName' => 'posts', 'layout' => 'list']);
 
-$component = new Container([
-    'shortName'       => 'category',
-    'size'            => apply_filters('comet_canvas_default_archive_width', 'contained'),
-], [
-    ...(isset($intro) ? [$intro] : []),
-    $posts
-]);
+$wrapperAttrs = [
+    'shortName' => 'category',
+    'size'      => apply_filters('comet_canvas_default_archive_width', 'contained'),
+];
+
+if (isset($intro)) {
+    $component = new Columns(
+        [
+            ...$wrapperAttrs,
+            'qty'          => 3,
+            'columnLayout' => 'expand-last'
+        ],
+        [
+            new Column(['shortName' => 'intro'], [$intro]),
+            new Column(['shortName' => 'posts'], [$posts])
+
+        ]
+    );
+}
+else {
+    $component = new PageSection($wrapperAttrs, [$posts]);
+}
 
 $component->render();
 

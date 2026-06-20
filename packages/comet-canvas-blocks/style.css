@@ -64,28 +64,6 @@ section + .separator-wrapper hr, .separator-wrapper + section hr {
   margin-block: 0;
 }
 
-.category__columns {
-  display: flex !important;
-  flex-direction: column;
-}
-@container (min-width: 940px) {
-  .category__columns {
-    flex-direction: row;
-  }
-}
-@container (min-width: 940px) {
-  .category__columns__column--intro {
-    width: 35%;
-    flex-basis: 35%;
-  }
-}
-@container (min-width: 940px) {
-  .category__columns__column--posts {
-    width: 65%;
-    flex-basis: 65%;
-  }
-}
-
 .post-content {
   padding-block: var(--spacing-lg);
 }

@@ -18,7 +18,7 @@ if (is_single()) {
     $attributes['id'] = 'page-header--post-' . get_the_ID();
 }
 
-$title = apply_filters('comet_canvas_page_header_title', $title);
+$title = apply_filters('comet_canvas_page_header_title', $title, 'page-header');
 
 if (class_exists('Doubleedesign\Breadcrumbs\Breadcrumbs')) {
     $breadcrumbs = Doubleedesign\Breadcrumbs\Breadcrumbs::$instance->get_raw_breadcrumbs();

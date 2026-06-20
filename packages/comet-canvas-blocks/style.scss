@@ -36,33 +36,6 @@
 	}
 }
 
-.category {
-	&__columns {
-		display: flex !important;
-		flex-direction: column;
-
-		@container (min-width: 940px) {
-			flex-direction: row;
-		}
-
-		&__column {
-			&--intro {
-				@container (min-width: 940px) {
-					width: 35%;
-					flex-basis: 35%;
-				}
-			}
-
-			&--posts {
-				@container (min-width: 940px) {
-					width: 65%;
-					flex-basis: 65%;
-				}
-			}
-		}
-	}
-}
-
 .post-content {
 	@include section-padding();
 	display: flex;
