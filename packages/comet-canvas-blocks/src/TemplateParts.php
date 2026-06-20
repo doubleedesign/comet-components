@@ -1,6 +1,6 @@
 <?php
 namespace Doubleedesign\CometCanvas;
-use Doubleedesign\Comet\Core\{Card, CardList, Config, PostNav};
+use Doubleedesign\Comet\Core\{Card, CardList, Config, PostNav, PreprocessedHTML};
 use WP_User_Query;
 
 /**
@@ -30,19 +30,24 @@ class TemplateParts {
         return apply_filters('comet_canvas_classic_contact_details_fields', $expected);
     }
 
-	public static function get_post_meta(): string {
-		$queried_object = get_queried_object();
-		$date = get_the_date('', $queried_object);
-		$category = get_the_category($queried_object->ID)[0] ?? null;
+    public static function get_post_meta(): PreprocessedHTML {
+        $queried_object = get_queried_object();
+        $date = get_the_date('', $queried_object);
+        $category = get_the_category($queried_object->ID)[0] ?? null;
 
-		$meta = "Published on $date";
-		if ($category) {
-			$category_link = get_category_link($category->term_id);
-			$meta .= " in <a href='$category_link'>{$category->name}</a>.";
-		}
+        $meta = "Published on $date";
+        if ($category) {
+            $category_link = get_category_link($category->term_id);
+            $meta .= " in <a href='$category_link'>{$category->name}</a>.";
+        }
 
-		return apply_filters('comet_canvas_blog_post_meta', $meta);
-	}
+        $text = apply_filters('comet_canvas_blog_post_meta', $meta);
+
+        return new PreprocessedHTML(
+            ['shortName'  => 'meta', 'aria-label' => 'Article details'],
+            $text
+        );
+    }
 
     public static function get_author_card(): Card {
         $queried_object = get_queried_object();
@@ -167,8 +172,8 @@ class TemplateParts {
 
         return new CardList(
             [
-				'isNested' => true,
-                'context' => 'posts',
+                'isNested'  => true,
+                'context'   => 'posts',
                 'maxPerRow' => $cardsPerRow,
                 'layout'    => $cardLayout,
                 ...$attributes

@@ -7,42 +7,37 @@ get_header();
 get_template_part('template-parts/page-header');
 
 $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+$include_post_meta_after_body = apply_filters('comet_canvas_blog_post_include_post_meta_after_body', true);
+$include_author_card = apply_filters('comet_canvas_blog_post_include_author_card', false);
+$include_post_nav = apply_filters('comet_canvas_blog_post_include_post_nav', true);
+
 if ($image_url) {
     $image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
     $image_caption = get_the_post_thumbnail_caption();
-	$image = new ContentImageBasic([
-		'src'         => $image_url,
-		'alt'         => $image_alt,
-		'caption'     => apply_filters('comet_canvas_single_post_featured_image_caption', true) ? $image_caption : null,
-		'aspectRatio' => apply_filters('comet_canvas_single_post_image_aspect_ratio', 'cinemascope'),
-		'scale'       => 'cover',
-		'classes'     => apply_filters('comet_canvas_blog_post_featured_image_classes', []),
-		'styleName'   => apply_filters('comet_canvas_blog_post_featured_image_style', ''),
-	]);
+    $image = new ContentImageBasic([
+        'src'         => $image_url,
+        'alt'         => $image_alt,
+        'caption'     => apply_filters('comet_canvas_single_post_featured_image_caption', true) ? $image_caption : null,
+        'aspectRatio' => apply_filters('comet_canvas_single_post_image_aspect_ratio', 'cinemascope'),
+        'scale'       => 'cover',
+        'classes'     => apply_filters('comet_canvas_blog_post_featured_image_classes', []),
+        'styleName'   => apply_filters('comet_canvas_blog_post_featured_image_style', ''),
+    ]);
 }
-
-$meta = new Copy([
-	'isNested'           => true,
-	'shortName'          => 'meta',
-	'aria-label'         => 'Article details',
-], [new PreprocessedHTML([], TemplateParts::get_post_meta())]);
 
 ob_start();
 do_action('comet_canvas_single_post_after_content');
 $after_content = ob_get_clean();
 
 $content = new Copy([
-	'colorTheme'         => 'primary',
-	'isNested'           => true,
-	'shortName'          => 'body'
+    'colorTheme'         => 'primary',
+    'isNested'           => true,
+    'shortName'          => 'body'
 ], [
-	new PreprocessedHTML([], wpautop(get_the_content())),
-	new PreprocessedHTML([], $after_content ?? ''),
-	$meta,
+    new PreprocessedHTML([], wpautop(get_the_content())),
+    new PreprocessedHTML([], $after_content ?? ''),
+    ...($include_post_meta_after_body ? [TemplateParts::get_post_meta()] : [])
 ]);
-
-$include_author_card = apply_filters('comet_canvas_blog_post_include_author_card', false);
-$include_post_nav = apply_filters('comet_canvas_blog_post_include_post_nav', true);
 
 $footer = new Group([
     'tagName'       => 'footer',
