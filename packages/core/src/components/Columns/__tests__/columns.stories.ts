@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { Alignment, ALIGNMENT_OPTIONS, ThemeColor, THEME_COLORS, ContainerSize, CONTAINER_SIZES } from '../../../../test/storybook-helpers.ts';
+import { Alignment, ThemeColor, ContainerSize } from '../../../../test/storybook-helpers.ts';
 
 type ColumnsProps = {
 	tagName: 'div' | 'section';
 	allowStacking: boolean;
+	qty: number;
+	columnLayout: 'even' | 'expand-first' | 'expand-last' | 'expand-middle';
 	hAlign: Alignment;
 	vAlign: Alignment;
 	backgroundColor: '' | 'none' | ThemeColor;
@@ -14,6 +16,7 @@ type ColumnsProps = {
 		attributes: any[];
 		content: string;
 	}>;
+	_actualQty?: number;
 }
 
 type ColumnsStoryProps = ColumnsProps & {
@@ -24,128 +27,15 @@ type ColumnsStoryProps = ColumnsProps & {
 const meta = {
 	title: 'Layout/Columns',
 	tags: ['wordpress-block', 'autodocs'],
-	...createStoryBase('Columns'),
+	...(await createStoryBase('Columns')),
 	args: {
 		tagName: "div",
-		allowStacking: true,
 		hAlign: "start",
 		vAlign: "start",
 		backgroundColor: "",
 		size: 'contained',
-		count: 3,
-		innerBackgrounds: false
-	},
-	argTypes: {
-		tagName: {
-			description: "The HTML tag to use for this component",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "div"
-				},
-				type: {
-					summary: "Tag"
-				}
-			},
-			options: [
-				"div",
-				"section"
-			]
-		},
-		size: {
-			description: "Keyword specifying the relative width of the container for the inner content",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "contained"
-				},
-				type: {
-					summary: "ContainerSize"
-				}
-			},
-			options: CONTAINER_SIZES
-		},
-		allowStacking: {
-			description: "Whether to adapt the layout by stacking columns when the viewport or container is narrow",
-			control: {
-				type: "boolean"
-			},
-			table: {
-				defaultValue: {
-					summary: "true"
-				},
-				type: {
-					summary: "bool"
-				}
-			}
-		},
-		hAlign: {
-			description: "",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "start"
-				},
-				type: {
-					summary: "Alignment"
-				}
-			},
-			options: ALIGNMENT_OPTIONS
-		},
-		vAlign: {
-			description: "",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "start"
-				},
-				type: {
-					summary: "Alignment"
-				}
-			},
-			options: ALIGNMENT_OPTIONS
-		},
-		backgroundColor: {
-			description: "Background colour keyword",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "ThemeColor"
-				}
-			},
-			options: ["none", ...THEME_COLORS]
-		},
-		classes: {
-			description: "CSS classes",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "columns"
-				},
-				type: {
-					summary: "array<string>"
-				}
-			}
-		},
-		count: {
-			description: 'How many columns to show in this demo; they will be semi-randomly assigned basic content of varying lengths.',
-		},
-		innerBackgrounds: {
-			description: 'Inner columns will be semi-randomly assigned background colours (or lack thereof).'
-		}
+		qty: 3,
+		columnLayout: 'even',
 	},
 } satisfies Meta<ColumnsStoryProps>;
 
@@ -153,5 +43,203 @@ export default meta;
 type Story = StoryObj<ColumnsStoryProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };
+
+export const Two_In_Two: Story = {
+	name: '2/2',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 2,
+		_actualQty: 2,
+	},
+	parameters: {
+		controls: {
+			include: ['size']
+		}
+	}
+};
+
+export const Two_In_Three: Story = {
+	name: '2/3',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 3,
+		_actualQty: 2,
+	},
+	parameters: {
+		controls: {
+			include: ['size', 'columnLayout', 'hAlign']
+		}
+	}
+};
+
+export const Two_In_Four: Story = {
+	name: '2/4',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 4,
+		_actualQty: 2,
+	},
+	parameters: {
+		controls: {
+			include: ['size', 'columnLayout', 'hAlign']
+		}
+	}
+};
+
+export const Three_In_Three: Story = {
+	name: '3/3',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 3,
+		_actualQty: 3,
+	},
+	parameters: {
+		controls: {
+			include: ['size']
+		}
+	}
+};
+
+export const Three_In_Four: Story = {
+	name: '3/4',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 4,
+		_actualQty: 3,
+	},
+	parameters: {
+		controls: {
+			include: ['size', 'columnLayout', 'hAlign']
+		}
+	}
+};
+
+export const Four_In_Four: Story = {
+	name: '4/4',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 4,
+		_actualQty: 4,
+	},
+	parameters: {
+		controls: {
+			include: ['size']
+		}
+	}
+};
+
+export const Three_In_Five: Story = {
+	name: '3/5',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 5,
+		_actualQty: 3,
+	},
+	parameters: {
+		controls: {
+			include: ['size', 'columnLayout', 'hAlign']
+		}
+	}
+};
+
+
+export const Three_In_Six: Story = {
+	name: '3/6',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 6,
+		_actualQty: 3,
+	},
+	parameters: {
+		controls: {
+			include: ['size', 'columnLayout', 'hAlign']
+		}
+	}
+};
+
+export const Four_In_Six: Story = {
+	name: '4/6',
+	tags: ['!autodocs'],
+	args: {
+		columnLayout: 'even',
+		qty: 6,
+		_actualQty: 4,
+	},
+	parameters: {
+		controls: {
+			include: ['size', 'columnLayout', 'hAlign']
+		}
+	}
+};
+
+
+export const Two_In_Three_Even_Centered: Story = {
+	name: '2/3 - even centered',
+	tags: ['autodocs', '!dev'],
+	args: {
+		columnLayout: 'even',
+		qty: 3,
+		_actualQty: 2,
+		hAlign: 'center',
+	},
+	parameters: {
+		controls: {
+			include: []
+		}
+	}
+}
+
+export const Two_In_Three_Expand_First: Story = {
+	name: '2/3 - expand first',
+	tags: ['autodocs', '!dev'],
+	args: {
+		columnLayout: 'expand-first',
+		qty: 3,
+		_actualQty: 2,
+	},
+	parameters: {
+		controls: {
+			include: []
+		}
+	}
+}
+
+export const Two_In_Three_Expand_Last: Story = {
+	name: '2/3 - expand last',
+	tags: ['autodocs', '!dev'],
+	args: {
+		columnLayout: 'expand-last',
+		qty: 3,
+		_actualQty: 2,
+	},
+	parameters: {
+		controls: {
+			include: []
+		}
+	}
+}
+
+export const Three_In_Four_Expand_Middle: Story = {
+	name: '3/4 - expand middle',
+	tags: ['autodocs', '!dev'],
+	args: {
+		columnLayout: 'expand-middle',
+		qty: 4,
+		_actualQty: 3,
+	},
+	parameters: {
+		controls: {
+			include: []
+		}
+	}
+}

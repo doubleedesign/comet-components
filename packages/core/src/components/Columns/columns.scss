@@ -3,6 +3,17 @@
 @use '../bem-mixin' as *;
 @use '../bem-class-selectors' as *;
 
+@mixin stack-columns($override: false) {
+	display: grid;
+	grid-gap: var(--spacing-md);
+	grid-template-columns: 1fr;
+	width: 100%;
+
+	@if $override {
+		grid-template-columns: 1fr !important;
+	}
+}
+
 @mixin grid-template-columns($columns, $spacing) {
 	grid-template-columns: repeat($columns, calc((100% - (var(--spacing-#{$spacing}) * (#{$columns} - 1))) / #{$columns}));
 
@@ -14,6 +25,14 @@
 @mixin grid-columns($columns, $unstackBreakpoint) {
 	@include container-width-up($unstackBreakpoint) {
 		@include grid-template-columns($columns, 'lg');
+
+		@each $actualCols in 2, 3, 4, 5, 6 {
+			&[data-count="#{$actualCols}"] {
+				@include maybe-expand-first($columns, $actualCols);
+				@include maybe-expand-last($columns, $actualCols);
+				@include maybe-expand-middle($columns, $actualCols);
+			}
+		}
 	}
 
 	&[data-allow-layout-stacking="false"] {
@@ -21,14 +40,47 @@
 	}
 }
 
-@mixin stack-columns($override: false) {display: grid;
-	grid-gap: var(--spacing-md);
-	grid-template-columns: 1fr;
-	width: 100%;
+@mixin maybe-expand-first($layoutCols, $contentColCount) {
+	// Important: $layoutCols is breakpoint-dependent when this is used within grid-columns - it's not always the same as data-cols
+	&[data-column-layout="expand-first"] {
+		> :first-child {
+			@if $contentColCount > $layoutCols {
+				grid-column: span #{$layoutCols};
+			}
+			@else {
+				grid-column: span #{$layoutCols - $contentColCount + 1};
+			}
+		}
+	}
+}
 
+@mixin maybe-expand-last($layoutCols, $contentColCount) {
+	// Important: $layoutCols is breakpoint-dependent when this is used within grid-columns - it's not always the same as data-cols
 
-	@if $override {
-		grid-template-columns: 1fr !important;
+	&[data-column-layout="expand-last"] {
+		> :last-child {
+			@if $contentColCount > $layoutCols {
+				grid-column: span #{$layoutCols};
+			}
+			@else {
+				grid-column: span #{$layoutCols - $contentColCount + 1};
+			}
+		}
+	}
+}
+
+@mixin maybe-expand-middle($layoutCols, $contentColCount) {
+	// Important: $layoutCols is breakpoint-dependent when this is used within grid-columns - it's not always the same as data-cols
+
+	@if $contentColCount % 2 == 0 {
+		// Ignore even numbers - no middle column to expand
+	}
+	@else {
+		&[data-column-layout="expand-middle"] {
+			> :nth-child(2) {
+				grid-column: span #{$layoutCols - $contentColCount + 1};
+			}
+		}
 	}
 }
 
@@ -40,23 +92,23 @@
 		grid-gap: var(--spacing-lg);
 	}
 
-	&[data-count="2"], &[data-count="4"], &[data-count="6"] {
+	&[data-cols="2"], &[data-cols="4"], &[data-cols="6"] {
 		@include grid-columns(2, 'small');
 	}
 
-	&[data-count="4"] {
+	&[data-cols="4"] {
 		@include grid-columns(4, 'narrower');
 	}
 
-	&[data-count="3"], &[data-count="5"], &[data-count="6"] {
+	&[data-cols="3"], &[data-cols="5"], &[data-cols="6"] {
 		@include grid-columns(3, 'small');
 	}
 
-	&[data-count="5"] {
+	&[data-cols="5"] {
 		@include grid-columns(5, 'narrow');
 	}
 
-	&[data-count="6"] {
+	&[data-cols="6"] {
 		@include grid-columns(6, 'narrow');
 	}
 

@@ -15,17 +15,26 @@ class Columns extends LayoutComponent {
 
     /**
      * @var int|mixed $qty
-     * @description The number of columns to display; by default automatically determined by the number of inner components.
+     * @description The number of layout columns to use; by default automatically determined by the number of inner components.
      *              Can be explicitly set when you want to use the columnLayout option (e.g., two columns laid out as 1/3 + 2/3)
      *              and/or hAlign option (e.g., 2 one-third columns centered).
+     *              The maximum supported by the CSS is 6, so if a larger number is provided it will be adjusted.
      */
     protected int $qty = 2;
+
+    /**
+     * @var int $actualQty
+     * @description The actual number of inner components provided, which may be different than the $qty specified for layout purposes.
+     */
     private int $actualQty = 0;
 
     /**
      * @var string $columnLayout
      * @description How to lay out inner columns when there is fewer than the $qty allowed for.
-     * @supported-values even, expand-first, expand-last
+     *              Which values are supported can depend on the number of content columns provided
+     * 		        and the viewport size (e.g., expand-middle will only work for odd numbers of inner Columns,
+     *              and only when there is enough horizontal space for all columns to be on the same row).
+     * @supported-values even, expand-first, expand-last, expand-middle
      */
     protected string $columnLayout = 'even';
 
@@ -46,6 +55,7 @@ class Columns extends LayoutComponent {
     public function __construct(array $attributes, array $innerComponents) {
         // Allow qty to be explicitly specified so consumers can do things like 2 columns in a three-column layout that would leave 1/3 space
         $this->actualQty = count($innerComponents);
+        $this->columnLayout = $attributes['columnLayout'] ?? $this->columnLayout;
         $this->qty = $attributes['qty'] ?? $this->actualQty;
         $this->allowStacking = $attributes['allowStacking'] ?? null;
         $this->set_layout_alignment($attributes);
@@ -71,8 +81,23 @@ class Columns extends LayoutComponent {
 
     private function get_columns_html_attributes(): array {
         $attributes = [];
+        $attributes['data-count'] = $this->actualQty;
+        $attributes['data-cols'] = $this->validate_layout_col_count($this->qty);
 
-        $attributes['data-count'] = $this->qty;
+        // We always want vAlign if set, that's not relevant to the column count stuff
+        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
+            $attributes['data-valign'] = $this->vAlign->value;
+        }
+
+        // Only add the stacking attribute if it explicitly false - default behaviour is true and I don't like muddyin' up the HTML
+        if ($this->allowStacking !== null && ($this->allowStacking === false)) {
+            $attributes['data-allow-layout-stacking'] = 'false';
+        }
+
+        // Return early if there are no actual columns, to prevent DivideByZero errors in the modulus checks below
+        if ($this->actualQty === 0) {
+            return $attributes;
+        }
 
         // If the actual number of columns does not evenly divide into the specified qty, add the attributes to handle the layout
         // (e.g., we don't need them if qty is 4 but actualQty is 8, but we do if qty is 4 and actualQty is 3)
@@ -86,17 +111,31 @@ class Columns extends LayoutComponent {
             }
         }
 
-        // We always want vAlign if set, that's not relevant to the column count stuff
-        if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
-            $attributes['data-valign'] = $this->vAlign->value;
-        }
-
-        // Only add the stacking attribute if it explicitly false - default behaviour is true and I don't like muddyin' up the HTML
-        if ($this->allowStacking !== null && ($this->allowStacking === false)) {
-            $attributes['data-allow-layout-stacking'] = 'false';
-        }
-
         return $attributes;
+    }
+
+    private function validate_layout_col_count($count): int {
+        if ($count === 0) {
+            return 2; // return early if there are no columns to prevent DivisionByZero errors in the modulus checks below
+        }
+
+        if ($count <= 6) {
+            return $count;
+        }
+
+        if ($count % 6 === 0) {
+            return 6;
+        }
+
+        if ($count % 4 === 0) {
+            return 4;
+        }
+
+        if ($count % 3 === 0) {
+            return 3;
+        }
+
+        return 2;
     }
 
     protected function get_html_attributes(): array {

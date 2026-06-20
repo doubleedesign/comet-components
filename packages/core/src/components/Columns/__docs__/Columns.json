@@ -4,7 +4,6 @@
     "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,
-    "belongsInside": "LayoutComponent",
     "attributes": {
         "allowStacking": {
             "type": "bool",
@@ -16,14 +15,26 @@
         },
         "classes": {
             "type": "array<string>",
-            "description": "CSS classes",
+            "description": "Additional CSS classes",
             "default": [
-                "columns"
+                "columns-wrapper"
             ]
+        },
+        "columnLayout": {
+            "type": "string",
+            "description": "How to lay out inner columns when there is fewer than the $qty allowed for. Which values are supported can depend on the number of content columns provided and the viewport size (e.g., expand-middle will only work for odd numbers of inner Columns, and only when there is enough horizontal space for all columns to be on the same row).",
+            "required": true,
+            "supported": [
+                "even",
+                "expand-first",
+                "expand-last",
+                "expand-middle"
+            ],
+            "default": "even"
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "hAlign": {
             "type": "Alignment",
@@ -41,15 +52,21 @@
             "type": "string",
             "description": "Unique identifier"
         },
+        "qty": {
+            "type": "int|mixed",
+            "description": "The number of layout columns to use; by default automatically determined by the number of inner components. Can be explicitly set when you want to use the columnLayout option (e.g., two columns laid out as 1/3 + 2/3) and/or hAlign option (e.g., 2 one-third columns centered). The maximum supported by the CSS is 6, so if a larger number is provided it will be adjusted.",
+            "required": true,
+            "default": 2
+        },
         "shortName": {
             "type": "string",
-            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
             "required": true,
-            "default": "columns"
+            "default": "columns-wrapper"
         },
         "size": {
             "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
             "supported": [
                 "fullwidth",
                 "wide",

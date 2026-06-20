@@ -18,17 +18,6 @@ class Column extends UIComponent {
         }
     }
 
-    protected function get_inline_styles(): array {
-        $styles = parent::get_inline_styles();
-
-        if (isset($this->width)) {
-            $styles['width'] = $this->width;
-            $styles['flex-basis'] = $this->width;
-        }
-
-        return $styles;
-    }
-
     protected function get_html_attributes(): array {
         $attributes = parent::get_html_attributes();
 
@@ -36,15 +25,26 @@ class Column extends UIComponent {
             $attributes['data-background'] = $this->get_background_color()->value;
         }
 
-		if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
-		    $attributes['data-halign'] = $this->hAlign->value;
-	    }
+        if (isset($this->hAlign) && !$this->hAlign->isDefault()) {
+            $attributes['data-halign'] = $this->hAlign->value;
+        }
 
         if (isset($this->vAlign) && !$this->vAlign->isDefault()) {
             $attributes['data-valign'] = $this->vAlign->value;
         }
 
         return $attributes;
+    }
+
+    public function update_context(string $context, ?Renderable $parent = null): static {
+        if ($this->get_shortname() !== 'column') {
+            return parent::update_context($context, $parent)
+                ->set_bem_element('column')
+                ->set_bem_modifier($this->get_shortname()
+                );
+        }
+
+        return parent::update_context($context, $parent);
     }
 
     public function render(): void {
