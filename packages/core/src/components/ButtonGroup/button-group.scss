@@ -1,11 +1,16 @@
 @use '../mixins' as *;
+@use '../bem-mixin' as *;
 
-.button-group {
+@include bem-block('button-group') {
 	display: flex;
 	gap: var(--spacing-sm);
 	padding-block: var(--spacing-sm);
 
 	&:last-child {
 		padding-block-end: 0;
+	}
+
+	&[data-halign] {
+		width: 100%;
 	}
 }
