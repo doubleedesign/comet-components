@@ -44,7 +44,6 @@
             "type": "array<string>",
             "description": "Additional CSS classes",
             "default": [
-                "image",
                 "image--basic"
             ]
         },

@@ -8,9 +8,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "button-group"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

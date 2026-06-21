@@ -8,9 +8,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "post-nav"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

@@ -9,7 +9,6 @@
             "type": "array<string>",
             "description": "Additional CSS classes",
             "default": [
-                "date",
                 "date--range"
             ]
         },

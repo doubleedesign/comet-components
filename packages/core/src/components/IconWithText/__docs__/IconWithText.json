@@ -8,9 +8,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "icon-with-text"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

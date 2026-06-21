@@ -29,9 +29,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "cover-image"
-            ]
+            "default": []
         },
         "context": {
             "type": "string",

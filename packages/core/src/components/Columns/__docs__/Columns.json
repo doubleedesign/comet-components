@@ -16,9 +16,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "columns-wrapper"
-            ]
+            "default": []
         },
         "columnLayout": {
             "type": "string",

@@ -13,9 +13,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "call-to-action"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

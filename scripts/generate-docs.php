@@ -515,6 +515,9 @@ class ComponentClassesToJsonDefinitions {
             if ($propertyName === 'classes' && method_exists($instance, 'get_filtered_classes')) {
                 $classes = $this->currentClass->getMethod('get_filtered_classes')?->invoke($instance) ?? [];
                 $defaultValue = $classes;
+                if (method_exists($instance, 'get_shortname')) {
+                    $defaultValue = array_values(array_diff($classes, [$instance->get_shortname()]));
+                }
             }
 
             if ($propertyName === 'context' && method_exists($instance, 'get_context')) {

@@ -27,9 +27,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "banner"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

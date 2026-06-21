@@ -16,9 +16,7 @@
                 "group",
                 "group--breakout"
             ],
-            "default": [
-                "group"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

@@ -13,9 +13,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "site-footer"
-            ]
+            "default": []
         },
         "context": {
             "type": "string",

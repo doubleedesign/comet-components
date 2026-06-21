@@ -43,9 +43,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "card"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

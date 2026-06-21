@@ -12,9 +12,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "links"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

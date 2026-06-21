@@ -13,9 +13,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "tabs"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",
