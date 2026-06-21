@@ -70,10 +70,10 @@ function OpenInNewTabButton() {
 		setCachedUrl(localStorage.getItem('storyUrlWithParams'));
 	});
 
-	return (
+	return cachedUrl !== '' ? (
 		<a href={cachedUrl} target="_blank">
 			Open in a new tab
 			<ArrowTopRightIcon/>
 		</a>
-	);
+	) : null;
 }

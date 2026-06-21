@@ -16,18 +16,23 @@ import { Stories } from './blocks/Stories.tsx';
 import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 
 const channel = addons.getChannel();
-// Log all events
-// import events from 'storybook/internal/core-events';
-//
-// Object.values(events).forEach((event) => {
-// 	channel.on(event, (data) => {
-// 		console.log(event, data);
-// 		//debugger;
-// 	});
-// });
+//Log all events
+import events from 'storybook/internal/core-events';
 
+Object.values(events).forEach((event) => {
+	channel.on(event, (data) => {
+		console.debug(event, data);
+		//debugger;
+	});
+});
+
+// Dispatch events that the ResponsiveContainer can pick up to re-fetch the URL (set in the story files) from local storage
+channel.on('storyRenderPhaseChanged', ({ newPhase }) => {
+	if(newPhase === 'rendering') {
+		document.dispatchEvent(new Event('storyArgsUpdatedCustom'));
+	}
+});
 channel.on('storyArgsUpdated', (data) => {
-	// Dispatch an event that the ResponsiveContainer can pick up to re-fetch the URL (set in the story files) from local storage
 	document.dispatchEvent(new Event('storyArgsUpdatedCustom'));
 });
 
