@@ -4,11 +4,10 @@
     "extends": "UIComponent",
     "abstract": false,
     "isInner": false,
-    "belongsInside": "LayoutComponent",
     "attributes": {
         "classes": {
             "type": "array<string>",
-            "description": "CSS classes",
+            "description": "Additional CSS classes",
             "default": [
                 "button-group"
             ]
@@ -33,7 +32,7 @@
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "hAlign": {
             "type": "Alignment",
@@ -62,7 +61,7 @@
         },
         "shortName": {
             "type": "string",
-            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
             "required": true,
             "default": "button-group"
         },

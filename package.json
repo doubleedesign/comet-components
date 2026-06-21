@@ -30,6 +30,7 @@
 		"@eslint/js": "^9.39.4",
 		"@playwright/test": "^1.59.1",
 		"@prettier/plugin-php": "^0.22.4",
+		"@react-aria/utils": "^3.34.1",
 		"@storybook/addon-docs": "^9.1.20",
 		"@storybook/addon-links": "^9.1.20",
 		"@storybook/html-vite": "^9.1.20",

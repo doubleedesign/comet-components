@@ -15,7 +15,7 @@ class PreprocessedHTML extends Renderable {
      */
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, '');
-        $this->init_bem_structure('components.PreprocessedHTML.preprocessed-html', null, $attributes['shortName']);
+        $this->init_bem_structure('components.PreprocessedHTML.preprocessed-html', null, $attributes['shortName'] ?? null);
         $this->content = $content;
     }
 

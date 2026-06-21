@@ -7,6 +7,9 @@ trait ShortName {
      * @description The name of the component without any namespacing, prefixes, etc.
      *              Used for BEM block/element naming.
      *              Derived from the Blade filename if not explicitly set.
+     *              If explicitly set, handling is component-specific depending on CSS requirements:
+     *              some will use it in place of generic defaults,
+     *              others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.
      */
     private string $shortName = '';
 

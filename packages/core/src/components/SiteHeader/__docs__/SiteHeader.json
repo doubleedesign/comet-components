@@ -4,7 +4,6 @@
     "extends": "LayoutComponent",
     "abstract": false,
     "isInner": false,
-    "belongsInside": null,
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",
@@ -12,11 +11,11 @@
         },
         "breakpoint": {
             "type": "string",
-            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style Note: \"Desktop\" style will still have a responsive layout, but submenus won't have the preferred behaviour on small viewports"
+            "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style Note: \"Desktop\" style will still have a responsive layout, but submenus won't have the preferred behaviour on small viewports e.g., phones - they'll appear on hover like on desktop, not in accordion style that responds better to touch interactions."
         },
         "classes": {
             "type": "array<string>",
-            "description": "CSS classes",
+            "description": "Additional CSS classes",
             "default": [
                 "site-header"
             ]
@@ -28,7 +27,7 @@
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "hAlign": {
             "type": "Alignment",
@@ -89,13 +88,13 @@
         },
         "shortName": {
             "type": "string",
-            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
             "required": true,
             "default": "site-header"
         },
         "size": {
             "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
             "supported": [
                 "fullwidth",
                 "wide",

@@ -178,5 +178,6 @@
     <orderEntry type="library" name="Playwright" level="project" />
     <orderEntry type="library" name="Comet Vue components" level="project" />
     <orderEntry type="library" name="@types/tinymce" level="application" />
+    <orderEntry type="library" name="@types/lodash" level="application" />
   </component>
 </module>

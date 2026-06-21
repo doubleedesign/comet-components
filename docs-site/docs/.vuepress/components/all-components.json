@@ -5,7 +5,6 @@
         "extends": "ImageComponent",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "align": {
                 "type": "string",
@@ -44,16 +43,22 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
             },
             "src": {
                 "type": "string",
@@ -96,11 +101,10 @@
         "extends": "Renderable",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "colorTheme": {
@@ -122,7 +126,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -133,6 +137,12 @@
                 "description": "The locale to be used for formatting the date.",
                 "required": true,
                 "default": "en_AU"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
             },
             "showDay": {
                 "type": "bool",
@@ -174,7 +184,6 @@
         "extends": "Renderable",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "alt": {
                 "type": "string",
@@ -184,16 +193,22 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
             },
             "src": {
                 "type": "string",
@@ -236,16 +251,15 @@
         "extends": "UIComponent",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -263,9 +277,15 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
+            },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -329,7 +349,6 @@
         "extends": "UIComponent",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -337,16 +356,22 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
             },
             "style": {
                 "type": "array",
@@ -389,7 +414,6 @@
         "extends": "UIComponent",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -397,7 +421,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "colorTheme": {
@@ -419,7 +443,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -433,6 +457,12 @@
                     "vertical"
                 ],
                 "default": "vertical"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
             },
             "style": {
                 "type": "array",
@@ -469,11 +499,10 @@
         "extends": null,
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "id": {
@@ -502,11 +531,10 @@
         "extends": "Renderable",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "id": {
@@ -584,20 +612,25 @@
         "extends": "TextElement",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
             },
             "style": {
                 "type": "array",
@@ -671,20 +704,25 @@
         "extends": "Renderable",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
                 "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
             },
             "style": {
                 "type": "array",
@@ -724,7 +762,6 @@
         "extends": "LayoutComponent",
         "abstract": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "ariaAttrs": {
                 "type": "array",
@@ -733,12 +770,12 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "dataAttrs": {
                 "type": "array",
@@ -761,9 +798,15 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": ""
+            },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -826,7 +869,6 @@
         "abstract": false,
         "vue": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -840,7 +882,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "accordion"
                 ]
@@ -864,7 +906,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "icon": {
                 "type": "string",
@@ -896,13 +938,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "accordion"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -960,14 +1002,14 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "accordion__panel__content"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "accordion"
             },
             "id": {
@@ -976,7 +1018,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "accordion-panel"
             },
@@ -1017,16 +1059,10 @@
     {
         "name": "Banner",
         "description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content. Supports parallax effect, minHeight and maxHeight.",
-        "extends": "WrappedLayoutComponent",
+        "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
                 "description": "The single background colour of the component."
@@ -1048,7 +1084,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "banner"
                 ]
@@ -1078,12 +1114,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -1109,13 +1140,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "banner"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -1174,18 +1205,17 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "breadcrumbs"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -1193,7 +1223,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "breadcrumbs"
             },
@@ -1229,11 +1259,10 @@
         "extends": "Renderable",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "button"
                 ]
@@ -1257,7 +1286,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "href": {
                 "type": "string",
@@ -1275,7 +1304,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "button"
             },
@@ -1313,11 +1342,10 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "button-group"
                 ]
@@ -1342,7 +1370,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -1371,7 +1399,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "button-group"
             },
@@ -1422,11 +1450,10 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "callout"
                 ]
@@ -1451,7 +1478,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "icon": {
                 "type": "string",
@@ -1468,7 +1495,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "callout"
             },
@@ -1506,15 +1533,15 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
-            "backgroundColors": {
-                "type": "BackgroundCollection",
-                "description": "Key -> value pairs of background placement and colour keywords"
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component.",
+                "default": "primary"
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "call-to-action"
                 ]
@@ -1539,7 +1566,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -1559,13 +1586,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "call-to-action"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -1613,8 +1640,7 @@
             "required": true
         },
         "traits": [
-            "BackgroundColorMulti",
-            "ColorTheme",
+            "ColorPair",
             "LayoutAlignment",
             "LayoutContainerSize",
             "BlockElementModifier"
@@ -1626,7 +1652,6 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "aboveContentComponents": {
                 "type": "array<Renderable>",
@@ -1665,7 +1690,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "card"
                 ]
@@ -1689,7 +1714,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "focalPoint": {
                 "type": "array{x:",
@@ -1751,7 +1776,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "card"
             },
@@ -1799,7 +1824,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -1807,7 +1831,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "card-list"
                 ]
@@ -1831,7 +1855,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -1882,13 +1906,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "card-list"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -1958,14 +1982,14 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "columns__column"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "columns"
             },
             "hAlign": {
@@ -1986,7 +2010,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "column"
             },
@@ -2038,7 +2062,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "allowStacking": {
                 "type": "bool",
@@ -2050,14 +2073,26 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
-                    "columns"
+                    "columns-wrapper"
                 ]
+            },
+            "columnLayout": {
+                "type": "string",
+                "description": "How to lay out inner columns when there is fewer than the $qty allowed for. Which values are supported can depend on the number of content columns provided and the viewport size (e.g., expand-middle will only work for odd numbers of inner Columns, and only when there is enough horizontal space for all columns to be on the same row).",
+                "required": true,
+                "supported": [
+                    "even",
+                    "expand-first",
+                    "expand-last",
+                    "expand-middle"
+                ],
+                "default": "even"
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -2075,15 +2110,21 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
+            "qty": {
+                "type": "int|mixed",
+                "description": "The number of layout columns to use; by default automatically determined by the number of inner components. Can be explicitly set when you want to use the columnLayout option (e.g., two columns laid out as 1/3 + 2/3) and/or hAlign option (e.g., 2 one-third columns centered). The maximum supported by the CSS is 6, so if a larger number is provided it will be adjusted.",
+                "required": true,
+                "default": 2
+            },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
-                "default": "columns"
+                "default": "columns-wrapper"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -2142,18 +2183,17 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": null,
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "container"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -2161,13 +2201,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "container"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -2215,7 +2255,6 @@
         "extends": "ContentImageComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "align": {
                 "type": "string",
@@ -2254,7 +2293,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "image",
                     "image--advanced"
@@ -2262,7 +2301,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "focalPoint": {
                 "type": "array{x:",
@@ -2294,7 +2333,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "image"
             },
@@ -2340,7 +2379,6 @@
         "extends": "ContentImageComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "align": {
                 "type": "string",
@@ -2379,7 +2417,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "image",
                     "image--basic"
@@ -2387,7 +2425,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "height": {
                 "type": "string",
@@ -2401,9 +2439,18 @@
                 "type": "string",
                 "description": "Unique identifier"
             },
+            "orientation": {
+                "type": "Orientation",
+                "description": "Orientation of the component content, if applicable",
+                "supported": [
+                    "horizontal",
+                    "vertical"
+                ],
+                "default": "vertical"
+            },
             "scale": {
                 "type": "string",
-                "description": "How to handle how the image fits the available space",
+                "description": "How to handle how the image fits the available space This is basically here because the WordPress block editor provides this option along with aspect ratio. The ContentImage class provides more advanced cropping and should NOT also have the scale attribute.",
                 "supported": [
                     "contain",
                     "cover"
@@ -2412,7 +2459,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "image"
             },
@@ -2452,6 +2499,7 @@
             }
         },
         "traits": [
+            "LayoutOrientation",
             "BlockElementModifier"
         ]
     },
@@ -2461,11 +2509,14 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
+            "backgroundColor": {
+                "type": "ThemeColor|ThemeGradient",
+                "description": "The single background colour of the component."
+            },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "copy"
                 ]
@@ -2489,7 +2540,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -2503,13 +2554,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "copy"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -2546,7 +2597,7 @@
             "required": true
         },
         "traits": [
-            "ColorTheme",
+            "ColorPair",
             "LayoutContainerSize",
             "NestedState",
             "BlockElementModifier"
@@ -2558,7 +2609,6 @@
         "extends": "Renderable",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "alt": {
                 "type": "string",
@@ -2583,14 +2633,14 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "cover-image"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "focalPoint": {
                 "type": "array{x:",
@@ -2628,7 +2678,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "cover-image"
             },
@@ -2666,11 +2716,10 @@
         "extends": "DateComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "date"
                 ]
@@ -2694,7 +2743,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "date": {
                 "type": "DateTime",
@@ -2712,7 +2761,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "date"
             },
@@ -2756,11 +2805,10 @@
         "extends": "DateComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "date",
                     "date--range"
@@ -2785,7 +2833,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "endDate": {
                 "type": "DateTime|string",
@@ -2803,7 +2851,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "date"
             },
@@ -2851,18 +2899,17 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "details"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -2870,7 +2917,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "details"
             },
@@ -2911,18 +2958,17 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "event-card"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "dateComponent": {
                 "type": "DateBlock|DateRangeBlock",
@@ -2952,7 +2998,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "event-card"
             },
@@ -2989,7 +3035,6 @@
         "extends": "CardList",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -2997,7 +3042,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "events"
                 ]
@@ -3021,7 +3066,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -3072,13 +3117,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "events"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -3144,7 +3189,7 @@
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "file-group__file"
                 ]
@@ -3168,7 +3213,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "file-group"
             },
             "description": {
@@ -3193,7 +3238,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "file"
             },
@@ -3240,7 +3285,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -3248,7 +3292,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "files"
                 ]
@@ -3273,7 +3317,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -3303,13 +3347,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "files"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -3369,7 +3413,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -3381,14 +3424,14 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "gallery"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -3442,13 +3485,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "gallery"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -3509,7 +3552,6 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -3517,7 +3559,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "supported": [
                     "group",
                     "group--breakout"
@@ -3545,7 +3587,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "dataAttrs": {
                 "type": "array",
@@ -3564,7 +3606,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "group"
             },
@@ -3610,7 +3652,6 @@
         "extends": "TextElementExtended",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -3623,7 +3664,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -3636,7 +3677,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": ""
             },
@@ -3688,18 +3729,17 @@
         "extends": "Renderable",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "icon-links"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -3737,7 +3777,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "icon-links"
             },
@@ -3782,11 +3822,10 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "icon-with-text"
                 ]
@@ -3810,7 +3849,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "icon": {
                 "type": "string",
@@ -3830,7 +3869,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "icon-with-text"
             },
@@ -3872,11 +3911,10 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "image-and-text"
                 ]
@@ -3902,7 +3940,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -3941,7 +3979,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "image-and-text"
             },
@@ -3977,11 +4015,10 @@
         "extends": "TextElement",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "icon": {
@@ -3999,7 +4036,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "label-with-tooltip"
             },
@@ -4053,18 +4090,17 @@
         "extends": "Renderable",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "link"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "description": {
                 "type": "string"
@@ -4087,7 +4123,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "link"
             },
@@ -4125,7 +4161,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4133,7 +4168,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "links"
                 ]
@@ -4157,7 +4192,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -4203,13 +4238,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "links"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -4270,18 +4305,17 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "list"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -4293,7 +4327,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "list"
             },
@@ -4334,14 +4368,14 @@
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "list__item"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "list"
             },
             "id": {
@@ -4350,7 +4384,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "list-item"
             },
@@ -4389,11 +4423,10 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "menu"
                 ]
@@ -4418,7 +4451,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -4426,7 +4459,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "menu"
             },
@@ -4467,14 +4500,14 @@
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "menu__list"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "menu"
             },
             "id": {
@@ -4483,7 +4516,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "menu-list"
             },
@@ -4523,14 +4556,14 @@
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "menu__list__item"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "menu__list"
             },
             "id": {
@@ -4544,7 +4577,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "menu-list-item"
             },
@@ -4580,7 +4613,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": null,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4593,7 +4625,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "page-header"
                 ]
@@ -4618,7 +4650,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -4638,13 +4670,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "page-header"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -4709,7 +4741,6 @@
         "extends": "Renderable",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4717,9 +4748,9 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
-                    ""
+                    "page-section"
                 ]
             },
             "id": {
@@ -4728,13 +4759,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
-                "default": ""
+                "default": "page-section"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -4753,7 +4784,9 @@
                 "type": "Tag",
                 "description": "The HTML tag to use for this component",
                 "supported": [
-                    "div"
+                    "div",
+                    "section",
+                    "article"
                 ],
                 "default": "div"
             },
@@ -4779,7 +4812,6 @@
         "extends": "TextElementExtended",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -4791,7 +4823,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -4799,7 +4831,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": ""
             },
@@ -4846,11 +4878,10 @@
         "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "post-nav"
                 ]
@@ -4874,7 +4905,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "entityName": {
                 "type": "string",
@@ -4892,9 +4923,19 @@
                 "required": true,
                 "default": []
             },
+            "nextIconClass": {
+                "type": "string",
+                "required": true,
+                "default": "fa-arrow-right"
+            },
+            "prevIconClass": {
+                "type": "string",
+                "required": true,
+                "default": "fa-arrow-left"
+            },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "post-nav"
             },
@@ -4929,16 +4970,53 @@
     {
         "name": "PreprocessedHTML",
         "description": null,
-        "extends": null,
+        "extends": "Renderable",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
-        "attributes": [],
+        "attributes": {
+            "classes": {
+                "type": "array<string>",
+                "description": "Additional CSS classes",
+                "default": []
+            },
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
+            },
+            "id": {
+                "type": "string",
+                "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": "preprocessed-html"
+            },
+            "style": {
+                "type": "array",
+                "description": "Inline styles"
+            },
+            "tagName": {
+                "type": "Tag",
+                "description": "The HTML tag to use for this component",
+                "supported": [
+                    "div"
+                ],
+                "default": "div"
+            },
+            "testId": {
+                "type": "string",
+                "description": "Optionally add a data-testid attribute for automated tests"
+            }
+        },
         "content": {
             "type": "string",
             "required": true
         },
-        "traits": []
+        "traits": [
+            "BlockElementModifier"
+        ]
     },
     {
         "name": "Pullquote",
@@ -4946,7 +5024,6 @@
         "extends": "TextElementExtended",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4958,7 +5035,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": []
             },
             "colorTheme": {
@@ -4980,7 +5057,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -4988,7 +5065,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": ""
             },
@@ -5044,14 +5121,14 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "responsive-panels__panel__content"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "responsive-panels"
             },
             "id": {
@@ -5060,7 +5137,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "responsive-panel"
             },
@@ -5106,7 +5183,6 @@
         "abstract": false,
         "vue": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -5119,7 +5195,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "responsive-panels"
                 ]
@@ -5143,7 +5219,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "icon": {
                 "type": "string",
@@ -5169,7 +5245,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "responsive-panels"
             },
@@ -5209,11 +5285,10 @@
         "extends": "Renderable",
         "abstract": false,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "separator"
                 ]
@@ -5256,7 +5331,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -5275,13 +5350,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "separator"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -5322,7 +5397,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": null,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -5331,14 +5405,14 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "site-footer"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "copyright": {
                 "type": "array{siteName:",
@@ -5366,13 +5440,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "site-footer"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -5430,7 +5504,6 @@
         "extends": "LayoutComponent",
         "abstract": false,
         "isInner": false,
-        "belongsInside": null,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -5438,11 +5511,11 @@
             },
             "breakpoint": {
                 "type": "string",
-                "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style Note: \"Desktop\" style will still have a responsive layout, but submenus won't have the preferred behaviour on small viewports"
+                "description": "Viewport breakpoint (in pixels or rem) at which to switch from the \"mobile\" style menu to \"desktop\" style menu; use 0 to always use the \"mobile\" style or null to always use the \"desktop\" style Note: \"Desktop\" style will still have a responsive layout, but submenus won't have the preferred behaviour on small viewports e.g., phones - they'll appear on hover like on desktop, not in accordion style that responds better to touch interactions."
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "site-header"
                 ]
@@ -5454,7 +5527,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "hAlign": {
                 "type": "Alignment",
@@ -5515,13 +5588,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "site-header"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",
@@ -5594,14 +5667,14 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "tabs__tab-panel__content"
                 ]
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant).",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
                 "default": "tabs"
             },
             "id": {
@@ -5610,7 +5683,7 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "tab-panel"
             },
@@ -5655,7 +5728,6 @@
         "abstract": false,
         "vue": true,
         "isInner": false,
-        "belongsInside": "LayoutComponent",
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -5663,7 +5735,7 @@
             },
             "classes": {
                 "type": "array<string>",
-                "description": "CSS classes",
+                "description": "Additional CSS classes",
                 "default": [
                     "tabs"
                 ]
@@ -5687,7 +5759,7 @@
             },
             "context": {
                 "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant)."
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "id": {
                 "type": "string",
@@ -5710,13 +5782,13 @@
             },
             "shortName": {
                 "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
                 "required": true,
                 "default": "tabs"
             },
             "size": {
                 "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
                 "supported": [
                     "fullwidth",
                     "wide",

@@ -37,7 +37,7 @@ trait ColorPair {
             $foreground = $this->colorTheme->value;
             $message = "ColorPair trait: Foreground $foreground does not have sufficient contrast to be used with $background->value, or there was a problem parsing one of the values.";
             if (function_exists('dump')) {
-                dump($message);
+               // dump($message);
             }
             else {
                 error_log($message);

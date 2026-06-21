@@ -4,17 +4,18 @@ import { Title } from './blocks/Title.tsx';
 import { Description } from './blocks/Description.tsx';
 import { ResponsiveContainer } from './custom-components/ResponsiveContainer.tsx';
 import { Primary } from './blocks/Primary.tsx';
-import { CommonAttributes } from './custom-components/CommonAttributes.tsx';
-import { Controls, DocsContainer, Subtitle, Unstyled } from '@storybook/addon-docs/blocks';
+import { DocsContainer, Subtitle, Unstyled } from '@storybook/addon-docs/blocks';
 import comet from './theme.ts';
 import './preview.css';
 import './custom-components/CodePanels.style.css';
 import './decorators/focal-point-picker.css';
 import { addons } from 'storybook/preview-api';
 import { withCodeTabs } from './addons/code-tabs/withCodeTabs.tsx';
+import { CustomControls } from './blocks/Controls.tsx';
+import { Stories } from './blocks/Stories.tsx';
+import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 
 const channel = addons.getChannel();
-
 // Log all events
 // import events from 'storybook/internal/core-events';
 //
@@ -30,6 +31,15 @@ channel.on('storyArgsUpdated', (data) => {
 	document.dispatchEvent(new Event('storyArgsUpdatedCustom'));
 });
 
+const subsetViewports = Object.entries(INITIAL_VIEWPORTS).reduce((acc, [key, value]) => {
+	// Just a randomish mix of device sizes
+	if(['iphone14', 'pixelxl', 'ipad', 'ipad11p', 'ipad12p'].includes(key)) {
+		acc[key] = value;
+	}
+
+	return acc;
+}, {});
+
 const preview: Preview = {
 	parameters: {
 		viewMode: 'story',
@@ -40,6 +50,32 @@ const preview: Preview = {
 				date: /Date$/i,
 			},
 			sort: 'none' // get order from story files
+		},
+		viewport: {
+			options: {
+				...subsetViewports,
+				smallTablet: {
+					name: 'Small Tablet',
+					styles: {
+						width: '640px',
+						height: '800px',
+					},
+				},
+				smallLaptop: {
+					name: 'Small PC',
+					styles: {
+						width: '1280px',
+						height: '768px',
+					},
+				},
+				largeLaptop: {
+					name: 'Medium PC',
+					styles: {
+						width: '1440px',
+						height: '900px',
+					},
+				},
+			}
 		},
 		options: {
 			storySort: {
@@ -113,12 +149,11 @@ const preview: Preview = {
 							<h2 className="section-heading">Attributes</h2>
 							<p>The public properties you can assign to your component at creation time using
 								the <code>$attributes</code> argument.</p>
-							<Controls/>
-							<CommonAttributes/>
+							<CustomControls/>
 						</div>
-						{/*<div className="stories-wrapper">*/}
-						{/*	<Stories includePrimary={false} title="Variations and examples"/>*/}
-						{/*</div>*/}
+						<div className="stories-wrapper">
+							<Stories includePrimary={false} title="Variations and examples"/>
+						</div>
 					</Unstyled>
 				);
 			}

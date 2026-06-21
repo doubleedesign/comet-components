@@ -6,7 +6,7 @@ trait LayoutContainerSize {
      * @var ?ContainerSize $size
      * @description Keyword specifying the relative width of the container for the inner content
      *              if the component is not nested inside another layout component.
-     *              Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.
+     *              Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.
      * @default-value ContainerSize::DEFAULT
      */
     protected ?ContainerSize $size = ContainerSize::DEFAULT;
@@ -40,9 +40,9 @@ trait LayoutContainerSize {
             ?? $this->size;
     }
 
-	public function get_size(): ?ContainerSize {
-		return $this->size;
-	}
+    public function get_size(): ?ContainerSize {
+        return $this->size;
+    }
 
     private function get_component_default(): ?ContainerSize {
         $class = static::class;

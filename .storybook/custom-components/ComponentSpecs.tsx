@@ -24,7 +24,7 @@ export function ComponentSpecs({ componentName }) {
 			belongsInside = 'At the top level of the document, and within SiteHeader, SiteFooter, Banner, and PageHeader components';
 		}
 		else {
-			belongsInside = 'At the top level of the document';
+			belongsInside = 'At the top level of the document or inside a PageSection';
 		}
 	}
 	// Some specific overrides

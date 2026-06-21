@@ -4,11 +4,10 @@
     "extends": null,
     "abstract": true,
     "isInner": false,
-    "belongsInside": "LayoutComponent",
     "attributes": {
         "classes": {
             "type": "array<string>",
-            "description": "CSS classes",
+            "description": "Additional CSS classes",
             "default": []
         },
         "id": {

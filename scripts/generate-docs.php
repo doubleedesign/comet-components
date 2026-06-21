@@ -163,14 +163,6 @@ class ComponentClassesToJsonDefinitions {
                 }
                 else {
                     $result['isInner'] = false;
-                    // TODO: Find a better way to handle this
-                    $canBeTopLevel = ['Doubleedesign\Comet\Core\Container', 'Doubleedesign\Comet\Core\PageHeader', 'Doubleedesign\Comet\Core\SiteHeader', 'Doubleedesign\Comet\Core\SiteFooter'];
-                    if (in_array($className, $canBeTopLevel)) {
-                        $result['belongsInside'] = null;
-                    }
-                    else {
-                        $result['belongsInside'] = 'LayoutComponent';
-                    }
 
                     // Check if there is a Vue component in this component's directory
                     $vueFile = Utils::kebab_case(str_replace('.php', '', basename($filePath)) . '.vue');
@@ -271,7 +263,7 @@ class ComponentClassesToJsonDefinitions {
 
         $finalAttrs = array_filter($properties, function($key) use ($reflectionClass) {
             if ($reflectionClass->isAbstract()) {
-                return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile', 'shortName']);
+                return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile']);
             }
 
             return !in_array($key, ['rawAttributes', 'content', 'innerComponents', 'bladeFile']);
@@ -345,13 +337,14 @@ class ComponentClassesToJsonDefinitions {
             // Get the first line based on the @description tag
             $description = trim($matches[1]);
 
-            // Get the next 2 lines and check if they should also be included in the description
+            // Get the next 5 lines and check if they should also be included in the description
+            // (at the time of writing, the longest known description is 6 lines)
             $lines = explode("\n", $docComment);
             $description_line = array_key_first(array_filter($lines, function($line) {
                 return str_contains($line, '@description');
             }));
             $maybe_one_or_two_more_lines = array_filter(
-                array_slice($lines, $description_line + 1, 2),
+                array_slice($lines, $description_line + 1, 5),
                 fn($line) => trim($line) !== ''
                     && trim($line) !== '*/'
                     && !str_starts_with(trim($line), "* @")
@@ -483,7 +476,7 @@ class ComponentClassesToJsonDefinitions {
             'colorTheme', 'backgroundColor', 'hAlign', 'vAlign', 'size', 'orientation', 'textAlign', 'textColor'
         ];
 
-		// Override the default value if the component has a different default set than the enum default
+        // Override the default value if the component has a different default set than the enum default
         if (in_array($propertyName, $knownTraitProperties) || str_contains($propertyName, 'Theme')) {
             $customDefault = $this->extractDefaultFromConstructor($this->currentClass, $propertyName);
             if ($customDefault !== null) {
@@ -567,7 +560,7 @@ class ComponentClassesToJsonDefinitions {
         }
         // Get default values from docblock if not already set
         if (!isset($defaultValue) && $docComment && preg_match('/@default-value\s+(.+)/', $docComment, $matches)) {
-           $defaultValue = trim($matches[1]);
+            $defaultValue = trim($matches[1]);
         }
         // Use type from docblock if specified, to use declared types like array<string>
         if ($docComment && preg_match('/@var\s+(\S+)/', $docComment, $matches)) {

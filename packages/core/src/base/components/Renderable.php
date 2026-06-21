@@ -23,7 +23,7 @@ abstract class Renderable {
 
     /**
      * @var array<string> $classes
-     * @description CSS classes
+     * @description Additional CSS classes
      */
     protected ?array $classes = [];
 

@@ -20,7 +20,6 @@
 		"allowImportingTsExtensions": true, // required to run scripts that import other TS files
 		"noEmit": true,
 		"jsx": "react"
-		// for allowImportingTsExtensions to work
 	},
 	"ts-node": {
 		"esm": true,

@@ -4,7 +4,6 @@
     "extends": "Renderable",
     "abstract": false,
     "isInner": false,
-    "belongsInside": "LayoutComponent",
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",
@@ -12,9 +11,9 @@
         },
         "classes": {
             "type": "array<string>",
-            "description": "CSS classes",
+            "description": "Additional CSS classes",
             "default": [
-                ""
+                "page-section"
             ]
         },
         "id": {
@@ -23,13 +22,13 @@
         },
         "shortName": {
             "type": "string",
-            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set.",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
             "required": true,
-            "default": ""
+            "default": "page-section"
         },
         "size": {
             "type": "ContainerSize",
-            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Should be ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
+            "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
             "supported": [
                 "fullwidth",
                 "wide",
@@ -48,7 +47,9 @@
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "div",
+                "section",
+                "article"
             ],
             "default": "div"
         },
