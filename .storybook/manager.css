@@ -79,12 +79,17 @@
 				}
 			}
 
-			/** The button when there is multiple pages for a component, i.e., docs and stories */
-
-			[data-icon="component"] {
+			/** "Docs" page directly under a "Component" button that expands/collapses its section **/
+			[data-nodetype="component"] + [data-nodetype="document"] & {
+				display: none;
 			}
 
-			[data-nodetype="document"] &,
+			/** Standalone "Docs" page **/
+			[data-nodetype="document"] & {
+				margin-inline-end: 0.25rem;
+			}
+
+			/** Standalone story OR story within an expanded list under a "Component" button **/
 			[data-nodetype="story"] & {
 				display: none;
 			}
