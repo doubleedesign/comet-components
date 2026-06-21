@@ -7,7 +7,7 @@
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",
-            "description": "The single background colour of the component."
+            "description": "The background colour of the component."
         },
         "breadcrumbs": {
             "type": "array",
@@ -17,9 +17,7 @@
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "page-header"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

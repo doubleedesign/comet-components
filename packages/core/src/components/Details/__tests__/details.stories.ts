@@ -10,55 +10,12 @@ type DetailsProps = {
 const meta = {
 	title: 'Text/Details',
 	tags: ['autodocs'],
-	...createStoryBase('Details'),
-	argTypes: {
-		tagName: {
-			description: "The HTML tag to use for this component",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "details"
-				},
-				type: {
-					summary: "Tag"
-				}
-			},
-			options: [
-				"details"
-			]
-		},
-		classes: {
-			description: "CSS classes",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "details"
-				},
-				type: {
-					summary: "array<string>"
-				}
-			}
-		},
-		summary: {
-			description: "The title of the panel, summarising the content.",
-			control: {
-				type: "text"
-			},
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		}
-	},
+	...(await createStoryBase('Details')),
 } satisfies Meta<DetailsProps>;
 
 export default meta;
 type Story = StoryObj<DetailsProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };

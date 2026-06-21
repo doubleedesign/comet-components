@@ -27,7 +27,7 @@
         },
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",
-            "description": "The single background colour of the component."
+            "description": "The background colour of the component."
         },
         "bodyText": {
             "type": "string",

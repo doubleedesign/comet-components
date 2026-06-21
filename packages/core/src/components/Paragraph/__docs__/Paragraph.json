@@ -1,26 +1,21 @@
 {
-    "name": "TabPanel",
-    "description": null,
-    "extends": "PanelComponent",
+    "name": "Paragraph",
+    "description": "Render a paragraph element, optionally with a theme style applied.",
+    "extends": "TextElementExtended",
     "abstract": false,
-    "isInner": true,
-    "belongsInside": "Tabs",
+    "isInner": false,
     "attributes": {
-        "backgroundColor": {
-            "type": "ThemeColor|ThemeGradient",
-            "description": "The background colour of the component."
-        },
         "classes": {
             "type": "array<string>",
-            "description": "Additional CSS classes",
-            "default": [
-                "tabs__tab-panel__content"
-            ]
+            "description": "CSS classes",
+            "supported": [
+                "is-style-lead"
+            ],
+            "default": []
         },
         "context": {
             "type": "string",
-            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected.",
-            "default": "tabs"
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "id": {
             "type": "string",
@@ -30,39 +25,42 @@
             "type": "string",
             "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
             "required": true,
-            "default": "tab-panel"
+            "default": ""
         },
         "style": {
             "type": "array",
             "description": "Inline styles"
         },
-        "subtitle": {
-            "type": "string"
-        },
         "tagName": {
             "type": "Tag",
             "description": "The HTML tag to use for this component",
             "supported": [
-                "div"
+                "p"
             ],
-            "default": "div"
+            "default": "p"
         },
         "testId": {
             "type": "string",
             "description": "Optionally add a data-testid attribute for automated tests"
         },
-        "title": {
-            "type": "string",
-            "required": true
+        "textAlign": {
+            "type": "Alignment",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ]
         }
     },
-    "innerComponents": {
-        "type": "array<Renderable>",
-        "description": "Inner components to be rendered within this component",
+    "content": {
+        "type": "string",
+        "description": "Plain text or basic HTML",
         "required": true
     },
     "traits": [
-        "BackgroundColor",
-        "BlockElementModifier"
+        "BlockElementModifier",
+        "TextAlign"
     ]
 }

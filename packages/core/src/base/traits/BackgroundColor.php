@@ -4,7 +4,7 @@ namespace Doubleedesign\Comet\Core;
 trait BackgroundColor {
     /**
      * @var ThemeColor|ThemeGradient|null $backgroundColor
-     * @description The single background colour of the component.
+     * @description The background colour of the component.
      */
     protected ThemeColor|ThemeGradient|null $backgroundColor = null;
 

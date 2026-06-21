@@ -286,7 +286,7 @@
 <xs:attribute name="testId" type="xs:string"/>
 <xs:attribute name="size" type="ContainerSize"/>
 <xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="qty" type="int|mixed"/>
+<xs:attribute name="qty" type="xs:int"/>
 <xs:attribute name="shortName" type="xs:string"/>
 <xs:attribute name="hAlign" type="Alignment"/>
 <xs:attribute name="id" type="xs:string"/>

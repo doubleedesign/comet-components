@@ -7,14 +7,12 @@
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",
-            "description": "The single background colour of the component."
+            "description": "The background colour of the component."
         },
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",
-            "default": [
-                "events"
-            ]
+            "default": []
         },
         "colorTheme": {
             "type": "ThemeColor",

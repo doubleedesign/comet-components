@@ -7,7 +7,7 @@
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",
-            "description": "The single background colour of the component."
+            "description": "The background colour of the component."
         },
         "caption": {
             "type": "string",

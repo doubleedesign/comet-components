@@ -14,11 +14,12 @@ class Columns extends LayoutComponent {
     use BackgroundColor;
 
     /**
-     * @var int|mixed $qty
+     * @var int $qty
      * @description The number of layout columns to use; by default automatically determined by the number of inner components.
      *              Can be explicitly set when you want to use the columnLayout option (e.g., two columns laid out as 1/3 + 2/3)
      *              and/or hAlign option (e.g., 2 one-third columns centered).
      *              The maximum supported by the CSS is 6, so if a larger number is provided it will be adjusted.
+     * @supported-values 2, 3, 4, 5, 6
      */
     protected int $qty = 2;
 
