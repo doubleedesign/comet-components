@@ -11,60 +11,12 @@ type SeparatorProps = {
 const meta = {
 	title: 'UI/Separator',
 	tags: ['wordpress-block', 'autodocs'],
-	...createStoryBase('Separator'),
-	args: {
-		tagName: "hr",
-		color: "primary"
-	},
-	argTypes: {
-		tagName: {
-			description: "The HTML tag to use for this component",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "hr"
-				},
-				type: {
-					summary: "Tag"
-				}
-			},
-			options: [
-				"hr"
-			]
-		},
-		classes: {
-			description: "CSS classes",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "separator"
-				},
-				type: {
-					summary: "array<string>"
-				}
-			}
-		},
-		color: {
-			description: "",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "primary"
-				},
-				type: {
-					summary: "ThemeColor"
-				}
-			},
-			options: THEME_COLORS
-		}
-	},
+	...(await createStoryBase('Separator')),
 } satisfies Meta<SeparatorProps>;
 
 export default meta;
 type Story = StoryObj<SeparatorProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };

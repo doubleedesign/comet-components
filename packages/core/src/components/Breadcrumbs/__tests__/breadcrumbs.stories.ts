@@ -9,45 +9,12 @@ type BreadcrumbsProps = {
 const meta = {
 	title: 'Navigation/Breadcrumbs',
 	tags: ['wordpress-theme', 'autodocs'],
-	...createStoryBase('Breadcrumbs'),
-	args: {
-		tagName: "nav",
-	},
-	argTypes: {
-		tagName: {
-			description: "The HTML tag to use for this component",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "nav"
-				},
-				type: {
-					summary: "Tag"
-				}
-			},
-			options: [
-				"nav"
-			]
-		},
-		classes: {
-			description: "CSS classes",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "breadcrumbs"
-				},
-				type: {
-					summary: "array<string>"
-				}
-			}
-		},
-
-	},
+	...(await createStoryBase('Breadcrumbs')),
 } satisfies Meta<BreadcrumbsProps>;
 
 export default meta;
 type Story = StoryObj<BreadcrumbsProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };

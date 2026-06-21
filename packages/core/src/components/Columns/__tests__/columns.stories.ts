@@ -29,11 +29,6 @@ const meta = {
 	tags: ['wordpress-block', 'autodocs'],
 	...(await createStoryBase('Columns')),
 	args: {
-		tagName: "div",
-		hAlign: "start",
-		vAlign: "start",
-		backgroundColor: "",
-		size: 'contained',
 		qty: 3,
 		columnLayout: 'even',
 	},

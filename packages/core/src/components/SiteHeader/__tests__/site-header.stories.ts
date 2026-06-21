@@ -34,13 +34,6 @@ export const BasicStyle: Story = {
 		responsiveStyle: 'basic',
 		breakpoint: null,
 	},
-	argTypes: {
-		responsiveStyle: {
-			// @ts-expect-error TS2339: Property responsiveStyle does not exist on type {}
-			...meta?.argTypes?.responsiveStyle,
-			control: { disable: true }
-		}
-	}
 }
 
 export const OverlayStyle: Story = {
@@ -51,7 +44,6 @@ export const OverlayStyle: Story = {
 	},
 	argTypes: {
 		responsiveStyle: {
-			// @ts-expect-error TS2339: Property responsiveStyle does not exist on type {}
 			...meta?.argTypes?.responsiveStyle,
 			control: { disable: true }
 		}
@@ -66,7 +58,6 @@ export const OffCanvasStyle: Story = {
 	},
 	argTypes: {
 		responsiveStyle: {
-			// @ts-expect-error TS2339: Property responsiveStyle does not exist on type {}
 			...meta?.argTypes?.responsiveStyle,
 			control: { disable: true }
 		}

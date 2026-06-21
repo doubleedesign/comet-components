@@ -11,98 +11,12 @@ type SiteFooterProps = {
 const meta = {
 	title: 'Layout/SiteFooter',
 	tags: ['wordpress-theme', 'autodocs'],
-	...createStoryBase('SiteFooter'),
-	args: {
-		backgroundColor: "",
-		size: "default",
-		tagName: "footer",
-	},
-	argTypes: {
-		backgroundColor: {
-			description: "Background colour keyword",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "ThemeColor"
-				}
-			},
-			options: [
-				"none",
-				"primary",
-				"secondary",
-				"accent",
-				"error",
-				"success",
-				"warning",
-				"info",
-				"light",
-				"dark",
-				"white"
-			]
-		},
-		classes: {
-			description: "CSS classes",
-			control: false,
-			table: {
-				defaultValue: {
-					summary: "site-footer"
-				},
-				type: {
-					summary: "array<string>"
-				}
-			}
-		},
-		size: {
-			description: "Keyword specifying the relative width of the container for the inner content",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "default"
-				},
-				type: {
-					summary: "ContainerSize"
-				}
-			},
-			options: [
-				"default",
-				"wide",
-				"fullwidth",
-				"narrow",
-				"narrower",
-				"small"
-			]
-		},
-		tagName: {
-			description: "The HTML tag to use for this component",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "footer"
-				},
-				type: {
-					summary: "Tag"
-				}
-			},
-			options: [
-				"footer"
-			]
-		},
-
-	},
+	...(await createStoryBase('SiteFooter')),
 } satisfies Meta<SiteFooterProps>;
 
 export default meta;
 type Story = StoryObj<SiteFooterProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };

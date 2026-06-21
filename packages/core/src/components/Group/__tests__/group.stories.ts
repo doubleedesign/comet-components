@@ -12,71 +12,12 @@ type GroupProps = {
 const meta = {
 	title: 'Layout/Group',
 	tags: ['autodocs'],
-	...createStoryBase('Group'),
-	args: {
-		backgroundColor: "",
-		tagName: "div"
-	},
-	argTypes: {
-		backgroundColor: {
-			description: "Background colour keyword",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "ThemeColor"
-				}
-			},
-			options: ["none", ...THEME_COLORS]
-		},
-		classes: {
-			description: "CSS classes",
-			control: {
-				type: "select"
-			},
-			options: [
-				"",
-				"group--breakout"
-			],
-			table: {
-				defaultValue: {
-					summary: "group"
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		},
-		tagName: {
-			description: "The HTML tag to use for this component",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: "div"
-				},
-				type: {
-					summary: "Tag"
-				}
-			},
-			options: [
-				"div",
-				"section",
-				"article",
-				"aside"
-			]
-		},
-	},
+	...(await createStoryBase('Group')),
 } satisfies Meta<GroupProps>;
 
 export default meta;
 type Story = StoryObj<GroupProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };

@@ -13,97 +13,12 @@ type HeadingProps = {
 const meta = {
 	title: 'Text/Heading',
 	tags: ['autodocs'],
-	...createStoryBase('Heading'),
-	args: {
-		level: 2,
-		textAlign: "",
-		textColor: "",
-		classes: ""
-	},
-	argTypes: {
-		classes: {
-			description: "CSS classes",
-			control: {
-				type: "select"
-			},
-			options: [
-				"",
-				"is-style-accent",
-				"is-style-small"
-			],
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "string"
-				}
-			}
-		},
-		level: {
-			description: "Heading level (1-6). Default is 2. Cannot be used in conjunction with tagName.",
-			control: {
-				type: "select"
-			},
-			options: [
-				1,
-				2,
-				3,
-				4,
-				5,
-				6
-			],
-			table: {
-				defaultValue: {
-					summary: "2"
-				},
-				type: {
-					summary: "int"
-				}
-			}
-		},
-		textAlign: {
-			description: "",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "Alignment"
-				}
-			},
-			options: [
-				"start",
-				"end",
-				"center",
-				"justify",
-				"match-parent"
-			]
-		},
-		textColor: {
-			description: "",
-			control: {
-				type: "select"
-			},
-			table: {
-				defaultValue: {
-					summary: ""
-				},
-				type: {
-					summary: "ThemeColor"
-				}
-			},
-			options: THEME_COLORS
-		}
-	},
+	...(await createStoryBase('Heading')),
 } satisfies Meta<HeadingProps>;
 
 export default meta;
 type Story = StoryObj<HeadingProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };

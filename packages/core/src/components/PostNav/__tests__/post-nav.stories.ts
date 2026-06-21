@@ -14,12 +14,12 @@ type PostNavProps = {
 const meta = {
 	title: 'Layout/PostNav',
 	tags: ['wordpress-theme', 'autodocs'],
-	...createStoryBase('PostNav'),
+	...(await createStoryBase('PostNav')),
 } satisfies Meta<PostNavProps>;
 
 export default meta;
 type Story = StoryObj<PostNavProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };

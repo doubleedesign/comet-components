@@ -7,7 +7,6 @@ import {
 } from "../../../../test/storybook-helpers.ts";
 import { createStoryBase } from "../../../../test/story-base.ts";
 
-// TODO: Complete type, args, argTypes
 type CardProps = {
 	colorTheme: ThemeColor;
 	orientation: Orientation;
@@ -17,12 +16,12 @@ type CardProps = {
 const meta = {
 	title: 'UI/Card',
 	tags: ['autodocs'],
-	...createStoryBase('Card'),
+	...(await createStoryBase('Card')),
 } satisfies Meta<CardProps>;
 
 export default meta;
 type Story = StoryObj<CardProps>;
 
 export const Playground: Story = {
-	tags: []
+	tags: ['!dev']
 };
