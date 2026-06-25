@@ -16,6 +16,10 @@ trait NestedState {
             if (method_exists($this, 'set_size')) {
                 $this->set_size(null);
             }
+
+			if (method_exists($this, 'set_tag')) {
+				$this->set_tag(Tag::DIV);
+			}
         }
     }
 

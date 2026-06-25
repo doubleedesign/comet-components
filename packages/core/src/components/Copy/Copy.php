@@ -6,9 +6,7 @@ namespace Doubleedesign\Comet\Core;
 class Copy extends UIComponent {
     use ColorPair;
     use LayoutContainerSize;
-    use NestedState {
-		set_is_nested as private trait_set_is_nested;
-    }
+    use NestedState;
 
     /**
      * @var array<PreprocessedHTML|Heading|ButtonGroup|ImageComponent> $innerComponents
@@ -19,15 +17,8 @@ class Copy extends UIComponent {
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Copy.copy');
         $this->set_color_pair($attributes);
-        $this->set_is_nested($attributes['isNested'] ?? null);
+        $this->set_is_nested($attributes['isNested'] ?? false);
         $this->set_size($attributes);
-    }
-
-    public function set_is_nested($isNested): void {
-        $this->trait_set_is_nested($isNested);
-        if ($this->get_is_nested()) {
-            $this->tagName = Tag::DIV;
-        }
     }
 
     protected function get_html_attributes(): array {
@@ -37,13 +28,13 @@ class Copy extends UIComponent {
             $attributes['data-size'] = $this->size->value;
         }
 
-	    if ($this->colorTheme) {
-		    $attributes['data-color-theme'] = $this->colorTheme->value;
-	    }
+        if ($this->colorTheme) {
+            $attributes['data-color-theme'] = $this->colorTheme->value;
+        }
 
-		if($this->get_background_color() !== null) {
-			$attributes['data-background'] = $this->get_background_color()->value;
-		}
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->get_background_color()->value;
+        }
 
         return $attributes;
     }
