@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\{Config, IconLinks, Menu, SiteFooter};
+use Doubleedesign\Comet\Core\{Config, PreprocessedHTML, Menu, SiteFooter};
 use Doubleedesign\CometCanvas\NavMenus;
 
 ?>
@@ -9,20 +9,13 @@ use Doubleedesign\CometCanvas\NavMenus;
 <?php
 $menuItems = NavMenus::get_simplified_nav_menu_items_by_location('footer');
 $menuComponent = new Menu([], $menuItems);
-$socials = function_exists('get_field') ? (get_field('social_media_links', 'options') ?? []) : [];
 $attributes = Config::getInstance()->get_component_defaults('site-footer') ?? [];
+ob_start();
+get_template_part('template-parts/social-links', null, ['context' => 'site-footer']);
+$socials = new PreprocessedHTML([], ob_get_clean());
 
-if ($socials) {
-    $iconLinksComponent = new IconLinks([
-        'aria-label' => 'Social media links',
-		'orientation' => 'horizontal',
-    ], $socials);
-    $footerComponent = new SiteFooter($attributes, [$iconLinksComponent, $menuComponent]);
-}
-else {
-    $footerComponent = new SiteFooter($attributes, [$menuComponent]);
-}
 
+$footerComponent = new SiteFooter($attributes, [$menuComponent, $socials]);
 $footerComponent->render();
 
 wp_footer(); ?>

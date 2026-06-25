@@ -1,6 +1,6 @@
 <?php
-if(!class_exists('Doubleedesign\Comet\Core\Config')) {
-	wp_die('Cannot load the page because a required plugin is not active.');
+if (!class_exists('Doubleedesign\Comet\Core\Config')) {
+    wp_die('Cannot load the page because a required plugin is not active.');
 }
 
 use Doubleedesign\Comet\Core\{Config, Group, Menu, PreprocessedHTML, SiteHeader};
@@ -51,18 +51,31 @@ $overlayMode = isset($header_attributes['responsiveStyle']) && $header_attribute
 $offCanvasMode = isset($header_attributes['responsiveStyle']) && $header_attributes['responsiveStyle'] === 'off-canvas';
 $basicMode = !$overlayMode && !$offCanvasMode;
 
+$showSocials = apply_filters('comet_canvas_show_social_links_in_header', false);
+$showSocialsInOverlay = apply_filters('comet_canvas_show_social_links_in_header_menu_overlay', false);
+
 ob_start();
 get_template_part('template-parts/contact-details');
 $contactBlockHtml = ob_get_clean();
 $contactBlock = new PreprocessedHTML([], $contactBlockHtml);
 $contactBlock = new Group(['shortName' => 'contact'], [$contactBlock]);
 
+ob_start();
+get_template_part('template-parts/social-links', null, ['context' => 'site-header__top']);
+$socials = new PreprocessedHTML([], ob_get_clean());
+
 $headerComponent = new SiteHeader(
     ['logoUrl' => $logoUrl, ...$header_attributes],
     [
         'menuComponent'  => $menuComponent,
-        'alwaysShow'     => $showContactDetails ? [$contactBlock] : [],
-        'showInOverlays' => $showContactDetailsInOverlay ? [$contactBlock] : []
+        'alwaysShow'     => [
+            ...($showContactDetails ? [$contactBlock] : []),
+            ...($showSocials ? [$socials] : [])
+        ],
+        'showInOverlays' => [
+            ...($showContactDetailsInOverlay ? [$contactBlock] : []),
+            ...($showSocialsInOverlay ? [$socials] : []),
+        ],
     ]
 );
 
