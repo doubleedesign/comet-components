@@ -149,7 +149,8 @@ class TemplateParts {
                         'isOutline' => true
                     ],
                     'colorTheme'  => 'primary',
-                    'orientation' => 'horizontal'
+                    'orientation' => 'horizontal',
+                    'cardAsLink'        => apply_filters('comet_canvas_posts_loop_card_as_link', false),
                 ]);
             }
         }
