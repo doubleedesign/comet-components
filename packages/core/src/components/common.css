@@ -116,8 +116,13 @@
     --gradient-white-error: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-error) 50%, var(--color-error) 100%);
     --gradient-white-light: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-light) 50%, var(--color-light) 100%);
     --gradient-white-dark: linear-gradient(180deg, var(--color-white) 0%, var(--color-white) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-    --font-size-sm: 0.875rem;
     --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: calc(1rem * pow(var(--typescale), 1));
+    --font-size-lg: calc(1rem * pow(var(--typescale), 2));
+    --font-size-xl: calc(1rem * pow(var(--typescale), 3));
+    --font-size-xxl: calc(1rem * pow(var(--typescale), 4));
+    --font-size-display: calc(1rem * pow(var(--typescale), 6));
     --font-weight-light: 300;
     --font-weight-regular: 400;
     --font-weight-semibold: 600;
@@ -162,19 +167,19 @@
     color: var(--theme-color);
   }
   h1 {
-    font-size: calc(1rem * var(--typescale) * var(--typescale) * var(--typescale));
+    font-size: var(--font-size-xl);
   }
   h1.is-style-accent {
     font-size: calc(1.25rem * var(--typescale) * var(--typescale) * var(--typescale));
   }
   h2 {
-    font-size: calc(1rem * var(--typescale) * var(--typescale));
+    font-size: var(--font-size-lg);
   }
   h2.is-style-accent {
     font-size: calc(1.25rem * var(--typescale) * var(--typescale));
   }
   h3 {
-    font-size: calc(1rem * var(--typescale));
+    font-size: var(--font-size-md);
   }
   h3.is-style-accent {
     font-size: calc(1.25rem * var(--typescale));
