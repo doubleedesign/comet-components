@@ -757,112 +757,6 @@
         ]
     },
     {
-        "name": "WrappedLayoutComponent",
-        "description": null,
-        "extends": "LayoutComponent",
-        "abstract": true,
-        "isInner": false,
-        "attributes": {
-            "ariaAttrs": {
-                "type": "array",
-                "description": "Allow for aria-* attributes to be passed down to the wrapper explicitly",
-                "required": true
-            },
-            "classes": {
-                "type": "array<string>",
-                "description": "Additional CSS classes",
-                "default": []
-            },
-            "context": {
-                "type": "string",
-                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
-            },
-            "dataAttrs": {
-                "type": "array",
-                "description": "Allow for data-* attributes to be passed down to the container explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
-                "required": true
-            },
-            "hAlign": {
-                "type": "Alignment",
-                "description": "Horizontal alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            },
-            "id": {
-                "type": "string",
-                "description": "Unique identifier"
-            },
-            "shortName": {
-                "type": "string",
-                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
-                "required": true,
-                "default": ""
-            },
-            "size": {
-                "type": "ContainerSize",
-                "description": "Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is nested.",
-                "supported": [
-                    "fullwidth",
-                    "wide",
-                    "narrow",
-                    "narrower",
-                    "small",
-                    "contained"
-                ],
-                "default": "contained"
-            },
-            "style": {
-                "type": "array",
-                "description": "Inline styles"
-            },
-            "tagName": {
-                "type": "Tag",
-                "description": "The HTML tag to use for this component",
-                "supported": [
-                    "section",
-                    "main",
-                    "div",
-                    "article",
-                    "footer",
-                    "figure"
-                ],
-                "default": "section"
-            },
-            "testId": {
-                "type": "string",
-                "description": "Optionally add a data-testid attribute for automated tests"
-            },
-            "vAlign": {
-                "type": "Alignment",
-                "description": "Vertical alignment, if applicable",
-                "supported": [
-                    "start",
-                    "end",
-                    "center",
-                    "justify",
-                    "match-parent"
-                ],
-                "default": "match-parent"
-            }
-        },
-        "innerComponents": {
-            "type": "array<Renderable>",
-            "description": "Inner components to be rendered within this component",
-            "required": true
-        },
-        "traits": [
-            "LayoutAlignment",
-            "LayoutContainerSize",
-            "BlockElementModifier"
-        ]
-    },
-    {
         "name": "Accordion",
         "description": "Group content into expandable/collapsible panels.",
         "extends": "PanelGroupComponent",
@@ -3690,7 +3584,7 @@
     {
         "name": "IconLinks",
         "description": null,
-        "extends": "Renderable",
+        "extends": "UIComponent",
         "abstract": false,
         "isInner": false,
         "attributes": {
@@ -3772,10 +3666,15 @@
                 "default": "match-parent"
             }
         },
+        "innerComponents": {
+            "type": "array<Renderable>",
+            "description": "Inner components to be rendered within this component",
+            "required": true
+        },
         "traits": [
-            "BlockElementModifier",
             "LayoutAlignment",
-            "LayoutOrientation"
+            "LayoutOrientation",
+            "BlockElementModifier"
         ]
     },
     {
