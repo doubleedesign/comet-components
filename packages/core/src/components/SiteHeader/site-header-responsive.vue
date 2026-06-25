@@ -1,4 +1,7 @@
 <script>
+import '../../plugins/tippy/popper.min.js';
+import '../../plugins/tippy/tippy.min.js';
+
 export default {
 	name: 'SiteHeaderResponsive',
 	inheritAttrs: false,
@@ -23,6 +26,7 @@ export default {
 	},
 	mounted() {
 		this.menuItems = JSON.parse(this.menuData || '[]');
+		tippy('[class$="site-header__menu-toggle"] > [data-tippy-content]', { appendTo: 'parent' });
 
 		// Check screen size first; or if breakpoint is 0, we're always in responsive mode
 		if (['0', '0px', '0rem'].includes(this.breakpoint)) {
@@ -98,8 +102,10 @@ export default {
             :data-menu-style="responsiveStyle"
             :aria-expanded="responsiveMenuOpen"
     >
-        <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
-        <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
+       <span data-tippy-content="Menu" tabindex="0">
+            <!-- Note: Font Awesome needs to be using Web Font mode, not SVG mode, for this to work -->
+            <i :class="[toggleButtonIconPrefix, responsiveMenuOpen ? 'fa-close' : toggleButtonIconClass]"></i>
+       </span>
     </button>
     <!-- Content in overlay or off-canvas mode (usually mobile/small viewports, unless always using overlay) -->
     <div v-if="isBelowBreakpoint"

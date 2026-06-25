@@ -46,6 +46,7 @@
 		justify-content: space-between;
 	}
 
+	&:has(> #{class-ends-with('__top')}),
 	&:has(> #{class-contains('__logo')}):has(> #{class-ends-with('__top')}):has(> #{class-ends-with('__menu')}),
 	&:has(> #{class-contains('__logo')}):has(> #{class-ends-with('__top')}):has(> [data-vue-component]) {
 		@include is-expanded {
@@ -74,6 +75,10 @@
 		}
 	}
 
+	.tippy-content {
+		font-family: var(--font-family-body);
+	}
+
 	[data-vue-component],
 	component {
 		display: contents;
@@ -96,7 +101,7 @@
 	&__top {
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
+		justify-content: flex-end;
 		@include section-padding();
 		padding-block-end: 0;
 
@@ -105,7 +110,7 @@
 		}
 
 		.site-header:has(.site-header__menu-toggle) & {
-			padding-inline-end: 3rem;
+			padding-inline-start: 3rem;
 		}
 
 		[data-style="overlay"] &,
@@ -146,7 +151,13 @@
 		right: 0;
 		z-index: 9999;
 
-		&[data-menu-style="off-canvas"] {
+		:has(> #{class-ends-with('__top')}) & {
+			right: unset;
+			left: 0;
+		}
+
+		&[data-menu-style="off-canvas"],
+		&[data-menu-style="overlay"] {
 			margin-left: 0;
 			--active-color: white;
 		}
@@ -391,6 +402,11 @@
 
 				&[data-open="true"] {
 					opacity: 1;
+
+					@at-root body:has([data-open="true"]) {
+						overflow: hidden;
+						height: 100dvh;
+					}
 				}
 
 				.site-header__menu__sub-menu__item {

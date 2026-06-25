@@ -32,6 +32,8 @@
   flex-direction: column;
   align-items: flex-start;
   flex-grow: 1;
+}
+[class$=card-list__item__card]:not([data-background]) .card__content, [class$=card-list__item__card]:not([data-background]) [class$=__card__content] {
   background: white;
 }
 @container (min-width: 600px) {

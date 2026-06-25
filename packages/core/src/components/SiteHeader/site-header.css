@@ -51,7 +51,7 @@
 }
 @container site-header style(--breakpoint:none) {
   @media (min-width: 940px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       display: grid;
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
@@ -60,27 +60,28 @@
     }
   }
   @media (min-width: 940px) and (min-width: 768px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xl);
     }
   }
   @media (min-width: 940px) and (min-width: 1440px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xxl);
     }
   }
   @media (min-width: 940px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+    .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
       grid-row: 1/3;
       margin-inline: 0;
       margin-block: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+    .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
       justify-content: flex-end;
       padding-block-start: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
       justify-content: flex-end;
@@ -88,7 +89,7 @@
   }
 }
 @media (min-width: 940px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+  .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
     display: grid;
     grid-template-columns: var(--logo-max-width) 1fr;
     grid-template-rows: auto auto;
@@ -97,106 +98,109 @@
   }
 }
 @media (min-width: 940px) and (min-width: 768px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+  .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
     padding-block: var(--spacing-xl);
   }
 }
 @media (min-width: 940px) and (min-width: 1440px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+  .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
     padding-block: var(--spacing-xxl);
   }
 }
 @media (min-width: 940px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+  .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
     grid-column: 1;
     grid-row: 1/3;
     margin-inline: 0;
     margin-block: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+  .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
     justify-content: flex-end;
     padding-block-start: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+  .site-header:has(> [class$=__top]) > [class$=__menu],
+  .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
     justify-content: flex-end;
   }
 }
 @container site-header (min-width: var(--breakpoint)) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+  .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
     display: grid;
     grid-template-columns: var(--logo-max-width) 1fr;
     grid-template-rows: auto auto;
     padding-block: var(--spacing-lg);
   }
   @media (min-width: 768px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xl);
     }
   }
   @media (min-width: 1440px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xxl);
     }
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+  .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
     row-gap: var(--spacing-lg);
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+  .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
     grid-column: 1;
     grid-row: 1/3;
     margin-inline: 0;
     margin-block: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+  .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
     justify-content: flex-end;
     padding-block-start: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+  .site-header:has(> [class$=__top]) > [class$=__menu],
+  .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
     justify-content: flex-end;
   }
 }
 @container site-header (min-width: var(--container-max-width)) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+  .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
     display: grid;
     grid-template-columns: var(--logo-max-width) 1fr;
     grid-template-rows: auto auto;
     padding-block: var(--spacing-lg);
   }
   @media (min-width: 768px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xl);
     }
   }
   @media (min-width: 1440px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xxl);
     }
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+  .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
     row-gap: var(--spacing-lg);
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+  .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
     grid-column: 1;
     grid-row: 1/3;
     margin-inline: 0;
     margin-block: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+  .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
     justify-content: flex-end;
     padding-block-start: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+  .site-header:has(> [class$=__top]) > [class$=__menu],
+  .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
     justify-content: flex-end;
   }
 }
 @media (min-width: 940px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
+  .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
     display: grid;
     grid-template-columns: var(--logo-max-width) 1fr;
     grid-template-rows: auto auto;
@@ -205,31 +209,35 @@
   }
 }
 @media (min-width: 940px) and (min-width: 768px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
+  .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
     padding-block: var(--spacing-xl);
   }
 }
 @media (min-width: 940px) and (min-width: 1440px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
+  .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
     padding-block: var(--spacing-xxl);
   }
 }
 @media (min-width: 940px) {
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo] {
+  .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo] {
     grid-column: 1;
     grid-row: 1/3;
     margin-inline: 0;
     margin-block: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top] {
+  .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top] {
     justify-content: flex-end;
     padding-block-start: 0;
   }
-  .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
+  .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
+  .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
   .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) [data-vue-component] [class$=__menu] {
     justify-content: flex-end;
   }
+}
+.site-header .tippy-content {
+  font-family: var(--font-family-body);
 }
 .site-header [data-vue-component],
 .site-header component {
@@ -273,7 +281,7 @@
 .site-header__top {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   padding-block: var(--spacing-lg);
 }
 @media (min-width: 768px) {
@@ -293,7 +301,7 @@
   display: none;
 }
 .site-header:has(.site-header__menu-toggle) .site-header__top {
-  padding-inline-end: 3rem;
+  padding-inline-start: 3rem;
 }
 [data-style=overlay] .site-header__top, [data-style=off-canvas] .site-header__top {
   margin-inline: auto;
@@ -325,7 +333,11 @@
   right: 0;
   z-index: 9999;
 }
-.site-header__menu-toggle[data-menu-style=off-canvas] {
+:has(> [class$=__top]) .site-header__menu-toggle {
+  right: unset;
+  left: 0;
+}
+.site-header__menu-toggle[data-menu-style=off-canvas], .site-header__menu-toggle[data-menu-style=overlay] {
   margin-left: 0;
   --active-color: white;
 }
@@ -583,6 +595,11 @@
 [data-style=overlay] .site-header__menu [class$=__sub-menu][data-open=true], [data-style=off-canvas] .site-header__menu [class$=__sub-menu][data-open=true] {
   opacity: 1;
 }
+body:has([data-open=true]) {
+  overflow: hidden;
+  height: 100dvh;
+}
+
 [data-style=overlay] .site-header__menu [class$=__sub-menu] .site-header__menu__sub-menu__item, [data-style=off-canvas] .site-header__menu [class$=__sub-menu] .site-header__menu__sub-menu__item {
   margin: 0;
   background: transparent;

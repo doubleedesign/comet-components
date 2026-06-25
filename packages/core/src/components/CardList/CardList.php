@@ -32,7 +32,7 @@ class CardList extends LayoutComponent {
         $this->set_is_nested($attributes['isNested'] ?? false);
         $this->set_color_pair($attributes);
         $headingComponent = isset($attributes['heading']) ? new Heading([], $attributes['heading']) : null;
-        $linkComponent = isset($attributes['link']) ? new Button($attributes['link'], $attributes['link']['title'] ?? 'View more') : null;
+        $linkComponent = (isset($attributes['link']) && !empty($attributes['link'])) ? new Button($attributes['link'], $attributes['link']['title'] ?? 'View more') : null;
 
         // Add a wrapper to each Card so that it can use container queries based on that
         $updatedInnerComponents = array_map(function($component) {

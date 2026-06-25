@@ -46,7 +46,10 @@
 		flex-direction: column;
 		align-items: flex-start;
 		flex-grow: 1;
-		background: white;
+
+		#{class-ends-with('card-list__item__card')}:not([data-background]) & {
+			background: white;
+		}
 
 		@container (min-width: 600px) {
 			padding: var(--spacing-md);

@@ -1,6 +1,7 @@
 @use '../mixins' as *;
+@use '../bem-mixin' as *;
 
-.page-header {
+@include bem-block('page-header') {
 
 	.breadcrumbs {
 		width: 100%;
@@ -16,11 +17,5 @@
 		margin-bottom: 0;
 		width: 100%;
 		flex-basis: 100%;
-	}
-
-	&__container {
-		&[data-halign="center"] {
-			text-align: center;
-		}
 	}
 }
