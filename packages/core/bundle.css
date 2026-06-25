@@ -19,13 +19,16 @@
     --spacing-xl: 2rem;
     --spacing-xxl: 2.827rem;
   }
+  * {
+    box-sizing: border-box;
+  }
   [data-size] {
     width: 100%;
     display: block;
     container-name: layout-section;
     container-type: inline-size;
     padding-inline: calc((100cqw - var(--container-max-width)) / 2);
-    border-inline: var(--spacing-md) solid transparent;
+    border-inline: var(--spacing-xl) solid transparent;
     box-sizing: border-box;
   }
   [data-size] > * {
@@ -222,22 +225,22 @@
   [data-background] > [data-background],
   [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
     padding-inline: var(--spacing-md);
+    box-sizing: content-box;
+    transform: translateX(calc(var(--spacing-md) * -1));
   }
   @media (min-width: 768px) {
     [data-background] > [data-background],
     [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
       padding-inline: var(--spacing-lg);
+      transform: translateX(calc(var(--spacing-lg) * -1));
     }
   }
   @media (min-width: 1440px) {
     [data-background] > [data-background],
     [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
       padding-inline: var(--spacing-xl);
+      transform: translateX(calc(var(--spacing-xl) * -1));
     }
-  }
-  [data-background] > [data-background],
-  [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
-    box-sizing: content-box;
   }
   [data-color-theme] {
     --theme-color-inverse: contrast-color(var(--theme-color));
@@ -881,9 +884,6 @@
       --base-font-size: 1rem;
       --typescale: 1.33;
     }
-  }
-  * {
-    box-sizing: border-box;
   }
   @view-transition {
     navigation: auto;

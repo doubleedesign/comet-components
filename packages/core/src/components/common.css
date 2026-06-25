@@ -132,9 +132,6 @@
       --typescale: 1.33;
     }
   }
-  * {
-    box-sizing: border-box;
-  }
   @view-transition {
     navigation: auto;
   }

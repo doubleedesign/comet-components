@@ -25,6 +25,10 @@
 		--spacing-xxl: 2.827rem;
 	}
 
+	* {
+		box-sizing: border-box;
+	}
+
 	[data-size] {
 		width: 100%;
 		display: block;

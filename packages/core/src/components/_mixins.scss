@@ -57,16 +57,21 @@
 	}
 }
 
-// Mixin to add equal padding on the sides of a section in select cases
+// Mixin to add equal padding on the sides of a section in select cases,
+// while keeping its content aligned with that of elements that do not have this
 @mixin section-padding-inline() {
 	padding-inline: var(--spacing-md);
+	box-sizing: content-box;
+	transform: translateX(calc(var(--spacing-md) * -1));
 
 	@include media-breakpoint-up('narrower') {
 		padding-inline: var(--spacing-lg);
+		transform: translateX(calc(var(--spacing-lg) * -1));
 	}
 
 	@include media-breakpoint-up('wide') {
 		padding-inline: var(--spacing-xl);
+		transform: translateX(calc(var(--spacing-xl) * -1));
 	}
 }
 
@@ -80,15 +85,16 @@
 }
 
 @mixin pad-edges() {
-	// make sure content doesn't hit the edges on small viewports or when full-width
-	border-inline: var(--spacing-md) solid transparent;
+	// make sure content doesn't hit the edges on small viewports or when full-width,
+	// while also leaving enough space to adjust elements with nested section padding so their content aligns with the rest of the page
+	border-inline: var(--spacing-xl) solid transparent;
 	box-sizing: border-box;
 }
 
 // Use unpad-edges() to "break out" a specific element (such as an image) from a parent with pad-edges()
 @mixin unpad-edges() {
-	width: calc(100% + var(--spacing-md) * 2);
-	margin-inline: calc(var(--spacing-md) * -1);
+	width: calc(100% + var(--spacing-xl) * 2);
+	margin-inline: calc(var(--spacing-xl) * -1);
 }
 
 @mixin breakout() {
