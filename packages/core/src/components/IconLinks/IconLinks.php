@@ -3,8 +3,7 @@ namespace Doubleedesign\Comet\Core;
 
 #[AllowedTags([Tag::DIV])]
 #[DefaultTag(Tag::DIV)]
-class IconLinks extends Renderable {
-    use BlockElementModifier;
+class IconLinks extends UIComponent {
     use LayoutAlignment;
     use LayoutOrientation;
 
@@ -23,7 +22,7 @@ class IconLinks extends Renderable {
     protected ?string $iconPrefix = 'fa-brands';
 
     public function __construct(array $attributes, array $links) {
-        parent::__construct($attributes, 'components.IconLinks.icon-links');
+        parent::__construct($attributes, [], 'components.IconLinks.icon-links');
         $this->init_bem_structure('components.IconLinks.icon-links', $attributes['context'] ?? null, $attributes['shortName'] ?? null);
         $this->set_layout_alignment($attributes, Alignment::CENTER);
         $this->set_orientation($attributes);
