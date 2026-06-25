@@ -235,6 +235,10 @@
       padding-inline: var(--spacing-xl);
     }
   }
+  [data-background] > [data-background],
+  [data-background] > [data-vue-component]:has(> [data-background]) > [data-background] {
+    box-sizing: content-box;
+  }
   [data-color-theme] {
     --theme-color-inverse: contrast-color(var(--theme-color));
   }
@@ -1556,6 +1560,8 @@
     flex-direction: column;
     align-items: flex-start;
     flex-grow: 1;
+  }
+  [class$=card-list__item__card]:not([data-background]) .card__content, [class$=card-list__item__card]:not([data-background]) [class$=__card__content] {
     background: white;
   }
   @container (min-width: 600px) {
@@ -1651,113 +1657,473 @@
     }
   }
   @container layout-section (min-width: 600px) {
-    .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    .columns[data-cols="2"], [data-cols="2"][class$=__columns], [data-cols="2"][class*=columns--], .columns[data-cols="4"], [data-cols="4"][class$=__columns], [data-cols="4"][class*=columns--], .columns[data-cols="6"], [data-cols="6"][class$=__columns], [data-cols="6"][class*=columns--] {
       grid-template-columns: repeat(2, calc((100% - var(--spacing-lg) * (2 - 1)) / 2));
     }
-    .columns[data-count="2"][data-halign], [data-count="2"][data-halign][class$=__columns], [data-count="2"][data-halign][class*=columns--], .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    .columns[data-cols="2"][data-halign], [data-cols="2"][data-halign][class$=__columns], [data-cols="2"][data-halign][class*=columns--], .columns[data-cols="4"][data-halign], [data-cols="4"][data-halign][class$=__columns], [data-cols="4"][data-halign][class*=columns--], .columns[data-cols="6"][data-halign], [data-cols="6"][data-halign][class$=__columns], [data-cols="6"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
+    }
+    .columns[data-cols="2"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="2"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="2"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="2"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="2"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="4"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 0;
+    }
+    .columns[data-cols="2"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="2"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="2"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="4"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span -2;
+    }
+    .columns[data-cols="2"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
     }
   }
   @container layout-section (min-width: var(--width-small)) {
-    .columns[data-count="2"], [data-count="2"][class$=__columns], [data-count="2"][class*=columns--], .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    .columns[data-cols="2"], [data-cols="2"][class$=__columns], [data-cols="2"][class*=columns--], .columns[data-cols="4"], [data-cols="4"][class$=__columns], [data-cols="4"][class*=columns--], .columns[data-cols="6"], [data-cols="6"][class$=__columns], [data-cols="6"][class*=columns--] {
       grid-template-columns: repeat(2, calc((100% - var(--spacing-lg) * (2 - 1)) / 2));
     }
-    .columns[data-count="2"][data-halign], [data-count="2"][data-halign][class$=__columns], [data-count="2"][data-halign][class*=columns--], .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    .columns[data-cols="2"][data-halign], [data-cols="2"][data-halign][class$=__columns], [data-cols="2"][data-halign][class*=columns--], .columns[data-cols="4"][data-halign], [data-cols="4"][data-halign][class$=__columns], [data-cols="4"][data-halign][class*=columns--], .columns[data-cols="6"][data-halign], [data-cols="6"][data-halign][class$=__columns], [data-cols="6"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
     }
+    .columns[data-cols="2"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="2"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="2"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="2"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="2"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="4"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 0;
+    }
+    .columns[data-cols="2"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="2"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="2"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="4"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span -2;
+    }
+    .columns[data-cols="2"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="4"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="2"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="2"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="4"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
   }
-  .columns[data-count="2"][data-allow-layout-stacking=false], [data-count="2"][data-allow-layout-stacking=false][class$=__columns], [data-count="2"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
+  .columns[data-cols="2"][data-allow-layout-stacking=false], [data-cols="2"][data-allow-layout-stacking=false][class$=__columns], [data-cols="2"][data-allow-layout-stacking=false][class*=columns--], .columns[data-cols="4"][data-allow-layout-stacking=false], [data-cols="4"][data-allow-layout-stacking=false][class$=__columns], [data-cols="4"][data-allow-layout-stacking=false][class*=columns--], .columns[data-cols="6"][data-allow-layout-stacking=false], [data-cols="6"][data-allow-layout-stacking=false][class$=__columns], [data-cols="6"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(2, calc((100% - var(--spacing-lg) * (2 - 1)) / 2));
   }
-  .columns[data-count="2"][data-allow-layout-stacking=false][data-halign], [data-count="2"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="2"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="4"][data-allow-layout-stacking=false][data-halign], [data-count="4"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false][data-halign], [data-count="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
+  .columns[data-cols="2"][data-allow-layout-stacking=false][data-halign], [data-cols="2"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="2"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-cols="4"][data-allow-layout-stacking=false][data-halign], [data-cols="4"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="4"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-cols="6"][data-allow-layout-stacking=false][data-halign], [data-cols="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
     grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (2 - 1)) / 2)));
   }
   @container layout-section (min-width: 768px) {
-    .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
+    .columns[data-cols="4"], [data-cols="4"][class$=__columns], [data-cols="4"][class*=columns--] {
       grid-template-columns: repeat(4, calc((100% - var(--spacing-lg) * (4 - 1)) / 4));
     }
-    .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--] {
+    .columns[data-cols="4"][data-halign], [data-cols="4"][data-halign][class$=__columns], [data-cols="4"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (4 - 1)) / 4)));
+    }
+    .columns[data-cols="4"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="4"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="4"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="4"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="4"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 2;
+    }
+    .columns[data-cols="4"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="4"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="4"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="4"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="4"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 0;
+    }
+    .columns[data-cols="4"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="4"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
     }
   }
   @container layout-section (min-width: var(--width-narrower)) {
-    .columns[data-count="4"], [data-count="4"][class$=__columns], [data-count="4"][class*=columns--] {
+    .columns[data-cols="4"], [data-cols="4"][class$=__columns], [data-cols="4"][class*=columns--] {
       grid-template-columns: repeat(4, calc((100% - var(--spacing-lg) * (4 - 1)) / 4));
     }
-    .columns[data-count="4"][data-halign], [data-count="4"][data-halign][class$=__columns], [data-count="4"][data-halign][class*=columns--] {
+    .columns[data-cols="4"][data-halign], [data-cols="4"][data-halign][class$=__columns], [data-cols="4"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (4 - 1)) / 4)));
     }
+    .columns[data-cols="4"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="4"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="4"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="4"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="4"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 2;
+    }
+    .columns[data-cols="4"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="4"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="4"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="4"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="4"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="4"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 0;
+    }
+    .columns[data-cols="4"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="4"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="4"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
+    }
   }
-  .columns[data-count="4"][data-allow-layout-stacking=false], [data-count="4"][data-allow-layout-stacking=false][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][class*=columns--] {
+  .columns[data-cols="4"][data-allow-layout-stacking=false], [data-cols="4"][data-allow-layout-stacking=false][class$=__columns], [data-cols="4"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(4, calc((100% - var(--spacing-lg) * (4 - 1)) / 4));
   }
-  .columns[data-count="4"][data-allow-layout-stacking=false][data-halign], [data-count="4"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="4"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
+  .columns[data-cols="4"][data-allow-layout-stacking=false][data-halign], [data-cols="4"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="4"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
     grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (4 - 1)) / 4)));
   }
   @container layout-section (min-width: 600px) {
-    .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    .columns[data-cols="3"], [data-cols="3"][class$=__columns], [data-cols="3"][class*=columns--], .columns[data-cols="5"], [data-cols="5"][class$=__columns], [data-cols="5"][class*=columns--], .columns[data-cols="6"], [data-cols="6"][class$=__columns], [data-cols="6"][class*=columns--] {
       grid-template-columns: repeat(3, calc((100% - var(--spacing-lg) * (3 - 1)) / 3));
     }
-    .columns[data-count="3"][data-halign], [data-count="3"][data-halign][class$=__columns], [data-count="3"][data-halign][class*=columns--], .columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    .columns[data-cols="3"][data-halign], [data-cols="3"][data-halign][class$=__columns], [data-cols="3"][data-halign][class*=columns--], .columns[data-cols="5"][data-halign], [data-cols="5"][data-halign][class$=__columns], [data-cols="5"][data-halign][class*=columns--], .columns[data-cols="6"][data-halign], [data-cols="6"][data-halign][class$=__columns], [data-cols="6"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (3 - 1)) / 3)));
+    }
+    .columns[data-cols="3"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="3"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="3"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="3"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="3"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="3"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="3"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="5"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 1;
+    }
+    .columns[data-cols="3"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="3"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="3"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="5"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span -1;
+    }
+    .columns[data-cols="3"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
     }
   }
   @container layout-section (min-width: var(--width-small)) {
-    .columns[data-count="3"], [data-count="3"][class$=__columns], [data-count="3"][class*=columns--], .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--], .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    .columns[data-cols="3"], [data-cols="3"][class$=__columns], [data-cols="3"][class*=columns--], .columns[data-cols="5"], [data-cols="5"][class$=__columns], [data-cols="5"][class*=columns--], .columns[data-cols="6"], [data-cols="6"][class$=__columns], [data-cols="6"][class*=columns--] {
       grid-template-columns: repeat(3, calc((100% - var(--spacing-lg) * (3 - 1)) / 3));
     }
-    .columns[data-count="3"][data-halign], [data-count="3"][data-halign][class$=__columns], [data-count="3"][data-halign][class*=columns--], .columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--], .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    .columns[data-cols="3"][data-halign], [data-cols="3"][data-halign][class$=__columns], [data-cols="3"][data-halign][class*=columns--], .columns[data-cols="5"][data-halign], [data-cols="5"][data-halign][class$=__columns], [data-cols="5"][data-halign][class*=columns--], .columns[data-cols="6"][data-halign], [data-cols="6"][data-halign][class$=__columns], [data-cols="6"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (3 - 1)) / 3)));
     }
+    .columns[data-cols="3"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="3"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="3"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="3"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="3"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="3"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="3"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="5"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 1;
+    }
+    .columns[data-cols="3"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="3"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="3"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="5"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2), .columns[data-cols="6"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span -1;
+    }
+    .columns[data-cols="3"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="5"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="3"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="3"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="5"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type, .columns[data-cols="6"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
   }
-  .columns[data-count="3"][data-allow-layout-stacking=false], [data-count="3"][data-allow-layout-stacking=false][class$=__columns], [data-count="3"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="5"][data-allow-layout-stacking=false], [data-count="5"][data-allow-layout-stacking=false][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
+  .columns[data-cols="3"][data-allow-layout-stacking=false], [data-cols="3"][data-allow-layout-stacking=false][class$=__columns], [data-cols="3"][data-allow-layout-stacking=false][class*=columns--], .columns[data-cols="5"][data-allow-layout-stacking=false], [data-cols="5"][data-allow-layout-stacking=false][class$=__columns], [data-cols="5"][data-allow-layout-stacking=false][class*=columns--], .columns[data-cols="6"][data-allow-layout-stacking=false], [data-cols="6"][data-allow-layout-stacking=false][class$=__columns], [data-cols="6"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(3, calc((100% - var(--spacing-lg) * (3 - 1)) / 3));
   }
-  .columns[data-count="3"][data-allow-layout-stacking=false][data-halign], [data-count="3"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="3"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="5"][data-allow-layout-stacking=false][data-halign], [data-count="5"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-count="6"][data-allow-layout-stacking=false][data-halign], [data-count="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
+  .columns[data-cols="3"][data-allow-layout-stacking=false][data-halign], [data-cols="3"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="3"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-cols="5"][data-allow-layout-stacking=false][data-halign], [data-cols="5"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="5"][data-allow-layout-stacking=false][data-halign][class*=columns--], .columns[data-cols="6"][data-allow-layout-stacking=false][data-halign], [data-cols="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
     grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (3 - 1)) / 3)));
   }
   @container layout-section (min-width: 940px) {
-    .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--] {
+    .columns[data-cols="5"], [data-cols="5"][class$=__columns], [data-cols="5"][class*=columns--] {
       grid-template-columns: repeat(5, calc((100% - var(--spacing-lg) * (5 - 1)) / 5));
     }
-    .columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--] {
+    .columns[data-cols="5"][data-halign], [data-cols="5"][data-halign][class$=__columns], [data-cols="5"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (5 - 1)) / 5)));
+    }
+    .columns[data-cols="5"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="5"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="5"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="5"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="5"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 3;
+    }
+    .columns[data-cols="5"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="5"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="5"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="5"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="5"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 1;
+    }
+    .columns[data-cols="5"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 5;
+    }
+    .columns[data-cols="5"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 5;
     }
   }
   @container layout-section (min-width: var(--width-narrow)) {
-    .columns[data-count="5"], [data-count="5"][class$=__columns], [data-count="5"][class*=columns--] {
+    .columns[data-cols="5"], [data-cols="5"][class$=__columns], [data-cols="5"][class*=columns--] {
       grid-template-columns: repeat(5, calc((100% - var(--spacing-lg) * (5 - 1)) / 5));
     }
-    .columns[data-count="5"][data-halign], [data-count="5"][data-halign][class$=__columns], [data-count="5"][data-halign][class*=columns--] {
+    .columns[data-cols="5"][data-halign], [data-cols="5"][data-halign][class$=__columns], [data-cols="5"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (5 - 1)) / 5)));
     }
+    .columns[data-cols="5"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="5"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="5"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="5"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="5"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 3;
+    }
+    .columns[data-cols="5"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="5"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="5"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="5"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="5"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="5"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 1;
+    }
+    .columns[data-cols="5"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 5;
+    }
+    .columns[data-cols="5"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="5"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 5;
+    }
   }
-  .columns[data-count="5"][data-allow-layout-stacking=false], [data-count="5"][data-allow-layout-stacking=false][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][class*=columns--] {
+  .columns[data-cols="5"][data-allow-layout-stacking=false], [data-cols="5"][data-allow-layout-stacking=false][class$=__columns], [data-cols="5"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(5, calc((100% - var(--spacing-lg) * (5 - 1)) / 5));
   }
-  .columns[data-count="5"][data-allow-layout-stacking=false][data-halign], [data-count="5"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="5"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
+  .columns[data-cols="5"][data-allow-layout-stacking=false][data-halign], [data-cols="5"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="5"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
     grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (5 - 1)) / 5)));
   }
   @container layout-section (min-width: 940px) {
-    .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    .columns[data-cols="6"], [data-cols="6"][class$=__columns], [data-cols="6"][class*=columns--] {
       grid-template-columns: repeat(6, calc((100% - var(--spacing-lg) * (6 - 1)) / 6));
     }
-    .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    .columns[data-cols="6"][data-halign], [data-cols="6"][data-halign][class$=__columns], [data-cols="6"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (6 - 1)) / 6)));
+    }
+    .columns[data-cols="6"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 5;
+    }
+    .columns[data-cols="6"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 5;
+    }
+    .columns[data-cols="6"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="6"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="6"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 4;
+    }
+    .columns[data-cols="6"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="6"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="6"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="6"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="6"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 2;
+    }
+    .columns[data-cols="6"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="6"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
     }
   }
   @container layout-section (min-width: var(--width-narrow)) {
-    .columns[data-count="6"], [data-count="6"][class$=__columns], [data-count="6"][class*=columns--] {
+    .columns[data-cols="6"], [data-cols="6"][class$=__columns], [data-cols="6"][class*=columns--] {
       grid-template-columns: repeat(6, calc((100% - var(--spacing-lg) * (6 - 1)) / 6));
     }
-    .columns[data-count="6"][data-halign], [data-count="6"][data-halign][class$=__columns], [data-count="6"][data-halign][class*=columns--] {
+    .columns[data-cols="6"][data-halign], [data-cols="6"][data-halign][class$=__columns], [data-cols="6"][data-halign][class*=columns--] {
       grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (6 - 1)) / 6)));
     }
+    .columns[data-cols="6"][data-count="2"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 5;
+    }
+    .columns[data-cols="6"][data-count="2"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="2"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 5;
+    }
+    .columns[data-cols="6"][data-count="3"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="6"][data-count="3"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="3"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 4;
+    }
+    .columns[data-cols="6"][data-count="3"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="3"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 4;
+    }
+    .columns[data-cols="6"][data-count="4"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="6"][data-count="4"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="4"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 3;
+    }
+    .columns[data-cols="6"][data-count="5"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="6"][data-count="5"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="5"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 2;
+    }
+    .columns[data-cols="6"][data-count="5"][data-column-layout=expand-middle] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class$=__columns] > :nth-child(2), [data-cols="6"][data-count="5"][data-column-layout=expand-middle][class*=columns--] > :nth-child(2) {
+      grid-column: span 2;
+    }
+    .columns[data-cols="6"][data-count="6"][data-column-layout=expand-first] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class$=__columns] [class$=__column]:first-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-first][class*=columns--] [class$=__column]:first-of-type {
+      grid-column: span 1;
+    }
+    .columns[data-cols="6"][data-count="6"][data-column-layout=expand-last] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class$=__columns] [class$=__column]:last-of-type, [data-cols="6"][data-count="6"][data-column-layout=expand-last][class*=columns--] [class$=__column]:last-of-type {
+      grid-column: span 1;
+    }
   }
-  .columns[data-count="6"][data-allow-layout-stacking=false], [data-count="6"][data-allow-layout-stacking=false][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][class*=columns--] {
+  .columns[data-cols="6"][data-allow-layout-stacking=false], [data-cols="6"][data-allow-layout-stacking=false][class$=__columns], [data-cols="6"][data-allow-layout-stacking=false][class*=columns--] {
     grid-template-columns: repeat(6, calc((100% - var(--spacing-lg) * (6 - 1)) / 6));
   }
-  .columns[data-count="6"][data-allow-layout-stacking=false][data-halign], [data-count="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-count="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
+  .columns[data-cols="6"][data-allow-layout-stacking=false][data-halign], [data-cols="6"][data-allow-layout-stacking=false][data-halign][class$=__columns], [data-cols="6"][data-allow-layout-stacking=false][data-halign][class*=columns--] {
     grid-template-columns: repeat(auto-fit, minmax(0, calc((100% - var(--spacing-lg) * (6 - 1)) / 6)));
   }
   div[data-size] > .columns, div[data-size] > [class$=__columns], div[data-size] > [class*=columns--] {
@@ -3175,21 +3541,18 @@
     display: block;
     font-size: var(--font-size-sm);
   }
-  .page-header .breadcrumbs {
+  .page-header .breadcrumbs, [class$=__page-header] .breadcrumbs, [class*=page-header--] .breadcrumbs {
     width: 100%;
     flex-basis: 100%;
   }
-  .page-header .breadcrumbs__list {
+  .page-header .breadcrumbs__list, [class$=__page-header] .breadcrumbs__list, [class*=page-header--] .breadcrumbs__list {
     margin-block-start: 0;
   }
-  .page-header h1 {
+  .page-header h1, [class$=__page-header] h1, [class*=page-header--] h1 {
     margin-top: var(--spacing-xs);
     margin-bottom: 0;
     width: 100%;
     flex-basis: 100%;
-  }
-  .page-header__container[data-halign=center] {
-    text-align: center;
   }
   .post-nav, [class$=__post-nav], [class*=post-nav--] {
     width: 100%;
@@ -3568,7 +3931,7 @@
   }
   @container site-header style(--breakpoint:none) {
     @media (min-width: 940px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         display: grid;
         grid-template-columns: var(--logo-max-width) 1fr;
         grid-template-rows: auto auto;
@@ -3577,27 +3940,28 @@
       }
     }
     @media (min-width: 940px) and (min-width: 768px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xl);
       }
     }
     @media (min-width: 940px) and (min-width: 1440px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
     }
     @media (min-width: 940px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+      .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
         grid-column: 1;
         grid-row: 1/3;
         margin-inline: 0;
         margin-block: 0;
       }
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+      .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
         justify-content: flex-end;
         padding-block-start: 0;
       }
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+      .site-header:has(> [class$=__top]) > [class$=__menu],
+      .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
       .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
         justify-content: flex-end;
@@ -3605,7 +3969,7 @@
     }
   }
   @media (min-width: 940px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       display: grid;
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
@@ -3614,106 +3978,109 @@
     }
   }
   @media (min-width: 940px) and (min-width: 768px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xl);
     }
   }
   @media (min-width: 940px) and (min-width: 1440px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       padding-block: var(--spacing-xxl);
     }
   }
   @media (min-width: 940px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+    .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
       grid-row: 1/3;
       margin-inline: 0;
       margin-block: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+    .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
       justify-content: flex-end;
       padding-block-start: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
       justify-content: flex-end;
     }
   }
   @container site-header (min-width: var(--breakpoint)) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       display: grid;
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
     }
     @media (min-width: 768px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xl);
       }
     }
     @media (min-width: 1440px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       row-gap: var(--spacing-lg);
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+    .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
       grid-row: 1/3;
       margin-inline: 0;
       margin-block: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+    .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
       justify-content: flex-end;
       padding-block-start: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
       justify-content: flex-end;
     }
   }
   @container site-header (min-width: var(--container-max-width)) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       display: grid;
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
       padding-block: var(--spacing-lg);
     }
     @media (min-width: 768px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xl);
       }
     }
     @media (min-width: 1440px) {
-      .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+      .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
         padding-block: var(--spacing-xxl);
       }
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
+    .site-header:has(> [class$=__top]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) {
       row-gap: var(--spacing-lg);
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
+    .site-header:has(> [class$=__top]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class*=__logo] {
       grid-column: 1;
       grid-row: 1/3;
       margin-inline: 0;
       margin-block: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
+    .site-header:has(> [class$=__top]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__top] {
       justify-content: flex-end;
       padding-block-start: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) > [class$=__menu],
+    .site-header:has(> [class$=__top]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]) [data-vue-component] [class$=__menu] {
       justify-content: flex-end;
     }
   }
   @media (min-width: 940px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
+    .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
       display: grid;
       grid-template-columns: var(--logo-max-width) 1fr;
       grid-template-rows: auto auto;
@@ -3722,31 +4089,35 @@
     }
   }
   @media (min-width: 940px) and (min-width: 768px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
+    .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
       padding-block: var(--spacing-xl);
     }
   }
   @media (min-width: 940px) and (min-width: 1440px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
+    .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)), .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) {
       padding-block: var(--spacing-xxl);
     }
   }
   @media (min-width: 940px) {
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo] {
+    .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class*=__logo] {
       grid-column: 1;
       grid-row: 1/3;
       margin-inline: 0;
       margin-block: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top] {
+    .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__top] {
       justify-content: flex-end;
       padding-block-start: 0;
     }
-    .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
+    .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
+    .site-header:has(> [class$=__top]).site-header:not(:has(.site-header__menu-toggle)) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [class$=__menu]).site-header:not(:has(.site-header__menu-toggle)) [data-vue-component] [class$=__menu], .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) > [class$=__menu],
     .site-header:has(> [class*=__logo]):has(> [class$=__top]):has(> [data-vue-component]).site-header:not(:has(.site-header__menu-toggle)) [data-vue-component] [class$=__menu] {
       justify-content: flex-end;
     }
+  }
+  .site-header .tippy-content {
+    font-family: var(--font-family-body);
   }
   .site-header [data-vue-component],
   .site-header component {
@@ -3790,7 +4161,7 @@
   .site-header__top {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     padding-block: var(--spacing-lg);
   }
   @media (min-width: 768px) {
@@ -3810,7 +4181,7 @@
     display: none;
   }
   .site-header:has(.site-header__menu-toggle) .site-header__top {
-    padding-inline-end: 3rem;
+    padding-inline-start: 3rem;
   }
   [data-style=overlay] .site-header__top, [data-style=off-canvas] .site-header__top {
     margin-inline: auto;
@@ -3842,7 +4213,11 @@
     right: 0;
     z-index: 9999;
   }
-  .site-header__menu-toggle[data-menu-style=off-canvas] {
+  :has(> [class$=__top]) .site-header__menu-toggle {
+    right: unset;
+    left: 0;
+  }
+  .site-header__menu-toggle[data-menu-style=off-canvas], .site-header__menu-toggle[data-menu-style=overlay] {
     margin-left: 0;
     --active-color: white;
   }
@@ -4099,6 +4474,10 @@
   }
   [data-style=overlay] .site-header__menu [class$=__sub-menu][data-open=true], [data-style=off-canvas] .site-header__menu [class$=__sub-menu][data-open=true] {
     opacity: 1;
+  }
+  body:has([data-open=true]) {
+    overflow: hidden;
+    height: 100dvh;
   }
   [data-style=overlay] .site-header__menu [class$=__sub-menu] .site-header__menu__sub-menu__item, [data-style=off-canvas] .site-header__menu [class$=__sub-menu] .site-header__menu__sub-menu__item {
     margin: 0;

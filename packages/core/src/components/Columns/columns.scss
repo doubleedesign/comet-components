@@ -42,8 +42,12 @@
 
 @mixin maybe-expand-first($layoutCols, $contentColCount) {
 	// Important: $layoutCols is breakpoint-dependent when this is used within grid-columns - it's not always the same as data-cols
+
 	&[data-column-layout="expand-first"] {
-		> :first-child {
+		// Note: This targets *__column rather than > :first child because in the WordPress editor, ACF adds a necessary extra wrapper around the columns,
+		// and I don't really want to have two selectors here (for the ideal case and for that case).
+		// This could need to change if supporting columns-within-columns in the future.
+		#{class-ends-with('__column')}:first-of-type {
 			@if $contentColCount > $layoutCols {
 				grid-column: span #{$layoutCols};
 			}
@@ -58,7 +62,11 @@
 	// Important: $layoutCols is breakpoint-dependent when this is used within grid-columns - it's not always the same as data-cols
 
 	&[data-column-layout="expand-last"] {
-		> :last-child {
+
+		// Note: This targets *__column rather than > :first child because in the WordPress editor, ACF adds a necessary extra wrapper around the columns,
+		// and I don't really want to have two selectors here (for the ideal case and for that case).
+		// This could need to change if supporting columns-within-columns in the future.
+		#{class-ends-with('__column')}:last-of-type {
 			@if $contentColCount > $layoutCols {
 				grid-column: span #{$layoutCols};
 			}
