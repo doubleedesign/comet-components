@@ -11,7 +11,7 @@ namespace Doubleedesign\Comet\Core;
 #[AllowedTags([Tag::DIV, Tag::SECTION])]
 #[DefaultTag(Tag::SECTION)]
 class FileGroup extends LayoutComponent {
-	use ColorPair;
+    use ColorPair;
     use NestedState;
 
     /**
@@ -26,7 +26,7 @@ class FileGroup extends LayoutComponent {
      */
     public function __construct(array $attributes, array $files) {
         $this->set_color_pair($attributes);
-        $this->set_is_nested($attributes['isNested'] ?? null);
+
         $this->heading = $attributes['heading'] ?? null;
 
         if (!isset($attributes['shortName'])) {
@@ -58,6 +58,7 @@ class FileGroup extends LayoutComponent {
         $updatedInnerComponents = $this->heading ? [new Heading([], $this->heading), $innerContent] : [$innerContent];
 
         parent::__construct($attributes, $updatedInnerComponents, 'components.FileGroup.file-group');
+	    $this->set_is_nested($attributes['isNested'] ?? null);
     }
 
     protected function get_html_attributes(): array {
@@ -67,10 +68,10 @@ class FileGroup extends LayoutComponent {
             $attributes['data-color-theme'] = $this->colorTheme->value;
         }
 
-	    if ($this->get_background_color() !== null) {
-		    $attributes['data-background'] = $this->get_background_color()->value;
-	    }
+        if ($this->get_background_color() !== null) {
+            $attributes['data-background'] = $this->get_background_color()->value;
+        }
 
-	    return $attributes;
+        return $attributes;
     }
 }
