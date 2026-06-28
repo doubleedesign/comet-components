@@ -74,6 +74,17 @@ abstract class Renderable {
         }
     }
 
+	/**
+	 * Get the kebab-cased name of the component class.
+	 * @return string
+	 */
+	public function get_name(): string {
+		$className = get_class($this);
+		$parts = explode('\\', $className);
+
+		return Utils::kebab_case(end($parts));
+	}
+
     protected function set_tag(string|Tag|null $tagName): void {
         $reflection = new ReflectionClass($this);
 
