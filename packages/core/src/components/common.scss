@@ -79,7 +79,7 @@
 	h1, h2, h3, h4 {
 		color: var(--theme-color);
 	}
-	
+
 	h1 {
 		font-size: var(--font-size-xl);
 
@@ -231,6 +231,13 @@
 			font-size: 1rem;
 			padding: var(--spacing-xs) var(--spacing-sm);
 			font-family: var(--font-family-body);
+			border: 1px solid lighten('dark', 50%);
+			transition: all 0.2s ease-in-out;
+			background: var(--color-white);
+
+			&:focus {
+				border-color: var(--color-secondary);
+			}
 		}
 
 		input[type="text"],
@@ -245,6 +252,15 @@
 			display: flex;
 			align-items: center;
 			align-content: center;
+		}
+
+		input[type="checkbox"],
+		input[type="radio"] {
+			accent-color: var(--color-secondary);
+		}
+
+		select {
+			cursor: pointer;
 		}
 
 		input[type="submit"],
