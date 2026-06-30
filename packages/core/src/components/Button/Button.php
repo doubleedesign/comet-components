@@ -32,6 +32,8 @@ class Button extends Renderable {
      * @description Plain text or basic HTML
      */
     protected string $content;
+    protected ?string $iconBefore = null;
+    protected ?string $iconAfter = null;
 
     public function __construct(array $attributes, string $content) {
         parent::__construct($attributes, 'components.Button.button');
@@ -39,6 +41,28 @@ class Button extends Renderable {
         $this->set_color_theme($attributes);
         $this->isOutline = $attributes['isOutline'] ?? false;
         $this->content = $content;
+        $this->set_icon_before($attributes);
+        $this->set_icon_after($attributes);
+    }
+
+    protected function set_icon_before(array $attributes): void {
+        $this->iconBefore = $attributes['iconBefore'] ?? null;
+    }
+
+    protected function set_icon_after(array $attributes): void {
+        if (isset($attributes['iconAfter'])) {
+            $this->iconAfter = $attributes['iconAfter'];
+        }
+        else if (isset($attributes['target']) && $attributes['target'] === '_blank') {
+            $this->iconAfter = 'fa-arrow-up-right-from-square';
+        }
+        // If the attributes specifically set iconAfter to null, respect that instead of using the default
+        else if (in_array('iconAfter', array_keys($attributes)) && $attributes['iconAfter'] === null) {
+            $this->iconAfter = null;
+        }
+        else {
+            $this->iconAfter = 'fa-arrow-right';
+        }
     }
 
     protected function get_html_attributes(): array {
@@ -54,15 +78,15 @@ class Button extends Renderable {
         return $attrs;
     }
 
-	public function get_filtered_classes(): array {
-		return array_unique(
-			array_merge(
-				[$this->get_shortname()],
-				$this->get_bem_classes(),
-				$this->classes
-			)
-		);
-	}
+    public function get_filtered_classes(): array {
+        return array_unique(
+            array_merge(
+                [$this->get_shortname()],
+                $this->get_bem_classes(),
+                $this->classes
+            )
+        );
+    }
     public function get_content(): string {
         return $this->content;
     }
@@ -75,6 +99,8 @@ class Button extends Renderable {
             'classes'    => $this->get_filtered_classes(),
             'attributes' => $this->get_html_attributes(),
             'content'    => Utils::sanitise_content($this->content, Settings::INLINE_PHRASING_ELEMENTS),
+            'iconBefore' => $this->iconBefore,
+            'iconAfter'  => $this->iconAfter
         ])->render();
     }
 }

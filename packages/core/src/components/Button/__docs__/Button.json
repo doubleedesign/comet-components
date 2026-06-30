@@ -36,6 +36,12 @@
             "description": "URL to link to if using <a> tag.",
             "default": ""
         },
+        "iconAfter": {
+            "type": "string"
+        },
+        "iconBefore": {
+            "type": "string"
+        },
         "id": {
             "type": "string",
             "description": "Unique identifier"
