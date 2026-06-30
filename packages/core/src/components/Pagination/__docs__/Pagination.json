@@ -1,0 +1,75 @@
+{
+    "name": "Pagination",
+    "description": "Render a pagination navigation list.",
+    "extends": "UIComponent",
+    "abstract": false,
+    "isInner": false,
+    "attributes": {
+        "classes": {
+            "type": "array<string>",
+            "description": "Additional CSS classes",
+            "default": []
+        },
+        "colorTheme": {
+            "type": "ThemeColor",
+            "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+            "supported": [
+                "primary",
+                "secondary",
+                "accent",
+                "error",
+                "success",
+                "warning",
+                "info",
+                "light",
+                "dark",
+                "white",
+                "black"
+            ]
+        },
+        "context": {
+            "type": "string",
+            "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "shortName": {
+            "type": "string",
+            "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+            "required": true,
+            "default": "pagination"
+        },
+        "style": {
+            "type": "array",
+            "description": "Inline styles"
+        },
+        "tagName": {
+            "type": "Tag",
+            "description": "The HTML tag to use for this component",
+            "supported": [
+                "nav"
+            ],
+            "default": "nav"
+        },
+        "testId": {
+            "type": "string",
+            "description": "Optionally add a data-testid attribute for automated tests"
+        }
+    },
+    "innerComponents": {
+        "type": "array<Renderable>",
+        "description": "Inner components to be rendered within this component",
+        "required": true
+    },
+    "traits": [
+        "ColorTheme",
+        "BlockElementModifier"
+    ],
+    "links": {
+        "type": "array",
+        "description": "Indexed array of pagination link associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
+        "required": true
+    }
+}

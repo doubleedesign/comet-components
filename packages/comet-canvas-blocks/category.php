@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\{Columns, Column, PageSection, PreprocessedHTML};
+use Doubleedesign\Comet\Core\{Column, Columns, PageSection, PreprocessedHTML};
 use Doubleedesign\CometCanvas\TemplateParts;
 
 get_header();
@@ -11,11 +11,9 @@ $description = get_term_meta($category_id, 'category_description', true);
 if (empty($description)) {
     $description = category_description($category_id);
 }
-
 if (!empty($description)) {
     $intro = new PreprocessedHTML([], wpautop($description));
 }
-$posts = TemplateParts::get_posts_loop_cards(['shortName' => 'posts', 'layout' => 'list']);
 
 $wrapperAttrs = [
     'shortName' => 'category',
@@ -31,16 +29,16 @@ if (isset($intro)) {
         ],
         [
             new Column(['shortName' => 'intro'], [$intro]),
-            new Column(['shortName' => 'posts'], [$posts])
-
+            new Column(['shortName' => 'posts'], [TemplateParts::get_posts_loop_cards(), TemplateParts::get_pagination('posts')])
         ]
     );
+	$component->render();
 }
 else {
-    $component = new PageSection($wrapperAttrs, [$posts]);
+    get_template_part('template-parts/posts-loop');
 }
 
-$component->render();
+
 
 get_template_part('template-parts/blog-page-blocks');
 

@@ -287,7 +287,7 @@ class ComponentClassesToJsonDefinitions {
         if (isset($properties['innerComponents']) && $reflectionClass->getName() !== 'Doubleedesign\Comet\Core\Breadcrumbs') {
             $result['innerComponents'] = $properties['innerComponents'];
         }
-        if ($reflectionClass->getName() === 'Doubleedesign\Comet\Core\Breadcrumbs') {
+        if (in_array($reflectionClass->getName(), ['Doubleedesign\Comet\Core\Breadcrumbs', 'Doubleedesign\Comet\Core\Pagination'])) {
             // Get params of constructor
             $constructor = $reflectionClass->getConstructor();
             $params = $constructor ? $constructor->getParameters() : [];

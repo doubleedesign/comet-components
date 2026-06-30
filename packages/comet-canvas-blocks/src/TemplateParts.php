@@ -228,4 +228,39 @@ class TemplateParts {
             $cards
         );
     }
+
+    public static function get_pagination($context = 'posts'): Pagination {
+        // Generate a basic version of the WordPress-provided pagination HTML
+        global $wp_query;
+        $output = paginate_links(array(
+            'current'      => max(1, get_query_var('paged')),
+            'total'        => $wp_query->max_num_pages,
+            'prev_text'    => 'Previous',
+            'next_text'    => 'Next',
+            'type'         => 'array',
+            'aria_current' => 'page',
+        ));
+
+        // ...and then process it into the format we want to pass to Comet
+        $links = array_map(function($html) {
+            try {
+                $dom = HTMLDocument::createFromString($html, LIBXML_HTML_NOIMPLIED);
+                $element = $dom->getElementsByTagName('a')[0] ?? $dom->getElementsByTagName('span')[0] ?? null;
+                if (!$element) {
+                    return null;
+                }
+
+                return [
+                    'href'    => $element->getAttribute('href') ?: '#',
+                    'title'   => $element->textContent,
+                    'current' => $element->getAttribute('aria-current')
+                ];
+            }
+            catch (\Exception $e) {
+                return null;
+            }
+        }, $output);
+
+        return new Pagination(['context' => $context], $links);
+    }
 }

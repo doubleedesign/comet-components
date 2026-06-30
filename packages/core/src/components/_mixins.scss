@@ -32,6 +32,12 @@
 	}
 }
 
+@mixin media-breakpoint-down($widthName) {
+	@media (max-width: #{map-get($widths, $widthName)}) {
+		@content;
+	}
+}
+
 @mixin section-margin() {
 	margin-block: var(--spacing-lg);
 
