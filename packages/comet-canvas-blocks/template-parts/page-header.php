@@ -9,9 +9,17 @@ $title = !empty($display_title) ? $display_title : get_the_title();
 
 if (is_home() && !is_front_page()) {
     $title = get_the_title(get_option('page_for_posts', true));
+	// If we are on page 2+, optionally append extra text as defined in the theme (e.g., "Archive")
+	if(is_paged()) {
+		$append = apply_filters('comet_canvas_append_to_blog_archive_pages', '');
+		$title .= " " . $append;
+	}
 }
 if (is_archive()) {
     $title = $queried_object->label ?? get_the_archive_title();
+}
+if (is_404()) {
+	$title = __('Page Not Found', 'comet-canvas-blocks');
 }
 
 if (is_single()) {
