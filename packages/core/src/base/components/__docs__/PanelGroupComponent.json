@@ -3,7 +3,6 @@
     "description": null,
     "extends": "UIComponent",
     "abstract": true,
-    "isInner": false,
     "attributes": {
         "backgroundColors": {
             "type": "BackgroundCollection",

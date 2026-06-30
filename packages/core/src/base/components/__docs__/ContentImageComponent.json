@@ -3,7 +3,6 @@
     "description": null,
     "extends": "ImageComponent",
     "abstract": true,
-    "isInner": false,
     "attributes": {
         "align": {
             "type": "string",

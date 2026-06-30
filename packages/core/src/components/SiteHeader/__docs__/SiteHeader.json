@@ -3,7 +3,6 @@
     "description": "Render a site header with a logo, responsive menu, and optional additional components.",
     "extends": "LayoutComponent",
     "abstract": false,
-    "isInner": false,
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",

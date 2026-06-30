@@ -3,7 +3,6 @@
     "description": null,
     "extends": "Renderable",
     "abstract": true,
-    "isInner": false,
     "attributes": {
         "alt": {
             "type": "string",

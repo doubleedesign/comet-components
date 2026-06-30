@@ -15,9 +15,9 @@ This provides a central location for validation logic and documentation, reducin
 <dt>Property</dt>
 <dd>
 	<code>backgroundColor</code> 
-	<strong>Type:</strong> <code>ThemeColor</code>
+	<strong>Type:</strong> <code>ThemeGradient|null</code>
 	
-<p>Background colour keyword</p>
+<p>The background colour of the component.</p>
 </dd>
 
 <dt>Method</dt>
@@ -30,23 +30,23 @@ This provides a central location for validation logic and documentation, reducin
 <dt>Method</dt>
 <dd>
 	<code>get_background_color</code> 
-	<strong>Returns:</strong> <code>ThemeColor</code>
+	<strong>Returns:</strong> <code>ThemeGradient|null</code>
 	
-<p>Get the background colour of the component.</p>
+<p>Get the background colour of the component; intended for use when only one is expected (primarily for backwards compatibility).</p>
 </dd>
 <dt>Method</dt>
 <dd>
 	<code>update_background_color</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
-<p>Allows the background colour of a component to be set based on contextual factors not available at instantiation.</p>
+<p>Allows the background colour of a component to be set</p>
 </dd>
 <dt>Method</dt>
 <dd>
 	<code>simplify_all_background_colors</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
-<p>Clean up duplication of background colours between this and its inner components simplify HTML and CSS. Runs either remove_redundant_background_colors() or set_background_color_based_on_children() as appropriate.</p>
+<p>Clean up duplication of background colours between this and its inner components simplify HTML and CSS. Runs either remove_redundant_background_colors() or set_background_colors_based_on_children() as appropriate.</p>
 </dd>
 <dt>Method</dt>
 <dd>
@@ -57,7 +57,7 @@ This provides a central location for validation logic and documentation, reducin
 </dd>
 <dt>Method</dt>
 <dd>
-	<code>set_background_color_based_on_inner_components</code> 
+	<code>set_background_colors_based_on_inner_components</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
 <p></p>
@@ -75,6 +75,69 @@ class MyComponent {
 	function __construct(array $attributes, array $innerComponents) {
 		parent::__construct($attributes, $innerComponents);
 		$this->set_background_color($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+
+## BackgroundColorMulti
+
+<dl>
+
+<dt>Property</dt>
+<dd>
+	<code>backgroundColors</code> 
+	<strong>Type:</strong> <code>BackgroundCollection</code>
+	
+<p>Key -> value pairs of background placement and colour keywords</p>
+</dd>
+
+<dt>Method</dt>
+<dd>
+	<code>set_background_colors</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p>Retrieves the relevant properties from the component $attributes array or component defaults, validates them, and assigns them to the corresponding component instance field.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_background_colors</code> 
+	<strong>Returns:</strong> <code>BackgroundCollection</code>
+	
+<p>Get the background colours of the component.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_background_color</code> 
+	<strong>Returns:</strong> <code>ThemeColor</code>
+	
+<p>Get the background colour of the component; intended for use when only one is expected (primarily for backwards compatibility).</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>update_background_colors</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use BackgroundColorMulti;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->set_background_colors($attributes);
 	}
 }
 ```
@@ -113,7 +176,7 @@ class MyComponent {
 </dd>
 <dt>Method</dt>
 <dd>
-	<code>set_bem_block</code> 
+	<code>update_context</code> 
 	<strong>Returns:</strong> <code>static</code>
 	
 <p></p>
@@ -183,13 +246,6 @@ class MyComponent {
 </dd>
 <dt>Method</dt>
 <dd>
-	<code>update_context</code> 
-	<strong>Returns:</strong> <code>static</code>
-	
-<p></p>
-</dd>
-<dt>Method</dt>
-<dd>
 	<code>set_shortname</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
@@ -232,6 +288,111 @@ class MyComponent {
 <div>
 
 
+## ColorPair
+
+<dl>
+
+<dt>Property</dt>
+<dd>
+	<code>backgroundColor</code> 
+	<strong>Type:</strong> <code>ThemeGradient|null</code>
+	
+<p>The background colour of the component.</p>
+</dd>
+<dt>Property</dt>
+<dd>
+	<code>colorTheme</code> 
+	<strong>Type:</strong> <code>ThemeColor</code>
+	
+<p>Colour keyword for theming purposes.</p>
+</dd>
+
+<dt>Method</dt>
+<dd>
+	<code>set_color_pair</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_background_color</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p>Retrieves the relevant properties from the component $attributes array or component defaults, validates them, and assigns them to the corresponding component instance field.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_background_color</code> 
+	<strong>Returns:</strong> <code>ThemeGradient|null</code>
+	
+<p>Get the background colour of the component; intended for use when only one is expected (primarily for backwards compatibility).</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>update_background_color</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p>Allows the background colour of a component to be set</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>simplify_all_background_colors</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p>Clean up duplication of background colours between this and its inner components simplify HTML and CSS. Runs either remove_redundant_background_colors() or set_background_colors_based_on_children() as appropriate.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>remove_redundant_background_colors</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p>If this component has a background colour set, remove the same background from any children that have it to simplify HTML and CSS.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_background_colors_based_on_inner_components</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_color_theme</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_color_theme</code> 
+	<strong>Returns:</strong> <code>ThemeColor</code>
+	
+<p></p>
+</dd>
+</dl>
+
+</div>
+
+::: note Example usage
+```php:no-line-numbers
+namespace Doubleedesign\Comet\Core;
+class MyComponent {
+	use ColorPair;
+	
+	function __construct(array $attributes, array $innerComponents) {
+		parent::__construct($attributes, $innerComponents);
+		$this->set_color_pair($attributes);
+	}
+}
+```
+:::
+</div>
+<div class="trait-class-doc">
+
+<div>
+
+
 ## ColorTheme
 
 <dl>
@@ -250,6 +411,13 @@ class MyComponent {
 	<strong>Returns:</strong> <code>void</code>
 	
 <p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_color_theme</code> 
+	<strong>Returns:</strong> <code>ThemeColor</code>
+	
+<p></p>
 </dd>
 </dl>
 
@@ -309,8 +477,22 @@ class MyComponent {
 </dd>
 <dt>Method</dt>
 <dd>
-	<code>update_context</code> 
-	<strong>Returns:</strong> <code>static</code>
+	<code>set_shortname</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>set_shortname_from_blade_file</code> 
+	<strong>Returns:</strong> <code>void</code>
+	
+<p></p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_shortname</code> 
+	<strong>Returns:</strong> <code>string</code>
 	
 <p></p>
 </dd>
@@ -584,7 +766,7 @@ class MyComponent {
 	<code>size</code> 
 	<strong>Type:</strong> <code>ContainerSize</code>
 	
-<p>Keyword specifying the relative width of the container for the inner content if the component is not nested inside another layout component. Ignored if the component has an isNested attribute set to true, or other logic determines that it is not nested.</p>
+<p>Keyword specifying the relative width of the container for the inner content</p>
 </dd>
 
 <dt>Method</dt>
@@ -592,7 +774,14 @@ class MyComponent {
 	<code>set_size</code> 
 	<strong>Returns:</strong> <code>void</code>
 	
-<p>Retrieves the relevant properties from the component $attributes array, validates them, and assigns them to the corresponding component instance field.</p>
+<p>Retrieves the relevant properties from the component $attributes array,</p>
+</dd>
+<dt>Method</dt>
+<dd>
+	<code>get_size</code> 
+	<strong>Returns:</strong> <code>ContainerSize</code>
+	
+<p></p>
 </dd>
 </dl>
 

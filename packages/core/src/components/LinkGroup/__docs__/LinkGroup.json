@@ -3,7 +3,6 @@
     "description": "Render a group of Link components with a common color theme.",
     "extends": "LayoutComponent",
     "abstract": false,
-    "isInner": false,
     "attributes": {
         "backgroundColor": {
             "type": "ThemeColor|ThemeGradient",

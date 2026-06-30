@@ -3,7 +3,6 @@
     "description": null,
     "extends": null,
     "abstract": true,
-    "isInner": false,
     "attributes": {
         "classes": {
             "type": "array<string>",

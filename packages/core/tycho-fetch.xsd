@@ -152,7 +152,9 @@
 <xs:attribute name="tagName" type="xs:string"/>
 <xs:attribute name="isOutline" type="xs:boolean"/>
 <xs:attribute name="shortName" type="xs:string"/>
+<xs:attribute name="iconBefore" type="xs:string"/>
 <xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="iconAfter" type="xs:string"/>
 <xs:attribute name="href" type="xs:string"/>
 <xs:attribute name="context" type="xs:string"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
@@ -206,26 +208,27 @@
 	</xs:element>
 	<xs:element name="Card">
 		<xs:complexType>
-			<xs:attribute name="orientation" type="Orientation"/>
+			<xs:attribute name="isNested" type="xs:boolean"/>
 <xs:attribute name="link" type="array{href:string,"/>
-<xs:attribute name="offset" type="array{x:"/>
 <xs:attribute name="aspectRatio" type="AspectRatio"/>
-<xs:attribute name="isNested" type="xs:boolean"/>
+<xs:attribute name="image" type="array{src:string,"/>
 <xs:attribute name="style" type="InlineStyle"/>
 <xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="focalPoint" type="FocalPoint"/>
-<xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="colorTheme" type="ThemeColor"/>
-<xs:attribute name="cardAsLink" type="xs:boolean"/>
-<xs:attribute name="bodyText" type="xs:string"/>
-<xs:attribute name="backgroundColor" type="ThemeColor|ThemeGradient"/>
 <xs:attribute name="originalImageOrientation" type="Orientation"/>
-<xs:attribute name="heading" type="xs:string"/>
+<xs:attribute name="cardAsLink" type="xs:boolean"/>
+<xs:attribute name="classes" type="StringArray"/>
+<xs:attribute name="bodyText" type="xs:string"/>
+<xs:attribute name="bodyComponents" type="array<Renderable>"/>
+<xs:attribute name="backgroundColor" type="ThemeColor|ThemeGradient"/>
+<xs:attribute name="offset" type="array{x:"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="orientation" type="Orientation"/>
+<xs:attribute name="focalPoint" type="FocalPoint"/>
 <xs:attribute name="shortName" type="xs:string"/>
-<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="heading" type="xs:string"/>
 <xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="image" type="array{src:string,"/>
+<xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="withWrapper" type="xs:boolean"/>
 <xs:attribute name="aboveContentComponents" type="array<Renderable>"/>
 		</xs:complexType>
@@ -366,21 +369,6 @@
 <xs:attribute name="colorTheme" type="ThemeColor"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="backgroundColor" type="ThemeColor|ThemeGradient"/>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="CopyBlock">
-		<xs:complexType>
-			<xs:attribute name="testId" type="xs:string"/>
-<xs:attribute name="vAlign" type="Alignment"/>
-<xs:attribute name="style" type="InlineStyle"/>
-<xs:attribute name="tagName" type="xs:string"/>
-<xs:attribute name="isNested" type="xs:boolean"/>
-<xs:attribute name="shortName" type="xs:string"/>
-<xs:attribute name="id" type="xs:string"/>
-<xs:attribute name="hAlign" type="Alignment"/>
-<xs:attribute name="context" type="xs:string"/>
-<xs:attribute name="classes" type="StringArray"/>
-<xs:attribute name="backgroundColor" type="ThemeColor"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="CoverImage">
@@ -772,6 +760,18 @@
 <xs:attribute name="id" type="xs:string"/>
 <xs:attribute name="classes" type="StringArray"/>
 <xs:attribute name="backgroundColor" type="ThemeColor|ThemeGradient"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Pagination">
+		<xs:complexType>
+			<xs:attribute name="testId" type="xs:string"/>
+<xs:attribute name="style" type="InlineStyle"/>
+<xs:attribute name="tagName" type="xs:string"/>
+<xs:attribute name="shortName" type="xs:string"/>
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="context" type="xs:string"/>
+<xs:attribute name="colorTheme" type="ThemeColor"/>
+<xs:attribute name="classes" type="StringArray"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Paragraph">

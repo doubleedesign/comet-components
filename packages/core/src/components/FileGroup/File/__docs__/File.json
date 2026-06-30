@@ -3,7 +3,6 @@
     "description": null,
     "extends": "Renderable",
     "abstract": false,
-    "isInner": true,
     "belongsInside": "FileGroup",
     "attributes": {
         "classes": {

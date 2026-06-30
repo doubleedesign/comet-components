@@ -3,7 +3,6 @@
     "description": null,
     "extends": "UIComponent",
     "abstract": false,
-    "isInner": true,
     "belongsInside": "Columns",
     "attributes": {
         "backgroundColor": {

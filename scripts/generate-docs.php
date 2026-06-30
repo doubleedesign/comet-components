@@ -158,32 +158,28 @@ class ComponentClassesToJsonDefinitions {
                 $pathParts = explode("\\", $pathParts[1]);
                 $isInner = count($pathParts) > 6;
                 if ($isInner) {
-                    $result['isInner'] = true;
                     $result['belongsInside'] = $pathParts[4];
                 }
-                else {
-                    $result['isInner'] = false;
 
-                    // Check if there is a Vue component in this component's directory
-                    $vueFile = Utils::kebab_case(str_replace('.php', '', basename($filePath)) . '.vue');
-                    $vueFilePath = dirname($filePath) . '\\' . $vueFile;
-                    if (file_exists($vueFilePath)) {
-                        $result['vue'] = true;
-                    }
-                    // Workaround for ones known to have a common Vue component (i.e., it's not in the same folder as the PHP class)
-                    // TODO: Should check the actual folder of these to get this dynamically
-                    if (in_array($className, [
-                        'Doubleedesign\Comet\Core\Accordion',
-                        'Doubleedesign\Comet\Core\Tabs',
-                    ])) {
-                        $result['vue'] = true;
-                    }
+                // Check if there is a Vue component in this component's directory
+                $vueFile = Utils::kebab_case(str_replace('.php', '', basename($filePath)) . '.vue');
+                $vueFilePath = dirname($filePath) . '\\' . $vueFile;
+                if (file_exists($vueFilePath)) {
+                    $result['vue'] = true;
+                }
+                // Workaround for ones known to have a common Vue component (i.e., it's not in the same folder as the PHP class)
+                // TODO: Should check the actual folder of these to get this dynamically
+                if (in_array($className, [
+                    'Doubleedesign\Comet\Core\Accordion',
+                    'Doubleedesign\Comet\Core\Tabs',
+                ])) {
+                    $result['vue'] = true;
                 }
 
                 // Sort the result into the desired order
                 $result = Utils::sort_associative_array_with_given_key_order(
                     $result,
-                    ['name', 'description', 'extends', 'abstract', 'vue', 'isInner', 'belongsInside', 'attributes', 'content', 'innerComponents']
+                    ['name', 'description', 'extends', 'abstract', 'vue', 'belongsInside', 'attributes', 'content', 'innerComponents']
                 );
 
                 // Ensure __docs__ folder exists
@@ -645,17 +641,21 @@ class ComponentClassesToJsonDefinitions {
                 try {
                     $allowedTagsAttr = $this->currentClass->getAttributes(AllowedTags::class)[0] ?? null;
                     $defaultTagAttr = $this->currentClass->getAttributes(DefaultTag::class)[0] ?? null;
-                    $allowedTags = $allowedTagsAttr->newInstance()->tags;
-                    $defaultTag = $defaultTagAttr->newInstance()->tag;
+                    if ($allowedTagsAttr || $defaultTagAttr) {
+                        $allowedTags = $allowedTagsAttr->newInstance()->tags;
+                        $defaultTag = $defaultTagAttr->newInstance()->tag;
 
-                    return [
-                        'type'      => str_replace("$namespace\\", '', $typeName),
-                        'supported' => array_values(array_map(fn($tag) => $tag->value, $allowedTags)),
-                        'default'   => $defaultTag->value
-                    ];
+                        return [
+                            'type'      => str_replace("$namespace\\", '', $typeName),
+                            'supported' => array_values(array_map(fn($tag) => $tag->value, $allowedTags)),
+                            'default'   => $defaultTag->value
+                        ];
+                    }
+
+					return [];
                 }
                 catch (\Throwable $e) {
-                    $this->log("Error processing AllowedTags or DefaultTag attributes: " . $e->getMessage(), 'error');
+                    $this->log("Error processing AllowedTags or DefaultTag attributes for $typeName: " . $e->getMessage(), 'error');
 
                     return [];
                 }

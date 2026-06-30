@@ -3,7 +3,6 @@
     "description": "A basic image within page content",
     "extends": "ContentImageComponent",
     "abstract": false,
-    "isInner": false,
     "attributes": {
         "align": {
             "type": "string",

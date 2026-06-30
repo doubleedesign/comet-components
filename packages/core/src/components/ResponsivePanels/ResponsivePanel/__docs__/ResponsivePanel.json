@@ -3,7 +3,6 @@
     "description": null,
     "extends": "PanelComponent",
     "abstract": false,
-    "isInner": true,
     "belongsInside": "ResponsivePanels",
     "attributes": {
         "backgroundColor": {

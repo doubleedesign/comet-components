@@ -3,7 +3,6 @@
     "description": "An image within content that supports advanced cropping options (aspect ratio, focal point and/or offsets).",
     "extends": "ContentImageComponent",
     "abstract": false,
-    "isInner": false,
     "attributes": {
         "align": {
             "type": "string",

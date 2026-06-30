@@ -3,7 +3,6 @@
     "description": null,
     "extends": "TextElement",
     "abstract": true,
-    "isInner": false,
     "attributes": {
         "classes": {
             "type": "array<string>",

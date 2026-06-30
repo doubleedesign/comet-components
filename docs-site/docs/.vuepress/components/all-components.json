@@ -4,7 +4,6 @@
         "description": null,
         "extends": "ImageComponent",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "align": {
                 "type": "string",
@@ -100,7 +99,6 @@
         "description": null,
         "extends": "Renderable",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -183,7 +181,6 @@
         "description": null,
         "extends": "Renderable",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "alt": {
                 "type": "string",
@@ -250,7 +247,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -348,7 +344,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -413,7 +408,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -498,7 +492,6 @@
         "description": null,
         "extends": null,
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -530,7 +523,6 @@
         "description": null,
         "extends": "Renderable",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -611,7 +603,6 @@
         "description": null,
         "extends": "TextElement",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -703,7 +694,6 @@
         "description": null,
         "extends": "Renderable",
         "abstract": true,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -762,7 +752,6 @@
         "extends": "PanelGroupComponent",
         "abstract": false,
         "vue": true,
-        "isInner": false,
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -885,7 +874,6 @@
         "description": null,
         "extends": "PanelComponent",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "Accordion",
         "attributes": {
             "backgroundColor": {
@@ -953,7 +941,6 @@
         "description": "A \"hero\" banner with an image background and optional overlay, with a container for inner content. Supports parallax effect, minHeight and maxHeight.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -1094,7 +1081,6 @@
         "description": "Render a breadcrumb navigation list.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -1146,7 +1132,6 @@
         "description": "Prompt the user to take an action with a button or button-style link.",
         "extends": "Renderable",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -1178,6 +1163,12 @@
                 "type": "string",
                 "description": "URL to link to if using <a> tag.",
                 "default": ""
+            },
+            "iconAfter": {
+                "type": "string"
+            },
+            "iconBefore": {
+                "type": "string"
             },
             "id": {
                 "type": "string",
@@ -1227,7 +1218,6 @@
         "description": "Semantically and visually group buttons together.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -1333,7 +1323,6 @@
         "description": "Highlight an important message in a callout box.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -1414,7 +1403,6 @@
         "description": "Highlight important information and prompt the user to take action.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -1531,7 +1519,6 @@
         "description": "*/",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "aboveContentComponents": {
                 "type": "array<Renderable>",
@@ -1557,10 +1544,15 @@
                 "type": "ThemeColor|ThemeGradient",
                 "description": "The background colour of the component."
             },
+            "bodyComponents": {
+                "type": "array<Renderable>",
+                "description": "Array of components to render in the main body of the card; will be rendered after the heading and before the link/button",
+                "required": true,
+                "default": []
+            },
             "bodyText": {
                 "type": "string",
-                "description": "Text content of the card; will be put into a paragraph; expects plain text / simple inline HTML",
-                "required": true
+                "description": "Text content of the card; will be put into a paragraph; expects plain text / simple inline HTML"
             },
             "cardAsLink": {
                 "type": "bool",
@@ -1701,7 +1693,6 @@
         "description": null,
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -1849,7 +1840,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "Columns",
         "attributes": {
             "backgroundColor": {
@@ -1937,7 +1927,6 @@
         "description": "Organise content visually with a column-based layout.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "allowStacking": {
                 "type": "bool",
@@ -2063,7 +2052,6 @@
         "description": "A basic page section to group nested content, e.g., a blog post containing an image, copy, author bio, post nav etc. Should generally have a shortName specified so the purpose of the grouping is clear.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -2133,7 +2121,6 @@
         "description": "An image within content that supports advanced cropping options (aspect ratio, focal point and/or offsets).",
         "extends": "ContentImageComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "align": {
                 "type": "string",
@@ -2256,7 +2243,6 @@
         "description": "A basic image within page content",
         "extends": "ContentImageComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "align": {
                 "type": "string",
@@ -2385,7 +2371,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -2483,7 +2468,6 @@
         "description": "*/",
         "extends": "Renderable",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "alt": {
                 "type": "string",
@@ -2588,7 +2572,6 @@
         "description": "Display a date.",
         "extends": "DateComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -2675,7 +2658,6 @@
         "description": "Display a date range.",
         "extends": "DateComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -2768,7 +2750,6 @@
         "description": "A component that renders a single expandable/collapsible panel.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -2825,7 +2806,6 @@
         "description": "Display a summary of an event including title, date, location and links.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -2900,7 +2880,6 @@
         "description": "*/",
         "extends": "CardList",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -3048,7 +3027,6 @@
         "description": null,
         "extends": "Renderable",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "FileGroup",
         "attributes": {
             "classes": {
@@ -3148,7 +3126,6 @@
         "description": "Display a list of downloadable file links with details about them.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -3274,7 +3251,6 @@
         "description": "Display a grid of images with optional captions, with a range of layout options.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -3411,7 +3387,6 @@
         "description": "Group components together for layout or structure purposes.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -3509,7 +3484,6 @@
         "description": "Render a heading element, optionally with a theme style applied.",
         "extends": "TextElementExtended",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -3586,7 +3560,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -3682,7 +3655,6 @@
         "description": "Display an icon with an associated text label.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -3769,7 +3741,6 @@
         "description": "Display some featured text alongside an image.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -3871,7 +3842,6 @@
         "description": null,
         "extends": "TextElement",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -3946,7 +3916,6 @@
         "description": "Display a link with a contextual icon.",
         "extends": "Renderable",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -4015,7 +3984,6 @@
         "description": "Render a group of Link components with a common color theme.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4157,7 +4125,6 @@
         "description": "Renders a list of items, either ordered or unordered.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -4214,7 +4181,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "List",
         "attributes": {
             "classes": {
@@ -4273,7 +4239,6 @@
         "description": "Render a navigation menu that can have multiple levels of lists.",
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -4344,7 +4309,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "Menu",
         "attributes": {
             "classes": {
@@ -4400,7 +4364,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "Menu",
         "attributes": {
             "classes": {
@@ -4461,7 +4424,6 @@
         "description": "Render a page header with the page title and optional breadcrumb navigation.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4587,7 +4549,6 @@
         "description": "A basic page element to group nested content that can have its semantics, own sizes and alignments within the bounds of this wrapper's size. This component is intended for layout purposes only, not intended to semantically group content. Unlike Container, it does not enforce nested state upon its inner components, and unlike UIComponent and its children it does not have or propagate context.",
         "extends": "Renderable",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4652,11 +4613,84 @@
         ]
     },
     {
+        "name": "Pagination",
+        "description": "Render a pagination navigation list.",
+        "extends": "UIComponent",
+        "abstract": false,
+        "attributes": {
+            "classes": {
+                "type": "array<string>",
+                "description": "Additional CSS classes",
+                "default": []
+            },
+            "colorTheme": {
+                "type": "ThemeColor",
+                "description": "Colour keyword for theming purposes. May be used for headings, buttons, accents, and other UI elements according to the component implementation.",
+                "supported": [
+                    "primary",
+                    "secondary",
+                    "accent",
+                    "error",
+                    "success",
+                    "warning",
+                    "info",
+                    "light",
+                    "dark",
+                    "white",
+                    "black"
+                ]
+            },
+            "context": {
+                "type": "string",
+                "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
+            },
+            "id": {
+                "type": "string",
+                "description": "Unique identifier"
+            },
+            "shortName": {
+                "type": "string",
+                "description": "The name of the component without any namespacing, prefixes, etc. Used for BEM block/element naming. Derived from the Blade filename if not explicitly set. If explicitly set, handling is component-specific depending on CSS requirements: some will use it in place of generic defaults, others will add a wrapper or adjust BEM classes but otherwise keep the same HTML structure.",
+                "required": true,
+                "default": "pagination"
+            },
+            "style": {
+                "type": "array",
+                "description": "Inline styles"
+            },
+            "tagName": {
+                "type": "Tag",
+                "description": "The HTML tag to use for this component",
+                "supported": [
+                    "nav"
+                ],
+                "default": "nav"
+            },
+            "testId": {
+                "type": "string",
+                "description": "Optionally add a data-testid attribute for automated tests"
+            }
+        },
+        "innerComponents": {
+            "type": "array<Renderable>",
+            "description": "Inner components to be rendered within this component",
+            "required": true
+        },
+        "traits": [
+            "ColorTheme",
+            "BlockElementModifier"
+        ],
+        "links": {
+            "type": "array",
+            "description": "Indexed array of pagination link associative arrays with title, URL, and optional boolean 'current' for if this link is the current page",
+            "required": true
+        }
+    },
+    {
         "name": "Paragraph",
         "description": "Render a paragraph element, optionally with a theme style applied.",
         "extends": "TextElementExtended",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -4722,7 +4756,6 @@
         "description": null,
         "extends": "UIComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -4815,7 +4848,6 @@
         "description": null,
         "extends": "Renderable",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -4866,7 +4898,6 @@
         "description": "Feature a quote or excerpt, with an optional citation.",
         "extends": "TextElementExtended",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -4955,7 +4986,6 @@
         "description": null,
         "extends": "PanelComponent",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "ResponsivePanels",
         "attributes": {
             "backgroundColor": {
@@ -5025,7 +5055,6 @@
         "extends": "PanelGroupComponent",
         "abstract": false,
         "vue": true,
-        "isInner": false,
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
@@ -5125,7 +5154,6 @@
         "description": "Visually separate content with a styled horizontal line.",
         "extends": "Renderable",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "classes": {
                 "type": "array<string>",
@@ -5235,7 +5263,6 @@
         "description": "Render a footer with inner components such as a Menu.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -5340,7 +5367,6 @@
         "description": "Render a site header with a logo, responsive menu, and optional additional components.",
         "extends": "LayoutComponent",
         "abstract": false,
-        "isInner": false,
         "attributes": {
             "backgroundColor": {
                 "type": "ThemeColor|ThemeGradient",
@@ -5493,7 +5519,6 @@
         "description": null,
         "extends": "PanelComponent",
         "abstract": false,
-        "isInner": true,
         "belongsInside": "Tabs",
         "attributes": {
             "backgroundColor": {
@@ -5562,7 +5587,6 @@
         "extends": "PanelGroupComponent",
         "abstract": false,
         "vue": true,
-        "isInner": false,
         "attributes": {
             "backgroundColors": {
                 "type": "BackgroundCollection",
