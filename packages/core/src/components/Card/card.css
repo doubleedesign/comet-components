@@ -71,6 +71,14 @@
   justify-content: space-between;
   gap: var(--spacing-xs);
 }
+.card__content [class$=__meta], [class$=__card__content] [class$=__meta] {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  background: var(--color-light);
+  color: var(--color-dark);
+  margin-block-end: var(--spacing-sm);
+}
 .card__content p, [class$=__card__content] p {
   display: -webkit-box;
   -webkit-box-orient: vertical;

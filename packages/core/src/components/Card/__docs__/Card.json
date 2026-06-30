@@ -29,10 +29,15 @@
             "type": "ThemeColor|ThemeGradient",
             "description": "The background colour of the component."
         },
+        "bodyComponents": {
+            "type": "array<Renderable>",
+            "description": "Array of components to render in the main body of the card; will be rendered after the heading and before the link/button",
+            "required": true,
+            "default": []
+        },
         "bodyText": {
             "type": "string",
-            "description": "Text content of the card; will be put into a paragraph; expects plain text / simple inline HTML",
-            "required": true
+            "description": "Text content of the card; will be put into a paragraph; expects plain text / simple inline HTML"
         },
         "cardAsLink": {
             "type": "bool",

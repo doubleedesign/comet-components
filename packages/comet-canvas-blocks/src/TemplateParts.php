@@ -1,7 +1,8 @@
 <?php
 namespace Doubleedesign\CometCanvas;
-use Doubleedesign\Comet\Core\{Card, CardList, Config, PostNav, PreprocessedHTML};
+use Doubleedesign\Comet\Core\{Card, CardList, Config, PostNav, PreprocessedHTML, Pagination};
 use WP_User_Query;
+use Dom\HTMLDocument;
 
 /**
  * Class TemplateParts
@@ -30,13 +31,13 @@ class TemplateParts {
         return apply_filters('comet_canvas_classic_contact_details_fields', $expected);
     }
 
-    public static function get_post_meta(): PreprocessedHTML {
-        $queried_object = get_queried_object();
+    public static function get_post_meta($post_id, $compact = false): PreprocessedHTML {
+        $queried_object = get_post($post_id);
         $date = get_the_date('', $queried_object);
         $category = get_the_category($queried_object->ID)[0] ?? null;
 
-        $meta = "Published on $date";
-        if ($category) {
+        $meta = $compact ? $date : "Published on $date";
+        if ($category && !$compact) {
             $category_link = get_category_link($category->term_id);
             $meta .= " in <a href='$category_link'>{$category->name}</a>.";
         }
@@ -134,11 +135,11 @@ class TemplateParts {
                 $image = get_the_post_thumbnail_url($post_id, 'large') ?: '';
                 $alt = get_post_meta(get_post_thumbnail_id($post_id), '_wp_attachment_image_alt', true);
                 $link = get_permalink($post_id);
+                $post_card_meta = apply_filters('comet_canvas_post_card_meta', TemplateParts::get_post_meta($post_id, true), $post_id);
 
                 $cards[] = new Card([
                     'tagName'     => 'article',
                     'heading'     => $title,
-                    'bodyText'    => $excerpt,
                     'image'       => [
                         'src' => $image,
                         'alt' => $alt,
@@ -148,10 +149,14 @@ class TemplateParts {
                         'content'   => 'Read more',
                         'isOutline' => true
                     ],
-                    'colorTheme'  => 'primary',
-                    'orientation' => 'horizontal',
+                    'colorTheme'        => 'primary',
+                    'orientation'       => 'horizontal',
                     'cardAsLink'        => apply_filters('comet_canvas_posts_loop_card_as_link', false),
-                ]);
+                ], [
+                    $post_card_meta,
+                    new PreprocessedHTML([], "<p>$excerpt</p>"),
+                ],
+                    []);
             }
         }
 

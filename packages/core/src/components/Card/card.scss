@@ -89,6 +89,15 @@
 			}
 		}
 
+		#{class-ends-with('__meta')} {
+			display: inline-block;
+			font-size: var(--font-size-sm);
+			padding: var(--spacing-xxs) var(--spacing-xs);
+			background: var(--color-light);
+			color: var(--color-dark);
+			margin-block-end: var(--spacing-sm);
+		}
+
 		p {
 			@include line-clamp(3);
 

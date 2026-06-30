@@ -16,6 +16,12 @@ class Card extends UIComponent {
     use LayoutOrientation;
     use NestedState;
 
+	/**
+	 * @var array<Renderable> $bodyComponents
+	 * @description Array of components to render in the main body of the card; will be rendered after the heading and before the link/button
+	 */
+	protected array $bodyComponents = [];
+
     /**
      * @var array<Renderable> $aboveContentComponents
      * @description Optional array of components to render above the main content; allows for things like tags, badges, etc
@@ -34,10 +40,10 @@ class Card extends UIComponent {
     protected string $heading;
 
     /**
-     * @var string $bodyText
+     * @var ?string $bodyText
      * @description Text content of the card; will be put into a paragraph; expects plain text / simple inline HTML
      */
-    protected string $bodyText;
+    protected ?string $bodyText;
 
     /**
      * @var array{href:string, content:string, target:string, isOutline:false} $link
@@ -52,7 +58,7 @@ class Card extends UIComponent {
     protected bool $cardAsLink = false;
     protected bool $withWrapper = true;
 
-    public function __construct(array $attributes, ?array $aboveContentComponents = null) {
+    public function __construct(array $attributes, ?array $bodyComponents = null, ?array $aboveContentComponents = null) {
         $this->image = $this->validate_image_attributes($attributes['image'] ?? []);
         $this->heading = $attributes['heading'] ?? '';
         $this->bodyText = $attributes['bodyText'] ?? '';
@@ -63,31 +69,30 @@ class Card extends UIComponent {
         $this->set_is_nested($attributes['isNested'] ?? true);
         $this->set_color_pair($attributes);
         $this->set_orientation($attributes);
+		if(!isset($bodyComponents)) {
+			$bodyComponents = []; // backwards compatibility
+		}
 
-        $innerComponents = $this->aboveContentComponents ?? [];
+        if (is_string($this->bodyText)) {
+            array_push($bodyComponents, new PreprocessedHTML([], $this->bodyText));
+        }
+
         if (!empty($this->heading)) {
             $iconPrefix = Config::getInstance()->get_icon_prefix();
             $preferHorizontal = $this->orientation && $this->orientation === Orientation::HORIZONTAL;
-            array_push($innerComponents, new Heading([
-                'level'   => 3
-            ],
-                // TODO: Make this icon properly configurable - different icon, different library etc. Maybe a centralised set of icons in the config?
-                $this->heading . ($this->cardAsLink ? "<i class='$iconPrefix fa-arrow-right'></i>" : '')
-            ));
+            array_unshift($bodyComponents, new Heading(['level'=> 3], $this->heading . ($this->cardAsLink ? "<i class='$iconPrefix fa-arrow-right'></i>" : '')));
         }
-        if (!empty($this->bodyText)) {
-            array_push($innerComponents, new Paragraph([], $this->bodyText));
-        }
+
         if (!empty($this->link) && !$this->cardAsLink) {
             $linkAttrs = [
                 'href'      => $this->link['href'] ?? '#',
                 'target'    => $this->link['target'] ?? null,
                 'isOutline' => $this->link['isOutline'] ?? false
             ];
-            array_push($innerComponents, new Button($linkAttrs, $this->link['content'] ?? 'Read more'));
+            array_push($bodyComponents, new Button($linkAttrs, $this->link['content'] ?? 'Read more'));
         }
 
-        parent::__construct($attributes, $innerComponents, 'components.Card.card');
+        parent::__construct($attributes, array_merge($this->aboveContentComponents, $bodyComponents), 'components.Card.card');
 
         // Optional advanced image configuration
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);
@@ -138,7 +143,7 @@ class Card extends UIComponent {
         return $attributes;
     }
 
-	public function render(): void {
+    public function render(): void {
         $blade = BladeService::getInstance();
 
         echo $blade->make($this->bladeFile, [

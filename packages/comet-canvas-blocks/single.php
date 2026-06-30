@@ -7,6 +7,7 @@ get_header();
 get_template_part('template-parts/page-header');
 
 $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+$include_post_meta_before_body = apply_filters('comet_canvas_blog_post_include_post_meta_before_body', false);
 $include_post_meta_after_body = apply_filters('comet_canvas_blog_post_include_post_meta_after_body', true);
 $include_author_card = apply_filters('comet_canvas_blog_post_include_author_card', false);
 $include_post_nav = apply_filters('comet_canvas_blog_post_include_post_nav', true);
@@ -34,9 +35,10 @@ $content = new Copy([
     'isNested'           => true,
     'shortName'          => 'body'
 ], [
+	...($include_post_meta_before_body ? [TemplateParts::get_post_meta(get_the_id())] : []),
     new PreprocessedHTML([], wpautop(get_the_content())),
     new PreprocessedHTML([], $after_content ?? ''),
-    ...($include_post_meta_after_body ? [TemplateParts::get_post_meta()] : [])
+    ...($include_post_meta_after_body ? [TemplateParts::get_post_meta(get_the_id())] : [])
 ]);
 
 $footer = new Group([
