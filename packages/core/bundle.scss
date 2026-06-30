@@ -34,6 +34,7 @@
 	@include meta.load-css("./src/components/LinkGroup/link-group.scss");
 	@include meta.load-css("./src/components/Menu/menu.scss");
 	@include meta.load-css("./src/components/PageHeader/page-header.scss");
+	@include meta.load-css("./src/components/Pagination/pagination.scss");
 	@include meta.load-css("./src/components/PostNav/post-nav.scss");
 	@include meta.load-css("./src/components/Pullquote/pullquote.scss");
 	@include meta.load-css("./src/components/ResponsivePanels/responsive-panels.scss");

@@ -1625,6 +1625,14 @@
     justify-content: space-between;
     gap: var(--spacing-xs);
   }
+  .card__content [class$=__meta], [class$=__card__content] [class$=__meta] {
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    background: var(--color-light);
+    color: var(--color-dark);
+    margin-block-end: var(--spacing-sm);
+  }
   .card__content p, [class$=__card__content] p {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -3579,6 +3587,36 @@
     margin-bottom: 0;
     width: 100%;
     flex-basis: 100%;
+  }
+  .pagination, [class$=__pagination], [class*=pagination--] {
+    margin-block: var(--spacing-lg);
+  }
+  @media (min-width: 768px) {
+    .pagination, [class$=__pagination], [class*=pagination--] {
+      margin-block: var(--spacing-xl);
+    }
+  }
+  @media (min-width: 1440px) {
+    .pagination, [class$=__pagination], [class*=pagination--] {
+      margin-block: var(--spacing-xxl);
+    }
+  }
+  .pagination:last-child, [class$=__pagination]:last-child, [class*=pagination--]:last-child {
+    margin-block-end: 0;
+  }
+  .pagination__button-group .button, [class$=__pagination__button-group] .button {
+    padding: var(--spacing-xs) var(--spacing-md);
+    line-height: 1;
+  }
+  .pagination__button-group .button[aria-current], [class$=__pagination__button-group] .button[aria-current] {
+    pointer-events: none;
+  }
+  .pagination__button-group .button[aria-label=""], [class$=__pagination__button-group] .button[aria-label=""], .pagination__button-group .button:not([aria-label]), [class$=__pagination__button-group] .button:not([aria-label]) {
+    pointer-events: none;
+    border: 0;
+  }
+  .pagination__button-group .button[aria-label="Previous page"] .button__label, [class$=__pagination__button-group] .button[aria-label="Previous page"] .button__label, .pagination__button-group .button[aria-label="Next page"] .button__label, [class$=__pagination__button-group] .button[aria-label="Next page"] .button__label {
+    display: none;
   }
   .post-nav, [class$=__post-nav], [class*=post-nav--] {
     width: 100%;
