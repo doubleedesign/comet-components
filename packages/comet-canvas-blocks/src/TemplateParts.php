@@ -1,8 +1,8 @@
 <?php
 namespace Doubleedesign\CometCanvas;
-use Doubleedesign\Comet\Core\{Card, CardList, Config, PostNav, PreprocessedHTML, Pagination};
-use WP_User_Query;
 use Dom\HTMLDocument;
+use Doubleedesign\Comet\Core\{Card, CardList, Config, Pagination, PostNav, PreprocessedHTML};
+use WP_User_Query;
 
 /**
  * Class TemplateParts
@@ -245,6 +245,10 @@ class TemplateParts {
             'type'         => 'array',
             'aria_current' => 'page',
         ));
+
+		if(!is_array($output)) {
+			$output = [];
+		}
 
         // ...and then process it into the format we want to pass to Comet
         $links = array_map(function($html) {
