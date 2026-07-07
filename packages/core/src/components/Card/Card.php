@@ -16,11 +16,11 @@ class Card extends UIComponent {
     use LayoutOrientation;
     use NestedState;
 
-	/**
-	 * @var array<Renderable> $bodyComponents
-	 * @description Array of components to render in the main body of the card; will be rendered after the heading and before the link/button
-	 */
-	protected array $bodyComponents = [];
+    /**
+     * @var array<Renderable> $bodyComponents
+     * @description Array of components to render in the main body of the card; will be rendered after the heading and before the link/button
+     */
+    protected array $bodyComponents = [];
 
     /**
      * @var array<Renderable> $aboveContentComponents
@@ -32,6 +32,13 @@ class Card extends UIComponent {
      * @var array{src:string, alt:string} $image
      */
     protected array $image;
+
+    /**
+     * @var string|null $scale
+     * @description How to handle how the image fits the available space
+     * @supported-values contain, cover
+     */
+    protected ?string $image_scale = 'contain';
 
     /**
      * @var string $heading
@@ -69,9 +76,9 @@ class Card extends UIComponent {
         $this->set_is_nested($attributes['isNested'] ?? true);
         $this->set_color_pair($attributes);
         $this->set_orientation($attributes);
-		if(!isset($bodyComponents)) {
-			$bodyComponents = []; // backwards compatibility
-		}
+        if (!isset($bodyComponents)) {
+            $bodyComponents = []; // backwards compatibility
+        }
 
         if (is_string($this->bodyText)) {
             array_push($bodyComponents, new PreprocessedHTML([], $this->bodyText));
@@ -92,12 +99,15 @@ class Card extends UIComponent {
             array_push($bodyComponents, new Button($linkAttrs, $this->link['content'] ?? 'Read more'));
         }
 
-        parent::__construct($attributes, array_merge($this->aboveContentComponents, $bodyComponents), 'components.Card.card');
+		$this->bodyComponents = $bodyComponents;
+
+        parent::__construct($attributes, array_merge($this->aboveContentComponents ?? [], $bodyComponents ?? []), 'components.Card.card');
 
         // Optional advanced image configuration
         $this->set_aspect_ratio_from_attrs($attributes, AspectRatio::STANDARD);
         $this->set_focal_point_from_attrs($attributes);
         $this->set_image_offset_from_attrs($attributes);
+        $this->image_scale = $attributes['image_scale'] ?? $this->image_scale;
 
         if ($this->cardAsLink) {
             $this->set_tag('a');
@@ -135,6 +145,9 @@ class Card extends UIComponent {
 
         if (isset($this->aspectRatio)) {
             $attributes['data-aspect-ratio'] = strtolower($this->aspectRatio->name);
+        }
+        if (isset($this->image_scale)) {
+            $attributes['data-behaviour'] = $this->image_scale;
         }
         if (isset($this->focalPoint) || isset($this->offset)) {
             $attributes['style'] = $this->get_local_css_properties();
