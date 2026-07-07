@@ -146,3 +146,9 @@
 		}
 	}
 }
+
+@mixin follows-adjacent-sibling($selector) {
+	#{$selector} + & {
+		@content;
+	}
+}
