@@ -1,11 +1,12 @@
 @use '../variables' as *;
 @use '../bem-mixin' as *;
+@use '../bem-class-selectors' as *;
 
 @include bem-block('files', ('file-group')) {
 
-	&__file-group {
+	@include bem-block('files__file-group', ('file')) {
 
-		&__file {
+		@include bem-block('files__file-group__file', ('icon', 'content')) {
 			display: flex;
 			flex-wrap: nowrap;
 			gap: var(--spacing-sm);
@@ -14,30 +15,18 @@
 			padding: var(--spacing-sm);
 			transition: background 0.2s linear;
 			font-size: 1rem;
+			background: color-mix(in srgb, var(--theme-color) 10%, white);
 
-			@each $name, $color in $colors {
-				[data-color-theme=#{$name}] &,
-				&[data-color-theme=#{$name}] {
-					background: color-mix(in srgb, var(--color-#{$name}) 10%, white);
-
-					&:hover, &:focus, &:active {
-						background: color-mix(in srgb, var(--color-#{$name}) 20%, white);
-						color: var(--color-#{$name});
-					}
-				}
+			&:hover, &:focus, &:active {
+				background: color-mix(in srgb, var(--theme-color) 20%, white);
 			}
 
 			&__icon {
 				font-size: 2rem;
-
-				@each $name, $color in $colors {
-					[data-color-theme=#{$name}] & {
-						color: var(--color-#{$name});
-					}
-				}
+				color: var(--theme-color);
 			}
 
-			&__content {
+			@include bem-block('files__file-group__file__content', ('title', 'description', 'meta')) {
 
 				&:has(> :only-child) {
 					display: flex;
@@ -47,12 +36,7 @@
 				&__title {
 					font-weight: var(--font-weight-semibold);
 					display: block;
-
-					@each $name, $color in $colors {
-						[data-color-theme=#{$name}] & {
-							color: var(--color-#{$name});
-						}
-					}
+					color: var(--theme-color);
 				}
 
 				&__description {
@@ -68,8 +52,8 @@
 					gap: var(--spacing-sm);
 					justify-content: flex-end;
 
-					&__size,
-					&__date {
+					#{class-ends-with('__size')},
+					#{class-ends-with('__date')} {
 						font-size: var(--font-size-sm);
 					}
 				}

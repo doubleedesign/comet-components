@@ -31,7 +31,7 @@
 	// to contextually named children (e.g., .profile__card__content)
 	@each $element in $elements {
 		#{class-ends-with("__#{$block}__#{$element}")} {
-			@extend .#{$block}__#{$element};
+			@extend .#{$block}__#{$element} !optional;
 		}
 	}
 }
