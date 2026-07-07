@@ -9,5 +9,15 @@ add_action('plugins_loaded', function() {
     }
 }, 1);
 
-new NavMenus();
-new SiteHealth();
+
+class CometCanvasTheme {
+
+	public function __construct() {
+		add_theme_support('post-thumbnails');
+
+		new NavMenus();
+		new SiteHealth();
+	}
+}
+
+new CometCanvasTheme();
