@@ -34,6 +34,10 @@ class PageSection extends Renderable {
         $this->set_shortname($attributes['shortName'] ?? null);
 
         array_walk($this->innerComponents, function(&$component) {
+            if (!is_object($component)) {
+                return;
+            }
+
             // Only keep size attribute on inner components that are different from the size of this wrapper
             if (method_exists($component, 'get_size') && $component->get_size() === $this->size) {
                 $component->set_size(null);

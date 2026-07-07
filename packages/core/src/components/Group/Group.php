@@ -29,7 +29,7 @@ class Group extends UIComponent {
 
     public function __construct(array $attributes, array $innerComponents) {
         parent::__construct($attributes, $innerComponents, 'components.Group.group');
-		$this->set_is_nested($attributes['isNested'] ?? false);
+        $this->set_is_nested($attributes['isNested'] ?? false);
         $this->set_color_pair($attributes);
         if ($this->get_background_color() !== null) {
             $this->simplify_all_background_colors();
@@ -37,13 +37,13 @@ class Group extends UIComponent {
 
         // If this component is nested, it stands to reason that its inner components should also be treated as nested,
         // so let's propagate that state down to them automatically
-	    if($this->get_is_nested()) {
-			array_walk($this->innerComponents, function(&$component) {
-				if (method_exists($component, 'set_is_nested')) {
-					$component->set_is_nested(true);
-				}
-			});
-		}
+        if ($this->get_is_nested()) {
+            array_walk($this->innerComponents, function(&$component) {
+                if (method_exists($component, 'set_is_nested')) {
+                    $component->set_is_nested(true);
+                }
+            });
+        }
 
         $this->dataAttrs = array_filter($attributes, fn($key) => str_starts_with($key, 'data-'), ARRAY_FILTER_USE_KEY);
     }

@@ -18,8 +18,7 @@ class ContentImageBasic extends ContentImageComponent {
      * @description How to handle how the image fits the available space
      * @supported-values contain, cover
      *
-     * This is basically here because the WordPress block editor provides this option along with aspect ratio.
-     * The ContentImage class provides more advanced cropping and should NOT also have the scale attribute.
+     * Note: The ContentImageAdvanced class provides more advanced cropping and should NOT also have the scale attribute, that's why this is here.
      */
     protected ?string $scale = 'contain';
 
