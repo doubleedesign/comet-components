@@ -1,6 +1,6 @@
 <?php
 
-use Doubleedesign\Comet\Core\{Container, ContentImageBasic, Copy, Group, PreprocessedHTML};
+use Doubleedesign\Comet\Core\{ContentImageBasic, Copy, Group, PageSection, PreprocessedHTML};
 use Doubleedesign\CometCanvas\TemplateParts;
 
 get_header();
@@ -49,7 +49,7 @@ $footer = new Group([
     ...($include_post_nav ? [TemplateParts::get_post_nav()] : []),
 ]);
 
-$component = new Container([
+$component = new PageSection([
     'tagName'         => 'article',
     'shortName'       => 'post-content',
     'size'            => apply_filters('comet_canvas_single_post_width', 'contained'),
