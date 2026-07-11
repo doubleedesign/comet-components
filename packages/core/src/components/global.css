@@ -111,10 +111,10 @@
     gap: var(--spacing-lg);
   }
   [data-group-layout=grid] {
-    width: 100%;
+    width: 100cqw;
+    min-width: 100%;
     display: grid;
     gap: var(--spacing-md);
-    container-type: inline-size;
     grid-template-columns: 1fr;
   }
   [data-group-layout=grid][data-max-per-row] {

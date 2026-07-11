@@ -8,11 +8,17 @@ namespace Doubleedesign\Comet\Core;
  * @version 1.0.1
  * @description Display a grid of images with optional captions, with a range of layout options.
  */
-#[AllowedTags([Tag::SECTION, Tag::FIGURE, Tag::DIV])]
+#[AllowedTags([Tag::SECTION, Tag::DIV])]
 #[DefaultTag(Tag::SECTION)]
 class Gallery extends LayoutComponent {
     use BackgroundColor;
     use NestedState;
+
+    /**
+     * @var AspectRatio|null $aspectRatio
+     * @description Crop images to the given aspect ratio, or scale them to fit within it (depending on the imageCrop setting); overrides explicitly set aspect ratios on individual images
+     */
+    protected ?AspectRatio $aspectRatio = null;
 
     /**
      * @var int $maxPerRow
@@ -26,6 +32,12 @@ class Gallery extends LayoutComponent {
      * @description Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>
      */
     protected ?string $caption;
+
+    /**
+     * @var bool $captionAsHeading
+     * @description Whether to render the caption as a heading above the gallery, or a figcaption below the gallery
+     */
+    protected bool $captionAsHeading = false;
 
     /**
      * @var bool $imageCrop
@@ -50,27 +62,30 @@ class Gallery extends LayoutComponent {
         $this->maxPerRow = $attributes['maxPerRow'] ?? $attributes['columns'] ?? $this->maxPerRow;
         $this->caption = (isset($attributes['caption']) && !empty(trim($attributes['caption']))) ? trim($attributes['caption']) : null;
         $this->lightbox = $attributes['lightbox'] ?? $this->lightbox;
+        $this->aspectRatio = isset($attributes['aspectRatio']) ? AspectRatio::fromString($attributes['aspectRatio']) : null;
+        $this->captionAsHeading = $attributes['captionAsHeading'] ?? $this->captionAsHeading;
+        $this->set_is_nested($attributes['isNested'] ?? false);
+        $this->set_background_color($attributes);
 
         $updatedInnerComponents = array_map(function(ContentImageBasic $component) use ($attributes) {
             $component->set_behaviour($this->imageCrop ? 'cover' : 'contain');
+            if (isset($this->aspectRatio)) {
+                $component->set_aspect_ratio($this->aspectRatio);
+            }
 
             return $component;
         }, $innerComponents);
 
         $groupAttrs = [
-            'tagName'           => 'div',
+            'tagName'           => isset($this->caption) ? 'figure' : 'div',
             'shortName'         => 'images',
             'data-group-layout' => 'grid',
             'data-max-per-row'  => $attributes['maxPerRow'] ?? $attributes,
             'data-lightbox'     => $this->lightbox ? 'true' : null,
-            'role'              => 'group'
+            'role'              => isset($this->caption) ? null : 'group'
         ];
 
         $wrappedImages = new Group($groupAttrs, $updatedInnerComponents);
-
-        // TODO: Check if tagName needs more handling for nested/not nested states
-        $this->set_is_nested($attributes['isNested'] ?? false);
-        $this->set_background_color($attributes);
 
         parent::__construct(
             $attributes,
@@ -81,11 +96,15 @@ class Gallery extends LayoutComponent {
         // Add caption after parent constructor runs so we have access to the correct BEM context
         if (!empty($this->caption)) {
             $captionClass = $this->get_bem_prefix() . '__caption';
-            $captionTag = (isset($attributes['tagName']) && $attributes['tagName'] === 'figure') ? 'figcaption' : 'p';
-            $wrappedImages->innerComponents[] = new PreprocessedHTML(
-                [],
-                "<{$captionTag} class=\"{$captionClass}\">" . $this->caption . "</{$captionTag}>"
-            );
+
+            if ($this->captionAsHeading) {
+                array_unshift($this->innerComponents, new Heading(['classes' => [$captionClass]], $this->caption));
+            }
+            else {
+                array_push($wrappedImages->innerComponents, new PreprocessedHTML([],
+                    "<figcaption class=\"{$captionClass}\">" . $this->caption . "</figcaption>"
+                ));
+            }
         }
     }
 

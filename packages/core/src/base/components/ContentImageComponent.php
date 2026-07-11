@@ -34,6 +34,17 @@ abstract class ContentImageComponent extends ImageComponent {
     }
 
     /**
+     * Enables setting the aspect ratio after instantiation, such as by the Gallery component
+     *
+     * @param  AspectRatio|string  $aspectRatio
+     *
+     * @return void
+     */
+    public function set_aspect_ratio(AspectRatio|string $aspectRatio): void {
+        $this->aspectRatio = $aspectRatio instanceof AspectRatio ? $aspectRatio : AspectRatio::fromString($aspectRatio);
+    }
+
+    /**
      * Layout attributes for the element wrapping both the image and the caption (if there is one)
      *
      * @return array
@@ -48,27 +59,29 @@ abstract class ContentImageComponent extends ImageComponent {
         });
     }
 
-	/**
-	 * Get the classes for the figure element wrapping both the image and the caption (if there is one)
-	 * @return array|string[]
-	 */
-	protected function get_wrapper_classes(): array {
-		if ($this->get_context()) {
-			return [$this->get_context() . '__image'];
-		}
+    /**
+     * Get the classes for the figure element wrapping both the image and the caption (if there is one)
+     *
+     * @return array|string[]
+     */
+    protected function get_wrapper_classes(): array {
+        if ($this->get_context()) {
+            return [$this->get_context() . '__image'];
+        }
 
-		return [];
-	}
+        return [];
+    }
 
-	/**
-	 * Get the classes for the figcaption element (if there is one)
-	 * @return array|string[]
-	 */
-	protected function get_caption_classes(): array {
-		if ($this->get_context()) {
-			return [$this->get_context() . '__image__caption'];
-		}
+    /**
+     * Get the classes for the figcaption element (if there is one)
+     *
+     * @return array|string[]
+     */
+    protected function get_caption_classes(): array {
+        if ($this->get_context()) {
+            return [$this->get_context() . '__image__caption'];
+        }
 
-		return [];
-	}
+        return [];
+    }
 }

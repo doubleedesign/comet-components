@@ -171,7 +171,7 @@ class ColorUtils {
             }
         }
         catch (Exception $e) {
-            error_log('Error loading colours.css: ' . $e->getMessage());
+            //error_log('Error loading colours.css: ' . $e->getMessage());
 
             return;
         }

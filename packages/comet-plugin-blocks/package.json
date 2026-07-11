@@ -8,7 +8,7 @@
 	"scripts": {
 		"compile": "rollup -c",
 		"lint": "eslint --fix",
-		"build": "pnpm run compile && pnpm run lint"
+		"build": "pnpm run compile && pnpm run lint && sass src/block-editor-config.scss:src/block-editor-config.css"
 	},
 	"dependencies": {
 		"@doubleedesign/comet-gutenberg-controls": "file:../../../../WebStormProjects/comet-gutenberg-controls"

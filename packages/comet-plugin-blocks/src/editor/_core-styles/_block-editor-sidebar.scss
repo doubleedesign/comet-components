@@ -4,4 +4,36 @@
 	font-family: inherit;
 }
 
+.acf-modal-block-form-container {
+	// Note: block name attribute is added dynamically, see block-editor-config.js
+	&[data-block-name="comet/gallery"] {
+
+		.acf-block-fields {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			.acf-field-gallery {
+				width: 100%;
+				flex-basis: 100%;
+			}
+
+			.acf-field--gallery--caption {
+				flex-grow: 1;
+			}
+
+			.acf-field--gallery--caption-as-heading {
+				width: fit-content;
+				padding-left: 0;
+
+				.acf-switch {
+					height: 40px; // same as text field beside it
+					align-items: center;
+				}
+			}
+		}
+	}
+
+}
+
 

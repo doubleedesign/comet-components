@@ -12,6 +12,12 @@
             "type": "string",
             "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>"
         },
+        "captionAsHeading": {
+            "type": "bool",
+            "description": "Whether to render the caption as a heading above the gallery, or a figcaption below the gallery",
+            "required": true,
+            "default": "false"
+        },
         "classes": {
             "type": "array<string>",
             "description": "Additional CSS classes",

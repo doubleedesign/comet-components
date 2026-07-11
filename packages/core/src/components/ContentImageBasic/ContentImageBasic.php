@@ -40,18 +40,26 @@ class ContentImageBasic extends ContentImageComponent {
      */
     protected ?string $href = null;
 
+    /**
+     * @var string|null $target
+     * @description Target attribute for the link, e.g. '_blank' to open in a new tab. Not intended for use within the Gallery component in lightbox mode.
+     */
+    protected ?string $target = null;
+
     public function __construct(array $attributes) {
         $this->set_bem_modifier('basic');
         $this->set_orientation($attributes);
         parent::__construct($attributes, 'components.ContentImageBasic.content-image-basic');
-        $this->scale = $attributes['scale'] ?? 'contain';
+        $this->scale = $attributes['scale'] ?? $this->scale;
         $this->height = $attributes['height'] ?? null;
         $this->width = $attributes['width'] ?? null;
         $this->href = $attributes['href'] ?? null;
+        $this->target = $attributes['target'] ?? null;
     }
 
     /**
      * Enables setting behaviour after instantiation, such as by the Gallery component
+     *
      * @param  string<'cover'|'contain'>  $behaviour
      *
      * @return void
@@ -114,6 +122,7 @@ class ContentImageBasic extends ContentImageComponent {
         echo $blade->make($this->bladeFile, [
             'src'            => $this->src,
             'href'           => $this->href,
+            'target'         => $this->target,
             'caption'        => $this->caption,
             'wrapperClasses' => $this->get_wrapper_classes(),
             'captionClasses' => $this->get_caption_classes(),

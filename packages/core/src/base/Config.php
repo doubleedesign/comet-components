@@ -26,7 +26,8 @@ class Config {
         'link-group'             => ['layout' => GroupLayout::LIST],
         'callout'                => ['colorTheme' => ThemeColor::INFO],
         'separator'              => ['colorTheme' => ThemeColor::PRIMARY],
-        'file-group'             => ['colorTheme' => ThemeColor::PRIMARY]
+        'file-group'             => ['colorTheme' => ThemeColor::PRIMARY],
+        'gallery'                => ['backgroundColor' => ThemeColor::WHITE, 'colorTheme' => ThemeColor::DARK]
     ];
 
     // Key-value pairs where the key should match valid ThemeColor names
@@ -189,7 +190,7 @@ class Config {
             return $pair['background'] === $background && $pair['foreground'] === $foreground;
         });
         if ($exists !== null) {
-            //error_log("Comet Components core config: Colour pair foreground '$foreground' and background '$background' already exists so has not been registered again.");
+            // error_log("Comet Components core config: Colour pair foreground '$foreground' and background '$background' already exists so has not been registered again.");
 
             return;
         }
@@ -201,7 +202,7 @@ class Config {
         }
         else {
             $message = "Comet Components core config: Colour pair foreground '$foreground' and background '$background' does not meet contrast threshold of $threshold:1 so has not been registered.";
-           // error_log($message);
+            // error_log($message);
         }
     }
 

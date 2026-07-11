@@ -152,3 +152,81 @@
 		@content;
 	}
 }
+
+@mixin grid-layout($wait-for-min-items: true) {
+	width: 100cqw;
+	min-width: 100%;
+	display: grid;
+	gap: var(--spacing-md);
+	grid-template-columns: 1fr;
+
+	&[data-max-per-row] {
+		// Align according to parent's hAlign if applicable,
+		// if the items don't take up the full space (e.g., 3 items sized for 4 per row)
+		justify-content: inherit;
+	}
+
+	&[data-max-per-row="2"], &[data-max-per-row="4"] {
+		@include container-width-up('small') {
+
+			@if $wait-for-min-items {
+				// Only go to 2 columns if there are 2 or more items
+				&:has(> :nth-child(2)) {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+		}
+	}
+
+	&[data-max-per-row="4"] {
+		@include container-width-up('narrower') {
+			grid-template-columns: repeat(auto-fit, 25%);  // this ensures alignment works correctly when there's fewer
+
+			@if $wait-for-min-items {
+				// Only go to 4 column grid if there are actually 4 or more items
+				&:has(> :nth-child(4)) {
+					grid-template-columns: repeat(4, 1fr);
+				}
+			}
+		}
+	}
+
+	&[data-max-per-row="3"], &[data-max-per-row="5"], &[data-max-per-row="6"] {
+		@include container-width-up('small') {
+			grid-template-columns: repeat(auto-fit, 33%); // this ensures alignment works correctly when there's fewer
+
+			@if $wait-for-min-items {
+				// Only go to 4 column grid if there are actually 3 or more items
+				&:has(> :nth-child(3)) {
+					grid-template-columns: repeat(3, 1fr);
+				}
+			}
+		}
+	}
+
+	&[data-max-per-row="5"] {
+		@include container-width-up('narrower') {
+			grid-template-columns: repeat(auto-fit, 20%);  // this ensures alignment works correctly when there's fewer
+
+			@if $wait-for-min-items {
+				// Only go to 5 column grid if there are actually 5 or more items
+				&:has(> :nth-child(5)) {
+					grid-template-columns: repeat(5, 1fr);
+				}
+			}
+		}
+	}
+
+	&[data-max-per-row="6"] {
+		@include container-width-up('narrower') {
+			grid-template-columns: repeat(auto-fit, 16.66%);  // this ensures alignment works correctly when there's fewer
+
+			@if $wait-for-min-items {
+				// Only go to 6 column grid if there are actually 6 or more items
+				&:has(> :nth-child(6)) {
+					grid-template-columns: repeat(6, 1fr);
+				}
+			}
+		}
+	}
+}
