@@ -1,13 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { ThemeColor, THEME_COLORS } from '../../../../test/storybook-helpers.ts';
-
-type GroupProps = {
-	backgroundColor: '' | 'none' | ThemeColor;
-	tagName: 'div' | 'section' | 'article' | 'aside';
-	classes?: string | string[];
-
-}
+import { GroupProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Layout/Group',

@@ -1,14 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { ThemeColor, THEME_COLORS } from '../../../../test/storybook-helpers.ts';
-
-type ButtonProps = {
-	tagName: 'a' | 'button';
-	colorTheme: ThemeColor;
-	isOutline: boolean;
-	href?: string;
-	classes?: string[];
-}
+import { ButtonProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Text/Button',

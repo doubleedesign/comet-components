@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { Alignment, ALIGNMENT_OPTIONS, Orientation, ORIENTATION_OPTIONS } from '../../../../test/storybook-helpers.ts';
-
-type IconLinksProps = {
-	tagName: 'div';
-	orientation: Orientation;
-	hAlign: Alignment;
-	vAlign: Alignment;
-	iconPrefix: string;
-	classes?: string[];
-}
+import { IconLinksProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'UI/IconLinks',

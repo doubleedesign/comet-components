@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { THEME_COLORS, ThemeColor } from "../../../../test/storybook-helpers.ts";
-
-type IconWithTextProps = {
-	tagName: 'div';
-	label: string;
-	iconPrefix: string;
-	icon: string;
-	colorTheme: ThemeColor;
-	classes?: string[];
-}
+import { IconWithTextProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Text/IconWithText',

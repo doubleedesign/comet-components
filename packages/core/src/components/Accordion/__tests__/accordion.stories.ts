@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
-import { type Orientation, type ThemeColor, THEME_COLORS, ORIENTATION_OPTIONS } from "../../../../test/storybook-helpers.ts";
 import { createStoryBase } from "../../../../test/story-base.ts";
-
-type AccordionProps = {
-	colorTheme: ThemeColor;
-	icon: string;
-	iconPrefix: string;
-	orientation: Orientation;
-	tagName: 'div';
-	classes?: string[];
-}
+import { AccordionProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Layout/Accordion',

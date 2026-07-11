@@ -65,7 +65,7 @@
                 "required": true
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "styleName": {
@@ -155,7 +155,7 @@
                 "default": "true"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -213,7 +213,7 @@
                 "required": true
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "styleName": {
@@ -293,7 +293,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -369,7 +369,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "subtitle": {
@@ -394,7 +394,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<Renderable>",
+            "type": "array",
             "description": "Inner components to be rendered within this component",
             "required": true
         },
@@ -459,7 +459,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -503,7 +503,7 @@
                 "description": "Unique identifier"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -534,7 +534,7 @@
                 "description": "Unique identifier"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -624,7 +624,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -715,7 +715,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -837,7 +837,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -903,7 +903,7 @@
                 "default": "accordion-panel"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "subtitle": {
@@ -927,7 +927,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<Renderable>",
+            "type": "array",
             "description": "Inner components to be rendered within this component",
             "required": true
         },
@@ -1035,7 +1035,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1102,7 +1102,7 @@
                 "default": "breadcrumbs"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1186,7 +1186,7 @@
                 "default": "button"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1278,7 +1278,7 @@
                 "default": "button-group"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1307,7 +1307,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<Button>",
+            "type": "array",
             "description": "Button objects to render inside the ButtonGroup",
             "required": true
         },
@@ -1371,7 +1371,7 @@
                 "default": "callout"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1472,7 +1472,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1587,7 +1587,7 @@
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "focalPoint": {
-                "type": "array{x:",
+                "type": "array{x: int, y:int}",
                 "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
                 "default": {
                     "x": 50,
@@ -1604,8 +1604,17 @@
                 "description": "Unique identifier"
             },
             "image": {
-                "type": "array{src:string,",
+                "type": "array{src:string, alt:string}",
                 "required": true
+            },
+            "image_scale": {
+                "type": "string",
+                "description": "How to handle how the image fits the available space",
+                "supported": [
+                    "contain",
+                    "cover"
+                ],
+                "default": "contain"
             },
             "isNested": {
                 "type": "bool",
@@ -1614,13 +1623,13 @@
                 "default": true
             },
             "link": {
-                "type": "array{href:string,",
+                "type": "array{href:string, content:string, target:string, isOutline:false}",
                 "description": "Optional link for the card",
                 "required": true,
                 "default": []
             },
             "offset": {
-                "type": "array{x:",
+                "type": "array{x: int, y:int}",
                 "description": "The percentage offsets of the image to use when cropping",
                 "default": {
                     "x": 0,
@@ -1651,7 +1660,7 @@
                 "default": "card"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1791,7 +1800,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -1881,7 +1890,7 @@
                 "default": "column"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2006,7 +2015,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2086,7 +2095,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2169,7 +2178,7 @@
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "focalPoint": {
-                "type": "array{x:",
+                "type": "array{x: int, y:int}",
                 "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
                 "default": {
                     "x": 50,
@@ -2181,7 +2190,7 @@
                 "description": "Unique identifier"
             },
             "offset": {
-                "type": "array{x:",
+                "type": "array{x: int, y:int}",
                 "description": "The percentage offsets of the image to use when cropping",
                 "default": {
                     "x": 0,
@@ -2208,7 +2217,7 @@
                 "required": true
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "styleName": {
@@ -2313,7 +2322,7 @@
             },
             "scale": {
                 "type": "string",
-                "description": "How to handle how the image fits the available space This is basically here because the WordPress block editor provides this option along with aspect ratio. The ContentImage class provides more advanced cropping and should NOT also have the scale attribute.",
+                "description": "How to handle how the image fits the available space Note: The ContentImageAdvanced class provides more advanced cropping and should NOT also have the scale attribute, that's why this is here.",
                 "supported": [
                     "contain",
                     "cover"
@@ -2332,7 +2341,7 @@
                 "required": true
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "styleName": {
@@ -2432,7 +2441,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2500,7 +2509,7 @@
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "focalPoint": {
-                "type": "array{x:",
+                "type": "array{x: int, y:int}",
                 "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
                 "default": {
                     "x": 50,
@@ -2518,7 +2527,7 @@
                 "default": "false"
             },
             "offset": {
-                "type": "array{x:",
+                "type": "array{x: int, y:int}",
                 "description": "The percentage offsets of the image to use when cropping",
                 "default": {
                     "x": 0,
@@ -2546,7 +2555,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2632,7 +2641,7 @@
                 "default": "true"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2724,7 +2733,7 @@
                 "description": "The start date to be displayed; can be passed in via $attributes as either as a DateTime object, Unix timestamp, or a string in YYYY-MM-DD format."
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2771,7 +2780,7 @@
                 "default": "details"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "summary": {
@@ -2825,7 +2834,7 @@
                 "description": "The URL to be used for the detail page."
             },
             "externalLink": {
-                "type": "array",
+                "type": "array{url:string, label:string, target:string}",
                 "description": "An associative array with fields URL, label, and target for an external link to a separate ticketing, registration, or other third-party site.",
                 "default": []
             },
@@ -2849,7 +2858,7 @@
                 "default": "event-card"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -2978,7 +2987,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3088,7 +3097,7 @@
                 "type": "string"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3204,7 +3213,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3259,6 +3268,12 @@
             "caption": {
                 "type": "string",
                 "description": "Caption describing the whole gallery; supports inline phrasing HTML tags such as <em> and <strong>"
+            },
+            "captionAsHeading": {
+                "type": "bool",
+                "description": "Whether to render the caption as a heading above the gallery, or a figcaption below the gallery",
+                "required": true,
+                "default": "false"
             },
             "classes": {
                 "type": "array<string>",
@@ -3339,7 +3354,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3347,7 +3362,6 @@
                 "description": "The HTML tag to use for this component",
                 "supported": [
                     "section",
-                    "figure",
                     "div"
                 ],
                 "default": "section"
@@ -3423,7 +3437,7 @@
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "dataAttrs": {
-                "type": "array",
+                "type": "array<string,string>",
                 "description": "Allow for data-* attributes to be passed down to the group explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
                 "required": true
             },
@@ -3444,7 +3458,7 @@
                 "default": "group"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3514,7 +3528,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3591,7 +3605,7 @@
                 "description": "Unique identifier"
             },
             "links": {
-                "type": "array",
+                "type": "array{url: string, label: string, icon: string}[]",
                 "required": true,
                 "default": []
             },
@@ -3611,7 +3625,7 @@
                 "default": "icon-links"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3705,7 +3719,7 @@
                 "default": "icon-with-text"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3812,7 +3826,7 @@
                 "default": "image-and-text"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3868,7 +3882,7 @@
                 "default": "label-with-tooltip"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -3952,7 +3966,7 @@
                 "default": "link"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4077,7 +4091,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4150,7 +4164,7 @@
                 "default": "list"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4168,7 +4182,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<ListItem>",
+            "type": "array",
             "description": "List item objects to render inside this list",
             "required": true
         },
@@ -4206,7 +4220,7 @@
                 "default": "list-item"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4278,7 +4292,7 @@
                 "default": "menu"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4334,7 +4348,7 @@
                 "default": "menu-list"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4394,7 +4408,7 @@
                 "default": "menu-list-item"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4497,7 +4511,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4583,7 +4597,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4655,7 +4669,7 @@
                 "default": "pagination"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4715,7 +4729,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4794,7 +4808,7 @@
                 "description": "Unique identifier"
             },
             "links": {
-                "type": "array{href:string,",
+                "type": "array{href:string, content:string}",
                 "description": "Links to include. Intended to be 1 or 2 only (previous and next).",
                 "required": true,
                 "default": []
@@ -4816,7 +4830,7 @@
                 "default": "post-nav"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4869,7 +4883,7 @@
                 "default": "preprocessed-html"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -4944,7 +4958,7 @@
                 "default": ""
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -5015,7 +5029,7 @@
                 "default": "responsive-panel"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "subtitle": {
@@ -5040,7 +5054,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<Renderable>",
+            "type": "array",
             "description": "Inner components to be rendered within this component",
             "required": true
         },
@@ -5120,7 +5134,7 @@
                 "default": "responsive-panels"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -5137,7 +5151,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<ResponsivePanel>",
+            "type": "array",
             "description": "Inner components to be rendered within this component",
             "required": true
         },
@@ -5159,24 +5173,6 @@
                 "type": "array<string>",
                 "description": "Additional CSS classes",
                 "default": []
-            },
-            "color": {
-                "type": "ThemeColor",
-                "required": true,
-                "supported": [
-                    "primary",
-                    "secondary",
-                    "accent",
-                    "error",
-                    "success",
-                    "warning",
-                    "info",
-                    "light",
-                    "dark",
-                    "white",
-                    "black"
-                ],
-                "default": "primary"
             },
             "colorTheme": {
                 "type": "ThemeColor",
@@ -5235,7 +5231,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -5279,11 +5275,11 @@
                 "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
             },
             "copyright": {
-                "type": "array{siteName:",
+                "type": "array{siteName: string, startYear: int, endYear: int}",
                 "required": true
             },
             "devCredit": {
-                "type": "array{authorName:",
+                "type": "array{authorName: string, authorUrl: string}",
                 "required": true
             },
             "hAlign": {
@@ -5322,7 +5318,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -5382,7 +5378,7 @@
                 "default": []
             },
             "componentGroups": {
-                "type": "array",
+                "type": "array<string, Renderable>",
                 "description": "The inner components other than the logo, provided in groups based on when and where they should be shown. Valid keys are: 'menuComponent', 'alwaysShow', 'showInOverlays'",
                 "required": true
             },
@@ -5467,7 +5463,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "submenuIcon": {
@@ -5548,7 +5544,7 @@
                 "default": "tab-panel"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "subtitle": {
@@ -5572,7 +5568,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<Renderable>",
+            "type": "array",
             "description": "Inner components to be rendered within this component",
             "required": true
         },
@@ -5657,7 +5653,7 @@
                 "default": "contained"
             },
             "style": {
-                "type": "array",
+                "type": "array<string, string>",
                 "description": "Inline styles"
             },
             "tagName": {
@@ -5675,7 +5671,7 @@
             }
         },
         "innerComponents": {
-            "type": "array<TabPanel>",
+            "type": "array",
             "description": "Inner components to be rendered within this component",
             "required": true
         },

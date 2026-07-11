@@ -11,6 +11,7 @@
 		"docs:build": "cd docs-site && pnpm run docs:build",
 		"generate": "node --import ./scripts/loader.mjs ./scripts/generate.ts",
 		"generate:docs": "php scripts/generate-docs.php",
+		"generate:types": "php scripts/generate-types.php",
 		"generate:stories": "php scripts/generate-stories.php",
 		"refresh:composer": "pwsh.exe -File scripts/refresh-composer.ps1",
 		"refresh:composer:dev": "pnpm run refresh:composer -local",

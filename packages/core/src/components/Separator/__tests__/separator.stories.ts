@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { THEME_COLORS, ThemeColor } from "../../../../test/storybook-helpers.ts";
-
-type SeparatorProps = {
-	tagName: 'hr';
-	color: ThemeColor;
-	classes?: string[];
-}
+import { SeparatorProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'UI/Separator',

@@ -1,17 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
-import {
-	type Orientation,
-	type ThemeColor,
-	THEME_COLORS,
-	ORIENTATION_OPTIONS
-} from "../../../../test/storybook-helpers.ts";
 import { createStoryBase } from "../../../../test/story-base.ts";
-
-type CardProps = {
-	colorTheme: ThemeColor;
-	orientation: Orientation;
-	tagName: 'div';
-}
+import { CardProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'UI/Card',

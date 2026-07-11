@@ -2,45 +2,12 @@
 // (basically TypeScript versions of the PHP component enums and whatnot)
 // and other shared utilities for stories
 
-export const THEME_COLORS = [
-	'primary',
-	'secondary',
-	'accent',
-	'error',
-	'success',
-	'warning',
-	'info',
-	'light',
-	'dark',
-	'white'
-];
+export {
+	type ThemeColor, type Alignment, type ContainerSize, type Orientation,
+	ALIGNMENT_OPTIONS, ORIENTATION_OPTIONS, GROUP_LAYOUT_OPTIONS
+} from '../dist/types.ts';
+import { CONTAINER_SIZE_OPTIONS, THEME_COLOR_OPTIONS } from '../dist/types.ts';
 
-export type ThemeColor = (typeof THEME_COLORS)[number];
+export const CONTAINER_SIZES = CONTAINER_SIZE_OPTIONS;
 
-export const ALIGNMENT_OPTIONS = [
-	"start",
-	"end",
-	"center",
-	"justify",
-	"match-parent"
-];
-
-export type Alignment = (typeof ALIGNMENT_OPTIONS)[number];
-
-export const CONTAINER_SIZES = [
-	"contained",
-	"wide",
-	"fullwidth",
-	"narrow",
-	"narrower",
-	"small"
-];
-
-export type ContainerSize = (typeof CONTAINER_SIZES)[number];
-
-export const ORIENTATION_OPTIONS = [
-	"horizontal",
-	"vertical"
-];
-
-export type Orientation = (typeof ORIENTATION_OPTIONS)[number];
+export const THEME_COLORS = THEME_COLOR_OPTIONS;

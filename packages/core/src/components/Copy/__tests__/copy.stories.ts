@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
-import { type ThemeColor } from "../../../../test/storybook-helpers.ts";
 import { createStoryBase } from "../../../../test/story-base.ts";
-
-type CopyProps = {
-	colorTheme: ThemeColor;
-	tagName: 'div';
-}
+import { CopyProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Text/Copy',

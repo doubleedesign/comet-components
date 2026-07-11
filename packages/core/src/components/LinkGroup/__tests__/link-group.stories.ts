@@ -1,13 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { ThemeColor, THEME_COLORS } from '../../../../test/storybook-helpers.ts';
-
-type LinkGroupProps = {
-	tagName: 'div';
-	colorTheme: ThemeColor;
-	classes?: string[];
-
-}
+import { LinkGroupProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Media/LinkGroup',

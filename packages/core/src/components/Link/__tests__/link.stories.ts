@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-
-type LinkProps = {
-	tagName: 'a';
-	iconPrefix: string;
-	icon: string;
-	classes?: string[];
-}
+import { LinkProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Media/Link',

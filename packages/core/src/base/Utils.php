@@ -67,6 +67,15 @@ class Utils {
         );
     }
 
+	public static function snake_case(string $value): string {
+		$value = self::kebab_case($value);
+		return str_replace('-', '_', $value);
+	}
+
+	public static function screaming_snake_case(string $value): string {
+		return strtoupper(self::snake_case($value));
+	}
+
     /**
      * Sanitise content string using HTMLPurifier.
      * This is quite restrictive and should be used only on content that hasn't already been processed (e.g., by a CMS)
@@ -137,8 +146,12 @@ class Utils {
             return [];
         }
 
-        // This is an array of arrays and needs to be flattened
-        if (is_array($array[0])) {
+
+	    // Account for the indexes being whack - don't assume the first element is index 0 unless resetting first
+	    $array = array_values($array);
+
+	    // This is an array of arrays and needs to be flattened
+        if (isset($array[0]) && is_array($array[0])) {
             return array_merge(...$array);
         }
 

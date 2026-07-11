@@ -1,17 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
 import { ThemeColor, THEME_COLORS } from '../../../../test/storybook-helpers.ts';
-
-type DateRangeBlockProps = {
-	tagName: 'time';
-	colorTheme: ThemeColor;
-	startDate: string;
-	endDate: string;
-	locale: string;
-	showDay: boolean;
-	showYear: boolean;
-	classes?: string[];
-}
+import { DateRangeBlockProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Text/DateRangeBlock',

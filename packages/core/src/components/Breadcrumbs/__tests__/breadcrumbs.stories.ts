@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-
-type BreadcrumbsProps = {
-	tagName: 'nav';
-	classes?: string[];
-}
+import { BreadcrumbsProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Navigation/Breadcrumbs',

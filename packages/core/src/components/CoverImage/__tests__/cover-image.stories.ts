@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base";
-
-type CoverImageProps = {
-	tagName: 'div';
-	alt: string;
-	caption: string;
-	title: string;
-	isParallax: boolean;
-	src?: string;
-	href?: string;
-}
+import { CoverImageProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Media/Cover Image',

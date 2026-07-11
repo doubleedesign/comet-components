@@ -2,8 +2,8 @@
 namespace Doubleedesign\Comet\Core;
 
 class ThemeGradient {
-    private ?ThemeColor $from;
-    private ?ThemeColor $to;
+    protected ?ThemeColor $from;
+    protected ?ThemeColor $to;
 
     // Enable accessing the string value in the same way we do for the ThemeColor enum
     public string $value {

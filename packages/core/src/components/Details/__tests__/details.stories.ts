@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-
-type DetailsProps = {
-	tagName: 'details';
-	summary: string;
-	classes?: string[];
-}
+import { DetailsProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Text/Details',

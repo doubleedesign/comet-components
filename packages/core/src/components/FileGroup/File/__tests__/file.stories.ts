@@ -1,21 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../../test/story-base.ts";
-import { THEME_COLORS } from "../../../../../test/storybook-helpers.ts";
-
-type FileProps = {
-	tagName: 'div';
-	size: string;
-	colorTheme: 'primary' | 'secondary' | 'accent' | 'error' | 'success' | 'warning' | 'info' | 'light' | 'dark' | 'white' | null;
-	iconPrefix: string;
-	icon: string;
-	url: string;
-	description: string;
-	mimeType: string;
-	title: string;
-	uploadDate: string;
-	classes?: string[];
-
-}
+import { FileProps } from '../../../../../dist/types';
 
 const meta = {
 	title: 'Media/File',

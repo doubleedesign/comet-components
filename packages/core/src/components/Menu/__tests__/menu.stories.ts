@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-
-type MenuProps = {
-	tagName: 'nav';
-	classes?: string[];
-}
+import { MenuProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Navigation/Menu',

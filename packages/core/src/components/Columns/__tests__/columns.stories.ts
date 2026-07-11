@@ -1,17 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
 import { Alignment, ThemeColor, ContainerSize } from '../../../../test/storybook-helpers.ts';
+import { ColumnsProps } from '../../../../dist/types';
 
-type ColumnsProps = {
-	tagName: 'div' | 'section';
-	allowStacking: boolean;
-	qty: number;
-	columnLayout: 'even' | 'expand-first' | 'expand-last' | 'expand-middle';
-	hAlign: Alignment;
-	vAlign: Alignment;
-	backgroundColor: '' | 'none' | ThemeColor;
-	size: ContainerSize,
-	classes?: string[];
+type ColumnsDemoProps = ColumnsProps & {
 	innerComponents?: Array<{
 		attributes: any[];
 		content: string;
@@ -19,7 +11,7 @@ type ColumnsProps = {
 	_actualQty?: number;
 }
 
-type ColumnsStoryProps = ColumnsProps & {
+type ColumnsStoryProps = ColumnsDemoProps & {
 	count: number;
 	innerBackgrounds: boolean;
 }

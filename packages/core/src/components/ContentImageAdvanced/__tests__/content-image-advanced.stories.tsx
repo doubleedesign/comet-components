@@ -1,22 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from '../../../../test/story-base';
-
-type ContentImageAdvancedProps = {
-	tagName: 'figure';
-	alt: string;
-	caption: string;
-	title: string;
-	src?: string;
-	align?: 'left' | 'center' | 'right' | 'full';
-	aspectRatio?: 'none' | '4:3' | '3:4' | '1:1' | '16:9' | '9:16' | '3:2' | '2:3' | '21:9' | '2.35:1';
-	focalPointX?: number;
-	focalPointY?: number;
-	focalPoint?: { x: number; y: number; };
-	offsetX?: number;
-	offsetY?: number;
-	offset?: { x: number; y: number; };
-}
+import { ContentImageAdvancedProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Media/Content Image (Advanced)',

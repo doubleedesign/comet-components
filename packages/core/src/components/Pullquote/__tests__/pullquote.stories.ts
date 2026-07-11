@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html-vite';
 import { createStoryBase } from "../../../../test/story-base.ts";
-import { Alignment, THEME_COLORS, ThemeColor } from "../../../../test/storybook-helpers.ts";
-
-type PullquoteProps = {
-	tagName: 'blockquote';
-	colorTheme: ThemeColor;
-	citation: string;
-	textAlign: '' | Alignment;
-	textColor: ThemeColor
-	classes?: string;
-}
+import { PullquoteProps } from '../../../../dist/types';
 
 const meta = {
 	title: 'Text/Pullquote',
