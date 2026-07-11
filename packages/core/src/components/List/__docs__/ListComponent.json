@@ -28,7 +28,7 @@
             "default": "list"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {
@@ -46,7 +46,7 @@
         }
     },
     "innerComponents": {
-        "type": "array<ListItem>",
+        "type": "array",
         "description": "List item objects to render inside this list",
         "required": true
     },

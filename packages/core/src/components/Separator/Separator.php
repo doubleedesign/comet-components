@@ -17,11 +17,6 @@ class Separator extends Renderable {
     use NestedState;
     protected string $lineStyle = '';
 
-    /**
-     * @var ThemeColor $color
-     */
-    protected ThemeColor $color = ThemeColor::PRIMARY;
-
     public function __construct(array $attributes) {
         parent::__construct($attributes, 'components.Separator.separator');
         $this->set_color_theme($attributes, ThemeColor::PRIMARY);

@@ -19,11 +19,11 @@
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "copyright": {
-            "type": "array{siteName:",
+            "type": "array{siteName: string, startYear: int, endYear: int}",
             "required": true
         },
         "devCredit": {
-            "type": "array{authorName:",
+            "type": "array{authorName: string, authorUrl: string}",
             "required": true
         },
         "hAlign": {
@@ -62,7 +62,7 @@
             "default": "contained"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {

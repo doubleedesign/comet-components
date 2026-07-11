@@ -35,7 +35,7 @@
             "required": true
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "styleName": {

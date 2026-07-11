@@ -18,7 +18,7 @@
             "default": []
         },
         "componentGroups": {
-            "type": "array",
+            "type": "array<string, Renderable>",
             "description": "The inner components other than the logo, provided in groups based on when and where they should be shown. Valid keys are: 'menuComponent', 'alwaysShow', 'showInOverlays'",
             "required": true
         },
@@ -103,7 +103,7 @@
             "default": "contained"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "submenuIcon": {

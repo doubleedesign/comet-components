@@ -10,7 +10,7 @@ class IconLinks extends UIComponent {
     /**
      * Array of arrays with URL, label, and icon class name
      *
-     * @var array
+     * @var array{url: string, label: string, icon: string}[] $links
      */
     protected array $links = [];
 

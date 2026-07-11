@@ -28,7 +28,7 @@
             "default": ""
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "subtitle": {
@@ -53,7 +53,7 @@
         }
     },
     "innerComponents": {
-        "type": "array<Renderable>",
+        "type": "array",
         "description": "Inner components to be rendered within this component",
         "required": true
     },

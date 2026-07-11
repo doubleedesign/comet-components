@@ -39,7 +39,7 @@
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "dataAttrs": {
-            "type": "array",
+            "type": "array<string,string>",
             "description": "Allow for data-* attributes to be passed down to the group explicitly; useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)",
             "required": true
         },
@@ -60,7 +60,7 @@
             "default": "group"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {

@@ -91,7 +91,7 @@
             "default": "contained"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {
@@ -99,7 +99,6 @@
             "description": "The HTML tag to use for this component",
             "supported": [
                 "section",
-                "figure",
                 "div"
             ],
             "default": "section"

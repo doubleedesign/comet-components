@@ -53,7 +53,7 @@
             "default": "icon-with-text"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {

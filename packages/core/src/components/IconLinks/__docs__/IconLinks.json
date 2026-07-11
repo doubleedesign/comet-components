@@ -34,7 +34,7 @@
             "description": "Unique identifier"
         },
         "links": {
-            "type": "array",
+            "type": "array{url: string, label: string, icon: string}[]",
             "required": true,
             "default": []
         },
@@ -54,7 +54,7 @@
             "default": "icon-links"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {

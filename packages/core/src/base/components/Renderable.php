@@ -28,7 +28,7 @@ abstract class Renderable {
     protected ?array $classes = [];
 
     /**
-     * @var array|null $style
+     * @var array<string, string>|null $style
      * @description Inline styles
      */
     protected ?array $style = null;
@@ -74,16 +74,17 @@ abstract class Renderable {
         }
     }
 
-	/**
-	 * Get the kebab-cased name of the component class.
-	 * @return string
-	 */
-	public function get_name(): string {
-		$className = get_class($this);
-		$parts = explode('\\', $className);
+    /**
+     * Get the kebab-cased name of the component class.
+     *
+     * @return string
+     */
+    public function get_name(): string {
+        $className = get_class($this);
+        $parts = explode('\\', $className);
 
-		return Utils::kebab_case(end($parts));
-	}
+        return Utils::kebab_case(end($parts));
+    }
 
     protected function set_tag(string|Tag|null $tagName): void {
         $reflection = new ReflectionClass($this);
@@ -96,14 +97,15 @@ abstract class Renderable {
         $defaultTag = $defaultTagAttr ? $defaultTagAttr->newInstance()->tag : Tag::DIV;
 
         // Try to use provided tag, fall back to default
-	    if($tagName instanceof Tag) {
-		    $requestedTag = $tagName;
-	    } else if (is_string($tagName)) {
-		    $requestedTag = $tagName ? Tag::tryFrom($tagName) : $defaultTag;
-	    }
-		else {
-			$requestedTag = $defaultTag;
-		}
+        if ($tagName instanceof Tag) {
+            $requestedTag = $tagName;
+        }
+        else if (is_string($tagName)) {
+            $requestedTag = $tagName ? Tag::tryFrom($tagName) : $defaultTag;
+        }
+        else {
+            $requestedTag = $defaultTag;
+        }
 
         // Validate against allowed tags if specified
         if ($allowedTags && !in_array($requestedTag, $allowedTags)) {

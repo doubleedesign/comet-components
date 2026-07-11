@@ -30,7 +30,7 @@ class EventCard extends UIComponent {
     protected ?string $detailUrl;
 
     /**
-     * @var array|null $externalLink
+     * @var array{url:string, label:string, target:string}|null $externalLink
      * @description An associative array with fields URL, label, and target for an external link to a separate ticketing, registration, or other third-party site.
      */
     protected ?array $externalLink = [];

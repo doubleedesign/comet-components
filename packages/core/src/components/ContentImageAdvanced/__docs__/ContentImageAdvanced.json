@@ -51,7 +51,7 @@
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "focalPoint": {
-            "type": "array{x:",
+            "type": "array{x: int, y:int}",
             "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
             "default": {
                 "x": 50,
@@ -63,7 +63,7 @@
             "description": "Unique identifier"
         },
         "offset": {
-            "type": "array{x:",
+            "type": "array{x: int, y:int}",
             "description": "The percentage offsets of the image to use when cropping",
             "default": {
                 "x": 0,
@@ -90,7 +90,7 @@
             "required": true
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "styleName": {

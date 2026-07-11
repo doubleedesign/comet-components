@@ -63,7 +63,7 @@
             "default": "button-group"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {
@@ -92,7 +92,7 @@
         }
     },
     "innerComponents": {
-        "type": "array<Button>",
+        "type": "array",
         "description": "Button objects to render inside the ButtonGroup",
         "required": true
     },

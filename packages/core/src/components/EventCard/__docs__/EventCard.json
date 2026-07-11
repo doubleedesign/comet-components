@@ -22,7 +22,7 @@
             "description": "The URL to be used for the detail page."
         },
         "externalLink": {
-            "type": "array",
+            "type": "array{url:string, label:string, target:string}",
             "description": "An associative array with fields URL, label, and target for an external link to a separate ticketing, registration, or other third-party site.",
             "default": []
         },
@@ -46,7 +46,7 @@
             "default": "event-card"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {

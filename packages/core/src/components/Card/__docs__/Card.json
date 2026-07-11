@@ -71,7 +71,7 @@
             "description": "The kebab-case or BEM element chain name of the parent component or variant (if contextually relevant). Note: For components that use the BEM trait, this must be set before init_bem_classes() is called for class naming to work as expected."
         },
         "focalPoint": {
-            "type": "array{x:",
+            "type": "array{x: int, y:int}",
             "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
             "default": {
                 "x": 50,
@@ -88,8 +88,17 @@
             "description": "Unique identifier"
         },
         "image": {
-            "type": "array{src:string,",
+            "type": "array{src:string, alt:string}",
             "required": true
+        },
+        "image_scale": {
+            "type": "string",
+            "description": "How to handle how the image fits the available space",
+            "supported": [
+                "contain",
+                "cover"
+            ],
+            "default": "contain"
         },
         "isNested": {
             "type": "bool",
@@ -98,13 +107,13 @@
             "default": true
         },
         "link": {
-            "type": "array{href:string,",
+            "type": "array{href:string, content:string, target:string, isOutline:false}",
             "description": "Optional link for the card",
             "required": true,
             "default": []
         },
         "offset": {
-            "type": "array{x:",
+            "type": "array{x: int, y:int}",
             "description": "The percentage offsets of the image to use when cropping",
             "default": {
                 "x": 0,
@@ -135,7 +144,7 @@
             "default": "card"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {

@@ -41,7 +41,7 @@
             "description": "Unique identifier"
         },
         "links": {
-            "type": "array{href:string,",
+            "type": "array{href:string, content:string}",
             "description": "Links to include. Intended to be 1 or 2 only (previous and next).",
             "required": true,
             "default": []
@@ -63,7 +63,7 @@
             "default": "post-nav"
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "tagName": {

@@ -21,7 +21,7 @@ class Group extends UIComponent {
     protected ?array $classes;
 
     /**
-     * @var array $dataAttrs
+     * @var array<string,string> $dataAttrs
      * @description Allow for data-* attributes to be passed down to the group explicitly;
      *              useful for cases that aren't worth creating a trait or shared property for (e.g., Columns uses this for data-count)
      */

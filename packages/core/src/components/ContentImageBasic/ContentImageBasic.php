@@ -52,7 +52,6 @@ class ContentImageBasic extends ContentImageComponent {
 
     /**
      * Enables setting behaviour after instantiation, such as by the Gallery component
-     *
      * @param  string<'cover'|'contain'>  $behaviour
      *
      * @return void

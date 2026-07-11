@@ -73,7 +73,7 @@
         },
         "scale": {
             "type": "string",
-            "description": "How to handle how the image fits the available space This is basically here because the WordPress block editor provides this option along with aspect ratio. The ContentImage class provides more advanced cropping and should NOT also have the scale attribute.",
+            "description": "How to handle how the image fits the available space Note: The ContentImageAdvanced class provides more advanced cropping and should NOT also have the scale attribute, that's why this is here.",
             "supported": [
                 "contain",
                 "cover"
@@ -92,7 +92,7 @@
             "required": true
         },
         "style": {
-            "type": "array",
+            "type": "array<string, string>",
             "description": "Inline styles"
         },
         "styleName": {

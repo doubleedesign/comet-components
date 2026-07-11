@@ -63,7 +63,7 @@ class SiteHeader extends LayoutComponent {
     private array $showInOverlaysComponents = [];
 
     /**
-     * @var array $componentGroups
+     * @var array<string, Renderable> $componentGroups
      * @description The inner components other than the logo, provided in groups based on when and where they should be shown.
      *              Valid keys are: 'menuComponent', 'alwaysShow', 'showInOverlays'
      */
