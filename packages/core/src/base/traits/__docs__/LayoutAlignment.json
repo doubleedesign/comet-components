@@ -1,0 +1,30 @@
+{
+    "name": "LayoutAlignment",
+    "attributes": {
+        "hAlign": {
+            "type": "Alignment",
+            "description": "Horizontal alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        },
+        "vAlign": {
+            "type": "Alignment",
+            "description": "Vertical alignment, if applicable",
+            "supported": [
+                "start",
+                "end",
+                "center",
+                "justify",
+                "match-parent"
+            ],
+            "default": "match-parent"
+        }
+    },
+    "inherits": []
+}

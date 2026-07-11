@@ -1,0 +1,12 @@
+{
+    "name": "NestedState",
+    "attributes": {
+        "isNested": {
+            "type": "bool",
+            "description": "Whether this component is nested inside another element; used for simplifying layout and HTML structure handling",
+            "required": true,
+            "default": false
+        }
+    },
+    "inherits": []
+}

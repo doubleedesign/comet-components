@@ -1,0 +1,45 @@
+{
+    "name": "ImageCropProperties",
+    "attributes": {
+        "aspectRatio": {
+            "type": "AspectRatio",
+            "description": "Crop image to the given aspect ratio by default",
+            "supported": [
+                "4:3",
+                "3:4",
+                "1:1",
+                "16:9",
+                "9:16",
+                "3:2",
+                "2:3",
+                "21:9",
+                "2.35:1"
+            ]
+        },
+        "originalImageOrientation": {
+            "type": "Orientation",
+            "description": "The original orientation of the image; can be used as a data attribute to tweak CSS for cropping",
+            "supported": [
+                "horizontal",
+                "vertical"
+            ]
+        },
+        "focalPoint": {
+            "type": "array{x: int, y:int}",
+            "description": "The focal point of the image to use when cropping - x and y values between 0 and 100",
+            "default": {
+                "x": 50,
+                "y": 50
+            }
+        },
+        "offset": {
+            "type": "array{x: int, y:int}",
+            "description": "The percentage offsets of the image to use when cropping",
+            "default": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "inherits": []
+}

@@ -13,6 +13,8 @@ use Doubleedesign\Comet\Core\{Accordion, AllowedTags, Config, DefaultTag, Tag, U
 class ComponentClassesToJsonDefinitions {
     private string $mainComponentDirectory;
     private string $baseComponentDirectory;
+    private string $baseTraitDirectory;
+    private array $traitsToDocument;
     private array $processedClasses = [];
     private ReflectionClass $currentClass;
     private ReflectionClass $declaringClass;
@@ -24,6 +26,16 @@ class ComponentClassesToJsonDefinitions {
 
         $this->mainComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\components';
         $this->baseComponentDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\components';
+        $this->baseTraitDirectory = dirname(__DIR__, 1) . '\packages\core\src\base\traits';
+
+        $this->traitsToDocument = [
+            'ColorPair',
+            'NestedState',
+            'Icon',
+            'ImageCropProperties',
+            'LayoutAlignment',
+            'LayoutContainerSize'
+        ];
     }
 
     public function runAll(): void {
@@ -32,6 +44,8 @@ class ComponentClassesToJsonDefinitions {
         $baseComponents = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->baseComponentDirectory));
         /** @noinspection PhpUnhandledExceptionInspection */
         $mainComponents = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mainComponentDirectory));
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $traits = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->baseTraitDirectory));
 
         $megaFileData = [];
 
@@ -61,6 +75,12 @@ class ComponentClassesToJsonDefinitions {
                 else {
                     $this->log("No result generated for main component file: " . $file->getPathname(), 'warning');
                 }
+            }
+        }
+
+        foreach ($traits as $file) {
+            if ($file->isFile() && $file->getExtension() === 'php' && !str_ends_with($file->getPathname(), 'Test.php') && !str_ends_with($file->getPathname(), '.blade.php')) {
+                $this->processFile($file->getPathname());
             }
         }
 
@@ -133,9 +153,20 @@ class ComponentClassesToJsonDefinitions {
         }
     }
 
+    public function runSingleTrait($trait): void {
+        $filePath = $this->baseComponentDirectory . '\\' . $trait . '.php';
+        if (file_exists($filePath)) {
+            $this->processFile($filePath);
+        }
+        else {
+            throw new RuntimeException("Trait $trait not found");
+        }
+    }
+
     private function processFile(string $filePath): ?array {
         // Get file contents
         $content = file_get_contents($filePath);
+		$is_trait = str_contains($filePath, 'traits');
 
         $namespace = '';
         if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
@@ -143,9 +174,14 @@ class ComponentClassesToJsonDefinitions {
             $namespace = $matches[1] . '\\';
         }
 
-        if (preg_match('/class\s+(\w+)/', $content, $matches)) {
+        if (!$is_trait && preg_match('/class\s+(\w+)/', $content, $matches)) {
             // Extract class name
             $className = $namespace . $matches[1];
+
+            // Check of if the name starts with an uppercase letter (workaround for it picking up comments like "class naming")
+            if (!preg_match('/^[A-Z]/', $matches[1])) {
+                return null;
+            }
 
             try {
                 // Collect the data about the class
@@ -197,7 +233,44 @@ class ComponentClassesToJsonDefinitions {
                 return $result;
             }
             catch (ReflectionException|Exception $e) {
-                $this->log("Error processing class $className: " . $e->getMessage(), 'error');
+                $this->log("Error processing class $className: " . $e->getMessage(), 'error', $e);
+
+                return null;
+            }
+        }
+        else if (preg_match('/trait\s+(\w+)/', $content, $matches)) {
+            $shortName = $matches[1];
+            if (!in_array($shortName, $this->traitsToDocument)) {
+                $this->log("Skipping trait $shortName because it's not in the list of traits to document", 'info');
+
+                return null;
+            }
+
+            $traitName = $namespace . $shortName;
+            try {
+                $reflectionTrait = new ReflectionClass($traitName);
+                $result = [
+                    'name'          => $shortName,
+                    'attributes'    => $this->getTraitData($reflectionTrait),
+                    'inherits'      => array_map(fn($name) => array_key_last(array_flip(explode("\\", $name))), array_keys($reflectionTrait->getTraits())),
+                ];
+
+                // Ensure __docs__ folder exists
+                $outputDir = dirname($filePath) . '\\__docs__';
+                if (!is_dir($outputDir)) {
+                    mkdir($outputDir, 0777, true);
+                }
+
+                // Export the data to a JSON file
+                $outputPath = $outputDir . '\\' . $result['name'] . '.json';
+                $this->exportToJson($outputPath, $result);
+                $this->log("Exported component definition JSON to $outputPath", 'success');
+
+                // We are not returning anything for traits because they don't go into the mega-file
+                return null;
+            }
+            catch (ReflectionException|Exception $e) {
+                $this->log("Error processing trait $traitName: " . $e->getMessage(), 'error');
 
                 return null;
             }
@@ -235,7 +308,7 @@ class ComponentClassesToJsonDefinitions {
         $traits = $reflectionClass->getTraits();
         $traitNames = [];
         foreach ($traits as $trait) {
-            $traitData = $this->getTraitData($trait, $reflectionClass);
+            $traitData = $this->getTraitData($trait);
             $properties = array_merge($properties, $traitData);
             $traitNames[] = $trait->getShortName();
         }
@@ -245,7 +318,7 @@ class ComponentClassesToJsonDefinitions {
         while ($ancestor && $ancestor->getName() !== 'Doubleedesign\Comet\Core\Renderable') {
             $ancestorTraits = $ancestor->getTraits();
             foreach ($ancestorTraits as $trait) {
-                $traitData = $this->getTraitData($trait, $reflectionClass);
+                $traitData = $this->getTraitData($trait);
                 $properties = array_merge($properties, $traitData);
                 $traitNames[] = $trait->getShortName();
             }
@@ -314,7 +387,7 @@ class ComponentClassesToJsonDefinitions {
         return $result;
     }
 
-    private function getTraitData(ReflectionClass $trait, ReflectionClass $component): array {
+    private function getTraitData(ReflectionClass $trait): array {
         $privatePropertiesToInclude = ['context', 'shortName', 'isNested'];
         $properties = [];
 
@@ -563,7 +636,19 @@ class ComponentClassesToJsonDefinitions {
         }
         // Use type from docblock if specified, to use declared types like array<string>
         if ($docComment && preg_match('/@var\s+(\S+)/', $docComment, $matches)) {
-            $type = trim($matches[1]);
+            if (str_starts_with($matches[1], 'array{') || str_starts_with($matches[1], 'array<')) {
+                // We need to extract the rest as it will have stopped at the first colon.
+                // We need to grab everything from @var until the $ indicating the start of the variable name (then trim it)
+                preg_match('/@var\s+(.+?)\s+\$/', $docComment, $rematches);
+				if(isset($rematches[1])) {
+					$trimmed = str_replace("@var", '', trim($rematches[1]));
+					$trimmed = str_replace("$", '', $trimmed);
+					$type = trim($trimmed);
+				}
+            }
+            else {
+                $type = trim($matches[1]);
+            }
         }
         else {
             $type = $result['type'];
@@ -652,7 +737,7 @@ class ComponentClassesToJsonDefinitions {
                         ];
                     }
 
-					return [];
+                    return [];
                 }
                 catch (\Throwable $e) {
                     $this->log("Error processing AllowedTags or DefaultTag attributes for $typeName: " . $e->getMessage(), 'error');
@@ -707,7 +792,7 @@ class ComponentClassesToJsonDefinitions {
         file_put_contents($outputPath, $json);
     }
 
-    private static function log(string $message, string $type): void {
+    private static function log(string $message, string $type, Exception|null $ex = null): void {
         // ANSI colour codes
         $red = "\033[0;31m";
         $green = "\033[0;32m";
@@ -729,7 +814,8 @@ class ComponentClassesToJsonDefinitions {
         if ($type === 'error') {
             \Symfony\Component\VarDumper\VarDumper::dump([
                 'message'     => $message,
-                'backtrace'   => debug_backtrace()
+                'backtrace'   => debug_backtrace(),
+	            'exception'   => $ex,
             ]);
         }
     }

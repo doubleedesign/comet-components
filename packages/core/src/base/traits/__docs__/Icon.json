@@ -1,0 +1,15 @@
+{
+    "name": "Icon",
+    "attributes": {
+        "iconPrefix": {
+            "type": "string",
+            "description": "Icon prefix class name",
+            "default": "fa-solid"
+        },
+        "icon": {
+            "type": "string",
+            "description": "Icon class name"
+        }
+    },
+    "inherits": []
+}
