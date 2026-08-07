@@ -1,4 +1,3 @@
-**/*.php linguist-language=PHP
 docs/* linguist-documentation
 docs-site/* linguist-documentation
 .storybook/* linguist-documentation
