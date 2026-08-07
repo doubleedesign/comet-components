@@ -1,6 +1,7 @@
 **/*.php linguist-language=PHP
 docs/* linguist-documentation
 docs-site/* linguist-documentation
+.storybook/* linguist-documentation
 eslint.config.js linguist-detectable=false
 loader.mjs linguist-detectable=false
 scripts/* linguist-detectable=false
