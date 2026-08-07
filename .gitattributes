@@ -17,3 +17,6 @@ package.json linguist-detectable=false
 package.lock linguist-detectable=false
 **/package.lock linguist-detectable=false
 packages/core/src/plugins/vue-wrapper/src/** linguist-vendored=true
+packages/core/dist/** linguist-generated
+packages/core/**/*.css linguist-generated
+packages/core/**/__docs__/ linguist-documentation
