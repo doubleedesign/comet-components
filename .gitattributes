@@ -21,3 +21,4 @@ packages/core/src/plugins/vue-wrapper/src/** linguist-vendored=true
 packages/core/dist/** linguist-generated
 packages/core/**/*.css linguist-generated
 packages/core/**/__docs__/ linguist-documentation
+*.blade.php linguist-language=HTML
